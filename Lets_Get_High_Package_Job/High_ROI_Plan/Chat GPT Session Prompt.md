@@ -238,9 +238,12 @@ I will upload:
 
 Based on the approved Progress Tracker Review in this conversation, compare the original and updated trackers.
 
+Treat the approved Progress Tracker Review as the authoritative list of expected differences.
+
 Verify that:
 - All approved changes were applied.
 - No approved changes were missed.
+- Every difference between the original and updated trackers corresponds to an approved change.
 - No unintended changes were introduced.
 - No important content was removed.
 - The updated tracker is identical to the original except for the approved changes.
