@@ -138,16 +138,19 @@ Based on everything I have completed so far in this iteration, help me complete 
 ```markdown
 ## Progress Tracker Review
 
-Before updating the Project Progress Tracker, review everything completed since the last update and provide a concise overview of the changes you plan to make.
+Review everything completed since the last Project Progress Tracker update and summarize the changes that should be reflected in the tracker.
 
 Include:
-- Current position updates (phase, iteration, article, track)
-- Newly completed work across all four tracks
-- New deliverables, assets, and milestones
-- Deferred items (if any)
-- Changes to Current Focus, Next Actions, and Overall Status
 
-Do **not** generate the updated tracker yet. Wait for my confirmation.
+- Current position updates (Phase, Iteration, Section, Article, Track)
+- Changes across all four tracks
+- Newly created assets, deliverables, and milestones
+- Deferred items (if any)
+- Changes to Current Focus, Next Actions, Overall Progress, and Overall Status
+
+Do **not** generate the updated tracker yet.
+
+Wait for my confirmation.
 ```
 
 ## Progress Tracker Update
@@ -155,66 +158,20 @@ Do **not** generate the updated tracker yet. Wait for my confirmation.
 ```markdown
 ## End of Iteration – Project Progress Tracker Update
 
-Based on the approved **Progress Tracker Review**, everything completed during this iteration, the attached **Project Specification**, and the **DevOps Career Roadmap**, generate the **entire updated Project Progress Tracker** as a complete replacement document.
+Based on the approved Progress Tracker Review, generate the **entire updated Project Progress Tracker** as a complete replacement document.
 
-The tracker is a **dynamic current-state dashboard**, not a historical log. Its purpose is to answer:
+The tracker is a **dynamic current-state dashboard**, not a historical log.
 
-> **"Where am I right now in the DevOps Career Project?"**
+Update only what is necessary to accurately reflect the current project state while keeping the document concise, internally consistent, and aligned with the Project Specification and DevOps Career Roadmap.
 
-Only include information that is relevant to the project's current state.
+If the tracker is too large for one response:
 
-### Update Requirements
+1. Tell me how many parts are required.
+2. Generate it sequentially as:
+   - Part 1 of N
+   - Part 2 of N
+   - ...
+   - Part N of N
 
-Update the tracker to accurately reflect the current project state by:
-
-* Updating the current position:
-  * Phase
-  * Iteration
-  * Section (if applicable)
-  * Article
-  * Current Track
-* Updating the Overall Status and Progress Dashboard.
-* Updating the current status of all four tracks.
-* Updating only the currently relevant deliverables, assets, milestones, deferred work, current focus, and next actions.
-* Removing completed historical details that are no longer useful for understanding the current project state.
-* Ensuring every section remains internally consistent.
-* Keeping the tracker fully aligned with the attached **Project Specification** and **DevOps Career Roadmap**.
-
-### Tracker Design Principles
-
-The tracker should remain approximately the same size throughout the entire project.
-
-Do **not** allow the document to grow indefinitely.
-
-Treat it as a living dashboard rather than a project history.
-
-Prioritize:
-
-* Current State
-* Current Focus
-* Current Objectives
-* Current Assets
-* Current Milestones
-* Next Actions
-
-Avoid:
-
-* Long historical summaries
-* Repeating previously completed work
-* Maintaining chronological logs
-* Duplicating information already contained in the Project Specification or Roadmap
-
-### Large Document Handling
-
-If the complete tracker cannot fit in a single response:
-
-1. Determine how many parts are required.
-2. Tell me upfront how many parts the tracker will be split into.
-3. Generate the tracker sequentially as:
-   * Part 1 of N
-   * Part 2 of N
-   * ...
-   * Part N of N
-4. Do not omit or reformat content because of the split.
-5. Ensure the combined parts form a single complete replacement document that can directly replace the existing Project Progress Tracker.
+Ensure the combined parts form one complete replacement document.
 ```
