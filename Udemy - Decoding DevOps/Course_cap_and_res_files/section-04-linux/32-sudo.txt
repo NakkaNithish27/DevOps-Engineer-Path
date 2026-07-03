@@ -1,0 +1,445 @@
+WEBVTT
+
+0
+00:01.040 --> 00:05.360
+In this video, we will be talking about sudo or sudo.
+
+1
+00:06.200 --> 00:12.500
+Howsoever you want to call it, we have executed this command so many times, sudo -i, that will switch to
+
+2
+00:12.530 --> 00:17.150
+user to root user, but it's only the vagrant user that can do it.
+
+3
+00:17.240 --> 00:19.550
+Not any other user will also. We will also test it now.
+
+4
+00:20.030 --> 00:26.450
+But if you want, you can give any other user privilege to switch to root user or execute command with
+
+5
+00:26.480 --> 00:29.390
+root privilege by adding the users into sudoers file.
+
+6
+00:29.390 --> 00:37.400
+So sudo acts like a power of attorney on behalf of root user, someone, some normal user can
+
+7
+00:37.400 --> 00:41.330
+execute root commands or even switch to rot user.
+
+8
+00:43.120 --> 00:44.700
+So let's see how that can be done.
+
+9
+00:53.400 --> 01:00.480
+So I will just log in, I do vagrant ssh and we know it will log in with vagrant user. So logged in
+
+10
+01:00.480 --> 01:04.830
+as vagrant user, but vagrant user has privilege to do sudo, can do sudo -i
+
+11
+01:04.830 --> 01:12.210
+Or can execute root commands like for example I can do sudo yum install.
+
+12
+01:12.810 --> 01:13.560
+Let's say git
+
+13
+01:14.880 --> 01:18.480
+I don't want to see its output's, I'm just going to send it to /dev/null
+
+14
+01:19.050 --> 01:19.460
+You know what?
+
+15
+01:19.470 --> 01:20.280
+Let's see the output.
+
+16
+01:23.330 --> 01:24.530
+So you see thats working.
+
+17
+01:26.950 --> 01:34.090
+But if I do not use the sudo command over will here, I just I don't prefix with sudo, just say yum install git
+
+18
+01:34.090 --> 01:38.530
+It's going to throw me an error or if I try to add a user.
+
+19
+01:41.830 --> 01:49.060
+Throws me an error, but I can do that by using sudo as a prefix, and that's happening because a
+
+20
+01:49.070 --> 01:50.920
+vagrant user has privilege to execute sudo
+
+21
+01:50.920 --> 01:54.970
+Can also switch to root user by doing sudo -i
+
+22
+01:56.660 --> 01:58.440
+Now, let's switch to another user.
+
+23
+01:58.460 --> 02:01.730
+Let's see ansible user that we have created in previous video.
+
+24
+02:02.950 --> 02:10.510
+And if this user is trying to do sudo before this, let's set a password for this user because we
+
+25
+02:10.510 --> 02:13.150
+will need it, passwd
+
+26
+02:16.170 --> 02:16.890
+ansible
+
+27
+02:23.140 --> 02:26.410
+OK, the reason why I set password for this user, you will know in a moment.
+
+28
+02:27.720 --> 02:30.930
+So I switched to ansible user.
+
+29
+02:32.510 --> 02:34.220
+And we can do, we are root user.
+
+30
+02:35.680 --> 02:39.880
+And if I try to do sudo useradd.
+
+31
+02:41.450 --> 02:46.160
+test12, so trying to add a username test12
+
+32
+02:47.420 --> 02:53.840
+OK, it's asking me password for Ansible, OK, it's asking me my own password as ansible password,
+
+33
+02:54.290 --> 02:57.860
+which I have already set, so I'm going to enter that password.
+
+34
+02:58.850 --> 03:04.550
+OK, throws me an error. Ansible is not in the sudoers file file, this incident will be reported.
+
+35
+03:05.480 --> 03:06.510
+So that's an error.
+
+36
+03:07.010 --> 03:10.930
+We can't do that, the ansible user cannot do that switch.
+
+37
+03:11.200 --> 03:11.780
+sudo -i
+
+38
+03:11.870 --> 03:16.000
+And I it's asking password for the ansible user again.
+
+39
+03:16.940 --> 03:20.510
+And remember, this is the user password, not the root password.
+
+40
+03:22.050 --> 03:22.230
+.
+
+41
+03:23.050 --> 03:24.960
+OK, let's exit from this user.
+
+42
+03:25.920 --> 03:31.320
+Let's clear the screen now I want ansible user to execute sudo commands.
+
+43
+03:32.560 --> 03:38.520
+So I have one simple way, which is I will run a command visudo, this command will open the /etc/sudoers
+
+44
+03:38.560 --> 03:39.790
+file in the write mode.
+
+45
+03:40.830 --> 03:41.130
+.
+
+46
+03:43.280 --> 03:45.350
+So let me quit again.
+
+47
+03:46.890 --> 03:51.900
+Before I do that, let me show you the file /etc/sudoers
+
+48
+03:55.880 --> 04:02.600
+Yes, that's the path and you see does not have write permission even for the root users, so you can't
+
+49
+04:02.600 --> 04:05.720
+can't just do vim /etc/sudoers file
+
+50
+04:06.060 --> 04:08.360
+It's going to throw you an error when you're trying to edit the file.
+
+51
+04:09.020 --> 04:10.310
+And that's for security reasons.
+
+52
+04:10.310 --> 04:10.730
+It's done.
+
+53
+04:10.740 --> 04:12.950
+You don't change the permission of this file.
+
+54
+04:12.950 --> 04:18.380
+You just run the command visudo, which will open this file in the write mode in vim
+
+55
+04:20.420 --> 04:22.380
+There's really a lot of content in this file.
+
+56
+04:22.400 --> 04:27.480
+We are looking for a user called as root. So search for root, n for next.
+
+57
+04:27.560 --> 04:28.160
+Next.
+
+58
+04:30.420 --> 04:33.570
+There I set the line number, so it's much visible.
+
+59
+04:34.770 --> 04:40.410
+All right, so line number 100, I have the root user information. I want to add the ansible user, so
+
+60
+04:40.410 --> 04:47.370
+I'm going to copy this line and just paste it and change that line for user ansible.
+
+61
+04:48.830 --> 04:56.600
+OK, do not update that line number 100 that you're seeing, just add a new line and save and quit.
+
+62
+04:58.680 --> 05:06.000
+OK, now let's switch to Ansible user and from Ansible, let's now try to do sudo -i.
+
+63
+05:06.000 --> 05:09.020
+Its asking the password.
+
+64
+05:09.030 --> 05:09.690
+Let's enter it.
+
+65
+05:11.660 --> 05:19.910
+And tadaaa, it's working now, but it's interactive, it's asking me password for my user login the
+
+66
+05:19.910 --> 05:26.870
+ansible user. If you don't want that, which will not need when we're executing scripts in the background.
+
+67
+05:27.350 --> 05:28.910
+I don't want it to be interactive.
+
+68
+05:28.910 --> 05:32.600
+So I'm going to open visudo again with root User.
+
+69
+05:34.540 --> 05:36.370
+Search for Ansible.
+
+70
+05:38.000 --> 05:43.580
+And I have to give an entry over here, nopasswd.
+
+71
+05:45.040 --> 05:50.170
+Which means do not ask Ansible user its own password when it's trying to do sudo.
+
+72
+05:51.420 --> 05:53.070
+And let's save and quit this.
+
+73
+05:54.580 --> 05:57.670
+OK, now let's switch to ansible user again.
+
+74
+06:00.370 --> 06:05.980
+And now try to do sudo -i from here, you see no password asked.
+
+75
+06:07.280 --> 06:15.320
+Or ansible user can just do sudo or do some root operation, like adding a user. Lets try again.
+
+76
+06:15.320 --> 06:17.720
+test12 and that worked.
+
+77
+06:20.380 --> 06:21.940
+OK, now exit from here.
+
+78
+06:25.470 --> 06:27.720
+OK, coming back to the root user prompt.
+
+79
+06:30.100 --> 06:38.290
+So we have seen we have the/etc/sudoers file, we can update that, but if you make any syntax error in this
+
+80
+06:38.290 --> 06:41.260
+file, I'll show you.
+
+81
+06:41.260 --> 06:45.390
+Lets run visduo again and I just put some content there.
+
+82
+06:45.880 --> 06:48.220
+I made some syntax error and I am trying to save it.
+
+83
+06:49.640 --> 06:54.950
+So it will find that there is a syntax error in this file at line number nine and it's going to say,
+
+84
+06:54.950 --> 06:55.640
+what now?
+
+85
+06:55.670 --> 07:04.430
+So you have to say e to edit it back and go to that line number nine and fix it and then save & quit.
+
+86
+07:06.140 --> 07:08.720
+So you see there is a chance of human error.
+
+87
+07:09.740 --> 07:15.220
+In that file, and that will lead to a non-functional sudoers files, so sudo command will not work then.
+
+88
+07:15.230 --> 07:20.000
+If you save that file, sudoers command will not work and you will be stuck.
+
+89
+07:20.000 --> 07:26.420
+If you don't have the root password, which most of the servers will not have the root password set
+
+90
+07:26.540 --> 07:32.150
+for security purpose. You will have normal user login like we have vagrant user. We  will have any other
+
+91
+07:32.150 --> 07:36.150
+normal user login and then that can be switched to root user by using sudo.
+
+92
+07:37.010 --> 07:42.560
+So if you want to fix that file, it will be a problem because the sudo will not work and you don't
+
+93
+07:42.560 --> 07:43.550
+have the root password.
+
+94
+07:44.270 --> 07:47.270
+Sure, there are some other methods, but that will lead to more problems.
+
+95
+07:47.930 --> 07:57.260
+So the better solution is instead of editing that sudoers file, you go to /etc/sudoers.d directory
+
+96
+07:57.260 --> 07:58.790
+here you can create your own file.
+
+97
+07:58.790 --> 08:00.770
+You will see there is a file called as vagrant.
+
+98
+08:01.910 --> 08:05.330
+And it has the content like that, you can create your own file.
+
+99
+08:05.840 --> 08:08.540
+Let's see, I create a file for devops.
+
+100
+08:09.780 --> 08:16.380
+And I edit that file and I want to add the devops group in that, and when you want to add a group,
+
+101
+08:16.380 --> 08:18.750
+you have to say %  percent and the group name.
+
+102
+08:20.370 --> 08:26.210
+Percent % means the group, devops is a group and not a user, and you can, save and quit.
+
+103
+08:28.270 --> 08:36.460
+And now any user which belongs to devops group can do sudo or you can add really the user name also there
+
+104
+08:36.470 --> 08:37.300
+instead of group.
+
+105
+08:38.910 --> 08:40.710
+So this is a much safer option.
+
+106
+08:42.330 --> 08:44.640
+Compared to directly editing the source file.
+
+107
+08:45.740 --> 08:50.990
+Sure, there are many more options in the sudoers file, you can give special commands for a particular
+
+108
+08:50.990 --> 08:52.100
+user to execute.
+
+109
+08:53.040 --> 08:59.870
+But that's all for now in sudoers, so practice this, make sure you get it very well.
+
+110
+09:00.800 --> 09:04.160
+And once you're done practicing over here, join me in the next video.

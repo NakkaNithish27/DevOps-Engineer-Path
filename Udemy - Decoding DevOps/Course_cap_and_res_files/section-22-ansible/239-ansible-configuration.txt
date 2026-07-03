@@ -1,0 +1,697 @@
+WEBVTT
+
+00:00.600 --> 00:03.630
+Instructor: Welcome to Ansible configuration section.
+
+00:03.630 --> 00:06.480
+We'll be seeing different Ansible configuration settings
+
+00:06.480 --> 00:08.610
+in this video, understand them,
+
+00:08.610 --> 00:12.240
+and also we'll see how to use them in the right order.
+
+00:12.240 --> 00:16.260
+So far we did not make any change to Ansible configuration
+
+00:16.260 --> 00:17.340
+but it's still working.
+
+00:17.340 --> 00:20.370
+That means Ansible has default configuration
+
+00:20.370 --> 00:22.290
+and that should be fine.
+
+00:22.290 --> 00:26.250
+But if you want to change the defaults, like for example,
+
+00:26.250 --> 00:28.020
+Ansible will connect to Linux machine
+
+00:28.020 --> 00:31.650
+by using SSH on port 22.
+
+00:31.650 --> 00:33.915
+That's the default port for SSH.
+
+00:33.915 --> 00:36.390
+And Ansible will also use that by default
+
+00:36.390 --> 00:39.000
+but for some reason, maybe security reasons,
+
+00:39.000 --> 00:42.900
+you change the port number of SSH on your servers,
+
+00:42.900 --> 00:44.250
+like web server, database server.
+
+00:44.250 --> 00:46.350
+You change the SSH port number from 22
+
+00:46.350 --> 00:49.770
+to something else, maybe 2020.
+
+00:49.770 --> 00:52.800
+Now in this case, Ansible will try to access these machines
+
+00:52.800 --> 00:56.880
+on port 22 and it'll fail because that's its default nature.
+
+00:56.880 --> 01:00.360
+It's going to go on port 22 for SSH and that's default.
+
+01:00.360 --> 01:03.030
+And when you want to change defaults
+
+01:03.030 --> 01:06.060
+you change Ansible configuration.
+
+01:06.060 --> 01:08.430
+There are different levels Ansible configuration.
+
+01:08.430 --> 01:12.402
+The first is the global level, which we have already seen.
+
+01:12.402 --> 01:16.920
+/etc/ansible/ansible.cfg. We made also a change there.
+
+01:16.920 --> 01:19.110
+host_key_checking false, we said.
+
+01:19.110 --> 01:22.110
+That's the global Ansible configuration file
+
+01:22.110 --> 01:24.810
+and that will have the last priority.
+
+01:24.810 --> 01:29.520
+The first priority goes to a variable, ansible_config.
+
+01:29.520 --> 01:32.400
+If you set this variable, export this variable
+
+01:32.400 --> 01:35.040
+and set the path of Ansible configuration,
+
+01:35.040 --> 01:38.490
+then Ansible will use this configuration file
+
+01:38.490 --> 01:40.020
+and not the global one.
+
+01:40.020 --> 01:42.540
+If you did not mention the steps over there
+
+01:42.540 --> 01:44.070
+or write settings over there
+
+01:44.070 --> 01:45.720
+then it'll go for the global one.
+
+01:46.800 --> 01:50.190
+Second priority goes to Ansible configuration file
+
+01:50.190 --> 01:53.130
+in the current working directory, ansible.cfg,
+
+01:53.130 --> 01:56.250
+your project working directory or in your repository.
+
+01:56.250 --> 01:58.050
+We are doing exercise two, exercise three
+
+01:58.050 --> 02:00.810
+so we should create ansible.cfg file
+
+02:00.810 --> 02:03.720
+in exercise three for example,
+
+02:03.720 --> 02:07.110
+and that will have lower priority compared to the variable
+
+02:07.110 --> 02:10.170
+but higher than the global config file.
+
+02:10.170 --> 02:13.260
+Third priority goes to ansible.cfg file,
+
+02:13.260 --> 02:16.080
+a hidden file you create in your home directory.
+
+02:16.080 --> 02:17.430
+That will have the third priority.
+
+02:17.430 --> 02:18.690
+And the last priority goes
+
+02:18.690 --> 02:21.420
+to the global Ansible configuration file.
+
+02:21.420 --> 02:26.420
+So mostly we use ansible.cfg file in the current directory.
+
+02:26.460 --> 02:29.550
+Being a DevOps, you will be writing Ansible playbooks
+
+02:29.550 --> 02:31.440
+and you'll be doing version control.
+
+02:31.440 --> 02:33.780
+You'll be putting that in the repository,
+
+02:33.780 --> 02:35.910
+which will be used by the entire team
+
+02:35.910 --> 02:37.650
+or everyone in the project.
+
+02:37.650 --> 02:39.270
+So everyone should have the same setting.
+
+02:39.270 --> 02:43.620
+So you will commit ansible.cfg in the repository itself.
+
+02:43.620 --> 02:45.873
+Because if you set .ansible.cfg,
+
+02:45.873 --> 02:47.520
+that will be at the system level.
+
+02:47.520 --> 02:50.430
+And this fourth one is also at the system level.
+
+02:50.430 --> 02:52.920
+And the first one, that is also setting up a variable
+
+02:52.920 --> 02:54.330
+at the system level.
+
+02:54.330 --> 02:56.940
+The second one is the only repository specific
+
+02:56.940 --> 02:59.070
+and we'll be also using that.
+
+02:59.070 --> 03:01.620
+But first we'll go through ansible.cfg file global.
+
+03:01.620 --> 03:03.600
+We'll understand the settings.
+
+03:03.600 --> 03:06.480
+So let's read the ansible.cfg file.
+
+03:06.480 --> 03:10.320
+So the ansible.cfg file is at the global location.
+
+03:10.320 --> 03:12.870
+Switch to root user, sudo -i.
+
+03:12.870 --> 03:17.617
+And we'll open vim /etc/ansible/ansible.cfg.
+
+03:17.617 --> 03:20.490
+This file we already generated
+
+03:20.490 --> 03:23.970
+because the default file has very few settings.
+
+03:23.970 --> 03:25.230
+Sorry, no settings.
+
+03:25.230 --> 03:26.190
+It has just command
+
+03:26.190 --> 03:28.380
+to generate the Ansible configuration file.
+
+03:28.380 --> 03:31.443
+We did that, we generated Ansible configuration file.
+
+03:33.120 --> 03:34.290
+And this is a huge file.
+
+03:34.290 --> 03:39.290
+If I set the line number, it is more than a thousand lines.
+
+03:39.900 --> 03:41.583
+Okay, let me go to the top.
+
+03:42.780 --> 03:44.610
+So there are different sections.
+
+03:44.610 --> 03:48.990
+One is the defaults that contains the maximum settings.
+
+03:48.990 --> 03:50.640
+Are the most commonly used settings,
+
+03:50.640 --> 03:53.160
+but if you go at the end, you have different sections.
+
+03:53.160 --> 03:56.280
+You see variable section, powershell,
+
+03:56.280 --> 03:58.470
+and many other sections,
+
+03:58.470 --> 04:03.470
+like inventory sections winrm, ssh_connection settings
+
+04:03.926 --> 04:08.790
+sudo_become_plugin, su_become_plugin, and many other.
+
+04:08.790 --> 04:11.230
+I don't want you to go through the whole file
+
+04:12.090 --> 04:15.840
+but just keep in mind, Ansible has its default nature
+
+04:15.840 --> 04:18.750
+and whenever you want to change that nature
+
+04:18.750 --> 04:21.630
+you come to Ansible configuration file.
+
+04:21.630 --> 04:24.630
+There is privilege_escalation section we will be using.
+
+04:24.630 --> 04:28.380
+So we are looking at the global Ansible configuration file
+
+04:28.380 --> 04:31.980
+but we will be using a local ansible.cfg file.
+
+04:31.980 --> 04:33.150
+That's very much required
+
+04:33.150 --> 04:36.150
+and you should be using that file in your repository
+
+04:36.150 --> 04:39.870
+instead of relying on global Ansible configuration file.
+
+04:39.870 --> 04:42.510
+Okay, I'm at the top once again.
+
+04:42.510 --> 04:45.090
+So hash and semicolon are for comment.
+
+04:45.090 --> 04:46.860
+We have seen that, right?
+
+04:46.860 --> 04:48.600
+And there are many settings here
+
+04:48.600 --> 04:50.160
+like for example, force_colors.
+
+04:50.160 --> 04:52.920
+If you don't want the colors
+
+04:52.920 --> 04:54.210
+while you're executing the playbook...
+
+04:54.210 --> 04:56.850
+I mean, who doesn't like colors, right?
+
+04:56.850 --> 04:58.920
+But anyways, if you want to disable that
+
+04:58.920 --> 05:00.033
+there is an option.
+
+05:00.990 --> 05:03.390
+Okay, like that, the option for ask password.
+
+05:03.390 --> 05:05.820
+By default, Ansible will not ask password.
+
+05:05.820 --> 05:07.860
+It'll try to use the key or the password.
+
+05:07.860 --> 05:09.660
+If it doesn't find, it will fail.
+
+05:09.660 --> 05:12.180
+But if you want Ansible to ask password
+
+05:12.180 --> 05:15.420
+to log into the target machine, you can enable that.
+
+05:15.420 --> 05:16.440
+ask_pass you can say true
+
+05:16.440 --> 05:18.870
+and it'll ask you then password.
+
+05:18.870 --> 05:22.770
+debug=False, by default it's not going to do the debug
+
+05:22.770 --> 05:25.170
+but if you want it to debug also while running the playbook
+
+05:25.170 --> 05:26.850
+you can enable that.
+
+05:26.850 --> 05:28.503
+forks, this is interesting.
+
+05:29.490 --> 05:31.530
+Now let's say you have a group of hosts,
+
+05:31.530 --> 05:35.250
+let's say web server, and that contains 20 host.
+
+05:35.250 --> 05:38.460
+Web servers group that contains 20 hosts.
+
+05:38.460 --> 05:41.280
+So you can mention Ansible should be connecting
+
+05:41.280 --> 05:43.200
+to all the machine at a time,
+
+05:43.200 --> 05:45.600
+or five machine at a time, or one machine at a time.
+
+05:45.600 --> 05:47.910
+Now this depends on your Ansible
+
+05:47.910 --> 05:50.010
+or control machines resources.
+
+05:50.010 --> 05:54.420
+CPU, RAM, and the network also, bandwidth also.
+
+05:54.420 --> 05:56.880
+So if you have more, you can give more number of host.
+
+05:56.880 --> 06:00.690
+It can automate many machines at a time.
+
+06:00.690 --> 06:03.240
+But keep in mind this is not the limitation of Ansible,
+
+06:03.240 --> 06:05.490
+this is limitation of the control machine
+
+06:05.490 --> 06:08.100
+where your Ansible is running.
+
+06:08.100 --> 06:10.650
+Alright, let's look at some other settings.
+
+06:10.650 --> 06:12.690
+Inventory file, you can mention where should be
+
+06:12.690 --> 06:13.523
+the inventory file
+
+06:13.523 --> 06:16.890
+every time we are specifying inventory path, right?
+
+06:16.890 --> 06:18.870
+You can mention that in configuration file
+
+06:18.870 --> 06:20.580
+then you don't need to mention it every time
+
+06:20.580 --> 06:21.903
+you execute the playbook.
+
+06:24.330 --> 06:26.970
+log_path, by default Ansible does not store
+
+06:26.970 --> 06:31.410
+any log of execution, but if you want you can mention a path
+
+06:31.410 --> 06:35.460
+and it's going to store all the output in the log file.
+
+06:35.460 --> 06:36.900
+So see, like that, there are many settings.
+
+06:36.900 --> 06:39.210
+I can go on and on and on and on.
+
+06:39.210 --> 06:40.983
+There's documentation also,
+
+06:42.000 --> 06:46.440
+docs.ansible.com/archive/ansible.
+
+06:46.440 --> 06:47.760
+I can simply Google it.
+
+06:47.760 --> 06:50.793
+Okay, Ansible configuration file and configuration file.
+
+06:51.900 --> 06:55.320
+Okay, so you have all these settings, right?
+
+06:55.320 --> 06:57.579
+If you click on any of the setting
+
+06:57.579 --> 07:01.350
+it will tell you the description and how to use it.
+
+07:01.350 --> 07:04.620
+So let's create our own Ansible configuration file
+
+07:04.620 --> 07:06.360
+instead of using this global one.
+
+07:06.360 --> 07:10.530
+So far it was using global Ansible configuration file.
+
+07:10.530 --> 07:13.563
+So I will go to exercise seven itself.
+
+07:14.640 --> 07:16.980
+Let's not create a separate exercise for this one.
+
+07:16.980 --> 07:21.453
+I'm going to place ansible.cfg file over here.
+
+07:23.880 --> 07:26.250
+Okay, so first I need to mention the section.
+
+07:26.250 --> 07:30.120
+So first one is defaults in the square bracket
+
+07:30.120 --> 07:35.120
+and then let's give host_key_checking equal to false.
+
+07:35.310 --> 07:37.530
+That we gave it first.
+
+07:37.530 --> 07:39.120
+Also, I will mention inventory.
+
+07:39.120 --> 07:41.880
+Every time I'm mentioning inventory path.
+
+07:41.880 --> 07:45.123
+So I'll say inventory equal to ./inventory.
+
+07:46.260 --> 07:48.540
+So my inventory file name is inventory, okay?
+
+07:48.540 --> 07:49.500
+So don't get confused.
+
+07:49.500 --> 07:53.640
+This is the path of my file, this is the setting name.
+
+07:53.640 --> 07:56.940
+I will also give forks. I'll say Forks equal to five.
+
+07:56.940 --> 07:58.290
+Now it really doesn't matter.
+
+07:58.290 --> 08:00.690
+I just have three hosts at the max.
+
+08:00.690 --> 08:03.873
+It can anyways go with three machine at a time.
+
+08:04.860 --> 08:07.809
+You can mention the settings just to learn.
+
+08:07.809 --> 08:08.642
+Okay, I'll also mention log_path,
+
+08:09.630 --> 08:10.950
+where I want to store the log.
+
+08:10.950 --> 08:12.690
+By default is not storing log anywhere
+
+08:12.690 --> 08:17.437
+but I'll say, var/log/ansible.log.
+
+08:19.200 --> 08:22.113
+Like that I will also mention one more section.
+
+08:23.159 --> 08:24.870
+privilege_escalation.
+
+08:24.870 --> 08:27.660
+Now you remember in the playbook we mentioned become, yes.
+
+08:27.660 --> 08:29.040
+If you have multiple playbooks,
+
+08:29.040 --> 08:30.360
+all the playbooks we need to mention
+
+08:30.360 --> 08:33.510
+that we can make this as a global setting also.
+
+08:33.510 --> 08:36.063
+We can say become equal to true.
+
+08:36.930 --> 08:39.370
+So any playbook that runs over here
+
+08:40.380 --> 08:42.390
+in this current folder...
+
+08:42.390 --> 08:44.910
+Sorry, it's true. Is going to use that setting.
+
+08:44.910 --> 08:47.730
+And there are a few other settings, like become method
+
+08:47.730 --> 08:49.950
+which really doesn't matter.
+
+08:49.950 --> 08:51.200
+Or anyways, I'll give it.
+
+08:52.200 --> 08:53.130
+become_method is sudo
+
+08:53.130 --> 08:55.683
+because anyways become means sudo in Linux.
+
+08:59.038 --> 09:00.955
+become_ask_pass, false.
+
+09:08.100 --> 09:11.010
+Anyways, the EC2 hyphen user, that is going to do sudo,
+
+09:11.010 --> 09:12.930
+it's not going to ask any password for it,
+
+09:12.930 --> 09:16.980
+but in case, just showing you some extra settings.
+
+09:16.980 --> 09:21.033
+Right, now let's save this file and quit.
+
+09:22.590 --> 09:24.960
+And I'm going to see ansible-playbook,
+
+09:24.960 --> 09:26.490
+and this time I'm just going to give the name
+
+09:26.490 --> 09:27.990
+of the playbook, that's all.
+
+09:27.990 --> 09:29.880
+I'm not going to say -i inventory
+
+09:29.880 --> 09:31.050
+because it's already there
+
+09:31.050 --> 09:33.033
+in the Ansible configuration file.
+
+09:34.320 --> 09:37.050
+Okay, it's working, but we see one warning over here.
+
+09:37.050 --> 09:39.780
+It is saying /var/log/ansible is not writeable.
+
+09:39.780 --> 09:41.400
+We cannot create it.
+
+09:41.400 --> 09:45.600
+We as in the Ubuntu user is trying to create that file
+
+09:45.600 --> 09:49.110
+and this location is owned by the root user.
+
+09:49.110 --> 09:54.110
+So you have to do this, sudo touch /var/log/ansible.log
+
+09:57.750 --> 10:02.177
+and then you should change its ownership to ubuntu.ubuntu.
+
+10:07.200 --> 10:09.963
+Okay, now if you run the playbook.
+
+10:13.140 --> 10:14.370
+You see? No warning.
+
+10:14.370 --> 10:17.700
+And we'll also look at the log file.
+
+10:17.700 --> 10:22.700
+Okay, let's take a look. cat /var/log/ansible.log.
+
+10:24.120 --> 10:25.980
+You see, now it started maintaining the log.
+
+10:25.980 --> 10:30.980
+If we mention -vv, two levels of verbosity,
+
+10:31.020 --> 10:33.183
+then we should have more logs.
+
+10:34.800 --> 10:35.633
+See that?
+
+10:37.350 --> 10:38.810
+Okay, so there are many, many settings
+
+10:38.810 --> 10:41.340
+in Ansible configuration file.
+
+10:41.340 --> 10:43.290
+Don't waste in going through all of them.
+
+10:43.290 --> 10:46.980
+Whenever you require to change something in Ansible,
+
+10:46.980 --> 10:48.960
+you want Ansible to do something like this
+
+10:48.960 --> 10:50.790
+instead of that, right?
+
+10:50.790 --> 10:54.720
+Then check the configuration settings and make the changes.
+
+10:54.720 --> 10:56.430
+But always, always, always
+
+10:56.430 --> 10:58.650
+you should have an Ansible configuration file
+
+10:58.650 --> 11:01.950
+in the repository where you have your playbook.
+
+11:01.950 --> 11:03.033
+That, keep in mind.
+
+11:03.990 --> 11:06.330
+That is all in this lecture about configuration.
+
+11:06.330 --> 11:07.780
+I'll see you in the next one.

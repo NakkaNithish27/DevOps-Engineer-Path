@@ -1,0 +1,892 @@
+WEBVTT
+
+00:02.688 --> 00:06.420
+(letters beeping robotically)
+
+00:06.420 --> 00:08.580
+Instructor: All right, in this lecture we are going
+
+00:08.580 --> 00:13.080
+to set up virtual machine by using vagrant file.
+
+00:13.080 --> 00:15.840
+All the information is available in the source code.
+
+00:15.840 --> 00:18.847
+So first open the browser and go to this URL,
+
+00:19.779 --> 00:22.687
+github.com/hkhcoders/vprofile-project.
+
+00:25.230 --> 00:29.280
+This is the source code for our project.
+
+00:29.280 --> 00:31.350
+First, we need to clone the source code
+
+00:31.350 --> 00:36.350
+in our local machine, so I'm going to use VS Code.
+
+00:36.420 --> 00:39.330
+If you have any other preference, you can use that.
+
+00:39.330 --> 00:42.420
+First, let me copy the URL here.
+
+00:42.420 --> 00:43.890
+So click on this dropdown.
+
+00:43.890 --> 00:45.240
+You see HTTPS URL.
+
+00:45.240 --> 00:49.740
+Click on the copy and I'm going to open VS Code,
+
+00:49.740 --> 00:51.030
+Visual Studio Code.
+
+00:51.030 --> 00:54.720
+Again, you can use any other editor of your choice.
+
+00:54.720 --> 00:56.190
+So to clone the source code,
+
+00:56.190 --> 00:57.870
+you need to click on this button over here,
+
+00:57.870 --> 01:01.920
+source control and say Clone Repository.
+
+01:01.920 --> 01:05.043
+Paste your URL over there and hit Enter.
+
+01:05.880 --> 01:08.160
+Select a path.
+
+01:08.160 --> 01:10.140
+So I'm going to go to F drive.
+
+01:10.140 --> 01:12.750
+You can clone it anywhere you want.
+
+01:12.750 --> 01:14.820
+I'll create a folder over here.
+
+01:14.820 --> 01:16.330
+I will name it as hkhcoder
+
+01:19.230 --> 01:21.603
+and select this as the destination.
+
+01:22.620 --> 01:26.700
+Okay, I would say that open in the same window.
+
+01:26.700 --> 01:28.230
+Okay, there it is open.
+
+01:28.230 --> 01:29.460
+Now, before we do anything,
+
+01:29.460 --> 01:34.050
+it's very, very important that you switch the branch,
+
+01:34.050 --> 01:36.600
+source code will have different branches,
+
+01:36.600 --> 01:40.680
+we'll cover all that in the GIT section of this course.
+
+01:40.680 --> 01:41.910
+But for now, what you need
+
+01:41.910 --> 01:44.910
+to do is just click on this button over here
+
+01:44.910 --> 01:46.770
+where it says main.
+
+01:46.770 --> 01:48.420
+It's too small, I know.
+
+01:48.420 --> 01:51.633
+And select origin/local.
+
+01:53.070 --> 01:55.110
+Yeah, make sure you switch that.
+
+01:55.110 --> 01:59.163
+You should see local over here and nothing else.
+
+02:00.840 --> 02:02.670
+All right, so let's look at the source code.
+
+02:02.670 --> 02:05.370
+So we will be using this folder over here,
+
+02:05.370 --> 02:09.060
+vagrant and it has sub folders.
+
+02:09.060 --> 02:11.490
+First, we will be doing manual provisioning.
+
+02:11.490 --> 02:13.680
+That means we'll bring up the virtual machine
+
+02:13.680 --> 02:16.320
+and execute all the steps one by one.
+
+02:16.320 --> 02:20.670
+So manual provisioning Windows and Mac OS with Intel chip,
+
+02:20.670 --> 02:22.650
+need to use this folder.
+
+02:22.650 --> 02:26.940
+If you have MacOS with M1, M2 or M3 chip,
+
+02:26.940 --> 02:28.653
+then you use this folder.
+
+02:30.030 --> 02:33.690
+Okay, so with the folder you see over here a vagrant file
+
+02:33.690 --> 02:35.100
+and a PDF document.
+
+02:35.100 --> 02:37.560
+Let's go and check this PDF document.
+
+02:37.560 --> 02:41.265
+So I'm going to open the file Explorer, F drive, hkhcoder.
+
+02:41.265 --> 02:42.150
+This is where I code.
+
+02:42.150 --> 02:46.170
+I see here the profile-project and vagrant.
+
+02:46.170 --> 02:49.530
+And I'm going to go to this folder over here
+
+02:49.530 --> 02:51.000
+and there's the PDF document.
+
+02:51.000 --> 02:52.233
+I'm going to open this.
+
+02:53.520 --> 02:55.860
+You can download this from the resource
+
+02:55.860 --> 02:57.540
+of this lecture as well.
+
+02:57.540 --> 02:58.560
+So let's see what we got.
+
+02:58.560 --> 03:02.310
+So prerequisite, Oracle VM virtual box and vagrant.
+
+03:02.310 --> 03:05.430
+This we already have and a vagrant plugin.
+
+03:05.430 --> 03:07.500
+I'm going to explain about this plugin later,
+
+03:07.500 --> 03:10.030
+but all you need to do is execute this command
+
+03:10.980 --> 03:13.350
+and they should install the plugin,
+
+03:13.350 --> 03:14.403
+vagrant-hostmanager.
+
+03:15.720 --> 03:17.550
+Now, the word, plugin,
+
+03:17.550 --> 03:21.150
+most of the time means an extra feature.
+
+03:21.150 --> 03:23.070
+So we use this tool, vagrant,
+
+03:23.070 --> 03:26.160
+and this plugin will add some extra feature
+
+03:26.160 --> 03:27.510
+to our vagrant tool.
+
+03:27.510 --> 03:28.380
+What is that feature?
+
+03:28.380 --> 03:30.150
+We'll see that in some time,
+
+03:30.150 --> 03:33.660
+but all you need to do first is copy this command,
+
+03:33.660 --> 03:36.933
+open Git Bash or your terminal if you're using MacOS.
+
+03:37.950 --> 03:42.030
+So I'm going to open Git Bash and execute this command.
+
+03:42.030 --> 03:43.053
+Very important.
+
+03:44.190 --> 03:46.773
+We'll see what is the benefit of this in some time.
+
+03:48.930 --> 03:50.583
+Okay, that is installed.
+
+03:51.870 --> 03:54.450
+Okay, so then it says VM setup.
+
+03:54.450 --> 03:57.960
+We clone the source code, we switched the branch local.
+
+03:57.960 --> 04:01.500
+We go into a right folder and we say vagrant up.
+
+04:01.500 --> 04:04.620
+That should bring up all the virtual machines.
+
+04:04.620 --> 04:07.890
+Before we do that, let's take a look at the vagrant file.
+
+04:07.890 --> 04:10.440
+So go back to your VS Code,
+
+04:10.440 --> 04:13.230
+manual provisioning Windows, Mac, Intel.
+
+04:13.230 --> 04:15.330
+If you're using MacOS M1, M2 chip,
+
+04:15.330 --> 04:18.513
+use that folder and open the vagrant file.
+
+04:20.070 --> 04:22.320
+Okay, so this is a multi-VM vagrant file
+
+04:22.320 --> 04:25.890
+and we have five VMs over here.
+
+04:25.890 --> 04:30.890
+DB VM, Memcache VM, RabbitMQ VM, Tomcat VM
+
+04:31.140 --> 04:32.463
+and Nginx VM.
+
+04:34.470 --> 04:36.420
+We have here two global setting,
+
+04:36.420 --> 04:38.820
+config host manager enabled.
+
+04:38.820 --> 04:41.310
+I told you, I'm going to explain this later.
+
+04:41.310 --> 04:43.830
+When we bring up the virtual machine, I'm going to show you
+
+04:43.830 --> 04:46.200
+what this does.
+
+04:46.200 --> 04:48.720
+So this is just any other multi-VM vagrant file
+
+04:48.720 --> 04:52.620
+that see few differences like we have here,
+
+04:52.620 --> 04:54.060
+hostname mentioned.
+
+04:54.060 --> 04:57.750
+So when we log into our VM, we will see hostname here
+
+04:57.750 --> 05:01.710
+as db01 for this machine and the IP address
+
+05:01.710 --> 05:03.810
+and the memory size.
+
+05:03.810 --> 05:06.750
+We've seen all this in vagrant section.
+
+05:06.750 --> 05:11.130
+So I have given here just 600 MB of memory
+
+05:11.130 --> 05:14.670
+for DB, Memcache, RabbitMQ,
+
+05:14.670 --> 05:19.050
+Tomcat, 800 MB, Nginx 800 MB.
+
+05:19.050 --> 05:22.140
+Now, this is the minimum that we can go,
+
+05:22.140 --> 05:25.080
+but if you have a better computer,
+
+05:25.080 --> 05:27.210
+let's say you have 16 GB of RAM,
+
+05:27.210 --> 05:32.210
+or more than eight GB of RAM, you can go till 1,024 MB.
+
+05:32.340 --> 05:37.110
+That will be one GB per VM, but I have kept here minimum.
+
+05:37.110 --> 05:40.623
+So majority of the people can use this vagrant file.
+
+05:42.660 --> 05:45.930
+Okay, so the first four VMs,
+
+05:45.930 --> 05:48.420
+we use CentOS9,
+
+05:48.420 --> 05:53.160
+for Web01, which is Nginx VM, we use Ubuntu.
+
+05:53.160 --> 05:57.810
+Same in the vagrant file for Macs M1, M2 chip,
+
+05:57.810 --> 06:00.420
+we have CentOS for first four VM
+
+06:00.420 --> 06:03.210
+and Web01, we have Ubuntu.
+
+06:03.210 --> 06:04.800
+So there's not much difference except
+
+06:04.800 --> 06:06.900
+the box name is different.
+
+06:06.900 --> 06:08.280
+Let's bring up these VMs
+
+06:08.280 --> 06:12.240
+and then see the settings that we have mentioned over here,
+
+06:12.240 --> 06:13.650
+how does it take effect,
+
+06:13.650 --> 06:16.920
+so I'm going to open Git Bash
+
+06:16.920 --> 06:18.450
+to execute my vagrant command,
+
+06:18.450 --> 06:20.463
+MacOS people can use terminal.
+
+06:21.360 --> 06:22.710
+So here's my Git Bash
+
+06:22.710 --> 06:24.870
+and I'm going to switch to the folder
+
+06:24.870 --> 06:26.370
+where I have my source code.
+
+06:26.370 --> 06:29.970
+So mine is in F drive, I have hkhcoder,
+
+06:29.970 --> 06:34.380
+in this, there is vprofile-project.
+
+06:34.380 --> 06:35.760
+Hit Enter.
+
+06:35.760 --> 06:38.850
+Do ls, and you should see the source code.
+
+06:38.850 --> 06:41.020
+I'm going to switch to vagrant
+
+06:42.270 --> 06:45.030
+and ls, right, the four folders.
+
+06:45.030 --> 06:49.680
+So I'm going to go to manual provisioning Windows, Mac,
+
+06:49.680 --> 06:51.273
+Intel, this folder.
+
+06:53.100 --> 06:56.070
+So choose the folder based on your operating system.
+
+06:56.070 --> 06:58.830
+So people with Windows, MacOS, Intel chip,
+
+06:58.830 --> 07:02.190
+even Linux users like Ubuntu should go
+
+07:02.190 --> 07:07.050
+to this folder except MacOS with M1, M2, M3 chip,
+
+07:07.050 --> 07:08.900
+everyone should be using this folder.
+
+07:10.260 --> 07:11.823
+Okay, let me clear the screen.
+
+07:13.773 --> 07:15.000
+Okay, let's do ls.
+
+07:15.000 --> 07:18.330
+We see here vagrant file and we see a PDF document.
+
+07:18.330 --> 07:19.890
+We'll go to the document.
+
+07:19.890 --> 07:21.810
+By the time we'll bring up the virtual machine,
+
+07:21.810 --> 07:24.060
+it takes time to bring up these VMs,
+
+07:24.060 --> 07:26.580
+by the time we'll go through the documents,
+
+07:26.580 --> 07:28.710
+but before I bring up the virtual machine,
+
+07:28.710 --> 07:31.530
+I would like to check if there are any other VMs
+
+07:31.530 --> 07:34.050
+already running so I can clean it.
+
+07:34.050 --> 07:37.743
+So vagrant, space, global-status.
+
+07:40.020 --> 07:41.640
+Okay, so I don't see any VM,
+
+07:41.640 --> 07:44.130
+but if you see any VM, go to that folder.
+
+07:44.130 --> 07:45.570
+It'll show you the directory over here.
+
+07:45.570 --> 07:48.510
+Go to that directory and destroy vagrant, destroy,
+
+07:48.510 --> 07:50.010
+delete those VMs.
+
+07:50.010 --> 07:51.990
+And once you are done cleaning up everything,
+
+07:51.990 --> 07:56.733
+you run this command, vagrant global-status--prune.
+
+07:59.040 --> 08:02.190
+So the prune command, if it has any stale entries,
+
+08:02.190 --> 08:03.540
+it'll remove those entries.
+
+08:03.540 --> 08:08.540
+You'll have a clean setup and then you can do vagrant up.
+
+08:08.880 --> 08:13.140
+Okay, for some people, this might ask a password to enter.
+
+08:13.140 --> 08:15.540
+That will be your own computer password.
+
+08:15.540 --> 08:17.220
+This is not the VM password.
+
+08:17.220 --> 08:20.820
+It is going to ask your own computer password.
+
+08:20.820 --> 08:22.980
+Most of the people it won't even ask.
+
+08:22.980 --> 08:24.390
+Just do vagrant up,
+
+08:24.390 --> 08:27.430
+again, make sure you are in the correct folder
+
+08:29.820 --> 08:31.890
+and do vagrant up.
+
+08:31.890 --> 08:33.930
+This is going to take some time, by the time,
+
+08:33.930 --> 08:36.543
+let's go back to a document and take a look.
+
+08:39.120 --> 08:43.020
+Okay, so here it says, all the VM's hostname
+
+08:43.020 --> 08:46.890
+and etc host file entries will be automatically updated.
+
+08:46.890 --> 08:49.200
+We'll see what is this when we bring up the VM
+
+08:49.200 --> 08:51.180
+and why it is important.
+
+08:51.180 --> 08:54.060
+In fact, this is the reason why we installed this plugin.
+
+08:54.060 --> 08:55.833
+We'll come to that in a moment.
+
+08:57.210 --> 08:58.830
+So we have the architecture diagram
+
+08:58.830 --> 09:01.890
+that we did in the previous lecture.
+
+09:01.890 --> 09:06.240
+So these are the services that is in this project.
+
+09:06.240 --> 09:09.843
+Nginx, Tomcat, RabbitMQ, Memcache, ElasticSearch, MySQL.
+
+09:11.460 --> 09:13.140
+Now we are skipping ElasticSearch,
+
+09:13.140 --> 09:16.770
+because this needs lot of amount of memory.
+
+09:16.770 --> 09:19.353
+So you're skipping this service.
+
+09:21.900 --> 09:24.540
+Okay, so it says the setup should be done in this
+
+09:24.540 --> 09:28.172
+below mentioned order first, MySQL, then Memcache,
+
+09:28.172 --> 09:31.620
+then RabbitMQ, then Tomcat, then Nginx.
+
+09:31.620 --> 09:33.900
+Now the VMs are coming up,
+
+09:33.900 --> 09:35.730
+but they're just bare operating system.
+
+09:35.730 --> 09:37.890
+We are going to install these services
+
+09:37.890 --> 09:41.730
+and there is a specific order mentioned over here.
+
+09:41.730 --> 09:44.520
+In real time, also, you should follow similar order.
+
+09:44.520 --> 09:46.890
+First, you set up the database
+
+09:46.890 --> 09:49.560
+and any other backend services that you have
+
+09:49.560 --> 09:52.500
+that uses the database like Memcache here connects
+
+09:52.500 --> 09:53.640
+to MySQL database.
+
+09:53.640 --> 09:56.190
+So first we need to set up MySQL.
+
+09:56.190 --> 09:58.709
+If it's up and running, then we go to Memcache.
+
+09:58.709 --> 10:00.840
+So Memcache can connect to it,
+
+10:00.840 --> 10:03.840
+one by one everything is getting validated
+
+10:03.840 --> 10:05.820
+and finally we come till Nginx.
+
+10:05.820 --> 10:07.890
+So once we access the Nginx service,
+
+10:07.890 --> 10:10.440
+all the other backend application service already
+
+10:10.440 --> 10:12.090
+are up and running.
+
+10:12.090 --> 10:14.370
+Now this is a good practice, not mandatory.
+
+10:14.370 --> 10:16.950
+Some places it is mandatory.
+
+10:16.950 --> 10:20.280
+Some application depends on the database to come up.
+
+10:20.280 --> 10:21.270
+That will be mandatory,
+
+10:21.270 --> 10:24.210
+but this should be anyways a standard order
+
+10:24.210 --> 10:28.290
+and when we shut down, the order should be reversed.
+
+10:28.290 --> 10:30.690
+First, we need to cut the user access.
+
+10:30.690 --> 10:34.620
+So frontend service, we need to stop first like Nginx,
+
+10:34.620 --> 10:38.422
+and then application service like Tomcat, then RabbitMQ,
+
+10:38.422 --> 10:41.250
+then Memcache, then MySQL.
+
+10:41.250 --> 10:43.953
+Again, a standard practice, not mandatory.
+
+10:45.120 --> 10:48.210
+So first, we have the MySQL setup
+
+10:48.210 --> 10:49.890
+and we'll come to all this commands.
+
+10:49.890 --> 10:52.383
+Let's see if the VMs are up or not.
+
+10:53.430 --> 10:56.640
+Okay, so I have RMQ01 coming up.
+
+10:56.640 --> 11:00.540
+So I'm going to pause the recording and resume once
+
+11:00.540 --> 11:01.983
+all the VMs are up.
+
+11:03.150 --> 11:05.010
+Okay, all my VMs are up.
+
+11:05.010 --> 11:07.770
+If you see some other error like timeout,
+
+11:07.770 --> 11:11.970
+or something like that, then just do vagrant reload.
+
+11:11.970 --> 11:16.110
+You can just do vagrant reload that VM name
+
+11:16.110 --> 11:18.960
+to reboot that, and then you can just again do vagrant up,
+
+11:18.960 --> 11:20.850
+or you can just say vagrant reload
+
+11:20.850 --> 11:22.537
+to just reboot all the VMs.
+
+11:23.520 --> 11:26.160
+But if it comes up clean, no worries.
+
+11:26.160 --> 11:29.790
+First, I'm going to log in to Web01,
+
+11:29.790 --> 11:32.560
+vagrant ssh web01.
+
+11:32.560 --> 11:34.050
+Okay, so once we log in,
+
+11:34.050 --> 11:38.523
+we see there is the hostname configured web01.
+
+11:39.390 --> 11:42.780
+I'm going to switch to root user
+
+11:42.780 --> 11:45.450
+and I will show you one nice entry
+
+11:45.450 --> 11:47.970
+that is created automatically by vagrant
+
+11:47.970 --> 11:52.533
+just do cat/etc/hosts,
+
+11:53.910 --> 11:57.093
+and you should see this entry in the host file.
+
+11:57.960 --> 11:59.010
+Okay, so the host file
+
+11:59.010 --> 12:01.920
+of any computer works like this.
+
+12:01.920 --> 12:04.890
+If you try to access a machine with the name app01,
+
+12:04.890 --> 12:07.080
+it is going to look for it's IP.
+
+12:07.080 --> 12:10.950
+First, it is going to look for the IP in the host file.
+
+12:10.950 --> 12:13.290
+If it's not finding in the host file,
+
+12:13.290 --> 12:17.010
+then it'll go and check the DNS of your ISP.
+
+12:17.010 --> 12:18.360
+But here we have the entry,
+
+12:18.360 --> 12:22.680
+app01 means this IP address, db01 means this IP.
+
+12:22.680 --> 12:25.110
+We did not add this entry, vagrant did it
+
+12:25.110 --> 12:28.740
+by using the vagrant host manager plugin.
+
+12:28.740 --> 12:31.200
+So this is the plugin that we installed initially,
+
+12:31.200 --> 12:34.173
+if you remember, and let's go to the vagrant file.
+
+12:35.430 --> 12:38.490
+In the vagrant file, we made this two entries,
+
+12:38.490 --> 12:41.430
+config.hostmanager.enabled true,
+
+12:41.430 --> 12:45.063
+config.hostmanager.manage_host=true.
+
+12:45.960 --> 12:49.200
+Now, this is just available in it's documentation in
+
+12:49.200 --> 12:50.220
+the GitHub repository.
+
+12:50.220 --> 12:51.810
+If we just Google, you'll find it.
+
+12:51.810 --> 12:52.980
+It's no big deal.
+
+12:52.980 --> 12:55.050
+Just install the plugin, add these entries,
+
+12:55.050 --> 12:59.850
+and automatically your VMs will have host name
+
+12:59.850 --> 13:01.473
+to IP mapping.
+
+13:03.690 --> 13:05.400
+Okay, you can check that in login
+
+13:05.400 --> 13:08.280
+and check in every VM in etc hosts file,
+
+13:08.280 --> 13:10.140
+you'll find this entry.
+
+13:10.140 --> 13:12.840
+Now, this is how it'll work in our configuration files,
+
+13:12.840 --> 13:17.310
+we'll have names like the name of app01.
+
+13:17.310 --> 13:18.143
+Right?
+
+13:18.143 --> 13:22.860
+Now, if we do ping app01 -c 4,
+
+13:22.860 --> 13:26.550
+that means it is going to first resolve app01
+
+13:26.550 --> 13:27.933
+to an IP address.
+
+13:28.770 --> 13:29.603
+You see that?
+
+13:29.603 --> 13:31.770
+That is happening through the host file,
+
+13:31.770 --> 13:34.050
+-: c 4 means count for four packets.
+
+13:34.050 --> 13:35.910
+It's going to send four packets,
+
+13:35.910 --> 13:37.530
+and if you get a reply back,
+
+13:37.530 --> 13:39.570
+that means we are able to connect.
+
+13:39.570 --> 13:42.000
+This is just a simple sanity test.
+
+13:42.000 --> 13:44.280
+If you're not getting any reply, you're getting timeouts,
+
+13:44.280 --> 13:47.070
+or something like that, then you need to reboot
+
+13:47.070 --> 13:49.560
+that machine, coming from app01,
+
+13:49.560 --> 13:51.870
+then reboot app01.
+
+13:51.870 --> 13:54.270
+Okay, now, I give you one exercise over here.
+
+13:54.270 --> 13:55.920
+Log into every machine,
+
+13:55.920 --> 13:57.303
+exit from here.
+
+13:59.970 --> 14:00.803
+Okay?
+
+14:00.803 --> 14:01.636
+Log into then
+
+14:02.670 --> 14:03.720
+app01
+
+14:03.720 --> 14:07.219
+and ping the backend services like MC01,
+
+14:07.219 --> 14:08.403
+RMQ01, DB01.
+
+14:09.690 --> 14:10.523
+Right?
+
+14:10.523 --> 14:13.620
+Try that, if you see anything does not give a response back,
+
+14:13.620 --> 14:15.930
+then you need to reboot that machine.
+
+14:15.930 --> 14:19.113
+Not a mandatory test for now, but just an exercise.

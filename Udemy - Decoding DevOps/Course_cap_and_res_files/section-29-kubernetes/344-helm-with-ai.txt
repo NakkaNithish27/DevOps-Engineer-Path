@@ -1,0 +1,1021 @@
+WEBVTT
+
+00:00.240 --> 00:00.560
+Okay.
+
+00:00.560 --> 00:04.320
+So finally in this lecture we are going to use Amazon Queue to develop the helm chart.
+
+00:04.360 --> 00:10.520
+So the basic helm charts that we created in the last lecture to learn the structure just delete the
+
+00:10.560 --> 00:11.480
+delete that folder.
+
+00:11.480 --> 00:16.360
+So I'm going to delete this folder WP hyphen chart.
+
+00:19.520 --> 00:19.720
+Okay.
+
+00:19.720 --> 00:24.880
+So all I have are those are these Kubernetes definition files.
+
+00:25.200 --> 00:27.800
+And I'm going to ask Amazon Cube Developer.
+
+00:27.800 --> 00:30.640
+So click on this open a new chat.
+
+00:31.800 --> 00:33.000
+Let me expand this.
+
+00:34.920 --> 00:37.440
+So we just need to write the prompt write prompt.
+
+00:37.440 --> 00:41.280
+So it reads our definition files and create charts for us.
+
+00:41.960 --> 00:43.120
+So this is my prompt.
+
+00:43.120 --> 00:46.640
+Create helm charts from these Kubernetes definitions file.
+
+00:46.840 --> 00:51.640
+Now since it's in the same folder it's single folder root folder I have all definition file.
+
+00:51.640 --> 00:53.600
+I'm saying these Kubernetes definition file.
+
+00:53.600 --> 00:57.200
+Otherwise you can mention the folder name even if you don't mention.
+
+00:57.200 --> 01:03.070
+If you just ask a question to create helm charts, it will find your Kubernetes resources and create
+
+01:03.070 --> 01:03.590
+charts.
+
+01:04.110 --> 01:06.470
+I'm saying use release name in the metadata.
+
+01:06.470 --> 01:09.470
+So when we deploy our helm charts, we'll give a release name.
+
+01:09.470 --> 01:11.030
+So I'm saying that in the metadata.
+
+01:11.070 --> 01:17.550
+Use that name, replace other hard coded values into variables and add those variables in values.
+
+01:17.550 --> 01:18.710
+Dot YAML file.
+
+01:19.230 --> 01:21.310
+Once you write this prompt hit enter.
+
+01:21.350 --> 01:22.630
+It's going to take some time.
+
+01:24.270 --> 01:26.070
+Started looking for the files.
+
+01:26.630 --> 01:28.190
+Sees one directory listed.
+
+01:31.390 --> 01:34.190
+Eight files started working.
+
+01:34.190 --> 01:35.950
+Started generating chart dot YAML.
+
+01:35.950 --> 01:37.430
+So let's take a moment.
+
+01:37.910 --> 01:39.150
+Oh wait, there is some error.
+
+01:39.150 --> 01:42.070
+So it says let me create the directory structure first.
+
+01:42.350 --> 01:43.910
+So it is asking us to create.
+
+01:43.950 --> 01:44.950
+Run this command.
+
+01:45.190 --> 01:46.910
+Now I can just say run.
+
+01:47.110 --> 01:49.030
+So it creates that folder structure.
+
+01:51.150 --> 01:52.350
+Okay it failed.
+
+01:52.350 --> 01:54.230
+Let's run this command once again.
+
+01:55.830 --> 01:56.150
+Okay.
+
+01:56.190 --> 01:57.950
+That command also failed.
+
+01:58.430 --> 01:59.670
+Something is wrong here.
+
+02:02.590 --> 02:02.790
+Okay.
+
+02:02.790 --> 02:04.990
+It's using MD command to create the folder.
+
+02:04.990 --> 02:05.990
+Mkdir is not working.
+
+02:05.990 --> 02:08.630
+I don't think it's using the bash shell.
+
+02:09.670 --> 02:11.790
+macOS user won't have this problem.
+
+02:12.390 --> 02:15.150
+Okay, anyways, just look for the question that is asking.
+
+02:15.150 --> 02:15.950
+Execute them.
+
+02:16.550 --> 02:19.750
+Once you create the folder structure, the rest it will take care of.
+
+02:20.390 --> 02:25.470
+Okay, so I'm going to pause the recording right now and resume when this is completed okay.
+
+02:25.510 --> 02:26.910
+The work is completed.
+
+02:27.430 --> 02:28.470
+Let's take a look.
+
+02:29.550 --> 02:32.190
+So we see a folder WordPress hyphen chart.
+
+02:33.350 --> 02:34.710
+There's one empty folder here.
+
+02:34.710 --> 02:38.630
+I think this was created because it was trying to create the chart.
+
+02:38.950 --> 02:40.190
+Anyways I removed that.
+
+02:40.550 --> 02:41.710
+So WordPress hyphen chart.
+
+02:41.750 --> 02:43.790
+Here you have values dot YAML file.
+
+02:43.790 --> 02:46.990
+You see all the variables defined.
+
+02:47.030 --> 02:50.270
+Here you see chart dot YAML file.
+
+02:51.630 --> 02:53.110
+That's the version of the chart.
+
+02:53.110 --> 02:58.950
+That's our WordPress application version which we're going to change in the templates.
+
+02:58.950 --> 03:02.260
+We should see all the templates for starting with MySQL deployment.
+
+03:02.940 --> 03:04.660
+So as I said in the release.
+
+03:05.140 --> 03:07.540
+So in the metadata give release name.
+
+03:08.580 --> 03:10.300
+This will be the name of the release.
+
+03:10.300 --> 03:14.740
+That's how I want to name my release or my resources.
+
+03:15.020 --> 03:18.140
+So if we say the release name is WordPress.
+
+03:18.140 --> 03:20.740
+So here it will be replaced by WordPress.
+
+03:20.740 --> 03:23.140
+Hyphen MySQL okay.
+
+03:23.180 --> 03:25.780
+The image you see those values.
+
+03:26.540 --> 03:28.780
+Environment variable MySQL root password.
+
+03:28.780 --> 03:31.180
+The value is coming from a secret.
+
+03:31.180 --> 03:34.540
+And the secret name is this release name hyphen MySQL.
+
+03:34.580 --> 03:35.580
+Hyphen secret.
+
+03:35.780 --> 03:37.460
+So that will be the secret name.
+
+03:38.180 --> 03:41.700
+Let's go to the secret file WordPress secret.
+
+03:42.700 --> 03:42.980
+See that?
+
+03:42.980 --> 03:45.220
+That's the name of the secret release dot name.
+
+03:45.220 --> 03:46.700
+Hyphen MySQL secret.
+
+03:46.820 --> 03:48.380
+And from that it's looking for the keys.
+
+03:48.380 --> 03:49.500
+These are different keys.
+
+03:49.500 --> 03:51.740
+And this will be replaced with these values.
+
+03:52.420 --> 03:55.260
+So values dot secret dot MySQL root password.
+
+03:55.260 --> 04:01.500
+Let's go to values file values dot secret dot MySQL root password.
+
+04:01.500 --> 04:02.260
+So this is the text.
+
+04:02.260 --> 04:03.780
+It's in clear text format.
+
+04:04.060 --> 04:05.460
+We should be encrypting this.
+
+04:05.460 --> 04:07.700
+But that is for us to change things.
+
+04:07.940 --> 04:14.260
+But this is going to be encoded in the secret here with base64 encoding.
+
+04:14.420 --> 04:16.340
+And that will be assigned to this key.
+
+04:16.340 --> 04:20.140
+And this is used in the MySQL deployment there.
+
+04:21.700 --> 04:21.900
+Okay.
+
+04:21.900 --> 04:25.180
+So it has created a basic structure for you which you can use.
+
+04:25.580 --> 04:26.340
+We can improve it.
+
+04:26.340 --> 04:29.900
+Also we will test this template first and then we'll make the changes.
+
+04:30.220 --> 04:35.700
+But one more interesting thing over here with values dot MySQL dot resource.
+
+04:35.700 --> 04:37.020
+Let's take a look over here.
+
+04:37.700 --> 04:43.900
+So it is saying that this resources will be replaced with this template values dot mysql dot resources.
+
+04:44.540 --> 04:46.860
+So values dot MySQL dot resources.
+
+04:46.860 --> 04:48.580
+It's basically empty here.
+
+04:48.580 --> 04:53.860
+But if you define some structure over here, like if you give some variables like this, then this whole
+
+04:53.860 --> 04:56.820
+section will be taken or sorry will be referred.
+
+04:57.380 --> 05:00.460
+And then you can give the variable name directly over there.
+
+05:00.580 --> 05:04.570
+You don't need to say values dot mysql, dot resources, dot blah blah blah.
+
+05:05.290 --> 05:10.650
+You are already referring it to this dictionary and then you can directly give the name of the variables
+
+05:10.650 --> 05:11.290
+over there.
+
+05:11.610 --> 05:16.250
+Okay, so go through all these files one by one MySQL PVC.
+
+05:16.290 --> 05:18.650
+Here it says this is condition based.
+
+05:18.970 --> 05:23.610
+So if values dot MySQL dot persistence enabled if this value is true.
+
+05:24.170 --> 05:26.250
+Now open both the files side by side.
+
+05:26.530 --> 05:30.410
+So the condition is if values dot MySQL dot persistence dot enabled.
+
+05:30.410 --> 05:37.610
+If this returns true which is values dot mysql dot persistence dot enabled is values true.
+
+05:37.890 --> 05:42.410
+If this is true, then only this template will be created.
+
+05:42.610 --> 05:47.850
+And keep in mind when there is an if in templating of helm, there will be an end also.
+
+05:48.770 --> 05:52.930
+So in this between block this is condition based.
+
+05:52.930 --> 05:54.490
+The whole file basically.
+
+05:55.010 --> 05:56.970
+So we'll look more into this one.
+
+05:57.370 --> 06:01.850
+And we're going to add many more things into this templates again with code Assistant.
+
+06:02.130 --> 06:05.730
+But before that, let's see how to deploy these charts.
+
+06:05.730 --> 06:08.770
+Use it and then we'll make more changes.
+
+06:09.850 --> 06:14.370
+Let's open the terminal I'm switching to git bash.
+
+06:16.170 --> 06:17.970
+Make sure you are in the right folder.
+
+06:20.010 --> 06:23.530
+You should see the chart over here WordPress chart.
+
+06:24.170 --> 06:26.490
+First we're going to check the syntax.
+
+06:26.490 --> 06:28.850
+So the command will be helm lint.
+
+06:29.290 --> 06:32.050
+And we give the path of the folder.
+
+06:34.250 --> 06:35.410
+So it's almost perfect.
+
+06:35.410 --> 06:42.490
+We have no mistakes I have tried many other code assistant, and it's only the Amazon Q developer that
+
+06:42.490 --> 06:45.610
+has given me an error free chart.
+
+06:46.290 --> 06:50.730
+Other code assistants I have tried, and usually there are some or the other mistakes.
+
+06:51.370 --> 06:52.570
+Okay, now there's another command.
+
+06:52.570 --> 06:55.090
+We can really check if the templates are working or not.
+
+06:55.130 --> 07:01.760
+We can do helm template, template and the path of our chart.
+
+07:04.920 --> 07:10.200
+Is going to scan through all the templates and see whether they are now getting the right variable's
+
+07:10.200 --> 07:11.280
+value or not.
+
+07:11.560 --> 07:12.720
+You can check it yourself.
+
+07:12.720 --> 07:18.080
+If you find any mistake, you can look into that template and check the variable value.
+
+07:19.040 --> 07:20.880
+If you're good, you can deploy it.
+
+07:20.880 --> 07:23.680
+So let's now deploy this so the command will be helm.
+
+07:23.720 --> 07:33.040
+Install the name of the release I'm going to give it as WP and the path of the chart hyphen n I'm going
+
+07:33.040 --> 07:36.520
+to give a name space here wp hyphen ns.
+
+07:37.800 --> 07:39.480
+And this namespace does not exist.
+
+07:39.480 --> 07:43.000
+So I'm going to give one option here which will create the namespace also.
+
+07:43.480 --> 07:48.360
+So with this command first it's going to create a namespace with this name and deploy chart with this
+
+07:48.360 --> 07:52.600
+name wp name by reading all the templates from here.
+
+07:53.200 --> 07:54.520
+So let's execute this.
+
+07:58.600 --> 07:58.840
+Okay.
+
+07:58.840 --> 08:00.120
+It's deployed with one warning.
+
+08:00.120 --> 08:02.920
+It is saying Kubernetes dot ingress class is deprecated.
+
+08:02.920 --> 08:06.200
+Please use spec dot ingress class name instead.
+
+08:06.640 --> 08:08.640
+We can check helm list.
+
+08:11.120 --> 08:14.440
+We need to mention the namespace hyphen and wp hyphen nss.
+
+08:16.880 --> 08:19.320
+So we see the revision number.
+
+08:19.680 --> 08:25.200
+We see the time stamp status as deployed chart name and its version.
+
+08:25.760 --> 08:32.080
+Let's look at all the resources kubectl get all hyphen and wp hyphen nss.
+
+08:33.480 --> 08:35.240
+Okay so we see two pod running.
+
+08:35.280 --> 08:36.840
+We see two services.
+
+08:36.880 --> 08:41.360
+We see deployment replica set for ingress.
+
+08:41.360 --> 08:44.920
+We need to just do get ingress.
+
+08:48.040 --> 08:49.840
+Okay I think there is a problem in the ingress.
+
+08:49.840 --> 08:50.400
+The class.
+
+08:50.400 --> 08:51.960
+It is not showing as nginx.
+
+08:51.960 --> 08:53.320
+And this could be an issue.
+
+08:53.680 --> 08:55.240
+Let's describe this ingress.
+
+09:01.240 --> 09:03.790
+So actually we see the ingress working.
+
+09:03.870 --> 09:07.670
+And I mean you see the address of the load balancer.
+
+09:07.670 --> 09:09.510
+If you don't see it yet, wait for some time.
+
+09:09.510 --> 09:10.510
+It will be there.
+
+09:10.670 --> 09:11.670
+It takes some time.
+
+09:12.150 --> 09:14.510
+But ingress class name it says none here.
+
+09:14.510 --> 09:15.910
+It should be nginx.
+
+09:16.310 --> 09:20.070
+So we are going to go to the WordPress ingress.
+
+09:20.070 --> 09:22.870
+And here we are going to add one setting.
+
+09:25.510 --> 09:28.510
+Ingress class name C colon nginx.
+
+09:28.550 --> 09:29.310
+Save this.
+
+09:29.590 --> 09:33.110
+And then let's change the version of the chart because we are going to upgrade it.
+
+09:33.110 --> 09:39.990
+So from 0.1. 1 to 0 .1.1 sorry, it was 0.1.0.
+
+09:39.990 --> 09:42.390
+So I'm just incrementing it by one.
+
+09:42.710 --> 09:44.750
+The third one will be for the bug fix.
+
+09:45.830 --> 09:53.350
+So once we upgrade the chart chart and the version of the chart and we put this setting, make sure
+
+09:53.350 --> 09:54.630
+you save all the files.
+
+09:55.110 --> 09:56.950
+And then let's upgrade this.
+
+09:57.550 --> 10:02.590
+So we have to run this command helm upgrade the name of our release.
+
+10:03.270 --> 10:06.710
+Okay, this option, I should remove the path of the chart.
+
+10:07.790 --> 10:08.190
+Oh, wait.
+
+10:08.190 --> 10:09.630
+I need to give the path of the chart.
+
+10:09.670 --> 10:10.350
+I'm sorry.
+
+10:11.910 --> 10:15.030
+Hyphen n and the namespace name.
+
+10:15.710 --> 10:18.830
+Hit enter, so it's going to read the changes and apply it.
+
+10:19.430 --> 10:19.710
+Okay.
+
+10:19.710 --> 10:21.910
+It says revision two is deployed.
+
+10:21.910 --> 10:26.950
+Let's check the ingress once again kubectl describe ingress okay.
+
+10:26.950 --> 10:29.390
+Now we see here ingress class nginx.
+
+10:30.070 --> 10:31.750
+Okay let's list the helm.
+
+10:31.790 --> 10:32.630
+Helm list.
+
+10:33.550 --> 10:37.870
+Now I need to give the namespace hyphen n wp hyphen ns okay.
+
+10:37.910 --> 10:42.230
+So the chart version we see that's WordPress 0.1.1.
+
+10:42.630 --> 10:44.910
+This one is the app version okay.
+
+10:44.910 --> 10:51.630
+Now in order to check it from the browser, you need to add this load balancer endpoint in your DNS
+
+10:51.630 --> 10:53.630
+record with this name WordPress.
+
+10:54.750 --> 10:55.910
+So you can do it two way.
+
+10:55.910 --> 11:03.020
+Either you can go to your domain domain registrar like GoDaddy and add the entry WordPress maps to this
+
+11:03.220 --> 11:08.860
+load balancer endpoint, or you can open the host file in your computer and make the change.
+
+11:09.540 --> 11:11.340
+Okay, I've logged into my GoDaddy account.
+
+11:11.340 --> 11:16.740
+I'm going to go to my products, I find my domain and I'm going to say DNS.
+
+11:17.580 --> 11:20.140
+The UI of this might change here and there.
+
+11:20.180 --> 11:23.620
+Just remember you need to go to the DNS records of your domain.
+
+11:24.060 --> 11:29.180
+See add new record type will be CNM because we are mapping a name to a name.
+
+11:29.180 --> 11:34.300
+So WordPress, that's what name we have given in the ingress, right?
+
+11:34.340 --> 11:36.900
+WordPress maps to this one.
+
+11:36.900 --> 11:38.540
+So select that and do right click.
+
+11:38.540 --> 11:43.300
+It will get copied and paste the value there and say save.
+
+11:43.620 --> 11:46.500
+Now after doing doing this this might take some time.
+
+11:46.940 --> 11:48.380
+It might take a very long time.
+
+11:48.380 --> 11:54.620
+Also based on the ISP internet service provider that caches these records.
+
+11:55.100 --> 11:56.380
+So run Nslookup command.
+
+11:56.380 --> 11:59.300
+If you are not able to resolve it, try it with Google DNS.
+
+11:59.300 --> 12:00.020
+I'll show it.
+
+12:00.660 --> 12:02.460
+So first do like this Nslookup.
+
+12:02.500 --> 12:03.220
+Nslookup.
+
+12:03.220 --> 12:05.300
+And your host path.
+
+12:05.300 --> 12:06.620
+If it resolves well and good.
+
+12:06.620 --> 12:07.660
+If it does not resolve.
+
+12:07.700 --> 12:10.700
+Try it with 8.8.8.8.
+
+12:10.700 --> 12:11.940
+That's the Google DNS.
+
+12:12.620 --> 12:18.980
+So if it's working with this and it's not working with this, that means you need to use this in your
+
+12:18.980 --> 12:19.980
+DNS record.
+
+12:20.700 --> 12:22.500
+I mean the domain resolver.
+
+12:22.940 --> 12:25.420
+I'll show how you can do it on Windows Machine.
+
+12:25.420 --> 12:27.380
+Or you just simply wait for some time.
+
+12:27.380 --> 12:28.220
+It will work.
+
+12:28.500 --> 12:29.820
+So in windows is how you can do it.
+
+12:29.820 --> 12:34.700
+Just run windows R and type this NP dot cpl.
+
+12:35.660 --> 12:38.420
+Find your adapter Wi-Fi or Ethernet.
+
+12:38.460 --> 12:39.100
+What are you using?
+
+12:39.100 --> 12:41.100
+Right click go to properties.
+
+12:41.940 --> 12:44.100
+Click on this Internet protocol version.
+
+12:44.140 --> 12:47.020
+Go to properties here and over here.
+
+12:47.020 --> 12:49.420
+Select this option and enter the DNS.
+
+12:49.420 --> 12:50.740
+As you see on my screen.
+
+12:50.780 --> 13:02.690
+8.8.8.8 and the second 18.8.4.4 and say, okay, close this and then you can try once again or before
+
+13:02.690 --> 13:02.890
+this.
+
+13:02.890 --> 13:05.170
+You can execute this command also in your PowerShell.
+
+13:05.810 --> 13:11.490
+Open PowerShell as administrator and run this command ipconfig slash flush DNS.
+
+13:15.170 --> 13:20.850
+Then you can run the command nslookup, WordPress or whatever your domain is and it should work.
+
+13:21.970 --> 13:26.490
+Now use this URL in the browser.
+
+13:27.530 --> 13:33.170
+So open up your browser, enter the URL and you should see this page.
+
+13:34.410 --> 13:35.210
+WordPress.
+
+13:35.330 --> 13:36.410
+Select the language.
+
+13:36.410 --> 13:36.650
+Go.
+
+13:36.690 --> 13:37.370
+Continue.
+
+13:37.610 --> 13:40.810
+Fill in this detail like I'm going to put site title as DevOps.
+
+13:40.810 --> 13:43.090
+Some username as admin password.
+
+13:43.090 --> 13:45.450
+Also, I'm going to keep it simple for now.
+
+13:46.250 --> 13:49.410
+Confirm and some email address over here.
+
+13:49.890 --> 13:52.450
+Discourage search engines from indexing this site.
+
+13:52.810 --> 13:56.330
+Install WordPress all this is set.
+
+13:56.330 --> 14:00.010
+Click on login and enter the username and password that you have used.
+
+14:00.410 --> 14:06.850
+I have used admin admin login and you should see your WordPress blog up and running.
+
+14:07.090 --> 14:11.170
+Okay, so this is all well and good, but this can be improved further.
+
+14:11.610 --> 14:14.530
+I'm talking about the code for the helm charts.
+
+14:15.090 --> 14:24.010
+So to close everything here and go back to Amazon Q Developer Chat and ask it to improve my code as
+
+14:24.010 --> 14:29.970
+per developmental standards or best practices, that's what I've put in the prompt.
+
+14:30.010 --> 14:34.090
+Improve helm charts as per developmental best practices.
+
+14:34.610 --> 14:35.650
+And let's hit enter.
+
+14:35.690 --> 14:37.730
+Let's see what changes it makes.
+
+14:38.490 --> 14:41.930
+Okay, it took some long time, but let's see what changes it made.
+
+14:41.930 --> 14:45.890
+Let's go to our files starting with MySQL Deployment.yaml.
+
+14:46.490 --> 14:52.090
+So in the name it's using include which is going to include or import from outside.
+
+14:52.090 --> 14:55.170
+So it's going to give the name WordPress MySQL dot full name.
+
+14:55.170 --> 14:57.770
+That will be the chart name for labels.
+
+14:57.770 --> 15:02.400
+Also it is using include okay where you see this indentation.
+
+15:02.400 --> 15:08.960
+This is basically to give indentation for this is so you know the correct YAML syntax should come over
+
+15:08.960 --> 15:09.240
+here.
+
+15:09.240 --> 15:13.000
+So four lines of indentation four columns of indentation.
+
+15:13.360 --> 15:17.480
+See most of the places that use include to give the chart name there.
+
+15:19.040 --> 15:25.520
+Here we see width values dot mysql dot resources nothing same as previously.
+
+15:25.840 --> 15:33.880
+Go to values dot mysql dot resources okay, their values dot mysql dot resources.
+
+15:33.880 --> 15:39.680
+So this thing this entire block should appear over here okay.
+
+15:39.720 --> 15:40.480
+Over here.
+
+15:41.080 --> 15:45.440
+So all the variables you know in that indentation will should be coming over here.
+
+15:45.800 --> 15:48.520
+Let's look at few other files MySQL PVC.
+
+15:49.160 --> 15:57.160
+So here we have condition and again include MySQL service similar thing WordPress deployment A similar
+
+15:57.160 --> 16:02.640
+thing we have include we have direct values like values dot WordPress dot service port.
+
+16:03.400 --> 16:05.920
+And this is what the resources gain.
+
+16:05.960 --> 16:07.840
+Importing the entire block over there.
+
+16:08.840 --> 16:09.120
+Okay.
+
+16:09.120 --> 16:14.560
+We have condition if this in WordPress ingress values dot ingress dot enabled.
+
+16:14.560 --> 16:21.760
+If this is true then this template will get created in annotation with values dot ingress dot annotation.
+
+16:21.760 --> 16:26.720
+So the entire block will be imported over here from the values dot YAML file.
+
+16:27.280 --> 16:27.480
+All right.
+
+16:27.480 --> 16:32.760
+So the reason I'm going through these new new settings is to show you how you can learn from the I.
+
+16:33.320 --> 16:35.560
+We are using it as a code assistant.
+
+16:35.600 --> 16:38.840
+We can also learn from the I the best practices.
+
+16:39.280 --> 16:42.880
+So do check all the files and see what are the best practices.
+
+16:43.520 --> 16:47.360
+There's one way of mastering your technologies or your skills.
+
+16:47.400 --> 16:51.600
+The other way is going through the documentation and experimenting with many things, right?
+
+16:51.840 --> 17:00.920
+Instead of that, you can use the help of AI tools like ChatGPT, Amazon, Q, GitHub, Copilot, Cloud
+
+17:00.960 --> 17:01.320
+Journey.
+
+17:01.320 --> 17:07.070
+There are many code assistants now, so when you ask it to improve your code, it is going to show you
+
+17:07.070 --> 17:10.110
+suggestions, going to give you things that you don't know.
+
+17:10.110 --> 17:12.030
+So that way you learn new things.
+
+17:12.590 --> 17:12.750
+Okay.
+
+17:12.750 --> 17:14.510
+So I'm going to stop over here.
+
+17:14.670 --> 17:15.550
+We can go on and on.
+
+17:15.550 --> 17:19.870
+On this one I want you to do a helm link to your new charts.
+
+17:20.270 --> 17:26.030
+You know the changed charts and do helm template to see how these values are resolved.
+
+17:26.030 --> 17:33.350
+Then uninstall the WordPress chart, install a new release, test it, play with it.
+
+17:33.950 --> 17:37.150
+It's impossible to master all this in just one lecture.
+
+17:37.510 --> 17:40.390
+It will only work out when you keep practicing.
+
+17:40.390 --> 17:41.350
+When you keep doing it.
+
+17:41.350 --> 17:43.910
+Repetitive things, repetitive changes.
+
+17:44.310 --> 17:45.830
+When you experiment, you're going to learn.
+
+17:45.830 --> 17:48.870
+But use these AI tools as much as possible.
+
+17:48.870 --> 17:50.630
+Code assistant and learn from them.
+
+17:50.990 --> 17:53.270
+That is the way forward in today's time.
+
+17:53.790 --> 17:56.190
+So if you're done here, you can uninstall the charts.
+
+17:56.190 --> 17:58.110
+You can delete the namespace.
+
+17:58.550 --> 18:01.390
+If you're not going to use the Kubernetes cluster, you can delete it.
+
+18:01.870 --> 18:04.230
+I'm going to simply delete the Kubernetes cluster.
+
+18:04.230 --> 18:06.830
+I'm going to create it later for other lectures.
+
+18:07.310 --> 18:09.110
+So I'm going to say delete cluster.
+
+18:09.150 --> 18:11.910
+It's going to delete the cluster once the cluster is deleted.
+
+18:11.910 --> 18:16.950
+When whenever I need it again I'm going to do Kops create cluster command to create it once again.
+
+18:18.630 --> 18:18.830
+Yeah.
+
+18:18.830 --> 18:20.390
+So I have already everything ready.
+
+18:20.390 --> 18:24.110
+I'm just going to use Kops create cluster command to create whenever I need it.
+
+18:24.710 --> 18:25.470
+Now one last thing.
+
+18:25.470 --> 18:27.710
+Also go through the helm documentation.
+
+18:28.070 --> 18:29.390
+The really good documentation.
+
+18:29.390 --> 18:35.310
+You can go through the introduction quick start guide, which most of the stuff we already did go to
+
+18:35.310 --> 18:42.310
+the topics, how to's, chart development, tips and tricks, best practices you have, chart template
+
+18:42.310 --> 18:43.190
+guide you have.
+
+18:43.510 --> 18:49.430
+So whenever you need to develop the helm charts from your Kubernetes definition files, you have help
+
+18:49.430 --> 18:53.550
+from the code assistance assistant like Amazon Q copilot.
+
+18:53.590 --> 18:57.830
+You also have the documentation, so take your time to explore this.
+
+18:58.270 --> 19:01.590
+I hope you have learned and enjoyed a lot in this lecture.
+
+19:02.110 --> 19:03.350
+I will see you in the next one.

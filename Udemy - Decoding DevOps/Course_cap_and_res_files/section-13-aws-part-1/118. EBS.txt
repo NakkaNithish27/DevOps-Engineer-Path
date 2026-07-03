@@ -1,0 +1,1012 @@
+WEBVTT
+
+00:00.360 --> 00:03.440
+Welcome to the Elastic Block Store session.
+
+00:04.280 --> 00:11.040
+EBS, as we call it, generally are really the virtual hard disks for your EC2 instance.
+
+00:13.080 --> 00:15.600
+So EBS basically provides you two things.
+
+00:15.600 --> 00:22.920
+One is the EBS volume, the virtual hard disk, and the snapshot, which will be the backup of EBS volume.
+
+00:23.680 --> 00:27.600
+So these virtual hard disks we generally call them as EBS volumes.
+
+00:29.240 --> 00:32.960
+It's a block based storage like an hard disk.
+
+00:33.800 --> 00:39.320
+It is used to run your EC2 instance operating system, like when you are launching the instance we see
+
+00:39.320 --> 00:41.200
+in the storage eight GB of volume.
+
+00:41.200 --> 00:46.960
+That's the EC2 EBS volume, root volume we call it, which stores your operating system data.
+
+00:47.800 --> 00:54.880
+It can be also used to store your other data like database web servers, file data, which we'll be
+
+00:54.880 --> 00:56.360
+doing in this exercises.
+
+00:58.040 --> 01:04.030
+While you are creating an EBS volume, you specify an availability zone, and your instance also should
+
+01:04.030 --> 01:08.070
+be in the same zone where you have the EBS volume.
+
+01:09.070 --> 01:15.830
+EBS volume data is automatically replicated within the availability zone, and this is so you can protect
+
+01:16.190 --> 01:21.070
+from any upcoming failure on your EBS volume at the data center level.
+
+01:21.670 --> 01:28.430
+But this is within the same availability zone, not in multiple availability zone snapshot.
+
+01:28.470 --> 01:31.110
+We used to take the backup of the entire volume.
+
+01:32.750 --> 01:37.550
+There are different types of hard disks, so there are different types of EBS volumes also.
+
+01:38.790 --> 01:42.310
+First is general purpose and as the name says general purpose.
+
+01:42.310 --> 01:45.910
+It is used generally for most of your workload.
+
+01:45.910 --> 01:52.390
+Like you want to run a web service, you will go for a volume type of general purpose.
+
+01:54.190 --> 01:57.870
+So this volume is SSD solid state drives.
+
+01:58.310 --> 02:01.650
+And there is also one more in this category Provisioned IOPs.
+
+02:02.650 --> 02:07.450
+This is used to run large databases where you need really good performance for your database.
+
+02:07.890 --> 02:11.250
+So the IO speed will be more than the general purpose volume.
+
+02:12.010 --> 02:13.970
+A higher input output per second.
+
+02:15.170 --> 02:21.770
+The next type is throughput optimized HDD, used mostly for big data and data warehouses.
+
+02:23.090 --> 02:29.410
+Then you have cold HDD, which is generally used for file servers and it's really very low cost.
+
+02:29.970 --> 02:33.610
+General purpose is the most recommended one from AWS.
+
+02:33.610 --> 02:38.330
+If you are running a general workload, you don't have a specific large databases or big data.
+
+02:38.850 --> 02:43.450
+So general purpose is the best combination of right pricing and right speed.
+
+02:44.210 --> 02:48.570
+But then based on the speed or the cost, you can select any other volume type.
+
+02:49.370 --> 02:54.770
+Last one is magnetic, which is the slowest one and generally recommended for backups and archives.
+
+02:54.770 --> 02:56.210
+It's also very, very cheap.
+
+02:57.650 --> 03:02.440
+Let's check the AWS documentation to see more detail about these volume types.
+
+03:03.280 --> 03:09.400
+So if you do a simple Google EBS volume types, you should come into this documentation.
+
+03:09.960 --> 03:14.920
+So this SSD solid state drive HDD, the throughput optimized and cold HDD.
+
+03:15.080 --> 03:17.480
+Then you have some old generation disks as well.
+
+03:19.000 --> 03:22.520
+You can see this table where you see general purpose.
+
+03:22.920 --> 03:25.200
+You have new one GP3 and you have GP2.
+
+03:26.000 --> 03:28.640
+I'm showing you this documentation for use cases.
+
+03:28.640 --> 03:31.560
+When you really want to make a decision.
+
+03:31.560 --> 03:33.160
+You can check the use cases.
+
+03:35.360 --> 03:40.760
+And you can see other details also over here like volume size, how much volume size you can give,
+
+03:40.960 --> 03:42.400
+what will be the speed.
+
+03:42.400 --> 03:46.760
+If you are a storage geek, you will know these concepts IOPs.
+
+03:47.520 --> 03:50.520
+How much is 16,000 and how much is more than that?
+
+03:53.640 --> 03:58.760
+And if you see provisioned IOPs will have higher IOPs, you will see the use cases.
+
+03:59.640 --> 04:01.540
+The size can be also bigger.
+
+04:03.300 --> 04:06.500
+Then if you come down you have HDD and you have two.
+
+04:06.540 --> 04:12.100
+In this throughput optimized and cold HDD throughput optimized is good for big data data warehouse and
+
+04:12.100 --> 04:18.540
+also log processing and cold HDD will be for again large data, but which are not so frequently accessed,
+
+04:18.540 --> 04:23.860
+infrequently accessed, and the previous generation volume type.
+
+04:23.860 --> 04:28.220
+You have magnetic and you can go maximum one TB in that.
+
+04:28.740 --> 04:31.620
+And IOPs will be also very low but it will be very cheap.
+
+04:32.140 --> 04:32.460
+Okay.
+
+04:32.460 --> 04:36.820
+So for this exercise we will need CentOS or Amazon Linux.
+
+04:36.820 --> 04:42.700
+We are going to go with Amazon Linux 2023, and we are going to provision it with the script.
+
+04:42.700 --> 04:46.740
+It's going to simply set up the website from 2.com.
+
+04:47.220 --> 04:49.500
+I'll put the script in the resource section.
+
+04:49.500 --> 04:51.180
+You can download it from there.
+
+04:51.780 --> 04:53.500
+So let's launch the instance.
+
+04:53.900 --> 05:05.530
+Let me test web zero one Ami Amazon Linux 2023 Ami Instance type will keep it as T2 micro key pair will
+
+05:05.530 --> 05:06.530
+use the same key.
+
+05:07.330 --> 05:13.850
+And security group also from the previous setup and advanced details.
+
+05:14.370 --> 05:15.370
+Scroll down.
+
+05:18.810 --> 05:20.570
+And put the content over there.
+
+05:20.770 --> 05:22.530
+Now let's come back over here.
+
+05:23.610 --> 05:24.730
+Configure storage.
+
+05:24.730 --> 05:27.810
+You see by default it has eight GB.
+
+05:27.930 --> 05:33.330
+Now it depends on the Ami that we are selecting for Amazon Linux 2023 Ami.
+
+05:33.370 --> 05:36.210
+It gives eight GB of default volume.
+
+05:36.570 --> 05:38.610
+The volume type is GP3.
+
+05:38.850 --> 05:42.130
+You know you can wish to change this while we are launching it.
+
+05:42.570 --> 05:44.090
+Or you can add new volumes.
+
+05:44.090 --> 05:48.690
+Also, we're going to see all that once we launch the instance, we're going to go through some steps
+
+05:49.290 --> 05:52.930
+to have the proper clarity on this EBS concept.
+
+05:53.410 --> 05:54.810
+So keep everything default.
+
+05:54.810 --> 05:58.650
+Just make sure keep the script over there and launch instance.
+
+05:59.530 --> 06:01.590
+So my instance is up and running.
+
+06:02.030 --> 06:04.910
+I'm going to SSH and check the server status.
+
+06:05.710 --> 06:07.310
+So copy the public IP.
+
+06:07.790 --> 06:09.590
+Open your git bash or terminal.
+
+06:10.790 --> 06:17.270
+So ssh key path ec2 hyphen user at the rate the public ip ssh.
+
+06:18.070 --> 06:18.910
+Okay I'm in.
+
+06:18.950 --> 06:26.390
+Let me switch to root user and first check the service status system CTL status httpd.
+
+06:27.990 --> 06:37.070
+The service is active running Q to quit this and let's check the files ls var ww HTML.
+
+06:38.030 --> 06:39.910
+So these are our website files right.
+
+06:39.950 --> 06:42.510
+And in this you have images folder.
+
+06:43.110 --> 06:44.830
+So let's do LS to images.
+
+06:45.510 --> 06:47.310
+Let's check the website from the browser.
+
+06:47.310 --> 06:50.350
+Let's take its public IP and put it in the browser.
+
+06:51.230 --> 06:57.070
+So these images that you see on this website are coming from that images folder.
+
+06:57.630 --> 07:00.140
+And where are these images stored right now.
+
+07:00.860 --> 07:02.100
+Yeah, it's in that folder.
+
+07:02.100 --> 07:03.820
+But in which partition?
+
+07:04.540 --> 07:06.980
+So any computer will have a hard disk.
+
+07:07.740 --> 07:11.980
+The hard disk of EC2 instance are the EBS volumes.
+
+07:12.300 --> 07:20.060
+So if you run this Linux command fdisk l this is going to list all the available or connected hard disks.
+
+07:20.860 --> 07:26.700
+So Linux command in this you see this is the hard disk slash dev SDA.
+
+07:27.260 --> 07:31.060
+It's eight GB in size and it has few partitions.
+
+07:31.540 --> 07:36.580
+The partitions are always connected to a folder or a directory.
+
+07:37.020 --> 07:38.420
+Then only you can access it.
+
+07:38.420 --> 07:41.100
+You cannot just do CD to this partition.
+
+07:41.540 --> 07:50.420
+If you run this command df hyphen h, you should see this partition slash dev Sda1 this partition over
+
+07:50.420 --> 07:55.180
+here, this is connected to or mounted to slash.
+
+07:55.740 --> 07:57.620
+That's the root directory.
+
+07:57.860 --> 08:03.320
+And there's no other separate partition to store except this boot dot boot slash EFI.
+
+08:03.720 --> 08:09.000
+So except this, all the data in this machine is stored in this partition.
+
+08:09.040 --> 08:10.600
+Because everything goes in root directory.
+
+08:10.640 --> 08:16.760
+Now if you want to have a separate partition for any particular directory, we need to have another
+
+08:16.760 --> 08:19.520
+hard disk or any separate partition we need to create.
+
+08:19.520 --> 08:20.560
+And then we can mount it.
+
+08:20.560 --> 08:22.520
+That's what we will be doing in this lecture.
+
+08:22.960 --> 08:24.720
+Let's go back to EC2 console.
+
+08:25.600 --> 08:26.960
+So that's our instance.
+
+08:26.960 --> 08:31.760
+If we click on storage we should see here a disk path.
+
+08:32.440 --> 08:33.920
+Here that's the volume ID.
+
+08:33.920 --> 08:37.640
+If you click on this this is going to take us to the volumes section over here.
+
+08:39.120 --> 08:40.360
+And so that's the volume.
+
+08:40.400 --> 08:41.880
+Let me cancel the search.
+
+08:43.080 --> 08:45.320
+So there is a name to the volume.
+
+08:45.320 --> 08:50.280
+If you do not see the name to your volume you know this is the volume coming from your instance.
+
+08:50.280 --> 08:52.840
+You can check the instance ID attached resource.
+
+08:52.840 --> 08:57.600
+You can see you can check make sure you give it a proper name.
+
+08:57.600 --> 08:59.830
+So we're going to name it as web zero one.
+
+08:59.870 --> 09:00.710
+Hyphen three.
+
+09:01.550 --> 09:04.830
+Hyphen vol or volume.
+
+09:05.470 --> 09:06.390
+Let's save it.
+
+09:07.110 --> 09:11.430
+So now we have a requirement of adding extra storage for our images folder.
+
+09:11.430 --> 09:16.190
+Let's take a look at the requirement first and then we'll do this EBS lab.
+
+09:17.630 --> 09:20.390
+So coming back to requirement gathering storage size.
+
+09:20.390 --> 09:24.070
+If there is a requirement we need five gigs for the web server images.
+
+09:24.470 --> 09:31.390
+And yeah I have given like just five GB because more than 30 GB in EBS goes out of free tier.
+
+09:32.190 --> 09:38.190
+So overall you should have 30 GB and less to be in the free tier of EBS.
+
+09:39.190 --> 09:41.670
+So five gigs for web server images.
+
+09:41.670 --> 09:45.030
+So we have hosted a web service and that has some images.
+
+09:45.030 --> 09:47.870
+I want to keep those images into a separate storage.
+
+09:48.470 --> 09:50.950
+And that storage size should be five gigs.
+
+09:50.950 --> 09:52.070
+That's the requirement.
+
+09:54.550 --> 09:54.870
+Okay.
+
+09:54.870 --> 09:58.070
+So come to volume section we have the root volume over here.
+
+09:58.070 --> 10:00.170
+We are going to create one extra volume.
+
+10:00.170 --> 10:02.130
+So click on Create Volume.
+
+10:02.890 --> 10:03.650
+Volume type.
+
+10:03.650 --> 10:05.330
+We're going to keep it as GP3.
+
+10:05.530 --> 10:08.090
+That's the general general purpose latest one.
+
+10:08.450 --> 10:11.650
+Also you should see some other storage type.
+
+10:11.650 --> 10:17.050
+As we discussed provisioned IOPs cold HDD throughput optimized and magnetic.
+
+10:17.330 --> 10:18.970
+We're going to go with general purpose.
+
+10:18.970 --> 10:21.210
+That's our requirement size.
+
+10:21.210 --> 10:25.250
+Keep it as five GB for now and scroll down.
+
+10:25.250 --> 10:27.770
+We need to select the availability zone.
+
+10:28.450 --> 10:31.850
+So availability zone depends on your instance.
+
+10:32.410 --> 10:38.570
+If your instance is in one A you need to create the volume in one A, otherwise you will you will not
+
+10:38.570 --> 10:40.370
+be able to attach the volume.
+
+10:40.810 --> 10:43.530
+So we need to first check where our instance belongs to.
+
+10:43.570 --> 10:45.010
+So let me cancel this.
+
+10:45.690 --> 10:50.490
+Go to instances where zero one is in one c.
+
+10:50.530 --> 10:53.330
+So I need to create the volume in the same zone.
+
+10:53.330 --> 10:55.210
+So let's go back to volumes.
+
+10:56.290 --> 10:57.290
+Volumes there.
+
+10:57.690 --> 11:06.040
+Create volume GP3 size as five GB and my instance is in one C, so I'm going to create the volume in
+
+11:06.040 --> 11:06.600
+one C.
+
+11:06.640 --> 11:08.960
+Please do check where your instance belongs.
+
+11:09.600 --> 11:11.680
+You can also encrypt the volume.
+
+11:11.680 --> 11:13.840
+This is called as encryption at rest.
+
+11:13.840 --> 11:18.280
+So all the data that is stored in your volume will be encrypted.
+
+11:18.640 --> 11:21.400
+And to encrypt you need an encryption key.
+
+11:22.000 --> 11:24.000
+So you have a default encryption key.
+
+11:24.040 --> 11:27.800
+Or you can create a new key with KMS service.
+
+11:28.480 --> 11:30.760
+I'm just showing you that this option exists.
+
+11:30.800 --> 11:33.240
+If you have a requirement then you can do this.
+
+11:33.240 --> 11:35.960
+But we are not going to do that for this lab.
+
+11:35.960 --> 11:38.760
+But do remember you can encrypt an EBS volume.
+
+11:38.760 --> 11:45.280
+You can use the default key, or you can create a KMS key and then select that if you're going to try
+
+11:45.320 --> 11:45.720
+that.
+
+11:46.320 --> 11:48.960
+Keep in mind KMS keys are not free.
+
+11:49.600 --> 11:52.960
+The default keys are free, but KMS keys are not free.
+
+11:53.720 --> 11:55.440
+Okay, make sure to tag the volumes.
+
+11:55.440 --> 11:57.040
+I'm going to give it a name.
+
+11:58.560 --> 12:00.620
+So again the name should be meaningful.
+
+12:00.620 --> 12:05.060
+This shows that this volume belongs for the most project for web zero.
+
+12:05.100 --> 12:08.260
+One instance is for dev environment and it's for images folder.
+
+12:09.060 --> 12:11.740
+Let's create volume okay a volume is created.
+
+12:11.740 --> 12:12.220
+We don't see it.
+
+12:12.260 --> 12:13.620
+We need to refresh this.
+
+12:13.620 --> 12:15.220
+Then we can see this volume.
+
+12:15.540 --> 12:17.420
+Now this volume will be in.
+
+12:18.660 --> 12:21.740
+If you check the volume state you should see it as available.
+
+12:21.740 --> 12:26.580
+That means it's not connected to anywhere in use, means it's connected and you can see where it is
+
+12:26.580 --> 12:27.340
+attached to.
+
+12:27.540 --> 12:34.060
+Now let's select our volume say action attach volume.
+
+12:34.660 --> 12:36.340
+You see it shows the availability zone.
+
+12:36.380 --> 12:41.460
+It's going to show all the instance that is in one see select it and you should see your instance.
+
+12:41.460 --> 12:51.220
+If it's in the same zone device name click on the drop down and I'm going to select as slash dev slash
+
+12:51.220 --> 12:51.980
+SDF.
+
+12:52.620 --> 12:57.300
+Now this one really does not matter because when you attach this volume it's going to anyways.
+
+12:57.300 --> 13:02.650
+Change the volume name from this one to something like this Xpdf.
+
+13:03.370 --> 13:06.410
+Let's attach the volume and let's refresh it.
+
+13:06.410 --> 13:10.410
+Now let's go back to our instance, ssh to your instance.
+
+13:10.730 --> 13:12.530
+And now if you okay.
+
+13:13.370 --> 13:13.850
+All right.
+
+13:13.890 --> 13:20.530
+So now if you check fdisk l you should see the extra volume the extra hard disk connected.
+
+13:20.530 --> 13:22.250
+That's five GB in size.
+
+13:22.890 --> 13:24.810
+Now we need to create partition from this.
+
+13:24.810 --> 13:27.410
+So we can use the fdisk tool in Linux.
+
+13:27.650 --> 13:35.890
+So you can say fdisk and the path of your disk or name slash dev slash xpdf.
+
+13:35.930 --> 13:40.250
+Make sure you select this one and not this because this is for the root partition.
+
+13:40.930 --> 13:41.610
+Hit enter.
+
+13:42.610 --> 13:44.770
+Now there are many things you can do with this disk.
+
+13:44.770 --> 13:48.610
+With fdisk utility you can use M for help.
+
+13:48.610 --> 13:50.850
+So you see all the available options.
+
+13:50.850 --> 13:52.250
+There are many things that you can do.
+
+13:52.610 --> 13:53.970
+You can delete a partition.
+
+13:53.970 --> 13:55.810
+You can list the known partition.
+
+13:55.810 --> 14:00.230
+You can print the partition and add a new partition n.
+
+14:00.750 --> 14:03.150
+So let's type n, hit enter.
+
+14:04.430 --> 14:08.030
+So it's asking is this a primary partition or extended partition.
+
+14:08.030 --> 14:11.590
+Remember first four partitions are primary.
+
+14:12.190 --> 14:15.230
+And even if you hit enter it's going to select this.
+
+14:15.390 --> 14:21.190
+Or you can just type P for primary partition the partition number 1234.
+
+14:21.350 --> 14:22.310
+Which one do you want to give.
+
+14:22.310 --> 14:24.910
+So I'm going to say one anyways that is default.
+
+14:26.110 --> 14:26.990
+Now about the size.
+
+14:26.990 --> 14:28.710
+Now it shows you first sector.
+
+14:28.750 --> 14:29.870
+You have to select first sector.
+
+14:29.870 --> 14:33.350
+And then you need to select the last sector that will decide what will be the size.
+
+14:33.550 --> 14:35.550
+That's too complicated I understand that.
+
+14:35.590 --> 14:39.630
+So just hit enter here which will select the first free sector.
+
+14:40.710 --> 14:42.870
+Now you need to select the last sector.
+
+14:42.870 --> 14:47.070
+Either you can give the size like plus three g.
+
+14:47.190 --> 14:49.830
+That means three GB of partition.
+
+14:50.030 --> 14:55.150
+So your five GB of volume three G means three GB of partition will be created.
+
+14:55.190 --> 14:56.390
+Two GB will be free.
+
+14:56.990 --> 15:04.100
+Or if you just hit enter, it is going to select the last free sector that will create the partition
+
+15:04.460 --> 15:05.700
+of the entire disk.
+
+15:05.940 --> 15:07.340
+Use P to print.
+
+15:07.980 --> 15:11.580
+You should see your partition Xccdf one.
+
+15:11.620 --> 15:14.420
+That's the first partition and the only partition.
+
+15:14.660 --> 15:18.380
+If you're good with this information, you can use W to write the changes.
+
+15:19.540 --> 15:23.700
+Now if you do fdisk L, you should see your partition created.
+
+15:25.900 --> 15:28.780
+So the partition is created but it is a raw volume.
+
+15:28.780 --> 15:30.660
+It does not have any format.
+
+15:31.180 --> 15:39.340
+The different types of format we have NTFS, Fat extension, ZFS and Linux extension format, and ZFS
+
+15:39.580 --> 15:44.660
+are most popularly used in Windows Vista, NTFS, or Fat.
+
+15:44.700 --> 15:49.260
+You know, in pen drives, USB drives, they are generally fat partition.
+
+15:49.660 --> 15:52.140
+So you can use this command Mkfs.
+
+15:53.860 --> 16:01.120
+Just hit tab two times quickly and you should see all the available commands with the partition names,
+
+16:01.160 --> 16:01.520
+sorry.
+
+16:01.560 --> 16:02.320
+Format names.
+
+16:02.320 --> 16:08.560
+So you have extension two, you have extension four, you have Vfat, ZFS, MS-DOS.
+
+16:08.560 --> 16:11.040
+Also you have fat partition.
+
+16:11.520 --> 16:13.840
+So we are going to go with extension four.
+
+16:14.240 --> 16:15.800
+And there's ZFS.
+
+16:15.800 --> 16:17.040
+Root volume is with XFS.
+
+16:17.080 --> 16:24.320
+ZFS is used for large volumes faster IO and extension for is just like general general purpose.
+
+16:24.720 --> 16:27.160
+So anyways we're going to go with extension four.
+
+16:28.440 --> 16:37.480
+So you say mkfs dot extension for ext4 and you give the path of the partition okay, Xccdf one the partition
+
+16:38.160 --> 16:39.640
+and is going to format it.
+
+16:39.760 --> 16:41.320
+And now you can mount it.
+
+16:41.320 --> 16:42.680
+So let me clear the screen.
+
+16:43.360 --> 16:52.200
+So if you want to mount it on var dub dub dub HTML images, it's already data in that you know if if
+
+16:52.240 --> 16:53.760
+we mount it it will get mounted.
+
+16:53.760 --> 16:55.800
+But this data will be now in the root partition.
+
+16:55.800 --> 16:57.200
+It will be kind of hidden.
+
+16:57.240 --> 16:58.790
+You will not be able to see the data.
+
+16:58.790 --> 17:00.790
+The data will exist when you unmount.
+
+17:00.790 --> 17:06.470
+You should be able to see the data so you know it's better we move this to some other folder.
+
+17:06.470 --> 17:10.310
+So I'm going to create a temp folder.
+
+17:10.350 --> 17:13.910
+I'm going to say img backup something like that.
+
+17:14.150 --> 17:19.910
+And I'm going to move all this to make all the images to this temporary folder.
+
+17:19.910 --> 17:22.670
+So I can copy it back later when we mount it.
+
+17:24.110 --> 17:25.070
+Image backup.
+
+17:27.150 --> 17:27.390
+Right.
+
+17:27.430 --> 17:29.910
+So now this will be empty okay.
+
+17:29.910 --> 17:30.710
+Now let's mount it.
+
+17:30.710 --> 17:33.070
+Now this is a temporary mount that I'm showing you right now.
+
+17:33.070 --> 17:40.790
+So mount command slash dev slash SDA F1, the partition path and the folder or directory where you want
+
+17:40.790 --> 17:42.990
+to mount hit this command.
+
+17:43.550 --> 17:48.990
+And now if you run the command df hyphen h you should see this directory is mounted on this partition.
+
+17:48.990 --> 17:53.710
+That means whatever data you put it on this will go into this partition.
+
+17:53.870 --> 17:55.630
+You can see it's complete size.
+
+17:55.630 --> 17:57.030
+It's available size.
+
+17:57.430 --> 18:01.970
+Now if you check your website, you know you can refresh this or open it from a new browser.
+
+18:02.210 --> 18:06.570
+You will not be able to see the images because there are no image in the images folder.
+
+18:06.850 --> 18:10.370
+So let's copy back our images which is in temp.
+
+18:11.810 --> 18:16.850
+I'm going to copy all the images to var HTML images folder.
+
+18:19.370 --> 18:24.530
+And I'm going to restart the service systemctl restart httpd.
+
+18:27.090 --> 18:28.330
+And now let's check the website.
+
+18:28.330 --> 18:31.610
+If you refresh the website you should see all the images back.
+
+18:34.250 --> 18:36.130
+Now this is a temporary mount.
+
+18:36.130 --> 18:40.770
+If I reboot this computer this VM this mount point will be detached.
+
+18:40.770 --> 18:43.330
+So I'm going to show you how to do a permanent mount.
+
+18:43.650 --> 18:45.410
+First let's unmount it.
+
+18:45.450 --> 18:48.530
+You mount and you can give the path of the directory.
+
+18:50.250 --> 18:51.770
+I need to give a space here.
+
+18:53.090 --> 18:53.330
+Okay.
+
+18:53.330 --> 18:55.130
+You will not be able to see the mount point.
+
+18:55.170 --> 18:57.330
+Now let me clear the screen.
+
+18:57.330 --> 19:00.000
+So I'm going to show you the permanent mount you need to do.
+
+19:00.040 --> 19:03.200
+VI, slash, etc. fstab this file.
+
+19:03.200 --> 19:04.840
+Open this file in VI editor.
+
+19:05.480 --> 19:07.160
+You should see here few entries.
+
+19:07.160 --> 19:09.040
+So open a new line here.
+
+19:09.200 --> 19:13.880
+Go to the last line and hit O to get into insert mode and the new line.
+
+19:14.320 --> 19:22.360
+And first thing you mention is the partition path slash dev slash Xccdf one you can use then tab or
+
+19:22.360 --> 19:26.240
+space, and then you mention where you want to mount it.
+
+19:26.640 --> 19:26.840
+Right.
+
+19:26.840 --> 19:31.880
+So that's the second entry or the second second column where you want to mount it the folder.
+
+19:32.040 --> 19:34.200
+Like here you see a UID.
+
+19:34.240 --> 19:37.280
+You can give a ID also to a partition here.
+
+19:37.280 --> 19:41.400
+That's the ID for the root partition which is giving the partition name directly.
+
+19:41.640 --> 19:46.960
+Then the folder where it is mounted we're giving images and then the type.
+
+19:47.400 --> 19:50.600
+So we have formatted it with extension four.
+
+19:52.040 --> 19:54.680
+Then hit tab and then options.
+
+19:54.680 --> 19:56.120
+So we're going to say defaults.
+
+19:56.120 --> 19:58.100
+We're not adding any special options.
+
+19:58.540 --> 20:08.340
+And again hit tab and say zero space zero one is for FSK and one is for the dump.
+
+20:09.100 --> 20:14.020
+So we're saying don't do any file system check or don't take any dump when things crashes.
+
+20:14.420 --> 20:14.580
+Okay.
+
+20:14.580 --> 20:16.300
+So we're taking all defaults option.
+
+20:16.540 --> 20:20.580
+Now escape colon wq save and quit.
+
+20:22.380 --> 20:23.660
+So now see df hyphen.
+
+20:23.780 --> 20:24.860
+There is nothing mounted.
+
+20:24.860 --> 20:29.980
+But when you run the command mount hyphen a this command is going to read the fstab file and execute
+
+20:29.980 --> 20:30.700
+the entries.
+
+20:31.220 --> 20:34.060
+Now if you do df h you should see it mounted.
+
+20:34.380 --> 20:35.980
+Now while running mount hyphen aa command.
+
+20:35.980 --> 20:42.100
+If you get any error, check the entries whether the path is correct or not of the partition.
+
+20:42.100 --> 20:43.940
+Check the path of the directory.
+
+20:44.140 --> 20:45.540
+Check the options.
+
+20:45.540 --> 20:46.180
+Spelling.
+
+20:46.220 --> 20:47.460
+Typographical error.
+
+20:47.500 --> 20:49.660
+If everything is good, it should get mounted.
+
+20:50.020 --> 20:55.460
+Okay, so one last time, restart the httpd service and join me in the next lecture where we're going
+
+20:55.460 --> 20:57.460
+to see more on the volume side.

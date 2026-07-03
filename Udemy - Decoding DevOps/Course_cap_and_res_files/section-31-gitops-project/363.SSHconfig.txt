@@ -1,0 +1,5 @@
+Host github.com-devops4sure
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/devops4sure
+    IdentitiesOnly yes

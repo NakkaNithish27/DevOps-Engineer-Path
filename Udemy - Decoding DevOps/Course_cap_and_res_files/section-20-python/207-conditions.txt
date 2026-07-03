@@ -1,0 +1,981 @@
+WEBVTT
+
+1
+00:00:00.670 --> 00:00:02.830
+Welcome to the decisionmaking session.
+
+2
+00:00:03.010 --> 00:00:05.130
+Now you don't have to make any decision.
+
+3
+00:00:05.750 --> 00:00:08.254
+Just the Python code is going to make decision.
+
+4
+00:00:08.362 --> 00:00:10.758
+It's similar as what you see
+
+5
+00:00:10.784 --> 00:00:12.802
+in the Bash scripting conditions.
+
+6
+00:00:12.886 --> 00:00:15.042
+If this is true, then execute the code.
+
+7
+00:00:15.116 --> 00:00:17.202
+Else execute something else.
+
+8
+00:00:17.646 --> 00:00:19.280
+Or we can have elseif also.
+
+9
+00:00:19.610 --> 00:00:21.534
+Okay, so this session is going to be very easy.
+
+10
+00:00:21.572 --> 00:00:23.238
+Again, we'll just see the
+
+11
+00:00:23.264 --> 00:00:24.980
+Python way of decision making.
+
+12
+00:00:26.450 --> 00:00:29.130
+So let's create a new script.
+
+13
+00:00:29.870 --> 00:00:33.270
+I'll call it as conditions.
+
+14
+00:00:35.670 --> 00:00:37.450
+First we'll see if condition.
+
+15
+00:00:42.190 --> 00:00:42.770
+Pretty simple.
+
+16
+00:00:42.820 --> 00:00:45.302
+Again, let's compare the integer number, x is
+
+17
+00:00:45.316 --> 00:00:49.382
+equal to 21 and let's say if and
+
+18
+00:00:49.456 --> 00:00:51.318
+now we'll use our comparison operator.
+
+19
+00:00:51.354 --> 00:00:54.782
+We'll say x less than 30.
+
+20
+00:00:54.976 --> 00:00:58.502
+If that is true, then make sure you
+
+21
+00:00:58.516 --> 00:01:00.340
+give that colon there at the end.
+
+22
+00:01:02.290 --> 00:01:02.726
+Okay?
+
+23
+00:01:02.788 --> 00:01:06.246
+That colon hit Enter if you're using PyCharm,
+
+24
+00:01:06.258 --> 00:01:08.102
+it should automatically give you the space.
+
+25
+00:01:08.176 --> 00:01:11.702
+So you don't need to do your indentation yourself.
+
+26
+00:01:11.776 --> 00:01:16.718
+Otherwise, count to three or just hit Enter.
+
+27
+00:01:16.804 --> 00:01:18.182
+If you are in PyCharm editor, it
+
+28
+00:01:18.196 --> 00:01:21.170
+should automatically give the indentation print.
+
+29
+00:01:22.450 --> 00:01:30.186
+I am inside if block and I'll
+
+30
+00:01:30.198 --> 00:01:40.640
+say yes, x is less than 30.
+
+31
+00:01:41.690 --> 00:01:42.090
+Okay?
+
+32
+00:01:42.140 --> 00:01:43.878
+PyCharm asked me to remove the
+
+33
+00:01:43.904 --> 00:01:46.026
+parenthesis, so I removed it.
+
+34
+00:01:46.208 --> 00:01:48.702
+So that is, the best practice is
+
+35
+00:01:48.716 --> 00:01:51.874
+the standards in Python eight standards.
+
+36
+00:01:51.922 --> 00:01:54.558
+So whenever it does something like that, right?
+
+37
+00:01:54.584 --> 00:01:55.880
+Whenever there is a problem,
+
+38
+00:01:56.210 --> 00:01:58.050
+I'll give here parenthesis.
+
+39
+00:01:59.630 --> 00:02:01.434
+So it should highlight something like this.
+
+40
+00:02:01.472 --> 00:02:03.550
+Not red means an error.
+
+41
+00:02:03.670 --> 00:02:06.294
+But even though if it's like this, some off
+
+42
+00:02:06.332 --> 00:02:07.902
+white or yellow color, it should tell you, you
+
+43
+00:02:07.916 --> 00:02:10.229
+can say right click show context actions.
+
+44
+00:02:10.850 --> 00:02:13.470
+It says remove redundant parenthesis.
+
+45
+00:02:16.290 --> 00:02:19.200
+Okay, one more print statement at the end. Let's see.
+
+46
+00:02:19.590 --> 00:02:22.560
+This is the rest of the code.
+
+47
+00:02:25.990 --> 00:02:27.160
+Let's run this.
+
+48
+00:02:30.890 --> 00:02:32.262
+So that condition is true.
+
+49
+00:02:32.336 --> 00:02:35.490
+So it executed the two  print statement.
+
+50
+00:02:36.650 --> 00:02:40.220
+Let's make the value as 31.
+
+51
+00:02:44.130 --> 00:02:45.542
+So the condition is false.
+
+52
+00:02:45.566 --> 00:02:48.386
+So it does not enter and execute your statement.
+
+53
+00:02:48.458 --> 00:02:50.794
+It will execute then again the rest of the code.
+
+54
+00:02:50.952 --> 00:02:53.050
+Okay, just take care of the indentations.
+
+55
+00:02:53.790 --> 00:02:56.134
+So I will give here as 21 and
+
+56
+00:02:56.172 --> 00:03:00.060
+then let's also copy it one more time.
+
+57
+00:03:03.250 --> 00:03:03.614
+There.
+
+58
+00:03:03.652 --> 00:03:05.500
+I'll give it as 31.
+
+59
+00:03:10.550 --> 00:03:11.490
+Okay, that's if.
+
+60
+00:03:11.540 --> 00:03:12.714
+Let's see now if else.
+
+61
+00:03:12.752 --> 00:03:14.050
+So how's the syntax?
+
+62
+00:03:14.170 --> 00:03:18.620
+Let me do a multiline comment on all this.
+
+63
+00:03:22.530 --> 00:03:22.930
+Okay.
+
+64
+00:03:22.980 --> 00:03:25.500
+So just I don't see that output now.
+
+65
+00:03:26.790 --> 00:03:29.460
+Okay, let's execute that nothing good.
+
+66
+00:03:39.550 --> 00:03:43.000
+Okay, let's again take a variable x equal to 31.
+
+67
+00:03:44.830 --> 00:03:50.380
+I'll say if x is less than 31.
+
+68
+00:03:52.730 --> 00:03:57.680
+I'll say if that is true, then I'll keep here as 30.
+
+69
+00:03:59.510 --> 00:04:00.538
+So that is false.
+
+70
+00:04:00.574 --> 00:04:02.290
+So it will not execute a print statement.
+
+71
+00:04:02.350 --> 00:04:03.942
+But I want to do something else.
+
+72
+00:04:04.016 --> 00:04:06.918
+If that if condition is false or else
+
+73
+00:04:07.004 --> 00:04:14.590
+colon and the else code, let's execute.
+
+74
+00:04:16.470 --> 00:04:16.822
+All right.
+
+75
+00:04:16.836 --> 00:04:18.110
+So this condition is false.
+
+76
+00:04:18.170 --> 00:04:21.026
+X less than 30, that is false.
+
+77
+00:04:21.218 --> 00:04:24.000
+So it is going to then execute the else part.
+
+78
+00:04:37.030 --> 00:04:37.430
+Okay?
+
+79
+00:04:37.480 --> 00:04:40.890
+Like if and else, we can also have multiple
+
+80
+00:04:40.950 --> 00:04:51.920
+condition checks by using elif. x equal to 41.
+
+81
+00:04:52.790 --> 00:04:57.080
+If x is greater than 40.
+
+82
+00:04:58.790 --> 00:05:00.546
+Let's make this as also 40.
+
+83
+00:05:00.608 --> 00:05:02.466
+Okay, so x greater than 40.
+
+84
+00:05:02.528 --> 00:05:04.374
+That is false, actually.
+
+85
+00:05:04.412 --> 00:05:06.330
+It should not print that statement.
+
+86
+00:05:07.370 --> 00:05:16.702
+And we say else x is less than 40.
+
+87
+00:05:16.896 --> 00:05:18.442
+Now, that is also not true.
+
+88
+00:05:18.576 --> 00:05:22.702
+X is neither less than 40 or neither greater than 40.
+
+89
+00:05:22.896 --> 00:05:23.998
+It's equal to, right?
+
+90
+00:05:24.024 --> 00:05:26.302
+So if you want to check that test case also we
+
+91
+00:05:26.316 --> 00:05:28.810
+need to do one more test so we can use elif.
+
+92
+00:05:29.730 --> 00:05:36.338
+Okay, we'll say X equal to 40 and we
+
+93
+00:05:36.364 --> 00:05:45.340
+can say yes, x is equal to 40.
+
+94
+00:05:48.470 --> 00:05:53.960
+Let's take that elif first and let's execute the code.
+
+95
+00:05:56.010 --> 00:05:57.826
+So code is syntactically, right,
+
+96
+00:05:57.888 --> 00:05:59.506
+but logically it's wrong.
+
+97
+00:05:59.688 --> 00:06:01.330
+It is saying X is less than 40.
+
+98
+00:06:01.380 --> 00:06:02.446
+That's not true.
+
+99
+00:06:02.628 --> 00:06:04.080
+X is equal to 40.
+
+100
+00:06:06.610 --> 00:06:08.286
+All right, so let's put that elif.
+
+101
+00:06:08.358 --> 00:06:10.670
+Now it should give us right answer.
+
+102
+00:06:10.840 --> 00:06:12.340
+X is equal to 40.
+
+103
+00:06:13.570 --> 00:06:15.906
+Okay, let's take a few more examples with condition.
+
+104
+00:06:15.978 --> 00:06:17.942
+We'll include our data types also
+
+105
+00:06:18.016 --> 00:06:20.046
+list and Tuples and dictionaries.
+
+106
+00:06:20.238 --> 00:06:22.850
+And we'll also use the membership operators.
+
+107
+00:06:23.830 --> 00:06:25.490
+So I will name this program
+
+108
+00:06:27.399 --> 00:06:39.030
+as conditions_variables. Let's put multi line comment.
+
+109
+00:06:43.290 --> 00:06:45.598
+Or you can test your skills now. So
+
+110
+00:06:45.624 --> 00:06:49.330
+far on data types, operators and conditions.
+
+111
+00:06:50.370 --> 00:06:52.850
+Okay, three simple print statement.
+
+112
+00:06:53.030 --> 00:06:54.050
+That is for script.
+
+113
+00:06:54.110 --> 00:06:55.078
+So it's going to print this
+
+114
+00:06:55.104 --> 00:06:57.782
+It organization has various skill sets.
+
+115
+00:06:57.926 --> 00:07:01.210
+Find out your match and enter the value in capitalized.
+
+116
+00:07:02.130 --> 00:07:03.900
+So let's execute that.
+
+117
+00:07:05.370 --> 00:07:07.450
+Three simple print statements.
+
+118
+00:07:08.490 --> 00:07:10.658
+Now let's get our data types.
+
+119
+00:07:10.814 --> 00:07:15.326
+So I will have one list called as DevOps.
+
+120
+00:07:15.458 --> 00:07:17.830
+DevOps skill set in a list format.
+
+121
+00:07:18.510 --> 00:07:20.486
+So I have strings, jenkins, Ansible
+
+122
+00:07:20.558 --> 00:07:22.358
+Bash, et cetera, et cetera.
+
+123
+00:07:22.514 --> 00:07:23.640
+That's a list.
+
+124
+00:07:24.150 --> 00:07:28.690
+Then I will have a Tuple with name development.
+
+125
+00:07:35.290 --> 00:07:36.702
+Okay, few more strings.
+
+126
+00:07:36.846 --> 00:07:39.830
+NodeJS, angularjsjava, net, python.
+
+127
+00:07:40.270 --> 00:07:42.050
+And I'll have two dictionaries.
+
+128
+00:07:42.370 --> 00:07:43.998
+So let's say DevOps and development.
+
+129
+00:07:44.034 --> 00:07:46.958
+These are two skill set that my It organization has.
+
+130
+00:07:47.104 --> 00:07:48.738
+Plus we have some contract employees also
+
+131
+00:07:48.774 --> 00:07:53.522
+So contract employee equal to the dictionary name
+
+132
+00:07:53.716 --> 00:07:57.354
+skill and the employee code key value pairs.
+
+133
+00:07:57.402 --> 00:08:00.738
+Let's have one more person rocky
+
+134
+00:08:00.834 --> 00:08:03.340
+skill, AI and code employee code.
+
+135
+00:08:04.390 --> 00:08:06.042
+Now, this is going to be interactive script.
+
+136
+00:08:06.066 --> 00:08:07.806
+We'll take input from the user.
+
+137
+00:08:07.938 --> 00:08:09.642
+The user enters a value and we'll
+
+138
+00:08:09.666 --> 00:08:12.074
+be checking that whether that exists in
+
+139
+00:08:12.112 --> 00:08:15.460
+all these data structure that we have.
+
+140
+00:08:15.790 --> 00:08:19.074
+So we'll take a variable user underscore skill
+
+141
+00:08:19.122 --> 00:08:21.474
+equal to and we'll take input from user.
+
+142
+00:08:21.642 --> 00:08:23.870
+So you have a function called as input.
+
+143
+00:08:26.630 --> 00:08:28.318
+And this will be prompt for the user,
+
+144
+00:08:28.354 --> 00:08:30.450
+whatever you put in the double quotes.
+
+145
+00:08:30.950 --> 00:08:42.741
+And I'll say enter your desired skill and
+
+146
+00:08:42.816 --> 00:08:45.060
+I'll just show it first how it works.
+
+147
+00:08:48.430 --> 00:08:50.006
+So when I run the program, it's going to
+
+148
+00:08:50.008 --> 00:08:51.722
+take an input from the user that will be
+
+149
+00:08:51.736 --> 00:08:54.054
+stored into the variable user underscore skill.
+
+150
+00:08:54.102 --> 00:08:56.260
+And then we are simply printing it for now.
+
+151
+00:08:57.250 --> 00:08:58.902
+All right, so enter your desired skill.
+
+152
+00:08:58.926 --> 00:09:04.914
+So I have to enter something, simply printing it back.
+
+153
+00:09:04.952 --> 00:09:07.726
+But now we'll do something with that user input.
+
+154
+00:09:07.918 --> 00:09:09.380
+Let's comment that.
+
+155
+00:09:12.330 --> 00:09:19.450
+So we'll say checking or check in the database
+
+156
+00:09:20.370 --> 00:09:27.170
+if we have this skill that's my comment.
+
+157
+00:09:27.350 --> 00:09:28.738
+So database is really the
+
+158
+00:09:28.764 --> 00:09:30.818
+list tuples and the dictionary.
+
+159
+00:09:30.974 --> 00:09:40.538
+So I'll say if user skill in DevOps, if
+
+160
+00:09:40.564 --> 00:09:45.758
+user enters some skill, I'll be checking that in
+
+161
+00:09:45.784 --> 00:09:50.138
+the list DevOps, okay, membership operator checking and that
+
+162
+00:09:50.164 --> 00:09:52.382
+should return true if that exists and then we
+
+163
+00:09:52.396 --> 00:09:54.230
+can print a message to the user.
+
+164
+00:09:55.570 --> 00:09:59.620
+I'll use format function if we have
+
+165
+00:10:03.770 --> 00:10:08.058
+the variable user skill in I'll just
+
+166
+00:10:08.084 --> 00:10:13.220
+give the string over there DevOps team.
+
+167
+00:10:16.430 --> 00:10:19.422
+So if it exists there, it should print it but if
+
+168
+00:10:19.436 --> 00:10:21.954
+it does not exist, I would like to compare it with
+
+169
+00:10:22.112 --> 00:10:26.120
+in other data also other database, data type also.
+
+170
+00:10:26.450 --> 00:10:32.626
+So I'll say elif  user skill in development, I'll check it
+
+171
+00:10:32.628 --> 00:10:35.714
+in the development which is a tuple and if that exists
+
+172
+00:10:35.762 --> 00:10:51.380
+I'll print a message we have user skill in development team
+
+173
+00:10:54.630 --> 00:10:58.294
+or if it does not exist in that DevOps list or
+
+174
+00:10:58.332 --> 00:11:02.026
+development tuple I would like to check in the dictionary and
+
+175
+00:11:02.148 --> 00:11:05.590
+I'm going to check it, I'm going to check the values,
+
+176
+00:11:06.570 --> 00:11:09.490
+skill is the key and I'm going to check the value
+
+177
+00:11:09.540 --> 00:11:13.498
+so I can use some functions and dictionary that returns me
+
+178
+00:11:13.524 --> 00:11:14.950
+keys and values.
+
+179
+00:11:17.190 --> 00:11:27.690
+So I'll say elif user skill in first dictionary.values.
+
+180
+00:11:27.750 --> 00:11:30.770
+Okay, that function is going to return only
+
+181
+00:11:30.820 --> 00:11:34.610
+the values also I would like to check
+
+182
+00:11:34.660 --> 00:11:36.734
+it if that exists in another one.
+
+183
+00:11:36.772 --> 00:11:46.950
+So or operator there, userskill in second one values.
+
+184
+00:11:51.030 --> 00:11:55.618
+Okay, so logical operator or if this is
+
+185
+00:11:55.644 --> 00:11:58.714
+true it's going to return hold as true.
+
+186
+00:11:58.812 --> 00:12:03.310
+If both are false, then only it should return false.
+
+187
+00:12:03.630 --> 00:12:06.050
+So I don't need to write two elif.
+
+188
+00:12:06.110 --> 00:12:08.602
+I can just write one elif, right? In that I
+
+189
+00:12:08.616 --> 00:12:12.610
+can just use my logical operator and do the comparison.
+
+190
+00:12:14.070 --> 00:12:15.842
+Okay, if any of this is true, I'm
+
+191
+00:12:15.866 --> 00:12:18.754
+going to print that message that we have
+
+192
+00:12:18.792 --> 00:12:22.690
+contract employees employee yeah, that should be good.
+
+193
+00:12:22.860 --> 00:12:25.198
+Now if it doesn't find any of the place not
+
+194
+00:12:25.224 --> 00:12:28.562
+in DevOps, not in development, not in the dictionary, counter
+
+195
+00:12:28.586 --> 00:12:34.930
+variable or sorry contract variable then else I'll just say
+
+196
+00:12:34.980 --> 00:12:44.886
+print skill not found and also print a message.
+
+197
+00:12:44.948 --> 00:12:46.458
+Please check if you have entered the value in
+
+198
+00:12:46.484 --> 00:12:50.574
+capitalized because we're just using capitalized value and j
+
+199
+00:12:50.612 --> 00:12:54.570
+capital, a capital, b capital. User may enter anything.
+
+200
+00:12:54.620 --> 00:12:57.882
+Sure, this program is not foolproof but
+
+201
+00:12:58.076 --> 00:12:59.838
+it's a good practice for you.
+
+202
+00:12:59.984 --> 00:13:02.202
+Okay, let's use the print function here also
+
+203
+00:13:02.276 --> 00:13:11.530
+if we have contract employee with user skill
+
+204
+00:13:12.810 --> 00:13:15.766
+okay, let's see how it works once again,
+
+205
+00:13:15.948 --> 00:13:19.370
+let's check three print statement storing the variables.
+
+206
+00:13:19.430 --> 00:13:22.222
+We have list, we have tuples and we have
+
+207
+00:13:22.236 --> 00:13:26.794
+two dictionaries, takes the user input and stores it
+
+208
+00:13:26.832 --> 00:13:30.382
+into the variable user underscore skill and then check
+
+209
+00:13:30.516 --> 00:13:35.062
+whether that value exists in the list, exists in
+
+210
+00:13:35.076 --> 00:13:37.598
+the tuple or exist in dictionary.
+
+211
+00:13:37.634 --> 00:13:39.142
+Now directly we don't do
+
+212
+00:13:39.276 --> 00:13:40.862
+membership operators to dictionary.
+
+213
+00:13:40.946 --> 00:13:43.282
+So dictionary dot values that is going
+
+214
+00:13:43.296 --> 00:13:45.170
+to return me list of values.
+
+215
+00:13:45.350 --> 00:13:47.354
+There are also dictionary dot values.
+
+216
+00:13:47.402 --> 00:13:50.314
+It's going to return me list of values so it
+
+217
+00:13:50.352 --> 00:13:54.362
+can use membership operator if any of the operand returns.
+
+218
+00:13:54.386 --> 00:13:54.646
+True.
+
+219
+00:13:54.708 --> 00:13:55.894
+Everything will be true.
+
+220
+00:13:56.052 --> 00:13:57.562
+Okay, let's test this program.
+
+221
+00:13:57.636 --> 00:14:02.302
+Now, let's run okay, taking the
+
+222
+00:14:02.316 --> 00:14:04.394
+input, enter your desired skill.
+
+223
+00:14:04.442 --> 00:14:06.550
+I will say Jenkins.
+
+224
+00:14:07.410 --> 00:14:10.140
+It says we have Jenkins in DevOps team. Right?
+
+225
+00:14:10.650 --> 00:14:14.650
+Okay, let's run a few more tests. Let's say Python.
+
+226
+00:14:17.530 --> 00:14:18.710
+Something's wrong?
+
+227
+00:14:18.880 --> 00:14:20.440
+No, I think that's right.
+
+228
+00:14:21.190 --> 00:14:23.522
+Well, Python exists in both, so we
+
+229
+00:14:23.536 --> 00:14:26.390
+can actually use membership operator again.
+
+230
+00:14:26.440 --> 00:14:28.850
+And sorry, logical operator.
+
+231
+00:14:29.230 --> 00:14:30.158
+But you know what?
+
+232
+00:14:30.244 --> 00:14:31.250
+Let's not do that.
+
+233
+00:14:31.360 --> 00:14:33.290
+We'll do that in the next programs.
+
+234
+00:14:33.910 --> 00:14:35.810
+We'll enter some other values.
+
+235
+00:14:37.090 --> 00:14:39.160
+Java. Yes.
+
+236
+00:14:40.450 --> 00:14:42.390
+Okay, now let's go for AI.
+
+237
+00:14:42.450 --> 00:14:43.910
+Artificial intelligence.
+
+238
+00:14:48.230 --> 00:14:50.346
+We have contract employees. Check that.
+
+239
+00:14:50.468 --> 00:14:52.818
+Okay, let's now execute something that
+
+240
+00:14:52.844 --> 00:14:54.270
+really does not exist here.
+
+241
+00:14:54.380 --> 00:15:00.490
+I'll say IoT, which does not exist anywhere.
+
+242
+00:15:01.650 --> 00:15:04.858
+So this program was to implement all the
+
+243
+00:15:04.884 --> 00:15:08.290
+previous skills that you have got in Python.
+
+244
+00:15:08.610 --> 00:15:10.054
+And that should be all here.
+
+245
+00:15:10.092 --> 00:15:11.140
+I'll see you in the next video.

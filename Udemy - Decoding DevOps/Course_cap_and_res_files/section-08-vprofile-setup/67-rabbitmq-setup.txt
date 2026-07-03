@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.750 --> 00:02.700
+Instructor: Okay, in this lecture we are going
+
+00:02.700 --> 00:06.540
+to set up RabbitMQ server queuing service.
+
+00:06.540 --> 00:08.527
+So once again, "dnf update hyphen y",
+
+00:08.527 --> 00:09.997
+"install epel release",
+
+00:09.997 --> 00:12.540
+"install wget"
+
+00:12.540 --> 00:15.892
+and then "install rabbitmq", sorry,
+
+00:15.892 --> 00:19.605
+this is the repository of four RabbitMQ.
+
+00:19.605 --> 00:20.550
+It's going to...
+
+00:20.550 --> 00:22.860
+with this package, it's going to set the repository,
+
+00:22.860 --> 00:25.950
+so from where we can install RabbitMQ
+
+00:25.950 --> 00:30.540
+and then "dnf--enablerepo" enables this repository
+
+00:30.540 --> 00:35.540
+which is installed and "-y install rabbitmq server", right?
+
+00:35.640 --> 00:38.670
+Don't get confused, it's just one single command wrapped up,
+
+00:38.670 --> 00:40.950
+no, two commands wrapped up into one.
+
+00:40.950 --> 00:45.950
+One thing it is doing is it is enabling this repository
+
+00:46.020 --> 00:48.390
+and then it is installing RabbitMQ server,
+
+00:48.390 --> 00:50.490
+all in one command, like that.
+
+00:50.490 --> 00:55.490
+And then "systemctl enable --now rabbitmq server".
+
+00:55.892 --> 00:59.130
+So you can do "systemctl start" and the service name
+
+00:59.130 --> 01:01.890
+and then you can say "systemctl enable"
+
+01:01.890 --> 01:05.223
+or together you can do like this, combination.
+
+01:06.180 --> 01:08.400
+And just thought, you know, you should know different ways.
+
+01:08.400 --> 01:09.780
+So just included that.
+
+01:09.780 --> 01:12.420
+Otherwise, "systemctl" or "enable", that also,
+
+01:12.420 --> 01:15.330
+start and enable, both commands, also, you can do.
+
+01:15.330 --> 01:18.030
+Okay? So once you have RabbitMQ up and running,
+
+01:18.030 --> 01:20.700
+then we are going to make some configuration change,
+
+01:20.700 --> 01:23.412
+add some user, execute some permission,
+
+01:23.412 --> 01:27.090
+and then RabbitMQ servers will be up and running.
+
+01:27.090 --> 01:31.050
+So let's do this one by one and let's see how it goes.
+
+01:31.050 --> 01:36.050
+Okay, so, "vagrant ssh rmq01".
+
+01:36.060 --> 01:38.223
+Make sure you are in the right folder.
+
+01:39.120 --> 01:41.767
+Okay, so switch to root user,
+
+01:41.767 --> 01:45.630
+"dnf update -y".
+
+01:45.630 --> 01:47.550
+Once again, this will take time.
+
+01:47.550 --> 01:49.710
+I'm going to pause my recording
+
+01:49.710 --> 01:52.023
+and resume once this is completed.
+
+01:54.090 --> 01:55.650
+Okay, the update is completed.
+
+01:55.650 --> 01:58.960
+Next step is installing EPL release repository
+
+01:59.940 --> 02:01.660
+and installing wget
+
+02:03.486 --> 02:05.763
+and wget would be already installed.
+
+02:06.990 --> 02:09.480
+Yes, it is already installed.
+
+02:09.480 --> 02:10.313
+Okay.
+
+02:12.810 --> 02:17.190
+The next command is installing the centos RabbitMQ
+
+02:17.190 --> 02:18.060
+repository.
+
+02:18.060 --> 02:20.520
+So once we install this package, it's going
+
+02:20.520 --> 02:23.430
+to set the RabbitMQ repository from
+
+02:23.430 --> 02:26.103
+where we can download all the RabbitMQ packages.
+
+02:27.330 --> 02:30.630
+So with this command it is going to enable this repository
+
+02:30.630 --> 02:33.033
+and install RabbitMQ from that.
+
+02:34.680 --> 02:36.933
+And you see, it's checking that repository.
+
+02:38.820 --> 02:43.653
+So RabbitMQ package plus 19 other repository dependencies.
+
+02:44.880 --> 02:46.290
+Okay, RabbitMQ is installed.
+
+02:46.290 --> 02:48.090
+Let's do the configuration changes.
+
+02:48.090 --> 02:51.600
+Let's copy this command and I'll explain you while I run it.
+
+02:51.600 --> 02:53.223
+Let me clear the screen.
+
+02:56.460 --> 02:58.530
+Okay, once again, this is a configuration change,
+
+02:58.530 --> 03:00.330
+just like we did it in (indistinct).
+
+03:01.170 --> 03:06.170
+So this is the file, "etc/rabbitmq.config".
+
+03:06.180 --> 03:09.930
+So we ran this command, "echo", we printed this message
+
+03:09.930 --> 03:12.303
+and redirected that into this file.
+
+03:15.060 --> 03:17.047
+Okay, after this we are going to
+
+03:17.047 --> 03:22.047
+"restart rabbitmq-server", "rabbitmq-server",
+
+03:25.050 --> 03:26.433
+that's the server's name.
+
+03:28.620 --> 03:31.350
+Okay, then we are going to execute a RabbitMQ command
+
+03:31.350 --> 03:33.480
+that is going to add a user called "test"
+
+03:33.480 --> 03:35.550
+with the password "test".
+
+03:35.550 --> 03:39.240
+This is a RabbitMQ user. Just like in mySQL.
+
+03:39.240 --> 03:42.000
+We did add the admin user.
+
+03:42.000 --> 03:45.393
+Like that, here, we have this test user in RabbitMQ.
+
+03:46.260 --> 03:49.650
+Then we say, "set_user_tags test administrator".
+
+03:49.650 --> 03:52.300
+We give this test user administrator tag
+
+03:54.330 --> 03:57.240
+and then we are going to run this command to set permission
+
+03:57.240 --> 03:59.283
+to this test user.
+
+04:00.900 --> 04:03.877
+Once again, let's restart the RabbitMQ service,
+
+04:03.877 --> 04:06.777
+"systemctl restart rabbitmq-server".
+
+04:08.100 --> 04:09.566
+One last time,
+
+04:09.566 --> 04:13.650
+let's check its status, "systemctl status rabbitmq-server"
+
+04:13.650 --> 04:16.440
+and it's active running, Q to quit.
+
+04:16.440 --> 04:20.970
+And that's all we need to do in RabbitMQ for this project.
+
+04:20.970 --> 04:24.090
+So complete this setup and join me in the next lecture,
+
+04:24.090 --> 04:26.400
+where we will set up Tomcat along
+
+04:26.400 --> 04:29.040
+with our V profile application.
+
+04:29.040 --> 04:33.723
+Exit from here and join me in the next one.

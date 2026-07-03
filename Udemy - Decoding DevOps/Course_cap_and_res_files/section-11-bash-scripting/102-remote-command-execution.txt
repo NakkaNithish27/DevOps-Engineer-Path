@@ -1,0 +1,469 @@
+WEBVTT
+
+0
+00:00.390 --> 00:00.930
+Welcome.
+
+1
+00:01.650 --> 00:08.400
+In this lecture, we will talk about a remote execution, how we can execute command from script box
+
+2
+00:08.400 --> 00:14.220
+to Web zero one and zero two, and we will also add one more machine web zero three, which will be
+
+3
+00:14.220 --> 00:15.060
+Ubuntu machine.
+
+4
+00:15.990 --> 00:18.330
+So let's check at our Vagrant file.
+
+5
+00:21.540 --> 00:29.400
+So from a script box, we will execute command that will run on Web 01 and web 02, and I will also
+
+6
+00:29.400 --> 00:31.860
+add one more machine, which will be Web zero three.
+
+7
+00:32.730 --> 00:36.540
+And that will be for Ubuntu operating system.
+
+8
+00:36.570 --> 00:38.970
+Now, this is not mandatory if you want to skip.
+
+9
+00:39.450 --> 00:45.480
+If you do not have enough resource on your computer, on your laptop, then you can skip this one.
+
+10
+00:49.720 --> 00:56.440
+But I'm going to do this web 03 because this is going to be Ubuntu operating system and we will be
+
+11
+00:56.440 --> 01:03.100
+using some techniques in our script that we have learned previously to execute script for a different
+
+12
+01:03.100 --> 01:07.000
+operating system. Ubuntu Bionic 64.
+
+13
+01:12.020 --> 01:14.150
+Also, IP address, I have to change.
+
+14
+01:15.260 --> 01:19.340
+And let's note down the IP address, 10.13, 10.14 and 10.15.
+
+15
+01:22.210 --> 01:25.090
+OK, now let's bring up all the machines we can just see vagrant up.
+
+16
+01:28.850 --> 01:32.390
+OK, we set up first, we will set hostname for every machine.
+
+17
+01:33.200 --> 01:36.830
+So, vagrant ssh web01.
+
+18
+01:42.340 --> 01:44.860
+So open the /etc/hostname file.
+
+19
+01:47.160 --> 01:48.780
+And lets give web01
+
+20
+01:55.420 --> 01:58.420
+Let's log out from web01, and, log into Web 02.
+
+21
+02:12.330 --> 02:13.950
+Let's get into web03 now.
+
+22
+02:15.360 --> 02:20.220
+And this is Ubuntu it is optional, if you want to skip it, you can skip it.
+
+23
+02:33.280 --> 02:34.360
+OK, let's log out.
+
+24
+02:35.710 --> 02:38.590
+OK, let's get the IP address of the machines.
+
+25
+02:39.130 --> 02:42.610
+We are going to add name to IP mapping in the script box.
+
+26
+02:42.610 --> 02:47.720
+So script Box can refer to all the machines with the names and not IP addresses.
+
+27
+02:47.740 --> 02:51.670
+But first, we have to save those same IP address in the /etc/host file
+
+28
+02:52.300 --> 02:53.890
+So let's log into script box.
+
+29
+02:55.980 --> 03:00.600
+OK, we will open the file /etc/hosts
+
+30
+03:08.190 --> 03:10.620
+OK, I'm done with that.
+
+31
+03:11.780 --> 03:16.280
+Now let's try to ping Webb zero one from script box.
+
+32
+03:16.310 --> 03:21.890
+It should result in the IP address, same Web 02 and also Web 03.
+
+33
+03:24.580 --> 03:26.230
+So let's try to make a test now.
+
+34
+03:26.860 --> 03:34.000
+We will say ssh, vagrant, which is the user in that machine, web01
+
+35
+03:35.120 --> 03:37.330
+OK, it's asking the question, should I login?
+
+36
+03:37.330 --> 03:38.080
+Yes, please.
+
+37
+03:38.530 --> 03:44.740
+And so asking the passwords of vagrant user passwords, vagrant, same password, same username.
+
+38
+03:44.740 --> 03:45.590
+And we are in.
+
+39
+03:45.610 --> 03:46.000
+OK.
+
+40
+03:46.270 --> 03:47.260
+And you see the hostname.
+
+41
+03:47.590 --> 03:47.920
+Right.
+
+42
+03:48.430 --> 03:49.810
+We can see where we are logged in.
+
+43
+03:50.680 --> 03:52.780
+So that was the benefit of setting the hostname.
+
+44
+03:53.790 --> 03:57.520
+Right, so when we log in to that machine, we can see we're connected to that machine.
+
+45
+03:58.170 --> 03:59.210
+Lets log out from here.
+
+46
+04:00.100 --> 04:02.380
+So we will not use the vagrant user.
+
+47
+04:02.380 --> 04:06.370
+We will create another user called as devops.
+
+48
+04:07.410 --> 04:12.510
+In all the Web servers, so will log into all the machines one by one. First Web 01.
+
+49
+04:14.580 --> 04:20.610
+You can do vagrant ssh from the host machine or from here itself, you can log in.
+
+50
+04:21.330 --> 04:27.780
+I'm going to add the user called as devops, and it will set the password for this user.
+
+51
+04:33.240 --> 04:38.440
+So will use the user to execute some remote commands, and that will be system commands also like installing
+
+52
+04:38.440 --> 04:40.210
+packages, adding users.
+
+53
+04:40.720 --> 04:44.050
+So we need to add this devops user into sudoers file.
+
+54
+04:44.050 --> 04:45.820
+So I will edit the sudoers file.
+
+55
+04:52.470 --> 04:59.700
+I will add the user devops in the sudoers file, and I'm going to say NOPASSWD
+
+56
+05:04.130 --> 05:05.810
+Oops, I made a syntax error.
+
+57
+05:08.070 --> 05:11.370
+NOPASSWD
+
+58
+05:15.810 --> 05:17.730
+OK, then log logout from web zero one.
+
+59
+05:20.850 --> 05:23.820
+Clear the screen now I'm going to log into Web 02.
+
+60
+05:27.970 --> 05:29.530
+And then do the same thing here.
+
+61
+05:31.420 --> 05:34.780
+After adding the user, again, I updated into the sudoers file.
+
+62
+05:38.520 --> 05:44.190
+Then log out from here, Web 02, let's log in to web03 now and again perform the same thing.
+
+63
+05:45.180 --> 05:46.800
+OK, but we can't do this.
+
+64
+05:46.830 --> 05:47.720
+There's a problem.
+
+65
+05:47.730 --> 05:53.250
+We can't log into Web 03, which is Ubuntu operating system with a vagrant user.
+
+66
+05:53.670 --> 05:56.010
+Basically, we cannot log in with the password.
+
+67
+05:56.010 --> 05:58.050
+We can log in only with the key.
+
+68
+05:58.890 --> 06:04.170
+Now, what that means is whenever I was trying to log into Web01, Web 02, it was asking me password.
+
+69
+06:05.670 --> 06:10.390
+Right there you see it's asking me, password, but for Web 03, it says, permission denied public.
+
+70
+06:10.410 --> 06:13.170
+It's not even asking the password for vagrant user.
+
+71
+06:14.010 --> 06:17.760
+So Web 03, which is Ubuntu, does not allow password login.
+
+72
+06:17.760 --> 06:20.580
+So you have to log out from.
+
+73
+06:22.010 --> 06:28.080
+The script box and we can log in from here, vagrant, this is a Web 03 from our host machine.
+
+74
+06:28.100 --> 06:29.360
+This is key based Longin.
+
+75
+06:30.740 --> 06:33.980
+OK, I'm in web03 and I will show you what is the problem.
+
+76
+06:33.980 --> 06:36.660
+Just run sudo -i in Web 03.
+
+77
+06:36.680 --> 06:45.260
+I'm sorry, Web 03 and open this file, /etc/ssh/sshd_config, file. To any Linux machine.
+
+78
+06:45.260 --> 06:50.870
+If you're trying to login with password and if it throws you that error, public access denied then
+
+79
+06:51.350 --> 06:52.360
+huge chances.
+
+80
+06:52.400 --> 06:59.690
+The password login is disabled, so open this file and find the line password authentication.
+
+81
+06:59.990 --> 07:03.180
+OK, there, line number 56, you can see password authentication.
+
+82
+07:03.180 --> 07:03.970
+It says no.
+
+83
+07:03.980 --> 07:05.170
+So my guess was right.
+
+84
+07:05.180 --> 07:07.010
+We can just say now password authentication.
+
+85
+07:07.020 --> 07:07.540
+Yes.
+
+86
+07:08.150 --> 07:14.600
+save & quit and then restart the ssh service.
+
+87
+07:14.610 --> 07:17.900
+It's ubuntu machine ssh service name is just ssh.
+
+88
+07:18.990 --> 07:21.150
+And let's go back to script box.
+
+89
+07:24.510 --> 07:28.620
+Now from Script Box, let's try once again, vagrant@we 03.
+
+90
+07:29.370 --> 07:34.620
+And you see it's asking the password and we can log in. Alright we are  able to login with password.
+
+91
+07:34.650 --> 07:36.440
+Now, let's continue with our activity.
+
+92
+07:36.450 --> 07:38.520
+We are going to add the user.
+
+93
+07:40.470 --> 07:45.030
+Dev ops, and this is an Ubuntu machine, so I'm going to use the command and user dev ops.
+
+94
+07:46.130 --> 07:48.020
+It should also ask me the password.
+
+95
+07:52.370 --> 07:57.380
+And we have to add the users in sudoers files, I'm going to say export EDITOR=vim.
+
+96
+07:58.610 --> 08:01.910
+and then visudo
+
+97
+08:11.180 --> 08:14.870
+OK, so devops user in the sudoers file with NOPASSWD
+
+98
+08:17.600 --> 08:23.290
+All right, guys, so now we are all set to do the remote execution now let's come back to our script
+
+99
+08:23.290 --> 08:23.800
+box.
+
+100
+08:23.810 --> 08:24.730
+Let's come home.
+
+101
+08:26.230 --> 08:31.930
+So what are we doing so far in this lecture was the preparations, so we can execute command over ssh
+
+102
+08:31.930 --> 08:33.670
+or remote execution.
+
+103
+08:33.680 --> 08:34.660
+So this is how it works.
+
+104
+08:35.050 --> 08:41.800
+So when you do a ssh and we will be using the user devops, as I said, and let's say web01
+
+105
+08:41.800 --> 08:41.980
+.
+
+106
+08:41.980 --> 08:43.900
+When you do ssh, it gives us the shell.
+
+107
+08:43.900 --> 08:47.500
+But if with that we give a command, let's say uptime.
+
+108
+08:48.130 --> 08:49.750
+Now observe what happens.
+
+109
+08:50.020 --> 08:50.980
+Look at the prompt.
+
+110
+08:51.280 --> 08:51.520
+OK.
+
+111
+08:51.580 --> 08:52.570
+It is asking the password.
+
+112
+08:52.580 --> 08:53.860
+Let's enter the password.
+
+113
+08:55.730 --> 09:00.110
+So we logged into Web zero one with the password it executed uptime command, and then we are
+
+114
+09:00.110 --> 09:01.670
+still in the script box.
+
+115
+09:02.120 --> 09:05.210
+So we really don't need to login, execute, command and log out.
+
+116
+09:05.210 --> 09:07.490
+We can execute the command from here itself.

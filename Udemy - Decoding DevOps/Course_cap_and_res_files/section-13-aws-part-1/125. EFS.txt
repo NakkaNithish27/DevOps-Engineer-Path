@@ -1,0 +1,970 @@
+WEBVTT
+
+00:00.160 --> 00:01.400
+Hello and welcome.
+
+00:01.400 --> 00:07.760
+In this lecture we are going to learn about EFS, Amazon File System, Elastic File System.
+
+00:08.360 --> 00:11.400
+So Amazon EFS is a shared file system.
+
+00:12.040 --> 00:17.480
+Before we learn this we need to understand what is a shared file system and why do we need it.
+
+00:18.200 --> 00:25.280
+So let's say we have a website hosted on a group of servers with a front end endpoint of a load balancer,
+
+00:25.280 --> 00:28.600
+so users access the load balancer.
+
+00:29.880 --> 00:32.480
+Let's say the users are uploading some images.
+
+00:32.480 --> 00:35.920
+This is a site where users upload and share images.
+
+00:36.600 --> 00:38.680
+So request goes to the load balancer.
+
+00:38.720 --> 00:41.840
+The load balancer routes it to one of the server.
+
+00:42.280 --> 00:47.400
+User uploads the image, and image gets stored into the hard disk of the server.
+
+00:47.800 --> 00:52.040
+The server could be EC2 instance, could be a virtual machine, could be a physical server.
+
+00:52.520 --> 00:57.880
+Anything, any computer, any operating system like this will have its own hard disk where it stores
+
+00:57.880 --> 00:58.560
+the data.
+
+00:59.120 --> 01:04.170
+The data consists of, first of all, the all, the operating system, then the application, the services
+
+01:04.170 --> 01:08.810
+running and the data the service is storing or retrieving.
+
+01:08.810 --> 01:12.170
+So let's say images are stored on this server's hard disk.
+
+01:12.530 --> 01:18.810
+Now what happens if the user accesses again the site and the load balancer routes the request to other
+
+01:18.810 --> 01:19.690
+web server?
+
+01:20.010 --> 01:21.650
+Let's name it as web zero two.
+
+01:21.850 --> 01:24.770
+So image was stored on web zero one hard disk.
+
+01:24.970 --> 01:31.330
+And when the user later comes and it redirects to web zero two, web zero two, hard disk will not have
+
+01:31.330 --> 01:32.170
+that image.
+
+01:32.890 --> 01:34.330
+That's the problem right?
+
+01:34.730 --> 01:40.810
+So that is the problem with the block storage like EBS or any hard disk of a computer is called as a
+
+01:40.810 --> 01:41.810
+block storage.
+
+01:42.130 --> 01:47.170
+So the files that needs sharing should be in a shared storage.
+
+01:47.170 --> 01:50.770
+The storage should be centralized for such kind of files.
+
+01:51.810 --> 01:53.730
+So we should have something like this.
+
+01:54.610 --> 01:59.810
+Now in this case the servers will have their own block storage where the operating system and the service
+
+01:59.850 --> 02:00.650
+resides.
+
+02:00.970 --> 02:06.750
+But the shared files like for example, images, videos and documents that need sharing those kinds
+
+02:06.750 --> 02:08.230
+of data should be going.
+
+02:08.510 --> 02:14.710
+Should be going into a centralized storage, or we can call it as a shared storage.
+
+02:15.190 --> 02:19.230
+In Linux, the most famous shared storage protocol is NFS.
+
+02:19.270 --> 02:25.950
+NFS is used as a shared storage, and to build NFS shared storage, we need to host NFS server, which
+
+02:25.950 --> 02:30.350
+contains all the hard disk and we need to manage this NFS server.
+
+02:30.830 --> 02:35.430
+So an extra overhead to manage this shared storage, but it is required.
+
+02:36.270 --> 02:39.550
+Now enter EFS Amazon Elastic File System.
+
+02:39.550 --> 02:44.070
+It is the shared storage hosted on the cloud on the AWS cloud.
+
+02:44.070 --> 02:47.510
+So you can simply create it and attach it to your instance.
+
+02:47.750 --> 02:50.510
+Basically, mount it on your Linux instance.
+
+02:50.790 --> 02:55.510
+And it's not only for the AWS EC2 instance you can use it for from your data center.
+
+02:55.510 --> 02:59.310
+Also, you can store data on Amazon EFS as a shared storage.
+
+02:59.670 --> 03:01.110
+So we'll do this exercise.
+
+03:01.110 --> 03:06.320
+First we need to spin a web server and then mount the shared storage on it.
+
+03:06.320 --> 03:09.280
+And we're going to do it for images of our website.
+
+03:10.640 --> 03:15.760
+EFS is a network service, and a network service on AWS needs a security group.
+
+03:15.760 --> 03:19.240
+So first we need to create a security group for the EFS.
+
+03:19.520 --> 03:21.320
+So let's go to the EC2 service.
+
+03:21.320 --> 03:23.320
+Let's go to security groups.
+
+03:24.120 --> 03:25.640
+Let's create security group.
+
+03:25.640 --> 03:35.240
+Let's name it as Inner Peace hyphen hyphen SG same I'm giving in the description inbound rule.
+
+03:35.280 --> 03:36.200
+Add inbound rule.
+
+03:36.200 --> 03:38.600
+Now the security group is for the EFS.
+
+03:38.640 --> 03:43.280
+The request is going to come from our web server our EC2 instance.
+
+03:43.600 --> 03:46.480
+We need to spin the same inner peace web server.
+
+03:46.920 --> 03:49.320
+So EFS works on NFS protocols.
+
+03:49.320 --> 03:55.480
+So in the type we select NFS, the port number is 2049.
+
+03:55.840 --> 04:00.240
+And the request should be allowed from the security group of our Inner Peace web server.
+
+04:00.840 --> 04:01.960
+So let's see.
+
+04:02.780 --> 04:05.780
+So when we launch instance we're going to keep it into the security group.
+
+04:05.780 --> 04:07.220
+Inner peace security group.
+
+04:08.700 --> 04:13.660
+Some description allow NFS access from Inner Peace web servers security group.
+
+04:14.860 --> 04:16.420
+So that's the only rule we need.
+
+04:16.460 --> 04:19.100
+Once again the security group is for the EFS.
+
+04:19.140 --> 04:23.940
+The request is going to come from or the access is going to come from this security group.
+
+04:24.780 --> 04:25.980
+Inner peace web server.
+
+04:25.980 --> 04:26.820
+Security group.
+
+04:27.540 --> 04:28.620
+Create security group.
+
+04:29.020 --> 04:30.220
+Now let's go to EFS.
+
+04:30.260 --> 04:32.860
+So you can just search here EFS and come to this.
+
+04:33.220 --> 04:34.780
+You can watch this video.
+
+04:34.820 --> 04:36.260
+I mean you should watch this video.
+
+04:36.260 --> 04:41.580
+It's a very nice video explains you about the benefits of EFS, how you can use it.
+
+04:41.620 --> 04:42.860
+What are the use cases?
+
+04:42.860 --> 04:44.220
+Really nice small video.
+
+04:44.220 --> 04:45.740
+Definitely watch this video.
+
+04:46.180 --> 04:48.820
+And once you're done, come to File systems.
+
+04:49.220 --> 04:50.940
+Let's create the EFS file system.
+
+04:50.940 --> 04:53.220
+Now like we create an EBS volume.
+
+04:53.220 --> 04:56.420
+It is almost similar to that but this is a shared storage.
+
+04:56.980 --> 05:03.830
+EBS volume can be connected to only one instance at a time, but EFS can be connected to multiple instances
+
+05:03.830 --> 05:04.430
+at a time.
+
+05:04.790 --> 05:06.390
+That's what shared storage is.
+
+05:06.950 --> 05:09.030
+So let's click on Create File System.
+
+05:09.390 --> 05:10.390
+Let's give it a name.
+
+05:10.630 --> 05:13.670
+So EC2 instance when we launch has a folder.
+
+05:13.910 --> 05:14.590
+Images.
+
+05:15.070 --> 05:19.910
+If you have something else uh in the folder like IMG or something you can use that.
+
+05:20.270 --> 05:26.630
+So most of the template that we download from 2.com, when we unzip it has a folder images or img.
+
+05:27.150 --> 05:32.390
+We'll see that when we launch the instance just give the name Inner Peace Hyphen Images or whatever
+
+05:32.390 --> 05:35.830
+your project name is and click on customize.
+
+05:36.150 --> 05:38.030
+I'm going to show you many options over here.
+
+05:38.030 --> 05:39.830
+So file system type.
+
+05:39.870 --> 05:41.990
+We are keeping it as regional.
+
+05:41.990 --> 05:47.830
+So in a region which is not Virginia I'm using, it will be available for all the zones.
+
+05:47.870 --> 05:51.190
+But if you want only for one zone you can select one zone as well.
+
+05:51.230 --> 05:52.630
+That will save you some cost.
+
+05:52.950 --> 05:55.550
+But for now the access that we are doing is going to be free.
+
+05:55.550 --> 05:57.030
+So do not worry about that.
+
+05:57.310 --> 05:58.470
+So keep it regional.
+
+05:58.990 --> 06:01.750
+There is an option of taking automated backups.
+
+06:01.790 --> 06:04.090
+You can put a check mark or just remove it.
+
+06:04.130 --> 06:05.690
+We are not going to take any backups.
+
+06:06.330 --> 06:13.290
+Lifecycle management like after the backup is taken, what you want to do after 30 days you can transition
+
+06:13.290 --> 06:16.290
+into archive to save the cost.
+
+06:16.290 --> 06:17.690
+So transition into archive.
+
+06:17.730 --> 06:19.010
+Select this to none.
+
+06:19.010 --> 06:20.130
+We don't want to do this.
+
+06:20.130 --> 06:21.690
+Make sure you select this to none.
+
+06:22.810 --> 06:24.130
+Encryption at rest.
+
+06:24.130 --> 06:26.730
+So EFS stores all the data encrypted.
+
+06:26.730 --> 06:29.050
+That's called as encryption at rest.
+
+06:29.610 --> 06:32.290
+Encryption in transit means when the data is traveling.
+
+06:32.770 --> 06:35.530
+So EFS stores the data encrypted.
+
+06:35.530 --> 06:36.930
+If you put this check mark on.
+
+06:36.930 --> 06:40.330
+Otherwise you can uncheck it if you don't need it in real time.
+
+06:40.330 --> 06:43.090
+Most cases this will be checked okay.
+
+06:43.130 --> 06:48.330
+Performance settings if you need high performing storage throughput mode.
+
+06:48.370 --> 06:50.530
+If you want you can put it as enhanced.
+
+06:50.970 --> 06:52.570
+You're going to keep it as bursting.
+
+06:52.930 --> 06:56.730
+Bursting is going to scale whenever it's required, otherwise it will be smaller.
+
+06:56.730 --> 06:59.610
+This saves cost and hence is just faster.
+
+06:59.650 --> 07:01.250
+You can check in the additional settings.
+
+07:01.250 --> 07:06.980
+Here we have performance mode, general purpose or max io will stick to general purpose.
+
+07:06.980 --> 07:13.140
+Max io is going to or it is used to tolerate higher latencies, but just keep it.
+
+07:13.180 --> 07:15.380
+General purpose tags.
+
+07:15.420 --> 07:17.620
+Let's give the name tag inner peace.
+
+07:17.620 --> 07:19.500
+Hyphen images go next.
+
+07:20.260 --> 07:23.140
+Okay, so for all the availability zones there are subnets.
+
+07:23.140 --> 07:28.020
+And on that there is a security group that decides what request can come in.
+
+07:28.700 --> 07:30.420
+So default security group is selected.
+
+07:30.420 --> 07:37.300
+Just remove all the default security group from all the subnets and then select the EFS security group
+
+07:37.300 --> 07:41.780
+that we have created for all the zones the EFS one.
+
+07:48.900 --> 07:50.020
+And go next.
+
+07:50.660 --> 07:51.300
+That's all.
+
+07:51.300 --> 07:57.700
+Just go to next and say create a file system is getting created.
+
+07:57.700 --> 08:00.260
+It's going to take few seconds to available okay.
+
+08:00.260 --> 08:01.020
+It's already there.
+
+08:01.020 --> 08:03.200
+It's available state Okay.
+
+08:03.200 --> 08:04.800
+Now, how do we access this?
+
+08:04.800 --> 08:08.160
+Now there are multiple ways of accessing an EFS storage.
+
+08:08.720 --> 08:10.880
+You can do it through IAM user also.
+
+08:10.880 --> 08:13.240
+But we are going to use access points.
+
+08:13.240 --> 08:14.880
+So you need to create an access points.
+
+08:14.880 --> 08:19.320
+This access points will connect your instance to this EFS file system.
+
+08:19.680 --> 08:22.400
+So go to Access Points and say Create Access Point.
+
+08:23.000 --> 08:24.520
+Give file system a name.
+
+08:25.200 --> 08:26.240
+Choose the file system.
+
+08:26.240 --> 08:27.720
+So this is for our file system.
+
+08:27.720 --> 08:28.960
+We can select it from here.
+
+08:29.640 --> 08:33.840
+So simply select that and scroll down and say Create Access point okay.
+
+08:33.880 --> 08:35.840
+So the access point is also created.
+
+08:36.160 --> 08:38.640
+Now how do we connect this to our instance.
+
+08:38.640 --> 08:41.160
+Or we have a folder images folder.
+
+08:41.160 --> 08:45.880
+We want to put all the data that it should come to this EFS file system.
+
+08:46.240 --> 08:48.840
+So let's launch the instance and let's take a look at that.
+
+08:49.160 --> 08:50.400
+So go to Launch Templates.
+
+08:50.400 --> 08:52.880
+You should have the launch template for Inner peace.
+
+08:52.880 --> 08:54.720
+Just simply launch the instance from there.
+
+08:57.000 --> 09:00.160
+Action launch instance from template.
+
+09:00.640 --> 09:03.040
+This one instance we need for now launch instance.
+
+09:06.530 --> 09:06.810
+Okay.
+
+09:06.810 --> 09:14.090
+It's already in running state, so I'm going to take its public IP and do SSH to it as I downloads inner
+
+09:14.090 --> 09:17.010
+Peace key EC2 hyphen user and the IP address.
+
+09:20.050 --> 09:20.290
+Okay.
+
+09:20.330 --> 09:21.890
+Switching to root user.
+
+09:22.730 --> 09:23.010
+Okay.
+
+09:23.010 --> 09:26.810
+So the way we mount a file system is one is manually.
+
+09:26.810 --> 09:29.250
+The other way is through fstab automatically.
+
+09:29.250 --> 09:31.650
+When the operating system boots it automatically mounts.
+
+09:31.650 --> 09:33.930
+We have seen that in EBS lecture.
+
+09:34.130 --> 09:39.370
+But the point is this Linux operating system does not understand what is EFS or what is NFS.
+
+09:39.930 --> 09:41.810
+So we need to install some packages.
+
+09:41.810 --> 09:43.770
+Then only it will understand what is EFS.
+
+09:43.770 --> 09:47.450
+And then we can mention that information in fstab file to mount it.
+
+09:47.970 --> 09:51.930
+So first let's go to var dub dub dub HTML.
+
+09:51.930 --> 09:55.330
+That's where our website data is located.
+
+09:55.610 --> 09:57.410
+Here I have images folder.
+
+09:57.410 --> 10:01.130
+You might have images or img based on what template you're using.
+
+10:01.650 --> 10:04.310
+Let's check the website from the browser.
+
+10:04.630 --> 10:09.070
+So first let me go to the security group of this inner peace instance.
+
+10:09.710 --> 10:10.870
+Edit inbound rule.
+
+10:11.270 --> 10:14.750
+Okay so I have access port 80 allowed from the load balancer security group.
+
+10:14.750 --> 10:18.430
+I'm going to add here port 80 from my IP.
+
+10:20.510 --> 10:24.550
+Save rule take its public IP.
+
+10:26.710 --> 10:28.470
+And let's check it from the browser.
+
+10:29.430 --> 10:31.390
+So where are the images.
+
+10:33.190 --> 10:34.990
+Yeah here there are these images.
+
+10:35.470 --> 10:38.430
+Those are coming from this images folder.
+
+10:39.710 --> 10:48.510
+I want you to move these images to a different location like create temporary folder temp images and
+
+10:48.510 --> 10:52.630
+move everything from the images to it.
+
+10:52.670 --> 10:55.270
+First let me go get into the images folders directly.
+
+10:56.430 --> 10:56.790
+Yeah.
+
+10:56.830 --> 11:06.440
+So move everything from the images folder to temp images and let's restart Start the HTTP service.
+
+11:10.680 --> 11:12.120
+So there are no images here.
+
+11:12.480 --> 11:13.600
+Let's go to the browser.
+
+11:14.480 --> 11:15.760
+Refresh the page.
+
+11:16.520 --> 11:22.360
+I think the images will be already uploaded to this browser, so we need to access it from another browser.
+
+11:22.400 --> 11:24.160
+Let's open something else.
+
+11:24.960 --> 11:26.720
+I'm using this DuckDuckGo.
+
+11:28.560 --> 11:30.280
+There will be nothing cached over here.
+
+11:30.320 --> 11:30.960
+Let's scroll down.
+
+11:30.960 --> 11:32.520
+So you see that images are gone.
+
+11:32.880 --> 11:33.160
+Okay.
+
+11:33.160 --> 11:37.240
+Just wanted to show you from where the images are coming and now it is uploaded.
+
+11:37.240 --> 11:40.960
+Then it will be uploaded to the browser and then it will be cached also.
+
+11:40.960 --> 11:43.720
+So if you want to remove it you have to remove the cache as well.
+
+11:43.960 --> 11:46.680
+So these are not dynamic images static images.
+
+11:46.680 --> 11:48.320
+So no upload download here.
+
+11:48.320 --> 11:50.120
+But just this is an example.
+
+11:50.720 --> 11:56.080
+Okay so one more reason I have moved the images to temporary images folder is because we are going to
+
+11:56.120 --> 11:58.240
+use this folder as the mount point.
+
+11:58.600 --> 12:02.280
+This will be connected to the EFS file system.
+
+12:02.720 --> 12:04.340
+Then we put images in this.
+
+12:04.540 --> 12:06.620
+Then it goes to the EFS file system.
+
+12:06.620 --> 12:08.740
+Right now it's just living in the hard disk.
+
+12:09.140 --> 12:14.700
+So in order to mount the EFS file system over here, we need to install some tools and set right information
+
+12:14.700 --> 12:15.820
+in fstab file.
+
+12:16.460 --> 12:23.220
+Okay so I just searched on the internet install EFS client or EFS utils on Amazon Linux 2023.
+
+12:23.580 --> 12:25.820
+I'll put this link in the lecture resource also.
+
+12:26.260 --> 12:28.620
+Or you can simply ask the ChatGPT how to do this.
+
+12:28.620 --> 12:29.660
+So yum!
+
+12:29.700 --> 12:31.900
+Install Amazon efs utils.
+
+12:32.620 --> 12:35.340
+I bet this also stunnel that we need to install.
+
+12:36.780 --> 12:39.460
+Okay, first let's install this yum install.
+
+12:41.820 --> 12:42.740
+Yum install.
+
+12:42.740 --> 12:45.580
+Hyphen y Amazon hyphen fs hyphen utils.
+
+12:47.460 --> 12:49.620
+So that is on Amazon Linux 2023.
+
+12:49.620 --> 12:52.860
+But you can install it through different packaging mechanism.
+
+12:52.860 --> 13:00.540
+Also, like APT on other operating system, you just need to search for how to install Amazon EFS utils
+
+13:00.580 --> 13:01.740
+on the operating system.
+
+13:01.940 --> 13:02.940
+The operating system name.
+
+13:02.940 --> 13:06.190
+You will get the package name and the steps to install it.
+
+13:06.390 --> 13:12.590
+So mounting file system mounting existing EC2 Linux instance automatically mounting.
+
+13:12.590 --> 13:18.950
+In this section you have existing EC2 Linux instance and we are using access point EFS access point
+
+13:18.950 --> 13:23.950
+okay, this one, not IAM authorization, not this this one EFS access point.
+
+13:24.150 --> 13:28.230
+So copy this and bring it into a notepad okay.
+
+13:28.270 --> 13:30.430
+So first you need to give file system ID.
+
+13:30.430 --> 13:34.070
+So this information goes into the etc. fstab files.
+
+13:34.390 --> 13:40.710
+So here we need to put the file system ID here the mount point path which will be the images folder.
+
+13:41.190 --> 13:43.150
+And here the access point ID.
+
+13:43.150 --> 13:44.510
+So let's get this.
+
+13:45.990 --> 13:47.390
+So that's the file system ID.
+
+13:47.390 --> 13:52.230
+Let me copy that file system ID colon forward slash.
+
+13:52.390 --> 13:53.710
+And here the path.
+
+13:54.030 --> 13:56.950
+So this is var HTML images.
+
+14:00.270 --> 14:00.950
+This folder.
+
+14:00.950 --> 14:07.770
+Now you could be having img or something else based on what template from 2.com you used.
+
+14:07.930 --> 14:11.810
+If you don't see images or IMG, you see anything else you can mount just any folder.
+
+14:11.810 --> 14:13.570
+Just you need to do this exercise.
+
+14:15.530 --> 14:17.330
+So here we are going to put that.
+
+14:17.330 --> 14:19.490
+And EFS is the storage type.
+
+14:19.930 --> 14:21.890
+And here the access point ID.
+
+14:23.570 --> 14:25.050
+So that's the access point ID.
+
+14:28.290 --> 14:28.970
+Yeah okay.
+
+14:29.010 --> 14:29.890
+So it should be like this.
+
+14:29.890 --> 14:31.730
+Let's copy all this information now.
+
+14:33.890 --> 14:40.330
+Let's do CD hit enter open vs vim etc. fstab file.
+
+14:41.370 --> 14:48.530
+Go to the last line or to get into insert mode and next line and shift insert to paste it.
+
+14:49.250 --> 14:49.690
+Take a look.
+
+14:49.690 --> 14:57.970
+Once again this should be the EFS file system id and this will be the access point ID and here the mount
+
+14:57.970 --> 14:58.770
+point path.
+
+14:59.210 --> 15:06.460
+So once you do this save and quit and you need to run the command mount hyphen A, so it reads the fstab
+
+15:06.460 --> 15:07.980
+file and mount it.
+
+15:08.020 --> 15:10.020
+Before this, let's run df h.
+
+15:11.220 --> 15:11.420
+Right.
+
+15:11.420 --> 15:12.740
+So there's no mount point yet.
+
+15:12.740 --> 15:17.340
+We're going to say mount hyphen A which will read the fstab file.
+
+15:17.540 --> 15:17.820
+Okay.
+
+15:17.820 --> 15:19.300
+Now let's run DFI finish.
+
+15:20.260 --> 15:20.540
+Okay.
+
+15:20.580 --> 15:21.260
+It's mounted.
+
+15:21.260 --> 15:22.020
+You see there.
+
+15:23.620 --> 15:25.340
+Now let's bring back our images.
+
+15:25.340 --> 15:32.660
+And now when you're doing this I'm copying everything from the images folder to var HTML images.
+
+15:32.940 --> 15:36.340
+Now see this images folder is connected to the EFS file system.
+
+15:36.340 --> 15:39.300
+So this images are going into that file system.
+
+15:40.220 --> 15:43.620
+So it's no more the folder on your local hard disk.
+
+15:43.660 --> 15:45.900
+It is the NFS mount point.
+
+15:46.100 --> 15:49.900
+Now let's restart httpd service.
+
+15:49.900 --> 15:51.460
+Restart httpd service.
+
+15:51.980 --> 15:54.140
+And I'm going back to that Duckduck browser.
+
+15:54.940 --> 15:56.300
+Let me refresh this.
+
+16:00.940 --> 16:04.100
+And this time these images are coming from the EFS file system.
+
+16:04.100 --> 16:05.960
+It's not on our hard disk.
+
+16:06.480 --> 16:08.080
+And this whole exercise is free.
+
+16:08.480 --> 16:11.080
+The file system size is very small, less than five GB.
+
+16:11.480 --> 16:13.440
+It comes under free tier, so do not worry.
+
+16:13.960 --> 16:16.480
+The last thing that you need to do is create the image.
+
+16:16.520 --> 16:18.960
+Am I off this instance?
+
+16:19.400 --> 16:22.320
+So we can use it in the later later lectures.
+
+16:22.400 --> 16:26.280
+So your instance is connected to EFS.
+
+16:26.320 --> 16:32.200
+Mount point say action images and say create image.
+
+16:32.640 --> 16:37.960
+I'm naming it as inner peace EFS because it has the EFS mount point connected to this.
+
+16:37.960 --> 16:43.360
+And whenever I launch instance from this EMI, it will automatically go and connect to the EFS file
+
+16:43.400 --> 16:43.920
+system.
+
+16:44.400 --> 16:45.640
+Just create image.
+
+16:46.400 --> 16:48.920
+Okay, wait until this EMI creation is completed.
+
+16:48.920 --> 16:50.600
+Go to the EMI section.
+
+16:50.920 --> 16:54.600
+Now you can remove the old EMI.
+
+16:55.480 --> 16:56.360
+This will keep.
+
+16:56.600 --> 16:58.080
+Or if you want, you can keep it.
+
+16:59.560 --> 17:02.440
+We can create a launch template also for this one.
+
+17:02.800 --> 17:05.380
+We need to do that actually in the further lectures.
+
+17:05.620 --> 17:06.900
+Let's just keep it till here.
+
+17:06.900 --> 17:08.340
+Just wait until this.
+
+17:08.380 --> 17:10.940
+Until this becomes into available state.
+
+17:10.940 --> 17:13.700
+Wait until that time and then you can delete your instance.
+
+17:14.100 --> 17:18.820
+Okay so my EMI is in available state the inner peace EFS.
+
+17:18.860 --> 17:23.940
+Now I am going to delete this EC2 instance just as a part of a clean up.
+
+17:26.820 --> 17:32.900
+And for now you can keep both instances if you want or sorry, both the EMI or you can delete the older
+
+17:32.940 --> 17:33.260
+EMI.
+
+17:33.260 --> 17:37.380
+I'm keeping both just few lectures and then we don't need those Amis.
+
+17:37.420 --> 17:39.180
+Also, we'll do that cleanup as well.
+
+17:40.100 --> 17:43.060
+Do not remove your EFS and access point.
+
+17:43.100 --> 17:44.420
+This comes under free tiers.
+
+17:44.420 --> 17:51.500
+You don't need to worry about it, but make sure you watch this video EFS video created by AWS.
+
+17:52.260 --> 17:55.660
+It's pretty simple to use and there's nothing more complication.
+
+17:55.660 --> 18:01.900
+Just keep in mind whenever you need a shared file system, you can use Amazon EFS.
+
+18:02.700 --> 18:04.860
+So that would be all in this lecture.
+
+18:04.860 --> 18:06.500
+I will see you in the next one.

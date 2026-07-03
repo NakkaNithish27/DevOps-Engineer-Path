@@ -1,0 +1,691 @@
+WEBVTT
+
+00:00.300 --> 00:02.430
+Instructor: Okay, so now we have all the stages set.
+
+00:02.430 --> 00:05.160
+Now we can start writing the Docker files.
+
+00:05.160 --> 00:06.450
+So open your VS Code
+
+00:06.450 --> 00:09.450
+and make sure you are in the source code that we clone
+
+00:09.450 --> 00:12.183
+and you are in the branch containers.
+
+00:13.140 --> 00:14.850
+In this we have a folder structure,
+
+00:14.850 --> 00:17.430
+Docker-files, if you see.
+
+00:17.430 --> 00:19.950
+So first we are going to build the app image,
+
+00:19.950 --> 00:23.760
+the Tomcat image on which our artifact,
+
+00:23.760 --> 00:26.340
+our V profile application will be hosted.
+
+00:26.340 --> 00:30.300
+So we have a app folder here and a Docker file.
+
+00:30.300 --> 00:31.800
+Now there's nothing in this Docker file.
+
+00:31.800 --> 00:33.510
+This Docker file is empty.
+
+00:33.510 --> 00:38.043
+I have just created the skeleton over here like DB, web.
+
+00:40.260 --> 00:44.190
+So in real time you need to create a skeleton like this.
+
+00:44.190 --> 00:46.024
+And in that, you need to place the Docker file
+
+00:46.024 --> 00:49.560
+and you have to make sure the Docker file starts
+
+00:49.560 --> 00:51.123
+with a capital D.
+
+00:52.200 --> 00:56.280
+Alright, so initially we created this list of the service,
+
+00:56.280 --> 00:57.870
+the version, and based on that,
+
+00:57.870 --> 01:00.510
+we found the image and the tag.
+
+01:00.510 --> 01:03.330
+Now, in order to build the Tomcat image, the app image,
+
+01:03.330 --> 01:06.630
+we need to give Tomcat a base image.
+
+01:06.630 --> 01:09.330
+And in that we need to upload our artifact.
+
+01:09.330 --> 01:12.720
+To build our artifact, we will need Maven.
+
+01:12.720 --> 01:16.650
+So we profile project setup documentation.
+
+01:16.650 --> 01:19.203
+We set up first the Docker, sorry,
+
+01:19.203 --> 01:21.690
+first we set up the Tomcat service in
+
+01:21.690 --> 01:25.950
+that now we have official Tomcat image we can just search
+
+01:25.950 --> 01:28.180
+for and go to Docker hub
+
+01:29.910 --> 01:32.061
+can search for Tomcat.
+
+01:32.061 --> 01:33.600
+There's the Tomcat image.
+
+01:33.600 --> 01:35.340
+So we don't need to build this image from the
+
+01:35.340 --> 01:37.230
+scratch, right?
+
+01:37.230 --> 01:40.050
+So we run this Tomcat container from this image
+
+01:40.050 --> 01:42.240
+and it runs the Tomcat service.
+
+01:42.240 --> 01:44.550
+The service runs on port 8080
+
+01:44.550 --> 01:47.520
+and then we can map it with any other port we want.
+
+01:47.520 --> 01:49.740
+We'll be mapping it with 8080 only.
+
+01:49.740 --> 01:53.100
+That we'll see in a moment. Catalina base.
+
+01:53.100 --> 01:55.080
+So this is the home directory
+
+01:55.080 --> 01:57.510
+where the Tomcat binaries will be located in this
+
+01:57.510 --> 01:59.970
+location in the Docker image.
+
+01:59.970 --> 02:02.190
+So it's a pretty simple Docker image.
+
+02:02.190 --> 02:04.770
+We have Tomcat service running in that. That's all.
+
+02:04.770 --> 02:07.440
+Now we need to put our artifact in that, right?
+
+02:07.440 --> 02:10.320
+So in the setup we set up the Tomcat service.
+
+02:10.320 --> 02:14.670
+Once we have our Tomcat service, then we build the artifact.
+
+02:14.670 --> 02:19.650
+So here we set up the Maven 3.9.9, you see there.
+
+02:19.650 --> 02:22.200
+We clone the source code, we make the changes
+
+02:22.200 --> 02:26.520
+to application properties file, and we run MVN install.
+
+02:26.520 --> 02:28.080
+Now that gives us the artifact
+
+02:28.080 --> 02:31.500
+and then we copy this artifact into the home directory
+
+02:31.500 --> 02:33.930
+of Tomcat in web apps folder.
+
+02:33.930 --> 02:36.450
+Okay? These kind of information is very important.
+
+02:36.450 --> 02:39.660
+Check over here, we are putting it in Tomcat home directory
+
+02:39.660 --> 02:42.720
+in web apps folder with the name root.war.
+
+02:42.720 --> 02:46.380
+And we check the Tomcat Docker image documentation.
+
+02:46.380 --> 02:49.020
+You see there is USR, local Tomcat in
+
+02:49.020 --> 02:52.530
+that we can have web apps in that we can have the artifact
+
+02:52.530 --> 02:53.793
+with the name root.war.
+
+02:54.639 --> 02:56.790
+Okay, so this is covered now, right?
+
+02:56.790 --> 02:58.170
+We need to build the artifact
+
+02:58.170 --> 03:00.930
+and put it into the Tomcat image.
+
+03:00.930 --> 03:02.673
+So let's copy these two.
+
+03:04.830 --> 03:07.080
+This is the Docker image that you want to use.
+
+03:07.080 --> 03:10.410
+This is the Maven image. That's the Tomcat image.
+
+03:10.410 --> 03:14.343
+Let's go to our source code and put it over there.
+
+03:15.180 --> 03:16.680
+So this will be the base image.
+
+03:16.680 --> 03:18.210
+How do you mention the base image?
+
+03:18.210 --> 03:22.260
+You give the instruction from capital, right?
+
+03:22.260 --> 03:24.293
+And this one also from, okay,
+
+03:25.645 --> 03:28.620
+now this will be a multi-stage Docker file.
+
+03:28.620 --> 03:31.830
+A multi-stage Docker file is most of the time used
+
+03:31.830 --> 03:35.010
+to build the artifact and put it into a target image.
+
+03:35.010 --> 03:38.040
+In this case, it'll be a Tomcat image on this,
+
+03:38.040 --> 03:39.780
+the artifact will be copied.
+
+03:39.780 --> 03:41.340
+I will show you that in a moment.
+
+03:41.340 --> 03:42.690
+So of course the from instruction.
+
+03:42.690 --> 03:45.140
+Now here we need to put the instruction to build.
+
+03:45.990 --> 03:47.940
+So we need the source code over here
+
+03:47.940 --> 03:50.880
+and then we can build with, with Maven con,
+
+03:50.880 --> 03:52.680
+we can build the artifact.
+
+03:52.680 --> 03:54.240
+Okay? So give the run instruction
+
+03:54.240 --> 03:56.793
+and the Git clone command to clone the source code.
+
+03:58.320 --> 03:59.910
+Okay? So when we build the Docker image,
+
+03:59.910 --> 04:02.250
+the run instruction is going to execute this command.
+
+04:02.250 --> 04:05.040
+It's going to bring up a container with Maven image,
+
+04:05.040 --> 04:06.420
+then run git clone command,
+
+04:06.420 --> 04:10.650
+and then we need to run the next command, which will CD into
+
+04:10.650 --> 04:13.293
+that folder and run MV install.
+
+04:14.580 --> 04:19.080
+Okay, so CD into V profile project folder.
+
+04:19.080 --> 04:21.210
+So when you clone the source code, we'll get that folder.
+
+04:21.210 --> 04:24.270
+Ampersand ampersand. We combine the command
+
+04:24.270 --> 04:25.890
+with Git checkout container.
+
+04:25.890 --> 04:27.870
+So it's going to switch to the containers branch
+
+04:27.870 --> 04:30.540
+and then it is going to run MVN install.
+
+04:30.540 --> 04:32.370
+Now if we don't use this ampersand,
+
+04:32.370 --> 04:34.740
+we can give the instruction one by one,
+
+04:34.740 --> 04:36.780
+like run CDV profile project.
+
+04:36.780 --> 04:40.290
+Next will be run GI checkout. Next will be run MV install.
+
+04:40.290 --> 04:42.090
+But this is not recommended.
+
+04:42.090 --> 04:44.550
+That will create more layers in the images.
+
+04:44.550 --> 04:46.230
+The size of the image will also increase
+
+04:46.230 --> 04:48.248
+and it'll add more complexity.
+
+04:48.248 --> 04:49.920
+So it's always recommended
+
+04:49.920 --> 04:52.620
+that you combine these commands together.
+
+04:52.620 --> 04:55.410
+So this will be just one layer. Okay?
+
+04:55.410 --> 04:58.710
+So when we run Docker build is going to bring up a container
+
+04:58.710 --> 05:02.190
+with Maven image, clone the source code, build the artifact.
+
+05:02.190 --> 05:06.030
+But we are not going to use this image, this is just used
+
+05:06.030 --> 05:07.890
+to get the artifact.
+
+05:07.890 --> 05:12.048
+We need to give this image a name in the build process.
+
+05:12.048 --> 05:15.720
+So we can say here as build image
+
+05:15.720 --> 05:17.160
+or any name you want,
+
+05:17.160 --> 05:19.440
+I'm just giving build underscore image name.
+
+05:19.440 --> 05:22.020
+And I'll show you now how that will be used.
+
+05:22.020 --> 05:24.360
+So when we run Docker bill, we get the artifact here.
+
+05:24.360 --> 05:26.580
+The artifact will be there in the
+
+05:26.580 --> 05:27.413
+container, not in the image.
+
+05:27.413 --> 05:28.830
+It'll be in the container with the
+
+05:28.830 --> 05:30.420
+container that will be running.
+
+05:30.420 --> 05:32.040
+Now in the next instruction, it's going
+
+05:32.040 --> 05:34.650
+to bring up a container with Tomcat image
+
+05:34.650 --> 05:37.590
+and a Tomcat image will have a default application
+
+05:37.590 --> 05:39.480
+that we need to remove first.
+
+05:39.480 --> 05:42.207
+Okay, so I add this run instruction and I say RMF
+
+05:42.207 --> 05:45.690
+and rf user local tomcat web app / star.
+
+05:45.690 --> 05:47.788
+Now how do I know at this location the default
+
+05:47.788 --> 05:49.560
+application is there?
+
+05:49.560 --> 05:52.770
+Well, it's there in the documentation of the Docker image,
+
+05:52.770 --> 05:54.510
+the Tomcat Docker image.
+
+05:54.510 --> 05:56.190
+Now if you're not sure about such things,
+
+05:56.190 --> 05:58.740
+what you can do is you can fetch this image,
+
+05:58.740 --> 06:01.470
+run a container, log into that container
+
+06:01.470 --> 06:05.610
+and see for yourself, definitely it'll need some r and d.
+
+06:05.610 --> 06:08.850
+Okay, wait, I have a spelling mistake here.
+
+06:08.850 --> 06:12.262
+Yeah, web apps APPS.
+
+06:12.262 --> 06:14.340
+Because what do we do now?
+
+06:14.340 --> 06:17.037
+We've removed the default application.
+
+06:17.037 --> 06:21.150
+Now we need to copy your artifact into into this image.
+
+06:21.150 --> 06:23.343
+So we have an instruction called copy.
+
+06:24.930 --> 06:28.170
+Now here's the thing, the artifact is over here
+
+06:28.170 --> 06:29.760
+and the container that created,
+
+06:29.760 --> 06:31.800
+that gets created by this image.
+
+06:31.800 --> 06:34.560
+So how do we copy that to here?
+
+06:34.560 --> 06:38.880
+Well, for that you have this from you give the image name,
+
+06:38.880 --> 06:41.073
+build image.
+
+06:41.970 --> 06:44.250
+I'm saying it as image, but actually it'll be a container
+
+06:44.250 --> 06:45.930
+that will be, there will be container running
+
+06:45.930 --> 06:48.180
+with this name build image,
+
+06:48.180 --> 06:50.130
+because we have mentioned it over here.
+
+06:51.540 --> 06:53.550
+And in that you have V profile project
+
+06:53.550 --> 06:55.170
+and we know vPro profile project
+
+06:55.170 --> 06:56.280
+there is a target folder,
+
+06:56.280 --> 07:00.320
+and then you have vPro profile-V2.war, okay,
+
+07:00.320 --> 07:03.000
+so vPro profile project/ target.
+
+07:03.000 --> 07:07.110
+In that you have the artifact vPro profile-V2.war,
+
+07:07.110 --> 07:09.060
+and we are going to copy it at this location.
+
+07:09.060 --> 07:12.183
+USR local Tomcat web apps with the name root.war.
+
+07:13.315 --> 07:18.270
+So it is going to take this file from the previous image.
+
+07:18.270 --> 07:21.183
+From the previous container, sorry, and copied over here.
+
+07:22.350 --> 07:24.600
+Okay, next two instructions are really not mandatory
+
+07:24.600 --> 07:25.890
+because this is a Tomcat image.
+
+07:25.890 --> 07:30.570
+It runs on port 8080 and it runs Catalina.sh command
+
+07:30.570 --> 07:32.010
+to start the Tomcat service.
+
+07:32.010 --> 07:34.560
+But I'm just keeping it over here
+
+07:34.560 --> 07:36.510
+because you might have something else.
+
+07:36.510 --> 07:38.940
+You might need to run it on some different port.
+
+07:38.940 --> 07:41.280
+Your configuration may be saying some other ports.
+
+07:41.280 --> 07:42.840
+You need to mention that port over here
+
+07:42.840 --> 07:47.400
+with expose instruction, CMD to run a script
+
+07:47.400 --> 07:49.680
+or a command, which starts the process.
+
+07:49.680 --> 07:53.160
+As I said, this Tomcat image anyways has this CMD
+
+07:53.160 --> 07:54.654
+instruction that starts the Tomcat
+
+07:54.654 --> 07:56.940
+process with this command.
+
+07:56.940 --> 07:59.520
+But if you have something else, some other script
+
+07:59.520 --> 08:02.820
+that you copied, then you can mention CMD instruction
+
+08:02.820 --> 08:04.150
+and mention your command.
+
+08:04.150 --> 08:06.510
+It'll be in square bracket format,
+
+08:06.510 --> 08:08.340
+command might have options.
+
+08:08.340 --> 08:10.350
+Our script might have options.
+
+08:10.350 --> 08:12.840
+So you need to mention that in double codes comma
+
+08:12.840 --> 08:14.970
+and the option or the argument,
+
+08:14.970 --> 08:16.530
+everything will be in the double codes
+
+08:16.530 --> 08:19.263
+and all this will be enclosed in the square bracket.
+
+08:20.700 --> 08:25.700
+Okay? Now why do we have two separate Docker images here?
+
+08:26.130 --> 08:27.600
+If you have that question well and good,
+
+08:27.600 --> 08:30.150
+if not, still I'm going to explain.
+
+08:30.150 --> 08:33.300
+Well, you know what you can also do is you can have a Tomcat
+
+08:33.300 --> 08:35.670
+image install Maven in that, build the artifact
+
+08:35.670 --> 08:37.890
+and then copy there, right?
+
+08:37.890 --> 08:40.170
+Just have just one image. You can do that.
+
+08:40.170 --> 08:42.660
+The problem is then that image will become very heavy.
+
+08:42.660 --> 08:44.310
+It'll have Maven tool.
+
+08:44.310 --> 08:48.510
+When run Maven runs the command MVN install it is going
+
+08:48.510 --> 08:50.370
+to download so many dependencies.
+
+08:50.370 --> 08:54.120
+All that dependencies will increase the size of the image.
+
+08:54.120 --> 08:56.640
+We just want the in the image.
+
+08:56.640 --> 08:58.910
+We don't want the other things which is required
+
+08:58.910 --> 09:00.840
+to build the artifact.
+
+09:00.840 --> 09:02.400
+We're just interested in the artifact.
+
+09:02.400 --> 09:06.300
+So in order to reduce the size of the image,
+
+09:06.300 --> 09:08.703
+we keep the build image separate
+
+09:08.703 --> 09:12.180
+and the service image separate.
+
+09:12.180 --> 09:13.290
+So if you have node GS,
+
+09:13.290 --> 09:15.990
+you will have a separate node GS container
+
+09:15.990 --> 09:17.310
+to build the artifact
+
+09:17.310 --> 09:20.220
+and another node GS to run the artifact,
+
+09:20.220 --> 09:23.520
+to execute or to host the artifact.
+
+09:23.520 --> 09:25.920
+Always remember, whenever you have application that needs
+
+09:25.920 --> 09:27.990
+to be built and then hosted,
+
+09:27.990 --> 09:30.870
+you need to have a multi-stage Docker file.
+
+09:30.870 --> 09:33.060
+This is a multi-stage Docker file.
+
+09:33.060 --> 09:35.850
+You build the artifact in a separate image
+
+09:35.850 --> 09:38.823
+and you copy that artifact into your destination image.
+
+09:39.900 --> 09:42.964
+Once again, this is a multi-stage Docker file
+
+09:42.964 --> 09:46.920
+and we create multi-stage Docker file
+
+09:46.920 --> 09:49.650
+to reduce the size of our image.
+
+09:49.650 --> 09:53.070
+This Tomcat image that will be hosted will have less size,
+
+09:53.070 --> 09:54.060
+it won't have Maven
+
+09:54.060 --> 09:57.180
+and all its dependencies, just the artifact.
+
+09:57.180 --> 09:58.740
+Alright, once you're done writing this,
+
+09:58.740 --> 10:01.440
+just to control S, save this.
+
+10:01.440 --> 10:04.350
+In the next lecture we are going to move to the DB image.
+
+10:04.350 --> 10:06.390
+We'll see how to create the DB image
+
+10:06.390 --> 10:08.580
+or write the Docker file for the DB image.
+
+10:08.580 --> 10:10.403
+Once we are done writing all the Docker files,
+
+10:10.403 --> 10:12.393
+we are going to build this.
+
+10:13.380 --> 10:15.780
+So wrap this up and join me in the next lecture.

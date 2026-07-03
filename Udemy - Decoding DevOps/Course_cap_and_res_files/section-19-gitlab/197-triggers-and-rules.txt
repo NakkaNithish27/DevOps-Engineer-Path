@@ -1,0 +1,661 @@
+WEBVTT
+
+00:00.240 --> 00:05.480
+Let's discuss about rules to include or exclude a job in the pipeline.
+
+00:05.480 --> 00:11.200
+So if you want to decide whether a particular job should run or not run in the pipeline, you can use
+
+00:11.200 --> 00:11.880
+rules.
+
+00:12.280 --> 00:17.040
+These are the rules that you can mention if changes exist.
+
+00:17.080 --> 00:26.080
+One which can be combined with these keywords allow failure, needs variables or interruptible.
+
+00:26.520 --> 00:28.680
+Let's see the example directly over here.
+
+00:28.680 --> 00:36.400
+So a script in a job over here will run if this rule matches or not matches based on the condition.
+
+00:36.400 --> 00:44.360
+So if this variable value is equal to feature and commit if this both the condition.
+
+00:44.400 --> 00:50.720
+If this variable value is feature starting with feature that cap represents starting with the text feature,
+
+00:51.040 --> 00:57.760
+and this condition is also met merge request target branch is not equal to this branch name.
+
+00:58.120 --> 01:00.460
+So if this entire condition this.
+
+01:00.500 --> 01:05.220
+If it returns true, then it is saying never, never run this job.
+
+01:05.980 --> 01:07.380
+Don't worry about the variables.
+
+01:07.380 --> 01:11.060
+These are the predefined variables which we have seen in the previous lecture.
+
+01:11.060 --> 01:14.420
+And based on your requirement, you can decide what variable to use.
+
+01:14.780 --> 01:16.420
+We'll see that with example.
+
+01:16.700 --> 01:18.220
+So it's going to evaluate this.
+
+01:18.220 --> 01:20.060
+And then it's going to come to this one.
+
+01:20.460 --> 01:23.860
+Here it checks this variable value is this.
+
+01:23.900 --> 01:27.100
+If that is true then the job will be manual.
+
+01:27.100 --> 01:27.660
+It says.
+
+01:28.060 --> 01:29.940
+That means it's not going to run automatically.
+
+01:29.940 --> 01:33.980
+You need to click on the button and decide whether to run it or not.
+
+01:34.460 --> 01:35.420
+Allow failure.
+
+01:35.580 --> 01:36.140
+True.
+
+01:36.740 --> 01:41.500
+That means even if this job fails, still go to the next job.
+
+01:41.860 --> 01:44.140
+The last condition is just the variable name.
+
+01:44.140 --> 01:46.980
+Now this would be either true or false.
+
+01:47.220 --> 01:48.460
+If it's true, the job runs.
+
+01:48.460 --> 01:51.180
+If it's false, then it's skipped.
+
+01:51.700 --> 01:54.180
+We'll see all this with real examples.
+
+01:54.180 --> 01:55.660
+So let's open our VSCode.
+
+01:56.380 --> 01:58.620
+Let's remove these echo statements.
+
+02:01.150 --> 02:02.390
+Let's keep that first one.
+
+02:03.150 --> 02:05.150
+We're also going to remove this only main.
+
+02:05.150 --> 02:09.910
+This is the old way to decide whether the pipeline runs and it's very limited.
+
+02:10.310 --> 02:11.910
+The best way is always with the rules.
+
+02:11.910 --> 02:18.190
+So remove this only main that we can decide with the rules also in both the jobs.
+
+02:22.710 --> 02:27.310
+So just below the images and before the script I'm going to say rules colon.
+
+02:27.310 --> 02:28.990
+And then start defining the rule.
+
+02:29.510 --> 02:33.270
+So I want to create a rule where it should trigger this job.
+
+02:33.270 --> 02:37.230
+If there is a push on the main branch or on the development branch.
+
+02:37.950 --> 02:44.670
+So I'm going to say hyphen space if colon this variable that we're using predefined variables.
+
+02:44.670 --> 02:52.990
+If ci commit branch is equal to main the equal to symbol two equal to or this is a or operator or if
+
+02:52.990 --> 02:54.990
+the ci commit branch is develop.
+
+02:55.310 --> 02:57.390
+So if either of this condition matches.
+
+02:57.390 --> 03:01.170
+If either of this is true, then it will trigger the job.
+
+03:01.650 --> 03:03.170
+Let's take a look at the quotes.
+
+03:03.210 --> 03:06.210
+Single quotes starts over here and ends over there.
+
+03:07.170 --> 03:09.930
+So this all condition is in single quote.
+
+03:10.090 --> 03:16.130
+And this double quote is only for the keyword to match it with this variable value for the mean.
+
+03:16.170 --> 03:17.650
+I have given double quote for develop.
+
+03:17.650 --> 03:18.890
+I have given double quotes.
+
+03:19.370 --> 03:21.610
+Now I also want to trigger this job.
+
+03:21.610 --> 03:26.050
+If there is a pull request in GitLab, it's called as merge request.
+
+03:26.130 --> 03:27.890
+So let's create another rule for that.
+
+03:27.890 --> 03:29.370
+Let me give a comment.
+
+03:30.690 --> 03:33.170
+So triggers on merge request.
+
+03:33.210 --> 03:40.490
+If single quote dollar CI underscore pipeline underscore source.
+
+03:40.490 --> 03:42.370
+That means what triggers the pipeline.
+
+03:42.370 --> 03:48.170
+If the merge request triggers the pipeline then this variable value will be merge underscore request
+
+03:48.170 --> 03:49.330
+underscore event.
+
+03:49.330 --> 03:54.370
+That will be the value of this variable if it is triggered by a merge request.
+
+03:54.650 --> 03:58.460
+But if it's triggered by a push then its value will be push.
+
+03:58.500 --> 04:00.940
+We have seen that in the previous lecture.
+
+04:01.420 --> 04:02.620
+Now there are a few other triggers.
+
+04:02.620 --> 04:06.220
+You can trigger the job from the web interface from the GitLab UI.
+
+04:06.820 --> 04:08.700
+Also, you can add schedule to a job.
+
+04:08.700 --> 04:14.060
+You can decide when the job runs, let's say every night at 9:00 pm and you want to keep such triggers
+
+04:14.060 --> 04:14.980
+also those.
+
+04:14.980 --> 04:16.980
+Also you need to define with the rules.
+
+04:17.620 --> 04:24.140
+So if the trigger is manual so I can put a condition if this variable its value is web, its value will
+
+04:24.140 --> 04:24.660
+be web.
+
+04:24.660 --> 04:30.100
+If it's triggered manually from the UI, that same variable value can be web.
+
+04:30.100 --> 04:31.420
+It can be merge request event.
+
+04:31.420 --> 04:33.700
+It can be push based on how it is triggered.
+
+04:34.060 --> 04:37.780
+Also, if it's scheduled then its value will be scheduled.
+
+04:38.300 --> 04:40.820
+Otherwise I do not want to run this.
+
+04:40.820 --> 04:43.020
+So I can say here hyphen one.
+
+04:43.940 --> 04:44.820
+Never.
+
+04:45.660 --> 04:49.500
+So only any of this condition matches, then only the job will run.
+
+04:49.500 --> 04:50.700
+Otherwise never.
+
+04:50.700 --> 04:55.700
+So this is just to make sure that this job or this stage never runs.
+
+04:55.700 --> 04:58.440
+If this condition are not matched.
+
+04:58.720 --> 05:00.720
+So just to be sure, we can put this.
+
+05:00.760 --> 05:03.360
+Otherwise it's really not mandatory to put whenever.
+
+05:03.840 --> 05:07.720
+Now let's give the same rules to the testing job.
+
+05:07.720 --> 05:13.520
+So I'm going to copy all this rules go to the testing job just below image I'm going to paste all this
+
+05:14.000 --> 05:17.120
+save this and let's commit it.
+
+05:17.120 --> 05:25.080
+So let's go to commit commit and push a commit message I'm testing some triggers I've given that commit
+
+05:25.080 --> 05:25.600
+message.
+
+05:25.640 --> 05:26.600
+Accept this.
+
+05:28.360 --> 05:30.760
+Let's go to build pipelines.
+
+05:31.280 --> 05:34.000
+And you see it has triggered the pipeline.
+
+05:34.000 --> 05:40.520
+That was because this condition matched the first condition itself matched the commit branch is main
+
+05:40.520 --> 05:43.240
+branch that triggered the pipeline okay.
+
+05:43.280 --> 05:45.040
+So the pipeline completed successfully.
+
+05:45.040 --> 05:46.320
+Now let's test a few other things.
+
+05:46.320 --> 05:47.320
+With this pipeline.
+
+05:47.680 --> 05:50.800
+We'll create a new branch and make a commit in the new branch.
+
+05:50.800 --> 05:52.800
+And let's see if that triggers the pipeline.
+
+05:52.800 --> 06:00.290
+So let's go to the repository tree and click on this drop down where you see main here.
+
+06:00.290 --> 06:02.610
+Click on this drop down and see new branch.
+
+06:03.330 --> 06:05.650
+I'll give the branch name as feature nine.
+
+06:06.170 --> 06:09.130
+Feature 91 creates from the main branch.
+
+06:09.130 --> 06:14.370
+So when I do that, all the content from the main branch will be copied into the feature 91 branch.
+
+06:14.770 --> 06:17.930
+And this branch is available in the GitLab repository.
+
+06:17.930 --> 06:20.650
+Let's fetch it into our local VS code.
+
+06:21.210 --> 06:23.490
+Let's go to Source Control symbol over here.
+
+06:23.490 --> 06:26.090
+Click on this three dots and say fetch.
+
+06:27.810 --> 06:33.650
+Once that is synced, you can switch to the feature branch that you created.
+
+06:34.290 --> 06:36.170
+You should see here feature 91.
+
+06:36.170 --> 06:37.610
+And let's make some changes.
+
+06:37.610 --> 06:39.570
+Let's go to README.md file.
+
+06:39.570 --> 06:43.090
+Add or remove some hash from here a new change.
+
+06:43.090 --> 06:44.170
+Let's commit it.
+
+06:44.170 --> 06:49.810
+Now keep in mind this is going into the feature 91 branch drop down, commit and push.
+
+06:50.490 --> 06:53.850
+Yes, I commit message updated Readme file.
+
+06:53.970 --> 06:54.910
+Accept this.
+
+06:56.950 --> 06:57.310
+Okay.
+
+06:57.310 --> 06:57.790
+That's done.
+
+06:57.790 --> 07:00.150
+There's a new commit in the future 91 branch.
+
+07:00.150 --> 07:01.270
+Let's go to GitLab.
+
+07:01.270 --> 07:03.670
+Now let's refresh this.
+
+07:04.150 --> 07:06.870
+You see there is a new commit the commit message.
+
+07:07.270 --> 07:11.590
+Let's go and check the pipeline whether the pipeline got triggered okay.
+
+07:11.630 --> 07:12.550
+So nothing right?
+
+07:12.590 --> 07:14.030
+No pipeline got triggered.
+
+07:14.030 --> 07:17.430
+That's because you have made a commit in a different branch.
+
+07:17.910 --> 07:22.990
+But if you have committed or created a branch with develop and made commit, that would have triggered
+
+07:22.990 --> 07:24.390
+the pipeline.
+
+07:24.390 --> 07:28.150
+But what if there is a merge request event when that happens?
+
+07:28.830 --> 07:33.150
+So there is a new branch and you want to merge this branch with the main branch.
+
+07:33.550 --> 07:35.990
+That's what happened in the development environment.
+
+07:35.990 --> 07:38.110
+Developers create branches.
+
+07:38.870 --> 07:41.070
+They make changes into these branches.
+
+07:41.070 --> 07:42.910
+Once they are tested, they're well and good.
+
+07:42.910 --> 07:45.030
+They merge it to the main branch.
+
+07:45.270 --> 07:46.150
+That's how they do it.
+
+07:46.190 --> 07:49.230
+Merge requests create merge request.
+
+07:49.550 --> 07:53.930
+So source branch feature 91 which has moved ahead of the main branch.
+
+07:54.170 --> 07:56.730
+This branch needs to be merged to the main branch.
+
+07:57.050 --> 07:58.290
+Compare and continue.
+
+07:58.730 --> 08:00.850
+Give a title to your merge request.
+
+08:00.850 --> 08:02.330
+I'm keeping it as it is.
+
+08:02.370 --> 08:03.330
+Scroll down.
+
+08:03.650 --> 08:05.170
+Who do you want to assign to?
+
+08:05.210 --> 08:10.410
+I'm saying assign it to me because I'm the only one user, but there could be other users like you are
+
+08:10.410 --> 08:14.210
+a developer and there is an admin who should review the merge request.
+
+08:14.210 --> 08:19.690
+So you have to assign it to an admin and you can assign the reviewer also who can review this.
+
+08:19.690 --> 08:23.050
+So I'm keeping it my user only because I have just one user here.
+
+08:23.450 --> 08:29.570
+Let's scroll down and there's an option to delete the source branch when the merge request is accepted.
+
+08:29.610 --> 08:30.570
+I put a check mark.
+
+08:30.570 --> 08:31.610
+Keep it as it is.
+
+08:32.010 --> 08:33.730
+Say create merge request.
+
+08:34.170 --> 08:36.610
+Now this is going to delete the branch.
+
+08:36.650 --> 08:38.810
+Feature branch when this is accepted.
+
+08:39.170 --> 08:39.330
+Right.
+
+08:39.330 --> 08:41.450
+But what happens when I create the merge request.
+
+08:41.450 --> 08:45.330
+You see the pipeline merge request pipeline a pipeline got created.
+
+08:45.650 --> 08:46.650
+Let's click on that.
+
+08:47.210 --> 08:48.490
+The pipeline got triggered.
+
+08:48.490 --> 08:51.250
+That's because this condition was matched.
+
+08:51.490 --> 08:56.380
+Merge request event was the trigger and thus variable will have that value.
+
+08:56.420 --> 08:57.620
+Merge request event.
+
+08:57.820 --> 09:00.540
+If that is true, then execute the job.
+
+09:00.540 --> 09:03.820
+This one also the build and testing both jobs.
+
+09:04.140 --> 09:05.620
+Now this is just a merge request.
+
+09:05.660 --> 09:07.020
+We have not merged the code.
+
+09:07.020 --> 09:10.780
+When this pipeline completes we can merge it to the main branch.
+
+09:10.780 --> 09:13.220
+So let's wait until this pipeline is completed.
+
+09:14.100 --> 09:16.460
+Okay, both the job completed successfully.
+
+09:16.820 --> 09:19.140
+Now, do not take this merge request lightly.
+
+09:19.460 --> 09:24.220
+In fact, in GitOps project setup, everything revolves around this merge request.
+
+09:24.220 --> 09:28.940
+I have created projects in DevOps project course that shows exactly same.
+
+09:28.940 --> 09:31.780
+The entire project revolves around the merge request.
+
+09:31.780 --> 09:34.460
+Any change goes through the merge request only.
+
+09:34.860 --> 09:39.740
+But right now we are just learning GitLab and how to use it so nothing is right or wrong.
+
+09:39.740 --> 09:42.860
+Over here we are learning different settings, different styles.
+
+09:43.180 --> 09:49.620
+Once we are good with this, then we can work on the projects and see how to best leverage these merge
+
+09:49.620 --> 09:50.260
+requests.
+
+09:50.580 --> 09:53.640
+But now we need to clean the branch.
+
+09:53.800 --> 09:59.800
+If you go to sorry, the merge request, if you go to merge request, we have a branch to merge.
+
+10:00.160 --> 10:03.960
+That was just the merge request and the pipeline is passed.
+
+10:03.960 --> 10:06.680
+And now we can merge it to the main branch.
+
+10:07.040 --> 10:09.000
+So click on merge.
+
+10:09.000 --> 10:11.120
+This is going to delete the source branch.
+
+10:11.120 --> 10:13.440
+The source branch is the feature 91 branch.
+
+10:13.440 --> 10:14.600
+So click on merge.
+
+10:14.960 --> 10:18.480
+Now if you go to the repository you click on the drop down.
+
+10:18.480 --> 10:19.720
+You just see the main branch.
+
+10:19.720 --> 10:24.400
+You don't see the feature branch, but that branch exists in our local machine.
+
+10:24.800 --> 10:26.360
+And we should delete this also.
+
+10:26.680 --> 10:29.840
+So click on this three dots or go to the terminal say new terminal.
+
+10:30.120 --> 10:32.240
+I'm using git bash.
+
+10:32.240 --> 10:35.000
+So I'm going to select the terminal as git bash.
+
+10:35.480 --> 10:38.480
+If you're not using windows then you can stick to your terminal.
+
+10:38.960 --> 10:43.920
+For windows you can use PowerShell or you can just switch to git bash from here.
+
+10:43.960 --> 10:52.890
+Do git checkout main switch to the main branch and from here delete the branch git branch hyphen D and
+
+10:52.890 --> 10:55.090
+the branch name feature 91.
+
+10:56.170 --> 10:59.330
+Now run the command git branch hyphen A.
+
+10:59.930 --> 11:02.210
+You still see the feature 91 branch.
+
+11:02.210 --> 11:03.290
+We need to prune this.
+
+11:03.290 --> 11:03.930
+Remove it.
+
+11:04.010 --> 11:05.050
+Remove this information.
+
+11:05.050 --> 11:06.410
+The branch is already gone.
+
+11:07.330 --> 11:14.170
+Run the command git fetch hyphen, hyphen prune and then run git branch hyphen a.
+
+11:14.210 --> 11:16.010
+You should see only the main branch.
+
+11:16.250 --> 11:17.930
+So asking us to sync changes.
+
+11:17.930 --> 11:20.130
+Let's sync the changes okay.
+
+11:20.170 --> 11:23.690
+This is mandatory to do before we go to the next lecture.
+
+11:24.050 --> 11:28.170
+So make sure you delete the branch on GitLab if it's not deleted.
+
+11:28.170 --> 11:32.450
+And then delete it over here from the command line and prune it.
+
+11:32.450 --> 11:33.450
+Sync everything.
+
+11:33.810 --> 11:36.930
+Or if this is giving you problem, just close vs code.
+
+11:36.930 --> 11:39.850
+Delete the branch in git lab and clone the repository.
+
+11:39.850 --> 11:45.370
+Once again, you can remove this folder and you can clone a new repository from GitLab that will be
+
+11:45.370 --> 11:47.490
+a fresh repository cloned from GitLab.
+
+11:48.170 --> 11:49.890
+All right then that would be all in this lecture.
+
+11:49.890 --> 11:51.050
+I will see you in the next one.

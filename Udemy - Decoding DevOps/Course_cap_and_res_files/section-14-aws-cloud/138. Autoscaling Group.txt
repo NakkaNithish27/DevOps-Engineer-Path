@@ -1,0 +1,826 @@
+WEBVTT
+
+00:00.630 --> 00:01.770
+Instructor: All right, so in this lecture,
+
+00:01.770 --> 00:03.780
+we are going to create auto-scaling group
+
+00:03.780 --> 00:06.270
+for our app01 instance
+
+00:06.270 --> 00:09.480
+so it scales out automatically when the load increases
+
+00:09.480 --> 00:12.930
+and scale in when the load decreases.
+
+00:12.930 --> 00:16.020
+So we need three things for auto-scaling group.
+
+00:16.020 --> 00:18.933
+First we need the AMI of the instance.
+
+00:19.980 --> 00:22.440
+Second, we need the launch template,
+
+00:22.440 --> 00:25.230
+the information on how to launch the instance,
+
+00:25.230 --> 00:27.180
+what security group to select,
+
+00:27.180 --> 00:29.880
+what key pair to select, et cetera, et cetera.
+
+00:29.880 --> 00:31.410
+That's launch template.
+
+00:31.410 --> 00:33.840
+And then the auto-scaling group itself
+
+00:33.840 --> 00:36.150
+where we mention this launch template.
+
+00:36.150 --> 00:40.650
+So first let's start by creating the AMI of this instance.
+
+00:40.650 --> 00:42.213
+So select this instance.
+
+00:43.380 --> 00:45.060
+Make sure you selected app01.
+
+00:45.060 --> 00:50.060
+Go to action, image and templates and say create image.
+
+00:50.880 --> 00:54.690
+Let's give AMI a name, vprofile-las-app-ami.
+
+00:54.690 --> 00:57.243
+And the description also, I'm giving the same.
+
+00:59.910 --> 01:02.610
+And just say create image.
+
+01:02.610 --> 01:03.900
+See it's currently creating AMI.
+
+01:03.900 --> 01:06.030
+It gives the link, let's click on that.
+
+01:06.030 --> 01:07.480
+It should take us to the AMI.
+
+01:08.340 --> 01:09.390
+All right, we can see the AMI
+
+01:09.390 --> 01:13.200
+or you can just go to here, images and click on AMI also.
+
+01:13.200 --> 01:14.673
+Let's see it's state.
+
+01:15.510 --> 01:16.620
+It's in pending state.
+
+01:16.620 --> 01:19.920
+This is gonna take some time to become available.
+
+01:19.920 --> 01:22.920
+By the time we can create the launch template.
+
+01:22.920 --> 01:25.080
+So let's go to launch template.
+
+01:25.080 --> 01:28.560
+Here in the instances section, launch templates.
+
+01:28.560 --> 01:31.200
+Say create launch templates.
+
+01:31.200 --> 01:35.703
+Let's give it a name, vprofile-las-app-LT.
+
+01:37.020 --> 01:38.910
+Scroll down and select the AMI.
+
+01:38.910 --> 01:42.690
+You have to go to my AMIs and find your AMI.
+
+01:42.690 --> 01:44.700
+This might not be still created,
+
+01:44.700 --> 01:48.960
+but you get the name in the list, right?
+
+01:48.960 --> 01:49.793
+So that's the AMI.
+
+01:49.793 --> 01:51.840
+It's the only AMI I have here.
+
+01:51.840 --> 01:53.220
+I'm going to select that.
+
+01:53.220 --> 01:57.900
+Instance type, t2 micro, or t3 micro
+
+01:57.900 --> 02:00.033
+whichever is under free tier eligible.
+
+02:01.080 --> 02:05.310
+Key pair, we have the login key, vprofile-prod-key.
+
+02:05.310 --> 02:06.300
+Network setting,
+
+02:06.300 --> 02:08.550
+we have to select the existing security group
+
+02:08.550 --> 02:10.740
+and that is app security group.
+
+02:10.740 --> 02:12.690
+This is the app instance.
+
+02:12.690 --> 02:14.073
+So app security group.
+
+02:15.570 --> 02:18.090
+Resource tags.
+
+02:18.090 --> 02:19.830
+Let's see, add new tag.
+
+02:19.830 --> 02:22.470
+That's give first the name tag.
+
+02:22.470 --> 02:26.880
+So we're just going to give vprofile-app, no 01, 02.
+
+02:26.880 --> 02:30.573
+So tag the instances and volumes.
+
+02:31.950 --> 02:36.120
+We'll add one more tag for the project, project vprofile
+
+02:36.120 --> 02:39.420
+and make sure you select the volumes tag also.
+
+02:39.420 --> 02:43.050
+Okay, come down, expand this advanced details.
+
+02:43.050 --> 02:46.140
+We need to give the IAM role if you want to.
+
+02:46.140 --> 02:48.420
+It's really not necessary now
+
+02:48.420 --> 02:51.960
+because in CI/CD, in Jenkins, we'll see
+
+02:51.960 --> 02:56.160
+how we can automatically deploy the artifact, right?
+
+02:56.160 --> 02:58.230
+But in real time, there may be cases
+
+02:58.230 --> 03:00.840
+where you need to add roles to your instances.
+
+03:00.840 --> 03:03.150
+Many times, many, many times you will see you need
+
+03:03.150 --> 03:05.070
+to add roles to the instances.
+
+03:05.070 --> 03:07.080
+And in the auto-scaling group, if you want to do that,
+
+03:07.080 --> 03:09.660
+you have to make sure in the launch template,
+
+03:09.660 --> 03:10.920
+whenever the instance is launched,
+
+03:10.920 --> 03:14.640
+you have to select here IAM instance profile and the role.
+
+03:14.640 --> 03:16.590
+So when the instance gets launched,
+
+03:16.590 --> 03:19.890
+it gets launched with this role.
+
+03:19.890 --> 03:21.420
+And then there are many other settings
+
+03:21.420 --> 03:26.040
+that we are going to skip and say create launch template.
+
+03:26.040 --> 03:29.070
+Okay, so launch template is created successfully.
+
+03:29.070 --> 03:29.970
+Now the final thing,
+
+03:29.970 --> 03:31.830
+we need to create the auto scaling groups.
+
+03:31.830 --> 03:36.270
+Go to auto scaling groups and say create auto scaling group.
+
+03:36.270 --> 03:40.470
+This is going to scale out instances when the load increases
+
+03:40.470 --> 03:43.470
+and scale in, reduce the number of instances
+
+03:43.470 --> 03:44.793
+when the load decreases.
+
+03:45.900 --> 03:47.820
+So you'll have a minimum size,
+
+03:47.820 --> 03:50.130
+you can mention a maximum size,
+
+03:50.130 --> 03:54.000
+how much maximum number of instances it can go,
+
+03:54.000 --> 03:55.650
+and you can have a desired capacity.
+
+03:55.650 --> 03:58.860
+Desired capacity is the one that it will try to maintain,
+
+03:58.860 --> 04:00.390
+but minimum it will go
+
+04:00.390 --> 04:03.300
+till the number of instance that you mentioned.
+
+04:03.300 --> 04:06.480
+So let's say you said minimum number of instances are two.
+
+04:06.480 --> 04:09.270
+So it's not going to go less than two ever,
+
+04:09.270 --> 04:11.400
+even if it's trying to scale in.
+
+04:11.400 --> 04:12.830
+It cannot go less than two.
+
+04:12.830 --> 04:15.090
+If your desired capacity is four,
+
+04:15.090 --> 04:16.590
+so it will try to maintain four,
+
+04:16.590 --> 04:20.310
+but in a scaling event, it cannot go less than two.
+
+04:20.310 --> 04:23.010
+Same for maximum, even the scale out happens,
+
+04:23.010 --> 04:25.743
+it cannot breach the maximum size.
+
+04:26.580 --> 04:28.743
+Okay, say create auto scaling group.
+
+04:29.730 --> 04:33.727
+Let's give this a name, vprofile-las-app-asg.
+
+04:36.870 --> 04:38.190
+Launch template.
+
+04:38.190 --> 04:40.770
+We already created the launch template, so select that.
+
+04:40.770 --> 04:42.540
+So again, in the scale out event,
+
+04:42.540 --> 04:44.310
+when the instance are launched,
+
+04:44.310 --> 04:47.700
+it is going to use this information to add the instances.
+
+04:47.700 --> 04:49.770
+All right, we'll select the security group key pair,
+
+04:49.770 --> 04:53.103
+all the things from the launch template information.
+
+04:54.240 --> 04:55.083
+Go next.
+
+04:56.070 --> 04:58.410
+Network, where do you really want to launch this instance?
+
+04:58.410 --> 04:59.490
+So there's the default,
+
+04:59.490 --> 05:02.340
+VPC default network will keep that as it is
+
+05:02.340 --> 05:04.170
+and the availability zone you can select,
+
+05:04.170 --> 05:06.670
+so I'm going to select all the availability zones.
+
+05:07.850 --> 05:09.990
+And if you wanna restrict it to some availability zone,
+
+05:09.990 --> 05:14.990
+you can select those zones only, and then go next.
+
+05:15.720 --> 05:18.030
+So load balancer, we want our instances
+
+05:18.030 --> 05:21.060
+to get added under the load balancer.
+
+05:21.060 --> 05:23.610
+So we have to say attach to an existing load balancer.
+
+05:23.610 --> 05:25.503
+We already have a load balancer.
+
+05:26.910 --> 05:28.710
+So if your classic load balancer,
+
+05:28.710 --> 05:30.660
+you can just select the classic load balancer,
+
+05:30.660 --> 05:33.330
+but if you have an application load balancer,
+
+05:33.330 --> 05:36.390
+which we created, then it will create
+
+05:36.390 --> 05:38.430
+or add it under the target group.
+
+05:38.430 --> 05:40.230
+So select the target group from there,
+
+05:40.230 --> 05:43.113
+we have our target group, select that.
+
+05:44.100 --> 05:45.960
+Now health checks.
+
+05:45.960 --> 05:47.220
+So load balancer,
+
+05:47.220 --> 05:49.440
+or our target group conducts the health check
+
+05:49.440 --> 05:50.520
+on the instances.
+
+05:50.520 --> 05:52.110
+We have that covered.
+
+05:52.110 --> 05:55.380
+We also want to do health check on the load balancer.
+
+05:55.380 --> 05:58.860
+So you can say turn on Elastic Load Balancing health check.
+
+05:58.860 --> 06:01.170
+Now the benefit of this is,
+
+06:01.170 --> 06:03.120
+load balancer conducts the health check
+
+06:03.120 --> 06:05.670
+on the specified port on the path.
+
+06:05.670 --> 06:08.283
+If there is some issue with the service,
+
+06:09.120 --> 06:11.700
+the instance will become unhealthy
+
+06:11.700 --> 06:15.810
+and then the auto-scaling group can remove that instance
+
+06:15.810 --> 06:17.460
+and create a new instance.
+
+06:17.460 --> 06:20.400
+But if you don't select that, then unhealthy
+
+06:20.400 --> 06:23.790
+and healthy will be only if the instance is down or up,
+
+06:23.790 --> 06:26.250
+but actually the service will not be checked.
+
+06:26.250 --> 06:28.650
+But if you select this, the health check,
+
+06:28.650 --> 06:30.990
+and the load balancer will conduct the health check
+
+06:30.990 --> 06:32.850
+on the instance.
+
+06:32.850 --> 06:34.680
+And even if the service goes down,
+
+06:34.680 --> 06:37.260
+it will declare the instance as unhealthy.
+
+06:37.260 --> 06:39.270
+So we don't want any unhealthy instance
+
+06:39.270 --> 06:42.360
+in our auto scaling group, right?
+
+06:42.360 --> 06:44.880
+So that's what this health check will do.
+
+06:44.880 --> 06:46.173
+And then go next.
+
+06:47.100 --> 06:49.170
+So group size, desired capacity.
+
+06:49.170 --> 06:51.600
+So I'll say just keep it one.
+
+06:51.600 --> 06:53.430
+You can increase to two also if you want,
+
+06:53.430 --> 06:54.873
+but I'm just keeping it one.
+
+06:56.370 --> 06:57.840
+Minimum one.
+
+06:57.840 --> 07:01.590
+So scale in till minimum these many instances.
+
+07:01.590 --> 07:03.543
+Maximum, I'll say four.
+
+07:05.001 --> 07:06.240
+Okay, so automatic scaling,
+
+07:06.240 --> 07:09.810
+how does it decide whether to scale out or scale in, right?
+
+07:09.810 --> 07:11.520
+That comes by default
+
+07:11.520 --> 07:14.703
+from target tracking scaling policies.
+
+07:15.660 --> 07:18.300
+Here, there are metrics, CPU utilization,
+
+07:18.300 --> 07:22.380
+network out, which is very popular for web applications.
+
+07:22.380 --> 07:25.140
+Any case, CPU utilization is the best bet
+
+07:25.140 --> 07:26.280
+and you can give a value.
+
+07:26.280 --> 07:30.870
+So if the CPU utilization is more than 50%,
+
+07:30.870 --> 07:32.730
+then it is going to add more instances.
+
+07:32.730 --> 07:36.123
+If it is less than 50% CPU utilization,
+
+07:36.123 --> 07:37.107
+it's going to scale in.
+
+07:37.107 --> 07:40.771
+Now this will be the average of all the instances.
+
+07:40.771 --> 07:42.180
+Okay, so based on the CPU utilization,
+
+07:42.180 --> 07:44.790
+you can scale out and scale in.
+
+07:44.790 --> 07:46.683
+You can also disable scale in.
+
+07:47.640 --> 07:50.220
+If you're not interested in scaling in, just scale out,
+
+07:50.220 --> 07:52.530
+do not scale in, you decide when to scale in,
+
+07:52.530 --> 07:55.020
+then you can put this check mark on.
+
+07:55.020 --> 07:57.840
+And then at the end over here,
+
+07:57.840 --> 08:00.480
+you have instance scale-in protection.
+
+08:00.480 --> 08:03.180
+Now this is different than what we have seen now.
+
+08:03.180 --> 08:07.320
+So what this does is if the instance is unhealthy,
+
+08:07.320 --> 08:10.200
+it is not going to remove it if you put a check mark here,
+
+08:10.200 --> 08:12.930
+it's not going to remove this instance.
+
+08:12.930 --> 08:15.810
+In turn, it is going to not divert any traffic
+
+08:15.810 --> 08:16.643
+to this instance.
+
+08:16.643 --> 08:18.420
+It will launch a new instance
+
+08:18.420 --> 08:20.340
+and this is when you really want
+
+08:20.340 --> 08:22.110
+to log into the instance and troubleshoot.
+
+08:22.110 --> 08:25.860
+You don't want the instance to get terminated automatically.
+
+08:25.860 --> 08:27.240
+Right, you want to find the root cause,
+
+08:27.240 --> 08:29.220
+why it is, you know, scaling,
+
+08:29.220 --> 08:31.680
+or you know, it's having any problem, why it's unhealthy.
+
+08:31.680 --> 08:33.630
+You want to check that, you want to log into the instance.
+
+08:33.630 --> 08:35.250
+So if you put this check mark,
+
+08:35.250 --> 08:37.320
+it won't delete the instance.
+
+08:37.320 --> 08:39.900
+In turn, it will not direct the traffic over there,
+
+08:39.900 --> 08:41.040
+launch a new instance
+
+08:41.040 --> 08:44.250
+and send the traffic to the new instance.
+
+08:44.250 --> 08:47.583
+Okay, I'm going to just uncheck this and go next.
+
+08:48.810 --> 08:52.770
+Okay, notification if you want any notification to be sent.
+
+08:52.770 --> 08:54.810
+All right, so if you followed the prerequisite lecture,
+
+08:54.810 --> 08:58.800
+we did set an SNS topic, an email address,
+
+08:58.800 --> 09:00.960
+and you can select that to send notification.
+
+09:00.960 --> 09:04.330
+You can say add notification, select here, SNS topic
+
+09:05.370 --> 09:08.670
+and you can send the events like launch, terminate,
+
+09:08.670 --> 09:10.500
+fail to launch or fail to terminate.
+
+09:10.500 --> 09:12.510
+You can select which event you want
+
+09:12.510 --> 09:14.610
+and then you can go next.
+
+09:14.610 --> 09:17.640
+So all these four events, I'll get the information.
+
+09:17.640 --> 09:22.233
+Go next, and say create auto scaling group.
+
+09:23.370 --> 09:24.930
+Okay, by the time this is happening,
+
+09:24.930 --> 09:27.180
+I want you to do one more thing.
+
+09:27.180 --> 09:30.330
+So if you have given more than one instance,
+
+09:30.330 --> 09:31.650
+then you need to do,
+
+09:31.650 --> 09:34.590
+this is specific for our vprofile application.
+
+09:34.590 --> 09:38.043
+Okay, go to target groups,
+
+09:39.060 --> 09:41.220
+go to select your target group,
+
+09:41.220 --> 09:44.373
+go to its attributes, click on edit,
+
+09:45.600 --> 09:48.240
+and here you have an option, stickiness.
+
+09:48.240 --> 09:49.830
+Turn on stickiness.
+
+09:49.830 --> 09:52.560
+Now what this does is now it will make sure
+
+09:52.560 --> 09:55.590
+if you reaches to let's say instance one,
+
+09:55.590 --> 09:58.200
+you know app01, it's going to make sure
+
+09:58.200 --> 10:01.893
+that you are always connecting to app01 again and again.
+
+10:02.892 --> 10:05.430
+And you can mention the stickiness duration also over here
+
+10:05.430 --> 10:06.720
+like one day or you know,
+
+10:06.720 --> 10:09.150
+there's other options also over here.
+
+10:09.150 --> 10:11.310
+So what happens is whenever you access a website,
+
+10:11.310 --> 10:14.160
+it takes a cookie and inject it in your browser.
+
+10:14.160 --> 10:16.650
+With the help of that cookie information,
+
+10:16.650 --> 10:19.380
+when you try to access that website again,
+
+10:19.380 --> 10:20.490
+you know in our case, you know,
+
+10:20.490 --> 10:22.650
+it's going to go to the same instance,
+
+10:22.650 --> 10:25.980
+let's say app01 or app02, wherever you're connected.
+
+10:25.980 --> 10:28.530
+Now why I say it's important for vprofile application,
+
+10:28.530 --> 10:29.640
+because our application
+
+10:29.640 --> 10:32.100
+cannot handle authentication like this.
+
+10:32.100 --> 10:33.990
+It's a pretty simple application.
+
+10:33.990 --> 10:36.120
+So if you're authenticated from app01,
+
+10:36.120 --> 10:38.010
+you'll be authenticated with app01.
+
+10:38.010 --> 10:40.473
+If you're routed to app02, you'll be logged out.
+
+10:41.460 --> 10:42.750
+Then you need to log in again.
+
+10:42.750 --> 10:44.760
+So in order to prevent that,
+
+10:44.760 --> 10:48.450
+make sure you turn on stickiness and save changes.
+
+10:48.450 --> 10:51.360
+Again, this is very specific to vprofile application.
+
+10:51.360 --> 10:55.380
+Some other application where you work may also have this one
+
+10:55.380 --> 10:57.783
+and you can turn on stickiness in that case.
+
+10:58.680 --> 11:01.860
+Okay, so auto scaling group launched one instance.
+
+11:01.860 --> 11:04.743
+Let's check in the target group, targets.
+
+11:08.161 --> 11:09.690
+Okay, so we have the instance
+
+11:09.690 --> 11:13.350
+in the target group vprofile app and it is in healthy state.
+
+11:13.350 --> 11:15.810
+Now I don't want vprofile app01,
+
+11:15.810 --> 11:19.470
+so I can just unselect that and I can see deregister
+
+11:19.470 --> 11:20.640
+and that's going to take some time
+
+11:20.640 --> 11:22.590
+to deregister that instance.
+
+11:22.590 --> 11:26.070
+And then we can delete that app01 instance
+
+11:26.070 --> 11:28.200
+'cause I want the auto scaling group
+
+11:28.200 --> 11:31.050
+to maintain the number of instance for me.
+
+11:31.050 --> 11:33.030
+I don't want to add any instance manually there.
+
+11:33.030 --> 11:36.420
+So just remove app01 action.
+
+11:36.420 --> 11:39.540
+Oh sorry, instance state, terminate.
+
+11:39.540 --> 11:42.330
+Don't worry, we also have the AMI of the instance.
+
+11:42.330 --> 11:44.370
+So even if something goes wrong,
+
+11:44.370 --> 11:46.270
+we can launch the instance once again.
+
+11:48.060 --> 11:49.680
+Okay, so we need to wait for some time
+
+11:49.680 --> 11:51.420
+in order to deregister the instance
+
+11:51.420 --> 11:53.400
+and that's the only instance available
+
+11:53.400 --> 11:58.400
+or one or many instances are available in the target group.
+
+11:58.770 --> 12:01.713
+Okay, you see it just says draining in the target group.
+
+12:02.565 --> 12:04.920
+And so once it's completely gone from the target group,
+
+12:04.920 --> 12:08.220
+instance is deleted, you can once again check from the URL
+
+12:08.220 --> 12:12.300
+whether you are able to access the website or not.
+
+12:12.300 --> 12:13.470
+We'll validate all that
+
+12:13.470 --> 12:17.760
+and we'll summarize it in the last lecture.
+
+12:17.760 --> 12:19.860
+All right, so take some five, 10 minutes of break
+
+12:19.860 --> 12:22.323
+and then come back and join in the next lecture.

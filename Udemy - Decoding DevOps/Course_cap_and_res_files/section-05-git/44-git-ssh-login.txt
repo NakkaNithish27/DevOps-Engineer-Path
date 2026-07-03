@@ -1,0 +1,233 @@
+WEBVTT
+
+0
+00:02.400 --> 00:07.610
+OK, in this video, we are going to see git ssh login with the remote repository.
+
+1
+00:08.010 --> 00:08.850
+So currently.
+
+2
+00:09.900 --> 00:16.170
+If you do cat to this file .git/config file, you will see there is an https url.
+
+3
+00:16.170 --> 00:21.290
+The authentication will be based on usernames and passwords, which really is not a good idea.
+
+4
+00:22.300 --> 00:26.610
+Then you have remember the password, and store the password, there are chances of exposing the password.
+
+5
+00:27.360 --> 00:34.170
+So GitHub provides also ssh based login and almost every remote git repository provides ssh
+
+6
+00:34.170 --> 00:38.640
+based authentication, which will be through keys ssh keys.
+
+7
+00:39.360 --> 00:41.640
+So first you need to generate ssh keys.
+
+8
+00:44.460 --> 00:47.990
+So I already have some ssh keys and I'm going to remove them.
+
+9
+00:51.980 --> 00:56.210
+OK, so just generate the ssh keys, you can say ssh-keygen.
+
+10
+00:58.200 --> 01:01.410
+So it's going to generate the public and private key at this path.
+
+11
+01:04.580 --> 01:05.060
+All right.
+
+12
+01:05.120 --> 01:06.380
+I'm already at this path
+
+13
+01:07.970 --> 01:10.180
+So I should have the .ssh directory.
+
+14
+01:14.540 --> 01:20.870
+So I have the public key and I have the private key, and I am going to take the public key content
+
+15
+01:21.020 --> 01:22.430
+and put it on GitHub.
+
+16
+01:28.570 --> 01:28.880
+Right.
+
+17
+01:28.900 --> 01:32.320
+So that's how the public key looks, I'm going to copy this.
+
+18
+01:34.730 --> 01:36.350
+And go to my GitHub account.
+
+19
+01:38.210 --> 01:44.720
+OK, so this is an account setting, not the repository setting, so come over here, top right corner
+
+20
+01:45.080 --> 01:46.310
+and go to settings.
+
+21
+01:48.780 --> 01:51.780
+You have ssh an gpg keys section, click on that.
+
+22
+01:53.900 --> 01:55.320
+You can say new ssh keys
+
+23
+01:57.040 --> 02:02.620
+Gives some title like my laptop and paste The Public Key.
+
+24
+02:04.140 --> 02:07.560
+OK, make sure you put the public you're here, not the private key.
+
+25
+02:10.220 --> 02:13.610
+OK, now I'm I will not be using that same repository.
+
+26
+02:13.640 --> 02:17.900
+Let's go to git-repos and let's clone.
+
+27
+02:19.990 --> 02:21.430
+The ssh end point.
+
+28
+02:24.530 --> 02:30.450
+OK, so our Repository titanwork is a private repository and definitely needs an authentication.
+
+29
+02:30.620 --> 02:32.970
+so not https, ssh.
+
+30
+02:33.770 --> 02:34.420
+Copy that.
+
+31
+02:36.190 --> 02:41.140
+And say git clone, it's a private repository, it should definitely check for the authentication, it
+
+32
+02:41.140 --> 02:46.690
+will match our private key with the public key that we have just uploaded.
+
+33
+02:47.350 --> 02:50.500
+If it works, if it matches, then we'll be able to clone.
+
+34
+02:50.530 --> 02:50.830
+Oh.
+
+35
+02:52.210 --> 02:57.670
+It says there already direcotory that exist here, so I'm going to remove that directory
+
+36
+02:57.670 --> 02:59.350
+and then try and git clone.
+
+37
+03:01.590 --> 03:06.540
+OK, you see, it's asking the question, yes or no, fingerprint check, does same like we do ssh,
+
+38
+03:06.990 --> 03:10.600
+we're going to say yes if it matches it.
+
+39
+03:11.370 --> 03:12.030
+Yes.
+
+40
+03:12.030 --> 03:12.840
+And it matched.
+
+41
+03:12.900 --> 03:15.520
+Of course, it's going to match because I just copied it.
+
+42
+03:15.720 --> 03:17.340
+So it is working now.
+
+43
+03:17.580 --> 03:19.860
+I don't need to see a username and password.
+
+44
+03:20.550 --> 03:26.640
+So this is considered as safer login, ssh login on git repositories compared to https login.
+
+45
+03:27.760 --> 03:32.050
+Before I wrap up the session, I would like to take you to the cheatsheet of git
+
+46
+03:33.360 --> 03:39.960
+So Atlassian BitBucket has the git cheatsheet, you can just Google git cheatsheet and you can download it.
+
+47
+03:42.770 --> 03:43.850
+That's a pdf file
+
+48
+03:46.210 --> 03:51.160
+So you don't need to remember these commands, right, at least initially, so you have git init, git clone
+
+49
+03:51.160 --> 03:57.400
+and git config, git add, and also description what that command is doing and git clean, git
+
+50
+03:57.400 --> 03:57.760
+config.
+
+51
+03:57.770 --> 04:01.990
+So there are many, many commands, but these are the most popularly used commands or useful commands
+
+52
+04:01.990 --> 04:03.330
+in the regular day to day work.
+
+53
+04:04.210 --> 04:05.770
+This this is really very handy.
+
+54
+04:06.850 --> 04:07.100
+Right.
+
+55
+04:07.270 --> 04:10.810
+And with that note, with that cheastsheet  I conclude the git session.
+
+56
+04:11.750 --> 04:14.420
+And that is all you need to know, really, being a devops.
+
+57
+04:15.960 --> 04:18.120
+So wrap this up and join me in the next session.

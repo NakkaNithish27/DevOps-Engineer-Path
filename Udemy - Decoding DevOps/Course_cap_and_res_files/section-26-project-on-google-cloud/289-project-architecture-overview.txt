@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00.240 --> 00:05.400
+So in the previous lecture you have already seen GCP Virtual Private Cloud VPC.
+
+00:06.040 --> 00:11.080
+And as I said, that's what is the first thing we are going to configure on Google Cloud.
+
+00:11.720 --> 00:21.360
+So in AWS we can create a private service like RDS or Activemq and directly connected to the VPC private
+
+00:21.360 --> 00:21.960
+subnet.
+
+00:21.960 --> 00:23.680
+But that's not the case in GCP.
+
+00:24.080 --> 00:31.680
+In GCP, if your private instance residing in the private subnet wants to access a managed service like
+
+00:31.680 --> 00:36.280
+cloud SQL, we need to configure PSA plus VPC peering.
+
+00:36.640 --> 00:44.000
+In GCP, these private services like Cloudsql and Memorystore lives in a service producer network.
+
+00:44.040 --> 00:50.200
+It's a different network, and to connect it to your VPC, we need to configure PSA plus the VPC.
+
+00:50.240 --> 00:57.800
+Peering PSA is basically the connection or private connection between your VPC and the service producer
+
+00:57.800 --> 00:58.480
+network.
+
+00:58.680 --> 01:00.480
+So keep in mind here we have two networks.
+
+01:00.480 --> 01:04.080
+One is our VPC and the other one is service producer network.
+
+01:04.400 --> 01:12.500
+So in PSA, basically you do a VPC peering between your VPC network and the GCP service Producer network.
+
+01:13.100 --> 01:17.700
+So once we have our VPC setup we are going to create Cloudsql Memorystore.
+
+01:17.740 --> 01:20.540
+We get the public IP sorry private IP.
+
+01:20.580 --> 01:26.940
+We are going to create an IP range for these services and pair it with our VPC.
+
+01:27.780 --> 01:28.700
+So that's the second part.
+
+01:28.740 --> 01:30.140
+First part we create VPC.
+
+01:30.180 --> 01:34.100
+Second part we create Memorystore Cloudsql and do the peering.
+
+01:35.180 --> 01:40.700
+So here you have configured your backend services with your private network.
+
+01:40.980 --> 01:44.660
+So your security is taken care of and your backend is ready.
+
+01:44.980 --> 01:46.660
+Next comes the front end.
+
+01:46.700 --> 01:47.780
+Now for front end.
+
+01:48.060 --> 01:50.260
+How to explain the entire front end.
+
+01:50.740 --> 01:52.700
+I have created a flow diagram.
+
+01:53.300 --> 01:59.940
+Before we get into that, just keep in mind the private instance that is your V profile application.
+
+02:00.100 --> 02:06.420
+So the request is going to come from the internet through load balancer and land into the private subnet
+
+02:06.980 --> 02:13.090
+to your private instance where we profile application is hosted and that we profile application is going
+
+02:13.090 --> 02:16.050
+to access the backend services through VPC peering.
+
+02:16.370 --> 02:21.490
+So once again keep in mind your application server will be in the private subnet of this VPC.
+
+02:21.930 --> 02:22.810
+Let's go next.
+
+02:24.810 --> 02:28.050
+So this entire flow consists of four thing.
+
+02:28.170 --> 02:35.690
+First thing is the internet where your URL website URL will be transitioned to the static public IP
+
+02:35.730 --> 02:37.210
+of the load balancer.
+
+02:37.610 --> 02:38.850
+So that's internet part.
+
+02:39.010 --> 02:43.010
+Then you have Https termination or HTTP redirection.
+
+02:43.370 --> 02:44.770
+So https or http.
+
+02:44.810 --> 02:48.130
+Both are going to route the request through the load balancer.
+
+02:48.610 --> 02:52.810
+In load balancer you will have the front end mentioned the back end services mentioned.
+
+02:53.050 --> 02:54.130
+The health check probe.
+
+02:54.250 --> 02:55.530
+That's the third part.
+
+02:56.050 --> 03:03.090
+And the fourth part is where the request comes in the VPC in the private subnet to your V profile application
+
+03:03.090 --> 03:04.890
+living on Tomcat instance.
+
+03:05.250 --> 03:06.930
+Let's decode this one by one.
+
+03:07.410 --> 03:09.850
+Okay so the first part our internet.
+
+03:10.450 --> 03:13.750
+So internet users are going to access a URL.
+
+03:14.390 --> 03:19.950
+So as I said, I'm going to use GoDaddy to map that name to a load balancer IP.
+
+03:20.150 --> 03:25.910
+So there will be an A record created in GoDaddy DNS entries, which will resolve the URL to the load
+
+03:25.910 --> 03:28.390
+balancer static public IP.
+
+03:28.910 --> 03:33.590
+Now, based on you use Https or HTTP, the request will be routed.
+
+03:33.590 --> 03:34.070
+As I said.
+
+03:34.070 --> 03:38.990
+In any case, the request will be routed to the load balancer, of course, but there's many configuration
+
+03:38.990 --> 03:41.510
+that we need to do in GCP in AWS.
+
+03:41.550 --> 03:46.870
+This is pretty simple, but in GCP, especially in command line we need to add many entries.
+
+03:47.470 --> 03:49.990
+So let's talk about Https first.
+
+03:50.390 --> 03:53.630
+User access the URL on https connection.
+
+03:53.630 --> 03:57.190
+We need to configure a target https proxy.
+
+03:57.670 --> 03:59.590
+This is the front end of the load balancer.
+
+03:59.590 --> 04:01.790
+All this is happening in the load balancer itself.
+
+04:02.310 --> 04:06.390
+Now since this is an Https connection certificate will be there.
+
+04:07.150 --> 04:13.510
+So we need to create a certificate map entry that says that if the request is this https and this URL,
+
+04:13.830 --> 04:17.730
+then use this certificate that we would be already configuring.
+
+04:18.130 --> 04:20.570
+So the user certificate will be validated.
+
+04:20.570 --> 04:25.650
+If it's validated, then there will be a URL map and URL map.
+
+04:26.010 --> 04:31.690
+URL map basically is a table which says if the request is coming at this, then for the request at this
+
+04:31.690 --> 04:32.810
+particular back end.
+
+04:33.370 --> 04:39.210
+Now this should tell you that this is a layer seven application load balancer where you can have multiple
+
+04:39.210 --> 04:39.890
+entries.
+
+04:40.130 --> 04:45.450
+If the user is accessing en route path, then route it to this particular target group.
+
+04:45.490 --> 04:47.130
+In AWS we have target group.
+
+04:47.410 --> 04:47.810
+Same thing.
+
+04:47.810 --> 04:49.650
+In GCP we have URL map.
+
+04:49.770 --> 04:56.210
+So we can have multiple entries, but we just have one entry, one for https, one for http and both
+
+04:56.210 --> 04:57.050
+will be same.
+
+04:57.450 --> 05:02.130
+So you need to understand in Https we need to configure an Https proxy.
+
+05:02.130 --> 05:07.490
+That is the front end certificate entry and the URL map for HTTP connection.
+
+05:07.490 --> 05:14.770
+We just need to create a target http proxy that will be the front end to receive on port 80 HTTP traffic
+
+05:14.770 --> 05:21.550
+on port 80, and then the URL map that says that the if the request is coming on port 80 for route,
+
+05:21.550 --> 05:24.030
+then route it to this load balancer backend.
+
+05:24.470 --> 05:29.070
+In any case, Https or http, the request is going to come to the load balancer backend.
+
+05:29.550 --> 05:33.590
+So we need to configure a backend service in load balancer.
+
+05:33.950 --> 05:38.030
+In our case the backend will be the managed instance group.
+
+05:38.070 --> 05:39.350
+The auto scaling group.
+
+05:39.390 --> 05:40.990
+In AWS we have auto scaling group.
+
+05:40.990 --> 05:43.470
+Here we have managed instance group.
+
+05:43.750 --> 05:49.350
+And of course there will be health check like in AWS we configure health check here.
+
+05:49.350 --> 05:52.470
+Also we have health check that checks at a particular port number.
+
+05:52.470 --> 05:57.190
+In our case that will be port 80 at http port 8080 of the instance.
+
+05:57.550 --> 06:04.390
+So this managed instance group are going to manage the instances in our VPCs private subnet.
+
+06:04.750 --> 06:06.990
+So instance will be created from the template.
+
+06:06.990 --> 06:13.390
+And in the template it's mentioned to use our own custom image that has our V profile application running
+
+06:13.390 --> 06:16.390
+on Tomcat service on port 8080.
+
+06:16.990 --> 06:18.430
+So this is the whole flow.
+
+06:19.350 --> 06:22.980
+I'm going to put this diagram in the lecture resources.
+
+06:22.980 --> 06:26.060
+So make sure you understand all the entries.
+
+06:26.500 --> 06:31.540
+And when we execute commands on Google Cloud Shell, we're going to configure all this one by one.
+
+06:31.540 --> 06:34.700
+So you can every time or you should every time.
+
+06:34.700 --> 06:35.820
+Look at these.
+
+06:35.860 --> 06:40.220
+Look at this diagram when we configure the load balancer entries.
+
+06:40.780 --> 06:46.100
+So once again internet traffic then the Https termination or HTTP redirect.
+
+06:46.100 --> 06:50.820
+Both are going to route the request to load balancer backend through URL map.
+
+06:51.340 --> 06:56.940
+Load balancer backend consists of the managed instance group that will be managing your instances in
+
+06:56.940 --> 06:58.980
+the private subnet of the VPC.
+
+06:59.620 --> 07:01.540
+So 1234.
+
+07:01.900 --> 07:04.540
+But before this we need to configure the VPC.
+
+07:05.260 --> 07:12.540
+So in the first part we are going to create VPC with four subnets two public two private create bastion
+
+07:12.540 --> 07:14.180
+host configure it.
+
+07:14.180 --> 07:16.540
+And then we're going to move to the backend service.
+
+07:16.540 --> 07:20.540
+So first part VPC second part backend services.
+
+07:21.060 --> 07:24.060
+Third and fourth part will be the front end.
+
+07:25.220 --> 07:26.660
+Let's get started with this.

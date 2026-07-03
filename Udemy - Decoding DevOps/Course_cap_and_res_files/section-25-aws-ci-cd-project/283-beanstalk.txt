@@ -1,0 +1,466 @@
+WEBVTT
+
+00:00.390 --> 00:01.740
+Instructor: Hello, and welcome.
+
+00:01.740 --> 00:02.610
+In this lecture,
+
+00:02.610 --> 00:05.340
+we are going to set up Beanstalk environment
+
+00:05.340 --> 00:08.313
+where we can run our Vprofile application.
+
+00:09.240 --> 00:11.550
+But before we launch the Beanstalk environment,
+
+00:11.550 --> 00:14.010
+we are going to create key pair,
+
+00:14.010 --> 00:17.250
+which we will use to log into our Beanstalk instance.
+
+00:17.250 --> 00:19.110
+We have a use case for that,
+
+00:19.110 --> 00:21.240
+and we'll do that in some time,
+
+00:21.240 --> 00:23.730
+but before that, we'll create a key pair.
+
+00:23.730 --> 00:25.593
+So click on Create key pair.
+
+00:26.520 --> 00:28.020
+Give key pair a name.
+
+00:28.020 --> 00:31.083
+So I will say here vprobeankey,
+
+00:32.430 --> 00:35.403
+then format, and Create key pair.
+
+00:36.360 --> 00:38.730
+Okay, now let's create Beanstalk application.
+
+00:38.730 --> 00:42.783
+So find Beanstalk service, and click on Create application.
+
+00:43.740 --> 00:45.300
+Web server environment, we'll select.
+
+00:45.300 --> 00:46.953
+We'll give application a name.
+
+00:48.690 --> 00:50.340
+I'm naming it as a Vprofile.
+
+00:50.340 --> 00:51.510
+Let's come down.
+
+00:51.510 --> 00:55.233
+Environment name, we'll say Vprofile-prod,
+
+00:56.160 --> 00:58.410
+and I'll add some numbers just to make it unique,
+
+00:58.410 --> 01:00.780
+so I'll say just 11.
+
+01:00.780 --> 01:04.740
+And for the domain, we will give the same name,
+
+01:04.740 --> 01:06.780
+and we need to check the availability
+
+01:06.780 --> 01:08.463
+because this will be the URL,
+
+01:09.330 --> 01:10.710
+and we have to make sure it's unique.
+
+01:10.710 --> 01:13.440
+So you need to add a different number
+
+01:13.440 --> 01:15.720
+or just make the name unique.
+
+01:15.720 --> 01:18.070
+You cannot use the same name that I have given.
+
+01:19.740 --> 01:22.290
+And let's choose the platform,
+
+01:22.290 --> 01:24.390
+so platform is Tomcat.
+
+01:24.390 --> 01:26.580
+Our Vprofile application runs on Tomcat,
+
+01:26.580 --> 01:29.700
+and we are going with Tomcat 10 with Coretto 21.
+
+01:29.700 --> 01:32.310
+That means JDK 21,
+
+01:32.310 --> 01:35.553
+and the instance will be Amazon Linux 2023.
+
+01:36.540 --> 01:37.830
+Okay, let's come down,
+
+01:37.830 --> 01:41.550
+and let's select configuration as custom.
+
+01:41.550 --> 01:42.383
+We'll make changes.
+
+01:42.383 --> 01:45.030
+We'll have load balanced instance,
+
+01:45.030 --> 01:47.160
+multiple instances with the load balancer.
+
+01:47.160 --> 01:48.063
+Let's go Next.
+
+01:49.500 --> 01:50.820
+Service role, we are going to say
+
+01:50.820 --> 01:52.230
+Use an existing service role,
+
+01:52.230 --> 01:56.734
+the service role we created in our re-architecting project
+
+01:56.734 --> 01:58.740
+where we created Beanstalk.
+
+01:58.740 --> 02:00.900
+Before that, we created this role.
+
+02:00.900 --> 02:04.020
+So if you don't see this, make sure you watch that lecture
+
+02:04.020 --> 02:05.790
+and create this role,
+
+02:05.790 --> 02:07.440
+and then say Use an existing role,
+
+02:07.440 --> 02:08.523
+select this role.
+
+02:09.780 --> 02:11.190
+Key pair, we already created,
+
+02:11.190 --> 02:12.873
+so we'll select that key pair.
+
+02:13.770 --> 02:17.553
+Instance profile, also we'll say vprofile-bean-role.
+
+02:19.050 --> 02:22.439
+All this we covered in a re-architecting project,
+
+02:22.439 --> 02:25.503
+so I'm just selecting the existing one, and go Next.
+
+02:26.417 --> 02:29.403
+Okay, from the dropdown, select your VPC,
+
+02:30.390 --> 02:34.380
+and instance settings, I'll say public address Activated.
+
+02:34.380 --> 02:37.770
+So instance will have public IP address ,
+
+02:37.770 --> 02:39.780
+and in this VPC, we have these many subnets.
+
+02:39.780 --> 02:42.210
+We are going to select all the subnets.
+
+02:42.210 --> 02:43.950
+So when the instance gets launched,
+
+02:43.950 --> 02:45.810
+it can go to any of the zones.
+
+02:45.810 --> 02:48.150
+So we will have minimum two instances.
+
+02:48.150 --> 02:49.890
+So it's going to divide these two instances
+
+02:49.890 --> 02:51.753
+in two Availability Zones.
+
+02:52.860 --> 02:56.100
+Let's come down, all the way down.
+
+02:56.100 --> 02:56.933
+Add new tag.
+
+02:56.933 --> 03:01.233
+We will give tag as Project vprofile.
+
+03:03.450 --> 03:06.721
+You cannot use a name tag because that tag is already taken.
+
+03:06.721 --> 03:10.200
+When we create application, it anyways uses that tag.
+
+03:10.200 --> 03:11.490
+So you cannot have name tag.
+
+03:11.490 --> 03:13.440
+We are creating just Project tag.
+
+03:13.440 --> 03:14.273
+Go Next.
+
+03:16.110 --> 03:19.350
+We will change the root volume from Container Default
+
+03:19.350 --> 03:22.920
+to General Purpose 3, GP3.
+
+03:22.920 --> 03:25.110
+There's some recent issues with Beanstalk.
+
+03:25.110 --> 03:29.010
+It is trying to use Launch Configuration, which is outdated,
+
+03:29.010 --> 03:30.990
+and you'll get an error.
+
+03:30.990 --> 03:33.300
+That Beanstalk should be using Launch Template.
+
+03:33.300 --> 03:36.660
+So if you use GP3, it will use Launch Template,
+
+03:36.660 --> 03:38.490
+but if you select here Container Default,
+
+03:38.490 --> 03:40.830
+it'll use Launch Configuration,
+
+03:40.830 --> 03:41.850
+which is outdated.
+
+03:41.850 --> 03:44.910
+So make sure you select GP3 over here.
+
+03:44.910 --> 03:45.903
+Scroll down.
+
+03:46.890 --> 03:49.800
+Security group, so it will create its own security groups,
+
+03:49.800 --> 03:51.273
+and we'll keep it as it is.
+
+03:52.230 --> 03:53.550
+In Auto scaling group,
+
+03:53.550 --> 03:57.000
+we have to change from Single instance to Load balanced
+
+03:57.000 --> 04:01.263
+and we will see minimum 2 instances and maximum 4.
+
+04:02.460 --> 04:04.530
+You can keep maximum as 2 as well.
+
+04:04.530 --> 04:06.480
+We are anyways not going to scale out.
+
+04:06.480 --> 04:09.822
+We'll just deploy the application on multiple instances.
+
+04:09.822 --> 04:12.660
+So make sure it's just two instances.
+
+04:12.660 --> 04:14.013
+So let's come down.
+
+04:15.390 --> 04:17.700
+Instance type, remove this t2.small,
+
+04:17.700 --> 04:18.990
+We'll go with t2.micro
+
+04:18.990 --> 04:21.510
+because that comes under Free tier.
+
+04:21.510 --> 04:24.063
+So search for t2.micro.
+
+04:25.980 --> 04:27.330
+Okay, then come down.
+
+04:27.330 --> 04:29.250
+Scaling triggers for Auto scaling group,
+
+04:29.250 --> 04:30.543
+we'll keep them Default.
+
+04:31.650 --> 04:33.663
+Load balancer visibility, public.
+
+04:35.010 --> 04:38.373
+Load Balancer Type, Application load balancer and Dedicated.
+
+04:40.050 --> 04:41.910
+Listeners, we'll keep Default.
+
+04:41.910 --> 04:45.360
+Processes, we'll make one simple change over here.
+
+04:45.360 --> 04:48.540
+Select that and Action and go to Edit.
+
+04:48.540 --> 04:49.470
+And in the Sessions,
+
+04:49.470 --> 04:52.770
+you make sure Session stickiness is Enabled.
+
+04:52.770 --> 04:54.753
+We will have two instances.
+
+04:55.800 --> 04:58.860
+So what stickiness will do is when we access our application
+
+04:58.860 --> 05:00.090
+through the load balancer,
+
+05:00.090 --> 05:03.720
+and let's say we go to instance number 1,
+
+05:03.720 --> 05:07.385
+so stickiness will hold that session for us.
+
+05:07.385 --> 05:10.270
+If we don't have stickiness, then it is going to bounce
+
+05:11.280 --> 05:14.010
+between these instances we want for our application.
+
+05:14.010 --> 05:15.750
+The Vprofile application is very simple.
+
+05:15.750 --> 05:17.193
+It doesn't give any token.
+
+05:18.240 --> 05:19.320
+So for authentication,
+
+05:19.320 --> 05:22.530
+we are to make sure we stick to one instance.
+
+05:22.530 --> 05:24.720
+Otherwise, if it jumps to another instance,
+
+05:24.720 --> 05:26.253
+we'll lose the authentication.
+
+05:27.180 --> 05:28.260
+So this is the requirement
+
+05:28.260 --> 05:31.830
+just for the Vprofile project, which is very simple.
+
+05:31.830 --> 05:33.780
+So let's save this,
+
+05:33.780 --> 05:36.243
+and then let's come down and go to Next.
+
+05:37.380 --> 05:40.014
+Health reporting, we'll keep it Default,
+
+05:40.014 --> 05:42.030
+and everything else, Default.
+
+05:42.030 --> 05:45.240
+Rolling updates, we will do Rolling.
+
+05:45.240 --> 05:48.090
+So one instance gets upgraded at a time.
+
+05:48.090 --> 05:52.470
+For that, we are going to give the size as 50%.
+
+05:52.470 --> 05:54.440
+So by Default, we will have two instances.
+
+05:54.440 --> 05:56.910
+So 50% means one instance at a time.
+
+05:56.910 --> 05:58.623
+You can give a fixed number also.
+
+05:59.940 --> 06:02.190
+In real-time production cases,
+
+06:02.190 --> 06:04.800
+you will have multiple instances,
+
+06:04.800 --> 06:09.510
+and percentage of deployment should be not more than 25%.
+
+06:09.510 --> 06:11.460
+Mostly in production. it's just 10%.
+
+06:11.460 --> 06:12.840
+Let's say you have 10 instances,
+
+06:12.840 --> 06:15.213
+so 10% means one instance at a time,
+
+06:16.050 --> 06:17.520
+but we just have two instances,
+
+06:17.520 --> 06:21.000
+and so we'll keep it as 50% one instance at a time
+
+06:21.000 --> 06:22.620
+and then everything else Default.
+
+06:22.620 --> 06:24.603
+Let's come down and go to Next.
+
+06:25.590 --> 06:26.820
+Okay, we selected everything.
+
+06:26.820 --> 06:28.080
+Review it once again.
+
+06:28.080 --> 06:30.270
+Make sure you have selected the same option
+
+06:30.270 --> 06:31.320
+that I have selected.
+
+06:31.320 --> 06:33.420
+Otherwise, you can edit it.
+
+06:33.420 --> 06:37.860
+And once you are done with all your reviews,
+
+06:37.860 --> 06:39.693
+then you can click on Submit.
+
+06:41.700 --> 06:44.640
+So it is going to take some time to launch this application.
+
+06:44.640 --> 06:47.610
+By the time, we will create RDS.
+
+06:47.610 --> 06:49.443
+So I'll see you in the next lecture.

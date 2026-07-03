@@ -1,0 +1,582 @@
+WEBVTT
+
+1
+00:00:00.240 --> 00:00:02.160
+<v Instructor>Okay, so we have SonarQube server set</v>
+
+2
+00:00:02.160 --> 00:00:03.870
+and everything ready for that.
+
+3
+00:00:03.870 --> 00:00:07.320
+Now, we need to create Amazon ECR registry
+
+4
+00:00:07.320 --> 00:00:08.580
+and create an IAM user
+
+5
+00:00:08.580 --> 00:00:11.370
+so pipeline can authenticate with that.
+
+6
+00:00:11.370 --> 00:00:15.660
+So go to AWS console and open ECR.
+
+7
+00:00:15.660 --> 00:00:17.310
+One more thing before you go there,
+
+8
+00:00:17.310 --> 00:00:19.680
+you can power off this instance for now
+
+9
+00:00:19.680 --> 00:00:20.820
+if you're not going to use it,
+
+10
+00:00:20.820 --> 00:00:22.863
+so I'm going to say Stop instance.
+
+11
+00:00:25.740 --> 00:00:30.303
+Okay, let's go to ECR, Elastic Container Registry.
+
+12
+00:00:31.470 --> 00:00:33.450
+Click on Create a repository.
+
+13
+00:00:33.450 --> 00:00:35.340
+Just make sure you are in the right region,
+
+14
+00:00:35.340 --> 00:00:37.920
+same region where you have the Sonar server.
+
+15
+00:00:37.920 --> 00:00:41.760
+It's not mandatory, but still, let's keep same region.
+
+16
+00:00:41.760 --> 00:00:44.040
+So create a repository.
+
+17
+00:00:44.040 --> 00:00:45.420
+Give repository a name.
+
+18
+00:00:45.420 --> 00:00:47.820
+So I'm going to give vprofileappimg,
+
+19
+00:00:47.820 --> 00:00:49.110
+stick to the same name
+
+20
+00:00:49.110 --> 00:00:52.110
+because same thing we are going to mention in the pipeline.
+
+21
+00:00:52.110 --> 00:00:54.210
+If you make any changes, make sure you remember that,
+
+22
+00:00:54.210 --> 00:00:56.940
+that you need to update that in the pipeline.
+
+23
+00:00:56.940 --> 00:00:59.640
+And just say Create. That's all.
+
+24
+00:00:59.640 --> 00:01:02.670
+Vprofileappimg, I-M-G.
+
+25
+00:01:02.670 --> 00:01:03.810
+Now, this is the URI.
+
+26
+00:01:03.810 --> 00:01:06.120
+Let's copy this and put it in the sticky note.
+
+27
+00:01:06.120 --> 00:01:06.953
+Not mandatory.
+
+28
+00:01:06.953 --> 00:01:09.060
+We can anytime go and access this one,
+
+29
+00:01:09.060 --> 00:01:10.260
+but still let's keep it.
+
+30
+00:01:11.790 --> 00:01:16.110
+Okay, so in order to authenticate, we need an IAM user,
+
+31
+00:01:16.110 --> 00:01:18.810
+which will be used by our GitHub Actions pipeline.
+
+32
+00:01:18.810 --> 00:01:20.340
+So go to IAM,
+
+33
+00:01:20.340 --> 00:01:24.570
+go to IAM users, and say Create user.
+
+34
+00:01:24.570 --> 00:01:26.400
+Give user a name.
+
+35
+00:01:26.400 --> 00:01:28.380
+I'm giving GitHub Actions.
+
+36
+00:01:28.380 --> 00:01:31.080
+Not mandatory. You can give different name also.
+
+37
+00:01:31.080 --> 00:01:31.913
+Go Next.
+
+38
+00:01:32.820 --> 00:01:34.260
+Attach policies directly.
+
+39
+00:01:34.260 --> 00:01:37.020
+Now, this user will be used by GitHub Actions
+
+40
+00:01:37.020 --> 00:01:39.810
+to upload your Docker image to ECR.
+
+41
+00:01:39.810 --> 00:01:42.330
+So we need to give right policies.
+
+42
+00:01:42.330 --> 00:01:44.130
+Just search for registry over here.
+
+43
+00:01:44.130 --> 00:01:46.493
+Select this one, AmazonEC2ContainerRegistryFullAccess.
+
+44
+00:01:48.741 --> 00:01:50.760
+This is one policy.
+
+45
+00:01:50.760 --> 00:01:52.177
+Then search for EKS.
+
+46
+00:01:54.979 --> 00:01:57.690
+AmazonEKSClusterPolicy.
+
+47
+00:01:57.690 --> 00:02:00.030
+This one, put a check mark on this.
+
+48
+00:02:00.030 --> 00:02:02.460
+So this ECR registry
+
+49
+00:02:02.460 --> 00:02:05.520
+will be accessed from the ES cluster.
+
+50
+00:02:05.520 --> 00:02:07.770
+So we need to give this policy.
+
+51
+00:02:07.770 --> 00:02:10.200
+Once you select this policy, these two policies,
+
+52
+00:02:10.200 --> 00:02:13.473
+check once again, say Create user.
+
+53
+00:02:14.670 --> 00:02:17.010
+Okay, now click on the username,
+
+54
+00:02:17.010 --> 00:02:21.660
+go to Security credentials, and say access key,
+
+55
+00:02:21.660 --> 00:02:23.253
+Create access key.
+
+56
+00:02:24.210 --> 00:02:25.533
+Select CLI.
+
+57
+00:02:26.850 --> 00:02:29.640
+I understand the above recommendation.
+
+58
+00:02:29.640 --> 00:02:31.680
+And say Next.
+
+59
+00:02:31.680 --> 00:02:36.330
+Create access key, and make sure you download this.
+
+60
+00:02:36.330 --> 00:02:38.700
+Download a CSV file.
+
+61
+00:02:38.700 --> 00:02:39.533
+Now, keep it here.
+
+62
+00:02:39.533 --> 00:02:42.990
+Don't need to copy this one in your text pad or sticky note.
+
+63
+00:02:42.990 --> 00:02:45.510
+We have it in our system so we can anytime open
+
+64
+00:02:45.510 --> 00:02:49.200
+and just save all this detail in GitHub Secrets.
+
+65
+00:02:49.200 --> 00:02:50.190
+Don't misplace this.
+
+66
+00:02:50.190 --> 00:02:51.390
+As soon as you're done with this,
+
+67
+00:02:51.390 --> 00:02:54.870
+you need to deactivate this keys or delete the user itself.
+
+68
+00:02:54.870 --> 00:02:58.860
+Do not put it in the Git repository in any case.
+
+69
+00:02:58.860 --> 00:03:00.660
+GitHub Secret is a different thing,
+
+70
+00:03:00.660 --> 00:03:03.300
+but do not put it in repository.
+
+71
+00:03:03.300 --> 00:03:06.810
+Even though repository's private, still do not keep it.
+
+72
+00:03:06.810 --> 00:03:08.940
+Just do as I'm doing.
+
+73
+00:03:08.940 --> 00:03:10.920
+Okay, this much is enough over here.
+
+74
+00:03:10.920 --> 00:03:14.940
+In the next lecture, we are going to create Slack workspace,
+
+75
+00:03:14.940 --> 00:03:17.400
+a Slack app basically.
+
+76
+00:03:17.400 --> 00:03:19.680
+So we can send notification from our pipeline
+
+77
+00:03:19.680 --> 00:03:23.070
+for pass or fail to our Slack channel.
+
+78
+00:03:23.070 --> 00:03:25.020
+So wrap this up and join me in the next one.
+
+79
+00:03:25.020 --> 00:03:27.480
+Okay, so just search for a Slack login.
+
+80
+00:03:27.480 --> 00:03:29.310
+You will get this URL.
+
+81
+00:03:29.310 --> 00:03:31.440
+If you already have a Slack account,
+
+82
+00:03:31.440 --> 00:03:33.030
+which I think you should have
+
+83
+00:03:33.030 --> 00:03:34.830
+if you followed the previous lectures
+
+84
+00:03:34.830 --> 00:03:36.180
+in Jenkins and all,
+
+85
+00:03:36.180 --> 00:03:37.920
+you can use the same Slack account,
+
+86
+00:03:37.920 --> 00:03:39.210
+you can use the same workspace,
+
+87
+00:03:39.210 --> 00:03:41.040
+but if you do not have, create a new one.
+
+88
+00:03:41.040 --> 00:03:44.280
+So I'm just going to get started with a new one
+
+89
+00:03:44.280 --> 00:03:46.170
+and I'm going to create a new workspace.
+
+90
+00:03:46.170 --> 00:03:48.090
+As I said, you can use the existing workspace,
+
+91
+00:03:48.090 --> 00:03:49.560
+no problem if you already have,
+
+92
+00:03:49.560 --> 00:03:53.670
+just wait until I go and create the app.
+
+93
+00:03:53.670 --> 00:03:55.890
+I'm giving the Slack workspace a name, sentinel.
+
+94
+00:03:55.890 --> 00:03:57.060
+Go Next.
+
+95
+00:03:57.060 --> 00:03:59.643
+I'm just gonna keep the same name of the account.
+
+96
+00:04:00.570 --> 00:04:03.183
+Skip this step. I don't want to invite anybody now.
+
+97
+00:04:04.140 --> 00:04:06.990
+Don't invite anyone. This is fine.
+
+98
+00:04:06.990 --> 00:04:09.000
+Continue with Free.
+
+99
+00:04:09.000 --> 00:04:09.833
+Okay, over here.
+
+100
+00:04:09.833 --> 00:04:11.370
+Now, if you already have Slack account,
+
+101
+00:04:11.370 --> 00:04:13.050
+you should be logged in over here.
+
+102
+00:04:13.050 --> 00:04:15.120
+You need to just create a new channel.
+
+103
+00:04:15.120 --> 00:04:16.080
+Create a new channel.
+
+104
+00:04:16.080 --> 00:04:18.810
+I'm going to call it as vprofile.
+
+105
+00:04:18.810 --> 00:04:20.760
+Wait, where did it go?
+
+106
+00:04:20.760 --> 00:04:22.590
+Create a new channel.
+
+107
+00:04:22.590 --> 00:04:25.533
+vprofile-actions.
+
+108
+00:04:26.550 --> 00:04:27.573
+Go Next.
+
+109
+00:04:28.530 --> 00:04:32.790
+This is going to be Private, Create.
+
+110
+00:04:32.790 --> 00:04:35.700
+Okay, skip for now. Don't want to invite anybody.
+
+111
+00:04:35.700 --> 00:04:37.140
+Okay, now in a separate tab,
+
+112
+00:04:37.140 --> 00:04:42.140
+go to this URL, api.slack.com/apps.
+
+113
+00:04:42.150 --> 00:04:42.983
+Hit Enter.
+
+114
+00:04:44.370 --> 00:04:47.583
+Say Create New App from scratch.
+
+115
+00:04:49.080 --> 00:04:53.520
+I'm going to call this app as vpro-act-notifications.
+
+116
+00:04:53.520 --> 00:04:55.470
+Pick up a workspace.
+
+117
+00:04:55.470 --> 00:04:58.230
+Sentinel, that's the workspace I'm selecting.
+
+118
+00:04:58.230 --> 00:05:00.210
+You can select anything you want.
+
+119
+00:05:00.210 --> 00:05:01.043
+Create app.
+
+120
+00:05:02.010 --> 00:05:04.680
+Then go to Incoming Webhooks,
+
+121
+00:05:04.680 --> 00:05:08.190
+Activate Incoming Webhooks, scroll down,
+
+122
+00:05:08.190 --> 00:05:09.603
+say Add New Webhook,
+
+123
+00:05:10.710 --> 00:05:12.030
+Workspace, Sentinel.
+
+124
+00:05:12.030 --> 00:05:14.601
+Channel that you have created.
+
+125
+00:05:14.601 --> 00:05:16.920
+This is the vprofile-actions I'm selecting.
+
+126
+00:05:16.920 --> 00:05:17.913
+Say Allow.
+
+127
+00:05:18.750 --> 00:05:21.420
+Okay, so that's the test.
+
+128
+00:05:21.420 --> 00:05:24.810
+You can just copy it and run it
+
+129
+00:05:24.810 --> 00:05:27.870
+from your Git bash or terminal if you already have call.
+
+130
+00:05:27.870 --> 00:05:29.550
+This is just to test.
+
+131
+00:05:29.550 --> 00:05:30.960
+So if we run this successfully,
+
+132
+00:05:30.960 --> 00:05:33.180
+we should see Hello, World! in our channel.
+
+133
+00:05:33.180 --> 00:05:34.860
+If you go back to our channel,
+
+134
+00:05:34.860 --> 00:05:37.110
+you see there, we see Hello, World!
+
+135
+00:05:37.110 --> 00:05:39.900
+So this is tested, and this is our webhook.
+
+136
+00:05:39.900 --> 00:05:41.370
+Copy this webhook.
+
+137
+00:05:41.370 --> 00:05:42.956
+And I'm going to store it
+
+138
+00:05:42.956 --> 00:05:46.773
+or just keep it ready in my sticky note.
+
+139
+00:05:48.090 --> 00:05:51.660
+Okay, so I have Sonar token, I have the ECR detail,
+
+140
+00:05:51.660 --> 00:05:56.660
+I have the Slack webhook URL, and I have access keys.
+
+141
+00:05:57.330 --> 00:05:59.220
+In the next lecture, we are going to create one more thing,
+
+142
+00:05:59.220 --> 00:06:03.090
+which is GitHub PAT, a token, Personal Access Token,
+
+143
+00:06:03.090 --> 00:06:04.110
+and all this information,
+
+144
+00:06:04.110 --> 00:06:06.270
+we are going to store it in GitHub Secrets.
+
+145
+00:06:06.270 --> 00:06:08.670
+So wrap this up and join me in the next lecture.
+

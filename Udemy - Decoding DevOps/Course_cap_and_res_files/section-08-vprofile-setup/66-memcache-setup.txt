@@ -1,0 +1,355 @@
+WEBVTT
+
+00:00.207 --> 00:01.500
+Instructor: All right, in this lecture
+
+00:01.500 --> 00:02.910
+we are going to set up Memcache.
+
+00:02.910 --> 00:03.840
+This is pretty simple.
+
+00:03.840 --> 00:06.810
+We just need to install Memcache, start the service,
+
+00:06.810 --> 00:08.370
+make some configuration change,
+
+00:08.370 --> 00:10.560
+and restart Memcache service.
+
+00:10.560 --> 00:12.000
+That's all we need to do.
+
+00:12.000 --> 00:14.970
+So let's log into Memcache.
+
+00:14.970 --> 00:17.340
+So I'm going to exit from db01
+
+00:17.340 --> 00:19.290
+because I'm connected in that.
+
+00:19.290 --> 00:20.550
+So I'll say vagrant,
+
+00:20.550 --> 00:24.393
+vagrant ssh mc01, that's the name of our VM.
+
+00:25.290 --> 00:29.640
+All right, I do sudo -i to become the root user.
+
+00:29.640 --> 00:30.810
+Clear the screen.
+
+00:30.810 --> 00:34.200
+Let's check all the commands and execute them one by one.
+
+00:34.200 --> 00:37.830
+So, once again, first, dnf update -y.
+
+00:37.830 --> 00:39.090
+Now this takes a lot of time.
+
+00:39.090 --> 00:42.150
+If you really want to skip this command, you can,
+
+00:42.150 --> 00:45.150
+this won't make any difference in this project setup.
+
+00:45.150 --> 00:46.530
+If you want skip it, skip it,
+
+00:46.530 --> 00:48.030
+but I'm going to execute this one.
+
+00:48.030 --> 00:49.510
+So I just copy this command
+
+00:50.790 --> 00:52.023
+and just run it.
+
+00:55.200 --> 00:57.900
+Again, I'm going to pause my recording
+
+00:57.900 --> 01:00.333
+and resume once this is completed.
+
+01:01.950 --> 01:03.870
+The update completed successfully.
+
+01:03.870 --> 01:05.170
+Let's go to the next step.
+
+01:07.230 --> 01:09.370
+Install epel-release repository
+
+01:11.640 --> 01:13.053
+and installing Memcache,
+
+01:15.258 --> 01:19.580
+dnf install memcached, that's the name of the package.
+
+01:20.927 --> 01:22.800
+Okay, memcached is installed.
+
+01:22.800 --> 01:24.777
+Let's start the memcached service.
+
+01:24.777 --> 01:28.260
+So systemctl start memcached.
+
+01:28.260 --> 01:32.133
+And we'll enable the service. Enable.
+
+01:33.120 --> 01:36.150
+Okay, now the next command, that's a sed command.
+
+01:36.150 --> 01:37.710
+We know this, search and replace.
+
+01:37.710 --> 01:42.270
+So it is searching for this 127.0.0.1
+
+01:42.270 --> 01:44.727
+and replacing it with 0.0.0
+
+01:46.020 --> 01:48.030
+and it is doing it in this file.
+
+01:48.030 --> 01:51.120
+So what does this mean and what does this do?
+
+01:51.120 --> 01:54.270
+Well, this is very important for you to understand.
+
+01:54.270 --> 01:56.280
+Whenever you set up a stack,
+
+01:56.280 --> 01:59.280
+now this is a stack, combination of multiple services
+
+01:59.280 --> 02:01.620
+working together as a single unit.
+
+02:01.620 --> 02:02.910
+It's a stack.
+
+02:02.910 --> 02:04.980
+Your multiple services, these services
+
+02:04.980 --> 02:07.830
+are designed to connect with each other.
+
+02:07.830 --> 02:11.400
+Like in our case, we'll have the Tomcat,
+
+02:11.400 --> 02:12.750
+our application running on that,
+
+02:12.750 --> 02:16.380
+and that will try to connect to Memcache service
+
+02:16.380 --> 02:19.800
+for the caching requirement, database caching.
+
+02:19.800 --> 02:22.500
+Now that's a remote connection, right?
+
+02:22.500 --> 02:24.270
+Memcache is on a different machine
+
+02:24.270 --> 02:26.730
+and Tomcat is on a different machine.
+
+02:26.730 --> 02:29.160
+Now many of the services are designed
+
+02:29.160 --> 02:33.120
+to, by default, not listen to remote connection.
+
+02:33.120 --> 02:34.680
+They don't listen to remote connection,
+
+02:34.680 --> 02:36.570
+only local connection.
+
+02:36.570 --> 02:39.030
+So every service will have its configuration file
+
+02:39.030 --> 02:41.910
+where it's picking up things like this file over here
+
+02:41.910 --> 02:44.400
+is for Memcache to pick up some settings
+
+02:44.400 --> 02:46.170
+when Memcache service starts.
+
+02:46.170 --> 02:47.913
+So let's take a look at this file.
+
+02:52.290 --> 02:54.090
+Hmm, just some variables.
+
+02:54.090 --> 02:56.610
+Some configuration files will be huge.
+
+02:56.610 --> 03:00.903
+Here you see OPTIONS -l 127.0.0.1.
+
+03:00.903 --> 03:02.310
+This is the local IP.
+
+03:02.310 --> 03:05.670
+Every machine refer to itself with this IP address.
+
+03:05.670 --> 03:07.050
+And when the Memcache starts
+
+03:07.050 --> 03:10.470
+by default it is designed to listen to only local IP,
+
+03:10.470 --> 03:11.790
+not the remote IP.
+
+03:11.790 --> 03:13.530
+So we need to change this.
+
+03:13.530 --> 03:16.890
+Either here we mention the IP address of the Tomcat machine,
+
+03:16.890 --> 03:19.950
+or we say 0.0.0.0.
+
+03:19.950 --> 03:22.470
+That means all in networking.
+
+03:22.470 --> 03:25.530
+Like in Linux we have star, that means everything,
+
+03:25.530 --> 03:27.993
+in networking 0.0.0.
+
+03:29.250 --> 03:32.670
+Did I say four zeros? Yeah, yeah.
+
+03:32.670 --> 03:36.240
+So IPv4. All the IPv4.
+
+03:36.240 --> 03:40.020
+It can listen to all the IPv4. That's what it means.
+
+03:40.020 --> 03:41.490
+And that's really difficult to remember.
+
+03:41.490 --> 03:43.080
+Really, I see all the zeros or not,
+
+03:43.080 --> 03:45.630
+but you know, let's just run this command
+
+03:45.630 --> 03:48.060
+and make the changes.
+
+03:48.060 --> 03:48.910
+Copy this
+
+03:50.460 --> 03:51.753
+and paste it.
+
+03:53.850 --> 03:57.480
+And let's look at the file again. There.
+
+03:57.480 --> 04:00.660
+Or you can just manually, you know, just vi this file,
+
+04:00.660 --> 04:02.190
+open this file and make the changes.
+
+04:02.190 --> 04:05.310
+You can do that also. It's a very good lesson for you.
+
+04:05.310 --> 04:09.000
+If a service is not able to connect to a remote service,
+
+04:09.000 --> 04:11.130
+even though the service is running, everything is fine,
+
+04:11.130 --> 04:12.510
+network is fine, everything is fine,
+
+04:12.510 --> 04:14.880
+make sure you check whether it is designed
+
+04:14.880 --> 04:17.460
+to run remote connection or not.
+
+04:17.460 --> 04:20.310
+Most of the services are not designed like this.
+
+04:20.310 --> 04:24.090
+They will be mentioning local IPs for security reasons.
+
+04:24.090 --> 04:25.860
+Anyways, we're done here.
+
+04:25.860 --> 04:27.360
+So let's restart Memcache service
+
+04:27.360 --> 04:29.220
+because we made a configuration change.
+
+04:29.220 --> 04:32.730
+Whenever we make configuration change, what is the rule?
+
+04:32.730 --> 04:37.050
+That's right, we restart the service. So restart memcached.
+
+04:37.050 --> 04:38.490
+Again, the firewall rules,
+
+04:38.490 --> 04:41.160
+you can execute them or you can skip them.
+
+04:41.160 --> 04:43.140
+As I said, we're going to talk about them later,
+
+04:43.140 --> 04:45.483
+but you have to execute this command.
+
+04:50.550 --> 04:54.210
+It's not a firewall command, it's a memcached command,
+
+04:54.210 --> 04:57.290
+which says, you know, listen on port 11211
+
+04:57.290 --> 05:00.090
+and UDP port 11111 again.
+
+05:00.090 --> 05:02.250
+Did I say five times 1?
+
+05:02.250 --> 05:03.300
+Anyways, you know that, right?
+
+05:03.300 --> 05:05.880
+So -u memcached and -d means DAMON,
+
+05:05.880 --> 05:07.770
+run it in the background.
+
+05:07.770 --> 05:09.537
+And that's how we set up Memcache service
+
+05:09.537 --> 05:11.190
+for vprofile-project.
+
+05:11.190 --> 05:14.100
+In the next lecture, we will set up RabbitMQ service.
+
+05:14.100 --> 05:18.010
+So finish this and make sure you log out from here
+
+05:19.050 --> 05:20.900
+and then join me in the next lecture.

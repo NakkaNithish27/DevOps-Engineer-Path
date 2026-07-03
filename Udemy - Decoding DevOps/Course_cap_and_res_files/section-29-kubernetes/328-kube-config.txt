@@ -1,0 +1,697 @@
+WEBVTT
+
+1
+00:00:01.390 --> 00:00:01.940
+Welcome.
+
+2
+00:00:03.530 --> 00:00:07.230
+When I first executed my kubectl commands,
+
+3
+00:00:07.670 --> 00:00:10.554
+in few minutes, I started wondering how this
+
+4
+00:00:10.592 --> 00:00:14.610
+kubectl is connecting to the Kubernetes cluster.
+
+5
+00:00:14.990 --> 00:00:18.366
+How does it know where is my master node and
+
+6
+00:00:18.428 --> 00:00:21.630
+how does it get authenticated and get all that information
+
+7
+00:00:21.740 --> 00:00:25.710
+from the cluster or even create information in the cluster?
+
+8
+00:00:26.390 --> 00:00:29.190
+Well, the answer is kubeconfig file.
+
+9
+00:00:30.830 --> 00:00:32.790
+When we created the cluster by using
+
+10
+00:00:32.840 --> 00:00:35.098
+kops or by any other method.
+
+11
+00:00:35.134 --> 00:00:37.494
+When we create the Kubernetes cluster, we
+
+12
+00:00:37.532 --> 00:00:39.802
+get a file called kubeconfig file.
+
+13
+00:00:39.886 --> 00:00:41.590
+We'll see where it is located.
+
+14
+00:00:41.770 --> 00:00:45.334
+But this file contains these information cluster
+
+15
+00:00:45.382 --> 00:00:48.654
+information users that it is going to
+
+16
+00:00:48.692 --> 00:00:50.206
+use to access the cluster.
+
+17
+00:00:50.278 --> 00:00:51.274
+And it's plural.
+
+18
+00:00:51.322 --> 00:00:54.586
+So you can have multiple clusters, multiple
+
+19
+00:00:54.658 --> 00:00:58.818
+users namespaces, which we'll see what are
+
+20
+00:00:58.844 --> 00:01:02.910
+they in next lecture and authentication mechanism.
+
+21
+00:01:03.470 --> 00:01:05.862
+Like when you want to do SSH, you need
+
+22
+00:01:05.936 --> 00:01:09.618
+the IP address, you need the username and you
+
+23
+00:01:09.644 --> 00:01:13.854
+need the password or the login key.
+
+24
+00:01:14.012 --> 00:01:14.960
+Like that.
+
+25
+00:01:15.290 --> 00:01:18.418
+kubectl needs cluster information, user
+
+26
+00:01:18.454 --> 00:01:22.350
+information, authentication mechanism and also namespace.
+
+27
+00:01:25.710 --> 00:01:27.962
+This is how a kubeconfig file
+
+28
+00:01:27.986 --> 00:01:30.240
+will look like with actual information.
+
+29
+00:01:30.630 --> 00:01:32.102
+This is just a sample.
+
+30
+00:01:32.246 --> 00:01:34.894
+So you will have clusters information and
+
+31
+00:01:34.992 --> 00:01:37.034
+you see it's in a list format.
+
+32
+00:01:37.202 --> 00:01:39.698
+So you'll have multiple cluster information, you'll
+
+33
+00:01:39.734 --> 00:01:44.170
+have users information, multiple user information context.
+
+34
+00:01:44.610 --> 00:01:47.942
+Context basically tells for this particular cluster.
+
+35
+00:01:48.026 --> 00:01:50.638
+Use this user to log in and also
+
+36
+00:01:50.664 --> 00:01:54.370
+it will have user login information the authentication.
+
+37
+00:01:54.870 --> 00:01:57.542
+Now let's see our actual coup config file.
+
+38
+00:01:57.566 --> 00:01:59.350
+Let's go to our terminal.
+
+39
+00:02:01.650 --> 00:02:03.670
+I'm inside this kops VM.
+
+40
+00:02:03.990 --> 00:02:06.182
+This is easy to instance from where I created
+
+41
+00:02:06.206 --> 00:02:09.253
+the cluster and when I created the cluster.
+
+42
+00:02:09.422 --> 00:02:14.470
+In my home directory, you see a directory called kube.
+
+43
+00:02:14.970 --> 00:02:18.194
+My home directory means the Ubuntu user home directory.
+
+44
+00:02:18.302 --> 00:02:23.210
+I'm over here and over here, we have dot kube.
+
+45
+00:02:23.390 --> 00:02:26.962
+And in the dot kubedirectory we
+
+46
+00:02:26.976 --> 00:02:28.990
+will see a file called config.
+
+47
+00:02:30.510 --> 00:02:34.022
+Let's open this file vim kube
+
+48
+00:02:34.106 --> 00:02:40.070
+or we'll just use less kubeconfig.
+
+49
+00:02:43.250 --> 00:02:43.926
+All right.
+
+50
+00:02:44.048 --> 00:02:46.462
+Not so easy to understand at first glance,
+
+51
+00:02:46.546 --> 00:02:50.250
+but it's really those information we talked about.
+
+52
+00:02:50.420 --> 00:02:54.538
+We have clusters and this is one cluster
+
+53
+00:02:54.634 --> 00:02:57.510
+and this is the certificate for that cluster.
+
+54
+00:02:59.370 --> 00:03:00.970
+This is the URL.
+
+55
+00:03:02.850 --> 00:03:05.510
+This is the URL of your master node.
+
+56
+00:03:05.570 --> 00:03:09.506
+API server APS server location.
+
+57
+00:03:09.698 --> 00:03:13.846
+Now, why is this API server information
+
+58
+00:03:13.968 --> 00:03:16.690
+API server lives in the master node.
+
+59
+00:03:17.550 --> 00:03:20.278
+And when we created the Kubernetes cluster by
+
+60
+00:03:20.304 --> 00:03:23.700
+using kops, it did one more thing.
+
+61
+00:03:24.870 --> 00:03:28.594
+In the route 53 hosted zone, we see one
+
+62
+00:03:28.632 --> 00:03:33.720
+record that is created by kops API and its
+
+63
+00:03:34.830 --> 00:03:38.050
+value is the IP address of our master node.
+
+64
+00:03:38.970 --> 00:03:42.898
+Read that IP and let me take you
+
+65
+00:03:42.924 --> 00:03:47.234
+to the EC2 dashboard master node.
+
+66
+00:03:47.282 --> 00:03:51.062
+And you see the IP address and the API
+
+67
+00:03:51.146 --> 00:03:53.198
+server we know lives in the control plane.
+
+68
+00:03:53.234 --> 00:03:54.806
+In the master node.
+
+69
+00:03:54.998 --> 00:03:58.570
+kubectl connects to the API server.
+
+70
+00:03:59.130 --> 00:04:01.210
+That means to the master node.
+
+71
+00:04:02.610 --> 00:04:04.390
+Let's go back to your terminal.
+
+72
+00:04:06.210 --> 00:04:10.534
+So api.kubevpro.groophy.in basically
+
+73
+00:04:10.632 --> 00:04:14.458
+means the IP address of our master node name.
+
+74
+00:04:14.544 --> 00:04:17.050
+That's the name of the cluster that it has given.
+
+75
+00:04:17.100 --> 00:04:20.302
+So this is all cluster information like that.
+
+76
+00:04:20.315 --> 00:04:22.682
+You can have multiple cluster information in this file,
+
+77
+00:04:22.706 --> 00:04:25.390
+you can have multiple kubernetes cluster and you can
+
+78
+00:04:25.440 --> 00:04:28.826
+feed the information over here in the same format.
+
+79
+00:04:29.018 --> 00:04:32.220
+Then let's go to the end of this file shift g.
+
+80
+00:04:33.990 --> 00:04:35.170
+Okay, see lot of things.
+
+81
+00:04:35.220 --> 00:04:39.190
+Let me scroll up users.
+
+82
+00:04:39.870 --> 00:04:41.566
+So that's the user name.
+
+83
+00:04:41.688 --> 00:04:44.750
+It is same as the cluster name user.
+
+84
+00:04:44.810 --> 00:04:47.606
+And this is the certificate for the user.
+
+85
+00:04:47.798 --> 00:04:50.640
+And then here we have the key.
+
+86
+00:04:51.330 --> 00:04:53.858
+So this will be used to authenticate.
+
+87
+00:04:54.014 --> 00:04:56.638
+It's going to use this like when we do SSH, we
+
+88
+00:04:56.664 --> 00:04:59.820
+have username and we have a login key similar to that.
+
+89
+00:05:00.450 --> 00:05:04.210
+And then in the middle of this we have context.
+
+90
+00:05:05.010 --> 00:05:10.322
+Context really marries cluster with the user.
+
+91
+00:05:10.466 --> 00:05:14.290
+That means for this cluster use this user.
+
+92
+00:05:14.610 --> 00:05:16.774
+Don't get confused, the same name.
+
+93
+00:05:16.812 --> 00:05:19.740
+But this is username and this is the cluster name.
+
+94
+00:05:20.130 --> 00:05:22.046
+And then you have current context.
+
+95
+00:05:22.118 --> 00:05:24.862
+Now you can have multiple cluster information,
+
+96
+00:05:24.996 --> 00:05:28.946
+multiple user information and multiple context.
+
+97
+00:05:29.138 --> 00:05:31.930
+But kubectl command, when you run by
+
+98
+00:05:31.980 --> 00:05:34.870
+default, it will use your current context.
+
+99
+00:05:35.370 --> 00:05:38.434
+If you wish we can change the context also while
+
+100
+00:05:38.472 --> 00:05:41.902
+running the kubectl command that I will show you in
+
+101
+00:05:41.916 --> 00:05:44.520
+the cheat sheet section how to do that.
+
+102
+00:05:45.390 --> 00:05:46.978
+So one last thing before we
+
+103
+00:05:47.004 --> 00:05:48.550
+move on to the next lecture.
+
+104
+00:05:49.050 --> 00:05:50.230
+Documentation.
+
+105
+00:05:51.930 --> 00:05:54.694
+So I simply search for kubeconfig and I came here.
+
+106
+00:05:54.732 --> 00:05:57.146
+This is the documentation of the kubeconfig file.
+
+107
+00:05:57.158 --> 00:05:59.554
+You have detailed information about what
+
+108
+00:05:59.592 --> 00:06:03.422
+is context kubectl config used context.
+
+109
+00:06:03.566 --> 00:06:05.578
+You can set a context, you can
+
+110
+00:06:05.604 --> 00:06:08.666
+say kubectl configview to see your context.
+
+111
+00:06:08.738 --> 00:06:18.210
+Let's run that command so it shows your context
+
+112
+00:06:18.270 --> 00:06:22.780
+and you see the certificates are all hidden here.
+
+113
+00:06:24.370 --> 00:06:25.382
+Let's go back to the
+
+114
+00:06:25.396 --> 00:06:28.994
+documentation again, few more things.
+
+115
+00:06:29.032 --> 00:06:31.718
+You can pass a queue config file you can
+
+116
+00:06:31.804 --> 00:06:36.378
+mention by default it will use kubeconfig file.
+
+117
+00:06:36.414 --> 00:06:39.362
+But if you want, you can specify different location of
+
+118
+00:06:39.376 --> 00:06:45.862
+your kubeconfig file also by using this flag context.
+
+119
+00:06:46.006 --> 00:06:47.566
+There can be many context.
+
+120
+00:06:47.698 --> 00:06:49.714
+When you work in a large scale environment,
+
+121
+00:06:49.762 --> 00:06:51.726
+there'll be multiple contexts and you can mention
+
+122
+00:06:51.788 --> 00:06:53.514
+which context do you want to use.
+
+123
+00:06:53.672 --> 00:06:56.958
+You can also mention flags like I want to use
+
+124
+00:06:56.984 --> 00:06:59.730
+this user and I want to use this cluster.
+
+125
+00:07:01.490 --> 00:07:04.054
+And if your cluster is really behind a proxy
+
+126
+00:07:04.102 --> 00:07:07.460
+server, you can mention a proxy server URL also.
+
+127
+00:07:08.270 --> 00:07:10.030
+So take a look at the documentation
+
+128
+00:07:10.090 --> 00:07:12.030
+before you move to the next lecture.
+
+129
+00:07:13.010 --> 00:07:15.390
+I will put the link in the resource section.
+
+130
+00:07:15.950 --> 00:07:17.730
+OK, one more last thing before
+
+131
+00:07:17.780 --> 00:07:19.350
+we move to the next lecture.
+
+132
+00:07:21.350 --> 00:07:26.058
+I'm back in my kops VM and I'm going to
+
+133
+00:07:26.084 --> 00:07:34.914
+do cat kubeconfig or better you can be in any
+
+134
+00:07:34.952 --> 00:07:37.494
+directory and you can run this command I will give
+
+135
+00:07:37.532 --> 00:07:44.910
+here tilde that means my home directory config file and
+
+136
+00:07:44.960 --> 00:07:56.734
+I'm going to copy this file, I copy the whole
+
+137
+00:07:56.772 --> 00:08:01.390
+content, I'm going to open another git bash terminal.
+
+138
+00:08:03.570 --> 00:08:05.678
+I will create a directory.
+
+139
+00:08:05.774 --> 00:08:08.030
+I'm in my local machine on my laptop.
+
+140
+00:08:08.090 --> 00:08:11.290
+I'm creating a directory kube.
+
+141
+00:08:12.810 --> 00:08:18.714
+And in that directory I'll create the file kube
+
+142
+00:08:18.762 --> 00:08:23.740
+config and I paste all the content here.
+
+143
+00:08:24.310 --> 00:08:25.854
+Make sure you copy and paste
+
+144
+00:08:25.902 --> 00:08:28.480
+properly, otherwise this will not work.
+
+145
+00:08:29.230 --> 00:08:34.270
+Save and Quit this is the documentation
+
+146
+00:08:34.330 --> 00:08:36.717
+of how to install kubectl on Linux.
+
+147
+00:08:36.813 --> 00:08:39.510
+Or you can also see how to do it on Windows.
+
+148
+00:08:40.909 --> 00:08:44.874
+Install tools kubectl on Linux, on
+
+149
+00:08:44.912 --> 00:08:46.366
+Mac OS or on Windows.
+
+150
+00:08:46.438 --> 00:08:50.910
+I have used chocolatey to install on Windows.
+
+151
+00:08:55.410 --> 00:08:57.194
+That's the command I have used choco
+
+152
+00:08:57.242 --> 00:09:00.838
+install kubernetes CLI so based on your
+
+153
+00:09:00.864 --> 00:09:03.050
+operating system, you can install kubectl.
+
+154
+00:09:03.110 --> 00:09:04.702
+You have kubeconfig file and you
+
+155
+00:09:04.716 --> 00:09:07.030
+can use kubectl from your laptop.
+
+156
+00:09:08.610 --> 00:09:10.738
+So once you install kubectl, then you can
+
+157
+00:09:10.764 --> 00:09:21.258
+say kubectl that's tested kubectl get nodes like
+
+158
+00:09:21.284 --> 00:09:23.442
+that and then you can continue using your
+
+159
+00:09:23.456 --> 00:09:25.414
+kubectl command from your laptop.
+
+160
+00:09:25.522 --> 00:09:28.114
+Now, kubeconfig file, you can have it anywhere.
+
+161
+00:09:28.222 --> 00:09:31.434
+You can use it in Jenkins to deploy or
+
+162
+00:09:31.472 --> 00:09:33.802
+apply or make changes to your kubernetes objects.
+
+163
+00:09:33.826 --> 00:09:35.206
+You can have it from ansible.
+
+164
+00:09:35.278 --> 00:09:36.418
+You can run it from anywhere.
+
+165
+00:09:36.454 --> 00:09:38.490
+You need to have kubeconfig file.
+
+166
+00:09:38.810 --> 00:09:40.338
+We will see later how to use
+
+167
+00:09:40.364 --> 00:09:42.920
+it from other tools like Jenkins also.
+
+168
+00:09:43.430 --> 00:09:46.078
+So in this course you can see me on the kops
+
+169
+00:09:46.114 --> 00:09:48.862
+VM or you can see me working on my laptop.
+
+170
+00:09:48.946 --> 00:09:50.914
+Just keep in mind I have my kube.
+
+171
+00:09:50.962 --> 00:09:53.602
+Config file saved in this location.
+
+172
+00:09:53.686 --> 00:09:55.760
+That's why I'm able to use it.
+
+173
+00:09:56.570 --> 00:10:00.030
+So set kubectl and kubeconfig file on your laptop.
+
+174
+00:10:00.350 --> 00:10:03.910
+Check it, test it and join me in the next lecture.

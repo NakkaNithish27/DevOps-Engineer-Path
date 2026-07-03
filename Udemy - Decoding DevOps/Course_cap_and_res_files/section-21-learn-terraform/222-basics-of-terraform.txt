@@ -1,0 +1,1027 @@
+WEBVTT
+
+00:00.300 --> 00:01.450
+Instructor: Welcome.
+
+00:02.520 --> 00:04.800
+In previous lecture I told you we are going
+
+00:04.800 --> 00:08.130
+to launch an EC2 instance by using Terraform
+
+00:08.130 --> 00:13.130
+and to launch an EC2 instance, we need to know its AMI ID.
+
+00:13.380 --> 00:14.850
+So first in this lecture we are going
+
+00:14.850 --> 00:18.030
+to talk about finding the AMI ID.
+
+00:18.030 --> 00:19.410
+So there are multiple ways.
+
+00:19.410 --> 00:24.390
+One of the simplest way is to click on a launch instance
+
+00:24.390 --> 00:28.560
+and in the quick start you get here the AMI ID.
+
+00:28.560 --> 00:30.810
+So for that is for Amazon Linux.
+
+00:30.810 --> 00:32.643
+You can check it for Ubuntu,
+
+00:33.720 --> 00:38.720
+is the AMI ID for Ubuntu server 24 at HVM SSD volume type.
+
+00:39.570 --> 00:43.300
+And you can select the different versions of the AMI
+
+00:45.330 --> 00:47.460
+and find the AMI ID.
+
+00:47.460 --> 00:49.740
+The other way is you can simply Google
+
+00:49.740 --> 00:52.740
+or search on the internet, find the so-and-so AMI ID
+
+00:52.740 --> 00:54.810
+and you will get some website.
+
+00:54.810 --> 00:59.220
+For example if I were to find Ubuntu AMI ID is Ubuntu
+
+00:59.220 --> 01:01.233
+Amazon EC2 AMI finder.
+
+01:02.310 --> 01:04.920
+And here we see the region,
+
+01:04.920 --> 01:09.480
+the versions, architecture, release date, and the AMI ID.
+
+01:09.480 --> 01:12.360
+Keep one thing in mind, AMI ID is different
+
+01:12.360 --> 01:14.400
+for different region.
+
+01:14.400 --> 01:19.400
+So Ubuntu 24 HVM SSD volume Type AMI ID
+
+01:19.590 --> 01:22.410
+for the region North Virginia,
+
+01:22.410 --> 01:25.260
+which is US East one is this.
+
+01:25.260 --> 01:30.090
+But if you switch the region for the same name of the AMI,
+
+01:30.090 --> 01:31.530
+you'll get a different ID.
+
+01:31.530 --> 01:33.123
+So that keep in mind,
+
+01:34.980 --> 01:39.510
+so I search here Jammy jellyfish, that is Ubuntu 22
+
+01:39.510 --> 01:41.190
+for AP South one.
+
+01:41.190 --> 01:43.255
+If you see same instance type,
+
+01:43.255 --> 01:47.433
+you see the AMI ID are different for every region.
+
+01:48.900 --> 01:52.260
+There are also AWS documentation which will tell you how
+
+01:52.260 --> 01:57.260
+to find an EC2 instance AMI ID, find an AMI using Amazon EC2
+
+01:58.140 --> 02:00.390
+console that we have just seen.
+
+02:00.390 --> 02:04.140
+We can also find it through CLI, Command Line Interface
+
+02:04.140 --> 02:07.470
+and we can also find it by using Terraform.
+
+02:07.470 --> 02:10.710
+Yes, that's what we are going to do the first thing.
+
+02:10.710 --> 02:12.360
+So the basics of Terraform, we are going
+
+02:12.360 --> 02:15.210
+to learn by finding first the AMI ID,
+
+02:15.210 --> 02:18.600
+and then we are going to launch the instance.
+
+02:18.600 --> 02:21.183
+So first I want you to create a folder.
+
+02:22.050 --> 02:23.740
+I have created an F drive
+
+02:24.600 --> 02:25.650
+and in that I'm going
+
+02:25.650 --> 02:28.653
+to create another folder called Exercise one.
+
+02:31.500 --> 02:34.350
+Now the name of this folders are optional,
+
+02:34.350 --> 02:37.803
+I mean to say you can give other names if you wish to.
+
+02:37.803 --> 02:38.636
+I've just given the name Terraform.
+
+02:38.636 --> 02:41.130
+You can give any other name if you wish to,
+
+02:41.130 --> 02:42.300
+just giving exercise one
+
+02:42.300 --> 02:43.410
+because that's where we are going
+
+02:43.410 --> 02:45.630
+to write our first exercise.
+
+02:45.630 --> 02:47.730
+Now let's open VS code
+
+02:47.730 --> 02:51.120
+and open the folder over here which you have created.
+
+02:51.120 --> 02:54.033
+So I'm going to say file, open folder,
+
+02:55.020 --> 02:56.883
+and I select my folder.
+
+02:59.760 --> 03:01.500
+So we are going to write Terraform code
+
+03:01.500 --> 03:04.740
+and let's install the extension pack from VS code.
+
+03:04.740 --> 03:09.437
+So click over here extensions and search for Terraform.
+
+03:09.437 --> 03:11.287
+Now this is not mandatory
+
+03:11.287 --> 03:14.370
+but this will give you a good help in formatting
+
+03:14.370 --> 03:15.870
+your code properly.
+
+03:15.870 --> 03:20.260
+So I'm going to install HashiCorp Terraform, install
+
+03:21.210 --> 03:23.580
+and this is just as per your choice you can use any other
+
+03:23.580 --> 03:24.840
+extension or if you don't want
+
+03:24.840 --> 03:26.643
+to use extension, that is also fine.
+
+03:28.350 --> 03:29.730
+Okay, now let's create a file.
+
+03:29.730 --> 03:32.170
+So we are going to go to exercise one here,
+
+03:32.170 --> 03:33.450
+going to click on this
+
+03:33.450 --> 03:36.000
+and here we are going to create a new file.
+
+03:36.000 --> 03:39.870
+I'm going to name it as InstID.TF.
+
+03:39.870 --> 03:44.400
+Make sure you give the extension as .TF, hit enter.
+
+03:44.400 --> 03:47.730
+So as I told you, we are going to first find the AMI ID
+
+03:47.730 --> 03:49.287
+by using Terraform.
+
+03:49.287 --> 03:52.860
+Now it's not mandatory, it's just an exercise for you
+
+03:52.860 --> 03:55.230
+to learn the basics of Terraform.
+
+03:55.230 --> 03:59.220
+You can find the AMI ID from the console from command line.
+
+03:59.220 --> 04:01.440
+Also you can find it by using Terraform
+
+04:01.440 --> 04:05.370
+and you can again use that in the same Terraform code also.
+
+04:05.370 --> 04:08.190
+So let's see how we can find the AMI ID.
+
+04:08.190 --> 04:11.376
+So Terraform gives us resources first of all
+
+04:11.376 --> 04:13.110
+from a provider.
+
+04:13.110 --> 04:16.440
+Providers are like AWS is a provider.
+
+04:16.440 --> 04:18.150
+So we are not going to do anything
+
+04:18.150 --> 04:20.700
+with the resources from AWS provider.
+
+04:20.700 --> 04:22.320
+We just want to fetch the information
+
+04:22.320 --> 04:25.050
+and it is outside of Terraform.
+
+04:25.050 --> 04:28.231
+And to get information that is outside of Terraform,
+
+04:28.231 --> 04:31.050
+we use data sources.
+
+04:31.050 --> 04:32.250
+That's how we define it.
+
+04:32.250 --> 04:35.820
+We say data and we give the resource name,
+
+04:35.820 --> 04:38.460
+which is going to fetch the data for us.
+
+04:38.460 --> 04:43.290
+And the resource for that is AWS_AMI.
+
+04:43.290 --> 04:46.440
+You need to put the resource name in the double codes
+
+04:46.440 --> 04:49.260
+and this is predefined resource in the Terraform.
+
+04:49.260 --> 04:51.162
+And I'm going to show you how Terraform
+
+04:51.162 --> 04:55.440
+downloads information of this resource in a moment.
+
+04:55.440 --> 04:57.330
+So after the resource you give a name
+
+04:57.330 --> 05:01.050
+to the resource, which is referred in your Terraform code.
+
+05:01.050 --> 05:03.960
+So I'm giving name as AMI ID. You can give here anything.
+
+05:03.960 --> 05:07.740
+And then you need to give the resource block in curly brace.
+
+05:07.740 --> 05:09.780
+So open and close curly brace.
+
+05:09.780 --> 05:12.860
+And in between this you give the arguments.
+
+05:12.860 --> 05:17.860
+So for example, from the resource AWS_AMI,
+
+05:18.029 --> 05:20.880
+one of the argument is most_recent
+
+05:20.880 --> 05:23.790
+and its value can be true or false.
+
+05:23.790 --> 05:26.100
+And all this is in the documentations.
+
+05:26.100 --> 05:28.338
+You don't need to worry, you don't need to buy heart
+
+05:28.338 --> 05:32.820
+the arguments or even the resource name also.
+
+05:32.820 --> 05:35.190
+So now to get the AMI ID, we need
+
+05:35.190 --> 05:37.767
+to put some filters, the search, right?
+
+05:37.767 --> 05:41.370
+That's how the data is going to, the data over here is going
+
+05:41.370 --> 05:43.680
+to find the actual data that we are looking for,
+
+05:43.680 --> 05:45.600
+which is instance ID.
+
+05:45.600 --> 05:47.490
+So we have an argument called filter.
+
+05:47.490 --> 05:51.210
+We can give the name of the filter like what we do search.
+
+05:51.210 --> 05:54.450
+So we going to write here, filter, open
+
+05:54.450 --> 05:58.170
+and close curly brace and we give here name.
+
+05:58.170 --> 05:59.820
+That will be the name of the filter.
+
+05:59.820 --> 06:01.959
+And the name of the filter is name itself
+
+06:01.959 --> 06:05.850
+for the AMI ID we have name right
+
+06:05.850 --> 06:07.890
+and what should be the value of the name
+
+06:07.890 --> 06:09.270
+that we need to give in the filter.
+
+06:09.270 --> 06:12.630
+So value is equal to, sorry, it's not in double quotes.
+
+06:12.630 --> 06:15.300
+The value is in the format of a dictionary.
+
+06:15.300 --> 06:16.893
+A list, I mean to say.
+
+06:18.360 --> 06:22.230
+Oh my bad it's "values" with an S.
+
+06:22.230 --> 06:24.960
+So in the square bracket in the double codes
+
+06:24.960 --> 06:29.910
+I give Ubuntu/images/hvm-ssd/ubuntu-jammy-22.
+
+06:29.910 --> 06:32.550
+So that's the name from the AMI ID that we get.
+
+06:32.550 --> 06:35.670
+That's what I'm putting it over here. Hyphen Star.
+
+06:35.670 --> 06:38.820
+That means this should be in the name.
+
+06:38.820 --> 06:40.860
+And then hyphen star means you know,
+
+06:40.860 --> 06:43.620
+star at the end means it could end with any name.
+
+06:43.620 --> 06:46.260
+Now it could have some version or anything like that.
+
+06:46.260 --> 06:47.640
+One more filter that I want
+
+06:47.640 --> 06:50.340
+to give is the hardware virtualization type.
+
+06:50.340 --> 06:54.720
+I want HVM. So I give one more filter name virtualization
+
+06:54.720 --> 06:56.730
+type value HVM.
+
+06:56.730 --> 06:59.820
+And there is also one more argument owners.
+
+06:59.820 --> 07:03.690
+Canonical has created this EMI on AWS.
+
+07:03.690 --> 07:06.420
+So we need to give the canonical ID.
+
+07:06.420 --> 07:11.133
+So the argument will be here owner with an S, owners.
+
+07:12.451 --> 07:15.420
+So if you're wondering how do I get all this information,
+
+07:15.420 --> 07:18.360
+I have just basically taken all this from the documentation,
+
+07:18.360 --> 07:20.730
+which I'll show you in some time.
+
+07:20.730 --> 07:22.440
+So please do not worry about you know,
+
+07:22.440 --> 07:24.090
+all these different names.
+
+07:24.090 --> 07:25.710
+Just understand the structure.
+
+07:25.710 --> 07:29.010
+The first lecture over here focuses on understanding the
+
+07:29.010 --> 07:31.860
+Terraform code structure and execution of it.
+
+07:31.860 --> 07:35.370
+So once again, data resource to fetch the data from
+
+07:35.370 --> 07:36.930
+outside of Terraform.
+
+07:36.930 --> 07:41.310
+And we are using a resource type AWS_AMI,
+
+07:41.310 --> 07:43.530
+which is predefined in Terraform.
+
+07:43.530 --> 07:44.700
+So this is resource type
+
+07:44.700 --> 07:46.200
+and this is resource name,
+
+07:46.200 --> 07:48.270
+name we can give anything we want.
+
+07:48.270 --> 07:50.430
+And in this curly brace,
+
+07:50.430 --> 07:53.220
+this is called as the resource block.
+
+07:53.220 --> 07:55.380
+In resource block we have arguments.
+
+07:55.380 --> 07:58.280
+So we have most recent, we have filter,
+
+07:58.280 --> 08:00.840
+we have owners, right?
+
+08:00.840 --> 08:04.800
+And the resource will have, sorry, the arguments
+
+08:04.800 --> 08:07.320
+for example like owners will have a value
+
+08:07.320 --> 08:09.180
+equal to some value.
+
+08:09.180 --> 08:13.140
+So value could be a Boolean, like true false,
+
+08:13.140 --> 08:16.860
+it could be a string like in double course here we see it's
+
+08:16.860 --> 08:19.587
+a string, or it could be a list.
+
+08:19.587 --> 08:21.990
+And in the list we can have strings.
+
+08:21.990 --> 08:24.660
+So based on the documentation you need to find out
+
+08:24.660 --> 08:28.170
+what will be the value of a particular argument.
+
+08:28.170 --> 08:31.350
+Right, here values in square bracket set off strings,
+
+08:31.350 --> 08:34.650
+set basically like we have list in Python.
+
+08:34.650 --> 08:37.680
+So in square bracket we can have the list
+
+08:37.680 --> 08:41.220
+and list can have multiple values separated by comma
+
+08:41.220 --> 08:44.970
+and the values can be strings, Booleans, you know,
+
+08:44.970 --> 08:46.920
+based on the argument we can check in the
+
+08:46.920 --> 08:49.410
+documentation that we'll see later.
+
+08:49.410 --> 08:53.010
+Okay, now this is going to get the AMI ID for us
+
+08:53.010 --> 08:55.410
+that says it has the name so and so
+
+08:55.410 --> 08:58.893
+and virtualization type is HVM.
+
+08:58.893 --> 09:01.289
+Now we can use output
+
+09:01.289 --> 09:05.276
+to print the output of this.
+
+09:05.276 --> 09:08.670
+So after this block is completed over here you see
+
+09:08.670 --> 09:11.970
+for me in line number 15, this data block is completed.
+
+09:11.970 --> 09:14.889
+We are going to write output Block.
+
+09:14.889 --> 09:18.060
+Output is just like print we have in Python,
+
+09:18.060 --> 09:20.910
+we have print in Bash, we have Echo,
+
+09:20.910 --> 09:23.956
+like that in Terraform, we have output.
+
+09:23.956 --> 09:25.710
+We can give some name
+
+09:25.710 --> 09:29.023
+to our output like I'll say instance_ID.
+
+09:30.616 --> 09:35.010
+And then we create the block open and close curly brace.
+
+09:35.010 --> 09:37.320
+So we are going to have two arguments over here.
+
+09:37.320 --> 09:38.580
+One is the description,
+
+09:38.580 --> 09:41.550
+the other one is the value that we want to print.
+
+09:41.550 --> 09:44.031
+So description equal to in double codes
+
+09:44.031 --> 09:47.310
+I will write simply AMI ID of open to instance.
+
+09:47.310 --> 09:49.050
+That's a description, you can write anything
+
+09:49.050 --> 09:51.300
+that describes your output.
+
+09:51.300 --> 09:54.030
+And then the next argument value equal to.
+
+09:54.030 --> 09:57.360
+Now we want to print the instance ID over here.
+
+09:57.360 --> 09:58.530
+So let me scroll up.
+
+09:58.530 --> 10:00.660
+So this is how we can fetch the information.
+
+10:00.660 --> 10:03.457
+We have to give data.
+
+10:03.457 --> 10:08.223
+.AWS_AMI.AMIID.id.
+
+10:10.710 --> 10:12.480
+So what's going to happen when we execute this,
+
+10:12.480 --> 10:14.836
+there's going to generate a whole lot of information.
+
+10:14.836 --> 10:18.600
+And if you remember in Python we have seen how
+
+10:18.600 --> 10:21.679
+to fetch information from you know, within a dictionary.
+
+10:21.679 --> 10:25.740
+Similar way we have to fetch the information from here.
+
+10:25.740 --> 10:28.380
+So the value will be here.
+
+10:28.380 --> 10:32.130
+So it is a data.aws_ami.
+
+10:32.130 --> 10:36.690
+ami id dot.
+
+10:36.690 --> 10:39.300
+So this is the benefit of that extension that we installed.
+
+10:39.300 --> 10:40.434
+Terraform extension.
+
+10:40.434 --> 10:43.440
+Otherwise we need to go to the documentation to find out.
+
+10:43.440 --> 10:47.640
+So here you have ID, you know you'll get description,
+
+10:47.640 --> 10:50.340
+you'll get boot mode, other kind of architecture,
+
+10:50.340 --> 10:51.420
+these kind of information.
+
+10:51.420 --> 10:55.470
+We just interested in the ID. So we're going to do that .ID.
+
+10:55.470 --> 10:57.900
+Okay, before we execute, once again
+
+10:57.900 --> 11:00.150
+this is data source block.
+
+11:00.150 --> 11:04.950
+This is the output block. Here, this fetch the information.
+
+11:04.950 --> 11:07.530
+Here we are printing the information.
+
+11:07.530 --> 11:11.353
+Now I'm going to save this and we will execute this.
+
+11:11.353 --> 11:15.660
+So I will click over here, I will go to terminal
+
+11:15.660 --> 11:17.193
+and I'll say new terminal.
+
+11:19.170 --> 11:21.780
+So I have set the terminal as Git Bash.
+
+11:21.780 --> 11:23.520
+If you are getting here PowerShell
+
+11:23.520 --> 11:27.270
+or Command Prompt, you can switch to Git Bash
+
+11:27.270 --> 11:28.260
+or you can use PowerShell
+
+11:28.260 --> 11:31.290
+or Command Prompt also, that is also fine.
+
+11:31.290 --> 11:33.540
+But from the dropdown you can select here Git Bash.
+
+11:33.540 --> 11:35.940
+My Git Bash is the default one.
+
+11:35.940 --> 11:39.861
+Now you have to make sure you are in exercise one directory
+
+11:39.861 --> 11:42.060
+or whatever you created.
+
+11:42.060 --> 11:45.630
+Do an LS and check. Do you have the instance ID or not?
+
+11:45.630 --> 11:48.840
+I mean the instance ID.TF file or not?
+
+11:48.840 --> 11:51.790
+So first we are going to run the command Terraform
+
+11:53.160 --> 11:55.110
+space FMT format.
+
+11:55.110 --> 11:56.850
+So check, it'll check the format.
+
+11:56.850 --> 11:59.580
+If it's wrong, it's going to correct the format.
+
+11:59.580 --> 12:02.700
+And you see that it uses the indentation just shifted
+
+12:02.700 --> 12:04.171
+things from here to there.
+
+12:04.171 --> 12:07.650
+So a standard format it'll give you.
+
+12:07.650 --> 12:11.340
+And then also check the syntax
+
+12:11.340 --> 12:15.618
+by using validate terraform space validate.
+
+12:15.618 --> 12:17.575
+And that is not going to work
+
+12:17.575 --> 12:19.680
+because first we need to execute
+
+12:19.680 --> 12:21.453
+the Terraform INIT command.
+
+12:22.410 --> 12:24.390
+Let me clear the screen.
+
+12:24.390 --> 12:28.410
+So Terraform INIT, initialize.
+
+12:28.410 --> 12:32.250
+Now what this will do is it's going to read your TF files
+
+12:32.250 --> 12:35.230
+or all the TF files present in the current directory.
+
+12:35.230 --> 12:38.130
+It'll check all the resources
+
+12:38.130 --> 12:41.520
+and those resource information, the plugins,
+
+12:41.520 --> 12:45.360
+it is going to download from Terraform registry.
+
+12:45.360 --> 12:47.523
+So you just execute Terraform in it.
+
+12:49.710 --> 12:51.240
+See, that says finding latest version
+
+12:51.240 --> 12:53.490
+of HashiCorp/AWS.
+
+12:53.490 --> 12:54.450
+It detected that,
+
+12:54.450 --> 12:58.262
+that that's the provider, installing HashiCorp/AWS.
+
+12:58.262 --> 13:01.362
+So it's downing that provider information.
+
+13:01.362 --> 13:03.123
+This might take some time.
+
+13:04.860 --> 13:06.750
+Okay, so it says Terraform has been
+
+13:06.750 --> 13:08.580
+successfully initialized.
+
+13:08.580 --> 13:11.520
+I'm going to clear the screen and I'm going to run
+
+13:11.520 --> 13:14.340
+now Terraform validate.
+
+13:14.340 --> 13:17.430
+So now it'll see whether all the arguments
+
+13:17.430 --> 13:19.170
+and its value, whatever we mentioned is
+
+13:19.170 --> 13:21.330
+syntactically correct or not?
+
+13:21.330 --> 13:24.180
+And since configuration is valued, okay,
+
+13:24.180 --> 13:27.333
+next step is apply.
+
+13:28.440 --> 13:30.420
+Now we are not creating any resource over here,
+
+13:30.420 --> 13:32.647
+we are just fetching the information and printing it.
+
+13:32.647 --> 13:35.640
+But if you're actually creating some resource
+
+13:35.640 --> 13:39.870
+or maintaining some resource like instances, buckets, AWS,
+
+13:39.870 --> 13:43.200
+Lambda functions, whatever you do with Google Cloud,
+
+13:43.200 --> 13:45.900
+if you're maintaining those things, first thing is you need
+
+13:45.900 --> 13:50.820
+to check that what is actually going to be impacted.
+
+13:50.820 --> 13:54.330
+You don't want to delete a few things unnecessarily.
+
+13:54.330 --> 13:57.420
+So you need to check what is going to happen when I apply it
+
+13:57.420 --> 14:01.440
+and to check that we can use Terraform plan.
+
+14:01.440 --> 14:03.900
+Now here for this code doesn't make sense,
+
+14:03.900 --> 14:07.800
+but next lectures this will make more sense.
+
+14:07.800 --> 14:10.800
+So Terraform Plan is going to basically check
+
+14:10.800 --> 14:13.830
+what will be the impact of the resource
+
+14:13.830 --> 14:16.050
+that we execute, right?
+
+14:16.050 --> 14:19.140
+So it says it's reading this resource and read is completed
+
+14:19.140 --> 14:23.250
+and the changes to outputs will be the instance ID
+
+14:23.250 --> 14:24.083
+there in the plan itself.
+
+14:24.083 --> 14:27.480
+We got the instance ID, right? So that's what is saying.
+
+14:27.480 --> 14:29.400
+Saying you know, this will be the change,
+
+14:29.400 --> 14:31.770
+which basically is nothing.
+
+14:31.770 --> 14:33.390
+If your code you are writing
+
+14:33.390 --> 14:35.670
+and it may destroy a few things, delete few things,
+
+14:35.670 --> 14:37.740
+it'll tell you that it's going to destroy these things.
+
+14:37.740 --> 14:39.840
+And this will be created and this is going to happen.
+
+14:39.840 --> 14:41.460
+The whole detail.
+
+14:41.460 --> 14:44.490
+And then the next step will be to apply it.
+
+14:44.490 --> 14:47.013
+So we're going to set Terraform apply.
+
+14:48.480 --> 14:52.200
+So when we apply it is going to again print the information.
+
+14:52.200 --> 14:54.240
+It is going to say, are you okay with this action?
+
+14:54.240 --> 14:57.000
+And then we'll say yes, if we approve this,
+
+14:57.000 --> 14:59.310
+basically you have to read this,
+
+14:59.310 --> 15:00.930
+but as I told you, we are not making any change.
+
+15:00.930 --> 15:02.670
+So just simply typing, yes.
+
+15:02.670 --> 15:04.650
+But if this impacts anything,
+
+15:04.650 --> 15:06.300
+then you definitely read everything.
+
+15:06.300 --> 15:10.080
+And if you are okay, then only go yes. Right?
+
+15:10.080 --> 15:14.310
+And it says apply complete, zero added, zero changed,
+
+15:14.310 --> 15:16.170
+zero destroyed, right?
+
+15:16.170 --> 15:17.283
+We knew that already.
+
+15:19.159 --> 15:20.578
+Outputs instance, ID EMI.
+
+15:20.578 --> 15:21.411
+So a code here, right?
+
+15:21.411 --> 15:23.820
+Output instance ID
+
+15:23.820 --> 15:27.240
+value is this is the one, okay,
+
+15:27.240 --> 15:28.710
+put create, let me clear the screen
+
+15:28.710 --> 15:30.363
+and let me type history here.
+
+15:31.560 --> 15:34.890
+So after writing the code, we check Terraform format. FMT.
+
+15:34.890 --> 15:37.530
+We did Terraform validate it does not work
+
+15:37.530 --> 15:39.450
+because we have to initialize it first.
+
+15:39.450 --> 15:41.520
+So always initialize first, Terraform in it
+
+15:41.520 --> 15:45.270
+and then check Terraform, validate, and then Terraform plan.
+
+15:45.270 --> 15:50.010
+So what it is going to do, and then Terraform apply finally.
+
+15:50.010 --> 15:51.150
+So take a look at the code.
+
+15:51.150 --> 15:53.781
+Once again, I'm not going to explain it again.
+
+15:53.781 --> 15:54.900
+Take your time.
+
+15:54.900 --> 15:57.060
+You don't understand a few things, no problem.
+
+15:57.060 --> 15:58.680
+We going to learn things slowly one
+
+15:58.680 --> 16:01.020
+by one in the next lectures.
+
+16:01.020 --> 16:03.240
+In short, we just found the AMI ID
+
+16:03.240 --> 16:06.880
+by using AWS_AMI resource.
+
+16:06.880 --> 16:11.880
+We mentioned few arguments here and then we used output
+
+16:11.940 --> 16:16.046
+and instance idea as a name to print the value
+
+16:16.046 --> 16:20.310
+that we have fetched from the previous resource.
+
+16:20.310 --> 16:21.570
+Okay, that is all in this lecture.
+
+16:21.570 --> 16:24.330
+In the next lecture we are going to launch an EC2 instance
+
+16:24.330 --> 16:25.410
+by using Terraform.
+
+16:25.410 --> 16:28.263
+So wrap this up and join me in the next one.

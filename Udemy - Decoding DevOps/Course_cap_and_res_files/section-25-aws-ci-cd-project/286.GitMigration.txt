@@ -1,0 +1,9 @@
+# Git to git Migration with history 
+git clone <url to ORI repo> 
+git branch -a
+git checkout branch-name
+git fetch --tags
+git remote rm origin
+git remote add origin <url to NEW repo>
+git push origin --all
+git push --tags

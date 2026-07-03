@@ -1,0 +1,877 @@
+WEBVTT
+
+1
+00:00:00.850 --> 00:00:01.830
+Hello and welcome.
+
+2
+00:00:01.940 --> 00:00:03.570
+In this lecture we will talk
+
+3
+00:00:03.620 --> 00:00:08.730
+about kubectl tricks or tips.
+
+4
+00:00:09.410 --> 00:00:12.534
+Now no matter how many trips and tricks we
+
+5
+00:00:12.572 --> 00:00:15.534
+have, it's difficult to remember all of them.
+
+6
+00:00:15.572 --> 00:00:18.920
+So Kubernetes has created an amazing
+
+7
+00:00:19.550 --> 00:00:22.510
+document for that cheat sheet.
+
+8
+00:00:22.570 --> 00:00:28.818
+Just search for it kubectl cheat sheet and
+
+9
+00:00:28.844 --> 00:00:34.100
+it has these many regularly used commands that we
+
+10
+00:00:34.550 --> 00:00:37.306
+need in our day to day Kubernetes operations.
+
+11
+00:00:37.498 --> 00:00:40.002
+For example, kubectl config view
+
+12
+00:00:40.076 --> 00:00:42.754
+which will show us the configuration.
+
+13
+00:00:42.802 --> 00:00:43.890
+Cube config?
+
+14
+00:00:44.570 --> 00:00:46.722
+Yeah, kubectl config view and it
+
+15
+00:00:46.736 --> 00:00:48.202
+is showing the keep config file.
+
+16
+00:00:48.226 --> 00:00:49.398
+It's not showing all the
+
+17
+00:00:49.424 --> 00:00:52.280
+certificate, it's just hiding them.
+
+18
+00:00:53.210 --> 00:00:54.678
+That's one example like that,
+
+19
+00:00:54.704 --> 00:00:56.562
+you have many commands here.
+
+20
+00:00:56.756 --> 00:01:00.570
+You can see the output in JSON format
+
+21
+00:01:01.430 --> 00:01:06.730
+and you can selectively get the right keys.
+
+22
+00:01:06.910 --> 00:01:09.922
+So for example, in coupon sick file you have users.
+
+23
+00:01:09.946 --> 00:01:12.810
+So you have to say dot users and its value
+
+24
+00:01:12.860 --> 00:01:16.038
+is a list so that's the square bracket in that
+
+25
+00:01:16.124 --> 00:01:19.770
+dot name which will display the first user.
+
+26
+00:01:20.630 --> 00:01:24.438
+kubectl config get context or show me the
+
+27
+00:01:24.464 --> 00:01:29.070
+current context or use a particular context.
+
+28
+00:01:29.990 --> 00:01:30.978
+You want to change the
+
+29
+00:01:31.004 --> 00:01:32.454
+default context to something else.
+
+30
+00:01:32.492 --> 00:01:34.954
+You can have multiple context
+
+31
+00:01:35.122 --> 00:01:37.290
+in the same kubeconfig file.
+
+32
+00:01:38.210 --> 00:01:42.462
+When you are managing multiple Kubernetes clusters, you can
+
+33
+00:01:42.476 --> 00:01:44.910
+have one coupon SIG file that has information of
+
+34
+00:01:44.960 --> 00:01:47.302
+all the clusters and you can select the cluster,
+
+35
+00:01:47.326 --> 00:01:49.446
+you can select the context and use it.
+
+36
+00:01:49.568 --> 00:01:51.654
+So these are some commands for
+
+37
+00:01:51.692 --> 00:01:54.030
+regularly used command for cube config.
+
+38
+00:01:55.490 --> 00:01:57.380
+Then you have kubectl apply.
+
+39
+00:01:58.130 --> 00:02:00.222
+As we have seen, you can apply a manifest, you
+
+40
+00:02:00.236 --> 00:02:05.262
+can give a path, you can give multiple files, you
+
+41
+00:02:05.276 --> 00:02:08.937
+can mention a directory that may have multiple definitions, multiple
+
+42
+00:02:08.973 --> 00:02:13.246
+manifests, and all of them will be applied.
+
+43
+00:02:13.438 --> 00:02:17.118
+Or you can give a URL and at
+
+44
+00:02:17.144 --> 00:02:19.558
+that location you already have definition files.
+
+45
+00:02:19.594 --> 00:02:20.922
+The manifest file is just going
+
+46
+00:02:20.936 --> 00:02:23.660
+to use them and apply it.
+
+47
+00:02:24.290 --> 00:02:29.118
+Okay, kubectl create deployment NGINX image NGINX this is
+
+48
+00:02:29.144 --> 00:02:33.198
+going to start or create a deployment with a
+
+49
+00:02:33.224 --> 00:02:39.260
+pod which has the container images enginex imperative way.
+
+50
+00:02:39.890 --> 00:02:41.478
+But with this, I will show you
+
+51
+00:02:41.504 --> 00:02:46.590
+one cool trick to create the manifest.
+
+52
+00:02:47.150 --> 00:02:50.194
+So let's come to our shell.
+
+53
+00:02:50.302 --> 00:02:52.390
+So that's actually my cops VM.
+
+54
+00:02:52.450 --> 00:02:53.842
+I have the cubeconfig file.
+
+55
+00:02:53.866 --> 00:02:58.498
+There cubeconfig which will be used by kubectl.
+
+56
+00:02:58.534 --> 00:02:59.790
+The cluster is up and running.
+
+57
+00:02:59.840 --> 00:03:02.626
+I have cubeconfig file and I'm
+
+58
+00:03:02.638 --> 00:03:07.520
+going to run kubectl run. Sorry.
+
+59
+00:03:08.390 --> 00:03:09.666
+Let's start with run first.
+
+60
+00:03:09.728 --> 00:03:11.074
+Run means run a pod.
+
+61
+00:03:11.122 --> 00:03:14.286
+Okay, so kubectl run and I give a name.
+
+62
+00:03:14.348 --> 00:03:25.234
+I will say now if I hit enter, it is
+
+63
+00:03:25.272 --> 00:03:27.562
+going to create a pod and the container image will
+
+64
+00:03:27.576 --> 00:03:31.526
+be engineix and the name everything will be engineer pod.
+
+65
+00:03:31.658 --> 00:03:34.070
+But I'm not going to create it. This is imperative.
+
+66
+00:03:34.130 --> 00:03:37.466
+I already told you that we always go with declarative.
+
+67
+00:03:37.658 --> 00:03:44.830
+So what I do is I say run equal to client.
+
+68
+00:03:45.150 --> 00:03:45.842
+This is dry.
+
+69
+00:03:45.866 --> 00:03:47.786
+Then like just show me how you're
+
+70
+00:03:47.798 --> 00:03:49.680
+going to do, but don't do it.
+
+71
+00:03:50.250 --> 00:03:54.986
+And it's output in YAML format and I'm
+
+72
+00:03:54.998 --> 00:03:56.810
+going to redirect it to a file.
+
+73
+00:03:56.870 --> 00:03:58.750
+I'll say Ng Pod.
+
+74
+00:04:05.110 --> 00:04:08.058
+So all that output goes to that file.
+
+75
+00:04:08.094 --> 00:04:08.922
+It has not applied.
+
+76
+00:04:08.946 --> 00:04:10.130
+It's a dry run, right?
+
+77
+00:04:10.240 --> 00:04:11.478
+So let's see that file.
+
+78
+00:04:11.514 --> 00:04:16.625
+Now you have a pod definition file, right?
+
+79
+00:04:16.688 --> 00:04:17.529
+That's declarative.
+
+80
+00:04:17.589 --> 00:04:19.362
+Now you can open that file and make
+
+81
+00:04:19.375 --> 00:04:22.314
+the required changes if you want to just
+
+82
+00:04:22.352 --> 00:04:24.478
+avoid going to the Kubernetes documentation.
+
+83
+00:04:24.574 --> 00:04:27.090
+So creation timestamp, I'll remove that.
+
+84
+00:04:27.140 --> 00:04:30.574
+I will remove DNS policy, I will remove restart
+
+85
+00:04:30.622 --> 00:04:33.226
+policy, I will remove status, I'll remove resources.
+
+86
+00:04:33.298 --> 00:04:35.070
+And maybe I can add like port
+
+87
+00:04:35.120 --> 00:04:37.520
+numbers or volumes and stuff like that.
+
+88
+00:04:38.330 --> 00:04:40.938
+So save a quote and I can just say
+
+89
+00:04:40.964 --> 00:04:45.150
+kubectl apply to that definition file like that.
+
+90
+00:04:45.260 --> 00:04:49.350
+One more example like this for the deployment kubectl
+
+91
+00:04:50.150 --> 00:04:52.858
+and create run is only for the pod.
+
+92
+00:04:52.894 --> 00:04:56.022
+Otherwise it's always create CTL create I
+
+93
+00:04:56.036 --> 00:04:58.160
+will say create a deployment for me.
+
+94
+00:04:58.490 --> 00:05:02.278
+And the name I'm going to say NGDEP.
+
+95
+00:05:02.434 --> 00:05:05.974
+That will be the name of the deployment image.
+
+96
+00:05:06.082 --> 00:05:07.494
+That's minimum you have to give
+
+97
+00:05:07.532 --> 00:05:10.438
+when you are creating deployment image.
+
+98
+00:05:10.594 --> 00:05:12.390
+There are other options also you can pass.
+
+99
+00:05:12.440 --> 00:05:17.458
+But I'm going to just do a dry run for this equal
+
+100
+00:05:17.494 --> 00:05:23.458
+to client O Yammel and redirect the output to a file.
+
+101
+00:05:23.494 --> 00:05:27.690
+I'll say NGDEP YAML.
+
+102
+00:05:28.430 --> 00:05:31.102
+All right, I see NGDEP
+
+103
+00:05:31.246 --> 00:05:37.310
+YML that's deployment definition file.
+
+104
+00:05:37.370 --> 00:05:38.698
+And again, you can open, make
+
+105
+00:05:38.724 --> 00:05:41.086
+the changes and just apply it.
+
+106
+00:05:41.268 --> 00:05:43.730
+This is just if you want to avoid
+
+107
+00:05:43.790 --> 00:05:47.030
+going to the documentation to fetch the manifest
+
+108
+00:05:47.210 --> 00:05:48.946
+settings, you can just do it like this.
+
+109
+00:05:49.008 --> 00:05:53.158
+This is very helpful in Kubernetes exams, the
+
+110
+00:05:53.184 --> 00:05:56.770
+certification exam where the time is very critical,
+
+111
+00:05:57.690 --> 00:06:02.170
+you get documentation in the exam, but going
+
+112
+00:06:02.220 --> 00:06:06.000
+there, copying pasting just avoids that time.
+
+113
+00:06:06.510 --> 00:06:08.734
+Make sure you get a very good hands on this one
+
+114
+00:06:08.772 --> 00:06:12.230
+if you're going to go for exams and also regular operation.
+
+115
+00:06:12.290 --> 00:06:16.080
+Also, let's go back to the cheat sheet now.
+
+116
+00:06:18.090 --> 00:06:18.490
+Okay.
+
+117
+00:06:18.540 --> 00:06:21.406
+kubectl create job. Hello.
+
+118
+00:06:21.588 --> 00:06:23.220
+This is to create a job.
+
+119
+00:06:23.730 --> 00:06:27.754
+Alright, imperative kubectl explain pods many other
+
+120
+00:06:27.792 --> 00:06:30.660
+regularly used commands giving and finding information.
+
+121
+00:06:31.230 --> 00:06:32.774
+get pods -o wide.
+
+122
+00:06:32.822 --> 00:06:36.574
+We talked about this in lecture two,
+
+123
+00:06:36.612 --> 00:06:39.238
+one, seven different levels of logging where
+
+124
+00:06:39.264 --> 00:06:43.030
+we talked about this getting information describe.
+
+125
+00:06:45.210 --> 00:06:47.494
+You might also need to try these things.
+
+126
+00:06:47.652 --> 00:06:49.450
+Output in JSON format.
+
+127
+00:06:49.890 --> 00:06:52.882
+In curly brace it says dot items means that's going
+
+128
+00:06:52.896 --> 00:06:56.422
+to be the primary key in the JSON star means
+
+129
+00:06:56.556 --> 00:07:01.034
+all the values from the list and from that metadata.
+
+130
+00:07:01.142 --> 00:07:02.450
+Inside that you'll have labels.
+
+131
+00:07:02.510 --> 00:07:04.090
+Inside that you'll have version.
+
+132
+00:07:04.710 --> 00:07:07.498
+So if you just view this in a YAML format or
+
+133
+00:07:07.644 --> 00:07:11.938
+specifically JSON format, if you view, you can find out all
+
+134
+00:07:11.964 --> 00:07:15.766
+the keys and the list and you can construct it.
+
+135
+00:07:15.828 --> 00:07:17.700
+You should give a try to this one.
+
+136
+00:07:19.590 --> 00:07:21.310
+Okay, let's go down.
+
+137
+00:07:21.480 --> 00:07:24.830
+So many quick commands.
+
+138
+00:07:24.950 --> 00:07:27.670
+Okay, updating resources, set an image.
+
+139
+00:07:28.110 --> 00:07:31.786
+We talked about this in the deployment rollout history.
+
+140
+00:07:31.908 --> 00:07:35.578
+Undo restarted deployment which will restart all
+
+141
+00:07:35.604 --> 00:07:37.270
+your pod in the rolling fashion.
+
+142
+00:07:39.210 --> 00:07:39.902
+Expose.
+
+143
+00:07:39.986 --> 00:07:44.198
+This is to create a service imperative cube
+
+144
+00:07:44.234 --> 00:07:47.350
+CTL label add label to a pod.
+
+145
+00:07:48.390 --> 00:07:49.514
+Patching resources.
+
+146
+00:07:49.562 --> 00:07:52.750
+This will be also helpful but again try
+
+147
+00:07:52.860 --> 00:07:56.626
+avoid this in productions in real time.
+
+148
+00:07:56.748 --> 00:07:59.290
+Always go through definitions manifest.
+
+149
+00:07:59.610 --> 00:08:01.190
+But you can patch a resource.
+
+150
+00:08:01.250 --> 00:08:02.950
+You can patch a deployment as in
+
+151
+00:08:03.000 --> 00:08:05.940
+you can change a specific value.
+
+152
+00:08:07.050 --> 00:08:10.958
+On this example kubectl patch deployment patch this deployment
+
+153
+00:08:11.114 --> 00:08:13.478
+type JSON and what do I need to patch
+
+154
+00:08:13.514 --> 00:08:15.226
+means what do I really need to change?
+
+155
+00:08:15.288 --> 00:08:19.450
+So you need to give this in a JSON format.
+
+156
+00:08:25.870 --> 00:08:27.098
+In that deployment, it's going to
+
+157
+00:08:27.124 --> 00:08:28.720
+find that and patch it.
+
+158
+00:08:29.590 --> 00:08:34.854
+Change basically editing resource scaling scale
+
+159
+00:08:34.902 --> 00:08:38.750
+out skill in deleting resources.
+
+160
+00:08:39.789 --> 00:08:41.982
+If you created something with the definition file,
+
+161
+00:08:42.006 --> 00:08:43.658
+you can just say delete -f and
+
+162
+00:08:43.683 --> 00:08:45.758
+the definition file path, it is going to
+
+163
+00:08:45.784 --> 00:08:49.370
+delete everything from that manifest.
+
+164
+00:08:50.230 --> 00:08:52.050
+You can delete it based on the labels
+
+165
+00:08:52.110 --> 00:08:56.594
+also and basically delete pods and services that
+
+166
+00:08:56.632 --> 00:09:01.590
+has this particular label interacting with running pods
+
+167
+00:09:01.650 --> 00:09:04.780
+logs we talked about this.
+
+168
+00:09:05.110 --> 00:09:07.274
+One thing I want to show you here is this one.
+
+169
+00:09:07.432 --> 00:09:09.642
+In a pod you may have multiple containers.
+
+170
+00:09:09.786 --> 00:09:12.338
+So if you have multiple containers, you can mention
+
+171
+00:09:12.424 --> 00:09:15.374
+the container name -C and the container name.
+
+172
+00:09:15.532 --> 00:09:18.890
+It will get you logs of that particular container.
+
+173
+00:09:19.330 --> 00:09:21.280
+You'll can use labels also.
+
+174
+00:09:23.750 --> 00:09:28.400
+kubectl run is to run the pod as we have seen.
+
+175
+00:09:28.790 --> 00:09:33.200
+So run it and -i --tty means just login to it.
+
+176
+00:09:33.830 --> 00:09:36.082
+This is the name and this is the image.
+
+177
+00:09:36.106 --> 00:09:40.434
+So this basically says run the container from this
+
+178
+00:09:40.472 --> 00:09:45.330
+image, open a shell and interact with that shell.
+
+179
+00:09:46.070 --> 00:09:48.634
+If you want a direct login, you can use kubectl
+
+180
+00:09:48.682 --> 00:09:54.726
+exec Stdn TTY MyPod that will be your pod name.
+
+181
+00:09:54.908 --> 00:09:57.918
+Bin Bash which will open a shell on that
+
+182
+00:09:57.944 --> 00:10:02.970
+running pod copying files and directories to and from
+
+183
+00:10:03.020 --> 00:10:08.540
+containers interacting with the deployments and services.
+
+184
+00:10:10.190 --> 00:10:14.082
+Port forwarding without creating a service or
+
+185
+00:10:14.156 --> 00:10:16.410
+on that service, do a port forwarding.
+
+186
+00:10:19.350 --> 00:10:22.082
+These are for the administration interacting
+
+187
+00:10:22.106 --> 00:10:24.338
+with nodes and cluster kubectl
+
+188
+00:10:24.374 --> 00:10:28.214
+ cordon, cordon basically means make this node
+
+189
+00:10:28.262 --> 00:10:32.086
+unscheduleable so no new pod will be running.
+
+190
+00:10:32.148 --> 00:10:34.594
+On this note, when you want to bring
+
+191
+00:10:34.632 --> 00:10:38.374
+it down for the maintenance then drain will
+
+192
+00:10:38.472 --> 00:10:41.882
+remove all the workload from that node.
+
+193
+00:10:42.026 --> 00:10:45.418
+So you coordinate so new thing doesn't run over there.
+
+194
+00:10:45.444 --> 00:10:46.138
+Then you drain it.
+
+195
+00:10:46.164 --> 00:10:47.854
+So you remove all the workload from
+
+196
+00:10:47.892 --> 00:10:50.654
+that which migrates to healthy worker nodes.
+
+197
+00:10:50.822 --> 00:10:52.466
+And once you're done with your maintenance
+
+198
+00:10:52.538 --> 00:10:54.382
+activity then you can uncordon it.
+
+199
+00:10:54.456 --> 00:10:56.820
+So new parts can start running on it.
+
+200
+00:10:57.390 --> 00:10:59.506
+uncordon doesn't really mean that it's going
+
+201
+00:10:59.508 --> 00:11:01.910
+to bring back your previous workload.
+
+202
+00:11:01.970 --> 00:11:04.990
+It is just going to open up to take the new workload.
+
+203
+00:11:06.870 --> 00:11:09.586
+This is if you're really Kubernetes administrator then
+
+204
+00:11:09.648 --> 00:11:12.514
+you really need these commands handy right?
+
+205
+00:11:12.612 --> 00:11:16.330
+So the cheat sheet again, do not by-heart.
+
+206
+00:11:16.380 --> 00:11:17.638
+This is already available.
+
+207
+00:11:17.724 --> 00:11:19.810
+But if you keep running this regularly
+
+208
+00:11:20.250 --> 00:11:22.510
+it will be automatically by-hearted.
+
+209
+00:11:22.950 --> 00:11:25.430
+But really a very good cheat sheet.
+
+210
+00:11:25.490 --> 00:11:27.610
+I use it very regularly.
+
+211
+00:11:28.170 --> 00:11:30.780
+Really good job Kubernetes on this one.
+
+212
+00:11:32.790 --> 00:11:35.170
+Okay, so that is all in this video.
+
+213
+00:11:35.340 --> 00:11:37.594
+Go ahead, try these things.
+
+214
+00:11:37.692 --> 00:11:40.200
+Create pod, create deployment, Create services.
+
+215
+00:11:40.830 --> 00:11:42.922
+Use these commands. Test them.
+
+216
+00:11:43.056 --> 00:11:45.194
+Get comfortable with kubectl CLI.
+
+217
+00:11:45.242 --> 00:11:48.480
+You will really need it every day.
+
+218
+00:11:49.530 --> 00:11:51.166
+So that is all in this video.
+
+219
+00:11:51.228 --> 00:11:53.150
+I will see you in the next one. Bye.

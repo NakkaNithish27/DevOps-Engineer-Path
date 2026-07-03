@@ -1,0 +1,880 @@
+WEBVTT
+
+00:00.240 --> 00:01.160
+Welcome.
+
+00:01.160 --> 00:04.600
+From this lecture onwards, we are going to start exploring Prometheus.
+
+00:05.000 --> 00:08.920
+So once again, Prometheus is an open source monitoring and alerting toolkit.
+
+00:08.960 --> 00:12.040
+It collects metrics from systems and application.
+
+00:12.040 --> 00:18.440
+This process is also called as scraping and it stores this metrics in a time series data.
+
+00:18.920 --> 00:23.280
+To retrieve these metrics, you need to execute Prom shell.
+
+00:23.320 --> 00:26.160
+Prom shell is Prometheus query language.
+
+00:26.720 --> 00:33.280
+Prom itself is a vast subject, but we're going to learn enough of prom shell so we can start monitoring
+
+00:33.280 --> 00:34.040
+the systems.
+
+00:34.560 --> 00:40.280
+Create panels and dashboards in Grafana, and send alert notification.
+
+00:40.680 --> 00:44.960
+But please keep in mind this course does not teach you complete Prom shell.
+
+00:45.600 --> 00:49.240
+The complete training material is available in Prometheus website.
+
+00:50.080 --> 00:56.240
+This training program to teach you complete prom shell if you're interested in learning the entire prom
+
+00:56.240 --> 00:56.680
+shell.
+
+00:57.080 --> 01:02.080
+So before starting with Prometheus and started learning the prom shell, we need to do few things.
+
+01:02.080 --> 01:08.040
+We need to generate some load on our system, on our web server, so we can collect information in Prometheus
+
+01:08.040 --> 01:14.560
+and see by executing the prompt QL queries, I should just say prompt ql because q itself means query.
+
+01:15.120 --> 01:19.920
+Okay, so open your AWS console and power on Prometheus and web server.
+
+01:21.400 --> 01:26.680
+So when you power on Prometheus and web server, if you if you're doing it in the next day.
+
+01:27.240 --> 01:32.440
+So when you power on Prometheus and web server, you should update the security group rules if your
+
+01:32.440 --> 01:33.560
+IP address changed.
+
+01:34.280 --> 01:41.080
+So go to security groups web server, edit inbound rule, web server, security group and wherever you
+
+01:41.080 --> 01:41.760
+see your IP.
+
+01:41.800 --> 01:44.000
+Just updated my IP, my IP.
+
+01:44.040 --> 01:45.400
+Now my IP is already updated.
+
+01:45.400 --> 01:46.480
+Just save the rules.
+
+01:47.200 --> 01:49.480
+Same do it for Prometheus also.
+
+01:50.080 --> 01:54.640
+And if you're doing Grafana also today, then update the rules for Grafana as well.
+
+01:54.640 --> 02:01.000
+So here 22 from my IP 1990 from IP for Prometheus save rules okay.
+
+02:01.040 --> 02:02.800
+First let's log in to the web server.
+
+02:02.800 --> 02:04.550
+So copy its public IP.
+
+02:05.430 --> 02:13.790
+So SSH hyphen I downloads and the key path username ubuntu at the rate the IP address of web server.
+
+02:14.350 --> 02:15.350
+Okay we are in.
+
+02:15.390 --> 02:16.430
+You can see the hostname.
+
+02:16.430 --> 02:16.710
+Also.
+
+02:16.750 --> 02:18.350
+We did setup last time.
+
+02:19.070 --> 02:22.470
+So it has the hostname as web server web zero one.
+
+02:22.830 --> 02:26.950
+Now in this machine you should have this script already there.
+
+02:27.630 --> 02:32.350
+Do a cat to this script or you can access it from the GitHub repository.
+
+02:32.790 --> 02:37.590
+You need to execute these two commands not to just this one for now.
+
+02:37.630 --> 02:39.670
+This is for logs that we'll see later.
+
+02:39.870 --> 02:42.350
+So only this command you need to copy and paste.
+
+02:42.590 --> 02:46.430
+So that's going to run this load script that is going to generate random load.
+
+02:47.110 --> 02:49.230
+So just copy this command and execute it.
+
+02:49.710 --> 02:50.990
+I already did this.
+
+02:50.990 --> 02:57.390
+And I should see siphon f grep load.sh.
+
+02:58.430 --> 03:00.270
+So I already see this script running.
+
+03:00.270 --> 03:05.910
+And if I run top command oops top command.
+
+03:07.150 --> 03:12.110
+I see a load average of 3.39 something and you see the some stress commands executing.
+
+03:12.110 --> 03:14.390
+So it's going to be random load generation.
+
+03:14.390 --> 03:16.270
+So now CPU is 74%.
+
+03:16.270 --> 03:19.990
+It's going to spike up and down Q to quit.
+
+03:20.390 --> 03:22.190
+So this is one thing that you need to do.
+
+03:22.230 --> 03:27.390
+Then the other thing is we need to send the website request to our web server.
+
+03:27.390 --> 03:31.190
+So if we go check its public IP we should see the website running.
+
+03:31.550 --> 03:34.510
+Sorry colon 5000 is running on 5000.
+
+03:36.350 --> 03:37.830
+So that's the main page.
+
+03:37.830 --> 03:39.950
+And then we have slash payment.
+
+03:40.550 --> 03:41.590
+It's another page.
+
+03:42.310 --> 03:44.830
+Now Prometheus is also going to collect the queries.
+
+03:45.190 --> 03:50.670
+I'm going to say the access the hits on the website that also it's going to collect that information.
+
+03:51.110 --> 03:57.030
+So we have two scripts that we are going to execute which will generate random access.
+
+03:57.030 --> 04:00.270
+So it's going to fake the website access.
+
+04:00.270 --> 04:03.190
+So we can collect this metrics and see it in Prometheus.
+
+04:03.910 --> 04:05.270
+This is just for learning purpose.
+
+04:05.310 --> 04:08.070
+This is not part of Monitoring stack.
+
+04:08.070 --> 04:13.870
+We're just trying to replicate the real time behavior, how the users access the website and how do
+
+04:13.870 --> 04:15.270
+we track that information.
+
+04:15.950 --> 04:16.270
+Okay.
+
+04:16.310 --> 04:21.270
+So go to github.com slash V profile hyphen project.
+
+04:21.950 --> 04:23.710
+Switch to monitoring branch.
+
+04:24.630 --> 04:25.830
+Here you see two scripts.
+
+04:25.830 --> 04:26.710
+One is main dot.
+
+04:26.990 --> 04:28.430
+The another one is payment.sh.
+
+04:28.470 --> 04:32.750
+If you click on this so here there is a curl command that is getting executed.
+
+04:32.750 --> 04:34.750
+Now this is getting executed randomly.
+
+04:35.110 --> 04:37.030
+So we can see spikes in the graph.
+
+04:37.510 --> 04:38.830
+You need to download the script.
+
+04:38.870 --> 04:41.310
+Change this IP to your website IP.
+
+04:41.350 --> 04:44.070
+In our case in my case it will be this IP.
+
+04:44.110 --> 04:48.870
+Sorry, not this IP, the private IP we will be using private IP of web server.
+
+04:48.870 --> 04:49.870
+So let's do this.
+
+04:49.870 --> 04:51.870
+Let's run it from Prometheus itself.
+
+04:52.150 --> 04:53.870
+So SSH to Prometheus.
+
+04:55.110 --> 05:02.150
+So ssh key path ubuntu at the rate the Prometheus public ip ssh switch to root user.
+
+05:02.150 --> 05:03.310
+Clear the screen.
+
+05:03.790 --> 05:08.030
+Run the command wget space and let's copy this.
+
+05:08.150 --> 05:09.190
+Click on raw.
+
+05:12.390 --> 05:13.390
+And get this link.
+
+05:14.790 --> 05:15.790
+Let's download it.
+
+05:18.750 --> 05:19.110
+Okay.
+
+05:19.110 --> 05:20.990
+Once you download it open this.
+
+05:24.190 --> 05:27.430
+And you make sure you give here private IP address.
+
+05:27.430 --> 05:30.590
+So shift insert sorry just insert.
+
+05:30.790 --> 05:37.550
+Get into insert mode and update over here the private IP of your web server your private IP.
+
+05:37.550 --> 05:42.950
+Because if you're running it from Prometheus, because Prometheus and this web server is in the same
+
+05:43.390 --> 05:43.990
+network.
+
+05:43.990 --> 05:48.950
+So anywhere if you want to run it from Grafana, Prometheus, Loki, anywhere, if you're running,
+
+05:48.950 --> 05:50.670
+then just use the private IP.
+
+05:50.950 --> 05:55.590
+If you're running it from locally, from your computer, then you need to use the public IP of the web
+
+05:55.590 --> 05:57.470
+server public IP.
+
+05:57.870 --> 06:02.830
+Okay, so the reason we are running it from Prometheus, because it's just one instance that is up and
+
+06:02.830 --> 06:03.990
+it's in the same network.
+
+06:04.310 --> 06:06.750
+So that is the reason we are running it from Prometheus.
+
+06:06.790 --> 06:08.750
+Otherwise you can run it from anywhere.
+
+06:09.110 --> 06:11.780
+So at both places mention the Prometheus.
+
+06:12.140 --> 06:13.060
+Web servers.
+
+06:13.060 --> 06:15.620
+Private IP, web servers, private IP.
+
+06:15.620 --> 06:15.940
+Take a look.
+
+06:15.980 --> 06:16.860
+This is the web server.
+
+06:16.860 --> 06:23.940
+Private IP and save and quit this file and download the another file which is for payment.
+
+06:25.380 --> 06:26.660
+This one payments.
+
+06:26.660 --> 06:27.820
+You need to do the same thing.
+
+06:28.820 --> 06:30.540
+Payment go to raw.
+
+06:30.660 --> 06:33.700
+Copy the link paste it.
+
+06:33.740 --> 06:34.460
+Download it.
+
+06:35.020 --> 06:43.420
+Open the file website hyphen, payment.sh and update here the private IP of web server at both places.
+
+06:43.420 --> 06:45.060
+This is for the payment link.
+
+06:46.940 --> 06:50.540
+Oh, also I need to change here to the port 5000.
+
+06:50.580 --> 06:53.820
+Make sure the port here is 5000.
+
+06:53.860 --> 06:59.940
+I'll update this in the script though I think while editing I made the same mistake.
+
+07:00.780 --> 07:03.740
+It should be 5000 or application is running on 5000.
+
+07:04.500 --> 07:07.860
+Okay, save and quit and run both the script the same way.
+
+07:07.900 --> 07:13.460
+No hub dot slash or first we need to make it executable.
+
+07:13.460 --> 07:19.060
+So see chmod chmod plus x website.
+
+07:19.180 --> 07:24.780
+Means you execute permission to this and also to payment.sh.
+
+07:25.300 --> 07:27.100
+And then you need to execute it like this.
+
+07:27.100 --> 07:29.220
+No hub dot slash.
+
+07:30.140 --> 07:32.660
+First the script ampersand.
+
+07:32.820 --> 07:35.820
+So it goes in the background and gets detached from the shell.
+
+07:36.420 --> 07:39.740
+Same way you run the payment dot, run both the scripts.
+
+07:41.500 --> 07:41.860
+Okay.
+
+07:41.940 --> 07:49.300
+And when you run the both this command, you should be able to run syphon f grep and find this website.
+
+07:50.100 --> 07:51.980
+You should see both the scripts running.
+
+07:52.140 --> 07:57.100
+Now this will generate some fake access on our website which we can track.
+
+07:57.540 --> 07:57.820
+Okay.
+
+07:57.820 --> 08:03.620
+Please make sure to run it for like five ten minutes at least and then only go to the next lecture so
+
+08:03.620 --> 08:06.380
+you can see some actual data from Prometheus.
+
+08:07.420 --> 08:16.060
+Okay, so if you go to Prometheus now, get the public IP of Prometheus And it's running on port 1990.
+
+08:16.100 --> 08:18.740
+Prometheus public IP port, 1990.
+
+08:19.820 --> 08:21.540
+Okay, first, let's check the status.
+
+08:21.700 --> 08:22.540
+Target health.
+
+08:22.980 --> 08:25.580
+So now this is showing only for Prometheus.
+
+08:25.580 --> 08:28.740
+We are going to add our web server in the Prometheus.
+
+08:29.380 --> 08:32.420
+So then Prometheus can start monitoring our web server also.
+
+08:32.420 --> 08:35.300
+And then you should see this information about Pro.
+
+08:35.540 --> 08:37.540
+Sorry about the web server over here.
+
+08:37.980 --> 08:41.180
+So in order to do that open this file etc..
+
+08:41.500 --> 08:44.700
+Prometheus Prometheus dot.
+
+08:44.740 --> 08:46.740
+YML open this.
+
+08:46.780 --> 08:48.580
+You see here some global settings.
+
+08:48.580 --> 08:50.940
+Scrape intervals 15 seconds.
+
+08:51.100 --> 08:56.420
+So every 15 seconds Prometheus is going to check its target and collect the metrics.
+
+08:56.420 --> 08:58.940
+That's called as scraping or scrape interval.
+
+08:58.940 --> 09:01.940
+Here evaluation period is also 15 seconds.
+
+09:01.940 --> 09:06.940
+Now evaluation is checking its rules that we define in it every 15 seconds.
+
+09:07.340 --> 09:08.740
+Now this might be a little confusing.
+
+09:08.740 --> 09:10.780
+For now you can just leave evaluation rule for now.
+
+09:10.780 --> 09:12.300
+We'll talk about it in Grafana.
+
+09:12.660 --> 09:14.900
+So scrape interval every 15 seconds.
+
+09:15.140 --> 09:19.980
+Then you have settings for alert Manager, which you're going to manage through Grafana itself.
+
+09:19.980 --> 09:24.460
+So scroll down and here you should see the scrape configs.
+
+09:25.060 --> 09:27.500
+So config these are the jobs.
+
+09:27.940 --> 09:30.460
+So there's only one job over here Prometheus.
+
+09:30.460 --> 09:35.460
+And if you see it's configuration target is localhost on port 9090.
+
+09:35.460 --> 09:36.820
+So it's monitoring itself.
+
+09:37.100 --> 09:42.860
+And that is happening because of this configuration labels app Prometheus.
+
+09:43.180 --> 09:46.460
+So if you check here you see here app Prometheus.
+
+09:46.620 --> 09:51.860
+And there are some other app some other labels you see that is defined by Prometheus itself.
+
+09:51.860 --> 09:53.580
+So you can give your own labels.
+
+09:53.620 --> 09:56.420
+Prometheus is also going to give labels to the metrics.
+
+09:56.780 --> 09:58.620
+Now we need to add our web server.
+
+09:58.620 --> 10:02.940
+So what I'm going to do I'm going to copy these ten lines from here.
+
+10:02.940 --> 10:04.260
+So I'm going to say ten.
+
+10:04.300 --> 10:07.740
+Why why go at the end I'm going to say P to paste.
+
+10:08.180 --> 10:16.340
+So job name I'm going to change it with I'm going to say here is web server web server hyphen system.
+
+10:16.340 --> 10:16.450
+Term.
+
+10:16.930 --> 10:17.530
+I'll tell you that.
+
+10:17.570 --> 10:19.050
+Why I have given the name system here.
+
+10:19.050 --> 10:21.210
+Because we are going to monitor the system metrics.
+
+10:21.210 --> 10:22.290
+There's a difference.
+
+10:22.650 --> 10:24.010
+First let's add this one.
+
+10:24.770 --> 10:32.810
+So static config in the targets we need to give here the private IP and the port number of our web server.
+
+10:33.730 --> 10:35.250
+So let's check our web server.
+
+10:35.250 --> 10:37.850
+So there is node exporter service running on web server.
+
+10:37.850 --> 10:39.810
+We did set that up right remember.
+
+10:40.570 --> 10:41.930
+So we use this script right.
+
+10:41.970 --> 10:43.610
+Web node setup.ss script.
+
+10:43.650 --> 10:45.650
+To set up our web server.
+
+10:45.650 --> 10:49.210
+In second stage we set up node exporter right there.
+
+10:49.210 --> 10:52.250
+We download the node exporter extract it right.
+
+10:52.290 --> 10:53.970
+We set it as a service.
+
+10:55.730 --> 10:58.610
+So it is running as a service over here in the web server.
+
+10:59.010 --> 11:01.690
+And this is running on port 9100.
+
+11:02.570 --> 11:02.810
+Right.
+
+11:02.850 --> 11:07.170
+9100 we allowed it node exporter port 9100.
+
+11:07.490 --> 11:09.690
+Now we can also access it right from the browser.
+
+11:09.690 --> 11:15.290
+So if we take its public IP node exporter and if we give the port number 9100.
+
+11:17.970 --> 11:26.010
+We see Prometheus node exporter and the metrics are exposed at this path slash metrics.
+
+11:27.530 --> 11:30.410
+Okay, this is the web server, not the Prometheus server.
+
+11:30.890 --> 11:35.050
+This is the node exporter generating and exposing the metrics.
+
+11:35.370 --> 11:41.890
+And these are the system metrics like the CPU disk memory stuff like that.
+
+11:42.010 --> 11:43.770
+So take some time and go through this.
+
+11:43.770 --> 11:45.090
+These are different metrics.
+
+11:45.250 --> 11:46.010
+Lot of metrics.
+
+11:46.050 --> 11:50.810
+See if something makes sense like CPU memory disk will quickly make sense.
+
+11:51.170 --> 11:52.370
+But there are many more metrics.
+
+11:52.370 --> 11:55.370
+So these are system metrics not the application metrics.
+
+11:55.730 --> 12:00.210
+We are also generating application metrics on port 5000.
+
+12:01.650 --> 12:01.850
+Right.
+
+12:01.850 --> 12:03.690
+Our application is running on port 5000.
+
+12:03.730 --> 12:10.330
+And through Python flask application we are exposing metrics for our Python flask application also.
+
+12:10.730 --> 12:15.730
+So both of these metrics we need to monitor from Prometheus.
+
+12:16.090 --> 12:17.530
+So that's what we have to do here.
+
+12:17.530 --> 12:20.690
+We have to update this private IP.
+
+12:21.650 --> 12:24.410
+Let's get the private IP of web server now.
+
+12:24.410 --> 12:29.930
+Prometheus and web server are in the same network, so we're giving private IP mostly.
+
+12:29.930 --> 12:30.650
+That will be the case.
+
+12:30.650 --> 12:32.370
+There will be always in the same network.
+
+12:32.770 --> 12:34.290
+So this is the system matrix.
+
+12:34.650 --> 12:36.570
+Let me change here the label to.
+
+12:38.730 --> 12:41.210
+I'll give label as app zero one system.
+
+12:41.210 --> 12:43.170
+Now we can give many more labels.
+
+12:43.170 --> 12:44.530
+Let's just keep one for now.
+
+12:44.690 --> 12:47.610
+Now that is going to monitor the system metrics the application metrics.
+
+12:47.610 --> 12:49.010
+Also we are going to monitor.
+
+12:49.010 --> 12:50.810
+So again copy these lines.
+
+12:50.810 --> 12:54.490
+Once again you can do ten by one and then paste.
+
+12:54.530 --> 12:55.650
+Paste it over there.
+
+12:59.650 --> 13:07.330
+So job name or here I'm going to change it to web server hyphen.
+
+13:09.370 --> 13:13.890
+App stat like application statistics like that.
+
+13:14.370 --> 13:17.610
+And here this runs on port 5000.
+
+13:20.450 --> 13:21.210
+5000.
+
+13:21.210 --> 13:24.530
+And here the private IP again of our web server.
+
+13:27.810 --> 13:37.730
+App label this I'm going to change it to web zero one hyphen app stat okay.
+
+13:37.730 --> 13:44.010
+Now label helps us differentiate between metrics and find and get the right information.
+
+13:44.050 --> 13:45.690
+You need to learn that in from shell.
+
+13:45.970 --> 13:47.330
+Let's save this one.
+
+13:48.970 --> 13:51.770
+You know, once again just take a look at this file.
+
+13:51.770 --> 13:55.890
+So you make any mistake you can just check it.
+
+13:57.570 --> 13:58.850
+It's in YAML format.
+
+13:58.850 --> 14:02.330
+So make sure the space and everything is exactly same.
+
+14:02.890 --> 14:10.410
+So we added these two settings web server system metrics and web zero and web server abstract.
+
+14:10.450 --> 14:11.010
+These two.
+
+14:11.050 --> 14:12.690
+That is the name of the job.
+
+14:12.810 --> 14:16.570
+The label is web zero one app stat and web zero one system.
+
+14:17.010 --> 14:20.690
+After doing this you need to restart Prometheus service.
+
+14:22.930 --> 14:24.050
+Prometheus.
+
+14:26.170 --> 14:28.130
+Okay, I think there are some changes that happen.
+
+14:28.130 --> 14:30.370
+We need to do systemctl daemon reload.
+
+14:31.850 --> 14:34.930
+I don't remember making any change to the system level.
+
+14:35.170 --> 14:36.690
+Systemctl daemon.
+
+14:36.690 --> 14:37.410
+Reload.
+
+14:39.170 --> 14:41.770
+And then let's restart the Prometheus service.
+
+14:42.410 --> 14:44.210
+Okay, wait for a minute or so.
+
+14:44.850 --> 14:48.930
+And after that, come to Prometheus server port 9090.
+
+14:48.970 --> 14:52.690
+Go to targets and click on the status target health.
+
+14:54.290 --> 14:54.730
+Okay.
+
+14:54.770 --> 14:57.090
+There is one mistake that I did.
+
+14:57.730 --> 15:00.570
+So the metric is not exposed on port 9090.
+
+15:00.610 --> 15:02.610
+That is on port 90 100.
+
+15:02.650 --> 15:04.290
+Yeah 9100.
+
+15:04.330 --> 15:06.250
+That's always confusing.
+
+15:06.450 --> 15:08.490
+So I'm going to update the file once again.
+
+15:11.170 --> 15:13.170
+So where we are monitoring the node right.
+
+15:13.170 --> 15:16.490
+The web server there you change the port number 9100.
+
+15:16.530 --> 15:21.970
+Do not change it for Prometheus that keep as it is for our web server.
+
+15:22.010 --> 15:26.320
+Change the port to 9100 for the web server system.
+
+15:26.320 --> 15:27.640
+Metrics for web server.
+
+15:27.680 --> 15:29.880
+Web start that is port 5000.
+
+15:30.760 --> 15:32.480
+And then save and quit.
+
+15:32.960 --> 15:35.120
+Restart Prometheus service.
+
+15:36.360 --> 15:41.120
+Wait for some time and then you can refresh this and few seconds.
+
+15:41.120 --> 15:42.960
+You should be able to see this as up.
+
+15:43.600 --> 15:43.800
+Okay.
+
+15:43.840 --> 15:45.720
+So that's what we wanted to do in this lecture.
+
+15:45.720 --> 15:49.080
+So once you have this up and running you can join me in the next lecture.
+
+15:49.080 --> 15:52.880
+We're going to run some from Kql queries and get more information about these systems.
+
+15:53.240 --> 15:58.120
+If you see some problem restarting Prometheus service or you see something here down some issue, some
+
+15:58.120 --> 16:00.120
+error, make sure you check your configuration.
+
+16:00.120 --> 16:01.640
+It's usually the configuration file.
+
+16:01.680 --> 16:02.960
+Mistake the YAML file.
+
+16:03.480 --> 16:04.520
+It's in YAML structure.
+
+16:04.520 --> 16:07.160
+So make sure the structure is correct as per YAML format.
+
+16:07.480 --> 16:09.680
+Check all the port number the IP addresses.
+
+16:09.680 --> 16:11.080
+Make sure everything is correct.
+
+16:11.120 --> 16:12.480
+Restart Prometheus service.
+
+16:12.520 --> 16:14.080
+It should be working now.
+
+16:14.080 --> 16:15.960
+Also take care of the security group.
+
+16:15.960 --> 16:20.120
+Rules 9100 5000 security group for the web server.
+
+16:20.120 --> 16:23.000
+You can open it for anywhere if things are not working.
+
+16:23.400 --> 16:26.520
+And once you get this, you can join me in the next lecture.
+
+16:26.720 --> 16:27.480
+See you in another one!

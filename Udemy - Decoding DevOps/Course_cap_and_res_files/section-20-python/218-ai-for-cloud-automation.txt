@@ -1,0 +1,940 @@
+WEBVTT
+
+00:00.280 --> 00:00.800
+All right.
+
+00:00.800 --> 00:05.080
+In this lecture we are going to write Python boto3 scripts.
+
+00:05.680 --> 00:07.760
+So I have opened my VSCode.
+
+00:07.760 --> 00:08.960
+You can also do the same.
+
+00:08.960 --> 00:12.120
+And I have opened the folder where I have my virtual environment.
+
+00:12.120 --> 00:15.360
+I created this folder so you can also do the same.
+
+00:15.360 --> 00:23.160
+Just go to file open folder and select the folder like I have enough Python and AWS cloud this folder.
+
+00:23.160 --> 00:28.680
+I say select folder and in this I have this virtual environment from the previous lecture.
+
+00:28.680 --> 00:33.960
+So I'm going to write my scripts over here and then execute it from the terminal of VS code.
+
+00:34.560 --> 00:39.160
+But before I do that, I'm going to install some extensions that will help me write better code.
+
+00:39.400 --> 00:40.560
+So go to extensions.
+
+00:40.560 --> 00:43.320
+And first extension I'm going to install is Python.
+
+00:43.960 --> 00:49.440
+So this one click on install okay Python extension is installed.
+
+00:49.440 --> 00:51.360
+Now I'm going to search for Boto3.
+
+00:51.400 --> 00:58.480
+If I have extension I'll install that as well AWS Boto3 I'll say install trust publisher and install
+
+00:59.200 --> 00:59.480
+okay.
+
+00:59.520 --> 01:00.520
+That is also installed.
+
+01:00.520 --> 01:02.070
+Now let's create the script.
+
+01:02.070 --> 01:07.670
+What we did in the previous exercise for the S3, create S3 bucket and copy the file into that.
+
+01:08.110 --> 01:10.590
+So I'm going to create here a new file.
+
+01:10.590 --> 01:13.910
+I will name it as S3 test.py.
+
+01:15.070 --> 01:17.750
+First thing we need the boto library in our script.
+
+01:17.750 --> 01:21.670
+So we are going to write import boto three.
+
+01:22.950 --> 01:26.510
+Next we need to connect to S3 client.
+
+01:26.510 --> 01:29.830
+And anyways our co-pilot is trying to complete that.
+
+01:29.830 --> 01:32.230
+Okay I'm going to use tab create S3 client.
+
+01:32.230 --> 01:35.350
+And here again this is what we did in the command line.
+
+01:35.350 --> 01:41.190
+The previous lecture S3 the variable which is taken a variable name equal to boto three dot client.
+
+01:41.550 --> 01:45.030
+And the service name I have defined three variables over here.
+
+01:45.070 --> 01:46.110
+Bucket name variable.
+
+01:46.110 --> 01:47.830
+Where I have given my bucket name.
+
+01:47.830 --> 01:50.590
+You better take your bucket name and put it over there.
+
+01:51.030 --> 01:51.670
+File name.
+
+01:51.670 --> 01:53.270
+File underscore name variable.
+
+01:53.590 --> 01:55.870
+I'm just taking the same file to upload.
+
+01:56.070 --> 02:01.230
+And the object name that will be the name of this object, this file in the S3 bucket.
+
+02:01.510 --> 02:04.150
+So when we upload the file, the file name will be this one.
+
+02:04.670 --> 02:09.070
+Now let's write the code to do that to push this file to the S3 bucket.
+
+02:09.830 --> 02:10.150
+Okay.
+
+02:10.150 --> 02:13.270
+Now copilot already understood what we are trying to do here.
+
+02:13.270 --> 02:18.670
+So let's use tab, upload the file to S3 and then it's giving a try block.
+
+02:18.910 --> 02:19.790
+Let's check that out.
+
+02:19.830 --> 02:26.870
+Try this S3 which is this variable which stores all the method dot upload underscore file in the parenthesis
+
+02:26.910 --> 02:27.630
+file name.
+
+02:27.630 --> 02:29.910
+That's our variable bucket name.
+
+02:30.070 --> 02:32.110
+That's the bucket name and the object name.
+
+02:33.070 --> 02:38.670
+And once this is completed a print statement that says file file name which will be this file name uploaded
+
+02:38.670 --> 02:39.270
+to bucket.
+
+02:39.270 --> 02:41.670
+And the bucket name as this object name.
+
+02:43.670 --> 02:45.670
+So I'm using Tab to complete this.
+
+02:46.910 --> 02:52.390
+And of course it will suggest except block except exception as e and an error.
+
+02:53.190 --> 02:58.310
+And now instead of taking the file name as the variable, I'm going to take it as the user input.
+
+02:58.550 --> 03:02.460
+So here I'm going to instead of the file name I'm going to mention the user input.
+
+03:02.900 --> 03:04.540
+So I'm going to say here input.
+
+03:05.660 --> 03:08.340
+So anyway suggesting I'm going to use Tab to complete.
+
+03:10.460 --> 03:11.260
+Now object name.
+
+03:11.260 --> 03:12.780
+Also I want to keep same.
+
+03:12.780 --> 03:20.020
+So I'm going to simply assign the same variable over here which is file underscore name okay I think
+
+03:20.020 --> 03:20.980
+this should be it.
+
+03:20.980 --> 03:23.260
+So it's going to try to upload the file.
+
+03:23.260 --> 03:26.820
+If it fails it goes to the exception and prints as the exception.
+
+03:27.340 --> 03:28.980
+So let me save this.
+
+03:28.980 --> 03:31.700
+And I'm going to open the terminal new terminal.
+
+03:33.220 --> 03:34.660
+It's opening PowerShell for me.
+
+03:34.660 --> 03:38.940
+So I'm going to switch here to git bash okay.
+
+03:38.980 --> 03:41.900
+So I think I'm in the same folder where I have the script.
+
+03:41.900 --> 03:45.980
+That one test 3.py I mean s3 test.py.
+
+03:46.300 --> 03:48.220
+But first I need to activate the environment.
+
+03:48.220 --> 03:54.500
+So I'm going to say source DevOps scripts activate again for Mac OS user.
+
+03:54.500 --> 03:56.740
+It will be the folder name.
+
+03:56.740 --> 03:59.540
+In my case it's DevOps slash bin.
+
+03:59.580 --> 04:02.130
+Instead of scripts you have bin and activate Wait.
+
+04:03.290 --> 04:03.490
+Okay.
+
+04:03.530 --> 04:04.770
+The environment is activated.
+
+04:04.770 --> 04:08.530
+I'm going to give execute permission to the script.
+
+04:09.450 --> 04:09.770
+Okay.
+
+04:09.770 --> 04:11.850
+Now, either I can run the script like this.
+
+04:11.850 --> 04:20.490
+I can say Python three test dot p y, or I can mention the interpreter path like this in my script.
+
+04:22.770 --> 04:26.330
+Hash exclamation usr bin env space python.
+
+04:26.330 --> 04:30.370
+So both ways I can do I'm going to just run it python3 test.py.
+
+04:31.850 --> 04:34.330
+So it's asking the path to upload the file.
+
+04:34.330 --> 04:36.570
+And as I said I'm going to give the same file name.
+
+04:36.570 --> 04:45.570
+So which is solar system dot txt it says the file uploaded.
+
+04:45.570 --> 04:47.210
+Now let me run it once again.
+
+04:47.210 --> 04:50.130
+And this time I'm going to give some file name which does not exist.
+
+04:50.130 --> 04:52.610
+And let's see what happens okay.
+
+04:52.650 --> 04:53.930
+Error uploading the file.
+
+04:54.330 --> 04:57.050
+So we also tested the try and accept exception handling.
+
+04:57.050 --> 05:00.290
+Also we have tested we can give better exception handling if you want.
+
+05:01.010 --> 05:03.850
+But now you don't need to do everything by yourself.
+
+05:04.410 --> 05:09.530
+So let me reiterate now we have learned Python programming basics of Python programming.
+
+05:09.530 --> 05:13.890
+We have seen how to do Linux automation by using Python fabric.
+
+05:13.930 --> 05:20.290
+We have seen OS commands and we have seen then how to interact with AWS cloud services by using Boto3
+
+05:20.290 --> 05:21.090
+in Python.
+
+05:21.690 --> 05:27.010
+Now you are trained enough to use any generative AI and write your code.
+
+05:27.330 --> 05:29.810
+You don't need to explicitly write every line.
+
+05:29.810 --> 05:35.210
+You can generate the entire script or even entire workspace to achieve complex tasks.
+
+05:35.410 --> 05:37.050
+First, let's start with simple thing.
+
+05:37.290 --> 05:41.210
+Let's say we want to set up a website on an EC2 instance.
+
+05:41.210 --> 05:42.250
+We need load balancer.
+
+05:42.250 --> 05:43.370
+We need target group.
+
+05:43.570 --> 05:44.850
+With that we will need key pair.
+
+05:44.850 --> 05:46.370
+We need security group.
+
+05:47.130 --> 05:50.370
+So let's ask ChatGPT to do that for us.
+
+05:51.170 --> 05:57.130
+So I'm asking it to create a Python boto3 script with trying to write it little neat now.
+
+05:57.250 --> 06:00.490
+So create python script which achieves below mentioned task.
+
+06:00.490 --> 06:05.760
+First it should create a key pair and then it should create a security group that allows port 22 from
+
+06:05.760 --> 06:08.280
+my IP and port 80 from anywhere.
+
+06:09.520 --> 06:16.080
+Next, I'm asking it to create EC2 instance T2 micro with this key pair and security group and Ami name
+
+06:16.080 --> 06:17.000
+I have mentioned.
+
+06:17.200 --> 06:19.960
+And it should have the website setup from 2.com.
+
+06:19.960 --> 06:22.520
+So it's going to have it in the user data.
+
+06:22.880 --> 06:24.760
+Okay I've modified the prompt a little bit.
+
+06:24.800 --> 06:29.240
+It should have the script in user data to set up website from 2.com.
+
+06:29.520 --> 06:31.760
+Next I'm going to put the load balancer.
+
+06:32.320 --> 06:34.320
+So create application load balancer register.
+
+06:34.320 --> 06:37.880
+This instance security group of ELB should allow port 80 from anywhere.
+
+06:38.360 --> 06:41.920
+And make sure all the zones are selected in ELB.
+
+06:42.160 --> 06:46.840
+Now when I did previously, the instance was not registering in the load balancer.
+
+06:46.840 --> 06:52.920
+That was because it took first two zones from the region for load balancer.
+
+06:52.920 --> 06:57.400
+So load balancer was in first two zones and the instance got created in the third zone.
+
+06:57.960 --> 07:03.400
+So if the instance is in a different zone than the load balancer, then the instance will not get registered.
+
+07:03.400 --> 07:04.310
+That's the problem.
+
+07:04.310 --> 07:06.110
+So that's why I included this point.
+
+07:06.350 --> 07:08.630
+And I'm just saying print LP end point.
+
+07:09.070 --> 07:14.030
+And last thing I wanted to give resource name as per the website name.
+
+07:14.950 --> 07:23.550
+Give name to all AWS resources resource says in the script as per the template name you take from 2.com.
+
+07:23.550 --> 07:28.070
+So any template that it selects, that should be the name of all the resources like key pair, security
+
+07:28.070 --> 07:28.990
+group and everything.
+
+07:29.350 --> 07:32.110
+Let's see what happens okay.
+
+07:32.110 --> 07:38.310
+So it imports Boto3 requests that we'll see what it is and OS to run OS commands.
+
+07:38.310 --> 07:41.990
+I think this is for to create the key pair locally.
+
+07:41.990 --> 07:44.750
+First import time for the time stamp.
+
+07:44.750 --> 07:51.430
+It has taken variables, defined variables and really it has just given the name to it I was expecting
+
+07:51.430 --> 07:53.150
+it gives the name of the template.
+
+07:53.390 --> 07:54.630
+I mean copilot does that.
+
+07:54.630 --> 07:58.150
+I've tried it with copilot and it gives the name of the template.
+
+07:58.150 --> 07:58.710
+Anyways.
+
+07:58.710 --> 07:59.070
+Let's see.
+
+07:59.070 --> 08:00.870
+We can modify that with prompts.
+
+08:01.310 --> 08:03.350
+So region us east one.
+
+08:03.350 --> 08:06.190
+Good if it's taking some other region in which you don't want.
+
+08:06.230 --> 08:07.870
+Make sure you mention the region as well.
+
+08:08.590 --> 08:14.110
+Okay, here my IP is a variable which is getting the value of your IP and that is happening through
+
+08:14.150 --> 08:14.990
+requests.
+
+08:15.230 --> 08:16.470
+Importing your request.
+
+08:16.710 --> 08:18.030
+So request dot get it.
+
+08:18.030 --> 08:19.110
+Access this URL.
+
+08:19.150 --> 08:21.870
+This generates the public IP your public IP.
+
+08:22.350 --> 08:27.830
+So this will give the public IP plus the string is added slash 32.
+
+08:27.870 --> 08:32.790
+So when we add in the security group it will be in proper format your IP slash 32.
+
+08:33.270 --> 08:36.110
+Now we know all this because we have gone through AWS.
+
+08:36.630 --> 08:37.790
+So we know AWS.
+
+08:37.830 --> 08:38.550
+We know Python.
+
+08:38.550 --> 08:39.430
+We know Boto3.
+
+08:39.470 --> 08:41.910
+We know how to interact with AWS cloud from Python.
+
+08:41.910 --> 08:48.110
+So we can write correct prompt or check the script and even modify the prompt and get the expected result.
+
+08:48.510 --> 08:50.710
+Okay, here it is creating a key pair.
+
+08:50.750 --> 08:51.630
+So easy to create.
+
+08:51.670 --> 08:52.150
+Key pair.
+
+08:52.190 --> 08:52.710
+Key name.
+
+08:52.710 --> 08:53.350
+Key pair.
+
+08:53.710 --> 08:55.190
+Here it's creating a file.
+
+08:55.950 --> 09:00.630
+Over here it is opening a file in the write mode and writing key material.
+
+09:01.150 --> 09:03.990
+And that file will have 400 permission.
+
+09:04.660 --> 09:07.140
+So this is the private key that is creating here.
+
+09:07.740 --> 09:12.260
+So what basically happens here is you know this is going to create a key pair.
+
+09:12.500 --> 09:12.700
+Right.
+
+09:12.700 --> 09:18.460
+And then when it creates the key on AWS cloud the private key is downloaded.
+
+09:18.460 --> 09:18.620
+Right.
+
+09:18.620 --> 09:22.220
+When we create a key pair the private key is downloaded that downloaded material.
+
+09:22.220 --> 09:26.260
+It is saving it into this file PEM underscore file name.
+
+09:26.260 --> 09:28.500
+This file will have it okay.
+
+09:28.540 --> 09:37.220
+Next creating security group and two rules 22 from my IP Cedar and port 80 from anywhere ami ID that
+
+09:37.220 --> 09:38.740
+is based on the region.
+
+09:38.740 --> 09:43.100
+So that's Amazon Linux 2023 ami id from US East one.
+
+09:43.780 --> 09:45.740
+And here is our user data script.
+
+09:45.740 --> 09:47.460
+So the template has taken is barista.
+
+09:47.460 --> 09:50.780
+I was expecting it is going to give the name to all the resource as barista.
+
+09:50.780 --> 09:54.580
+But anyways let's try this also in GitHub copilot in a moment.
+
+09:55.380 --> 09:59.100
+Okay, so after I log in and use Chrome browser, I'm getting better results.
+
+09:59.740 --> 10:04.180
+Starting with the template name, the resource name it has taken as the template name, which is from
+
+10:04.340 --> 10:06.140
+two slate.com photo folio.
+
+10:06.820 --> 10:11.380
+We scroll down, you see that in the User Data Photo Folio.
+
+10:12.100 --> 10:12.300
+Okay.
+
+10:12.300 --> 10:16.020
+So it's going to create the instance rate for the instance to become running.
+
+10:16.260 --> 10:22.020
+That is going to create the security group for load balancer that allows port 80 from anywhere.
+
+10:22.660 --> 10:22.780
+Okay.
+
+10:22.820 --> 10:26.380
+Here it is creating the load balancer creating the target group.
+
+10:26.380 --> 10:29.100
+And it should register our instance register target.
+
+10:29.460 --> 10:33.220
+And finally it's going to print the endpoint of the load balancer.
+
+10:33.660 --> 10:36.020
+Now in one moment it will be too much overwhelming.
+
+10:36.020 --> 10:41.820
+So the better way to learn here would be take the script of individual resources.
+
+10:41.820 --> 10:46.460
+It not take you know check with the prompt create key pair python script.
+
+10:46.860 --> 10:49.780
+You can use the prompt as you know make it simple or keep it simple.
+
+10:49.780 --> 10:53.900
+So it's going to avoid try and accept and trying to keep it simple so you can understand.
+
+10:53.900 --> 10:58.340
+Then later you can add the exception handling and you can add one thing after another.
+
+10:58.340 --> 10:59.580
+We'll see that in a moment.
+
+10:59.580 --> 11:00.820
+First let's test this one.
+
+11:00.820 --> 11:02.180
+So I'm going to copy this code.
+
+11:02.660 --> 11:10.970
+Create a new file here naming Named as folio set up AWS dot p, y anything and just paste all the content,
+
+11:11.010 --> 11:14.250
+save it in the terminal.
+
+11:14.250 --> 11:18.170
+I should have that script and I'm going to execute it with the interpreter.
+
+11:18.170 --> 11:21.410
+Python folio setup aws.py.
+
+11:22.970 --> 11:23.930
+So I get an error.
+
+11:23.970 --> 11:25.610
+No module named request.
+
+11:25.610 --> 11:28.530
+It's importing request here the request library.
+
+11:30.570 --> 11:31.530
+And we need to install it.
+
+11:31.530 --> 11:34.530
+So to install library in Python we have pip pip install.
+
+11:34.530 --> 11:37.570
+We're going to say request okay.
+
+11:37.610 --> 11:43.530
+Once we install request through pip then we can execute the script again okay.
+
+11:43.530 --> 11:44.330
+It started working.
+
+11:44.330 --> 11:45.770
+So it's creating the key pair.
+
+11:46.450 --> 11:49.810
+And now you should have a key there.
+
+11:49.850 --> 11:51.010
+That's the private key.
+
+11:51.050 --> 11:51.690
+See that.
+
+11:53.370 --> 11:57.530
+Okay I got some error okay I got some error.
+
+11:58.170 --> 12:04.850
+Let's see is the load balancer name can only contain characters that are alphanumeric and hyphens okay
+
+12:04.850 --> 12:06.600
+I'm going to ask this to ChatGPT.
+
+12:06.640 --> 12:12.560
+By the way, I know what this is, but I'm going to still ask ChatGPT and get the answer or no corrected
+
+12:12.560 --> 12:13.000
+code.
+
+12:13.320 --> 12:15.240
+So let me copy it from here.
+
+12:15.280 --> 12:17.280
+Easy to instance before it fails.
+
+12:17.320 --> 12:21.120
+Till here and put this in the prompt.
+
+12:21.520 --> 12:26.400
+Okay, so I said after executing the script I got below error, EC2 instance, blah blah blah and this
+
+12:26.400 --> 12:26.640
+error.
+
+12:26.640 --> 12:27.760
+Let's see what it says.
+
+12:28.280 --> 12:33.240
+It says the problem is invalid LP name and cannot contains underscore.
+
+12:33.440 --> 12:34.440
+So what's the fix?
+
+12:34.440 --> 12:37.240
+We can change the template name in the LP.
+
+12:37.760 --> 12:39.040
+So that's the variable right.
+
+12:39.040 --> 12:39.920
+That derives that name.
+
+12:39.920 --> 12:44.480
+So instead of you know giving that let's give a different name to the LP itself.
+
+12:44.840 --> 12:48.520
+You know I think starting the name with the number is a problem here.
+
+12:49.120 --> 12:52.720
+Anyways, let's go to the script and make the changes to the LP name itself.
+
+12:52.760 --> 12:54.160
+LP name this one.
+
+12:55.000 --> 13:02.800
+It's going to remove this function also F and just going to give some name, I'll just say folio, LP,
+
+13:03.720 --> 13:04.440
+LP, whatever.
+
+13:04.440 --> 13:06.720
+I'm just making some change over here.
+
+13:06.760 --> 13:09.080
+No special character.
+
+13:09.480 --> 13:12.880
+And for the template also here I'm going to change this one.
+
+13:12.880 --> 13:13.920
+Remove the underscore.
+
+13:13.920 --> 13:17.480
+And instead of the number first I'm just going to give Photo Folio.
+
+13:17.480 --> 13:18.360
+That should be good.
+
+13:19.040 --> 13:23.440
+Now before I execute this it should have already created EC2 instance security group and key pair.
+
+13:23.440 --> 13:24.720
+I need to remove that.
+
+13:24.920 --> 13:26.520
+So I have one running instance.
+
+13:26.520 --> 13:27.880
+I'm going to delete that.
+
+13:28.880 --> 13:32.000
+That one because it's going to again create a new instance.
+
+13:32.480 --> 13:34.560
+Also going to remove the key pairs.
+
+13:35.120 --> 13:37.760
+Key pairs remove this key.
+
+13:39.960 --> 13:41.080
+Security groups.
+
+13:41.440 --> 13:41.600
+Okay.
+
+13:41.640 --> 13:45.160
+So I have two security group one for instance one for the load balancer.
+
+13:46.720 --> 13:48.560
+Delete those okay.
+
+13:48.560 --> 13:49.760
+It's refusing to get deleted.
+
+13:49.760 --> 13:51.360
+Once again I'm going to try delete.
+
+13:53.000 --> 13:53.160
+Okay.
+
+13:53.160 --> 13:55.640
+It says one network interface associated.
+
+13:56.200 --> 13:58.320
+Maybe the instance is still not terminated.
+
+14:00.040 --> 14:00.520
+It's gone.
+
+14:00.520 --> 14:01.680
+Let me try once again.
+
+14:07.190 --> 14:07.350
+Yeah.
+
+14:07.390 --> 14:08.270
+Now I can delete.
+
+14:08.830 --> 14:09.110
+Okay.
+
+14:09.110 --> 14:11.670
+Once again check in the EC2 dashboard refresh.
+
+14:11.670 --> 14:17.270
+Make sure you have zero running instance one security group that is default zero key pair.
+
+14:17.910 --> 14:24.150
+And then let's try our execution of our code once again okay.
+
+14:24.190 --> 14:26.390
+Started okay great.
+
+14:26.390 --> 14:31.510
+Another error but similar one target group name cannot have this underscore special character.
+
+14:31.790 --> 14:34.510
+You know I'm going to remove all this underscore from my script.
+
+14:34.550 --> 14:35.710
+Delete everything again.
+
+14:36.430 --> 14:38.790
+And the script is in the variables pretty easy.
+
+14:38.790 --> 14:44.630
+Or you can ask this to ChatGPT not to put any underscore special character there.
+
+14:44.630 --> 14:48.190
+Also you'll be underscore let me save this okay.
+
+14:48.190 --> 14:50.310
+Once again make sure you delete again everything.
+
+14:50.310 --> 14:52.350
+And you now have the load balancer also.
+
+14:52.910 --> 14:54.910
+So first thing delete the load balancer.
+
+14:56.270 --> 14:59.950
+Then delete the instance key pair.
+
+15:02.150 --> 15:03.030
+Security group.
+
+15:08.580 --> 15:12.500
+Okay, I'm adding some change for the folio app I have given.
+
+15:12.500 --> 15:16.020
+Make sure I remove all the underscores from all the variables name.
+
+15:16.740 --> 15:19.420
+Save the script and test it once again.
+
+15:21.260 --> 15:23.700
+Now there are many private key that got created.
+
+15:23.700 --> 15:25.220
+Let's delete those also.
+
+15:28.340 --> 15:29.580
+Okay, that one I'm going to keep.
+
+15:29.580 --> 15:30.620
+This is the new one.
+
+15:31.460 --> 15:31.860
+Okay.
+
+15:31.900 --> 15:34.460
+Finally it completed successfully.
+
+15:35.020 --> 15:37.620
+So the script got completed successfully.
+
+15:37.620 --> 15:41.140
+But we are still not sure whether it has given us the right result or not.
+
+15:41.740 --> 15:43.020
+Wait for five ten minutes.
+
+15:43.060 --> 15:44.060
+Check the URL.
+
+15:44.060 --> 15:49.580
+If everything is good, then we can study the script once again and make our final decision.
+
+15:50.180 --> 15:57.060
+Okay, now coming to the most important point of this lecture you have seen, we can generate entire
+
+15:57.060 --> 16:04.740
+code is not too much, but imagine you are accessing or using many other services 1015 services.
+
+16:04.740 --> 16:10.300
+They might have many sub services and you will get a huge complex script.
+
+16:11.020 --> 16:16.380
+When you get error, you have to keep troubleshooting it, deleting it, and do this task repetitively
+
+16:16.380 --> 16:18.100
+until you get the final result.
+
+16:18.340 --> 16:23.020
+So the best way is always to write small small script, even if you're using.
+
+16:23.060 --> 16:26.660
+I test it and then you can integrate it together.
+
+16:27.500 --> 16:27.780
+Okay.
+
+16:27.820 --> 16:29.420
+So now delete everything.
+
+16:29.420 --> 16:33.140
+You don't need to worry about whether the website works or not.
+
+16:33.140 --> 16:34.140
+Just delete everything.
+
+16:34.140 --> 16:37.820
+And in the next lecture we are going to set up everything one by one.
+
+16:37.820 --> 16:41.300
+We're going to also verify script or code before we execute.
+
+16:41.300 --> 16:44.540
+And this time we are going to use GitHub Copilot to do it.
+
+16:44.860 --> 16:49.340
+So I'm going to delete first the load balancer then the target groups.
+
+16:51.540 --> 16:52.620
+Then the instances.
+
+16:56.220 --> 16:56.980
+Key pair.
+
+16:59.340 --> 17:00.900
+And finally the security group.
+
+17:05.780 --> 17:08.620
+Once you're done doing the cleanup join me in the next lecture.

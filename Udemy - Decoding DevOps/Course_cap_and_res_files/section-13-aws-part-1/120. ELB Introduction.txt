@@ -1,0 +1,424 @@
+WEBVTT
+
+00:01.830 --> 00:02.790
+Instructor: Hello and welcome
+
+00:02.790 --> 00:05.820
+to "AWS Load Balancers" lecture.
+
+00:05.820 --> 00:06.653
+In this lecture,
+
+00:06.653 --> 00:09.030
+we are going to see what is a load balancer,
+
+00:09.030 --> 00:10.320
+why do we need it,
+
+00:10.320 --> 00:12.690
+how the load balancer works,
+
+00:12.690 --> 00:16.590
+and in AWS, what are the different types of load balancers.
+
+00:16.590 --> 00:17.940
+Once we understand all this,
+
+00:17.940 --> 00:20.340
+we are going to actually do it.
+
+00:20.340 --> 00:24.300
+We will set up web servers or cluster of web servers,
+
+00:24.300 --> 00:25.440
+and on the frontend,
+
+00:25.440 --> 00:28.830
+we are going to set up a load balancer for these servers.
+
+00:28.830 --> 00:32.310
+We are also going to see AMI, Amazon Machine Images,
+
+00:32.310 --> 00:34.680
+and a launch templates.
+
+00:34.680 --> 00:37.860
+So really lot of things in this lecture,
+
+00:37.860 --> 00:40.233
+but let's first understand the load balancer.
+
+00:41.220 --> 00:44.280
+So, let's say we have multiple web servers.
+
+00:44.280 --> 00:47.190
+Now, why do we need multiple web servers?
+
+00:47.190 --> 00:49.800
+Well, in real time, one single web server
+
+00:49.800 --> 00:54.800
+or one server won't be enough based on the performance
+
+00:54.900 --> 00:56.430
+and also maintenance.
+
+00:56.430 --> 00:57.450
+When you have cluster
+
+00:57.450 --> 01:01.290
+of web servers running the same web service,
+
+01:01.290 --> 01:03.270
+you can anytime scale out.
+
+01:03.270 --> 01:04.650
+You can add more servers
+
+01:04.650 --> 01:06.720
+for the capacity, for better performance,
+
+01:06.720 --> 01:11.190
+or you can also scale in, reduce it, to save the cost.
+
+01:11.190 --> 01:15.300
+Also, you can update these servers and softwares on it
+
+01:15.300 --> 01:18.990
+without bringing down the entire user experience.
+
+01:18.990 --> 01:21.240
+But when you have cluster of servers,
+
+01:21.240 --> 01:23.370
+in this case cluster of web servers,
+
+01:23.370 --> 01:25.290
+you will need a single endpoint
+
+01:25.290 --> 01:28.050
+on which the user can access,
+
+01:28.050 --> 01:31.950
+and that single endpoint is provided by a load balancer.
+
+01:31.950 --> 01:35.490
+In short, a load balancer takes the request from the user
+
+01:35.490 --> 01:39.180
+on a specific port number, like 80 or 443,
+
+01:39.180 --> 01:41.610
+and forwards the request
+
+01:41.610 --> 01:46.200
+to the web server distributing this traffic.
+
+01:46.200 --> 01:49.230
+So, a load balancer will have an endpoint
+
+01:49.230 --> 01:52.440
+on which the user will access a frontend port.
+
+01:52.440 --> 01:53.970
+And when it receives this request,
+
+01:53.970 --> 01:56.790
+it is going to route on a backend port,
+
+01:56.790 --> 01:58.770
+which will be the port number of the server.
+
+01:58.770 --> 02:00.300
+So let's say if you have web server,
+
+02:00.300 --> 02:04.290
+commonly we use port 80, http port 80.
+
+02:04.290 --> 02:06.990
+Now, this will be the backend port for the load balancer,
+
+02:06.990 --> 02:10.023
+that will be the frontend port on which the user access.
+
+02:11.340 --> 02:14.190
+So, a load balancer is a device or a software.
+
+02:14.190 --> 02:16.140
+It could be a hardware computer
+
+02:16.140 --> 02:18.150
+or a software running on the computer
+
+02:18.150 --> 02:20.070
+that distributes the network traffic
+
+02:20.070 --> 02:22.980
+across multiple servers or application.
+
+02:22.980 --> 02:26.040
+Now, obviously we discussed this is to balance the load,
+
+02:26.040 --> 02:27.240
+have better performance,
+
+02:27.240 --> 02:30.240
+we can scale out and scale in whenever we want,
+
+02:30.240 --> 02:32.010
+and it acts like a proxy, it's not...
+
+02:32.010 --> 02:34.020
+The load balancer is not the real server.
+
+02:34.020 --> 02:35.790
+It provides the endpoint.
+
+02:35.790 --> 02:40.790
+It's a proxy in between the user and the server or servers.
+
+02:40.950 --> 02:42.000
+Now, if you're on AWS,
+
+02:42.000 --> 02:44.970
+you don't need to run a software load balancer.
+
+02:44.970 --> 02:46.890
+That means you don't need to launch an EC2 instance
+
+02:46.890 --> 02:49.237
+and install a load balancer software.
+
+02:49.237 --> 02:52.830
+AWS provides you Elastic Load Balancers
+
+02:52.830 --> 02:56.160
+and the different types of load balancers in AWS.
+
+02:56.160 --> 02:59.610
+Application load balancer, network load balancer,
+
+02:59.610 --> 03:03.720
+gateway load balancer, and classic load balancers.
+
+03:03.720 --> 03:07.710
+On AWS, the load balancers are called ELB in short,
+
+03:07.710 --> 03:10.323
+elastic load balancers, ELB.
+
+03:11.220 --> 03:13.590
+Let's first take a look at the classic load balancer.
+
+03:13.590 --> 03:14.640
+It's pretty simple.
+
+03:14.640 --> 03:18.180
+As we discussed, it takes the request on the frontend port,
+
+03:18.180 --> 03:19.470
+for example, 443,
+
+03:19.470 --> 03:22.170
+and routes the request to the backend server.
+
+03:22.170 --> 03:23.003
+So, it's simple.
+
+03:23.003 --> 03:24.570
+You create EC2 instances,
+
+03:24.570 --> 03:26.400
+set up your web service on them,
+
+03:26.400 --> 03:30.690
+and add these instances under a classic load balancer.
+
+03:30.690 --> 03:33.960
+You provide the endpoint of the classic load balancer
+
+03:33.960 --> 03:35.280
+to the user.
+
+03:35.280 --> 03:36.720
+It's ideal for a simple solution.
+
+03:36.720 --> 03:38.670
+It works on Layer 4.
+
+03:38.670 --> 03:41.730
+That means it does not understand the URL,
+
+03:41.730 --> 03:44.970
+it understands the IP address and the port number.
+
+03:44.970 --> 03:46.653
+Frontend port, backend port.
+
+03:47.940 --> 03:50.220
+Then, there is application load balancer.
+
+03:50.220 --> 03:53.520
+It is for http and https traffic.
+
+03:53.520 --> 03:55.110
+It works on Layer 7.
+
+03:55.110 --> 03:57.690
+That means it understands the URL
+
+03:57.690 --> 04:00.990
+and you can distribute the traffic based on the URL.
+
+04:00.990 --> 04:04.100
+So if the user access, let's say, hkinfotech.in,
+
+04:04.100 --> 04:07.800
+in it can send it to a group of server.
+
+04:07.800 --> 04:11.910
+But if the user says hkinfotech.in/videos,
+
+04:11.910 --> 04:13.800
+it can, based on the rule,
+
+04:13.800 --> 04:16.323
+route the request to a different cluster.
+
+04:17.250 --> 04:19.500
+So, it is intelligent routing
+
+04:19.500 --> 04:22.860
+and that's why it is used the most on AWS
+
+04:22.860 --> 04:25.413
+for http and https traffic.
+
+04:26.280 --> 04:27.930
+And in this course, most of the time,
+
+04:27.930 --> 04:30.753
+we will be using this application load balancer.
+
+04:31.950 --> 04:34.170
+The next one is the network load balancer.
+
+04:34.170 --> 04:36.660
+Now, this sounds like a classic load balancer
+
+04:36.660 --> 04:40.170
+but it provides a static IP address
+
+04:40.170 --> 04:43.320
+which is very important in some use cases,
+
+04:43.320 --> 04:46.623
+and it can handle millions of requests per second.
+
+04:47.640 --> 04:49.470
+And you must have understood now
+
+04:49.470 --> 04:52.050
+that it will be very expensive.
+
+04:52.050 --> 04:54.963
+It works on Layer 4, just like classic load balancer.
+
+04:56.040 --> 04:56.873
+And sometimes,
+
+04:56.873 --> 05:00.240
+it is put in front of application load balancer.
+
+05:00.240 --> 05:02.220
+Now, this will be out of the scope of this course
+
+05:02.220 --> 05:03.570
+because it is too expensive
+
+05:03.570 --> 05:06.033
+and it works same as classic load balancer.
+
+05:06.930 --> 05:09.420
+The last one is the gateway load balancer.
+
+05:09.420 --> 05:10.950
+This is also out of the scope
+
+05:10.950 --> 05:13.650
+and it is too early for you to understand this
+
+05:13.650 --> 05:15.750
+because for this, you need experience
+
+05:15.750 --> 05:18.570
+with AWS VPC networking.
+
+05:18.570 --> 05:21.150
+But just for your information,
+
+05:21.150 --> 05:23.800
+gateway load balancer works on Layer 3
+
+05:25.110 --> 05:29.040
+and it is used to run and manage firewalls,
+
+05:29.040 --> 05:31.500
+intrusion detection systems.
+
+05:31.500 --> 05:33.600
+The best part about gateway load balancer
+
+05:33.600 --> 05:36.900
+is it does not do anything with the network packet,
+
+05:36.900 --> 05:39.150
+the source and destination IP address.
+
+05:39.150 --> 05:42.060
+All the information of the network packet remains same.
+
+05:42.060 --> 05:44.670
+It just forwards it to the appliance
+
+05:44.670 --> 05:47.430
+that could be a firewall and IDS.
+
+05:47.430 --> 05:49.500
+So for example, intrusion detection system,
+
+05:49.500 --> 05:52.380
+it needs all that information in order to scan the packet
+
+05:52.380 --> 05:55.980
+and understand for the security reason, of course.
+
+05:55.980 --> 05:58.620
+Now, AWS provides really good documentation
+
+05:58.620 --> 06:00.630
+for the load balancers,
+
+06:00.630 --> 06:03.150
+application load balancer, network load balancer,
+
+06:03.150 --> 06:04.830
+gateway load balancer,
+
+06:04.830 --> 06:06.420
+and you can come and read this later
+
+06:06.420 --> 06:08.853
+after you actually do the exercises.
+
+06:09.720 --> 06:11.430
+So I would say now enough talking,
+
+06:11.430 --> 06:12.630
+let's get into the action
+
+06:12.630 --> 06:15.720
+and understand these load balancers much better.
+
+06:15.720 --> 06:17.320
+So, join me in the next lecture.

@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00.360 --> 00:06.640
+In this lecture we want to create the managed instance group like Auto scaling Group we do in AWS.
+
+00:07.440 --> 00:12.360
+So to create the managed instance group or MiG we need the instance template.
+
+00:12.400 --> 00:18.880
+A template defines what will be the instance type, which image to use to create the instance subnet
+
+00:18.880 --> 00:20.720
+region and other details.
+
+00:21.040 --> 00:22.840
+So the template defines all this.
+
+00:23.000 --> 00:26.800
+And with this template we can create the managed instance group.
+
+00:27.120 --> 00:31.000
+And if you want we can also set the auto scaling parameters.
+
+00:31.400 --> 00:39.400
+Maximum replica count minimum replica trigger for the scaling CPU utilization or even the load balancing
+
+00:39.800 --> 00:40.880
+utilization.
+
+00:41.400 --> 00:43.080
+So let's do all this in this lecture.
+
+00:43.480 --> 00:45.120
+First creating the template.
+
+00:45.840 --> 00:50.280
+So this is the command gcloud compute instance hyphen template.
+
+00:50.280 --> 00:54.640
+Create the template name in our case v profile hyphen template.
+
+00:55.320 --> 00:57.000
+Mention the instance type.
+
+00:57.040 --> 01:01.960
+The hyphen hyphen machine hyphen type e to micro should be fine just to run the Tomcat service.
+
+01:02.200 --> 01:07.880
+Now to create the image we mentioned e to medium to small because there was the build process and all
+
+01:07.880 --> 01:11.750
+those things were happening, so we needed a bigger instance type.
+
+01:11.750 --> 01:14.590
+But just to run the Tomcat service, E2 micro will be fine.
+
+01:14.950 --> 01:20.710
+The template will mention our image that we have created the profile image there.
+
+01:20.750 --> 01:25.110
+But yeah, I just refresh the page.
+
+01:25.350 --> 01:28.110
+That's the image and private subnet.
+
+01:28.150 --> 01:29.590
+Of course you already tested it.
+
+01:29.630 --> 01:31.710
+Our instance in the private subnet.
+
+01:31.710 --> 01:32.430
+It worked.
+
+01:32.950 --> 01:34.510
+Region and hyphen.
+
+01:34.510 --> 01:34.830
+Hyphen.
+
+01:34.830 --> 01:38.950
+No address all the time whenever you launch instance in the private subnet.
+
+01:39.110 --> 01:45.230
+If you are working on public private subnet in the VPC and when you launch instances private subnet
+
+01:45.230 --> 01:51.270
+always make sure there is hyphen found no address so it does not get any external IP address.
+
+01:51.990 --> 01:53.470
+Tags tag app.
+
+01:53.470 --> 01:59.030
+So this is the same firewall rule tag which is going to apply the two firewall rules to this instance.
+
+01:59.590 --> 02:01.630
+Okay so let's create this template.
+
+02:02.670 --> 02:06.710
+This will get created quickly because just the information about the instance launch.
+
+02:07.230 --> 02:11.950
+Now next we're going to create the managed instance group and mention this template information.
+
+02:11.950 --> 02:12.910
+It's pretty simple.
+
+02:13.590 --> 02:16.590
+We create a MiG with this name V profile hyphen MiG.
+
+02:16.630 --> 02:22.550
+We mention our template V profile hyphen template and we'll mention the zone us Central1 a.
+
+02:23.070 --> 02:25.150
+So this is the command gcloud.
+
+02:25.150 --> 02:32.790
+Compute instance groups managed create and the name of the managed instance group zone us Central1 a
+
+02:32.790 --> 02:36.750
+and the template that we just created size we are giving two.
+
+02:36.790 --> 02:40.070
+So it's going to start already creating two instances.
+
+02:40.070 --> 02:45.030
+Then once we set the auto scaling group based on the trigger, it can scale out and in.
+
+02:45.190 --> 02:47.470
+But for now it will create two instances.
+
+02:47.670 --> 02:48.830
+So let's create this.
+
+02:50.910 --> 02:56.310
+Okay so in Compute Engine section in the instance template you should see the template.
+
+02:56.870 --> 02:57.830
+You should see here.
+
+02:57.870 --> 03:01.350
+If you scroll down instance groups.
+
+03:01.350 --> 03:04.750
+In this instance groups you should see the instance group.
+
+03:04.990 --> 03:07.150
+It's saying it's already has two instances.
+
+03:07.510 --> 03:10.230
+So two VM instances got created.
+
+03:10.910 --> 03:12.110
+Status is ready.
+
+03:12.630 --> 03:16.310
+So there are two instances in the managed instance group but there is no scaling.
+
+03:16.310 --> 03:22.110
+We can set the scaling by running this command gcloud compute instance group managed set auto scaling
+
+03:22.590 --> 03:25.220
+the name of your MiG zone name.
+
+03:25.420 --> 03:30.820
+Mention the maximum replica, minimum replica, and target CPU utilization.
+
+03:30.860 --> 03:32.380
+We are keeping it at 0.6.
+
+03:32.380 --> 03:33.780
+That means 60%.
+
+03:34.020 --> 03:40.820
+So if the CPU utilization goes above 60%, it's going to start scaling out and this will be 60% of all
+
+03:40.860 --> 03:41.860
+the instances.
+
+03:42.220 --> 03:49.460
+But mostly for the load balancer that serves the http https request, this trigger is set target load
+
+03:49.460 --> 03:50.740
+balancing utilization.
+
+03:50.740 --> 03:53.940
+So load balancer is utilized more than 80%.
+
+03:53.940 --> 03:56.300
+It will start scaling out the instances.
+
+03:56.580 --> 03:58.020
+We don't have any load balancer yet.
+
+03:58.020 --> 03:59.220
+We're going to set it later.
+
+03:59.660 --> 04:03.580
+But while creating this auto scaling parameter we'll mention this trigger also.
+
+04:03.980 --> 04:09.860
+So we have an auto scaling group with two triggers CPU utilization of the instances and load balancing
+
+04:09.860 --> 04:10.860
+utilization.
+
+04:13.180 --> 04:14.300
+Let's run this command.
+
+04:15.860 --> 04:17.660
+Okay that got created successfully.
+
+04:17.660 --> 04:19.620
+You should see here the information.
+
+04:19.940 --> 04:21.540
+The status is already active.
+
+04:22.220 --> 04:22.540
+Okay.
+
+04:22.540 --> 04:26.500
+So now we are very close to completing our project load balancer.
+
+04:26.500 --> 04:27.820
+Front end part is remaining.
+
+04:28.620 --> 04:29.980
+We are in the end game now.
+
+04:30.420 --> 04:31.900
+Oh I just love seeing this.
+
+04:32.580 --> 04:33.740
+Join me in the next one.

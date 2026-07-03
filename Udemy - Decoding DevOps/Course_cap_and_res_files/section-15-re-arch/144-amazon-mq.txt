@@ -1,0 +1,326 @@
+WEBVTT
+
+1
+00:00:00.270 --> 00:00:01.140
+<v Instructor>Okay, so by now,</v>
+
+2
+00:00:01.140 --> 00:00:04.050
+we have created Amazon RDS MySQL instance,
+
+3
+00:00:04.050 --> 00:00:06.210
+ElastiCache for Memcached.
+
+4
+00:00:06.210 --> 00:00:07.530
+We need one more,
+
+5
+00:00:07.530 --> 00:00:11.610
+RabbitMQ, and for that, we are going to use Amazon MQ,
+
+6
+00:00:11.610 --> 00:00:14.160
+so let's go ahead and go to Amazon MQ service
+
+7
+00:00:14.160 --> 00:00:16.800
+and create our RabbitMQ instance.
+
+8
+00:00:16.800 --> 00:00:20.610
+So, here, you can search for Amazon MQ or just RabbitMQ.
+
+9
+00:00:20.610 --> 00:00:22.770
+You will see here Amazon MQ.
+
+10
+00:00:22.770 --> 00:00:25.950
+Just make sure it's Amazon MQ and not Amazon Q.
+
+11
+00:00:25.950 --> 00:00:27.693
+That is a different AI tool.
+
+12
+00:00:29.040 --> 00:00:31.200
+So, Amazon MQ is fully managed service.
+
+13
+00:00:31.200 --> 00:00:33.510
+You don't need to create subnet groups and all those things.
+
+14
+00:00:33.510 --> 00:00:36.360
+Just click on Create brokers, Get started.
+
+15
+00:00:36.360 --> 00:00:40.440
+Make sure you select RabbitMQ and go Next.
+
+16
+00:00:40.440 --> 00:00:42.030
+There is Cluster deployment option,
+
+17
+00:00:42.030 --> 00:00:44.190
+but we are going to go with single instance only
+
+18
+00:00:44.190 --> 00:00:45.960
+because this is for learning purpose.
+
+19
+00:00:45.960 --> 00:00:48.750
+In real time, you might need a cluster deployment
+
+20
+00:00:48.750 --> 00:00:50.280
+for production workloads,
+
+21
+00:00:50.280 --> 00:00:52.650
+but here, just click on Single-instance broker.
+
+22
+00:00:52.650 --> 00:00:53.940
+Go Next.
+
+23
+00:00:53.940 --> 00:00:58.080
+Broker name, I'm keeping vprofile-rearch-rabbitmq.
+
+24
+00:00:58.080 --> 00:00:59.340
+And broker instance type,
+
+25
+00:00:59.340 --> 00:01:02.520
+now here, we do not have the 1GB option.
+
+26
+00:01:02.520 --> 00:01:05.550
+The minimum is one CPU and 4GB,
+
+27
+00:01:05.550 --> 00:01:07.140
+so select that, and don't worry,
+
+28
+00:01:07.140 --> 00:01:10.320
+we're going to anyways delete it once we are done.
+
+29
+00:01:10.320 --> 00:01:12.270
+For username, I have given rabbit.
+
+30
+00:01:12.270 --> 00:01:15.960
+For password, I have given BlueBunny980.
+
+31
+00:01:15.960 --> 00:01:17.880
+So, whatever password you're giving over here,
+
+32
+00:01:17.880 --> 00:01:20.130
+make sure you save it somewhere.
+
+33
+00:01:20.130 --> 00:01:22.230
+I'm keeping it in my sticky note.
+
+34
+00:01:22.230 --> 00:01:23.790
+Don't need to give the same password.
+
+35
+00:01:23.790 --> 00:01:26.370
+You can give any 12 character.
+
+36
+00:01:26.370 --> 00:01:28.110
+Mix it with name and number
+
+37
+00:01:28.110 --> 00:01:30.110
+and make sure there is a capital letter.
+
+38
+00:01:31.680 --> 00:01:34.770
+Open Additional settings, Broker engine version.
+
+39
+00:01:34.770 --> 00:01:38.670
+Select the engine version as 3.13.
+
+40
+00:01:38.670 --> 00:01:41.130
+Don't go with 4.2, just go with three dot.
+
+41
+00:01:41.130 --> 00:01:42.600
+Any three is fine.
+
+42
+00:01:42.600 --> 00:01:46.050
+This is more a stable, more matured engine version
+
+43
+00:01:46.050 --> 00:01:48.690
+and it works with vprofile application also.
+
+44
+00:01:48.690 --> 00:01:50.250
+Scroll down.
+
+45
+00:01:50.250 --> 00:01:51.540
+Monitoring CloudWatch logs.
+
+46
+00:01:51.540 --> 00:01:53.370
+In real time, you will need logs,
+
+47
+00:01:53.370 --> 00:01:56.280
+so make sure in real time, you put this check mark on.
+
+48
+00:01:56.280 --> 00:01:58.050
+Access type, Private access.
+
+49
+00:01:58.050 --> 00:01:59.460
+Our vprofile application is going
+
+50
+00:01:59.460 --> 00:02:01.740
+to internally access the RabbitMQ service
+
+51
+00:02:01.740 --> 00:02:05.250
+within AWS internal network, the default VPC,
+
+52
+00:02:05.250 --> 00:02:07.350
+so use case is definitely Private access,
+
+53
+00:02:07.350 --> 00:02:09.000
+so make sure you select that.
+
+54
+00:02:09.000 --> 00:02:10.260
+Scroll down.
+
+55
+00:02:10.260 --> 00:02:11.640
+So, as I already told you,
+
+56
+00:02:11.640 --> 00:02:13.950
+we just have default VPC on default subnet,
+
+57
+00:02:13.950 --> 00:02:15.390
+so make sure this is selected,
+
+58
+00:02:15.390 --> 00:02:17.610
+use default VPC and subnet.
+
+59
+00:02:17.610 --> 00:02:20.790
+Security group, select existing security group,
+
+60
+00:02:20.790 --> 00:02:23.023
+and select vprofile-backend-sg.
+
+61
+00:02:24.150 --> 00:02:26.400
+Data encryption, now, there's no option
+
+62
+00:02:26.400 --> 00:02:29.100
+to disable encryption over here, and this is fine.
+
+63
+00:02:29.100 --> 00:02:33.360
+Our vprofile source code, which is an awsrefactor branch,
+
+64
+00:02:33.360 --> 00:02:36.990
+is customized to encrypt the traffic for RabbitMQ,
+
+65
+00:02:36.990 --> 00:02:38.193
+so this will work.
+
+66
+00:02:39.540 --> 00:02:42.090
+Maintenance, again, no preferences.
+
+67
+00:02:42.090 --> 00:02:44.403
+Add new tag, just give a name tag here,
+
+68
+00:02:46.154 --> 00:02:48.510
+vprofile-rearch-rabbitmq,
+
+69
+00:02:48.510 --> 00:02:49.980
+and say Next.
+
+70
+00:02:49.980 --> 00:02:51.360
+Just go through all the settings,
+
+71
+00:02:51.360 --> 00:02:54.030
+check the RabbitMQ engine version,
+
+72
+00:02:54.030 --> 00:02:56.913
+check the password, make sure you save your password.
+
+73
+00:02:58.530 --> 00:03:01.530
+Scroll down and say Create broker.
+
+74
+00:03:01.530 --> 00:03:02.940
+Now, this is also going to take some time,
+
+75
+00:03:02.940 --> 00:03:06.540
+so we have all our three backend services created,
+
+76
+00:03:06.540 --> 00:03:08.370
+but there's one thing that we need to do
+
+77
+00:03:08.370 --> 00:03:11.520
+in the RDS instance, in our MySQL instance.
+
+78
+00:03:11.520 --> 00:03:13.320
+We need to initialize the database
+
+79
+00:03:13.320 --> 00:03:17.040
+with our SQL file, db_backup.sql file.
+
+80
+00:03:17.040 --> 00:03:19.470
+That's what we're going to do in the next lecture,
+
+81
+00:03:19.470 --> 00:03:21.693
+so wrap this up and join me in the next one.
+

@@ -1,0 +1,586 @@
+WEBVTT
+
+1
+00:00:00.330 --> 00:00:01.470
+<v Instructor>Okay, so in this lecture,</v>
+
+2
+00:00:01.470 --> 00:00:03.600
+we are going to initialize our database.
+
+3
+00:00:03.600 --> 00:00:06.090
+That means we are going to use schema
+
+4
+00:00:06.090 --> 00:00:11.090
+of vprofile application and deploy it in this RDS instance.
+
+5
+00:00:11.160 --> 00:00:13.800
+So let's open this RDS instance.
+
+6
+00:00:13.800 --> 00:00:16.200
+And that is the endpoint, this one,
+
+7
+00:00:16.200 --> 00:00:19.860
+from vprofile till here, .com.
+
+8
+00:00:19.860 --> 00:00:21.750
+Or you can just click here on the endpoints.
+
+9
+00:00:21.750 --> 00:00:23.280
+Just just find the endpoint.
+
+10
+00:00:23.280 --> 00:00:24.630
+That's the endpoint.
+
+11
+00:00:24.630 --> 00:00:27.330
+And this is port 3306.
+
+12
+00:00:27.330 --> 00:00:29.520
+Now this is private RDS instance,
+
+13
+00:00:29.520 --> 00:00:32.010
+we cannot access it through the internet.
+
+14
+00:00:32.010 --> 00:00:34.500
+It can be accessed only within the VPC,
+
+15
+00:00:34.500 --> 00:00:38.640
+so we are going to launch an EC2 instance in this region,
+
+16
+00:00:38.640 --> 00:00:39.900
+North Virginia region.
+
+17
+00:00:39.900 --> 00:00:43.590
+So this region has one default VPC, which is this one.
+
+18
+00:00:43.590 --> 00:00:45.510
+So when we launch the instance, by default,
+
+19
+00:00:45.510 --> 00:00:47.880
+it gets inside this VPC.
+
+20
+00:00:47.880 --> 00:00:50.190
+We will SSH to our instance, and from there,
+
+21
+00:00:50.190 --> 00:00:51.980
+we can access this RDS instance.
+
+22
+00:00:51.980 --> 00:00:55.440
+So if we can access, we can also deploy our schema.
+
+23
+00:00:55.440 --> 00:00:57.480
+So copy this endpoint.
+
+24
+00:00:57.480 --> 00:00:59.940
+So I'm gonna just paste it in the sticky note.
+
+25
+00:00:59.940 --> 00:01:01.560
+So that's the endpoint.
+
+26
+00:01:01.560 --> 00:01:04.830
+This is the username, this is the password.
+
+27
+00:01:04.830 --> 00:01:06.960
+So we have all the details.
+
+28
+00:01:06.960 --> 00:01:08.310
+If you click on code snippets,
+
+29
+00:01:08.310 --> 00:01:09.480
+this is the command like this,
+
+30
+00:01:09.480 --> 00:01:12.540
+we are going to execute the command in our RDS, sorry,
+
+31
+00:01:12.540 --> 00:01:13.560
+in our EC2 instance.
+
+32
+00:01:13.560 --> 00:01:15.450
+So let's launch an EC2 instance,
+
+33
+00:01:15.450 --> 00:01:17.310
+install MySQL client in that.
+
+34
+00:01:17.310 --> 00:01:21.120
+And like this, we are going to access our RDS instance.
+
+35
+00:01:21.120 --> 00:01:22.833
+So go to EC2.
+
+36
+00:01:26.370 --> 00:01:28.110
+So I'll launch an Ubuntu instance,
+
+37
+00:01:28.110 --> 00:01:31.590
+install MySQL and access the RDS database from there.
+
+38
+00:01:31.590 --> 00:01:34.530
+I'll just simply call it as mysql-client.
+
+39
+00:01:34.530 --> 00:01:35.790
+This is a temporary instance.
+
+40
+00:01:35.790 --> 00:01:39.120
+We are going to delete it once we initialize our database.
+
+41
+00:01:39.120 --> 00:01:44.120
+I'll keep as Ubuntu, Ubuntu Server 24.0 is fine, t2.micro.
+
+42
+00:01:45.690 --> 00:01:50.100
+Key pair, we'll select the key pair that we created earlier,
+
+43
+00:01:50.100 --> 00:01:52.650
+or you can just create a new key pair for this one.
+
+44
+00:01:53.610 --> 00:01:55.170
+Security group, let's go edit
+
+45
+00:01:55.170 --> 00:01:57.273
+and create a new security group for this,
+
+46
+00:01:58.890 --> 00:02:03.890
+vpro-mysql-client-sg, and we'll give rule 22 from my IP,
+
+47
+00:02:04.650 --> 00:02:07.170
+so we can SSH to this instance.
+
+48
+00:02:07.170 --> 00:02:09.273
+And that is all, just launch instance.
+
+49
+00:02:10.470 --> 00:02:12.660
+Let's get its details.
+
+50
+00:02:12.660 --> 00:02:14.160
+So that's the public IP.
+
+51
+00:02:14.160 --> 00:02:16.110
+Let's do SSH.
+
+52
+00:02:16.110 --> 00:02:19.233
+So open your terminal, ssh -i,
+
+53
+00:02:21.270 --> 00:02:22.443
+part of your key,
+
+54
+00:02:23.880 --> 00:02:27.423
+username ubuntu@ and the IP address.
+
+55
+00:02:29.730 --> 00:02:30.603
+Yes.
+
+56
+00:02:31.830 --> 00:02:33.453
+Let me clear the screen.
+
+57
+00:02:34.500 --> 00:02:36.390
+Let's become the root user.
+
+58
+00:02:36.390 --> 00:02:39.300
+So to connect to database from here,
+
+59
+00:02:39.300 --> 00:02:41.100
+we need MySQL client,
+
+60
+00:02:41.100 --> 00:02:44.400
+and the DB schema is in our source code.
+
+61
+00:02:44.400 --> 00:02:47.160
+So we need Git command to clone the source code.
+
+62
+00:02:47.160 --> 00:02:48.510
+So we need to install that.
+
+63
+00:02:49.500 --> 00:02:52.500
+So let's say, apt update &amp;&amp; and then run the command
+
+64
+00:02:52.500 --> 00:02:56.820
+apt install mysql-client git -y.
+
+65
+00:02:56.820 --> 00:02:58.530
+So it's going to run the update command
+
+66
+00:02:58.530 --> 00:03:00.003
+and install our tools.
+
+67
+00:03:02.970 --> 00:03:04.080
+Okay, it's installed.
+
+68
+00:03:04.080 --> 00:03:06.690
+Now we need two things.
+
+69
+00:03:06.690 --> 00:03:08.610
+We need the database details,
+
+70
+00:03:08.610 --> 00:03:11.040
+RDS endpoint, username, password.
+
+71
+00:03:11.040 --> 00:03:13.020
+So RDS information we need, that's one.
+
+72
+00:03:13.020 --> 00:03:15.960
+Second, we need to make sure we allow
+
+73
+00:03:15.960 --> 00:03:20.223
+this instance security group to talk to RDS security group.
+
+74
+00:03:21.210 --> 00:03:24.330
+So you can access the RDS security group from here itself.
+
+75
+00:03:24.330 --> 00:03:27.003
+So in the EC2, we go to security groups.
+
+76
+00:03:28.650 --> 00:03:30.120
+We have the backend security group.
+
+77
+00:03:30.120 --> 00:03:31.860
+In this, we have RDS.
+
+78
+00:03:31.860 --> 00:03:33.540
+And this is the security group
+
+79
+00:03:33.540 --> 00:03:35.970
+that we just created for EC2 instance.
+
+80
+00:03:35.970 --> 00:03:39.020
+So first we'll take the security group ID...
+
+81
+00:03:40.950 --> 00:03:44.760
+Security group ID of the client security group,
+
+82
+00:03:44.760 --> 00:03:49.230
+then we'll go to the backend security group, inbound rules.
+
+83
+00:03:49.230 --> 00:03:50.400
+Again, inbound rules.
+
+84
+00:03:50.400 --> 00:03:52.560
+Be careful, not outbound.
+
+85
+00:03:52.560 --> 00:03:54.540
+Edit inbound rules.
+
+86
+00:03:54.540 --> 00:03:56.130
+See add rule.
+
+87
+00:03:56.130 --> 00:04:00.210
+We'll select here MySQL, which is port 3306
+
+88
+00:04:00.210 --> 00:04:04.500
+allowed from the security group of MySQL client,
+
+89
+00:04:04.500 --> 00:04:06.990
+so instance can talk to RDS.
+
+90
+00:04:06.990 --> 00:04:08.163
+Say save rules.
+
+91
+00:04:09.210 --> 00:04:11.193
+Now let's get database details.
+
+92
+00:04:12.150 --> 00:04:14.673
+Let's get the endpoint of RDS.
+
+93
+00:04:15.570 --> 00:04:16.620
+And in the sticky note,
+
+94
+00:04:16.620 --> 00:04:19.740
+I have already saved the username and password.
+
+95
+00:04:19.740 --> 00:04:21.420
+First, let's try to log in.
+
+96
+00:04:21.420 --> 00:04:26.340
+So we'll say, mysql -h and the endpoint,
+
+97
+00:04:26.340 --> 00:04:31.340
+space -u for the user name admin -p and the password.
+
+98
+00:04:33.450 --> 00:04:35.730
+So you have already seen my password,
+
+99
+00:04:35.730 --> 00:04:38.190
+so I'm putting that in the command line,
+
+100
+00:04:38.190 --> 00:04:40.080
+but I said this in the previous project, also,
+
+101
+00:04:40.080 --> 00:04:42.390
+never put password like this in the command line.
+
+102
+00:04:42.390 --> 00:04:46.263
+Just use -p, hit Enter, it'll ask password for you.
+
+103
+00:04:47.490 --> 00:04:49.860
+All right, this is just for convenience.
+
+104
+00:04:49.860 --> 00:04:52.950
+Database name accounts, hit Enter,
+
+105
+00:04:52.950 --> 00:04:54.930
+and we should be able to log in.
+
+106
+00:04:54.930 --> 00:04:56.343
+Okay, now exit from here.
+
+107
+00:04:57.240 --> 00:04:58.340
+Clone the source code.
+
+108
+00:04:59.460 --> 00:05:01.020
+Okay, so from your browser you can open
+
+109
+00:05:01.020 --> 00:05:06.020
+github.com/hkhcoder/vprofile-project.
+
+110
+00:05:06.150 --> 00:05:09.183
+From the dropdown, just copy the HTTPS link,
+
+111
+00:05:10.200 --> 00:05:13.563
+go back to your terminal and you can say git clone.
+
+112
+00:05:16.710 --> 00:05:19.410
+So you should have the source code.
+
+113
+00:05:19.410 --> 00:05:23.460
+You can go to the source code directory.
+
+114
+00:05:23.460 --> 00:05:27.573
+Shift to the branch awsrefactor.
+
+115
+00:05:31.500 --> 00:05:35.970
+Okay? And this we have in src/main/resources/.
+
+116
+00:05:35.970 --> 00:05:38.670
+We have our db_backup file.
+
+117
+00:05:38.670 --> 00:05:40.830
+We need to deploy this schema.
+
+118
+00:05:40.830 --> 00:05:45.600
+So use the up arrow and go back to your MySQL login command.
+
+119
+00:05:45.600 --> 00:05:48.600
+Make sure the accounts database is selected there.
+
+120
+00:05:48.600 --> 00:05:51.940
+Input redirection and path of your SQL file,
+
+121
+00:05:51.940 --> 00:05:56.940
+src/main/resources/db_backup.sql, okay?
+
+122
+00:05:58.470 --> 00:06:00.330
+You have to make sure you are in this folder,
+
+123
+00:06:00.330 --> 00:06:04.260
+otherwise you can give absolute path of the file.
+
+124
+00:06:04.260 --> 00:06:05.283
+Hit Enter.
+
+125
+00:06:06.690 --> 00:06:09.603
+Now up arrow once again, remove this.
+
+126
+00:06:11.040 --> 00:06:13.830
+Keep it till accounts, hit Enter.
+
+127
+00:06:13.830 --> 00:06:15.210
+You should be logged in.
+
+128
+00:06:15.210 --> 00:06:20.210
+Say show tables and let's check.
+
+129
+00:06:22.410 --> 00:06:23.880
+So we have the tables created.
+
+130
+00:06:23.880 --> 00:06:25.680
+Our database is initialized.
+
+131
+00:06:25.680 --> 00:06:29.340
+It's ready to use for our vprofile project.
+
+132
+00:06:29.340 --> 00:06:32.130
+And now you can delete this instance.
+
+133
+00:06:32.130 --> 00:06:34.170
+If you're not planning to use it for anything else,
+
+134
+00:06:34.170 --> 00:06:35.850
+you can delete the instance.
+
+135
+00:06:35.850 --> 00:06:39.030
+Go back to instances, select your instance.
+
+136
+00:06:39.030 --> 00:06:40.623
+Instance state, terminate.
+
+137
+00:06:42.900 --> 00:06:44.700
+So the whole purpose of using this instance
+
+138
+00:06:44.700 --> 00:06:46.680
+was to just initialize the database.
+
+139
+00:06:46.680 --> 00:06:50.910
+And since the database instance is private,
+
+140
+00:06:50.910 --> 00:06:53.220
+we need to do it through another EC2 instance
+
+141
+00:06:53.220 --> 00:06:56.280
+in the same VPC, the same network.
+
+142
+00:06:56.280 --> 00:06:59.580
+Okay, now we can see our backend is ready.
+
+143
+00:06:59.580 --> 00:07:00.413
+In the next lecture,
+
+144
+00:07:00.413 --> 00:07:03.153
+we will create the Beanstalk instance,
+
+145
+00:07:04.050 --> 00:07:07.800
+where we are going to host our vprofile application.
+
+146
+00:07:07.800 --> 00:07:09.350
+So join me in the next lecture.
+

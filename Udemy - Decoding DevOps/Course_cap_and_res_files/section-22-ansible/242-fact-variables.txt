@@ -1,0 +1,541 @@
+WEBVTT
+
+00:00.570 --> 00:03.960
+Instructor: Hello and welcome to Fact Variables section.
+
+00:03.960 --> 00:07.920
+In this video we will understand how the setup model works
+
+00:07.920 --> 00:10.020
+and how it generates facts variables
+
+00:10.020 --> 00:12.240
+and what will be their use cases.
+
+00:12.240 --> 00:13.883
+As I discussed previously,
+
+00:13.883 --> 00:16.020
+fact variables are runtime variable.
+
+00:16.020 --> 00:19.380
+They get generated when setup model gets executed.
+
+00:19.380 --> 00:21.810
+Like you can have the operating system name,
+
+00:21.810 --> 00:24.692
+you can have processor cores, kernel versions,
+
+00:24.692 --> 00:28.440
+Ansible devices, the connected devices,
+
+00:28.440 --> 00:31.710
+IP address, MAC address, architecture.
+
+00:31.710 --> 00:33.870
+So these are some examples of fact variables.
+
+00:33.870 --> 00:37.260
+Now we will run set up model through ad hoc command
+
+00:37.260 --> 00:39.810
+and we'll see all the fact variables.
+
+00:39.810 --> 00:42.570
+So let's get into control machine now.
+
+00:42.570 --> 00:44.820
+Okay, let's get into vprofile,
+
+00:44.820 --> 00:47.553
+and let's get into exercise nine.
+
+00:49.320 --> 00:53.320
+And we will execute this playbook first, vars_precedence.
+
+00:58.770 --> 01:02.250
+Now whenever any playbook executes by default,
+
+01:02.250 --> 01:04.320
+Ansible will execute this task,
+
+01:04.320 --> 01:06.663
+gathering facts for all the hosts.
+
+01:07.980 --> 01:11.010
+And our lecture is based on this one only,
+
+01:11.010 --> 01:14.670
+gathering facts execute a module called setup.
+
+01:14.670 --> 01:16.620
+This module collects information
+
+01:16.620 --> 01:19.110
+about the host in JSON format.
+
+01:19.110 --> 01:20.460
+And it's only in the runtime.
+
+01:20.460 --> 01:25.380
+It doesn't really use it unless we want
+
+01:25.380 --> 01:28.680
+to use those variables from setup module.
+
+01:28.680 --> 01:32.310
+If you want, we can disable it also, mostly we don't use it.
+
+01:32.310 --> 01:35.010
+So if we are not using it, you can disable it.
+
+01:35.010 --> 01:38.940
+You can come here and you can say, just before task,
+
+01:38.940 --> 01:43.940
+you can say gather_facts: false.
+
+01:45.960 --> 01:47.673
+Now when you run the playbook,
+
+01:50.760 --> 01:55.560
+you see, the gathering facts task is not here now.
+
+01:55.560 --> 01:58.470
+Now we can execute this task
+
+01:58.470 --> 02:03.063
+through ad hoc also, ansible-m setup.
+
+02:03.960 --> 02:06.723
+Now, let me clear the screen first and then run it.
+
+02:07.590 --> 02:12.063
+Ansible-m setup, on, let's say, web zero one.
+
+02:17.340 --> 02:18.660
+See all that information?
+
+02:18.660 --> 02:20.970
+This is in JSON format.
+
+02:20.970 --> 02:21.963
+Let's scroll up.
+
+02:23.460 --> 02:25.800
+So the whole output is basically a dictionary,
+
+02:25.800 --> 02:29.850
+a giant dictionary in that you have keys like ansible facts.
+
+02:29.850 --> 02:32.490
+And its value is another dictionary,
+
+02:32.490 --> 02:35.013
+and it also has so many keys in it.
+
+02:36.510 --> 02:40.053
+And some key value is a list, you see the square bracket.
+
+02:41.640 --> 02:44.940
+And some key values are another dictionary,
+
+02:44.940 --> 02:47.880
+see those curly braces, key and value.
+
+02:47.880 --> 02:49.200
+So there are many variables.
+
+02:49.200 --> 02:50.940
+Ansible_architecture.
+
+02:50.940 --> 02:52.680
+Now here the word ansible does not
+
+02:52.680 --> 02:54.330
+mean the ansible control machine.
+
+02:54.330 --> 02:57.180
+This is all information about web zero one.
+
+02:57.180 --> 02:58.830
+You can see BIOS date.
+
+02:58.830 --> 03:00.690
+There are many things.
+
+03:00.690 --> 03:02.550
+Ansible date and time, you can use
+
+03:02.550 --> 03:05.820
+it to take backup of files, right.
+
+03:05.820 --> 03:09.033
+You have complete dictionary for that.
+
+03:09.990 --> 03:11.253
+IP address,
+
+03:12.750 --> 03:14.850
+Ansible distribution,
+
+03:14.850 --> 03:16.023
+the OS name.
+
+03:18.150 --> 03:20.040
+So let's print this variables.
+
+03:20.040 --> 03:22.200
+For this, we'll create another playbook.
+
+03:22.200 --> 03:27.077
+We'll call it as print_facts, this will be fun, .vaml.
+
+03:31.680 --> 03:34.650
+Three hyphen in the beginning, hyphen name,
+
+03:34.650 --> 03:38.853
+we'll just say print facts, that's the name of the play.
+
+03:40.710 --> 03:43.470
+Host, we'll say all the hosts,
+
+03:43.470 --> 03:45.630
+and we'll mention the task.
+
+03:45.630 --> 03:46.473
+Tasks.
+
+03:48.210 --> 03:51.753
+I'll say, first task is to print OS name.
+
+03:53.130 --> 03:54.723
+Use the module debug.
+
+03:58.950 --> 04:01.387
+Variable, ansible_distribution.
+
+04:02.280 --> 04:04.650
+You can check the spelling of the variable
+
+04:04.650 --> 04:06.273
+by running the setup module.
+
+04:10.440 --> 04:11.463
+Check once again.
+
+04:15.450 --> 04:16.530
+Let's execute it.
+
+04:16.530 --> 04:19.743
+Ansible-playbook, print facts.
+
+04:22.140 --> 04:25.740
+So gathering facts and then printing it.
+
+04:25.740 --> 04:29.613
+What happens if we disable gathering facts, let's see that.
+
+04:33.750 --> 04:37.563
+We'll say gather_facts: false.
+
+04:40.170 --> 04:42.330
+So now it is going to try to print
+
+04:42.330 --> 04:44.190
+a variable that does not exist,
+
+04:44.190 --> 04:46.890
+because gathering facts is not getting executed.
+
+04:46.890 --> 04:50.790
+And you see the error variable is not defined.
+
+04:50.790 --> 04:53.880
+So we'll go back and we will change it.
+
+04:53.880 --> 04:57.930
+We'll remove that gathering facts, or you know what,
+
+04:57.930 --> 05:00.543
+just keep it here and put a hash in front of it.
+
+05:09.908 --> 05:12.390
+Now it's time to add one more OS in the mix.
+
+05:12.390 --> 05:13.950
+We have all sent to us.
+
+05:13.950 --> 05:17.250
+We will create one more EC2 instance with Ubuntu.
+
+05:17.250 --> 05:18.850
+We'll name it as web zero three.
+
+05:20.310 --> 05:23.673
+So log into your EC2 console, launch instance.
+
+05:24.840 --> 05:29.840
+We'll name it as we vprofile-web03.
+
+05:29.880 --> 05:33.060
+Ubuntu will keep Ubuntu 22 there.
+
+05:33.060 --> 05:35.580
+Scroll down, instance Type three two micro is fine.
+
+05:35.580 --> 05:36.780
+Key,
+
+05:36.780 --> 05:38.763
+client key, same key.
+
+05:40.290 --> 05:42.093
+Select existing security group.
+
+05:43.486 --> 05:45.186
+We have the client security group.
+
+05:46.110 --> 05:48.093
+And simply launch instance.
+
+05:49.500 --> 05:50.850
+Okay, by the time this is coming up,
+
+05:50.850 --> 05:53.070
+let's copy its private IP,
+
+05:53.070 --> 05:54.963
+and let's update our inventory file.
+
+05:58.586 --> 06:00.336
+We will copy these two lines to yy,
+
+06:01.730 --> 06:03.840
+and we will paste it here,
+
+06:03.840 --> 06:08.460
+change it to web zero three and the IP address.
+
+06:08.460 --> 06:10.470
+And we will also add this
+
+06:10.470 --> 06:15.470
+in the group web zero three, colon.
+
+06:18.090 --> 06:22.350
+Let's save this and let's execute first the ping model.
+
+06:22.350 --> 06:25.773
+Ansible-m ping web zero three,
+
+06:26.650 --> 06:27.833
+or you know what, we'll do it for all.
+
+06:30.930 --> 06:32.180
+You can see what happens.
+
+06:33.019 --> 06:34.590
+Failed to connect to host, permission denied.
+
+06:34.590 --> 06:37.380
+Look at the user that it is using.
+
+06:37.380 --> 06:40.230
+This web zero three is from Ubuntu AMI,
+
+06:40.230 --> 06:42.480
+the user is Ubuntu.
+
+06:42.480 --> 06:45.213
+But we have defined global variables, right?
+
+06:47.160 --> 06:49.140
+But remember what we learned.
+
+06:49.140 --> 06:51.570
+Host variable takes higher priority.
+
+06:51.570 --> 06:56.570
+So such cases we should have their own separate variables.
+
+07:00.090 --> 07:02.340
+The host variables will take higher priority.
+
+07:02.340 --> 07:03.450
+So it'll check first
+
+07:03.450 --> 07:05.640
+whether the host has those values or not.
+
+07:05.640 --> 07:08.820
+If it's not, then only it'll go for global.
+
+07:08.820 --> 07:09.963
+So now let's try it.
+
+07:17.955 --> 07:20.910
+Now you see web zero three success.
+
+07:20.910 --> 07:23.580
+Okay, let's come back to our print facts playbook.
+
+07:23.580 --> 07:28.383
+Now let's print the ansible distribution name.
+
+07:31.110 --> 07:32.670
+And you see for web zero three,
+
+07:32.670 --> 07:35.340
+ansible distribution value is Unbuntu.
+
+07:35.340 --> 07:38.373
+Let's execute the setup module once again manually.
+
+07:40.050 --> 07:42.633
+We'll take it for web zero one or anything.
+
+07:47.070 --> 07:49.440
+So there are many variables over here.
+
+07:49.440 --> 07:51.033
+Let's use a few other.
+
+07:53.850 --> 07:56.493
+Let's look at some un-nested dictionary.
+
+07:58.020 --> 08:02.400
+Ansible memory mb, and its value is a dictionary.
+
+08:02.400 --> 08:05.280
+So we have to say dot, and we'll say real,
+
+08:05.280 --> 08:09.270
+that's the ram memory, dot, and we can say free.
+
+08:09.270 --> 08:10.743
+So let me copy this.
+
+08:12.214 --> 08:14.403
+Let's open our playbook.
+
+08:15.390 --> 08:16.803
+Create another task.
+
+08:19.530 --> 08:24.450
+Print RAM memory, or just ram, you can say.
+
+08:24.450 --> 08:25.960
+And the value
+
+08:31.051 --> 08:34.743
+.real.free.
+
+08:38.850 --> 08:40.623
+Let's execute this and see.
+
+08:52.292 --> 08:54.210
+Okay, there, so we got the string, right,
+
+08:54.210 --> 08:59.100
+free was the string, but it was inside the dictionary real.
+
+08:59.100 --> 09:00.630
+And that dictionary was inside
+
+09:00.630 --> 09:03.840
+the dictionary ansible memory mb.
+
+09:03.840 --> 09:05.703
+Let's execute setup once again.
+
+09:07.560 --> 09:09.333
+Let's find some list.
+
+09:13.110 --> 09:15.060
+Okay, this one, ansible_processor.
+
+09:15.060 --> 09:17.130
+It's value is a list.
+
+09:17.130 --> 09:20.850
+So we have three strings at zeroth position,
+
+09:20.850 --> 09:23.520
+first position and second position.
+
+09:23.520 --> 09:26.520
+So it'll print the name of the processor, ansible_processor.
+
+09:28.770 --> 09:30.870
+Let's open our playbook.
+
+09:30.870 --> 09:33.063
+Let's add one more task to debug.
+
+09:38.190 --> 09:41.373
+We'll say print processor name.
+
+09:44.310 --> 09:47.070
+And that is the variable name.
+
+09:47.070 --> 09:49.860
+And its value is a list, so to access the element
+
+09:49.860 --> 09:51.660
+in the list, we have to say square bracket,
+
+09:51.660 --> 09:53.103
+and I'm going to say two.
+
+09:57.540 --> 09:59.253
+And let's save this.
+
+10:02.070 --> 10:03.633
+And let's print it.
+
+10:07.230 --> 10:09.990
+There, so in this whole lecture, I'm showing you how
+
+10:09.990 --> 10:12.420
+to access the variables, the fact variables.
+
+10:12.420 --> 10:16.200
+You can use this in your playbook for various other purpose,
+
+10:16.200 --> 10:20.340
+like condition to check whether RAM is free or not,
+
+10:20.340 --> 10:23.400
+and then decide the task should get executed or not.
+
+10:23.400 --> 10:25.148
+You can use it to name files,
+
+10:25.148 --> 10:27.480
+push the content into the file.
+
+10:27.480 --> 10:30.300
+We'll be seeing decision making in the next lecture,
+
+10:30.300 --> 10:31.350
+and you'll understand how
+
+10:31.350 --> 10:34.380
+you can use it for your own benefits.
+
+10:34.380 --> 10:37.140
+So try to print different variables, values.
+
+10:37.140 --> 10:38.730
+Try to access them, print them.
+
+10:38.730 --> 10:41.220
+This is a very good exercise.
+
+10:41.220 --> 10:43.170
+And then join me in the next lecture.
+
+10:43.170 --> 10:44.003
+See you there.

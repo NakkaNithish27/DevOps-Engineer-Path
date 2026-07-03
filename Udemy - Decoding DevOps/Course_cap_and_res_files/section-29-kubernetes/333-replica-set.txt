@@ -1,0 +1,877 @@
+WEBVTT
+
+1
+00:00:00.970 --> 00:00:02.180
+ReplicaSet.
+
+2
+00:00:03.530 --> 00:00:05.180
+This one's easy to understand.
+
+3
+00:00:06.050 --> 00:00:09.690
+ReplicaSet maintains a Replica of your pod.
+
+4
+00:00:11.990 --> 00:00:12.966
+What does that mean?
+
+5
+00:00:13.028 --> 00:00:14.900
+And why do we really need it?
+
+6
+00:00:17.250 --> 00:00:19.102
+Okay, so you have a pod running on
+
+7
+00:00:19.116 --> 00:00:21.442
+a node and users are accessing it.
+
+8
+00:00:21.516 --> 00:00:24.180
+The pod is running, let's say, some web application.
+
+9
+00:00:24.870 --> 00:00:28.714
+And for some reason the pod goes down, the
+
+10
+00:00:28.752 --> 00:00:31.440
+users won't be able to access the service.
+
+11
+00:00:31.890 --> 00:00:34.222
+And that's it, end of the story.
+
+12
+00:00:34.416 --> 00:00:37.318
+Someone needs to login, delete the
+
+13
+00:00:37.344 --> 00:00:39.420
+pod, recreate it, fix the problem.
+
+14
+00:00:40.290 --> 00:00:44.340
+But if the pod is running with ReplicaSet
+
+15
+00:00:44.730 --> 00:00:48.914
+ReplicaSet object you mentioned, these are the pods.
+
+16
+00:00:48.962 --> 00:00:50.182
+I want to run.
+
+17
+00:00:50.376 --> 00:00:52.826
+These many Replicas I want to run off this pod.
+
+18
+00:00:52.898 --> 00:00:54.418
+ReplicaSet will do that for you.
+
+19
+00:00:54.444 --> 00:00:59.242
+Any pod crashes, it can recreate a new pod for you.
+
+20
+00:00:59.436 --> 00:01:02.330
+And you can mention Replicas for scaling.
+
+21
+00:01:02.450 --> 00:01:04.918
+You can add more pods into the ReplicaSet.
+
+22
+00:01:04.944 --> 00:01:07.380
+You can remove pods from the ReplicaSet.
+
+23
+00:01:08.670 --> 00:01:10.238
+And when I say Replica, it doesn't
+
+24
+00:01:10.274 --> 00:01:12.434
+really need to be really Replicas.
+
+25
+00:01:12.482 --> 00:01:13.726
+You can just say one also.
+
+26
+00:01:13.788 --> 00:01:16.762
+Replica One, you will see.
+
+27
+00:01:16.776 --> 00:01:19.270
+If I have to mention one, why will I use ReplicaSet?
+
+28
+00:01:19.380 --> 00:01:21.490
+Well, for the health checks.
+
+29
+00:01:21.870 --> 00:01:23.602
+If your pad goes down, you
+
+30
+00:01:23.616 --> 00:01:25.726
+don't need to manually recreate it.
+
+31
+00:01:25.788 --> 00:01:28.330
+ReplicaSet will do it for you automatically.
+
+32
+00:01:29.670 --> 00:01:32.974
+And the best part is you're mentioning more.
+
+33
+00:01:33.012 --> 00:01:35.950
+Replicas scheduler will distribute your
+
+34
+00:01:36.000 --> 00:01:38.890
+pods across multiple worker nodes.
+
+35
+00:01:39.570 --> 00:01:41.350
+So in an event of the entire
+
+36
+00:01:41.460 --> 00:01:46.130
+node crashing, pods running on that node
+
+37
+00:01:46.190 --> 00:01:49.810
+can get recreated on healthy worker nodes.
+
+38
+00:01:50.610 --> 00:01:54.922
+If you have pod running on a node without ReplicaSet,
+
+39
+00:01:54.996 --> 00:01:58.020
+just you created a pod and that node goes down.
+
+40
+00:01:58.530 --> 00:02:00.526
+Pod goes down. That's it.
+
+41
+00:02:00.588 --> 00:02:01.560
+End of the story.
+
+42
+00:02:02.370 --> 00:02:04.418
+But if it is created with a Replica
+
+43
+00:02:04.454 --> 00:02:07.440
+Set, it will recreate that pod for you.
+
+44
+00:02:08.850 --> 00:02:10.377
+Okay, let's see how to do it.
+
+45
+00:02:10.404 --> 00:02:12.010
+Let's go to the documentation.
+
+46
+00:02:13.650 --> 00:02:14.362
+Okay, I'm in.
+
+47
+00:02:14.376 --> 00:02:19.114
+Documentation, says purpose is to maintain stable set
+
+48
+00:02:19.152 --> 00:02:22.620
+of Replica pod running at any given time.
+
+49
+00:02:23.790 --> 00:02:25.678
+It is often used to guarantee the
+
+50
+00:02:25.704 --> 00:02:29.290
+availability of specified number of identical parts.
+
+51
+00:02:30.150 --> 00:02:31.022
+It's a guarantee.
+
+52
+00:02:31.046 --> 00:02:32.246
+You said three Replicas.
+
+53
+00:02:32.318 --> 00:02:33.334
+It's going to give you three.
+
+54
+00:02:33.372 --> 00:02:34.954
+If something goes wrong with one
+
+55
+00:02:34.992 --> 00:02:36.182
+or two, it will recreate.
+
+56
+00:02:36.206 --> 00:02:38.470
+We'll always maintain those three Replicas.
+
+57
+00:02:38.970 --> 00:02:41.220
+And you can read about how it works.
+
+58
+00:02:41.730 --> 00:02:43.174
+When to use ReplicaSet.
+
+59
+00:02:43.212 --> 00:02:44.700
+It's written over there.
+
+60
+00:02:45.030 --> 00:02:50.280
+I just want to take this definition file directly and
+
+61
+00:02:51.090 --> 00:02:55.018
+let's bring it in sublime text editor and read this.
+
+62
+00:02:55.164 --> 00:02:56.400
+Let's copy this.
+
+63
+00:02:57.990 --> 00:02:58.740
+Okay.
+
+64
+00:03:00.450 --> 00:03:01.186
+All right.
+
+65
+00:03:01.308 --> 00:03:03.950
+API version apps/v1.
+
+66
+00:03:04.010 --> 00:03:05.138
+Not just v1
+
+67
+00:03:05.234 --> 00:03:07.742
+This is new style of API
+
+68
+00:03:07.766 --> 00:03:09.790
+versioning for the newer objects.
+
+69
+00:03:11.730 --> 00:03:14.554
+And older objects like that will have but
+
+70
+00:03:14.592 --> 00:03:18.490
+the newer object, like Replicas Set deployments ingress
+
+71
+00:03:19.170 --> 00:03:22.250
+will have API versioning in this format. Apps.
+
+72
+00:03:22.430 --> 00:03:26.158
+v1 for all apps. kind
+
+73
+00:03:26.244 --> 00:03:31.586
+ReplicaSet, metadata, name, labels.
+
+74
+00:03:31.778 --> 00:03:34.560
+You can give as many as labels you want.
+
+75
+00:03:35.190 --> 00:03:40.090
+We use labels for filtering, inspect.
+
+76
+00:03:41.250 --> 00:03:42.710
+That's the specification.
+
+77
+00:03:42.830 --> 00:03:44.026
+Replicas Three.
+
+78
+00:03:44.088 --> 00:03:45.818
+You can mention the number of Replicas.
+
+79
+00:03:45.854 --> 00:03:47.674
+Let's just keep that for now.
+
+80
+00:03:47.832 --> 00:03:50.606
+Selector match label.
+
+81
+00:03:50.798 --> 00:03:52.726
+And I'll come to that in a moment. Let's see.
+
+82
+00:03:52.788 --> 00:03:55.450
+In templates, you have this all
+
+83
+00:03:55.500 --> 00:03:57.960
+Pod information from metadata till here.
+
+84
+00:03:58.890 --> 00:04:00.158
+So metadata.
+
+85
+00:04:00.314 --> 00:04:04.042
+This is about the label of the Pod tier frontend.
+
+86
+00:04:04.236 --> 00:04:08.386
+Now this label is matching exactly
+
+87
+00:04:08.448 --> 00:04:10.138
+the same match label here.
+
+88
+00:04:10.284 --> 00:04:15.082
+So this simply means that any Pod that has this
+
+89
+00:04:15.156 --> 00:04:20.786
+label that is in this replica if you have existing
+
+90
+00:04:20.858 --> 00:04:25.378
+Pod with the same label you mentioned replica Three, you
+
+91
+00:04:25.404 --> 00:04:27.578
+already have one Pod with the same label.
+
+92
+00:04:27.734 --> 00:04:30.338
+Then this ReplicaSet will create just two Pod.
+
+93
+00:04:30.374 --> 00:04:34.150
+Because one already exists with this label.
+
+94
+00:04:35.130 --> 00:04:37.454
+So that's how it selects the Pod.
+
+95
+00:04:37.502 --> 00:04:39.970
+That's why it's in the selector section.
+
+96
+00:04:40.890 --> 00:04:44.582
+Spec container, name of a container and an image.
+
+97
+00:04:44.666 --> 00:04:48.240
+So let's just copy this.
+
+98
+00:04:49.350 --> 00:04:51.430
+Let's come to a terminal.
+
+99
+00:04:52.650 --> 00:04:54.922
+If you have kubectl set up locally, you
+
+100
+00:04:54.936 --> 00:04:56.558
+can just do it in your own machine.
+
+101
+00:04:56.594 --> 00:04:57.806
+I'm in the Kops VM.
+
+102
+00:04:57.878 --> 00:05:00.158
+I'll say Replica.
+
+103
+00:05:00.314 --> 00:05:06.590
+I'll just say Replica YAML.
+
+104
+00:05:08.350 --> 00:05:10.000
+Let's put everything here.
+
+105
+00:05:10.930 --> 00:05:12.138
+Let's save and exit.
+
+106
+00:05:12.174 --> 00:05:15.938
+If you choose to change the names like the name of the
+
+107
+00:05:15.964 --> 00:05:20.294
+ReplicaSet or the name of the Pod, you can do that.
+
+108
+00:05:20.452 --> 00:05:22.370
+I'll just use the same one.
+
+109
+00:05:22.420 --> 00:05:29.080
+I'll say kubectl create or apply.
+
+110
+00:05:32.390 --> 00:05:37.074
+Okay, I will run kubectl get rs, ReplicaSet.
+
+111
+00:05:37.232 --> 00:05:40.086
+Short of that, it says OK design.
+
+112
+00:05:40.208 --> 00:05:43.400
+Three current three are ready.
+
+113
+00:05:44.150 --> 00:05:47.370
+kubectl get Pod.
+
+114
+00:05:48.770 --> 00:05:50.170
+All right, so you see three Pod.
+
+115
+00:05:50.230 --> 00:05:52.770
+Now you'll see why this three three times.
+
+116
+00:05:52.940 --> 00:05:54.918
+So decided this is what I mentioned.
+
+117
+00:05:55.004 --> 00:05:56.670
+This will be my Replica.
+
+118
+00:05:57.290 --> 00:05:58.710
+Current are three.
+
+119
+00:05:58.820 --> 00:06:00.490
+How many pods got created?
+
+120
+00:06:00.550 --> 00:06:02.574
+And out of that, how many are ready?
+
+121
+00:06:02.612 --> 00:06:05.370
+I mean, your Pod may have some problem, right?
+
+122
+00:06:05.420 --> 00:06:06.978
+So you may have current as three and
+
+123
+00:06:07.004 --> 00:06:08.538
+you may have already as maybe two.
+
+124
+00:06:08.624 --> 00:06:10.618
+Maybe one pod is still getting created.
+
+125
+00:06:10.654 --> 00:06:12.922
+Or maybe having some problem not getting created.
+
+126
+00:06:12.946 --> 00:06:14.170
+It doesn't have resource.
+
+127
+00:06:14.290 --> 00:06:16.626
+There could be many problems, right?
+
+128
+00:06:16.688 --> 00:06:20.350
+So our end goal is to have three ready parts.
+
+129
+00:06:20.530 --> 00:06:23.046
+Okay, if you have three pods and you see that's the name
+
+130
+00:06:23.108 --> 00:06:26.660
+of the ReplicaSet hyphen and it gave some ID there.
+
+131
+00:06:27.170 --> 00:06:32.070
+And one by one out of one container, one is running.
+
+132
+00:06:32.120 --> 00:06:34.134
+If you have multiple containers, you can
+
+133
+00:06:34.172 --> 00:06:36.610
+have three container, maybe in a pod.
+
+134
+00:06:36.670 --> 00:06:39.020
+And you can see out of three, one is running.
+
+135
+00:06:40.070 --> 00:06:42.150
+It may be like that if
+
+136
+00:06:42.260 --> 00:06:43.974
+all of your container doesn't work.
+
+137
+00:06:44.072 --> 00:06:45.582
+But we have one container in
+
+138
+00:06:45.596 --> 00:06:47.420
+the Pod and one is running.
+
+139
+00:06:48.050 --> 00:06:49.522
+Okay, now that's the Replica.
+
+140
+00:06:49.546 --> 00:06:54.474
+We can scale up or scale out, or
+
+141
+00:06:54.512 --> 00:06:57.500
+we can scale in or scale down.
+
+142
+00:06:58.130 --> 00:06:59.742
+But before I do that, I want
+
+143
+00:06:59.756 --> 00:07:01.294
+to just delete one of the pod.
+
+144
+00:07:01.342 --> 00:07:04.254
+kubectl delete pod, not one.
+
+145
+00:07:04.292 --> 00:07:06.586
+I'll delete two parts.
+
+146
+00:07:06.778 --> 00:07:09.646
+Delete this pod and I'll delete this pod.
+
+147
+00:07:09.778 --> 00:07:11.262
+Let's assume these two parts are
+
+148
+00:07:11.276 --> 00:07:12.166
+running on a worker node.
+
+149
+00:07:12.178 --> 00:07:14.010
+And that worker node crashed.
+
+150
+00:07:15.590 --> 00:07:17.262
+Okay, so when it crashed, it's going to
+
+151
+00:07:17.276 --> 00:07:20.418
+delete the pods, but then the ReplicaSet.
+
+152
+00:07:20.564 --> 00:07:22.146
+How that was so fast.
+
+153
+00:07:22.208 --> 00:07:25.270
+You know, these are two new pods.
+
+154
+00:07:25.330 --> 00:07:26.442
+Look at their age.
+
+155
+00:07:26.516 --> 00:07:27.630
+4 seconds.
+
+156
+00:07:29.210 --> 00:07:31.018
+How quickly they got created.
+
+157
+00:07:31.054 --> 00:07:33.020
+Because it's just a process time.
+
+158
+00:07:34.610 --> 00:07:37.278
+How we can scale down or scale up.
+
+159
+00:07:37.304 --> 00:07:39.682
+The best way is always declarative.
+
+160
+00:07:39.766 --> 00:07:42.474
+So better always make the
+
+161
+00:07:42.512 --> 00:07:44.430
+change in the definition file.
+
+162
+00:07:46.950 --> 00:07:48.382
+Change the Replica size.
+
+163
+00:07:48.456 --> 00:07:52.994
+I will say Replica I want maybe five save and quit.
+
+164
+00:07:53.102 --> 00:07:55.560
+I'm scaling out or scaling up.
+
+165
+00:07:56.130 --> 00:07:58.320
+I say kubectl apply.
+
+166
+00:08:03.330 --> 00:08:07.390
+Okay, let's say kubectl get pod.
+
+167
+00:08:08.910 --> 00:08:10.320
+I have five now.
+
+168
+00:08:10.830 --> 00:08:13.054
+Like that, you can scale down other ways.
+
+169
+00:08:13.092 --> 00:08:16.502
+Is kubectl through command line imperative way we'll
+
+170
+00:08:16.526 --> 00:08:26.440
+see scale --replicas equal to I will say one
+
+171
+00:08:27.490 --> 00:08:33.340
+and rs slash the ReplicaSet name frontend
+
+172
+00:08:33.909 --> 00:08:36.280
+And that's my ReplicaSet name.
+
+173
+00:08:37.690 --> 00:08:41.090
+Okay, let's say kubectl get pod.
+
+174
+00:08:41.770 --> 00:08:43.909
+You see that scale down.
+
+175
+00:08:43.960 --> 00:08:45.340
+You can again scale up.
+
+176
+00:08:45.910 --> 00:08:48.974
+But this time, I'm going to scale with another way.
+
+177
+00:08:49.072 --> 00:08:52.970
+kubectl edit Rs.
+
+178
+00:08:53.530 --> 00:08:56.498
+And I gave the name of the ReplicaSet.
+
+179
+00:08:56.644 --> 00:08:57.734
+But you can do it two ways.
+
+180
+00:08:57.772 --> 00:09:00.338
+You can say RS slash frontend like this.
+
+181
+00:09:00.424 --> 00:09:03.220
+Or you can say rs space frontend.
+
+182
+00:09:04.390 --> 00:09:06.770
+Okay, now let's find Replicas.
+
+183
+00:09:08.650 --> 00:09:10.226
+Okay, replica One.
+
+184
+00:09:10.288 --> 00:09:12.280
+I'll say I need Replica Two.
+
+185
+00:09:12.610 --> 00:09:15.940
+And save and quit. That's it. Done.
+
+186
+00:09:17.530 --> 00:09:22.094
+Okay, these last two methods this one and this
+
+187
+00:09:22.132 --> 00:09:26.106
+one is not at all recommended in production.
+
+188
+00:09:26.178 --> 00:09:28.830
+Always be going to do it through definition
+
+189
+00:09:28.890 --> 00:09:32.500
+files, through manifest and we apply the changes.
+
+190
+00:09:34.210 --> 00:09:36.326
+And if you are thinking, hey,
+
+191
+00:09:36.508 --> 00:09:38.690
+where did this command come from?
+
+192
+00:09:38.860 --> 00:09:40.550
+Do I need to remember it?
+
+193
+00:09:40.660 --> 00:09:43.178
+Well, I did it so many times, so I remember it.
+
+194
+00:09:43.204 --> 00:09:45.242
+But trust me, you don't need to remember it.
+
+195
+00:09:45.376 --> 00:09:48.590
+Let me take you to kubectl Cheat sheet.
+
+196
+00:09:49.930 --> 00:09:51.830
+Okay, it says Cheat sheet, but
+
+197
+00:09:51.880 --> 00:09:54.050
+this is from official documentation.
+
+198
+00:09:54.970 --> 00:09:58.000
+So we'll go through the cheap cheat sheet later.
+
+199
+00:09:58.330 --> 00:10:03.100
+I want to simply take you to command where I scaled it.
+
+200
+00:10:04.210 --> 00:10:05.440
+Let's find out.
+
+201
+00:10:06.070 --> 00:10:07.878
+There scaling resources.
+
+202
+00:10:07.914 --> 00:10:12.278
+So, Cheat Sheet is many commands in
+
+203
+00:10:12.304 --> 00:10:14.294
+one place which you regularly use.
+
+204
+00:10:14.392 --> 00:10:17.646
+It's really very good documentation.
+
+205
+00:10:17.718 --> 00:10:19.178
+You should really bookmark this.
+
+206
+00:10:19.204 --> 00:10:20.560
+I use this a lot.
+
+207
+00:10:21.130 --> 00:10:23.630
+So that's how you can find those commands.
+
+208
+00:10:24.490 --> 00:10:28.178
+Okay, we have the documentation for ReplicaSet here.
+
+209
+00:10:28.264 --> 00:10:29.486
+You can read about it.
+
+210
+00:10:29.548 --> 00:10:30.602
+But it's pretty simple.
+
+211
+00:10:30.676 --> 00:10:33.880
+Just to maintain the replica, you use ReplicaSet.
+
+212
+00:10:34.630 --> 00:10:36.038
+Once you're done delete your
+
+213
+00:10:36.064 --> 00:10:41.630
+ReplicaSet, kubectl delete Rs.
+
+214
+00:10:43.090 --> 00:10:45.318
+Because you cannot really delete pods
+
+215
+00:10:45.354 --> 00:10:47.342
+here, they will get created again.
+
+216
+00:10:47.536 --> 00:10:51.194
+So you just need to delete the ReplicaSet and
+
+217
+00:10:51.232 --> 00:10:56.726
+that in turn will delete the pod gone, right?
+
+218
+00:10:56.848 --> 00:10:57.746
+Play with this.
+
+219
+00:10:57.868 --> 00:10:59.900
+Wrap this up and join me in the next video.

@@ -1,0 +1,525 @@
+WEBVTT
+
+1
+00:00:00.670 --> 00:00:01.820
+Hello and welcome.
+
+2
+00:00:03.050 --> 00:00:05.782
+By now you would have been very proficient 
+
+3
+00:00:05.866 --> 00:00:07.878
+with kubectl command and you can do
+
+4
+00:00:07.904 --> 00:00:11.790
+anything, but still those are commands.
+
+5
+00:00:12.410 --> 00:00:15.774
+How about having a central view from where
+
+6
+00:00:15.872 --> 00:00:18.570
+you can see everything, like a dashboard?
+
+7
+00:00:19.310 --> 00:00:22.470
+There are web dashboard for Kubernetes and I
+
+8
+00:00:22.520 --> 00:00:25.700
+really don't like them except one or two.
+
+9
+00:00:26.630 --> 00:00:32.034
+The one that is really used nowadays is not
+
+10
+00:00:32.072 --> 00:00:35.106
+a web dashboard, but a software or a tool
+
+11
+00:00:35.168 --> 00:00:38.938
+called Lens, which you can install on your laptop.
+
+12
+00:00:39.094 --> 00:00:41.022
+And you can have a central view
+
+13
+00:00:41.096 --> 00:00:44.130
+of all your Kubernetes cluster from there.
+
+14
+00:00:44.300 --> 00:00:46.290
+So let's take a look at Lens.
+
+15
+00:00:47.630 --> 00:00:50.360
+Okay, that is beautiful.
+
+16
+00:00:52.590 --> 00:00:56.650
+So the way the world runs, Kubernetes
+
+17
+00:00:58.470 --> 00:01:01.018
+really just download and install it.
+
+18
+00:01:01.164 --> 00:01:02.398
+That's why we are here.
+
+19
+00:01:02.544 --> 00:01:04.330
+And you will see how amazing it is.
+
+20
+00:01:04.379 --> 00:01:06.166
+So just download it from here, install
+
+21
+00:01:06.228 --> 00:01:07.920
+it based on your operating system.
+
+22
+00:01:08.850 --> 00:01:12.086
+You also have option for Mac and Linux.
+
+23
+00:01:12.158 --> 00:01:14.930
+If you're using Linux for the desktop or Windows
+
+24
+00:01:14.990 --> 00:01:17.770
+or Mac based on that, download it, install it.
+
+25
+00:01:17.880 --> 00:01:21.106
+Once you have Lens installed, then open
+
+26
+00:01:21.168 --> 00:01:22.966
+Lens, which I'm going to do now.
+
+27
+00:01:23.028 --> 00:01:24.790
+I already have it installed.
+
+28
+00:01:26.070 --> 00:01:28.270
+Okay, lens is loading.
+
+29
+00:01:32.890 --> 00:01:36.210
+Okay, so here you have the catalog.
+
+30
+00:01:36.270 --> 00:01:38.534
+Now I have some cluster over here.
+
+31
+00:01:38.572 --> 00:01:39.714
+They're not actually active.
+
+32
+00:01:39.762 --> 00:01:42.074
+I'm going to add some new cluster here.
+
+33
+00:01:42.112 --> 00:01:43.094
+So you can say plus.
+
+34
+00:01:43.192 --> 00:01:46.574
+And you can directly give the kubeconfig file here.
+
+35
+00:01:46.612 --> 00:01:48.950
+So you can see Add from kubeconfig
+
+36
+00:01:49.690 --> 00:01:51.870
+and you can paste your kubeconfig file.
+
+37
+00:01:51.930 --> 00:01:58.410
+So mine is there in the Kopsvm, .kube/config.
+
+38
+00:01:58.590 --> 00:02:00.280
+I'm just going to copy this.
+
+39
+00:02:05.450 --> 00:02:06.226
+Be careful.
+
+40
+00:02:06.298 --> 00:02:07.220
+Copy everything.
+
+41
+00:02:07.670 --> 00:02:08.960
+Start till end.
+
+42
+00:02:10.430 --> 00:02:14.720
+Copy that and paste it there.
+
+43
+00:02:17.730 --> 00:02:20.290
+Yeah, there was one extra line over there. Okay.
+
+44
+00:02:20.340 --> 00:02:23.410
+So I removed it and I'll see Add cluster.
+
+45
+00:02:25.530 --> 00:02:27.310
+Okay, that's our cluster.
+
+46
+00:02:28.230 --> 00:02:29.580
+Let's click on that.
+
+47
+00:02:30.150 --> 00:02:33.670
+It's connecting authenticating.
+
+48
+00:02:38.830 --> 00:02:40.682
+Okay, you will see this error if you do
+
+49
+00:02:40.696 --> 00:02:44.154
+not have the metrics installed on your cluster.
+
+50
+00:02:44.202 --> 00:02:45.950
+So let's install Metrics.
+
+51
+00:02:48.590 --> 00:02:51.622
+Now, this basically uses Prometheus.
+
+52
+00:02:51.766 --> 00:02:55.542
+If you have already Prometheus installed, then it
+
+53
+00:02:55.556 --> 00:02:57.234
+will try to read information from that.
+
+54
+00:02:57.272 --> 00:03:00.766
+Or you can deploy your own promise from Lens.
+
+55
+00:03:00.838 --> 00:03:03.150
+Prometheus is a monitoring tool
+
+56
+00:03:03.200 --> 00:03:05.446
+or monitoring service for Kubernetes.
+
+57
+00:03:05.518 --> 00:03:08.134
+Especially not just for Kubernetes,
+
+58
+00:03:08.182 --> 00:03:09.440
+but for many things.
+
+59
+00:03:09.830 --> 00:03:13.182
+So to have monitoring installed, we have to go
+
+60
+00:03:13.256 --> 00:03:15.642
+to the cluster here, and we need to go
+
+61
+00:03:15.656 --> 00:03:19.350
+to the Settings and go to Lens Metrics.
+
+62
+00:03:19.850 --> 00:03:22.378
+And here you have Enable Bundle, Prometheus
+
+63
+00:03:22.414 --> 00:03:26.574
+stack and that one, and that one.
+
+64
+00:03:26.732 --> 00:03:29.122
+So all this I want to install all these metrics.
+
+65
+00:03:29.146 --> 00:03:32.600
+So let's apply and let's wait for some time.
+
+66
+00:03:34.730 --> 00:03:36.560
+Okay, it seems this is done.
+
+67
+00:03:37.370 --> 00:03:40.518
+And let's go here to Metrics prometheus
+
+68
+00:03:40.544 --> 00:03:43.254
+Auto Detect. Okay.
+
+69
+00:03:43.292 --> 00:03:45.270
+Yeah, we'll keep it as Auto Detect.
+
+70
+00:03:45.650 --> 00:03:47.000
+Let's just keep this.
+
+71
+00:03:47.630 --> 00:03:48.800
+Let's go back.
+
+72
+00:03:50.030 --> 00:03:51.018
+Okay, it does not come.
+
+73
+00:03:51.044 --> 00:03:52.078
+Let's go to the Metrics.
+
+74
+00:03:52.114 --> 00:03:55.110
+And instead of Auto Detect, you select here Lens.
+
+75
+00:03:57.050 --> 00:03:59.542
+It says all metrics are available on the UI.
+
+76
+00:03:59.566 --> 00:04:00.980
+Let's just close this.
+
+77
+00:04:01.850 --> 00:04:05.850
+You see that usage request limits.
+
+78
+00:04:06.890 --> 00:04:09.574
+You see all this information on CPU on memory
+
+79
+00:04:09.622 --> 00:04:12.138
+on the pod, how much it is used, how
+
+80
+00:04:12.164 --> 00:04:14.958
+much is the capacity of your cluster. Right?
+
+81
+00:04:15.104 --> 00:04:20.601
+So see that CPU have four, that's two worker, two CPU.
+
+82
+00:04:20.625 --> 00:04:24.810
+So total four CPU, ram size total three, eight GB.
+
+83
+00:04:25.670 --> 00:04:27.560
+You can see your notes from here.
+
+84
+00:04:29.090 --> 00:04:30.418
+You can see the workloads.
+
+85
+00:04:30.454 --> 00:04:32.370
+Like you can see all your pods.
+
+86
+00:04:33.350 --> 00:04:34.798
+You have to select the namespace.
+
+87
+00:04:34.834 --> 00:04:38.840
+Now, I created some extra pods just to show you this.
+
+88
+00:04:39.170 --> 00:04:41.142
+You can select the namespace here.
+
+89
+00:04:41.156 --> 00:04:42.490
+I'm going to select view profile.
+
+90
+00:04:42.550 --> 00:04:44.060
+I have a few things here.
+
+91
+00:04:46.370 --> 00:04:48.046
+So it has this one pod.
+
+92
+00:04:48.178 --> 00:04:51.270
+And you can see detail about this pod.
+
+93
+00:04:52.310 --> 00:04:54.970
+Like we do describe or -o yaml.
+
+94
+00:04:55.150 --> 00:04:58.110
+You can even get a shell to this pod.
+
+95
+00:05:00.170 --> 00:05:03.260
+Okay, it's opening my Git bash for some reason.
+
+96
+00:05:04.790 --> 00:05:08.526
+Okay, again, I actually have to select
+
+97
+00:05:08.588 --> 00:05:11.202
+PowerShell because that's my default shell here.
+
+98
+00:05:11.336 --> 00:05:13.138
+That's why it goes to Git bash.
+
+99
+00:05:13.294 --> 00:05:14.874
+But you get an idea, right?
+
+100
+00:05:14.972 --> 00:05:16.734
+I want you to just go through this.
+
+101
+00:05:16.772 --> 00:05:19.422
+You can see config maps and you can see stuff.
+
+102
+00:05:19.616 --> 00:05:22.290
+Just make sure you select the right namespace there.
+
+103
+00:05:22.340 --> 00:05:26.278
+Or you can just see all namespaces, config
+
+104
+00:05:26.314 --> 00:05:30.200
+maps, network storage, different namespaces, access control.
+
+105
+00:05:30.650 --> 00:05:33.994
+This gives you a complete view of this cluster.
+
+106
+00:05:34.042 --> 00:05:36.154
+Like that, you can have multiple clusters.
+
+107
+00:05:36.322 --> 00:05:41.370
+So really a centralized view to see information about
+
+108
+00:05:41.420 --> 00:05:44.938
+your workloads, many things, you can see their status.
+
+109
+00:05:45.034 --> 00:05:46.518
+This is a warning. Back off.
+
+110
+00:05:46.544 --> 00:05:48.270
+Restarting failed container.
+
+111
+00:05:49.310 --> 00:05:50.720
+Let's click on this.
+
+112
+00:05:52.610 --> 00:05:55.078
+If you click over here, this hamburger symbol
+
+113
+00:05:55.114 --> 00:05:57.094
+here, this is going to show the logs.
+
+114
+00:05:57.262 --> 00:05:58.374
+So what's going on?
+
+115
+00:05:58.472 --> 00:06:00.118
+See it's trying to run this pod.
+
+116
+00:06:00.154 --> 00:06:03.822
+It's not running because password needs to
+
+117
+00:06:03.836 --> 00:06:05.778
+be set for this pod, right?
+
+118
+00:06:05.864 --> 00:06:08.240
+So you can see the logs if something goes wrong.
+
+119
+00:06:09.650 --> 00:06:12.380
+I personally like Lens a lot.
+
+120
+00:06:12.830 --> 00:06:14.538
+I'm mostly a command line guy.
+
+121
+00:06:14.564 --> 00:06:15.834
+I use kubectl a lot.
+
+122
+00:06:15.872 --> 00:06:20.226
+But Lens is just amazing and better than
+
+123
+00:06:20.288 --> 00:06:23.274
+many web dashboards and UI out there.
+
+124
+00:06:23.432 --> 00:06:26.262
+The software is really it is called as
+
+125
+00:06:26.276 --> 00:06:30.826
+an IDE, not just any other tools.
+
+126
+00:06:30.898 --> 00:06:32.034
+Kubernetes ID.
+
+127
+00:06:32.132 --> 00:06:34.254
+So, again, take your time, go
+
+128
+00:06:34.292 --> 00:06:37.280
+through this, see different options.
+
+129
+00:06:38.090 --> 00:06:41.274
+This will be very useful tool for you. All right?
+
+130
+00:06:41.312 --> 00:06:42.930
+And that is all in this video.
+
+131
+00:06:43.040 --> 00:06:44.220
+I will see you in the next one.

@@ -1,0 +1,717 @@
+WEBVTT
+
+1
+00:00:01.750 --> 00:00:04.398
+If you remember pom.XML file from
+
+2
+00:00:04.424 --> 00:00:07.230
+Maven and Jenkins session, you know, it's really
+
+3
+00:00:07.280 --> 00:00:09.882
+difficult to read and also to write.
+
+4
+00:00:10.016 --> 00:00:11.722
+But thankfully now we have moved
+
+5
+00:00:11.746 --> 00:00:13.090
+to a better data structure.
+
+6
+00:00:13.150 --> 00:00:15.070
+We have JSON and YAML.
+
+7
+00:00:15.250 --> 00:00:16.798
+And if you have already followed
+
+8
+00:00:16.834 --> 00:00:19.830
+Python sessions, you already know JSON.
+
+9
+00:00:20.330 --> 00:00:23.230
+Yes, no, I have not taken any special session on JSON.
+
+10
+00:00:23.290 --> 00:00:25.354
+But you know, Python dictionary.
+
+11
+00:00:25.522 --> 00:00:26.898
+So what you see right now on
+
+12
+00:00:26.924 --> 00:00:28.834
+your screen is a Python dictionary.
+
+13
+00:00:28.942 --> 00:00:31.416
+You have a dictionary that has two keys,
+
+14
+00:00:31.416 --> 00:00:32.019
+DevOps and
+
+15
+00:00:32.019 --> 00:00:32.729
+development. 
+
+16
+00:00:33.170 --> 00:00:35.770
+This is the same example from our Python session.
+
+17
+00:00:35.890 --> 00:00:36.978
+So dictionary that I have
+
+18
+00:00:37.004 --> 00:00:38.746
+taken from the Python session.
+
+19
+00:00:38.818 --> 00:00:43.002
+A dictionary that has two keys DevOps, its value is
+
+20
+00:00:43.136 --> 00:00:46.806
+a list development and its value is also a list.
+
+21
+00:00:46.988 --> 00:00:49.486
+And I will try to make it little more complicated.
+
+22
+00:00:49.558 --> 00:00:50.994
+So I'll add one more key value
+
+23
+00:00:51.032 --> 00:00:56.702
+pair , and there another key ansible facts.
+
+24
+00:00:56.726 --> 00:00:59.234
+And its value is a dictionary.
+
+25
+00:00:59.402 --> 00:01:04.390
+So we have three keys, DevOps, development, ansible facts,
+
+26
+00:01:05.310 --> 00:01:08.650
+you have value, list, list and a dictionary.
+
+27
+00:01:09.390 --> 00:01:11.218
+Now I know it's already getting difficult to
+
+28
+00:01:11.244 --> 00:01:13.670
+read, but I will make it more readable.
+
+29
+00:01:13.730 --> 00:01:15.934
+Now check this out.
+
+30
+00:01:16.032 --> 00:01:22.274
+I'll just copy everything once again and
+
+31
+00:01:22.312 --> 00:01:25.420
+I will make it more readable. Enter.
+
+32
+00:01:28.910 --> 00:01:32.060
+Okay, there was this extra comma anyway?
+
+33
+00:01:45.630 --> 00:01:46.874
+Now PyCharm is smart.
+
+34
+00:01:46.922 --> 00:01:49.030
+It's already taking everything properly.
+
+35
+00:01:52.450 --> 00:01:53.738
+So what I'm really doing is
+
+36
+00:01:53.764 --> 00:01:55.370
+I'm just making this vertical.
+
+37
+00:02:09.590 --> 00:02:12.258
+Okay, that's the same dictionary, but that is just a
+
+38
+00:02:12.284 --> 00:02:14.670
+vertical version of the dictionary that you have seen.
+
+39
+00:02:14.720 --> 00:02:16.254
+But it is so much easier to read.
+
+40
+00:02:16.292 --> 00:02:18.822
+Now starts over there you have the
+
+41
+00:02:18.836 --> 00:02:21.802
+key DevOps and development and ansible facts.
+
+42
+00:02:21.946 --> 00:02:23.886
+You have the value as list.
+
+43
+00:02:24.008 --> 00:02:27.114
+That's vertical development value is also list.
+
+44
+00:02:27.212 --> 00:02:28.880
+Let me bring this one here.
+
+45
+00:02:29.810 --> 00:02:30.802
+Ansible facts.
+
+46
+00:02:30.826 --> 00:02:34.230
+It's value is a dictionary with just one key pair.
+
+47
+00:02:34.610 --> 00:02:37.110
+And this my friend is JSON.
+
+48
+00:02:39.870 --> 00:02:42.310
+Okay, that was Python dictionary.
+
+49
+00:02:45.910 --> 00:02:48.650
+And this that you have just seen, vertical
+
+50
+00:02:49.090 --> 00:02:52.790
+is JSON and JSON data structure is very
+
+51
+00:02:52.840 --> 00:02:56.658
+famous now or very much adapted or adopted.
+
+52
+00:02:56.814 --> 00:02:59.742
+There are so many tools now using JSON format.
+
+53
+00:02:59.886 --> 00:03:01.490
+And in today's time if I see any
+
+54
+00:03:01.540 --> 00:03:04.130
+tool using XML format, I'll be really worried.
+
+55
+00:03:04.570 --> 00:03:06.702
+Okay, so that is about JSON.
+
+56
+00:03:06.846 --> 00:03:08.634
+Now let's understand YAML.
+
+57
+00:03:08.802 --> 00:03:11.750
+If you understood this, then YAML is a pleasure.
+
+58
+00:03:12.430 --> 00:03:15.760
+Okay, so I'm going to copy this whole JSON again.
+
+59
+00:03:17.710 --> 00:03:19.478
+Yes, I'm going to convert this into
+
+60
+00:03:19.504 --> 00:03:22.180
+YAML and you will love this.
+
+61
+00:03:24.370 --> 00:03:24.806
+Okay.
+
+62
+00:03:24.868 --> 00:03:29.810
+In YAML we don't have opening and closing here.
+
+63
+00:03:29.860 --> 00:03:32.574
+It's just like python indentation.
+
+64
+00:03:32.742 --> 00:03:35.330
+And you don't even need to give double quotes.
+
+65
+00:03:37.510 --> 00:03:39.410
+And the square brackets.
+
+66
+00:03:41.350 --> 00:03:42.974
+I'll just clean this.
+
+67
+00:03:43.132 --> 00:03:45.820
+This will look very beautiful in a moment.
+
+68
+00:03:48.130 --> 00:03:50.318
+So double quotes if you want,
+
+69
+00:03:50.344 --> 00:03:52.122
+you can give that's not mandatory.
+
+70
+00:03:52.206 --> 00:03:53.762
+Like if you have special character at
+
+71
+00:03:53.776 --> 00:03:55.430
+all, you can give double quotes.
+
+72
+00:03:59.210 --> 00:04:01.040
+Okay, a list is like this.
+
+73
+00:04:06.510 --> 00:04:08.278
+Okay, so indentation is very important.
+
+74
+00:04:08.364 --> 00:04:10.860
+Now if you want you can start it here also.
+
+75
+00:04:11.250 --> 00:04:13.860
+But after that hyphen, there should be a space.
+
+76
+00:04:17.589 --> 00:04:19.410
+Okay, let's do it for the development.
+
+77
+00:04:19.470 --> 00:04:31.546
+Also two keys DevOps development.
+
+78
+00:04:31.618 --> 00:04:32.814
+And its value is a list.
+
+79
+00:04:32.852 --> 00:04:34.590
+And list is in this format,
+
+80
+00:04:34.910 --> 00:04:37.566
+a space and the element name. Okay?
+
+81
+00:04:37.688 --> 00:04:39.138
+Or whatever the element is.
+
+82
+00:04:39.224 --> 00:04:41.300
+Okay, let's do it for the third key also.
+
+83
+00:04:45.630 --> 00:04:47.710
+Now its value is a dictionary.
+
+84
+00:04:57.610 --> 00:04:58.900
+And that's it.
+
+85
+00:04:59.710 --> 00:05:01.238
+You have to make sure there
+
+86
+00:05:01.264 --> 00:05:04.790
+is a space after ansible facts.
+
+87
+00:05:06.070 --> 00:05:07.960
+Those two space or three space.
+
+88
+00:05:08.410 --> 00:05:09.830
+And that is YAML.
+
+89
+00:05:09.830 --> 00:05:10.830
+Three keys, devops, development 
+
+90
+00:05:12.498 --> 00:05:17.114
+ansible_facts, DevOps key is a list. Sorry.
+
+91
+00:05:17.212 --> 00:05:18.842
+DevOps value is a list.
+
+92
+00:05:18.976 --> 00:05:21.014
+Development value is also a list.
+
+93
+00:05:21.172 --> 00:05:23.646
+Ansible facts value is a dictionary.
+
+94
+00:05:23.838 --> 00:05:27.974
+So key value, if you are having one
+
+95
+00:05:28.012 --> 00:05:29.834
+more key value pair, then again space.
+
+96
+00:05:29.932 --> 00:05:37.110
+Let's say for example version, its value is an integer.
+
+97
+00:05:38.330 --> 00:05:40.460
+So let's check it once again.
+
+98
+00:05:43.770 --> 00:05:47.710
+So that is Python dictionary horizontal.
+
+99
+00:05:48.150 --> 00:05:53.590
+That is JSON and that is YAML.
+
+100
+00:05:54.090 --> 00:05:55.670
+I know which one you liked.
+
+101
+00:05:55.790 --> 00:05:57.890
+That's everyone's choice. YAML.
+
+102
+00:05:58.070 --> 00:06:00.850
+So ansible playbook will be in YAML format.
+
+103
+00:06:01.530 --> 00:06:03.050
+You have seen the execution.
+
+104
+00:06:03.170 --> 00:06:05.878
+When we execute an ansible module, it
+
+105
+00:06:05.904 --> 00:06:07.706
+returns output in the JSON format.
+
+106
+00:06:07.778 --> 00:06:09.730
+And now you should be able to read it. Okay.
+
+107
+00:06:09.840 --> 00:06:12.226
+So this is the output for DB one
+
+108
+00:06:12.288 --> 00:06:15.122
+key name, ansible facts and you have changed
+
+109
+00:06:15.146 --> 00:06:17.642
+and you have ping, ansible facts value is
+
+110
+00:06:17.666 --> 00:06:20.710
+another dictionary discovered Python interpreter.
+
+111
+00:06:22.230 --> 00:06:24.550
+Changed key value is a boolean.
+
+112
+00:06:24.990 --> 00:06:26.018
+Changed is a string.
+
+113
+00:06:26.054 --> 00:06:27.506
+Its value is a boolean.
+
+114
+00:06:27.638 --> 00:06:29.614
+False again.
+
+115
+00:06:29.652 --> 00:06:30.578
+A string ping.
+
+116
+00:06:30.674 --> 00:06:32.170
+Its value is pong.
+
+117
+00:06:32.490 --> 00:06:34.382
+Yeah, I know, not so funny.
+
+118
+00:06:34.526 --> 00:06:37.078
+But in ansible whatever module you execute, it will
+
+119
+00:06:37.104 --> 00:06:40.510
+have an output like ping module output is pong.
+
+120
+00:06:40.950 --> 00:06:43.522
+Changed will be a key that will
+
+121
+00:06:43.536 --> 00:06:45.026
+be present in all the output.
+
+122
+00:06:45.098 --> 00:06:48.266
+Changed will be true if this module
+
+123
+00:06:48.338 --> 00:06:50.494
+if this task execution made any change.
+
+124
+00:06:50.592 --> 00:06:52.058
+So we are executing ping module.
+
+125
+00:06:52.094 --> 00:06:53.880
+Ping model doesn't make any change.
+
+126
+00:06:54.390 --> 00:06:57.334
+It's a soft touch model, it login and come back.
+
+127
+00:06:57.492 --> 00:07:02.098
+So it's not making any change on DB one nor on web one.
+
+128
+00:07:02.736 --> 00:07:04.678
+Or neither on web two.
+
+129
+00:07:04.764 --> 00:07:07.750
+So changed value you will see is false for ping.
+
+130
+00:07:08.250 --> 00:07:10.442
+But if you're installing a package or pushing
+
+131
+00:07:10.466 --> 00:07:12.622
+a configuration file, and when you do it
+
+132
+00:07:12.636 --> 00:07:14.374
+for the first time when it applies the
+
+133
+00:07:14.412 --> 00:07:16.678
+change, the changed value will be true.
+
+134
+00:07:16.824 --> 00:07:19.462
+When you run it once again, if the system is
+
+135
+00:07:19.476 --> 00:07:22.310
+in the same state, the changed value will be false.
+
+136
+00:07:22.490 --> 00:07:24.840
+We'll understand that in the next video.
+
+137
+00:07:25.530 --> 00:07:27.974
+So I hope you understood JSON
+
+138
+00:07:28.022 --> 00:07:29.794
+and YAML in the easiest way.
+
+139
+00:07:29.892 --> 00:07:33.326
+Let me also show you Python documentation for YAML.
+
+140
+00:07:33.458 --> 00:07:34.138
+Oh, sorry.
+
+141
+00:07:34.224 --> 00:07:36.250
+Ansible documentation for YAML.
+
+142
+00:07:36.930 --> 00:07:37.898
+YAML syntax.
+
+143
+00:07:37.934 --> 00:07:39.218
+It talks about YAML syntax.
+
+144
+00:07:39.254 --> 00:07:40.390
+YAML basics.
+
+145
+00:07:40.830 --> 00:07:42.240
+Like this is a list.
+
+146
+00:07:42.990 --> 00:07:45.238
+A three hyphen at the beginning of the
+
+147
+00:07:45.264 --> 00:07:48.350
+file represents that it's a YAML file.
+
+148
+00:07:48.530 --> 00:07:50.138
+But that's optional.
+
+149
+00:07:50.294 --> 00:07:53.110
+It just indicates that this is where it starts.
+
+150
+00:07:53.730 --> 00:07:55.658
+So here you see list of fruits.
+
+151
+00:07:55.754 --> 00:07:58.380
+Let me make it bigger. Too small.
+
+152
+00:07:59.610 --> 00:08:01.642
+List of fruit. Right.
+
+153
+00:08:01.776 --> 00:08:04.058
+A dictionary key named Martin.
+
+154
+00:08:04.094 --> 00:08:06.370
+It's value is a dictionary. Key value pairs. Okay.
+
+155
+00:08:06.420 --> 00:08:08.520
+Indentation, this space is very important.
+
+156
+00:08:10.050 --> 00:08:12.010
+This is a list of dictionary.
+
+157
+00:08:12.330 --> 00:08:13.606
+So you have list.
+
+158
+00:08:13.728 --> 00:08:15.194
+First element is a dictionary.
+
+159
+00:08:15.242 --> 00:08:17.410
+Second element is also dictionary. Right?
+
+160
+00:08:17.520 --> 00:08:18.674
+Martin is a dictionary.
+
+161
+00:08:18.722 --> 00:08:21.002
+Its value is another dictionary.
+
+162
+00:08:21.146 --> 00:08:22.250
+Then you have skills.
+
+163
+00:08:22.310 --> 00:08:25.186
+Its value is a list. Okay?
+
+164
+00:08:25.248 --> 00:08:28.814
+So on whole I will say this is list of dictionary.
+
+165
+00:08:28.982 --> 00:08:30.566
+We have two dictionaries.
+
+166
+00:08:30.698 --> 00:08:34.126
+One is Martin, the other one is Kabita. 
+
+167
+00:08:34.188 --> 00:08:36.070
+And its value is also dictionary.
+
+168
+00:08:36.510 --> 00:08:37.977
+But then you have skills key in
+
+169
+00:08:38.004 --> 00:08:39.720
+that, its value is a list.
+
+170
+00:08:40.230 --> 00:08:41.217
+That's what I told you.
+
+171
+00:08:41.244 --> 00:08:42.922
+When you're learning Python, it's very important
+
+172
+00:08:42.996 --> 00:08:44.918
+for you to understand Python data types.
+
+173
+00:08:44.954 --> 00:08:47.362
+If you understand that, you will very easily understand
+
+174
+00:08:47.436 --> 00:08:50.230
+JSON and then you'll very easily understand YAML.
+
+175
+00:08:50.790 --> 00:08:54.322
+To get the link of this documentation, just google
+
+176
+00:08:54.396 --> 00:08:57.698
+ansible YAML and you will get the link syntax
+
+177
+00:08:57.794 --> 00:08:59.460
+and then you can read through it.
+
+178
+00:08:59.970 --> 00:09:01.366
+That will be all in this video.
+
+179
+00:09:01.428 --> 00:09:02.560
+I'll see you in the next one.

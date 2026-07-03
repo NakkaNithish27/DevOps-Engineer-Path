@@ -1,0 +1,210 @@
+WEBVTT
+
+1
+00:00:00.480 --> 00:00:01.920
+<v Instructor>All right, let's take a look at the code</v>
+
+2
+00:00:01.920 --> 00:00:06.210
+that we will use to deploy our container on ECS.
+
+3
+00:00:06.210 --> 00:00:09.390
+First, we are setting here two variables,
+
+4
+00:00:09.390 --> 00:00:11.340
+cluster and service.
+
+5
+00:00:11.340 --> 00:00:13.500
+Cluster will be the ECS cluster name
+
+6
+00:00:13.500 --> 00:00:15.810
+that we will set up in the next lecture.
+
+7
+00:00:15.810 --> 00:00:18.720
+And service is the service that we create
+
+8
+00:00:18.720 --> 00:00:20.700
+in the ECS cluster.
+
+9
+00:00:20.700 --> 00:00:23.550
+Service in ECS clusters gives complete management
+
+10
+00:00:23.550 --> 00:00:24.510
+of your container.
+
+11
+00:00:24.510 --> 00:00:27.870
+It gives load balancer, health check monitoring,
+
+12
+00:00:27.870 --> 00:00:29.700
+logging, all in one.
+
+13
+00:00:29.700 --> 00:00:32.220
+So in the next lecture we are going to create ECS cluster.
+
+14
+00:00:32.220 --> 00:00:35.310
+And in the cluster, we are going to create the ECS service.
+
+15
+00:00:35.310 --> 00:00:37.950
+Also, the service is going to fetch the image
+
+16
+00:00:37.950 --> 00:00:40.830
+from ECR repository from this path
+
+17
+00:00:40.830 --> 00:00:43.260
+and run it on the ECS cluster.
+
+18
+00:00:43.260 --> 00:00:45.810
+So to deploy a container, the stage is pretty simple.
+
+19
+00:00:45.810 --> 00:00:47.580
+The rest of the code is exactly same
+
+20
+00:00:47.580 --> 00:00:49.620
+as we have seen previously.
+
+21
+00:00:49.620 --> 00:00:52.590
+We have a stage deployed to ECS.
+
+22
+00:00:52.590 --> 00:00:53.820
+In this, we have the step here.
+
+23
+00:00:53.820 --> 00:00:55.860
+We are using a plugin,
+
+24
+00:00:55.860 --> 00:00:58.650
+Pipeline AWS Steps.
+
+25
+00:00:58.650 --> 00:01:00.120
+Now this plugin gives us a feature
+
+26
+00:01:00.120 --> 00:01:04.350
+where we can mention details like credentials, awscreds.
+
+27
+00:01:04.350 --> 00:01:07.830
+This is the credential that we have saved in Jenkins
+
+28
+00:01:07.830 --> 00:01:08.663
+and the region.
+
+29
+00:01:08.663 --> 00:01:11.010
+So it's going to set this region and credential.
+
+30
+00:01:11.010 --> 00:01:13.410
+And with that, you can execute your command.
+
+31
+00:01:13.410 --> 00:01:15.570
+So this is a shell command.
+
+32
+00:01:15.570 --> 00:01:18.960
+So on the shell, it is going to export the credentials,
+
+33
+00:01:18.960 --> 00:01:22.110
+the region information, and execute this shell command.
+
+34
+00:01:22.110 --> 00:01:24.510
+This is an AWS CLI command.
+
+35
+00:01:24.510 --> 00:01:25.500
+This command is going to check
+
+36
+00:01:25.500 --> 00:01:29.040
+for the latest image available in the repository,
+
+37
+00:01:29.040 --> 00:01:30.390
+fetch that container image,
+
+38
+00:01:30.390 --> 00:01:32.760
+and execute your container on the ECS cluster.
+
+39
+00:01:32.760 --> 00:01:36.858
+So we see aws ecs update-service
+
+40
+00:01:36.858 --> 00:01:38.430
+<v ->-cluster, cluster name.</v>
+
+41
+00:01:38.430 --> 00:01:40.310
+This is the variable that we have set.
+
+42
+00:01:40.310 --> 00:01:42.090
+<v ->-service, the service name,</v>
+
+43
+00:01:42.090 --> 00:01:44.040
+again, the variable that we have set,
+
+44
+00:01:44.040 --> 00:01:46.140
+and we force for a new deployment.
+
+45
+00:01:46.140 --> 00:01:47.610
+When we do this, it's going to go
+
+46
+00:01:47.610 --> 00:01:50.910
+and check for the latest image available in the ECR
+
+47
+00:01:50.910 --> 00:01:54.720
+and run it on this cluster under this service.
+
+48
+00:01:54.720 --> 00:01:56.610
+So once again, we are going to create ECS cluster
+
+49
+00:01:56.610 --> 00:01:59.190
+in the next lecture and ECS service inside that.
+
+50
+00:01:59.190 --> 00:02:00.270
+And after that, we are going
+
+51
+00:02:00.270 --> 00:02:03.510
+to install this plugin in Jenkins.
+
+52
+00:02:03.510 --> 00:02:04.860
+So join me in the next one.
+

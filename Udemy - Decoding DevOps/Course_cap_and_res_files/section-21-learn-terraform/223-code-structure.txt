@@ -1,0 +1,1003 @@
+WEBVTT
+
+00:00.000 --> 00:00.960
+Instructor: Welcome.
+
+00:00.960 --> 00:04.080
+In this lecture, we are gonna launch an EC2 instance
+
+00:04.080 --> 00:06.780
+by using Terraform. but let me tell you,
+
+00:06.780 --> 00:09.000
+that's not the objective of this lecture.
+
+00:09.000 --> 00:10.139
+The objective of this lecture
+
+00:10.139 --> 00:13.350
+is to understand the Terraform code much better,
+
+00:13.350 --> 00:17.340
+its structure and also the Terraform state.
+
+00:17.340 --> 00:19.263
+How does it maintains the state?
+
+00:20.130 --> 00:22.169
+Launching an instance is just an example
+
+00:22.169 --> 00:25.770
+of what we are trying to achieve.
+
+00:25.770 --> 00:26.910
+Our major focus here
+
+00:26.910 --> 00:29.970
+is to understand the code structure of Terraform.
+
+00:29.970 --> 00:33.108
+So in the previous lecture, we have seen how to fetch a data
+
+00:33.108 --> 00:35.340
+and print it by using Terraform,
+
+00:35.340 --> 00:38.730
+and the data was the AWS EMI ID.
+
+00:38.730 --> 00:40.710
+If you expand here exercise one,
+
+00:40.710 --> 00:42.450
+you will see a few more thing apart
+
+00:42.450 --> 00:46.500
+from just the instance ID.tf file, that was our code.
+
+00:46.500 --> 00:50.220
+There is also a dot terraform folder.
+
+00:50.220 --> 00:53.250
+This was created when we executed Terraform init.
+
+00:53.250 --> 00:55.350
+So if you expand it, now, here,
+
+00:55.350 --> 00:57.148
+this is an executable file for Windows.
+
+00:57.148 --> 00:59.850
+You don't need to actually open it,
+
+00:59.850 --> 01:02.250
+but when you do Terraform init,
+
+01:02.250 --> 01:05.040
+these folders will get created.
+
+01:05.040 --> 01:08.730
+You have a lock file here, click on that,
+
+01:08.730 --> 01:10.560
+so this is maintained automatically
+
+01:10.560 --> 01:12.990
+by Terraform init, it says.
+
+01:12.990 --> 01:14.220
+It has some information,
+
+01:14.220 --> 01:17.313
+like the provider that we are using, its version,
+
+01:18.150 --> 01:20.930
+and then you have the terraform.tfstate file.
+
+01:20.930 --> 01:23.782
+This file maintains the information.
+
+01:23.782 --> 01:25.429
+You can think of this as the output
+
+01:25.429 --> 01:29.010
+when you execute the terraform apply.
+
+01:29.010 --> 01:30.654
+It does what you want it to do
+
+01:30.654 --> 01:32.483
+and stores all that information,
+
+01:32.483 --> 01:35.061
+all that output, into the state file.
+
+01:35.061 --> 01:37.953
+This is called as the tfstate file.
+
+01:37.953 --> 01:41.040
+Now, we just maintained the AMI ID,
+
+01:41.040 --> 01:44.280
+we just fetched the AMI ID, so you can see here,
+
+01:44.280 --> 01:47.696
+resources, AWS AMI, name, AMI ID,
+
+01:47.696 --> 01:50.700
+provider, et cetera, et cetera.
+
+01:50.700 --> 01:53.730
+If you scroll down, you should see here the ID.
+
+01:53.730 --> 01:56.970
+See, this is what we printed in the output.
+
+01:56.970 --> 01:59.141
+We said dot ID, and it printed that information,
+
+01:59.141 --> 02:01.106
+so you can fetch all this information
+
+02:01.106 --> 02:02.970
+which was created by the state file.
+
+02:02.970 --> 02:06.480
+This creates in the runtime, and then it will save it.
+
+02:06.480 --> 02:08.280
+Now, this is locally saved over here.
+
+02:08.280 --> 02:10.170
+In the upcoming lectures, we are going to see
+
+02:10.170 --> 02:12.960
+how we can maintain the state remotely.
+
+02:12.960 --> 02:15.510
+We're going to use S3 bucket for that.
+
+02:15.510 --> 02:18.690
+Okay, so just take a look, and then we are going
+
+02:18.690 --> 02:23.010
+to create the second exercise, but not here.
+
+02:23.010 --> 02:27.600
+Click over here, new folder. Not inside this, yeah.
+
+02:27.600 --> 02:30.690
+Now, I had to create the exercise two and the exercise one,
+
+02:30.690 --> 02:33.333
+then I simply dragged it outside like this,
+
+02:35.220 --> 02:36.840
+and then it says moved.
+
+02:36.840 --> 02:38.490
+Anyways, lemme close this.
+
+02:38.490 --> 02:39.877
+Let's go to exercise two, and here,
+
+02:39.877 --> 02:43.230
+we are going to create a new file
+
+02:43.230 --> 02:45.180
+that will be seeing the instance ID,
+
+02:45.180 --> 02:47.220
+because we still want to find the instance ID,
+
+02:47.220 --> 02:50.190
+so I will just name it as instance ID.tf,
+
+02:50.190 --> 02:54.010
+and I'm going to copy everything from instance ID here
+
+02:56.400 --> 03:01.230
+to the instance ID.tf in the exercise two, save it,
+
+03:01.230 --> 03:05.340
+and I have named it like that, instance ID.tf file,
+
+03:05.340 --> 03:09.300
+and I'll only put here the instance ID fetching information.
+
+03:09.300 --> 03:13.653
+To launch an instance, I am going to write another TF file,
+
+03:14.520 --> 03:16.485
+and also, to launch the instance,
+
+03:16.485 --> 03:20.970
+we need a key pair and we need the security group,
+
+03:20.970 --> 03:23.310
+so for those resources also,
+
+03:23.310 --> 03:25.203
+I'm going to create separate files.
+
+03:26.160 --> 03:29.790
+So first, let's create a file for key pair.,
+
+03:29.790 --> 03:34.790
+so I'll say keypair.tf and just hit enter.
+
+03:37.530 --> 03:40.410
+Make sure to give the extension as dot TF.
+
+03:40.410 --> 03:43.320
+The name, you can choose anything else if you want.
+
+03:43.320 --> 03:47.563
+One more file I'm going to give is for security group.tf,
+
+03:50.430 --> 03:55.430
+and another file for the instance, instance.tf.
+
+03:58.110 --> 04:00.840
+So that's how you create the structure.
+
+04:00.840 --> 04:02.670
+This will make your code more readable.
+
+04:02.670 --> 04:05.340
+You can put all the information just in one file
+
+04:05.340 --> 04:08.040
+and execute, but then it will be difficult for you
+
+04:08.040 --> 04:10.020
+to maintain and manage that one single file,
+
+04:10.020 --> 04:11.534
+so it's better you separate your resources
+
+04:11.534 --> 04:13.950
+into different files.
+
+04:13.950 --> 04:16.620
+Also, don't just create too many files.
+
+04:16.620 --> 04:17.850
+If your resources are short,
+
+04:17.850 --> 04:20.310
+you can just group them into one file also
+
+04:20.310 --> 04:25.310
+or few files rather than creating file for every resource.
+
+04:27.150 --> 04:30.180
+Okay, now I'm going to create one more file,
+
+04:30.180 --> 04:35.180
+and I'm going to name it as provider.tf, just with small P,
+
+04:39.060 --> 04:41.100
+and I'll tell you why I'm creating that.
+
+04:41.100 --> 04:42.577
+Our provider will be AWS,
+
+04:43.770 --> 04:46.650
+and with that, I can mention more information also
+
+04:46.650 --> 04:49.500
+of the provider, like which region I want to use,
+
+04:49.500 --> 04:51.840
+what key pairs I want to use.
+
+04:51.840 --> 04:54.270
+Sorry, I meant to say the access keys.
+
+04:54.270 --> 04:56.220
+That's not a good idea to put access keys,
+
+04:56.220 --> 04:59.460
+definitely very, very bad idea to put access keys
+
+04:59.460 --> 05:02.760
+in the source code, so never do that,
+
+05:02.760 --> 05:03.660
+but I'm just telling you,
+
+05:03.660 --> 05:06.840
+you can give more information about a provider.
+
+05:06.840 --> 05:09.150
+So again, you don't want to put all this information
+
+05:09.150 --> 05:10.590
+into the instance file
+
+05:10.590 --> 05:12.900
+because that's separate information,
+
+05:12.900 --> 05:15.510
+so I'm going to say here provider,
+
+05:15.510 --> 05:17.880
+and the provider is AWS.
+
+05:17.880 --> 05:21.030
+That's the name you have to use, exactly same name,
+
+05:21.030 --> 05:25.140
+and then the resource block, like we create, curly braces.
+
+05:25.140 --> 05:28.530
+Region, you can mention equal to the region where you want
+
+05:28.530 --> 05:32.163
+to create something, say, us-east-1.
+
+05:33.870 --> 05:37.447
+So come to this link, registry.terraform.io/browse/provider,
+
+05:37.447 --> 05:39.090
+so if you just come over here,
+
+05:39.090 --> 05:41.130
+you can see all the providers.
+
+05:41.130 --> 05:44.493
+So we are going to use AWS provider, so let's click on that,
+
+05:46.410 --> 05:48.813
+and let's click on the documentation over here.
+
+05:49.710 --> 05:52.350
+Okay, so left-hand side, you see all the resources
+
+05:52.350 --> 05:55.020
+you will see here to create instances,
+
+05:55.020 --> 05:57.300
+CloudWatch, and everything.
+
+05:57.300 --> 05:59.620
+So example usage. How do you use the provider?
+
+05:59.620 --> 06:03.630
+Terraform required providers, this we don't want,
+
+06:03.630 --> 06:06.783
+so provider, AWS, and you can mention the region.
+
+06:07.680 --> 06:11.370
+Here's an example to create a VPC in the same file,
+
+06:11.370 --> 06:13.230
+but that's not what you're going to do.
+
+06:13.230 --> 06:14.220
+What else? Your versions.
+
+06:14.220 --> 06:17.043
+You can mention the different version of your provider,
+
+06:17.910 --> 06:21.750
+so approximate, that's an approximate symbol, 5.0.
+
+06:21.750 --> 06:23.300
+Let's see what else you can do.
+
+06:24.180 --> 06:27.990
+Yeah, access key and secret key. As I said, never do that.
+
+06:27.990 --> 06:31.920
+I just wanted to show you, you can mention more information.
+
+06:31.920 --> 06:34.230
+Profiles, if you have multiple profiles
+
+06:34.230 --> 06:37.560
+for your AWS account, multiple AWS account,
+
+06:37.560 --> 06:40.050
+you can mention the profiles.
+
+06:40.050 --> 06:43.200
+Roles, assuming AIM roles.
+
+06:43.200 --> 06:46.147
+I'm just showing you that you can give more information.
+
+06:46.147 --> 06:48.571
+You can just get into the documentation and find out
+
+06:48.571 --> 06:51.030
+and use that information.
+
+06:51.030 --> 06:53.970
+Here are AWS configuration references,
+
+06:53.970 --> 06:57.750
+all of them that we can use with the provider.
+
+06:57.750 --> 06:59.520
+All right, so let's come back to our code.
+
+06:59.520 --> 07:01.590
+So we just want to mention the region. That is all.
+
+07:01.590 --> 07:02.910
+Let's just save this file,
+
+07:02.910 --> 07:06.210
+and we want to create a key pair first,
+
+07:06.210 --> 07:07.983
+so let's go to the key pair,
+
+07:09.330 --> 07:10.710
+and from the documentation itself,
+
+07:10.710 --> 07:14.133
+we'll find out the resource to use or create a key pair.
+
+07:15.540 --> 07:19.680
+So in the same documentation, just search here, key_pair.
+
+07:19.680 --> 07:21.570
+Now you can find the resources.
+
+07:21.570 --> 07:24.480
+As the resources, let's click on that.
+
+07:24.480 --> 07:26.384
+See AWS key pair, example usage,
+
+07:26.384 --> 07:27.900
+so that's how you can use it,
+
+07:27.900 --> 07:31.890
+so I'm going to simply copy this and put it over here.
+
+07:31.890 --> 07:34.340
+Just hold on a minute, I'm going to explain this.
+
+07:35.520 --> 07:40.111
+Yeah, so aws_key_pair, that's the name
+
+07:40.111 --> 07:41.970
+of type of the resource.
+
+07:41.970 --> 07:44.130
+This is the name. We're gonna change it.
+
+07:44.130 --> 07:47.913
+I'm going to use the name as dove-key,
+
+07:48.750 --> 07:51.090
+just the name of the resource.
+
+07:51.090 --> 07:53.220
+Key name, this will be the name of the key
+
+07:53.220 --> 07:57.450
+in the AWS console that we'll see, EC2 console,
+
+07:57.450 --> 08:01.020
+so that will be the name of the key dove-key and public key.
+
+08:01.020 --> 08:02.885
+Now, here's the content of the public key.
+
+08:02.885 --> 08:06.963
+Definitely, this is not what we're using to remove this.
+
+08:08.490 --> 08:11.190
+So key, we know it gets created into pairs,
+
+08:11.190 --> 08:13.440
+so first, you would generate the key pair,
+
+08:13.440 --> 08:15.300
+and the public key, we'll put over here,
+
+08:15.300 --> 08:17.670
+and private key, we'll keep it with us.
+
+08:17.670 --> 08:19.740
+First, let me just see this one.
+
+08:19.740 --> 08:24.690
+So open the terminal, terminal, new terminal.
+
+08:27.510 --> 08:30.480
+Just make sure you are in exercise two
+
+08:30.480 --> 08:32.190
+or whatever name you have given.
+
+08:32.190 --> 08:33.363
+Go to that folder.
+
+08:35.550 --> 08:37.920
+All right, so we should have all these files here,
+
+08:37.920 --> 08:42.300
+and here, I'm going to generate the key, ssh-keygen,
+
+08:42.300 --> 08:44.103
+execute that command, hit enter.
+
+08:45.090 --> 08:47.580
+So it is asking me to save the file path.
+
+08:47.580 --> 08:48.990
+I'm going to give the name itself
+
+08:48.990 --> 08:51.810
+so it creates the key here itself,
+
+08:51.810 --> 08:56.790
+so I will just give the name as dove-key and hit enter
+
+08:56.790 --> 09:01.260
+and enter and enter, and if we do ls here,
+
+09:01.260 --> 09:02.814
+so we should see the public key,
+
+09:02.814 --> 09:04.920
+and we should see the private key now.
+
+09:04.920 --> 09:07.320
+Let's take a look at the public key,
+
+09:07.320 --> 09:09.903
+because that's what we want to push.
+
+09:11.010 --> 09:14.733
+So that's the public key. Let me copy that.
+
+09:15.870 --> 09:19.320
+So whatever content you see, just select that,
+
+09:19.320 --> 09:23.640
+so for Bash terminal, you just need to just select it,
+
+09:23.640 --> 09:25.463
+right click, and that's how it's going to copy,
+
+09:25.463 --> 09:28.893
+and then come over here in this double quotes and paste it.
+
+09:30.990 --> 09:32.700
+And it's control S.
+
+09:32.700 --> 09:36.036
+So this will be the private key to log into the instance.
+
+09:36.036 --> 09:37.773
+We're going to store it in AWS.
+
+09:39.270 --> 09:40.440
+So that was the key pair.
+
+09:40.440 --> 09:44.352
+Now, let's go to security group.tf file.
+
+09:44.352 --> 09:47.370
+Here, we're going to create the security group.
+
+09:47.370 --> 09:48.930
+So I search for security group,
+
+09:48.930 --> 09:51.570
+and we are going to create the instance,
+
+09:51.570 --> 09:54.674
+that is not the one, VPC,
+
+09:54.674 --> 09:59.100
+so security group is basically a VPC resource.
+
+09:59.100 --> 10:01.623
+So I'll click on this, aws_security_group.
+
+10:03.540 --> 10:06.720
+Let's scroll down, and here's the example.
+
+10:06.720 --> 10:08.640
+It's big, but don't worry.
+
+10:08.640 --> 10:10.620
+We understand this, because we already know
+
+10:10.620 --> 10:13.110
+how to create security group through console,
+
+10:13.110 --> 10:17.010
+so similar information or almost same information
+
+10:17.010 --> 10:18.810
+in the code format.
+
+10:18.810 --> 10:22.383
+So we have resource, aws_security_group,
+
+10:22.383 --> 10:26.070
+and the name of the resource that's given over here.
+
+10:26.070 --> 10:27.630
+This will be the name of the security group,
+
+10:27.630 --> 10:29.640
+the description when we create the security group,
+
+10:29.640 --> 10:32.450
+remember, we give description also, VPC ID,
+
+10:32.450 --> 10:35.220
+you can mention the VPC, where it should belong to.
+
+10:35.220 --> 10:38.550
+If you don't give this, it will create in the default VPC,
+
+10:38.550 --> 10:39.480
+and then the tag.
+
+10:39.480 --> 10:41.370
+So this should create the security group,
+
+10:41.370 --> 10:42.658
+but then this will create the rules
+
+10:42.658 --> 10:45.000
+inside the security group.
+
+10:45.000 --> 10:47.910
+So in security group, we have seen we have inbound rule
+
+10:47.910 --> 10:49.380
+and outbound rule.
+
+10:49.380 --> 10:52.653
+Here, it's called a ingress, that is inbound,
+
+10:53.610 --> 10:57.033
+and you have egress, that means outbound rule,
+
+10:57.870 --> 10:59.460
+and you can create multiple rules.
+
+10:59.460 --> 11:03.990
+This is one rule, this is one rule, so two inbound rule,
+
+11:03.990 --> 11:06.690
+because here, it's the resources ingress,
+
+11:06.690 --> 11:08.972
+and one outbound rule.
+
+11:08.972 --> 11:11.850
+There's one more, this is for IPv6.
+
+11:11.850 --> 11:16.290
+So let's see the resource type, name of the resource,
+
+11:16.290 --> 11:17.850
+and then the security group ID.
+
+11:17.850 --> 11:19.560
+So security group ID is coming from here,
+
+11:19.560 --> 11:24.560
+so aws_security_group.allow_tls.
+
+11:24.720 --> 11:28.020
+That's the name over here, and then dot ID.
+
+11:28.020 --> 11:29.713
+So that should get the security group ID
+
+11:29.713 --> 11:32.370
+where this rule will get created,
+
+11:32.370 --> 11:35.730
+then the CIDR block, that is from where?
+
+11:35.730 --> 11:40.730
+So here, we can mention our own IP or the 0.0.0/0 rule.
+
+11:41.067 --> 11:43.769
+That means from anywhere, and the port number.
+
+11:43.769 --> 11:45.423
+Now, here you will see from and to port.
+
+11:45.423 --> 11:48.060
+We are going to give the same,
+
+11:48.060 --> 11:51.750
+so when we create security group manually through console,
+
+11:51.750 --> 11:52.859
+we just give one port number,
+
+11:52.859 --> 11:54.600
+but here, there is from and to.
+
+11:54.600 --> 11:56.643
+We are going to have to keep the same over there.
+
+11:56.643 --> 11:58.530
+This is not inbound and outbound rule.
+
+11:58.530 --> 12:02.040
+This is the ingress rule, remember, and the protocol.
+
+12:02.040 --> 12:04.452
+Similarly, there is one more rule for ingress
+
+12:04.452 --> 12:08.550
+and one egress, that means the outbound rule,
+
+12:08.550 --> 12:10.200
+and here, it says CIDR block.
+
+12:10.200 --> 12:14.970
+That is from anywhere, any IPv4, and IP protocol minus one,
+
+12:14.970 --> 12:17.550
+this means for all the ports.
+
+12:17.550 --> 12:19.920
+So outbound rule, we're keeping,
+
+12:19.920 --> 12:22.500
+all the traffic can go anywhere,
+
+12:22.500 --> 12:26.100
+and this is for IPv4, and this is for IPv6.
+
+12:26.100 --> 12:29.940
+So let's copy this, and let's make the changes.
+
+12:29.940 --> 12:32.910
+Let's paste it here, save it,
+
+12:32.910 --> 12:35.040
+and then let's start making the changes.
+
+12:35.040 --> 12:37.263
+So name, I'm going to give dove-sg.
+
+12:38.580 --> 12:40.050
+That is the name of the resource,
+
+12:40.050 --> 12:42.260
+but the security group name is here,
+
+12:42.260 --> 12:43.623
+so I'm going to give here,
+
+12:44.700 --> 12:46.920
+and here also. description, I'm giving the same.
+
+12:46.920 --> 12:49.353
+You can give some other description if you wish.
+
+12:51.090 --> 12:52.800
+VPC ID, I'm going to remove this
+
+12:52.800 --> 12:55.124
+because I want it to create in default VPC.
+
+12:55.124 --> 12:56.827
+That is fine.
+
+12:56.827 --> 12:59.373
+Tag, I'm going to give again the same tag.
+
+13:04.680 --> 13:06.870
+Okay, now the rule, so I want to give two rules here,
+
+13:06.870 --> 13:11.870
+22 allowed from my IP and port 80 allowed from anywhere,
+
+13:12.270 --> 13:13.530
+so that's the rule type.
+
+13:13.530 --> 13:18.033
+The rule name, I'm going to say SSH from my IP.
+
+13:19.320 --> 13:20.547
+Now, security group ID,
+
+13:20.547 --> 13:23.640
+AWS security group dot the name of the resource,
+
+13:23.640 --> 13:28.640
+which is dove-sg here, dot dove-sg.id.
+
+13:29.190 --> 13:31.273
+Now, CIDR from where we want to allow this.
+
+13:31.273 --> 13:32.790
+I'm going to remove this one
+
+13:32.790 --> 13:36.150
+and I'm going to give some square bracket,
+
+13:36.150 --> 13:37.860
+so I'm going to give here my IP.
+
+13:37.860 --> 13:41.430
+So I'm going to Google and find out what is my IPv4.
+
+13:41.430 --> 13:43.980
+So I just searched on the internet, what is my IPv4?
+
+13:43.980 --> 13:47.010
+I'll say this website, what is my IPv4 address?
+
+13:47.010 --> 13:49.020
+You can get it from any website.
+
+13:49.020 --> 13:51.450
+So in double quote, I get the IP address,
+
+13:51.450 --> 13:54.300
+and I have to say slash 32.
+
+13:54.300 --> 13:57.270
+Slash 32 means exactly this IP, not the range.
+
+13:57.270 --> 14:00.906
+I can give the range, but that is a topic of networking.
+
+14:00.906 --> 14:03.990
+We are going to learn about this, the range and all,
+
+14:03.990 --> 14:08.730
+in AWS part two section, where we learn detail about VPC.
+
+14:08.730 --> 14:13.020
+So from port 22, here also, to port, same, 22,
+
+14:13.020 --> 14:17.160
+and 22 SSH port is the protocol is TCP, basically,
+
+14:17.160 --> 14:20.040
+and I keep on saving it again and again.
+
+14:20.040 --> 14:22.950
+I recommend you do the same, just control S.
+
+14:22.950 --> 14:25.683
+The second one, I will say allow HTTP.
+
+14:29.546 --> 14:34.546
+The security group ID name here, we have to change, dove-sg.
+
+14:34.680 --> 14:38.820
+CIDR IPv4, and I'm going to give here,
+
+14:38.820 --> 14:42.630
+so if you want to allow it for IPv6,
+
+14:42.630 --> 14:46.017
+then here, you have to mention CIDR IPv6,
+
+14:46.017 --> 14:48.450
+but I'm just keeping it IPv4 for now,
+
+14:48.450 --> 14:53.450
+just to keep it simple, and I'll say 0.0.0/0.
+
+14:54.870 --> 14:57.520
+I have to make sure I should put it in double quotes,
+
+14:59.580 --> 15:04.580
+from port 80 and 80 and here also 80.
+
+15:06.720 --> 15:09.360
+Okay, control S, let's save this.
+
+15:09.360 --> 15:12.300
+So that means anywhere, any IPv4,
+
+15:12.300 --> 15:15.783
+so port 80 is allowed from anywhere, any IPv4.
+
+15:17.040 --> 15:19.050
+Now, the eggress rule, the outbound rule,
+
+15:19.050 --> 15:21.590
+we have to make sure we give the outbound rule
+
+15:21.590 --> 15:23.100
+of the security group.
+
+15:23.100 --> 15:26.490
+Otherwise, our instance won't be able to reach the internet.
+
+15:26.490 --> 15:31.490
+Name of this resource, I'm going to say allow all outbound.
+
+15:31.890 --> 15:36.120
+Once again, the security group name, dove-sg.
+
+15:36.120 --> 15:39.453
+Sorry, the resource name, not the security group name,
+
+15:40.500 --> 15:44.142
+and CIDR IPv4 allowed from anywhere, any IPv4,
+
+15:44.142 --> 15:45.835
+and IP protocol minus one.
+
+15:45.835 --> 15:49.350
+This basically means all the protocol,
+
+15:49.350 --> 15:50.880
+all the port number, I mean to say,
+
+15:50.880 --> 15:55.880
+so all the ports can go destination on any IPv4.
+
+15:56.530 --> 15:58.200
+I'm going to give for IPv6 also.
+
+15:58.200 --> 16:01.533
+So here, I'm going to see underscore IPv4,
+
+16:05.160 --> 16:08.823
+and over here, the next rule, I'm going to say here,
+
+16:12.390 --> 16:17.390
+allow all outbound_IPv6, security group resource name,
+
+16:18.600 --> 16:22.413
+dove-sg, and control S, save it.
+
+16:23.550 --> 16:24.990
+Okay, so check again,
+
+16:24.990 --> 16:27.358
+syntactically it is correct or not, check the names.
+
+16:27.358 --> 16:30.990
+I've given the security group name as dove-sg.
+
+16:30.990 --> 16:34.713
+So all the rules here should have that for the ID.
+
+16:35.790 --> 16:39.090
+Check that, and wherever you have string,
+
+16:39.090 --> 16:41.250
+make sure it's in double quotes.
+
+16:41.250 --> 16:43.140
+This is an integer, so it doesn't need to be
+
+16:43.140 --> 16:44.580
+in double quote.
+
+16:44.580 --> 16:46.680
+So let's save this,
+
+16:46.680 --> 16:48.704
+so our security group resource is also created.
+
+16:48.704 --> 16:52.650
+Now, the next one will be the instance.
+
+16:52.650 --> 16:55.290
+So instance TF file,
+
+16:55.290 --> 16:57.090
+we are going to write in the next lectures.
+
+16:57.090 --> 16:59.190
+Complete this and join me in the next one.

@@ -1,0 +1,1094 @@
+WEBVTT
+
+1
+00:00:00.180 --> 00:00:01.230
+<v Instructor>Welcome.</v>
+
+2
+00:00:01.230 --> 00:00:02.460
+In this lecture we are going
+
+3
+00:00:02.460 --> 00:00:04.530
+to create GitHub actions pipeline
+
+4
+00:00:04.530 --> 00:00:07.590
+for our repository vprofile app,
+
+5
+00:00:07.590 --> 00:00:10.560
+which is nothing new, except here we are going to
+
+6
+00:00:10.560 --> 00:00:14.550
+at the end update the values.yaml file
+
+7
+00:00:14.550 --> 00:00:15.960
+in a different repository.
+
+8
+00:00:15.960 --> 00:00:18.753
+Apart from that, everything we did previously as well.
+
+9
+00:00:19.654 --> 00:00:21.720
+And we have to do it the right way.
+
+10
+00:00:21.720 --> 00:00:24.480
+We have to make all the changes in a different branch,
+
+11
+00:00:24.480 --> 00:00:25.980
+not the main branch.
+
+12
+00:00:25.980 --> 00:00:30.300
+So open your Git Bash or terminal and go to your repository.
+
+13
+00:00:30.300 --> 00:00:35.300
+Mine is in a desktop gitops vprofile-app.
+
+14
+00:00:36.600 --> 00:00:37.890
+You should be in the main branch.
+
+15
+00:00:37.890 --> 00:00:39.960
+You need to create a new branch.
+
+16
+00:00:39.960 --> 00:00:44.040
+Git branch -c -x, that's the name we are giving.
+
+17
+00:00:44.040 --> 00:00:46.080
+Assuming that the new feature developers
+
+18
+00:00:46.080 --> 00:00:48.570
+are writing in a new branch.
+
+19
+00:00:48.570 --> 00:00:50.520
+Check out to that new branch.
+
+20
+00:00:50.520 --> 00:00:52.473
+Git check out feature -X.
+
+21
+00:00:53.460 --> 00:00:54.990
+Open the VS code.
+
+22
+00:00:54.990 --> 00:00:57.783
+Make sure you are in feature -X branch.
+
+23
+00:00:59.580 --> 00:01:01.410
+So this is the prompt that we are going
+
+24
+00:01:01.410 --> 00:01:02.970
+to use in GitHub Copilot
+
+25
+00:01:02.970 --> 00:01:06.123
+to generate our GitHub actions pipeline.
+
+26
+00:01:07.140 --> 00:01:11.280
+So we have a Java Spring MVC application built with Maven
+
+27
+00:01:11.280 --> 00:01:13.470
+and we need a GitHub action CSCD pipeline
+
+28
+00:01:13.470 --> 00:01:15.540
+with the following details.
+
+29
+00:01:15.540 --> 00:01:18.450
+So first we are going to push the feature branch
+
+30
+00:01:18.450 --> 00:01:20.310
+no pipeline should run.
+
+31
+00:01:20.310 --> 00:01:23.400
+When the pull request is raised for the main branch
+
+32
+00:01:23.400 --> 00:01:26.880
+then it should run Maven build, unit tests, Checkstyle,
+
+33
+00:01:26.880 --> 00:01:30.450
+SonarQube scan, SonarQube quality gate check,
+
+34
+00:01:30.450 --> 00:01:34.530
+and it should block the merge if the quality gate fails.
+
+35
+00:01:34.530 --> 00:01:37.522
+Quality gate will be in SonarQube server.
+
+36
+00:01:37.522 --> 00:01:38.700
+The server will send the information
+
+37
+00:01:38.700 --> 00:01:40.800
+to the pipeline whether it's passed or fail.
+
+38
+00:01:40.800 --> 00:01:44.670
+If it's passed, then you can merge it to the main branch.
+
+39
+00:01:44.670 --> 00:01:47.610
+So when we merge, it should build a docker image
+
+40
+00:01:47.610 --> 00:01:51.930
+pushed to Amazon ECR with the commit ID commit SHA
+
+41
+00:01:51.930 --> 00:01:53.250
+and also the latest tag.
+
+42
+00:01:53.250 --> 00:01:55.200
+Both tags should be there for the image.
+
+43
+00:01:55.200 --> 00:01:56.370
+Then update the image
+
+44
+00:01:56.370 --> 00:01:59.250
+and this tag in the Helm values.file.
+
+45
+00:01:59.250 --> 00:02:01.650
+Values.yaml file
+
+46
+00:02:01.650 --> 00:02:04.650
+in separate GitHub repository.
+
+47
+00:02:04.650 --> 00:02:07.950
+So we have defined the entire flow, which is good.
+
+48
+00:02:07.950 --> 00:02:11.580
+Now details it should use Java 21,
+
+49
+00:02:11.580 --> 00:02:14.460
+Maven, Tomcat WAR Packaging.
+
+50
+00:02:14.460 --> 00:02:16.740
+SonarQube we are using self-hosted on EC2.
+
+51
+00:02:16.740 --> 00:02:18.180
+We are not using SonarCloud.
+
+52
+00:02:18.180 --> 00:02:20.310
+Now there is a reason we are not using SonarCloud
+
+53
+00:02:20.310 --> 00:02:22.860
+because there are too many restrictions on free account.
+
+54
+00:02:22.860 --> 00:02:27.030
+We cannot operate it properly for our project test cases.
+
+55
+00:02:27.030 --> 00:02:29.670
+So we are using EC2 instance.
+
+56
+00:02:29.670 --> 00:02:32.610
+And we're asking it to use these GitHub actions.
+
+57
+00:02:32.610 --> 00:02:35.340
+These are readymade GitHub actions that you can use.
+
+58
+00:02:35.340 --> 00:02:37.620
+This one is popular for SonarQube scanning.
+
+59
+00:02:37.620 --> 00:02:40.740
+This one is popular for SonarQube quality gate check.
+
+60
+00:02:40.740 --> 00:02:42.480
+And we are saying use this existing
+
+61
+00:02:42.480 --> 00:02:45.450
+sonar-project.properties file.
+
+62
+00:02:45.450 --> 00:02:48.480
+Right, this one which has all the details
+
+63
+00:02:48.480 --> 00:02:50.700
+for which file to push.
+
+64
+00:02:50.700 --> 00:02:52.830
+docker file location, which docker file to use
+
+65
+00:02:52.830 --> 00:02:56.370
+to build our app image, which is in this location.
+
+66
+00:02:56.370 --> 00:02:59.130
+We have seen this already. Let's see it once again.
+
+67
+00:02:59.130 --> 00:03:03.570
+docker file, app, multistage, this docker file
+
+68
+00:03:03.570 --> 00:03:06.150
+to use to build the app image.
+
+69
+00:03:06.150 --> 00:03:08.010
+Nothing new. We have seen this previously.
+
+70
+00:03:08.010 --> 00:03:09.273
+We have written this.
+
+71
+00:03:10.140 --> 00:03:11.430
+ECR repository name.
+
+72
+00:03:11.430 --> 00:03:14.793
+This is your ECR repository name. Region, US-East1.
+
+73
+00:03:14.793 --> 00:03:17.160
+This is not required where anyways using the variables,
+
+74
+00:03:17.160 --> 00:03:19.410
+you don't need to parse it also.
+
+75
+00:03:19.410 --> 00:03:20.520
+Helm repository name.
+
+76
+00:03:20.520 --> 00:03:23.220
+We have given values file path,
+
+77
+00:03:23.220 --> 00:03:26.820
+Helm/vprofile/values.yaml.
+
+78
+00:03:26.820 --> 00:03:29.850
+Let's take a look whether this is the correct path or not.
+
+79
+00:03:29.850 --> 00:03:33.600
+So open GitHub and go to your GitHub account.
+
+80
+00:03:33.600 --> 00:03:37.820
+Go to vprofile-Helm/vprofile.
+
+81
+00:03:39.600 --> 00:03:42.120
+In this you have values.yaml.
+
+82
+00:03:42.120 --> 00:03:46.833
+So this path you need to mention helm/vprofile/values.yaml,
+
+83
+00:03:47.880 --> 00:03:50.340
+which is right in the prompt.
+
+84
+00:03:50.340 --> 00:03:52.560
+Okay, structure of the values.yaml file.
+
+85
+00:03:52.560 --> 00:03:54.510
+Important, you need to supply this.
+
+86
+00:03:54.510 --> 00:03:56.460
+That image name will be something like this.
+
+87
+00:03:56.460 --> 00:03:57.720
+Tag will be something like this,
+
+88
+00:03:57.720 --> 00:04:00.000
+so it knows how to update it.
+
+89
+00:04:00.000 --> 00:04:02.430
+Here we are saying that values.yaml file
+
+90
+00:04:02.430 --> 00:04:04.650
+has an app.image, which is this one.
+
+91
+00:04:04.650 --> 00:04:08.083
+An app.tag field that need to be updated using yq.
+
+92
+00:04:09.030 --> 00:04:11.670
+And there's one way you can use cell Linux set command
+
+93
+00:04:11.670 --> 00:04:12.810
+that is too complicated.
+
+94
+00:04:12.810 --> 00:04:16.500
+Yq is yaml editor for search and replace.
+
+95
+00:04:16.500 --> 00:04:18.690
+So it will create, it will download yq
+
+96
+00:04:18.690 --> 00:04:22.290
+and use yq to you know, edit this yaml file.
+
+97
+00:04:22.290 --> 00:04:24.390
+Also mention the secrets that we want to use.
+
+98
+00:04:24.390 --> 00:04:26.670
+Sonar token, access key, secret key,
+
+99
+00:04:26.670 --> 00:04:28.560
+Helm repo user, GitHub's part.
+
+100
+00:04:28.560 --> 00:04:32.250
+Make sure this is the same secret name that we have kept.
+
+101
+00:04:32.250 --> 00:04:33.783
+Also we have Slack.
+
+102
+00:04:34.710 --> 00:04:37.050
+At the end also, we have mentioned the secrets
+
+103
+00:04:37.050 --> 00:04:40.380
+and variables that we have defined in GitHub.
+
+104
+00:04:40.380 --> 00:04:42.510
+So it will know that it has to use
+
+105
+00:04:42.510 --> 00:04:44.430
+these variables and secret.
+
+106
+00:04:44.430 --> 00:04:47.013
+So final ci.yml structure will be this.
+
+107
+00:04:47.013 --> 00:04:48.933
+This will be the pipeline file.
+
+108
+00:04:50.370 --> 00:04:51.960
+Triggers pushed to main,
+
+109
+00:04:51.960 --> 00:04:55.260
+docker plus helm job will run only.
+
+110
+00:04:55.260 --> 00:04:57.240
+If there's a pull request for the main branch
+
+111
+00:04:57.240 --> 00:04:59.010
+the sonar job will run.
+
+112
+00:04:59.010 --> 00:05:00.060
+You can go on and on.
+
+113
+00:05:00.060 --> 00:05:03.900
+You can mention as much as detail as you want
+
+114
+00:05:03.900 --> 00:05:06.150
+or you can do it one at a time.
+
+115
+00:05:06.150 --> 00:05:08.520
+Well, when I get started, I do one at a time.
+
+116
+00:05:08.520 --> 00:05:10.890
+I come to a point where I like the pipeline.
+
+117
+00:05:10.890 --> 00:05:12.090
+This is a working pipeline.
+
+118
+00:05:12.090 --> 00:05:15.180
+Then I ask it to give me a prompt which I can use later
+
+119
+00:05:15.180 --> 00:05:17.070
+to generate the same pipeline.
+
+120
+00:05:17.070 --> 00:05:18.330
+And every time it will make one
+
+121
+00:05:18.330 --> 00:05:21.540
+or the other mistake, which is fine, expected.
+
+122
+00:05:21.540 --> 00:05:23.280
+It cannot literally get inside our brain
+
+123
+00:05:23.280 --> 00:05:25.470
+and look at all the configuration of our brain.
+
+124
+00:05:25.470 --> 00:05:27.420
+So that's fine.
+
+125
+00:05:27.420 --> 00:05:30.930
+But yeah, this prompt will bring you very close
+
+126
+00:05:30.930 --> 00:05:32.610
+to the actual pipeline.
+
+127
+00:05:32.610 --> 00:05:35.160
+But still, use the pipeline
+
+128
+00:05:35.160 --> 00:05:36.690
+which is in this lecture resource
+
+129
+00:05:36.690 --> 00:05:40.260
+so you get a working CICD flow quickly.
+
+130
+00:05:40.260 --> 00:05:43.500
+Later, you can do it yourself manually also.
+
+131
+00:05:43.500 --> 00:05:45.960
+But for the sake of completing this project,
+
+132
+00:05:45.960 --> 00:05:47.820
+use this prompt.
+
+133
+00:05:47.820 --> 00:05:50.710
+Okay, so I'm just copy pasting the prompt over here
+
+134
+00:05:51.690 --> 00:05:53.370
+and it's going to take some time.
+
+135
+00:05:53.370 --> 00:05:54.990
+Let's wait.
+
+136
+00:05:54.990 --> 00:05:56.940
+Okay, it's asking me some question.
+
+137
+00:05:56.940 --> 00:06:00.750
+It wants to check this SonarQube scan action from GitHub.
+
+138
+00:06:00.750 --> 00:06:03.270
+I'll say go ahead, check.
+
+139
+00:06:03.270 --> 00:06:06.120
+So it's going to take some time. Let's wait.
+
+140
+00:06:06.120 --> 00:06:07.950
+Okay, it has generated the pipeline flow.
+
+141
+00:06:07.950 --> 00:06:10.530
+Let's say keep.
+
+142
+00:06:10.530 --> 00:06:11.643
+Now let's take a look.
+
+143
+00:06:13.234 --> 00:06:16.440
+Ci.yaml, it added something, roles to assume.
+
+144
+00:06:16.440 --> 00:06:18.610
+We don't want to use roles.
+
+145
+00:06:18.610 --> 00:06:20.160
+Let's remove it.
+
+146
+00:06:20.160 --> 00:06:23.070
+Oh Slack we have missed. Let's add it later.
+
+147
+00:06:23.070 --> 00:06:25.950
+Let's see in the pipeline what all it did.
+
+148
+00:06:25.950 --> 00:06:27.300
+So this pipeline will run
+
+149
+00:06:27.300 --> 00:06:30.480
+whenever there is a pulled request on main branch
+
+150
+00:06:30.480 --> 00:06:32.610
+and whenever there is a push to the main branch,
+
+151
+00:06:32.610 --> 00:06:34.230
+which is fine.
+
+152
+00:06:34.230 --> 00:06:36.090
+Okay, the variables, I don't know why
+
+153
+00:06:36.090 --> 00:06:37.380
+it again, saved the variable.
+
+154
+00:06:37.380 --> 00:06:38.310
+This is not required.
+
+155
+00:06:38.310 --> 00:06:41.733
+You can directly use this variables anyways.
+
+156
+00:06:42.570 --> 00:06:44.130
+Sonar host URL.
+
+157
+00:06:44.130 --> 00:06:46.620
+We need to create this one, later we'll do
+
+158
+00:06:46.620 --> 00:06:48.660
+before we run the pipeline.
+
+159
+00:06:48.660 --> 00:06:51.900
+Okay, so the job built and build and sonar job.
+
+160
+00:06:51.900 --> 00:06:55.530
+So there's a condition if the GitHub event name
+
+161
+00:06:55.530 --> 00:06:58.383
+is pull request, that means when we raise the pull request
+
+162
+00:06:58.383 --> 00:06:59.670
+this is what it's going to do,
+
+163
+00:06:59.670 --> 00:07:01.770
+it's going to check out the source code, good,
+
+164
+00:07:01.770 --> 00:07:04.890
+set up the JDK 21, nice.
+
+165
+00:07:04.890 --> 00:07:06.030
+Cache.
+
+166
+00:07:06.030 --> 00:07:08.520
+Now we have included something in the prompt
+
+167
+00:07:08.520 --> 00:07:10.980
+that will keep the cache for Maven and sonar
+
+168
+00:07:10.980 --> 00:07:13.830
+so or build becomes faster.
+
+169
+00:07:13.830 --> 00:07:17.130
+So that's why it added these two steps extra over here.
+
+170
+00:07:17.130 --> 00:07:19.500
+Okay, next is this build run unit test
+
+171
+00:07:19.500 --> 00:07:20.880
+and generate checkstyle reports.
+
+172
+00:07:20.880 --> 00:07:24.360
+So checkstyle output format, the file part.
+
+173
+00:07:24.360 --> 00:07:27.750
+Okay, it really made it complicated but clean.
+
+174
+00:07:27.750 --> 00:07:29.250
+I will make it much cleaner.
+
+175
+00:07:29.250 --> 00:07:31.230
+We just want the simple options.
+
+176
+00:07:31.230 --> 00:07:36.030
+Hyphen B is fine, so this option -B is batch mode.
+
+177
+00:07:36.030 --> 00:07:37.410
+Let's keep this one.
+
+178
+00:07:37.410 --> 00:07:40.560
+This prevent it from putting too much extra information
+
+179
+00:07:40.560 --> 00:07:42.870
+like downloading this, downloading that.
+
+180
+00:07:42.870 --> 00:07:44.583
+So I'm going to remove all this.
+
+181
+00:07:45.810 --> 00:07:47.050
+And just add
+
+182
+00:07:49.830 --> 00:07:52.110
+this, so I'm being clean.
+
+183
+00:07:52.110 --> 00:07:55.440
+Verify checkstyle:checkstyle-B. Plain and simple.
+
+184
+00:07:55.440 --> 00:07:58.637
+We know it generates the checkstyle-result.XML file.
+
+185
+00:08:00.450 --> 00:08:03.960
+Okay, so that is going to generate the target folder
+
+186
+00:08:03.960 --> 00:08:05.250
+and all the reports in that.
+
+187
+00:08:05.250 --> 00:08:07.260
+Then it's going to use the SonarQube scanner.
+
+188
+00:08:07.260 --> 00:08:09.930
+This action, to scan our source code,
+
+189
+00:08:09.930 --> 00:08:12.930
+all the information is in the properties file.
+
+190
+00:08:12.930 --> 00:08:17.130
+So this is the token it is using and sonar host URL.
+
+191
+00:08:17.130 --> 00:08:21.014
+This variable we need to mention in GitHub variables.
+
+192
+00:08:21.014 --> 00:08:22.080
+Then it is going to use this action
+
+193
+00:08:22.080 --> 00:08:23.610
+to do the quality gate check.
+
+194
+00:08:23.610 --> 00:08:26.820
+Again, going to parse the token and sonar host URL.
+
+195
+00:08:26.820 --> 00:08:29.310
+It has also mentioned the polling timeout seconds,
+
+196
+00:08:29.310 --> 00:08:31.620
+600 seconds which is fine,
+
+197
+00:08:31.620 --> 00:08:33.900
+it's going to be completing before this.
+
+198
+00:08:33.900 --> 00:08:35.820
+Okay, so this is still pull request.
+
+199
+00:08:35.820 --> 00:08:39.600
+Once the pull request and this quality gate checks out fine,
+
+200
+00:08:39.600 --> 00:08:43.260
+then when you try to merge to the main branch,
+
+201
+00:08:43.260 --> 00:08:44.160
+you see that?
+
+202
+00:08:44.160 --> 00:08:46.260
+Event name when it is push,
+
+203
+00:08:46.260 --> 00:08:47.850
+and this will happening be only
+
+204
+00:08:47.850 --> 00:08:49.380
+for the main branch check over here.
+
+205
+00:08:49.380 --> 00:08:50.700
+This pipeline will only work
+
+206
+00:08:50.700 --> 00:08:54.030
+for the main branch pull request and main branch push.
+
+207
+00:08:54.030 --> 00:08:58.080
+So here event push is for the main.
+
+208
+00:08:58.080 --> 00:09:00.230
+Then it is going to build the docker image,
+
+209
+00:09:01.320 --> 00:09:05.340
+output ECR registry and image tag.
+
+210
+00:09:05.340 --> 00:09:06.270
+This will be the output
+
+211
+00:09:06.270 --> 00:09:08.100
+when it's going to print this output.
+
+212
+00:09:08.100 --> 00:09:10.470
+And this is the image name and this is the tag.
+
+213
+00:09:10.470 --> 00:09:12.030
+So step, check out the source code,
+
+214
+00:09:12.030 --> 00:09:14.100
+configure the credentials, region,
+
+215
+00:09:14.100 --> 00:09:17.220
+access key area and secret access key.
+
+216
+00:09:17.220 --> 00:09:19.500
+Create ECR repository if needed.
+
+217
+00:09:19.500 --> 00:09:21.600
+It's not required. The step is not required.
+
+218
+00:09:21.600 --> 00:09:23.460
+We have the ECR repository.
+
+219
+00:09:23.460 --> 00:09:26.160
+Okay, anyways, this is going to describe the repository,
+
+220
+00:09:26.160 --> 00:09:29.430
+if it exists, then it is not going to go to the next one.
+
+221
+00:09:29.430 --> 00:09:33.240
+Yeah, there is an OR operand over here.
+
+222
+00:09:33.240 --> 00:09:35.640
+So if this works out fine, it's not going to go
+
+223
+00:09:35.640 --> 00:09:38.730
+and create the repository, which is fine.
+
+224
+00:09:38.730 --> 00:09:40.590
+Okay, the last one is build and push,
+
+225
+00:09:40.590 --> 00:09:42.300
+not last one, the second last.
+
+226
+00:09:42.300 --> 00:09:43.860
+It looks too many commands, but it's pretty simple.
+
+227
+00:09:43.860 --> 00:09:47.160
+It's going to set the ECR registry name, image tag,
+
+228
+00:09:47.160 --> 00:09:50.580
+which is going to be GitHub SHA commit ID,
+
+229
+00:09:50.580 --> 00:09:53.970
+docker build commands mentioning the path of a docker image
+
+230
+00:09:53.970 --> 00:09:56.823
+and the tag that needs to be mentioned.
+
+231
+00:09:57.810 --> 00:10:02.043
+So ECR registry/ECR repository: the image tag.
+
+232
+00:10:03.293 --> 00:10:06.330
+And tag again with the latest, I think.
+
+233
+00:10:06.330 --> 00:10:07.893
+Yeah, with the latest tag.
+
+234
+00:10:09.360 --> 00:10:12.480
+Then AWS ECR login.
+
+235
+00:10:12.480 --> 00:10:16.650
+Push the docker image with this tag, which is the commit id,
+
+236
+00:10:16.650 --> 00:10:18.960
+and push again with the latest tag.
+
+237
+00:10:18.960 --> 00:10:20.790
+And it's just going to echo this information,
+
+238
+00:10:20.790 --> 00:10:22.650
+print this information.
+
+239
+00:10:22.650 --> 00:10:24.900
+Okay, finally update helm.
+
+240
+00:10:24.900 --> 00:10:27.750
+So if the event name is push
+
+241
+00:10:27.750 --> 00:10:29.790
+and also says it needs the docker build
+
+242
+00:10:29.790 --> 00:10:32.460
+and publish this one.
+
+243
+00:10:32.460 --> 00:10:33.630
+Once this one completes,
+
+244
+00:10:33.630 --> 00:10:36.750
+then only it's going to start these steps.
+
+245
+00:10:36.750 --> 00:10:39.423
+So check out the source code, install yq.
+
+246
+00:10:40.350 --> 00:10:42.033
+Clone the helm repository.
+
+247
+00:10:45.150 --> 00:10:46.800
+Yeah.
+
+248
+00:10:46.800 --> 00:10:49.823
+Then use yq to update the app.image
+
+249
+00:10:49.823 --> 00:10:52.803
+and app.tag as per the information.
+
+250
+00:10:53.700 --> 00:10:57.390
+Yeah, this is wrong. It should not be like this over here.
+
+251
+00:10:57.390 --> 00:10:59.523
+I'll talk to Copilot about this one.
+
+252
+00:11:01.620 --> 00:11:04.200
+So initially in values.yaml file, this will be the name
+
+253
+00:11:04.200 --> 00:11:07.470
+of the image and the tag could be anything,
+
+254
+00:11:07.470 --> 00:11:10.290
+but next time it will not be Vprofile containers,
+
+255
+00:11:10.290 --> 00:11:13.650
+vprofile app, it will be the easier information.
+
+256
+00:11:13.650 --> 00:11:15.780
+Then how is it going to find it?
+
+257
+00:11:15.780 --> 00:11:19.170
+The app.image value could be anything, not just this one.
+
+258
+00:11:19.170 --> 00:11:20.949
+Take care of this.
+
+259
+00:11:20.949 --> 00:11:23.133
+And also app.tag also could be anything.
+
+260
+00:11:24.030 --> 00:11:27.603
+Okay, let's accept this. Let's see what changes it makes.
+
+261
+00:11:28.740 --> 00:11:29.703
+Okay, moving on.
+
+262
+00:11:30.630 --> 00:11:33.240
+So the next one will be mentioning this information,
+
+263
+00:11:33.240 --> 00:11:34.650
+the values.yaml file.
+
+264
+00:11:34.650 --> 00:11:36.180
+So it needs to commit
+
+265
+00:11:36.180 --> 00:11:39.150
+and push the changes to helm repository.
+
+266
+00:11:39.150 --> 00:11:42.750
+So it sets the username, sets the email address,
+
+267
+00:11:42.750 --> 00:11:46.140
+say git add dot, git commit, git push.
+
+268
+00:11:46.140 --> 00:11:49.290
+And that is it. Let's save this.
+
+269
+00:11:49.290 --> 00:11:50.340
+Okay, in the next lecture
+
+270
+00:11:50.340 --> 00:11:52.890
+we are going to commit this into the feature branch
+
+271
+00:11:52.890 --> 00:11:55.560
+and then raise a merge request
+
+272
+00:11:55.560 --> 00:11:57.750
+or pull request to the main branch
+
+273
+00:11:57.750 --> 00:12:00.003
+and see how this pipeline works.
+

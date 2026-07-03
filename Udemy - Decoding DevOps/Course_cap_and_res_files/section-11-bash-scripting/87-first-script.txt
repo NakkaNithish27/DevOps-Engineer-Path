@@ -1,0 +1,417 @@
+WEBVTT
+
+0
+00:01.470 --> 00:01.980
+Welcome.
+
+1
+00:02.490 --> 00:10.290
+We are going to write our first script and we will place it in a directory, we will crete a dir /opt/scripts
+
+2
+00:10.830 --> 00:11.790
+/opt/scripts
+
+3
+00:17.070 --> 00:18.360
+Let's get into the directory.
+
+4
+00:22.050 --> 00:26.670
+We're going to write all our script in the command line, and we're going to use vim editor.
+
+5
+00:26.880 --> 00:30.960
+And as you see, we will not be installed by default on that centos box.
+
+6
+00:31.380 --> 00:33.210
+So we're going to install vim first.
+
+7
+00:37.520 --> 00:44.360
+So a script is really a text file that contains bash commands, so to write a text file, obviously
+
+8
+00:44.360 --> 00:45.800
+we are using vim
+
+9
+00:45.830 --> 00:47.420
+Let's write the script first.
+
+10
+00:47.810 --> 00:55.130
+firstscript.sh , .sh is in general, the extension of Shell script, but that is not mandatory.
+
+11
+00:55.970 --> 00:56.840
+Let's open the file.
+
+12
+00:57.680 --> 01:03.020
+First line in your script will be a Shebang character hash exclamation.
+
+13
+01:03.020 --> 01:10.190
+That's one character Shebang that really gives or tells the path of the interpretive.
+
+14
+01:11.320 --> 01:17.740
+So what basically we're telling the script when it executes is that open this interpreter and execute
+
+15
+01:17.740 --> 01:23.020
+all the commands that I'm writing on that interpreter, if it happens to be a Python script, you'll
+
+16
+01:23.020 --> 01:25.720
+have the path of Python interpreter.
+
+17
+01:25.720 --> 01:27.070
+If it's Ruby, you'll have Ruby.
+
+18
+01:27.070 --> 01:31.810
+But since you are writing bash script, so that is the path of the bash interpreter.
+
+19
+01:32.950 --> 01:37.270
+And I'm writing a command echo, which really means print.
+
+20
+01:37.630 --> 01:38.290
+Print what?
+
+21
+01:38.290 --> 01:40.660
+What are you giving the double code that will be printed.
+
+22
+01:41.350 --> 01:42.880
+So that's what I want to print.
+
+23
+01:43.000 --> 01:45.600
+And I'm going to say echo and just hit enter.
+
+24
+01:45.610 --> 01:47.980
+When this execute, it will just print an empty line.
+
+25
+01:48.700 --> 01:50.850
+Also, let me write a few other things.
+
+26
+01:50.860 --> 01:57.010
+I will say the uptime of the system.
+
+27
+01:59.340 --> 01:59.940
+Is.
+
+28
+02:02.140 --> 02:03.760
+And I write the command uptime.
+
+29
+02:05.460 --> 02:06.870
+Memory utilization.
+
+30
+02:08.970 --> 02:10.860
+And I'll give the command free -m.
+
+31
+02:13.460 --> 02:15.350
+Then I'll say disk utilization.
+
+32
+02:17.460 --> 02:18.600
+df -h
+
+33
+02:19.650 --> 02:24.960
+Ok, that's what my script is, it's going to print some statements and just run the commands, basically
+
+34
+02:25.020 --> 02:26.490
+we're just going to run these commands.
+
+35
+02:26.880 --> 02:28.080
+So let's save when quit.
+
+36
+02:29.710 --> 02:34.780
+And in order to run a script, you have to give its path, absolute or relative path.
+
+37
+02:34.810 --> 02:36.100
+First Let's go with the relative path
+
+38
+02:36.100 --> 02:40.930
+So dot, current working directory, forward slash and the script name.
+
+39
+02:42.940 --> 02:45.490
+So I'm basically giving its relative path, when I do this.
+
+40
+02:45.880 --> 02:47.470
+I get permission denied.
+
+41
+02:48.190 --> 02:50.170
+if you check the permission of the file?
+
+42
+02:50.860 --> 02:57.280
+It does not have executed permission for the user who is root or for that matter, group or others does
+
+43
+02:57.280 --> 02:58.450
+not have execute permission.
+
+44
+02:58.450 --> 02:59.590
+So you can't execute it.
+
+45
+02:59.590 --> 03:02.160
+So we have to make, give it executable permission.
+
+46
+03:02.170 --> 03:04.580
+So I'm going to chmod +x
+
+47
+03:05.080 --> 03:05.980
+And the path.
+
+48
+03:07.150 --> 03:08.620
+And then if I run it.
+
+49
+03:12.020 --> 03:13.880
+Then that's the output, right?
+
+50
+03:14.450 --> 03:14.790
+Yeah.
+
+51
+03:15.740 --> 03:18.180
+It's not much readable, but let's make it more readable.
+
+52
+03:18.200 --> 03:19.640
+Let's open the script once again.
+
+53
+03:21.100 --> 03:29.540
+And I want to give gaps, let me set the line numbers, so at line number five.
+
+54
+03:29.560 --> 03:31.550
+I would like to say echo
+
+55
+03:32.080 --> 03:34.060
+And let's put some hashas there.
+
+56
+03:36.840 --> 03:41.520
+After the uptime command complete, I would like to give an empty space again and again.
+
+57
+03:42.450 --> 03:45.210
+So, yeah, this should be printing well now.
+
+58
+03:45.780 --> 03:51.150
+This makes the output readable, but we also need to make our script readable.
+
+59
+03:51.150 --> 03:55.170
+We should be able to understand our script later when we open.
+
+60
+03:55.170 --> 04:00.690
+Let's after a month or so of what the script is doing instead of reading the entire script and understanding
+
+61
+04:00.690 --> 04:01.590
+what it is doing.
+
+62
+04:01.620 --> 04:03.690
+We can give comments.
+
+63
+04:06.430 --> 04:10.630
+We can use hash and watever we type after that will be ignored by the interpreter.
+
+64
+04:10.630 --> 04:15.340
+So this is called as comments, so we can say, this script prints
+
+65
+04:17.370 --> 04:18.510
+System info.
+
+66
+04:20.860 --> 04:22.340
+And I can give something like this.
+
+67
+04:22.650 --> 04:23.870
+That's a three hash.
+
+68
+04:25.360 --> 04:28.480
+And then concluded with 3 hash, so it's like a title.
+
+69
+04:29.720 --> 04:31.910
+And then here we can say.
+
+70
+04:39.290 --> 04:41.660
+Checking system uptime.
+
+71
+04:44.460 --> 04:49.630
+And in line number 14, I'm going to say memory utilization.
+
+72
+04:49.650 --> 04:55.170
+Now, I know the script is pretty simple and we really don't need to give so many comments, but we have to
+
+73
+04:55.170 --> 04:56.070
+make this as a habit.
+
+74
+04:56.090 --> 04:58.080
+So our code becomes more readable.
+
+75
+05:00.510 --> 05:06.200
+OK, so as you see now, the script is also becoming readable and the output will be also readable.
+
+76
+05:06.210 --> 05:08.340
+Let's execute it now one more time.
+
+77
+05:09.060 --> 05:10.020
+Let's clear the screen.
+
+78
+05:10.950 --> 05:13.980
+And as I said, you can give the absolute path.
+
+79
+05:16.230 --> 05:17.590
+And you can also give.
+
+80
+05:18.130 --> 05:23.420
+Sorry we have given the relative path also we can give absolute path, so the absolute path of our script is
+
+81
+05:23.430 --> 05:24.630
+let's clear the screen first.
+
+82
+05:26.100 --> 05:28.590
+/opt/scripts/firstscript.sh
+
+83
+05:31.360 --> 05:34.870
+OK, so you have seen we can give absolute path or relative path.
+
+84
+05:35.910 --> 05:37.380
+to execute our script.
+
+85
+05:38.010 --> 05:40.710
+All right, one final time, let's open our script once again.
+
+86
+05:42.140 --> 05:43.790
+And let's read it quickly.
+
+87
+05:43.820 --> 05:46.460
+First line is shebang character.
+
+88
+05:50.610 --> 05:56.310
+Yeah, line number one, shebang character, that is the part of the interpreter, that means open this
+
+89
+05:56.310 --> 05:58.710
+interpreter and run all these commands on it.
+
+90
+05:59.520 --> 06:06.270
+We have seen comments hash, hash is comment in bash, Python and Ruby in many other places.
+
+91
+06:06.710 --> 06:10.200
+That means just ignore everything after that except this one, OK?
+
+92
+06:10.320 --> 06:11.340
+This is one character.
+
+93
+06:11.340 --> 06:12.030
+This is not hash.
+
+94
+06:12.030 --> 06:14.490
+This is hash exclamation shebang character.
+
+95
+06:14.880 --> 06:16.860
+So we kind of give a title to the script.
+
+96
+06:17.010 --> 06:18.240
+We give some commands.
+
+97
+06:18.240 --> 06:21.480
+We give some some comment, and then we give some commands.
+
+98
+06:21.840 --> 06:22.920
+We give some spaces.
+
+99
+06:23.340 --> 06:31.800
+And similar way, so  really script is just commands in a text file, which we can execute whenever we
+
+100
+06:31.800 --> 06:32.190
+want.
+
+101
+06:33.790 --> 06:35.270
+So that is all in this video.
+
+102
+06:35.290 --> 06:38.140
+Next video, let's learn more feature in the scripts.
+
+103
+06:39.520 --> 06:41.710
+So wrap this up and join me in the next video.

@@ -1,0 +1,526 @@
+WEBVTT
+
+00:00.200 --> 00:01.400
+Hello and welcome.
+
+00:01.400 --> 00:07.280
+In this section of the course we are going to learn basics of Python, and we are going to see how to
+
+00:07.320 --> 00:09.000
+use Python for automation.
+
+00:09.800 --> 00:13.520
+So why is it necessary to learn Python for DevOps?
+
+00:14.200 --> 00:18.800
+Well, I highly recommend to any DevOps engineer to learn Python.
+
+00:18.800 --> 00:21.360
+One thing is you should know basics of programming.
+
+00:21.800 --> 00:27.000
+If you're working in the computer industry now, especially for DevOps, there are many automation tools
+
+00:27.000 --> 00:28.360
+that we will be using.
+
+00:28.560 --> 00:35.240
+And these automation tools like Jenkins, Terraform, Ansible, Argo, CD, many other all these automation
+
+00:35.240 --> 00:42.960
+tools derives programming concepts or logic to give you a sophisticated automation platform.
+
+00:43.360 --> 00:48.320
+In short, if you want to master automation tools, you should have some basics of programming.
+
+00:48.520 --> 00:53.560
+Also, while working in projects when you're doing automation, sometimes you will see some tasks that
+
+00:53.560 --> 00:56.320
+cannot be automated by automation tools.
+
+00:56.760 --> 00:59.000
+You know you need some customized solutions.
+
+00:59.000 --> 01:04.140
+In that case, you can use Python and get your customized result.
+
+01:05.420 --> 01:08.140
+And if you have never done programming, please do not worry.
+
+01:08.180 --> 01:12.420
+Python is very easy to read and very easy to write.
+
+01:12.900 --> 01:18.540
+Python is an interpreted and interactive language just like Perl PHP, you don't need a compiler to
+
+01:18.580 --> 01:20.180
+compile the code and then run it.
+
+01:20.180 --> 01:24.140
+You can just write the Python code and run it on the interpreter itself.
+
+01:24.420 --> 01:26.300
+You need to have Python interpreter.
+
+01:26.740 --> 01:32.060
+Python is definitely a beginner's language, so if you're learning programming, you should start with
+
+01:32.060 --> 01:32.500
+Python.
+
+01:32.540 --> 01:35.580
+You know, earlier times we used to start with C language.
+
+01:36.060 --> 01:38.260
+In today's time it's definitely Python.
+
+01:38.940 --> 01:42.460
+And the best part of Python is there are so many libraries.
+
+01:43.060 --> 01:44.620
+Now you have a programming language.
+
+01:44.620 --> 01:46.460
+Then you can extend its feature.
+
+01:46.500 --> 01:51.540
+Like for example, if you want to use Python for machine learning or web development, you know many
+
+01:51.540 --> 01:52.900
+things you can achieve with Python.
+
+01:52.900 --> 01:55.580
+You want to do automation in automation itself.
+
+01:55.580 --> 02:01.820
+Let's say we need to interact with Jenkins or Terraform or cloud computing providers like AWS, Google
+
+02:01.820 --> 02:03.260
+Cloud, Azure.
+
+02:03.700 --> 02:09.680
+So you can install these libraries, these frameworks and you can utilize them and automate your desired
+
+02:09.720 --> 02:10.280
+tasks.
+
+02:10.880 --> 02:16.240
+So Python is used almost everywhere web development, automation, data science, machine learning,
+
+02:16.280 --> 02:18.440
+AI, the list goes on and on.
+
+02:18.440 --> 02:20.240
+So you have huge support.
+
+02:21.320 --> 02:26.480
+So in this course we are going to understand the basics of Python Python fundamentals.
+
+02:26.480 --> 02:28.440
+We're going to write simple automation scripts.
+
+02:29.320 --> 02:33.760
+We'll also see how to use Python in cloud computing automation.
+
+02:34.480 --> 02:40.640
+And finally we'll leverage the power of AI and expand more in our Python knowledge.
+
+02:41.440 --> 02:44.200
+So as I said, Python is very easy to get started with.
+
+02:44.200 --> 02:47.320
+And first step is of course the installation of Python.
+
+02:47.560 --> 02:51.280
+If you're using Linux or Mac OS, Python comes by default.
+
+02:51.640 --> 02:53.480
+In windows you need to install Python.
+
+02:53.480 --> 03:00.600
+So in simple steps, you know in windows you open PowerShell as administrator and execute install Python
+
+03:00.600 --> 03:02.120
+and Python will be installed.
+
+03:02.560 --> 03:03.640
+Same in Mac OS.
+
+03:03.880 --> 03:09.980
+You want to install Python or upgrade Python, just use brew, install Python and you have Python.
+
+03:10.300 --> 03:13.140
+Now along with Python, we're going to use few more utilities.
+
+03:13.140 --> 03:16.420
+In the beginning stage we'll be using Anaconda.
+
+03:16.980 --> 03:18.380
+I'll show you how it works.
+
+03:18.380 --> 03:22.500
+And also we'll be using a code editor PyCharm.
+
+03:22.500 --> 03:23.780
+Now you can use VS code.
+
+03:23.780 --> 03:26.540
+Also you can use any code editor of your choice.
+
+03:26.980 --> 03:32.900
+But since we are learning Python, I want to show you the most popular code editor for Python, which
+
+03:32.900 --> 03:33.740
+is PyCharm.
+
+03:33.860 --> 03:36.100
+Again, you can use VS code if you want.
+
+03:36.140 --> 03:42.300
+So let's see how to install Python first okay, so in windows open PowerShell as administrator.
+
+03:42.300 --> 03:44.100
+In macOS open your terminal.
+
+03:50.140 --> 03:55.620
+So once you open your PowerShell as admin user execute the command choco install python hyphen y.
+
+03:56.100 --> 03:57.860
+They should install Python for you.
+
+03:58.180 --> 04:00.940
+For Mac OS it will be brew install Python.
+
+04:01.540 --> 04:07.900
+So likewise execute these commands choco install Anaconda three and for macOS brew install hyphen hyphen
+
+04:07.900 --> 04:14.680
+task anaconda and then choco install PyCharm, Python, community and for macOS brew install hyphen
+
+04:14.680 --> 04:16.880
+f and cask PyCharm hyphen c.
+
+04:17.440 --> 04:25.600
+Once all this is installed, reboot your computer once and open Anaconda from your programs menu.
+
+04:26.440 --> 04:35.320
+So open your start menu and open Anaconda Navigator so Anaconda makes it easier to manage Python environment
+
+04:35.320 --> 04:37.320
+and launch application from it.
+
+04:37.720 --> 04:42.800
+It's used for data science, machine learning, scientific computing, but we're going to simply use
+
+04:42.800 --> 04:46.160
+it to launch various environment that we use for Python.
+
+04:46.400 --> 04:52.080
+For example, we have here Jupyter Notebook which is a browser based Python interpreter.
+
+04:52.080 --> 04:53.400
+And it's very user friendly.
+
+04:53.400 --> 04:58.400
+It's very good in the beginning when you're learning Python, when you write short programs, you can
+
+04:58.400 --> 05:00.840
+you can write it, execute it, test it there itself.
+
+05:01.120 --> 05:03.840
+You can use it to launch PyCharm Community Edition.
+
+05:03.840 --> 05:06.360
+You can open your VSCode also from here.
+
+05:06.760 --> 05:09.520
+So let's first click on this Jupyter notebook.
+
+05:09.520 --> 05:10.560
+Click on launch.
+
+05:11.800 --> 05:16.140
+So this should open your default browser and you should see some URL like this.
+
+05:16.140 --> 05:17.900
+You should see your folder structure.
+
+05:18.180 --> 05:20.820
+First we will create a new folder into this.
+
+05:20.820 --> 05:23.740
+So click on this drop down and say new folder.
+
+05:24.300 --> 05:25.980
+Let's give this folder a name.
+
+05:26.220 --> 05:30.820
+So I'm going to say Python hyphen practice.
+
+05:33.140 --> 05:36.220
+So this is creating this folder in your home directory.
+
+05:37.460 --> 05:39.980
+So like that create some folder for you separately.
+
+05:39.980 --> 05:42.860
+And in that you can create your Python scripts.
+
+05:42.860 --> 05:45.380
+Basically these are called as notebooks here.
+
+05:45.900 --> 05:48.220
+So click on drop down say Python three.
+
+05:48.220 --> 05:50.140
+This is going to open a new notebook.
+
+05:50.540 --> 05:52.420
+Let's give this notebook a name.
+
+05:52.980 --> 05:56.220
+Let's rename it with first Python notebook.
+
+05:58.660 --> 05:58.940
+Okay.
+
+05:58.940 --> 06:02.220
+So in the notebook the first thing you see is this shell.
+
+06:02.740 --> 06:03.220
+Sorry.
+
+06:03.260 --> 06:05.220
+Sell sell sell.
+
+06:05.820 --> 06:08.260
+We can write our Python statements over here.
+
+06:08.260 --> 06:13.780
+Like the first statement I'm going to write is print and give parenthesis and parenthesis.
+
+06:13.820 --> 06:21.040
+Give double quotes and write some text like I'm going to write Welcome to Python like that.
+
+06:21.800 --> 06:23.960
+Some three print statements I have written.
+
+06:23.960 --> 06:28.800
+And I'm going to now click on this button over here which says, you know, run this cell.
+
+06:28.800 --> 06:31.560
+So if I click on that it simply executes that.
+
+06:32.320 --> 06:33.680
+So print in Python.
+
+06:33.680 --> 06:38.800
+You might have already understood this is just to print like in bash we have echo here.
+
+06:38.800 --> 06:42.280
+We have print now print in Python three is a function.
+
+06:42.640 --> 06:44.120
+Function looks like this.
+
+06:44.120 --> 06:47.120
+You will have the name of the function and you will have parentheses.
+
+06:47.640 --> 06:50.720
+This is how you call a function or invoke a function.
+
+06:50.720 --> 06:53.440
+And in the parentheses you pass the argument.
+
+06:53.440 --> 06:59.360
+So here the argument is a text and do not give any space in between the statement.
+
+06:59.360 --> 07:00.120
+This is wrong.
+
+07:00.120 --> 07:02.520
+If you execute this you will get this error.
+
+07:02.520 --> 07:05.280
+Indentation error will understand that in the next lecture.
+
+07:05.600 --> 07:09.560
+Just make sure you start all the statements from the first column itself.
+
+07:10.520 --> 07:14.440
+Okay, so here you can add multiple cells and you can execute them.
+
+07:15.000 --> 07:17.800
+So once you're done here you can click on save.
+
+07:17.840 --> 07:19.420
+This notebook will be saved.
+
+07:19.420 --> 07:22.660
+And when you go back, let me refresh this.
+
+07:23.500 --> 07:26.220
+This notebook is there in this folder Python practices.
+
+07:26.220 --> 07:29.700
+If you double click it, it is going to open it into new tab.
+
+07:30.300 --> 07:31.740
+So as you see this is very good.
+
+07:31.780 --> 07:38.740
+Now when you're practicing when you're learning Python come back to the navigator and open PyCharm community.
+
+07:38.740 --> 07:39.860
+This is the IDE.
+
+07:40.300 --> 07:44.220
+Now you know IDE or any code editor is for professional usage.
+
+07:44.860 --> 07:45.980
+Click on launch.
+
+07:46.740 --> 07:51.900
+Once you launch this, you might get a message to import settings from VSCode or other places.
+
+07:51.900 --> 07:56.100
+You can click on Skip and here you can click on New Project.
+
+07:56.460 --> 07:58.020
+Let's give this project a name.
+
+07:58.020 --> 08:00.260
+You should see the path where it is saving this.
+
+08:01.100 --> 08:02.100
+I'm just giving it a name.
+
+08:02.100 --> 08:03.220
+My Python scripts.
+
+08:03.220 --> 08:06.220
+You can give any name you want and click on create.
+
+08:06.860 --> 08:08.740
+Okay, this should open up the editor.
+
+08:08.900 --> 08:10.580
+Over here you see the folders.
+
+08:10.580 --> 08:12.380
+You see the path where it is located.
+
+08:12.580 --> 08:16.220
+You can right click on this and click on New Python file.
+
+08:16.260 --> 08:21.140
+So just give the name of the file and it will create a Python file for you.
+
+08:21.640 --> 08:23.960
+just give the name, that's all and hit enter.
+
+08:23.960 --> 08:25.720
+It will give the extension automatically.
+
+08:25.720 --> 08:30.360
+You see dot p y and write the print statements over here.
+
+08:30.480 --> 08:34.760
+I've just copied it from the Jupyter notebook and now we can run it.
+
+08:34.760 --> 08:37.240
+You can right click over here and say run this.
+
+08:39.200 --> 08:43.040
+So it uses the Python environment creates a virtual environment for Python.
+
+08:43.040 --> 08:46.360
+You see this path v env scripts Python dot x.
+
+08:46.360 --> 08:51.240
+So it uses the Python from the virtual environment, not the Python from your system.
+
+08:51.240 --> 08:57.920
+We're going to talk about this virtual environment in later lectures, but basically just uses the Python
+
+08:57.920 --> 09:01.680
+interpreter and executes your script and you get the output.
+
+09:02.440 --> 09:04.360
+So in this course we'll be using PyCharm.
+
+09:04.360 --> 09:06.040
+We'll be using Jupyter Notebook as.
+
+09:06.040 --> 09:09.520
+And when required you're free to use anything of your choice.
+
+09:09.520 --> 09:10.560
+You can use VS code.
+
+09:10.560 --> 09:13.600
+Also we are also going to use VS code in later lectures.
+
+09:14.240 --> 09:17.400
+So I'm just showing you different methods of invoking Python interpreter.
+
+09:17.440 --> 09:21.120
+Now use whatever you feel is good for you for now.
+
+09:21.720 --> 09:26.820
+But anyways, later you will be using editors code editors like you can use PyCharm or VS code.
+
+09:27.300 --> 09:30.300
+One last thing I want to show you is the Python interpreter.
+
+09:30.940 --> 09:37.900
+So in windows open Git Bash in macOS, open your terminal and just type Python and hit enter.
+
+09:38.860 --> 09:40.580
+You should see the version of Python also.
+
+09:40.580 --> 09:41.660
+And this is the interpreter.
+
+09:41.660 --> 09:47.060
+Just like we have git bash shell like we have shell, we execute shell commands.
+
+09:47.060 --> 09:48.660
+This is the Python interpreter.
+
+09:48.660 --> 09:51.780
+You can call it as Python shell for now just for understanding.
+
+09:51.780 --> 09:53.860
+But this is called as Python interpreter.
+
+09:54.220 --> 09:57.220
+And you can interact with it like you can write the statements.
+
+09:57.540 --> 10:02.980
+But this will only work for the Python statements not the Linux command or windows commands.
+
+10:03.020 --> 10:04.300
+Not going to work over here.
+
+10:04.540 --> 10:08.900
+So same thing I'm going to write here and just hit enter.
+
+10:10.300 --> 10:10.540
+All right.
+
+10:10.540 --> 10:13.420
+So this is how you can interact with the Python interpreter.
+
+10:14.100 --> 10:15.980
+Now that would be all in this lecture.
+
+10:15.980 --> 10:19.580
+In the next lecture we are going to see how to use Python on Linux environment.
+
+10:19.580 --> 10:24.900
+We're going to talk about different versions of Python and syntax of Python programming language.
+
+10:25.540 --> 10:27.700
+So wrap this up and join me in the next one.

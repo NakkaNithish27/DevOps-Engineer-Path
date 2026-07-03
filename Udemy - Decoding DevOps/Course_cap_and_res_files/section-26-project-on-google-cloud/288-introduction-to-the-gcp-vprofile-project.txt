@@ -1,0 +1,760 @@
+WEBVTT
+
+00:00.270 --> 00:01.710
+Instructor: Hello and welcome.
+
+00:01.710 --> 00:03.360
+In this section you are going
+
+00:03.360 --> 00:08.010
+to learn Google Cloud Platform, also known as GCP.
+
+00:08.010 --> 00:10.710
+Now, you already are an AWS Warrior.
+
+00:10.710 --> 00:13.410
+You have conquered EC2 load balancers,
+
+00:13.410 --> 00:16.830
+auto scaling group, databases, backend services,
+
+00:16.830 --> 00:18.720
+DNS, and many other things.
+
+00:18.720 --> 00:22.650
+You do not need to learn GCP one service at a time,
+
+00:22.650 --> 00:24.090
+but instead of that we are going
+
+00:24.090 --> 00:27.570
+to deploy VProfile application on GCP,
+
+00:27.570 --> 00:29.610
+and this will be production-grade.
+
+00:29.610 --> 00:30.930
+So before you get started,
+
+00:30.930 --> 00:34.020
+make sure you have completed these prerequisites.
+
+00:34.020 --> 00:37.380
+You already have AWS knowledge.
+
+00:37.380 --> 00:40.890
+You have done AWS Lift &amp; Shift project,
+
+00:40.890 --> 00:43.140
+the new migrated VProfile application
+
+00:43.140 --> 00:46.500
+by doing AWS Re Architecture project,
+
+00:46.500 --> 00:49.830
+and you have knowledge of AWS VPC.
+
+00:49.830 --> 00:51.210
+If you know all this,
+
+00:51.210 --> 00:55.950
+it will be very easy to transition from AWS to GCP.
+
+00:55.950 --> 00:58.893
+Now, let's get to know the service names in GCP
+
+00:58.893 --> 01:00.480
+that we will be using,
+
+01:00.480 --> 01:03.330
+which is equivalent to AWS services.
+
+01:03.330 --> 01:06.303
+So you can think of this as AWS to GCP mapping.
+
+01:07.440 --> 01:09.060
+So we have three columns over here.
+
+01:09.060 --> 01:11.400
+The first one is AWS service.
+
+01:11.400 --> 01:14.430
+Last one is the GCP name of the same service
+
+01:14.430 --> 01:16.200
+or a similar service.
+
+01:16.200 --> 01:18.210
+And in the middle you have what the service does.
+
+01:18.210 --> 01:20.670
+Now by far, you already know what the service does
+
+01:20.670 --> 01:23.160
+if you see the AWS service name.
+
+01:23.160 --> 01:27.720
+So AWS VPC service creates the virtual network
+
+01:27.720 --> 01:29.910
+with public and private subnets.
+
+01:29.910 --> 01:33.990
+Same thing in GCP it's called as same, VPC.
+
+01:33.990 --> 01:36.780
+NAT Gateway, which provides internet access
+
+01:36.780 --> 01:38.400
+to the private subnets.
+
+01:38.400 --> 01:41.283
+Same thing in GCP is called as Cloud NAT.
+
+01:42.270 --> 01:44.700
+EC2 instances, virtual machines.
+
+01:44.700 --> 01:46.470
+Virtual machines on GCP
+
+01:46.470 --> 01:50.820
+are called as Compute Engine or virtual instances.
+
+01:50.820 --> 01:52.860
+A custom machine image in AWS
+
+01:52.860 --> 01:55.980
+is called as AMI, Amazon Machine Image.
+
+01:55.980 --> 01:59.580
+Same thing in GCP is called as just custom image.
+
+01:59.580 --> 02:03.360
+When we want to quickly launch VMs from the AMI,
+
+02:03.360 --> 02:05.460
+we can create VM configuration
+
+02:05.460 --> 02:08.550
+that is called as Launch Template in AWS,
+
+02:08.550 --> 02:10.110
+which contains all the information
+
+02:10.110 --> 02:12.750
+about the instance launch like the security group,
+
+02:12.750 --> 02:16.050
+key pair, instance type, all the details.
+
+02:16.050 --> 02:19.650
+Same thing in GCP is called as Instance Template.
+
+02:19.650 --> 02:22.710
+To automatically scale VM up or down,
+
+02:22.710 --> 02:26.490
+we have AWS service called Auto Scaling Group.
+
+02:26.490 --> 02:30.630
+In GCP, that service is called as Managed Instance Group.
+
+02:30.630 --> 02:31.710
+Now there are two things here.
+
+02:31.710 --> 02:35.302
+This unmanaged instance group, that is without scaling,
+
+02:35.302 --> 02:39.180
+and managed instance group that comes with scaling.
+
+02:39.180 --> 02:41.220
+Now in AWS, both are same.
+
+02:41.220 --> 02:44.340
+We can set an auto scaling group that does not do scaling.
+
+02:44.340 --> 02:47.790
+That will be just an unmanaged instance group,
+
+02:47.790 --> 02:51.233
+and auto scaling group that scales up and down,
+
+02:51.233 --> 02:56.233
+that will be called as Managed Instance Group in GCP.
+
+02:56.460 --> 02:57.813
+Okay, a few other things.
+
+02:58.680 --> 03:02.070
+Load Balancer in AWS, we have Application Load Balancer.
+
+03:02.070 --> 03:03.150
+Same thing in GCP,
+
+03:03.150 --> 03:06.120
+it's called as Global HTTPS Load Balancer.
+
+03:06.120 --> 03:08.880
+The SSL certificate we create in AWS
+
+03:08.880 --> 03:12.540
+by using Certificate Manager Service, ACM.
+
+03:12.540 --> 03:15.600
+Same thing in GCP, it's called as Certificate Manager.
+
+03:15.600 --> 03:19.110
+Managed MySQL database service or any SQL database
+
+03:19.110 --> 03:21.390
+service in AWS is called as RDS,
+
+03:21.390 --> 03:23.150
+Relational Database Service.
+
+03:23.150 --> 03:26.967
+In GCP, that service is called as Cloud SQL.
+
+03:26.967 --> 03:30.090
+For Memcached, we have ElastiCache.
+
+03:30.090 --> 03:32.670
+In GCP, that is Memorystore.
+
+03:32.670 --> 03:36.372
+To manage DNS entries, in AWS, we have Route 53.
+
+03:36.372 --> 03:39.690
+In GCP, that is called as Cloud DNS.
+
+03:39.690 --> 03:40.860
+And there are a few other things.
+
+03:40.860 --> 03:42.510
+I don't want to go through the whole list,
+
+03:42.510 --> 03:45.660
+but you will get to know once we execute this project.
+
+03:45.660 --> 03:47.760
+Like in AWS, we have security group.
+
+03:47.760 --> 03:50.130
+In GCP, we have firewall.
+
+03:50.130 --> 03:52.980
+Yes, just the name is Firewall Rules.
+
+03:52.980 --> 03:56.100
+So in this project we are going
+
+03:56.100 --> 04:00.000
+to deploy a Vprofile application on GCP.
+
+04:00.000 --> 04:01.890
+And this will be almost similar
+
+04:01.890 --> 04:03.750
+to re-architecturing project,
+
+04:03.750 --> 04:07.110
+AWS re-architecturing project, it's similar to that
+
+04:07.110 --> 04:09.982
+except we have few more extra things
+
+04:09.982 --> 04:12.270
+that we'll see along the way.
+
+04:12.270 --> 04:14.222
+The most important thing
+
+04:14.222 --> 04:17.100
+for any production-grade infrastructure
+
+04:17.100 --> 04:19.000
+is to have its own network
+
+04:19.000 --> 04:21.630
+where you can have complete control.
+
+04:21.630 --> 04:24.660
+And in cloud, it is called as a VPC,
+
+04:24.660 --> 04:25.890
+Virtual Private Cloud
+
+04:25.890 --> 04:28.800
+or Virtual Private Network, you can say.
+
+04:28.800 --> 04:29.790
+Every cloud provider
+
+04:29.790 --> 04:32.100
+gives you a default network that you can use,
+
+04:32.100 --> 04:34.500
+but you do not have much control on it.
+
+04:34.500 --> 04:36.900
+If you want to have more control, more security,
+
+04:36.900 --> 04:39.060
+you need to create your own network.
+
+04:39.060 --> 04:40.680
+And that is called as VPC.
+
+04:40.680 --> 04:42.411
+In AWS we have VPC.
+
+04:42.411 --> 04:45.052
+And in VPC we have public cloud,
+
+04:45.052 --> 04:48.900
+I'm sorry, public subnet and private subnet.
+
+04:48.900 --> 04:52.860
+So this is the general AWS VPC diagram.
+
+04:52.860 --> 04:54.600
+We have minimum two public subnet
+
+04:54.600 --> 04:56.280
+and minimum two private subnet
+
+04:56.280 --> 04:58.980
+distributed among two different zones.
+
+04:58.980 --> 05:00.750
+Resources in the private subnets
+
+05:00.750 --> 05:03.750
+cannot be accessed from the internet directly,
+
+05:03.750 --> 05:06.230
+but the resources like instances or VMs,
+
+05:06.230 --> 05:08.520
+if they want to access internet,
+
+05:08.520 --> 05:11.610
+that traffic is going to go through the NAT Gateway,
+
+05:11.610 --> 05:13.320
+which lives in the public subnet
+
+05:13.320 --> 05:16.200
+and Nat Gateway routes the traffic to the internet.
+
+05:16.200 --> 05:17.760
+But the direct traffic from the internet
+
+05:17.760 --> 05:19.770
+cannot land in private subnet.
+
+05:19.770 --> 05:21.690
+It can go into public subnet.
+
+05:21.690 --> 05:23.520
+So let's say if you want to SSH
+
+05:23.520 --> 05:25.890
+to an instance in the private subnet,
+
+05:25.890 --> 05:27.750
+there is no direct access.
+
+05:27.750 --> 05:31.470
+One way is you can use a bastion host,
+
+05:31.470 --> 05:33.360
+also called as a jump server,
+
+05:33.360 --> 05:34.770
+which is in the public subnet.
+
+05:34.770 --> 05:36.630
+You can do SSH to the bastion host
+
+05:36.630 --> 05:38.820
+and from the bastion host you can SSH
+
+05:38.820 --> 05:41.460
+to the instance in the private subnet.
+
+05:41.460 --> 05:42.690
+So you can decide the rules,
+
+05:42.690 --> 05:44.910
+you can decide the inbound/outbound traffic.
+
+05:44.910 --> 05:47.580
+You can decide security group firewalls,
+
+05:47.580 --> 05:51.450
+and you can distribute your infrastructure in multiple zone.
+
+05:51.450 --> 05:53.823
+Now this is same in GCP.
+
+05:56.910 --> 06:00.580
+First thing, we are going to create a VPC in GCP
+
+06:00.580 --> 06:04.740
+with two public subnet and two private subnet.
+
+06:04.740 --> 06:09.300
+To give access or internet access to the instances
+
+06:09.300 --> 06:10.320
+in the private subnet,
+
+06:10.320 --> 06:13.260
+we are going to configure a Cloud NAT,
+
+06:13.260 --> 06:14.850
+which is same as in AWS,
+
+06:14.850 --> 06:18.183
+we have NAT Gateway, here we call this Cloud NAT.
+
+06:19.050 --> 06:23.910
+In AWS VPC, we create root entries, root table entries.
+
+06:23.910 --> 06:28.910
+But in GCP VPC, we need to configure a cloud router.
+
+06:29.160 --> 06:32.124
+In AWS, we get a default router,
+
+06:32.124 --> 06:35.310
+which is created by default automatically,
+
+06:35.310 --> 06:38.310
+but in GCP we need to create a cloud router
+
+06:38.310 --> 06:40.710
+and connect it to the VPC.
+
+06:40.710 --> 06:42.840
+Also, we are going to have a bastion host
+
+06:42.840 --> 06:45.480
+in the public subnet that will be controlled
+
+06:45.480 --> 06:47.460
+or its internet access will be controlled
+
+06:47.460 --> 06:49.590
+by a firewall rules.
+
+06:49.590 --> 06:51.600
+In AWS, we have security group.
+
+06:51.600 --> 06:54.660
+In GCP, we have firewall rules.
+
+06:54.660 --> 06:56.430
+So this is the first thing that we are going
+
+06:56.430 --> 07:01.020
+to create in this project, VPC on Google Cloud.
+
+07:01.020 --> 07:02.790
+But now let's look at the entire flow,
+
+07:02.790 --> 07:05.613
+what we are going to do in this project one by one.
+
+07:07.530 --> 07:10.770
+So as I said, first thing, we are going to create a VPC
+
+07:10.770 --> 07:13.140
+in Google Cloud with four subnets,
+
+07:13.140 --> 07:16.830
+two public, two private, and configure the Cloud NAT,
+
+07:16.830 --> 07:19.110
+which is like the NAT Gateway.
+
+07:19.110 --> 07:21.090
+Once again, Cloud NAT is used
+
+07:21.090 --> 07:24.930
+to give internet access to the private subnet.
+
+07:24.930 --> 07:25.763
+Once we have that,
+
+07:25.763 --> 07:27.510
+we are going to configure a bastion host,
+
+07:27.510 --> 07:29.670
+a VM instance in the public subnet.
+
+07:29.670 --> 07:32.970
+So we can do SSH, get inside the VPC.
+
+07:32.970 --> 07:35.460
+Then we are going to create backend services,
+
+07:35.460 --> 07:39.780
+MySQL 8 and Memcached service for our Vprofile project.
+
+07:39.780 --> 07:42.422
+So MySQL 8 will be on Cloud SQL
+
+07:42.422 --> 07:45.660
+and Memcached will be on Memorystore.
+
+07:45.660 --> 07:47.040
+This will be similar to what we did
+
+07:47.040 --> 07:49.320
+in AWS re-architecturing project.
+
+07:49.320 --> 07:52.010
+Used a managed AWS service.
+
+07:52.010 --> 07:53.670
+In GCP, same thing.
+
+07:53.670 --> 07:57.940
+We are going to use Cloud SQL and Memorystore.
+
+07:57.940 --> 08:01.800
+Cloud SQL and Memorystore will be in private,
+
+08:01.800 --> 08:02.940
+as in private network,
+
+08:02.940 --> 08:06.900
+but it is not part of the VPC private subnet.
+
+08:06.900 --> 08:09.660
+And later you'll understand when we deploy all this
+
+08:09.660 --> 08:11.370
+how we are going to configure it.
+
+08:11.370 --> 08:14.820
+But when we have it configured, we'll get a IP,
+
+08:14.820 --> 08:16.970
+a private IP for Cloud SQL and Memorystore.
+
+08:17.850 --> 08:20.270
+So we are going to create a private DNS entries,
+
+08:20.270 --> 08:23.700
+which maps the name to the IP address
+
+08:23.700 --> 08:25.920
+of Cloud SQL and Memorystore.
+
+08:25.920 --> 08:27.120
+So we are going to access it
+
+08:27.120 --> 08:30.030
+through the name and not just the IP.
+
+08:30.030 --> 08:34.170
+Next we are going to create a VM instance with Tomcat
+
+08:34.170 --> 08:37.500
+and deploy our Vprofile application in it.
+
+08:37.500 --> 08:39.990
+And then we are going to create its image.
+
+08:39.990 --> 08:41.610
+Like in AWS we have AMI,
+
+08:41.610 --> 08:43.983
+we are going to here create custom image.
+
+08:44.880 --> 08:49.200
+This custom image will be in a managed instance group.
+
+08:49.200 --> 08:52.110
+In short we call it as MIG.
+
+08:52.110 --> 08:54.780
+Managed instance group is the auto scaling group
+
+08:54.780 --> 08:57.300
+where we can manage the minimum instance,
+
+08:57.300 --> 09:00.300
+maximum instance, and scale out and scale in
+
+09:00.300 --> 09:03.150
+based on the triggers like more CPU utilization
+
+09:03.150 --> 09:05.940
+or more HTTP request, we scale out.
+
+09:05.940 --> 09:07.743
+Same as auto scaling group in AWS.
+
+09:08.580 --> 09:11.033
+So once again, VPC, bastion host,
+
+09:11.033 --> 09:14.441
+Cloud SQL and Memorystore, DNS zones,
+
+09:14.441 --> 09:19.290
+app image, or custom app image, and auto scaling group.
+
+09:19.290 --> 09:20.123
+Next.
+
+09:21.390 --> 09:22.230
+The internet traffic
+
+09:22.230 --> 09:24.660
+is going to route through a load balancer.
+
+09:24.660 --> 09:28.800
+We are going to have HTTP and HTTPS both in the front end.
+
+09:28.800 --> 09:29.820
+So from the load balancer,
+
+09:29.820 --> 09:32.970
+the request will go to the managed instance group
+
+09:32.970 --> 09:35.130
+through a URL map.
+
+09:35.130 --> 09:38.250
+I'll explain in detail later what is a URL map.
+
+09:38.250 --> 09:40.020
+But if you have HTTPS connection,
+
+09:40.020 --> 09:41.820
+we need an SSL certificate.
+
+09:41.820 --> 09:42.862
+That we are going to configure
+
+09:42.862 --> 09:46.260
+in certificate manager service of GCP.
+
+09:46.260 --> 09:48.150
+We are going to create a certificate,
+
+09:48.150 --> 09:50.940
+verify it through our domain registrar.
+
+09:50.940 --> 09:52.830
+I'm going to use GoDaddy,
+
+09:52.830 --> 09:55.080
+which will confirm the certificate.
+
+09:55.080 --> 09:56.520
+And finally,
+
+09:56.520 --> 10:00.330
+when we have the load balancer static public IP,
+
+10:00.330 --> 10:04.350
+we are going to create an A record in our domain registrar,
+
+10:04.350 --> 10:08.790
+which will map Name to our load balancer public IP.
+
+10:08.790 --> 10:13.140
+Yes, in GCP we get the public IP to the load balancer.
+
+10:13.140 --> 10:15.900
+In AWS, we get an endpoint.
+
+10:15.900 --> 10:17.580
+And the best part about this project
+
+10:17.580 --> 10:20.640
+is we are going to do everything through command line.
+
+10:20.640 --> 10:22.830
+In AWS, we have AWS CLI.
+
+10:22.830 --> 10:26.010
+In Google Cloud, we have GCloud Shell.
+
+10:26.010 --> 10:30.351
+And the reason I chose GCloud Shell instead of the console
+
+10:30.351 --> 10:33.240
+is because in general Google Cloud is managed
+
+10:33.240 --> 10:35.790
+through command line and Terraform.
+
+10:35.790 --> 10:38.760
+So if you know manually every step of how
+
+10:38.760 --> 10:41.441
+to configure your GCloud infrastructure,
+
+10:41.441 --> 10:42.900
+through command line,
+
+10:42.900 --> 10:45.570
+then you can transition same into Terraform.
+
+10:45.570 --> 10:48.621
+You can use many available AI tools
+
+10:48.621 --> 10:52.860
+like GitHub Copilot, Amazon Q, or even ChatGPT,
+
+10:52.860 --> 10:56.280
+to convert all the commands into the code.
+
+10:56.280 --> 10:58.860
+But here we are going to have step by step everything,
+
+10:58.860 --> 11:01.110
+every command one command at a time,
+
+11:01.110 --> 11:02.490
+so you understand the flow,
+
+11:02.490 --> 11:04.740
+you understand the entire infrastructure,
+
+11:04.740 --> 11:06.540
+how they connect together.
+
+11:06.540 --> 11:08.640
+This way you are going to learn Google Cloud.
+
+11:08.640 --> 11:10.230
+You're going to learn it through command line,
+
+11:10.230 --> 11:11.670
+and then you can transition it
+
+11:11.670 --> 11:14.520
+to the infrastructure code like Terraform.
+
+11:14.520 --> 11:15.353
+In the next lecture,
+
+11:15.353 --> 11:17.910
+we are going to look at the architecture diagrams
+
+11:17.910 --> 11:21.150
+of VPC backend services and the entire flow
+
+11:21.150 --> 11:24.060
+from the internet traffic to your instance.
+
+11:24.060 --> 11:25.410
+So join me in the next one.

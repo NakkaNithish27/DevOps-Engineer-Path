@@ -1,0 +1,898 @@
+WEBVTT
+
+00:00.810 --> 00:02.970
+Instructor: Okay, so we set the Ansible infrastructure.
+
+00:02.970 --> 00:05.940
+We have a control machine, Ubuntu operating system.
+
+00:05.940 --> 00:10.770
+Then we have web01, web02, db01, all send to S9.
+
+00:10.770 --> 00:13.320
+So first thing will be to establishing connection
+
+00:13.320 --> 00:15.990
+between control machine and all its targets.
+
+00:15.990 --> 00:17.190
+Now from here on,
+
+00:17.190 --> 00:21.000
+I'm going to call these EC2 instances as targets.
+
+00:21.000 --> 00:25.800
+When I say targets, that means web01, web02, and db01.
+
+00:25.800 --> 00:28.713
+So control machine needs to connect to target machines,
+
+00:30.240 --> 00:33.723
+and we know Ansible uses SSH.
+
+00:35.516 --> 00:37.730
+When we want to do SSH to these machines,
+
+00:37.730 --> 00:40.137
+to these EC2 instances, we use the command ssh -i,
+
+00:40.137 --> 00:44.313
+the key path, username, and the IP address.
+
+00:45.498 --> 00:48.960
+So we need to provide same information to Ansible,
+
+00:48.960 --> 00:50.940
+so it can SSH.
+
+00:50.940 --> 00:53.310
+So let's come to control machine.
+
+00:53.310 --> 00:54.453
+Log into control.
+
+00:56.460 --> 00:59.253
+First I want you to create a project directory.
+
+01:02.130 --> 01:04.233
+I'm naming it as simply vprofile.
+
+01:06.404 --> 01:08.285
+And let's cd into it.
+
+01:08.285 --> 01:11.220
+Assume this as the Git repository.
+
+01:11.220 --> 01:14.040
+But we are going to create a different folders
+
+01:14.040 --> 01:15.750
+for exercises, different exercises.
+
+01:15.750 --> 01:18.510
+So you can very easily do the revision,
+
+01:18.510 --> 01:20.160
+look at the previous codes also.
+
+01:20.160 --> 01:24.723
+So I'm going to create here exercise one.
+
+01:26.070 --> 01:31.070
+And exercise one will be about writing inventory file.
+
+01:31.410 --> 01:32.940
+Inventory file.
+
+01:32.940 --> 01:36.510
+Inventory file basically provides information to Ansible
+
+01:36.510 --> 01:40.470
+about its targets, its IP address, username, password,
+
+01:40.470 --> 01:42.510
+login keys, port numbers,
+
+01:42.510 --> 01:46.350
+whatever it needs to log in to the target machine.
+
+01:46.350 --> 01:47.790
+It's going to fetch all the information
+
+01:47.790 --> 01:48.990
+from the inventory file.
+
+01:50.700 --> 01:53.070
+And there are two ways of writing inventory file.
+
+01:53.070 --> 01:58.070
+One is INI format and the new one, which is YAML.
+
+01:58.170 --> 02:01.320
+So we will be using a YAML format
+
+02:01.320 --> 02:03.690
+to write the inventory file now.
+
+02:03.690 --> 02:05.310
+So before I start writing,
+
+02:05.310 --> 02:09.420
+I want you to go through the documentation for inventory.
+
+02:09.420 --> 02:11.340
+So simply Google Ansible inventory.
+
+02:11.340 --> 02:14.730
+You should get this link, how to build your inventory.
+
+02:14.730 --> 02:15.563
+Okay so initially,
+
+02:15.563 --> 02:17.880
+the documentation might look little confusing,
+
+02:17.880 --> 02:19.770
+but don't worry, we are going to run through.
+
+02:19.770 --> 02:23.433
+I'm going to write the whole inventory file, line by line.
+
+02:24.974 --> 02:27.030
+So if you do not mention any inventory file,
+
+02:27.030 --> 02:30.450
+by default, Ansible will use this as the inventory file.
+
+02:30.450 --> 02:34.320
+This is the default location of a default inventory file.
+
+02:34.320 --> 02:35.730
+And many people use this,
+
+02:35.730 --> 02:39.570
+but I do not recommend using the default inventory file.
+
+02:39.570 --> 02:42.870
+Always have inventory in your repository.
+
+02:42.870 --> 02:44.730
+So then you can fetch it on any machine
+
+02:44.730 --> 02:47.250
+and you can run your Ansible code.
+
+02:47.250 --> 02:49.290
+Ansible playbooks, basically.
+
+02:49.290 --> 02:52.860
+Now if you want to specify your own inventory file,
+
+02:52.860 --> 02:55.560
+you have to give a path -i
+
+02:55.560 --> 02:57.570
+and the path of the inventory file,
+
+02:57.570 --> 02:59.640
+which we'll see in a moment.
+
+02:59.640 --> 03:01.190
+How to build an inventory file.
+
+03:01.190 --> 03:03.543
+So this is an example of an inventory file.
+
+03:04.440 --> 03:07.380
+As I told you, there are two methods, INI and YAML.
+
+03:07.380 --> 03:11.310
+This what you see here is INI format,
+
+03:11.310 --> 03:15.780
+and this is the, sorry, this is the new one, YAML format.
+
+03:15.780 --> 03:17.910
+Okay, don't worry, we'll write it line by line.
+
+03:17.910 --> 03:19.910
+We'll understand it, it's pretty simple.
+
+03:21.060 --> 03:24.060
+By the time we complete this inventory exercise,
+
+03:24.060 --> 03:27.210
+you will very easily understand these inventory files.
+
+03:27.210 --> 03:29.010
+What I want you to see here is
+
+03:29.010 --> 03:30.840
+at the very end of this document,
+
+03:30.840 --> 03:32.313
+you have variables.
+
+03:33.210 --> 03:37.430
+Ansible_host, where you can mention the IP address
+
+03:37.430 --> 03:39.900
+or the name of your target.
+
+03:39.900 --> 03:41.730
+Ansible port, if you don't mention,
+
+03:41.730 --> 03:43.957
+it's anyways 22 by default.
+
+03:43.957 --> 03:47.550
+Ansible user, what user to use to connect to the target.
+
+03:47.550 --> 03:50.580
+Ansible password, but don't use password.
+
+03:50.580 --> 03:53.370
+Actually never use passwords in inventory file.
+
+03:53.370 --> 03:54.750
+It's very dangerous.
+
+03:54.750 --> 03:57.540
+You mention the password then in clear text.
+
+03:57.540 --> 04:00.480
+Always use the private key file.
+
+04:00.480 --> 04:03.090
+Like we do, SSH -i we give the key path, right?
+
+04:03.090 --> 04:05.590
+Similar way we'll be mentioning the key file path.
+
+04:06.630 --> 04:08.733
+And there are many other variables.
+
+04:10.980 --> 04:13.380
+You don't need to look at the documentation right now.
+
+04:13.380 --> 04:14.640
+Let's build the inventory file.
+
+04:14.640 --> 04:16.740
+Then you come back to the documentation and read,
+
+04:16.740 --> 04:18.393
+but read it please.
+
+04:20.130 --> 04:21.570
+Okay so let's write inventory file.
+
+04:21.570 --> 04:24.060
+Now inventory file name can be anything.
+
+04:24.060 --> 04:27.090
+And we will just name it as inventory.
+
+04:27.090 --> 04:29.550
+As I said, you can name it anything,
+
+04:29.550 --> 04:32.073
+because we anyways mention the path by giving -i.
+
+04:35.310 --> 04:37.320
+Okay, let's get into insert mode.
+
+04:37.320 --> 04:39.300
+Now it is in YAML format, okay?
+
+04:39.300 --> 04:41.190
+So first you have to say all,
+
+04:41.190 --> 04:43.290
+that means we are going to mention all the host,
+
+04:43.290 --> 04:46.920
+and colon, make sure everything ends with colon.
+
+04:46.920 --> 04:48.150
+Hit enter.
+
+04:48.150 --> 04:52.140
+And inside that, so we can use two space or three space.
+
+04:52.140 --> 04:53.883
+I'm going to use two space.
+
+04:55.590 --> 04:58.743
+Here you mention the host information, okay?
+
+04:59.880 --> 05:01.950
+Host, colon, again, hit enter.
+
+05:01.950 --> 05:05.250
+Then again inside that, so two space,
+
+05:05.250 --> 05:07.830
+then two space, total four space.
+
+05:07.830 --> 05:10.350
+And you give the name of the host that you want.
+
+05:10.350 --> 05:11.610
+So we can give any name.
+
+05:11.610 --> 05:14.700
+So I'm going to say web01, colon.
+
+05:14.700 --> 05:16.380
+And then it's information.
+
+05:16.380 --> 05:17.280
+Again, hit enter.
+
+05:17.280 --> 05:22.110
+Now total six space, 1, 2, 3, 4, 5, 6.
+
+05:22.110 --> 05:24.540
+And now we can mention those variables that we have seen
+
+05:24.540 --> 05:29.223
+like ansible_user, what user to use to connect to web01.
+
+05:30.514 --> 05:35.077
+Before that, again six space, we'll mention ansible_host.
+
+05:38.850 --> 05:42.990
+Now you can mention user first, host later, does not matter.
+
+05:42.990 --> 05:44.940
+But it looks standard, right?
+
+05:44.940 --> 05:49.200
+Ansible_host, and then you have to mention the IP address.
+
+05:49.200 --> 05:51.480
+So let's get the IP address of web01
+
+05:51.480 --> 05:54.270
+and use the private IP, okay?
+
+05:54.270 --> 05:56.610
+Not public, private IP.
+
+05:56.610 --> 05:59.043
+We have given security group rule also for that.
+
+06:01.440 --> 06:02.844
+And ansible_user.
+
+06:02.844 --> 06:06.570
+Now that is sent to us 9 AMI from Amazon,
+
+06:06.570 --> 06:09.810
+and it's username is EC2-user.
+
+06:09.810 --> 06:12.780
+Not sent to us, EC2-user.
+
+06:12.780 --> 06:14.550
+Okay, now what do we need?
+
+06:14.550 --> 06:17.003
+Well we need login key, right?
+
+06:17.003 --> 06:18.863
+So we'll mention the variable ansible_ssh_private_key_file.
+
+06:25.867 --> 06:26.700
+Now don't worry, you don't need to memorize this,
+
+06:26.700 --> 06:28.530
+you know you can get it from the documentation.
+
+06:28.530 --> 06:32.160
+Now I already know this because I used Ansible a lot.
+
+06:32.160 --> 06:34.210
+So most of the variables you know
+
+06:35.522 --> 06:37.320
+got automatically by hearted.
+
+06:37.320 --> 06:38.153
+Anyways.
+
+06:38.153 --> 06:39.450
+Now let's mention the key part.
+
+06:39.450 --> 06:44.450
+Now we'll just first give the name clientkey.pem.
+
+06:44.790 --> 06:46.230
+Now this key does not exist.
+
+06:46.230 --> 06:49.740
+What we are really saying is there is a key with this name
+
+06:49.740 --> 06:53.160
+in the current folder, in the present working directory.
+
+06:53.160 --> 06:54.120
+We don't have it yet.
+
+06:54.120 --> 06:55.773
+We will copy that in a moment.
+
+06:56.970 --> 07:00.570
+And the name should be exactly same now, okay?
+
+07:00.570 --> 07:01.833
+So save and quit.
+
+07:03.780 --> 07:07.320
+So when we launched those EC2 instances,
+
+07:07.320 --> 07:09.330
+we downloaded the key locally in our machine.
+
+07:09.330 --> 07:12.450
+So let's exit from here.
+
+07:12.450 --> 07:16.740
+And I'm going to do cat to that key.
+
+07:16.740 --> 07:20.343
+Client-key.pem, that is the name that I gave.
+
+07:21.490 --> 07:22.920
+That was the name that I gave.
+
+07:22.920 --> 07:24.333
+So do a cat to it.
+
+07:25.380 --> 07:27.900
+So that's the private key to login.
+
+07:27.900 --> 07:30.570
+And you have to copy this.
+
+07:30.570 --> 07:32.460
+Carefully, you know, for macros,
+
+07:32.460 --> 07:34.320
+there will be an extra percent at the end.
+
+07:34.320 --> 07:35.490
+Don't copy that,
+
+07:35.490 --> 07:39.483
+make sure you copy those five hyphen, till there, okay?
+
+07:42.614 --> 07:44.514
+Be very, very careful in copying this.
+
+07:45.450 --> 07:46.283
+Copy.
+
+07:46.283 --> 07:50.220
+Make sure no extra space or any extra characters are copied.
+
+07:50.220 --> 07:52.173
+Now do SSH to it once again.
+
+07:53.940 --> 07:56.250
+Okay, let's get into our project directory.
+
+07:56.250 --> 07:59.580
+Exercise one, LS.
+
+07:59.580 --> 08:01.443
+Okay, let me clear the screen here.
+
+08:03.936 --> 08:06.143
+So in the present directory, we have the inventory file.
+
+08:11.817 --> 08:12.650
+And inventory file says,
+
+08:12.650 --> 08:14.490
+there should be a key with this name.
+
+08:14.490 --> 08:17.340
+So I'm going to create it exactly with this name.
+
+08:17.340 --> 08:19.890
+Remember I had client-key, right?
+
+08:19.890 --> 08:21.993
+But here the name I have given clientkey.
+
+08:23.100 --> 08:24.780
+So use proper names,
+
+08:24.780 --> 08:27.360
+whatever you mentioned in the inventory file.
+
+08:27.360 --> 08:30.963
+Get into insert mode first, and then paste it.
+
+08:33.390 --> 08:35.370
+Make sure no percent or anything else,
+
+08:35.370 --> 08:37.773
+extra space, nothing are copied.
+
+08:39.155 --> 08:42.570
+Escape colon WQ.
+
+08:42.570 --> 08:46.803
+Okay, also the login key permission should be 400.
+
+08:47.940 --> 08:50.823
+When we created it, its permission has changed.
+
+08:51.960 --> 08:53.613
+It is 664.
+
+08:54.660 --> 08:55.590
+Okay, you know what?
+
+08:55.590 --> 08:58.110
+Let's try to connect by using the same key permission.
+
+08:58.110 --> 08:59.220
+Let's see what error we get.
+
+08:59.220 --> 09:01.080
+We'll definitely get error.
+
+09:01.080 --> 09:02.100
+So how do we connect?
+
+09:02.100 --> 09:03.903
+Well the command is this, Ansible,
+
+09:04.830 --> 09:08.760
+and you mention the host name, web01,
+
+09:08.760 --> 09:10.810
+that is the same from the inventory file.
+
+09:11.700 --> 09:14.880
+And you say -m, -m is for module.
+
+09:14.880 --> 09:17.850
+Ansible has tons of modules, we'll go through them.
+
+09:17.850 --> 09:20.070
+The first basic module that we are seeing is ping.
+
+09:20.070 --> 09:22.803
+Ping is a module that really,
+
+09:24.270 --> 09:26.400
+actually it will use SSH.
+
+09:26.400 --> 09:28.410
+It's not the network ping, okay?
+
+09:28.410 --> 09:30.063
+It is going to do SSH.
+
+09:31.080 --> 09:33.000
+To web01.
+
+09:33.000 --> 09:36.721
+And the information -i inventory file.
+
+09:36.721 --> 09:38.100
+Take the information from this inventory file, okay?
+
+09:38.100 --> 09:40.353
+Let's hit enter and see what happens.
+
+09:42.360 --> 09:44.730
+Okay, it is asking us the question, do you want to continue?
+
+09:44.730 --> 09:45.563
+Yes or no?
+
+09:45.563 --> 09:46.560
+We discussed about this, right?
+
+09:46.560 --> 09:48.030
+So it's going to store the fingerprint.
+
+09:48.030 --> 09:51.900
+But this is a problem.
+
+09:51.900 --> 09:55.200
+We don't want our execution to be interactive,
+
+09:55.200 --> 09:58.500
+no questions asked, yes or no, this and that.
+
+09:58.500 --> 10:00.630
+Surely we can say yes and then it continues.
+
+10:00.630 --> 10:01.950
+But we add new machines,
+
+10:01.950 --> 10:04.890
+and every time it ask, yes, it makes it interactive.
+
+10:04.890 --> 10:06.360
+If you're running it from background,
+
+10:06.360 --> 10:07.620
+this is not going to work out.
+
+10:07.620 --> 10:09.003
+So I'm going to say No.
+
+10:10.320 --> 10:11.430
+And look at the error, it says,
+
+10:11.430 --> 10:13.770
+failed to connect to the host via SSH,
+
+10:13.770 --> 10:16.710
+host key verification failed.
+
+10:16.710 --> 10:18.930
+It's not able to verify that target machine.
+
+10:18.930 --> 10:19.890
+Anyways.
+
+10:19.890 --> 10:22.350
+So I'm going to use Ansible configuration
+
+10:22.350 --> 10:25.350
+to tell Ansible to not check the host keys,
+
+10:25.350 --> 10:27.060
+just accept the connection.
+
+10:27.060 --> 10:29.370
+Just say yes by default.
+
+10:29.370 --> 10:30.780
+How do we do that?
+
+10:30.780 --> 10:33.120
+Well, we need to create Ansible configuration file.
+
+10:33.120 --> 10:38.087
+There is a configuration file, sudo cat etc Ansible,
+
+10:39.748 --> 10:41.010
+ansible.cfg, this file,
+
+10:41.010 --> 10:42.993
+but really does not contain anything.
+
+10:43.890 --> 10:46.260
+We have to run this command
+
+10:46.260 --> 10:48.390
+to generate the Ansible configuration file.
+
+10:48.390 --> 10:51.183
+So very carefully, switch to root user,
+
+10:53.081 --> 10:54.843
+and go to this folder, etc Ansible.
+
+10:56.070 --> 10:59.520
+Do LS, you should find here Ansible configuration file.
+
+10:59.520 --> 11:01.323
+And this file contains this command.
+
+11:02.400 --> 11:04.350
+Okay, we're going to copy this command.
+
+11:05.190 --> 11:06.330
+Okay, before that,
+
+11:06.330 --> 11:10.260
+let's rename this Ansible configuration file,
+
+11:10.260 --> 11:13.320
+with, let's say, backup.
+
+11:13.320 --> 11:15.960
+We don't want to lose that file, okay?
+
+11:15.960 --> 11:17.973
+So now we'll run this command.
+
+11:20.610 --> 11:23.610
+Make sure you're in etc Ansible folder.
+
+11:23.610 --> 11:24.460
+Run this command.
+
+11:25.620 --> 11:28.383
+And it should create an Ansible configuration file.
+
+11:29.250 --> 11:31.050
+So Ansible configuration file we use
+
+11:31.050 --> 11:35.010
+to change its default nature, settings basically.
+
+11:35.010 --> 11:37.170
+We have a separate lecture on Ansible configuration,
+
+11:37.170 --> 11:40.080
+we'll talk about it in detail on this.
+
+11:40.080 --> 11:42.270
+For now, we just need to open this file,
+
+11:42.270 --> 11:43.200
+Ansible configuration.
+
+11:43.200 --> 11:46.410
+Again, make sure you're in etc Ansible folder.
+
+11:46.410 --> 11:48.180
+Open this file.
+
+11:48.180 --> 11:52.660
+And you have to here search for host_key_checking
+
+11:55.320 --> 11:56.853
+this setting, right?
+
+11:56.853 --> 11:58.920
+Made a mistake, yeah, checking.
+
+11:58.920 --> 11:59.753
+Hit enter.
+
+12:01.050 --> 12:03.000
+Okay, now in the beginning of this line,
+
+12:03.000 --> 12:04.860
+there is a semicolon.
+
+12:04.860 --> 12:07.980
+Go into insert mode and remove that semicolon.
+
+12:07.980 --> 12:10.140
+Semicolon means the line is commented.
+
+12:10.140 --> 12:14.460
+So hash or semicolon, these both are used as a comment here.
+
+12:14.460 --> 12:19.460
+So remove that and instead of true, change it to false.
+
+12:19.704 --> 12:20.537
+So host key checking, false.
+
+12:20.537 --> 12:21.840
+Please do not do host key checking,
+
+12:21.840 --> 12:23.700
+just accept the connection.
+
+12:23.700 --> 12:25.020
+That is all you need to do.
+
+12:25.020 --> 12:26.490
+Don't worry about other settings.
+
+12:26.490 --> 12:27.510
+We'll learn them.
+
+12:27.510 --> 12:31.143
+Remove semicolon, change it to false, save and quit.
+
+12:32.790 --> 12:35.733
+Okay now log out, and come back to Ubuntu user.
+
+12:36.810 --> 12:41.520
+Clear the screen, make sure you're in exercise one folder.
+
+12:41.520 --> 12:45.063
+And now, let's do once again the Ansible ping.
+
+12:50.236 --> 12:53.040
+Okay, another error, read.
+
+12:53.040 --> 12:54.900
+You should read the errors.
+
+12:54.900 --> 12:57.000
+Then you'll understand what is happening.
+
+12:57.000 --> 13:01.320
+It says permission 0664 for client key are too open.
+
+13:01.320 --> 13:04.050
+Okay, first of all, the red color actually
+
+13:04.050 --> 13:05.910
+is default for failure in Ansible.
+
+13:05.910 --> 13:08.610
+But you should check this message here.
+
+13:08.610 --> 13:10.320
+It says unreachable.
+
+13:10.320 --> 13:11.190
+Why?
+
+13:11.190 --> 13:13.500
+Well, it is telling you, it's failed to connect.
+
+13:13.500 --> 13:16.950
+That is because unprotected private key file.
+
+13:16.950 --> 13:21.060
+Its permission is 644 and it's too open.
+
+13:21.060 --> 13:24.663
+Okay, so we have to change it to 400 client key.
+
+13:28.440 --> 13:30.450
+Okay, its permission changes to 400,
+
+13:30.450 --> 13:33.003
+and let's do once again ping and,
+
+13:34.348 --> 13:36.000
+and yeah, there.
+
+13:36.000 --> 13:37.950
+So it's a success.
+
+13:37.950 --> 13:39.120
+Changed false,
+
+13:39.120 --> 13:41.940
+that means it did not change anything on that machine
+
+13:41.940 --> 13:44.520
+because anyways, it's SSH login and come back,
+
+13:44.520 --> 13:46.200
+it doesn't change anything.
+
+13:46.200 --> 13:49.410
+And there is a response to our ping, which is pong.
+
+13:49.410 --> 13:51.420
+Yeah, again, not so funny.
+
+13:51.420 --> 13:54.720
+I mean, every module will have a response back.
+
+13:54.720 --> 13:56.760
+We are going to see when we install packages
+
+13:56.760 --> 13:58.320
+and do other things.
+
+13:58.320 --> 13:59.973
+We'll see these responses.
+
+14:01.260 --> 14:03.180
+So we'll stop here in this lecture.
+
+14:03.180 --> 14:05.580
+In the next lecture, we will add all the other machines
+
+14:05.580 --> 14:09.150
+and we'll see more amazing features about inventory file.
+
+14:09.150 --> 14:12.600
+So make sure this results into a success.
+
+14:12.600 --> 14:15.273
+And after that, join me in the next lecture.

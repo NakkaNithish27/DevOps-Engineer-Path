@@ -1,0 +1,1085 @@
+WEBVTT
+
+1
+00:00:00.670 --> 00:00:03.430
+In this video we will be seeing Python operators.
+
+2
+00:00:03.550 --> 00:00:05.938
+The different types of operators in Python
+
+3
+00:00:06.094 --> 00:00:08.130
+to do different kinds of operations.
+
+4
+00:00:08.570 --> 00:00:11.226
+For example, arithmetic operators like
+
+5
+00:00:11.288 --> 00:00:14.914
+plus minus, division, multiplication, modulus.
+
+6
+00:00:15.082 --> 00:00:19.270
+To do arithmetic operations, you have comparison operators
+
+7
+00:00:19.450 --> 00:00:22.820
+like greater than, equal to less than.
+
+8
+00:00:23.150 --> 00:00:26.542
+You have assignment operators to assign values.
+
+9
+00:00:26.626 --> 00:00:30.510
+You have logical operators like add or
+
+10
+00:00:30.680 --> 00:00:34.162
+bitwise operator, membership  and identity operator.
+
+11
+00:00:34.306 --> 00:00:36.150
+Let's see these operators.
+
+12
+00:00:37.730 --> 00:00:40.890
+This time I will be using Jupiter notebook.
+
+13
+00:00:41.510 --> 00:00:43.590
+So let me create a new notebook.
+
+14
+00:00:44.330 --> 00:00:47.370
+I will name it as operators.
+
+15
+00:00:51.270 --> 00:00:53.654
+Okay, first let's see arithmetic operators.
+
+16
+00:00:53.762 --> 00:00:54.720
+Very simple.
+
+17
+00:00:58.930 --> 00:01:00.618
+Okay, let's take two variables.
+
+18
+00:01:00.654 --> 00:01:03.974
+Let's take x and let's take y.
+
+19
+00:01:04.072 --> 00:01:09.302
+Two very popular variables from maths. 2 and
+
+20
+00:01:09.316 --> 00:01:11.560
+I'll say y is equal to five.
+
+21
+00:01:12.130 --> 00:01:15.350
+And let's do addition.
+
+22
+00:01:15.970 --> 00:01:21.302
+Let's say total variable equal to x plus y.
+
+23
+00:01:21.496 --> 00:01:22.562
+That's simple.
+
+24
+00:01:22.756 --> 00:01:25.120
+Print, print total.
+
+25
+00:01:26.350 --> 00:01:27.580
+Let's run it.
+
+26
+00:01:28.510 --> 00:01:30.400
+Answer is seven obviously.
+
+27
+00:01:31.990 --> 00:01:34.350
+So plus is the arithmetic operator.
+
+28
+00:01:34.410 --> 00:01:36.650
+Equal to is the assignment operator.
+
+29
+00:01:37.690 --> 00:01:39.566
+Let's overwrite the value of total.
+
+30
+00:01:39.628 --> 00:01:42.700
+Now equal to x minus y.
+
+31
+00:01:47.570 --> 00:01:50.670
+I also have to print it of course. Print.
+
+32
+00:01:56.190 --> 00:01:58.454
+So the minus arithmetic operator,
+
+33
+00:01:58.562 --> 00:02:00.540
+let's again overwrite its value.
+
+34
+00:02:01.410 --> 00:02:04.980
+Let's do multiplication x star y
+
+35
+00:02:06.030 --> 00:02:07.990
+star is the multiplication operator.
+
+36
+00:02:16.210 --> 00:02:17.190
+Let's do division.
+
+37
+00:02:17.250 --> 00:02:22.610
+Let's divide y by x.
+
+38
+00:02:22.720 --> 00:02:24.686
+Let me increase the value of y.
+
+39
+00:02:24.748 --> 00:02:29.850
+Let's take it to six print.
+
+40
+00:02:34.950 --> 00:02:37.166
+Okay, let's see how we can find the remainder.
+
+41
+00:02:37.298 --> 00:02:39.034
+Let me increase the value of y
+
+42
+00:02:39.072 --> 00:02:44.006
+by seven and let's do modulus.
+
+43
+00:02:44.138 --> 00:02:51.430
+Total is equal to y mod the percent symbol
+
+44
+00:02:52.290 --> 00:03:03.618
+x and let's see the remainder. One. So modulus
+
+45
+00:03:03.654 --> 00:03:05.680
+operator will give you the remainder value.
+
+46
+00:03:06.250 --> 00:03:11.282
+Let's see exponential total is equal to y
+
+47
+00:03:11.416 --> 00:03:25.278
+to the power x that's also called as
+
+48
+00:03:25.304 --> 00:03:27.740
+exponent or you can say to the power.
+
+49
+00:03:28.070 --> 00:03:30.390
+So these are some arithmetic operators.
+
+50
+00:03:31.250 --> 00:03:33.750
+Now we will see comparison operators.
+
+51
+00:03:35.210 --> 00:03:37.206
+Let me add a few more cells there
+
+52
+00:03:37.328 --> 00:03:47.990
+so I can scroll up comparison operator.
+
+53
+00:03:48.050 --> 00:03:56.040
+Let's say the value of A is 30 and value of b is 60.
+
+54
+00:03:58.290 --> 00:04:02.494
+And let's see, let's take a variable out equal to
+
+55
+00:04:02.532 --> 00:04:06.166
+and we'll compare if A is less than b.
+
+56
+00:04:06.228 --> 00:04:08.746
+So that's the less than symbol which in general
+
+57
+00:04:08.808 --> 00:04:10.810
+also it is. Same it's in Python.
+
+58
+00:04:11.310 --> 00:04:13.210
+Let's print the output.
+
+59
+00:04:17.470 --> 00:04:19.802
+So true comparison operator is going
+
+60
+00:04:19.815 --> 00:04:20.942
+to return a boolean value.
+
+61
+00:04:21.016 --> 00:04:22.550
+True or false?
+
+62
+00:04:23.230 --> 00:04:25.494
+You can also put this under parenthesis.
+
+63
+00:04:25.542 --> 00:04:27.734
+When we are doing multiple expressions like
+
+64
+00:04:27.772 --> 00:04:29.990
+this when comparing, it will be helpful.
+
+65
+00:04:30.310 --> 00:04:33.410
+Also let's see greater than a
+
+66
+00:04:33.460 --> 00:04:37.010
+greater than b. which is false.
+
+67
+00:04:38.470 --> 00:04:42.314
+Let's see equal to A is equal to b
+
+68
+00:04:42.412 --> 00:04:44.800
+and the answer will be false of course.
+
+69
+00:04:47.110 --> 00:04:50.562
+And when you want to ask reverse not equal
+
+70
+00:04:50.586 --> 00:04:54.830
+to exclamation and equal to symbol that will be
+
+71
+00:04:54.880 --> 00:04:57.820
+A not equal to b, so that is true.
+
+72
+00:04:59.890 --> 00:05:02.246
+Also A greater than equal to b
+
+73
+00:05:02.308 --> 00:05:04.660
+or A less than equal to b.
+
+74
+00:05:06.430 --> 00:05:09.290
+So A greater than or equal to b, that's false.
+
+75
+00:05:10.630 --> 00:05:16.890
+A value is 30, b value is 60, so that is false.
+
+76
+00:05:17.070 --> 00:05:22.334
+A less than equal to B that is true, a is less
+
+77
+00:05:22.372 --> 00:05:25.840
+than B, a's value is 30 and B's value is 60.
+
+78
+00:05:26.710 --> 00:05:29.150
+So these are comparison operator.
+
+79
+00:05:29.530 --> 00:05:34.178
+Now let's see assignment operators the usual one
+
+80
+00:05:34.204 --> 00:05:36.098
+equal to which we are already seeing where
+
+81
+00:05:36.124 --> 00:05:37.890
+we assign the value to a variable.
+
+82
+00:05:38.010 --> 00:05:40.182
+But we have few other assignment operators.
+
+83
+00:05:40.326 --> 00:05:44.080
+Let's first say that C is equal to
+
+84
+00:05:44.590 --> 00:05:51.560
+one and D is equal to one.
+
+85
+00:05:53.030 --> 00:05:54.018
+So we are assigning the
+
+86
+00:05:54.044 --> 00:05:55.570
+value that's assignment operator.
+
+87
+00:05:55.630 --> 00:05:59.274
+We can also increment the value of C by D.
+
+88
+00:05:59.432 --> 00:06:07.314
+So if I say C plus equal to D which is
+
+89
+00:06:07.352 --> 00:06:13.880
+equal to or similar to C is equal to C plus
+
+90
+00:06:16.470 --> 00:06:19.798
+so value of C is zero incrementing it by one.
+
+91
+00:06:19.884 --> 00:06:23.160
+First we'll get value of C as one
+
+92
+00:06:24.210 --> 00:06:26.962
+so the value of C is zero.
+
+93
+00:06:27.096 --> 00:06:28.858
+If you are incrementing it by one then
+
+94
+00:06:28.884 --> 00:06:30.850
+the value of C should be now one.
+
+95
+00:06:30.900 --> 00:06:41.980
+Let's print C value of C, value of C is one.
+
+96
+00:06:42.490 --> 00:06:46.746
+It was zero previously, let's keep it zero and let's
+
+97
+00:06:46.758 --> 00:06:53.180
+say value of these ten so it works like that
+
+98
+00:06:56.190 --> 00:07:02.710
+there's also decrement operator just plus we say minus.
+
+99
+00:07:05.350 --> 00:07:09.834
+Let's print the value of C and I should comment
+
+100
+00:07:09.882 --> 00:07:11.942
+this because it's going to increment and then decrement you
+
+101
+00:07:11.956 --> 00:07:18.798
+will not be able to see that's minus one.
+
+102
+00:07:18.824 --> 00:07:22.580
+So value of C is zero decrementing it by one minus one.
+
+103
+00:07:23.330 --> 00:07:24.714
+So likewise you can do it
+
+104
+00:07:24.752 --> 00:07:28.450
+for multiplication, for division, for exponent.
+
+105
+00:07:28.630 --> 00:07:32.960
+Next we have logical operators and or
+
+106
+00:07:33.470 --> 00:07:38.120
+so the operator is add and R.
+
+107
+00:07:39.230 --> 00:07:44.250
+So let's take value of A as 40 and let's take
+
+108
+00:07:44.300 --> 00:07:49.246
+value of B as 60 and we need two more variables
+
+109
+00:07:49.378 --> 00:07:54.562
+y, let's say two and I will say X is equal
+
+110
+00:07:54.586 --> 00:07:59.480
+to two and Y is equal to three.
+
+111
+00:07:59.930 --> 00:08:02.518
+So we'll do comparison between these two variables
+
+112
+00:08:02.554 --> 00:08:05.374
+and these two variables and we'll use logical
+
+113
+00:08:05.422 --> 00:08:07.470
+operator to do some operations with them.
+
+114
+00:08:07.520 --> 00:08:09.082
+We know when we use comparison
+
+115
+00:08:09.106 --> 00:08:11.790
+operator it returns true or false.
+
+116
+00:08:12.170 --> 00:08:14.000
+So let's take a variable out.
+
+117
+00:08:14.570 --> 00:08:19.662
+Let's say A is less than B which should return true.
+
+118
+00:08:19.856 --> 00:08:22.434
+And I have another expression which I'll say
+
+119
+00:08:22.472 --> 00:08:26.938
+X is greater than Y, which is false.
+
+120
+00:08:27.034 --> 00:08:28.578
+So this expression is true
+
+121
+00:08:28.664 --> 00:08:30.658
+and this expression is false.
+
+122
+00:08:30.814 --> 00:08:34.618
+And if I'm checking which of them are operation
+
+123
+00:08:34.714 --> 00:08:38.686
+so it will check if any of the operand
+
+124
+00:08:38.758 --> 00:08:42.140
+is true then it's going to return true.
+
+125
+00:08:46.110 --> 00:08:48.034
+So A less than B that is true.
+
+126
+00:08:48.132 --> 00:08:52.042
+And if one operand returns true then R is going to
+
+127
+00:08:52.056 --> 00:08:57.360
+return true and you should see true in the out. Okay?
+
+128
+00:08:57.750 --> 00:08:59.806
+So if the first operand itself returns true it
+
+129
+00:08:59.808 --> 00:09:01.870
+will not check the right hand side operand.
+
+130
+00:09:02.610 --> 00:09:04.440
+Let's change this little bit.
+
+131
+00:09:05.970 --> 00:09:09.358
+We'll say A greater than B which is
+
+132
+00:09:09.444 --> 00:09:12.430
+false and we'll say X less than y.
+
+133
+00:09:12.600 --> 00:09:16.226
+So left hand side operand returns false.
+
+134
+00:09:16.298 --> 00:09:17.998
+If that returns false we'll check the right
+
+135
+00:09:18.024 --> 00:09:20.482
+hand side operand that is returning true so
+
+136
+00:09:20.556 --> 00:09:22.140
+it is going to return true.
+
+137
+00:09:23.430 --> 00:09:24.902
+So any of the operand returns
+
+138
+00:09:24.926 --> 00:09:27.120
+true the output will be true.
+
+139
+00:09:27.810 --> 00:09:35.046
+If both returns false, let's make both operand false.
+
+140
+00:09:35.058 --> 00:09:37.850
+So a greater than B, that is false.
+
+141
+00:09:38.230 --> 00:09:43.806
+X greater than Y that is also false.
+
+142
+00:09:43.938 --> 00:09:46.370
+So it should then return false.
+
+143
+00:09:48.610 --> 00:09:52.398
+So for our operation any of the operand
+
+144
+00:09:52.434 --> 00:09:54.698
+returns true, the whole expression will be true.
+
+145
+00:09:54.844 --> 00:09:56.870
+And then we have and operation.
+
+146
+00:09:59.050 --> 00:10:01.770
+So a greater than B that is false.
+
+147
+00:10:01.830 --> 00:10:06.578
+And we will say now and X less than Y that is true.
+
+148
+00:10:06.724 --> 00:10:08.658
+But the first one is false.
+
+149
+00:10:08.814 --> 00:10:11.522
+If any of them, any of the
+
+150
+00:10:11.536 --> 00:10:15.110
+operand is false, then everything is false.
+
+151
+00:10:17.630 --> 00:10:19.474
+So and is like that very strict.
+
+152
+00:10:19.582 --> 00:10:21.560
+You have to be true on the both side.
+
+153
+00:10:22.010 --> 00:10:25.002
+Or is like if you are true on either of
+
+154
+00:10:25.016 --> 00:10:29.050
+the side, that is fine, but and is more strict.
+
+155
+00:10:29.170 --> 00:10:32.754
+So we have to make both true to get the true.
+
+156
+00:10:32.912 --> 00:10:38.994
+So a less than B that is true.
+
+157
+00:10:39.092 --> 00:10:42.006
+X less than Y, that is also true.
+
+158
+00:10:42.128 --> 00:10:43.940
+Okay, now it should return true.
+
+159
+00:10:46.470 --> 00:10:49.990
+See that if both the operands sorry, my bad, I did
+
+160
+00:10:50.040 --> 00:10:55.882
+and I should do and not or, yeah. if both the
+
+161
+00:10:55.896 --> 00:10:58.380
+operands are true, then only it will return true.
+
+162
+00:10:59.250 --> 00:11:00.730
+There is also a negation.
+
+163
+00:11:02.850 --> 00:11:06.118
+So let's take the expression x
+
+164
+00:11:06.204 --> 00:11:09.360
+less than Y which is true.
+
+165
+00:11:09.990 --> 00:11:12.082
+Value of x is two, value of y is
+
+166
+00:11:12.096 --> 00:11:14.640
+three, x less than y that is true.
+
+167
+00:11:14.970 --> 00:11:17.506
+I have to put an assignment operator there.
+
+168
+00:11:17.628 --> 00:11:19.858
+Now I can negate that, I can say not.
+
+169
+00:11:20.004 --> 00:11:23.162
+So if this expression is returning true, if this operand
+
+170
+00:11:23.186 --> 00:11:25.870
+is returning true, it will just make it as false.
+
+171
+00:11:26.970 --> 00:11:28.260
+Let's print it.
+
+172
+00:11:34.750 --> 00:11:35.860
+You see that?
+
+173
+00:11:36.790 --> 00:11:38.318
+So this was supposed to be
+
+174
+00:11:38.344 --> 00:11:40.710
+true then not operator simply negatied it.
+
+175
+00:11:40.770 --> 00:11:42.530
+It made it false.
+
+176
+00:11:44.350 --> 00:11:46.250
+So it will always do the opposite.
+
+177
+00:11:46.870 --> 00:11:49.226
+Now these are really as simple
+
+178
+00:11:49.288 --> 00:11:52.938
+as any other programming languages operators.
+
+179
+00:11:52.974 --> 00:11:57.438
+But now we'll see membership operator
+
+180
+00:11:57.594 --> 00:12:00.218
+which we use so many times.
+
+181
+00:12:00.364 --> 00:12:01.754
+Now of course these operators also
+
+182
+00:12:01.792 --> 00:12:03.522
+will be using for condition checking.
+
+183
+00:12:03.546 --> 00:12:05.920
+But membership operator is just awesome.
+
+184
+00:12:07.390 --> 00:12:09.614
+Okay, for this I will take a list
+
+185
+00:12:09.652 --> 00:12:11.886
+or a tuple from our previous exercise.
+
+186
+00:12:12.078 --> 00:12:13.802
+So from data type exercise I'm going
+
+187
+00:12:13.816 --> 00:12:20.300
+to take this tuple or list.
+
+188
+00:12:20.690 --> 00:12:22.494
+You can use anything. Okay.
+
+189
+00:12:22.532 --> 00:12:24.680
+So membership operator works like this.
+
+190
+00:12:25.850 --> 00:12:27.714
+So I want to check whether a string called
+
+191
+00:12:27.752 --> 00:12:30.234
+as DevOps exist in this tuple or not.
+
+192
+00:12:30.272 --> 00:12:34.722
+So I can say DevOps, the string, in.
+
+193
+00:12:34.796 --> 00:12:38.158
+So in is the membership operator and I'll give the tuple
+
+194
+00:12:38.194 --> 00:12:44.722
+name and let's see what we get in the answer.
+
+195
+00:12:44.916 --> 00:12:49.166
+So it's like asking does DevOps
+
+196
+00:12:49.238 --> 00:12:51.002
+string exist in this tuple?
+
+197
+00:12:51.146 --> 00:12:52.740
+And the answer is true.
+
+198
+00:12:54.690 --> 00:12:57.974
+It says str1 is not defined. That was a variable.
+
+199
+00:12:58.022 --> 00:12:59.640
+Let's put something over here.
+
+200
+00:13:05.710 --> 00:13:08.930
+Let's put there as IoT and that
+
+201
+00:13:08.980 --> 00:13:11.106
+is also variable which is not defined.
+
+202
+00:13:11.238 --> 00:13:12.686
+It was supposed to be some numbers.
+
+203
+00:13:12.748 --> 00:13:14.954
+So let's give that okay.
+
+204
+00:13:14.992 --> 00:13:16.610
+So membership operator is going to traverse
+
+205
+00:13:16.660 --> 00:13:19.970
+It's going to check in your sequence either
+
+206
+00:13:20.020 --> 00:13:22.118
+a tuple or a list and where it
+
+207
+00:13:22.144 --> 00:13:27.506
+finds. It's just going to return the truth. True.
+
+208
+00:13:27.628 --> 00:13:32.106
+So DevOps string exists in the tuple.
+
+209
+00:13:32.298 --> 00:13:33.650
+We can also negate this.
+
+210
+00:13:33.700 --> 00:13:39.140
+We can also ask the reverse way.
+
+211
+00:13:39.590 --> 00:13:43.594
+We can say DevOps not in, so we are saying devops
+
+212
+00:13:43.642 --> 00:13:45.406
+does not exist in this tuple.
+
+213
+00:13:45.538 --> 00:13:47.506
+But the answer should be false,
+
+214
+00:13:47.698 --> 00:13:50.082
+because that does exist, right?
+
+215
+00:13:50.156 --> 00:13:52.040
+Maybe we look for something else
+
+216
+00:13:53.210 --> 00:13:54.766
+that really does not exist.
+
+217
+00:13:54.838 --> 00:14:00.740
+So let's say AI or I'll just put some number 67 in.
+
+218
+00:14:01.550 --> 00:14:04.030
+So I'm checking this integer exist in this tuple
+
+219
+00:14:04.090 --> 00:14:06.454
+and print me the answer that is false.
+
+220
+00:14:06.502 --> 00:14:08.146
+67 does not exist.
+
+221
+00:14:08.278 --> 00:14:09.246
+You have 47.
+
+222
+00:14:09.308 --> 00:14:10.700
+Let's try 47.
+
+223
+00:14:14.910 --> 00:14:16.810
+Okay, let's do the opposite.
+
+224
+00:14:17.610 --> 00:14:18.660
+Not in.
+
+225
+00:14:20.130 --> 00:14:21.754
+That's false, because 47 does
+
+226
+00:14:21.792 --> 00:14:25.878
+exist that does not exist.
+
+227
+00:14:25.914 --> 00:14:27.494
+So that is going to return. True.
+
+228
+00:14:27.652 --> 00:14:29.978
+67 not in first triple. Yes, that's true.
+
+229
+00:14:30.004 --> 00:14:31.266
+It does not exist.
+
+230
+00:14:31.458 --> 00:14:33.650
+Okay, next identity operator.
+
+231
+00:14:38.870 --> 00:14:43.880
+So let's say A is twelve and B is 15.
+
+232
+00:14:47.310 --> 00:14:49.380
+So I'll take a variable result.
+
+233
+00:14:50.430 --> 00:14:52.860
+I'll say A is B.
+
+234
+00:14:53.730 --> 00:14:55.440
+Let's print its value.
+
+235
+00:14:58.450 --> 00:14:59.690
+Let's check it.
+
+236
+00:14:59.860 --> 00:15:01.190
+That's false.
+
+237
+00:15:01.630 --> 00:15:02.726
+So this is same like, you
+
+238
+00:15:02.728 --> 00:15:04.730
+know, comparison operator equal to.
+
+239
+00:15:04.900 --> 00:15:07.960
+Let's make the value of B also as twelve.
+
+240
+00:15:09.610 --> 00:15:10.840
+Let's check now.
+
+241
+00:15:11.770 --> 00:15:13.970
+Okay, there's also the reverse again
+
+242
+00:15:14.020 --> 00:15:19.530
+here that should be false.
+
+243
+00:15:20.990 --> 00:15:23.960
+Okay, let's change the value there 15 again.
+
+244
+00:15:27.450 --> 00:15:31.058
+So it's like equal to comparison operator double equal
+
+245
+00:15:31.094 --> 00:15:33.000
+to and this is like not equal to.
+
+246
+00:15:33.690 --> 00:15:34.702
+Okay with that.
+
+247
+00:15:34.776 --> 00:15:37.190
+That leaves me with one more last operator,
+
+248
+00:15:37.250 --> 00:15:38.830
+which we are not going to cover.
+
+249
+00:15:39.000 --> 00:15:42.314
+Bitwise operator that works on bits
+
+250
+00:15:42.482 --> 00:15:44.486
+and does bit by bit operation.
+
+251
+00:15:44.678 --> 00:15:46.550
+So we're not getting into binaries.
+
+252
+00:15:46.730 --> 00:15:48.180
+So that should be it.
+
+253
+00:15:48.930 --> 00:15:50.880
+It should not be that difficult to understand.
+
+254
+00:15:51.510 --> 00:15:53.302
+I know the session could be boring also
+
+255
+00:15:53.376 --> 00:15:57.358
+plus minus modulus multiplication greater than equal to.
+
+256
+00:15:57.384 --> 00:16:00.122
+But these operators like comparison operators
+
+257
+00:16:00.146 --> 00:16:02.998
+or assignment operators, logical operator, these
+
+258
+00:16:03.024 --> 00:16:04.778
+are very helpful in condition checking.
+
+259
+00:16:04.874 --> 00:16:06.754
+Then your increment operator, which will be very
+
+260
+00:16:06.792 --> 00:16:10.394
+helpful when we're doing looping membership operator.
+
+261
+00:16:10.442 --> 00:16:11.578
+Also we want to check some
+
+262
+00:16:11.604 --> 00:16:13.426
+data exist in some data type.
+
+263
+00:16:13.548 --> 00:16:14.878
+Now, one more thing.
+
+264
+00:16:14.904 --> 00:16:17.398
+With membership operator you can check for
+
+265
+00:16:17.544 --> 00:16:19.750
+if a substring exist in a string.
+
+266
+00:16:20.070 --> 00:16:22.570
+That also you can do not just tuple and list, but
+
+267
+00:16:22.620 --> 00:16:24.922
+also you can check it in a string where you
+
+268
+00:16:24.936 --> 00:16:27.266
+want to see whether dev exist in DevOps.
+
+269
+00:16:27.338 --> 00:16:28.740
+So that should return. True.
+
+270
+00:16:29.190 --> 00:16:31.078
+So practice this, wrap this up and
+
+271
+00:16:31.104 --> 00:16:32.140
+join me in the next video.

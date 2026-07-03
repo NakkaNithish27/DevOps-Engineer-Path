@@ -1,0 +1,241 @@
+WEBVTT
+
+0
+00:00.610 --> 00:01.180
+Welcome.
+
+1
+00:01.420 --> 00:03.850
+In this video, we will talk about quotes.
+
+2
+00:04.420 --> 00:09.700
+Very simple thing, we have two types of quotes in bash, double quotes and single quotes.
+
+3
+00:10.210 --> 00:11.590
+Let's see how they're different.
+
+4
+00:13.230 --> 00:14.560
+So you must have seen so far.
+
+5
+00:14.580 --> 00:16.440
+I've been using double quotes.
+
+6
+00:17.860 --> 00:19.870
+So we have also single quotes.
+
+7
+00:20.910 --> 00:28.260
+So when I'm taking a variable, let's take a  variable called SKILL and let's take double quotes and store
+
+8
+00:28.260 --> 00:28.770
+the value.
+
+9
+00:29.910 --> 00:31.560
+And let's try to print that.
+
+10
+00:34.380 --> 00:34.830
+Nice.
+
+11
+00:35.310 --> 00:37.620
+OK, what if I do it with a single quotes?
+
+12
+00:39.840 --> 00:44.220
+Now, when we're doing this, we're actually reassigning the value to the variable, so this value will
+
+13
+00:44.220 --> 00:46.080
+be overwritten from the previous value.
+
+14
+00:46.650 --> 00:48.450
+So let's print it once again.
+
+15
+00:49.590 --> 00:49.860
+Hmm.
+
+16
+00:50.520 --> 00:51.570
+We don't see any difference.
+
+17
+00:52.290 --> 00:54.150
+Most of the time there is no difference.
+
+18
+00:54.180 --> 01:00.390
+But now let's take that variable skill and let's put that variable in the double quotes when we're printing.
+
+19
+01:01.080 --> 01:01.590
+I will see.
+
+20
+01:01.590 --> 01:03.600
+I have got.
+
+21
+01:04.760 --> 01:06.980
+$SKILL.
+
+22
+01:08.760 --> 01:09.180
+$SKILL
+
+23
+01:10.600 --> 01:14.800
+So the variable is in the double quotes, that's the sentence, and it's working fine.
+
+24
+01:15.310 --> 01:18.070
+But now let me put this into a single quotes.
+
+25
+01:19.840 --> 01:22.630
+And now let's see what happens now, observe the output.
+
+26
+01:24.020 --> 01:26.660
+You see there in double quotes.
+
+27
+01:27.920 --> 01:34.310
+The variable worked. But in single quotes when I put it  just printing dollars as it is, so thats how
+
+28
+01:34.310 --> 01:35.510
+single quotes is different.
+
+29
+01:35.840 --> 01:38.540
+It removes the meaning of special character.
+
+30
+01:38.720 --> 01:40.430
+Dollar is a special character.
+
+31
+01:40.430 --> 01:42.350
+It has a special meaning in Bash.
+
+32
+01:42.860 --> 01:44.480
+What if I put it into a single quotes?
+
+33
+01:44.480 --> 01:45.980
+It's special, meaning is gone.
+
+34
+01:47.160 --> 01:53.790
+OK, so what if we have to print a dollar and also a variable in the same sentence?
+
+35
+01:54.390 --> 01:56.490
+Let's take a variable, VIRUS.
+
+36
+02:03.630 --> 02:05.250
+So I want to print this message.
+
+37
+02:06.810 --> 02:12.630
+Due to $VIRUS virus, company have lost nine million dollars , now observe?
+
+38
+02:13.170 --> 02:20.490
+This is a variable, but this is not I want to print it as it is, but this I want to access the value
+
+39
+02:20.490 --> 02:21.270
+of the variable.
+
+40
+02:21.360 --> 02:24.540
+But if I do it in double quotes, this is what I get.
+
+41
+02:25.050 --> 02:28.870
+Well, this worked, but the nine million is just lost there.
+
+42
+02:29.290 --> 02:29.480
+Yeah.
+
+43
+02:29.550 --> 02:31.560
+Which actually is lost as per the statement.
+
+44
+02:32.190 --> 02:35.940
+But you see, dollar nine actually means the ninth argument.
+
+45
+02:36.600 --> 02:38.490
+But we don't want it as an argument.
+
+46
+02:38.490 --> 02:42.540
+We want to print that so we can put that into single quotes, yes.
+
+47
+02:43.170 --> 02:46.400
+But then this will happen.
+
+48
+02:46.410 --> 02:48.330
+And this printed as it is literally.
+
+49
+02:48.330 --> 02:50.670
+But this is not accessing the value.
+
+50
+02:51.150 --> 02:52.320
+So what do we do in this case?
+
+51
+02:52.350 --> 02:57.240
+Well, you put it in double quotes, but wherever you have a special character, you put a backward
+
+52
+02:57.250 --> 02:59.400
+slash, not forward.
+
+53
+02:59.400 --> 03:00.090
+Backward.
+
+54
+03:00.120 --> 03:05.670
+What happens the next charactor after that, if it's a special character, will be ignored.
+
+55
+03:05.670 --> 03:10.110
+That means the next character special meaning will be gone and you will see it like this.
+
+56
+03:10.770 --> 03:16.440
+So if you're searching for a special character in vim, or if you want to print a special character,
+
+57
+03:17.100 --> 03:22.230
+then you can also put a backwards slash to remove the special meaning of the next character.
+
+58
+03:23.080 --> 03:24.710
+Well, that's all in the quotes.
+
+59
+03:24.720 --> 03:26.610
+I will see you in the next lecture.

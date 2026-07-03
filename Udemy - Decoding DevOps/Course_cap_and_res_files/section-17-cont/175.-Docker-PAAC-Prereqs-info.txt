@@ -1,0 +1,631 @@
+WEBVTT
+
+00:00.330 --> 00:01.163
+-: Welcome.
+
+00:01.163 --> 00:04.684
+In this lecture we are going to see the code that we'll use
+
+00:04.684 --> 00:08.849
+to build the docker image and upload it to Amazon ECR.
+
+00:08.849 --> 00:11.250
+Let's go through our previous stages.
+
+00:11.250 --> 00:13.447
+First we fetch the source code.
+
+00:13.447 --> 00:17.310
+In this case, we are using a branch called docker.
+
+00:17.310 --> 00:20.225
+I'll show you content of this branch in some time.
+
+00:20.225 --> 00:25.225
+Then we build the artifact Unit Test, check style,
+
+00:26.580 --> 00:27.840
+sonar code analysis,
+
+00:27.840 --> 00:30.150
+and upload the result to sonar dashboard
+
+00:30.150 --> 00:32.340
+and then the quality gates.
+
+00:32.340 --> 00:34.890
+Now the next stage was to upload the artifact
+
+00:34.890 --> 00:36.090
+to an access repository,
+
+00:36.090 --> 00:40.620
+but now we are going to build the docker image
+
+00:40.620 --> 00:43.560
+and upload it to Amazon ECR.
+
+00:43.560 --> 00:46.860
+So docker image will be the artifact.
+
+00:46.860 --> 00:48.900
+So Jenkins does not have any inbuilt feature
+
+00:48.900 --> 00:51.930
+to build the docker image and upload to docker registry.
+
+00:51.930 --> 00:54.483
+So we are going to use a plugin called docker.
+
+00:55.710 --> 00:57.600
+Now let's understand these two stages
+
+00:57.600 --> 01:00.090
+that we have added in our pipeline.
+
+01:00.090 --> 01:02.335
+So the first is the building image.
+
+01:02.335 --> 01:05.115
+In this we are using a plugin called a docker.
+
+01:05.115 --> 01:07.590
+We'll install this plugin.
+
+01:07.590 --> 01:09.760
+This plugin has a function called build
+
+01:12.420 --> 01:14.130
+and you can understand that it is a function
+
+01:14.130 --> 01:16.590
+by looking at these parenthesis,
+
+01:16.590 --> 01:18.060
+you'll understand about functions
+
+01:18.060 --> 01:20.760
+and how to write your own functions in Python section,
+
+01:20.760 --> 01:23.220
+which is the next section after this.
+
+01:23.220 --> 01:25.440
+But I need to explain this to you.
+
+01:25.440 --> 01:27.810
+In function we can pass arguments.
+
+01:27.810 --> 01:30.420
+So the build function, you can pass two argument,
+
+01:30.420 --> 01:34.020
+one will be the image name, separated by comma.
+
+01:34.020 --> 01:36.720
+There is another argument that is the path
+
+01:36.720 --> 01:38.790
+of the docker file.
+
+01:38.790 --> 01:41.580
+Now this docker file will be in our source code.
+
+01:41.580 --> 01:43.800
+So let's take a look at the source code.
+
+01:43.800 --> 01:46.230
+So we're going to go to our source code URL
+
+01:46.230 --> 01:49.173
+and switch to branch docker and check the content.
+
+01:50.285 --> 01:52.200
+Okay, so we are in the GitHub repository
+
+01:52.200 --> 01:54.633
+and we are going to switch to the branch docker.
+
+01:57.047 --> 01:59.650
+In this we have a folder called docker-files.
+
+01:59.650 --> 02:03.960
+Click on that. Inside that you have a folder called app.
+
+02:03.960 --> 02:06.660
+Inside that we have a folder called multistage.
+
+02:06.660 --> 02:08.733
+And here we have the docker file.
+
+02:09.750 --> 02:11.663
+Now, I don't want you to stress too much on docker file.
+
+02:11.663 --> 02:15.390
+We need to learn it in much detail in the docker section.
+
+02:15.390 --> 02:17.760
+What this docker file does is basically it is used
+
+02:17.760 --> 02:19.470
+to build the image, a docker image,
+
+02:19.470 --> 02:21.240
+and the instructions are over here,
+
+02:21.240 --> 02:23.370
+how to build the docker image.
+
+02:23.370 --> 02:25.200
+So this is a two stage docker file.
+
+02:25.200 --> 02:28.566
+First stage, we are going to fetch the source code
+
+02:28.566 --> 02:30.780
+switch to the branch docker,
+
+02:30.780 --> 02:34.320
+and then run mvn install, which will generate the artifact.
+
+02:34.320 --> 02:37.389
+The second stage is going to take a Tomcat image
+
+02:37.389 --> 02:39.570
+from docker hub,
+
+02:39.570 --> 02:42.095
+remove the default application and copy our artifact
+
+02:42.095 --> 02:44.850
+that was built in the previous stage here.
+
+02:44.850 --> 02:45.900
+With this instruction, it's going
+
+02:45.900 --> 02:49.320
+to copy the artifact in the Tomcat image
+
+02:49.320 --> 02:51.030
+and will the image build is completed.
+
+02:51.030 --> 02:54.330
+We'll have a docker image with Tomcat service
+
+02:54.330 --> 02:57.330
+and our application hosted inside that.
+
+02:57.330 --> 02:58.470
+So coming back to our code.
+
+02:58.470 --> 03:00.270
+So docker build command is going to run
+
+03:00.270 --> 03:02.100
+the docker build command.
+
+03:02.100 --> 03:04.500
+I'm talking about the docker CLI.
+
+03:04.500 --> 03:07.740
+In the Jenkins it's going to run the docker build command.
+
+03:07.740 --> 03:10.443
+Use this name as the image name,
+
+03:11.370 --> 03:14.040
+image name with the build tag.
+
+03:14.040 --> 03:15.960
+And it's going to build the docker image
+
+03:15.960 --> 03:18.415
+by using instructions present in this docker file,
+
+03:18.415 --> 03:20.250
+which we have just seen.
+
+03:20.250 --> 03:23.010
+I understand this can be overwhelming now,
+
+03:23.010 --> 03:25.140
+but once you are through with the docker section,
+
+03:25.140 --> 03:26.520
+this will be pretty easy for you.
+
+03:26.520 --> 03:28.170
+You will be writing your own docker file,
+
+03:28.170 --> 03:29.760
+so please do not worry now.
+
+03:29.760 --> 03:31.680
+Just focus on the stage.
+
+03:31.680 --> 03:33.906
+So basically this instruction, this pipeline stage
+
+03:33.906 --> 03:36.630
+is going to build a docker image for us.
+
+03:36.630 --> 03:38.580
+And now we need to upload this docker image.
+
+03:38.580 --> 03:41.568
+So here comes the next stage uploading image.
+
+03:41.568 --> 03:43.440
+So again, docker plugin.
+
+03:43.440 --> 03:45.690
+And this time the function is with registry.
+
+03:45.690 --> 03:47.187
+Here the function was build.
+
+03:47.187 --> 03:49.668
+With registry function we passed two arguments.
+
+03:49.668 --> 03:52.605
+One is the registry path, the location of registry,
+
+03:52.605 --> 03:54.660
+which will be a URL.
+
+03:54.660 --> 03:55.530
+Now this is a variable.
+
+03:55.530 --> 03:57.540
+We'll see the variables in the moment.
+
+03:57.540 --> 03:59.820
+And then the registry credential.
+
+03:59.820 --> 04:01.980
+So it'll log into the docker registry,
+
+04:01.980 --> 04:04.650
+which in our case is Amazon, ECR.
+
+04:04.650 --> 04:07.770
+And push the docker image with the tag.
+
+04:07.770 --> 04:10.200
+Tag is used for versioning in docker.
+
+04:10.200 --> 04:12.466
+So we are putting two tags to the same image.
+
+04:12.466 --> 04:16.168
+One will be the build number, the second one is the latest.
+
+04:16.168 --> 04:18.780
+Latest is the default tag.
+
+04:18.780 --> 04:20.340
+So while fetching a docker image,
+
+04:20.340 --> 04:22.740
+if you don't mention any tag by default is going
+
+04:22.740 --> 04:24.990
+to use the tag as latest.
+
+04:24.990 --> 04:27.780
+Okay, now let's come to the variables that we have used.
+
+04:27.780 --> 04:29.430
+We have used two variables over here,
+
+04:29.430 --> 04:33.570
+imageName, vprofileRegistry and registryCredentials.
+
+04:33.570 --> 04:35.070
+Let's take a look at these variables
+
+04:35.070 --> 04:36.870
+that we have defined over here.
+
+04:36.870 --> 04:38.880
+The registryCredentials.
+
+04:38.880 --> 04:40.530
+Now its value will be the credentials
+
+04:40.530 --> 04:43.050
+that we are going to store in Jenkins.
+
+04:43.050 --> 04:44.820
+So in Jenkins, like we store credentials
+
+04:44.820 --> 04:47.790
+like sonar token, Nexus login.
+
+04:47.790 --> 04:49.892
+Like this, we are going to store AWS credentials,
+
+04:49.892 --> 04:51.810
+AWS access key and secret key.
+
+04:51.810 --> 04:54.705
+This is the format for the docker plugin.
+
+04:54.705 --> 04:58.968
+You mentioned the registry name, you mentioned the region
+
+04:58.968 --> 05:01.830
+and the credential name.
+
+05:01.830 --> 05:03.900
+So we are going to go to Jenkins
+
+05:03.900 --> 05:07.650
+store the access key and secret key in the Jenkins,
+
+05:07.650 --> 05:11.490
+which docker plugin will use to log into AWS account.
+
+05:11.490 --> 05:13.870
+The next is image name, image name format is like this.
+
+05:13.870 --> 05:18.753
+It'll be the account name slash the image name.
+
+05:20.010 --> 05:21.510
+And where is this coming from?
+
+05:21.510 --> 05:24.866
+When we create Amazon ECR registry will get this URL
+
+05:24.866 --> 05:27.690
+and our docker image name should be like this.
+
+05:27.690 --> 05:31.560
+The account name slash the image name colon, the tag
+
+05:31.560 --> 05:35.827
+that we are using anyways when we push the docker image.
+
+05:35.827 --> 05:37.890
+The next one is a vPro profile registry. The URL.
+
+05:37.890 --> 05:42.068
+If you see this, and this will be same, this is the URL
+
+05:42.068 --> 05:44.493
+and this is the account name.
+
+05:45.540 --> 05:46.950
+Okay, now let's prepare a list.
+
+05:46.950 --> 05:49.591
+What we need to do in order to execute this plugin.
+
+05:49.591 --> 05:52.890
+So I'm keeping my sticky notes over here
+
+05:52.890 --> 05:55.095
+and I'm going to jot down the points
+
+05:55.095 --> 05:58.410
+or the prerequisite that we need to do on Jenkins
+
+05:58.410 --> 06:00.960
+and AWS in order to execute this pipeline,
+
+06:00.960 --> 06:02.940
+starting with the credentials.
+
+06:02.940 --> 06:04.830
+So we need to store the credentials.
+
+06:04.830 --> 06:06.210
+So for that, we need to go to IAM
+
+06:06.210 --> 06:08.460
+and create access key and secret key.
+
+06:08.460 --> 06:10.530
+So we need to go to AWS, create an IAM user
+
+06:10.530 --> 06:11.670
+with the access key.
+
+06:11.670 --> 06:13.590
+That's one thing that we need to do.
+
+06:13.590 --> 06:16.524
+The next, we need to create an ECR registry.
+
+06:16.524 --> 06:20.760
+So ECR registry is a docker registry from AWS.
+
+06:20.760 --> 06:22.860
+Here you can store the docker images so that
+
+06:22.860 --> 06:26.610
+we need to create, so we can give that information over here
+
+06:26.610 --> 06:28.562
+so we get all these details.
+
+06:28.562 --> 06:31.300
+Next, let's check at the stages.
+
+06:31.300 --> 06:34.683
+So plugin, we need to install a plugin called docker.
+
+06:34.683 --> 06:38.010
+Actually, there are two plugins we need to install docker
+
+06:38.010 --> 06:39.870
+and docker pipeline.
+
+06:39.870 --> 06:42.450
+So on Jenkins, we need to do these things.
+
+06:42.450 --> 06:44.700
+We need to store AWS access keys
+
+06:44.700 --> 06:47.080
+that will be used called as Jenkins credentials.
+
+06:47.080 --> 06:50.760
+And we need to install docker engine in the Jenkins.
+
+06:50.760 --> 06:54.900
+This docker is a plugin, but we also need the docker engine.
+
+06:54.900 --> 06:57.270
+docker plugin is going to execute docker commands.
+
+06:57.270 --> 07:00.100
+In order to execute docker commands, you need docker engine
+
+07:00.100 --> 07:03.030
+and all these are getting executed on Jenkins.
+
+07:03.030 --> 07:06.060
+So we need to install docker engine in Jenkins.
+
+07:06.060 --> 07:09.420
+Now also there is also one more plugin we need to install.
+
+07:09.420 --> 07:13.260
+That is ECR. So these are the things that we need to do.
+
+07:13.260 --> 07:16.413
+So let's get into the next lecture and execute all the steps
+
+07:16.413 --> 07:19.140
+and test our pipeline.
+
+07:19.140 --> 07:21.540
+You can download this pipeline code
+
+07:21.540 --> 07:22.890
+from the lecture resource.
+
+07:22.890 --> 07:24.960
+Go through it, take a look,
+
+07:24.960 --> 07:26.730
+make sure you understand all the steps
+
+07:26.730 --> 07:27.960
+except the docker file.
+
+07:27.960 --> 07:29.730
+Don't worry about the docker file.
+
+07:29.730 --> 07:32.363
+You're going to cover it in detail in docker section.
+
+07:32.363 --> 07:35.530
+Alright, so these are the steps that we will execute now.
+
+07:35.530 --> 07:38.900
+First we need to install docker engine in Jenkins,
+
+07:38.900 --> 07:40.800
+so we can run docker build command
+
+07:40.800 --> 07:42.273
+from the Jenkins pipeline.
+
+07:43.140 --> 07:47.406
+And we also need to add this Jenkins user into docker group
+
+07:47.406 --> 07:51.300
+because Jenkins user will execute docker build command,
+
+07:51.300 --> 07:53.670
+and Jenkins users should have privilege
+
+07:53.670 --> 07:55.590
+to execute docker command.
+
+07:55.590 --> 07:57.510
+And then we will reboot it.
+
+07:57.510 --> 07:59.280
+We'll also install AWS cli,
+
+07:59.280 --> 08:02.160
+which is not required for this project,
+
+08:02.160 --> 08:04.350
+but in the next, when we do continuous delivery,
+
+08:04.350 --> 08:07.140
+when we deliver the artifact that time we'll need it.
+
+08:07.140 --> 08:09.543
+So just install it now itself.
+
+08:10.770 --> 08:12.973
+We will create an IAM user in AWS
+
+08:12.973 --> 08:15.510
+and we will get access key and secret key.
+
+08:15.510 --> 08:19.830
+We'll create ECR repository on AWS, again,
+
+08:19.830 --> 08:22.320
+where we'll store the docker images.
+
+08:22.320 --> 08:24.450
+And these are the plugins that we need to install
+
+08:24.450 --> 08:28.500
+ECR, docker pipeline, aws sdk
+
+08:28.500 --> 08:30.330
+to store the credentials in Jenkins.
+
+08:30.330 --> 08:32.850
+These three pipelines, sorry, these three plugins
+
+08:32.850 --> 08:34.425
+we need to install in Jenkins.
+
+08:34.425 --> 08:37.770
+Then we will store the AWS credentials in Jenkins
+
+08:37.770 --> 08:39.273
+access key and secret key.
+
+08:40.260 --> 08:43.800
+And then we will run the pipeline as you have already seen.
+
+08:43.800 --> 08:46.230
+Now, before you move into the next lecture,
+
+08:46.230 --> 08:49.380
+I want you to watch this video once again.
+
+08:49.380 --> 08:53.010
+Understand the flow of the pipeline script
+
+08:53.010 --> 08:56.490
+and also the flow, the steps that we are to execute.
+
+08:56.490 --> 08:58.830
+Download the pipeline script from resource section.
+
+08:58.830 --> 09:02.340
+Take a look, make sure you understand everything.
+
+09:02.340 --> 09:05.400
+I also recommend you do some research, Google,
+
+09:05.400 --> 09:08.010
+look at the pipeline documentation,
+
+09:08.010 --> 09:11.943
+docker pipeline documentation before you actually do it.
+
+09:13.260 --> 09:16.413
+Alright, then wrap this up and join me in the next lecture.

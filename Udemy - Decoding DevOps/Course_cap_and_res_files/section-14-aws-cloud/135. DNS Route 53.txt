@@ -1,0 +1,406 @@
+WEBVTT
+
+00:00.000 --> 00:02.820
+Instructor: Okay, so our vprofile application
+
+00:02.820 --> 00:04.690
+will be living in app01
+
+00:05.580 --> 00:09.570
+and that will need the backend service connection.
+
+00:09.570 --> 00:12.120
+Database, memcache, RabbitMQ.
+
+00:12.120 --> 00:14.130
+So how does our application knows
+
+00:14.130 --> 00:16.020
+the backend services, right?
+
+00:16.020 --> 00:20.220
+So coming again back to the source code, SRC,
+
+00:20.220 --> 00:25.220
+main, resources, application.properties file.
+
+00:25.440 --> 00:29.880
+Right, here we have db01, that's the host name.
+
+00:29.880 --> 00:33.210
+Now this should resolve to an IP address
+
+00:33.210 --> 00:36.090
+because network connectivity happens through IP address.
+
+00:36.090 --> 00:38.460
+Name is just for understanding, right?
+
+00:38.460 --> 00:42.900
+Once again, if we add IP addresses over here, like here,
+
+00:42.900 --> 00:46.140
+db01 IP here, memcache IP.
+
+00:46.140 --> 00:49.380
+And if something goes wrong with the instance, we delete it
+
+00:49.380 --> 00:50.670
+and we create a new instance,
+
+00:50.670 --> 00:53.970
+then we again need to update the source code
+
+00:53.970 --> 00:56.370
+or the application properties file.
+
+00:56.370 --> 00:58.590
+We need to update with new IP.
+
+00:58.590 --> 00:59.940
+Not a good idea.
+
+00:59.940 --> 01:02.490
+Always remember in the configurations files
+
+01:02.490 --> 01:06.720
+we should have the names, not IP addresses.
+
+01:06.720 --> 01:10.470
+So in local project setup we have seen, we have IP
+
+01:10.470 --> 01:13.590
+to name mapping in ETC host file.
+
+01:13.590 --> 01:14.760
+Right, in ETC host file.
+
+01:14.760 --> 01:16.230
+So this name will be resolved
+
+01:16.230 --> 01:17.670
+to IP address in the host file,
+
+01:17.670 --> 01:19.830
+but that won't work out here in the cloud.
+
+01:19.830 --> 01:22.290
+I mean, it will work out.
+
+01:22.290 --> 01:24.600
+It's not a good or standard practice.
+
+01:24.600 --> 01:27.150
+We need a private DNS service,
+
+01:27.150 --> 01:31.320
+a DNS service that can resolve name to IP address.
+
+01:31.320 --> 01:34.560
+So we can conveniently give the names
+
+01:34.560 --> 01:35.790
+in the configuration file
+
+01:35.790 --> 01:38.160
+and the DNS will resolve that.
+
+01:38.160 --> 01:41.610
+So what is the DNS service on AWS?
+
+01:41.610 --> 01:43.593
+It's Route 53.
+
+01:44.940 --> 01:49.533
+Route 53 or Route 53, whatever you want to call it.
+
+01:50.670 --> 01:53.100
+So Route 53 is a DNS service
+
+01:53.100 --> 01:55.800
+where you can create domains.
+
+01:55.800 --> 01:57.270
+I mean you can buy domains,
+
+01:57.270 --> 02:01.170
+you can create DNS entries for your domain.
+
+02:01.170 --> 02:02.580
+We're looking for very simple thing.
+
+02:02.580 --> 02:06.000
+We don't need a public DNS service, we just need
+
+02:06.000 --> 02:09.543
+to resolve this internally just for our instances.
+
+02:10.470 --> 02:13.680
+So we need to create a hosted zone for that
+
+02:13.680 --> 02:18.090
+where we can create the record like DB01 results
+
+02:18.090 --> 02:19.950
+to so and so IP address.
+
+02:19.950 --> 02:22.473
+So we go to create hosted zone.
+
+02:23.370 --> 02:24.840
+You will give a name.
+
+02:24.840 --> 02:29.203
+I will give it as vprofile, wait, vprofile.in.
+
+02:31.860 --> 02:33.210
+If you want, you can give anything else,
+
+02:33.210 --> 02:34.620
+but make sure you put
+
+02:34.620 --> 02:38.430
+that same entry in the application properties file, okay?
+
+02:38.430 --> 02:41.610
+Otherwise, keep whatever I'm doing over here
+
+02:41.610 --> 02:45.030
+and you have to go with private hosted zone,
+
+02:45.030 --> 02:47.190
+not the public private.
+
+02:47.190 --> 02:49.623
+We just need internal resolution, that's all.
+
+02:50.490 --> 02:52.170
+Okay, region.
+
+02:52.170 --> 02:54.270
+So I'm using North Virginia.
+
+02:54.270 --> 02:56.613
+I hope you're also using North Virginia.
+
+02:58.170 --> 02:59.920
+Right, where is the North Virginia?
+
+03:02.250 --> 03:07.140
+Okay, there, it's just N. Virginia and VPC.
+
+03:07.140 --> 03:09.760
+There will be one default VPC that we have to select
+
+03:12.120 --> 03:14.310
+and let's just create hosted zone.
+
+03:14.310 --> 03:16.200
+Okay, when you create the hosted zone here,
+
+03:16.200 --> 03:17.823
+you can create the records,
+
+03:18.900 --> 03:20.973
+Okay, hosted zones once again.
+
+03:21.900 --> 03:23.043
+Vprofile.in.
+
+03:24.660 --> 03:28.080
+Okay, now let's get the private IP of our instances.
+
+03:28.080 --> 03:29.913
+Go to EC2 service.
+
+03:32.550 --> 03:33.933
+Go to our instances.
+
+03:35.070 --> 03:38.580
+Okay, starting with db01, get the private IP,
+
+03:38.580 --> 03:40.577
+not the public IP, okay?
+
+03:40.577 --> 03:43.710
+Just internal DNS resolution.
+
+03:43.710 --> 03:45.273
+Just get the private IP.
+
+03:46.410 --> 03:47.640
+Let's create the record.
+
+03:47.640 --> 03:49.620
+Create record.
+
+03:49.620 --> 03:53.910
+And you need to give here db01.
+
+03:53.910 --> 03:57.600
+So the host name will be db01.vprofile.in.
+
+03:57.600 --> 04:00.660
+This, we need to add in the application properties file.
+
+04:00.660 --> 04:02.283
+Here you put the value.
+
+04:03.360 --> 04:04.710
+Okay, this record type is A record.
+
+04:04.710 --> 04:08.580
+A record means name to IP mapping.
+
+04:08.580 --> 04:09.870
+Okay, C name is different.
+
+04:09.870 --> 04:11.550
+C name is name to name mapping.
+
+04:11.550 --> 04:13.920
+Here the value will be another name,
+
+04:13.920 --> 04:16.260
+maybe like a load balance or URL, okay?
+
+04:16.260 --> 04:19.360
+But we are doing A records, name to IP mapping
+
+04:20.310 --> 04:22.053
+and just say create record.
+
+04:23.400 --> 04:25.230
+Be very careful creating this record.
+
+04:25.230 --> 04:28.410
+Make sure you're giving right name and right IP address.
+
+04:28.410 --> 04:32.520
+MC01, let's get the IP address of MC01.
+
+04:34.980 --> 04:36.630
+Private IP address.
+
+04:36.630 --> 04:39.153
+Again, private IP, not public IP,
+
+04:41.700 --> 04:44.283
+Private IP, create record.
+
+04:46.290 --> 04:47.193
+Last one.
+
+04:48.930 --> 04:50.733
+RMQ01.
+
+04:52.404 --> 04:55.340
+Just get the private IP of RMQ01.
+
+04:58.800 --> 05:01.383
+Okay, make sure you check the name and IP mapping.
+
+05:05.490 --> 05:06.693
+Create records.
+
+05:07.680 --> 05:10.410
+Okay, after making this entry, I also want you
+
+05:10.410 --> 05:12.570
+to validate so you are sure.
+
+05:12.570 --> 05:16.440
+First, check all these records are having private IP,
+
+05:16.440 --> 05:18.570
+172 or whatever the private IP is.
+
+05:18.570 --> 05:20.250
+There's no public IP here.
+
+05:20.250 --> 05:22.770
+And also if this is really resolving this name
+
+05:22.770 --> 05:23.760
+to an IP address.
+
+05:23.760 --> 05:27.120
+So for that, let's go to app01 instance,
+
+05:27.120 --> 05:30.453
+take its public IP and SSH to this instance.
+
+05:34.590 --> 05:36.750
+SSH username is Ubuntu,
+
+05:36.750 --> 05:40.050
+because this is an Ubuntu AMI, app01.
+
+05:40.050 --> 05:44.430
+And over here you can just do this ping -c 4
+
+05:44.430 --> 05:49.023
+and just say db01.vprofile, right?
+
+05:50.100 --> 05:55.100
+Vprofile.in, whatever domain you created, just check.
+
+05:56.700 --> 05:58.050
+And there's a reply coming back.
+
+05:58.050 --> 06:01.260
+More importantly, you see here the IP address.
+
+06:01.260 --> 06:04.290
+Make sure this is the right IP of your db01.
+
+06:04.290 --> 06:06.753
+Like that, verify all the three instances.
+
+06:07.890 --> 06:12.390
+Right, one last entry that we need to create is for app01.
+
+06:12.390 --> 06:13.683
+So create record.
+
+06:14.940 --> 06:19.170
+I'll say here, app01, and this is not mandatory
+
+06:19.170 --> 06:22.350
+because we anyways using load balancer to connect
+
+06:22.350 --> 06:24.270
+to app server.
+
+06:24.270 --> 06:26.640
+But you know, since we are having all the entries,
+
+06:26.640 --> 06:28.620
+let's also have app01 entry.
+
+06:28.620 --> 06:31.680
+Again, not mandatory for this project.
+
+06:31.680 --> 06:32.613
+Create record.
+
+06:33.690 --> 06:35.730
+Okay, app01 need all this information.
+
+06:35.730 --> 06:38.220
+It's nobody connecting to app01 with the name.
+
+06:38.220 --> 06:39.900
+So you don't need this entry.
+
+06:39.900 --> 06:42.030
+Anyways, we created all these four entries
+
+06:42.030 --> 06:44.910
+and validate, check everything is correct or not.
+
+06:44.910 --> 06:47.190
+If you find everything is good, then wrap this up
+
+06:47.190 --> 06:49.023
+and join me in the next lecture.

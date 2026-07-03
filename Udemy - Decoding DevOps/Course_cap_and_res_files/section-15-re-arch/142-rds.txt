@@ -1,0 +1,1046 @@
+WEBVTT
+
+1
+00:00:00.360 --> 00:00:02.370
+<v Instructor>Alright, so v-profile application</v>
+
+2
+00:00:02.370 --> 00:00:06.000
+needs database, MySQL database to be specific,
+
+3
+00:00:06.000 --> 00:00:09.810
+and we are going to use Amazon RDS for that.
+
+4
+00:00:09.810 --> 00:00:12.660
+So let's go ahead and spin an RDS instance.
+
+5
+00:00:12.660 --> 00:00:17.437
+Okay, so let's find RDS service. Aurora and RDS.
+
+6
+00:00:18.690 --> 00:00:22.680
+So we need a specifically MySQL database.
+
+7
+00:00:22.680 --> 00:00:24.900
+You see here an option create with express
+
+8
+00:00:24.900 --> 00:00:26.100
+configuration in seconds.
+
+9
+00:00:26.100 --> 00:00:29.730
+This is for Aurora PostgreSQL.
+
+10
+00:00:29.730 --> 00:00:31.980
+We want to create a MySQL database
+
+11
+00:00:31.980 --> 00:00:33.450
+so we can go with this option.
+
+12
+00:00:33.450 --> 00:00:36.930
+But before this we are going to create two things,
+
+13
+00:00:36.930 --> 00:00:39.840
+parameter groups and subnet group.
+
+14
+00:00:39.840 --> 00:00:41.790
+Now in real time, there will be DB geeks
+
+15
+00:00:41.790 --> 00:00:44.670
+who wants to change the configuration, the settings,
+
+16
+00:00:44.670 --> 00:00:47.730
+they need full customization of the database,
+
+17
+00:00:47.730 --> 00:00:49.860
+but Amazon RDS doesn't give any option to, you know,
+
+18
+00:00:49.860 --> 00:00:52.890
+SSH and change the configuration file.
+
+19
+00:00:52.890 --> 00:00:55.500
+But it gives us a parameter groups.
+
+20
+00:00:55.500 --> 00:00:57.210
+So when you create a MySQL
+
+21
+00:00:57.210 --> 00:01:00.150
+or any Amazon RDS instance,
+
+22
+00:01:00.150 --> 00:01:02.070
+it uses the default parameter group,
+
+23
+00:01:02.070 --> 00:01:04.110
+but we can create our own parameter group
+
+24
+00:01:04.110 --> 00:01:06.570
+and make the changes when we need.
+
+25
+00:01:06.570 --> 00:01:09.360
+So click over here, you will see an option
+
+26
+00:01:09.360 --> 00:01:10.650
+for parameter group.
+
+27
+00:01:10.650 --> 00:01:11.613
+Click over there.
+
+28
+00:01:12.480 --> 00:01:16.410
+In the default, you will see a default parameter group.
+
+29
+00:01:16.410 --> 00:01:18.990
+If you don't see, ignore it anyways.
+
+30
+00:01:18.990 --> 00:01:20.790
+We need to create our own parameter group.
+
+31
+00:01:20.790 --> 00:01:23.640
+So click on create parameter group,
+
+32
+00:01:23.640 --> 00:01:25.500
+give parameter group a name.
+
+33
+00:01:25.500 --> 00:01:30.102
+So I'm giving "vprofile-rds-rearch-paragrp."
+
+34
+00:01:30.102 --> 00:01:33.000
+And in the description also I'm giving the same.
+
+35
+00:01:33.000 --> 00:01:36.270
+So give a name that makes more sense like this.
+
+36
+00:01:36.270 --> 00:01:39.030
+And then in engine type, you need to select the database
+
+37
+00:01:39.030 --> 00:01:40.020
+that you want to create.
+
+38
+00:01:40.020 --> 00:01:41.940
+So it gives you configuration for that.
+
+39
+00:01:41.940 --> 00:01:45.750
+So you want MySQL Community, click on that.
+
+40
+00:01:45.750 --> 00:01:47.190
+Parameter group family.
+
+41
+00:01:47.190 --> 00:01:50.790
+So we are going to launch MySQL 5 and...
+
+42
+00:01:50.790 --> 00:01:52.980
+I'm sorry, we are going to launch MySQL 8
+
+43
+00:01:52.980 --> 00:01:57.480
+and we can go with MySQL 8.4 as this works with our
+
+44
+00:01:57.480 --> 00:01:58.770
+v-profile application.
+
+45
+00:01:58.770 --> 00:02:02.310
+So stick to MySQL 8.4, I have tested it.
+
+46
+00:02:02.310 --> 00:02:04.650
+And in the type make sure it's DB parameter group
+
+47
+00:02:04.650 --> 00:02:06.300
+and not the cluster parameter group
+
+48
+00:02:06.300 --> 00:02:09.270
+because we are going to launch just one single RDS instance
+
+49
+00:02:09.270 --> 00:02:10.653
+and then click on create.
+
+50
+00:02:11.490 --> 00:02:14.910
+Now, let's click on the parameter group that is created.
+
+51
+00:02:14.910 --> 00:02:17.250
+So it comes with all the default configuration,
+
+52
+00:02:17.250 --> 00:02:21.990
+a lot and lot of configuration around like 27 pages.
+
+53
+00:02:21.990 --> 00:02:24.030
+Don't worry, you don't need to understand these things,
+
+54
+00:02:24.030 --> 00:02:25.410
+but just keep in mind that
+
+55
+00:02:25.410 --> 00:02:28.830
+whenever you get a requirement of changing a configuration
+
+56
+00:02:28.830 --> 00:02:31.140
+for your RDS instance, you can find that parameter,
+
+57
+00:02:31.140 --> 00:02:34.590
+that configuration over here and make the changes.
+
+58
+00:02:34.590 --> 00:02:38.250
+The next one is the database administrator might need
+
+59
+00:02:38.250 --> 00:02:40.890
+more control over the network.
+
+60
+00:02:40.890 --> 00:02:43.472
+So every region has a default VPC,
+
+61
+00:02:43.472 --> 00:02:46.020
+and in that there are default subnets,
+
+62
+00:02:46.020 --> 00:02:49.350
+but in real time, they might create a separate VPC
+
+63
+00:02:49.350 --> 00:02:51.570
+or you might need to create your own VPC
+
+64
+00:02:51.570 --> 00:02:53.910
+and your own subnet in that.
+
+65
+00:02:53.910 --> 00:02:56.160
+And in MySQL database in Amazon RDS,
+
+66
+00:02:56.160 --> 00:03:00.390
+you can select those subnets through subnet group.
+
+67
+00:03:00.390 --> 00:03:03.090
+So click here on subnet groups,
+
+68
+00:03:03.090 --> 00:03:05.880
+click on create DB subnet group.
+
+69
+00:03:05.880 --> 00:03:07.920
+Give subnet group a name.
+
+70
+00:03:07.920 --> 00:03:11.430
+So I'm giving "vprofile-rds-rearch-subgrp"
+
+71
+00:03:11.430 --> 00:03:13.443
+and same I'm giving in the description.
+
+72
+00:03:15.210 --> 00:03:16.830
+Now check here or VPC.
+
+73
+00:03:16.830 --> 00:03:18.420
+You see a default VPC,
+
+74
+00:03:18.420 --> 00:03:21.690
+but you might have your own separate VPC for your project
+
+75
+00:03:21.690 --> 00:03:23.220
+or for your database.
+
+76
+00:03:23.220 --> 00:03:25.020
+You need to select that VPC.
+
+77
+00:03:25.020 --> 00:03:26.640
+Here we have just the default VPC,
+
+78
+00:03:26.640 --> 00:03:27.840
+we're going to select that.
+
+79
+00:03:27.840 --> 00:03:32.840
+And in a VPC, which is a network, you have subnets.
+
+80
+00:03:33.030 --> 00:03:35.070
+Now you see the list of zones over here.
+
+81
+00:03:35.070 --> 00:03:36.900
+One zone can have many subnets.
+
+82
+00:03:36.900 --> 00:03:39.513
+Let's just select all the subnets.
+
+83
+00:03:40.800 --> 00:03:42.360
+I'm sorry, let's select all these zones.
+
+84
+00:03:42.360 --> 00:03:44.370
+Here we are selecting all these zones.
+
+85
+00:03:44.370 --> 00:03:45.970
+So select all these zones
+
+86
+00:03:46.920 --> 00:03:49.560
+and then you can see here the list of subnets
+
+87
+00:03:49.560 --> 00:03:51.510
+in those zones.
+
+88
+00:03:51.510 --> 00:03:55.290
+So for us-east-1d, there is this subnet.
+
+89
+00:03:55.290 --> 00:03:57.930
+Now it might be specific in your project case
+
+90
+00:03:57.930 --> 00:03:59.700
+you need to select a specific subnet id.
+
+91
+00:03:59.700 --> 00:04:02.340
+So based on that you can select that subnet id.
+
+92
+00:04:02.340 --> 00:04:05.103
+But here we are just going to select all the subnets.
+
+93
+00:04:08.760 --> 00:04:10.440
+So I've selected all these zones
+
+94
+00:04:10.440 --> 00:04:13.680
+and I've selected all these subnets from that zone.
+
+95
+00:04:13.680 --> 00:04:16.140
+Now while creating this subnet group, you might get an error
+
+96
+00:04:16.140 --> 00:04:18.960
+that this particular zone or subnet is not available.
+
+97
+00:04:18.960 --> 00:04:19.980
+There is an issue with that,
+
+98
+00:04:19.980 --> 00:04:21.990
+you can remove that from the list.
+
+99
+00:04:21.990 --> 00:04:24.250
+Let's try to create with selecting all
+
+100
+00:04:25.290 --> 00:04:28.138
+and it got created without any issues, at least for me.
+
+101
+00:04:28.138 --> 00:04:31.620
+But if you get any error, remove that specific subnet
+
+102
+00:04:31.620 --> 00:04:34.050
+or zone and then create it again.
+
+103
+00:04:34.050 --> 00:04:36.780
+Okay, so we have parameter group and we have subnet group.
+
+104
+00:04:36.780 --> 00:04:39.630
+Now let's go to dashboard
+
+105
+00:04:39.630 --> 00:04:41.910
+and click on create with full configuration.
+
+106
+00:04:41.910 --> 00:04:43.920
+Click on create.
+
+107
+00:04:43.920 --> 00:04:45.180
+This is with full configuration.
+
+108
+00:04:45.180 --> 00:04:47.100
+You can select every settings.
+
+109
+00:04:47.100 --> 00:04:48.900
+So based on your project requirement,
+
+110
+00:04:48.900 --> 00:04:51.210
+you might need a specific kind of database.
+
+111
+00:04:51.210 --> 00:04:53.430
+For v-profile we have MySQL.
+
+112
+00:04:53.430 --> 00:04:55.590
+So we are going to select here MySQL.
+
+113
+00:04:55.590 --> 00:04:58.140
+So there is a full configuration option, easy create.
+
+114
+00:04:58.140 --> 00:04:59.850
+We are going to select full configuration
+
+115
+00:04:59.850 --> 00:05:02.520
+because I want to show you all the settings.
+
+116
+00:05:02.520 --> 00:05:05.850
+In templates, we have production, dev/test, and sandbox.
+
+117
+00:05:05.850 --> 00:05:07.440
+So do not select production.
+
+118
+00:05:07.440 --> 00:05:11.610
+This is going to create a multi-zone database cluster,
+
+119
+00:05:11.610 --> 00:05:15.000
+which will be costlier, just select dev and test.
+
+120
+00:05:15.000 --> 00:05:17.730
+We still get to see all the options
+
+121
+00:05:17.730 --> 00:05:20.340
+and we can create the most cost-efficient
+
+122
+00:05:20.340 --> 00:05:22.470
+RDS database for us.
+
+123
+00:05:22.470 --> 00:05:23.820
+If you want to be very careful
+
+124
+00:05:23.820 --> 00:05:28.260
+and do not want to take any chances of any extra charges,
+
+125
+00:05:28.260 --> 00:05:29.970
+then you can select sandbox.
+
+126
+00:05:29.970 --> 00:05:32.430
+So you see everything, the production style,
+
+127
+00:05:32.430 --> 00:05:34.020
+the multi-zone will be grayed out
+
+128
+00:05:34.020 --> 00:05:36.720
+and you will get option of all free tier.
+
+129
+00:05:36.720 --> 00:05:38.400
+But I'm going to select here dev and test
+
+130
+00:05:38.400 --> 00:05:42.270
+and still select the most cost efficient options,
+
+131
+00:05:42.270 --> 00:05:43.770
+free in fact.
+
+132
+00:05:43.770 --> 00:05:48.000
+So dev and test and select single-zone database.
+
+133
+00:05:48.000 --> 00:05:52.080
+Okay, scroll down and select here MySQL engine version.
+
+134
+00:05:52.080 --> 00:05:56.760
+So 8.4.8 works fine. I have tested it 'til here.
+
+135
+00:05:56.760 --> 00:05:58.920
+So now stick to 8.4.
+
+136
+00:05:58.920 --> 00:06:00.330
+The minor version can be anything
+
+137
+00:06:00.330 --> 00:06:04.710
+but stick to 8.4 until I update the lecture.
+
+138
+00:06:04.710 --> 00:06:07.530
+Scroll down, give database a name.
+
+139
+00:06:07.530 --> 00:06:09.750
+So I'm giving "vprofile-rds-rearch."
+
+140
+00:06:09.750 --> 00:06:11.550
+Now I have said the name of database.
+
+141
+00:06:11.550 --> 00:06:14.310
+This is the name of the RDS instance.
+
+142
+00:06:14.310 --> 00:06:15.960
+In RDS instance which is MySQL,
+
+143
+00:06:15.960 --> 00:06:18.540
+we are going to create a database called accounts.
+
+144
+00:06:18.540 --> 00:06:20.850
+That is the requirement of our v-profile project.
+
+145
+00:06:20.850 --> 00:06:22.650
+So let me correct myself.
+
+146
+00:06:22.650 --> 00:06:25.410
+This is the name of the RDS instance.
+
+147
+00:06:25.410 --> 00:06:28.800
+For credentials, the username, let's keep admin
+
+148
+00:06:28.800 --> 00:06:31.410
+and for credential for saving the password,
+
+149
+00:06:31.410 --> 00:06:33.390
+we are going to say self-managed.
+
+150
+00:06:33.390 --> 00:06:35.760
+There's an option to save all these passwords
+
+151
+00:06:35.760 --> 00:06:38.550
+in AWS Secret Manager, but that is not free.
+
+152
+00:06:38.550 --> 00:06:42.930
+So keep self-managed and click on auto generate.
+
+153
+00:06:42.930 --> 00:06:45.960
+Scroll down. Instance configuration.
+
+154
+00:06:45.960 --> 00:06:48.630
+So in real time where you have many users connected
+
+155
+00:06:48.630 --> 00:06:51.150
+to your application, you might need an database
+
+156
+00:06:51.150 --> 00:06:54.480
+that has good EBS bandwidth, good RAM, good CPU.
+
+157
+00:06:54.480 --> 00:06:58.230
+But for our use case, which is learning and testing,
+
+158
+00:06:58.230 --> 00:07:00.630
+we're going to select here burstable class.
+
+159
+00:07:00.630 --> 00:07:04.320
+And from here you can keep here t3.micro, t2.micro.
+
+160
+00:07:04.320 --> 00:07:07.350
+just make sure here you have just one GB of RAM.
+
+161
+00:07:07.350 --> 00:07:11.340
+Once again, be careful here select t3.micro, t2.micro.
+
+162
+00:07:11.340 --> 00:07:13.170
+Scroll down in storage.
+
+163
+00:07:13.170 --> 00:07:14.700
+GP3 is fine.
+
+164
+00:07:14.700 --> 00:07:19.620
+You see here the option of provision IOPS, which is faster,
+
+165
+00:07:19.620 --> 00:07:22.770
+but let's keep GP3 which is cost efficient for us.
+
+166
+00:07:22.770 --> 00:07:26.820
+And make sure you reduce this allocated storage to 20 GB.
+
+167
+00:07:26.820 --> 00:07:29.250
+It'll be 200 GB by default
+
+168
+00:07:29.250 --> 00:07:32.640
+because we have selected dev and test option up there.
+
+169
+00:07:32.640 --> 00:07:34.590
+So if you have selected sandbox,
+
+170
+00:07:34.590 --> 00:07:37.290
+you will get here 20 GB anyways.
+
+171
+00:07:37.290 --> 00:07:40.170
+And scroll down. Additional configuration.
+
+172
+00:07:40.170 --> 00:07:42.840
+So enable storage auto scaling.
+
+173
+00:07:42.840 --> 00:07:44.190
+You can keep this option on
+
+174
+00:07:44.190 --> 00:07:47.130
+because anyways, we are not going to add any more storage.
+
+175
+00:07:47.130 --> 00:07:49.740
+This feature allows storage to increase
+
+176
+00:07:49.740 --> 00:07:51.810
+after a specific threshold is exceeded.
+
+177
+00:07:51.810 --> 00:07:53.460
+So we are not going to put any data,
+
+178
+00:07:53.460 --> 00:07:56.340
+so even if you enable it, it doesn't matter.
+
+179
+00:07:56.340 --> 00:07:59.100
+But for a safer side, just uncheck it.
+
+180
+00:07:59.100 --> 00:08:00.690
+Connectivity, keep it as it is.
+
+181
+00:08:00.690 --> 00:08:02.580
+We're going to manage the connectivity
+
+182
+00:08:02.580 --> 00:08:05.130
+from our v-profile application to this RDS instance.
+
+183
+00:08:05.130 --> 00:08:09.450
+VPC, just keep it default. DB subnet group.
+
+184
+00:08:09.450 --> 00:08:11.160
+Just make sure your DB subnet group
+
+185
+00:08:11.160 --> 00:08:12.840
+is selected over here.
+
+186
+00:08:12.840 --> 00:08:14.460
+We have created this DB subnet group,
+
+187
+00:08:14.460 --> 00:08:16.170
+so make sure that is selected.
+
+188
+00:08:16.170 --> 00:08:18.450
+Public access not required.
+
+189
+00:08:18.450 --> 00:08:20.460
+Our v-profile application is going to connect
+
+190
+00:08:20.460 --> 00:08:24.300
+to this RDS instance privately inside the AWS network.
+
+191
+00:08:24.300 --> 00:08:27.060
+So we definitely don't need public access.
+
+192
+00:08:27.060 --> 00:08:29.460
+Now here, public access means from the internet.
+
+193
+00:08:30.630 --> 00:08:32.700
+Security group. We are going to create...
+
+194
+00:08:32.700 --> 00:08:34.800
+Oh sorry, select our own security group.
+
+195
+00:08:34.800 --> 00:08:37.440
+So just remove this default from here
+
+196
+00:08:37.440 --> 00:08:40.323
+and find your v-profile backend security group.
+
+197
+00:08:42.120 --> 00:08:45.540
+All our backend service goes in the same security group.
+
+198
+00:08:45.540 --> 00:08:47.550
+Scroll down. Additional configuration.
+
+199
+00:08:47.550 --> 00:08:49.323
+We have the port number 3306.
+
+200
+00:08:50.370 --> 00:08:53.490
+So let's keep it as it is. Default one.
+
+201
+00:08:53.490 --> 00:08:57.300
+Monitoring, keep it same, database insight - standard.
+
+202
+00:08:57.300 --> 00:08:59.280
+You can uncheck this enhanced monitoring.
+
+203
+00:08:59.280 --> 00:09:02.580
+We don't need it for our use case, which is learning.
+
+204
+00:09:02.580 --> 00:09:04.140
+But in time you might need
+
+205
+00:09:04.140 --> 00:09:07.020
+or you would definitely need the enhanced monitoring.
+
+206
+00:09:07.020 --> 00:09:10.110
+And based on this input you can scale out
+
+207
+00:09:10.110 --> 00:09:12.570
+or scale in your RDS instance and manage cost
+
+208
+00:09:12.570 --> 00:09:14.460
+and performance, both.
+
+209
+00:09:14.460 --> 00:09:17.250
+Logs. So RDS doesn't give any logs.
+
+210
+00:09:17.250 --> 00:09:18.750
+We don't have any as such login.
+
+211
+00:09:18.750 --> 00:09:20.340
+And we can see the log files,
+
+212
+00:09:20.340 --> 00:09:22.260
+but there's an option that can send all the logs
+
+213
+00:09:22.260 --> 00:09:23.400
+to CloudWatch.
+
+214
+00:09:23.400 --> 00:09:25.600
+In real time, you might need to select this.
+
+215
+00:09:26.490 --> 00:09:27.780
+Additional configuration.
+
+216
+00:09:27.780 --> 00:09:30.030
+So initial database names.
+
+217
+00:09:30.030 --> 00:09:32.250
+So for v-profile application,
+
+218
+00:09:32.250 --> 00:09:34.380
+we need a database called as accounts.
+
+219
+00:09:34.380 --> 00:09:37.020
+Make sure there's no spelling mistakes.
+
+220
+00:09:37.020 --> 00:09:38.370
+DB parameter group.
+
+221
+00:09:38.370 --> 00:09:41.643
+So select our parameter group that we have created earlier.
+
+222
+00:09:42.870 --> 00:09:44.820
+Backup. Enable automated backup.
+
+223
+00:09:44.820 --> 00:09:47.130
+We are not using it for production use cases,
+
+224
+00:09:47.130 --> 00:09:48.240
+so we can uncheck this.
+
+225
+00:09:48.240 --> 00:09:50.430
+We don't need any automated backups.
+
+226
+00:09:50.430 --> 00:09:52.530
+You can keep encryption as it is.
+
+227
+00:09:52.530 --> 00:09:54.513
+Scroll down. Maintenance window.
+
+228
+00:09:55.530 --> 00:09:56.970
+Auto minor version upgrade.
+
+229
+00:09:56.970 --> 00:09:58.680
+If you put this check mark on,
+
+230
+00:09:58.680 --> 00:10:01.770
+then any minor version will be automatically upgraded.
+
+231
+00:10:01.770 --> 00:10:04.080
+Really does not matter because we are going to anyways
+
+232
+00:10:04.080 --> 00:10:06.780
+delete our RDS instance once we are done.
+
+233
+00:10:06.780 --> 00:10:10.320
+Maintenance window, let's keep it as no preference.
+
+234
+00:10:10.320 --> 00:10:13.230
+When you make any configuration change to your RDS instance,
+
+235
+00:10:13.230 --> 00:10:15.540
+then that configuration can be applied
+
+236
+00:10:15.540 --> 00:10:18.570
+at a maintenance window that you have selected over here.
+
+237
+00:10:18.570 --> 00:10:20.460
+For our use case now we don't need this option,
+
+238
+00:10:20.460 --> 00:10:23.010
+so we can just say no preference.
+
+239
+00:10:23.010 --> 00:10:24.780
+Now, estimated monthly cost, do not worry.
+
+240
+00:10:24.780 --> 00:10:25.613
+This is monthly cost.
+
+241
+00:10:25.613 --> 00:10:27.810
+We are just going to keep it for a few hours
+
+242
+00:10:27.810 --> 00:10:29.700
+and we have selected all free tier options.
+
+243
+00:10:29.700 --> 00:10:30.990
+So don't worry about the cost,
+
+244
+00:10:30.990 --> 00:10:33.660
+just click on create database.
+
+245
+00:10:33.660 --> 00:10:35.670
+Now as soon as you click on create a database,
+
+246
+00:10:35.670 --> 00:10:37.350
+do not refresh or don't do anything,
+
+247
+00:10:37.350 --> 00:10:40.320
+just click here on view connection details
+
+248
+00:10:40.320 --> 00:10:41.850
+and copy this password.
+
+249
+00:10:41.850 --> 00:10:45.690
+This is your RDS instance password, username is admin
+
+250
+00:10:45.690 --> 00:10:47.310
+and this is the password.
+
+251
+00:10:47.310 --> 00:10:48.870
+And make sure you save it somewhere,
+
+252
+00:10:48.870 --> 00:10:50.880
+like a sticky note or somewhere
+
+253
+00:10:50.880 --> 00:10:52.620
+because we need to give this information
+
+254
+00:10:52.620 --> 00:10:54.270
+in our v-profile application.
+
+255
+00:10:54.270 --> 00:10:56.160
+So our application can connect to
+
+256
+00:10:56.160 --> 00:10:58.620
+or authenticate to our RDS instance.
+
+257
+00:10:58.620 --> 00:11:03.180
+So I'm just keeping here the password and the username.
+
+258
+00:11:03.180 --> 00:11:06.240
+And once this is ready, then I am also going
+
+259
+00:11:06.240 --> 00:11:08.700
+to get an end point, but it will take some time.
+
+260
+00:11:08.700 --> 00:11:12.030
+By the time, let's go ahead and create ElastiCache.
+
+261
+00:11:12.030 --> 00:11:13.580
+So join me in the next lecture.
+

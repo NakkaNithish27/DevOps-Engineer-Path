@@ -1,0 +1,649 @@
+WEBVTT
+
+00:00.280 --> 00:01.560
+Hello and welcome.
+
+00:02.160 --> 00:09.160
+In this lecture we are going to talk about the input we pass to an action and also different triggers
+
+00:09.160 --> 00:10.120
+for a workflow.
+
+00:10.840 --> 00:13.400
+So let's take an example of this workflow.
+
+00:13.400 --> 00:16.160
+I'm going to click on configure to show you a few settings.
+
+00:16.680 --> 00:18.720
+So let me scroll down here.
+
+00:19.720 --> 00:23.080
+Okay this one login to GitHub container registry.
+
+00:23.080 --> 00:25.760
+So it uses this action.
+
+00:25.760 --> 00:28.760
+And with this it passes few parameters.
+
+00:28.760 --> 00:30.360
+These are called as inputs.
+
+00:30.760 --> 00:35.400
+So with an inputs that you can pass to an action.
+
+00:35.680 --> 00:39.800
+So for example we have checkout action over here.
+
+00:39.800 --> 00:41.840
+And we need to pass some parameter.
+
+00:42.200 --> 00:45.720
+Now check out in general is going to clone the source code.
+
+00:45.720 --> 00:48.120
+But sometimes we need much in depth.
+
+00:48.120 --> 00:51.400
+We need the history of the previous commits.
+
+00:51.400 --> 00:57.200
+So we can compare and use it for different purpose, like giving a tag to a Docker image.
+
+00:57.200 --> 01:03.360
+So in that case we need the previous histories so we can pass an input with this.
+
+01:06.000 --> 01:09.440
+Fetch hyphen depth the value zero.
+
+01:09.760 --> 01:11.800
+So it's not going to just clone the source code.
+
+01:11.800 --> 01:17.560
+It's going to get the previous history commit logs everything which might be required if you're trying
+
+01:17.560 --> 01:23.240
+to compare previous commit, but not in a in our case we're just going to use the current commit ID.
+
+01:23.280 --> 01:27.240
+But I wanted to show you that how you can pass input to an action.
+
+01:27.680 --> 01:31.200
+We are also cloning this source code in the testing job.
+
+01:31.200 --> 01:32.840
+So let's give it here also.
+
+01:34.640 --> 01:36.120
+And let me save this.
+
+01:38.640 --> 01:43.080
+So the market marketplace if we search for a checkout let's take a look.
+
+01:45.880 --> 01:47.760
+So you see that's how we use it right.
+
+01:47.800 --> 01:52.000
+We give the action users and we give the action name and the version with.
+
+01:52.000 --> 01:58.360
+And you see there are so many parameters that we can pass like token, SSH key and many other things
+
+01:58.360 --> 01:58.920
+fetch depth.
+
+01:58.960 --> 01:59.880
+That's what we have used.
+
+01:59.880 --> 02:00.760
+Default is one.
+
+02:00.760 --> 02:01.960
+If we set it to zero.
+
+02:02.480 --> 02:05.720
+Indicates all history for all branches and tags.
+
+02:06.240 --> 02:09.560
+So based on your requirement you can find the different parameters.
+
+02:09.560 --> 02:13.240
+And you can pass it with the input with the width input.
+
+02:13.920 --> 02:19.440
+Next we are going to look at the most popular triggers for GitHub actions workflow.
+
+02:19.800 --> 02:25.760
+We have seen in previous lectures that when we push the content to the main branch, it triggers the
+
+02:25.800 --> 02:26.560
+workflow.
+
+02:26.840 --> 02:32.040
+Let's take a look at one more trigger that is popular pull request.
+
+02:32.680 --> 02:40.360
+You see pull request colon and then you can give the name of the branch or branches in list format.
+
+02:40.400 --> 02:45.120
+Now you can give either in this format list or in this format also.
+
+02:48.120 --> 02:49.560
+So like this in square bracket.
+
+02:49.560 --> 02:51.600
+In double quote you give the branch name comma.
+
+02:51.600 --> 02:55.520
+And then you can give other branch name like let's say feature branch.
+
+02:56.210 --> 02:57.370
+So this is one style.
+
+02:57.370 --> 03:02.610
+The other style is this you can just say branches in the next line give space hyphen.
+
+03:02.610 --> 03:03.730
+You give the branch name.
+
+03:03.730 --> 03:09.050
+And like that you can keep increasing the list when you need it.
+
+03:09.410 --> 03:13.810
+So let's keep this format now in order to show how this works.
+
+03:13.810 --> 03:16.050
+First we need to commit this.
+
+03:16.050 --> 03:22.010
+Then raise a pull request for the main branch from a feature branch from another branch in order to
+
+03:22.010 --> 03:28.250
+remove the confusion, I'm just going to keep it as main branch only, and I'm going to commit these
+
+03:28.250 --> 03:34.410
+three lines over here, because when I commit it into the main branch, this is going to trigger the
+
+03:34.450 --> 03:34.930
+workflow.
+
+03:34.930 --> 03:36.650
+So I'm commenting this out for now.
+
+03:37.250 --> 03:41.530
+Just keep pull request branches and the main branch name and let's commit and push.
+
+03:41.530 --> 03:45.050
+Make sure you save the file control S and then commit and push.
+
+03:45.970 --> 03:49.490
+Give a commit message and say accept commit message.
+
+03:51.730 --> 03:53.290
+Okay come to your repository.
+
+03:53.290 --> 03:54.810
+Let's go back to the repository.
+
+03:55.050 --> 03:56.250
+Let's go to actions.
+
+03:56.570 --> 03:58.610
+So that did not trigger the workflow.
+
+03:58.650 --> 04:01.930
+That is because we have commented this.
+
+04:04.290 --> 04:06.890
+Now let's test this pull request.
+
+04:06.930 --> 04:11.090
+First you need to create a branch from the main branch.
+
+04:11.890 --> 04:15.090
+The developer directly do not commit to the main branch.
+
+04:15.250 --> 04:18.370
+They create a feature branch or bug fix branch.
+
+04:18.410 --> 04:20.850
+The branch name could be anything based on the requirement.
+
+04:20.970 --> 04:27.530
+So let's say I'm creating a branch called bug fix and some number here 901.
+
+04:27.930 --> 04:29.330
+And I say create branch.
+
+04:30.010 --> 04:32.570
+New branch is created from the main branch.
+
+04:32.570 --> 04:36.610
+Both the branch main branch and this branch has exactly same code.
+
+04:37.130 --> 04:44.290
+So we'll pull this branch also in our VS code in our local machine, make some changes in this bug fix
+
+04:44.290 --> 04:47.890
+branch and then will merge this branch to main branch.
+
+04:47.890 --> 04:53.610
+Or basically we're going to raise a pull request to merge our code to main branch.
+
+04:53.930 --> 04:55.810
+So I'm going to open the terminal over here.
+
+04:56.290 --> 04:58.010
+In the VSCode open terminal.
+
+04:58.370 --> 05:00.770
+And I'm switching to git bash.
+
+05:00.890 --> 05:07.650
+If you're using Mac OS or Linux you can stick to your terminal run the command git fetch origin.
+
+05:08.250 --> 05:10.330
+You see it has pulled a new branch.
+
+05:10.530 --> 05:12.290
+Now let's switch to that branch.
+
+05:12.330 --> 05:18.490
+Git checkout bug fix hyphen 901.
+
+05:19.490 --> 05:21.650
+Okay, switch to that branch you can see over here.
+
+05:21.650 --> 05:24.770
+Or you could have just clicked it and you could have selected the branch.
+
+05:25.250 --> 05:27.770
+Now let's make some changes in this branch.
+
+05:28.210 --> 05:30.450
+I'm going to basically remove these files.
+
+05:30.450 --> 05:35.210
+So Jenkins file I'm going to remove like delete.
+
+05:36.890 --> 05:44.770
+And also this vagrant folder I'm going to delete to open the Readme file make some changes over here
+
+05:44.770 --> 05:48.450
+I'm going to add some extra hash and make sure this is JDK 21.
+
+05:48.850 --> 05:50.810
+So basically I made some change.
+
+05:50.810 --> 05:52.690
+Now I'm going to commit this.
+
+05:52.690 --> 05:54.010
+I'm going to do it through command line.
+
+05:54.010 --> 05:58.850
+This time git add dot git commit hyphen em.
+
+06:00.250 --> 06:00.730
+I'm just saying.
+
+06:00.770 --> 06:02.530
+Fixed bug 901.
+
+06:03.170 --> 06:08.290
+And I'm going to say git push origin bug fix.
+
+06:10.490 --> 06:13.850
+Hyphen 901 as a mistake.
+
+06:13.850 --> 06:19.930
+Bug fix 901 okay, now let's go back to GitHub.
+
+06:20.650 --> 06:23.130
+So our bug fix branch is fast forwarded.
+
+06:23.130 --> 06:25.170
+It has moved ahead of the main branch.
+
+06:25.170 --> 06:26.490
+And let's say everything is fixed.
+
+06:26.490 --> 06:27.570
+Everything is working.
+
+06:27.970 --> 06:31.130
+And now we need to merge this code into the main branch.
+
+06:31.530 --> 06:35.090
+So main branches usually will be protected.
+
+06:35.570 --> 06:38.730
+And you cannot just directly merge it into the main branch.
+
+06:38.730 --> 06:40.650
+You need to raise a pull request.
+
+06:41.090 --> 06:43.850
+You already get an option over here compare and pull request.
+
+06:43.850 --> 06:45.330
+But let's go to pull request.
+
+06:45.690 --> 06:47.250
+Let's say new pull request.
+
+06:47.490 --> 06:50.420
+So let's select here the bug fix branch.
+
+06:52.180 --> 06:54.620
+So this changes will be merged to the main branch.
+
+06:54.620 --> 06:57.900
+It will show you what all the changes are being merged.
+
+06:58.420 --> 06:58.740
+Sure.
+
+06:58.780 --> 06:59.020
+Okay.
+
+06:59.020 --> 07:01.220
+You can say create pull request.
+
+07:02.180 --> 07:05.740
+So let's give some description some description.
+
+07:06.220 --> 07:09.620
+Scroll down and click on create pull request.
+
+07:10.140 --> 07:15.540
+So once you reach the pull request you see over here itself the pipeline has triggered, the workflow
+
+07:15.580 --> 07:16.340
+has triggered.
+
+07:16.860 --> 07:17.740
+And click on this.
+
+07:18.340 --> 07:18.660
+Yeah.
+
+07:18.700 --> 07:25.580
+Or you could have just click on the on the actions and you can see the workflow got triggered.
+
+07:26.020 --> 07:30.060
+So that's what the pull request trigger means.
+
+07:30.500 --> 07:33.660
+So when we mention pull request branches and the name of the branch.
+
+07:33.660 --> 07:36.460
+So now the pull request was raised for the main branch.
+
+07:36.780 --> 07:38.860
+That's why the workflow got triggered like that.
+
+07:38.860 --> 07:41.580
+You can add here different branches if it is required.
+
+07:41.580 --> 07:43.620
+But mostly it will be for main branch.
+
+07:44.020 --> 07:44.260
+Okay.
+
+07:44.260 --> 07:45.340
+Let's remove this.
+
+07:45.620 --> 07:47.220
+Remove these hashes.
+
+07:47.820 --> 07:49.340
+Let's keep this one also.
+
+07:50.540 --> 07:51.540
+Just make sure.
+
+07:51.580 --> 07:54.220
+Push and pull request are in the same column.
+
+07:54.980 --> 07:55.740
+Save it.
+
+07:56.340 --> 08:00.860
+Now let's take a look at some other simple workflow triggers.
+
+08:02.660 --> 08:06.340
+In the same column workflow underscore dispatch.
+
+08:06.780 --> 08:07.700
+It's pretty simple one.
+
+08:07.700 --> 08:13.380
+You know, if you want to run the workflow manually, maybe initially this is required for testing purpose.
+
+08:13.820 --> 08:19.380
+Or if it's not a CI CD workflow, if it's for something else running some commands or something and
+
+08:19.380 --> 08:24.300
+you want to run workflow manually, not for the commits, then you can use workflow underscore dispatch.
+
+08:24.300 --> 08:27.340
+That is enough and you will get an option to do that.
+
+08:27.340 --> 08:28.460
+We'll see that in a moment.
+
+08:29.060 --> 08:35.500
+Let's take a look at one another trigger that is schedule C schedule colon.
+
+08:35.500 --> 08:39.060
+And in this you can pass this parameter cron.
+
+08:39.500 --> 08:45.460
+If you want to give the schedule in the cron job format, let's say every night at 2 a.m. you want to
+
+08:45.740 --> 08:47.140
+run this workflow?
+
+08:47.540 --> 08:52.500
+So doesn't matter whether there's a push event, there's a pull request or anything at this time, this
+
+08:52.500 --> 08:53.940
+workflow will get executed.
+
+08:54.340 --> 08:55.940
+So the first one is for minute.
+
+08:55.940 --> 08:58.500
+It's normal cron job format in the Linux.
+
+08:58.860 --> 09:00.100
+First one is minute.
+
+09:00.100 --> 09:04.340
+So let's say I want to do it at 210 or maybe in the afternoon.
+
+09:04.340 --> 09:05.500
+So I'll say 14.
+
+09:05.820 --> 09:08.020
+So 2:00 pm and ten minutes.
+
+09:08.180 --> 09:09.740
+This workflow will get triggered.
+
+09:09.980 --> 09:18.500
+The next one is day of the month like first, second, third till 31st star means every day, every
+
+09:18.540 --> 09:22.140
+date of the month, and the next one is the month.
+
+09:23.140 --> 09:23.460
+One.
+
+09:23.460 --> 09:29.420
+If you give, that means January 12th is December, star means all the month, and the last one is for
+
+09:29.420 --> 09:31.780
+the day of the week Sunday, Monday, Tuesday.
+
+09:32.220 --> 09:35.700
+So let's say if you want to do it from Monday to Friday.
+
+09:36.460 --> 09:40.940
+So zero is Sunday, one is Monday hyphen and five is Friday.
+
+09:40.940 --> 09:43.300
+So it's Monday to Friday like that.
+
+09:44.260 --> 09:44.460
+All right.
+
+09:44.500 --> 09:50.940
+So these are some commonly used triggers to run your GitHub actions workflow.
+
+09:50.980 --> 09:53.060
+These are common ones but there are many more.
+
+09:54.380 --> 09:58.340
+So for now save this commit it commit and push.
+
+09:58.340 --> 10:00.300
+This should trigger the workflow.
+
+10:01.780 --> 10:03.100
+Give some commit message.
+
+10:07.340 --> 10:11.860
+So if you see a workflow getting executed, just let it complete.
+
+10:12.020 --> 10:16.900
+We have the previous pull request that is pending after the pull request.
+
+10:17.460 --> 10:22.500
+The pipeline was triggered and completed successfully and now we can merge it.
+
+10:22.940 --> 10:26.820
+Merge pull request and say confirm merge.
+
+10:26.820 --> 10:29.380
+This is going to merge the code to the main branch.
+
+10:30.100 --> 10:33.420
+And you also get an option to delete this bug fix branch.
+
+10:33.420 --> 10:35.180
+So let's click on Delete branch.
+
+10:36.060 --> 10:38.140
+Let's take a look at the source code once again.
+
+10:38.820 --> 10:41.390
+So now you have just the main branch.
+
+10:41.430 --> 10:43.070
+Let's take a look at the workflows.
+
+10:44.430 --> 10:48.070
+So that's the code that we had in our bugfix branch.
+
+10:48.070 --> 10:49.750
+Now it's merged to the main branch.
+
+10:50.190 --> 10:52.910
+And the bugfix branch is also deleted from here.
+
+10:52.950 --> 10:55.990
+Now it's time to also delete it from our local machine.
+
+10:56.350 --> 10:58.030
+So open your VS code.
+
+10:58.030 --> 11:00.910
+First of all switch to the main branch.
+
+11:01.430 --> 11:03.110
+Then let's open the terminal.
+
+11:03.350 --> 11:04.070
+New terminal.
+
+11:04.470 --> 11:07.710
+Okay, here, for some reason it is still in the bugfix branch.
+
+11:07.710 --> 11:08.510
+I will need to.
+
+11:08.550 --> 11:10.270
+Yeah I am in the main branch.
+
+11:10.270 --> 11:13.990
+But anyways just do git checkout main to make sure you are in the main branch.
+
+11:14.670 --> 11:22.150
+Then run this command git branch hyphen d bugfix hyphen 901 or the branch name that you have given hit
+
+11:22.150 --> 11:22.630
+enter.
+
+11:22.910 --> 11:25.670
+If that does not work, use capital D.
+
+11:26.030 --> 11:34.350
+If you get any error, use capital D and then run the command git fetch hyphen f and prune run git branch
+
+11:35.110 --> 11:42.070
+hyphen a git Pull to pull any changes left in the main branch.
+
+11:42.630 --> 11:42.910
+Okay.
+
+11:42.950 --> 11:43.670
+Take a look.
+
+11:47.390 --> 11:50.350
+Git checkout main git branch hyphen d.
+
+11:50.910 --> 11:56.910
+If that doesn't work, then capital D to delete the branch git fetch hyphen hyphen prune git branch
+
+11:56.910 --> 11:57.550
+hyphen a.
+
+11:57.590 --> 12:03.150
+To list all the branches, you should see only main branch here git pull to pull all the latest changes
+
+12:03.150 --> 12:07.230
+from the main branch to your local machine main branch.
+
+12:07.870 --> 12:09.310
+All right, so that is all.
+
+12:09.310 --> 12:14.750
+In this lecture we have seen how to pass input to an action.
+
+12:14.750 --> 12:15.830
+By using width.
+
+12:16.110 --> 12:21.150
+We can look for the different parameters of an action in the documentation.
+
+12:21.670 --> 12:24.710
+Then we have seen triggers push to main branch.
+
+12:24.710 --> 12:25.750
+We already have seen.
+
+12:25.750 --> 12:33.350
+We have seen pull request workflow dispatch for manual trigger and schedule to run your workflow at
+
+12:33.350 --> 12:35.350
+a particular time or intervals.
+
+12:35.990 --> 12:37.350
+That would be all in this lecture.
+
+12:37.350 --> 12:38.550
+I will see you in the next one.

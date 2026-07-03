@@ -1,0 +1,775 @@
+WEBVTT
+
+00:01.350 --> 00:02.183
+Instructor: Okay, so that,
+
+00:02.183 --> 00:05.340
+is complete continuous integration pipeline.
+
+00:05.340 --> 00:07.020
+Actually it is not.
+
+00:07.020 --> 00:08.490
+I mean the pipeline configuration,
+
+00:08.490 --> 00:11.490
+everything is good, start till end.
+
+00:11.490 --> 00:15.000
+But what's missing is start and the end.
+
+00:15.000 --> 00:17.940
+The pipeline is triggering manually.
+
+00:17.940 --> 00:21.300
+We are clicking a button that triggers the pipeline.
+
+00:21.300 --> 00:23.670
+This pipeline should trigger automatically.
+
+00:23.670 --> 00:26.010
+When you make a commit to the repository,
+
+00:26.010 --> 00:27.960
+when the developer makes a commit to the repository,
+
+00:27.960 --> 00:31.110
+it should automatically trigger, we'll see that next.
+
+00:31.110 --> 00:33.660
+In this lecture, we're gonna talk about the end part,
+
+00:33.660 --> 00:36.120
+where we get the notifications.
+
+00:36.120 --> 00:37.950
+Anything that's passed or fail,
+
+00:37.950 --> 00:39.960
+we should get a notification.
+
+00:39.960 --> 00:43.050
+So Jenkins has varieties of plugin,
+
+00:43.050 --> 00:46.590
+by using that, you can send notification to various places.
+
+00:46.590 --> 00:51.590
+Let's come to Dashboard, Manage Jenkins, Plugins,
+
+00:51.750 --> 00:55.980
+Available plugins, and let's just search for notification.
+
+00:55.980 --> 00:58.290
+So you'll see a lot of plugins.
+
+00:58.290 --> 01:03.067
+DingTalk, Google Chat Notification, Webhooks,
+
+01:03.067 --> 01:06.783
+CloudBees Docker Registry, Slack Upload,
+
+01:08.430 --> 01:12.570
+Jabber, Amazon SNS, Skype,
+
+01:12.570 --> 01:15.630
+SMS Notifications, Zoom, and many other.
+
+01:15.630 --> 01:17.340
+We can just go on and on.
+
+01:17.340 --> 01:20.430
+In this lecture, we are going to use Slack.
+
+01:20.430 --> 01:22.200
+If you don't know Slack,
+
+01:22.200 --> 01:25.380
+then I really recommend you find out, start using it,
+
+01:25.380 --> 01:28.020
+because this is a very popular collaboration tool we use
+
+01:28.020 --> 01:29.640
+in the IT industry.
+
+01:29.640 --> 01:32.970
+It's like your usual chat plus, you know, you can send files
+
+01:32.970 --> 01:36.060
+and there are many other integration that comes with it.
+
+01:36.060 --> 01:38.250
+So let's install Slack Notification,
+
+01:38.250 --> 01:42.810
+find out the Slack plugin, put a check mark and say Install.
+
+01:42.810 --> 01:44.430
+We will create a Slack account
+
+01:44.430 --> 01:46.800
+and then we'll add its detail to Jenkins.
+
+01:46.800 --> 01:50.133
+So just search for Slack login,
+
+01:52.380 --> 01:55.500
+sign into Slack, Sign up,
+
+01:55.500 --> 01:57.543
+and I'm gonna say, Continue with Google.
+
+01:58.620 --> 01:59.730
+Okay, once you are logged in,
+
+01:59.730 --> 02:02.550
+you will get this option, Create a workspace.
+
+02:02.550 --> 02:04.530
+So I'll say Create a workspace.
+
+02:04.530 --> 02:07.620
+Workspace mostly represents the project name.
+
+02:07.620 --> 02:09.840
+What's the name of your company or team?
+
+02:09.840 --> 02:12.693
+So I'll say hkhinfotech.
+
+02:15.000 --> 02:16.233
+And I'll go Next.
+
+02:17.100 --> 02:19.260
+What's your name? Hkh admin it has taken.
+
+02:19.260 --> 02:21.150
+I'll say fine. Go Next.
+
+02:21.150 --> 02:22.680
+Okay, add your team.
+
+02:22.680 --> 02:25.293
+So you can give your team member's email ID,
+
+02:27.060 --> 02:29.820
+or you can just skip the step, Skip step.
+
+02:29.820 --> 02:32.160
+What's your team working on right now?
+
+02:32.160 --> 02:36.243
+Devopscicd, Next.
+
+02:38.250 --> 02:40.593
+Okay. Free subscription, of course.
+
+02:41.550 --> 02:44.580
+Okay, so here, this is your workspace name, hkhinfotech,
+
+02:44.580 --> 02:47.190
+like, my workspace name.
+
+02:47.190 --> 02:48.810
+And then this is the channel.
+
+02:48.810 --> 02:50.370
+We communicate over the channel.
+
+02:50.370 --> 02:52.530
+Now you can add colleagues in the channel
+
+02:52.530 --> 02:54.660
+and you can chat with each other.
+
+02:54.660 --> 02:55.560
+And there are many other things.
+
+02:55.560 --> 02:58.560
+I don't wanna get into Slack, into detail right now.
+
+02:58.560 --> 03:01.860
+What we're interested in is the workspace name
+
+03:01.860 --> 03:03.063
+and the channel name.
+
+03:04.560 --> 03:06.300
+Okay, now in order to integrate Jenkins
+
+03:06.300 --> 03:09.210
+with this Slack account, we need a token,
+
+03:09.210 --> 03:12.510
+and that we'll get through Jenkins app
+
+03:12.510 --> 03:13.680
+that we'll install in Slack.
+
+03:13.680 --> 03:17.910
+So just search for Slack apps.
+
+03:17.910 --> 03:21.750
+And you should get this add apps to Slack marketplace.
+
+03:21.750 --> 03:24.420
+Over here, search for Jenkins.
+
+03:24.420 --> 03:26.403
+And you should see here Jenkins CI,
+
+03:27.360 --> 03:29.103
+and say Add to Slack.
+
+03:30.630 --> 03:31.710
+Select a channel.
+
+03:31.710 --> 03:35.970
+So come on, come on. Okay, yeah, that one.
+
+03:35.970 --> 03:37.530
+So you can create any other channel
+
+03:37.530 --> 03:38.730
+or you can just select the channel
+
+03:38.730 --> 03:40.853
+that we created while we are setting up Slack.
+
+03:40.853 --> 03:43.890
+So I'll select this one, devopscicd.
+
+03:43.890 --> 03:46.353
+I'll say Add Jenkins CI integration.
+
+03:47.190 --> 03:48.780
+Okay, now it's going to show a lot of steps,
+
+03:48.780 --> 03:52.170
+but we are interested in this one, token.
+
+03:52.170 --> 03:55.023
+If you scroll down, you can see that over here also,
+
+03:56.070 --> 04:00.030
+let's copy the token, and say Save settings.
+
+04:00.030 --> 04:02.880
+Okay, temporarily, I'm storing the token
+
+04:02.880 --> 04:04.620
+over here in a sticky note.
+
+04:04.620 --> 04:08.340
+And let me go back to Slack app,
+
+04:08.340 --> 04:10.650
+click on, I'll refresh this first.
+
+04:10.650 --> 04:13.620
+Click over here on this dropdown and click on this one.
+
+04:13.620 --> 04:17.370
+And this is your workspace name.
+
+04:17.370 --> 04:18.480
+I mean this is workspace name,
+
+04:18.480 --> 04:20.310
+but this is what we need to add in the Jenkins.
+
+04:20.310 --> 04:25.080
+So copy this one. Go to Manage Jenkins.
+
+04:25.080 --> 04:27.810
+Go to System, search for Slack.
+
+04:27.810 --> 04:30.240
+It will be mostly at the end side.
+
+04:30.240 --> 04:33.960
+So in the Workspace, paste this one, the one
+
+04:33.960 --> 04:36.030
+that we got from this URL, just this part,
+
+04:36.030 --> 04:38.580
+not the .slack.com.
+
+04:38.580 --> 04:41.343
+So mine is hkhinfotechworkspace.
+
+04:42.180 --> 04:44.070
+And token, we need to store the token.
+
+04:44.070 --> 04:47.370
+So let's say Add, Jenkins,
+
+04:47.370 --> 04:49.593
+and it will be Secret text.
+
+04:51.330 --> 04:54.990
+So I saved it in the sticky note. I'm going to use that one.
+
+04:54.990 --> 04:56.340
+Issued there.
+
+04:56.340 --> 05:00.420
+And let's give an ID and description,
+
+05:00.420 --> 05:03.130
+slacktoken, slacktoken, and say Add.
+
+05:03.130 --> 05:05.223
+Okay, channel name.
+
+05:06.810 --> 05:10.567
+So that is the channel that I'm going to use, devopscicd.
+
+05:10.567 --> 05:13.530
+#devopscicd, that's the channel name.
+
+05:13.530 --> 05:16.773
+And let's test the connection. Click on Test Connection.
+
+05:17.880 --> 05:19.230
+Okay, it says there's no credential,
+
+05:19.230 --> 05:21.930
+because I've not selected it, slacktoken.
+
+05:21.930 --> 05:24.870
+Let me select the credential and make the test again.
+
+05:24.870 --> 05:26.940
+Okay, it says it's success.
+
+05:26.940 --> 05:29.310
+Okay, now come to the pipeline code.
+
+05:29.310 --> 05:31.800
+Now, notification is not an extra stage.
+
+05:31.800 --> 05:36.210
+It's the post installation step of your pipeline.
+
+05:36.210 --> 05:39.480
+So that last curly braces, that's where our pipeline ends.
+
+05:39.480 --> 05:42.660
+And this is the curly brace for stages. See that?
+
+05:42.660 --> 05:45.393
+So it's going to be outside of all the stages,
+
+05:47.160 --> 05:50.040
+because we are setting notification for the entire pipeline.
+
+05:50.040 --> 05:52.170
+And over here I'm going to put a code
+
+05:52.170 --> 05:54.840
+that I'm going to explain you in a moment.
+
+05:54.840 --> 05:58.230
+Okay, post stage, like post installation step like that,
+
+05:58.230 --> 06:01.620
+post, open brace, curly brace, close curly brace.
+
+06:01.620 --> 06:04.440
+And in that, I have a always block.
+
+06:04.440 --> 06:06.960
+This will always get executed.
+
+06:06.960 --> 06:10.380
+So first is a message, echo 'Slack Notification,'
+
+06:10.380 --> 06:11.880
+just to print message.
+
+06:11.880 --> 06:16.590
+And then there is the plugin slackSend, S, capital there.
+
+06:16.590 --> 06:18.780
+And we're passing three values over here.
+
+06:18.780 --> 06:22.260
+One is channel, one is color, and one is the message.
+
+06:22.260 --> 06:25.830
+So channel is the devopscicd channel
+
+06:25.830 --> 06:27.810
+that we created in the Slack app.
+
+06:27.810 --> 06:30.210
+It's the same one that I have given.
+
+06:30.210 --> 06:33.480
+Color, so there is this COLOR_MAP function
+
+06:33.480 --> 06:35.100
+that we have to define.
+
+06:35.100 --> 06:39.750
+So basically you need to pass here, good or danger.
+
+06:39.750 --> 06:41.310
+There are a few other things.
+
+06:41.310 --> 06:45.720
+So good is green color and danger is red color,
+
+06:45.720 --> 06:47.880
+but that it should take automatically based
+
+06:47.880 --> 06:49.430
+on whether it's passed or fail.
+
+06:50.370 --> 06:54.360
+I'll show that you in the moment. Then we have message.
+
+06:54.360 --> 06:56.070
+Message. You can construct anything.
+
+06:56.070 --> 06:59.456
+We have given here, currentBuild.currentResult,
+
+06:59.456 --> 07:01.050
+and that will give success or failure.
+
+07:01.050 --> 07:03.840
+And the job name here.
+
+07:03.840 --> 07:06.090
+So print the text, Job, and the JOB_NAME,
+
+07:06.090 --> 07:08.310
+build, and the BUILD_NUMBER.
+
+07:08.310 --> 07:09.593
+So you can construct it, whatever you want.
+
+07:09.593 --> 07:13.230
+You can put whatever variables you like.
+
+07:13.230 --> 07:15.360
+Let's come to this COLOR_MAP.
+
+07:15.360 --> 07:20.360
+Scroll up, just before the pipeline you will start.
+
+07:20.580 --> 07:22.263
+I'm putting a function over here.
+
+07:24.540 --> 07:26.610
+So def, that means a function
+
+07:26.610 --> 07:29.460
+starts with this name, COLOR_MAP,
+
+07:29.460 --> 07:33.570
+and it is going to return good if you pass success,
+
+07:33.570 --> 07:37.110
+it's going to return danger if you pass failure.
+
+07:37.110 --> 07:39.603
+So what happens is, let's come down again here,
+
+07:40.830 --> 07:43.170
+currentBuild.currentResult, this is going
+
+07:43.170 --> 07:45.420
+to return success or failure.
+
+07:45.420 --> 07:47.640
+This will be passed to this function,
+
+07:47.640 --> 07:50.790
+and it is going to return the value based on it.
+
+07:50.790 --> 07:52.230
+So if you pass success here,
+
+07:52.230 --> 07:53.610
+you're going to get in return, good.
+
+07:53.610 --> 07:54.870
+If you're going to pass failure,
+
+07:54.870 --> 07:56.670
+it's going to return danger.
+
+07:56.670 --> 08:00.900
+Now, if you pass good or danger, right, come here.
+
+08:00.900 --> 08:03.180
+So this will be replaced by either good
+
+08:03.180 --> 08:06.570
+or danger based on the job status.
+
+08:06.570 --> 08:08.430
+So if it's written as good,
+
+08:08.430 --> 08:11.550
+then in the Slack you will see the green color.
+
+08:11.550 --> 08:14.310
+If you pass danger, it's going to show the red color.
+
+08:14.310 --> 08:16.140
+That means the job failed.
+
+08:16.140 --> 08:18.660
+And keep everything as it is.
+
+08:18.660 --> 08:21.240
+You can download this pipeline code
+
+08:21.240 --> 08:22.653
+from the lecture resource.
+
+08:23.580 --> 08:25.860
+Okay, let me save this Jenkins, sorry,
+
+08:25.860 --> 08:27.483
+the Slack details over here.
+
+08:28.710 --> 08:30.870
+I'll create a new item.
+
+08:30.870 --> 08:33.270
+Oh, you know what? Let me go back.
+
+08:33.270 --> 08:37.683
+Let's access Vprofile-CI-Pipeline, Configure.
+
+08:38.880 --> 08:40.260
+In the same one, I'm going
+
+08:40.260 --> 08:42.933
+to replace this whole thing with our new code.
+
+08:44.100 --> 08:47.050
+Make sure the channel name is correct, that you have given.
+
+08:48.930 --> 08:50.883
+Save it and let's test it.
+
+08:52.380 --> 08:55.350
+So you need to be over here in the Slack app
+
+08:55.350 --> 08:57.030
+in your channel.
+
+08:57.030 --> 08:59.280
+We already see one message here, by the way,
+
+08:59.280 --> 09:01.110
+well, that's because we made a test.
+
+09:01.110 --> 09:03.360
+You see that? It's coming over here.
+
+09:03.360 --> 09:05.640
+Now let's wait until the pipeline completes.
+
+09:05.640 --> 09:08.310
+And if the pipeline completes successfully, we're going
+
+09:08.310 --> 09:11.220
+to get this green color over there with the details,
+
+09:11.220 --> 09:13.260
+the message that we have sent.
+
+09:13.260 --> 09:15.603
+So let's wait until the pipeline completes.
+
+09:16.950 --> 09:20.190
+Okay, the pipeline completed successfully, right?
+
+09:20.190 --> 09:23.040
+And you see one more stage here. This is the post action.
+
+09:23.040 --> 09:25.740
+Let's see whether it has sent the notification or not.
+
+09:28.230 --> 09:31.803
+Okay. Let me check the console output.
+
+09:34.440 --> 09:36.780
+Okay, that failed. I think I know the reason.
+
+09:36.780 --> 09:38.910
+This devopscicd.
+
+09:38.910 --> 09:41.370
+There's an extra S over here in the channel name.
+
+09:41.370 --> 09:42.333
+Let's fix that.
+
+09:43.620 --> 09:45.060
+Configure.
+
+09:45.060 --> 09:48.180
+Okay, it's just devopscicd. There was an extra S.
+
+09:48.180 --> 09:50.853
+Let's save this and let's run it once again.
+
+09:52.350 --> 09:55.890
+Okay, let's check now. Post actions.
+
+09:55.890 --> 09:57.420
+Now let me directly go to the channel.
+
+09:57.420 --> 10:00.720
+And oh yeah, there see? A success.
+
+10:00.720 --> 10:02.790
+And that green color you see?
+
+10:02.790 --> 10:04.530
+All right, it has also sent the URL,
+
+10:04.530 --> 10:06.690
+so we can check the logs from here.
+
+10:06.690 --> 10:09.303
+Now, let's somehow try to fail this job.
+
+10:10.440 --> 10:11.610
+You know, somewhere in the beginning,
+
+10:11.610 --> 10:14.040
+I'll put a stage which will fail this.
+
+10:14.040 --> 10:18.090
+I'll put something fake here, stage.
+
+10:18.090 --> 10:19.473
+I'd have to give the name.
+
+10:24.900 --> 10:27.240
+Again, stage, just test slack.
+
+10:27.240 --> 10:31.230
+And here I will put, how to put steps, right,
+
+10:31.230 --> 10:35.520
+steps, open close curly brace, and I'll say sh.
+
+10:35.520 --> 10:38.740
+And I'll give a command, NotARealCommand,
+
+10:44.160 --> 10:45.270
+just giving some text.
+
+10:45.270 --> 10:46.680
+It's going to execute this on the shell.
+
+10:46.680 --> 10:48.720
+And you know, if we execute on the shell,
+
+10:48.720 --> 10:50.010
+it's going to say command not found.
+
+10:50.010 --> 10:51.150
+It's going to fail.
+
+10:51.150 --> 10:54.033
+When it fails, it should send a fail notification.
+
+10:55.590 --> 10:57.243
+Okay? So let's copy this.
+
+10:58.410 --> 11:00.030
+And you know what? I'll keep this as it is.
+
+11:00.030 --> 11:03.750
+I'm going to create a new pipeline. So New Item.
+
+11:03.750 --> 11:07.020
+I'll call it a slackTest, Pipeline, OK.
+
+11:07.020 --> 11:09.420
+Over here I'm going to paste this entire code,
+
+11:09.420 --> 11:12.153
+save it, and let's run it.
+
+11:13.500 --> 11:15.543
+Okay, so that failed obviously.
+
+11:18.480 --> 11:21.630
+And you see in the color, it says danger here.
+
+11:21.630 --> 11:22.860
+Let's go and check.
+
+11:22.860 --> 11:26.250
+Okay, there, see that? Failure, red color.
+
+11:26.250 --> 11:28.230
+So that's how the Slack Notification work.
+
+11:28.230 --> 11:29.910
+There are many other kinds of notification
+
+11:29.910 --> 11:31.770
+that you can set in Jenkins based
+
+11:31.770 --> 11:34.470
+on what you're using in your organization.
+
+11:34.470 --> 11:38.670
+There are some even paid plugins in Jenkins
+
+11:38.670 --> 11:40.440
+for collaboration.
+
+11:40.440 --> 11:41.550
+Anyways, you get an idea.
+
+11:41.550 --> 11:44.010
+In most of the chats, they will be using Slack
+
+11:44.010 --> 11:49.010
+and you can do the Slack integration very easily now, right?
+
+11:49.230 --> 11:50.063
+So, so far,
+
+11:50.063 --> 11:52.740
+we have tested all this continuous integration pipeline.
+
+11:52.740 --> 11:55.650
+We have included notifications also.
+
+11:55.650 --> 11:56.970
+Now we're going to switch our gears
+
+11:56.970 --> 11:59.520
+and we're going to move to the containerization part.
+
+11:59.520 --> 12:02.310
+We not only just want to publish the artifact,
+
+12:02.310 --> 12:04.500
+but we want to publish the Docker images
+
+12:04.500 --> 12:07.560
+with the artifact in them, and how all that is done,
+
+12:07.560 --> 12:09.780
+that we will see from the next lectures.
+
+12:09.780 --> 12:12.093
+So wrap this up and join me in the next one.

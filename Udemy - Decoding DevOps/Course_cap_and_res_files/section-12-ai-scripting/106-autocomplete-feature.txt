@@ -1,0 +1,460 @@
+WEBVTT
+
+00:00.150 --> 00:01.530
+Instructor: Hello, and welcome.
+
+00:01.530 --> 00:02.363
+In this lecture,
+
+00:02.363 --> 00:05.250
+we are going to see how to leverage AI
+
+00:05.250 --> 00:06.870
+in writing our scripts,
+
+00:06.870 --> 00:11.190
+and we are also going to learn new concepts in Bash scripts
+
+00:11.190 --> 00:13.140
+through GitHub Copilot.
+
+00:13.140 --> 00:14.490
+So from the previous lecture,
+
+00:14.490 --> 00:17.610
+you should already have these virtual machines running.
+
+00:17.610 --> 00:18.900
+When we write our Bash scripts
+
+00:18.900 --> 00:22.440
+or when we develop our Bash scripts by using GitHub Copilot,
+
+00:22.440 --> 00:24.810
+if you intend to test it,
+
+00:24.810 --> 00:26.250
+then you can use these VMs.
+
+00:26.250 --> 00:28.440
+I'm going to show you how we can place the scripts
+
+00:28.440 --> 00:32.280
+into the sync folder and then use it in the virtual machine.
+
+00:32.280 --> 00:35.010
+So my virtual machine is in this folder,
+
+00:35.010 --> 00:38.010
+or my virtual machines are in this folder.
+
+00:38.010 --> 00:40.830
+So I'm going to download scripts file,
+
+00:40.830 --> 00:43.170
+scripts ZIP file, from the lecture resource,
+
+00:43.170 --> 00:45.180
+and place it in this folder.
+
+00:45.180 --> 00:48.480
+So in the first lecture of Bash scripting section,
+
+00:48.480 --> 00:50.793
+in the resources, download the ZIP file.
+
+00:52.080 --> 00:53.490
+When you extract the ZIP file,
+
+00:53.490 --> 00:55.530
+you should find a folder called scripts.
+
+00:55.530 --> 00:56.790
+You have all the scripts
+
+00:56.790 --> 01:00.180
+that we have developed in this section.
+
+01:00.180 --> 01:01.976
+So copy these scripts,
+
+01:01.976 --> 01:03.880
+Better, copy this folder
+
+01:05.010 --> 01:07.380
+and place it into the Bash scripting lecture
+
+01:07.380 --> 01:10.380
+in the right folder based on your VMs.
+
+01:10.380 --> 01:12.192
+So mine is in this Windows folder,
+
+01:12.192 --> 01:14.700
+so I'm going to place it over here.
+
+01:14.700 --> 01:18.780
+Now I'm going to open this folder from VS Code.
+
+01:18.780 --> 01:21.630
+So open VS Code, click on Open Folder,
+
+01:21.630 --> 01:24.900
+go to the folder where you have your VMs,
+
+01:24.900 --> 01:26.073
+and say Select Folder.
+
+01:27.750 --> 01:30.150
+So it should appear over there in the scripts folder.
+
+01:30.150 --> 01:32.560
+I'm going to reboot all my machine
+
+01:33.780 --> 01:36.510
+'cause they're running from some long time.
+
+01:36.510 --> 01:39.510
+And by the time this happens, the machine gets reloaded.
+
+01:39.510 --> 01:41.100
+Let's go back to our VS Code,
+
+01:41.100 --> 01:44.073
+and let's look at the scripts folder.
+
+01:44.970 --> 01:47.013
+So you will get here all the scripts
+
+01:47.013 --> 01:48.046
+that you have written in this section.
+
+01:48.046 --> 01:52.860
+In VS Code, you should also have GitHub Copilot by now.
+
+01:52.860 --> 01:54.480
+If you do not have it, install it.
+
+01:54.480 --> 01:56.250
+GitHub Copilot, go to EXTENSIONS,
+
+01:56.250 --> 01:58.380
+search for GitHub Copilot.
+
+01:58.380 --> 02:00.720
+If it's not installed, install it,
+
+02:00.720 --> 02:03.660
+and search for another extension called Bash.
+
+02:03.660 --> 02:05.700
+You should find this Bash IDE.
+
+02:05.700 --> 02:07.893
+Click on that and install this.
+
+02:09.570 --> 02:11.523
+Okay, so all our data is ready.
+
+02:12.390 --> 02:14.700
+Let's take a look at our scripts.
+
+02:14.700 --> 02:18.390
+So open the first script, first script.sh.
+
+02:18.390 --> 02:20.490
+Pretty simple script now, right?
+
+02:20.490 --> 02:24.420
+So the script prints the message and executes the command.
+
+02:24.420 --> 02:26.100
+So we have here uptime.
+
+02:26.100 --> 02:27.150
+We have free -m.
+
+02:27.150 --> 02:29.678
+We have the Disk Utilization, df -h.
+
+02:29.678 --> 02:33.123
+I'm going to go to the last line and simply hit Enter.
+
+02:34.680 --> 02:38.010
+And you see it started giving me suggestion.
+
+02:38.010 --> 02:39.330
+That's GitHub Copilot.
+
+02:39.330 --> 02:41.640
+I'm going to use Tab to finish that
+
+02:41.640 --> 02:44.790
+and go and hit next Enter.
+
+02:44.790 --> 02:46.890
+That's CPU Utilization already over there.
+
+02:46.890 --> 02:49.140
+So Tab to auto-complete.
+
+02:49.140 --> 02:52.230
+So you see that, just giving suggestions.
+
+02:52.230 --> 02:55.590
+I'm going to hit Enter and Tab again and hit Enter
+
+02:55.590 --> 02:58.890
+and Tab again and hit Enter and Tab again.
+
+02:58.890 --> 03:01.530
+Now I have the whole new section, right, CPU Utilization.
+
+03:01.530 --> 03:03.090
+It also suggested the command.
+
+03:03.090 --> 03:05.760
+And if you see the echo message,
+
+03:05.760 --> 03:08.310
+it says the same number of hashes.
+
+03:08.310 --> 03:10.380
+So what that tells you?
+
+03:10.380 --> 03:13.350
+The AI is also learning from you, right?
+
+03:13.350 --> 03:15.930
+Or you can say it has taken this script as a context
+
+03:15.930 --> 03:17.940
+and suggesting you next things.
+
+03:17.940 --> 03:19.050
+So let's keep doing that.
+
+03:19.050 --> 03:22.260
+Let's hit Enter there and say Tab.
+
+03:22.260 --> 03:23.280
+Hit Enter, Tab.
+
+03:23.280 --> 03:24.113
+You see that?
+
+03:24.113 --> 03:26.130
+Now System Information next one.
+
+03:26.130 --> 03:28.140
+And if you keep doing that,
+
+03:28.140 --> 03:30.480
+you see it gives the command also uname -a.
+
+03:30.480 --> 03:32.940
+Again, a core message, Network Information.
+
+03:32.940 --> 03:35.790
+Nice, okay. See that?
+
+03:35.790 --> 03:38.820
+How simple it is to write the code now.
+
+03:38.820 --> 03:42.600
+So if you have some structure ready in your script,
+
+03:42.600 --> 03:44.940
+and then it kind of, you know, read your mind,
+
+03:44.940 --> 03:48.930
+Not actually, there's no magic happening here, right?
+
+03:48.930 --> 03:52.980
+But you see these are the superpowers of the AI tools
+
+03:52.980 --> 03:57.420
+or one of the superpower, which we can leverage.
+
+03:57.420 --> 03:58.620
+So keep doing that.
+
+03:58.620 --> 04:01.530
+And you'll find sometimes it's repeating something
+
+04:01.530 --> 04:02.910
+that it has already done.
+
+04:02.910 --> 04:03.743
+Like, for example,
+
+04:03.743 --> 04:07.020
+it can repeat the System Information command.
+
+04:07.020 --> 04:09.300
+It may or may not, right?
+
+04:09.300 --> 04:11.760
+And you can also learn commands that is suggesting.
+
+04:11.760 --> 04:12.593
+Take a look at it.
+
+04:12.593 --> 04:16.620
+CPU utilization, how to find it, top -b -nl | grep
+
+04:16.620 --> 04:18.780
+from that the Cpu(s) section.
+
+04:18.780 --> 04:21.930
+And there it'll display the CPU Utilization.
+
+04:21.930 --> 04:24.813
+So I'm going to fill few more lines over here.
+
+04:27.390 --> 04:29.140
+Oops, in the next line, okay, fine.
+
+04:34.570 --> 04:36.960
+Okay, I think I'm done here.
+
+04:36.960 --> 04:39.240
+Yeah, but I recommend you check the commands
+
+04:39.240 --> 04:41.370
+that it is suggesting, like for example,
+
+04:41.370 --> 04:43.080
+list all the running processes,
+
+04:43.080 --> 04:44.730
+ps aux and sorting
+
+04:44.730 --> 04:47.520
+and it's, you know, getting the first 10 lines out of it.
+
+04:47.520 --> 04:49.740
+List of open files, right?
+
+04:49.740 --> 04:52.233
+All the system services that are running.
+
+04:53.400 --> 04:55.890
+So interesting, so, you know, you are learning from AI.
+
+04:55.890 --> 04:58.080
+The AI is learning from you.
+
+04:58.080 --> 04:58.913
+It's pretty nice,
+
+04:58.913 --> 05:01.920
+but always review your code before you run.
+
+05:01.920 --> 05:05.610
+Or you know, even the AI can review the code for you.
+
+05:05.610 --> 05:06.443
+How?
+
+05:06.443 --> 05:08.730
+Well, let's select all the lines.
+
+05:08.730 --> 05:09.990
+Now let's see where is the suggestion?
+
+05:09.990 --> 05:11.160
+Yeah, here.
+
+05:11.160 --> 05:13.200
+Let's click on this symbol,
+
+05:13.200 --> 05:16.050
+and here, you can click on Review using Copilot.
+
+05:16.050 --> 05:17.160
+Hit Enter.
+
+05:17.160 --> 05:18.260
+I'll just click on it.
+
+05:20.250 --> 05:21.840
+Okay, the first thing that it found
+
+05:21.840 --> 05:23.880
+was, you know, there is a spelling mistake,
+
+05:23.880 --> 05:25.080
+a typographical mistake.
+
+05:25.080 --> 05:25.913
+So it's saying, you know,
+
+05:25.913 --> 05:27.330
+"Instead of this, you should write this."
+
+05:27.330 --> 05:30.690
+Okay, you can apply and go to the next suggestion.
+
+05:30.690 --> 05:31.523
+Click on that.
+
+05:32.610 --> 05:35.160
+And then it is suggesting, instead of this command,
+
+05:35.160 --> 05:36.810
+you better use this command,
+
+05:36.810 --> 05:40.230
+and yeah, the Copilot has suggested this command.
+
+05:40.230 --> 05:42.450
+And again, it is saying that this can be better.
+
+05:42.450 --> 05:46.560
+So it's the AI tool, the Copilot itself suggesting itself.
+
+05:46.560 --> 05:47.913
+Well, did I say it right?
+
+05:48.750 --> 05:51.060
+Or anyways, you got the point, right?
+
+05:51.060 --> 05:52.863
+So let's Apply and go to next.
+
+05:54.210 --> 05:55.770
+Okay, saying instead of ifconfig,
+
+05:55.770 --> 05:58.053
+consider using ip -a, fine.
+
+05:59.250 --> 06:01.207
+Right, and you see there, it's saying,
+
+06:01.207 --> 06:02.490
+"Instead of ps aux,
+
+06:02.490 --> 06:04.380
+you better write this code,"
+
+06:04.380 --> 06:06.843
+and let's apply that also.
+
+06:07.800 --> 06:09.330
+Okay, and maybe I'm done with this.
+
+06:09.330 --> 06:13.293
+I'm going to say, wait, this one, discard, and just discard.
+
+06:14.400 --> 06:15.870
+Okay, so I've taken some suggestions,
+
+06:15.870 --> 06:17.130
+some I have not taken,
+
+06:17.130 --> 06:18.828
+depends on what I need.
+
+06:19.756 --> 06:22.863
+But you know, this is a very good way to learn from AI.

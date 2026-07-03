@@ -1,0 +1,1270 @@
+WEBVTT
+
+1
+00:00:00.390 --> 00:00:01.830
+<v Instructor>Okay, so let's start writing</v>
+
+2
+00:00:01.830 --> 00:00:05.370
+our pipeline script to do code analysis.
+
+3
+00:00:05.370 --> 00:00:08.490
+But before we write a complete code analysis pipeline,
+
+4
+00:00:08.490 --> 00:00:10.350
+I want to show you a few things.
+
+5
+00:00:10.350 --> 00:00:12.780
+For that purpose, open the pipeline script
+
+6
+00:00:12.780 --> 00:00:13.950
+that we used earlier.
+
+7
+00:00:13.950 --> 00:00:16.470
+I have opened it in Sublime Text editor.
+
+8
+00:00:16.470 --> 00:00:19.260
+You can use editor of your own choice.
+
+9
+00:00:19.260 --> 00:00:21.900
+First thing, just move this unit test.
+
+10
+00:00:21.900 --> 00:00:24.270
+This is opening, this is closing.
+
+11
+00:00:24.270 --> 00:00:25.143
+Copy this.
+
+12
+00:00:27.060 --> 00:00:28.380
+Cut it, just remove it.
+
+13
+00:00:28.380 --> 00:00:30.783
+And this starts here, ends here.
+
+14
+00:00:33.540 --> 00:00:37.350
+So move the unit test stage after the build
+
+15
+00:00:37.350 --> 00:00:40.059
+and one more time copy it.
+
+16
+00:00:40.059 --> 00:00:43.230
+In this stage we are going to do checkstyle code analysis.
+
+17
+00:00:43.230 --> 00:00:44.700
+So remove this name "Unit Test"
+
+18
+00:00:44.700 --> 00:00:48.180
+and write here "Checkstyle Analysis".
+
+19
+00:00:48.180 --> 00:00:51.840
+And over here, now checkstyle we can run through Maven
+
+20
+00:00:51.840 --> 00:00:56.733
+by giving this option checkstyle:checkstyle.
+
+21
+00:00:58.203 --> 00:00:59.550
+Now when you run this,
+
+22
+00:00:59.550 --> 00:01:02.490
+Maven is going to download the checkstyle tools
+
+23
+00:01:02.490 --> 00:01:05.400
+or its binaries and do code analysis with that.
+
+24
+00:01:05.400 --> 00:01:08.490
+So Maven will be doing checkstyle code analysis.
+
+25
+00:01:08.490 --> 00:01:10.050
+Let's test this one first.
+
+26
+00:01:10.050 --> 00:01:13.380
+So copy all this content, go to Jenkins dashboard
+
+27
+00:01:13.380 --> 00:01:18.357
+or create a new job, new item and just say "Checkstyle."
+
+28
+00:01:19.380 --> 00:01:22.710
+Click on pipeline and say, Okay,
+
+29
+00:01:22.710 --> 00:01:26.043
+scroll down and just paste your pipeline script over here.
+
+30
+00:01:27.060 --> 00:01:30.450
+Save it and see, build now.
+
+31
+00:01:30.450 --> 00:01:31.840
+Let's click on stages
+
+32
+00:01:33.780 --> 00:01:36.060
+and let's see here.
+
+33
+00:01:36.060 --> 00:01:38.643
+Show stage names, show stage duration,
+
+34
+00:01:39.780 --> 00:01:41.760
+wait for it to complete.
+
+35
+00:01:41.760 --> 00:01:44.160
+Okay, let's click on this checkstyle.
+
+36
+00:01:44.160 --> 00:01:46.170
+It says success, it's completed.
+
+37
+00:01:46.170 --> 00:01:50.880
+It says there are 641 errors reported by checkstyle 9.3.
+
+38
+00:01:50.880 --> 00:01:54.360
+You see there are some binaries that it is downloading.
+
+39
+00:01:54.360 --> 00:01:57.540
+So these are the dependencies for Maven
+
+40
+00:01:57.540 --> 00:01:59.883
+to execute checkstyle code analysis.
+
+41
+00:02:01.020 --> 00:02:03.270
+Now what I want to show you here is,
+
+42
+00:02:03.270 --> 00:02:05.070
+let's go back to this checkstyle,
+
+43
+00:02:05.070 --> 00:02:09.690
+go to this first job and go to workspaces.
+
+44
+00:02:09.690 --> 00:02:10.713
+Click on this path.
+
+45
+00:02:11.820 --> 00:02:13.950
+Here you should see the target folder.
+
+46
+00:02:13.950 --> 00:02:15.090
+In the target folder,
+
+47
+00:02:15.090 --> 00:02:19.140
+you should see here, checkstyle-result.XML.
+
+48
+00:02:19.140 --> 00:02:22.110
+This file. Click on view.
+
+49
+00:02:22.110 --> 00:02:24.540
+And that's a beautiful view, isn't it?
+
+50
+00:02:24.540 --> 00:02:25.680
+I mean, you can read everything.
+
+51
+00:02:25.680 --> 00:02:28.650
+You can understand everything, right? Just go through it.
+
+52
+00:02:28.650 --> 00:02:32.610
+Only if you are a superhuman. Which, I guess, you're not.
+
+53
+00:02:32.610 --> 00:02:36.630
+So my point here is you need some kind of dashboard,
+
+54
+00:02:36.630 --> 00:02:40.020
+which can read this and show you the analysis
+
+55
+00:02:40.020 --> 00:02:42.330
+that how many errors are there,
+
+56
+00:02:42.330 --> 00:02:44.580
+what are the problems, how we can fix it.
+
+57
+00:02:44.580 --> 00:02:48.210
+And this is where SonarCube server dashboard comes in handy.
+
+58
+00:02:48.210 --> 00:02:50.490
+So checkstyle is just one code analysis tool.
+
+59
+00:02:50.490 --> 00:02:52.230
+There are many code analysis tool like that,
+
+60
+00:02:52.230 --> 00:02:54.960
+you can do scanning of your code
+
+61
+00:02:54.960 --> 00:02:57.580
+and push all this result to SonarCube server
+
+62
+00:02:58.748 --> 00:03:01.680
+and SonarCube server will do the analysis,
+
+63
+00:03:01.680 --> 00:03:05.130
+show you the details more in a human readable format.
+
+64
+00:03:05.130 --> 00:03:08.310
+So how do we push all this result to SonarCube server?
+
+65
+00:03:08.310 --> 00:03:10.500
+Let's Google it.
+
+66
+00:03:10.500 --> 00:03:12.870
+So one thing is for sure that we want to do it
+
+67
+00:03:12.870 --> 00:03:14.610
+through pipeline script.
+
+68
+00:03:14.610 --> 00:03:18.540
+So I've just searched sonar scanner pipeline script.
+
+69
+00:03:18.540 --> 00:03:20.310
+There are sonar documentation.
+
+70
+00:03:20.310 --> 00:03:22.320
+I will go there in a moment.
+
+71
+00:03:22.320 --> 00:03:25.920
+But let's see what the AI says, Gemini.
+
+72
+00:03:25.920 --> 00:03:27.433
+So if you take a look here,
+
+73
+00:03:27.433 --> 00:03:30.982
+it says stage SonarCube analysis, the steps are,
+
+74
+00:03:30.982 --> 00:03:34.590
+sonar withSonarCube environment.
+
+75
+00:03:34.590 --> 00:03:37.740
+This is where your SonarCube plugin is coming in handy.
+
+76
+00:03:37.740 --> 00:03:39.990
+You mentioned the SonarCube server.
+
+77
+00:03:39.990 --> 00:03:41.460
+Now we added the SonarCube server
+
+78
+00:03:41.460 --> 00:03:42.293
+information in Jenkins, right?
+
+79
+00:03:42.293 --> 00:03:46.200
+So this is the same name, you have to keep over here.
+
+80
+00:03:46.200 --> 00:03:47.820
+And script.
+
+81
+00:03:47.820 --> 00:03:49.590
+So you mentioned the tool,
+
+82
+00:03:49.590 --> 00:03:52.500
+again, the tool that we added in Jenkins,
+
+83
+00:03:52.500 --> 00:03:54.690
+and then you mentioned the commands.
+
+84
+00:03:54.690 --> 00:03:57.000
+So sh means the shell commands.
+
+85
+00:03:57.000 --> 00:03:59.250
+So basically the sonar scanner home,
+
+86
+00:03:59.250 --> 00:04:02.700
+which is this tool, /bin/sonar-scanner.
+
+87
+00:04:02.700 --> 00:04:04.860
+And with that you can pass many options
+
+88
+00:04:04.860 --> 00:04:06.810
+that I'll show you in a moment.
+
+89
+00:04:06.810 --> 00:04:09.390
+And then you have here the quality gate stage
+
+90
+00:04:09.390 --> 00:04:13.110
+where it'll check if the code analysis passed or not.
+
+91
+00:04:13.110 --> 00:04:14.970
+That will see in the next lecture.
+
+92
+00:04:14.970 --> 00:04:17.070
+Also, let's go to the documentation.
+
+93
+00:04:17.070 --> 00:04:18.780
+So sonar scanner for Jenkins.
+
+94
+00:04:18.780 --> 00:04:21.723
+Let's scroll down and let's see.
+
+95
+00:04:23.190 --> 00:04:24.840
+Okay, same thing, right?
+
+96
+00:04:24.840 --> 00:04:27.420
+So stage, the name of the stage
+
+97
+00:04:27.420 --> 00:04:31.830
+and the tool path withSonarCube environment.
+
+98
+00:04:31.830 --> 00:04:34.230
+Mentioned the SonarCube server that we have configured
+
+99
+00:04:34.230 --> 00:04:36.120
+and the sonar scanner tool.
+
+100
+00:04:36.120 --> 00:04:37.500
+Now what this will do is
+
+101
+00:04:37.500 --> 00:04:39.300
+this is going to scan the source code
+
+102
+00:04:39.300 --> 00:04:41.850
+withSonarCube scanner CLI.
+
+103
+00:04:41.850 --> 00:04:44.130
+Along with that, you can post many other things over here,
+
+104
+00:04:44.130 --> 00:04:45.690
+which I'll show you in a moment.
+
+105
+00:04:45.690 --> 00:04:47.640
+And all this result, it's going to post it
+
+106
+00:04:47.640 --> 00:04:49.860
+to the SonarCube server.
+
+107
+00:04:49.860 --> 00:04:53.790
+So I am going to copy this and put it in my pipeline script
+
+108
+00:04:53.790 --> 00:04:55.530
+and then work on it.
+
+109
+00:04:55.530 --> 00:04:57.960
+Though frankly, you can use any AI tool,
+
+110
+00:04:57.960 --> 00:05:00.960
+you can use GitHub copilot, ChatGPT
+
+111
+00:05:00.960 --> 00:05:02.970
+or anything else you wish,
+
+112
+00:05:02.970 --> 00:05:05.460
+and you can generate the entire pipeline.
+
+113
+00:05:05.460 --> 00:05:06.810
+But that is for later.
+
+114
+00:05:06.810 --> 00:05:09.240
+First, you need to know how to do it yourself manually,
+
+115
+00:05:09.240 --> 00:05:10.073
+one by one.
+
+116
+00:05:10.073 --> 00:05:11.190
+Once you are good with that,
+
+117
+00:05:11.190 --> 00:05:16.190
+then you can definitely use copilot, any other AI assistant.
+
+118
+00:05:16.560 --> 00:05:19.140
+Okay, so let's go over here.
+
+119
+00:05:19.140 --> 00:05:23.250
+Once this checkstyle completes, let's paste it over here,
+
+120
+00:05:23.250 --> 00:05:26.670
+and let me make sure it is properly indented
+
+121
+00:05:26.670 --> 00:05:27.843
+so it can look good.
+
+122
+00:05:29.160 --> 00:05:31.953
+I'm going to remove this comment. This looks too long.
+
+123
+00:05:35.190 --> 00:05:36.990
+First, I'm going to change the name of the stage.
+
+124
+00:05:36.990 --> 00:05:41.580
+I'm going to just say "Sonar Code Analysis."
+
+125
+00:05:41.580 --> 00:05:43.710
+Now, scannerHome is the variable,
+
+126
+00:05:43.710 --> 00:05:45.480
+that is assigned over here.
+
+127
+00:05:45.480 --> 00:05:47.700
+We can change it if you want, but let's keep it.
+
+128
+00:05:47.700 --> 00:05:50.160
+Now definitely means this is going to be a local variable,
+
+129
+00:05:50.160 --> 00:05:51.570
+not with a global scope.
+
+130
+00:05:51.570 --> 00:05:56.370
+So this is for this stage only. That's what this deaf means.
+
+131
+00:05:56.370 --> 00:05:59.040
+Local variable, a local variable within the scope
+
+132
+00:05:59.040 --> 00:06:01.230
+of this curly brace.
+
+133
+00:06:01.230 --> 00:06:02.820
+And the tool name I have to give.
+
+134
+00:06:02.820 --> 00:06:05.460
+And this is the same tool name that we added in the Jenkins.
+
+135
+00:06:05.460 --> 00:06:10.170
+So let's go to Jenkins, manage Jenkins tools, scroll down,
+
+136
+00:06:10.170 --> 00:06:13.650
+find SonarCube scanner installation there, Sonar 8.0.
+
+137
+00:06:13.650 --> 00:06:15.210
+Make sure it's exactly the name
+
+138
+00:06:15.210 --> 00:06:17.190
+that you have given over there.
+
+139
+00:06:17.190 --> 00:06:21.720
+Let's remove this and add our tool name.
+
+140
+00:06:21.720 --> 00:06:24.450
+Okay, next thing is with SonarCube environment.
+
+141
+00:06:24.450 --> 00:06:27.753
+So this is the sonar server name that we added in Jenkins.
+
+142
+00:06:28.650 --> 00:06:31.200
+So manage Jenkins system, scroll down,
+
+143
+00:06:31.200 --> 00:06:33.543
+this is the name I've given sonar server.
+
+144
+00:06:34.860 --> 00:06:36.960
+So make sure it's the same name over here
+
+145
+00:06:36.960 --> 00:06:38.133
+in the single quote.
+
+146
+00:06:40.650 --> 00:06:41.970
+Okay, now the command.
+
+147
+00:06:41.970 --> 00:06:44.370
+So this command will get executed along with that.
+
+148
+00:06:44.370 --> 00:06:46.380
+We need to pass few other parameters,
+
+149
+00:06:46.380 --> 00:06:49.500
+like what will be the project name on SonarCube server.
+
+150
+00:06:49.500 --> 00:06:51.120
+Also the checkstyle result
+
+151
+00:06:51.120 --> 00:06:52.770
+that we have just seen the XML file,
+
+152
+00:06:52.770 --> 00:06:55.710
+which you are able to read properly, right?
+
+153
+00:06:55.710 --> 00:06:56.730
+Yeah, that file.
+
+154
+00:06:56.730 --> 00:06:59.790
+We also need to post it to SonarCube server.
+
+155
+00:06:59.790 --> 00:07:03.253
+The unit test result that was generated by mvn test,
+
+156
+00:07:03.253 --> 00:07:05.520
+JaCoCo, all the test cases
+
+157
+00:07:05.520 --> 00:07:08.460
+that we have created in the workspace,
+
+158
+00:07:08.460 --> 00:07:11.190
+all those we need to put it to SonarCube dashboard.
+
+159
+00:07:11.190 --> 00:07:14.850
+So along with this command, we need to pass few options
+
+160
+00:07:14.850 --> 00:07:17.070
+that I'll show you in a moment.
+
+161
+00:07:17.070 --> 00:07:19.890
+But first, this is going to be a multi-line command.
+
+162
+00:07:19.890 --> 00:07:20.970
+This is just in one line.
+
+163
+00:07:20.970 --> 00:07:24.360
+If you have to give multi-line, then you need to close it
+
+164
+00:07:24.360 --> 00:07:27.467
+with three single code, open it with three single codes
+
+165
+00:07:27.467 --> 00:07:30.840
+so you can give multi-line commands.
+
+166
+00:07:30.840 --> 00:07:32.310
+Okay, so I'm in ChatGPT.
+
+167
+00:07:32.310 --> 00:07:34.110
+Now you can get all this detail
+
+168
+00:07:34.110 --> 00:07:36.570
+from the sonar documentation also.
+
+169
+00:07:36.570 --> 00:07:37.500
+I just need to know it.
+
+170
+00:07:37.500 --> 00:07:41.040
+Once you know it from anywhere, from ChatGPT documentation,
+
+171
+00:07:41.040 --> 00:07:44.220
+anywhere, then you can use the same information later.
+
+172
+00:07:44.220 --> 00:07:47.040
+So I just ask ChatGPT that along with this pipeline script
+
+173
+00:07:47.040 --> 00:07:49.380
+that I'm writing, I want to upload checkstyle result,
+
+174
+00:07:49.380 --> 00:07:52.140
+I want to give project name, I want to upload JaCoCo result,
+
+175
+00:07:52.140 --> 00:07:54.960
+and all the other results to sonar server.
+
+176
+00:07:54.960 --> 00:07:57.090
+And this is what it has given.
+
+177
+00:07:57.090 --> 00:07:58.080
+This is a multi-line script.
+
+178
+00:07:58.080 --> 00:08:00.990
+This is in triple codes with double codes.
+
+179
+00:08:00.990 --> 00:08:03.840
+I have given single code, doesn't matter, it works.
+
+180
+00:08:03.840 --> 00:08:07.170
+So this is the command and then you are passing the option.
+
+181
+00:08:07.170 --> 00:08:12.170
+So it says -Dsonar.projectKey equal to the project name,
+
+182
+00:08:13.440 --> 00:08:15.540
+then the project name itself.
+
+183
+00:08:15.540 --> 00:08:16.650
+This will be the id,
+
+184
+00:08:16.650 --> 00:08:19.710
+and this will be just the description name.
+
+185
+00:08:19.710 --> 00:08:23.400
+Version, source code, where the source code is located.
+
+186
+00:08:23.400 --> 00:08:25.860
+So ours is also SRC.
+
+187
+00:08:25.860 --> 00:08:27.750
+In our gate repository we have SRC folder
+
+188
+00:08:27.750 --> 00:08:29.670
+where we have the Java code
+
+189
+00:08:29.670 --> 00:08:33.840
+and the Java binaries, the checkstyle reports path.
+
+190
+00:08:33.840 --> 00:08:37.560
+So I check that. And all the other details.
+
+191
+00:08:37.560 --> 00:08:39.820
+So I am going to copy this
+
+192
+00:08:41.550 --> 00:08:42.810
+and just paste it over here.
+
+193
+00:08:42.810 --> 00:08:44.850
+Now I'm going to give in this lecture resource
+
+194
+00:08:44.850 --> 00:08:46.230
+this entire pipeline script.
+
+195
+00:08:46.230 --> 00:08:47.310
+You can copy paste also,
+
+196
+00:08:47.310 --> 00:08:49.080
+but I want you to generate it like this,
+
+197
+00:08:49.080 --> 00:08:51.000
+searching one thing at a time,
+
+198
+00:08:51.000 --> 00:08:53.190
+so you get good hands on practice.
+
+199
+00:08:53.190 --> 00:08:54.990
+Okay, so I have made a few changes.
+
+200
+00:08:54.990 --> 00:08:56.949
+ProjectKey, I have given vprofile,
+
+201
+00:08:56.949 --> 00:08:59.520
+projectTeam, I have given as vprofile,
+
+202
+00:08:59.520 --> 00:09:02.250
+projectVersion I have kept same, 1.0.
+
+203
+00:09:02.250 --> 00:09:06.630
+And the source code folder, SRC/,
+
+204
+00:09:06.630 --> 00:09:07.887
+that is in our source code.
+
+205
+00:09:07.887 --> 00:09:09.960
+The pipeline will fetch the source code, right?
+
+206
+00:09:09.960 --> 00:09:13.380
+And it has a folder, SRC, it has all the Java code.
+
+207
+00:09:13.380 --> 00:09:15.230
+So this part is mentioned over there.
+
+208
+00:09:16.290 --> 00:09:21.290
+For scanning Java binary target/classes.
+
+209
+00:09:21.750 --> 00:09:24.160
+So let's go to a checkstyle pipeline
+
+210
+00:09:25.860 --> 00:09:28.533
+and go to the workspaces of the first build job.
+
+211
+00:09:29.834 --> 00:09:30.990
+You go to target,
+
+212
+00:09:30.990 --> 00:09:33.873
+you should see here a folder called Classes.
+
+213
+00:09:35.940 --> 00:09:38.490
+And same way you have the reports file.
+
+214
+00:09:38.490 --> 00:09:42.690
+Surefire report path, JaCoCo, XML file path.
+
+215
+00:09:42.690 --> 00:09:44.610
+You don't need to write all this manually.
+
+216
+00:09:44.610 --> 00:09:47.070
+This is this project specific vprofile.
+
+217
+00:09:47.070 --> 00:09:48.330
+You work in a different project,
+
+218
+00:09:48.330 --> 00:09:51.420
+you'll have different path, or might be same path.
+
+219
+00:09:51.420 --> 00:09:54.540
+But anyways, get all this from the pipeline script,
+
+220
+00:09:54.540 --> 00:09:55.950
+from this lecture resource
+
+221
+00:09:55.950 --> 00:09:58.050
+and make sure it's the same one.
+
+222
+00:09:58.050 --> 00:10:00.120
+Checkstyle you have just seen
+
+223
+00:10:00.120 --> 00:10:01.860
+in the beginning of this lecture.
+
+224
+00:10:01.860 --> 00:10:04.410
+So you don't need to by heart this, all those things,
+
+225
+00:10:04.410 --> 00:10:06.210
+this depends on the project.
+
+226
+00:10:06.210 --> 00:10:10.110
+What you need to understand it when you scan the code
+
+227
+00:10:10.110 --> 00:10:11.820
+with sonar scanner
+
+228
+00:10:11.820 --> 00:10:13.110
+or any other code analysis tool,
+
+229
+00:10:13.110 --> 00:10:14.580
+you need to pass some parameter
+
+230
+00:10:14.580 --> 00:10:18.330
+to take all this result for the analysis.
+
+231
+00:10:18.330 --> 00:10:21.240
+Okay, now we have to fix a few things here.
+
+232
+00:10:21.240 --> 00:10:23.730
+One thing is that we need to add this plugin
+
+233
+00:10:23.730 --> 00:10:27.780
+inside steps, like we did it in every stage.
+
+234
+00:10:27.780 --> 00:10:32.280
+So we need to add steps, open curly brace,
+
+235
+00:10:32.280 --> 00:10:35.910
+and then do not put closing curly brace over here.
+
+236
+00:10:35.910 --> 00:10:40.680
+Come down over here and add here one more curly brace.
+
+237
+00:10:40.680 --> 00:10:44.790
+Let's do a little indentation. Two step, two step.
+
+238
+00:10:44.790 --> 00:10:49.680
+And this one also will go two step and this one, two step.
+
+239
+00:10:49.680 --> 00:10:51.450
+Okay, if for now this is confusing,
+
+240
+00:10:51.450 --> 00:10:54.180
+then download the lecture resource,
+
+241
+00:10:54.180 --> 00:10:56.493
+that you have proper pipeline script.
+
+242
+00:10:57.360 --> 00:10:59.190
+Just be careful with opening and closing,
+
+243
+00:10:59.190 --> 00:11:02.730
+like steps is opening over here and closing over here.
+
+244
+00:11:02.730 --> 00:11:05.250
+And this plugin information is opening over here,
+
+245
+00:11:05.250 --> 00:11:06.663
+closing over here.
+
+246
+00:11:06.663 --> 00:11:09.633
+Then this curly breeze is for the stage.
+
+247
+00:11:10.500 --> 00:11:11.400
+Now that's one thing.
+
+248
+00:11:11.400 --> 00:11:14.430
+The other thing is a def, as I told you,
+
+249
+00:11:14.430 --> 00:11:16.260
+is for a local variables,
+
+250
+00:11:16.260 --> 00:11:19.350
+but then you need to put it inside a script block.
+
+251
+00:11:19.350 --> 00:11:22.470
+This is a groovy specific thing.
+
+252
+00:11:22.470 --> 00:11:24.000
+This def is groovy specific thing.
+
+253
+00:11:24.000 --> 00:11:26.580
+Now if you want to put groovy in Jenkins pipeline script,
+
+254
+00:11:26.580 --> 00:11:29.220
+you need to put that into script section,
+
+255
+00:11:29.220 --> 00:11:31.980
+like you have steps, you need to put all the steps,
+
+256
+00:11:31.980 --> 00:11:33.990
+everything in the script.
+
+257
+00:11:33.990 --> 00:11:38.010
+Or the best practices, we are going to remove this def
+
+258
+00:11:38.010 --> 00:11:40.893
+and we are going to put this into environment section.
+
+259
+00:11:41.760 --> 00:11:45.180
+We see environment, we open curly brace here
+
+260
+00:11:45.180 --> 00:11:47.553
+and then we close it over there.
+
+261
+00:11:48.510 --> 00:11:49.710
+So in the environment
+
+262
+00:11:49.710 --> 00:11:52.590
+you are mentioning the environment variables.
+
+263
+00:11:52.590 --> 00:11:55.530
+Now this again for the this stage only.
+
+264
+00:11:55.530 --> 00:11:57.930
+This is local for this stage.
+
+265
+00:11:57.930 --> 00:11:59.730
+You can mention also environment variable
+
+266
+00:11:59.730 --> 00:12:01.470
+at the global level over here,
+
+267
+00:12:01.470 --> 00:12:02.940
+before the stages.
+
+268
+00:12:02.940 --> 00:12:04.500
+That we'll see later.
+
+269
+00:12:04.500 --> 00:12:07.200
+But this is a good working piece of code over here.
+
+270
+00:12:07.200 --> 00:12:09.810
+Copy this. Go to Jenkins.
+
+271
+00:12:09.810 --> 00:12:10.980
+Let's create a new job.
+
+272
+00:12:10.980 --> 00:12:15.183
+Go to new item. Give this job name Code Analysis.
+
+273
+00:12:17.550 --> 00:12:20.403
+pipeline, select pipeline. Say okay.
+
+274
+00:12:21.780 --> 00:12:24.960
+Scroll down and paste your script here.
+
+275
+00:12:24.960 --> 00:12:27.513
+Once you're good, save it and build it.
+
+276
+00:12:30.510 --> 00:12:32.193
+Okay, let's look at the stages.
+
+277
+00:12:34.320 --> 00:12:35.370
+So it's going to take some time.
+
+278
+00:12:35.370 --> 00:12:37.890
+I'm going to pause the recording for now.
+
+279
+00:12:37.890 --> 00:12:40.020
+Okay, this failed. I wanted you to see this.
+
+280
+00:12:40.020 --> 00:12:44.100
+So I checked the sonar code analysis that failed,
+
+281
+00:12:44.100 --> 00:12:49.100
+and here I could see 502 bad gateway error for this URL,
+
+282
+00:12:49.440 --> 00:12:50.970
+which is basically SonarCube server.
+
+283
+00:12:50.970 --> 00:12:53.310
+So I checked the public IP of SonarCube
+
+284
+00:12:53.310 --> 00:12:55.200
+and it was down,
+
+285
+00:12:55.200 --> 00:12:58.020
+it was showing the same error from the browser,
+
+286
+00:12:58.020 --> 00:12:59.640
+502 bad gateway.
+
+287
+00:12:59.640 --> 00:13:00.600
+I did not do anything.
+
+288
+00:13:00.600 --> 00:13:03.030
+I was just looking, going through the errors
+
+289
+00:13:03.030 --> 00:13:05.310
+and then it automatically got refreshed
+
+290
+00:13:05.310 --> 00:13:09.330
+and SonarCube service was coming then from the browser.
+
+291
+00:13:09.330 --> 00:13:12.720
+So there is a glitch, it got restarted for some reason,
+
+292
+00:13:12.720 --> 00:13:14.160
+but now it's a running.
+
+293
+00:13:14.160 --> 00:13:18.510
+So let's run this job once again and let's see what happens.
+
+294
+00:13:18.510 --> 00:13:22.380
+I will just rerun this sonar core analysis job only.
+
+295
+00:13:22.380 --> 00:13:23.910
+Let's see.
+
+296
+00:13:23.910 --> 00:13:26.100
+It's executing the entire pipeline once again.
+
+297
+00:13:26.100 --> 00:13:27.483
+Let's let it complete.
+
+298
+00:13:28.410 --> 00:13:29.243
+Okay, good.
+
+299
+00:13:29.243 --> 00:13:32.010
+The core analysis got completed successfully.
+
+300
+00:13:32.010 --> 00:13:34.160
+Okay, take a look at the output. It's huge.
+
+301
+00:13:35.400 --> 00:13:37.320
+Here at the end, you can see analysis successful,
+
+302
+00:13:37.320 --> 00:13:38.340
+you can find the result,
+
+303
+00:13:38.340 --> 00:13:40.410
+but this is the private IP we cannot access
+
+304
+00:13:40.410 --> 00:13:41.243
+from the browser.
+
+305
+00:13:41.243 --> 00:13:44.250
+We need to definitely go with the public IP of SonarCube.
+
+306
+00:13:44.250 --> 00:13:47.340
+So go to SonarCube dashboard, go to projects,
+
+307
+00:13:47.340 --> 00:13:49.920
+and you should see a project named vprofile.
+
+308
+00:13:49.920 --> 00:13:51.900
+That's what we have given the option.
+
+309
+00:13:51.900 --> 00:13:53.280
+Click on this, right?
+
+310
+00:13:53.280 --> 00:13:55.243
+So it says there's three security issues,
+
+311
+00:13:55.243 --> 00:13:59.700
+5,200 liability issues, 25 security hotspots.
+
+312
+00:13:59.700 --> 00:14:01.530
+So overall it says pass,
+
+313
+00:14:01.530 --> 00:14:06.180
+because it says the quality gate does not block any of this.
+
+314
+00:14:06.180 --> 00:14:09.630
+And what does that mean? That will see in the next lecture.
+
+315
+00:14:09.630 --> 00:14:11.850
+So go through these errors and issues
+
+316
+00:14:11.850 --> 00:14:13.590
+and then join me in the next one.
+
+317
+00:14:13.590 --> 00:14:15.993
+We are going to create the quality gate there.
+

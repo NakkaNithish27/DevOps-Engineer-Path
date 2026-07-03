@@ -1,0 +1,594 @@
+WEBVTT
+
+1
+00:00:00.240 --> 00:00:03.900
+<v Instructor>GitOps Pipeline for our VProfile project.</v>
+
+2
+00:00:03.900 --> 00:00:07.140
+This is the final project in this course,
+
+3
+00:00:07.140 --> 00:00:11.250
+and it also consolidates everything we have learned so far.
+
+4
+00:00:11.250 --> 00:00:15.900
+In today's time, a modern DevOps means a GitOps Pipeline.
+
+5
+00:00:15.900 --> 00:00:18.780
+And you will agree with me once you complete this project,
+
+6
+00:00:18.780 --> 00:00:21.780
+you will understand why I said this.
+
+7
+00:00:21.780 --> 00:00:24.270
+So first, let's understand what is GitOps
+
+8
+00:00:24.270 --> 00:00:26.823
+and then we'll understand about this project.
+
+9
+00:00:28.380 --> 00:00:30.990
+So GitOps means
+
+10
+00:00:30.990 --> 00:00:34.620
+Git repository will be the single source of truth
+
+11
+00:00:34.620 --> 00:00:37.500
+for any operational changes.
+
+12
+00:00:37.500 --> 00:00:40.470
+So Git here represents that everything,
+
+13
+00:00:40.470 --> 00:00:42.900
+all your infrastructure information,
+
+14
+00:00:42.900 --> 00:00:44.340
+your application information,
+
+15
+00:00:44.340 --> 00:00:47.760
+everything will be stored into the Git repository.
+
+16
+00:00:47.760 --> 00:00:50.520
+And there will be some pipeline, some controllers
+
+17
+00:00:50.520 --> 00:00:53.280
+that will make sure that your infrastructure,
+
+18
+00:00:53.280 --> 00:00:54.510
+your application,
+
+19
+00:00:54.510 --> 00:00:58.473
+everything is as per the code in the Git repository.
+
+20
+00:00:59.460 --> 00:01:03.990
+Why this is such a big buzz in today's DevOps world?
+
+21
+00:01:03.990 --> 00:01:06.930
+What we have seen so far, when we do manual deployment,
+
+22
+00:01:06.930 --> 00:01:09.420
+it's time consuming and error prone,
+
+23
+00:01:09.420 --> 00:01:12.300
+and it's hard to audit and track.
+
+24
+00:01:12.300 --> 00:01:15.480
+So if I made any change with my automation pipeline
+
+25
+00:01:15.480 --> 00:01:16.830
+or with my automation code
+
+26
+00:01:16.830 --> 00:01:21.090
+and someone is also making manual changes,
+
+27
+00:01:21.090 --> 00:01:24.480
+then it becomes difficult to track who did what.
+
+28
+00:01:24.480 --> 00:01:27.210
+And also, it's not scalable
+
+29
+00:01:27.210 --> 00:01:29.940
+if you have a big team, if your team is growing.
+
+30
+00:01:29.940 --> 00:01:32.670
+Because of this, you cannot replicate everything
+
+31
+00:01:32.670 --> 00:01:34.350
+into the next environment.
+
+32
+00:01:34.350 --> 00:01:35.460
+Like if you have GitOps,
+
+33
+00:01:35.460 --> 00:01:37.230
+you can have dev environment
+
+34
+00:01:37.230 --> 00:01:39.900
+as same as the production environment,
+
+35
+00:01:39.900 --> 00:01:41.970
+at least in terms of configuration.
+
+36
+00:01:41.970 --> 00:01:43.860
+In terms of infrastructure size,
+
+37
+00:01:43.860 --> 00:01:46.020
+it will be definitely different.
+
+38
+00:01:46.020 --> 00:01:48.900
+But there are many more benefits that we get
+
+39
+00:01:48.900 --> 00:01:51.090
+with this GitOps platform.
+
+40
+00:01:51.090 --> 00:01:54.360
+So GitOps platform means everything is automated,
+
+41
+00:01:54.360 --> 00:01:55.500
+everything is auditable
+
+42
+00:01:55.500 --> 00:01:57.420
+because everything is in Git repository,
+
+43
+00:01:57.420 --> 00:01:59.130
+we'll know who committed.
+
+44
+00:01:59.130 --> 00:02:01.650
+Reproducible, because it's created
+
+45
+00:02:01.650 --> 00:02:03.240
+with the code infrastructure as a code
+
+46
+00:02:03.240 --> 00:02:04.410
+so we can reproduce it.
+
+47
+00:02:04.410 --> 00:02:07.230
+And it's mostly Kubernetes native.
+
+48
+00:02:07.230 --> 00:02:11.460
+So imagine this, you have a cloud infrastructure.
+
+49
+00:02:11.460 --> 00:02:13.920
+So all the configuration in your cloud account,
+
+50
+00:02:13.920 --> 00:02:17.580
+starting from your account users as permissions,
+
+51
+00:02:17.580 --> 00:02:19.110
+policies, organization,
+
+52
+00:02:19.110 --> 00:02:21.990
+everything we can manage through code
+
+53
+00:02:21.990 --> 00:02:25.410
+which is kept in the Git repository like Terraform code.
+
+54
+00:02:25.410 --> 00:02:27.240
+And this code will be applied
+
+55
+00:02:27.240 --> 00:02:31.110
+or synced with your cloud infrastructure.
+
+56
+00:02:31.110 --> 00:02:32.640
+Then on your cloud infrastructure,
+
+57
+00:02:32.640 --> 00:02:35.730
+you will have your Kubernetes cluster,
+
+58
+00:02:35.730 --> 00:02:38.610
+again, to create, to manage all the changes.
+
+59
+00:02:38.610 --> 00:02:41.670
+All the source code will be kept in the Git repository.
+
+60
+00:02:41.670 --> 00:02:43.950
+All your Terraform code or Kubernetes manifest
+
+61
+00:02:43.950 --> 00:02:46.080
+will be kept in a Git repository.
+
+62
+00:02:46.080 --> 00:02:48.240
+And these changes will be in sync
+
+63
+00:02:48.240 --> 00:02:50.040
+with your Kubernetes cluster,
+
+64
+00:02:50.040 --> 00:02:51.300
+or it should be in sync
+
+65
+00:02:51.300 --> 00:02:54.210
+with your Kubernetes cluster's configuration.
+
+66
+00:02:54.210 --> 00:02:56.430
+Then you have your application,
+
+67
+00:02:56.430 --> 00:02:58.980
+like we have our VProfile application
+
+68
+00:02:58.980 --> 00:03:01.140
+that consists of many things, ingress, servers,
+
+69
+00:03:01.140 --> 00:03:03.240
+deployment, volume, et cetera.
+
+70
+00:03:03.240 --> 00:03:07.140
+And all this you can manage with Argo CD.
+
+71
+00:03:07.140 --> 00:03:09.600
+So Argo CD will have all this information
+
+72
+00:03:09.600 --> 00:03:11.700
+in form of YAML files.
+
+73
+00:03:11.700 --> 00:03:15.180
+And it will always try to keep this in the sync.
+
+74
+00:03:15.180 --> 00:03:17.580
+But all this configuration, all this manifest,
+
+75
+00:03:17.580 --> 00:03:20.040
+will be kept in the Git repository.
+
+76
+00:03:20.040 --> 00:03:21.480
+So your application source code,
+
+77
+00:03:21.480 --> 00:03:24.030
+which you need to build and create docker images,
+
+78
+00:03:24.030 --> 00:03:25.200
+will be in Git repository.
+
+79
+00:03:25.200 --> 00:03:28.260
+Argo CD configuration file will be in Git repository,
+
+80
+00:03:28.260 --> 00:03:30.120
+like Helm charts.
+
+81
+00:03:30.120 --> 00:03:31.350
+And this will be synced
+
+82
+00:03:31.350 --> 00:03:33.780
+with your application on Kubernetes cluster.
+
+83
+00:03:33.780 --> 00:03:35.670
+So it will be the job of Argo CD
+
+84
+00:03:35.670 --> 00:03:38.970
+to make sure your Helm charts or your Kubernetes manifest
+
+85
+00:03:38.970 --> 00:03:42.153
+are in sync with the application that is in the cluster.
+
+86
+00:03:43.050 --> 00:03:47.100
+Any manual changes will be absolutely denied.
+
+87
+00:03:47.100 --> 00:03:48.150
+Now, when you do this,
+
+88
+00:03:48.150 --> 00:03:50.640
+then Git becomes the single source of truth.
+
+89
+00:03:50.640 --> 00:03:53.373
+Every change will go through Git repository.
+
+90
+00:03:54.270 --> 00:03:56.640
+So once again, infrastructure,
+
+91
+00:03:56.640 --> 00:03:59.430
+if you talk about the infrastructure, we have Kubernetes,
+
+92
+00:03:59.430 --> 00:04:03.193
+let's say Amazon EKS managed by Terraform.
+
+93
+00:04:03.193 --> 00:04:06.281
+So your Terraform source code will be in Git repository,
+
+94
+00:04:06.281 --> 00:04:09.360
+GitHub actions, or Jenkins Pipeline, or GitLab,
+
+95
+00:04:09.360 --> 00:04:12.150
+any kind of CI/CD pipeline you need to set up,
+
+96
+00:04:12.150 --> 00:04:14.010
+it will validate the source code.
+
+97
+00:04:14.010 --> 00:04:15.690
+And like we do Terraform plan,
+
+98
+00:04:15.690 --> 00:04:18.510
+it will create a plan file and detect a drift.
+
+99
+00:04:18.510 --> 00:04:21.390
+It will compare your Kubernetes infrastructure
+
+100
+00:04:21.390 --> 00:04:23.550
+with the code of Terraform.
+
+101
+00:04:23.550 --> 00:04:26.250
+If there are any issues, it will apply the changes,
+
+102
+00:04:26.250 --> 00:04:28.860
+and you can select the manual trigger in that.
+
+103
+00:04:28.860 --> 00:04:30.810
+So your Kubernetes cluster configuration
+
+104
+00:04:30.810 --> 00:04:34.380
+stays in sync with the Git repository source code.
+
+105
+00:04:34.380 --> 00:04:36.240
+So that is about the infrastructure.
+
+106
+00:04:36.240 --> 00:04:38.160
+Then you have your application.
+
+107
+00:04:38.160 --> 00:04:40.680
+The developer writes the application source code.
+
+108
+00:04:40.680 --> 00:04:42.720
+And this part, you already know,
+
+109
+00:04:42.720 --> 00:04:44.910
+it's the same CI/CD pipeline.
+
+110
+00:04:44.910 --> 00:04:48.570
+You take the developer's source code, test it, build it,
+
+111
+00:04:48.570 --> 00:04:51.270
+create docker images, push it to a registry.
+
+112
+00:04:51.270 --> 00:04:52.410
+So you can have Helm chart
+
+113
+00:04:52.410 --> 00:04:55.260
+which defines your entire application,
+
+114
+00:04:55.260 --> 00:04:57.570
+which docker image, which tag to fetch.
+
+115
+00:04:57.570 --> 00:05:00.510
+So here's the difference now in Git repository.
+
+116
+00:05:00.510 --> 00:05:01.890
+Your continuous integration pipeline
+
+117
+00:05:01.890 --> 00:05:04.260
+will make changes to the Helm values file
+
+118
+00:05:04.260 --> 00:05:07.020
+in Git repository, another Git repository,
+
+119
+00:05:07.020 --> 00:05:10.500
+Argo CD will detect that change and apply it.
+
+120
+00:05:10.500 --> 00:05:12.660
+I'll explain everything with the architecture diagram,
+
+121
+00:05:12.660 --> 00:05:15.450
+just be with me for a few more minutes.
+
+122
+00:05:15.450 --> 00:05:17.850
+So generally, it will be like this.
+
+123
+00:05:17.850 --> 00:05:20.190
+You will have different repositories,
+
+124
+00:05:20.190 --> 00:05:22.260
+different Git repositories.
+
+125
+00:05:22.260 --> 00:05:23.550
+This is a standard practice.
+
+126
+00:05:23.550 --> 00:05:26.010
+You don't need to put everything in one Git repository.
+
+127
+00:05:26.010 --> 00:05:27.990
+You will have a Git repository
+
+128
+00:05:27.990 --> 00:05:30.600
+for your application source code.
+
+129
+00:05:30.600 --> 00:05:33.270
+Another repository like Helm repository,
+
+130
+00:05:33.270 --> 00:05:35.430
+where you will keep your Helm charts
+
+131
+00:05:35.430 --> 00:05:38.610
+and all the Argo CD defined application files
+
+132
+00:05:38.610 --> 00:05:39.633
+will be in this.
+
+133
+00:05:40.500 --> 00:05:43.200
+And then you will have an infrastructure repository
+
+134
+00:05:43.200 --> 00:05:45.630
+that will contain the Terraform code.
+
+135
+00:05:45.630 --> 00:05:47.190
+Mostly, if you're using Terraform,
+
+136
+00:05:47.190 --> 00:05:50.790
+that's what most of the people use for cloud management.
+
+137
+00:05:50.790 --> 00:05:53.790
+And all your infrastructure-related configuration files
+
+138
+00:05:53.790 --> 00:05:56.220
+and source code will be in infrastructure repository.
+
+139
+00:05:56.220 --> 00:05:59.070
+So generally, you will these three repositories.
+
+140
+00:05:59.070 --> 00:06:00.780
+It will be more also
+
+141
+00:06:00.780 --> 00:06:03.330
+based on microservice architecture and all.
+
+142
+00:06:03.330 --> 00:06:06.330
+But for one service, let's say for one Tomcat application,
+
+143
+00:06:06.330 --> 00:06:08.340
+you will have one application source code,
+
+144
+00:06:08.340 --> 00:06:09.990
+one Helm source code,
+
+145
+00:06:09.990 --> 00:06:12.390
+and one infrastructure source code.
+
+146
+00:06:12.390 --> 00:06:13.223
+In next lecture,
+
+147
+00:06:13.223 --> 00:06:15.690
+I'll explain everything with the architecture diagram.
+
+148
+00:06:15.690 --> 00:06:17.040
+So join me in the next one.
+

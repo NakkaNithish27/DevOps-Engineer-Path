@@ -1,0 +1,937 @@
+WEBVTT
+
+00:00.160 --> 00:01.240
+Hello and welcome.
+
+00:01.240 --> 00:06.280
+In this lecture we are going to look at Amazon CLI or command line interface.
+
+00:06.640 --> 00:14.480
+And we're also going to see how to use Amazon Q which is the Amazon AI assistant used in coding.
+
+00:14.480 --> 00:17.600
+We can use it to get information via chatting.
+
+00:17.920 --> 00:24.120
+And there are a few other amazing benefits of Amazon Q first, let's talk about the Amazon CLI.
+
+00:24.520 --> 00:30.480
+So what we do on AWS through the browser through Amazon console right.
+
+00:30.520 --> 00:31.960
+Like so far we launched instance.
+
+00:31.960 --> 00:34.720
+We created key pair or we're going to do many more things.
+
+00:35.000 --> 00:38.240
+All those things can be also done from the command line interface.
+
+00:38.480 --> 00:39.600
+By issuing commands.
+
+00:39.600 --> 00:45.840
+We can do it from our own computer, be it windows, Mac OS or Linux or any other place where we have
+
+00:45.840 --> 00:47.600
+the command line interface installed.
+
+00:47.760 --> 00:54.600
+First we need to install aws cli to install it on windows we have the command choco install aws cli.
+
+00:54.640 --> 00:58.480
+You need to open PowerShell as admin user for Mac OS.
+
+00:58.480 --> 01:02.150
+Just open the terminal and run the command brew install aws cli.
+
+01:02.510 --> 01:07.030
+If you're using any Linux operating system, then you need to download this package.
+
+01:07.310 --> 01:08.270
+With curl command.
+
+01:08.270 --> 01:12.430
+You unzip it, you execute the script that will install aws cli.
+
+01:12.910 --> 01:15.110
+So I'm going to open PowerShell as admin user.
+
+01:20.750 --> 01:24.670
+Execute the command choco install aws cli.
+
+01:31.710 --> 01:36.990
+If you're using Mac OS, just open terminal and run the command brew install aws cli.
+
+01:39.990 --> 01:41.710
+AWS cli is installed for me.
+
+01:41.710 --> 01:43.230
+I'm going to close PowerShell.
+
+01:44.230 --> 01:46.110
+Now we need to set authentication.
+
+01:46.110 --> 01:53.430
+So when we open the browser and when we go to Amazon Console, we authenticate with username and password
+
+01:53.870 --> 01:54.830
+from command line.
+
+01:54.830 --> 01:57.310
+We need to do it through the access keys.
+
+01:58.060 --> 02:01.060
+Access keys comes with the IAM user.
+
+02:01.060 --> 02:03.060
+So go to your Amazon console.
+
+02:03.100 --> 02:06.380
+AWS console look for the service IAM.
+
+02:06.860 --> 02:07.820
+Go to the service.
+
+02:08.300 --> 02:09.420
+Go to users.
+
+02:09.980 --> 02:11.660
+Click on create user.
+
+02:12.100 --> 02:13.300
+Give user a name.
+
+02:13.620 --> 02:16.820
+I'm giving CLI admin go next.
+
+02:17.100 --> 02:20.180
+So we need to give some permission privilege to this user.
+
+02:20.180 --> 02:22.140
+So we can use different services.
+
+02:22.140 --> 02:25.220
+So we click on attach policies directly.
+
+02:25.540 --> 02:30.020
+IAM has many ready made policies that you can attach to a user.
+
+02:30.020 --> 02:37.220
+For example, if you search for EC2 we have something like Amazon EC2 Full Access which gives the user
+
+02:37.220 --> 02:40.940
+complete access on EC2 service but not on other services.
+
+02:41.140 --> 02:43.180
+But then you can fine tune these policies.
+
+02:43.180 --> 02:48.420
+Also, you can have read only access or based on the what service you want to use.
+
+02:48.420 --> 02:51.700
+Now for this lecture we are going to use multiple services.
+
+02:52.100 --> 02:54.620
+So we are giving administrator access.
+
+02:54.620 --> 02:57.330
+Now be very very careful with this one.
+
+02:57.650 --> 03:00.930
+You cannot lose credentials for this user.
+
+03:01.050 --> 03:03.770
+You cannot expose it to anybody, anywhere.
+
+03:04.090 --> 03:10.290
+Because if that happens, then that other party is going to get complete access on your AWS account.
+
+03:10.290 --> 03:11.970
+So be careful.
+
+03:11.970 --> 03:14.170
+I'm giving administrator access now.
+
+03:14.170 --> 03:17.410
+So far there are no access we are giving to this user.
+
+03:17.450 --> 03:18.770
+Just creating the user.
+
+03:19.010 --> 03:19.810
+There's no credential.
+
+03:19.810 --> 03:22.050
+There's no nothing attached to this user.
+
+03:22.050 --> 03:23.530
+Now we click on this user.
+
+03:23.890 --> 03:25.970
+You see we have administrator access.
+
+03:25.970 --> 03:27.690
+We go to security credentials.
+
+03:28.010 --> 03:30.690
+So we are not giving any console access to this user.
+
+03:30.730 --> 03:36.050
+We scroll down we see here access keys and we say create access keys.
+
+03:36.210 --> 03:43.610
+Now this is for as it says AWS cli, AWS tools, PowerShell, AWS SDK, AWS API calls.
+
+03:43.930 --> 03:46.170
+So all programmatic and command line access.
+
+03:46.170 --> 03:47.810
+So click on Create Access key.
+
+03:48.010 --> 03:49.610
+Select your use case.
+
+03:49.610 --> 03:50.930
+So ours is CLI.
+
+03:50.970 --> 03:52.810
+So select command line interface.
+
+03:53.410 --> 03:56.240
+See I understand the risk and go.
+
+03:56.280 --> 03:58.720
+Next create access key.
+
+03:59.120 --> 04:00.080
+So this is two parts.
+
+04:00.080 --> 04:03.080
+You have the access key and you have the secret access key.
+
+04:03.080 --> 04:08.160
+So it works like you know username and password that we have seen but not actually username password.
+
+04:08.440 --> 04:10.560
+And you see this one time and then it will be gone.
+
+04:10.560 --> 04:13.320
+So you can download it all into a CSV file.
+
+04:13.320 --> 04:15.240
+So click on download CSV file.
+
+04:15.880 --> 04:19.600
+So mine got downloaded into downloads folder and say done.
+
+04:20.000 --> 04:24.400
+So here you can see the access keys I mean you cannot see the secret access key over here.
+
+04:26.360 --> 04:26.840
+That's gone.
+
+04:26.840 --> 04:31.280
+It's downloaded in my downloads folder so I can open it and set it up.
+
+04:31.280 --> 04:33.840
+But before we go there, just take a look at the actions.
+
+04:33.840 --> 04:35.920
+You can deactivate an access key.
+
+04:35.960 --> 04:41.520
+You can delete the access key and one users can have one user can have multiple access keys.
+
+04:41.520 --> 04:43.240
+You can create multiple access keys.
+
+04:43.440 --> 04:46.480
+And you can select which one to activate, which one to deactivate.
+
+04:46.800 --> 04:48.760
+Now always be very cautious.
+
+04:48.760 --> 04:51.360
+Extra cautious when it comes to the access keys.
+
+04:51.360 --> 04:56.120
+These are text and there are many instances where people post it on GitHub.
+
+04:56.120 --> 05:02.280
+Public repositories, public places where there are bots that can scan these keys, get the keys, and
+
+05:02.280 --> 05:03.880
+will start doing crypto mining.
+
+05:03.880 --> 05:05.200
+In your AWS account.
+
+05:05.200 --> 05:09.160
+You'll have many instances and you will have huge bills within a few hours.
+
+05:09.560 --> 05:11.840
+So be very, very careful with these keys.
+
+05:11.840 --> 05:12.720
+Do not lose them.
+
+05:12.720 --> 05:14.400
+Do not put them into public places.
+
+05:14.400 --> 05:15.920
+Do not show it to anybody.
+
+05:16.560 --> 05:17.760
+Now let's set these keys.
+
+05:17.760 --> 05:20.320
+So you must have downloaded the CSV file.
+
+05:20.800 --> 05:21.840
+Open it in notepad.
+
+05:21.840 --> 05:24.280
+You can see the access key and secret key over there.
+
+05:24.720 --> 05:27.840
+So I'm doing right click open with notepad.
+
+05:28.200 --> 05:29.240
+So this is the access key.
+
+05:29.240 --> 05:30.520
+And this is my secret key.
+
+05:30.560 --> 05:33.800
+And I'm going to delete it as soon as the lecture recording is completed.
+
+05:34.360 --> 05:36.200
+If you're using Windows Open Git Bash.
+
+05:36.200 --> 05:41.680
+If you're using Mac OS or Linux, open the terminal and run the command AWS configure.
+
+05:44.880 --> 05:46.600
+This will ask you the access key.
+
+05:46.600 --> 05:48.480
+So first let's get the access key.
+
+05:49.960 --> 05:51.040
+Paste it over there.
+
+05:51.360 --> 05:52.790
+Then get the secret key.
+
+05:53.150 --> 05:59.870
+It will be comma separated CSV file are comma separated, so copy the secret key.
+
+06:02.230 --> 06:03.350
+Mention the region.
+
+06:03.350 --> 06:04.750
+This will be the default region.
+
+06:04.750 --> 06:06.390
+We can change it whenever we want.
+
+06:06.430 --> 06:09.670
+So I'm going to use us hyphen hyphen one.
+
+06:10.030 --> 06:11.710
+So make sure the code is correct.
+
+06:12.110 --> 06:15.230
+The region code you can check it from your console.
+
+06:15.230 --> 06:18.550
+So I'm using North Virginia and its code is US hyphen East.
+
+06:18.550 --> 06:21.990
+Hyphen one output format.
+
+06:21.990 --> 06:24.150
+We are going to keep it as JSON format.
+
+06:25.310 --> 06:32.790
+Now this information is going to create few files two files actually if you do ls tilde slash dot aws.
+
+06:33.630 --> 06:35.950
+So in your home directory there is a folder dot aws.
+
+06:35.990 --> 06:38.790
+It will have two files config and credentials.
+
+06:39.950 --> 06:46.470
+Config file will have the region and the output format and credentials file will have the access key
+
+06:46.470 --> 06:47.230
+and secret key.
+
+06:47.230 --> 06:53.620
+So if you make a mistake you can manually also go to editor text editor like VI and open it and make
+
+06:53.620 --> 06:54.220
+the changes.
+
+06:54.220 --> 06:58.940
+Or you can just run the AWS configure command once again and give your entries.
+
+06:59.140 --> 07:04.980
+Usually we make mistake while doing copy pasting or typing, and the aws cli does not work.
+
+07:04.980 --> 07:09.780
+So like for example, now I'm going to run a command which should return me information about the account
+
+07:09.780 --> 07:15.300
+id user id if all this information is correct that I have given this command should work, but if you
+
+07:15.300 --> 07:21.580
+get any error then you better run AWS configure command once again and set the details so the command
+
+07:21.620 --> 07:23.060
+is AWS sts.
+
+07:23.100 --> 07:25.260
+Get caller hyphen identity.
+
+07:25.620 --> 07:28.060
+Run this command and this should return the output.
+
+07:28.060 --> 07:30.180
+If it does not, you get any error.
+
+07:30.180 --> 07:37.780
+Then run the AWS configure command once again okay, if it's working, let's run our first command to
+
+07:37.780 --> 07:40.140
+get information about the EC2 instances.
+
+07:40.580 --> 07:43.500
+AWS, EC2 describe hyphen instances.
+
+07:44.060 --> 07:48.380
+So it's going to describe all the instances in the current region, which is US East one.
+
+07:48.580 --> 07:50.930
+And the output will be in the JSON format.
+
+07:51.170 --> 07:52.050
+And says open.
+
+07:52.050 --> 07:55.970
+In the more editor, you can hit enter and you can see the details.
+
+07:56.650 --> 08:02.730
+You can see architecture type, device name, volume, ID, public IP.
+
+08:04.290 --> 08:07.250
+You can just keep hitting enter until you see everything.
+
+08:09.330 --> 08:11.850
+Instance type T2 micro to keep hitting.
+
+08:11.850 --> 08:13.450
+Enter until you come till the end.
+
+08:13.450 --> 08:15.690
+Or you can just hit Q to quit it.
+
+08:16.170 --> 08:20.650
+Okay, now there are many AWS services and there are many, many settings.
+
+08:20.650 --> 08:25.450
+So as I told you, we can do everything through command line, but it's impossible to remember these
+
+08:25.450 --> 08:25.970
+commands.
+
+08:26.530 --> 08:28.570
+You should not even remember the commands.
+
+08:28.570 --> 08:30.170
+That will be a stupid idea.
+
+08:30.410 --> 08:35.290
+So usually I used to show documentation like aws cli documentation.
+
+08:35.290 --> 08:36.410
+You go to user guide.
+
+08:36.570 --> 08:38.610
+You can see all the information over here.
+
+08:39.930 --> 08:40.970
+Let's get started.
+
+08:40.970 --> 08:45.530
+This install how to install it authentication access.
+
+08:45.530 --> 08:49.040
+We have just seen so using AWS, cli or AWS CLI.
+
+08:49.080 --> 08:49.920
+Examples.
+
+08:50.360 --> 08:52.880
+Guided command examples like Amazon EC2.
+
+08:52.920 --> 08:53.960
+How to create key pairs.
+
+08:53.960 --> 08:54.840
+How to create key.
+
+08:54.880 --> 08:55.440
+Key pair.
+
+08:55.520 --> 08:56.000
+Sorry.
+
+08:56.120 --> 09:04.880
+Security group EC2 instances like one example AWS EC2 run instance, image ID, mi ID count, instance
+
+09:04.880 --> 09:05.440
+type.
+
+09:05.960 --> 09:09.760
+So sure you can go through the documentation and find out information.
+
+09:10.280 --> 09:12.000
+Create your command and execute it.
+
+09:12.360 --> 09:15.200
+Or you can use the AI tools like ChatGPT.
+
+09:15.240 --> 09:23.800
+You can use which is great, but AWS also has its own AI Amazon Q developer.
+
+09:23.840 --> 09:25.120
+That's what we are going to use.
+
+09:25.400 --> 09:27.320
+You look at this icon over here.
+
+09:27.480 --> 09:31.440
+You should see it Amazon Q you click on it and you can start chatting.
+
+09:31.760 --> 09:33.600
+We're going to see Amazon Q later.
+
+09:33.600 --> 09:37.560
+Also as a code assistant in our VS code we're going to write codes later.
+
+09:37.560 --> 09:39.440
+Scripting automation code.
+
+09:39.440 --> 09:40.720
+It's like GitHub Copilot.
+
+09:40.720 --> 09:43.240
+Also you can use like a code assistant agent AI.
+
+09:43.920 --> 09:48.390
+But right now we're just going to use it as a chatting tool like ChatGPT and we can get information
+
+09:48.390 --> 09:51.350
+from it like how to do any tasks.
+
+09:51.350 --> 09:53.070
+For example, I want to create a key pair.
+
+09:53.110 --> 09:55.710
+How can I create a key pair by using AWS cli.
+
+09:57.150 --> 09:59.590
+How to create key pair using AWS cli.
+
+10:00.030 --> 10:06.550
+Now Amazon EC2 is slower than other AI tools like ChatGPT for chatting, but it is the most precise
+
+10:06.550 --> 10:08.230
+one that I have seen so far.
+
+10:08.590 --> 10:12.230
+And for this such simple thing, of course ChatGPT will also give you the right thing.
+
+10:12.230 --> 10:17.510
+But when we get into detail later into this course, when we do scripting, when we programmatically
+
+10:17.510 --> 10:24.150
+create AWS resources, that time you will see the power of Amazon Q now anyways, so we get the command
+
+10:24.150 --> 10:29.030
+AWS, EC2, create key pair key name, and you give the key name that just creates the key.
+
+10:29.190 --> 10:31.070
+Save the private key to a file.
+
+10:31.110 --> 10:32.150
+Let's do this one.
+
+10:32.350 --> 10:33.550
+Let me copy this command.
+
+10:34.070 --> 10:36.150
+So I'm not going to change anything over here.
+
+10:36.150 --> 10:38.990
+Just I'm just keeping the key name as my key pair.
+
+10:39.030 --> 10:41.270
+Dot PEM hit enter.
+
+10:41.870 --> 10:45.620
+So this should create the public key on our AWS account and private key.
+
+10:46.140 --> 10:47.340
+In this file.
+
+10:47.380 --> 10:50.340
+Now this error you see over here the output redirection.
+
+10:50.540 --> 10:53.180
+So this is going to generate the private key.
+
+10:53.420 --> 10:56.380
+And this information will be stored into this file.
+
+10:57.180 --> 10:57.380
+Okay.
+
+10:57.420 --> 10:58.460
+If we do Cat.
+
+10:58.700 --> 11:03.100
+So this file would have already created my key pair dot pem.
+
+11:03.540 --> 11:05.100
+See the private key content.
+
+11:05.820 --> 11:10.820
+If you go to EC2 the key pair section you can see the public key also over here.
+
+11:11.140 --> 11:11.380
+Okay.
+
+11:11.380 --> 11:16.020
+Now next command let's ask create security group.
+
+11:19.660 --> 11:29.940
+With name my SG with rule 22 from my IP and 80 from anywhere.
+
+11:32.740 --> 11:34.220
+I'm just being very simple.
+
+11:34.220 --> 11:37.780
+No prompt prompt modification or refining the prompt.
+
+11:37.820 --> 11:38.220
+Nothing.
+
+11:38.220 --> 11:39.740
+Just plain chatting.
+
+11:40.300 --> 11:44.810
+Just keeping it as simple as I can and see if it gives me the right information or not.
+
+11:45.210 --> 11:47.810
+Because of course it is saying, you know, get your current IP address.
+
+11:47.810 --> 11:49.810
+So when you run this command, let's do this.
+
+11:51.090 --> 11:53.370
+So that's a variable equal to.
+
+11:53.410 --> 12:00.210
+And then there is a command curl command which accesses a URL that that gets the public IP and stores
+
+12:00.210 --> 12:01.530
+it into this variable.
+
+12:01.850 --> 12:05.810
+And echo command is just simply going to print that there.
+
+12:05.810 --> 12:09.450
+So we have that our public IP and it is stored into this variable.
+
+12:10.010 --> 12:10.250
+Okay.
+
+12:10.290 --> 12:13.090
+So the next command is just simply creating the security group.
+
+12:13.090 --> 12:15.930
+Let me just copy this and paste it.
+
+12:15.970 --> 12:18.090
+I'm simply doing copy paste but in real time.
+
+12:18.090 --> 12:18.610
+Definitely.
+
+12:18.610 --> 12:22.810
+You need to know make the changes, do the proper naming convention and stuff.
+
+12:23.050 --> 12:25.490
+But as I said, for now I'm just keeping it pretty simple.
+
+12:26.010 --> 12:29.730
+Okay, so this command created a security group, but without any rules.
+
+12:29.770 --> 12:31.650
+Let's see how it creates the rules.
+
+12:32.130 --> 12:39.610
+So this is how it creates the rule AWS EC2 Authorized Security Group ingress the group name, protocol,
+
+12:39.650 --> 12:43.850
+TCP port number, and cider from where it should be allowed.
+
+12:43.850 --> 12:45.130
+That is from my IP.
+
+12:45.770 --> 12:46.770
+Use this command.
+
+12:50.090 --> 12:50.690
+Nice.
+
+12:50.730 --> 12:57.770
+Okay, now you must have observed that I'm executing the commands about a task that we already did.
+
+12:58.490 --> 13:00.090
+And that's how it should be.
+
+13:00.090 --> 13:01.850
+You should know what you're doing.
+
+13:01.850 --> 13:05.050
+You should have already done it through graphically, or you should know it somehow.
+
+13:05.490 --> 13:11.570
+So mastering AWS, CLI or even programmatic access of AWS will not come directly.
+
+13:11.570 --> 13:15.730
+First, you should know that you should have done that either graphically or you should have worked
+
+13:15.730 --> 13:16.250
+on it.
+
+13:16.490 --> 13:18.450
+Then only these commands will make sense.
+
+13:18.930 --> 13:22.690
+And that's my thumb rule that I teach to everyone in DevOps.
+
+13:23.090 --> 13:28.010
+Know how to do things manually first before you start automating it, right?
+
+13:28.050 --> 13:33.210
+If you do not know security group and if I show you this command, or if you know the Amazon Q is showing
+
+13:33.210 --> 13:36.210
+you the ChatGPT showing you you won't be able to make any sense out of it.
+
+13:36.250 --> 13:39.690
+If it fails you, you will not know why it failed, right?
+
+13:39.690 --> 13:44.760
+So always, always learn how to do things manually first and then learn how to automate it.
+
+13:45.200 --> 13:47.160
+Or in this case just command line.
+
+13:47.200 --> 13:49.080
+Learn how to do it through command line later.
+
+13:49.080 --> 13:52.040
+First graphically when you're learning of course.
+
+13:52.080 --> 13:53.320
+Anyways, let's get back.
+
+13:53.320 --> 13:55.320
+So another rule to add port 80.
+
+13:55.360 --> 13:56.320
+Let's take this.
+
+13:58.120 --> 14:02.400
+So it's you create the security group first and then you add the rule okay.
+
+14:02.600 --> 14:08.000
+Last command I'm going to ask launch EC2 instance with below details name I have given web zero two
+
+14:08.040 --> 14:08.680
+key pair.
+
+14:08.720 --> 14:11.320
+My key pair which we created previously.
+
+14:11.760 --> 14:14.600
+Security group name Amazon Linux Ami.
+
+14:14.640 --> 14:17.920
+I've just given the name you can give ami id that is better.
+
+14:18.120 --> 14:19.800
+So let me get the ami id.
+
+14:20.000 --> 14:22.840
+So I'm going to say my chat is gone anyways.
+
+14:23.000 --> 14:24.440
+So launch instance.
+
+14:24.840 --> 14:27.120
+So that's the ami ID Amazon Linux.
+
+14:30.240 --> 14:33.920
+Now actually it can find the ID for you based on the region also.
+
+14:34.320 --> 14:37.560
+But I want it to be very specific okay.
+
+14:37.560 --> 14:39.350
+So I'm giving all this detail Ahmed.
+
+14:39.350 --> 14:40.790
+And then instance type.
+
+14:41.030 --> 14:43.430
+Let's hit enter and let's see the command that it gives us.
+
+14:44.030 --> 14:45.910
+Or you can ask much more details.
+
+14:45.950 --> 14:50.350
+You know user data script how to add stuff like that gives you the command.
+
+14:50.390 --> 14:51.190
+Let's copy it.
+
+14:51.470 --> 14:52.390
+Let's run this.
+
+14:55.470 --> 14:57.830
+Okay I'm going to give Q to quit from this.
+
+14:58.550 --> 15:00.790
+Now let's take a look in the Amazon console.
+
+15:01.230 --> 15:02.990
+So we have web zero two here.
+
+15:03.030 --> 15:03.950
+Go to security.
+
+15:03.950 --> 15:05.390
+You can see the security group.
+
+15:05.390 --> 15:08.710
+You can see the rules in the security group you can see the key pair name.
+
+15:08.990 --> 15:11.350
+Now why do we need this command line.
+
+15:11.550 --> 15:12.990
+Where will we use it.
+
+15:13.030 --> 15:15.630
+You are going to see that in the upcoming lectures.
+
+15:15.630 --> 15:22.750
+When we do DevOps, CI, CD pipelines, when we do programmatic access, there are situations where
+
+15:22.750 --> 15:24.630
+we need the command lines.
+
+15:24.790 --> 15:26.550
+I'm not asking you to know.
+
+15:26.590 --> 15:27.470
+Just memorize.
+
+15:27.510 --> 15:28.670
+Learn all the commands.
+
+15:28.670 --> 15:29.670
+You should know everything.
+
+15:29.670 --> 15:30.990
+How to do it through command line.
+
+15:30.990 --> 15:35.070
+No, you should have the power of CLI in your hand whenever you need.
+
+15:35.070 --> 15:37.700
+You can use it and trust me, you will need it.
+
+15:37.860 --> 15:39.420
+So you have documentation.
+
+15:39.420 --> 15:44.340
+You have Amazon Q, you have ChatGPT you can use all these resources and find the command and execute
+
+15:44.340 --> 15:44.500
+it.
+
+15:44.500 --> 15:46.700
+Just don't run it blindly.
+
+15:46.940 --> 15:52.460
+Take a look see what command is saying and test it before you use it into your scripting, which we'll
+
+15:52.460 --> 15:53.140
+see later.
+
+15:53.740 --> 15:58.900
+Once you're done, you can delete the instance, this instance, and make sure you deactivate the access
+
+15:58.940 --> 16:00.620
+keys that you have created.
+
+16:00.780 --> 16:02.540
+So I'm going to terminate this instance.
+
+16:02.540 --> 16:04.460
+Now you can use the command line better.
+
+16:04.460 --> 16:05.300
+Use the command line.
+
+16:05.300 --> 16:09.460
+Find out the command how to terminate this instance and then go to IAM.
+
+16:09.900 --> 16:13.540
+You can either delete the user or delete the access key.
+
+16:14.300 --> 16:18.700
+Or before you do that, play with AWS a little bit more.
+
+16:18.740 --> 16:19.900
+See what you can do.
+
+16:20.220 --> 16:21.460
+Just get to know it a little bit.
+
+16:21.900 --> 16:23.260
+Know a little bit better.
+
+16:23.420 --> 16:28.780
+You really don't need to master it, but just some hands on which will be very useful in our further
+
+16:28.780 --> 16:29.500
+lectures.
+
+16:30.540 --> 16:32.740
+Okay, confirm and delete this user.
+
+16:33.620 --> 16:35.380
+Okay then that would be all in this lecture.
+
+16:35.380 --> 16:36.620
+I will see you in the next one.

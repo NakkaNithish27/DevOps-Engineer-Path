@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00.600 --> 00:02.307
+Instructor: Okay, so if you have still not set up
+
+00:02.307 --> 00:07.307
+the Kubernetes cluster, then go to the previous lectures
+
+00:07.380 --> 00:10.260
+where we set up Kubernetes cluster with kOPs.
+
+00:10.260 --> 00:13.110
+Follow that and set up the Kubernetes cluster.
+
+00:13.110 --> 00:15.861
+If you already did that lecture and you deleted your cluster
+
+00:15.861 --> 00:18.240
+and you have the kOPs EC2 instance
+
+00:18.240 --> 00:19.980
+and all the other prerequisites,
+
+00:19.980 --> 00:23.040
+hosted zone everything, then you just need
+
+00:23.040 --> 00:27.000
+to bring up your kOPs instance and log into this.
+
+00:27.000 --> 00:29.850
+And from there, we'll run the kops create cluster command
+
+00:29.850 --> 00:32.370
+and set up the Kubernetes cluster.
+
+00:32.370 --> 00:34.590
+If you don't wish to do that,
+
+00:34.590 --> 00:36.060
+then you can just watch this lecture.
+
+00:36.060 --> 00:37.950
+You already done the definition files.
+
+00:37.950 --> 00:41.403
+I'll show you how you can run it on the cluster.
+
+00:42.600 --> 00:45.450
+So I'm going to copy the public IP of the kOPs instance
+
+00:45.450 --> 00:46.593
+and log into this.
+
+00:51.300 --> 00:54.333
+Okay, switch to root user, clear the screen.
+
+00:56.010 --> 00:58.170
+Kops create cluster command,
+
+00:58.170 --> 00:59.820
+and you have to make sure you have
+
+00:59.820 --> 01:01.800
+the access key stored over here.
+
+01:01.800 --> 01:05.580
+You have created the hosted zone in root 53,
+
+01:05.580 --> 01:08.220
+stored this information in Kubernetes account,
+
+01:08.220 --> 01:10.740
+DNS records, DNS name records.
+
+01:10.740 --> 01:14.010
+You have the S3 bucket and all the other things
+
+01:14.010 --> 01:16.410
+that we did while setting up the cluster.
+
+01:16.410 --> 01:19.410
+So I'm just going to run this command to set up the cluster.
+
+01:21.120 --> 01:23.280
+Okay, and then I'm going to run the kops update cluster
+
+01:23.280 --> 01:26.010
+command that will start setting up the cluster.
+
+01:26.010 --> 01:28.950
+Kops update cluster, cluster name, hyphen hyphen state,
+
+01:28.950 --> 01:32.073
+the bucket path, hyphen hyphen yes, hyphen hyphen admin.
+
+01:33.900 --> 01:35.760
+Okay, this should start creating the cluster,
+
+01:35.760 --> 01:37.710
+by the time we are going to push our source code
+
+01:37.710 --> 01:39.510
+to our GitHub repository.
+
+01:39.510 --> 01:43.233
+Okay, so come to github.com and create a repository.
+
+01:44.130 --> 01:46.590
+Make sure you're logged into your GitHub account.
+
+01:46.590 --> 01:48.512
+And give a name.
+
+01:48.512 --> 01:50.550
+I'm just giving a name as vprokube.
+
+01:50.550 --> 01:52.800
+Public Repository, don't add anything.
+
+01:52.800 --> 01:54.543
+Just hit Create Repository.
+
+01:55.650 --> 01:57.420
+So once it is created, you get this,
+
+01:57.420 --> 02:00.780
+you click on uploading an existing file.
+
+02:00.780 --> 02:03.960
+So we can do SSH-based authentication, push our code.
+
+02:03.960 --> 02:06.090
+But I'm just keeping it simple over here, we're just going
+
+02:06.090 --> 02:10.350
+to simply take all our file and just upload it over here.
+
+02:10.350 --> 02:12.240
+So on the VS Code, when I was cloning,
+
+02:12.240 --> 02:17.240
+I cloned all this in the F drive in kubeapp folder.
+
+02:17.280 --> 02:20.700
+So go to your location, I'm in F drive, kubeapp folder.
+
+02:20.700 --> 02:25.410
+Here I have vprofile-project, and let me minimize this.
+
+02:25.410 --> 02:27.210
+So I'm going to drag and drop,
+
+02:27.210 --> 02:30.180
+because I want to copy everything.
+
+02:30.180 --> 02:34.233
+Just select all this and just drag and drop.
+
+02:36.210 --> 02:37.980
+It is saying there are too many files.
+
+02:37.980 --> 02:40.800
+Now do it fewer than 100 at a time.
+
+02:40.800 --> 02:42.990
+So let's do one folder at a time.
+
+02:42.990 --> 02:45.273
+So first I'll copy the src.
+
+02:47.640 --> 02:49.743
+Select it, drag and drop.
+
+02:53.400 --> 02:54.750
+That is also a problem.
+
+02:54.750 --> 02:56.883
+Just going to copy the kubedefs.
+
+02:58.920 --> 03:02.430
+Frankly, that's all we need for this project setup.
+
+03:02.430 --> 03:04.320
+It's going to fetch all the images from Docker Hub.
+
+03:04.320 --> 03:05.580
+We really don't need the source code.
+
+03:05.580 --> 03:08.220
+We are not doing any build or anything over here.
+
+03:08.220 --> 03:10.620
+So you can just upload the kube definition files.
+
+03:10.620 --> 03:13.680
+And along with that, I'll just put docker-compose
+
+03:13.680 --> 03:14.580
+and other files also,
+
+03:14.580 --> 03:16.800
+just in case if you want to see things.
+
+03:16.800 --> 03:18.460
+So I'll put the Docker files
+
+03:19.590 --> 03:22.533
+and I'll also put the docker-compose file.
+
+03:24.900 --> 03:27.900
+Mainly we need the kubedefs folder.
+
+03:27.900 --> 03:28.980
+And let's make a commit.
+
+03:28.980 --> 03:32.730
+I'll just say kube defs upload.
+
+03:32.730 --> 03:34.533
+And I'll just say, commit changes.
+
+03:35.820 --> 03:38.220
+And that's the URL HTTPS.
+
+03:38.220 --> 03:40.533
+This is the URL of our repository.
+
+03:41.400 --> 03:42.600
+So go to that.
+
+03:42.600 --> 03:46.080
+Just say copy, go to your kOPs instance
+
+03:46.080 --> 03:49.983
+and clone it over here, I'm going to say git clone insert.

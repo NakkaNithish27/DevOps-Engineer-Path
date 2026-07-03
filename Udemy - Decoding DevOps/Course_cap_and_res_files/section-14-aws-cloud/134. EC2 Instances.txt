@@ -1,0 +1,1036 @@
+WEBVTT
+
+00:00.570 --> 00:01.800
+Instructor: All right, in this lecture,
+
+00:01.800 --> 00:05.223
+we are going to set up four EC2 instances,
+
+00:06.540 --> 00:11.370
+one for MySQL, second for Memcache, third, RabbitMQ,
+
+00:11.370 --> 00:14.250
+fourth one, the Tomcat instance.
+
+00:14.250 --> 00:16.500
+We are going to provision this instance
+
+00:16.500 --> 00:20.460
+and set up all the services by using the user data script,
+
+00:20.460 --> 00:23.130
+and while we launch these instances, we have to make sure
+
+00:23.130 --> 00:25.770
+we put them in the right security group.
+
+00:25.770 --> 00:29.160
+These three instances goes into backend security group,
+
+00:29.160 --> 00:33.030
+Tomcat instance goes into the app security group,
+
+00:33.030 --> 00:34.200
+and then in the later lecture,
+
+00:34.200 --> 00:35.940
+we'll see the load balancer, when we create,
+
+00:35.940 --> 00:38.643
+we put it in the load balancer security group.
+
+00:39.600 --> 00:42.900
+Okay, first thing we'll do is we will clone our source code,
+
+00:42.900 --> 00:47.900
+so come to github.com/hkhcoder/vprofile-project.
+
+00:48.660 --> 00:49.953
+Copy the link.
+
+00:52.560 --> 00:54.630
+So I'm going to clone it in the F drive
+
+00:54.630 --> 00:57.660
+that I did in the previous project,
+
+00:57.660 --> 01:00.259
+but I'll remove that repository first, so in the hkhcoder,
+
+01:00.259 --> 01:03.750
+I cloned the repository and we made some changes.
+
+01:03.750 --> 01:08.750
+We just should delete this now, and then let's open VSCode.
+
+01:10.720 --> 01:13.170
+Okay, let's click on this button over here,
+
+01:13.170 --> 01:17.040
+source control, and clone repository.
+
+01:17.040 --> 01:20.130
+Paste the URL over there, click on it,
+
+01:20.130 --> 01:23.430
+and select your location where you want to clone it.
+
+01:23.430 --> 01:27.270
+I'm going to keep it in F drive, hkhcoder,
+
+01:27.270 --> 01:29.823
+and I'll say select repository destination.
+
+01:31.290 --> 01:32.973
+Okay, open in the same window.
+
+01:34.320 --> 01:38.250
+So by default, you will get the main branch.
+
+01:38.250 --> 01:40.920
+We need to switch from main branch
+
+01:40.920 --> 01:43.860
+to AWS lift and shift branch.
+
+01:43.860 --> 01:48.270
+So click on this and select AWS lift and shift,
+
+01:48.270 --> 01:51.213
+all in small, click on this branch.
+
+01:52.530 --> 01:56.073
+Here, you get this folder, user data. Expand that.
+
+01:57.990 --> 02:00.180
+So first, we will launch the DB instance,
+
+02:00.180 --> 02:04.089
+so we're going to use this mysql.sh script in the user data
+
+02:04.089 --> 02:06.360
+to set up the MySQL service.
+
+02:06.360 --> 02:08.010
+Now, this is not so much different
+
+02:08.010 --> 02:12.330
+from what we used in vprofile project local setup
+
+02:12.330 --> 02:13.946
+when we set up our vprofile project
+
+02:13.946 --> 02:16.680
+on the virtual machines using Vagrant.
+
+02:16.680 --> 02:19.980
+So this is the similar script, except few changes.
+
+02:19.980 --> 02:24.980
+We will be using Amazon Linux 2023 AMI, not the CentOS AMI,
+
+02:27.030 --> 02:30.340
+and in this, you have the MariaDB package name
+
+02:30.340 --> 02:33.843
+as mariadb105-server.
+
+02:35.220 --> 02:38.700
+So that is the name of the package which we install.
+
+02:38.700 --> 02:40.890
+We start and enable MariaDB service.
+
+02:40.890 --> 02:43.410
+We clone our source code.
+
+02:43.410 --> 02:45.240
+Now, in manual provisioning, we have seen,
+
+02:45.240 --> 02:47.550
+after we install MariaDB service,
+
+02:47.550 --> 02:50.970
+we run a command, MySQL secure installation,
+
+02:50.970 --> 02:54.450
+which will ask us the question of the root password,
+
+02:54.450 --> 02:57.300
+removing the test databases and all,
+
+02:57.300 --> 02:58.950
+but this will be all happening in the background,
+
+02:58.950 --> 03:00.534
+so we have some SQL queries here
+
+03:00.534 --> 03:04.320
+that is going to execute those things for us,
+
+03:04.320 --> 03:07.500
+removing test users and all, and once that is done,
+
+03:07.500 --> 03:10.495
+we create the database, we create admin user
+
+03:10.495 --> 03:14.190
+and grant it privilege on the accounts database
+
+03:14.190 --> 03:16.860
+from locally and from remotely,
+
+03:16.860 --> 03:19.980
+and we deploy the DB schema file.
+
+03:19.980 --> 03:21.240
+This is the same thing what we did
+
+03:21.240 --> 03:24.390
+in vprofile project local setup.
+
+03:24.390 --> 03:26.520
+So let's go ahead, launch the instance,
+
+03:26.520 --> 03:28.323
+and execute the script on that.
+
+03:29.340 --> 03:30.960
+Okay, I'm on my AWS console,
+
+03:30.960 --> 03:33.390
+again, north Virginia region I'm in,
+
+03:33.390 --> 03:35.820
+same place where I created the security group.
+
+03:35.820 --> 03:38.550
+Just check once again if you have the security groups.
+
+03:38.550 --> 03:40.380
+I have all the security groups.
+
+03:40.380 --> 03:43.950
+Let's go instances, and I'm going to say launch instances.
+
+03:43.950 --> 03:47.190
+I will name it as vprofile-db01.
+
+03:47.190 --> 03:49.290
+We'll add some more tag.
+
+03:49.290 --> 03:51.513
+We'll give the project tag here.
+
+03:54.180 --> 03:57.345
+The value will be vprofile.
+
+03:57.345 --> 04:01.530
+Now, in real time, you will have some naming conventions,
+
+04:01.530 --> 04:06.090
+some more things to add, like the environment owner,
+
+04:06.090 --> 04:08.340
+so make sure you follow the right standards
+
+04:08.340 --> 04:11.130
+as per your organization or as per your project
+
+04:11.130 --> 04:14.580
+and give proper naming convention to your instances,
+
+04:14.580 --> 04:17.940
+not just on the fly, you decide something and give the name.
+
+04:17.940 --> 04:19.110
+There should be a standard.
+
+04:19.110 --> 04:20.220
+If there is no standard,
+
+04:20.220 --> 04:23.010
+you have to make sure you set the standard,
+
+04:23.010 --> 04:25.893
+and we'll also make sure the tags are on the volumes.
+
+04:29.310 --> 04:31.260
+Make sure you don't miss this in the real time.
+
+04:31.260 --> 04:34.170
+Your volumes should also have tag
+
+04:34.170 --> 04:36.030
+so you don't accidentally delete some volumes
+
+04:36.030 --> 04:38.041
+or maybe delete the instance or volumes are just there,
+
+04:38.041 --> 04:41.970
+just like that, eating up your space.
+
+04:41.970 --> 04:45.240
+Okay, next, go and select an AMI,
+
+04:45.240 --> 04:49.290
+so we are going with Amazon Linux 2023 AMI.
+
+04:49.290 --> 04:52.110
+We're keeping this as a standard in this project,
+
+04:52.110 --> 04:54.330
+except for Tomcat.
+
+04:54.330 --> 04:58.053
+That we will set on Ubuntu, and I'll let you know why later.
+
+04:59.310 --> 05:03.030
+Okay, coming down, instance type, we'll keep T2 micro,
+
+05:03.030 --> 05:05.670
+or if you have T3 Micro, that is a standard.
+
+05:05.670 --> 05:07.440
+You can select that one.
+
+05:07.440 --> 05:10.980
+Just make sure you have free tier eligible there.
+
+05:10.980 --> 05:12.602
+Okay, key pair, we already created key pair,
+
+05:12.602 --> 05:14.880
+vprofile prod key.
+
+05:14.880 --> 05:16.650
+We'll select that.
+
+05:16.650 --> 05:19.170
+Network settings, edit,
+
+05:19.170 --> 05:22.560
+and come to select existing security group
+
+05:22.560 --> 05:24.390
+and select your security group.
+
+05:24.390 --> 05:26.524
+So this is a database instance,
+
+05:26.524 --> 05:28.641
+and we have a separate security group for that,
+
+05:28.641 --> 05:30.990
+vprofile backend security group.
+
+05:30.990 --> 05:34.500
+Make sure you select that and then come down
+
+05:34.500 --> 05:37.620
+and click on advanced details.
+
+05:37.620 --> 05:39.780
+Scroll till the end, and here,
+
+05:39.780 --> 05:42.450
+we're going to put the MySQL script,
+
+05:42.450 --> 05:44.670
+so I'm going to go to my VSCode
+
+05:44.670 --> 05:47.610
+and make sure I copy everything from here,
+
+05:47.610 --> 05:49.173
+including the first line.
+
+05:50.100 --> 05:52.533
+Go back and just paste it over there.
+
+05:54.300 --> 05:55.590
+This first line is important.
+
+05:55.590 --> 05:57.870
+Otherwise, user data script won't run.
+
+05:57.870 --> 05:59.803
+Also, one more reason your script won't work
+
+05:59.803 --> 06:01.590
+is if you have made changes
+
+06:01.590 --> 06:04.080
+to the security group outbound rules,
+
+06:04.080 --> 06:05.910
+you will not get any internet
+
+06:05.910 --> 06:09.750
+and won't be able to download any softwares.
+
+06:09.750 --> 06:11.820
+So that is it. Launch instance.
+
+06:11.820 --> 06:13.862
+Okay, the instance launch is in progress.
+
+06:13.862 --> 06:17.403
+Let's go and look at the second instance script,
+
+06:18.660 --> 06:20.670
+memcache.sh.
+
+06:20.670 --> 06:23.550
+It's pretty simple, install memcache, start and enable it,
+
+06:23.550 --> 06:26.745
+change the configuration file, so Memcache service listens
+
+06:26.745 --> 06:29.970
+on remote connection.
+
+06:29.970 --> 06:34.970
+For that, we replace the local IP with 0.0.0.0,
+
+06:38.280 --> 06:39.800
+then we restart the Memcache service,
+
+06:39.800 --> 06:42.630
+so it starts listening to the remote connection.
+
+06:42.630 --> 06:47.063
+We execute this command so Memcache listens on port 11211.
+
+06:48.480 --> 06:51.420
+That simple. Just let's launch the instance.
+
+06:51.420 --> 06:53.403
+Let's go back to the EC2 instances.
+
+06:55.500 --> 07:00.120
+Click on launch instances, vprofile-mc01,
+
+07:00.120 --> 07:03.840
+additional tag, project, I will add project, vprofile,
+
+07:03.840 --> 07:06.873
+make sure the volumes are also tagged.
+
+07:08.820 --> 07:13.473
+Select the AMI as Amazon Linux 2023 AMI, free tier eligible.
+
+07:14.520 --> 07:17.790
+Instance type, T2 micro is fine, free tier eligible.
+
+07:17.790 --> 07:20.310
+If you have T3 micro free tier eligible,
+
+07:20.310 --> 07:22.350
+you can select that also.
+
+07:22.350 --> 07:25.740
+Key pair, vprofile prod key.
+
+07:25.740 --> 07:27.930
+Network setting, edit,
+
+07:27.930 --> 07:32.460
+and make sure to select the backend security group.
+
+07:32.460 --> 07:33.293
+Backend.
+
+07:35.190 --> 07:38.133
+Goes in the same security group like MySQL,
+
+07:39.120 --> 07:43.200
+and then advanced details, user data,
+
+07:43.200 --> 07:44.643
+let's copy your script.
+
+07:45.720 --> 07:47.193
+It's a pretty simple script.
+
+07:48.120 --> 07:52.383
+Let's paste it here and say launch instance.
+
+07:53.400 --> 07:57.753
+Okay, let's go and check the next script, rabbitmq.sh.
+
+07:58.980 --> 08:01.470
+Now, this script is very different from what we used
+
+08:01.470 --> 08:06.330
+in local setup of vprofile, 'cause that was done on CentOS,
+
+08:06.330 --> 08:10.770
+and the same method does not work on Amazon Linux 2023 AMI
+
+08:10.770 --> 08:12.900
+because it has different repositories.
+
+08:12.900 --> 08:14.640
+It's almost the same operating system,
+
+08:14.640 --> 08:16.620
+but the repositories are different,
+
+08:16.620 --> 08:20.280
+so I got these commands from the RabbitMQ documentation.
+
+08:20.280 --> 08:21.930
+So first three commands are simple.
+
+08:21.930 --> 08:26.930
+We import sign-in keys for RabbitMQ repository,
+
+08:27.720 --> 08:31.192
+Erlang repository, which is the dependency of RabbitMQ,
+
+08:31.192 --> 08:36.174
+Erlang, then we have here a command that downloads a file
+
+08:36.174 --> 08:37.953
+from our repository.
+
+08:39.780 --> 08:42.960
+I have created a file in our repository,
+
+08:42.960 --> 08:46.530
+so downloads and keeps at this location.
+
+08:46.530 --> 08:48.840
+Let's take a look at that file.
+
+08:48.840 --> 08:52.620
+So our source code, this local, we cloned it from GitHub,
+
+08:52.620 --> 08:54.003
+so there's this file.
+
+08:54.960 --> 08:56.618
+This is the information of a repository
+
+08:56.618 --> 08:58.776
+for Erlang and RabbitMQ.
+
+08:58.776 --> 09:02.730
+This I got from the RabbitMQ documentation,
+
+09:02.730 --> 09:05.176
+so one way is manually you create this file.
+
+09:05.176 --> 09:08.460
+The other way is what I did.
+
+09:08.460 --> 09:11.370
+I just created this file, stored it in our source code,
+
+09:11.370 --> 09:14.553
+and we just download it in the instance.
+
+09:15.390 --> 09:18.483
+I can put all this also in the script.
+
+09:18.483 --> 09:20.880
+By using cat command, we can create the file,
+
+09:20.880 --> 09:25.740
+but the script will look very ugly, so I use this method.
+
+09:25.740 --> 09:27.779
+So in our source code, it's going to go to this branch,
+
+09:27.779 --> 09:31.650
+and here, we have this repository file.
+
+09:31.650 --> 09:33.450
+It's going to download it from here,
+
+09:34.351 --> 09:35.460
+because that's what it does.
+
+09:35.460 --> 09:40.110
+It keeps that file at this location, etc/yum.repos.d,
+
+09:40.110 --> 09:41.940
+and we run DNF update,
+
+09:41.940 --> 09:45.570
+install socat and logrotate dependency for RabbitMQ,
+
+09:45.570 --> 09:48.240
+and then we install Erlang and RabbitMQ.
+
+09:48.240 --> 09:49.770
+Start and enable the service.
+
+09:49.770 --> 09:53.370
+After this, it is the same what we did in the local project.
+
+09:53.370 --> 09:56.175
+We changed the configuration, we add the test user,
+
+09:56.175 --> 09:59.340
+we give it administrator tag, we give it permission,
+
+09:59.340 --> 10:01.473
+and we restart RabbitMQ servers.
+
+10:02.340 --> 10:04.305
+Okay, so let's go and launch the instance
+
+10:04.305 --> 10:06.453
+and execute the script on it.
+
+10:08.430 --> 10:11.154
+Click on launch instances, give it tag,
+
+10:11.154 --> 10:16.154
+name, vprofile-rmq01, project, vprofile.
+
+10:16.470 --> 10:18.693
+Make sure to tag the volumes also.
+
+10:21.030 --> 10:22.230
+Come down.
+
+10:22.230 --> 10:27.097
+Same AMI, Amazon Linux 2023 AMI, T2 micro or T3 micro,
+
+10:28.590 --> 10:33.590
+free tier eligible, whichever, key pair, vprofile prod key,
+
+10:34.350 --> 10:38.130
+network settings, edit, select security group,
+
+10:38.130 --> 10:41.310
+and select the backend security group once again,
+
+10:41.310 --> 10:42.753
+backend security group.
+
+10:47.010 --> 10:49.023
+User data, let's copy the script.
+
+10:50.250 --> 10:52.000
+Make sure you copy the whole thing.
+
+10:55.620 --> 10:58.803
+Paste it, and let's launch the instance.
+
+11:00.030 --> 11:03.630
+So the last instance, then, Tomcat, very simple script.
+
+11:03.630 --> 11:06.720
+Let's go to tomcat_ubuntu.sh, that's right.
+
+11:06.720 --> 11:11.720
+We're going to use Ubuntu AMI for this one, Ubuntu 2024.
+
+11:11.880 --> 11:16.880
+Reason? Well, we did use CentOS in the local setup project.
+
+11:17.670 --> 11:20.280
+I wanted to have a different operating system
+
+11:20.280 --> 11:22.260
+for this one, Ubuntu.
+
+11:22.260 --> 11:25.650
+I want to show you how simple it is to use Ubuntu.
+
+11:25.650 --> 11:29.250
+Most of the packages are available in the repositories,
+
+11:29.250 --> 11:30.690
+so if we use CentOS
+
+11:30.690 --> 11:32.910
+and we need to download the latest Tomcat,
+
+11:32.910 --> 11:35.730
+you have seen what all we need to go through.
+
+11:35.730 --> 11:38.820
+We download the binary, extract it, add Tomcat user,
+
+11:38.820 --> 11:41.580
+create systemd file, and we do a lot of things,
+
+11:41.580 --> 11:43.114
+but here in Ubuntu, it's pretty simple,
+
+11:43.114 --> 11:46.290
+apt install tomcat10, that is it.
+
+11:46.290 --> 11:49.620
+And this is available in Ubuntu 2024,
+
+11:49.620 --> 11:52.290
+or simply we just call it as Ubuntu 24 server.
+
+11:52.290 --> 11:55.890
+Older than that, we have Tomcat 9 in the repository.
+
+11:55.890 --> 11:56.790
+So that is all we need to do.
+
+11:56.790 --> 11:58.620
+We just need to set up the Tomcat service.
+
+11:58.620 --> 12:00.799
+To build and deploy, that we'll see in the later lecture,
+
+12:00.799 --> 12:04.395
+where we build the source code locally on our computer,
+
+12:04.395 --> 12:09.000
+on our laptop, and then upload it through S3 bucket.
+
+12:09.000 --> 12:11.610
+It's going to be fun, so I want you to keep that separate
+
+12:11.610 --> 12:13.860
+so you have some more extra learning.
+
+12:13.860 --> 12:16.590
+Okay, so let's quickly launch this instance.
+
+12:16.590 --> 12:18.393
+Let's go to launch instances.
+
+12:19.440 --> 12:22.110
+Name, vprofile-app01.
+
+12:22.110 --> 12:24.180
+Make sure to tag the volume.
+
+12:24.180 --> 12:26.643
+Project, vprofile, tag the volume.
+
+12:27.840 --> 12:31.603
+Okay, here, the AMI will be Ubuntu 24.
+
+12:34.020 --> 12:37.710
+Make sure that's 24 LTS HVM SSD volume type,
+
+12:37.710 --> 12:39.450
+free tier eligible.
+
+12:39.450 --> 12:40.860
+If you don't see it right away,
+
+12:40.860 --> 12:43.920
+click on this and find it from here
+
+12:43.920 --> 12:46.323
+and make sure to go with 24.
+
+12:47.550 --> 12:51.420
+T2 micro is fine, key pair, the same key pair,
+
+12:51.420 --> 12:54.213
+network settings, edit, select.
+
+12:56.010 --> 12:58.460
+Now, which security group do we select over here?
+
+12:59.340 --> 13:01.473
+That's right, app security group.
+
+13:02.910 --> 13:06.180
+Tomcat instance goes into the app security group,
+
+13:06.180 --> 13:08.791
+and then, when it connects to these backend instances,
+
+13:08.791 --> 13:11.730
+these backend instance security group rules
+
+13:11.730 --> 13:14.130
+will allow the connection.
+
+13:14.130 --> 13:19.110
+So the app security group, advanced details, user data.
+
+13:19.110 --> 13:23.107
+Let's copy the script, and let's say launch instance.
+
+13:28.348 --> 13:29.970
+All right.
+
+13:29.970 --> 13:33.000
+Now, close these extra tabs over here.
+
+13:33.000 --> 13:36.030
+Remove this over here, the filter.
+
+13:36.030 --> 13:38.070
+We see all the instances.
+
+13:38.070 --> 13:39.900
+Now, app instance will be still
+
+13:39.900 --> 13:41.130
+executing the script and all.
+
+13:41.130 --> 13:43.473
+Let's verify all these instances one by one.
+
+13:46.320 --> 13:48.480
+Let's check the service of every instance.
+
+13:48.480 --> 13:53.130
+db01, select the db01, get its public IP,
+
+13:53.130 --> 13:56.520
+and open your terminal. Let's do ssh -i.
+
+13:56.520 --> 14:01.520
+My key is in the Downloads/vprofile-prod-key.
+
+14:01.620 --> 14:06.582
+Username is ec2-user.
+
+14:06.582 --> 14:09.453
+ec2-user, this is the DB instance.
+
+14:11.010 --> 14:15.303
+Amazon Linux 2023 AMI, the user is ec2-user.
+
+14:17.490 --> 14:20.340
+If you're doing an SSH, after one day,
+
+14:20.340 --> 14:21.840
+your public IP will change.
+
+14:21.840 --> 14:24.243
+You need to update the security group rule then.
+
+14:26.250 --> 14:29.091
+You can just go to security group, edit inbound rule,
+
+14:29.091 --> 14:33.000
+and 22 from my IP, and then it should work.
+
+14:33.000 --> 14:33.833
+Okay, we're in.
+
+14:33.833 --> 14:38.833
+Let's check the MySQL service, first of all,
+
+14:39.284 --> 14:44.284
+systemctl status, mariadb, if I can type.
+
+14:47.580 --> 14:48.993
+MariaDB.
+
+14:50.310 --> 14:54.003
+Okay, it says active, running up here.
+
+14:54.960 --> 14:59.010
+Q to quit from here, and let's log into the database,
+
+14:59.010 --> 15:04.010
+mysql -u, user, admin, -p, password, admin123,
+
+15:06.180 --> 15:08.430
+database name accounts.
+
+15:08.430 --> 15:11.850
+Once again, do not type password
+
+15:11.850 --> 15:14.100
+on the command line like this.
+
+15:14.100 --> 15:16.110
+I'm typing because I want to show you
+
+15:16.110 --> 15:18.930
+that this is the password so you don't get confused.
+
+15:18.930 --> 15:21.810
+It's in the script, but in real time,
+
+15:21.810 --> 15:23.910
+do not type password like that.
+
+15:23.910 --> 15:25.830
+Just hit enter, it is going to ask you password.
+
+15:25.830 --> 15:29.340
+If you just give hyphen P, it will ask you the password
+
+15:29.340 --> 15:30.930
+and you can enter the password.
+
+15:30.930 --> 15:35.163
+We are in the database, and let's see, show tables.
+
+15:36.840 --> 15:38.520
+Okay, that's good.
+
+15:38.520 --> 15:41.850
+Let's exit from here and exit from the instance as well,
+
+15:41.850 --> 15:45.810
+exit, exit, and let's clear the screen,
+
+15:45.810 --> 15:47.880
+and let's log into the next instance,
+
+15:47.880 --> 15:50.923
+which will be Memcache.
+
+15:50.923 --> 15:55.593
+Select the Memcache instance and get its public IP.
+
+15:56.520 --> 15:58.170
+Make sure the right instance is selected,
+
+15:58.170 --> 16:00.320
+otherwise, you'll copy the wrong public IP.
+
+16:02.970 --> 16:05.523
+Let's log in, yes.
+
+16:07.410 --> 16:12.410
+Switch to root user, systemctl status memcached.
+
+16:16.680 --> 16:19.033
+Okay, active, running. That's good.
+
+16:19.033 --> 16:21.333
+All right, let's exit from here,
+
+16:22.680 --> 16:27.000
+and let's go to the next instance, which will be RabbitMQ.
+
+16:27.000 --> 16:28.203
+We can remove this IP.
+
+16:30.030 --> 16:34.290
+Okay, let's get the RabbitMQ IP, rmq01, select it.
+
+16:34.290 --> 16:36.570
+Again, make sure you're copying the right public IP.
+
+16:36.570 --> 16:38.373
+Validate the name of the instance.
+
+16:43.590 --> 16:45.273
+Okay, let's log in.
+
+16:47.238 --> 16:48.903
+Sudo -i.
+
+16:49.830 --> 16:54.197
+Systemctl status rabbitmq-server.
+
+17:00.360 --> 17:02.073
+Okay, active, running.
+
+17:04.020 --> 17:05.463
+Let's exit from here.
+
+17:07.380 --> 17:09.120
+Okay, we're good.
+
+17:09.120 --> 17:11.670
+If any of the instance you see that there is a problem,
+
+17:11.670 --> 17:14.970
+the service is not running, or you're getting any error,
+
+17:14.970 --> 17:16.952
+then you don't need to do any troubleshooting,
+
+17:16.952 --> 17:18.810
+because we just launched the instance
+
+17:18.810 --> 17:20.970
+and put the user data script.
+
+17:20.970 --> 17:25.020
+Simply delete the instance, launch a new instance,
+
+17:25.020 --> 17:28.710
+and make sure you're selecting the right security group
+
+17:28.710 --> 17:31.140
+and using the right script.
+
+17:31.140 --> 17:32.952
+Sometimes it happens, we use different script
+
+17:32.952 --> 17:36.213
+for different instances and we look for a different service.
+
+17:37.080 --> 17:38.610
+It happens when we're doing so much,
+
+17:38.610 --> 17:40.890
+so don't need to do troubleshooting here,
+
+17:40.890 --> 17:42.870
+because there's nothing we're doing manually.
+
+17:42.870 --> 17:45.450
+It's everything automatically through user data.
+
+17:45.450 --> 17:46.916
+So delete the instance, launch the instance,
+
+17:46.916 --> 17:51.330
+make sure security group rules, outbound rules are clear,
+
+17:51.330 --> 17:54.900
+you have not updated the outbound security group rules.
+
+17:54.900 --> 17:56.857
+Make sure you do, as I've shown you in the lecture,
+
+17:56.857 --> 17:59.940
+selecting the right AMI, right security group,
+
+17:59.940 --> 18:02.010
+then it will work.
+
+18:02.010 --> 18:03.538
+Even after doing all this, if it's still not working,
+
+18:03.538 --> 18:06.813
+contact me through Q and A and I will help you.
+
+18:07.770 --> 18:09.900
+App instance, we'll verify in the next lectures,
+
+18:09.900 --> 18:13.980
+but for now, that would be all in this lecture.
+
+18:13.980 --> 18:16.590
+If you're going to continue in the next lecture,
+
+18:16.590 --> 18:17.790
+keep the instances running.
+
+18:17.790 --> 18:19.088
+If you're going to continue it later,
+
+18:19.088 --> 18:22.500
+make sure you shut down these instances, power off,
+
+18:22.500 --> 18:25.410
+and then when you continue, you can power on the instances.
+
+18:25.410 --> 18:26.910
+In the next lecture, we're going to look
+
+18:26.910 --> 18:29.820
+into the private DNS entries,
+
+18:29.820 --> 18:32.193
+so wrap this up and join me in the next one.

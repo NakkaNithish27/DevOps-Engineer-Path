@@ -1,0 +1,817 @@
+WEBVTT
+
+00:00.660 --> 00:01.500
+Narrator: In this section
+
+00:01.500 --> 00:04.080
+we are going to talk about variables.
+
+00:04.080 --> 00:07.440
+We'll see how to define variables, how to use it.
+
+00:07.440 --> 00:08.550
+So you'll really see
+
+00:08.550 --> 00:11.253
+the Terraform way of consuming variables.
+
+00:12.420 --> 00:16.290
+So variables as we know, helps us move critical
+
+00:16.290 --> 00:18.783
+or confidential data out of our script.
+
+00:19.680 --> 00:21.090
+Also, if there are some values
+
+00:21.090 --> 00:24.030
+that changes based on your environment on your project,
+
+00:24.030 --> 00:26.310
+you can define them as variable.
+
+00:26.310 --> 00:29.040
+So you don't need to make much change in your code,
+
+00:29.040 --> 00:30.870
+you can just change the value of variables.
+
+00:30.870 --> 00:33.933
+Or if you are again reusing it,
+
+00:35.430 --> 00:37.920
+you want to reuse your code for different environment,
+
+00:37.920 --> 00:40.113
+different project.
+
+00:40.950 --> 00:44.310
+So you can define things like AMI, tags, keypair,
+
+00:44.310 --> 00:48.900
+these things as variables in our instance.tf file
+
+00:48.900 --> 00:50.200
+that we're going to write.
+
+00:52.260 --> 00:53.670
+So we are here right now,
+
+00:53.670 --> 00:55.773
+we have instance.tf file, right?
+
+00:56.700 --> 00:58.110
+We have provider information
+
+00:58.110 --> 01:00.633
+and we have the resource information.
+
+01:02.370 --> 01:05.070
+So we have things like region that may change
+
+01:05.070 --> 01:07.920
+based on where we execute our Terraform scripts.
+
+01:07.920 --> 01:10.920
+There are things like AMI in this, instance type.
+
+01:10.920 --> 01:12.870
+These are the things that varies
+
+01:12.870 --> 01:14.130
+based on different situations.
+
+01:14.130 --> 01:17.100
+So from here, we'll go here.
+
+01:17.100 --> 01:18.690
+So we'll take providers out,
+
+01:18.690 --> 01:20.400
+we'll have a providers.tf file
+
+01:20.400 --> 01:22.120
+where we'll define the provider
+
+01:23.040 --> 01:25.800
+which is actually accessing REGION.
+
+01:25.800 --> 01:30.540
+The value of REGION variable is gonna be var.REGION.
+
+01:30.540 --> 01:33.480
+So it's a variable and variables will define another file.
+
+01:33.480 --> 01:36.600
+So let's say we have vars.tf file,
+
+01:36.600 --> 01:37.740
+where we'll define variable,
+
+01:37.740 --> 01:39.960
+that's how you define variable in Terraform
+
+01:39.960 --> 01:43.320
+Variable, variable name in curly braces,
+
+01:43.320 --> 01:45.420
+you say default and the value.
+
+01:45.420 --> 01:48.630
+So it means the default value of AWS_REGION
+
+01:48.630 --> 01:51.750
+is us-west-one,
+
+01:51.750 --> 01:54.450
+and that you're referring in the providers.tf file,
+
+01:54.450 --> 01:56.100
+var.REGION.
+
+01:56.100 --> 01:59.820
+So in vars.tf file we have the variable REGION,
+
+01:59.820 --> 02:03.120
+and its value is us-west-1.
+
+02:03.120 --> 02:05.340
+If you're gonna define the access key and secret key,
+
+02:05.340 --> 02:07.487
+you make sure to define it in different file,
+
+02:07.487 --> 02:09.690
+terraform.tfvars file.
+
+02:09.690 --> 02:12.330
+But you can totally skip that because as I told you,
+
+02:12.330 --> 02:14.190
+do not put your access key and secret key
+
+02:14.190 --> 02:15.723
+in your scripts in your code.
+
+02:16.710 --> 02:18.540
+And then we'll have instance.tf file
+
+02:18.540 --> 02:20.700
+where as of now we are not defining variable,
+
+02:20.700 --> 02:22.180
+but we'll change that as well
+
+02:23.610 --> 02:25.170
+in a very different way like this.
+
+02:25.170 --> 02:28.928
+So now vars.tf file have more variables,
+
+02:28.928 --> 02:31.113
+ACCESS_KEY, SECRET_KEY, REGION.
+
+02:31.950 --> 02:35.523
+And also one more interesting variable, variable AMIS,
+
+02:36.450 --> 02:40.800
+This variable is of format, is of type map,
+
+02:40.800 --> 02:43.200
+like a dictionary, like a hash.
+
+02:43.200 --> 02:45.690
+So if you want to access this based on your region,
+
+02:45.690 --> 02:48.120
+what's the value of your region?
+
+02:48.120 --> 02:50.010
+We can define the values.
+
+02:50.010 --> 02:52.770
+So if you want to access this AMI,
+
+02:52.770 --> 02:57.480
+you're gonna say AMIS. Us-west-1
+
+02:57.480 --> 03:00.963
+and you will get that particular AMI.
+
+03:01.920 --> 03:03.720
+This call us map variable.
+
+03:03.720 --> 03:06.780
+So if you see in your instance.tf file now,
+
+03:06.780 --> 03:08.700
+for AMI we have var.AMIS.
+
+03:09.690 --> 03:10.840
+So that's the variable.
+
+03:11.910 --> 03:15.510
+And then in square bracket we are giving var.REGION.
+
+03:15.510 --> 03:19.203
+Inside that AMIS it'll look for a key named as REGION.
+
+03:20.190 --> 03:23.460
+So, region value currently is us-west-1,
+
+03:23.460 --> 03:27.300
+So, us-west-1 value is ami and this particular ID.
+
+03:27.300 --> 03:28.380
+This will be very helpful
+
+03:28.380 --> 03:30.510
+if you're executing your Terraform scripts
+
+03:30.510 --> 03:31.680
+for different regions.
+
+03:31.680 --> 03:34.773
+So based on the region it'll pick up the right AMI ID.
+
+03:36.360 --> 03:39.330
+So let's see what we are going to do in this exercise.
+
+03:39.330 --> 03:41.093
+We're going write providers.tf file,
+
+03:42.333 --> 03:46.020
+vars.tf file where we'll mention all the variables,
+
+03:46.020 --> 03:50.280
+instance.tf file which is going to access all the variables,
+
+03:50.280 --> 03:53.558
+we'll apply the changes of course before validating,
+
+03:53.558 --> 03:57.000
+first we'll validate and then we'll apply the changes,
+
+03:57.000 --> 03:59.280
+and then we'll make some more changes to the instance
+
+03:59.280 --> 04:02.640
+to see its state and then we'll reapply the changes.
+
+04:02.640 --> 04:05.550
+So let's get started with the exercise.
+
+04:05.550 --> 04:08.250
+Okay, so I'm going to take all the code from Exercise2
+
+04:08.250 --> 04:10.980
+and copy to Exercise3.
+
+04:10.980 --> 04:13.080
+So I'm going to simply right-click over here
+
+04:13.080 --> 04:17.490
+and we'll say Copy and right-click and Paste,
+
+04:17.490 --> 04:18.600
+and then right-click
+
+04:18.600 --> 04:23.490
+and I'm going to rename it to Exercise3.
+
+04:23.490 --> 04:24.323
+Enter.
+
+04:27.300 --> 04:30.720
+Okay, so we have all the code from the previous exercise
+
+04:30.720 --> 04:34.440
+in this exercise and we are going to add variables here.
+
+04:34.440 --> 04:37.620
+So let's create a file called vars.tf
+
+04:37.620 --> 04:39.720
+where we'll mention all our variables.
+
+04:39.720 --> 04:42.900
+So Exercise3, right-click and new file,
+
+04:42.900 --> 04:46.473
+I'm going to name it as vars.tf.
+
+04:48.570 --> 04:50.100
+And before defining the variable,
+
+04:50.100 --> 04:52.500
+I'm going to put the variable where I want to use,
+
+04:52.500 --> 04:55.440
+like in the provider.
+
+04:55.440 --> 05:00.240
+Here I have just mentioned the value directly over here.
+
+05:00.240 --> 05:04.863
+Instead of that, I'm going to say here var.region.
+
+05:06.420 --> 05:08.670
+And save this.
+
+05:08.670 --> 05:11.370
+Let's go to instance.tfi file.
+
+05:11.370 --> 05:13.890
+And the availability_zone also I'm going to say here
+
+05:13.890 --> 05:18.603
+var.zone, and let me see if this.
+
+05:19.830 --> 05:21.610
+Okay, now let's define these two variables.
+
+05:21.610 --> 05:24.090
+We'll come back again and we'll add a few more variables.
+
+05:24.090 --> 05:25.980
+Let's start with these two.
+
+05:25.980 --> 05:28.440
+Okay, so I have defined here two variables.
+
+05:28.440 --> 05:29.273
+That's how you do it.
+
+05:29.273 --> 05:31.590
+Variable and the variable name,
+
+05:31.590 --> 05:33.420
+default and the value.
+
+05:33.420 --> 05:37.050
+So the value of the variable region is this
+
+05:37.050 --> 05:41.190
+and the value of variable zone1 is this.
+
+05:41.190 --> 05:42.720
+Did you observe anything?
+
+05:42.720 --> 05:46.203
+If not, you'll observe it or find it when we execute it.
+
+05:47.190 --> 05:50.490
+So two variables we have defined in vars.tf file,
+
+05:50.490 --> 05:54.030
+and instance.tf file we are using those variables.
+
+05:54.030 --> 05:57.093
+One we are using here and one we are using in the provider.
+
+05:58.560 --> 06:01.230
+Okay, let's execute and see what happens.
+
+06:01.230 --> 06:04.023
+So once again you can open the terminal from here.
+
+06:05.160 --> 06:07.855
+Yeah, make sure to switch to Exercise3.
+
+06:07.855 --> 06:09.660
+This is a new exercise.
+
+06:09.660 --> 06:11.460
+Make clear the screen
+
+06:11.460 --> 06:15.363
+and let's say terraform fmt.
+
+06:16.710 --> 06:20.100
+So, vars.tf format it corrected.
+
+06:20.100 --> 06:21.123
+Let's save that.
+
+06:24.000 --> 06:26.463
+And let's say where terraform validate.
+
+06:30.720 --> 06:32.880
+Right, something broke. Let's take a look.
+
+06:32.880 --> 06:37.597
+It says, "Instance.tf line 6, availability_zone.
+
+06:37.597 --> 06:39.877
+"An input variable with the name 'zone'
+
+06:39.877 --> 06:41.197
+"has not been declared.
+
+06:41.197 --> 06:43.350
+"Did you mean 'zone' one?"
+
+06:43.350 --> 06:45.300
+See that? It's smart.
+
+06:45.300 --> 06:47.010
+So variable names were similar, right?
+
+06:47.010 --> 06:50.700
+So it found that you know, it is not zone, it's zone1.
+
+06:50.700 --> 06:52.470
+But variable name might be different
+
+06:52.470 --> 06:55.470
+and it might not find what exactly you mean.
+
+06:55.470 --> 06:59.643
+So make sure variable names matches.
+
+07:01.890 --> 07:04.683
+So it's zone1, the variable name, right?
+
+07:05.700 --> 07:07.593
+Let's execute it once again,
+
+07:09.360 --> 07:11.430
+terraform validate.
+
+07:11.430 --> 07:13.650
+After making the changes make sure you save it
+
+07:13.650 --> 07:15.030
+and everything is good.
+
+07:15.030 --> 07:19.470
+Now let's do terraform plan, right?
+
+07:19.470 --> 07:21.840
+So in the previous lecture we deleted everything, right?
+
+07:21.840 --> 07:23.850
+So now it is saying now it has plans
+
+07:23.850 --> 07:25.983
+to add nine more resources.
+
+07:29.370 --> 07:31.290
+So we are not going to apply any change now.
+
+07:31.290 --> 07:33.870
+I want to show you one more variable,
+
+07:33.870 --> 07:36.450
+and that is for the AMI.
+
+07:36.450 --> 07:38.280
+Now, code is already smart enough
+
+07:38.280 --> 07:41.010
+to fetch the AMI ID in the latest AMI ID.
+
+07:41.010 --> 07:42.290
+But what if we don't want that?
+
+07:42.290 --> 07:45.570
+We want specific AMI IDs to mention.
+
+07:45.570 --> 07:48.330
+And based on the region that we change,
+
+07:48.330 --> 07:50.970
+it should select that particular AMI ID.
+
+07:50.970 --> 07:53.250
+We already discussed that AMI ID is different
+
+07:53.250 --> 07:55.170
+for different regions.
+
+07:55.170 --> 07:59.490
+So we want to have a variable that returns a dynamic value.
+
+07:59.490 --> 08:01.260
+Not exactly dynamic, but you know lookup,
+
+08:01.260 --> 08:02.193
+it should you know,
+
+08:02.193 --> 08:05.643
+look and find the right AMI based on the region.
+
+08:06.540 --> 08:08.730
+So come to vars.tf file
+
+08:08.730 --> 08:12.450
+and we are going to create a variable of type lookup.
+
+08:12.450 --> 08:14.850
+I'm going to say type map.
+
+08:14.850 --> 08:16.680
+Yes, there are different types of variable.
+
+08:16.680 --> 08:19.740
+You have string, you have list variables
+
+08:19.740 --> 08:22.350
+and you have map variable.
+
+08:22.350 --> 08:23.790
+So generally the value will be like this,
+
+08:23.790 --> 08:26.100
+we say default and equal to we give the string.
+
+08:26.100 --> 08:28.680
+But here this is a dictionary
+
+08:28.680 --> 08:30.510
+that will have multiple key value pairs.
+
+08:30.510 --> 08:34.440
+So you can say default equal to open close curly brace,
+
+08:34.440 --> 08:37.380
+and then you can give different AMI IDs.
+
+08:37.380 --> 08:40.380
+So if the region is us-east-2,
+
+08:40.380 --> 08:41.820
+then this will be the AMI ID.
+
+08:41.820 --> 08:43.920
+I mean, here there is no if and but here,
+
+08:43.920 --> 08:45.600
+they're just a list.
+
+08:45.600 --> 08:46.920
+We'll see with the lookup function
+
+08:46.920 --> 08:50.640
+how we can fetch the right AMI ID for our region.
+
+08:50.640 --> 08:52.920
+So first make sure these AMI IDs are correct.
+
+08:52.920 --> 08:55.140
+So find your AMI IDs.
+
+08:55.140 --> 08:57.300
+So go to one of the region that you have mentioned
+
+08:57.300 --> 08:59.430
+and say Launch Instance.
+
+08:59.430 --> 09:02.883
+Let's select ubuntu and get this AMI ID.
+
+09:04.230 --> 09:07.113
+And this one is for us-east-1 here.
+
+09:08.070 --> 09:09.870
+Paste the value in us-east-1.
+
+09:09.870 --> 09:13.080
+Let's go and find out for us-east-2.
+
+09:13.080 --> 09:15.813
+So I switched to Ohio us-east-2.
+
+09:16.710 --> 09:21.063
+Launch instance, click on ubuntu and get the AMI ID.
+
+09:22.110 --> 09:23.100
+You see both are same,
+
+09:23.100 --> 09:26.850
+going to server 24 HVM SSD volume type.
+
+09:26.850 --> 09:29.280
+But their AMI IDs are different.
+
+09:29.280 --> 09:31.290
+So come to instance.tf file now.
+
+09:31.290 --> 09:33.880
+In the AMI here we are going to give
+
+09:34.920 --> 09:37.623
+var.amiID.
+
+09:39.470 --> 09:40.563
+ID's capital, amiID.
+
+09:43.170 --> 09:45.360
+So now it has multiple values, right?
+
+09:45.360 --> 09:48.810
+So to get that you need to do square bracket like this,
+
+09:48.810 --> 09:50.760
+and as I said, based on the region
+
+09:50.760 --> 09:53.340
+I want to fetch the AMI ID.
+
+09:53.340 --> 09:54.173
+How do I do that?
+
+09:54.173 --> 09:58.590
+Well here I can mention var.region variable.
+
+09:58.590 --> 10:01.530
+So what's going to happen now is var.region value
+
+10:01.530 --> 10:06.150
+is in this case us-east-1, right?
+
+10:06.150 --> 10:09.180
+So here it'll be us-east-1.
+
+10:09.180 --> 10:14.180
+So it'll go to var.amiID variable, var.amiID variable.
+
+10:14.400 --> 10:17.220
+And from this we need to mention the right key.
+
+10:17.220 --> 10:19.500
+In this case it'll be us-east-1,
+
+10:19.500 --> 10:21.900
+which it'll take automatically from this variable
+
+10:21.900 --> 10:24.600
+and get the AMI ID for us.
+
+10:24.600 --> 10:27.480
+Okay, take a look once again in the vars.tf file
+
+10:27.480 --> 10:29.250
+and instance.tf file.
+
+10:29.250 --> 10:33.270
+If you follow the Python lecture this will be easy for you.
+
+10:33.270 --> 10:35.430
+This basically is a dictionary.
+
+10:35.430 --> 10:37.770
+So we mentioned the key in the dictionary.
+
+10:37.770 --> 10:40.170
+Dictionary name dot the key.
+
+10:40.170 --> 10:43.650
+In this case here its, amiID is the dictionary name,
+
+10:43.650 --> 10:46.983
+dot its key var.region.
+
+10:47.820 --> 10:51.600
+That is the key, key name which is another variable, right?
+
+10:51.600 --> 10:54.330
+We have to make sure we save all this.
+
+10:54.330 --> 10:56.140
+And let's plan the execution
+
+11:00.030 --> 11:01.950
+while we had terminal open anyways.
+
+11:01.950 --> 11:06.580
+So let me go to Exercise3
+
+11:10.320 --> 11:13.920
+and I'll say terraform plan.
+
+11:13.920 --> 11:17.373
+First let's do fmt, format.
+
+11:18.540 --> 11:21.123
+And then say validate.
+
+11:23.010 --> 11:26.013
+Okay, everything is successful, and then let's say plan.
+
+11:29.670 --> 11:31.620
+Alright, so finally the plan will tell you
+
+11:31.620 --> 11:33.720
+whether it's fetching the variable or not.
+
+11:33.720 --> 11:36.420
+The validate itself will tell you whether the variable names
+
+11:36.420 --> 11:37.970
+are correctly mentioned or not.
+
+11:38.970 --> 11:40.650
+So really we don't need to apply this
+
+11:40.650 --> 11:41.670
+and wait for some time.
+
+11:41.670 --> 11:42.503
+This is good.
+
+11:43.530 --> 11:45.930
+So I recommend you check this documentation also
+
+11:45.930 --> 11:48.663
+if you need to create other kinds of variables.
+
+11:48.663 --> 11:51.720
+This is all the information about variables over here.
+
+11:51.720 --> 11:55.230
+You can just simply Google search variables in Terraform
+
+11:55.230 --> 11:58.110
+and you can come to this documentation.
+
+11:58.110 --> 11:59.580
+Declaring an Input Variable.
+
+11:59.580 --> 12:01.920
+You see we can mention the type of the variable,
+
+12:01.920 --> 12:03.690
+like string.
+
+12:03.690 --> 12:06.180
+You can mention list of string, right?
+
+12:06.180 --> 12:07.980
+And then the value like this.
+
+12:07.980 --> 12:09.780
+So this is basically the list of string,
+
+12:09.780 --> 12:13.230
+you can give multiple values comma-separated here.
+
+12:13.230 --> 12:14.610
+A few other arguments you have here,
+
+12:14.610 --> 12:17.850
+default type, description, sensitive,
+
+12:17.850 --> 12:20.973
+so it hides the output of it,
+
+12:21.960 --> 12:24.160
+like something that you don't want to print.
+
+12:25.350 --> 12:27.270
+Type constraints, different types.
+
+12:27.270 --> 12:30.120
+You even have Boolean tool false,
+
+12:30.120 --> 12:34.710
+description, suppressing values in CLI output, right?
+
+12:34.710 --> 12:36.363
+By giving sensitive, true.
+
+12:37.200 --> 12:39.450
+Using the input value variable, we've seen that,
+
+12:39.450 --> 12:42.420
+var. variable name we can give.
+
+12:42.420 --> 12:45.330
+Also, when you are applying the changes,
+
+12:45.330 --> 12:47.880
+you can mention the var file location,
+
+12:47.880 --> 12:50.700
+which can be some other place as well, right?
+
+12:50.700 --> 12:53.100
+So use it when you need it.
+
+12:53.100 --> 12:54.360
+When you have use cases,
+
+12:54.360 --> 12:55.920
+then you can come to the documentation,
+
+12:55.920 --> 12:58.440
+find out and put it in your code.
+
+12:58.440 --> 13:01.050
+But that should be all for this lecture.
+
+13:01.050 --> 13:03.990
+In the next lecture we are going to talk about provisioners.
+
+13:03.990 --> 13:06.423
+So wrap this up and join me in the next one.

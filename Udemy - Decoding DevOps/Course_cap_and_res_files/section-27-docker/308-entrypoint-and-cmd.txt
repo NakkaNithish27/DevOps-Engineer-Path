@@ -1,0 +1,497 @@
+WEBVTT
+
+1
+00:00:00.730 --> 00:00:01.880
+Hello and welcome.
+
+2
+00:00:02.690 --> 00:00:04.974
+In last lecture, you have seen how to build
+
+3
+00:00:05.012 --> 00:00:08.250
+a docker image, and we have seen many instructions.
+
+4
+00:00:08.750 --> 00:00:10.914
+In this lecture, I am going to talk about two
+
+5
+00:00:10.952 --> 00:00:17.070
+instructions from the docker file, ENTRYPOINT and CMD, because
+
+6
+00:00:17.180 --> 00:00:20.106
+usually there is a confusion in between these two.
+
+7
+00:00:20.288 --> 00:00:23.310
+So I have created a separate lecture for these
+
+8
+00:00:23.360 --> 00:00:27.346
+two instructions which will help you understand and grasp
+
+9
+00:00:27.538 --> 00:00:31.770
+concepts behind command CMD and ENTRYPOINT.
+
+10
+00:00:31.940 --> 00:00:34.758
+So let's go to my docker engine and
+
+11
+00:00:34.784 --> 00:00:38.274
+let's look at three different docker file that
+
+12
+00:00:38.312 --> 00:00:40.580
+will be using CMD and ENTRYPOINT.
+
+13
+00:00:42.590 --> 00:00:44.240
+I'm in the docker engine.
+
+14
+00:00:44.690 --> 00:00:47.038
+I've just logged into it and I have a directory
+
+15
+00:00:47.074 --> 00:00:51.538
+here called entry CMD and with the wrong spelling.
+
+16
+00:00:51.574 --> 00:00:53.360
+Let me correct the spelling here.
+
+17
+00:00:55.370 --> 00:00:57.162
+Okay, there, I fixed it.
+
+18
+00:00:57.356 --> 00:01:00.934
+So I have three directories in this CMD, entry
+
+19
+00:01:01.042 --> 00:01:03.982
+and entry CMD, and each contains a docker file.
+
+20
+00:01:04.006 --> 00:01:06.330
+So let's look at CMD docker file.
+
+21
+00:01:07.190 --> 00:01:09.534
+It's very simple docker file we are
+
+22
+00:01:09.572 --> 00:01:11.430
+using from instruction, and we are using
+
+23
+00:01:11.480 --> 00:01:14.866
+Ubuntu latest image and CMD instruction.
+
+24
+00:01:15.058 --> 00:01:17.190
+So we have seen in the previous lecture, also
+
+25
+00:01:17.240 --> 00:01:20.110
+CMD is the place where we give the binary
+
+26
+00:01:20.290 --> 00:01:23.202
+or the command which will start the container process.
+
+27
+00:01:23.336 --> 00:01:25.434
+So here I'm saying echo hello.
+
+28
+00:01:25.592 --> 00:01:29.262
+So echo is the command shell command, and
+
+29
+00:01:29.336 --> 00:01:32.338
+hello is the argument to that command.
+
+30
+00:01:32.494 --> 00:01:34.138
+So that's how we give command
+
+31
+00:01:34.234 --> 00:01:36.682
+comma argument in double quotes.
+
+32
+00:01:36.826 --> 00:01:38.722
+Now let's build this image.
+
+33
+00:01:38.746 --> 00:01:43.566
+We'll say docker build t.
+
+34
+00:01:43.628 --> 00:01:45.510
+I will call it as printer.
+
+35
+00:01:51.450 --> 00:01:53.098
+I need to go inside that.
+
+36
+00:01:53.124 --> 00:01:55.298
+I'll just give the path CMD docker
+
+37
+00:01:55.334 --> 00:01:58.838
+file, so I'm not in that directory.
+
+38
+00:01:58.874 --> 00:02:01.102
+So I directly give the path of the docker file and
+
+39
+00:02:01.116 --> 00:02:06.350
+it's going to build let me just remove the name.
+
+40
+00:02:06.400 --> 00:02:07.422
+Just give CMD.
+
+41
+00:02:07.506 --> 00:02:09.759
+Okay, yeah, that's building it.
+
+42
+00:02:10.990 --> 00:02:14.380
+Okay, so I should have an image now,
+
+43
+00:02:16.630 --> 00:02:21.354
+docker images, and that's a printer image.
+
+44
+00:02:21.522 --> 00:02:22.960
+Let me clear the screen.
+
+45
+00:02:23.830 --> 00:02:26.450
+Let's do a cat once again to that file
+
+46
+00:02:28.450 --> 00:02:31.646
+and the docker image that we have from this.
+
+47
+00:02:31.828 --> 00:02:35.738
+So I'm just going to say docker run, and I give
+
+48
+00:02:35.764 --> 00:02:41.430
+the image name so we know what this will do.
+
+49
+00:02:41.540 --> 00:02:43.410
+This has the command echo hello.
+
+50
+00:02:43.460 --> 00:02:45.318
+So it's just going to run that and
+
+51
+00:02:45.344 --> 00:02:49.160
+it should be printing the text hello there.
+
+52
+00:02:50.750 --> 00:02:51.800
+It worked.
+
+53
+00:02:52.250 --> 00:02:55.760
+Okay, so that is in CMD, command and argument both.
+
+54
+00:02:56.270 --> 00:02:59.370
+Now, another docker file.
+
+55
+00:03:05.190 --> 00:03:07.402
+Here we have the instruction ENTRYPOINT
+
+56
+00:03:07.476 --> 00:03:08.714
+and we just have the command.
+
+57
+00:03:08.762 --> 00:03:10.430
+We do not have any argument.
+
+58
+00:03:10.490 --> 00:03:16.678
+Let's build this docker build -t printer v2.
+
+59
+00:03:16.764 --> 00:03:18.514
+I'll give this tag as v2.
+
+60
+00:03:18.672 --> 00:03:20.722
+I will give the directory path where I
+
+61
+00:03:20.736 --> 00:03:23.040
+have the docker file and let's build it.
+
+62
+00:03:24.750 --> 00:03:27.674
+Okay, the images built docker images,
+
+63
+00:03:27.782 --> 00:03:29.686
+and we have printer v2.
+
+64
+00:03:29.808 --> 00:03:32.220
+Now, if I run this docker run
+
+65
+00:03:32.790 --> 00:03:37.840
+printer, what do you think will happen?
+
+66
+00:03:38.470 --> 00:03:40.086
+It will run the command echo.
+
+67
+00:03:40.158 --> 00:03:42.326
+That's right, but there's no argument to it.
+
+68
+00:03:42.388 --> 00:03:44.346
+And if you just run empty echo, it's
+
+69
+00:03:44.358 --> 00:03:47.680
+just going to print an empty line there.
+
+70
+00:03:48.310 --> 00:03:51.182
+Right, but if you have it like that.
+
+71
+00:03:51.256 --> 00:03:53.030
+You have command in the ENTRYPOINT
+
+72
+00:03:53.080 --> 00:03:54.534
+and you do not have argument.
+
+73
+00:03:54.582 --> 00:03:57.630
+Then that means a user has to pass the argument.
+
+74
+00:03:57.750 --> 00:04:00.520
+So I'm going to pass your argument, hello.
+
+75
+00:04:01.330 --> 00:04:05.680
+So now it's going to run the command echo hello.
+
+76
+00:04:09.470 --> 00:04:11.422
+So in a docker file, or when you docker,
+
+77
+00:04:11.446 --> 00:04:14.070
+inspect any image and you see ENTRYPOINT have
+
+78
+00:04:14.120 --> 00:04:16.113
+command but does not have any argument.
+
+79
+00:04:16.161 --> 00:04:20.646
+That means the user needs to pass the argument. Okay?
+
+80
+00:04:20.767 --> 00:04:28.870
+Now the third one, entry CMD, docker file.
+
+81
+00:04:29.970 --> 00:04:33.010
+So here you have ENTRYPOINT and CMD together.
+
+82
+00:04:33.120 --> 00:04:34.418
+I think you would have understood.
+
+83
+00:04:34.454 --> 00:04:37.238
+Now the ENTRYPOINT, we have command and CMD.
+
+84
+00:04:37.274 --> 00:04:38.770
+We have the argument.
+
+85
+00:04:39.810 --> 00:04:41.338
+If they are used together, that
+
+86
+00:04:41.364 --> 00:04:43.178
+will be mostly for two purposes.
+
+87
+00:04:43.274 --> 00:04:45.586
+One is what you're seeing right now.
+
+88
+00:04:45.768 --> 00:04:47.114
+ENTRYPOINT will have command
+
+89
+00:04:47.162 --> 00:04:48.746
+and CMD will have argument.
+
+90
+00:04:48.818 --> 00:04:51.850
+That is one purpose of using both together.
+
+91
+00:04:52.020 --> 00:04:54.814
+The second purpose is you maybe need to
+
+92
+00:04:54.852 --> 00:04:58.020
+have some script that executes and initialize something.
+
+93
+00:04:58.350 --> 00:04:59.902
+And you want to run it first so
+
+94
+00:04:59.916 --> 00:05:01.666
+that you give in the ENTRYPOINT.
+
+95
+00:05:01.848 --> 00:05:04.282
+And then your actual command that starts the
+
+96
+00:05:04.296 --> 00:05:08.002
+container process will be in CMD, right?
+
+97
+00:05:08.076 --> 00:05:11.818
+So we can use ENTRYPOINT and CMD together.
+
+98
+00:05:11.904 --> 00:05:14.834
+Now, in this case, let's build it docker
+
+99
+00:05:14.882 --> 00:05:25.490
+build printer v three and the directory.
+
+100
+00:05:29.030 --> 00:05:36.800
+Okay, now let's run it, docker run printer V three.
+
+101
+00:05:37.370 --> 00:05:38.574
+Now we know what's going to happen.
+
+102
+00:05:38.612 --> 00:05:40.940
+It's just going to say echo hello.
+
+103
+00:05:41.270 --> 00:05:43.220
+So just prints hello.
+
+104
+00:05:44.930 --> 00:05:46.134
+You will say, what's the big deal?
+
+105
+00:05:46.172 --> 00:05:47.406
+I mean, we could have given just
+
+106
+00:05:47.468 --> 00:05:49.450
+CMD and come on an argument.
+
+107
+00:05:49.510 --> 00:05:53.334
+Same like our force docker file. But watch this.
+
+108
+00:05:53.372 --> 00:05:56.602
+Now I can now override the argument.
+
+109
+00:05:56.686 --> 00:05:58.890
+So argument is hello.
+
+110
+00:05:59.000 --> 00:06:00.762
+But now I can overwrite it.
+
+111
+00:06:00.776 --> 00:06:11.502
+I can say hi, or maybe I can say hello world, right?
+
+112
+00:06:11.696 --> 00:06:14.394
+And if I do not give any argument, then
+
+113
+00:06:14.492 --> 00:06:16.858
+it will just run, use the default argument.
+
+114
+00:06:16.894 --> 00:06:20.310
+So now you can say if ENTRYPOINT
+
+115
+00:06:20.360 --> 00:06:23.310
+and CMD are used together, CMD will have
+
+116
+00:06:23.360 --> 00:06:27.690
+default argument, which user can override.
+
+117
+00:06:28.970 --> 00:06:31.902
+If this is still confusing, I'm uploading all
+
+118
+00:06:31.916 --> 00:06:34.306
+this into the resource section in this lecture.
+
+119
+00:06:34.378 --> 00:06:36.450
+Download it, build each and every
+
+120
+00:06:36.500 --> 00:06:38.502
+docker file and run it.
+
+121
+00:06:38.696 --> 00:06:40.950
+Just keep one thing in mind, ENTRYPOINT
+
+122
+00:06:41.000 --> 00:06:44.910
+will have higher priority, and then comes CMD.
+
+123
+00:06:46.370 --> 00:06:48.670
+And that is all in this lecture.
+
+124
+00:06:48.730 --> 00:06:50.160
+I will see you in the next one.

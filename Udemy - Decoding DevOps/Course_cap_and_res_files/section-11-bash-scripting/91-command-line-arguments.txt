@@ -1,0 +1,401 @@
+WEBVTT
+
+0
+00:00.650 --> 00:07.520
+Welcome, in this lecture, we will talk about command line arguments for our scripts, as we have been
+
+1
+00:07.520 --> 00:12.740
+seeing arguments for commands like, for example, for ls command, we give the path of a directory.
+
+2
+00:12.740 --> 00:20.090
+So that path is the argument when you're copying a file, the source and destination, we give basically
+
+3
+00:20.090 --> 00:23.000
+arguments to the cp command or to the mv command.
+
+4
+00:23.360 --> 00:27.410
+So we've seen many, many commands and many, many commands needs many, many arguments.
+
+5
+00:28.130 --> 00:31.610
+How can we programmatically take arguments from our script?
+
+6
+00:31.910 --> 00:39.980
+For example, we may want to take the URL of the artifact as an argument so user can pass any URL in
+
+7
+00:39.980 --> 00:44.360
+our script, will deploy that website for the user.
+
+8
+00:44.930 --> 00:46.400
+So let's go to a script box.
+
+9
+00:48.080 --> 00:49.040
+Let's clear the screen.
+
+10
+00:51.500 --> 00:55.790
+I will write a script 4_args.sh
+
+11
+00:59.090 --> 01:04.850
+OK, these few statements in the scripts are to make you understand how come line arguments work.
+
+12
+01:05.570 --> 01:07.760
+So I'm printing a message, the value of zero.
+
+13
+01:08.710 --> 01:13.810
+I will say value of zero is and will see dollar zero there.
+
+14
+01:15.030 --> 01:21.070
+So $ we know extract the value of the variable, so here is zero, and then one, two, three.
+
+15
+01:21.090 --> 01:24.120
+These are variable the dollar in front of them represents that.
+
+16
+01:24.120 --> 01:29.460
+We are trying to access the value of that variable or here, printing, we are printing, the value of dollar
+
+17
+01:29.460 --> 01:31.080
+1, dollar 2, dollar three.
+
+18
+01:31.590 --> 01:35.670
+But we have not stored any values to those variables.
+
+19
+01:35.700 --> 01:37.980
+Basically, we have not declared those variables.
+
+20
+01:38.550 --> 01:40.830
+So let's see how these things work.
+
+21
+01:43.780 --> 01:45.190
+Make the script executable.
+
+22
+01:47.580 --> 01:50.400
+Now, before I execute the script, I want to show you something.
+
+23
+01:51.150 --> 01:54.180
+I take a variable X and I declare some value to it.
+
+24
+01:54.210 --> 01:55.260
+Let's say one, two, three.
+
+25
+01:56.190 --> 01:58.680
+And I'm going to say echo $x
+
+26
+02:00.040 --> 02:01.210
+All right, we know that much.
+
+27
+02:01.660 --> 02:06.130
+But what if I do not have any value to a variable?
+
+28
+02:06.130 --> 02:06.970
+Basically, let's see.
+
+29
+02:06.970 --> 02:09.500
+I have not declared any variable, but I'm trying to access it.
+
+30
+02:09.520 --> 02:12.790
+Let's say $y , which I have not defined or declared.
+
+31
+02:13.600 --> 02:16.960
+So it just prints empty since we have established this point.
+
+32
+02:16.970 --> 02:23.140
+Now, let's execute our 4_args.sh, which is going to print 4 variables for us.
+
+33
+02:23.170 --> 02:24.850
+Zero, one, two, three.
+
+34
+02:27.600 --> 02:34.150
+So we see the value of zero is the name of the script or path of the script. Value of one.
+
+35
+02:34.180 --> 02:37.620
+Well, there is nothing, value of 2, there's nothing, value of 3
+
+36
+02:37.620 --> 02:41.400
+There's nothing, so basically those are not declared or defined.
+
+37
+02:41.610 --> 02:43.410
+When we passed the argument.
+
+38
+02:43.420 --> 02:46.840
+So if I see first as, let's say, Linux.
+
+39
+02:47.310 --> 02:50.220
+So that is the first argument.
+
+40
+02:50.220 --> 02:52.050
+It will be stored into the variable one.
+
+41
+02:52.800 --> 02:53.670
+And you see there.
+
+42
+02:55.790 --> 02:58.580
+Likewise, let's define the other arguments.
+
+43
+03:01.980 --> 03:02.880
+Three arguments.
+
+44
+03:04.690 --> 03:10.630
+In an order, we can pass more arguments also, but we are really not using it, in our, script.
+
+45
+03:11.230 --> 03:16.960
+So that's how command line arguments work its from zero to nine or should I say one to nine zero is always
+
+46
+03:16.960 --> 03:17.980
+the name of the script.
+
+47
+03:18.550 --> 03:22.660
+So you can say zero is reserved for the name of the script from one to nine.
+
+48
+03:23.290 --> 03:24.910
+You can use command line arguments.
+
+49
+03:25.460 --> 03:29.980
+OK, let's clear the screen and let's use that in our script.
+
+50
+03:30.010 --> 03:32.910
+So I'm going to copy our script.
+
+51
+03:32.920 --> 03:36.130
+3_vars_websetup.sh and I'm going to say.
+
+52
+03:40.180 --> 03:41.890
+5_args
+
+53
+03:43.980 --> 03:47.670
+And let's open the script and now use the command line argument.
+
+54
+03:48.270 --> 03:49.410
+Well, it's not going to be difficult.
+
+55
+03:49.440 --> 03:51.630
+I want to take two command line argument.
+
+56
+03:51.630 --> 03:54.150
+One will be the URL, so I'm going to comment this one.
+
+57
+03:54.720 --> 03:55.170
+Oops.
+
+58
+03:59.320 --> 04:01.120
+Now, I didn't go to the insert mode, OK.
+
+59
+04:02.170 --> 04:06.430
+It's not here, there and there.
+
+60
+04:08.540 --> 04:13.340
+So now these two variables does not exist the URL and artifact name. Because I have
+
+61
+04:13.340 --> 04:18.860
+commented it and I am not going to use the variable, I'm going to use command line arguments.
+
+62
+04:18.860 --> 04:21.740
+So here I'm going to say $1
+
+63
+04:25.040 --> 04:27.920
+And there I'm going to see a $2.
+
+64
+04:29.540 --> 04:37.700
+So user basically needs to pass two arguments and definitely needs to pass because if the user does
+
+65
+04:37.700 --> 04:39.380
+not pass, this is going to be empty.
+
+66
+04:39.710 --> 04:42.990
+So it's going to be, wget empty, which will throw error at us.
+
+67
+04:43.010 --> 04:46.670
+So user definitely needs to pass the command line argument in this case.
+
+68
+04:47.090 --> 04:48.890
+So the first will be the URL.
+
+69
+04:48.890 --> 04:50.690
+The second will be the artifact name.
+
+70
+04:52.230 --> 04:53.820
+Let's take the URL
+
+71
+04:55.170 --> 04:56.070
+From here itself.
+
+72
+04:57.310 --> 04:59.010
+Well, first, let me dismantle everything.
+
+73
+05:04.540 --> 05:10.090
+And how about we take a different website, and that's the benefits of variable, right?
+
+74
+05:10.420 --> 05:11.200
+We can vary.
+
+75
+05:11.890 --> 05:16.720
+OK, I'm here tooplate.com and let me select something else this time.
+
+76
+05:17.810 --> 05:19.070
+Now, how about the ziggy
+
+77
+05:20.020 --> 05:20.740
+I like the name.
+
+78
+05:25.490 --> 05:27.740
+OK, so let's get the URL over here F 12.
+
+79
+05:28.760 --> 05:29.170
+Oops.
+
+80
+05:29.810 --> 05:30.070
+Yeah.
+
+81
+05:30.140 --> 05:31.340
+Open development tools.
+
+82
+05:33.600 --> 05:36.830
+Network, lets click on the download.
+
+83
+05:39.880 --> 05:41.020
+OK, there we get it.
+
+84
+05:44.870 --> 05:45.920
+All right, let's run it.
+
+85
+05:47.230 --> 05:49.090
+And first is going to be the URL.
+
+86
+05:49.570 --> 05:52.600
+And second is going to be the artifact name, which will be this.
+
+87
+05:54.320 --> 05:59.780
+So check out this is now a reusable code, I can use it to deploy any website I want.
+
+88
+06:02.450 --> 06:04.790
+And that is some intelligent work there.
+
+89
+06:05.480 --> 06:06.530
+Let's see if it works.
+
+90
+06:07.750 --> 06:08.770
+All right, looks fine.
+
+91
+06:08.980 --> 06:10.180
+Let's get the IP.
+
+92
+06:11.710 --> 06:12.520
+Let's take that.
+
+93
+06:13.010 --> 06:14.380
+And let's go to our browser.
+
+94
+06:17.440 --> 06:19.300
+Let's try that and there we go.
+
+95
+06:19.330 --> 06:20.440
+Welcome to Zigi.
+
+96
+06:24.420 --> 06:28.020
+So that is how the command line argument works.
+
+97
+06:28.500 --> 06:33.240
+So, $1, first argument, $2 second argument likewise, you can go till $9.
+
+98
+06:34.050 --> 06:35.820
+So that is all in this lecture.
+
+99
+06:35.830 --> 06:37.230
+I will see you in the next one.

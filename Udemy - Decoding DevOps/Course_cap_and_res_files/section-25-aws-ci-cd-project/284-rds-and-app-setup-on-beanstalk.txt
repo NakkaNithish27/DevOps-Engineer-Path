@@ -1,0 +1,742 @@
+WEBVTT
+
+00:00.450 --> 00:01.650
+Instructor: Alright, so we did set
+
+00:01.650 --> 00:04.286
+up our Beans Stack application environment
+
+00:04.286 --> 00:06.375
+and now we need a database
+
+00:06.375 --> 00:10.784
+to store our vprofile application tables.
+
+00:10.784 --> 00:14.220
+So we are going to create Amazon RDS for that.
+
+00:14.220 --> 00:17.050
+So search for RDS service and open it
+
+00:17.970 --> 00:20.523
+and then click on create database.
+
+00:21.600 --> 00:25.113
+Okay, keep standard create and select MySQL.
+
+00:25.950 --> 00:26.783
+Come down.
+
+00:27.874 --> 00:32.700
+MySQL engine version 8.035.
+
+00:32.700 --> 00:36.090
+And then in templates, just make sure you select free tier
+
+00:36.090 --> 00:39.153
+so, accidentally, you don't select any paid service,
+
+00:39.990 --> 00:41.013
+and come down.
+
+00:41.970 --> 00:43.950
+Let's give DB instance a name.
+
+00:43.950 --> 00:47.013
+So I'm going to call it as vprords.
+
+00:47.940 --> 00:50.520
+Username, we will keep it as admin,
+
+00:50.520 --> 00:54.450
+and for password, we will say auto generate password.
+
+00:54.450 --> 00:56.040
+Instance configuration,
+
+00:56.040 --> 00:59.670
+make sure you select the instance type as T3 Micro
+
+00:59.670 --> 01:01.500
+or T2 Micro.
+
+01:01.500 --> 01:04.158
+If you selected free tier by default, it is going
+
+01:04.158 --> 01:05.844
+to select T3 Micro
+
+01:05.844 --> 01:09.663
+or T2 Micro, which comes under free tier.
+
+01:11.433 --> 01:12.771
+Scroll down storage.
+
+01:12.771 --> 01:15.420
+Also, it'll select minimum which is 20 GB,
+
+01:15.420 --> 01:17.235
+general purpose storage.
+
+01:17.235 --> 01:19.500
+Connectivity, keep it as default.
+
+01:19.500 --> 01:22.020
+We will do our own connections.
+
+01:22.020 --> 01:24.236
+Public access, no.
+
+01:24.236 --> 01:26.055
+Security group, you have to make sure you click
+
+01:26.055 --> 01:27.786
+on create new security group.
+
+01:27.786 --> 01:30.813
+We will give it a name, vprords-sg.
+
+01:32.460 --> 01:34.713
+Availability zone will say no preference.
+
+01:36.330 --> 01:37.470
+Any additional configurations.
+
+01:37.470 --> 01:38.910
+We have port 3306.
+
+01:38.910 --> 01:39.743
+That's default.
+
+01:39.743 --> 01:40.923
+Let's keep it as it is.
+
+01:41.769 --> 01:45.895
+Database authentication will keep password authentication.
+
+01:45.895 --> 01:47.790
+In additional configuration,
+
+01:47.790 --> 01:51.501
+you have to give the name of our DB which is accounts.
+
+01:51.501 --> 01:55.590
+So we vprofile application needs the DB name as accounts,
+
+01:55.590 --> 01:56.580
+so we need to create that.
+
+01:56.580 --> 01:58.560
+And then we are going to run some SQL queries
+
+01:58.560 --> 02:02.423
+which will create tables in this accounts database.
+
+02:02.423 --> 02:04.473
+Alright, let's come down.
+
+02:07.200 --> 02:08.370
+Keep everything default.
+
+02:08.370 --> 02:10.080
+Don't worry about this cost.
+
+02:10.080 --> 02:12.600
+We are going to create everything in free tier.
+
+02:12.600 --> 02:14.943
+So click on create database.
+
+02:16.327 --> 02:18.863
+Okay, close this popup if it appears.
+
+02:18.863 --> 02:21.810
+And here you will see view credential details.
+
+02:21.810 --> 02:25.620
+Make sure you do that and you copy this password
+
+02:25.620 --> 02:26.790
+and store it somewhere
+
+02:26.790 --> 02:29.100
+because we are going to put this information
+
+02:29.100 --> 02:30.967
+in our bill file.
+
+02:30.967 --> 02:33.450
+Okay, so I'm using sticky notes temporarily
+
+02:33.450 --> 02:36.880
+to store the password and also I will store the username
+
+02:38.010 --> 02:39.510
+and then we can close it.
+
+02:39.510 --> 02:41.820
+The problem is if you do not save this now
+
+02:41.820 --> 02:44.790
+and if you close this then there is no way
+
+02:44.790 --> 02:46.920
+of retrieving the credentials back.
+
+02:46.920 --> 02:49.440
+You have to reset the credentials.
+
+02:49.440 --> 02:50.390
+So make sure you get that,
+
+02:50.390 --> 02:52.960
+and if you accidentally close it, then wait
+
+02:52.960 --> 02:55.254
+for this instance to become ready
+
+02:55.254 --> 02:57.870
+and then you can go in the settings
+
+02:57.870 --> 03:00.873
+and you can reset the master credentials.
+
+03:01.900 --> 03:04.980
+Okay, so now you need to wait for five to 10 minutes
+
+03:04.980 --> 03:07.440
+for this RDS instance to become ready.
+
+03:07.440 --> 03:10.260
+And once it is ready, we are going to go to our next step,
+
+03:10.260 --> 03:12.690
+which is DB initialization.
+
+03:12.690 --> 03:14.970
+So I'm going to pause the recording for now
+
+03:14.970 --> 03:17.613
+and resume once this instance is ready.
+
+03:18.623 --> 03:20.100
+Okay, after some time,
+
+03:20.100 --> 03:22.890
+my RDS instance is in available status
+
+03:22.890 --> 03:26.356
+and my Bean Stack instance is also available.
+
+03:26.356 --> 03:28.590
+So Bean Stack environment would have
+
+03:28.590 --> 03:30.240
+created two EC2 instances.
+
+03:30.240 --> 03:32.624
+If you go to EC2, EC2 instances,
+
+03:32.624 --> 03:34.830
+make sure you're in the same region.
+
+03:34.830 --> 03:37.380
+You will see two instances over here.
+
+03:37.380 --> 03:39.660
+And when we deploy our application, it is going
+
+03:39.660 --> 03:41.334
+to run on these instances
+
+03:41.334 --> 03:44.956
+and these instance needs a connection
+
+03:44.956 --> 03:47.430
+to the RDS instance.
+
+03:47.430 --> 03:50.280
+Our Vprofile application needs the database connection.
+
+03:50.280 --> 03:52.625
+We are going to give information about RDS instance
+
+03:52.625 --> 03:54.420
+that we created.
+
+03:54.420 --> 03:57.044
+So our application is going to try
+
+03:57.044 --> 04:00.463
+to access the RDS database instance,
+
+04:00.463 --> 04:01.958
+and for that, first we need
+
+04:01.958 --> 04:06.450
+to make sure RDS instance security group.
+
+04:06.450 --> 04:07.860
+Let's go to the RDS instance.
+
+04:07.860 --> 04:10.503
+And you should see here security group.
+
+04:10.503 --> 04:12.659
+This security group should allow connection
+
+04:12.659 --> 04:15.081
+from these instances.
+
+04:15.081 --> 04:18.302
+So we will go to security groups
+
+04:18.302 --> 04:22.080
+and you should see here the RDS security group
+
+04:22.080 --> 04:25.500
+and you will see here two Bean Stack security group.
+
+04:25.500 --> 04:27.000
+One is for the load balancer
+
+04:27.000 --> 04:29.760
+and this one, this is for the instance.
+
+04:29.760 --> 04:34.050
+So make sure you select this security group,
+
+04:34.050 --> 04:35.720
+the RDS instance security group
+
+04:35.720 --> 04:39.270
+and copy its security group id.
+
+04:39.270 --> 04:42.660
+Then we will go to the RDS security group.
+
+04:42.660 --> 04:43.967
+Click on that.
+
+04:43.967 --> 04:47.433
+And in the inbound rules, we'll say edit,
+
+04:49.050 --> 04:50.400
+and we'll say add rule.
+
+04:50.400 --> 04:53.280
+So we are editing RDS security group,
+
+04:53.280 --> 04:58.280
+and we will say 3306 incoming connection is allowed
+
+04:59.100 --> 05:03.842
+from this security group right where our instance is
+
+05:03.842 --> 05:06.030
+running.
+
+05:06.030 --> 05:10.290
+So our Bean Stack instance can connect to RDS instance
+
+05:10.290 --> 05:12.543
+on port 3306.
+
+05:13.440 --> 05:14.540
+Save rule.
+
+05:14.540 --> 05:16.466
+Okay, let's go back to your instance.
+
+05:16.466 --> 05:18.273
+Now select any of the instance.
+
+05:19.710 --> 05:21.900
+Now we will do two things.
+
+05:21.900 --> 05:24.360
+One, we will test this connection that we are able
+
+05:24.360 --> 05:26.891
+to access the RDS instance from this instance
+
+05:26.891 --> 05:28.920
+from the EC2 instance.
+
+05:28.920 --> 05:30.300
+That will check one.
+
+05:30.300 --> 05:34.170
+Second thing, we have to initialize our database,
+
+05:34.170 --> 05:36.600
+the accounts database living in RDS instance.
+
+05:36.600 --> 05:40.008
+We need to add tables in that, the schemas.
+
+05:40.008 --> 05:43.931
+So for this purpose we will SSH into any one
+
+05:43.931 --> 05:45.090
+of this instance.
+
+05:45.090 --> 05:47.688
+So let's copy the public IP of any of the instance
+
+05:47.688 --> 05:52.688
+and open git bash for Windows user terminal for MacOS.
+
+05:53.220 --> 05:57.030
+And we created the key initially key pair.
+
+05:57.030 --> 05:58.803
+So mine is in downloads.
+
+06:01.691 --> 06:02.775
+Okay, downloads/vprobeankey,
+
+06:02.775 --> 06:05.490
+that's where I have my login key.
+
+06:05.490 --> 06:10.173
+So I'm going to see ssh -i, downloads vprobeankey.
+
+06:11.250 --> 06:12.967
+Oh wait, before that,
+
+06:12.967 --> 06:14.990
+we have to make sure we do this,
+
+06:14.990 --> 06:19.470
+chmod 400 downloads/vprobeankey.
+
+06:19.470 --> 06:22.950
+We give this permission to the key and then we can use it.
+
+06:22.950 --> 06:27.505
+Otherwise we might get an error saying permission denied.
+
+06:27.505 --> 06:31.740
+And the username is EC2-user
+
+06:31.740 --> 06:33.963
+because it's Amazon Linux instance.
+
+06:34.920 --> 06:39.920
+And let's paste the, oops, not this one, the IP address.
+
+06:40.650 --> 06:43.350
+Let me copy the IP address of the instance once again.
+
+06:44.400 --> 06:45.753
+Let's paste it here.
+
+06:48.240 --> 06:49.383
+I say yes.
+
+06:52.830 --> 06:54.840
+Okay, so we are in the Beans Stack instance.
+
+06:54.840 --> 06:56.040
+Let's do sudo -i.
+
+06:56.040 --> 06:57.330
+Let's clear the screen.
+
+06:57.330 --> 06:59.043
+This is Amazon Linux.
+
+07:00.870 --> 07:02.465
+So to test the connection
+
+07:02.465 --> 07:05.760
+to our RDS instance in our accounts database,
+
+07:05.760 --> 07:08.100
+we need MySQL client.
+
+07:08.100 --> 07:12.663
+So let's search for DNF, search mysql.
+
+07:13.620 --> 07:16.920
+Let's search if we have any MySQL client.
+
+07:16.920 --> 07:21.450
+So that's the name of the MySQL client, mariadb105.
+
+07:21.450 --> 07:23.190
+This is in Amazon Lenux instance.
+
+07:23.190 --> 07:27.375
+So we'll say DNF install and the name.
+
+07:27.375 --> 07:29.583
+Now, let's say -y.
+
+07:33.120 --> 07:34.571
+Alright, we have that.
+
+07:34.571 --> 07:35.760
+Let's clear the screen.
+
+07:35.760 --> 07:39.754
+Now we have to give this command mysql -h, the host name.
+
+07:39.754 --> 07:41.313
+So here we have RDS instance,
+
+07:41.313 --> 07:44.990
+so let's get the end point of RDS instance.
+
+07:44.990 --> 07:46.519
+So go to your RDS instance
+
+07:46.519 --> 07:48.180
+and here's the endpoint.
+
+07:48.180 --> 07:51.333
+Copy that and let's paste it here.
+
+07:52.170 --> 07:53.740
+Space username.
+
+07:53.740 --> 07:56.832
+We have a user admin in our database.
+
+07:56.832 --> 07:58.731
+-: P, password.
+
+07:58.731 --> 08:01.470
+So I stored my password in the sticky note, so I'm going
+
+08:01.470 --> 08:05.160
+to copy it from there and I'm going to paste it here.
+
+08:05.160 --> 08:07.560
+Now, yes, I am showing you the password
+
+08:07.560 --> 08:09.396
+of this RDS instance, which is very bad,
+
+08:09.396 --> 08:11.730
+but I'm going to delete this instance as soon
+
+08:11.730 --> 08:14.520
+as this lecture is completed.
+
+08:14.520 --> 08:16.218
+And also giving password like
+
+08:16.218 --> 08:19.140
+that in the command line is a very bad idea.
+
+08:19.140 --> 08:21.240
+But this is just to show you in real time,
+
+08:21.240 --> 08:23.940
+you should not give the password, just say -p.
+
+08:23.940 --> 08:28.940
+And you can give the database name, accounts, and hit enter.
+
+08:30.180 --> 08:32.520
+So if you're not given the password in the command line,
+
+08:32.520 --> 08:33.990
+it'll ask you the password.
+
+08:33.990 --> 08:37.350
+Then you can paste the password, which will not be visible.
+
+08:37.350 --> 08:38.792
+So as you see we are connected
+
+08:38.792 --> 08:41.156
+to the RDS instance in the accounts database.
+
+08:41.156 --> 08:45.453
+You can say here, show databases.
+
+08:47.880 --> 08:49.530
+All right, so we have the accounts database
+
+08:49.530 --> 08:51.870
+where anyways we are logged into that
+
+08:51.870 --> 08:53.370
+and few other database.
+
+08:53.370 --> 08:55.020
+Now let's exit from here.
+
+08:55.020 --> 08:56.310
+So that was our one task.
+
+08:56.310 --> 08:57.574
+We verified the connection.
+
+08:57.574 --> 09:01.506
+If you're getting timeout, something like that, some error,
+
+09:01.506 --> 09:04.404
+you have to check first the security group rule,
+
+09:04.404 --> 09:07.860
+which we did to make sure we add the rule over there.
+
+09:07.860 --> 09:11.812
+And also check the username and password if it's correct,
+
+09:11.812 --> 09:14.190
+and also the DB name in this account.
+
+09:14.190 --> 09:15.390
+Just look for the error,
+
+09:15.390 --> 09:16.614
+what exactly error it is giving you,
+
+09:16.614 --> 09:19.508
+invalid credentials or timeout.
+
+09:19.508 --> 09:22.680
+Based on that, you can do the troubleshooting.
+
+09:22.680 --> 09:24.321
+Now we need to run the SQL query
+
+09:24.321 --> 09:27.032
+on this RDS accounts database.
+
+09:27.032 --> 09:29.580
+So we have that in our source code.
+
+09:29.580 --> 09:33.150
+So open the source code, vprofile project hkhcoder
+
+09:33.150 --> 09:34.950
+vprofile project.
+
+09:34.950 --> 09:36.480
+Right, that's the URL.
+
+09:36.480 --> 09:41.480
+Open that and switch to the branch, AWS CI.
+
+09:41.635 --> 09:46.635
+Go to SRC, main, resources,
+
+09:47.731 --> 09:52.053
+and the db_backup.sql file, this file.
+
+09:53.820 --> 09:57.930
+So I'm going to directly download this file in the instance.
+
+09:57.930 --> 10:00.930
+And for that I'm going to click here on raw.
+
+10:00.930 --> 10:04.920
+When I click on raw, it's going to gimme a URL of the file.
+
+10:04.920 --> 10:08.151
+I'm going to copy this URL, go to my instance,
+
+10:08.151 --> 10:12.723
+and I will say wget and paste this URL.
+
+10:14.100 --> 10:16.800
+So what it'll do is it is going to download this file.
+
+10:17.753 --> 10:20.910
+Okay, for some reason, if you're not able to do this,
+
+10:20.910 --> 10:24.630
+you can just simply copy the content of this file
+
+10:24.630 --> 10:26.880
+and paste it in a file in the instance.
+
+10:26.880 --> 10:30.694
+You can do that also, or you can download this file as well.
+
+10:30.694 --> 10:34.260
+In any case, we need this SQL file over here.
+
+10:34.260 --> 10:37.590
+Now let me clear the screen, ls.
+
+10:37.590 --> 10:42.590
+Now let's do up arrow and go back to a login command there.
+
+10:42.665 --> 10:43.984
+And same over here.
+
+10:43.984 --> 10:48.000
+We have to give input redirection and the file name.
+
+10:48.000 --> 10:49.320
+What will happen is it is going
+
+10:49.320 --> 10:50.568
+to log into the accounts database
+
+10:50.568 --> 10:52.757
+and execute these SQL queries.
+
+10:52.757 --> 10:57.349
+Now let's log in again to the RDS instance and verify.
+
+10:57.349 --> 11:01.383
+So cancel this, just keep the command log in command
+
+11:01.383 --> 11:03.390
+with the database named accounts.
+
+11:03.390 --> 11:07.824
+Hit enter and say show tables
+
+11:07.824 --> 11:11.564
+and you should be able to see these tables.
+
+11:11.564 --> 11:13.590
+If you don't see these tables created,
+
+11:13.590 --> 11:16.260
+make sure you check the file content.
+
+11:16.260 --> 11:18.660
+You have to download the same file as it is
+
+11:18.660 --> 11:20.160
+and execute the same command.
+
+11:20.160 --> 11:21.889
+You will see the tables then.
+
+11:21.889 --> 11:23.884
+Okay, let's exit from here.
+
+11:23.884 --> 11:28.342
+So now our database is ready with the tables in it.
+
+11:28.342 --> 11:31.710
+So now we can move on to the next lecture
+
+11:31.710 --> 11:34.845
+from where we are going to create CICD pipeline
+
+11:34.845 --> 11:39.184
+where our source code will be automatically fetched, built,
+
+11:39.184 --> 11:42.060
+and deployed to the Bean Stack instance.
+
+11:42.060 --> 11:44.460
+Our application will be running on Bean Stack instance,
+
+11:44.460 --> 11:48.208
+and application will be accessing this RDS database.
+
+11:48.208 --> 11:51.123
+So wrap this up and join me in the next lecture.

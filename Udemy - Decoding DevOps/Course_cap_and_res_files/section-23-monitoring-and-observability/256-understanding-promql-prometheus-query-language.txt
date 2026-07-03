@@ -1,0 +1,946 @@
+WEBVTT
+
+00:00.160 --> 00:01.080
+Hello and welcome.
+
+00:01.080 --> 00:05.920
+In this lecture we are going to learn from Prometheus Query Language.
+
+00:06.520 --> 00:10.360
+So open your Prometheus server on port 1990 from browser.
+
+00:11.080 --> 00:13.680
+Check the status of your instances.
+
+00:14.080 --> 00:16.600
+So that's Prometheus, that web server app stat.
+
+00:16.600 --> 00:18.080
+That's web server system.
+
+00:18.480 --> 00:20.960
+Now all these metrics expose the endpoint.
+
+00:21.240 --> 00:25.840
+Sorry, all these endpoints expose the metrics which Prometheus has collected and stored it.
+
+00:26.240 --> 00:29.560
+And we can access those metrics by running query.
+
+00:29.560 --> 00:30.560
+So click on query.
+
+00:31.680 --> 00:34.720
+One simple example is up is a metric.
+
+00:34.720 --> 00:40.000
+If you just run it you can say execute and you will see the result of that query.
+
+00:40.040 --> 00:42.760
+Yes, that's a query and that's the result.
+
+00:43.120 --> 00:45.880
+So here up label app Prometheus.
+
+00:45.880 --> 00:46.800
+That's one.
+
+00:47.360 --> 00:50.200
+Its output is one and that's an integer.
+
+00:51.080 --> 00:54.440
+Next one you see app web zero one hyphen abstract.
+
+00:54.480 --> 00:55.960
+You see that in double quotes.
+
+00:56.080 --> 00:57.200
+That's a string.
+
+00:57.880 --> 01:01.500
+Now this output that is returned is called as instant vector.
+
+01:02.060 --> 01:04.020
+It will have values like one zero.
+
+01:04.580 --> 01:07.020
+So if it's up, you see here one.
+
+01:07.020 --> 01:08.900
+If it's down, you see here zero.
+
+01:09.340 --> 01:11.340
+I have created a sheet over here.
+
+01:11.340 --> 01:14.420
+You can download it from the lecture resource over here.
+
+01:14.420 --> 01:17.300
+These are the queries in the in this first column.
+
+01:17.540 --> 01:22.100
+And the column B shows what it returns when you execute these queries.
+
+01:22.380 --> 01:25.940
+So first query that we executed up returned an instant vector.
+
+01:26.180 --> 01:32.380
+But if you give a range like five that means five minutes in square bracket that is going to return
+
+01:32.380 --> 01:33.620
+range vector.
+
+01:33.900 --> 01:43.340
+So we say up square bracket we say 5MM is for a minute, D is for days, H is for hours, Ms. is for
+
+01:43.340 --> 01:44.300
+milliseconds.
+
+01:44.460 --> 01:47.700
+So we're going to go here five M and execute this.
+
+01:48.220 --> 01:50.220
+So you see the entire range over here.
+
+01:50.260 --> 01:50.780
+Now what.
+
+01:50.780 --> 01:56.620
+This is the one represents here the value that it is up at this time.
+
+01:56.620 --> 01:58.100
+This is time now.
+
+01:58.140 --> 01:59.650
+Why so many times?
+
+01:59.650 --> 02:05.450
+Because we are taking a range of five minutes and Prometheus scrapes every 15 seconds.
+
+02:05.930 --> 02:11.850
+So every 15 seconds for five minutes, that will be 20 values that we are getting now.
+
+02:12.090 --> 02:20.170
+It doesn't make sense to read this, but when you create a graph by using Grafana, you can see proper
+
+02:20.170 --> 02:20.930
+timeline.
+
+02:21.250 --> 02:22.410
+When was this term up?
+
+02:22.410 --> 02:24.210
+When it was down, at what time?
+
+02:24.690 --> 02:27.810
+Now this time is in Unix format.
+
+02:28.450 --> 02:36.690
+So this timestamp is basically the number of seconds that has completed from January 1st, 1970.
+
+02:37.210 --> 02:38.810
+That's Unix timestamp.
+
+02:39.410 --> 02:44.250
+Now, I know it's slightly weird, but it helps store the data properly in proper structure.
+
+02:44.250 --> 02:47.930
+And when you use Grafana it will properly show you the current timestamp.
+
+02:47.930 --> 02:48.610
+Everything.
+
+02:49.090 --> 02:52.130
+So first was instant vector, then it was range vector.
+
+02:52.130 --> 02:53.690
+These are the different types of data.
+
+02:54.330 --> 02:57.530
+Now I'm showing you a count function count parenthesis.
+
+02:57.530 --> 02:59.510
+And in this I have given the metric up.
+
+02:59.550 --> 03:05.110
+It's going to basically just count how many of those values it has returned, and that is three.
+
+03:05.990 --> 03:08.470
+But with this it also returns the label.
+
+03:08.510 --> 03:12.230
+Now there are no labels over here, but it returns this empty curly braces.
+
+03:12.230 --> 03:18.470
+If you want it in proper scalar format, you need to give it in scalar function scalar parenthesis,
+
+03:18.710 --> 03:25.030
+scalar parenthesis count up that also returns three, but it just returns three.
+
+03:25.070 --> 03:26.790
+Doesn't return any labels.
+
+03:27.510 --> 03:29.190
+Now again, doesn't make too much sense.
+
+03:29.190 --> 03:32.670
+Now we are seeing three with count function, also with scalar also.
+
+03:32.830 --> 03:35.710
+But when we use it in Grafana this will make more sense.
+
+03:36.350 --> 03:41.710
+So for now just have patience and just execute all these queries and check the result.
+
+03:41.950 --> 03:48.470
+First we check the data types instant vector, range, vector, scalar and string.
+
+03:48.510 --> 03:50.150
+The string is basically the text.
+
+03:50.790 --> 03:56.670
+And we also have arithmetic operators like plus minus multiplication division modulus.
+
+03:57.300 --> 04:01.980
+So for example, this metric node memory mem totals bytes.
+
+04:02.220 --> 04:03.620
+It returns in the bytes.
+
+04:03.900 --> 04:09.540
+So we only have this for the web system web zero one system because that is created by node metrics.
+
+04:09.540 --> 04:11.420
+Node metrics generate the system metrics.
+
+04:11.420 --> 04:14.300
+System metrics includes this memory information.
+
+04:14.540 --> 04:17.620
+So this is the total memory in bytes.
+
+04:18.340 --> 04:21.860
+Now we also have a metric to check the free bytes.
+
+04:21.860 --> 04:23.020
+Free memory bytes.
+
+04:23.500 --> 04:24.060
+And we have.
+
+04:24.420 --> 04:27.620
+If we subtract this we'll get the available memory.
+
+04:27.620 --> 04:35.620
+So if we put here minus and node memory free bytes and we execute it we get here the we get here the
+
+04:35.620 --> 04:38.540
+output that shows us the available memory.
+
+04:38.540 --> 04:42.180
+So from total we are subtracting free we get the available.
+
+04:42.220 --> 04:44.580
+Now like this I have given here a few more examples.
+
+04:44.740 --> 04:46.820
+How to get free disk utilization.
+
+04:47.060 --> 04:53.620
+So we divide the available bytes of the file system with the total byte size of the file system, we
+
+04:53.620 --> 04:54.380
+get an output.
+
+04:54.420 --> 04:58.080
+We multiply that with 100, we get the output in percentage.
+
+04:58.640 --> 05:05.840
+Again, the reason I'm showing you all this is so when you create metric panels in Grafana, you will
+
+05:05.840 --> 05:11.000
+not then be confused with what is this division multiplication additions subtractions.
+
+05:11.200 --> 05:12.880
+So these are arithmetic operators.
+
+05:13.280 --> 05:16.520
+And this another sheet I have more examples over here.
+
+05:17.040 --> 05:18.840
+So just check it from the lecture resource.
+
+05:18.840 --> 05:19.680
+It is useful.
+
+05:20.840 --> 05:22.680
+Okay let's check the comparison operator.
+
+05:22.680 --> 05:25.920
+Like equal to greater than less than or less than equal to.
+
+05:26.400 --> 05:27.520
+So we sing up.
+
+05:27.520 --> 05:31.200
+And if its value is one then only return the output.
+
+05:31.200 --> 05:32.680
+So execute.
+
+05:33.000 --> 05:34.160
+We see all the output.
+
+05:34.400 --> 05:40.840
+We say if up value is zero, show me all the nodes that means which are down right up zero equal to
+
+05:40.880 --> 05:41.240
+zero.
+
+05:41.280 --> 05:43.360
+Nothing because all the nodes are up.
+
+05:43.400 --> 05:49.600
+Let's check another metric node node node node one.
+
+05:49.840 --> 05:50.760
+Execute this.
+
+05:51.600 --> 05:58.590
+So let's say we want to check all the system whose load average is greater than three or greater than
+
+05:58.590 --> 05:59.390
+two, we'll say.
+
+06:00.070 --> 06:01.190
+Let's give a space here.
+
+06:01.830 --> 06:04.670
+Execute okay.
+
+06:04.710 --> 06:05.950
+For few minutes.
+
+06:05.950 --> 06:06.670
+For few seconds.
+
+06:06.670 --> 06:10.510
+It did not show because we have a script running in our web node.
+
+06:10.510 --> 06:11.030
+Right.
+
+06:11.070 --> 06:12.390
+Which is sometime pushing the load.
+
+06:12.390 --> 06:13.790
+Sometime it's bringing it down.
+
+06:13.790 --> 06:16.390
+So it was not showing it, then executed a few times.
+
+06:16.390 --> 06:18.470
+After few seconds it started showing it.
+
+06:18.670 --> 06:24.190
+If we say show me which is which has load average greater than three, we might not get anything right
+
+06:24.190 --> 06:24.590
+now.
+
+06:25.750 --> 06:26.070
+Okay.
+
+06:26.110 --> 06:29.190
+Likewise up not equal to zero.
+
+06:29.870 --> 06:34.310
+That means this query is going to show all the node that are up okay.
+
+06:34.350 --> 06:36.910
+Now this one let's take this one okay.
+
+06:36.910 --> 06:37.910
+Let's understand this one.
+
+06:37.910 --> 06:40.750
+So give me any up metric.
+
+06:40.750 --> 06:42.390
+Its value is equal to one.
+
+06:42.630 --> 06:44.750
+And this is the ending operation.
+
+06:44.990 --> 06:47.550
+And the load should be also greater than two.
+
+06:48.350 --> 06:51.830
+So ending means both the values should return.
+
+06:52.030 --> 06:52.990
+No should match.
+
+06:52.990 --> 06:54.610
+Then only we get the output.
+
+06:55.050 --> 06:57.810
+We say here load is greater than three.
+
+06:57.850 --> 06:59.610
+We might not get anything because.
+
+07:00.450 --> 07:02.170
+Oh, I think now node value.
+
+07:02.210 --> 07:04.970
+Load value is greater than three say four.
+
+07:05.970 --> 07:06.410
+Yeah.
+
+07:07.650 --> 07:09.850
+So load of our system is going up and down.
+
+07:09.850 --> 07:11.450
+So that's why we see this.
+
+07:11.810 --> 07:16.170
+So the node was up but its value load value was less than four.
+
+07:16.170 --> 07:17.890
+So it did not return any output.
+
+07:18.410 --> 07:20.450
+Now we can use or operator.
+
+07:21.250 --> 07:25.330
+Now show us the node that is up or any node.
+
+07:25.330 --> 07:26.970
+Its value is greater than four.
+
+07:26.970 --> 07:30.170
+So we might get one or all three right.
+
+07:30.170 --> 07:33.970
+So these are called as logical operator and or okay.
+
+07:34.010 --> 07:41.330
+So first we have seen the data types arithmetic operators comparison operators and logical operators.
+
+07:41.690 --> 07:43.450
+Once again execute all this.
+
+07:43.450 --> 07:44.690
+Look at the output.
+
+07:45.370 --> 07:46.330
+Learn by doing it.
+
+07:46.330 --> 07:47.730
+And not just by watching.
+
+07:48.250 --> 07:50.370
+By just watching you'll just get confused.
+
+07:50.890 --> 07:54.280
+And this will all make more sense when we go into Grafana.
+
+07:54.880 --> 07:55.160
+Okay.
+
+07:55.160 --> 07:57.320
+Let's take example of offset.
+
+07:58.480 --> 08:00.440
+Offset is showing the history.
+
+08:00.840 --> 08:02.200
+So we just execute the metric.
+
+08:02.200 --> 08:03.280
+It shows the current value.
+
+08:03.280 --> 08:07.640
+But if you want to see the previous values like what happened like last five minutes.
+
+08:08.200 --> 08:12.320
+So let's say we want to see node memory free bytes.
+
+08:12.760 --> 08:14.680
+So it's going to show me the current one.
+
+08:15.040 --> 08:20.440
+But if I'm going to say offset five m that means last five minutes.
+
+08:20.440 --> 08:21.800
+Sorry five minutes back.
+
+08:21.800 --> 08:23.360
+What was the free memory bytes.
+
+08:23.360 --> 08:25.320
+So it might show us a different value.
+
+08:25.800 --> 08:27.760
+So five minutes.
+
+08:27.800 --> 08:28.880
+M is for minute.
+
+08:29.640 --> 08:30.680
+Then we have days.
+
+08:30.680 --> 08:31.520
+We have hours.
+
+08:31.520 --> 08:32.240
+We have seconds.
+
+08:32.240 --> 08:33.440
+We have milliseconds.
+
+08:33.840 --> 08:36.120
+So based on your requirement you can see that.
+
+08:36.120 --> 08:39.880
+So memory six minutes ago up status five minutes ago.
+
+08:40.440 --> 08:45.400
+So what we want to do again that we'll understand in Grafana that what what we want to see based on
+
+08:45.440 --> 08:46.920
+that we're going to write the query.
+
+08:47.800 --> 08:48.080
+Okay.
+
+08:48.120 --> 08:52.140
+So so far we're checking the metrics from the node exporter.
+
+08:52.140 --> 09:00.020
+We have also the Python flask application Titan that is also exposing metrics that is mostly related
+
+09:00.020 --> 09:00.860
+to HTTP.
+
+09:00.860 --> 09:05.700
+So let's search for http http request total.
+
+09:06.140 --> 09:07.980
+Let's execute this okay.
+
+09:07.980 --> 09:12.300
+So here it says web zero one app start endpoint slash which is the main.
+
+09:13.220 --> 09:16.620
+There are total 8900 requests that came.
+
+09:16.660 --> 09:17.500
+And for payment.
+
+09:17.500 --> 09:23.260
+This is only one I think there's something wrong with the script that we are running because this should
+
+09:23.260 --> 09:24.660
+also have spiked.
+
+09:25.540 --> 09:36.300
+But but before that, let me just take the public IP of the web server and access it on port 5000 slash
+
+09:36.340 --> 09:37.180
+payment.
+
+09:38.740 --> 09:38.980
+Right.
+
+09:38.980 --> 09:39.820
+So that page is up.
+
+09:39.820 --> 09:40.740
+No problem.
+
+09:40.780 --> 09:44.620
+Let's check once again executing it few more times.
+
+09:45.060 --> 09:47.740
+So I should see the result in the query.
+
+09:47.780 --> 09:48.780
+The Prometheus query.
+
+09:48.780 --> 09:52.480
+Let's wait for a few seconds 15 seconds it takes to scrape.
+
+09:52.480 --> 09:52.760
+Right?
+
+09:52.760 --> 09:54.640
+So we need to wait at least 15 seconds.
+
+09:55.360 --> 09:57.320
+Okay, I see now that five total.
+
+09:57.360 --> 09:57.520
+Right.
+
+09:57.520 --> 10:00.280
+But the script that we are running I think that is not working.
+
+10:00.280 --> 10:05.320
+So let me switch to Prometheus and check take a look at that script.
+
+10:09.640 --> 10:09.920
+Okay.
+
+10:09.920 --> 10:14.880
+PS hyphen f group was web something.
+
+10:15.880 --> 10:16.040
+Okay.
+
+10:16.040 --> 10:16.640
+It's running.
+
+10:16.640 --> 10:17.760
+Let me kill it.
+
+10:17.880 --> 10:19.600
+Kill 2363.
+
+10:22.160 --> 10:22.520
+Okay.
+
+10:22.520 --> 10:23.160
+It's here.
+
+10:23.160 --> 10:24.280
+The script is here.
+
+10:24.720 --> 10:25.640
+Let me take a look.
+
+10:25.680 --> 10:27.520
+Website payment dot.
+
+10:27.520 --> 10:27.920
+SH.
+
+10:29.440 --> 10:30.600
+Everything looks good.
+
+10:31.440 --> 10:32.920
+Let's do a curl manually.
+
+10:34.760 --> 10:36.920
+Yeah, it's returning the HTML page.
+
+10:37.480 --> 10:39.120
+Let me run the script once again.
+
+10:43.080 --> 10:48.280
+Dot slash web payment and person.
+
+10:51.150 --> 10:52.870
+Okay, now it is increasing.
+
+10:53.150 --> 10:53.870
+Something wrong?
+
+10:53.910 --> 10:55.470
+Why was that script not running?
+
+10:55.550 --> 10:56.750
+I did not make any change.
+
+10:56.750 --> 10:57.870
+It was same as it is.
+
+10:57.870 --> 11:00.030
+Just killed the process and started again.
+
+11:00.510 --> 11:07.070
+And I'm going to kill this process for which checks the main page and make sure there you know at least
+
+11:07.070 --> 11:08.150
+similar range.
+
+11:11.230 --> 11:12.550
+2331.
+
+11:13.470 --> 11:15.830
+And after few minutes I'm going to run it once again.
+
+11:16.230 --> 11:21.150
+So when I get into Grafana I should show you graphs matching going up and down.
+
+11:21.150 --> 11:21.430
+Right.
+
+11:21.430 --> 11:26.990
+So to show that visual representation I'm just trying to make sure that they are in thousands.
+
+11:27.510 --> 11:27.790
+Okay.
+
+11:27.790 --> 11:33.430
+Again now back here so we can see get me a range of five minutes.
+
+11:33.470 --> 11:35.150
+What happened in last five minutes.
+
+11:36.030 --> 11:37.350
+And that was in thousands.
+
+11:37.350 --> 11:39.590
+You know take a look over here for payment.
+
+11:39.830 --> 11:40.710
+It was was one.
+
+11:40.710 --> 11:44.870
+Then at this time it was there were two requests then five requests for this time, then eight, then
+
+11:44.910 --> 11:46.230
+increased to 35.
+
+11:46.590 --> 11:46.830
+Right.
+
+11:46.870 --> 11:49.050
+So this shows the range vector.
+
+11:49.450 --> 11:52.290
+So there are many interesting function that Frankl provides.
+
+11:52.290 --> 11:53.770
+One of them is rate.
+
+11:53.770 --> 11:55.970
+We'll be using this in Grafana also.
+
+11:56.130 --> 11:59.850
+So put this all in rate and execute this.
+
+12:00.250 --> 12:03.210
+So this shows the request per second.
+
+12:03.770 --> 12:08.730
+So for this one request per second was around like three seconds sorry three.
+
+12:09.450 --> 12:11.130
+And for slash payment it is less.
+
+12:11.130 --> 12:12.610
+We know that you know it was not working.
+
+12:12.610 --> 12:13.650
+It was not running.
+
+12:14.130 --> 12:17.890
+So like that there are many helpful functions that we will be using in Grafana.
+
+12:18.370 --> 12:19.210
+Let's take a look.
+
+12:19.570 --> 12:26.690
+So we have I rate that shows instant rate network for network throughput helpful for network throughput.
+
+12:26.690 --> 12:29.850
+Actually not so much for the HTTP total request.
+
+12:30.450 --> 12:34.970
+There is increase function that can show, you know increase in last.
+
+12:35.010 --> 12:36.210
+Here it is like one hour.
+
+12:36.250 --> 12:38.250
+You can just put five minutes also and see.
+
+12:38.610 --> 12:41.570
+So last one minute or sorry one hour.
+
+12:41.850 --> 12:47.370
+What was the increase in this total request sum that will just sum add everything.
+
+12:47.920 --> 12:51.960
+So here this basically means, you know, when we run up we get three values, right.
+
+12:51.960 --> 12:54.280
+So sum is just going to add them three.
+
+12:54.640 --> 12:56.680
+So if you do this you just get the value three.
+
+12:56.880 --> 12:59.960
+And by job here means this is for the label.
+
+12:59.960 --> 13:05.200
+So you know Prometheus configuration we have mentioned jobs or three jobs.
+
+13:05.440 --> 13:08.000
+So let's run this okay.
+
+13:08.040 --> 13:16.120
+So for the job Prometheus like if you have multiple configuration in one job like in one like Prometheus
+
+13:16.120 --> 13:20.640
+job, we just have one configuration or here also we have one configuration.
+
+13:21.120 --> 13:22.000
+Let me show you.
+
+13:22.000 --> 13:24.600
+So when we open the Prometheus configuration file.
+
+13:26.560 --> 13:30.000
+So this job right web server app start it has just one config.
+
+13:30.000 --> 13:31.280
+Just one target mentioned.
+
+13:31.280 --> 13:35.600
+We can have multiple targets also especially when we group things together.
+
+13:35.960 --> 13:38.480
+So let's say here we have ten targets.
+
+13:38.480 --> 13:42.400
+So job web server app start has ten target.
+
+13:42.440 --> 13:44.880
+Now out of that ten target how many are up.
+
+13:44.880 --> 13:47.500
+That's exactly the query we have executed.
+
+13:48.100 --> 13:50.820
+Right now we just have one target per group.
+
+13:50.820 --> 13:54.060
+So it is showing its status that it's just up.
+
+13:54.220 --> 13:59.220
+It's just one target that is up here, one target here, up here, one target up like that.
+
+14:00.220 --> 14:01.780
+Then we have average.
+
+14:01.940 --> 14:02.820
+We have delta.
+
+14:02.860 --> 14:03.820
+The difference.
+
+14:04.220 --> 14:09.300
+And then there is a huge list of the functions in the another sheet I have given here a lot of other
+
+14:09.300 --> 14:10.020
+functions.
+
+14:10.500 --> 14:16.900
+Minimum maximum average counting top k top three.
+
+14:16.900 --> 14:20.660
+So this command is going to return the top three load values.
+
+14:20.660 --> 14:23.820
+Bottom k bottom three load values.
+
+14:24.300 --> 14:27.060
+Count values is going to count based on the labels.
+
+14:27.620 --> 14:29.660
+So take a look at this list.
+
+14:29.660 --> 14:30.500
+You can execute.
+
+14:30.500 --> 14:33.020
+You should actually execute these queries.
+
+14:33.220 --> 14:36.340
+And also make sure you look at the description while you're executing the query.
+
+14:36.700 --> 14:37.860
+Some might make sense.
+
+14:37.860 --> 14:39.340
+Some might not make sense.
+
+14:39.380 --> 14:43.580
+Once again, once we put this in Grafana, all will start making sense.
+
+14:44.060 --> 14:45.500
+So there are many functions.
+
+14:45.500 --> 14:46.090
+There's many.
+
+14:46.090 --> 14:46.570
+Operator.
+
+14:46.570 --> 14:48.930
+We cannot just execute all the queries.
+
+14:49.250 --> 14:51.010
+Understand the entire prompt QL.
+
+14:51.050 --> 14:54.530
+That's not going to be possible in this lecture or in this course.
+
+14:54.970 --> 14:57.090
+But this much will be enough for you.
+
+14:57.330 --> 15:00.210
+All the sheet if you execute like look at the output.
+
+15:00.690 --> 15:05.170
+Then when you get into Grafana you will not be confused about the queries.
+
+15:05.850 --> 15:12.490
+In any case, you can use ChatGPT or any other AI tool to give you a query that you're looking for.
+
+15:12.970 --> 15:13.650
+That's what I do.
+
+15:13.690 --> 15:14.810
+I have a requirement.
+
+15:14.810 --> 15:17.890
+I need this kind of graph or bar chart or pie chart.
+
+15:18.090 --> 15:19.730
+So I just open ChatGPT.
+
+15:19.770 --> 15:25.850
+I just mentioned my requirement, get the query, put it there, and after some tinkering I get what
+
+15:25.850 --> 15:26.490
+I want.
+
+15:26.970 --> 15:33.570
+So for now, take some time, execute these queries, get your results and be prepared for next lectures
+
+15:33.890 --> 15:34.490
+from QL.
+
+15:34.490 --> 15:35.570
+Query is not over.
+
+15:35.610 --> 15:36.690
+It just got started.
+
+15:36.690 --> 15:38.770
+We're going to have this throughout the course.
+
+15:38.810 --> 15:42.010
+Sorry throughout this section of monitoring and observability.
+
+15:42.570 --> 15:44.490
+But that should be all in this lecture for now.
+
+15:44.490 --> 15:45.650
+I'll see you in the next one.

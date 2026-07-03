@@ -1,0 +1,262 @@
+WEBVTT
+
+00:00.200 --> 00:01.000
+Welcome.
+
+00:01.680 --> 00:07.200
+In this lecture we are going to work on helm, the Kubernetes package manager.
+
+00:07.920 --> 00:13.520
+By using helm, you can manage your application as a single package on Kubernetes cluster.
+
+00:17.080 --> 00:20.240
+So far we have seen many objects in Kubernetes.
+
+00:20.680 --> 00:28.120
+And to run a complete application we will use multiple objects like deployment service ingress for the
+
+00:28.120 --> 00:28.480
+back end.
+
+00:28.520 --> 00:34.440
+We might need volumes, secret config maps, daemonset, statefulset many other things.
+
+00:34.840 --> 00:40.000
+So managing these objects in separate file can be overwhelming.
+
+00:40.280 --> 00:46.400
+So by using helm you can convert these definition files into single helm chart.
+
+00:46.880 --> 00:53.400
+So an application will be basically the bundle of this helm chart or the bundle of these different Kubernetes
+
+00:53.440 --> 00:55.000
+object into helm chart.
+
+00:55.040 --> 00:57.440
+So you deploy your application as a single suit.
+
+00:57.600 --> 01:03.980
+And then you can manage that application like that by using simple helm commands like helm install my
+
+01:03.980 --> 01:08.900
+app, helm uninstall or change the settings or versions.
+
+01:09.620 --> 01:14.860
+Now in this way, if you look, helm really acts like a package manager, but package package manager
+
+01:14.860 --> 01:18.180
+for your application, you can version your application.
+
+01:18.180 --> 01:21.740
+You can do templating, minor update, minor changes.
+
+01:21.740 --> 01:24.740
+You can easily deploy by using helm.
+
+01:25.300 --> 01:32.340
+And if we talk about DevOps and that's what we do, we deploy application, we manage applications,
+
+01:32.740 --> 01:33.540
+we upgrade them.
+
+01:33.540 --> 01:36.460
+So helm really makes our life easier.
+
+01:36.460 --> 01:41.340
+When we are deploying application on Kubernetes cluster, we can easily manage it.
+
+01:41.980 --> 01:43.700
+Let's look at some terminology.
+
+01:43.700 --> 01:49.460
+So charts or helm charts are basically collection of your Kubernetes objects.
+
+01:49.500 --> 01:55.020
+Your Kubernetes resources like deployments servers, ingress volumes, etc..
+
+01:55.540 --> 01:59.590
+So the chart is collection of all these pre-configured resources.
+
+02:00.070 --> 02:02.270
+We also have repositories in helm.
+
+02:02.270 --> 02:05.310
+We can store these charts in helm repositories.
+
+02:05.510 --> 02:10.550
+There are also some predefined repositories from where we can download ready made applications and run
+
+02:10.550 --> 02:10.790
+it.
+
+02:11.070 --> 02:14.710
+When you run the helm chart, when you deploy the helm chart, it's called as release.
+
+02:15.310 --> 02:20.750
+So an instance of a chart in the Kubernetes cluster is called release.
+
+02:21.110 --> 02:28.190
+One of the most important part of this helm charts are the values, which are basically the variables
+
+02:28.590 --> 02:31.430
+or the defined values of the variables.
+
+02:32.070 --> 02:34.110
+Let's look at the structure of helm.
+
+02:34.430 --> 02:38.750
+So first we create the helm chart by this command helm create.
+
+02:38.750 --> 02:41.390
+And you give the name of your application like my app.
+
+02:41.750 --> 02:43.710
+Then it creates a directory structure.
+
+02:43.710 --> 02:45.950
+What you see in the left hand side WordPress chart.
+
+02:45.950 --> 02:47.070
+That's an example.
+
+02:47.110 --> 02:54.150
+In templates you have all the resources and they will generally not have hard coded values like image
+
+02:54.150 --> 02:56.310
+name or port number won't be defined.
+
+02:56.350 --> 03:03.130
+There will be the variable name mentioned there and its value will be defined in Values.yaml file chart.
+
+03:03.170 --> 03:08.250
+Dot YAML file will have the name of the chart, its version, which you can change.
+
+03:08.730 --> 03:15.050
+So once you have this chart created for your application by simple commands, you can deploy this entire
+
+03:15.050 --> 03:16.530
+application as a single chart.
+
+03:16.530 --> 03:22.330
+So you can say helm, install your name off the release and the path where this directory structure
+
+03:22.330 --> 03:22.970
+exists.
+
+03:23.290 --> 03:28.130
+And when you happen to make any change like you change the image tag or some port number or anything,
+
+03:28.130 --> 03:33.570
+you can make the changes in the values.yaml file, or you can have a separate values.yaml file as well.
+
+03:33.850 --> 03:37.570
+And once you make change, you can just say Helm upgrade and it will apply the changes.
+
+03:37.570 --> 03:42.650
+If you want to remove your application, you can just say helm uninstall and there are many other commands
+
+03:42.650 --> 03:46.890
+like helm, list, etc. as I said, there are repositories in helm.
+
+03:46.890 --> 03:50.650
+You can store your chart in repositories and download and install.
+
+03:50.650 --> 03:55.210
+From there you can use existing repositories where there are predefined charts.
+
+03:55.530 --> 04:01.310
+You can add the repository like this helm repo, add name of the chart and URL.
+
+04:01.430 --> 04:07.190
+And then basically when you do helm install it's going to download those charts from that repository
+
+04:07.190 --> 04:08.190
+and run it.
+
+04:09.030 --> 04:09.270
+Okay.
+
+04:09.310 --> 04:12.710
+Now let's look at what we are going to do in this lecture.
+
+04:13.110 --> 04:15.110
+The exercise this will be very interesting.
+
+04:15.150 --> 04:17.230
+We are going to take WordPress setup.
+
+04:17.270 --> 04:23.110
+We are going to create necessary resources for it like deployment service volumes, PVC, persistent
+
+04:23.110 --> 04:25.550
+volume claim ingress and secret.
+
+04:25.910 --> 04:31.910
+So we have here the WordPress application running and the database MySQL database that supports it.
+
+04:31.910 --> 04:33.550
+So we'll have two deployments.
+
+04:33.950 --> 04:35.510
+One for the app, one for the DB.
+
+04:35.550 --> 04:39.070
+Then same for service PVC and one for ingress.
+
+04:39.670 --> 04:41.910
+And in secret we're going to store the passwords.
+
+04:42.510 --> 04:45.350
+And we're going to run it directly from the Kubernetes definition files.
+
+04:45.350 --> 04:51.910
+And then we are going to use AI generative AI to convert these into helm charts.
+
+04:51.910 --> 04:53.590
+We can do it manually also.
+
+04:53.590 --> 05:00.000
+But Frankly, after, you know, the code assistance tools like Copilot and many other tools, we are
+
+05:00.000 --> 05:02.600
+going to use Amazon Q in this lecture.
+
+05:03.000 --> 05:09.480
+So after these tools emerged in market, we started using these to write our code.
+
+05:09.480 --> 05:12.360
+And then we just change it as per requirements.
+
+05:12.360 --> 05:19.280
+I'm going to show you how you can use Amazon Q developer Q, which is an AI generative AI from Amazon.
+
+05:19.480 --> 05:22.680
+So we're going to use that to generate the helm charts.
+
+05:23.160 --> 05:28.360
+Once we develop our charts we are going to install them and run them make some changes.
+
+05:28.560 --> 05:30.400
+You know look at the basic helm commands.
+
+05:30.640 --> 05:37.280
+And once we are through with that we are going to see more features from helm again by using Amazon
+
+05:37.280 --> 05:43.720
+Q, the code assistant, we're going to ask it to deploy or implement best practices, development best
+
+05:43.720 --> 05:44.560
+practices.
+
+05:44.560 --> 05:49.320
+And then it's going to add many more things from helm into our charts into our templates.
+
+05:49.640 --> 05:51.880
+And then we're going to study those templates.
+
+05:52.480 --> 05:53.440
+So enough talking.
+
+05:53.440 --> 05:54.560
+Let's get started.

@@ -1,0 +1,544 @@
+WEBVTT
+
+00:05.010 --> 00:07.020
+Instructor: In this lecture we are going to create
+
+00:07.020 --> 00:09.720
+a bastion host.
+
+00:09.720 --> 00:13.170
+The other name of this is also jump server.
+
+00:13.170 --> 00:16.920
+This is no VPC technical term,
+
+00:16.920 --> 00:18.880
+it's a general networking term
+
+00:19.800 --> 00:24.510
+assigned to any secure network, host or computer
+
+00:24.510 --> 00:27.760
+through which you can access the private subnet
+
+00:28.680 --> 00:30.750
+or resources in the private subnet.
+
+00:30.750 --> 00:33.570
+So private subnet, let's say you launch an instance,
+
+00:33.570 --> 00:34.680
+now this concept applies
+
+00:34.680 --> 00:36.110
+to any general networking thing, right?
+
+00:36.110 --> 00:38.670
+If you create any computer instance
+
+00:38.670 --> 00:41.520
+any kind of resource in a private subnet,
+
+00:41.520 --> 00:44.640
+first thing is that it'll not have a public IP.
+
+00:44.640 --> 00:48.060
+So accessing it from the internet is out of question.
+
+00:48.060 --> 00:50.550
+The second, even if it has a public IP
+
+00:50.550 --> 00:52.230
+it is in a private subnet,
+
+00:52.230 --> 00:54.810
+you cannot access it from the internet.
+
+00:54.810 --> 00:58.980
+It has to come through a bastion host or a jump server.
+
+00:58.980 --> 01:02.640
+I'm talking about accessing it to make changes to it.
+
+01:02.640 --> 01:06.330
+And you want to SSH, for example, you want to SSH
+
+01:06.330 --> 01:08.550
+to an instance which is in the private subnet,
+
+01:08.550 --> 01:11.550
+you cannot do it from the internet.
+
+01:11.550 --> 01:14.370
+You have to SSH to an instance
+
+01:14.370 --> 01:15.750
+which is in the public subnet.
+
+01:15.750 --> 01:18.300
+And from that you can SSH to the instance
+
+01:18.300 --> 01:20.850
+which is in the private subnet.
+
+01:20.850 --> 01:23.130
+So bastion holes becomes a single point entry
+
+01:23.130 --> 01:26.250
+to access your resources into private subnet,
+
+01:26.250 --> 01:28.113
+and this needs to be very secure.
+
+01:30.090 --> 01:31.480
+Right, so that's a fort
+
+01:32.340 --> 01:35.640
+and everything is safe and secure inside it, right?
+
+01:35.640 --> 01:38.670
+I'm talking about the old times, of course.
+
+01:38.670 --> 01:40.710
+There are many resources inside this,
+
+01:40.710 --> 01:44.613
+but to access it, you need to get passed through the door.
+
+01:45.540 --> 01:49.120
+If this door is weak or not well guarded
+
+01:50.040 --> 01:51.300
+you know what will happen, right?
+
+01:51.300 --> 01:53.940
+There's no point in building this entire fort
+
+01:53.940 --> 01:56.550
+if the door is weak or unguarded,
+
+01:56.550 --> 01:59.400
+it's accessible easily, right?
+
+01:59.400 --> 02:03.210
+So you bastion host is that single point of entry
+
+02:03.210 --> 02:07.020
+in your VPC to access the resources
+
+02:07.020 --> 02:08.250
+in your private subnet.
+
+02:08.250 --> 02:10.631
+Again, this goes not only for the VPC AWS,
+
+02:10.631 --> 02:13.083
+VPC is a general networking concept.
+
+02:14.580 --> 02:17.280
+Okay, so let's go ahead and create a bastion host
+
+02:17.280 --> 02:20.550
+and I'm going to talk about few security concepts
+
+02:20.550 --> 02:23.160
+while I'm doing it, most of it you already know.
+
+02:23.160 --> 02:25.380
+Some I'm going to talk about along the way.
+
+02:25.380 --> 02:28.170
+So let's go back to AWS console.
+
+02:28.170 --> 02:30.783
+We are going to get into EC2.
+
+02:32.010 --> 02:34.470
+We'll launch an instance and place it
+
+02:34.470 --> 02:36.993
+in the public subnet of our VPC.
+
+02:38.070 --> 02:41.100
+Okay, if you look in the EC2 dashboard in the same region
+
+02:41.100 --> 02:42.660
+you should see one elastic IP
+
+02:42.660 --> 02:44.430
+that we have created for the NAT gateway.
+
+02:44.430 --> 02:46.650
+You should see two security groups.
+
+02:46.650 --> 02:49.260
+Now these security groups are default security groups
+
+02:49.260 --> 02:52.980
+that gets created when we create the VPC, right?
+
+02:52.980 --> 02:54.990
+So it's one for our default VPC.
+
+02:54.990 --> 02:57.900
+The other one is for our V profile VPC.
+
+02:57.900 --> 03:01.350
+So let's create a security group for our bastion host,
+
+03:01.350 --> 03:04.623
+name it vpro-bastion-sg, security group.
+
+03:06.210 --> 03:08.130
+Description I'm giving same.
+
+03:08.130 --> 03:12.900
+Make sure you change this VPC over here to vprofile-VPC.
+
+03:12.900 --> 03:16.800
+Security groups are specific to the VPC.
+
+03:16.800 --> 03:18.540
+If you create a security group
+
+03:18.540 --> 03:21.150
+in a different VPC, a default VPC,
+
+03:21.150 --> 03:23.700
+you will not be able to attach the security group
+
+03:23.700 --> 03:26.520
+to the instance in our V profile VPC.
+
+03:26.520 --> 03:30.360
+They are VPC specific, so make sure you select your VPC,
+
+03:30.360 --> 03:34.740
+confirm that once again, vprofile-VPC you have to select.
+
+03:34.740 --> 03:37.410
+Now, the only purpose of the security group
+
+03:37.410 --> 03:39.210
+is for the bastion host to do SSH.
+
+03:39.210 --> 03:42.360
+So we will have just one rule over here, SSH,
+
+03:42.360 --> 03:44.343
+allowed from My IP.
+
+03:46.620 --> 03:49.050
+In real time when you set this up, this public IP
+
+03:49.050 --> 03:52.890
+will be off your corporate network, your office network.
+
+03:52.890 --> 03:56.100
+So only from your office network
+
+03:56.100 --> 03:59.670
+you can do SSH to the instance, okay?
+
+03:59.670 --> 04:01.500
+You can change it based on the requirement,
+
+04:01.500 --> 04:03.960
+but ideally this is how it should be.
+
+04:03.960 --> 04:07.950
+Don't give it from anywhere, only from My IP.
+
+04:07.950 --> 04:09.240
+Now of course for learning purpose,
+
+04:09.240 --> 04:10.500
+if things are not working, yes,
+
+04:10.500 --> 04:11.760
+you can give it from anywhere,
+
+04:11.760 --> 04:16.020
+but in real time it has to be from your corporate network.
+
+04:16.020 --> 04:17.193
+Create security group.
+
+04:19.590 --> 04:21.453
+Now let's go to Key Pair.
+
+04:25.020 --> 04:26.070
+We'll create a key pair
+
+04:26.070 --> 04:30.600
+and this private key needs to be kept very safe.
+
+04:30.600 --> 04:33.000
+I give it a name, I say .pem,
+
+04:33.000 --> 04:37.413
+vpro-bastion-key, Create key pair, downloaded.
+
+04:39.330 --> 04:42.450
+Okay, so this private key is the key
+
+04:42.450 --> 04:44.520
+to open the door of your fort.
+
+04:44.520 --> 04:45.930
+You know what I mean now, right?
+
+04:45.930 --> 04:47.850
+You need to keep it very safe.
+
+04:47.850 --> 04:48.840
+Let's launch the instance.
+
+04:48.840 --> 04:49.860
+Let's go to the instances.
+
+04:49.860 --> 04:51.090
+So there are two things, right?
+
+04:51.090 --> 04:52.950
+Proper security group rule,
+
+04:52.950 --> 04:56.220
+safe key pair and launch the instance.
+
+04:56.220 --> 04:59.883
+The third thing that I'm going to talk about is the AMI.
+
+05:01.380 --> 05:04.170
+Now so far we just use the AMI that we just get
+
+05:04.170 --> 05:09.170
+from the AWS Quickstart or marketplace, free AMIs, right?
+
+05:10.170 --> 05:14.310
+But for the bastion host in real time,
+
+05:14.310 --> 05:18.840
+you should go for the AMI that are tested for vulnerability.
+
+05:18.840 --> 05:23.763
+If you go to Browse more AMI, go to AWS Marketplace.
+
+05:26.430 --> 05:30.750
+So see there are providers who are selling AMIs
+
+05:30.750 --> 05:34.830
+that are well tested for the security vulnerabilities.
+
+05:34.830 --> 05:38.550
+There are many vulnerabilities in an operating system
+
+05:38.550 --> 05:41.220
+and these providers will find those vulnerabilities,
+
+05:41.220 --> 05:46.220
+fix them, create AMI for you which you can use.
+
+05:46.290 --> 05:48.510
+So one provider is CIS.
+
+05:48.510 --> 05:51.990
+Now I've been using this for bastion host for many time,
+
+05:51.990 --> 05:53.400
+but there are other providers also, okay?
+
+05:53.400 --> 05:56.910
+Center of Internet Security, search for CIS.
+
+05:56.910 --> 05:59.220
+So you will see CIS Amazon Linux 2,
+
+05:59.220 --> 06:01.590
+these are the same AMI that we use generally
+
+06:01.590 --> 06:03.783
+but they are from CIS, tested.
+
+06:04.860 --> 06:09.750
+There is CentOS 7, there is Microsoft and there is Ubuntu.
+
+06:09.750 --> 06:11.220
+And you see there are charges.
+
+06:11.220 --> 06:14.010
+Now we are not going to take these AMI
+
+06:14.010 --> 06:15.690
+for learning purpose.
+
+06:15.690 --> 06:18.210
+We wanted to keep it as low cost as possible, right?
+
+06:18.210 --> 06:20.100
+So you're not going to use these AMIs.
+
+06:20.100 --> 06:21.600
+I'm showing you in real time,
+
+06:21.600 --> 06:24.330
+better go for these AMIs, okay?
+
+06:24.330 --> 06:27.510
+A company can invest $130 per year for security,
+
+06:27.510 --> 06:31.530
+definitely, if you're now creating such secure VPC
+
+06:31.530 --> 06:36.060
+that much can be invested or should be invested, okay?
+
+06:36.060 --> 06:38.490
+So based on your use case, you can select the right AMI,
+
+06:38.490 --> 06:42.520
+but we are going to go for normal plain Ubuntu
+
+06:44.130 --> 06:46.080
+which we can get from Quickstart also.
+
+06:46.080 --> 06:48.240
+You can go Ubuntu, CentOS, your choice.
+
+06:48.240 --> 06:50.820
+We just need to SSH to it, that's all.
+
+06:50.820 --> 06:53.190
+So I'll go with Ubuntu Server 22
+
+06:53.190 --> 06:55.170
+which is free tier eligible.
+
+06:55.170 --> 07:00.123
+Select, I will name it as bastion,
+
+07:01.680 --> 07:03.360
+instance type t2.micro is fine,
+
+07:03.360 --> 07:06.480
+key pair that we created previously,
+
+07:06.480 --> 07:10.440
+and in Networks you have to make sure
+
+07:10.440 --> 07:13.650
+that we place it in our VPC in the public subnet.
+
+07:13.650 --> 07:18.650
+So click on Edit, select our VPC, V profile VPC,
+
+07:18.990 --> 07:22.773
+and carefully select the public subnet one or two.
+
+07:24.450 --> 07:26.280
+You see, auto-assign public IP,
+
+07:26.280 --> 07:29.700
+it's enabled by default because we enabled that.
+
+07:29.700 --> 07:31.650
+Now security group,
+
+07:31.650 --> 07:33.780
+you will be able to find your security group
+
+07:33.780 --> 07:37.320
+only if you created in that VPC.
+
+07:37.320 --> 07:40.380
+Otherwise you won't be able to find your security group
+
+07:40.380 --> 07:42.093
+if it's in a default VPC.
+
+07:43.020 --> 07:44.280
+Okay, so these are important things.
+
+07:44.280 --> 07:46.380
+Select the VPC, select the public subnet,
+
+07:46.380 --> 07:48.570
+select the security group that we created earlier
+
+07:48.570 --> 07:50.403
+and say Launch instance.
+
+07:55.080 --> 07:57.780
+Okay, wait until the instance state comes to running
+
+07:57.780 --> 07:59.643
+and then we can SSH to it.
+
+08:02.010 --> 08:03.930
+Okay, it's in the running state for me
+
+08:03.930 --> 08:06.930
+and now it's time to test.
+
+08:06.930 --> 08:11.340
+If we are able to SSH to it, then our VPC setup
+
+08:11.340 --> 08:14.820
+for public subnet is working perfectly fine.
+
+08:14.820 --> 08:16.230
+You see it has the public IP,
+
+08:16.230 --> 08:18.810
+it has the public DNS name.
+
+08:18.810 --> 08:20.580
+Let's copy the public IP,
+
+08:20.580 --> 08:22.653
+let me open Git Bash.
+
+08:23.490 --> 08:26.550
+So open, likewise, terminal if you have MacOS,
+
+08:26.550 --> 08:30.210
+let's get the key.
+
+08:30.210 --> 08:31.380
+Yeah, that's the key.
+
+08:31.380 --> 08:34.533
+Ubuntu, add the rate and the IP address.
+
+08:35.940 --> 08:39.000
+Okay, the response is coming back.
+
+08:39.000 --> 08:43.680
+I'm gonna say yes and I'm in.
+
+08:43.680 --> 08:46.353
+So this validates our public subnet.
+
+08:47.520 --> 08:49.290
+Okay, so now in the next lecture
+
+08:49.290 --> 08:52.230
+we are going to launch instance in the private subnet
+
+08:52.230 --> 08:55.320
+and we'll access it from the bastion host.
+
+08:55.320 --> 08:57.840
+Also, we are going to set up a website
+
+08:57.840 --> 08:59.280
+in the private instance
+
+08:59.280 --> 09:03.870
+and access the website through the load balancers.
+
+09:03.870 --> 09:05.100
+Okay, this is going to be fun.
+
+09:05.100 --> 09:06.500
+Join me in the next lecture.

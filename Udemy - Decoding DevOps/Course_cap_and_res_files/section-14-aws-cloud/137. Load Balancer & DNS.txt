@@ -1,0 +1,697 @@
+WEBVTT
+
+00:00.420 --> 00:01.950
+Instructor: Okay, so all the services,
+
+00:01.950 --> 00:03.570
+we have installed and set them.
+
+00:03.570 --> 00:06.480
+Now before we create the load balancer,
+
+00:06.480 --> 00:07.470
+let's actually check
+
+00:07.470 --> 00:10.293
+whether the Tomcat instance is responding or not.
+
+00:11.130 --> 00:12.867
+So go to our app01
+
+00:12.867 --> 00:16.620
+and we are going to access it on port 8080 from the browser.
+
+00:16.620 --> 00:18.180
+So first in the security group,
+
+00:18.180 --> 00:19.890
+we have to make sure we have the rules.
+
+00:19.890 --> 00:23.040
+So go to the app0 app security group
+
+00:23.040 --> 00:24.543
+and edit inbound rule.
+
+00:25.410 --> 00:28.290
+And we have 8080 from the load balancer security group.
+
+00:28.290 --> 00:32.703
+We are going to add one more rule, 8080 from my IP.
+
+00:34.020 --> 00:35.280
+Okay, this just will check
+
+00:35.280 --> 00:37.980
+whether the service is up and running or not.
+
+00:37.980 --> 00:41.250
+So add this rule and get the instance public IP,
+
+00:41.250 --> 00:45.750
+app01 public IP, and put it in the browser.
+
+00:45.750 --> 00:48.540
+The port number on which Tomcat runs is 8080.
+
+00:48.540 --> 00:49.773
+So give that port,
+
+00:52.140 --> 00:54.060
+and you should get the login page.
+
+00:54.060 --> 00:55.410
+Okay, but this is just a test.
+
+00:55.410 --> 00:57.990
+We really don't want to use it like this.
+
+00:57.990 --> 01:00.390
+You want to do it through load balancer.
+
+01:00.390 --> 01:02.760
+So you can close this for now
+
+01:02.760 --> 01:04.200
+and let's create the load balancer.
+
+01:04.200 --> 01:06.180
+So go to load balancing section.
+
+01:06.180 --> 01:08.193
+First we need to create a target group.
+
+01:09.360 --> 01:11.880
+So create a target group.
+
+01:11.880 --> 01:14.880
+So we're creating the target group of instances.
+
+01:14.880 --> 01:18.270
+So make sure instances is selected over there.
+
+01:18.270 --> 01:21.150
+Come down, let's give target group a name,
+
+01:21.150 --> 01:23.880
+vprofile-las-tg.
+
+01:23.880 --> 01:28.410
+Protocol port number, we have to give here 8080.
+
+01:28.410 --> 01:30.000
+Okay, the protocol is HTTP,
+
+01:30.000 --> 01:32.190
+but the port number of our instance,
+
+01:32.190 --> 01:33.760
+Tomcat runs on port 8080.
+
+01:33.760 --> 01:35.580
+We've just seen it.
+
+01:35.580 --> 01:39.450
+So make sure you give 8080 over there, scroll down.
+
+01:39.450 --> 01:41.430
+And in the health check also,
+
+01:41.430 --> 01:44.970
+we have to do here advanced health check settings
+
+01:44.970 --> 01:49.413
+and we have to override the HTTP protocol port number,
+
+01:50.790 --> 01:52.800
+'cause by default it is going to take 80,
+
+01:52.800 --> 01:54.753
+we have to give 8080.
+
+01:56.250 --> 01:59.670
+Okay, so two places here, 8080 over there
+
+01:59.670 --> 02:01.830
+and in the health check also.
+
+02:01.830 --> 02:03.240
+Also there is one more place
+
+02:03.240 --> 02:04.830
+that will do it in the next screen.
+
+02:04.830 --> 02:09.040
+So click on next, find your app01 instance,
+
+02:09.040 --> 02:10.860
+put a check mark over there
+
+02:10.860 --> 02:13.980
+and say here, make sure that's 8080,
+
+02:13.980 --> 02:16.233
+and say include as pending below.
+
+02:17.190 --> 02:20.700
+Okay, the instance should come over here, app01, port 8080.
+
+02:20.700 --> 02:22.620
+If you see something else,
+
+02:22.620 --> 02:27.570
+then you remove that and add it again, app01 on port 8080.
+
+02:28.410 --> 02:30.420
+Say create target group.
+
+02:30.420 --> 02:32.190
+Okay, so target group is created.
+
+02:32.190 --> 02:35.130
+Now let's create the load balancer.
+
+02:35.130 --> 02:38.640
+So the load balancer is going to listen on port 80
+
+02:38.640 --> 02:40.560
+and also on port 443.
+
+02:40.560 --> 02:42.870
+That will be a final, 443.
+
+02:42.870 --> 02:45.240
+But HTTPS connection, right?
+
+02:45.240 --> 02:48.183
+So HTTPS connection needs a certificate.
+
+02:49.020 --> 02:52.650
+We did create AWS ACM certificate,
+
+02:52.650 --> 02:55.923
+public certificate in the prerequisites lecture.
+
+02:56.940 --> 02:58.140
+We purchased a domain,
+
+02:58.140 --> 03:02.310
+we created AWS ACM certificate to match with that domain.
+
+03:02.310 --> 03:03.630
+If you have not done that,
+
+03:03.630 --> 03:06.780
+and if you want to do it, this is the time,
+
+03:06.780 --> 03:08.610
+but if you don't want to buy a domain
+
+03:08.610 --> 03:10.650
+and you just want to watch,
+
+03:10.650 --> 03:12.210
+you can create the load balancer,
+
+03:12.210 --> 03:13.230
+you can do the exercise,
+
+03:13.230 --> 03:16.593
+then you need to skip the 443 HTTPS part.
+
+03:17.670 --> 03:20.463
+Okay, so ACM certificate manager,
+
+03:21.630 --> 03:23.340
+I'll show you the certificate.
+
+03:23.340 --> 03:28.340
+So I have a certificate for this domain, hkhinfoteck.xyz.
+
+03:29.010 --> 03:31.080
+I did purchase the domain from GoDaddy.
+
+03:31.080 --> 03:34.260
+I've shown you that in the prerequisites lecture.
+
+03:34.260 --> 03:35.430
+If you want to do that now,
+
+03:35.430 --> 03:38.370
+you can buy the domain, create the certificate,
+
+03:38.370 --> 03:40.470
+and then continue with the lecture.
+
+03:40.470 --> 03:42.060
+If you still don't want to buy the domain,
+
+03:42.060 --> 03:42.893
+that is also fine.
+
+03:42.893 --> 03:43.890
+You can still do the lecture,
+
+03:43.890 --> 03:48.000
+except you cannot do the HTTPS connection part.
+
+03:48.000 --> 03:50.040
+Okay, so let me go to the load balancer back
+
+03:50.040 --> 03:52.440
+and say create load balancer.
+
+03:52.440 --> 03:56.040
+Application load balancer for HTTP and HTTPS traffic.
+
+03:56.040 --> 03:57.690
+That's what you want to do.
+
+03:57.690 --> 03:59.580
+Click on create there
+
+03:59.580 --> 04:02.913
+and give load balancer a name, vprofile-las-elb.
+
+04:05.940 --> 04:09.720
+Scrolling down, network mapping VPC
+
+04:09.720 --> 04:11.850
+and select all the availability zones
+
+04:11.850 --> 04:13.413
+that you see over there.
+
+04:19.263 --> 04:20.096
+Okay, coming down.
+
+04:20.096 --> 04:22.350
+By default it will be in the default security group,
+
+04:22.350 --> 04:27.090
+so remove that and select our load balancer security group
+
+04:27.090 --> 04:29.390
+that we created in the security group lecture.
+
+04:30.570 --> 04:32.550
+Listeners and routing here.
+
+04:32.550 --> 04:34.650
+So it's going to listen on port 80
+
+04:34.650 --> 04:38.373
+and route the request to the target group that we created.
+
+04:39.630 --> 04:41.790
+Now we need HTTPS connection.
+
+04:41.790 --> 04:45.180
+Now if you don't want to have the HTTPS connection,
+
+04:45.180 --> 04:46.590
+you can just move on,
+
+04:46.590 --> 04:49.590
+but if you want to have, you can say add listener tag.
+
+04:49.590 --> 04:50.423
+I'm sorry, my bad.
+
+04:50.423 --> 04:51.960
+It's add listener, this one,
+
+04:51.960 --> 04:56.190
+click on this and select here, HTTPS.
+
+04:56.190 --> 04:58.830
+It's going to by default, take the port number
+
+04:58.830 --> 05:00.483
+and select the target group.
+
+05:01.440 --> 05:03.510
+And when you do this, you need
+
+05:03.510 --> 05:05.853
+to select the certificate from the ACM.
+
+05:06.828 --> 05:08.940
+Okay, so if you scroll down the security policies,
+
+05:08.940 --> 05:12.150
+sorry, here, default SSL and TLS certificate.
+
+05:12.150 --> 05:17.150
+From ACM, drop down and select here, certificate.
+
+05:17.430 --> 05:20.940
+So mine is hkhinfo.xyz, this one.
+
+05:20.940 --> 05:24.633
+Okay, this you'll only get if you select here HTTPS.
+
+05:25.620 --> 05:28.110
+Okay, now over here get few more options
+
+05:28.110 --> 05:32.820
+like AWS Web Application Firewall, WAF, Global Accelerator.
+
+05:32.820 --> 05:34.680
+We can skip all this part
+
+05:34.680 --> 05:37.773
+and come down and say create load balancer.
+
+05:38.640 --> 05:40.410
+Okay, the load balancer is created.
+
+05:40.410 --> 05:41.910
+Let's click here on the load balancer.
+
+05:41.910 --> 05:44.790
+And this is gonna take some time to provision.
+
+05:44.790 --> 05:48.400
+And by the time we can go to this load balancer URL
+
+05:49.650 --> 05:51.840
+and add it in our domain record.
+
+05:51.840 --> 05:52.980
+Mine is in GoDaddy,
+
+05:52.980 --> 05:55.293
+so I'm going to log into my GoDaddy account.
+
+05:56.220 --> 05:57.630
+Okay, so this is only for people
+
+05:57.630 --> 06:01.800
+who bought the domain either from GoDaddy or anywhere else.
+
+06:01.800 --> 06:04.080
+If you have not done it, you can skip this part.
+
+06:04.080 --> 06:06.570
+If you have that, then go to your GoDaddy account.
+
+06:06.570 --> 06:07.983
+Go to my products.
+
+06:09.030 --> 06:11.073
+Okay, scroll down here.
+
+06:12.000 --> 06:13.020
+Okay, that's my domain.
+
+06:13.020 --> 06:15.063
+I'm going to say go to DNS.
+
+06:17.460 --> 06:21.390
+Again, here we are going to create the CNAME record.
+
+06:21.390 --> 06:25.680
+So click on add new record, choose type CNAME.
+
+06:25.680 --> 06:28.500
+So name of my website, I'm giving vprofileapp.
+
+06:28.500 --> 06:32.660
+So URL will be like this, vprofileapp.hkhinfotech.xyz.
+
+06:34.410 --> 06:36.780
+You can choose something else if you want.
+
+06:36.780 --> 06:38.130
+And in the value, we are going
+
+06:38.130 --> 06:42.603
+to give the load balancer DNS name, load balancer endpoint.
+
+06:43.650 --> 06:46.650
+So paste the load balancer endpoint over here,
+
+06:46.650 --> 06:48.303
+DNS name and say save.
+
+06:50.280 --> 06:51.360
+Okay, that's done.
+
+06:51.360 --> 06:54.030
+Now people who do not have the domain,
+
+06:54.030 --> 06:55.680
+they can just access the website
+
+06:55.680 --> 06:59.130
+by taking the load balancer endpoint, right?
+
+06:59.130 --> 07:00.900
+Copy it and put it in the browser.
+
+07:00.900 --> 07:02.130
+It will work out,
+
+07:02.130 --> 07:05.160
+but you're not going to get any HTTPS connection.
+
+07:05.160 --> 07:08.340
+Okay, it says active load balancer is active.
+
+07:08.340 --> 07:10.860
+Let's also check the target group
+
+07:10.860 --> 07:12.990
+if the instance are healthy or not.
+
+07:12.990 --> 07:16.230
+So go to the target group, open your target group
+
+07:16.230 --> 07:18.870
+and go to health checks.
+
+07:18.870 --> 07:22.590
+Nope, targets, refresh this.
+
+07:22.590 --> 07:25.380
+Okay, mine says status as healthy.
+
+07:25.380 --> 07:27.840
+For some reason, it is showing unhealthy for you,
+
+07:27.840 --> 07:30.060
+make sure the Tomcat service is running
+
+07:30.060 --> 07:32.850
+on the app01 instance, check that.
+
+07:32.850 --> 07:34.710
+Next thing you check the security group
+
+07:34.710 --> 07:36.480
+of the Tomcat instance.
+
+07:36.480 --> 07:40.650
+Does it allow port 8080 from the load balancer or not?
+
+07:40.650 --> 07:44.610
+If that is also correct, then check the health checks.
+
+07:44.610 --> 07:47.370
+That should be port 8080 over here.
+
+07:47.370 --> 07:49.530
+If all these three things are working,
+
+07:49.530 --> 07:52.590
+maximum chance, it should show healthy.
+
+07:52.590 --> 07:55.440
+You know, make sure you refresh and check again.
+
+07:55.440 --> 07:57.180
+It takes time.
+
+07:57.180 --> 07:58.830
+It performs few health check
+
+07:58.830 --> 08:01.920
+before it declares it as healthy.
+
+08:01.920 --> 08:02.880
+So if it's unhealthy,
+
+08:02.880 --> 08:04.770
+you're going to check the Tomcat service.
+
+08:04.770 --> 08:07.200
+You are going to check security group allows
+
+08:07.200 --> 08:09.390
+from the load balancer or not.
+
+08:09.390 --> 08:11.340
+And then you do the health checks,
+
+08:11.340 --> 08:13.593
+you check the port number is 8080 or not.
+
+08:14.820 --> 08:16.380
+Okay, let's come to load balancer
+
+08:16.380 --> 08:19.740
+and check it from the URL of the load balancer.
+
+08:19.740 --> 08:21.810
+Maximum chance it is going to show up.
+
+08:21.810 --> 08:24.660
+This is going on port 80 HTTP connection.
+
+08:24.660 --> 08:25.920
+It's working fine.
+
+08:25.920 --> 08:27.540
+You'll see here it says not secure
+
+08:27.540 --> 08:29.880
+because we are not using HTTPS connection.
+
+08:29.880 --> 08:32.790
+And again, this is a wrong domain.
+
+08:32.790 --> 08:35.280
+I mean not for our HTTPS connection.
+
+08:35.280 --> 08:37.170
+So I'm going to open a separate tab
+
+08:37.170 --> 08:41.053
+and I'm going to do now https://vprofileapp.hkhinfoteck.xyz
+
+08:45.660 --> 08:48.603
+HTTPS connection, hit Enter.
+
+08:50.430 --> 08:54.750
+Okay, if you check here, vprofileapp.hkhinfoteck.xyz,
+
+08:54.750 --> 08:56.250
+it shows all valid certificate.
+
+08:56.250 --> 08:57.300
+You can click over here
+
+08:57.300 --> 08:59.910
+and you can see, it says connection is secure.
+
+08:59.910 --> 09:02.370
+You click on that and you can see certificate is valid.
+
+09:02.370 --> 09:05.610
+If you click on that, you should see the certificate given
+
+09:05.610 --> 09:09.183
+for hkhinfoteck.xyz given by Amazon.
+
+09:10.080 --> 09:12.720
+Amazon gives the detail of the certificate.
+
+09:12.720 --> 09:14.520
+That is coming, all information is coming
+
+09:14.520 --> 09:16.710
+from the certificate manager.
+
+09:16.710 --> 09:17.880
+Okay, this certificate,
+
+09:17.880 --> 09:21.520
+and we have applied this certificate on the load balancer.
+
+09:21.520 --> 09:24.903
+If we go to load balancer,
+
+09:26.880 --> 09:30.483
+there, HTTPS-443, if you click on that, go to certificates,
+
+09:31.443 --> 09:33.780
+you should see a certificate over there.
+
+09:33.780 --> 09:34.980
+Okay, now let's log in
+
+09:34.980 --> 09:39.330
+and find out the other details, like DB connection.
+
+09:39.330 --> 09:43.653
+So log in with the username, admin_vp, same password.
+
+09:45.060 --> 09:48.010
+If you're able to log in, the DB connection is verified
+
+09:49.020 --> 09:51.390
+because the user information is stored in the database.
+
+09:51.390 --> 09:53.043
+So if you are able to log in,
+
+09:54.210 --> 09:55.470
+the DB connection is working.
+
+09:55.470 --> 09:58.890
+Check RabbitMQ, queue is generated.
+
+09:58.890 --> 10:01.800
+So RabbitMQ connection is also working.
+
+10:01.800 --> 10:04.143
+Click on all users to check Memcache.
+
+10:05.910 --> 10:07.503
+Select any user.
+
+10:09.420 --> 10:11.070
+You see it says data is from DB
+
+10:11.070 --> 10:12.690
+and data is inserted in cache.
+
+10:12.690 --> 10:14.220
+Go back.
+
+10:14.220 --> 10:15.870
+Click on the same user once again
+
+10:15.870 --> 10:18.930
+and you should see the message data is from cache.
+
+10:18.930 --> 10:22.590
+So all the services, everything is verified.
+
+10:22.590 --> 10:23.670
+So everything is good,
+
+10:23.670 --> 10:28.670
+but we also want our instances to scale out automatically
+
+10:28.710 --> 10:30.570
+when the load increases, right?
+
+10:30.570 --> 10:33.180
+When there are more users connecting to our website,
+
+10:33.180 --> 10:35.190
+we want it to automatically scale out.
+
+10:35.190 --> 10:36.023
+So in the next lecture,
+
+10:36.023 --> 10:38.820
+we are going to see autoscaling group,
+
+10:38.820 --> 10:41.910
+how we can do it for our project.
+
+10:41.910 --> 10:44.583
+So wrap this up and join me in the next lecture.

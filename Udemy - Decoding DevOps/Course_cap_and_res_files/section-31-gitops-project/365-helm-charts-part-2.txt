@@ -1,0 +1,1246 @@
+WEBVTT
+
+1
+00:00:00.240 --> 00:00:03.600
+<v Instructor>So we are going to use a GitHub Copilot</v>
+
+2
+00:00:03.600 --> 00:00:04.920
+to generate our Helm chart
+
+3
+00:00:04.920 --> 00:00:08.280
+from this Kubernetes definition files.
+
+4
+00:00:08.280 --> 00:00:10.710
+And we are going to use a prompt,
+
+5
+00:00:10.710 --> 00:00:13.950
+and this is the prompt that we are going to use.
+
+6
+00:00:13.950 --> 00:00:17.130
+Now, it took me some time to generate this prompt
+
+7
+00:00:17.130 --> 00:00:18.900
+and I have generated the prompt
+
+8
+00:00:18.900 --> 00:00:21.330
+from the GitHub Copilot itself.
+
+9
+00:00:21.330 --> 00:00:24.420
+So the way it works is we give a prompt,
+
+10
+00:00:24.420 --> 00:00:27.450
+we get some files,
+
+11
+00:00:27.450 --> 00:00:29.730
+and based on the requirement we give new prompt,
+
+12
+00:00:29.730 --> 00:00:32.760
+we keep chatting until we get finally to a point
+
+13
+00:00:32.760 --> 00:00:35.370
+where we have the right configuration,
+
+14
+00:00:35.370 --> 00:00:37.170
+the right code that we're looking for.
+
+15
+00:00:37.170 --> 00:00:40.440
+Once we have that, we can ask the AI agent
+
+16
+00:00:40.440 --> 00:00:45.000
+to generate a prompt for this discussion that we had
+
+17
+00:00:45.000 --> 00:00:46.770
+so I can generate it at once.
+
+18
+00:00:46.770 --> 00:00:48.420
+So that's how I generated the prompt.
+
+19
+00:00:48.420 --> 00:00:50.130
+I made some more changes in the prompt,
+
+20
+00:00:50.130 --> 00:00:51.720
+so there's no guarantee
+
+21
+00:00:51.720 --> 00:00:54.090
+that this prompt is going to generate exactly same
+
+22
+00:00:54.090 --> 00:00:55.980
+as it generated for me.
+
+23
+00:00:55.980 --> 00:00:59.040
+So use this prompt in GitHub Copilot,
+
+24
+00:00:59.040 --> 00:01:00.510
+see if you get right kind of code.
+
+25
+00:01:00.510 --> 00:01:03.090
+If there is any issue, you can directly use the code,
+
+26
+00:01:03.090 --> 00:01:06.150
+the Helm charts from this lecture resource
+
+27
+00:01:06.150 --> 00:01:08.700
+and put that folder in the Git repository
+
+28
+00:01:08.700 --> 00:01:11.430
+in the VProfile Helm repository.
+
+29
+00:01:11.430 --> 00:01:12.840
+Okay, let's take a look at the prompt.
+
+30
+00:01:12.840 --> 00:01:16.320
+So it says, "Create a Helm chart from Kubernetes manifest
+
+31
+00:01:16.320 --> 00:01:17.580
+in the kubedefs folder."
+
+32
+00:01:17.580 --> 00:01:19.800
+So we have the kubedefs folder
+
+33
+00:01:19.800 --> 00:01:22.350
+where we have all the Kubernetes manifest.
+
+34
+00:01:22.350 --> 00:01:25.500
+From this we want to generate the Helm chart.
+
+35
+00:01:25.500 --> 00:01:26.640
+Requirements: the chart name
+
+36
+00:01:26.640 --> 00:01:27.840
+should be vprofile.
+
+37
+00:01:27.840 --> 00:01:28.770
+Folder structure:
+
+38
+00:01:28.770 --> 00:01:31.740
+there should be a folder called Helm inside that vprofile.
+
+39
+00:01:31.740 --> 00:01:33.420
+This will have the charts.
+
+40
+00:01:33.420 --> 00:01:37.140
+Now, we wanted separate file for every resource type,
+
+41
+00:01:37.140 --> 00:01:39.360
+for app-deployment, a separate file,
+
+42
+00:01:39.360 --> 00:01:41.460
+for db-deployment, separate file.
+
+43
+00:01:41.460 --> 00:01:43.803
+Likewise for memcache and RabbitMQ.
+
+44
+00:01:43.803 --> 00:01:46.020
+For services, you want a different file.
+
+45
+00:01:46.020 --> 00:01:48.000
+For ingress, we want a different file.
+
+46
+00:01:48.000 --> 00:01:50.580
+For secret, so we mentioned all the different file
+
+47
+00:01:50.580 --> 00:01:52.683
+that we need in the template.
+
+48
+00:01:53.640 --> 00:01:57.603
+Then, the most important file here is the values.yaml file.
+
+49
+00:01:58.560 --> 00:02:00.810
+This is what will be updated automatically
+
+50
+00:02:00.810 --> 00:02:03.390
+from our continuous integration pipeline.
+
+51
+00:02:03.390 --> 00:02:04.740
+So as per our requirement,
+
+52
+00:02:04.740 --> 00:02:07.548
+we need separate section for app, db, memcache,
+
+53
+00:02:07.548 --> 00:02:10.290
+RabbitMQ, initcontainers, ingress.
+
+54
+00:02:10.290 --> 00:02:13.620
+Ingress, we will be using AWS ALB ingress,
+
+55
+00:02:13.620 --> 00:02:15.000
+not NGINX ingress.
+
+56
+00:02:15.000 --> 00:02:18.180
+AWS ALB Ingress Controller we'll be using.
+
+57
+00:02:18.180 --> 00:02:20.070
+So separate section of variable for this,
+
+58
+00:02:20.070 --> 00:02:22.710
+for secrets, for dockerregistry.
+
+59
+00:02:22.710 --> 00:02:24.720
+So by default, we are going to keep this disabled,
+
+60
+00:02:24.720 --> 00:02:27.300
+dockerregistry will be disabled by default,
+
+61
+00:02:27.300 --> 00:02:28.230
+but we can enable it.
+
+62
+00:02:28.230 --> 00:02:30.090
+So we are saying in values.yaml file
+
+63
+00:02:30.090 --> 00:02:32.700
+have separate section for all these variables.
+
+64
+00:02:32.700 --> 00:02:34.860
+It should be one level nesting.
+
+65
+00:02:34.860 --> 00:02:36.990
+So I'll show you a sample values.yaml file
+
+66
+00:02:36.990 --> 00:02:37.920
+that you want to generate.
+
+67
+00:02:37.920 --> 00:02:40.380
+So one level nesting means this app
+
+68
+00:02:40.380 --> 00:02:43.560
+and inside that variable, this is one level nesting,
+
+69
+00:02:43.560 --> 00:02:44.850
+and separate variable section
+
+70
+00:02:44.850 --> 00:02:48.240
+for app, db, memcached like this we want.
+
+71
+00:02:48.240 --> 00:02:50.670
+And in templates, we want a separate file
+
+72
+00:02:50.670 --> 00:02:52.170
+for every resource type:
+
+73
+00:02:52.170 --> 00:02:53.850
+app-deployment, separate file,
+
+74
+00:02:53.850 --> 00:02:55.800
+db-deployment, separate file.
+
+75
+00:02:55.800 --> 00:02:56.820
+This is good for management,
+
+76
+00:02:56.820 --> 00:02:58.740
+so this is what we want to generate, right?
+
+77
+00:02:58.740 --> 00:03:00.750
+So these are the variable
+
+78
+00:03:00.750 --> 00:03:04.023
+and this is where the variables are defined, like replicas.
+
+79
+00:03:05.550 --> 00:03:08.460
+So here, Values.app.replicas,
+
+80
+00:03:08.460 --> 00:03:10.173
+that is the value of replicas.
+
+81
+00:03:11.160 --> 00:03:12.720
+So we are most interested
+
+82
+00:03:12.720 --> 00:03:16.020
+into this app image name and image tag,
+
+83
+00:03:16.020 --> 00:03:19.890
+this will be default image name and default as the tag.
+
+84
+00:03:19.890 --> 00:03:20.850
+This we are going to update
+
+85
+00:03:20.850 --> 00:03:23.100
+with our continuous integration pipeline.
+
+86
+00:03:23.100 --> 00:03:25.230
+Okay, so coming back to our prompt.
+
+87
+00:03:25.230 --> 00:03:27.600
+So variables, these are the common variables
+
+88
+00:03:27.600 --> 00:03:28.433
+that you should use,
+
+89
+00:03:28.433 --> 00:03:29.490
+so this is what we are telling it
+
+90
+00:03:29.490 --> 00:03:31.410
+to the GitHub Copilot, right?
+
+91
+00:03:31.410 --> 00:03:32.850
+So these are common variables to use:
+
+92
+00:03:32.850 --> 00:03:34.320
+image, tag, replicas,
+
+93
+00:03:34.320 --> 00:03:37.222
+containerPort, servicePort, storageClass,
+
+94
+00:03:37.222 --> 00:03:38.730
+storageSize, defaultUser.
+
+95
+00:03:38.730 --> 00:03:41.520
+For ingress, you want these variable:
+
+96
+00:03:41.520 --> 00:03:43.620
+ingress enabled, true or false,
+
+97
+00:03:43.620 --> 00:03:46.500
+the host and the servicePort.
+
+98
+00:03:46.500 --> 00:03:49.110
+Now, I know this will be too much to understand for now.
+
+99
+00:03:49.110 --> 00:03:50.700
+Once we generate the entire Helm chart,
+
+100
+00:03:50.700 --> 00:03:51.570
+you'll understand it,
+
+101
+00:03:51.570 --> 00:03:54.660
+but you won't be able to write all the prompt
+
+102
+00:03:54.660 --> 00:03:55.920
+at once in real time,
+
+103
+00:03:55.920 --> 00:03:57.390
+it will be one by one.
+
+104
+00:03:57.390 --> 00:03:59.400
+Like you will give this prompt first,
+
+105
+00:03:59.400 --> 00:04:00.840
+it will generate the folder structure,
+
+106
+00:04:00.840 --> 00:04:03.360
+you will say my variables
+
+107
+00:04:03.360 --> 00:04:05.070
+should have different section like this.
+
+108
+00:04:05.070 --> 00:04:06.360
+So one by one you're going to give
+
+109
+00:04:06.360 --> 00:04:08.910
+one line at a time in real time.
+
+110
+00:04:08.910 --> 00:04:12.420
+But here, we are being a little time conscious
+
+111
+00:04:12.420 --> 00:04:15.060
+so we're doing everything at once.
+
+112
+00:04:15.060 --> 00:04:15.990
+Okay, so let's complete this.
+
+113
+00:04:15.990 --> 00:04:18.093
+So all image tag must be default,
+
+114
+00:04:19.320 --> 00:04:21.210
+which is latest, no empty tag.
+
+115
+00:04:21.210 --> 00:04:22.530
+Sometimes it gives empty tags
+
+116
+00:04:22.530 --> 00:04:24.510
+so I've given here that no empty tag values,
+
+117
+00:04:24.510 --> 00:04:25.560
+there should be some tag,
+
+118
+00:04:25.560 --> 00:04:27.720
+otherwise the Helm chart will fail.
+
+119
+00:04:27.720 --> 00:04:30.330
+Image name and tag should be separate variable.
+
+120
+00:04:30.330 --> 00:04:32.040
+I used to generate this prompt
+
+121
+00:04:32.040 --> 00:04:35.460
+and then it used to give image and tag at the same line
+
+122
+00:04:35.460 --> 00:04:37.440
+so I said, "You know, give it separately."
+
+123
+00:04:37.440 --> 00:04:40.530
+db.storageClass must be gp2,
+
+124
+00:04:40.530 --> 00:04:42.300
+so that I'll show you.
+
+125
+00:04:42.300 --> 00:04:45.630
+So in our kubedefs file, we have the pvc file,
+
+126
+00:04:45.630 --> 00:04:48.030
+this is what create the PVC,
+
+127
+00:04:48.030 --> 00:04:51.660
+and here the name of the PVC, PersistentVolumeClaim,
+
+128
+00:04:51.660 --> 00:04:52.860
+this is the name.
+
+129
+00:04:52.860 --> 00:04:56.550
+The storageClass is default in our kubedefs file.
+
+130
+00:04:56.550 --> 00:04:59.370
+But when we are going to create this infrastructure
+
+131
+00:04:59.370 --> 00:05:02.283
+on AWS EKS cluster, we want it to be gp2,
+
+132
+00:05:03.210 --> 00:05:04.590
+so that's what we are mentioning
+
+133
+00:05:04.590 --> 00:05:06.190
+when we generate the Helm chart,
+
+134
+00:05:07.473 --> 00:05:09.483
+Helm chart values.yaml file.
+
+135
+00:05:10.410 --> 00:05:14.460
+db section storageClass should be gp2.
+
+136
+00:05:14.460 --> 00:05:16.572
+We can also mention the storageSize,
+
+137
+00:05:16.572 --> 00:05:17.430
+so db.,
+
+138
+00:05:17.430 --> 00:05:22.430
+I'll just say db.storage size
+
+139
+00:05:23.640 --> 00:05:25.357
+should be 3Gi.
+
+140
+00:05:28.330 --> 00:05:32.160
+Okay, I told you we will be using AWS controller,
+
+141
+00:05:32.160 --> 00:05:33.180
+AWS ALB controller,
+
+142
+00:05:33.180 --> 00:05:35.937
+so ingress must use
+
+143
+00:05:35.937 --> 00:05:37.980
+AWS ALB controller with annotation,
+
+144
+00:05:37.980 --> 00:05:40.650
+and these are the annotation that we want.
+
+145
+00:05:40.650 --> 00:05:42.123
+Let me just separate this.
+
+146
+00:05:43.110 --> 00:05:46.530
+Kubernetes.io/ingress.class name should be alb,
+
+147
+00:05:46.530 --> 00:05:48.120
+scheme should be internet-facing,
+
+148
+00:05:48.120 --> 00:05:49.740
+target-type should be ip,
+
+149
+00:05:49.740 --> 00:05:52.410
+and ingressClassName should be alb.
+
+150
+00:05:52.410 --> 00:05:54.240
+So when we set up our Kubernetes cluster,
+
+151
+00:05:54.240 --> 00:05:57.030
+we are going to install an ingress controller
+
+152
+00:05:57.030 --> 00:06:00.060
+called as AWS ALB controller in that.
+
+153
+00:06:00.060 --> 00:06:02.730
+If you want to use that when you create the ingress file,
+
+154
+00:06:02.730 --> 00:06:05.400
+it should have the class name as alb,
+
+155
+00:06:05.400 --> 00:06:07.320
+scheme as internet-facing,
+
+156
+00:06:07.320 --> 00:06:08.670
+target-type should be ip,
+
+157
+00:06:08.670 --> 00:06:10.567
+and ingressClassName should be alb.
+
+158
+00:06:10.567 --> 00:06:13.470
+If you give this annotation in the ingress file,
+
+159
+00:06:13.470 --> 00:06:16.680
+then it will use the AWS ALB controller,
+
+160
+00:06:16.680 --> 00:06:18.330
+it will create a load balancer,
+
+161
+00:06:18.330 --> 00:06:21.660
+which the users can use to access your application.
+
+162
+00:06:21.660 --> 00:06:24.900
+Now, this has nothing to do with the Helm chart,
+
+163
+00:06:24.900 --> 00:06:28.710
+this is all about the AWS ALB controller.
+
+164
+00:06:28.710 --> 00:06:30.150
+You can put this information later
+
+165
+00:06:30.150 --> 00:06:31.920
+also in the Helm charts.
+
+166
+00:06:31.920 --> 00:06:34.380
+You can think of this as the project requirement.
+
+167
+00:06:34.380 --> 00:06:37.440
+This is nothing specific to vprofile project
+
+168
+00:06:37.440 --> 00:06:39.570
+or this lecture or Helm.
+
+169
+00:06:39.570 --> 00:06:41.250
+The real-time project you're working on
+
+170
+00:06:41.250 --> 00:06:43.200
+might be using a different controller,
+
+171
+00:06:43.200 --> 00:06:46.170
+so you need to give that kind of information over here.
+
+172
+00:06:46.170 --> 00:06:48.479
+Once again, this is not going to happen overnight,
+
+173
+00:06:48.479 --> 00:06:50.970
+you need to spend time with your project,
+
+174
+00:06:50.970 --> 00:06:52.590
+understand the requirement,
+
+175
+00:06:52.590 --> 00:06:53.730
+do testing
+
+176
+00:06:53.730 --> 00:06:56.910
+and then slowly, slowly you come up to this information.
+
+177
+00:06:56.910 --> 00:06:57.743
+And you know what?
+
+178
+00:06:57.743 --> 00:06:59.850
+Let's just copy this prompt
+
+179
+00:06:59.850 --> 00:07:01.260
+and generate the Helm chart,
+
+180
+00:07:01.260 --> 00:07:03.540
+then we can again talk about this.
+
+181
+00:07:03.540 --> 00:07:07.590
+Okay, so open GitHub Chat, GitHub Copilot Chat
+
+182
+00:07:07.590 --> 00:07:09.660
+and paste your prompt over here,
+
+183
+00:07:09.660 --> 00:07:10.710
+hit Enter.
+
+184
+00:07:10.710 --> 00:07:11.820
+And it's going take some time,
+
+185
+00:07:11.820 --> 00:07:13.380
+I'm going to pause the lecture recording
+
+186
+00:07:13.380 --> 00:07:15.930
+and resume when this is completed.
+
+187
+00:07:15.930 --> 00:07:17.790
+Okay, now let's take a look.
+
+188
+00:07:17.790 --> 00:07:20.433
+It's completed, I'm going to click here on Keep.
+
+189
+00:07:21.780 --> 00:07:24.570
+So you should see a folder called helm.
+
+190
+00:07:24.570 --> 00:07:26.760
+In that, you should see folder vprofile,
+
+191
+00:07:26.760 --> 00:07:28.473
+that is the name of the chart.
+
+192
+00:07:29.430 --> 00:07:32.070
+Here you have all the templates.
+
+193
+00:07:32.070 --> 00:07:33.690
+In values.yaml file,
+
+194
+00:07:33.690 --> 00:07:36.120
+you should have this kind of content.
+
+195
+00:07:36.120 --> 00:07:38.550
+Now, I'm not giving any guarantee
+
+196
+00:07:38.550 --> 00:07:40.740
+that with this prompt you'll have exactly
+
+197
+00:07:40.740 --> 00:07:43.140
+same charts as mine.
+
+198
+00:07:43.140 --> 00:07:46.710
+And in order to properly execute this entire project setup,
+
+199
+00:07:46.710 --> 00:07:50.370
+it's better for you that you delete this helm folder,
+
+200
+00:07:50.370 --> 00:07:53.640
+download the helm folder from this lecture resource
+
+201
+00:07:53.640 --> 00:07:55.680
+and copy it in your helm repository.
+
+202
+00:07:55.680 --> 00:07:57.180
+That would be better.
+
+203
+00:07:57.180 --> 00:08:01.080
+Otherwise later also you can do this once you're executing,
+
+204
+00:08:01.080 --> 00:08:03.720
+once Argo CD fetches this charts
+
+205
+00:08:03.720 --> 00:08:05.940
+and deploys on Kubernetes cluster.
+
+206
+00:08:05.940 --> 00:08:07.290
+And if you're getting any issue,
+
+207
+00:08:07.290 --> 00:08:09.210
+that time also you can do that.
+
+208
+00:08:09.210 --> 00:08:11.190
+But anyways, I want you to verify a few things
+
+209
+00:08:11.190 --> 00:08:13.440
+like the structure of values.yaml file
+
+210
+00:08:13.440 --> 00:08:14.790
+should be exactly as you're seeing,
+
+211
+00:08:14.790 --> 00:08:19.260
+app.image should have the image name,
+
+212
+00:08:19.260 --> 00:08:22.020
+tag should have the latest tag.
+
+213
+00:08:22.020 --> 00:08:24.270
+So it should be in the same format,
+
+214
+00:08:24.270 --> 00:08:25.980
+same way for everything.
+
+215
+00:08:25.980 --> 00:08:27.360
+And while scrolling down,
+
+216
+00:08:27.360 --> 00:08:30.480
+you should see here ingress enabled false,
+
+217
+00:08:30.480 --> 00:08:33.480
+make it to true, save this.
+
+218
+00:08:33.480 --> 00:08:35.970
+Make sure you do Ctrl + S because we need ingress,
+
+219
+00:08:35.970 --> 00:08:37.170
+we are going to set up everything
+
+220
+00:08:37.170 --> 00:08:39.510
+through ingress controller access
+
+221
+00:08:39.510 --> 00:08:42.330
+our vprofile application through a load balancer
+
+222
+00:08:42.330 --> 00:08:44.070
+so you should enable this.
+
+223
+00:08:44.070 --> 00:08:47.367
+In host, you make sure you give vprofile.,
+
+224
+00:08:48.270 --> 00:08:51.270
+and then your domain that you have.
+
+225
+00:08:51.270 --> 00:08:53.130
+I have domain from GoDaddy,
+
+226
+00:08:53.130 --> 00:08:56.580
+and my domain is hkhinfotek.xyz.
+
+227
+00:08:56.580 --> 00:08:58.170
+You make sure you give your domain.
+
+228
+00:08:58.170 --> 00:08:59.400
+If you do not have a domain
+
+229
+00:08:59.400 --> 00:09:01.890
+and if you don't want to get any domain,
+
+230
+00:09:01.890 --> 00:09:03.600
+you can keep this example.com
+
+231
+00:09:03.600 --> 00:09:06.510
+or anything later when you are actually accessing
+
+232
+00:09:06.510 --> 00:09:09.660
+the application through the browser through a URL,
+
+233
+00:09:09.660 --> 00:09:12.270
+that time you can skip and just watch the lecture.
+
+234
+00:09:12.270 --> 00:09:13.320
+But if you have a domain,
+
+235
+00:09:13.320 --> 00:09:15.180
+make sure you give your domain over here,
+
+236
+00:09:15.180 --> 00:09:17.680
+vprofile. your domain.
+
+237
+00:09:17.680 --> 00:09:21.000
+A few other things to verify will be db,
+
+238
+00:09:21.000 --> 00:09:24.270
+storageClass gp2 should be here.
+
+239
+00:09:24.270 --> 00:09:28.710
+The next thing to check is the ingress.yaml file.
+
+240
+00:09:28.710 --> 00:09:30.150
+Now, we have seen ingress,
+
+241
+00:09:30.150 --> 00:09:34.050
+ingress v accessed through a load balancer.
+
+242
+00:09:34.050 --> 00:09:35.700
+Now we are doing this setup on AWS
+
+243
+00:09:35.700 --> 00:09:39.300
+so we will be using AWS Load Balancer Controller,
+
+244
+00:09:39.300 --> 00:09:41.310
+which we are going to see
+
+245
+00:09:41.310 --> 00:09:44.700
+when we set up load balancer for Argo CD.
+
+246
+00:09:44.700 --> 00:09:47.850
+But if you want to use AWS ALB controller,
+
+247
+00:09:47.850 --> 00:09:50.793
+we need to provide some annotations over here.
+
+248
+00:09:52.042 --> 00:09:54.810
+In this section, you can remove all these annotation
+
+249
+00:09:54.810 --> 00:09:58.470
+and from the document in this lecture resource,
+
+250
+00:09:58.470 --> 00:10:00.460
+you can copy this annotation
+
+251
+00:10:02.610 --> 00:10:03.840
+and paste it over here.
+
+252
+00:10:03.840 --> 00:10:05.670
+So ingress.class, alb,
+
+253
+00:10:05.670 --> 00:10:07.560
+that will be the name of our controller,
+
+254
+00:10:07.560 --> 00:10:09.450
+scheme: internet-facing,
+
+255
+00:10:09.450 --> 00:10:11.580
+target-type: ip address,
+
+256
+00:10:11.580 --> 00:10:14.310
+and certificate-arn, here you need to provide
+
+257
+00:10:14.310 --> 00:10:17.730
+the ARN of your public certificate on AWS
+
+258
+00:10:17.730 --> 00:10:19.500
+that we have created.
+
+259
+00:10:19.500 --> 00:10:20.910
+In this course project side,
+
+260
+00:10:20.910 --> 00:10:24.090
+we created a public certificate through the domain,
+
+261
+00:10:24.090 --> 00:10:25.530
+we have verified it.
+
+262
+00:10:25.530 --> 00:10:28.800
+So in AWS, go to Certificate Manager service,
+
+263
+00:10:28.800 --> 00:10:30.990
+you should see your certificate.
+
+264
+00:10:30.990 --> 00:10:32.160
+If you have not set it,
+
+265
+00:10:32.160 --> 00:10:33.210
+you can ignore it now,
+
+266
+00:10:33.210 --> 00:10:34.350
+later also you can do it
+
+267
+00:10:34.350 --> 00:10:37.320
+or later you can also skip this part as well.
+
+268
+00:10:37.320 --> 00:10:38.430
+But if you have a domain,
+
+269
+00:10:38.430 --> 00:10:40.650
+if you have the public certificate,
+
+270
+00:10:40.650 --> 00:10:42.180
+then go to the public certificate,
+
+271
+00:10:42.180 --> 00:10:47.010
+copy the ARN and replace this ARN, this is mine,
+
+272
+00:10:47.010 --> 00:10:50.850
+so replace this with your ARN.
+
+273
+00:10:50.850 --> 00:10:51.990
+Now, this way it will make sure
+
+274
+00:10:51.990 --> 00:10:53.940
+that when we access it through HTTPS,
+
+275
+00:10:53.940 --> 00:10:56.520
+it will use this certificate.
+
+276
+00:10:56.520 --> 00:10:58.380
+Listen-port 80 and 443,
+
+277
+00:10:58.380 --> 00:11:01.593
+we are keeping both HTTP and HTTPS as default ports.
+
+278
+00:11:02.610 --> 00:11:06.255
+Backend-protocol, this will be HTTP or Tomcat application,
+
+279
+00:11:06.255 --> 00:11:10.500
+which will be deployed with this app-deployment file.
+
+280
+00:11:10.500 --> 00:11:11.520
+It creates that part
+
+281
+00:11:11.520 --> 00:11:13.953
+and that listen on default port,
+
+282
+00:11:14.790 --> 00:11:18.900
+I mean to say default protocol HTTP and not HTTPS,
+
+283
+00:11:18.900 --> 00:11:21.120
+so make sure this is HTTP.
+
+284
+00:11:21.120 --> 00:11:22.620
+You can just copy all the annotation
+
+285
+00:11:22.620 --> 00:11:24.960
+from this lecture resource document and put it over here,
+
+286
+00:11:24.960 --> 00:11:29.130
+just replace your ARN and you will be good.
+
+287
+00:11:29.130 --> 00:11:30.480
+Save this.
+
+288
+00:11:30.480 --> 00:11:33.150
+Once again verify values.yaml file,
+
+289
+00:11:33.150 --> 00:11:36.180
+compare it with my values.yaml file,
+
+290
+00:11:36.180 --> 00:11:38.130
+or better you delete the folder over here
+
+291
+00:11:38.130 --> 00:11:40.710
+and use the helm folder that is in this lecture.
+
+292
+00:11:40.710 --> 00:11:42.870
+What you need to do now is once you're done here,
+
+293
+00:11:42.870 --> 00:11:45.570
+you need to make a Commit &amp; Push.
+
+294
+00:11:45.570 --> 00:11:47.580
+There should be on the main branch.
+
+295
+00:11:47.580 --> 00:11:50.430
+Now, I like it doing through the prompt,
+
+296
+00:11:50.430 --> 00:11:51.510
+I'm sorry, through the terminal,
+
+297
+00:11:51.510 --> 00:11:52.923
+I'm going to open Git Bash.
+
+298
+00:11:54.270 --> 00:11:57.000
+I'm going to go to the Desktop.
+
+299
+00:11:57.000 --> 00:12:00.690
+gitops/vprofile-helm.
+
+300
+00:12:00.690 --> 00:12:01.830
+Clear the screen.
+
+301
+00:12:01.830 --> 00:12:03.423
+I'm gonna check git status,
+
+302
+00:12:04.440 --> 00:12:06.057
+and I'm gonna say git add.,
+
+303
+00:12:07.800 --> 00:12:10.000
+git commit -m
+
+304
+00:12:12.870 --> 00:12:14.800
+generated helm charts
+
+305
+00:12:19.170 --> 00:12:23.583
+and git push origin main.
+
+306
+00:12:24.870 --> 00:12:26.373
+And that's it, we're done here.
+
+307
+00:12:26.373 --> 00:12:29.130
+This is what we wanted to do in this lecture.
+
+308
+00:12:29.130 --> 00:12:29.963
+In the next lecture,
+
+309
+00:12:29.963 --> 00:12:31.620
+we are going to do some practical sites
+
+310
+00:12:31.620 --> 00:12:34.020
+for our next repository and pipeline,
+
+311
+00:12:34.020 --> 00:12:35.373
+so join me in the next one.
+

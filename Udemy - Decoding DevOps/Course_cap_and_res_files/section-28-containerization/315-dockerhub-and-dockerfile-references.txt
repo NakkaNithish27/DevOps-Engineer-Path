@@ -1,0 +1,400 @@
+WEBVTT
+
+00:06.000 --> 00:07.650
+Instructor: Dockerfile reference documentation
+
+00:07.650 --> 00:08.520
+from Docker Hub.
+
+00:08.520 --> 00:11.940
+If you don't have hands-on building a Docker image,
+
+00:11.940 --> 00:15.090
+then you can check it from here how to build a Docker image.
+
+00:15.090 --> 00:16.910
+You need to have a Dockerfile.
+
+00:20.310 --> 00:22.473
+Dockerfile, D, capital there.
+
+00:23.820 --> 00:25.590
+And once you have that Dockerfile,
+
+00:25.590 --> 00:27.330
+you're given the information about the image,
+
+00:27.330 --> 00:32.040
+you can run the command docker build -t,
+
+00:32.040 --> 00:36.060
+your account name, and slash, the image name.
+
+00:36.060 --> 00:37.623
+Account name will be,
+
+00:39.660 --> 00:42.633
+this is your account name, right?
+
+00:44.370 --> 00:46.440
+But when you have organization,
+
+00:46.440 --> 00:49.830
+then you can create the organization with your name.
+
+00:49.830 --> 00:51.990
+That will be the account name.
+
+00:51.990 --> 00:53.520
+But since we just have the account,
+
+00:53.520 --> 00:56.280
+we don't have any organization, we are going to go
+
+00:56.280 --> 00:58.020
+to the repositories.
+
+00:58.020 --> 01:01.620
+See that? That will be considered as our account name.
+
+01:01.620 --> 01:04.710
+And we are going to create repository over here,
+
+01:04.710 --> 01:06.240
+that will represent the image.
+
+01:06.240 --> 01:10.170
+So click on Create repository. We have three images.
+
+01:10.170 --> 01:15.170
+So let's start with the app. We'll name it as vprofileapp.
+
+01:15.450 --> 01:16.590
+And we'll keep it public,
+
+01:16.590 --> 01:20.490
+because private is not free, one is free.
+
+01:20.490 --> 01:22.563
+But then we need three images.
+
+01:23.700 --> 01:25.170
+And when you're working in projects,
+
+01:25.170 --> 01:28.080
+these images will be private mostly,
+
+01:28.080 --> 01:30.540
+but we are keeping it public, because we want it free.
+
+01:30.540 --> 01:32.163
+So click on Create.
+
+01:33.120 --> 01:35.430
+Yeah, let's again click on Repositories.
+
+01:35.430 --> 01:38.250
+Let's create the next repository,
+
+01:38.250 --> 01:42.723
+or the image, vprofiledb.
+
+01:45.390 --> 01:49.833
+And one more, Create repository,
+
+01:51.696 --> 01:55.050
+vprofileweb, okay?
+
+01:55.050 --> 01:57.930
+Now once again, in real time, you will have organization.
+
+01:57.930 --> 02:00.960
+In organization, you're going to create repositories.
+
+02:00.960 --> 02:02.430
+So here instead of the account name,
+
+02:02.430 --> 02:04.560
+you'll have organization name, that's one thing.
+
+02:04.560 --> 02:06.780
+The second thing is the image will not be public,
+
+02:06.780 --> 02:07.803
+it will be private.
+
+02:10.770 --> 02:12.600
+So we need three Dockerfiles
+
+02:12.600 --> 02:15.390
+to build our image and then we are gonna host it.
+
+02:15.390 --> 02:18.240
+After building it, we are going to push it to Docker Hub,
+
+02:20.700 --> 02:23.643
+like this, we can build, we can get that output,
+
+02:25.110 --> 02:26.310
+and then we can push it.
+
+02:27.600 --> 02:29.880
+So if you don't have hands-on Dockerfile,
+
+02:29.880 --> 02:31.680
+you can check this documentation.
+
+02:31.680 --> 02:34.683
+The few instruction, common instruction that we'll be using,
+
+02:40.320 --> 02:41.590
+FROM instruction in the Dockerfile.
+
+02:41.590 --> 02:44.370
+The Dockerfile is series of instruction.
+
+02:44.370 --> 02:46.260
+FROM instruction, we give the base image.
+
+02:46.260 --> 02:50.130
+We already have figured out our base images, Tomcat,
+
+02:50.130 --> 02:52.500
+MySQL, and Nginx.
+
+02:52.500 --> 02:54.840
+We just need to figure out the right tag.
+
+02:54.840 --> 02:56.583
+So we can mention the base image.
+
+03:00.960 --> 03:04.650
+Right, this is a simple Dockerfile, FROM, the base image.
+
+03:04.650 --> 03:07.830
+COPY, copy your file from your machine
+
+03:07.830 --> 03:09.393
+to the container's directory.
+
+03:10.380 --> 03:12.270
+RUN is going to execute this command.
+
+03:12.270 --> 03:13.803
+This is Windows command.
+
+03:14.700 --> 03:17.850
+We have Linux containers. We're gonna build Linux images.
+
+03:17.850 --> 03:20.223
+So obviously we'll be using Linux commands.
+
+03:24.750 --> 03:29.040
+These are the instruction, ADD, COPY, ENV, EXPOSE, FROM,
+
+03:29.040 --> 03:33.270
+LABEL, STOPSIGNAL, USER, VOLUME, WORKDIR.
+
+03:33.270 --> 03:36.813
+We'll be using some of them, or most of them.
+
+03:42.720 --> 03:45.030
+So you can see all the instruction
+
+03:45.030 --> 03:47.640
+with examples in great detail over here.
+
+03:47.640 --> 03:49.713
+FROM, CMD.
+
+03:50.640 --> 03:53.250
+RUN, this is about RUN, the command that we want to execute
+
+03:53.250 --> 03:56.043
+to build our image in the container.
+
+03:57.420 --> 04:00.870
+CMD to mention the binaries that we want to run,
+
+04:00.870 --> 04:03.333
+in order to run the process in the container.
+
+04:06.690 --> 04:09.213
+One example there, here's one example.
+
+04:11.700 --> 04:16.230
+LABEL, which are like tags that we have seen in AWS.
+
+04:16.230 --> 04:17.433
+Key value pairs.
+
+04:19.470 --> 04:20.870
+MAINTAINER is deprecated.
+
+04:20.870 --> 04:23.850
+So if you are already using it, stop using it.
+
+04:23.850 --> 04:27.090
+EXPOSE, when we are running our binary,
+
+04:27.090 --> 04:29.730
+let's say we're running Tomcat, CATALINA search run.
+
+04:29.730 --> 04:31.710
+So it's gonna run the service,
+
+04:31.710 --> 04:34.170
+bind the process on port 8080.
+
+04:34.170 --> 04:36.453
+So we have to then say EXPOSE 8080.
+
+04:37.500 --> 04:39.153
+See EXPOSE is used for that.
+
+04:40.140 --> 04:42.840
+ENV, if you want to set any environment variable,
+
+04:42.840 --> 04:43.673
+we'll try that.
+
+04:43.673 --> 04:45.300
+We don't need any environment variable,
+
+04:45.300 --> 04:49.173
+but we'll just set some environment variable.
+
+04:51.330 --> 04:54.063
+ADD, if you want to push any file into your container.
+
+04:57.570 --> 05:00.240
+Like, in this example, any file that start
+
+05:00.240 --> 05:03.300
+with home will be pushed into the container directory
+
+05:03.300 --> 05:04.533
+at this location.
+
+05:07.650 --> 05:10.590
+ADD, and there's also COPY, which are similar,
+
+05:10.590 --> 05:13.560
+but ADD has more options.
+
+05:13.560 --> 05:16.143
+ADD can also extract your zip file.
+
+05:17.970 --> 05:19.683
+COPY, which is similar to ADD.
+
+05:21.540 --> 05:23.490
+Okay, COPY and ADD will be very useful when you want
+
+05:23.490 --> 05:27.000
+to put your own customized data while building the image.
+
+05:27.000 --> 05:29.820
+You want to push a configuration file into your container
+
+05:29.820 --> 05:30.960
+while you're building the image,
+
+05:30.960 --> 05:33.910
+or you want to push your artifact, that we are going to do.
+
+05:36.150 --> 05:37.800
+We have ENTRYPOINT,
+
+05:37.800 --> 05:40.143
+which will have higher priority than command,
+
+05:41.160 --> 05:42.510
+where we can mention a command.
+
+05:42.510 --> 05:46.293
+And with command we can pass the arguments. We'll see that.
+
+05:47.520 --> 05:50.730
+So for example, this, ENTRYPOINT.
+
+05:50.730 --> 05:53.703
+When you run a container built from this Dockerfile,
+
+05:55.140 --> 05:56.280
+as soon as you run the container,
+
+05:56.280 --> 06:00.570
+it's gonna run the command, top -b, space, -c.
+
+06:00.570 --> 06:03.090
+So command, whatever you mentioned in CMD, will come
+
+06:03.090 --> 06:05.430
+as an argument over here,
+
+06:05.430 --> 06:07.953
+which if you want, you can override it.
+
+06:09.360 --> 06:11.763
+Like, as in this example, docker run,
+
+06:13.140 --> 06:17.583
+the name of the image, top -h.
+
+06:20.430 --> 06:22.157
+These are some samples.
+
+06:22.157 --> 06:25.560
+Again, if you don't have hands-on experience on Dockerfile,
+
+06:25.560 --> 06:28.020
+I recommend you try few of them.
+
+06:28.020 --> 06:31.230
+Like for example, this one, which is very popular.
+
+06:31.230 --> 06:34.620
+So this is going to fetch an image, Debian,
+
+06:34.620 --> 06:37.680
+install Apache 2 on it,
+
+06:37.680 --> 06:40.620
+expose it on port 80 and 443.
+
+06:40.620 --> 06:44.041
+A volume will be exposed, or multiple volumes,
+
+06:44.041 --> 06:48.660
+/var/www/, /var/log/apache2, /etc/apache2.
+
+06:48.660 --> 06:50.760
+So you'll have three volumes which you can map
+
+06:50.760 --> 06:52.590
+with your host machine.
+
+06:52.590 --> 06:54.855
+ENTRYPOINT, so as soon as you run the container,
+
+06:54.855 --> 06:58.533
+it's going to run this command, apachectl -D FOREGROUND.
+
+06:59.520 --> 07:01.650
+This is a very popular example to practice, one,
+
+07:01.650 --> 07:03.390
+because this is very easy,
+
+07:03.390 --> 07:07.140
+and also you would have already used Apache to your httpd.
+
+07:07.140 --> 07:08.460
+So it's easy to understand this.
+
+07:08.460 --> 07:11.460
+So you can build a Dockerfile with this,
+
+07:11.460 --> 07:13.743
+build a container, and test it.

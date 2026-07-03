@@ -1,0 +1,370 @@
+WEBVTT
+
+00:01.080 --> 00:04.140
+Imran: Okay, now let's once again take a look
+
+00:04.140 --> 00:05.430
+in our source code.
+
+00:05.430 --> 00:06.903
+Let's summarize this.
+
+00:07.860 --> 00:11.760
+So we really started writing the Docker-files first, right?
+
+00:11.760 --> 00:13.950
+But we are going to understand now once again,
+
+00:13.950 --> 00:16.320
+summarize this by looking at the docker-compose file,
+
+00:16.320 --> 00:18.360
+because this gives the whole picture
+
+00:18.360 --> 00:22.263
+of our containerization exercise or project.
+
+00:24.270 --> 00:25.230
+Now, if you...
+
+00:25.230 --> 00:26.940
+Once again, take a look, it will be very easy
+
+00:26.940 --> 00:29.253
+for you to understand the docker-compose file.
+
+00:30.810 --> 00:33.120
+But we have come to this conclusion
+
+00:33.120 --> 00:35.730
+because we have all the information
+
+00:35.730 --> 00:37.563
+that we have gathered so far.
+
+00:38.790 --> 00:40.770
+So in any project, the primary thing
+
+00:40.770 --> 00:44.760
+is information gathering, you collect the information.
+
+00:44.760 --> 00:49.560
+First, knowing how to build and deploy the project, right?
+
+00:49.560 --> 00:50.610
+You work with the developer
+
+00:50.610 --> 00:55.080
+and understand the development steps or deployment steps
+
+00:55.080 --> 00:58.533
+or setup step of the application.
+
+00:59.640 --> 01:01.500
+You understand the different services
+
+01:01.500 --> 01:04.230
+that are used in the project, like in vprofile-project,
+
+01:04.230 --> 01:09.180
+we have a database, we have a Memcached, we have RabbitMQ,
+
+01:09.180 --> 01:12.870
+we have Tomcat, we have Nginx, right?
+
+01:12.870 --> 01:16.800
+So, you know, you can start creating a skeleton
+
+01:16.800 --> 01:19.920
+of a docker-compose file from the very beginning itself.
+
+01:19.920 --> 01:20.880
+And you can say services
+
+01:20.880 --> 01:23.820
+and you can give the name of the services, right?
+
+01:23.820 --> 01:24.990
+And then giving the build step,
+
+01:24.990 --> 01:28.740
+you mention where will be the Dockerfile, right?
+
+01:28.740 --> 01:30.480
+So looking at the Dockerfile.
+
+01:30.480 --> 01:33.090
+Again, Dockerfile is the information
+
+01:33.090 --> 01:36.210
+of how the application is deployed, right?
+
+01:36.210 --> 01:39.390
+The setup step, same way you write the Dockerfile.
+
+01:39.390 --> 01:42.000
+So if you need Maven, you can use OpenJDK.
+
+01:42.000 --> 01:44.490
+There is also Maven image directly available
+
+01:44.490 --> 01:45.323
+from Docker Hub.
+
+01:45.323 --> 01:46.800
+We can use that.
+
+01:46.800 --> 01:49.170
+But I wanted to have a few more steps over here.
+
+01:49.170 --> 01:52.770
+One thing I have given over here is clone the source code.
+
+01:52.770 --> 01:55.920
+This necessarily doesn't need to be cloning here.
+
+01:55.920 --> 02:00.330
+You can also mount the current repository folder
+
+02:00.330 --> 02:02.400
+in the container image, right?
+
+02:02.400 --> 02:04.020
+It's pretty easy, all you can do
+
+02:04.020 --> 02:08.490
+is you can give here step ADD and you can say dot.
+
+02:08.490 --> 02:10.020
+In our case, not exactly dot,
+
+02:10.020 --> 02:13.980
+we need to give dot dot slash dot dot.
+
+02:13.980 --> 02:16.470
+So dot dot slash means the Docker-files folder,
+
+02:16.470 --> 02:18.960
+and after that, again dot dot slash
+
+02:18.960 --> 02:21.870
+means the vprofile-project, this folder, right?
+
+02:21.870 --> 02:24.157
+That's where our source code is, src file,
+
+02:24.157 --> 02:26.310
+you have pom.xml file here, right?
+
+02:26.310 --> 02:27.780
+You can mount it to a folder.
+
+02:27.780 --> 02:30.303
+We can say, like, vprofile-project.
+
+02:32.970 --> 02:34.680
+Right, and then you do cd into that
+
+02:34.680 --> 02:37.800
+and then you can run mvn install directly
+
+02:37.800 --> 02:40.230
+or maybe you need to checkout to some other branch.
+
+02:40.230 --> 02:43.380
+Not exactly checkout, you can just give mvn install.
+
+02:43.380 --> 02:44.760
+But there are a few complications here
+
+02:44.760 --> 02:46.233
+because of the branches.
+
+02:47.490 --> 02:49.410
+So I did not mention that step,
+
+02:49.410 --> 02:51.840
+but ideally you should be doing this step.
+
+02:51.840 --> 02:54.270
+You can do git clone also, right?
+
+02:54.270 --> 02:55.710
+So you know how to build the artifact,
+
+02:55.710 --> 02:57.750
+so build image should be always separate
+
+02:57.750 --> 03:00.960
+and the app image should be separate.
+
+03:00.960 --> 03:04.320
+Okay, you should copy the artifact from the build image
+
+03:04.320 --> 03:05.733
+to the app image.
+
+03:07.080 --> 03:12.080
+Right, db image, mostly db images will be simple as this.
+
+03:12.300 --> 03:14.340
+You take a MySQL or the Redis
+
+03:14.340 --> 03:16.170
+or whatever database in the project is, right?
+
+03:16.170 --> 03:19.170
+And you put your schemas in inside that,
+
+03:19.170 --> 03:21.510
+you mention the username, database name, right?
+
+03:21.510 --> 03:24.150
+It would be mostly easy like this, okay?
+
+03:24.150 --> 03:25.950
+Coming back again to the docker-compose file.
+
+03:25.950 --> 03:28.080
+So, now when the container runs,
+
+03:28.080 --> 03:30.090
+what port number they should be running on,
+
+03:30.090 --> 03:32.490
+we need to export any variables or not, right?
+
+03:32.490 --> 03:34.650
+All this information you should be collecting.
+
+03:34.650 --> 03:36.000
+Again, information gathering
+
+03:36.000 --> 03:39.423
+will give you all this information, right?
+
+03:40.980 --> 03:44.550
+So once you can containerize one image,
+
+03:44.550 --> 03:46.080
+the others will follow along.
+
+03:46.080 --> 03:48.513
+It will be mostly copy-paste and make changes.
+
+03:50.190 --> 03:52.140
+So at the end of the day, it will be docker-compose
+
+03:52.140 --> 03:53.850
+and Dockerfile, these two things.
+
+03:53.850 --> 03:56.070
+You build it, test it, if it's good,
+
+03:56.070 --> 03:57.933
+then you push it to Docker Hub.
+
+03:59.130 --> 04:02.400
+And if that is good, you can commit your source code.
+
+04:02.400 --> 04:04.550
+And once you have your source code ready...
+
+04:05.790 --> 04:07.710
+Right, so once you have your source code ready,
+
+04:07.710 --> 04:09.450
+after this it will be very simple.
+
+04:09.450 --> 04:12.000
+You fetch the source code wherever you want.
+
+04:12.000 --> 04:14.730
+You can build through docker-compose and run it.
+
+04:14.730 --> 04:16.620
+It's that simple, right?
+
+04:16.620 --> 04:19.080
+Clone the source code, docker-compose up hyphen d,
+
+04:19.080 --> 04:22.743
+and it is going to build the image and run the container.
+
+04:24.600 --> 04:27.480
+Okay, let's reiterate the steps that we did.
+
+04:27.480 --> 04:30.990
+We should know the steps to setup your stack on VMs,
+
+04:30.990 --> 04:33.870
+locally or remotely anywhere.
+
+04:33.870 --> 04:36.900
+We should know the steps to setup each and every service
+
+04:36.900 --> 04:38.880
+in your entire stack.
+
+04:38.880 --> 04:41.310
+Once you know that, you can find your right Base image
+
+04:41.310 --> 04:42.237
+from Docker Hub.
+
+04:42.237 --> 04:44.910
+You can write Dockerfile to customize your image.
+
+04:44.910 --> 04:46.890
+You can use docker-compose file
+
+04:46.890 --> 04:49.050
+to run multi containers and test it.
+
+04:49.050 --> 04:51.963
+Once you're done, you can host the image to Docker Hub.
+
+04:53.490 --> 04:55.350
+And that's exactly what we did.
+
+04:55.350 --> 04:56.733
+We cloned our source code.
+
+04:58.410 --> 05:01.290
+We written Dockerfile with the right data.
+
+05:01.290 --> 05:02.550
+We said docker build
+
+05:02.550 --> 05:05.223
+which fetch the Base image from Docker Hub.
+
+05:06.120 --> 05:08.400
+We used docker-compose to test it.
+
+05:08.400 --> 05:09.690
+When we find it is good,
+
+05:09.690 --> 05:11.643
+then we pushed it back to Docker Hub.
+
+05:12.810 --> 05:14.220
+So that was it.
+
+05:14.220 --> 05:17.640
+In this project, I hope you have learned a lot
+
+05:17.640 --> 05:19.080
+and gained some rich experience
+
+05:19.080 --> 05:21.660
+in containerizing your application.
+
+05:21.660 --> 05:22.920
+Thank you very much for watching.
+
+05:22.920 --> 05:24.423
+I'll see you in the next one.
+
+05:25.280 --> 05:27.863
+(upbeat music)

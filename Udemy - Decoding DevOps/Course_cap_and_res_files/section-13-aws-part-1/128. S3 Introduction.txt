@@ -1,0 +1,1432 @@
+WEBVTT
+
+00:00.180 --> 00:02.673
+Instructor: Welcome to the Amazon S3 session.
+
+00:04.020 --> 00:07.323
+In this session, we will be learning Amazon S3 service,
+
+00:08.160 --> 00:11.250
+Simple Storage Service.
+
+00:11.250 --> 00:14.520
+As the name says, it's really very simple to use
+
+00:14.520 --> 00:18.193
+and they are really many, many, many use cases for S3.
+
+00:19.800 --> 00:22.950
+S3 is one of the most popular service of AWS
+
+00:22.950 --> 00:26.730
+and also the oldest one, one of the oldest one.
+
+00:26.730 --> 00:28.143
+Let's see, what is S3?
+
+00:30.690 --> 00:32.670
+So S3 is a storage service
+
+00:32.670 --> 00:35.670
+and you can access it over the internet.
+
+00:35.670 --> 00:39.420
+You can store any amount of data in S3 bucket at any time,
+
+00:39.420 --> 00:42.450
+and you can access from anywhere.
+
+00:42.450 --> 00:46.230
+So as of now, think of it as like Google Drive or Dropbox,
+
+00:46.230 --> 00:49.743
+but it's much more than that with many, many features.
+
+00:52.530 --> 00:56.283
+Some very basic things about S3, it's an object storage.
+
+00:57.210 --> 00:58.710
+Again, just like Google Drive
+
+00:58.710 --> 01:00.870
+or Dropbox where you can upload your files
+
+01:00.870 --> 01:05.400
+and access them from anywhere like your documents,
+
+01:05.400 --> 01:08.673
+pictures, videos, etc.
+
+01:09.690 --> 01:13.140
+When you upload any data into S3 bucket,
+
+01:13.140 --> 01:15.270
+bucket is really the top level storage.
+
+01:15.270 --> 01:18.870
+It's like a folder in the S3 bucket, the top level folder.
+
+01:18.870 --> 01:20.340
+When you upload the data in the bucket,
+
+01:20.340 --> 01:23.760
+the data is replicated in multiple facilities.
+
+01:23.760 --> 01:24.720
+And there is no limit,
+
+01:24.720 --> 01:28.680
+you can store unlimited amount of data.
+
+01:28.680 --> 01:30.940
+So the data that you store is object
+
+01:31.839 --> 01:33.589
+and the storage is called a bucket.
+
+01:34.513 --> 01:36.790
+The bucket name has to be unique
+
+01:37.770 --> 01:41.490
+because we will be getting an endpoint to access it
+
+01:41.490 --> 01:44.580
+and then that endpoint will have the name of the bucket.
+
+01:44.580 --> 01:46.530
+So it has to be unique on the internet.
+
+01:49.350 --> 01:51.570
+So again, bucket is a logical container
+
+01:51.570 --> 01:52.890
+where you store the data
+
+01:52.890 --> 01:55.710
+and object is the data that you're storing,
+
+01:55.710 --> 01:58.560
+like your file, a document, a picture video,
+
+01:58.560 --> 02:00.360
+will be an object.
+
+02:00.360 --> 02:02.220
+So you have properties at the bucket level,
+
+02:02.220 --> 02:03.960
+you have properties at the object level.
+
+02:03.960 --> 02:06.480
+You can set permission at both levels
+
+02:06.480 --> 02:07.890
+and it's really simple to do.
+
+02:07.890 --> 02:09.840
+You just access the S3 service,
+
+02:09.840 --> 02:12.510
+you create a bucket if you want, you can create folder
+
+02:12.510 --> 02:15.930
+to organize it, and then you can upload your object
+
+02:15.930 --> 02:18.660
+and then you can access it from anywhere.
+
+02:18.660 --> 02:21.270
+And again, that's based on if you have given the permission
+
+02:21.270 --> 02:25.646
+to access it publicly or internally or for some IAM users,
+
+02:25.646 --> 02:27.120
+there are different ways of accessing data
+
+02:27.120 --> 02:28.263
+on your S3 bucket.
+
+02:29.160 --> 02:32.200
+One common, very, very common use case of S3 bucket
+
+02:33.776 --> 02:36.300
+is EC2 instances which are running some service,
+
+02:36.300 --> 02:38.340
+let's say web service, any application service,
+
+02:38.340 --> 02:41.370
+they want to store some file-based data.
+
+02:41.370 --> 02:43.530
+They can use S3 bucket.
+
+02:43.530 --> 02:47.610
+So developers will program in their application
+
+02:47.610 --> 02:50.160
+that the data is getting stored in S3 bucket
+
+02:50.160 --> 02:52.740
+and not in some folder locally.
+
+02:52.740 --> 02:55.050
+So yeah, this may seem like EFS
+
+02:55.050 --> 02:56.910
+through this architectural design.
+
+02:56.910 --> 03:01.020
+But in EFS, we mount the file system
+
+03:01.020 --> 03:03.150
+at the operating system level.
+
+03:03.150 --> 03:06.120
+So we get a folder at the operating system level
+
+03:06.120 --> 03:07.260
+where we store the data.
+
+03:07.260 --> 03:10.320
+But S3, we're going to programmatically access
+
+03:10.320 --> 03:11.730
+through our application.
+
+03:11.730 --> 03:15.450
+You can also mount S3 bucket to a folder,
+
+03:15.450 --> 03:18.963
+but that comes through a different driver, S3 FS.
+
+03:20.100 --> 03:21.930
+So that's one very common use case,
+
+03:21.930 --> 03:23.670
+but there are many, many use cases we are going
+
+03:23.670 --> 03:25.890
+to see in the exercise.
+
+03:25.890 --> 03:27.420
+The different storage classes,
+
+03:27.420 --> 03:30.060
+or you can say storage types in S3 bucket,
+
+03:30.060 --> 03:33.570
+first you have S3 standard, which is the most common one.
+
+03:33.570 --> 03:35.940
+So if you select this storage type,
+
+03:35.940 --> 03:39.390
+then the data access will be fast
+
+03:39.390 --> 03:43.950
+and object will be replicated in multiple availability zones
+
+03:43.950 --> 03:46.590
+and you will be charged accordingly for that.
+
+03:46.590 --> 03:50.760
+But if you don't access the data so frequently,
+
+03:50.760 --> 03:55.170
+maybe you're storing it to access the data once in a day
+
+03:55.170 --> 03:57.840
+or once in a week or few times in a week,
+
+03:57.840 --> 03:59.040
+it's not a continuous access.
+
+03:59.040 --> 04:00.390
+Then you can save some cost
+
+04:00.390 --> 04:03.510
+and you can select S3 infrequent access.
+
+04:03.510 --> 04:06.750
+Here, the data access will be slow,
+
+04:06.750 --> 04:09.510
+but the object is still getting replicated
+
+04:09.510 --> 04:12.090
+in multiple availability zones
+
+04:12.090 --> 04:14.150
+and the replication happens automatically.
+
+04:14.150 --> 04:15.660
+We don't really need to do anything.
+
+04:15.660 --> 04:17.730
+We don't need to set anything for that.
+
+04:17.730 --> 04:20.913
+And this is in multiple availability zones, not the region.
+
+04:21.900 --> 04:24.513
+This is so you don't lose your data.
+
+04:25.740 --> 04:29.520
+Then the third type is S3 One Zone Infrequent Access
+
+04:29.520 --> 04:33.810
+where you really don't care about the data durability.
+
+04:33.810 --> 04:36.750
+Maybe you already have it somewhere stored
+
+04:36.750 --> 04:38.790
+or it's not such critical data.
+
+04:38.790 --> 04:40.770
+So you can save some money
+
+04:40.770 --> 04:45.240
+and you can select S3 One Zone Infrequent Access.
+
+04:45.240 --> 04:48.930
+So no redundancy, the data is not replicated
+
+04:48.930 --> 04:50.763
+and the data access will be slower.
+
+04:52.200 --> 04:54.930
+Now what I'm saying slower, infrequent access,
+
+04:54.930 --> 04:57.840
+I'm comparing it with S3 standard.
+
+04:57.840 --> 04:59.440
+Then you have S3 intelligent tiering
+
+04:59.440 --> 05:01.500
+where the data automatically moves
+
+05:01.500 --> 05:03.960
+to the most cost effective tier.
+
+05:03.960 --> 05:05.370
+And again, this happens automatically.
+
+05:05.370 --> 05:06.870
+You don't need to do anything.
+
+05:08.520 --> 05:11.340
+Few more classes, we have S3 glacier,
+
+05:11.340 --> 05:14.100
+which is really a very low cost storage
+
+05:14.100 --> 05:16.920
+and usually, we do the data archiving on that
+
+05:16.920 --> 05:18.303
+where we dump the data,
+
+05:19.170 --> 05:21.180
+which we rarely access.
+
+05:21.180 --> 05:23.700
+Maybe once in a year for audit
+
+05:23.700 --> 05:25.440
+or maybe you have some compliance where you need
+
+05:25.440 --> 05:28.200
+to store the data for a particular period of time.
+
+05:28.200 --> 05:29.790
+Let's say one year, two year.
+
+05:29.790 --> 05:30.990
+And then you can delete the data.
+
+05:30.990 --> 05:33.660
+So such kind of data where you rarely going to access,
+
+05:33.660 --> 05:36.750
+we put in S3 Glacier and save some money.
+
+05:36.750 --> 05:38.820
+Then you have S3 Glacier Deep Archive.
+
+05:38.820 --> 05:41.910
+This is the lowest cost storage
+
+05:41.910 --> 05:45.003
+and the retrieval time can be up to 12 hours.
+
+05:45.870 --> 05:50.100
+So you want to store long, long time data, like decades
+
+05:50.100 --> 05:53.010
+where you very rarely may be, you are going
+
+05:53.010 --> 05:55.530
+to access it sometimes like old medical records
+
+05:55.530 --> 05:57.003
+or some government records.
+
+05:59.580 --> 06:02.190
+And there is also one more that has come up again back,
+
+06:02.190 --> 06:03.590
+which I'm going to show you.
+
+06:04.980 --> 06:06.540
+Now while you're uploading object,
+
+06:06.540 --> 06:08.790
+you can decide what storage type
+
+06:08.790 --> 06:11.220
+or you can also set lifecycle policy
+
+06:11.220 --> 06:14.490
+that can move your object from one storage type
+
+06:14.490 --> 06:16.980
+to another based on its age.
+
+06:16.980 --> 06:19.020
+So let's say for an example,
+
+06:19.020 --> 06:22.830
+your data that you uploaded age is 30 days
+
+06:22.830 --> 06:26.850
+and you set a policy that after 30 days, move might object
+
+06:26.850 --> 06:29.400
+to S3 Infrequent Access.
+
+06:29.400 --> 06:31.020
+So it'll be automatically shifted
+
+06:31.020 --> 06:32.670
+to Infrequent Access storage type.
+
+06:32.670 --> 06:35.700
+And let's say you said after more 30 days, so total 60 days,
+
+06:35.700 --> 06:38.790
+move it to One Zone Infrequent Access.
+
+06:38.790 --> 06:40.470
+Or maybe you have set after 90 days,
+
+06:40.470 --> 06:42.303
+just move it to Amazon Glacier.
+
+06:43.500 --> 06:47.640
+So this lifecycle policy, we set usually on logs archive,
+
+06:47.640 --> 06:49.020
+and you can also set expiry.
+
+06:49.020 --> 06:51.660
+Also you can set after one year, delete all this data.
+
+06:51.660 --> 06:55.560
+So the data is automatically shifting from one storage type
+
+06:55.560 --> 06:59.310
+to other based on its age and then finally getting deleted.
+
+06:59.310 --> 07:01.533
+So this is just to save your cost.
+
+07:04.680 --> 07:07.440
+There is this table from Amazon documentation,
+
+07:07.440 --> 07:08.850
+AWS documentation.
+
+07:08.850 --> 07:10.290
+So all the status storage type,
+
+07:10.290 --> 07:13.230
+S3 Standard Intelligent Tiering, Infrequent Access,
+
+07:13.230 --> 07:15.210
+One Zone Infrequent Access, Glacier,
+
+07:15.210 --> 07:16.920
+and Glacier Deep Archive.
+
+07:16.920 --> 07:19.800
+Durability is 99.99999999999%.
+
+07:19.800 --> 07:23.730
+So anything you select, you have the durability.
+
+07:23.730 --> 07:27.370
+For availability, most of them are 99.99%.
+
+07:27.370 --> 07:31.215
+Okay, some of them are 99.9
+
+07:31.215 --> 07:35.880
+and then 99.5 for S3 One Zone Infrequent Access
+
+07:35.880 --> 07:40.350
+availability SLA is almost same with an extra .9
+
+07:40.350 --> 07:42.120
+for S3 standard.
+
+07:42.120 --> 07:45.750
+And a replication, it's going to be doing replications
+
+07:45.750 --> 07:48.660
+as you know, at minimum three zones,
+
+07:48.660 --> 07:53.430
+three subfacilities for intelligent tiering, three for S3,
+
+07:53.430 --> 07:54.810
+infrequent access three.
+
+07:54.810 --> 07:57.330
+But for S3 One Zone Infrequent Access,
+
+07:57.330 --> 07:59.820
+it's just one availability zone.
+
+07:59.820 --> 08:01.950
+So here, data is really not getting replicated
+
+08:01.950 --> 08:03.690
+in many zones.
+
+08:03.690 --> 08:05.430
+So retrieval fee, if you check
+
+08:05.430 --> 08:07.200
+for S3 Standard Intelligent Tiering
+
+08:07.200 --> 08:10.260
+there is no retrieval fees fee specified
+
+08:10.260 --> 08:12.600
+because it's you know, fast access,
+
+08:12.600 --> 08:16.620
+but for others, you have it charged on per GB.
+
+08:16.620 --> 08:18.300
+So this should be useful when you really want
+
+08:18.300 --> 08:22.380
+to decide which storage type to select for your objects.
+
+08:22.380 --> 08:25.110
+Now let's finally discuss about the three charges.
+
+08:25.110 --> 08:27.930
+Well first of all, you get charged on the storage,
+
+08:27.930 --> 08:30.450
+the amount of data you're storing.
+
+08:30.450 --> 08:32.640
+Second, the number of requests.
+
+08:32.640 --> 08:33.910
+You're sending IO
+
+08:35.250 --> 08:38.250
+and what storage type you selected, what tier you selected.
+
+08:38.250 --> 08:40.650
+Based on that, there'll be a charge.
+
+08:40.650 --> 08:44.490
+Data transfer and also a region replication.
+
+08:44.490 --> 08:47.430
+There is an option to replicate your S3 bucket
+
+08:47.430 --> 08:49.110
+from one region to other region.
+
+08:49.110 --> 08:52.260
+You can set that up and there'll be extra charges for that.
+
+08:52.260 --> 08:54.870
+Mostly, we do that for disaster recovery or maybe we want
+
+08:54.870 --> 08:57.630
+to sync data between two S3 buckets,
+
+08:57.630 --> 08:59.253
+which are in different region.
+
+09:00.180 --> 09:03.270
+So now let's go and access this simple storage service
+
+09:03.270 --> 09:04.893
+and let's see some use cases.
+
+09:05.970 --> 09:10.970
+Open AWS console, search for S3 and open it.
+
+09:14.190 --> 09:16.890
+Okay, so now, we will do very simple exercise.
+
+09:16.890 --> 09:19.500
+We will create an S3 bucket.
+
+09:19.500 --> 09:23.370
+We'll upload few objects or files into it.
+
+09:23.370 --> 09:24.900
+We'll see how they are private
+
+09:24.900 --> 09:29.010
+and how we can make it public based on our use case.
+
+09:29.010 --> 09:31.260
+And along the line, we will see some options
+
+09:31.260 --> 09:32.733
+that S3 provides.
+
+09:33.900 --> 09:35.640
+Once we get comfortable with S3,
+
+09:35.640 --> 09:39.300
+then we'll see into some more advanced options in S3.
+
+09:39.300 --> 09:41.403
+So let's say create bucket.
+
+09:45.113 --> 09:47.520
+Okay, so when you create a bucket, you get few options.
+
+09:47.520 --> 09:48.693
+General purpose.
+
+09:50.250 --> 09:53.850
+So most of the use cases uses general purpose,
+
+09:53.850 --> 09:55.770
+but now you have a new one directory,
+
+09:55.770 --> 09:57.780
+which is for low latency.
+
+09:57.780 --> 09:59.910
+So it provides a faster processing
+
+09:59.910 --> 10:04.350
+but it's just available in one single availability zone.
+
+10:04.350 --> 10:06.270
+Check the region.
+
+10:06.270 --> 10:08.730
+Wherever you are in whichever region,
+
+10:08.730 --> 10:09.720
+you have selected already,
+
+10:09.720 --> 10:12.360
+it's going to create the S3 bucket in that region.
+
+10:12.360 --> 10:14.730
+But S3 is a global service.
+
+10:14.730 --> 10:17.370
+It is accessible from everywhere.
+
+10:17.370 --> 10:19.113
+But based on your use case,
+
+10:20.040 --> 10:23.910
+you select the right region know based on where the user is
+
+10:23.910 --> 10:26.043
+or users are located, so like that.
+
+10:27.330 --> 10:29.850
+Bucket name, bucket name needs to be unique.
+
+10:29.850 --> 10:33.840
+Now I do not have any S3 bucket in my account,
+
+10:33.840 --> 10:36.780
+but if I try to give a name for example, you know test,
+
+10:36.780 --> 10:39.000
+which is a very common name, right?
+
+10:39.000 --> 10:41.760
+And we'll just simply go scroll down
+
+10:41.760 --> 10:44.730
+and we'll click on Create Bucket.
+
+10:44.730 --> 10:45.903
+We'll get an error.
+
+10:47.707 --> 10:50.070
+"Bucket with the same name already exists."
+
+10:50.070 --> 10:51.870
+It does not exist in my account,
+
+10:51.870 --> 10:54.420
+but it exists in someone's account.
+
+10:54.420 --> 10:57.663
+So globally, the bucket name needs to be unique.
+
+10:58.920 --> 11:00.150
+So let's say I create a bucket
+
+11:00.150 --> 11:02.573
+with name DevOps Imran, you cannot do that.
+
+11:02.573 --> 11:05.490
+Anybody cannot do it then.
+
+11:05.490 --> 11:08.130
+So to make it unique, generally, we add some number.
+
+11:08.130 --> 11:10.260
+So I'm giving the name as DevOps doc
+
+11:10.260 --> 11:13.110
+and I'll add some number to make it unique.
+
+11:13.110 --> 11:14.463
+Let's say 623.
+
+11:16.230 --> 11:17.700
+Now you have to give a different name
+
+11:17.700 --> 11:21.213
+or you have to make your bucket name unique.
+
+11:22.320 --> 11:24.420
+Okay, now let's come down, scroll down.
+
+11:24.420 --> 11:25.500
+Object ownership.
+
+11:25.500 --> 11:28.110
+This will keep it disabled.
+
+11:28.110 --> 11:31.320
+So S3 can also provide access based on access control list.
+
+11:31.320 --> 11:34.750
+That means the users, the AWS account users
+
+11:36.030 --> 11:38.670
+can be given the access to the S3 bucket,
+
+11:38.670 --> 11:41.520
+but most of the bucket permission will be through policies.
+
+11:41.520 --> 11:42.810
+We'll talk about that later.
+
+11:42.810 --> 11:44.700
+So by default, it's going to be disabled,
+
+11:44.700 --> 11:48.210
+but when we want to make the S3 bucket public,
+
+11:48.210 --> 11:50.250
+then we need to enable ACLs.
+
+11:50.250 --> 11:51.153
+We'll see that.
+
+11:54.030 --> 11:55.860
+Okay, now keep this in mind.
+
+11:55.860 --> 11:59.280
+Whenever you upload any object in the S3 bucket,
+
+11:59.280 --> 12:01.410
+it's by default, private.
+
+12:01.410 --> 12:03.363
+It cannot be accessed publicly.
+
+12:04.230 --> 12:07.170
+Even if you want to make it public, you cannot do it
+
+12:07.170 --> 12:11.220
+because by default, all the public access is blocked.
+
+12:11.220 --> 12:12.330
+That's by default.
+
+12:12.330 --> 12:16.500
+It's an extra level of safety or security you can say.
+
+12:16.500 --> 12:18.390
+Now, it's not like AWS is forcing you
+
+12:18.390 --> 12:19.560
+to keep everything private.
+
+12:19.560 --> 12:21.240
+Definitely have many use cases
+
+12:21.240 --> 12:23.430
+where you want to make the S3 bucket public
+
+12:23.430 --> 12:27.060
+when you want to host publicly available images, documents,
+
+12:27.060 --> 12:30.120
+or even websites, you need to make it public.
+
+12:30.120 --> 12:32.250
+But AWS is just making sure
+
+12:32.250 --> 12:35.640
+that accidentally, you don't make your data public.
+
+12:35.640 --> 12:38.190
+And we'll see this in a moment once we create the bucket
+
+12:38.190 --> 12:40.530
+and we upload the object.
+
+12:40.530 --> 12:42.063
+Bucket versioning.
+
+12:43.470 --> 12:46.410
+So there's one very common question that I get to be asked,
+
+12:46.410 --> 12:47.670
+you know, from the client
+
+12:47.670 --> 12:49.950
+or many people ask me this.
+
+12:49.950 --> 12:54.180
+What happens if you know, delete the data in the S3 bucket?
+
+12:54.180 --> 12:55.320
+Can we recover it?
+
+12:55.320 --> 12:57.600
+It is based on if you have enabled versioning.
+
+12:57.600 --> 12:59.700
+If you enable versioning, it's super easy.
+
+12:59.700 --> 13:03.480
+You just see the older version and you can just revert it.
+
+13:03.480 --> 13:05.520
+Sure, there are other ways in architecture,
+
+13:05.520 --> 13:09.630
+but this is the easier one and we will enable it.
+
+13:09.630 --> 13:12.360
+We have some use cases that we'll talk about.
+
+13:12.360 --> 13:15.810
+I need to show you how to, you know, recover the data.
+
+13:15.810 --> 13:17.403
+So let's enable the versioning.
+
+13:18.810 --> 13:19.643
+Encryption.
+
+13:19.643 --> 13:23.100
+Now by default, S3 is forcing you to encrypt your data.
+
+13:23.100 --> 13:24.420
+This was not the case earlier.
+
+13:24.420 --> 13:28.830
+You had an option to have unencrypted data also,
+
+13:28.830 --> 13:31.260
+but now, there is encryption
+
+13:31.260 --> 13:33.240
+and what kind of encryption do you want?
+
+13:33.240 --> 13:38.240
+So server side encryption with Amazon S3 managed keys.
+
+13:38.460 --> 13:41.340
+So the encryption keys will be managed by Amazon S3.
+
+13:41.340 --> 13:43.410
+It's the cheapest option.
+
+13:43.410 --> 13:46.980
+Then you have encryption with KMS.
+
+13:46.980 --> 13:49.260
+So you can create your own encryption key
+
+13:49.260 --> 13:51.990
+by using AWS KMS service.
+
+13:51.990 --> 13:53.700
+Mind you, it's not free.
+
+13:53.700 --> 13:54.810
+And even if you create it,
+
+13:54.810 --> 13:57.510
+you cannot just delete the KMS keys.
+
+13:57.510 --> 14:01.773
+There is a seven days of period from where you disable it,
+
+14:03.210 --> 14:05.190
+but you have the ownership of the keys.
+
+14:05.190 --> 14:07.533
+This is mostly used for compliance.
+
+14:08.700 --> 14:11.790
+You don't want to give, you know, encryption decryption keys
+
+14:11.790 --> 14:14.133
+to AWS service or AWS.
+
+14:15.090 --> 14:16.980
+You want to keep the keys with yourself.
+
+14:16.980 --> 14:19.953
+So you can, you know, go with KMS.
+
+14:20.880 --> 14:23.814
+Then you have dual layer of encryption.
+
+14:23.814 --> 14:27.810
+And again, the pricing will increase for our exercise.
+
+14:27.810 --> 14:31.330
+We'll keep it just SSE-S3
+
+14:32.670 --> 14:34.983
+and we will just say Create Bucket.
+
+14:36.840 --> 14:38.280
+Okay, the bucket is created.
+
+14:38.280 --> 14:39.573
+Click on it, open it.
+
+14:40.800 --> 14:43.350
+And upload some files.
+
+14:43.350 --> 14:48.350
+So I'm going to say upload add files,
+
+14:48.420 --> 14:51.240
+and I'm going to select some PDF from my desktop.
+
+14:51.240 --> 14:53.400
+You can do PDF images.
+
+14:53.400 --> 14:54.963
+So I'll upload this PDF.
+
+14:56.940 --> 14:59.220
+Now while you upload the PDF,
+
+14:59.220 --> 15:01.833
+or sorry, any object while you upload,
+
+15:02.670 --> 15:04.380
+you can select the storage class.
+
+15:04.380 --> 15:06.570
+If you go to the properties while uploading the object,
+
+15:06.570 --> 15:09.083
+you'll see the properties and you can select
+
+15:09.083 --> 15:10.980
+the storage class of that object.
+
+15:10.980 --> 15:13.260
+Standard is by default.
+
+15:13.260 --> 15:14.640
+And then you have all the options
+
+15:14.640 --> 15:17.520
+that we already discussed in the introduction.
+
+15:17.520 --> 15:21.450
+So you can select the object storage class
+
+15:21.450 --> 15:23.970
+and then you can upload it.
+
+15:23.970 --> 15:25.950
+You also have an option
+
+15:25.950 --> 15:28.650
+to decide the encryption key for the object.
+
+15:28.650 --> 15:31.030
+Now, encryption is there on the S3 bucket
+
+15:31.890 --> 15:33.813
+and whatever key you used for it.
+
+15:34.800 --> 15:37.770
+You can specify a different encryption key
+
+15:37.770 --> 15:39.783
+for the object that you're uploading.
+
+15:41.070 --> 15:42.059
+Okay?
+
+15:42.059 --> 15:44.700
+But we'll just keep it do not specify an encryption key
+
+15:44.700 --> 15:46.143
+and we'll say upload.
+
+15:48.330 --> 15:50.163
+Okay, now we'll say close to it.
+
+15:51.990 --> 15:53.940
+Okay, now I want you to pause the lecture
+
+15:53.940 --> 15:56.370
+and go through all the different tabs
+
+15:56.370 --> 15:59.700
+and look at all the different settings of the S3 bucket.
+
+15:59.700 --> 16:02.220
+Also, click on the object
+
+16:02.220 --> 16:04.680
+and look at the different options available
+
+16:04.680 --> 16:05.970
+for the object as well.
+
+16:05.970 --> 16:10.740
+Take some time and go through it and then we'll continue.
+
+16:10.740 --> 16:12.573
+So pause the lecture now.
+
+16:14.430 --> 16:18.330
+Okay, so let's start talking about the access of the object.
+
+16:18.330 --> 16:20.730
+So by default, any object
+
+16:20.730 --> 16:23.190
+that you upload in the S3 bucket is private.
+
+16:23.190 --> 16:24.023
+By default.
+
+16:25.050 --> 16:27.300
+It cannot be made public.
+
+16:27.300 --> 16:29.340
+Now there is an open option over here.
+
+16:29.340 --> 16:31.240
+This is going to open the object
+
+16:32.512 --> 16:35.190
+with the AWS user privileges.
+
+16:35.190 --> 16:38.580
+So you know, the user that I logged in on this AWS console,
+
+16:38.580 --> 16:40.770
+and it's the same user who uploaded the object.
+
+16:40.770 --> 16:45.770
+So the owner clicks on open, can open the object.
+
+16:46.830 --> 16:48.780
+You know it's visible.
+
+16:48.780 --> 16:50.700
+Read access basically.
+
+16:50.700 --> 16:52.590
+It opens on the browser,
+
+16:52.590 --> 16:55.053
+but that does not mean it's publicly accessible.
+
+16:57.060 --> 16:57.893
+Okay?
+
+16:57.893 --> 16:58.980
+So I'll show you that.
+
+16:58.980 --> 17:01.440
+If you click on the object
+
+17:01.440 --> 17:05.610
+and there is object URL, that's the link, copy that
+
+17:05.610 --> 17:07.860
+and put it on the browser.
+
+17:07.860 --> 17:11.073
+This is the publicly available URL for this object.
+
+17:13.290 --> 17:16.290
+And you see that it says access denied.
+
+17:16.290 --> 17:18.633
+Now we'll see how we can make it public.
+
+17:21.450 --> 17:22.680
+Now this is just an exercise.
+
+17:22.680 --> 17:24.630
+It does not mean that every object you need
+
+17:24.630 --> 17:27.840
+to make public, it's based on the use case.
+
+17:27.840 --> 17:29.700
+Like for example, your hosting website
+
+17:29.700 --> 17:32.970
+or an application created by the developer needs access
+
+17:32.970 --> 17:36.480
+to publicly available images or videos.
+
+17:36.480 --> 17:38.850
+Then you need to make those object public.
+
+17:38.850 --> 17:40.680
+Otherwise, no.
+
+17:40.680 --> 17:41.640
+So how to make it public?
+
+17:41.640 --> 17:42.720
+It's pretty simple.
+
+17:42.720 --> 17:47.370
+Select the object or multiple objects, go to action
+
+17:47.370 --> 17:49.740
+and if you scroll down, you will get option here,
+
+17:49.740 --> 17:52.770
+make public using ACL, but you see it's grayed out
+
+17:52.770 --> 17:57.210
+because ACL is disabled on the bucket.
+
+17:57.210 --> 17:59.610
+So you cannot make it public through ACLs.
+
+17:59.610 --> 18:02.820
+First thing is you need to go to the Permissions,
+
+18:02.820 --> 18:07.820
+you need to go to Object Ownership, Edit.
+
+18:08.100 --> 18:11.763
+and you need to enable the ACLs, access control list.
+
+18:12.630 --> 18:16.770
+And say I acknowledge and say Save Changes.
+
+18:16.770 --> 18:18.660
+Now ACLs are enabled.
+
+18:18.660 --> 18:22.200
+Now you can make the object public through ACL.
+
+18:22.200 --> 18:23.463
+Once again, let's go.
+
+18:24.390 --> 18:26.100
+Let's go to the bucket.
+
+18:26.100 --> 18:27.513
+Let's select our object.
+
+18:28.710 --> 18:29.543
+Action.
+
+18:29.543 --> 18:31.233
+Oh, sorry, my bad.
+
+18:32.430 --> 18:36.330
+Actions, scroll down, make public using ACL.
+
+18:36.330 --> 18:37.560
+Click on that.
+
+18:37.560 --> 18:39.390
+And now you should get an error
+
+18:39.390 --> 18:41.043
+when you click on make public.
+
+18:41.970 --> 18:43.260
+Yes, that's the error.
+
+18:43.260 --> 18:46.110
+That is because all the public access
+
+18:46.110 --> 18:49.710
+on the S3 bucket is disabled.
+
+18:49.710 --> 18:52.020
+Yeah, while creating the bucket, we see that option, right?
+
+18:52.020 --> 18:57.020
+We can go to go to our S3 bucket and go to permissions.
+
+18:57.450 --> 19:02.340
+If you come down here, you see block public access, it's on.
+
+19:02.340 --> 19:06.750
+So click on edit and you uncheck that.
+
+19:06.750 --> 19:09.360
+Now only do it if it's really required.
+
+19:09.360 --> 19:12.150
+Otherwise just keep it blocked.
+
+19:12.150 --> 19:13.830
+Now we are seeing a use case, right?
+
+19:13.830 --> 19:16.713
+So we unblock it, save changes.
+
+19:17.670 --> 19:19.083
+I say confirm.
+
+19:22.350 --> 19:24.360
+Okay, so we enabled the ACL,
+
+19:24.360 --> 19:27.540
+we made the object public using ACL,
+
+19:27.540 --> 19:30.540
+and then we disable this option,
+
+19:30.540 --> 19:32.280
+public block, public access.
+
+19:32.280 --> 19:34.920
+We disable this option, okay?
+
+19:34.920 --> 19:38.373
+So once again, our bucket, object.
+
+19:40.650 --> 19:41.610
+Okay, select our object.
+
+19:41.610 --> 19:43.320
+We did not yet make it public, okay?
+
+19:43.320 --> 19:44.700
+We are not able to make it public.
+
+19:44.700 --> 19:46.140
+So we're going to check that
+
+19:46.140 --> 19:48.000
+and we are going to make it public again,
+
+19:48.000 --> 19:51.480
+make public using ACL, make public.
+
+19:51.480 --> 19:52.830
+So this comes at the end, right?
+
+19:52.830 --> 19:53.733
+Making public.
+
+19:55.530 --> 19:59.823
+Okay, now let's go to that URL and let's refresh it.
+
+20:01.530 --> 20:02.370
+You see that?
+
+20:02.370 --> 20:05.493
+From the URL, from the publicly available URL,
+
+20:07.260 --> 20:10.593
+we are able to access the object from the internet.
+
+20:11.520 --> 20:13.593
+Okay, let's upload one more object.
+
+20:14.850 --> 20:17.710
+Say upload, add files
+
+20:18.690 --> 20:20.373
+and I will select this one.
+
+20:21.750 --> 20:23.460
+Okay, now while I'm uploading,
+
+20:23.460 --> 20:25.320
+let's again look at all the options First,
+
+20:25.320 --> 20:27.690
+the destination details.
+
+20:27.690 --> 20:29.100
+So bucket versioning is enabled,
+
+20:29.100 --> 20:30.993
+what is the encryption of the bucket?
+
+20:32.400 --> 20:35.430
+So those are the details, permissions.
+
+20:35.430 --> 20:37.910
+So you can say choose from predefined ACL.
+
+20:37.910 --> 20:40.200
+So we already enabled the ACLs.
+
+20:40.200 --> 20:43.200
+So whatever ACLs are applied to, you want to apply it.
+
+20:43.200 --> 20:45.720
+You can make it public read access.
+
+20:45.720 --> 20:48.780
+While you are uploading the object will not do it.
+
+20:48.780 --> 20:50.730
+I will show you that how it is private.
+
+20:50.730 --> 20:54.270
+Even the bucket is public, the object will be private,
+
+20:54.270 --> 20:55.310
+but if you want, you can make it public
+
+20:55.310 --> 20:56.730
+that I want to show you.
+
+20:56.730 --> 20:58.620
+So just keep it as it is.
+
+20:58.620 --> 21:02.310
+Once again, properties, you can change the storage class.
+
+21:02.310 --> 21:06.003
+Maybe I want to just say One Zone Infrequent Access.
+
+21:07.230 --> 21:11.103
+And encryption, we'll keep it as it is and say upload.
+
+21:12.330 --> 21:13.740
+Okay, so this is the second object.
+
+21:13.740 --> 21:16.230
+Close this, that's the object.
+
+21:16.230 --> 21:19.150
+Let's click on that and let's get its URL
+
+21:20.640 --> 21:22.293
+and put it in the browser.
+
+21:23.130 --> 21:25.770
+You see access denied, even though bucket is public,
+
+21:25.770 --> 21:29.043
+ACLs are enabled, but the object is still private.
+
+21:30.090 --> 21:32.700
+So you we know how to make it public.
+
+21:32.700 --> 21:34.893
+I can just go to the permissions.
+
+21:36.916 --> 21:38.100
+You know, we can do this view also, right?
+
+21:38.100 --> 21:41.103
+We can just go to the permissions of the object, edit.
+
+21:42.720 --> 21:43.953
+Everyone read.
+
+21:45.150 --> 21:46.200
+Okay, I know.
+
+21:46.200 --> 21:47.463
+Let's cancel this.
+
+21:48.480 --> 21:50.670
+Let's just do the simple option that is provided.
+
+21:50.670 --> 21:51.930
+Put a check mark.
+
+21:51.930 --> 21:53.550
+Action.
+
+21:53.550 --> 21:57.153
+Make public using ACL and make public.
+
+21:58.890 --> 22:00.600
+Okay, so the object is made public.
+
+22:00.600 --> 22:02.193
+Now let's refresh this page.
+
+22:03.990 --> 22:04.823
+There you go.
+
+22:08.190 --> 22:11.970
+Okay, so those were some simple use cases and exercises.
+
+22:11.970 --> 22:13.500
+In the next lecture, we will see
+
+22:13.500 --> 22:17.520
+how we can host a website on the S3 bucket.
+
+22:17.520 --> 22:19.800
+Yes, it's possible, it's very easy.
+
+22:19.800 --> 22:23.070
+And with that, we'll see some other options available
+
+22:23.070 --> 22:25.830
+or features available with the S3 bucket.
+
+22:25.830 --> 22:28.653
+So wrap this up and join me in the next lecture.

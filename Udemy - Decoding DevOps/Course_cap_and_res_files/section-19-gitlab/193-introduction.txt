@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.240 --> 00:01.600
+Hello and welcome.
+
+00:01.600 --> 00:09.040
+In this section of the course we are going to learn GitLab, a complete CI CD solution stack.
+
+00:09.760 --> 00:13.120
+GitLab is a complete DevSecOps platform.
+
+00:13.120 --> 00:15.360
+You get everything at one place.
+
+00:16.040 --> 00:19.800
+You have the source code management git repositories.
+
+00:19.800 --> 00:21.200
+You have CI, CD.
+
+00:21.680 --> 00:25.320
+You can implement security and complete project management.
+
+00:25.760 --> 00:26.800
+You get both model.
+
+00:26.800 --> 00:27.960
+You can use SaaS.
+
+00:28.000 --> 00:32.680
+You can just subscribe, login to gitlab.com, subscribe and start using it.
+
+00:32.680 --> 00:35.880
+Or you can also host your own GitLab environment.
+
+00:37.080 --> 00:39.520
+The three options available you have free tier.
+
+00:39.560 --> 00:42.440
+You can go for Premium and ultimate tiers.
+
+00:42.440 --> 00:46.160
+In this lecture we will be using free tier.
+
+00:46.760 --> 00:52.120
+So first you have the source code management, the complete git repository setup.
+
+00:52.120 --> 00:56.360
+Just like any other git repository, you get option of hosting your repository.
+
+00:56.360 --> 01:01.560
+You have branching workflows updating code in branches through merge request.
+
+01:01.950 --> 01:03.910
+Well, that's the pull request in GitLab.
+
+01:03.910 --> 01:05.350
+It's called a merge request.
+
+01:05.710 --> 01:09.350
+With approvals, of course, you can use web based IDE.
+
+01:09.430 --> 01:13.470
+You do not prefer VSCode like your own code editor.
+
+01:13.470 --> 01:14.590
+You can use web IDE.
+
+01:14.590 --> 01:20.430
+Also, you have wikis for maintaining documentation and all the amazing features of the git repository
+
+01:20.470 --> 01:21.830
+you get in GitLab.
+
+01:22.470 --> 01:23.830
+So this is where we start.
+
+01:23.830 --> 01:27.990
+And then we need continuous integration and deployment pipelines.
+
+01:28.510 --> 01:30.910
+So you can set YAML based pipelines.
+
+01:30.950 --> 01:32.630
+Easy to read, easy to write.
+
+01:32.950 --> 01:34.750
+Looks something like this.
+
+01:34.790 --> 01:43.350
+Complete YAML based pipeline for managing multiple stages in your pipeline, multi-stage jobs and pipeline
+
+01:43.350 --> 01:44.390
+visualization.
+
+01:44.830 --> 01:49.150
+You can see all your pipeline and different jobs in your pipeline at one place.
+
+01:49.510 --> 01:56.470
+With all the logs and all the information, you can use inbuilt runners from GitLab, or you can add
+
+01:56.470 --> 01:57.510
+your own runner.
+
+01:57.510 --> 02:00.430
+That means you can decide where your job should run.
+
+02:00.670 --> 02:07.610
+You can choose external servers like EC2 instance, physical machines or VM's hosted in your own environment.
+
+02:07.770 --> 02:11.690
+You can select a runner for your project like I have.
+
+02:11.690 --> 02:13.490
+An EC2 instance is added over here.
+
+02:13.490 --> 02:17.970
+I can enable and disable it or like that add any other runner of my choice.
+
+02:18.490 --> 02:24.330
+Auto DevOps templates are available which you can use ready made and also integration with many other
+
+02:24.330 --> 02:26.130
+platforms like Kubernetes.
+
+02:26.530 --> 02:31.490
+You can use GitLab agents that safely connects to your Kubernetes cluster.
+
+02:31.810 --> 02:34.490
+You can also integrate with Google Cloud.
+
+02:34.850 --> 02:41.570
+Also, you can keep an eye on your Terraform states from a security point of view and also compliance.
+
+02:42.890 --> 02:46.730
+You get a code analysis, static code analysis, or dynamic testing.
+
+02:47.010 --> 02:49.290
+So not only code scanning, container scanning.
+
+02:49.290 --> 02:55.770
+If you're building Docker images, license checks so you or your organization doesn't get into legal
+
+02:55.770 --> 02:56.330
+issues.
+
+02:56.330 --> 03:03.450
+So in your pipeline you can integrate security capabilities which is mandatory in DevSecOps pipelines.
+
+03:03.680 --> 03:09.720
+Secret detection so you don't accidentally expose your credentials to git repositories or any other
+
+03:09.960 --> 03:11.320
+public platforms.
+
+03:11.800 --> 03:15.840
+We have audit logs and also you can set compliance pipelines.
+
+03:16.440 --> 03:21.280
+The outputs of your pipelines are usually packages or artifacts.
+
+03:21.880 --> 03:27.560
+If you're publishing Docker images, GitLab gives you container registry where you can host your Docker
+
+03:27.560 --> 03:28.240
+images.
+
+03:28.520 --> 03:35.480
+If you need a package, registries for example for Maven or npm, you can use package registry provided
+
+03:35.480 --> 03:40.360
+by GitLab or any other artifact that you want to store, like reports.
+
+03:40.760 --> 03:45.800
+You can mention that in your pipeline and the job will store your artifacts as well.
+
+03:46.680 --> 03:48.360
+Monitoring and analytics.
+
+03:48.760 --> 03:51.080
+You get complete analysis of your pipeline.
+
+03:51.080 --> 03:52.200
+You get a dashboard.
+
+03:52.560 --> 03:53.640
+You can look at the trend.
+
+03:53.640 --> 03:55.600
+How many pipelines passed or failed.
+
+03:56.320 --> 03:58.200
+We have code quality reports.
+
+03:58.600 --> 04:04.280
+GitLab can integrate with your monitoring tool like Prometheus and monitor health of your application
+
+04:04.660 --> 04:10.900
+like CPU, memory, disk also integrated with sentry so you can do error tracking.
+
+04:11.340 --> 04:12.540
+Also audit events.
+
+04:12.540 --> 04:13.700
+Who did what?
+
+04:14.620 --> 04:23.340
+For complete project and team management, you can develop dashboards which has issues, set milestones
+
+04:23.740 --> 04:24.980
+and roadmaps.
+
+04:25.380 --> 04:28.500
+On top of that, you have service desk for customer support.
+
+04:28.940 --> 04:36.460
+If all that is not enough, GitLab also has various integrations with cloud platforms with communication
+
+04:36.580 --> 04:42.740
+or notification systems like slack tools integration like JIRA, Trello boards, or even Jenkins.
+
+04:43.100 --> 04:47.420
+And like any other web based platform, you have APIs and webhooks as well.
+
+04:48.060 --> 04:54.500
+So in conclusion, GitLab provides you everything that unifies development, security, and operations
+
+04:54.740 --> 04:55.260
+for teams.
+
+04:55.260 --> 05:01.580
+You have collaboration, automation, compliance and I have personally used it for startups and even
+
+05:01.580 --> 05:02.540
+enterprises.
+
+05:03.100 --> 05:06.020
+So let's see GitLab in action from the next lecture.

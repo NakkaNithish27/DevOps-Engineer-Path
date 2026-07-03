@@ -1,0 +1,1042 @@
+WEBVTT
+
+1
+00:00:00.360 --> 00:00:01.590
+<v ->Hello and welcome.</v>
+
+2
+00:00:01.590 --> 00:00:05.130
+In this lecture we are going to talk about Jenkins agents.
+
+3
+00:00:05.130 --> 00:00:08.730
+This also called us the distributed architecture in Jenkins,
+
+4
+00:00:08.730 --> 00:00:11.250
+or in CI/CD, which is just a fancy name
+
+5
+00:00:11.250 --> 00:00:14.970
+of some other computer executing the commands.
+
+6
+00:00:14.970 --> 00:00:15.990
+Looks something like this.
+
+7
+00:00:15.990 --> 00:00:20.160
+So you have the central master like Jenkins
+
+8
+00:00:20.160 --> 00:00:25.160
+or any other CI/CD tool and other computers connected to it.
+
+9
+00:00:25.530 --> 00:00:30.530
+And the master will connect to these agents, these computers
+
+10
+00:00:30.720 --> 00:00:33.930
+via SSH TCP or any other protocol
+
+11
+00:00:33.930 --> 00:00:35.820
+and sends the built instruction,
+
+12
+00:00:35.820 --> 00:00:39.000
+like we have seen in the previous lecture,
+
+13
+00:00:39.000 --> 00:00:41.790
+git clone command even install command.
+
+14
+00:00:41.790 --> 00:00:44.880
+So those commands will be sent as the build instruction
+
+15
+00:00:44.880 --> 00:00:49.290
+to the agents and the agent will execute those commands.
+
+16
+00:00:49.290 --> 00:00:52.500
+Agent could be a Linux machine, a Windows, a Mac OS
+
+17
+00:00:52.500 --> 00:00:54.003
+based on your requirement.
+
+18
+00:00:55.200 --> 00:00:58.680
+So here we will have Jenkins as the master, the controller,
+
+19
+00:00:58.680 --> 00:01:00.060
+that will be the central brain
+
+20
+00:01:00.060 --> 00:01:03.750
+where we configure all the jobs and manages everything.
+
+21
+00:01:03.750 --> 00:01:08.750
+Agents, nodes, or slaves will be the dedicated machines.
+
+22
+00:01:09.120 --> 00:01:13.170
+Like we can configure one agent as Maven agent
+
+23
+00:01:13.170 --> 00:01:18.170
+or Maven builder that executes only Maven commands.
+
+24
+00:01:18.180 --> 00:01:22.320
+Now the word slaves should not be used, but I have kept it
+
+25
+00:01:22.320 --> 00:01:24.720
+because few people still call it as a slave
+
+26
+00:01:24.720 --> 00:01:26.760
+because that's how the concept developed,
+
+27
+00:01:26.760 --> 00:01:29.010
+Jenkins master slave concept.
+
+28
+00:01:29.010 --> 00:01:30.720
+But then the word slave was discarded
+
+29
+00:01:30.720 --> 00:01:32.670
+and it should be discarded.
+
+30
+00:01:32.670 --> 00:01:36.930
+So these agents or nodes will execute the jobs, the commands
+
+31
+00:01:36.930 --> 00:01:39.720
+and the agent could be of different operating system.
+
+32
+00:01:39.720 --> 00:01:42.900
+It could be a Linux agent, it could be a Windows agent.
+
+33
+00:01:42.900 --> 00:01:44.570
+So if you want to execute dotnet
+
+34
+00:01:44.570 --> 00:01:47.370
+or MSBuild, Windows based commands, you need
+
+35
+00:01:47.370 --> 00:01:51.150
+to configure a Windows agent with the Jenkins master.
+
+36
+00:01:51.150 --> 00:01:55.170
+Same way for Mac OS. So working is pretty simple.
+
+37
+00:01:55.170 --> 00:01:56.910
+The master sends the signal,
+
+38
+00:01:56.910 --> 00:01:59.520
+the build instruction using different protocol
+
+39
+00:01:59.520 --> 00:02:00.840
+based on how you configured it.
+
+40
+00:02:00.840 --> 00:02:02.850
+It sends the instruction
+
+41
+00:02:02.850 --> 00:02:04.710
+and the agent just executes those
+
+42
+00:02:04.710 --> 00:02:06.870
+instruction straightforward.
+
+43
+00:02:06.870 --> 00:02:09.210
+So one benefit, you can clearly see
+
+44
+00:02:09.210 --> 00:02:12.030
+that we can execute different kinds
+
+45
+00:02:12.030 --> 00:02:15.930
+of jobs from one master, Linux based,
+
+46
+00:02:15.930 --> 00:02:17.460
+Windows based or Mac OS based.
+
+47
+00:02:17.460 --> 00:02:19.230
+The other is the parallel execution.
+
+48
+00:02:19.230 --> 00:02:22.980
+You can execute multiple jobs at the same time.
+
+49
+00:02:22.980 --> 00:02:24.660
+So in this lecture we are going to do
+
+50
+00:02:24.660 --> 00:02:25.890
+a very simple exercise.
+
+51
+00:02:25.890 --> 00:02:30.000
+The same build job, we will execute on a Linux agent.
+
+52
+00:02:30.000 --> 00:02:31.710
+So let's see how this works.
+
+53
+00:02:31.710 --> 00:02:34.710
+So in order to do this exercise, we need to
+
+54
+00:02:34.710 --> 00:02:36.660
+create an EC2 instance Linux based.
+
+55
+00:02:36.660 --> 00:02:41.010
+Let's take Ubuntu. So let's click on a launch instance.
+
+56
+00:02:41.010 --> 00:02:43.050
+Let's call it as a Maven agent.
+
+57
+00:02:43.050 --> 00:02:45.330
+Let's select Ubuntu Operating System.
+
+58
+00:02:45.330 --> 00:02:47.400
+Open 224 is fine.
+
+59
+00:02:47.400 --> 00:02:50.130
+Keep it as T3 micro or wait,
+
+60
+00:02:50.130 --> 00:02:53.220
+let's increase its size to T2 small.
+
+61
+00:02:53.220 --> 00:02:54.630
+Later, we are going to just delete this
+
+62
+00:02:54.630 --> 00:02:56.670
+after the exercise is completed.
+
+63
+00:02:56.670 --> 00:02:59.760
+Select the same key pair, security group.
+
+64
+00:02:59.760 --> 00:03:03.480
+Let's give it a different name to this security group.
+
+65
+00:03:03.480 --> 00:03:07.623
+Mavenagent-sg, same I'm giving in the description.
+
+66
+00:03:09.030 --> 00:03:11.580
+So this Linux agent, this Maven agent,
+
+67
+00:03:11.580 --> 00:03:14.040
+we are going to connect via SSH.
+
+68
+00:03:14.040 --> 00:03:17.280
+So Jenkins will do SSH to this Linux agent
+
+69
+00:03:17.280 --> 00:03:18.960
+and execute the commands.
+
+70
+00:03:18.960 --> 00:03:22.110
+So in the security group, first we'll see SSH from my IP.
+
+71
+00:03:22.110 --> 00:03:23.550
+So we can SSH to it.
+
+72
+00:03:23.550 --> 00:03:27.240
+And then we are going to add one more SSH rule for 22.
+
+73
+00:03:27.240 --> 00:03:29.460
+Or we can just say SSH here.
+
+74
+00:03:29.460 --> 00:03:33.270
+And allow it from the Jenkins Security Group.
+
+75
+00:03:33.270 --> 00:03:34.860
+Select your Jenkins Security Group.
+
+76
+00:03:34.860 --> 00:03:38.100
+So Jenkins can do SSH to this Maven agent.
+
+77
+00:03:38.100 --> 00:03:39.270
+Give some description here.
+
+78
+00:03:39.270 --> 00:03:43.443
+Allow Jenkins to SSH and just say launch instance.
+
+79
+00:03:44.460 --> 00:03:46.980
+Okay, once it's up and running, copy its public IP
+
+80
+00:03:46.980 --> 00:03:48.990
+and SSH to this,
+
+81
+00:03:48.990 --> 00:03:51.720
+but Maven agent, I need to SSH to Maven Agent.
+
+82
+00:03:51.720 --> 00:03:53.973
+Select Maven agent, take its public IP.
+
+83
+00:03:55.002 --> 00:03:58.470
+Ssh-i Key path ubuntu at the rate the public IP
+
+84
+00:03:58.470 --> 00:04:00.123
+of this agent.
+
+85
+00:04:02.160 --> 00:04:04.210
+Switch to root user
+
+86
+00:04:05.730 --> 00:04:08.130
+and execute the command to install JDK.
+
+87
+00:04:08.130 --> 00:04:09.210
+This is a Maven builder.
+
+88
+00:04:09.210 --> 00:04:13.380
+So we are going to have JDK installed in this.
+
+89
+00:04:13.380 --> 00:04:18.220
+So apt update &amp;&amp; apt install openjdk-21-jdk-y.
+
+90
+00:04:23.130 --> 00:04:26.310
+So installing JDK is the necessity over here.
+
+91
+00:04:26.310 --> 00:04:30.060
+Kit is already present and open to machine.
+
+92
+00:04:30.060 --> 00:04:32.160
+Maven will let Jenkins handle it.
+
+93
+00:04:32.160 --> 00:04:35.250
+So as we have configured Maven tool in Jenkins,
+
+94
+00:04:35.250 --> 00:04:38.910
+so it's going to download it and set it over here.
+
+95
+00:04:38.910 --> 00:04:41.970
+Okay, so the JDK is installed
+
+96
+00:04:41.970 --> 00:04:44.490
+Java-versions, you can see this.
+
+97
+00:04:44.490 --> 00:04:46.530
+Now we need to create a folder,
+
+98
+00:04:46.530 --> 00:04:51.210
+where Jenkins will install the agent softwares,
+
+99
+00:04:51.210 --> 00:04:53.130
+agent tools and the workspace.
+
+100
+00:04:53.130 --> 00:04:56.940
+So we'll say /opt/jenkins.
+
+101
+00:04:56.940 --> 00:04:59.460
+We already have SSH user that we use
+
+102
+00:04:59.460 --> 00:05:02.310
+to log into this machine, which is Ubuntu user.
+
+103
+00:05:02.310 --> 00:05:06.090
+So we need to give permission to Ubuntu user
+
+104
+00:05:06.090 --> 00:05:10.323
+and Ubuntu group to this folder opt/jenkins.
+
+105
+00:05:11.280 --> 00:05:15.540
+So do ch1Ubuntu:ubuntu/opt/jenkins.
+
+106
+00:05:15.540 --> 00:05:18.873
+Let's ls-ld /opt/jenkins.
+
+107
+00:05:19.830 --> 00:05:22.710
+So the user Ubuntu has full permission to read and execute.
+
+108
+00:05:22.710 --> 00:05:24.360
+The group ubuntu has just to read
+
+109
+00:05:24.360 --> 00:05:27.240
+and execute and that is fine for now.
+
+110
+00:05:27.240 --> 00:05:28.980
+Log out from this agent
+
+111
+00:05:28.980 --> 00:05:31.860
+and do a CAT to your login key,
+
+112
+00:05:31.860 --> 00:05:35.673
+agent login key, the CI/CD pem file
+
+113
+00:05:35.673 --> 00:05:37.860
+'cause we need to copy this content in Jenkins,
+
+114
+00:05:37.860 --> 00:05:42.180
+so Jenkins can use this login key to log into the agent.
+
+115
+00:05:42.180 --> 00:05:44.520
+So just do a cat and just keep it ready.
+
+116
+00:05:44.520 --> 00:05:47.400
+Let's go to Jenkins and add this agent.
+
+117
+00:05:47.400 --> 00:05:52.020
+So go to manage Jenkins, click on nodes,
+
+118
+00:05:52.020 --> 00:05:53.820
+click on new node.
+
+119
+00:05:53.820 --> 00:05:57.390
+Give node a name. I'm giving MavenBuilder.
+
+120
+00:05:57.390 --> 00:06:00.183
+See permanent agent, create.
+
+121
+00:06:01.260 --> 00:06:02.460
+Number of executor.
+
+122
+00:06:02.460 --> 00:06:05.730
+That means how many jobs can parallelly run over here.
+
+123
+00:06:05.730 --> 00:06:07.740
+Like if you say two.
+
+124
+00:06:07.740 --> 00:06:11.970
+So Jenkins can send two jobs parallelly if it's executed.
+
+125
+00:06:11.970 --> 00:06:13.380
+And if you still continue
+
+126
+00:06:13.380 --> 00:06:14.790
+and execute the third job,
+
+127
+00:06:14.790 --> 00:06:16.890
+the third job will go into the queue.
+
+128
+00:06:16.890 --> 00:06:19.410
+Now this all depends on the resource of your agent,
+
+129
+00:06:19.410 --> 00:06:21.900
+how much RAM memory CPU it has
+
+130
+00:06:21.900 --> 00:06:25.920
+and how much amount of resource the build job takes.
+
+131
+00:06:25.920 --> 00:06:27.840
+So based on that you can configure those things.
+
+132
+00:06:27.840 --> 00:06:31.711
+I'm just keeping it as one, remote route directory gives
+
+133
+00:06:31.711 --> 00:06:35.670
+/opt/jenkins label.
+
+134
+00:06:35.670 --> 00:06:38.010
+I'm going to name it as MAVENBUILDER.
+
+135
+00:06:38.010 --> 00:06:39.453
+All in caps.
+
+136
+00:06:40.350 --> 00:06:43.500
+Usage I want this job, I want this agent
+
+137
+00:06:43.500 --> 00:06:46.080
+to be used only when I mention the label.
+
+138
+00:06:46.080 --> 00:06:48.150
+So I am going to select only build job
+
+139
+00:06:48.150 --> 00:06:51.240
+with label expression matching this node.
+
+140
+00:06:51.240 --> 00:06:54.030
+That means in the job we need to mention this label.
+
+141
+00:06:54.030 --> 00:06:55.920
+Then only it'll select this agent.
+
+142
+00:06:55.920 --> 00:06:56.883
+Otherwise not.
+
+143
+00:06:58.500 --> 00:07:00.850
+Launch method, I'm going to connect it via SSH.
+
+144
+00:07:02.340 --> 00:07:05.340
+So we need to give here the private IP of our agent
+
+145
+00:07:05.340 --> 00:07:09.240
+because master and agent are in the same network.
+
+146
+00:07:09.240 --> 00:07:11.430
+You can connect it with the private IP.
+
+147
+00:07:11.430 --> 00:07:15.570
+So give its private IP, the agent's private IP over here.
+
+148
+00:07:15.570 --> 00:07:19.830
+In the credentials you need to save the private key.
+
+149
+00:07:19.830 --> 00:07:21.270
+The login private key.
+
+150
+00:07:21.270 --> 00:07:25.230
+So click on add, click on global,
+
+151
+00:07:25.230 --> 00:07:27.870
+select username, yeah here.
+
+152
+00:07:27.870 --> 00:07:32.220
+SSH username with private key. Select that and go next.
+
+153
+00:07:32.220 --> 00:07:34.860
+Give id. That means give a name.
+
+154
+00:07:34.860 --> 00:07:37.410
+Just giving it as maven agent login.
+
+155
+00:07:37.410 --> 00:07:39.723
+Same I'm going to keep in the description.
+
+156
+00:07:40.590 --> 00:07:42.633
+Username is Ubuntu.
+
+157
+00:07:44.550 --> 00:07:46.650
+Private key, click on enter directly,
+
+158
+00:07:46.650 --> 00:07:51.600
+click on add and copy the content of your private key.
+
+159
+00:07:51.600 --> 00:07:54.330
+So make sure nothing extra is copied.
+
+160
+00:07:54.330 --> 00:07:56.310
+Start till end over here.
+
+161
+00:07:56.310 --> 00:07:59.400
+Make sure it's copied properly and paste it over here.
+
+162
+00:07:59.400 --> 00:08:04.400
+Verify it once again and say create.
+
+163
+00:08:05.310 --> 00:08:07.830
+Select the credentials from the dropdown
+
+164
+00:08:07.830 --> 00:08:10.770
+and make sure over here host key verification strategy,
+
+165
+00:08:10.770 --> 00:08:14.340
+just say non verifying verification strategy.
+
+166
+00:08:14.340 --> 00:08:17.040
+So when you do SSH for the first time to any Linux machine,
+
+167
+00:08:17.040 --> 00:08:18.120
+it asks you a question.
+
+168
+00:08:18.120 --> 00:08:21.570
+This is the fingerprint, whether you accept yes or no.
+
+169
+00:08:21.570 --> 00:08:24.120
+Now this is going to be happening in the background.
+
+170
+00:08:24.120 --> 00:08:27.510
+So there is no way to send yes or no signal from there.
+
+171
+00:08:27.510 --> 00:08:30.720
+So we just see non verifying verification strategy
+
+172
+00:08:30.720 --> 00:08:32.420
+because anyways, we have created this agent.
+
+173
+00:08:32.420 --> 00:08:35.430
+We have built this agent. So we are good with this.
+
+174
+00:08:35.430 --> 00:08:39.060
+So once you select all these options, just say save.
+
+175
+00:08:39.060 --> 00:08:42.160
+Once you say save, click the agent name once again
+
+176
+00:08:43.140 --> 00:08:46.740
+and click on log to see whether it is connected or not.
+
+177
+00:08:46.740 --> 00:08:49.860
+Agent successfully connected and online.
+
+178
+00:08:49.860 --> 00:08:52.020
+Now if you see any error over here,
+
+179
+00:08:52.020 --> 00:08:56.010
+then make sure the details are correctly mentioned.
+
+180
+00:08:56.010 --> 00:08:57.663
+The login key is correct,
+
+181
+00:08:58.740 --> 00:09:01.890
+the route directory path, the ownership of the directory,
+
+182
+00:09:01.890 --> 00:09:05.130
+all those steps you can just reach it all the step
+
+183
+00:09:05.130 --> 00:09:07.710
+and check whether what you have missed.
+
+184
+00:09:07.710 --> 00:09:10.890
+Also the security group rule of this agent,
+
+185
+00:09:10.890 --> 00:09:12.660
+like in the Maven agent security group,
+
+186
+00:09:12.660 --> 00:09:15.183
+we allow 22 from Jenkins Security Group.
+
+187
+00:09:16.620 --> 00:09:18.450
+If you have followed all the steps correctly,
+
+188
+00:09:18.450 --> 00:09:19.710
+this should work.
+
+189
+00:09:19.710 --> 00:09:20.970
+But still, if it's not working,
+
+190
+00:09:20.970 --> 00:09:23.220
+you can pose the question in the Q&amp;A
+
+191
+00:09:23.220 --> 00:09:24.870
+we'll be happy to answer.
+
+192
+00:09:24.870 --> 00:09:27.360
+Okay, so this agent is connected successfully
+
+193
+00:09:27.360 --> 00:09:31.173
+and its label is MAVENBUILDER, all in caps.
+
+194
+00:09:32.010 --> 00:09:37.010
+That's the label MAVENBUILDER. Now let's go to Jenkins job.
+
+195
+00:09:37.410 --> 00:09:41.070
+Let's take example of this first job, let's click on this.
+
+196
+00:09:41.070 --> 00:09:42.510
+Let's say configure.
+
+197
+00:09:42.510 --> 00:09:46.413
+This was our first job where we executed just the commands.
+
+198
+00:09:47.580 --> 00:09:50.550
+Now here you can find a setting in the general section,
+
+199
+00:09:50.550 --> 00:09:53.220
+restrict where this project can be run.
+
+200
+00:09:53.220 --> 00:09:56.313
+Put a check mark over here and mention the label.
+
+201
+00:09:57.270 --> 00:09:59.103
+If you just type MAVENBUILDER,
+
+202
+00:10:00.870 --> 00:10:03.270
+you should get this name over here.
+
+203
+00:10:03.270 --> 00:10:05.310
+Okay, only give that much the same label
+
+204
+00:10:05.310 --> 00:10:08.670
+and say save and say build now.
+
+205
+00:10:08.670 --> 00:10:12.030
+Okay, let's check the console output.
+
+206
+00:10:12.030 --> 00:10:13.980
+You see here building remotely
+
+207
+00:10:13.980 --> 00:10:17.520
+on MAVENBUILDER in workspace, check the path.
+
+208
+00:10:17.520 --> 00:10:19.500
+Now you should understand this.
+
+209
+00:10:19.500 --> 00:10:21.420
+See who am I command? Ubuntu user
+
+210
+00:10:21.420 --> 00:10:23.403
+because Ubuntu user is doing the SSH.
+
+211
+00:10:24.270 --> 00:10:26.970
+Okay, let's try the same thing in the build job.
+
+212
+00:10:26.970 --> 00:10:29.880
+Let's go to the view profile build job.
+
+213
+00:10:29.880 --> 00:10:31.083
+Let's say configure.
+
+214
+00:10:32.370 --> 00:10:35.070
+And let's select right here.
+
+215
+00:10:35.070 --> 00:10:38.887
+Restrict where this project can be run. Give MAVENBUILDER.
+
+216
+00:10:40.680 --> 00:10:44.910
+So that will make sure this job runs on the agent
+
+217
+00:10:44.910 --> 00:10:46.563
+that matches this label.
+
+218
+00:10:47.400 --> 00:10:50.550
+Let's also select Maven we have not installed
+
+219
+00:10:50.550 --> 00:10:53.940
+Maven is now default Maven in the agent.
+
+220
+00:10:53.940 --> 00:10:56.620
+So we are going to select Maven 3.9
+
+221
+00:10:57.600 --> 00:10:59.220
+and that should be it.
+
+222
+00:10:59.220 --> 00:11:02.253
+Let's say save. And let's execute and see.
+
+223
+00:11:03.180 --> 00:11:04.620
+Let's check the console output
+
+224
+00:11:04.620 --> 00:11:06.630
+after the job completes.
+
+225
+00:11:06.630 --> 00:11:09.120
+Click to see complete log.
+
+226
+00:11:09.120 --> 00:11:12.360
+Okay, so we see building a remotely on MAVENBUILDER
+
+227
+00:11:12.360 --> 00:11:15.720
+and here it's downloading the Maven 3.9
+
+228
+00:11:15.720 --> 00:11:17.370
+and it has kept at this location.
+
+229
+00:11:17.370 --> 00:11:21.360
+Check the location opt/jenkins, that is on the agent.
+
+230
+00:11:21.360 --> 00:11:25.290
+Now these things should clear your concept of tools.
+
+231
+00:11:25.290 --> 00:11:28.620
+I recommend you do the previous exercise once again,
+
+232
+00:11:28.620 --> 00:11:30.900
+as I told you in the previous lecture,
+
+233
+00:11:30.900 --> 00:11:32.370
+select different jdk version.
+
+234
+00:11:32.370 --> 00:11:33.660
+Select different Maven version.
+
+235
+00:11:33.660 --> 00:11:38.660
+Install JDK 11 and JDK 17 on the agent.
+
+236
+00:11:38.790 --> 00:11:43.680
+Set those path in the tools JDK 11 tool, JDK 17 tool.
+
+237
+00:11:43.680 --> 00:11:44.820
+Do mix and match.
+
+238
+00:11:44.820 --> 00:11:48.240
+Do this exercise for some time so you get comfortable
+
+239
+00:11:48.240 --> 00:11:50.940
+with the agent and tools at the same time.
+
+240
+00:11:50.940 --> 00:11:53.490
+We are going to talk about agents and nodes later,
+
+241
+00:11:53.490 --> 00:11:55.350
+more again in the lecture.
+
+242
+00:11:55.350 --> 00:11:57.090
+But I wanted to cover this with the tools
+
+243
+00:11:57.090 --> 00:11:59.910
+so you get complete clarity on the tools and agents
+
+244
+00:11:59.910 --> 00:12:01.293
+and distributed build part.
+
+245
+00:12:02.160 --> 00:12:03.570
+Once you're done with this exercise,
+
+246
+00:12:03.570 --> 00:12:04.800
+you can delete this agent.
+
+247
+00:12:04.800 --> 00:12:07.770
+You don't need it. So instance, state, terminate.
+
+248
+00:12:07.770 --> 00:12:09.810
+Once you're done doing all your experiments,
+
+249
+00:12:09.810 --> 00:12:11.190
+then only terminate it.
+
+250
+00:12:11.190 --> 00:12:15.570
+Also make sure to remove the agent label from the jobs.
+
+251
+00:12:15.570 --> 00:12:17.250
+Otherwise you will get error
+
+252
+00:12:17.250 --> 00:12:19.260
+while you're executing these jobs.
+
+253
+00:12:19.260 --> 00:12:22.470
+So go to configure page of the job, uncheck this, save this.
+
+254
+00:12:22.470 --> 00:12:27.470
+Do it for both the jobs, vpprofile build, job, configure,
+
+255
+00:12:27.690 --> 00:12:29.613
+uncheck this, save this.
+
+256
+00:12:31.620 --> 00:12:34.170
+Also at the end I remove the agent.
+
+257
+00:12:34.170 --> 00:12:37.473
+Go to Manage Jenkins, nodes,
+
+258
+00:12:38.550 --> 00:12:41.760
+MavenBuilder, and delete the agent.
+
+259
+00:12:41.760 --> 00:12:44.223
+Delete agent, yes.
+
+260
+00:12:45.600 --> 00:12:48.233
+Once you're done with this, join me in the next lecture.
+

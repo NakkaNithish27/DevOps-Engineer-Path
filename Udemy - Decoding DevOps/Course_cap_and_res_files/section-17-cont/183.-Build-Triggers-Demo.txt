@@ -1,0 +1,991 @@
+WEBVTT
+
+00:00.870 --> 00:02.760
+Instructor: Okay, let's see our forced trigger,
+
+00:02.760 --> 00:03.700
+Git Webhook.
+
+00:06.240 --> 00:08.610
+So to run this job or to run this pipeline,
+
+00:08.610 --> 00:10.080
+I have to click on Build Now,
+
+00:10.080 --> 00:12.903
+but I want to run this job whenever there is a commit.
+
+00:13.920 --> 00:15.990
+Not only commit, there are different events
+
+00:15.990 --> 00:19.980
+based on different events on your GitHub repository,
+
+00:19.980 --> 00:21.780
+this job will get triggered.
+
+00:21.780 --> 00:24.633
+So first, we just copy the URL.
+
+00:28.828 --> 00:30.153
+'Til colon 8080.
+
+00:31.680 --> 00:34.740
+And we will go to our GitHub repository.
+
+00:34.740 --> 00:36.540
+So go to your repository settings,
+
+00:36.540 --> 00:37.830
+this is repository setting,
+
+00:37.830 --> 00:40.983
+not account setting, repository setting, click on Settings.
+
+00:41.940 --> 00:45.810
+And you will see here option Webhooks, click on that.
+
+00:45.810 --> 00:47.680
+And say here Add webhook.
+
+00:49.770 --> 00:53.283
+And paste the URL over here.
+
+00:54.240 --> 00:58.873
+And after 8080 slash, you have to say GitHub hypen webhook,
+
+01:01.110 --> 01:02.493
+and a forward slash.
+
+01:03.450 --> 01:06.270
+Make sure there is a forward slash at the end,
+
+01:06.270 --> 01:09.060
+no spelling mistake, exactly as it is.
+
+01:09.060 --> 01:12.033
+In the content type, select application JSON.
+
+01:12.960 --> 01:15.240
+Don't need to mention any secret here.
+
+01:15.240 --> 01:18.450
+Now, this webhook will get triggered for a push event
+
+01:18.450 --> 01:20.700
+or for everything.
+
+01:20.700 --> 01:22.620
+Or you can select individual events
+
+01:22.620 --> 01:26.670
+like a branch or a tag gets created.
+
+01:26.670 --> 01:30.960
+Whenever there is a comment on the commit deployments,
+
+01:30.960 --> 01:32.160
+there are many options over here,
+
+01:32.160 --> 01:35.490
+but we will just keep it for push event,
+
+01:35.490 --> 01:37.350
+so whenever there is a push,
+
+01:37.350 --> 01:40.180
+trigger the pipeline, like that, we'll see Add webhook.
+
+01:43.200 --> 01:45.153
+Okay, let's refresh this.
+
+01:46.740 --> 01:49.290
+Okay, you see this green check mark over here,
+
+01:49.290 --> 01:51.573
+that means this was delivered.
+
+01:53.610 --> 01:56.250
+You can click on Recent Deliveries.
+
+01:56.250 --> 02:01.250
+And you can say that this JSON payload was delivered.
+
+02:01.800 --> 02:05.100
+Now for some reason if you see a red cross mark over here
+
+02:05.100 --> 02:07.740
+that is not delivered,
+
+02:07.740 --> 02:10.110
+then there are a few things you can check,
+
+02:10.110 --> 02:12.423
+make sure you're giving the right URL.
+
+02:14.730 --> 02:17.250
+Make sure you selected the right content type.
+
+02:17.250 --> 02:20.193
+Also, check the Jenkins Security Group.
+
+02:21.510 --> 02:22.650
+Jenkins Security Group,
+
+02:22.650 --> 02:26.160
+8080 should be allowed from anywhere.
+
+02:26.160 --> 02:27.690
+If it's just your IP,
+
+02:27.690 --> 02:32.190
+then GitHub will not be able to reach your Jenkins server.
+
+02:32.190 --> 02:34.773
+Okay, now let's go to our Jenkins job.
+
+02:36.040 --> 02:38.490
+In the build job, click on Configure.
+
+02:38.490 --> 02:40.770
+And select here in the Build Triggers,
+
+02:40.770 --> 02:45.603
+you have to select GitHub hook triggers for GITScm polling.
+
+02:46.470 --> 02:48.093
+And save this.
+
+02:51.060 --> 02:54.150
+Okay, now look at the job ID here, that's one.
+
+02:54.150 --> 02:56.610
+Now I'm going to make a commit in my repository,
+
+02:56.610 --> 02:59.880
+in this repository, and you will see the job gets triggered.
+
+02:59.880 --> 03:01.560
+Okay, so I'm here in the repository,
+
+03:01.560 --> 03:06.003
+and I will just create some file, testfile dot TXT.
+
+03:08.790 --> 03:10.533
+That's a git add dot.
+
+03:11.820 --> 03:14.493
+Git commit hyphen M.
+
+03:16.050 --> 03:19.593
+I'll say test trigger one.
+
+03:21.420 --> 03:23.763
+Git push origin.
+
+03:26.610 --> 03:27.443
+Master.
+
+03:29.520 --> 03:30.540
+Okay, I made a comment,
+
+03:30.540 --> 03:32.490
+and this should have triggered the job.
+
+03:34.800 --> 03:36.000
+And there, you see that.
+
+03:38.010 --> 03:40.210
+So that was GitHub webhook.
+
+03:41.748 --> 03:43.563
+And next we will see Poll SCM,
+
+03:44.670 --> 03:47.640
+which is similar but the opposite.
+
+03:47.640 --> 03:50.610
+So, when I say opposite, that means, in this case,
+
+03:50.610 --> 03:53.280
+GitHub is triggering the job.
+
+03:53.280 --> 03:57.690
+But now, Jenkins will check for commits,
+
+03:57.690 --> 04:01.563
+so we'll say Poll SCM, I'll remove this check mark.
+
+04:03.750 --> 04:08.460
+So Jenkins will be regularly checking your GitHub commits,
+
+04:08.460 --> 04:10.770
+any commits on your GitHub repository.
+
+04:10.770 --> 04:14.100
+And you have to give a schedule in a cron job format,
+
+04:14.100 --> 04:16.980
+like we did in bash scripting, cron job.
+
+04:16.980 --> 04:20.880
+Hour, minute, date of month, month, date of week.
+
+04:20.880 --> 04:24.930
+So, if I want to run this for every minute
+
+04:24.930 --> 04:26.010
+I have to say star,
+
+04:26.010 --> 04:30.000
+that means every minute, star, every hour star,
+
+04:30.000 --> 04:35.000
+every date, one to 31st, star every month.
+
+04:35.280 --> 04:39.960
+And again, last star, for every day of the week.
+
+04:39.960 --> 04:44.400
+So total five star, that means run every minute.
+
+04:44.400 --> 04:45.903
+And we'll say save this.
+
+04:48.720 --> 04:51.843
+Now you should see here Git Polling Log, click on that.
+
+04:52.740 --> 04:53.940
+And it says it checked it
+
+04:53.940 --> 04:56.790
+but did not find any change in your repository,
+
+04:56.790 --> 04:58.440
+now let's make a...
+
+04:58.440 --> 05:02.520
+I'll say touch test file two dot TXT.
+
+05:02.520 --> 05:04.353
+Same thing, Git add dot.
+
+05:05.400 --> 05:06.333
+Git commit.
+
+05:08.430 --> 05:09.693
+And Git push.
+
+05:12.930 --> 05:15.450
+Okay, this is a commit, now Jenkins will be every minute
+
+05:15.450 --> 05:18.540
+checking for new commit in our repository.
+
+05:18.540 --> 05:21.750
+And if it finds, it will run this job.
+
+05:21.750 --> 05:23.343
+Okay, so no changes yet.
+
+05:25.050 --> 05:26.760
+Okay, see that, changes found,
+
+05:26.760 --> 05:29.190
+and you see the job ID three, it's in pending state,
+
+05:29.190 --> 05:30.603
+it will start in a moment.
+
+05:31.770 --> 05:32.603
+There.
+
+05:34.560 --> 05:38.250
+Now I know both are similar, gives you similar list result,
+
+05:38.250 --> 05:42.573
+but here Jenkins will be checking every minute.
+
+05:43.806 --> 05:47.070
+And GitHub webhook, whenever there is a commit,
+
+05:47.070 --> 05:49.140
+GitHub will send a JSON payload
+
+05:49.140 --> 05:50.540
+which will trigger your job.
+
+05:52.200 --> 05:54.840
+Okay, scheduled job, which is similar to Poll SCM
+
+05:54.840 --> 05:58.230
+but it is not going to check your source code manager,
+
+05:58.230 --> 05:59.970
+or your GitHub.
+
+05:59.970 --> 06:02.640
+It will just run the job at that particular time,
+
+06:02.640 --> 06:03.573
+so let's see that.
+
+06:05.640 --> 06:06.963
+Okay, configure.
+
+06:09.360 --> 06:11.523
+And I'm gonna remove this Poll SCM.
+
+06:12.780 --> 06:14.433
+Build periodically.
+
+06:15.570 --> 06:17.760
+Yeah, that's the scheduled one.
+
+06:17.760 --> 06:20.133
+So again, this is the same cron job format.
+
+06:21.780 --> 06:26.780
+Again, you can mention interval or a specific time,
+
+06:26.850 --> 06:30.510
+for example, I want to run it every night at 8:30 PM,
+
+06:30.510 --> 06:34.893
+so I will say 30 for the minute, 8:00 PM, that is 20.
+
+06:35.940 --> 06:38.310
+And then third field is day of the month,
+
+06:38.310 --> 06:40.210
+so I want to run it like on every day.
+
+06:41.940 --> 06:46.440
+Then star every month, then star every day of the week,
+
+06:46.440 --> 06:49.950
+or wait, arrange, one to five.
+
+06:49.950 --> 06:52.350
+Zero is Sunday, one is Monday.
+
+06:52.350 --> 06:54.990
+So it's like Monday to Friday.
+
+06:54.990 --> 06:56.823
+Every night, 8:30 PM.
+
+06:57.750 --> 07:00.183
+Right, so that's building periodically.
+
+07:02.580 --> 07:06.030
+Now of course we are not going to wait 'til that time.
+
+07:06.030 --> 07:07.950
+But it's pretty simple, you know how to do it,
+
+07:07.950 --> 07:09.450
+same cron job format,
+
+07:09.450 --> 07:12.633
+we have seen it in the cron job in bash scripting,
+
+07:13.470 --> 07:16.803
+Poll SCM and build periodically, all three are same.
+
+07:18.660 --> 07:20.520
+Okay, the next one are remote trigger,
+
+07:20.520 --> 07:22.590
+now this can get slightly complicated,
+
+07:22.590 --> 07:25.863
+but if you stay with me, follow the document, it will work.
+
+07:27.330 --> 07:29.190
+Remote trigger means from anywhere,
+
+07:29.190 --> 07:31.650
+you can trigger that Jenkins job from anywhere,
+
+07:31.650 --> 07:35.700
+from a script, from other Jenkins server, from your laptop,
+
+07:35.700 --> 07:38.490
+from some server, anywhere you can run that job,
+
+07:38.490 --> 07:40.650
+as long as you have the network access
+
+07:40.650 --> 07:44.490
+to the Jenkins server, you can trigger that Jenkins job,
+
+07:44.490 --> 07:45.890
+so let's see how to do that.
+
+07:47.460 --> 07:50.040
+So this is the document that I created for it.
+
+07:50.040 --> 07:51.480
+It will be in the resource section,
+
+07:51.480 --> 07:53.340
+you can download it and use it.
+
+07:53.340 --> 07:55.500
+So we need to do three things here,
+
+07:55.500 --> 07:58.770
+first is, you need to create a job URL,
+
+07:58.770 --> 08:00.540
+which is pretty simple to do.
+
+08:00.540 --> 08:02.430
+Then you need to create a token for this user,
+
+08:02.430 --> 08:03.450
+this is also simple,
+
+08:03.450 --> 08:05.700
+the Jenkins user that we log in with,
+
+08:05.700 --> 08:08.250
+we'll need to create a token for that user.
+
+08:08.250 --> 08:10.113
+And then we need to generate CRUMB.
+
+08:10.980 --> 08:14.070
+And the CRUMB will be generated by running this command.
+
+08:14.070 --> 08:15.510
+It will generate a CRUMB.
+
+08:15.510 --> 08:17.520
+And all these three things combine together,
+
+08:17.520 --> 08:19.383
+we are going to use a cURL command.
+
+08:22.230 --> 08:25.080
+Right, and the final command will be something like this.
+
+08:26.342 --> 08:28.890
+So you have http colon slash slash admin,
+
+08:28.890 --> 08:31.370
+that is the username, colon, the token.
+
+08:31.370 --> 08:33.063
+At the rate, that's the job URL.
+
+08:34.500 --> 08:36.660
+And hyphen edge, and then the CRUMB.
+
+08:36.660 --> 08:39.150
+So these three things combine together,
+
+08:39.150 --> 08:41.070
+and we can trigger this Jenkins job.
+
+08:41.070 --> 08:42.453
+So, let's do this.
+
+08:43.600 --> 08:45.870
+Okay, I'll keep a editor handy,
+
+08:45.870 --> 08:48.900
+I will use this Sublime text editor,
+
+08:48.900 --> 08:51.570
+just to copy paste things, that's all.
+
+08:51.570 --> 08:54.063
+Let's go to the Jenkins job, configure.
+
+08:58.200 --> 09:02.430
+And we'll say trigger builds remotely, example from scripts.
+
+09:02.430 --> 09:04.287
+And you need to mention authentication token,
+
+09:04.287 --> 09:07.170
+now you can give any token name over here.
+
+09:07.170 --> 09:10.353
+I'll just give the name as mybuildtoken.
+
+09:12.030 --> 09:14.250
+So whatever token name you give,
+
+09:14.250 --> 09:17.100
+make sure you have to be, it has to be in the URL,
+
+09:17.100 --> 09:20.313
+and this is the URL, here, copy this URL.
+
+09:24.690 --> 09:28.923
+And we will need some kind of text editor to paste things.
+
+09:30.870 --> 09:32.640
+So first, Jenkins underscore URL,
+
+09:32.640 --> 09:34.173
+let's get the Jenkins URL.
+
+09:35.490 --> 09:37.803
+Copy the URL 'til 8080.
+
+09:40.860 --> 09:43.083
+And just paste the URL over here.
+
+09:43.980 --> 09:46.590
+Remove that extra forward slash.
+
+09:46.590 --> 09:49.957
+And the token name I have given is is mybuildtoken.
+
+09:51.070 --> 09:53.463
+Okay, so that is my job URL,
+
+09:54.480 --> 09:59.480
+the next thing I need is token, and third is CRUMB.
+
+10:03.360 --> 10:05.103
+Okay, so now let's get the token.
+
+10:06.450 --> 10:08.313
+So make sure you save this job.
+
+10:10.800 --> 10:12.150
+The user that you logged in with,
+
+10:12.150 --> 10:15.960
+click on this dropdown button here and go to Credentials.
+
+10:15.960 --> 10:17.193
+Sorry, Configure.
+
+10:18.060 --> 10:20.040
+Click on Configure once again there.
+
+10:20.040 --> 10:21.540
+Configure.
+
+10:21.540 --> 10:25.440
+And come to APA token here, say Add New Token.
+
+10:25.440 --> 10:26.763
+And say Generate.
+
+10:27.810 --> 10:30.813
+And you should see the token, you can use this to copy it.
+
+10:31.800 --> 10:35.040
+Token is copied, let's again paste the token.
+
+10:35.040 --> 10:40.040
+And we'll paste it in this format, admin, colon, the token.
+
+10:40.080 --> 10:43.500
+Now my login user in the Jenkins is admin,
+
+10:43.500 --> 10:46.740
+if your user is something else, like your name,
+
+10:46.740 --> 10:47.823
+use that name.
+
+10:48.720 --> 10:51.420
+So it's username, colon, token.
+
+10:51.420 --> 10:52.253
+Next is CRUMB.
+
+10:53.430 --> 10:56.460
+Now, CRUMB is this long command.
+
+10:56.460 --> 10:59.130
+WGET, let me copy this command.
+
+10:59.130 --> 11:00.453
+And show it to you first.
+
+11:02.010 --> 11:07.010
+Okay, make sure you remove the new line character,
+
+11:07.050 --> 11:09.693
+backspace from here, space there.
+
+11:13.080 --> 11:15.303
+Okay, now this should be all in one line.
+
+11:16.800 --> 11:19.590
+Now in Sublime text editor, there is no horizontal scroller,
+
+11:19.590 --> 11:22.710
+so, it just shows it in the next line.
+
+11:22.710 --> 11:24.510
+You can enable though, but this looks better,
+
+11:24.510 --> 11:27.003
+but make sure you remove any extra space.
+
+11:28.410 --> 11:30.946
+And we really need to fill these details,
+
+11:30.946 --> 11:35.910
+WGET auth challenge, user, admin.
+
+11:35.910 --> 11:40.593
+Password, login password, now mine is pretty simple.
+
+11:41.490 --> 11:43.380
+So that's the Jenkins username and password
+
+11:43.380 --> 11:44.370
+you have to give there.
+
+11:44.370 --> 11:47.190
+Jenkins IP there, so I already have it from here,
+
+11:47.190 --> 11:48.333
+I can copy this.
+
+11:53.670 --> 11:56.760
+And that is it, you have to run this command,
+
+11:56.760 --> 11:57.930
+it should give you the CRUMB,
+
+11:57.930 --> 12:02.730
+but WGET command is not available by default in Windows.
+
+12:02.730 --> 12:06.930
+But you can download and install WGET in Git BASH.
+
+12:06.930 --> 12:08.880
+In MacBook, it will be there, so no problem,
+
+12:08.880 --> 12:11.670
+open your terminal, run this command, you'll get the CRUMB.
+
+12:11.670 --> 12:14.553
+But for Windows user, we need to download WGET.
+
+12:16.230 --> 12:19.890
+So just search on the net, WGET for Git BASH.
+
+12:19.890 --> 12:21.480
+And the first link itself,
+
+12:21.480 --> 12:23.793
+how to add more utilities to Git BASH.
+
+12:24.870 --> 12:25.713
+Click on that.
+
+12:27.780 --> 12:30.183
+WGET, there's a link, eternallybored.
+
+12:31.830 --> 12:35.883
+And download the 64-bit ZIP file, ZIP file.
+
+12:38.274 --> 12:40.624
+Okay, once it's downloaded, click on Open File.
+
+12:43.740 --> 12:46.860
+Okay, so it opened it in WinRAR here,
+
+12:46.860 --> 12:51.180
+click on WGET.EXE, and say Extract To.
+
+12:51.180 --> 12:54.363
+And you need to extract it at this location, C Drive.
+
+12:56.430 --> 13:00.930
+Program Files, expand that, Program Files,
+
+13:00.930 --> 13:03.060
+you will see here Git.
+
+13:03.060 --> 13:07.440
+In this you see mingw64, expand that.
+
+13:07.440 --> 13:09.330
+Inside that you have bin.
+
+13:09.330 --> 13:11.550
+In mingw64.
+
+13:11.550 --> 13:12.573
+And say OK.
+
+13:14.730 --> 13:16.290
+Now I already have it installed,
+
+13:16.290 --> 13:19.440
+so I'm just gonna replace it once again, yes to all.
+
+13:19.440 --> 13:22.620
+And now I should have WGET on my Git BASH,
+
+13:22.620 --> 13:25.803
+so I'm gonna open next Git BASH.
+
+13:26.640 --> 13:28.380
+Git BASH terminal was already open,
+
+13:28.380 --> 13:30.003
+so I just reopened it kind of.
+
+13:31.260 --> 13:33.360
+Okay, let's copy this URL,
+
+13:33.360 --> 13:36.570
+make sure this is all in just one line, not multiple lines,
+
+13:36.570 --> 13:38.130
+so once again.
+
+13:38.130 --> 13:40.170
+You can just paste it in another Notepad
+
+13:40.170 --> 13:41.673
+or see if it's in one line.
+
+13:44.310 --> 13:45.843
+Let's go to Git BASH.
+
+13:46.740 --> 13:49.740
+And I'm just gonna paste this URL.
+
+13:49.740 --> 13:50.573
+Hit Enter.
+
+13:52.050 --> 13:54.330
+And that's the CRUMB.
+
+13:54.330 --> 13:55.740
+Got it.
+
+13:55.740 --> 13:56.573
+Copy that.
+
+13:58.440 --> 14:00.060
+Paste it, so we got all three things now,
+
+14:00.060 --> 14:04.773
+job URL, admin user token, and the CRUMB, now final thing,
+
+14:06.780 --> 14:09.000
+is this URL.
+
+14:09.000 --> 14:11.490
+cURL command, this cURL command, copy this cURL command,
+
+14:11.490 --> 14:13.743
+bring it to your editor.
+
+14:15.570 --> 14:20.570
+Hyphen H, backspace space, okay, this is better.
+
+14:21.030 --> 14:22.800
+Okay, now let's start filling these things,
+
+14:22.800 --> 14:26.700
+so I'll take first the username and the token.
+
+14:26.700 --> 14:28.383
+Copy the username and the token.
+
+14:29.700 --> 14:30.993
+Just paste it here.
+
+14:33.540 --> 14:35.940
+Okay, admin, colon, the token, add the rate,
+
+14:35.940 --> 14:37.650
+okay, no space here.
+
+14:37.650 --> 14:40.500
+Add the rate, at the Jenkins IP,
+
+14:40.500 --> 14:43.680
+colon 8080 slash job and job name and token,
+
+14:43.680 --> 14:45.753
+so I'm just gonna copy this, everything.
+
+14:46.920 --> 14:48.690
+'Til the IP address.
+
+14:48.690 --> 14:49.593
+'Til the IP.
+
+14:50.820 --> 14:54.363
+And just right over here.
+
+14:57.390 --> 14:59.670
+Hyphen H and the Jenkins CRUMB,
+
+14:59.670 --> 15:01.653
+let's copy that Jenkins CRUMB.
+
+15:07.849 --> 15:09.600
+Okay, okay.
+
+15:09.600 --> 15:11.493
+A mistake, JJ.
+
+15:12.450 --> 15:14.160
+Just Jenkins.
+
+15:14.160 --> 15:16.500
+Okay, I think we are good, let's test it,
+
+15:16.500 --> 15:20.643
+let's go to Jenkins.
+
+15:23.610 --> 15:25.623
+Okay, so, the job ID three.
+
+15:27.360 --> 15:29.400
+Now I'm going to copy this cURL command
+
+15:29.400 --> 15:31.950
+and paste it in Git BASH.
+
+15:31.950 --> 15:34.713
+Run it from the Git BASH, you can run it from anywhere.
+
+15:36.990 --> 15:37.823
+Paste it.
+
+15:38.730 --> 15:41.943
+Let's hit Enter and let's see the magic.
+
+15:43.260 --> 15:47.460
+Okay, let's go to Jenkins, and, okay, see that?
+
+15:47.460 --> 15:48.810
+Fourth job.
+
+15:48.810 --> 15:50.610
+That got triggered, now that URL,
+
+15:50.610 --> 15:53.640
+that you can use to run it from a script.
+
+15:53.640 --> 15:55.800
+And when it says script, it's not just basket, okay,
+
+15:55.800 --> 15:58.650
+it could be Python, Ruby, any programming language,
+
+15:58.650 --> 16:03.330
+Ansible, from anywhere you can run that command,
+
+16:03.330 --> 16:04.830
+and that will trigger your job,
+
+16:04.830 --> 16:06.813
+and that is with authentication.
+
+16:07.680 --> 16:10.590
+Okay, the last one is pretty simple,
+
+16:10.590 --> 16:13.713
+and for that I need to create one more job here.
+
+16:15.510 --> 16:19.563
+I'll just create test job, I'll say freestyle, okay?
+
+16:21.930 --> 16:25.440
+And I will just say here, add build step, execute shell,
+
+16:25.440 --> 16:28.410
+you can do whatever here you want, your choice.
+
+16:28.410 --> 16:29.463
+I'll say echo.
+
+16:30.960 --> 16:33.483
+Test, test, test.
+
+16:35.340 --> 16:36.173
+Save.
+
+16:37.470 --> 16:39.543
+I guess any kind of job, okay, now.
+
+16:40.380 --> 16:42.270
+I will say this test job runs
+
+16:42.270 --> 16:44.310
+only after the build job is completed,
+
+16:44.310 --> 16:46.787
+so I'm going to go to the build trigger of test job,
+
+16:46.787 --> 16:50.220
+I will say Build after other projects are completed.
+
+16:50.220 --> 16:53.070
+And I will mention here, build job name.
+
+16:53.070 --> 16:55.050
+See that, it shows the job name.
+
+16:55.050 --> 16:56.283
+And save it.
+
+16:58.320 --> 16:59.400
+Yeah?
+
+16:59.400 --> 17:01.830
+That's all, really.
+
+17:01.830 --> 17:04.683
+So let's test it, let's run the build job.
+
+17:07.050 --> 17:08.880
+And once the build job completes,
+
+17:08.880 --> 17:10.263
+let's look at the logs.
+
+17:12.780 --> 17:16.830
+You see here, triggering new build of a test job.
+
+17:16.830 --> 17:18.240
+Right, so it triggered the test job,
+
+17:18.240 --> 17:21.510
+if you go to test job, you will see the test job.
+
+17:21.510 --> 17:22.740
+Job ID one.
+
+17:22.740 --> 17:23.703
+That got triggered.
+
+17:24.570 --> 17:28.380
+So these are some popular Jenkins triggers.
+
+17:28.380 --> 17:30.570
+As I said, there are more.
+
+17:30.570 --> 17:32.640
+But these triggers are more than enough
+
+17:32.640 --> 17:35.253
+to create any successful pipeline.
+
+17:36.360 --> 17:37.740
+So that is all in this lecture,
+
+17:37.740 --> 17:39.543
+I will see you in the next one.

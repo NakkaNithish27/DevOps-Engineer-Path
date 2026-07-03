@@ -1,0 +1,762 @@
+WEBVTT
+
+1
+00:00:00.240 --> 00:00:01.860
+<v Instructor>Welcome back to Jenkins.</v>
+
+2
+00:00:01.860 --> 00:00:04.710
+Now I know the tools lecture was slightly confusing,
+
+3
+00:00:04.710 --> 00:00:05.730
+but please do not worry.
+
+4
+00:00:05.730 --> 00:00:06.690
+In the next lecture,
+
+5
+00:00:06.690 --> 00:00:09.360
+you'll understand how to use those tools
+
+6
+00:00:09.360 --> 00:00:11.520
+and things will get very clear.
+
+7
+00:00:11.520 --> 00:00:14.130
+So we access tools from jobs.
+
+8
+00:00:14.130 --> 00:00:14.963
+So in this lecture,
+
+9
+00:00:14.963 --> 00:00:18.450
+we are going to understand what is a job, how it works,
+
+10
+00:00:18.450 --> 00:00:20.880
+what are the features and issues with it.
+
+11
+00:00:20.880 --> 00:00:23.520
+There's nothing right and wrong about doing in this lecture,
+
+12
+00:00:23.520 --> 00:00:26.430
+it's just about understanding a Jenkins job.
+
+13
+00:00:26.430 --> 00:00:28.830
+So that's what we will be doing in this lecture,
+
+14
+00:00:28.830 --> 00:00:31.170
+just understand the Jenkins job.
+
+15
+00:00:31.170 --> 00:00:33.720
+So you can click on Create a job over here
+
+16
+00:00:33.720 --> 00:00:35.640
+or you can click on New Item over here.
+
+17
+00:00:35.640 --> 00:00:38.010
+So I'm going to click on New Item here.
+
+18
+00:00:38.010 --> 00:00:39.480
+You need to give job a name.
+
+19
+00:00:39.480 --> 00:00:41.287
+So I'm just going to say FirstJob.
+
+20
+00:00:42.839 --> 00:00:44.080
+Yeah, FirstJob and select Freestyle project.
+
+21
+00:00:46.920 --> 00:00:50.160
+We will be using Pipeline most of the time in the course.
+
+22
+00:00:50.160 --> 00:00:51.450
+Just for understanding purpose,
+
+23
+00:00:51.450 --> 00:00:53.160
+we are using Freestyle project.
+
+24
+00:00:53.160 --> 00:00:56.850
+Click on OK. So freestyle means all graphical.
+
+25
+00:00:56.850 --> 00:00:58.470
+You need to just select options
+
+26
+00:00:58.470 --> 00:01:00.900
+and decide what you need to do.
+
+27
+00:01:00.900 --> 00:01:03.090
+First is the Description.
+
+28
+00:01:03.090 --> 00:01:04.800
+So giving some meaningful description,
+
+29
+00:01:04.800 --> 00:01:06.690
+like we are learning Jenkins job.
+
+30
+00:01:06.690 --> 00:01:09.690
+The few options over here, we'll see them later.
+
+31
+00:01:09.690 --> 00:01:12.330
+Source Code Management, you can select which source code
+
+32
+00:01:12.330 --> 00:01:15.480
+to use and from where to fetch the source code.
+
+33
+00:01:15.480 --> 00:01:17.340
+This, we'll see in the next lecture.
+
+34
+00:01:17.340 --> 00:01:21.240
+Triggers, how the job should get executed automatically,
+
+35
+00:01:21.240 --> 00:01:24.210
+manually, on a scheduled period.
+
+36
+00:01:24.210 --> 00:01:26.310
+Again, we are going to see this later.
+
+37
+00:01:26.310 --> 00:01:28.650
+There's a dedicated lecture for this one.
+
+38
+00:01:28.650 --> 00:01:31.650
+I just want you to see this first, Build Step.
+
+39
+00:01:31.650 --> 00:01:34.050
+So, "Automate your build process
+
+40
+00:01:34.050 --> 00:01:37.410
+with ordered tasks like code compilation,
+
+41
+00:01:37.410 --> 00:01:38.820
+testing and deployment."
+
+42
+00:01:38.820 --> 00:01:40.980
+So most of the magic happens over here,
+
+43
+00:01:40.980 --> 00:01:43.320
+and this needs the settings and features
+
+44
+00:01:43.320 --> 00:01:44.880
+and tools that we call.
+
+45
+00:01:44.880 --> 00:01:49.380
+So click on Add build step. And here, you see a few options.
+
+46
+00:01:49.380 --> 00:01:52.920
+Just go through them like NodeJS, Windows batch command,
+
+47
+00:01:52.920 --> 00:01:54.660
+execute shell command.
+
+48
+00:01:54.660 --> 00:01:55.950
+Now based on the plugins,
+
+49
+00:01:55.950 --> 00:01:57.540
+you will see the features over here.
+
+50
+00:01:57.540 --> 00:02:00.990
+So we have NodeJS plugin, Windows batch command plugin,
+
+51
+00:02:00.990 --> 00:02:02.760
+we have Maven plugin.
+
+52
+00:02:02.760 --> 00:02:06.360
+But for now, just select Execute shell.
+
+53
+00:02:06.360 --> 00:02:08.550
+We'll just execute some shell commands over here
+
+54
+00:02:08.550 --> 00:02:10.080
+and see how this works.
+
+55
+00:02:10.080 --> 00:02:11.700
+So I'm going to see, whoami,
+
+56
+00:02:11.700 --> 00:02:14.250
+that's a Linux command that tells you what user you are,
+
+57
+00:02:14.250 --> 00:02:16.593
+pwd shows present working directory,
+
+58
+00:02:17.610 --> 00:02:20.610
+w command and id command.
+
+59
+00:02:20.610 --> 00:02:22.170
+So these are a bunch of commands that,
+
+60
+00:02:22.170 --> 00:02:25.410
+shell commands that I want to execute on Jenkins.
+
+61
+00:02:25.410 --> 00:02:27.990
+And just save this.
+
+62
+00:02:27.990 --> 00:02:29.160
+So you created your first job
+
+63
+00:02:29.160 --> 00:02:31.380
+that is just some shell commands.
+
+64
+00:02:31.380 --> 00:02:33.960
+Now click on Build Now.
+
+65
+00:02:33.960 --> 00:02:35.913
+Okay, click it a few more times.
+
+66
+00:02:37.320 --> 00:02:38.970
+So job takes time to execute.
+
+67
+00:02:38.970 --> 00:02:42.480
+So click and wait for a few seconds.
+
+68
+00:02:42.480 --> 00:02:45.090
+And here you will start seeing the history.
+
+69
+00:02:45.090 --> 00:02:48.150
+First build ID, second build ID, third build ID.
+
+70
+00:02:48.150 --> 00:02:51.810
+If you click on this green check mark, this means success.
+
+71
+00:02:51.810 --> 00:02:55.080
+If you click on this, you go to the console output.
+
+72
+00:02:55.080 --> 00:02:57.930
+Now read all this carefully and try to understand it.
+
+73
+00:02:57.930 --> 00:03:00.000
+Says, "Started by user Admin."
+
+74
+00:03:00.000 --> 00:03:03.097
+That is the Jenkins homepage username.
+
+75
+00:03:03.097 --> 00:03:05.700
+"Running as a SYSTEM. Building in workspace."
+
+76
+00:03:05.700 --> 00:03:09.300
+This is the path where it is executing these commands.
+
+77
+00:03:09.300 --> 00:03:11.550
+And this is your command, whoami.
+
+78
+00:03:11.550 --> 00:03:13.050
+The output, jenkins.
+
+79
+00:03:13.050 --> 00:03:15.690
+So the job is running with the jenkins user.
+
+80
+00:03:15.690 --> 00:03:19.203
+Pwd, that is where the command is getting executed.
+
+81
+00:03:20.190 --> 00:03:22.860
+W showing you load average, the number of users.
+
+82
+00:03:22.860 --> 00:03:27.630
+Id command shows you the user and its UID and GID.
+
+83
+00:03:27.630 --> 00:03:29.460
+So always keep in mind,
+
+84
+00:03:29.460 --> 00:03:33.720
+Jenkins jobs are running with the jenkins user privilege.
+
+85
+00:03:33.720 --> 00:03:36.420
+Now go back to the job, click on FirstJob,
+
+86
+00:03:36.420 --> 00:03:39.420
+and go to Configure, click on Configure,
+
+87
+00:03:39.420 --> 00:03:42.600
+scroll down and add another build step.
+
+88
+00:03:42.600 --> 00:03:45.690
+Click on Add build step, say Execute shell.
+
+89
+00:03:45.690 --> 00:03:49.323
+And here execute the command sudo apt update.
+
+90
+00:03:51.210 --> 00:03:52.293
+And save this.
+
+91
+00:03:53.580 --> 00:03:55.713
+Now let's run this job, Build Now.
+
+92
+00:03:56.580 --> 00:03:59.970
+Okay, the job has failed. You see that, failed symbol?
+
+93
+00:03:59.970 --> 00:04:01.100
+Click on that.
+
+94
+00:04:01.100 --> 00:04:02.550
+So you see all the commands
+
+95
+00:04:02.550 --> 00:04:05.640
+that we executed previously is working as expected.
+
+96
+00:04:05.640 --> 00:04:10.500
+Sudo apt update is failing. Now can you figure out why?
+
+97
+00:04:10.500 --> 00:04:12.390
+So apt update is a system command.
+
+98
+00:04:12.390 --> 00:04:14.610
+You need sudo's privilege.
+
+99
+00:04:14.610 --> 00:04:17.310
+This job is running with jenkins user privilege,
+
+100
+00:04:17.310 --> 00:04:20.790
+which does not have sudo's access or it is not root user.
+
+101
+00:04:20.790 --> 00:04:23.460
+So definitely jenkins user cannot execute
+
+102
+00:04:23.460 --> 00:04:25.020
+apt update command.
+
+103
+00:04:25.020 --> 00:04:27.120
+So anything fails in the job,
+
+104
+00:04:27.120 --> 00:04:29.680
+the entire job will be declared as failure
+
+105
+00:04:30.690 --> 00:04:32.280
+unless you set an ignore option
+
+106
+00:04:32.280 --> 00:04:34.740
+that we'll see in pipeline later.
+
+107
+00:04:34.740 --> 00:04:37.080
+Now, let's click on Configure once again,
+
+108
+00:04:37.080 --> 00:04:38.290
+remove this command
+
+109
+00:04:39.180 --> 00:04:42.873
+and run this command, cat /proc/cpuinfo,
+
+110
+00:04:45.060 --> 00:04:46.350
+and redirect the output
+
+111
+00:04:46.350 --> 00:04:48.973
+to a file called as cpuinfo.txt.
+
+112
+00:04:52.890 --> 00:04:57.300
+Now along with this, I'm going to run ls -ltr command,
+
+113
+00:04:57.300 --> 00:04:59.370
+and once again, pwd command.
+
+114
+00:04:59.370 --> 00:05:00.633
+Let's save this.
+
+115
+00:05:02.460 --> 00:05:04.200
+So you know, this will run the command
+
+116
+00:05:04.200 --> 00:05:07.650
+and create a file cpuinfo.txt, right?
+
+117
+00:05:07.650 --> 00:05:10.440
+But where and how to access it?
+
+118
+00:05:10.440 --> 00:05:12.060
+Let's run Build Now.
+
+119
+00:05:12.060 --> 00:05:14.060
+Let's take a look at the console output.
+
+120
+00:05:15.270 --> 00:05:16.920
+So it executed our command.
+
+121
+00:05:16.920 --> 00:05:18.510
+And if you're in ls -ltr,
+
+122
+00:05:18.510 --> 00:05:21.060
+you should see that file over there,
+
+123
+00:05:21.060 --> 00:05:23.010
+and it's in this folder.
+
+124
+00:05:23.010 --> 00:05:25.560
+Okay, so Jenkins, there's a folder called workspace.
+
+125
+00:05:25.560 --> 00:05:27.180
+In that, you have FirstJob folder,
+
+126
+00:05:27.180 --> 00:05:29.250
+and in that, you have this file.
+
+127
+00:05:29.250 --> 00:05:30.090
+Once again, take a look.
+
+128
+00:05:30.090 --> 00:05:33.630
+It is owned by the jenkins user and the jenkins group.
+
+129
+00:05:33.630 --> 00:05:35.790
+Now if you go back to the job,
+
+130
+00:05:35.790 --> 00:05:38.370
+you should see here Workspace.
+
+131
+00:05:38.370 --> 00:05:42.030
+In the Workspace, you see the file. You can view this file.
+
+132
+00:05:42.030 --> 00:05:44.943
+So that's the content of cpuinfo file.
+
+133
+00:05:46.890 --> 00:05:47.850
+And you can also choose
+
+134
+00:05:47.850 --> 00:05:49.893
+to download it all files in zip.
+
+135
+00:05:52.020 --> 00:05:53.730
+Okay, just do the simple, simple exercise.
+
+136
+00:05:53.730 --> 00:05:56.010
+I know it's like little childish,
+
+137
+00:05:56.010 --> 00:05:58.200
+but trust me, I'm training you for something
+
+138
+00:05:58.200 --> 00:06:02.310
+that you will be regularly doing as a DevOps engineer.
+
+139
+00:06:02.310 --> 00:06:04.140
+You can also clean the workspace.
+
+140
+00:06:04.140 --> 00:06:05.850
+You can say Wipe Out Current Workspace,
+
+141
+00:06:05.850 --> 00:06:08.820
+which removes everything from the workspace.
+
+142
+00:06:08.820 --> 00:06:12.090
+Now see, this workspace is off this job,
+
+143
+00:06:12.090 --> 00:06:14.280
+the content of First Job folder.
+
+144
+00:06:14.280 --> 00:06:16.530
+If you click on Workspace now,
+
+145
+00:06:16.530 --> 00:06:18.960
+we will see nothing, but if we run Build Now,
+
+146
+00:06:18.960 --> 00:06:21.660
+it'll generate the workspace once again.
+
+147
+00:06:21.660 --> 00:06:22.830
+So if you click on Workspace,
+
+148
+00:06:22.830 --> 00:06:24.900
+you should see this file once again.
+
+149
+00:06:24.900 --> 00:06:26.790
+Okay, one last thing with this job.
+
+150
+00:06:26.790 --> 00:06:29.550
+So click on Configure once again,
+
+151
+00:06:29.550 --> 00:06:31.170
+and if you scroll down at the end,
+
+152
+00:06:31.170 --> 00:06:34.650
+you see here Post-build Action.
+
+153
+00:06:34.650 --> 00:06:36.630
+What do you want to do after the build is completed?
+
+154
+00:06:36.630 --> 00:06:39.810
+Like send an email notification or archive some files
+
+155
+00:06:39.810 --> 00:06:42.120
+and send it somewhere else, et cetera, et cetera,
+
+156
+00:06:42.120 --> 00:06:43.650
+based on your requirement.
+
+157
+00:06:43.650 --> 00:06:45.810
+So if you click on Add post-build action,
+
+158
+00:06:45.810 --> 00:06:47.850
+you'll see many options, but again,
+
+159
+00:06:47.850 --> 00:06:50.190
+based on the plugins like email notification,
+
+160
+00:06:50.190 --> 00:06:52.230
+you see Editable Email Notification,
+
+161
+00:06:52.230 --> 00:06:55.260
+you see some GitHub commit commands.
+
+162
+00:06:55.260 --> 00:06:58.780
+But I'm going to select this one, Archive the artifacts.
+
+163
+00:06:58.780 --> 00:07:00.089
+Files to archive,
+
+164
+00:07:00.089 --> 00:07:03.922
+and I'm going to say here **/*.txt.
+
+165
+00:07:08.460 --> 00:07:12.540
+Now this means find any file that ends with .txt,
+
+166
+00:07:12.540 --> 00:07:14.490
+archive it and keep it.
+
+167
+00:07:14.490 --> 00:07:18.660
+So *.txt anyways means any file that ends with txt.
+
+168
+00:07:18.660 --> 00:07:21.560
+The beginning two stars, slash means recursively.
+
+169
+00:07:21.560 --> 00:07:25.740
+So recursively, even if you have subfolders from any folder,
+
+170
+00:07:25.740 --> 00:07:29.250
+find files that ends with .txt and archive it.
+
+171
+00:07:29.250 --> 00:07:31.110
+That's what this means.
+
+172
+00:07:31.110 --> 00:07:35.970
+So click on Save and say Build Now.
+
+173
+00:07:35.970 --> 00:07:37.953
+Okay, so that's the job, right?
+
+174
+00:07:39.330 --> 00:07:40.890
+Completed successfully.
+
+175
+00:07:40.890 --> 00:07:42.330
+If you go to Workspace,
+
+176
+00:07:42.330 --> 00:07:45.360
+you see that txt file, right, in the workspace.
+
+177
+00:07:45.360 --> 00:07:48.213
+But if I clear this workspace,
+
+178
+00:07:49.121 --> 00:07:53.070
+if I click on Workspace once again, the workspace is gone.
+
+179
+00:07:53.070 --> 00:07:56.190
+But you will see here the Last Successful Artifact.
+
+180
+00:07:56.190 --> 00:07:59.040
+This is from the post-build action.
+
+181
+00:07:59.040 --> 00:08:02.790
+It has archived any file that it finds with .txt extension
+
+182
+00:08:02.790 --> 00:08:06.180
+and kept it over here, which you can then access.
+
+183
+00:08:06.180 --> 00:08:08.790
+So this is the artifact of the job.
+
+184
+00:08:08.790 --> 00:08:13.260
+The workspace keeps the current temporary files.
+
+185
+00:08:13.260 --> 00:08:15.240
+So practice this a few more times,
+
+186
+00:08:15.240 --> 00:08:17.340
+get comfortable with the job.
+
+187
+00:08:17.340 --> 00:08:18.173
+In the next lecture,
+
+188
+00:08:18.173 --> 00:08:20.760
+we'll see a job that actually makes some sense,
+
+189
+00:08:20.760 --> 00:08:23.190
+like building and testing the code.
+
+190
+00:08:23.190 --> 00:08:26.140
+So that is all in this lecture. I will see in the next one.
+

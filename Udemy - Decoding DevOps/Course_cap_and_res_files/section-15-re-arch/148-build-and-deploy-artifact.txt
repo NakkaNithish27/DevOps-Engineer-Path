@@ -1,0 +1,766 @@
+WEBVTT
+
+00:00.480 --> 00:01.410
+Instructor: All right, so it's time
+
+00:01.410 --> 00:03.900
+to deploy the artifact, it's pretty simple.
+
+00:03.900 --> 00:07.050
+You can just click here, Upload and deploy.
+
+00:07.050 --> 00:09.840
+And you can say, Choose file, select the artifact,
+
+00:09.840 --> 00:11.550
+version it, and deploy it.
+
+00:11.550 --> 00:12.960
+But we need to build our artifact
+
+00:12.960 --> 00:15.030
+and we also need to make sure
+
+00:15.030 --> 00:18.600
+our code contains the backend service information.
+
+00:18.600 --> 00:20.910
+So first I'll collect the backend service information
+
+00:20.910 --> 00:23.190
+like the RDS endpoint.
+
+00:23.190 --> 00:24.903
+I'll keep it in my sticky notes.
+
+00:26.100 --> 00:29.313
+So, I already did save the username and password for this.
+
+00:30.660 --> 00:35.070
+Next, I'll go to Amazon MQ, select our broker.
+
+00:35.070 --> 00:37.950
+Come down, you have here Connections.
+
+00:37.950 --> 00:40.260
+Over here, you have this URL.
+
+00:40.260 --> 00:43.320
+After the slash slash, copy that,
+
+00:43.320 --> 00:45.213
+and put it in the sticky note.
+
+00:46.410 --> 00:50.580
+Now observe the port number, it's 5671.
+
+00:50.580 --> 00:52.050
+In application properties file,
+
+00:52.050 --> 00:54.180
+we have port number as 5672.
+
+00:54.180 --> 00:58.080
+So we need to also edit the port number of RabbitMQ
+
+00:58.080 --> 00:59.610
+in the configuration file, right?
+
+00:59.610 --> 01:01.440
+We'll take this port number as it is.
+
+01:01.440 --> 01:02.823
+Let's check ElastiCache.
+
+01:04.710 --> 01:09.710
+Okay, in the Resources, Memcached caches, select that.
+
+01:10.260 --> 01:12.240
+And that's the configuration endpoint.
+
+01:12.240 --> 01:15.903
+Copy that, again, I'm saving it in the sticky notes.
+
+01:18.360 --> 01:21.150
+We also need the username and password for RabbitMQ.
+
+01:21.150 --> 01:24.900
+While creating, I created a user called rabbit,
+
+01:24.900 --> 01:27.870
+and my password was this, right?
+
+01:27.870 --> 01:28.703
+So make sure
+
+01:28.703 --> 01:30.930
+you collect all the backend service information.
+
+01:30.930 --> 01:34.380
+Let's make sure this 11211 is here.
+
+01:34.380 --> 01:37.020
+Okay, now let's clone the source code in our local machine,
+
+01:37.020 --> 01:39.120
+build it, and then upload it.
+
+01:39.120 --> 01:44.120
+So go to github.com/hkhcoder/vprofile-project
+
+01:45.150 --> 01:49.440
+and copy the URL, HTTPS.
+
+01:49.440 --> 01:53.130
+I'm going to put it in my F drive, hkhcoder folder I have,
+
+01:53.130 --> 01:55.080
+and in that, I already have a repository,
+
+01:55.080 --> 01:56.340
+but I'm going to delete this one.
+
+01:56.340 --> 01:59.643
+It's the old one. I will open Visual Studio Code.
+
+02:00.480 --> 02:03.690
+Okay, click on this button over here, Source Control.
+
+02:03.690 --> 02:08.130
+Clone Repository. Paste the repository, hit Enter.
+
+02:08.130 --> 02:09.150
+Select the destination.
+
+02:09.150 --> 02:14.103
+I'm keeping it in my F drive, hkhcoder folder, Open.
+
+02:14.940 --> 02:19.530
+Okay, very important. Switch to the branch awsrefactor.
+
+02:19.530 --> 02:24.000
+So click on this branch over here and select awsrefactor.
+
+02:24.000 --> 02:26.253
+All small, this branch exactly.
+
+02:27.810 --> 02:29.940
+Okay, let's update the application properties file.
+
+02:29.940 --> 02:33.630
+So go to src, main, resources,
+
+02:33.630 --> 02:35.700
+application.properties, right?
+
+02:35.700 --> 02:38.040
+So here instead of db01,
+
+02:38.040 --> 02:40.773
+we'll give the DB endpoint, RDS endpoint.
+
+02:45.900 --> 02:48.000
+Be careful when you're pasting this one.
+
+02:48.000 --> 02:51.617
+It's mysql:// and the endpoint, :3306.
+
+02:53.970 --> 02:57.240
+Username is admin. The password is different.
+
+02:57.240 --> 02:58.533
+That's the password.
+
+03:03.550 --> 03:05.943
+Okay, let's get the Memcached endpoint.
+
+03:07.260 --> 03:08.193
+Yup, that one.
+
+03:11.670 --> 03:15.420
+Okay, make sure this is the Memcached endpoint,
+
+03:15.420 --> 03:17.490
+and that's the RDS endpoint.
+
+03:17.490 --> 03:19.440
+Port 11211, that is same.
+
+03:19.440 --> 03:21.390
+So we don't need to make any change there.
+
+03:21.390 --> 03:25.413
+RabbitMQ. So let me copy the RabbitMQ endpoint.
+
+03:27.870 --> 03:30.900
+All right, so replace rmq01 with the RabbitMQ endpoint,
+
+03:30.900 --> 03:33.770
+and port number is 5671.
+
+03:33.770 --> 03:35.520
+So make sure you change that.
+
+03:35.520 --> 03:36.923
+Username we have given,
+
+03:36.923 --> 03:41.923
+I mean, I have given rabbit, and the password.
+
+03:43.230 --> 03:45.480
+Check it. Once again, be careful.
+
+03:45.480 --> 03:46.860
+If you make mistake over here,
+
+03:46.860 --> 03:48.660
+then our application won't be able
+
+03:48.660 --> 03:50.190
+to connect to backend services.
+
+03:50.190 --> 03:53.700
+In that case, you can make the changes again, fix it,
+
+03:53.700 --> 03:55.200
+and then build the artifact again,
+
+03:55.200 --> 03:57.450
+and again, you have to deploy it.
+
+03:57.450 --> 04:01.293
+Okay, so save this, Control + S, or Control + S like this.
+
+04:03.120 --> 04:04.740
+Okay, now we can build the source code.
+
+04:04.740 --> 04:09.600
+So just hit Control + Shift + P, and type,
+
+04:09.600 --> 04:12.817
+Control + Shift + P, and type default profile.
+
+04:12.817 --> 04:17.370
+Right, so select default profile.
+
+04:17.370 --> 04:20.580
+So Terminal: Select Default Profile, select that.
+
+04:20.580 --> 04:24.030
+And select your default terminal. I'm using Git Bash.
+
+04:24.030 --> 04:25.170
+If you're using MacBook,
+
+04:25.170 --> 04:27.840
+then you will select here, just the Terminal.
+
+04:27.840 --> 04:29.523
+So I'm selecting Git Bash.
+
+04:30.450 --> 04:34.233
+And then View, and I'll say Terminal.
+
+04:36.000 --> 04:38.973
+So it opens the Git Bash terminal over here itself.
+
+04:39.810 --> 04:42.330
+Should be the path of your repository,
+
+04:42.330 --> 04:44.490
+the branch, awsrefactor.
+
+04:44.490 --> 04:47.700
+Run the command mvn -version
+
+04:47.700 --> 04:50.010
+to see what's the Maven version.
+
+04:50.010 --> 04:53.130
+It should be Maven 3.9.9,
+
+04:53.130 --> 04:56.280
+and Java version should be 17 or higher.
+
+04:56.280 --> 04:59.100
+If you see different version, make sure you uninstall it.
+
+04:59.100 --> 05:01.440
+If you're using Windows, you can use Chocolatey command,
+
+05:01.440 --> 05:04.650
+choco uninstall, and then install the right version.
+
+05:04.650 --> 05:07.740
+Check the software installation lecture
+
+05:07.740 --> 05:09.930
+for the right command to install right version
+
+05:09.930 --> 05:11.670
+of Java and Maven.
+
+05:11.670 --> 05:13.530
+For MacBook, you can use Brew.
+
+05:13.530 --> 05:16.470
+Again, check the software installation lecture for this.
+
+05:16.470 --> 05:17.520
+It's in the prerequisite,
+
+05:17.520 --> 05:19.140
+but if you have the right version,
+
+05:19.140 --> 05:21.993
+all you need to do is run mvn install.
+
+05:22.950 --> 05:23.783
+Hit Enter.
+
+05:25.680 --> 05:27.870
+Okay, so the artifact should be created.
+
+05:27.870 --> 05:28.860
+If the build is success,
+
+05:28.860 --> 05:31.470
+you should see a target folder here,
+
+05:31.470 --> 05:35.253
+and you should see the artifact, vprofile-v2.war.
+
+05:36.240 --> 05:37.890
+Now we can upload this artifact
+
+05:37.890 --> 05:39.180
+to our Beanstalk environment.
+
+05:39.180 --> 05:41.160
+So go to Beanstalk,
+
+05:41.160 --> 05:43.110
+make sure you're in your Beanstalk environment.
+
+05:43.110 --> 05:45.000
+You'll get an option here, Upload and deploy.
+
+05:45.000 --> 05:47.853
+Click on that. Say Choose file.
+
+05:48.900 --> 05:53.900
+Go to the location, mine is hkhcoder, vprofile-project,
+
+05:54.480 --> 05:59.480
+and target, vprofile-v2.war, select that.
+
+06:00.120 --> 06:01.950
+And let's give some version over here.
+
+06:01.950 --> 06:06.457
+I will say vprofile-rearch-beanapp-version-1.9,
+
+06:09.180 --> 06:11.070
+just some random number, I'm giving.
+
+06:11.070 --> 06:14.580
+Deployment preference, so we have rolling.
+
+06:14.580 --> 06:16.860
+And batch size is 50%.
+
+06:16.860 --> 06:18.600
+If you want, at the time of deployment,
+
+06:18.600 --> 06:19.657
+also you can change the policy,
+
+06:19.657 --> 06:23.283
+but we'll keep it as it is, and we'll say Deploy.
+
+06:24.660 --> 06:25.680
+Okay, this will take some time.
+
+06:25.680 --> 06:27.510
+It's going to upload the artifact first
+
+06:27.510 --> 06:29.493
+and then start the deployment.
+
+06:30.510 --> 06:34.323
+Okay, it started the deployment. Let's look in the Events.
+
+06:35.250 --> 06:37.680
+Nothing in the Events for now.
+
+06:37.680 --> 06:40.083
+Elastic Beanstalk is updating your environment.
+
+06:41.910 --> 06:44.340
+Soon you should see events appearing over here
+
+06:44.340 --> 06:45.693
+about the deployment.
+
+06:48.030 --> 06:51.630
+Okay, there, application update progress.
+
+06:51.630 --> 06:55.860
+So we have two instances, right? Deployment policy said 50%.
+
+06:55.860 --> 06:58.503
+So one instance will be upgraded at a time.
+
+06:59.580 --> 07:01.860
+Okay, this is gonna take some time.
+
+07:01.860 --> 07:05.430
+I'll pause the lecture and resume it to show you the events.
+
+07:05.430 --> 07:06.720
+Okay, anyways here.
+
+07:06.720 --> 07:09.090
+Batch 1, starting application deployment.
+
+07:09.090 --> 07:11.913
+It's also showing the instance ID.
+
+07:13.290 --> 07:16.050
+Okay, so once the batch 1 is completed,
+
+07:16.050 --> 07:17.850
+you know, how will it know, right?
+
+07:17.850 --> 07:22.113
+So when it deploys to one instance, let me go to,
+
+07:24.150 --> 07:27.240
+so we have two instances, right, two instances.
+
+07:27.240 --> 07:29.910
+So in the target group, right?
+
+07:29.910 --> 07:32.310
+Go to Target Groups, you should see the target group.
+
+07:32.310 --> 07:36.300
+And if you see here, we have two instances, yeah.
+
+07:36.300 --> 07:38.880
+I'll refresh this, both are showing healthy now.
+
+07:38.880 --> 07:41.100
+But as soon as the deployment happens,
+
+07:41.100 --> 07:43.080
+one instance will become unhealthy.
+
+07:43.080 --> 07:44.580
+When the deployment completes,
+
+07:44.580 --> 07:46.290
+the instance will become healthy.
+
+07:46.290 --> 07:47.700
+When the instance become healthy,
+
+07:47.700 --> 07:50.910
+then it will move to the next instance.
+
+07:50.910 --> 07:52.980
+Okay, you see? It says draining.
+
+07:52.980 --> 07:55.350
+All right, if you keep refreshing, you can see that.
+
+07:55.350 --> 07:57.570
+And this should match with the event.
+
+07:57.570 --> 07:59.970
+Okay, it's already started application deployment
+
+07:59.970 --> 08:01.443
+on the second instance.
+
+08:02.550 --> 08:03.383
+Okay, so we'll wait for some time.
+
+08:03.383 --> 08:05.340
+I'm going to pause my lecture
+
+08:05.340 --> 08:07.893
+and resume when the deployment is completed.
+
+08:09.270 --> 08:12.428
+Okay, so the application update completed.
+
+08:12.428 --> 08:14.700
+It says 46 seconds ago.
+
+08:14.700 --> 08:18.210
+Okay, that's nice. So the health should be okay.
+
+08:18.210 --> 08:19.157
+And this should be the URL.
+
+08:19.157 --> 08:24.157
+If you click on this, we should get the login page. Nice.
+
+08:24.780 --> 08:26.970
+But you see here it says not secure.
+
+08:26.970 --> 08:30.360
+We want HTTPS secure connection.
+
+08:30.360 --> 08:34.620
+And as we did in the previous project, we need HTTPS 443
+
+08:34.620 --> 08:37.290
+and we need the ACM certificate.
+
+08:37.290 --> 08:39.570
+So if you have not purchased the domain,
+
+08:39.570 --> 08:42.510
+and if you don't want to get it, you can go ahead
+
+08:42.510 --> 08:47.222
+and perform the test, log into the account, admin_vpn,
+
+08:47.222 --> 08:49.773
+admin_vpn, password, and verify everything.
+
+08:50.880 --> 08:53.520
+If you have the domain and you have the ACM certificate
+
+08:53.520 --> 08:56.460
+that we did previously, then we can add that connection.
+
+08:56.460 --> 09:00.603
+So follow me. So first we need to add the ACM certificate.
+
+09:01.740 --> 09:04.380
+So we'll go to Configuration.
+
+09:04.380 --> 09:05.340
+If we scroll down,
+
+09:05.340 --> 09:08.280
+we should see Instance traffic and scaling options here.
+
+09:08.280 --> 09:11.640
+Let's edit this one, and scroll down.
+
+09:11.640 --> 09:16.233
+We need to find the load balancer listeners, coming down.
+
+09:17.280 --> 09:20.970
+Load balancer settings. Okay, listener there.
+
+09:20.970 --> 09:23.013
+So we can say here, Add listener,
+
+09:25.350 --> 09:28.017
+we'll select the protocol to HTTPS,
+
+09:28.017 --> 09:29.790
+and it should select the port number.
+
+09:29.790 --> 09:33.018
+It's not, okay, let me type 443.
+
+09:33.018 --> 09:34.980
+Okay, in the SSL certificate,
+
+09:34.980 --> 09:38.647
+so I'll be using this one, hkhinfoteck.xyz.
+
+09:39.897 --> 09:44.493
+SSL policy. Yeah, that one, 2021-06.
+
+09:45.630 --> 09:46.803
+And just save it.
+
+09:47.790 --> 09:49.260
+And the saving is not enough.
+
+09:49.260 --> 09:52.830
+We have to apply the changes, click on Apply.
+
+09:52.830 --> 09:54.210
+Okay? And that is gonna take some time.
+
+09:54.210 --> 09:56.970
+It's going to make the changes in the target group.
+
+09:56.970 --> 10:00.510
+Load balancer also, it will add the listeners.
+
+10:00.510 --> 10:02.940
+By the time, we'll go to the GoDaddy account
+
+10:02.940 --> 10:05.580
+and add the entries.
+
+10:05.580 --> 10:07.293
+So copy this URL.
+
+10:10.230 --> 10:11.553
+Go to GoDaddy.
+
+10:12.390 --> 10:14.190
+GoDaddy or whatever domain registrar,
+
+10:14.190 --> 10:15.480
+you have taken your domain from,
+
+10:15.480 --> 10:19.530
+go to the domain and manage DNS.
+
+10:19.530 --> 10:22.170
+See? Add New Record.
+
+10:22.170 --> 10:24.408
+And here the type will be CNAME.
+
+10:24.408 --> 10:27.330
+We'll be mapping a name to a name.
+
+10:27.330 --> 10:32.330
+So name, I'm giving vprorearch. Can give any name you want.
+
+10:32.820 --> 10:34.683
+And the value will be the endpoint,
+
+10:35.640 --> 10:39.090
+all right, our Beanstalk endpoint, that one.
+
+10:39.090 --> 10:40.560
+And say Save.
+
+10:40.560 --> 10:45.560
+So our URL will become vprorearch, dot,
+
+10:45.810 --> 10:47.373
+the domain name, right?
+
+10:48.270 --> 10:49.740
+So we need to wait for some time
+
+10:49.740 --> 10:53.040
+when by the time this URL is published.
+
+10:53.040 --> 10:56.733
+And then we can access it on HTTPS secure protocol.
+
+10:58.710 --> 11:00.360
+Okay, so after waiting for some time,
+
+11:00.360 --> 11:04.890
+https://, the name that I have given,
+
+11:04.890 --> 11:06.540
+and dot, the domain, right?
+
+11:06.540 --> 11:11.540
+So mine is vprorearch.hkhinfoteck.xyz. And hit Enter.
+
+11:14.040 --> 11:16.260
+And there, okay, secure connection.
+
+11:16.260 --> 11:19.470
+If you click on this, you should see connection is secure.
+
+11:19.470 --> 11:22.590
+You can see the certificate is valid.
+
+11:22.590 --> 11:24.603
+The certificate is for this one.
+
+11:25.560 --> 11:28.200
+Okay, now let's log in to check the other things.
+
+11:28.200 --> 11:30.840
+We'll log in with the username admin_vp,
+
+11:30.840 --> 11:34.200
+and the password, admin_vp.
+
+11:34.200 --> 11:35.160
+So if this works,
+
+11:35.160 --> 11:37.560
+the database connectivity will be verified.
+
+11:37.560 --> 11:39.633
+And yes, that is working.
+
+11:40.740 --> 11:42.333
+Okay, we can see the page,
+
+11:45.930 --> 11:47.130
+can check the page.
+
+11:47.130 --> 11:51.540
+And you can also verify the backend services.
+
+11:51.540 --> 11:52.640
+Let's check Memcached.
+
+11:54.003 --> 11:57.810
+And username, you see? Data is inserted in cache.
+
+11:57.810 --> 12:01.920
+Go back. All right, so the application is verified.
+
+12:01.920 --> 12:05.430
+If you have come this far, it's really great job.
+
+12:05.430 --> 12:09.760
+You have understood how to use cloud managed services
+
+12:10.710 --> 12:12.570
+in an application.
+
+12:12.570 --> 12:16.530
+There are many other cloud managed services that you can use
+
+12:16.530 --> 12:18.780
+in the project that you're working.
+
+12:18.780 --> 12:21.990
+This project set would have given you the confidence
+
+12:21.990 --> 12:25.383
+that you need to use this cloud managed services.
+
+12:26.220 --> 12:27.180
+Really amazing job.
+
+12:27.180 --> 12:30.390
+In the next lecture, we'll see how to use CloudFront
+
+12:30.390 --> 12:33.930
+to distribute your traffic around the world,
+
+12:33.930 --> 12:36.660
+so you can have global audience.
+
+12:36.660 --> 12:39.810
+Does not matter where you host your servers,
+
+12:39.810 --> 12:41.400
+in which region,
+
+12:41.400 --> 12:44.010
+if you're global audience, you can use CloudFront service
+
+12:44.010 --> 12:47.433
+to deliver your services around the world.
+
+12:48.630 --> 12:50.430
+That will be all in this lecture.
+
+12:50.430 --> 12:51.980
+I will see you in the next one.

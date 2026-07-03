@@ -1,0 +1,962 @@
+WEBVTT
+
+1
+00:00:01.090 --> 00:00:04.350
+Okay, in this video we will be talking about slicing.
+
+2
+00:00:04.910 --> 00:00:06.450
+Yes, slicing.
+
+3
+00:00:06.770 --> 00:00:09.126
+Getting a slice from your data
+
+4
+00:00:09.308 --> 00:00:11.646
+or subdata from your data.
+
+5
+00:00:11.828 --> 00:00:14.514
+So let's create a script and
+
+6
+00:00:14.552 --> 00:00:16.710
+we'll name it it as slicing.
+
+7
+00:00:19.710 --> 00:00:23.498
+Okay, so we have string, we have list, we have tuple.
+
+8
+00:00:23.654 --> 00:00:25.426
+And if you want to fetch some data
+
+9
+00:00:25.488 --> 00:00:28.690
+from that, that will be called slicing.
+
+10
+00:00:29.310 --> 00:00:32.270
+Okay, first let's talk about string.
+
+11
+00:00:32.390 --> 00:00:35.998
+So I'll take a variable, planet one, and I
+
+12
+00:00:36.024 --> 00:00:47.580
+will say here, closest to Sunday, print it.
+
+13
+00:00:53.770 --> 00:00:55.850
+Now, that gives me the entire string.
+
+14
+00:00:57.670 --> 00:00:58.034
+Okay?
+
+15
+00:00:58.072 --> 00:01:00.590
+So let's say if I want to get a particular
+
+16
+00:01:00.700 --> 00:01:03.760
+character from this entire string, like I want to get
+
+17
+00:01:04.090 --> 00:01:07.730
+F from the off or T from the closest.
+
+18
+00:01:09.070 --> 00:01:10.986
+I can do that because string
+
+19
+00:01:11.058 --> 00:01:13.158
+is an element that is indexed.
+
+20
+00:01:13.254 --> 00:01:16.262
+So you have indexed number at zero th position,
+
+21
+00:01:16.336 --> 00:01:19.780
+you have C at first position, you have L.
+
+22
+00:01:21.130 --> 00:01:25.062
+Second position, you have O and so on and so forth.
+
+23
+00:01:25.206 --> 00:01:27.282
+So if I want to access that, I'm
+
+24
+00:01:27.306 --> 00:01:31.910
+going to say print from the print.
+
+25
+00:01:32.410 --> 00:01:35.006
+So after giving the variable, I'm going to do square
+
+26
+00:01:35.068 --> 00:01:37.598
+bracket and I'm going to give the index number.
+
+27
+00:01:37.744 --> 00:01:41.980
+So I see zero and let's print and see what we get.
+
+28
+00:01:42.970 --> 00:01:51.260
+You see we got C, okay, like this, 
+we can say 1, 2..
+
+29
+00:01:56.030 --> 00:01:57.320
+Let's run it.
+
+30
+00:02:01.410 --> 00:02:03.298
+So O is at the second position,
+
+31
+00:02:03.444 --> 00:02:05.160
+l is at the first position.
+
+32
+00:02:05.670 --> 00:02:07.330
+It starts with zero.
+
+33
+00:02:07.380 --> 00:02:10.834
+So when I say first, that means really the second. 
+
+34
+00:02:10.872 --> 00:02:13.030
+There is also a negative indexing.
+
+35
+00:02:14.310 --> 00:02:16.586
+Like negative as in it's not pessimistic.
+
+36
+00:02:16.658 --> 00:02:18.802
+There is like minus one, minus two.
+
+37
+00:02:18.996 --> 00:02:20.890
+Python is very, very positive.
+
+38
+00:02:21.750 --> 00:02:25.634
+Okay, so I will print planet one, square bracket.
+
+39
+00:02:25.682 --> 00:02:27.120
+I see minus one.
+
+40
+00:02:28.410 --> 00:02:32.434
+And lets run it, you see N at
+
+41
+00:02:32.472 --> 00:02:34.270
+minus one, you have that N.
+
+42
+00:02:34.380 --> 00:02:36.900
+So minus one, minus two, minus three. Like that.
+
+43
+00:02:44.890 --> 00:02:49.022
+Let's run this in the reverse order.
+
+44
+00:02:49.096 --> 00:02:53.690
+NUS, that's the opposite of sun. Okay?
+
+45
+00:02:53.740 --> 00:02:57.630
+Now if we have that power, then we can get a slice.
+
+46
+00:02:57.690 --> 00:02:59.320
+We can give a range also.
+
+47
+00:02:59.770 --> 00:03:05.758
+And this is called as slicing a string.
+
+48
+00:03:05.854 --> 00:03:07.830
+So let's slice this string.
+
+49
+00:03:08.270 --> 00:03:10.522
+That really means to get a substring
+
+50
+00:03:10.546 --> 00:03:23.330
+from a string planet square bracket.
+
+51
+00:03:23.390 --> 00:03:26.390
+And I can give a range colon.
+
+52
+00:03:26.570 --> 00:03:28.450
+So before colon you give the start
+
+53
+00:03:28.500 --> 00:03:31.174
+range, and after gold colon, you give
+
+54
+00:03:31.212 --> 00:03:33.574
+obviously the end range, the index number.
+
+55
+00:03:33.732 --> 00:03:37.018
+So let's say we want to get this
+
+56
+00:03:37.104 --> 00:03:41.102
+Los loss, not the last loss, just Los.
+
+57
+00:03:41.126 --> 00:03:45.142
+So L is at the first index and
+
+58
+00:03:45.216 --> 00:03:47.798
+S is one, two, three, third index.
+
+59
+00:03:47.834 --> 00:03:49.702
+But I cannot give third at the
+
+60
+00:03:49.896 --> 00:03:51.802
+end range, we have to give four.
+
+61
+00:03:51.996 --> 00:03:55.140
+So one, colon, four.
+
+62
+00:04:00.070 --> 00:04:01.300
+Let's print that.
+
+63
+00:04:02.110 --> 00:04:05.238
+See, we got loss, like just the string loss.
+
+64
+00:04:05.274 --> 00:04:09.280
+We are not in loss, you are in profit. Yes.
+
+65
+00:04:10.990 --> 00:04:16.221
+Okay, there are default ranges.
+
+66
+00:04:16.305 --> 00:04:19.398
+So if I just say colon, if I don't give the
+
+67
+00:04:19.423 --> 00:04:22.326
+first range and the last range, that means I have given
+
+68
+00:04:22.388 --> 00:04:25.700
+zero and the minus one or the last one.
+
+69
+00:04:26.330 --> 00:04:27.260
+See that?
+
+70
+00:04:28.010 --> 00:04:31.050
+So if I want to just print the closest.
+
+71
+00:04:34.350 --> 00:04:36.046
+So I'm not going to give zero
+
+72
+00:04:36.108 --> 00:04:42.970
+over here because that starts at 001-23-4567.
+
+73
+00:04:43.080 --> 00:04:46.260
+My God, I'm really counting like my kid.
+
+74
+00:04:48.150 --> 00:04:49.546
+Yeah, seven.
+
+75
+00:04:49.668 --> 00:04:52.906
+So at 7th position you have a space. Okay.
+
+76
+00:04:53.088 --> 00:04:54.862
+But the end range really means
+
+77
+00:04:54.936 --> 00:04:57.502
+till that and not exactly that.
+
+78
+00:04:57.696 --> 00:04:59.498
+So when I say seven at the end range,
+
+79
+00:04:59.534 --> 00:05:03.540
+that means till six or six, till seven.
+
+80
+00:05:04.650 --> 00:05:05.386
+Same way.
+
+81
+00:05:05.448 --> 00:05:07.800
+Also the other side.
+
+82
+00:05:08.430 --> 00:05:11.218
+If I want to print sun okay, again
+
+83
+00:05:11.244 --> 00:05:16.020
+I'm going to count 123-45, 67, 89, 10.
+
+84
+00:05:18.430 --> 00:05:21.470
+If I'm good at counting, then that should be right.
+
+85
+00:05:21.640 --> 00:05:24.760
+So it starts at twelve and ends at the end.
+
+86
+00:05:26.530 --> 00:05:27.654
+No, I'm bad at counting.
+
+87
+00:05:27.702 --> 00:05:29.210
+Yes, that should be eleven.
+
+88
+00:05:32.030 --> 00:05:33.870
+Yeah, that's good sun.
+
+89
+00:05:34.040 --> 00:05:36.702
+Alright, so that gives us this one. Closest s.
+
+90
+00:05:36.776 --> 00:05:37.530
+Closest sun.
+
+91
+00:05:37.580 --> 00:05:38.610
+What is the closest sun?
+
+92
+00:05:38.660 --> 00:05:40.160
+Sun is the closest sun.
+
+93
+00:05:40.730 --> 00:05:44.000
+So it can get really interesting.
+
+94
+00:05:44.750 --> 00:05:46.654
+Okay, that was slicing a string.
+
+95
+00:05:46.702 --> 00:05:49.542
+We can really slice list and tuple also.
+
+96
+00:05:49.736 --> 00:05:51.440
+And that gets more interesting.
+
+97
+00:05:52.370 --> 00:05:54.118
+So let's get a tuple.
+
+98
+00:05:54.274 --> 00:05:58.086
+So I will create a tuple named DevOps and I will really
+
+99
+00:05:58.148 --> 00:06:02.538
+give the tools in the same order that we are learning.
+
+100
+00:06:02.624 --> 00:06:06.798
+So Linux not a tool and operating system,
+
+101
+00:06:06.884 --> 00:06:13.890
+but you get me and vagrant and AWS.
+
+102
+00:06:16.190 --> 00:06:17.550
+We had bash scripting before
+
+103
+00:06:17.600 --> 00:06:28.802
+this So bash scripting and Jenkins.
+
+104
+00:06:28.946 --> 00:06:31.330
+And now we are doing Python.
+
+105
+00:06:32.490 --> 00:06:35.950
+And the next will be definitely Ansible
+
+106
+00:06:37.050 --> 00:06:38.774
+and then Docker and then Kubernetes.
+
+107
+00:06:38.822 --> 00:06:40.310
+And along with that some projects.
+
+108
+00:06:40.370 --> 00:06:41.938
+Okay, that's not the point.
+
+109
+00:06:42.084 --> 00:06:45.542
+We just have a couple of strings.
+
+110
+00:06:45.686 --> 00:06:47.462
+And I want to know do slicing.
+
+111
+00:06:47.546 --> 00:06:49.310
+Now, this is also index.
+
+112
+00:06:49.370 --> 00:06:52.534
+At zero position you have Linux, then first
+
+113
+00:06:52.572 --> 00:06:55.814
+position you have Vagrant, then Bash, then AWS
+
+114
+00:06:55.862 --> 00:06:57.730
+and so on and so forth.
+
+115
+00:06:58.230 --> 00:07:02.770
+So let's say print DevOps.
+
+116
+00:07:04.110 --> 00:07:10.010
+I'll give a comment slicing tuple.
+
+117
+00:07:10.130 --> 00:07:12.970
+Now tuple or list, it will be same way of slicing.
+
+118
+00:07:13.950 --> 00:07:15.540
+So I'll say zeroth position.
+
+119
+00:07:17.130 --> 00:07:18.480
+Let's print this.
+
+120
+00:07:19.530 --> 00:07:22.860
+You see, we get Linux right like this.
+
+121
+00:07:25.270 --> 00:07:26.486
+Do something in the middle.
+
+122
+00:07:26.548 --> 00:07:28.622
+Fourth position. What was it?
+
+123
+00:07:28.636 --> 00:07:31.070
+The fourth position, jenkins.
+
+124
+00:07:31.930 --> 00:07:34.626
+Okay, also minus.
+
+125
+00:07:34.698 --> 00:07:41.910
+So minus one, Ansible.
+
+126
+00:07:42.230 --> 00:07:44.538
+We sure have Docker and Kubernetes after that,
+
+127
+00:07:44.624 --> 00:07:46.014
+but I'm not putting it over here.
+
+128
+00:07:46.052 --> 00:07:50.094
+Now with that I can also get a range, right?
+
+129
+00:07:50.252 --> 00:07:56.966
+So I can see print DevOps, square bracket
+
+130
+00:07:57.038 --> 00:08:01.860
+and I will see from second to fourth.
+
+131
+00:08:09.190 --> 00:08:10.418
+Now that is interesting.
+
+132
+00:08:10.504 --> 00:08:15.110
+You see, when I get a range, it returns a tuple.
+
+133
+00:08:17.050 --> 00:08:18.338
+Even if you do that on a
+
+134
+00:08:18.364 --> 00:08:20.630
+list, that will also return a tuple.
+
+135
+00:08:21.490 --> 00:08:25.250
+Okay, now we get that and we can slice it more further.
+
+136
+00:08:25.750 --> 00:08:28.122
+Yes, so I get a tuple.
+
+137
+00:08:28.146 --> 00:08:30.170
+I can slice a tuple more further.
+
+138
+00:08:30.550 --> 00:08:39.042
+Let's get more in depth, I'll say devops[2:5]
+
+139
+00:08:39.236 --> 00:08:40.914
+And we know what we get.
+
+140
+00:08:43.905 --> 00:08:45.862
+I can slice it much more further.
+
+141
+00:08:46.006 --> 00:08:48.702
+I'm going to say give me what is it?
+
+142
+00:08:48.716 --> 00:08:53.818
+The 0th position after that, which is Bash scripting.
+
+143
+00:08:53.854 --> 00:08:55.950
+Now that is a string.
+
+144
+00:08:56.390 --> 00:08:58.590
+Okay, if you have doubt, we can run type func
+
+145
+00:08:58.640 --> 00:09:02.542
+on that. Can I slice string much more further?
+
+146
+00:09:02.686 --> 00:09:05.242
+Yes, I can slice a string so let's
+
+147
+00:09:05.266 --> 00:09:10.590
+slice let's get scripting from that. Print
+
+148
+00:09:12.050 --> 00:09:13.880
+Okay, I'll copy the same thing.
+
+149
+00:09:21.630 --> 00:09:23.006
+OK, now if you're wondering why I'm
+
+150
+00:09:23.018 --> 00:09:25.850
+doing this, actually I'm training your brain.
+
+151
+00:09:26.030 --> 00:09:28.582
+When you see Jason or YAML later you should be
+
+152
+00:09:28.596 --> 00:09:31.282
+able to get data from that somewhere in the middle.
+
+153
+00:09:31.416 --> 00:09:33.538
+Okay, there could be a dictionary inside that, there
+
+154
+00:09:33.564 --> 00:09:35.158
+could be a list inside that, there could be
+
+155
+00:09:35.184 --> 00:09:37.594
+tuple inside that, there could be string and you
+
+156
+00:09:37.632 --> 00:09:40.454
+should have been slicing string much more further.
+
+157
+00:09:40.502 --> 00:09:43.980
+So you need to go 3456 levels down like that
+
+158
+00:09:44.430 --> 00:09:46.990
+and that you can do when you know slicing.
+
+159
+00:09:47.430 --> 00:09:50.638
+So I said I want to get scripting not
+
+160
+00:09:50.664 --> 00:09:52.930
+scripting just I want to get script from that.
+
+161
+00:09:52.980 --> 00:10:09.870
+Okay, so yeah, counting again 01234 five so eleven
+
+162
+00:10:09.990 --> 00:10:11.858
+I hope this time I got it right.
+
+163
+00:10:12.004 --> 00:10:18.434
+Let's run it and yeah, script well, that is again
+
+164
+00:10:18.472 --> 00:10:21.650
+a string and you can slice it much more further.
+
+165
+00:10:21.970 --> 00:10:23.140
+How about that?
+
+166
+00:10:23.710 --> 00:10:27.090
+Just one last time. I'll say just minus
+
+167
+00:10:27.150 --> 00:10:30.902
+one, I will get t from that.
+
+168
+00:10:31.096 --> 00:10:33.774
+Yes and yes, you can slice it much more further.
+
+169
+00:10:33.822 --> 00:10:36.700
+You can't do it, you can't make it half.
+
+170
+00:10:37.510 --> 00:10:40.406
+Okay, seeing you can do it for the list as well.
+
+171
+00:10:40.588 --> 00:10:47.714
+So let's copy this whole thing, paste it
+
+172
+00:10:47.752 --> 00:10:49.554
+and the only thing that I'll be changing
+
+173
+00:10:49.602 --> 00:11:04.298
+here is the square braces list and I'll
+
+174
+00:11:04.334 --> 00:11:06.926
+comment everything else so you don't get confused.
+
+175
+00:11:06.998 --> 00:11:11.434
+I'll put a three comment and I will
+
+176
+00:11:11.472 --> 00:11:19.430
+put it so all this is commented.
+
+177
+00:11:19.930 --> 00:11:22.240
+All right, so only list will be printed now.
+
+178
+00:11:23.950 --> 00:11:25.600
+Yeah, you see, same thing.
+
+179
+00:11:26.470 --> 00:11:28.898
+My mistake, I said you're going to get
+
+180
+00:11:28.924 --> 00:11:30.686
+a tuple but we are getting a list
+
+181
+00:11:30.808 --> 00:11:32.800
+from a list if you're slicing the list.
+
+182
+00:11:35.450 --> 00:11:38.874
+Okay, one last thing dictionary but it's really
+
+183
+00:11:38.912 --> 00:11:41.430
+not slicing because we have key and value
+
+184
+00:11:41.480 --> 00:11:43.554
+pair so we can get the key.
+
+185
+00:11:43.712 --> 00:11:46.254
+Instead of getting an index number here in list
+
+186
+00:11:46.292 --> 00:11:49.578
+and tuples and string we use index number in
+
+187
+00:11:49.604 --> 00:11:52.710
+dictionary we have the key so we ask what
+
+188
+00:11:52.760 --> 00:11:55.110
+is the value of this key and it returns.
+
+189
+00:11:55.550 --> 00:11:56.960
+So let's set that.
+
+190
+00:12:00.350 --> 00:12:01.520
+I'll just say example.
+
+191
+00:12:03.050 --> 00:12:06.886
+Okay, so I will create a variable named skills
+
+192
+00:12:06.958 --> 00:12:11.118
+and its value will be a dictionary and I
+
+193
+00:12:11.144 --> 00:12:16.160
+will say well DevOps is key and it's value.
+
+194
+00:12:16.610 --> 00:12:18.462
+Let's pick a few things from there and
+
+195
+00:12:18.476 --> 00:12:20.938
+it's value will say it's a tuple.
+
+196
+00:12:21.094 --> 00:12:26.840
+Okay, let's pick up strings from here, start from here.
+
+197
+00:12:31.650 --> 00:12:33.130
+Oh, I did at the wrong place.
+
+198
+00:12:33.180 --> 00:12:37.080
+Wait a second, let me take that.
+
+199
+00:12:42.790 --> 00:12:46.670
+Okay, so the key is DevOps and its value is a tuple.
+
+200
+00:12:47.230 --> 00:12:50.286
+So just one key and value pair, one pair
+
+201
+00:12:50.418 --> 00:12:54.100
+give one more we will give a string called as
+
+202
+00:12:54.970 --> 00:13:00.880
+development and it's value let's give a list.
+
+203
+00:13:02.050 --> 00:13:08.150
+So I will say java NodeJS.
+
+204
+00:13:17.990 --> 00:13:20.754
+Okay, so in this whole dictionary I just have two
+
+205
+00:13:20.792 --> 00:13:27.318
+pairs, both keys are string and first keys value is
+
+206
+00:13:27.344 --> 00:13:30.920
+a tuple and the second key value is a list.
+
+207
+00:13:33.810 --> 00:13:37.526
+Now let's get and fetch the data from that print.
+
+208
+00:13:37.598 --> 00:13:41.280
+Let's first just print dictionary just like that.
+
+209
+00:13:42.330 --> 00:13:43.450
+Case sensitive.
+
+210
+00:13:46.930 --> 00:13:49.300
+Okay, I'll come into all these other things.
+
+211
+00:13:54.530 --> 00:13:57.680
+Yeah, this is better.
+
+212
+00:13:58.370 --> 00:14:01.242
+Let's give D capital here and there.
+
+213
+00:14:01.376 --> 00:14:02.430
+O, capital.
+
+214
+00:14:06.390 --> 00:14:12.266
+Okay, now I'm going to ask to this dictionary
+
+215
+00:14:12.338 --> 00:14:16.018
+to give me a key square bracket and you
+
+216
+00:14:16.044 --> 00:14:21.814
+give the key name, the key named DevOps, right?
+
+217
+00:14:21.852 --> 00:14:23.338
+And it should return its value which
+
+218
+00:14:23.364 --> 00:14:27.940
+is this tuple. There you go.
+
+219
+00:14:29.470 --> 00:14:32.630
+Also let's do it for the development.
+
+220
+00:14:38.330 --> 00:14:39.294
+Development key.
+
+221
+00:14:39.332 --> 00:14:42.860
+And its value is a list. There.
+
+222
+00:14:43.190 --> 00:14:45.142
+Now you know what you can do much more further?
+
+223
+00:14:45.226 --> 00:14:47.682
+That's a tuple and that's a list
+
+224
+00:14:47.756 --> 00:14:50.310
+and you can slice it much further.
+
+225
+00:14:51.230 --> 00:14:59.240
+So let's say from this DevOps, I want the minus one.
+
+226
+00:15:03.270 --> 00:15:04.066
+Okay?
+
+227
+00:15:04.248 --> 00:15:07.258
+So I asked for this and from that the
+
+228
+00:15:07.284 --> 00:15:12.478
+minus one index you have ansible, right? Oh, sure.
+
+229
+00:15:12.504 --> 00:15:13.690
+You can give the range.
+
+230
+00:15:17.830 --> 00:15:18.374
+Okay.
+
+231
+00:15:18.472 --> 00:15:19.574
+Colon four.
+
+232
+00:15:19.672 --> 00:15:21.738
+So from that ansible I'm going to slice
+
+233
+00:15:21.774 --> 00:15:24.170
+it much more further than I get and
+
+234
+00:15:24.220 --> 00:15:27.880
+see, no, wait, I wanted just answer three.
+
+235
+00:15:30.590 --> 00:15:32.358
+Yes. Alright.
+
+236
+00:15:32.384 --> 00:15:34.086
+So challenge yourself like this.
+
+237
+00:15:34.208 --> 00:15:35.358
+This will be very important
+
+238
+00:15:35.444 --> 00:15:37.770
+for JSON and YAML understanding.
+
+239
+00:15:38.330 --> 00:15:40.078
+And that is all in slicing.
+
+240
+00:15:40.114 --> 00:15:41.160
+I'll see you in the next one.

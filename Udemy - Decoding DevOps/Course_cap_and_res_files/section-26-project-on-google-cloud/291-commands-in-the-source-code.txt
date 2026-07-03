@@ -1,0 +1,301 @@
+WEBVTT
+
+00:00.720 --> 00:01.160
+All right.
+
+00:01.160 --> 00:06.080
+So let's open the VS code or any of your favorite editor that you want to use.
+
+00:06.720 --> 00:08.080
+Go to Source Control.
+
+00:08.280 --> 00:10.400
+Click on Clone Repository.
+
+00:11.040 --> 00:20.400
+Go to our V profile project repository github.com slash v profile hyphen project and copy the https
+
+00:20.440 --> 00:23.120
+link clone repository.
+
+00:23.400 --> 00:26.600
+Enter the URL and clone from GitHub.
+
+00:27.120 --> 00:28.080
+I'll just hit enter.
+
+00:28.520 --> 00:30.800
+Select the folder where you want to save this.
+
+00:31.160 --> 00:35.440
+I have created a folder in F drive called as GCP underscore v profile.
+
+00:35.440 --> 00:38.160
+I'm going to select as repository destination.
+
+00:38.760 --> 00:41.080
+So by default you will be in the local branch.
+
+00:41.080 --> 00:47.520
+So click on this branch over here and search the branch says GCP and click on that.
+
+00:48.000 --> 00:49.680
+Now here you will see some script.
+
+00:49.720 --> 00:51.800
+Don't worry we're not going to execute directly the script.
+
+00:51.800 --> 00:54.000
+We're going to execute one command at a time.
+
+00:54.000 --> 00:56.040
+And we understand it and then we run it.
+
+00:56.280 --> 01:00.320
+But I have divided this entire project into four parts.
+
+01:00.840 --> 01:08.120
+The first one will be the VPC, then will be the backend, then front end, first part and then front
+
+01:08.120 --> 01:09.040
+end second part.
+
+01:09.100 --> 01:10.260
+I'm going to go through it.
+
+01:10.460 --> 01:12.620
+So first let's go to VPC.
+
+01:13.300 --> 01:15.500
+Here are some variables that are mentioned.
+
+01:15.900 --> 01:22.900
+And before you run all these commands over here one by one you need to set all these variables values
+
+01:22.900 --> 01:23.420
+first.
+
+01:23.700 --> 01:32.380
+So these variables you need to edit project ID that will be your GCP project ID region like I'm using
+
+01:32.420 --> 01:34.020
+US central one.
+
+01:34.020 --> 01:38.180
+Over here you can use the same one app name I'm keeping it as V profile.
+
+01:38.180 --> 01:44.020
+You can keep the same domain if you have purchased a domain or if you have a domain, you can set this
+
+01:44.020 --> 01:44.380
+value.
+
+01:44.380 --> 01:49.780
+Or if you do not have just fake some domain name if you have purchased a domain and if you want to see
+
+01:49.780 --> 01:55.060
+the Https connection the production style, then use your domain name over here, I'm going to show
+
+01:55.060 --> 01:57.980
+you what I'm going to set a sub domain.
+
+01:58.020 --> 01:59.820
+Now I recommend you keep the same one.
+
+01:59.820 --> 02:02.900
+This will be for your final public URL.
+
+02:02.900 --> 02:08.220
+So for me it will be like this V profile v Pro gcp.info dot x y z.
+
+02:08.260 --> 02:10.900
+This will be the URL of the website.
+
+02:11.700 --> 02:12.620
+My IP.
+
+02:12.780 --> 02:15.460
+Now here I have set all the IPv4.
+
+02:15.500 --> 02:19.680
+This will be for the firewall rule, like in AWS security Group we mentioned there.
+
+02:19.680 --> 02:19.880
+Right.
+
+02:19.920 --> 02:21.200
+SSH from my IP.
+
+02:21.440 --> 02:23.440
+Here we are going to do the same thing.
+
+02:23.800 --> 02:26.120
+So initially I recommend you keep the same.
+
+02:26.160 --> 02:30.720
+Later we are going to edit the firewall rule and make sure your our own public IP.
+
+02:30.760 --> 02:32.960
+We mentioned their SSH key.
+
+02:33.000 --> 02:36.600
+Here we need to mention the public IP key content.
+
+02:36.880 --> 02:41.640
+Now in AWS when we launch an instance we attach a key pair right.
+
+02:41.680 --> 02:42.600
+We create a key pair.
+
+02:42.640 --> 02:44.440
+We attach it when the instance launch.
+
+02:44.840 --> 02:46.440
+But in GCP that's not the case.
+
+02:46.440 --> 02:49.040
+There is no such option of creating key pairs.
+
+02:50.440 --> 02:56.400
+If you want to do SSH to your instance in GCP, you need to make sure before you launch or while you're
+
+02:56.400 --> 03:00.560
+launching it, you put your key your public key in that.
+
+03:00.960 --> 03:05.520
+So what we are going to do we're going to generate a key pair while we launch the instance.
+
+03:05.520 --> 03:11.920
+We're going to inject a public key in the instance and the private key we're going to use to SSH to
+
+03:11.960 --> 03:13.080
+our instance.
+
+03:13.840 --> 03:14.080
+Okay.
+
+03:14.120 --> 03:15.080
+Database password.
+
+03:15.120 --> 03:16.680
+Now I recommend you keep the same.
+
+03:16.720 --> 03:20.840
+Otherwise we need to edit the application properties file also.
+
+03:21.240 --> 03:26.190
+So if you keep the same you don't need to make any changes in application properties file, but if you
+
+03:26.190 --> 03:31.750
+wish to change it, make sure you remember to change it in the application properties file.
+
+03:32.230 --> 03:37.990
+Okay, now I know this will be too much initially, but all you need to do is you need to find the variable
+
+03:37.990 --> 03:40.830
+value and set it in this lecture.
+
+03:40.830 --> 03:45.070
+Once we execute everything, you will understand the entire flow and everything.
+
+03:45.550 --> 03:48.190
+Okay, so the other variables just go through them.
+
+03:48.230 --> 03:52.950
+The public subnet names, the bastion host and all the other names.
+
+03:52.950 --> 03:54.750
+You don't need to memorize these things.
+
+03:55.670 --> 04:02.150
+The only reason I am using variable is because you and me, we both can execute same commands.
+
+04:02.670 --> 04:08.390
+Otherwise, there is a huge chance of making mistakes while you execute the commands.
+
+04:09.110 --> 04:14.190
+But if we set the variable, then you and me, we both can enter the same command and how we are going
+
+04:14.190 --> 04:15.270
+to set these variables and all.
+
+04:15.270 --> 04:16.630
+I'm going to show you that.
+
+04:16.830 --> 04:22.750
+So what are you going to do now is first go through all the variables and then go through all the commands
+
+04:22.750 --> 04:23.630
+one by one.
+
+04:24.030 --> 04:26.870
+Now you don't need to learn or by heart anything over here.
+
+04:26.870 --> 04:30.510
+Just go through and understand the flow of the execution.
+
+04:30.950 --> 04:33.970
+We are going to execute this gcloud commands.
+
+04:33.970 --> 04:36.010
+So focus on this gcloud command.
+
+04:36.050 --> 04:37.290
+Go through them one by one.
+
+04:37.330 --> 04:39.650
+See how much you can understand.
+
+04:39.650 --> 04:43.810
+You don't need to decode the entire command, just understand the flow.
+
+04:44.570 --> 04:48.810
+Like over here we set the project, then we enable some APIs.
+
+04:49.170 --> 04:50.890
+Then we create a VPC.
+
+04:51.330 --> 04:52.690
+Then we create a subnet.
+
+04:52.690 --> 04:56.770
+So like that go through the flow look at the variable names.
+
+04:56.970 --> 04:59.530
+See the values that we have set over here.
+
+04:59.530 --> 05:00.410
+Compare them.
+
+05:00.610 --> 05:02.370
+Take your time like that.
+
+05:02.370 --> 05:09.570
+Go through every script first VPC then back end, then front end once then front end two dot.
+
+05:10.570 --> 05:13.850
+From the next lecture onwards we are going to execute these commands.
+
+05:13.850 --> 05:19.810
+We're going to type the commands, understand them, look at its output from Google Cloud Console.
+
+05:20.370 --> 05:25.090
+Like when we create the VPC, we're going to go through the browser Google Cloud Console and see the
+
+05:25.090 --> 05:26.410
+VPC that it creates.
+
+05:27.170 --> 05:30.330
+So basically we understand the command we execute it.
+
+05:30.330 --> 05:31.970
+Then we look at its output like that.
+
+05:31.970 --> 05:35.850
+We're going to go through each and every command to understand the entire flow.
+
+05:36.570 --> 05:37.450
+So I'm going to stop.
+
+05:37.450 --> 05:42.370
+Now you can go ahead and go through this these scripts I'll see you in the next one.

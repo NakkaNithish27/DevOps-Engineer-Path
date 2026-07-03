@@ -1,0 +1,485 @@
+WEBVTT
+
+0
+00:00.450 --> 00:01.530
+Hello and welcome.
+
+1
+00:03.140 --> 00:06.680
+In this lecture, we will talk about what is virtualization.
+
+2
+00:07.640 --> 00:13.010
+And this will help you understand what is cloud computing and also what are containers?
+
+3
+00:13.460 --> 00:14.720
+What is Docker?
+
+4
+00:15.320 --> 00:16.040
+So let's see.
+
+5
+00:18.440 --> 00:21.890
+One computer does the job of multiple computers.
+
+6
+00:22.930 --> 00:25.420
+No, I'm not talking about multitasking.
+
+7
+00:26.870 --> 00:29.030
+I am talking about multi os.
+
+8
+00:30.190 --> 00:33.680
+One computer can run multiple OS at the same time.
+
+9
+00:33.700 --> 00:34.420
+parallelly.
+
+10
+00:37.520 --> 00:39.470
+Now before virtualization came.
+
+11
+00:41.240 --> 00:44.680
+That was not the case before virtualization.
+
+12
+00:44.690 --> 00:53.720
+Also, we had software, services, apps running and to run an app or a service like Tomcat or apache http
+
+13
+00:53.720 --> 01:00.110
+apache httpd or mysql databases to run such services, we need servers.
+
+14
+01:00.410 --> 01:03.440
+In that time, the only option was physical computers.
+
+15
+01:04.990 --> 01:08.820
+Like the one you would be using right now to watch this video.
+
+16
+01:10.240 --> 01:13.990
+We have much more bigger computers in data centers.
+
+17
+01:15.060 --> 01:18.630
+And always the idea is one service, one server.
+
+18
+01:19.230 --> 01:21.830
+Or should I say one main service = one server
+
+19
+01:23.410 --> 01:25.150
+And this is for isolation.
+
+20
+01:25.180 --> 01:32.170
+So if your database server is running, you don't want to run a web server in the same machine or a
+
+21
+01:32.170 --> 01:34.090
+web service in the same computer.
+
+22
+01:35.360 --> 01:38.600
+If you run multiple main service in one server.
+
+23
+01:39.990 --> 01:42.750
+It's like "Putting all our eggs in one basket."
+
+24
+01:44.430 --> 01:46.590
+Which can lead to catastrophe.
+
+25
+01:48.090 --> 01:49.800
+So this is called as isolation.
+
+26
+01:50.760 --> 01:53.580
+And servers are always over provisioned.
+
+27
+01:55.460 --> 02:01.190
+That means if we need 8 GB of RAM, we will go for 12 gb of RAM.
+
+28
+02:01.910 --> 02:04.820
+IT team will always over-provision servers.
+
+29
+02:06.450 --> 02:09.270
+But server resources are mostly underutilized.
+
+30
+02:11.000 --> 02:14.600
+You will say if it's under-utilized, then why is it over-provisioned?
+
+31
+02:16.220 --> 02:19.550
+Well, the team will always go for extra just in case.
+
+32
+02:20.330 --> 02:22.810
+So they don't run out of resources.
+
+33
+02:24.500 --> 02:29.060
+But all this results in huge capital expenditure and operational expenditure.
+
+34
+02:29.690 --> 02:31.910
+I'm talking about physical servers over here.
+
+35
+02:31.910 --> 02:38.000
+We have to procure it, stack it, rack it, install operating system and maintain it.
+
+36
+02:39.810 --> 02:46.230
+So if you have a ten services in a project, you need ten servers minimum and for high availability
+
+37
+02:46.230 --> 02:47.610
+minimum, you need 20.
+
+38
+02:48.390 --> 02:50.340
+And definitely more than that.
+
+39
+02:51.480 --> 02:52.830
+So it was kind of a big deal.
+
+40
+02:53.930 --> 02:55.430
+To run an I.T. project.
+
+41
+02:56.480 --> 02:58.070
+Then came VMware.
+
+42
+02:58.070 --> 03:01.520
+With the concept of virtualization.
+
+43
+03:02.030 --> 03:09.260
+VMware brought in tools or created tools which could allow one computer to run multiple operating systems.
+
+44
+03:09.260 --> 03:11.020
+And that's how we can isolate, right?
+
+45
+03:12.060 --> 03:17.610
+So instead of running multiple main Services in one computer, we can run multiple operating system
+
+46
+03:17.610 --> 03:20.940
+in the computer and run all services on top of that.
+
+47
+03:21.420 --> 03:22.560
+So they will be isolated.
+
+48
+03:23.040 --> 03:27.600
+And if you're thinking again, isn't it the problem of one basket
+
+49
+03:27.600 --> 03:30.330
+having multiple eggs or multiple eggs in one basket?
+
+50
+03:31.230 --> 03:37.380
+So let me tell you here, these physical computers can be clustered together so you can distribute your
+
+51
+03:37.410 --> 03:38.430
+virtual machines.
+
+52
+03:39.120 --> 03:39.870
+That later.
+
+53
+03:40.650 --> 03:43.740
+But I just want to tell you that this thing is already taken care.
+
+54
+03:45.170 --> 03:50.750
+So virtualization partitions your physical resource into virtual resource.
+
+55
+03:52.050 --> 03:55.470
+So to set up and run an operating system, you need a physical computer.
+
+56
+03:55.500 --> 04:00.930
+But with virtualization, you can create a virtual computer in the physical machine and you can create
+
+57
+04:00.930 --> 04:03.960
+multiple virtual computers in a physical machine.
+
+58
+04:04.830 --> 04:08.670
+Think of think of them as baby computers living in the physical machine.
+
+59
+04:10.280 --> 04:14.390
+And these virtual machines are isolated from each other because they have their own operating systems.
+
+60
+04:15.830 --> 04:20.720
+And I'm talking about server virtualization, virtual machines.
+
+61
+04:21.650 --> 04:24.020
+But there's other kind of virtualization as well.
+
+62
+04:24.020 --> 04:27.080
+You have network virtualization, storage virtualization.
+
+63
+04:29.950 --> 04:31.060
+So that is how it may look.
+
+64
+04:31.090 --> 04:33.580
+You have the hardware, the computer, physical computer.
+
+65
+04:33.580 --> 04:40.150
+On top of that, you will have a tool called a hypervisor, the software, and on that you can create
+
+66
+04:40.150 --> 04:44.230
+virtual machines, each virtual machine having its own operating system.
+
+67
+04:44.530 --> 04:49.090
+And you can run your main service, your application in this OS.
+
+68
+04:50.080 --> 04:52.030
+So they are isolated from each other.
+
+69
+04:54.300 --> 04:54.570
+Okay.
+
+70
+04:54.570 --> 04:56.420
+Let's discuss about some terminologies.
+
+71
+04:57.670 --> 05:01.710
+Host OS This is the operating system of the physical machine.
+
+72
+05:01.720 --> 05:02.800
+Physical computer.
+
+73
+05:03.960 --> 05:09.810
+So currently, if you're using laptop or a desktop to watch this video, the operating system of your
+
+74
+05:09.810 --> 05:12.270
+laptop is the host operating system.
+
+75
+05:13.760 --> 05:17.750
+Guest operating system is the operating system of the virtual machine.
+
+76
+05:18.620 --> 05:22.070
+Virtual machines are also sometimes referred as guest machine.
+
+77
+05:22.670 --> 05:27.830
+So host, guest,  got that? because we will be using these terminologies a lot.
+
+78
+05:28.760 --> 05:31.700
+VM are the short form of virtual machines
+
+79
+05:32.540 --> 05:33.380
+Snapshot, 
+
+80
+05:34.760 --> 05:37.430
+Is a way of taking backup of the virtual machine.
+
+81
+05:38.510 --> 05:42.530
+Well, we say machine, virtual machine, but it's really just sort of files.
+
+82
+05:43.160 --> 05:45.890
+So which can be backed up very easily.
+
+83
+05:45.890 --> 05:52.220
+And there will be concept of snapshot in every virtualization technology to back up your virtual machines.
+
+84
+05:53.480 --> 05:59.810
+Hypervisor is the tool or the software that let us do or create virtual machines.
+
+85
+06:01.480 --> 06:04.000
+Hypervisor enables virtualization.
+
+86
+06:05.180 --> 06:06.860
+There are two types of hypervisor.
+
+87
+06:06.860 --> 06:12.080
+You have type one, which is also called as bare metal operating a bare metal hypervisor.
+
+88
+06:12.830 --> 06:18.200
+It runs directly on the physical computer, like an operating system like here installing Windows 10
+
+89
+06:18.530 --> 06:25.120
+or you have Mac OS, like that you will have hypervisor installed on the physical computer.
+
+90
+06:25.130 --> 06:31.160
+Now this is only for production and it won't let you use this computer for other purposes.
+
+91
+06:32.030 --> 06:35.630
+For example, VMware ESXi or  Zen Hypervisor.
+
+92
+06:37.240 --> 06:41.200
+The other type of hypervisor is type 2 which we will be using in this course.
+
+93
+06:42.100 --> 06:45.220
+It runs as a software which you can install on any computer.
+
+94
+06:46.800 --> 06:51.630
+This is just for learning and testing purpose, because obviously you're not going to run production
+
+95
+06:51.630 --> 06:53.730
+machines on your laptop.
+
+96
+06:55.870 --> 07:02.530
+Some example, Oracle VM VirtualBox, which we will be using in this course and VMware server and there
+
+97
+07:02.530 --> 07:03.130
+are many other.
+
+98
+07:04.870 --> 07:07.810
+So that First diagram is the type 1 hypervisor.
+
+99
+07:08.830 --> 07:14.050
+You have the computer on top of that, your hypervisor, and then you create your virtual machine,
+
+100
+07:14.680 --> 07:16.810
+install your operating system and run your app.
+
+101
+07:17.080 --> 07:19.930
+This is for production, and this also can be clustered.
+
+102
+07:20.530 --> 07:27.940
+Type one hypervisors can be clustered together so you can distribute your virtual machines on the cluster
+
+103
+07:27.940 --> 07:29.110
+of hypervisors.
+
+104
+07:29.440 --> 07:35.260
+So if one of the hypervisor goes down, the other can take or run your virtual machines.
+
+105
+07:36.160 --> 07:39.980
+Type two hypervisor, which just runs like a software on your computer.
+
+106
+07:40.000 --> 07:45.010
+This is for learning and testing purpose, so you will have your computer.
+
+107
+07:45.010 --> 07:49.870
+On top of that, you will have an operating system like Windows ten, Mac OS or even Linux.
+
+108
+07:50.200 --> 07:54.880
+And like you install softwares, you're going to install a Type two hypervisor on that.
+
+109
+07:54.880 --> 07:58.630
+You can create virtual machines and install your operating system.
+
+110
+08:00.840 --> 08:07.410
+Now there is a hypervisor called Hyper-V from Microsoft, and that can be easily confused as a Type
+
+111
+08:07.440 --> 08:08.460
+two hypervisor.
+
+112
+08:09.090 --> 08:11.430
+But it is a type one hypervisor.
+
+113
+08:11.820 --> 08:12.540
+Just a tip.
+
+114
+08:13.920 --> 08:14.400
+Anyways.
+
+115
+08:14.400 --> 08:21.150
+We will see in the next lecture how to do virtualization or how to create virtual machines on a computer.
+
+116
+08:21.540 --> 08:25.260
+And we are going to also automate that setup.
+
+117
+08:26.450 --> 08:32.360
+The reason of doing this exercises or creating virtual machines so you can practice Linux and a few
+
+118
+08:32.360 --> 08:34.280
+other upcoming tools in this course.
+
+119
+08:35.300 --> 08:37.050
+So thank you for watching this video.
+
+120
+08:37.070 --> 08:38.480
+I will see you in the next one.

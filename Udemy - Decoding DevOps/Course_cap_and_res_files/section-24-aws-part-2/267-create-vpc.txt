@@ -1,0 +1,478 @@
+WEBVTT
+
+00:01.590 --> 00:02.790
+Lecturer: Alright, so in this lecture
+
+00:02.790 --> 00:04.570
+we are going to create VPC
+
+00:05.460 --> 00:07.380
+but not the whole VPC,
+
+00:07.380 --> 00:09.850
+just the VPC CIDR block
+
+00:11.100 --> 00:12.990
+which is very easy to create.
+
+00:12.990 --> 00:15.060
+Actually entire VPC
+
+00:15.060 --> 00:16.770
+with all the subnets, internet gateway,
+
+00:16.770 --> 00:20.490
+NAT gateway can be created automatically
+
+00:20.490 --> 00:22.710
+through this UI here
+
+00:22.710 --> 00:24.840
+and it's very easy to do also.
+
+00:24.840 --> 00:27.810
+Provided you know the network range
+
+00:27.810 --> 00:28.980
+and what exactly you're doing.
+
+00:28.980 --> 00:30.480
+You have architectural diagram
+
+00:30.480 --> 00:33.453
+and you have the network range, everything.
+
+00:34.950 --> 00:35.863
+So we are going to create
+
+00:35.863 --> 00:38.583
+a VPC range here in this lecture, this one.
+
+00:39.600 --> 00:42.960
+But you can create the whole thing automatically
+
+00:42.960 --> 00:47.370
+through the VPC dashboard in the AWS UI.
+
+00:47.370 --> 00:49.830
+Okay, here we made one mistake.
+
+00:49.830 --> 00:53.280
+So two NAT gateways will need two IP.
+
+00:53.280 --> 00:54.690
+So I have mentioned here two,
+
+00:54.690 --> 00:56.070
+but in reality
+
+00:56.070 --> 00:57.840
+we are just going to create one NAT gateway
+
+00:57.840 --> 00:59.400
+and one elastic IP.
+
+00:59.400 --> 01:01.140
+And that is to save cost
+
+01:01.140 --> 01:04.800
+because NAT gateways are expensive.
+
+01:04.800 --> 01:07.770
+If you keep it running for a longer time,
+
+01:07.770 --> 01:08.820
+you will see the bills
+
+01:08.820 --> 01:10.350
+that you will get worried about.
+
+01:10.350 --> 01:14.970
+So we are going to try to keep it as minimum as possible
+
+01:14.970 --> 01:16.170
+but for the learning purpose
+
+01:16.170 --> 01:17.850
+we need to create one NAT gateway
+
+01:17.850 --> 01:19.200
+and one elastic IP at least.
+
+01:19.200 --> 01:20.580
+And once we start doing it
+
+01:20.580 --> 01:24.090
+we'll complete the entire VPC section
+
+01:24.090 --> 01:25.740
+and then we'll do the cleanup as well.
+
+01:25.740 --> 01:27.270
+So you're not going to see much build,
+
+01:27.270 --> 01:29.640
+so please don't worry about the builds.
+
+01:29.640 --> 01:30.780
+So for high availability,
+
+01:30.780 --> 01:32.161
+you should have two NAT gateway
+
+01:32.161 --> 01:34.470
+and you should have two elastic IP for them.
+
+01:34.470 --> 01:36.000
+But to save the cost
+
+01:36.000 --> 01:39.390
+we are just creating one NAT gateway and one elastic IP.
+
+01:39.390 --> 01:41.970
+Okay, so let me show you the concept of creating VPC.
+
+01:41.970 --> 01:45.783
+So come to your VPCs, click on create VPC.
+
+01:46.890 --> 01:49.020
+Now to just create the VPC range,
+
+01:49.020 --> 01:49.920
+you can give the name
+
+01:49.920 --> 01:51.660
+and you can give the CIDR range
+
+01:51.660 --> 01:52.860
+and you can say create.
+
+01:52.860 --> 01:53.693
+That is it.
+
+01:53.693 --> 01:54.660
+It will be created.
+
+01:54.660 --> 01:56.460
+If you want to create the entire VPC
+
+01:56.460 --> 01:58.500
+with public private subnet, internet gateway,
+
+01:58.500 --> 02:01.140
+NAT gateway, then you can click on this one.
+
+02:01.140 --> 02:04.650
+The UI might change a little bit for you,
+
+02:04.650 --> 02:07.020
+but more or less it'll be like this.
+
+02:07.020 --> 02:09.510
+So I'm just showing you over here,
+
+02:09.510 --> 02:11.070
+we are not going to create it like this.
+
+02:11.070 --> 02:12.840
+We're going to create it, everything one by one
+
+02:12.840 --> 02:14.340
+and join them together.
+
+02:14.340 --> 02:17.250
+That's how we are going to learn the entire VPC setup
+
+02:17.250 --> 02:19.560
+and understand if something goes wrong.
+
+02:19.560 --> 02:20.880
+So click on this radio button
+
+02:20.880 --> 02:22.500
+and we'll do some fill-in-the-blanks
+
+02:22.500 --> 02:24.700
+and then we'll see the flow
+
+02:25.680 --> 02:28.293
+and then we'll go back to creating VPC manually.
+
+02:31.050 --> 02:34.050
+Tag, so let me just queue V profile.
+
+02:34.050 --> 02:35.237
+Once again, we are just filling the blanks.
+
+02:35.237 --> 02:37.080
+We are not creating it.
+
+02:37.080 --> 02:40.980
+So IPV4 CIDR block for the entire VPC,
+
+02:40.980 --> 02:41.940
+which is this one.
+
+02:41.940 --> 02:43.930
+So let's copy this range
+
+02:45.810 --> 02:47.283
+and let's put it there.
+
+02:48.780 --> 02:49.860
+Let's come down.
+
+02:49.860 --> 02:53.490
+Tenancy default, that means create it in a shared hardware.
+
+02:53.490 --> 02:56.100
+If you select your tenancy dedicated
+
+02:56.100 --> 02:57.330
+it will be very expensive,
+
+02:57.330 --> 03:01.323
+but you get dedicated hardware for your VPC to run.
+
+03:02.460 --> 03:03.840
+So keep it default.
+
+03:03.840 --> 03:05.370
+Number of availability zones,
+
+03:05.370 --> 03:06.543
+so we'll keep it two.
+
+03:07.650 --> 03:09.900
+Customize availability zones,
+
+03:09.900 --> 03:12.450
+so us-west-1a here
+
+03:12.450 --> 03:15.330
+and then here us-west-1b.
+
+03:15.330 --> 03:17.400
+And number of public submit two
+
+03:17.400 --> 03:19.323
+and number of private submit two.
+
+03:20.520 --> 03:23.130
+Okay, and customize subnet CIDR blocks.
+
+03:23.130 --> 03:24.873
+So again, fill in the blanks.
+
+03:25.710 --> 03:29.890
+So we'll say 24 just 1.0
+
+03:31.020 --> 03:33.720
+and the second one 24,
+
+03:33.720 --> 03:35.643
+we're going to keep it 2.0,
+
+03:37.387 --> 03:41.200
+243.0
+
+03:42.780 --> 03:47.430
+slash 24 and here we'll say 4.0.
+
+03:47.430 --> 03:49.920
+Now it's really not mandatory to create all the subnet
+
+03:49.920 --> 03:52.830
+in the same sequence, like 1.0, 2.0, 3.0.
+
+03:52.830 --> 03:54.420
+You can give different sequence also
+
+03:54.420 --> 03:58.323
+but this is good to look, you know, easy to identify.
+
+04:00.030 --> 04:04.350
+Okay, then coming down, so NAT gateway
+
+04:04.350 --> 04:05.650
+you see the dollar symbol.
+
+04:06.930 --> 04:08.430
+That means there'll be extra charges.
+
+04:08.430 --> 04:09.720
+Click on info and find out,
+
+04:09.720 --> 04:12.305
+but don't worry for now.
+
+04:12.305 --> 04:14.520
+So if we say one per AZ,
+
+04:14.520 --> 04:15.720
+one per availability zone,
+
+04:15.720 --> 04:17.520
+so it will create two NAT gateway
+
+04:17.520 --> 04:19.500
+because you have two zones.
+
+04:19.500 --> 04:21.240
+VPC endpoint.
+
+04:21.240 --> 04:22.500
+Now VPC is a service
+
+04:22.500 --> 04:25.260
+that will be accessed globally
+
+04:25.260 --> 04:27.390
+through the internet publicly,
+
+04:27.390 --> 04:30.090
+but if you want VPC to be accessible privately
+
+04:30.090 --> 04:31.260
+from the private subnet,
+
+04:31.260 --> 04:33.573
+you can create VPC endpoints.
+
+04:35.670 --> 04:36.840
+So as I told you,
+
+04:36.840 --> 04:37.673
+we are not creating it,
+
+04:37.673 --> 04:38.506
+we are just looking.
+
+04:38.506 --> 04:39.339
+So take a look,
+
+04:39.339 --> 04:40.800
+that's your VPC.
+
+04:40.800 --> 04:43.740
+It has four subnets distributed in two zones.
+
+04:43.740 --> 04:45.333
+And let me scroll it like this.
+
+04:47.040 --> 04:49.920
+So instance that belongs to this subnet,
+
+04:49.920 --> 04:52.980
+it's traffic will be routed through the route table
+
+04:52.980 --> 04:55.560
+and will go to the internet gateway.
+
+04:55.560 --> 04:57.900
+Same will be for the other public subnet also.
+
+04:57.900 --> 05:00.690
+But private subnet, traffic will be routed
+
+05:00.690 --> 05:03.450
+through the NAT gateway.
+
+05:03.450 --> 05:04.283
+See that?
+
+05:04.283 --> 05:05.250
+See the flow?
+
+05:05.250 --> 05:07.080
+That's how I did this fill-in-the-blank.
+
+05:07.080 --> 05:09.573
+So you can have a nice look over here.
+
+05:10.800 --> 05:14.253
+And also you see the traffic going to VPC endpoints.
+
+05:15.090 --> 05:17.760
+If you want to access S3 bucket privately
+
+05:17.760 --> 05:20.910
+you can access it through the VPC endpoints.
+
+05:20.910 --> 05:22.020
+Okay, so I did all this.
+
+05:22.020 --> 05:23.580
+So if you click on create VPC,
+
+05:23.580 --> 05:25.380
+it will create everything for you.
+
+05:25.380 --> 05:26.430
+But don't do that.
+
+05:26.430 --> 05:27.573
+Cancel this one.
+
+05:30.270 --> 05:31.470
+Just to be on a safer side.
+
+05:31.470 --> 05:32.910
+Cancel that, come back,
+
+05:32.910 --> 05:34.620
+click on create VPC,
+
+05:34.620 --> 05:35.720
+select here VPC only
+
+05:35.720 --> 05:38.670
+and let's give our VPC a name.
+
+05:38.670 --> 05:42.997
+I will just call it as vprofile-vpc,
+
+05:43.860 --> 05:48.860
+the network range 172.20.0.0/16,
+
+05:50.790 --> 05:53.010
+tenancy default,
+
+05:53.010 --> 05:54.960
+tag name automatically it will take
+
+05:54.960 --> 05:56.880
+and click on create VPC.
+
+05:56.880 --> 05:58.983
+So this will create the network range.
+
+05:59.940 --> 06:00.773
+When you do this,
+
+06:00.773 --> 06:03.270
+it will also create a default route table.
+
+06:03.270 --> 06:05.320
+We are not going to use that route table.
+
+06:06.600 --> 06:08.100
+So you just see the VPC over here
+
+06:08.100 --> 06:10.140
+you won't see the subnets and other things for it.
+
+06:10.140 --> 06:11.370
+Then add gateway internet gateway
+
+06:11.370 --> 06:12.690
+that we are going to create one by one
+
+06:12.690 --> 06:14.010
+and join them together.
+
+06:14.010 --> 06:15.960
+The next lecture we are going to create
+
+06:16.800 --> 06:19.113
+four subnets in this VPC.

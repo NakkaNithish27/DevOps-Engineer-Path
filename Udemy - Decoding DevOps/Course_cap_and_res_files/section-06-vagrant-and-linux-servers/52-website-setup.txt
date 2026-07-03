@@ -1,0 +1,886 @@
+WEBVTT
+
+00:00.570 --> 00:02.220
+Instructor: Hello and welcome.
+
+00:03.450 --> 00:06.750
+In this lecture we are going to talk more about Linux.
+
+00:06.750 --> 00:09.210
+So, far we have learned basics of Linux.
+
+00:09.210 --> 00:12.870
+We have seen the file systems, filters, users and groups
+
+00:12.870 --> 00:16.203
+sudo, software management, services and processes.
+
+00:17.130 --> 00:19.950
+In this lecture we will be talking about server management.
+
+00:19.950 --> 00:22.320
+How do we install and manage a server
+
+00:22.320 --> 00:25.530
+as service on a Linux operating system.
+
+00:25.530 --> 00:28.110
+This is to boost your confidence.
+
+00:28.110 --> 00:30.090
+You get more practice.
+
+00:30.090 --> 00:31.740
+And then similar thing we will be doing
+
+00:31.740 --> 00:36.740
+on AWS Cloud as well in many of the coming sections.
+
+00:40.080 --> 00:45.080
+So first, we will be setting up httpd service on CentOS
+
+00:45.120 --> 00:47.400
+and we will deploy some HTML templates.
+
+00:47.400 --> 00:50.430
+This is a very basic website.
+
+00:50.430 --> 00:53.507
+A ready-built website will download from the internet
+
+00:53.507 --> 00:56.313
+and run it on a CentOS operating system.
+
+00:57.420 --> 01:00.600
+Next we will be using Ubuntu operating system
+
+01:00.600 --> 01:02.883
+and we will set up a LAMP stack.
+
+01:03.750 --> 01:07.173
+It's long form is Linux, Apache, MySQL and PHP.
+
+01:08.430 --> 01:12.060
+There are many application that runs on LAMP stack.
+
+01:12.060 --> 01:14.220
+So, we'll set up an Ubuntu VM,
+
+01:14.220 --> 01:18.063
+set up LAMP stack on that and deploy WordPress template.
+
+01:18.990 --> 01:21.960
+WordPress is a very popular blogging application
+
+01:21.960 --> 01:26.160
+that you can run on your Linux machines.
+
+01:26.160 --> 01:28.860
+And all these we will be doing manually first.
+
+01:28.860 --> 01:32.400
+And then we are going to automate these setup
+
+01:32.400 --> 01:35.220
+by using vagrant provisioning.
+
+01:35.220 --> 01:38.280
+So, at the end we will have two vagrant files,
+
+01:38.280 --> 01:40.770
+one to setup HTML templates automatically,
+
+01:40.770 --> 01:44.370
+the other to set up WordPress template automatically.
+
+01:44.370 --> 01:46.023
+Now let's see this in action.
+
+01:47.040 --> 01:50.430
+Okay, so we want to set up a website on CentOS
+
+01:50.430 --> 01:52.650
+and there are ready-made templates available
+
+01:52.650 --> 01:54.090
+on the internet.
+
+01:54.090 --> 01:56.640
+So, I recommend you use a Brave browser
+
+01:56.640 --> 01:59.820
+and open this site: tooplate.com.
+
+01:59.820 --> 02:02.070
+Now, Brave browser because
+
+02:02.070 --> 02:03.420
+if you open it in other browser,
+
+02:03.420 --> 02:05.160
+it'll show you a lot of marketing popups.
+
+02:05.160 --> 02:09.660
+So, use Brave browser, easy to get the download link, also.
+
+02:09.660 --> 02:11.850
+There are many ready-made templates available here.
+
+02:11.850 --> 02:13.980
+You can choose whatever you want.
+
+02:13.980 --> 02:18.980
+Right now I see this one Mini Finance or finance.
+
+02:19.230 --> 02:21.270
+So, I'm going to use this one.
+
+02:21.270 --> 02:25.320
+So, our project name will be finance or finance.
+
+02:25.320 --> 02:27.240
+So, I'm going to create a virtual machine
+
+02:27.240 --> 02:29.640
+with CentOS operating system.
+
+02:29.640 --> 02:30.540
+Before I do that,
+
+02:30.540 --> 02:33.393
+I'll see if there are any other VMs running.
+
+02:35.054 --> 02:37.440
+So, I don't have any other virtual machines running.
+
+02:37.440 --> 02:40.110
+If you have: go there, delete those virtual machines.
+
+02:40.110 --> 02:42.783
+I'm going to create a folder in F drive.
+
+02:43.769 --> 02:47.253
+vagrant-vms with the name finance.
+
+02:48.330 --> 02:49.710
+And get into that,
+
+02:49.710 --> 02:52.323
+you can choose any folder of your choice.
+
+02:54.510 --> 02:56.010
+vagrant box list.
+
+02:56.010 --> 02:59.761
+We have a CentOS box in our machine.
+
+02:59.761 --> 03:02.763
+This one we'll be using eurolinux.
+
+03:06.810 --> 03:09.153
+So, we'll run the command vagrant init.
+
+03:10.320 --> 03:13.050
+And the box name, I just selected that, it copied it.
+
+03:13.050 --> 03:15.543
+I'm going to do Shift + Insert so it paste there.
+
+03:16.440 --> 03:18.630
+It creates the vagrant file.
+
+03:18.630 --> 03:21.000
+We'll open this vagrant file.
+
+03:21.000 --> 03:25.050
+You can use Notepad or VIM, whatever editor of your choice.
+
+03:25.050 --> 03:26.460
+We're going to make some changes.
+
+03:26.460 --> 03:31.170
+We need a static IP or a public IP is also fine.
+
+03:31.170 --> 03:35.293
+So, I'm going to give the IP as 56.22.
+
+03:36.600 --> 03:40.860
+Make sure this IP doesn't collide with other existing VMs.
+
+03:40.860 --> 03:43.770
+That's why I told you to even delete the VM.
+
+03:43.770 --> 03:48.770
+And also, we can use the IP that we get from our router.
+
+03:49.920 --> 03:52.870
+So, you can use any of this IP to connect to this VM later.
+
+03:54.480 --> 03:57.483
+And we'll keep RAM as 1 GB.
+
+04:00.210 --> 04:01.773
+Okay, save and quit.
+
+04:04.050 --> 04:05.583
+And let's bring up the VM.
+
+04:08.400 --> 04:09.450
+Okay, the VM is up.
+
+04:09.450 --> 04:14.040
+I'm need to log in inside, okay, and switch to root user.
+
+04:14.040 --> 04:15.060
+The first thing I want to do
+
+04:15.060 --> 04:18.300
+is I would like to change the host name here.
+
+04:18.300 --> 04:22.200
+So, via etc/hostname and give host name of your choice.
+
+04:22.200 --> 04:24.360
+I'm just going to give it as finance
+
+04:24.360 --> 04:28.323
+and run the command hostname finance.
+
+04:29.370 --> 04:33.183
+And then you have to log out and then log in again.
+
+04:35.280 --> 04:36.990
+Okay, now this is not mandatory.
+
+04:36.990 --> 04:38.280
+If you want to do...
+
+04:38.280 --> 04:40.323
+You want to skip this also that is fine.
+
+04:41.160 --> 04:45.090
+Okay, so, in order to set the HTML template,
+
+04:45.090 --> 04:47.880
+we need httpd service.
+
+04:47.880 --> 04:52.019
+Now since this is CentOS, the service name is httpd
+
+04:52.019 --> 04:54.180
+or also the package name is httpd.
+
+04:54.180 --> 04:57.560
+If it's Ubuntu, the package and service name is Apache2.
+
+04:57.560 --> 04:59.610
+We have seen that, right?
+
+04:59.610 --> 05:02.403
+So, we have this as CentOS 9.
+
+05:03.510 --> 05:08.430
+Okay, now let's install httpd
+
+05:08.430 --> 05:11.190
+and we will need a few other things:
+
+05:11.190 --> 05:16.190
+wget, vim, unzip and zip.
+
+05:16.320 --> 05:19.050
+Zip is not necessary, but let's download it.
+
+05:19.050 --> 05:21.150
+So, httpd, we know that's the website package.
+
+05:21.150 --> 05:24.210
+wget, we are going to download the HTML template
+
+05:24.210 --> 05:25.995
+by using wget command.
+
+05:25.995 --> 05:28.560
+vim because we're going to edit some files.
+
+05:28.560 --> 05:31.170
+So, and the file that we are going to download
+
+05:31.170 --> 05:33.360
+from the internet the HTML template.
+
+05:33.360 --> 05:34.560
+That will be in zip format.
+
+05:34.560 --> 05:37.860
+So, we need unzip to unzip it.
+
+05:37.860 --> 05:38.710
+Let's install it.
+
+05:39.630 --> 05:41.010
+So, these are the dependencies.
+
+05:41.010 --> 05:44.700
+So, first thing always is to install the dependencies.
+
+05:44.700 --> 05:45.963
+That's what we are doing.
+
+05:47.040 --> 05:48.180
+Okay, it's installed.
+
+05:48.180 --> 05:50.463
+Let's start the service,
+
+05:52.140 --> 05:54.510
+systemctl start httpd.
+
+05:54.510 --> 05:57.300
+And we would also like to enable the service
+
+05:57.300 --> 06:00.120
+because if you reboot the httpd service won't come up.
+
+06:00.120 --> 06:02.010
+So, you should enable that.
+
+06:02.010 --> 06:04.863
+And now it'll come up if even if we reboot this OS.
+
+06:05.820 --> 06:09.480
+Okay, let's check the IP address, ip addr show.
+
+06:09.480 --> 06:13.050
+And any 192 IP except NAT use.
+
+06:13.050 --> 06:16.053
+You can use this IP also 56.22.
+
+06:17.040 --> 06:18.993
+And let's check it from the browser,
+
+06:21.217 --> 06:25.953
+http:// and you paste the IP address.
+
+06:27.270 --> 06:30.840
+Okay, so you see a default httpd webpage.
+
+06:30.840 --> 06:31.860
+It's the default.
+
+06:31.860 --> 06:32.850
+When you don't set anything
+
+06:32.850 --> 06:36.270
+it just shows that, you know, httpd services running fine.
+
+06:36.270 --> 06:38.760
+Okay now, before I deploy my HTML templates
+
+06:38.760 --> 06:42.030
+from tooplate.com, I want to show you one thing.
+
+06:42.030 --> 06:42.863
+Read this:
+
+06:42.863 --> 06:44.700
+For systems using Apache HTTP server:
+
+06:44.700 --> 06:47.970
+You may now add content or content
+
+06:47.970 --> 06:50.840
+to the directory /var/www/html/.
+
+06:50.840 --> 06:53.040
+Okay so, if we add content over here
+
+06:53.040 --> 06:54.270
+it's going to show over here,
+
+06:54.270 --> 06:57.360
+but the content needs to be in a specific format
+
+06:57.360 --> 06:58.920
+that we will see.
+
+06:58.920 --> 07:03.920
+So, go to /var/www/html/, ls, it will be empty.
+
+07:04.650 --> 07:08.550
+We are going to create here a file index.html,
+
+07:08.550 --> 07:10.140
+exactly same name.
+
+07:10.140 --> 07:13.173
+That's the file it is going to throw on the browser.
+
+07:14.580 --> 07:16.080
+And let's put something over here.
+
+07:16.080 --> 07:20.903
+This is my first website setup.
+
+07:22.380 --> 07:24.420
+And so I'm not writing really any HTML content,
+
+07:24.420 --> 07:25.770
+just some text.
+
+07:25.770 --> 07:29.103
+If you know HTML you can write it but really don't bother.
+
+07:30.390 --> 07:33.030
+So, we created a file exactly in this folder
+
+07:33.030 --> 07:34.290
+with exactly this name.
+
+07:34.290 --> 07:38.580
+And after that we are going to restart the httpd service.
+
+07:38.580 --> 07:42.330
+So, whenever you make change to the service,
+
+07:42.330 --> 07:44.970
+make sure you restart the service
+
+07:44.970 --> 07:47.730
+or at least reload the service.
+
+07:47.730 --> 07:50.080
+Okay, keep that as a thumb rule, remember that.
+
+07:51.090 --> 07:52.290
+Okay, let's go back to the browser.
+
+07:52.290 --> 07:54.570
+And now let's refresh it again.
+
+07:54.570 --> 07:55.403
+You see that?
+
+07:55.403 --> 07:58.890
+That's really a very dumb website, I know that, right?
+
+07:58.890 --> 08:00.300
+But we are practicing here.
+
+08:00.300 --> 08:01.920
+We understood index.html file
+
+08:01.920 --> 08:04.560
+is pushed to the browser, right?
+
+08:04.560 --> 08:08.610
+Now, coming back to here, tooplate.com.
+
+08:08.610 --> 08:10.710
+So, select whatever template you want, right?
+
+08:10.710 --> 08:12.690
+You can scroll down.
+
+08:12.690 --> 08:13.980
+If you click on Download,
+
+08:13.980 --> 08:16.383
+it is going to download a zip file.
+
+08:19.200 --> 08:20.283
+And download.
+
+08:23.820 --> 08:25.530
+Right, a zip file.
+
+08:25.530 --> 08:27.087
+See that.
+
+08:27.087 --> 08:29.130
+And this contains all the data,
+
+08:29.130 --> 08:32.670
+including index.html of this website.
+
+08:32.670 --> 08:35.250
+But we need to download it in our VM
+
+08:35.250 --> 08:38.610
+where we can unzip and we can deploy this file
+
+08:38.610 --> 08:40.770
+to /var/www/html.
+
+08:40.770 --> 08:43.350
+And in order to do that, we need the download link.
+
+08:43.350 --> 08:44.490
+Generally, what we do is
+
+08:44.490 --> 08:48.750
+we do Right Click, and we say Copy Link Address.
+
+08:48.750 --> 08:50.790
+Right? Now let's open another tab.
+
+08:50.790 --> 08:52.676
+If we paste this link,
+
+08:52.676 --> 08:56.520
+this really is not a download link, okay?
+
+08:56.520 --> 08:57.353
+This is
+
+09:01.440 --> 09:04.500
+not going to download this zip file or it may download.
+
+09:04.500 --> 09:05.343
+But anyways,
+
+09:06.300 --> 09:10.680
+what I wanted to show you here is finding the download link
+
+09:10.680 --> 09:14.820
+from the browser, and use Brave browser for now,
+
+09:14.820 --> 09:15.653
+F12.
+
+09:17.760 --> 09:19.110
+Click on F12.
+
+09:19.110 --> 09:23.190
+Okay? Make sure you are in the network tab, right?
+
+09:23.190 --> 09:26.373
+And then click on download.
+
+09:27.270 --> 09:28.800
+Okay, it'll start the download.
+
+09:28.800 --> 09:30.903
+You can save or cancel it. Cancel it.
+
+09:32.250 --> 09:34.110
+Okay, now here you see two links.
+
+09:34.110 --> 09:36.420
+Okay, let's expand this.
+
+09:36.420 --> 09:38.790
+Okay, you see there, right?
+
+09:38.790 --> 09:40.020
+So, click on that.
+
+09:40.020 --> 09:42.390
+Click on Headers, make sure you click on Headers.
+
+09:42.390 --> 09:45.690
+Once again, Network, click on that link, zip one
+
+09:45.690 --> 09:47.670
+in Headers.
+
+09:47.670 --> 09:50.610
+And here you see the complete download link
+
+09:50.610 --> 09:52.203
+and you can copy it from here.
+
+09:53.680 --> 09:55.530
+Okay, let's do Control + C to copy
+
+09:55.530 --> 09:58.380
+and let's go to our terminal.
+
+09:58.380 --> 10:01.380
+Now don't download it in HTML or other places.
+
+10:01.380 --> 10:05.130
+Just go in tmp because this is going to be temporary file.
+
+10:05.130 --> 10:07.623
+We don't want to put it in other places.
+
+10:08.520 --> 10:11.280
+wget paste the link and this wget command
+
+10:11.280 --> 10:13.800
+is going to download that zip file
+
+10:13.800 --> 10:16.200
+and store it in our local machine.
+
+10:16.200 --> 10:18.450
+Sorry, in the VM, right?
+
+10:18.450 --> 10:19.590
+So, that's the zip file.
+
+10:19.590 --> 10:21.540
+And now it's time to unzip it,
+
+10:21.540 --> 10:23.793
+unzip give the name.
+
+10:25.620 --> 10:26.453
+Do ls.
+
+10:26.453 --> 10:29.220
+You should find a folder there, a directory.
+
+10:29.220 --> 10:33.063
+Get inside that and clear the screen.
+
+10:34.620 --> 10:38.190
+Right, make sure you're inside this unzipped folder.
+
+10:38.190 --> 10:39.510
+Do ls.
+
+10:39.510 --> 10:44.103
+And now you should see all the content including index.html.
+
+10:45.480 --> 10:49.370
+Now, all this content, we need to copy, cp -r *.
+
+10:51.043 --> 10:52.350
+-: r because there are folders, right?
+
+10:52.350 --> 10:54.050
+We want to copy all of the folders
+
+10:54.920 --> 10:59.920
+*, everything to /var/www/html.
+
+11:00.254 --> 11:03.033
+Right? So, make sure you are in that folder.
+
+11:05.070 --> 11:06.240
+So, it's asking do you want to
+
+11:06.240 --> 11:08.640
+override the existing index.html file.
+
+11:08.640 --> 11:11.523
+Yes, because we created it just for testing.
+
+11:13.230 --> 11:17.220
+Right, now do ls /var/www/html.
+
+11:17.220 --> 11:20.070
+And you should see all this content, same content, right?
+
+11:21.360 --> 11:23.310
+And the next step, I think you already know.
+
+11:23.310 --> 11:26.883
+We are going to restart the httpd service.
+
+11:29.490 --> 11:30.323
+Okay.
+
+11:30.323 --> 11:31.380
+Very well.
+
+11:31.380 --> 11:34.380
+Okay, now before we check from the browser
+
+11:34.380 --> 11:35.760
+I want you to validate few other things.
+
+11:35.760 --> 11:40.260
+systemctl status httpd, the service should be running.
+
+11:40.260 --> 11:45.260
+You should have the content in /var/www/html.
+
+11:45.390 --> 11:47.943
+Also, I want you to check one more thing.
+
+11:48.870 --> 11:51.750
+That's the firewall service.
+
+11:51.750 --> 11:56.523
+So, systemctl status firewalld.
+
+11:59.400 --> 12:02.190
+Now if you are running a CentOS VM on Windows machine,
+
+12:02.190 --> 12:03.810
+this will be not active.
+
+12:03.810 --> 12:04.983
+This will be inactive.
+
+12:06.300 --> 12:09.900
+But if you are running Fedora on MacWise,
+
+12:09.900 --> 12:12.933
+then this will be running and you have to stop it.
+
+12:13.770 --> 12:17.760
+systemctl status stop firewalld.
+
+12:17.760 --> 12:20.190
+And you have to also disable it.
+
+12:20.190 --> 12:22.170
+So, it does not come at the boot time.
+
+12:22.170 --> 12:25.380
+When you reboot the machine, it should not come up.
+
+12:25.380 --> 12:27.270
+In real time, this is not a good practice
+
+12:27.270 --> 12:28.920
+to shut down the firewall.
+
+12:28.920 --> 12:30.810
+But we are going to learn about firewall later
+
+12:30.810 --> 12:32.400
+in real time use cases.
+
+12:32.400 --> 12:35.130
+For now, we are just learning provisioning.
+
+12:35.130 --> 12:38.610
+So, we are focusing on Linux virtualization
+
+12:38.610 --> 12:41.463
+and we'll see some automation in next lectures.
+
+12:43.320 --> 12:46.320
+You can also check the service.
+
+12:46.320 --> 12:48.240
+Once again, httpd.
+
+12:48.240 --> 12:49.233
+Q to quit.
+
+12:54.510 --> 12:56.040
+Right, pretty basic validation.
+
+12:56.040 --> 12:57.570
+Get the IP address.
+
+12:57.570 --> 12:59.163
+ip addr show.
+
+13:00.780 --> 13:02.929
+Right? Not this 10.0 IP.
+
+13:02.929 --> 13:06.540
+192, this IP or this IP, right?
+
+13:06.540 --> 13:07.980
+If you already have it in the browser.
+
+13:07.980 --> 13:10.470
+So, I'm going to go back to the browser
+
+13:10.470 --> 13:12.570
+and I'm going to simply refresh the page.
+
+13:12.570 --> 13:15.810
+And now you should see the website, right?
+
+13:15.810 --> 13:18.210
+So, index html file is pushed on the browser
+
+13:18.210 --> 13:21.000
+and that file shows the other content, images
+
+13:21.000 --> 13:22.250
+and all the other things.
+
+13:23.370 --> 13:26.100
+Okay so, if you want to quickly reiterate everything, right?
+
+13:26.100 --> 13:27.820
+What we did, we created the VM
+
+13:29.963 --> 13:31.470
+CentOS, right?
+
+13:31.470 --> 13:33.450
+And let's look at the history.
+
+13:33.450 --> 13:36.660
+We installed the dependencies or packages
+
+13:36.660 --> 13:38.280
+then we started the service.
+
+13:38.280 --> 13:41.430
+Or you can say we managed the service, right?
+
+13:41.430 --> 13:43.260
+We made some configuration.
+
+13:43.260 --> 13:45.870
+We did not make actually any configuration change.
+
+13:45.870 --> 13:48.750
+But the third step will be configuration changes
+
+13:48.750 --> 13:51.060
+if anything is required.
+
+13:51.060 --> 13:54.840
+And then the final fourth step is deploying the data
+
+13:54.840 --> 13:57.540
+which was, you know, downloaded from the internet.
+
+13:57.540 --> 13:59.010
+We did unzip and copied it,
+
+13:59.010 --> 14:01.830
+restarted the service that is deploying the data.
+
+14:01.830 --> 14:03.540
+We are going to reiterate all this
+
+14:03.540 --> 14:05.910
+in proper method and make you aware
+
+14:05.910 --> 14:08.100
+about server deployment steps
+
+14:08.100 --> 14:09.810
+after we do WordPress.
+
+14:09.810 --> 14:14.810
+So, once you're done here, exit from the VM and power off.
+
+14:16.080 --> 14:18.060
+Or if you want, you can delete this also.
+
+14:18.060 --> 14:19.173
+We don't need it now.
+
+14:20.700 --> 14:21.960
+Also, I destroyed the VM.
+
+14:21.960 --> 14:23.250
+Deleted the VM.
+
+14:23.250 --> 14:26.430
+So, complete this exercise, delete the VM,
+
+14:26.430 --> 14:28.530
+and then join me in the next lecture
+
+14:28.530 --> 14:31.440
+where we are going to get more into detail
+
+14:31.440 --> 14:32.823
+with WordPress block.

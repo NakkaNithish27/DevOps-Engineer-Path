@@ -1,0 +1,1450 @@
+WEBVTT
+
+00:00.360 --> 00:01.440
+Instructor: Welcome to the session
+
+00:01.440 --> 00:04.350
+of Log Management on AWS.
+
+00:04.350 --> 00:06.780
+First, we'll understand the logs just in general
+
+00:06.780 --> 00:10.140
+and how we archive them and move to some other storage
+
+00:10.140 --> 00:11.940
+and then we'll see some different solutions
+
+00:11.940 --> 00:12.843
+for those things.
+
+00:14.280 --> 00:16.170
+So I have a web server.
+
+00:16.170 --> 00:20.913
+It's created by using the AMI Amazon Linux 2.
+
+00:22.110 --> 00:26.040
+Amazon Linux 2, you also need to use the same AMI
+
+00:26.040 --> 00:28.110
+because I'm going to run the command specifically
+
+00:28.110 --> 00:30.480
+for Amazon Linux 2 AMI.
+
+00:30.480 --> 00:33.470
+So it has a web service running, Wave Cafe.
+
+00:37.110 --> 00:40.740
+This is the same setup we've been doing in this course.
+
+00:40.740 --> 00:43.260
+Install HTTPd and a download template
+
+00:43.260 --> 00:46.470
+from tooplate.com and use that.
+
+00:46.470 --> 00:51.470
+So whenever user access any website an HTTPd service
+
+00:51.780 --> 00:53.673
+it generates access log.
+
+00:56.460 --> 01:01.350
+So let's go to var/log/httpd.
+
+01:04.933 --> 01:06.330
+It's a CentOS 7 operating system,
+
+01:06.330 --> 01:10.080
+so log file of httpd will be at this location.
+
+01:10.080 --> 01:13.143
+You have access_log, if you check that.
+
+01:15.150 --> 01:18.180
+Okay, I just accessed it for like once or twice
+
+01:18.180 --> 01:21.330
+and you see that much log it generated, okay?
+
+01:21.330 --> 01:22.923
+I didn't even click anywhere.
+
+01:23.940 --> 01:27.057
+Okay, now let me do "tail -f",
+
+01:28.440 --> 01:31.083
+and let me access it from some other IP now.
+
+01:38.730 --> 01:42.870
+Okay, you see that I have accessed it from some other IP,
+
+01:42.870 --> 01:47.190
+and already, I'm clicking on a few places there on the site,
+
+01:47.190 --> 01:49.340
+and you see the logs are getting generated.
+
+01:54.180 --> 01:56.910
+So you see, by just access from two place
+
+01:56.910 --> 02:00.630
+generates this much log, imagine thousands of users
+
+02:00.630 --> 02:03.750
+or millions of user accessing your web services,
+
+02:03.750 --> 02:06.030
+how much log it'll generate.
+
+02:06.030 --> 02:08.250
+Like that, different services, different processes
+
+02:08.250 --> 02:11.070
+generate different log file, and their size may grow
+
+02:11.070 --> 02:13.830
+and that will eventually take the disc space.
+
+02:13.830 --> 02:17.343
+So it's always a good idea to rotate the log.
+
+02:18.510 --> 02:21.510
+One common thing you can do is archive the logs,
+
+02:21.510 --> 02:24.510
+send it to some somewhere out of the system,
+
+02:24.510 --> 02:26.970
+and then you can clean the logs, okay?
+
+02:26.970 --> 02:28.800
+So we'll create an S3 bucket,
+
+02:28.800 --> 02:31.050
+we'll archive these logs and send it to S3 bucket,
+
+02:31.050 --> 02:33.330
+and then we'll delete the logs.
+
+02:33.330 --> 02:35.133
+So I will go to S3 service.
+
+02:41.310 --> 02:45.960
+So I'll give the bucket name as wave-web-logs,
+
+02:47.370 --> 02:49.863
+and I'll give some numbers to make it unique.
+
+02:52.290 --> 02:56.133
+Okay, I select the same region and I say create bucket.
+
+02:59.820 --> 03:04.820
+Okay? So that's my bucket. Now let's archive the log files.
+
+03:05.220 --> 03:10.220
+I will say "tar czvf", say wave-web01-httpdlogs,
+
+03:17.430 --> 03:19.610
+and I have to give you timestamp also, okay?
+
+03:19.610 --> 03:24.610
+So 19122020, oops, 2020.
+
+03:24.720 --> 03:28.080
+I'm trying to go to the future, 2929.
+
+03:28.080 --> 03:30.643
+Okay, 2020, tar.gz.
+
+03:32.503 --> 03:35.580
+Okay, I'll say star, so all the log files,
+
+03:35.580 --> 03:38.550
+like these two log files in the current working directory
+
+03:38.550 --> 03:40.150
+will be archived with this name.
+
+03:43.200 --> 03:44.640
+Okay, good. I have it archived.
+
+03:44.640 --> 03:47.140
+I'm going to create a directory in the temp drive.
+
+03:48.450 --> 03:53.450
+Let's say, logs-wave, and I will move this log archive to
+
+03:59.160 --> 04:04.160
+if I can type today, "tmp/logs-wave/".
+
+04:07.200 --> 04:10.050
+Okay, now I'm going to clean all these files.
+
+04:10.050 --> 04:15.050
+So I'll say dev/null, redirect the output to access_log file
+
+04:15.990 --> 04:16.940
+and also error_log.
+
+04:19.770 --> 04:22.110
+So that's going to clear everything from the log file.
+
+04:22.110 --> 04:24.810
+You should not have anything now in the access_log.
+
+04:24.810 --> 04:27.720
+Oh, I think it got generated again.
+
+04:27.720 --> 04:31.480
+Wait a second, access_log, and then we'll send it
+
+04:33.197 --> 04:34.383
+to the error_log.
+
+04:39.120 --> 04:40.980
+Yeah, it's clean now.
+
+04:40.980 --> 04:45.040
+Okay, now I'm going to use AWS CLI to move
+
+04:55.290 --> 04:58.860
+this log file, this archive log to S3 bucket.
+
+04:58.860 --> 05:00.720
+So I'm going to install AWS CLI.
+
+05:00.720 --> 05:02.220
+I'm in Red Hat machine center,
+
+05:02.220 --> 05:06.663
+so I'm gonna say yum install awscli.
+
+05:15.690 --> 05:17.973
+Okay, so we can do this AWS S3.
+
+05:18.810 --> 05:21.150
+You can run help and you can see
+
+05:21.150 --> 05:23.463
+what are the available options with S3.
+
+05:24.660 --> 05:29.660
+So you can use cp, you can copy the log file, you can move,
+
+05:31.200 --> 05:34.680
+you can remove, okay?
+
+05:34.680 --> 05:36.780
+There's sync option, right?
+
+05:36.780 --> 05:39.663
+There's make bucket, remove bucket, and list option.
+
+05:40.770 --> 05:44.280
+So let's just say "aws s3 ls".
+
+05:44.280 --> 05:46.500
+It's gonna, it should list all the buckets,
+
+05:46.500 --> 05:49.560
+but for that we need to set up the credentials.
+
+05:49.560 --> 05:51.120
+So we need to create an IAM user
+
+05:51.120 --> 05:53.040
+with access key and secret key,
+
+05:53.040 --> 05:55.630
+and we need to run the command aws configure
+
+05:57.720 --> 06:00.900
+give the access key secret key so our awscli command
+
+06:00.900 --> 06:04.590
+will use those credential to access our AWS account.
+
+06:04.590 --> 06:08.013
+So let's go to IAM service and create a user.
+
+06:15.240 --> 06:18.600
+So I will say add user and I will name this
+
+06:18.600 --> 06:23.600
+as s3-log-admin, programmatic access,
+
+06:24.810 --> 06:27.450
+which will give us access key and secret key.
+
+06:27.450 --> 06:28.443
+Let's go next.
+
+06:30.240 --> 06:32.100
+I need only S3 permission,
+
+06:32.100 --> 06:35.523
+so I'm going to say S3 full access.
+
+06:36.360 --> 06:37.353
+Let's go next.
+
+06:40.620 --> 06:43.500
+Okay, so that creates access key and secret key.
+
+06:43.500 --> 06:48.500
+So I'm going to copy the access key and paste here.
+
+06:50.310 --> 06:51.450
+Also the secret key.
+
+06:51.450 --> 06:53.580
+Now I'm revealing my secret key to you,
+
+06:53.580 --> 06:57.453
+but I'm going to delete it as soon as this is done.
+
+06:58.980 --> 07:00.603
+And I specify the region.
+
+07:04.200 --> 07:06.393
+Default output format, I'll say json.
+
+07:07.680 --> 07:10.653
+Okay, now let's run aws s3 ls.
+
+07:13.080 --> 07:16.713
+So this is listing all the buckets in my AWS account.
+
+07:18.480 --> 07:21.390
+Now I can use aws s3 cp.
+
+07:21.390 --> 07:25.863
+I can give the path of my log file,
+
+07:27.630 --> 07:32.253
+and I can say s3://, our S3 bucket name,
+
+07:36.640 --> 07:37.540
+which is this one,
+
+07:43.320 --> 07:47.040
+and I can hit enter and it's gonna copy my log file.
+
+07:47.040 --> 07:48.030
+So that is one way.
+
+07:48.030 --> 07:51.243
+The other way is you can use aws s3 sync.
+
+07:54.450 --> 07:57.250
+Okay? Then you give source and destination as directory.
+
+08:04.530 --> 08:06.510
+Now what's the difference between sync and cp?
+
+08:06.510 --> 08:07.950
+CP will just copy the file.
+
+08:07.950 --> 08:10.260
+If you run it again, it's gonna again copy the file,
+
+08:10.260 --> 08:14.160
+but sync, it's gonna copy the file, the differential data.
+
+08:14.160 --> 08:16.620
+If you add something over there,
+
+08:16.620 --> 08:19.620
+like if I say touch temp log files,
+
+08:19.620 --> 08:21.987
+I'll say "testfileforsync".
+
+08:24.720 --> 08:26.670
+I'm just creating some text file, okay?
+
+08:29.310 --> 08:31.143
+Now if I run AWS S3 sync,
+
+08:32.400 --> 08:36.570
+now we also have the archive in the same directory,
+
+08:36.570 --> 08:37.920
+but that's already copied
+
+08:37.920 --> 08:39.960
+so it's not gonna recopy those things.
+
+08:39.960 --> 08:44.247
+Whatever is not copied, so it's just gonna do the sync.
+
+08:44.247 --> 08:47.640
+Okay? So this is source and this is destination.
+
+08:47.640 --> 08:50.670
+And if you have this method of taking backups,
+
+08:50.670 --> 08:52.740
+then you better create a script for it.
+
+08:52.740 --> 08:55.240
+You can use Bash, Python or Ansible
+
+08:56.160 --> 08:58.920
+and then you run it in a Cron job, right?
+
+08:58.920 --> 09:00.370
+Of course, once you are done,
+
+09:02.318 --> 09:04.743
+you should remove your log file also.
+
+09:09.540 --> 09:12.750
+So moving it out of the system was the idea,
+
+09:12.750 --> 09:13.770
+and we did that.
+
+09:13.770 --> 09:16.920
+We moved it to the S3 bucket and then we cleaned it.
+
+09:16.920 --> 09:19.320
+So log files are also safe
+
+09:19.320 --> 09:22.650
+and we are preserving the disc space also.
+
+09:22.650 --> 09:25.680
+Now if you need the log, it's not there on the system,
+
+09:25.680 --> 09:29.430
+you can go through the S3 bucket, download it, access it.
+
+09:29.430 --> 09:33.570
+But what if you want to stream the live logs?
+
+09:33.570 --> 09:36.183
+Like regular issues are coming with the product,
+
+09:37.200 --> 09:40.650
+and you have production system, so your service,
+
+09:40.650 --> 09:42.360
+your application is going to generate log.
+
+09:42.360 --> 09:44.520
+You're not gonna give access to the developers
+
+09:44.520 --> 09:46.290
+to follow production system.
+
+09:46.290 --> 09:49.320
+You're going to log into the system, fetch the log
+
+09:49.320 --> 09:52.590
+from the production system, and give it to the developers
+
+09:52.590 --> 09:55.530
+or who saw you need to pass it for troubleshooting.
+
+09:55.530 --> 09:58.110
+In such case, it will be a very good idea
+
+09:58.110 --> 10:01.020
+if you're able to stream the logs to some dashboard
+
+10:01.020 --> 10:04.740
+so the developers will have access to the dashboard,
+
+10:04.740 --> 10:06.630
+they will see the logs from their live,
+
+10:06.630 --> 10:09.690
+and they can give suggestions how to troubleshoot it.
+
+10:09.690 --> 10:11.790
+Or in general, for something you want
+
+10:11.790 --> 10:13.680
+to just stream the log outside.
+
+10:13.680 --> 10:15.900
+Don't want to keep it in the operating system.
+
+10:15.900 --> 10:20.900
+So for that you can use a CloudWatch, CloudWatch Logs.
+
+10:21.090 --> 10:25.020
+You can use AWS CloudWatch Logs service
+
+10:25.020 --> 10:27.750
+to stream logs from your operating system.
+
+10:27.750 --> 10:29.220
+You will get a dashboard over here
+
+10:29.220 --> 10:32.490
+from where you can see the logs and you can do other things.
+
+10:32.490 --> 10:34.080
+You can analyze the log,
+
+10:34.080 --> 10:36.210
+you can create alarms on the metric,
+
+10:36.210 --> 10:37.980
+you can create metrics from the logs,
+
+10:37.980 --> 10:39.690
+you can fetch for some value,
+
+10:39.690 --> 10:42.420
+and if that value is more than X times
+
+10:42.420 --> 10:44.880
+you send the notification.
+
+10:44.880 --> 10:46.170
+Such kinds of things you can do.
+
+10:46.170 --> 10:48.870
+You can send these logs to Elasticsearch
+
+10:48.870 --> 10:50.700
+where it can be processed more further.
+
+10:50.700 --> 10:54.510
+From here you can also send it to S3 bucket for archiving.
+
+10:54.510 --> 10:55.470
+So there are many benefits
+
+10:55.470 --> 10:57.660
+if you're using CloudWatch Logs service,
+
+10:57.660 --> 10:59.190
+so let's see how we can do that.
+
+10:59.190 --> 11:03.213
+So I want to have the access_log file.
+
+11:05.490 --> 11:08.130
+The access_log file should be streaming everything
+
+11:08.130 --> 11:10.563
+to CloudWatch Logs' dashboard.
+
+11:11.580 --> 11:15.840
+For this, we need to install an agent, CloudWatch agent,
+
+11:15.840 --> 11:18.483
+and we specify that I want to stream this log.
+
+11:20.010 --> 11:23.523
+Okay, but before we go there, one more thing.
+
+11:25.170 --> 11:28.020
+Now we know EC2 instance is accessing the S3 service,
+
+11:28.020 --> 11:30.420
+and for that we are using authentication
+
+11:30.420 --> 11:35.160
+to IAM, IAM user access key and secret key.
+
+11:35.160 --> 11:38.913
+We have a better way, which is called as roles.
+
+11:40.620 --> 11:43.770
+Roles is a way of giving permission to a service,
+
+11:43.770 --> 11:47.070
+like for example to EC2 service,
+
+11:47.070 --> 11:49.920
+to access some other service like S3 service.
+
+11:49.920 --> 11:52.620
+So you can assign role to EC2 instance
+
+11:52.620 --> 11:56.700
+with privilege of S3 access and there is no chance
+
+11:56.700 --> 11:58.740
+of exposing access key and secret key,
+
+11:58.740 --> 12:00.870
+you don't need to rotate the keys.
+
+12:00.870 --> 12:02.310
+And creating role is very simple.
+
+12:02.310 --> 12:04.710
+Again, it's just like creating any other IAM user.
+
+12:04.710 --> 12:06.990
+You say create role, you select the service
+
+12:06.990 --> 12:09.633
+that is going to use the role, I'll say EC2,
+
+12:11.610 --> 12:12.933
+and then we say next.
+
+12:14.670 --> 12:16.590
+And now we can select the policy.
+
+12:16.590 --> 12:21.060
+So I will say S3 full access is one thing,
+
+12:21.060 --> 12:24.240
+so I want to use it for both to access the S3 service
+
+12:24.240 --> 12:26.090
+and also CloudWatch service.
+
+12:26.090 --> 12:27.720
+So S3 full access I will give
+
+12:27.720 --> 12:30.003
+and I will say also CloudWatch.
+
+12:33.763 --> 12:38.523
+CloudWatch Logs, CloudWatch Logs full access.
+
+12:39.810 --> 12:40.803
+Say go next.
+
+12:42.390 --> 12:46.853
+Let's give the rule name, we'll say "log-admin-role".
+
+12:48.900 --> 12:52.620
+Now a role is not for the humanly access, right?
+
+12:52.620 --> 12:56.010
+We are going to attach it to EC2 service.
+
+12:56.010 --> 12:58.803
+So you can give something like that in the description.
+
+13:02.130 --> 13:03.480
+Okay, we created the role,
+
+13:03.480 --> 13:06.210
+now we can attach it to our EC2 instance.
+
+13:06.210 --> 13:08.960
+Okay, but before that first I'll remove the credentials
+
+13:11.070 --> 13:14.790
+so you can see that it's really working.
+
+13:14.790 --> 13:16.683
+So I'll remove AWS credentials file,
+
+13:18.000 --> 13:20.103
+and I'll say aws s3 ls.
+
+13:21.960 --> 13:24.570
+You see we are getting error, okay?
+
+13:24.570 --> 13:27.930
+Now let's attach the role that we just created.
+
+13:27.930 --> 13:32.930
+So select your instance, action, instance setting.
+
+13:36.990 --> 13:40.350
+Sorry, not instance setting, it's in security,
+
+13:40.350 --> 13:44.460
+modify IAM role, and you can select the IAM role.
+
+13:44.460 --> 13:48.663
+We have created log-admin something.
+
+13:51.270 --> 13:54.873
+All right, log-admin-role and we'll say save.
+
+13:57.540 --> 13:58.743
+Okay, now let's try.
+
+14:00.030 --> 14:04.770
+Again, aws s3 ls, and it's working.
+
+14:04.770 --> 14:06.900
+And I can access S3 servers from this instance,
+
+14:06.900 --> 14:09.210
+also CloudWatch service.
+
+14:09.210 --> 14:12.393
+Now we are going to install CloudWatch Logs agent.
+
+14:13.800 --> 14:17.730
+This CloudWatch Logs agent will take logs
+
+14:17.730 --> 14:20.040
+from our log file that we are going to specify
+
+14:20.040 --> 14:22.400
+and stream it to AWS CloudWatch.
+
+14:23.820 --> 14:27.540
+So you just have to run the command yum install awslogs,
+
+14:27.540 --> 14:29.523
+this is in Amazon Linux 2.
+
+14:34.170 --> 14:36.123
+Once again, yum install awslogs.
+
+14:37.290 --> 14:40.710
+And then there is a service that will get created.
+
+14:40.710 --> 14:44.160
+We can start that service systemctl start.
+
+14:44.160 --> 14:49.160
+Or before we start we can just do the configuration
+
+14:49.740 --> 14:54.740
+of this file, "etc/awslogs/awslogs.conf".
+
+14:59.880 --> 15:04.880
+Now in this file at the end we have this section.
+
+15:06.180 --> 15:09.080
+Now this is going to, by default, if we start the awslog,
+
+15:09.080 --> 15:13.950
+so this going to start sending this log file to CloudWatch.
+
+15:13.950 --> 15:15.810
+Sorry, this is the file path actually,
+
+15:15.810 --> 15:17.310
+this is the log group name.
+
+15:17.310 --> 15:18.960
+It's going to create a group
+
+15:18.960 --> 15:21.690
+and in that you will have a stream name
+
+15:21.690 --> 15:24.240
+where you can mention some stream name.
+
+15:24.240 --> 15:28.890
+And in that stream you will have content of this log file.
+
+15:28.890 --> 15:32.523
+So what we can do is we can just copy this content,
+
+15:33.510 --> 15:38.510
+one, two, seven, it's total seven lines so 7yy.
+
+15:38.790 --> 15:41.460
+I'm just copying this and go at the end of this file
+
+15:41.460 --> 15:44.913
+and I'm going to do p to paste this content.
+
+15:45.750 --> 15:49.113
+And let me get into insert mode, give a little space here.
+
+15:50.100 --> 15:52.920
+Okay, now we'll change the names.
+
+15:52.920 --> 15:56.010
+So we have to send HTTPd access_log files,
+
+15:56.010 --> 15:59.400
+so "var/log/httpd".
+
+15:59.400 --> 16:02.190
+Now here you can give anything if you want.
+
+16:02.190 --> 16:05.867
+This is just the name of the configuration, right?
+
+16:08.730 --> 16:11.973
+But here it matters where you have file,
+
+16:11.973 --> 16:14.943
+here you need to give the right path of the file.
+
+16:16.140 --> 16:17.583
+So I'm going to remove this,
+
+16:19.230 --> 16:23.790
+and give our file path, "var/log/httpd/access_log".
+
+16:23.790 --> 16:28.790
+Now verify the file name and the path, it should be same
+
+16:28.830 --> 16:31.140
+as it is showing in your system.
+
+16:31.140 --> 16:34.737
+Stream name, we will give web01-httpd-access.
+
+16:45.990 --> 16:50.990
+And a log group name, we'll change this one also, wave-web.
+
+16:53.010 --> 16:58.010
+Also in this log_group_name here, this one also will change.
+
+16:58.440 --> 16:59.610
+We'll give the same group name,
+
+16:59.610 --> 17:04.083
+so both the stream comes in the same group.
+
+17:05.610 --> 17:07.440
+Stream name, also we'll change it here.
+
+17:07.440 --> 17:08.940
+This is a variable, it'll automatically
+
+17:08.940 --> 17:11.520
+take the instance ID, but we don't want that.
+
+17:11.520 --> 17:14.487
+I will give you a "web01-sys-logs".
+
+17:22.560 --> 17:25.590
+Okay, this looks good, let's save and quit it.
+
+17:25.590 --> 17:27.840
+And once again, verify this file path.
+
+17:27.840 --> 17:32.160
+This should exist, cat, I'm going to give the file path.
+
+17:32.160 --> 17:34.650
+You see this file exists, so verify that the file name
+
+17:34.650 --> 17:36.425
+that you have given do exist,
+
+17:36.425 --> 17:39.747
+and then we are going to restart awslogsd, awslogsd.
+
+17:43.800 --> 17:46.980
+Restart the service, and also we'll enable it.
+
+17:46.980 --> 17:49.953
+So whenever we reboot the machine, it should come up.
+
+17:53.850 --> 17:55.080
+Okay, now this should have already
+
+17:55.080 --> 17:57.333
+started streaming the log files.
+
+17:58.380 --> 18:01.380
+Let's go and check in CloudWatch Logs.
+
+18:01.380 --> 18:05.853
+We should be able to see in the CloudWatch some log groups.
+
+18:07.530 --> 18:08.400
+Yeah, you see that?
+
+18:08.400 --> 18:12.713
+That's the log group name and you have the log stream there.
+
+18:16.860 --> 18:19.320
+Okay? And it gets updated regularly.
+
+18:19.320 --> 18:21.940
+But I want to more specifically now send
+
+18:23.490 --> 18:28.490
+var/log/httpd/access_log, this file.
+
+18:30.510 --> 18:33.460
+So let's copy its path and we are going to update
+
+18:34.680 --> 18:39.680
+var/awslogs/etc/awslogs.conf.
+
+18:50.670 --> 18:52.023
+Okay? Let's open this file.
+
+18:53.040 --> 18:54.390
+Go to the end of this file,
+
+18:55.410 --> 18:59.490
+and you will see the entry for var/log/messages.
+
+18:59.490 --> 19:03.600
+One, two, three, four, five, six, seven, seven lines.
+
+19:03.600 --> 19:08.600
+I'll copy that, 7yy, and I'm gonna paste it down here.
+
+19:11.640 --> 19:15.873
+Okay, file name. Let's make changes.
+
+19:17.640 --> 19:20.520
+So this is gonna be my file, okay?
+
+19:20.520 --> 19:25.390
+And log stream name, I'll say web01-httpd-access log.
+
+19:29.400 --> 19:31.170
+Okay? Log group name I'll keep same.
+
+19:31.170 --> 19:32.920
+So it goes into the same log group.
+
+19:34.710 --> 19:37.683
+That's all. Let's save and quit.
+
+19:41.640 --> 19:45.933
+And let's restart the awslogs service.
+
+19:49.523 --> 19:50.356
+Restart.
+
+19:54.907 --> 19:56.407
+Okay, that's good.
+
+20:06.120 --> 20:07.590
+All right, you see that?
+
+20:07.590 --> 20:09.780
+HTTPd access_log that comes over there,
+
+20:09.780 --> 20:11.700
+and you should have the access_log.
+
+20:11.700 --> 20:13.230
+You don't have much logs.
+
+20:13.230 --> 20:15.963
+Let's access our web server.
+
+20:17.700 --> 20:19.203
+It should generate the logs.
+
+20:22.980 --> 20:25.634
+Yeah, you see that? New logs coming up.
+
+20:25.634 --> 20:26.520
+All right, so all the logs
+
+20:26.520 --> 20:30.540
+that is coming in var/log/httpd/access_log
+
+20:30.540 --> 20:32.970
+is streaming directly over here, okay?
+
+20:32.970 --> 20:35.640
+Then you can do many things over here.
+
+20:35.640 --> 20:37.830
+It's a pretty interesting service.
+
+20:37.830 --> 20:42.450
+So you select your stream and you have option then
+
+20:42.450 --> 20:44.130
+to export to S3 bucket.
+
+20:44.130 --> 20:46.440
+You can send it to Elasticsearch
+
+20:46.440 --> 20:47.700
+or you can send it to to Lambda.
+
+20:47.700 --> 20:50.130
+So which will trigger some lambda function.
+
+20:50.130 --> 20:53.160
+You can also create metrics filter.
+
+20:53.160 --> 20:56.580
+Metric filter is just like, like we have CP utilization
+
+20:56.580 --> 20:58.770
+metrics for EC2 instance, right?
+
+20:58.770 --> 21:02.343
+So you can create your own metric based from this log data.
+
+21:03.690 --> 21:08.690
+So let's say from this, okay, maybe I am looking in that,
+
+21:09.510 --> 21:13.733
+an IP address, which is probably a hacker IP, okay?
+
+21:14.610 --> 21:16.173
+That's a test pattern.
+
+21:19.020 --> 21:20.580
+Okay, so I get, okay?
+
+21:20.580 --> 21:22.620
+So I'm looking for this IP in the log file, right?
+
+21:22.620 --> 21:25.143
+So it's showing me all this entry. I go next.
+
+21:27.090 --> 21:30.093
+Filter name, I'll say, this is in hacker-ip.
+
+21:34.320 --> 21:37.920
+Metric name, also I'll give same metric namespace.
+
+21:37.920 --> 21:39.447
+Sorry, that's the namespace.
+
+21:40.853 --> 21:43.323
+I'll give metric namespace as hackers.
+
+21:46.410 --> 21:48.650
+Okay? Metric value, I will say...
+
+21:50.250 --> 21:53.867
+If I see it once, even for once, right?
+
+21:55.680 --> 21:58.980
+Then I know we should get the data,
+
+21:58.980 --> 22:00.543
+so created metric filter.
+
+22:02.130 --> 22:04.710
+So you have a metric and based on the metric,
+
+22:04.710 --> 22:07.560
+if you want you can create an alarm, all right?
+
+22:07.560 --> 22:10.470
+If this IP appears to be these many times,
+
+22:10.470 --> 22:12.060
+you get notification.
+
+22:12.060 --> 22:13.320
+Now just taking one example,
+
+22:13.320 --> 22:15.510
+you can create any kind of metric filter
+
+22:15.510 --> 22:18.150
+based on what you're looking in the log file.
+
+22:18.150 --> 22:22.710
+So you have seen, you can put just any log file
+
+22:22.710 --> 22:25.050
+in the configuration and you can stream any logs
+
+22:25.050 --> 22:27.360
+from your operating system to CloudWatch.
+
+22:27.360 --> 22:30.390
+And from CloudWatch you can do many other operation.
+
+22:30.390 --> 22:33.120
+Now one more thing in the logs I will show you,
+
+22:33.120 --> 22:34.980
+and then we'll end this video
+
+22:34.980 --> 22:38.040
+because for the other services
+
+22:38.040 --> 22:41.550
+you have the CloudWatch logs integration for RDS.
+
+22:41.550 --> 22:43.020
+Most of the services you'll have
+
+22:43.020 --> 22:44.640
+CloudWatch logs integration.
+
+22:44.640 --> 22:47.880
+You just put a check mark and the logs get streamed, right?
+
+22:47.880 --> 22:49.140
+For EC2 operating system,
+
+22:49.140 --> 22:51.750
+we have seen how to stream the logs to CloudWatch.
+
+22:51.750 --> 22:54.060
+Now there's also one more thing, load balancer,
+
+22:54.060 --> 22:57.660
+which can neither stream the logs to CloudWatch,
+
+22:57.660 --> 22:59.040
+nor it has an operating system.
+
+22:59.040 --> 23:04.040
+So how can we generate logs from load balancer
+
+23:04.470 --> 23:06.960
+and then save it somewhere?
+
+23:06.960 --> 23:09.270
+So for that let's create a load balancer
+
+23:09.270 --> 23:10.473
+for this web server.
+
+23:12.030 --> 23:14.280
+So you can go with application load balancer
+
+23:14.280 --> 23:16.470
+or classic load balancer, anything.
+
+23:16.470 --> 23:18.993
+I will go with classic load balancer quickly.
+
+23:19.950 --> 23:22.413
+So I'll say wave-elb.
+
+23:27.060 --> 23:31.413
+I will create a security group for this, wave-elb-sg.
+
+23:38.220 --> 23:40.863
+Health check, healthy threshold, I'll just keep two.
+
+23:41.940 --> 23:44.523
+Add instance, let's select our web server.
+
+23:52.020 --> 23:53.460
+Okay, so we have a load balancer.
+
+23:53.460 --> 23:57.060
+Now, this load balancer also generate access logs, right?
+
+23:57.060 --> 24:00.150
+If you scroll down you will see attributes access log,
+
+24:00.150 --> 24:02.580
+it's disabled, but you can enable that.
+
+24:02.580 --> 24:04.353
+You can say configure access log.
+
+24:05.310 --> 24:07.470
+Enable access log, you can select the interval.
+
+24:07.470 --> 24:10.440
+You have just two options, 60 minutes or five minutes.
+
+24:10.440 --> 24:14.040
+Let's say five minutes, and you give the S3 bucket.
+
+24:14.040 --> 24:16.380
+And the directory name inside that.
+
+24:16.380 --> 24:20.137
+So let's take the same S3 bucket, okay? And we give that.
+
+24:22.470 --> 24:25.020
+Inside that we'll give a directory name.
+
+24:25.020 --> 24:27.570
+So let's also create a directory inside that.
+
+24:27.570 --> 24:31.623
+Create folder. I will say elb-wave. That's all. Okay?
+
+24:35.760 --> 24:37.833
+Create folder. Elb-wave.
+
+24:40.254 --> 24:42.204
+All right, that's my folder name, okay?
+
+24:46.650 --> 24:47.940
+Okay, so that's the example.
+
+24:47.940 --> 24:52.150
+Now if I say save, it's going to throw me an error
+
+24:53.070 --> 24:55.320
+and that is because load balancer
+
+24:55.320 --> 24:57.990
+is trying to access the S3 bucket,
+
+24:57.990 --> 25:01.860
+but S3 bucket has its own ways of giving access.
+
+25:01.860 --> 25:05.370
+You can use your access key secret key, like an IAM user,
+
+25:05.370 --> 25:07.980
+or you can use roles from the EC2 instance.
+
+25:07.980 --> 25:11.370
+But for load balancer we cannot attach a role,
+
+25:11.370 --> 25:14.700
+neither can we log in inside that SSH
+
+25:14.700 --> 25:17.490
+and set the access keys, right?
+
+25:17.490 --> 25:20.550
+So the other way is setting access policies
+
+25:20.550 --> 25:22.320
+on the S3 bucket.
+
+25:22.320 --> 25:25.470
+Otherwise, you will not be able to send the logs.
+
+25:25.470 --> 25:29.010
+So on the S3 bucket in the permission section
+
+25:29.010 --> 25:32.010
+you have bucket policies, okay?
+
+25:32.010 --> 25:36.033
+So here you have to give some bucket policy there, edit,
+
+25:37.470 --> 25:38.670
+you have to give the bucket policy,
+
+25:38.670 --> 25:42.513
+which says allow the write access from the load balancer.
+
+25:43.620 --> 25:46.110
+So we'll see the documentation for that.
+
+25:46.110 --> 25:48.780
+So enable access logs for your classic load balancer.
+
+25:48.780 --> 25:50.400
+If you just do a simple Google,
+
+25:50.400 --> 25:52.083
+you will find this documentation.
+
+25:56.910 --> 25:59.310
+Okay, so in this documentation it says first
+
+25:59.310 --> 26:02.700
+you create a bucket and attach a policy to your S3 bucket.
+
+26:02.700 --> 26:04.053
+Let's see the policy.
+
+26:05.430 --> 26:07.530
+Okay, so this is the policy.
+
+26:07.530 --> 26:12.530
+And let me copy this and take it to Notepad.
+
+26:12.570 --> 26:15.043
+More specifically, Notepad++.
+
+26:16.620 --> 26:20.373
+Okay, I will save this file with an extension of json.
+
+26:21.824 --> 26:26.353
+I will say all types, say s3-policy.json.
+
+26:32.700 --> 26:34.067
+All right, the reason I saved it
+
+26:34.067 --> 26:36.210
+because then you get that colors and you get
+
+26:36.210 --> 26:39.510
+that cascading all those things, right?
+
+26:39.510 --> 26:41.250
+That's why I saved it.
+
+26:41.250 --> 26:44.910
+Okay, so S3 policy, let's understand it.
+
+26:44.910 --> 26:48.120
+So first, well it's in json format, okay?
+
+26:48.120 --> 26:52.050
+First you have version key. Its value will be this always.
+
+26:52.050 --> 26:55.650
+Statement, statements are like rules, okay?
+
+26:55.650 --> 26:58.833
+And it's list of rules, it's a square bracket, you see?
+
+27:00.990 --> 27:05.040
+A list of rules, so you have this one rule,
+
+27:05.040 --> 27:10.040
+that's the second one, and that's the third one, okay?
+
+27:10.140 --> 27:12.150
+So three rules you have.
+
+27:12.150 --> 27:16.080
+Effect allow. You can have allow and deny.
+
+27:16.080 --> 27:18.063
+We are specifically saying allow.
+
+27:18.930 --> 27:21.000
+Principle, a principle means who.
+
+27:21.000 --> 27:23.700
+Who is going to access, okay?
+
+27:23.700 --> 27:26.310
+In principle you say AWS, colon,
+
+27:26.310 --> 27:29.040
+and arn Amazon resource name.
+
+27:29.040 --> 27:30.931
+Amazon resource, basically,
+
+27:30.931 --> 27:35.931
+arn is basically part of your service for AWS.
+
+27:36.060 --> 27:40.620
+Okay? So this particular thing is going to access resource.
+
+27:40.620 --> 27:42.450
+This is the resource.
+
+27:42.450 --> 27:46.500
+And what will be the action? S3 PutObject. Okay?
+
+27:46.500 --> 27:48.720
+There are various other access.
+
+27:48.720 --> 27:50.910
+And here you have elb-account-id,
+
+27:50.910 --> 27:54.570
+load balancer account ID, colon, root.
+
+27:54.570 --> 27:58.500
+So load balancer account ID is region specific.
+
+27:58.500 --> 28:02.580
+Let's check the documentation. There you have, okay?
+
+28:02.580 --> 28:04.590
+Load balancer account ID.
+
+28:04.590 --> 28:09.590
+So our instance, or it's in us-east-2, so us-east-2 Ohio,
+
+28:11.070 --> 28:15.990
+that's the load balancer account ID, okay?
+
+28:15.990 --> 28:17.103
+So let's put that.
+
+28:20.130 --> 28:24.390
+Okay, then the arn of your bucket, AWS S3,
+
+28:24.390 --> 28:27.600
+then three colon bucket name slash prefix.
+
+28:27.600 --> 28:31.110
+Let's get that "bucket-name/prefix".
+
+28:39.300 --> 28:42.750
+Inside that "/AWSlogs" and "aws-account-id",
+
+28:42.750 --> 28:45.033
+so I'm going to give my AWS account ID here.
+
+28:46.410 --> 28:48.330
+Okay, I have given some fake account ID,
+
+28:48.330 --> 28:49.710
+I'm gonna change it that, okay?
+
+28:49.710 --> 28:53.310
+Change that later to my actual account ID.
+
+28:53.310 --> 28:55.020
+Okay, again, one more allow access
+
+28:55.020 --> 28:59.370
+for delivery logs service, again on the S3 bucket.
+
+28:59.370 --> 29:00.640
+So let's copy that
+
+29:04.470 --> 29:06.993
+Again over here 'til the end.
+
+29:09.600 --> 29:13.113
+Same, one more. You just have to give the bucket name here.
+
+29:17.910 --> 29:21.990
+Okay, this is "GetBucketAcl" for delivery log service.
+
+29:21.990 --> 29:25.113
+Okay, so this is the policy. Let's copy this policy.
+
+29:28.680 --> 29:31.410
+Okay, so go to your S3 bucket, edit bucket policy,
+
+29:31.410 --> 29:33.873
+and paste your bucket policy.
+
+29:35.250 --> 29:38.010
+Okay, and say save changes.
+
+29:38.010 --> 29:42.210
+If everything is good, you should be able to store the logs.
+
+29:42.210 --> 29:43.893
+Okay, let's try it once again.
+
+29:48.930 --> 29:53.930
+That's the bucket name slash, yeah, that's the bucket name.
+
+29:59.040 --> 30:01.680
+Bucket name slash the prefix enable.
+
+30:01.680 --> 30:03.843
+I'll say generate for every five minutes.
+
+30:05.400 --> 30:06.630
+All right, if you're able to save it
+
+30:06.630 --> 30:10.083
+that means you're policy, S3 policy's working.
+
+30:12.060 --> 30:14.220
+And yes, I'm able to save it.
+
+30:14.220 --> 30:17.460
+Now it should be also creating some test files.
+
+30:17.460 --> 30:22.460
+If we go to the S3 bucket, objects in elb-wave,
+
+30:22.830 --> 30:24.750
+you should see AWSLogs directory.
+
+30:24.750 --> 30:27.570
+So you should see a test log file.
+
+30:27.570 --> 30:30.180
+If you wait for five minutes
+
+30:30.180 --> 30:33.993
+then you should be able to see the ELB access log files.

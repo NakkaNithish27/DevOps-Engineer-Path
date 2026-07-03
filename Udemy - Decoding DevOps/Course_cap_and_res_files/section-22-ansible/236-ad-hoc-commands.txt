@@ -1,0 +1,805 @@
+WEBVTT
+
+00:02.730 --> 00:05.160
+Instructor: Okay, so we have all set.
+
+00:05.160 --> 00:08.580
+We have the inventory file and mentioning,
+
+00:08.580 --> 00:11.460
+which mentions all the detail about the targets
+
+00:11.460 --> 00:13.320
+and we tested the connection also.
+
+00:13.320 --> 00:16.893
+Now, let's copy the exercise3 with exercise4.
+
+00:18.500 --> 00:21.190
+We are actually not going to write any files
+
+00:22.710 --> 00:24.300
+in this exercise.
+
+00:24.300 --> 00:25.830
+We are going to execute commands.
+
+00:25.830 --> 00:29.520
+These commands are called as ad hoc commands.
+
+00:29.520 --> 00:30.510
+You've already seen that.
+
+00:30.510 --> 00:32.340
+The ping module that we executed,
+
+00:32.340 --> 00:34.023
+that was an ad hoc command.
+
+00:35.160 --> 00:36.510
+Let's look at the documentation,
+
+00:36.510 --> 00:39.690
+introduction to ad hoc commands.
+
+00:39.690 --> 00:41.730
+Now, I love this feature of Ansible.
+
+00:41.730 --> 00:45.450
+I have used many configuration management tools.
+
+00:45.450 --> 00:48.270
+And every configuration management tool or automation tool,
+
+00:48.270 --> 00:51.000
+we write scripts with its own format.
+
+00:51.000 --> 00:54.030
+In Ansible, we use YAML format.
+
+00:54.030 --> 00:56.040
+We cannot call them scripts also,
+
+00:56.040 --> 00:58.590
+but just for understanding purpose.
+
+00:58.590 --> 01:01.830
+Ansible scripts are called as playbooks.
+
+01:01.830 --> 01:03.810
+We'll see it in the next lecture
+
+01:03.810 --> 01:05.220
+and it's written in YAML format.
+
+01:05.220 --> 01:07.140
+We mentioned all the details, right?
+
+01:07.140 --> 01:09.870
+But what if you want to execute something very quickly
+
+01:09.870 --> 01:12.060
+like maybe install a package or do something?
+
+01:12.060 --> 01:14.190
+It's not a good practice.
+
+01:14.190 --> 01:16.980
+Everything should be through the code,
+
+01:16.980 --> 01:19.230
+so you can version-control it
+
+01:19.230 --> 01:21.510
+and keep it in your repositories, right?
+
+01:21.510 --> 01:23.970
+So everything should be version-controlled.
+
+01:23.970 --> 01:26.130
+But sometimes, something needs to be done quickly
+
+01:26.130 --> 01:28.320
+and we can use Ansible ad hoc commands.
+
+01:28.320 --> 01:30.120
+Basically, whatever we write,
+
+01:30.120 --> 01:31.110
+playbook instead of that,
+
+01:31.110 --> 01:34.260
+we can run that in the command line, right?
+
+01:34.260 --> 01:35.940
+It says ad hoc commands are great
+
+01:35.940 --> 01:38.730
+for task you repeat rarely, right?
+
+01:38.730 --> 01:40.980
+For example, if you want to power-off all the machines
+
+01:40.980 --> 01:42.840
+in your lab for Christmas vacation,
+
+01:42.840 --> 01:45.960
+you could execute a quick one-liner in Ansible
+
+01:45.960 --> 01:48.063
+without writing a playbook.
+
+01:49.050 --> 01:52.530
+The pattern is same that we used for the ping module.
+
+01:52.530 --> 01:53.670
+So here's one example,
+
+01:53.670 --> 01:56.280
+ansible atlanta, -a
+
+01:56.280 --> 02:00.570
+and we are passing the command reboot, /sbin/reboot.
+
+02:00.570 --> 02:05.010
+So all the machines in that group will get rebooted
+
+02:05.010 --> 02:08.580
+or you can pass power off or other commands
+
+02:08.580 --> 02:10.350
+that we are going to see now, okay?
+
+02:10.350 --> 02:11.430
+So what about the modules?
+
+02:11.430 --> 02:14.190
+Okay, so we have seen ping module.
+
+02:14.190 --> 02:16.320
+That's the first module we've seen, the only module.
+
+02:16.320 --> 02:20.760
+There are many modules like you have ansible.builtin.copy.
+
+02:20.760 --> 02:23.463
+You mention the source, you mention the destination,
+
+02:24.480 --> 02:25.387
+okay?
+
+02:25.387 --> 02:26.220
+Some examples are here,
+
+02:26.220 --> 02:28.350
+file module, which can change the properties
+
+02:28.350 --> 02:30.960
+of the file or create folders.
+
+02:30.960 --> 02:32.730
+Managing packages, you can use,
+
+02:32.730 --> 02:36.573
+yum module or apt module,
+
+02:37.770 --> 02:40.080
+a user module to add or remove
+
+02:40.080 --> 02:41.970
+or change properties of a user,
+
+02:41.970 --> 02:46.200
+service module to start, stop services, right?
+
+02:46.200 --> 02:48.510
+So first, let's go through these basic modules
+
+02:48.510 --> 02:50.580
+and then I'm going to take you through the documentation.
+
+02:50.580 --> 02:51.750
+Don't worry, you don't need
+
+02:51.750 --> 02:54.090
+to by-heart these module names
+
+02:54.090 --> 02:56.370
+as clear-cut documentation will go through them,
+
+02:56.370 --> 02:58.263
+but let's first test this.
+
+03:00.960 --> 03:02.790
+Okay, so I'm in exercise4,
+
+03:02.790 --> 03:07.790
+I'm going to say, ansible webservers.
+
+03:08.370 --> 03:09.203
+You know what?
+
+03:09.203 --> 03:13.800
+First, I'll go with just web01 -m
+
+03:13.800 --> 03:15.210
+and I want to install a package.
+
+03:15.210 --> 03:18.193
+So I'm going to use the module ansible.builtin.yum.
+
+03:23.160 --> 03:24.540
+Now what to do with yum?
+
+03:24.540 --> 03:26.490
+Well, -a arguments,
+
+03:26.490 --> 03:29.160
+passing the arguments, in double quotes.
+
+03:29.160 --> 03:31.290
+Argument, name equal
+
+03:31.290 --> 03:34.360
+to the name of the package, I'll say httpd
+
+03:35.910 --> 03:38.850
+and state should be,
+
+03:38.850 --> 03:41.550
+wait, state should be present.
+
+03:41.550 --> 03:43.770
+Don't worry about by-hearting these things.
+
+03:43.770 --> 03:45.270
+As I told you, the documentation,
+
+03:45.270 --> 03:47.160
+you have all the arguments mentioned there,
+
+03:47.160 --> 03:48.600
+you can use them.
+
+03:48.600 --> 03:52.320
+So different modules may have different arguments.
+
+03:52.320 --> 03:55.170
+So name for yum is the name of the package.
+
+03:55.170 --> 03:57.900
+State, you have to mention present or absent.
+
+03:57.900 --> 04:00.933
+We'll look at all the other options that we can pass to it.
+
+04:01.890 --> 04:02.723
+And of course,
+
+04:02.723 --> 04:06.300
+I have to pass the inventory file path, -i inventory.
+
+04:06.300 --> 04:08.610
+Now when I run this command, it's going to throw an error.
+
+04:08.610 --> 04:09.443
+Take a look.
+
+04:13.410 --> 04:14.243
+Okay, there.
+
+04:14.243 --> 04:15.873
+Now read the error.
+
+04:16.770 --> 04:18.690
+First of all, it says failed.
+
+04:18.690 --> 04:19.597
+What's the message?
+
+04:19.597 --> 04:23.670
+"This command has to be run under the root user."
+
+04:23.670 --> 04:24.503
+Right.
+
+04:24.503 --> 04:26.280
+We are using ec2-user, right?
+
+04:26.280 --> 04:27.530
+Check the inventory file.
+
+04:30.930 --> 04:33.060
+The username is ec2-user.
+
+04:33.060 --> 04:36.300
+Now, that user has a privilege to do pseudo,
+
+04:36.300 --> 04:37.440
+but it is not going to do,
+
+04:37.440 --> 04:39.630
+until and unless you tell.
+
+04:39.630 --> 04:42.030
+So how do we tell, or how do we say?
+
+04:42.030 --> 04:43.800
+Well, same command,
+
+04:43.800 --> 04:47.133
+at the end you say, --become,
+
+04:49.221 --> 04:52.410
+-: -become will actually escalate the privilege.
+
+04:52.410 --> 04:55.350
+It'll run the pseudo command, pseudo yum install like that
+
+04:55.350 --> 04:57.360
+or any, whatever module you mentioned there
+
+04:57.360 --> 04:58.770
+with pseudo privilege.
+
+04:58.770 --> 04:59.603
+Let's see now.
+
+05:00.930 --> 05:02.700
+Okay, now look at the output.
+
+05:02.700 --> 05:04.740
+Changed, right?
+
+05:04.740 --> 05:06.720
+It made some changes to web01,
+
+05:06.720 --> 05:08.310
+what was that, results.
+
+05:08.310 --> 05:11.280
+And telling you, installed, what all it has installed.
+
+05:11.280 --> 05:12.630
+Right?
+
+05:12.630 --> 05:14.313
+Now, I'm going to do the same.
+
+05:15.240 --> 05:17.793
+Once again, just rerun the command.
+
+05:19.980 --> 05:22.020
+But now instead of web01,
+
+05:22.020 --> 05:24.063
+I'm going to give the group name.
+
+05:27.714 --> 05:28.547
+Okay?
+
+05:28.547 --> 05:29.380
+Now observe.
+
+05:29.380 --> 05:30.390
+We did it for web01
+
+05:30.390 --> 05:35.390
+and now webservers contains web01 plus web02.
+
+05:36.000 --> 05:37.320
+So what happens now?
+
+05:37.320 --> 05:38.160
+What is the output?
+
+05:38.160 --> 05:38.993
+Look at the output.
+
+05:38.993 --> 05:40.173
+It's important to note.
+
+05:44.790 --> 05:45.736
+Right?
+
+05:45.736 --> 05:46.569
+Let's scroll up.
+
+05:46.569 --> 05:48.810
+Web01, it says success as the message,
+
+05:48.810 --> 05:50.460
+changed is false.
+
+05:50.460 --> 05:53.523
+If you check previously, changed was true.
+
+05:55.290 --> 05:56.123
+Message?
+
+05:56.123 --> 05:57.420
+"Nothing to do," right?
+
+05:57.420 --> 06:01.560
+That means web01 is in the same state
+
+06:01.560 --> 06:03.390
+that you are mentioning
+
+06:03.390 --> 06:07.290
+or its configuration is same that you are trying to apply.
+
+06:07.290 --> 06:10.230
+So this is configuration management tool.
+
+06:10.230 --> 06:12.230
+If the target is in the same state,
+
+06:12.230 --> 06:15.690
+it is not going to rerun the task for you.
+
+06:15.690 --> 06:16.687
+It is going to simply say,
+
+06:16.687 --> 06:17.910
+"Okay, it's in the same state.
+
+06:17.910 --> 06:20.040
+There's nothing to do, you can continue."
+
+06:20.040 --> 06:22.650
+But if the target state is different
+
+06:22.650 --> 06:24.453
+from what you are mentioning,
+
+06:25.704 --> 06:29.160
+then it is going to apply and then you'll see changed.
+
+06:29.160 --> 06:31.350
+So web02 was not in the same state.
+
+06:31.350 --> 06:35.160
+It has applied the changes.
+
+06:35.160 --> 06:37.323
+And now let's run this command once again.
+
+06:40.470 --> 06:42.450
+01, success,
+
+06:42.450 --> 06:43.410
+web02, success,
+
+06:43.410 --> 06:44.490
+changed, false.
+
+06:44.490 --> 06:47.340
+Look at this, changed, false, okay?
+
+06:47.340 --> 06:49.710
+That means the target is in the same state
+
+06:49.710 --> 06:50.700
+that you're mentioning.
+
+06:50.700 --> 06:54.060
+This is called as configuration management.
+
+06:54.060 --> 06:55.470
+And this is the biggest different
+
+06:55.470 --> 06:58.470
+from scripts and configuration management.
+
+06:58.470 --> 07:00.360
+With scripts, the automation, what you do,
+
+07:00.360 --> 07:02.400
+it simply reapplies.
+
+07:02.400 --> 07:03.233
+It does not check,
+
+07:03.233 --> 07:06.003
+until and unless, you add some intelligence to it.
+
+07:07.230 --> 07:09.120
+It'll simply reapply the change.
+
+07:09.120 --> 07:10.800
+But in configuration management tool,
+
+07:10.800 --> 07:13.800
+it is going to compare the state.
+
+07:13.800 --> 07:14.970
+Focus on my words,
+
+07:14.970 --> 07:18.960
+it is going to compare the state.
+
+07:18.960 --> 07:21.330
+If there is a difference, then it'll apply.
+
+07:21.330 --> 07:25.260
+Now difference could be at the source or at the destination.
+
+07:25.260 --> 07:26.093
+What do I mean?
+
+07:26.093 --> 07:27.210
+Well, check this.
+
+07:27.210 --> 07:28.290
+Now, I'm going to change
+
+07:28.290 --> 07:33.047
+from state=present to state=absent, right?
+
+07:34.380 --> 07:36.580
+Now there is a difference between the state.
+
+07:38.970 --> 07:40.800
+So whatever now you're trying to apply,
+
+07:40.800 --> 07:43.710
+if it finds difference, it is going to apply those.
+
+07:43.710 --> 07:46.230
+So package was not absent, it was present.
+
+07:46.230 --> 07:48.660
+So now it removed it, okay?
+
+07:48.660 --> 07:50.793
+Let's run it again with present.
+
+07:56.340 --> 07:57.173
+Right?
+
+07:57.173 --> 07:58.006
+So someone ask you difference
+
+07:58.006 --> 08:00.930
+between scripting and configuration management,
+
+08:00.930 --> 08:03.030
+so you can tell this.
+
+08:03.030 --> 08:06.330
+Configuration management tools maintain the state
+
+08:06.330 --> 08:07.320
+of the target.
+
+08:07.320 --> 08:10.410
+And you can use this word called as idempotent.
+
+08:10.410 --> 08:12.840
+Configuration management tools are idempotent.
+
+08:12.840 --> 08:14.011
+What is idempotent?
+
+08:14.011 --> 08:16.050
+It's the same thing what I was talking about.
+
+08:16.050 --> 08:18.600
+If the target is in a different state,
+
+08:18.600 --> 08:20.160
+then only it'll apply the changes.
+
+08:20.160 --> 08:21.330
+If it's in the same state,
+
+08:21.330 --> 08:23.520
+it'll not apply the changes
+
+08:23.520 --> 08:25.470
+and your scripts or your commands are also not going
+
+08:25.470 --> 08:26.670
+to fail.
+
+08:26.670 --> 08:29.610
+Okay, now let me quickly write a few other commands.
+
+08:29.610 --> 08:31.203
+I'm going to clear the screen.
+
+08:34.050 --> 08:38.607
+Ansible.builtin.service, so service module,
+
+08:41.460 --> 08:43.680
+name of the service, httpd,
+
+08:43.680 --> 08:45.450
+not the package name, it's the service name
+
+08:45.450 --> 08:50.450
+and state, started enabled colon, sorry, equal to yes.
+
+08:52.770 --> 08:55.151
+So it'll do systemctl start httpd
+
+08:55.151 --> 08:57.933
+and systemctl enable httpd, both.
+
+09:01.440 --> 09:02.793
+And the huge output.
+
+09:07.530 --> 09:08.823
+Running it once again.
+
+09:09.900 --> 09:14.070
+This time, the changed value will be false,
+
+09:14.070 --> 09:16.260
+because it's in the same stage, right?
+
+09:16.260 --> 09:19.290
+Okay, one more task.
+
+09:19.290 --> 09:20.850
+This time, we're going to copy a file.
+
+09:20.850 --> 09:22.740
+But for that, we'll create some file first.
+
+09:22.740 --> 09:25.320
+So I'm going to create a directory here,
+
+09:25.320 --> 09:26.153
+or you know what?
+
+09:26.153 --> 09:26.986
+I'll create it here itself.
+
+09:26.986 --> 09:29.793
+I'll say, vim index.html.
+
+09:31.200 --> 09:34.467
+I will say, "This is from ansible,"
+
+09:36.384 --> 09:39.290
+or "This is managed by ansible."
+
+09:43.020 --> 09:45.870
+Okay, so index.html file,
+
+09:45.870 --> 09:47.970
+we are going to push it to webserver
+
+09:47.970 --> 09:50.970
+at var/www/html location.
+
+09:50.970 --> 09:53.200
+So module name is copy
+
+09:55.140 --> 09:57.590
+and I'm going to remove all these arguments here.
+
+10:04.410 --> 10:07.080
+Okay, src, source, index.html,
+
+10:07.080 --> 10:08.280
+which is in the current directory,
+
+10:08.280 --> 10:12.090
+destination, var/www/html/index.html.
+
+10:12.090 --> 10:13.650
+You have to mention the complete path,
+
+10:13.650 --> 10:15.720
+including the file name, okay?
+
+10:15.720 --> 10:16.563
+Let's hit it.
+
+10:17.850 --> 10:18.683
+Okay, you see,
+
+10:18.683 --> 10:20.220
+changed, true.
+
+10:20.220 --> 10:22.830
+Now, I'm going to rerun that.
+
+10:22.830 --> 10:24.030
+What is going to happen?
+
+10:24.030 --> 10:27.150
+I have not made any change in the source or destination.
+
+10:27.150 --> 10:30.450
+So it's simply going to say changed as false.
+
+10:30.450 --> 10:31.620
+Right.
+
+10:31.620 --> 10:33.270
+But if I make any change
+
+10:33.270 --> 10:37.710
+to source or the destination, right?
+
+10:37.710 --> 10:39.330
+Let me add, you know what?
+
+10:39.330 --> 10:43.980
+I'll add some extra full-stops here, all right?
+
+10:43.980 --> 10:45.840
+A single change, single line space,
+
+10:45.840 --> 10:47.523
+anything, any difference,
+
+10:49.410 --> 10:50.460
+it is going to find out
+
+10:50.460 --> 10:52.830
+and it is going to reapply the change, okay?
+
+10:52.830 --> 10:54.960
+Let's look at the website also now.
+
+10:54.960 --> 10:56.850
+Okay, let's first go to the Security group
+
+10:56.850 --> 11:00.360
+of these instances,
+
+11:00.360 --> 11:02.250
+Edit inbound rule
+
+11:02.250 --> 11:07.233
+and we'll add rule here for 80 from anywhere,
+
+11:09.420 --> 11:10.293
+save rule,
+
+11:12.900 --> 11:15.300
+or you can say 80 from my IP, right?
+
+11:15.300 --> 11:18.810
+And let's get the IP of any of the web server,
+
+11:18.810 --> 11:21.210
+copy its public IP, put it in the browser
+
+11:21.210 --> 11:24.120
+and you should see the website,
+
+11:24.120 --> 11:27.930
+which is just the index.html file, right?
+
+11:27.930 --> 11:28.763
+Now, go ahead,
+
+11:28.763 --> 11:30.570
+make changes to index.html file,
+
+11:30.570 --> 11:32.970
+push it, observe the changes.
+
+11:32.970 --> 11:35.490
+This is configuration management tool.
+
+11:35.490 --> 11:38.430
+It maintains the configuration of the target.
+
+11:38.430 --> 11:40.860
+Now, we are just running ad hoc command.
+
+11:40.860 --> 11:43.350
+The much better picture you'll get in the next lecture
+
+11:43.350 --> 11:46.410
+when we learn how to write playbooks.
+
+11:46.410 --> 11:50.013
+So wrap this up and join me in the next lecture.

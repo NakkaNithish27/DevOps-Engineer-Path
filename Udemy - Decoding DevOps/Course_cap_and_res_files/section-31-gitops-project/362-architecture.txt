@@ -1,0 +1,542 @@
+WEBVTT
+
+1
+00:00:00.360 --> 00:00:03.000
+<v Instructor>So this is our project's</v>
+
+2
+00:00:03.000 --> 00:00:04.800
+GitHub's pipeline flow.
+
+3
+00:00:04.800 --> 00:00:07.740
+But this is also a general GitHub's flow.
+
+4
+00:00:07.740 --> 00:00:09.120
+You see two parts over here.
+
+5
+00:00:09.120 --> 00:00:10.680
+Left-hand side you see GitHub,
+
+6
+00:00:10.680 --> 00:00:13.260
+right-hand side you see AWS.
+
+7
+00:00:13.260 --> 00:00:15.930
+That is because we're using GitHub and AWS,
+
+8
+00:00:15.930 --> 00:00:18.060
+but instead of GitHub, it could be GitLab
+
+9
+00:00:18.060 --> 00:00:21.540
+or any other Git repository hosting platform.
+
+10
+00:00:21.540 --> 00:00:24.540
+Or instead of AWS, it could be GCP or Azure
+
+11
+00:00:24.540 --> 00:00:26.820
+or any other cloud provider.
+
+12
+00:00:26.820 --> 00:00:29.940
+So on GitHub, you see three parts over here.
+
+13
+00:00:29.940 --> 00:00:33.510
+These three parts represents three Git repositories.
+
+14
+00:00:33.510 --> 00:00:36.120
+The first one is a vprofile-infra,
+
+15
+00:00:36.120 --> 00:00:38.130
+that's the name we will be giving,
+
+16
+00:00:38.130 --> 00:00:41.490
+which will contain the Terraform source code.
+
+17
+00:00:41.490 --> 00:00:44.370
+And on GitHub we have GitHub Actions,
+
+18
+00:00:44.370 --> 00:00:46.020
+that is the pipeline,
+
+19
+00:00:46.020 --> 00:00:48.510
+which will make sure these changes are in sync
+
+20
+00:00:48.510 --> 00:00:52.983
+with your EKS cluster on AWS, Kubernetes cluster.
+
+21
+00:00:55.080 --> 00:00:58.230
+The next repository will be vprofile-app.
+
+22
+00:00:58.230 --> 00:00:59.280
+That's the name we will give.
+
+23
+00:00:59.280 --> 00:01:02.610
+It will contain the vprofile application source code,
+
+24
+00:01:02.610 --> 00:01:05.010
+the Java source code.
+
+25
+00:01:05.010 --> 00:01:08.100
+And the third one will be vprofile-helm repository.
+
+26
+00:01:08.100 --> 00:01:10.650
+This will contain the Helm charts
+
+27
+00:01:10.650 --> 00:01:13.350
+and Argo CD manifests,
+
+28
+00:01:13.350 --> 00:01:15.810
+which Argo CD will keep checking
+
+29
+00:01:15.810 --> 00:01:20.810
+and make sure the application configuration is in sync
+
+30
+00:01:21.150 --> 00:01:22.440
+with the Helm charts
+
+31
+00:01:22.440 --> 00:01:24.640
+that you have defined in the Git repository.
+
+32
+00:01:25.680 --> 00:01:29.610
+So let's get started with understanding every part of this,
+
+33
+00:01:29.610 --> 00:01:31.770
+starting with vprofile-app.
+
+34
+00:01:31.770 --> 00:01:35.400
+And before this, let me make this thing absolutely clear.
+
+35
+00:01:35.400 --> 00:01:37.931
+We have three Git repository here,
+
+36
+00:01:37.931 --> 00:01:41.760
+vprofile-infra, vprofile-helm, and vprofile-app.
+
+37
+00:01:41.760 --> 00:01:43.440
+In this we have two pipeline.
+
+38
+00:01:43.440 --> 00:01:46.290
+One will be for vprofile-infra source code,
+
+39
+00:01:46.290 --> 00:01:48.300
+the Terraform pipeline.
+
+40
+00:01:48.300 --> 00:01:51.000
+That will be managed by GitHub Actions.
+
+41
+00:01:51.000 --> 00:01:53.850
+The other one is vprofile-app.
+
+42
+00:01:53.850 --> 00:01:57.240
+Here also will have a GitHub Actions pipeline.
+
+43
+00:01:57.240 --> 00:01:59.340
+So three repositories, two pipeline.
+
+44
+00:01:59.340 --> 00:02:03.360
+This will be just a repository, vprofile-helm repository,
+
+45
+00:02:03.360 --> 00:02:07.260
+because Argo CD is going to fetch the changes and apply.
+
+46
+00:02:07.260 --> 00:02:09.420
+Okay, so let's get started with this one.
+
+47
+00:02:09.420 --> 00:02:13.680
+This one we did so many times, the same CI/CD pipeline.
+
+48
+00:02:13.680 --> 00:02:15.990
+This is a continuous integration pipeline
+
+49
+00:02:15.990 --> 00:02:17.250
+and continuous delivery also.
+
+50
+00:02:17.250 --> 00:02:20.520
+But delivery will be for the images.
+
+51
+00:02:20.520 --> 00:02:22.740
+So in this, the first part,
+
+52
+00:02:22.740 --> 00:02:25.950
+so you know in Git repository we have branches.
+
+53
+00:02:25.950 --> 00:02:27.570
+There will be one main branch,
+
+54
+00:02:27.570 --> 00:02:29.940
+generally we call it as main branch,
+
+55
+00:02:29.940 --> 00:02:32.040
+and developer will create other branches
+
+56
+00:02:32.040 --> 00:02:36.330
+where they'll write new feature or new bug fixes.
+
+57
+00:02:36.330 --> 00:02:38.820
+So let's say developer created a feature branch,
+
+58
+00:02:38.820 --> 00:02:40.050
+has written a feature
+
+59
+00:02:40.050 --> 00:02:44.370
+and committed the source code into this Git repository.
+
+60
+00:02:44.370 --> 00:02:45.960
+Now, this will not do anything.
+
+61
+00:02:45.960 --> 00:02:48.570
+This is not going to trigger any pipeline.
+
+62
+00:02:48.570 --> 00:02:51.180
+When there is a pull request
+
+63
+00:02:51.180 --> 00:02:55.200
+to merge the feature branch with the main branch,
+
+64
+00:02:55.200 --> 00:02:58.200
+whenever there is a PR, pull request,
+
+65
+00:02:58.200 --> 00:03:00.510
+then this pipeline will get triggered.
+
+66
+00:03:00.510 --> 00:03:02.880
+It's going to do the same thing,
+
+67
+00:03:02.880 --> 00:03:05.640
+build and execute unit test,
+
+68
+00:03:05.640 --> 00:03:07.620
+do Checkstyle code analysis,
+
+69
+00:03:07.620 --> 00:03:10.110
+do code analysis with SonarQube,
+
+70
+00:03:10.110 --> 00:03:14.790
+upload all this result to the SonarQube server,
+
+71
+00:03:14.790 --> 00:03:17.580
+which will be an EC2 instance in our case.
+
+72
+00:03:17.580 --> 00:03:19.020
+Here, quality check will be done
+
+73
+00:03:19.020 --> 00:03:22.080
+and the response will be sent back to the Sonar,
+
+74
+00:03:22.080 --> 00:03:23.460
+sorry to the pipeline.
+
+75
+00:03:23.460 --> 00:03:26.940
+Once the pipeline receives that this quality is good,
+
+76
+00:03:26.940 --> 00:03:29.190
+this pipeline will stop.
+
+77
+00:03:29.190 --> 00:03:31.110
+So pull request
+
+78
+00:03:31.110 --> 00:03:35.220
+will complete the continuous integration pipeline.
+
+79
+00:03:35.220 --> 00:03:37.230
+When this is approved
+
+80
+00:03:37.230 --> 00:03:39.930
+and when this is merged to the main branch,
+
+81
+00:03:39.930 --> 00:03:42.420
+so when the pull request is approved
+
+82
+00:03:42.420 --> 00:03:44.790
+and it is merged to main branch,
+
+83
+00:03:44.790 --> 00:03:46.050
+which will be only after there is
+
+84
+00:03:46.050 --> 00:03:48.030
+a good quality of this code,
+
+85
+00:03:48.030 --> 00:03:50.820
+then when the request is merged,
+
+86
+00:03:50.820 --> 00:03:53.550
+then it is going to build the Docker image
+
+87
+00:03:53.550 --> 00:03:54.780
+from the source code
+
+88
+00:03:54.780 --> 00:03:58.320
+and push this Docker image to Amazon ECR.
+
+89
+00:03:58.320 --> 00:04:00.510
+So this new image will be with new tag
+
+90
+00:04:00.510 --> 00:04:05.220
+and this tag information will be updated in the Helm chart.
+
+91
+00:04:05.220 --> 00:04:08.490
+In the Helm chart we'll have values.yaml file.
+
+92
+00:04:08.490 --> 00:04:09.810
+So this is a Helm repository.
+
+93
+00:04:09.810 --> 00:04:11.850
+You have charts folder in that.
+
+94
+00:04:11.850 --> 00:04:14.460
+In this you have vprofile folder.
+
+95
+00:04:14.460 --> 00:04:17.640
+And in the charts, here you have values.yaml file.
+
+96
+00:04:17.640 --> 00:04:21.390
+So this is another repository, Helm repository.
+
+97
+00:04:21.390 --> 00:04:23.160
+In this values.yaml file,
+
+98
+00:04:23.160 --> 00:04:27.600
+the image name and the image tag will be updated.
+
+99
+00:04:27.600 --> 00:04:30.060
+So the image that was pushed to ECR,
+
+100
+00:04:30.060 --> 00:04:31.920
+the same image name will be updated
+
+101
+00:04:31.920 --> 00:04:34.680
+into this Helm repository.
+
+102
+00:04:34.680 --> 00:04:37.590
+And there are also Argo manifests
+
+103
+00:04:37.590 --> 00:04:39.270
+that created an Argo project
+
+104
+00:04:39.270 --> 00:04:42.090
+that is maintaining your vprofile application.
+
+105
+00:04:42.090 --> 00:04:43.860
+This Argo CD controller
+
+106
+00:04:43.860 --> 00:04:47.130
+will be continuously watching this Git repository.
+
+107
+00:04:47.130 --> 00:04:49.230
+In our case, it will be checking the Helm charts.
+
+108
+00:04:49.230 --> 00:04:50.640
+If there is any difference,
+
+109
+00:04:50.640 --> 00:04:54.150
+it is going to apply that difference to your application,
+
+110
+00:04:54.150 --> 00:04:58.293
+like updating the deployment of your vprofile application.
+
+111
+00:04:59.190 --> 00:05:00.540
+So this is the whole flow.
+
+112
+00:05:00.540 --> 00:05:02.790
+Terraform, we are going to get into this
+
+113
+00:05:02.790 --> 00:05:04.410
+once again later in the course
+
+114
+00:05:04.410 --> 00:05:06.360
+when we write the Terraform source code,
+
+115
+00:05:06.360 --> 00:05:08.190
+that will be the at the end.
+
+116
+00:05:08.190 --> 00:05:10.170
+So this will be our steps.
+
+117
+00:05:10.170 --> 00:05:13.650
+First we are going to create these three Git repositories.
+
+118
+00:05:13.650 --> 00:05:18.000
+Then we put the Helm charts into the Helm repository,
+
+119
+00:05:18.000 --> 00:05:20.340
+and there is no pipeline over here.
+
+120
+00:05:20.340 --> 00:05:22.800
+Once we have that ready, once we have the Helm chart,
+
+121
+00:05:22.800 --> 00:05:25.050
+the values.yaml file, everything ready,
+
+122
+00:05:25.050 --> 00:05:26.490
+then we are going to start working
+
+123
+00:05:26.490 --> 00:05:29.340
+on our vprofile application pipeline,
+
+124
+00:05:29.340 --> 00:05:30.780
+which is going to test the source code,
+
+125
+00:05:30.780 --> 00:05:32.880
+build the image, update to ECR,
+
+126
+00:05:32.880 --> 00:05:37.140
+and then at the end update the values.yaml file over here.
+
+127
+00:05:37.140 --> 00:05:38.130
+Once we are done till here,
+
+128
+00:05:38.130 --> 00:05:39.390
+then we are going to start writing
+
+129
+00:05:39.390 --> 00:05:41.160
+the Terraform source code,
+
+130
+00:05:41.160 --> 00:05:45.840
+create our Kubernetes cluster, deploy our Argo manifest,
+
+131
+00:05:45.840 --> 00:05:48.360
+and then everything will come into the play.
+
+132
+00:05:48.360 --> 00:05:49.470
+So in next lecture,
+
+133
+00:05:49.470 --> 00:05:52.170
+we are going to create these three Git repository
+
+134
+00:05:52.170 --> 00:05:55.080
+and sync it with our local system.
+
+135
+00:05:55.080 --> 00:05:56.280
+See you in the next one.
+

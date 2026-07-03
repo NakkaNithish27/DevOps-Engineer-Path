@@ -1,0 +1,259 @@
+WEBVTT
+
+00:00.900 --> 00:02.010
+Instructor: Hello and welcome.
+
+00:02.010 --> 00:04.950
+In this lecturem we will talk about how to create
+
+00:04.950 --> 00:09.570
+a virtual machine so we can practice Linux
+
+00:09.570 --> 00:11.610
+in the next section.
+
+00:11.610 --> 00:16.320
+So we will be creating two Linux VMs in this section.
+
+00:16.320 --> 00:19.323
+One is CentOS, the other one is Ubuntu.
+
+00:20.790 --> 00:24.460
+These are two very popular flavor of Linux operating system
+
+00:25.710 --> 00:29.580
+and we'll talk about their differences much in detail
+
+00:29.580 --> 00:31.293
+in Linux section.
+
+00:32.730 --> 00:35.940
+So there are two methods of creating VMs.
+
+00:35.940 --> 00:37.953
+One is manual,
+
+00:39.540 --> 00:44.540
+where we will see each and every step of creating VM
+
+00:44.580 --> 00:46.800
+and installing operating system on that.
+
+00:46.800 --> 00:51.800
+This will be wizard-based where we select multiple options
+
+00:52.590 --> 00:54.570
+in order to create VMs.
+
+00:54.570 --> 00:57.990
+The second option is automated.
+
+00:57.990 --> 01:00.090
+You can also automatically create VMs,
+
+01:00.090 --> 01:01.593
+which will be very simpler.
+
+01:02.490 --> 01:06.150
+You create a text file, you issue a command,
+
+01:06.150 --> 01:08.073
+and the VM will be up and running.
+
+01:09.600 --> 01:12.993
+So why not we directly go with the automated method?
+
+01:14.040 --> 01:16.203
+It's fast, it's simple, right?
+
+01:18.360 --> 01:20.973
+Let me tell you the most important thumb rule.
+
+01:21.900 --> 01:23.700
+If you want to automate something,
+
+01:23.700 --> 01:27.033
+make sure you know how to do it manually first.
+
+01:28.680 --> 01:32.070
+When you do a task manually, you know each and every step,
+
+01:32.070 --> 01:33.903
+you know the entire recipe.
+
+01:35.220 --> 01:39.040
+And automation is simply assembling all these steps together
+
+01:40.140 --> 01:44.280
+in a logical way by using a tool, or scripting,
+
+01:44.280 --> 01:45.843
+or any programming language.
+
+01:46.980 --> 01:51.063
+Never, ever forget this rule in your DevOps career.
+
+01:52.710 --> 01:56.550
+If you get a task to automate something, first,
+
+01:56.550 --> 01:58.533
+do those things manually.
+
+02:00.510 --> 02:02.460
+Okay, let's talk about the requirement.
+
+02:03.480 --> 02:05.160
+You need a 64 bit computer
+
+02:05.160 --> 02:06.993
+with high speed internet connection,
+
+02:08.040 --> 02:11.410
+and your computer can have Windows 10, 11,
+
+02:11.410 --> 02:14.943
+MacOS with Intel chip or M1 chip, or even Linux.
+
+02:16.290 --> 02:18.090
+Even if you have a Linux desktop,
+
+02:18.090 --> 02:21.120
+still, you are going to create Vms
+
+02:21.120 --> 02:23.403
+with Linux operating system on that.
+
+02:24.570 --> 02:27.603
+This is very much required in this course for the practice.
+
+02:28.770 --> 02:31.140
+Later, we'll be migrating to AWS,
+
+02:31.140 --> 02:33.090
+so we'll be doing everything on cloud computing,
+
+02:33.090 --> 02:36.817
+but for initial practice, you need Linux VMs.
+
+02:38.100 --> 02:41.400
+In the prerequisites section, we have installed many tools.
+
+02:41.400 --> 02:44.340
+Make sure you have completed that section.
+
+02:44.340 --> 02:46.863
+You have all the necessary tools to create VMs.
+
+02:48.330 --> 02:49.680
+First, we'll see the manual step,
+
+02:49.680 --> 02:51.540
+and these are the tools that we need in that.
+
+02:51.540 --> 02:55.380
+Oracle VM Virtualbox, which is the hypervisor.
+
+02:55.380 --> 02:57.780
+Make sure you remember this name,
+
+02:57.780 --> 02:59.580
+Oracle VM Virtualbox.
+
+02:59.580 --> 03:01.410
+If you have any other hypervisor,
+
+03:01.410 --> 03:04.863
+like VMware Desktop or anything else,
+
+03:06.060 --> 03:08.820
+I recommend you don't use that in this course.
+
+03:08.820 --> 03:11.161
+You have to use Oracle VM Virtualbox
+
+03:11.161 --> 03:12.810
+so we are all in the same pace,
+
+03:12.810 --> 03:17.340
+except MacOS M1 and M2 chip,
+
+03:17.340 --> 03:20.070
+you will be seeing a different tool.
+
+03:20.070 --> 03:22.500
+instead of the Virtualbox.
+
+03:22.500 --> 03:25.833
+You will need ISO file, CentOS and Ubuntu.
+
+03:27.060 --> 03:30.990
+These ISO files are basically installation files
+
+03:30.990 --> 03:33.960
+which we are going to attach to our VM.
+
+03:33.960 --> 03:37.350
+We will need a login tool, Git Bash or Putty.
+
+03:37.350 --> 03:38.253
+We'll see both.
+
+03:40.230 --> 03:43.602
+In automated, you still need virtual box
+
+03:43.602 --> 03:47.190
+for Windows and MacOS Intel chip.
+
+03:47.190 --> 03:49.230
+If you have MacOS M1 chip,
+
+03:49.230 --> 03:50.760
+there is a separate lecture on that.
+
+03:50.760 --> 03:53.340
+Make sure you install those tools.
+
+03:53.340 --> 03:55.230
+You need Vagrant,
+
+03:55.230 --> 03:56.063
+and this is the tool
+
+03:56.063 --> 03:58.830
+that will automatically create VMs for us
+
+03:58.830 --> 04:02.583
+by issuing very simple commands, which we will see.
+
+04:04.560 --> 04:06.900
+Okay, so two labs basically.
+
+04:06.900 --> 04:08.820
+One is to set up VM manually,
+
+04:08.820 --> 04:10.530
+you need Virtualbox
+
+04:10.530 --> 04:15.180
+where you're going to create VM following through some steps
+
+04:15.180 --> 04:17.980
+and then you are going to download an ISO file
+
+04:18.960 --> 04:21.483
+and install operating system on that VM.
+
+04:24.930 --> 04:26.700
+The second lab is automatically
+
+04:26.700 --> 04:29.340
+where you create a Vagrantfile with the box name
+
+04:29.340 --> 04:31.233
+and you issue the command vagrant up.
+
+04:32.850 --> 04:36.150
+So enough talking, let's get into action now.
+
+04:36.150 --> 04:37.550
+See you in the next lecture.

@@ -1,0 +1,676 @@
+WEBVTT
+
+00:00.690 --> 00:01.830
+Instructor: Hello and welcome.
+
+00:01.830 --> 00:03.240
+In this lecture, we will see
+
+00:03.240 --> 00:08.240
+how to run our Vprofile application on containers.
+
+00:08.490 --> 00:10.350
+Now this lecture is more of a trailer
+
+00:10.350 --> 00:13.710
+of what is coming next in Docker.
+
+00:13.710 --> 00:15.960
+Everything is ready made over here.
+
+00:15.960 --> 00:17.640
+We just need to bring up the VM
+
+00:17.640 --> 00:21.060
+and run our Vprofile containers on it.
+
+00:21.060 --> 00:22.740
+Later in Docker section,
+
+00:22.740 --> 00:25.890
+we will see how to build all this from scratch.
+
+00:25.890 --> 00:29.610
+So if you remember from Vprofile project setup on the VM,
+
+00:29.610 --> 00:32.279
+we have Nginx, Tomcat,
+
+00:32.279 --> 00:35.100
+RabbitMQ, MemCached and MySQL
+
+00:35.100 --> 00:37.140
+and we build separate images for them,
+
+00:37.140 --> 00:40.380
+sorry, separate VMs for them.
+
+00:40.380 --> 00:41.670
+In this lecture, we will see
+
+00:41.670 --> 00:46.670
+how these things will run on the container together.
+
+00:46.680 --> 00:48.030
+We are going to run this entire setup
+
+00:48.030 --> 00:49.740
+on a virtual machine.
+
+00:49.740 --> 00:50.880
+So in the virtual machine,
+
+00:50.880 --> 00:52.680
+you will have all these containers running
+
+00:52.680 --> 00:54.450
+and we will access it.
+
+00:54.450 --> 00:56.583
+So let's see those simple steps now.
+
+00:57.810 --> 01:00.840
+Download the vagrant files from the resource section
+
+01:00.840 --> 01:02.433
+as a zip file, extract it.
+
+01:09.720 --> 01:12.660
+So there's vagrant file for Windows and MacOS Intel
+
+01:12.660 --> 01:16.560
+and MacOS M1 chip, separate vagrant files.
+
+01:16.560 --> 01:19.410
+So create a folder or directory in your system.
+
+01:19.410 --> 01:21.630
+Copy that vagrant file.
+
+01:21.630 --> 01:22.530
+You can do it anywhere.
+
+01:22.530 --> 01:24.630
+You don't need to do it exactly the same place
+
+01:24.630 --> 01:25.533
+where I'm doing.
+
+01:26.430 --> 01:28.770
+You can copy this to any other folder.
+
+01:28.770 --> 01:30.450
+I'm creating this container intro
+
+01:30.450 --> 01:34.410
+and I'll be copying the vagrant file,
+
+01:34.410 --> 01:36.870
+downloads, vagrant files,
+
+01:36.870 --> 01:39.780
+and inside that is I think another one, yes.
+
+01:39.780 --> 01:43.150
+And Windows vagrant file
+
+01:44.100 --> 01:47.320
+to F/containerIntro.
+
+01:52.890 --> 01:55.140
+Okay, if you want,
+
+01:55.140 --> 01:56.970
+you can copy from GraphQL also
+
+01:56.970 --> 01:59.490
+and just copy and paste your vagrant file into a folder
+
+01:59.490 --> 02:00.963
+and get into that folder.
+
+02:04.440 --> 02:06.720
+Okay and that should be the vagrant file.
+
+02:06.720 --> 02:09.543
+This is for the Windows and MacOS Intel chip.
+
+02:11.220 --> 02:14.340
+And so this vagrant file contains also commands
+
+02:14.340 --> 02:16.260
+to install Docker
+
+02:16.260 --> 02:18.423
+and Docker CLI and other stuff.
+
+02:19.260 --> 02:22.260
+It has two GB of RAM.
+
+02:22.260 --> 02:24.420
+Make sure you shut down all the other VMs
+
+02:24.420 --> 02:27.270
+so you don't run out of resources.
+
+02:27.270 --> 02:31.623
+Vagrant global-status --prune.
+
+02:33.240 --> 02:36.670
+Run this command to remove all entry of VMs
+
+02:37.890 --> 02:41.613
+and check the status of all the vagrant VMs in your machine.
+
+02:42.960 --> 02:44.640
+Okay, so I have three VMs
+
+02:44.640 --> 02:46.920
+and all these three VMs are powered off.
+
+02:46.920 --> 02:49.110
+If you see any of your VM powered on,
+
+02:49.110 --> 02:50.340
+just go to that folder
+
+02:50.340 --> 02:53.220
+and power off those VMs, vagrant halt,
+
+02:53.220 --> 02:55.260
+or delete those VMs
+
+02:55.260 --> 02:57.993
+and then bring up this VM, vagrant up.
+
+02:59.106 --> 03:00.090
+This is going to take some time.
+
+03:00.090 --> 03:02.460
+It is going to install Docker Engine and all those things.
+
+03:02.460 --> 03:03.750
+It'll take some time.
+
+03:03.750 --> 03:05.370
+So I'm going to pause my screen
+
+03:05.370 --> 03:07.353
+and resume when this is completed.
+
+03:08.970 --> 03:10.290
+Okay, my VM is up.
+
+03:10.290 --> 03:12.903
+I'm going to log into it, vagrant ssh,
+
+03:15.300 --> 03:19.593
+and I'm going to switch to root user, sudo -i,
+
+03:20.520 --> 03:21.723
+and clear the screen.
+
+03:22.590 --> 03:25.110
+Now, if you want to run multiple containers together,
+
+03:25.110 --> 03:29.400
+there is a concept of Docker compose in Docker.
+
+03:29.400 --> 03:30.780
+We'll learn in detail about it,
+
+03:30.780 --> 03:32.910
+but in short, you have a command,
+
+03:32.910 --> 03:35.460
+docker compose, this command
+
+03:35.460 --> 03:40.140
+and this will read a file called dockercompose.yml file.
+
+03:40.140 --> 03:41.820
+I'll show you that in a moment.
+
+03:41.820 --> 03:45.000
+So when you run docker compose,
+
+03:45.000 --> 03:46.980
+you should see the options here.
+
+03:46.980 --> 03:49.110
+You can see docker compose up
+
+03:49.110 --> 03:51.210
+to start and run the container.
+
+03:51.210 --> 03:53.670
+And you can see stop.
+
+03:53.670 --> 03:56.310
+You can see docker compose down
+
+03:56.310 --> 03:57.990
+to stop and remove the container
+
+03:57.990 --> 03:59.580
+and many other options you have.
+
+03:59.580 --> 04:00.540
+Don't worry about these.
+
+04:00.540 --> 04:03.213
+All these options, we'll be covering in detail later.
+
+04:04.260 --> 04:07.890
+But docker compose needs a docker compose file.
+
+04:07.890 --> 04:11.760
+That file we have available in our repository.
+
+04:11.760 --> 04:14.673
+We are going to just download and run that file.
+
+04:16.650 --> 04:18.270
+Okay, so you need to come
+
+04:18.270 --> 04:22.380
+to a repository on github.com, right?
+
+04:22.380 --> 04:23.520
+That's our repository
+
+04:23.520 --> 04:26.460
+and you have to switch to the branch, okay?
+
+04:26.460 --> 04:28.500
+You click on this dropdown
+
+04:28.500 --> 04:31.620
+and give the name as docker
+
+04:31.620 --> 04:34.200
+and click on this docker.
+
+04:34.200 --> 04:35.520
+It will switch to the branch.
+
+04:35.520 --> 04:37.290
+Make sure this is docker over here
+
+04:37.290 --> 04:40.470
+and then you should see a compose folder here.
+
+04:40.470 --> 04:41.303
+Click on that.
+
+04:42.660 --> 04:45.300
+And that's the docker-compose.yml file.
+
+04:45.300 --> 04:46.890
+If you click on this,
+
+04:46.890 --> 04:49.740
+it should show you the entire content.
+
+04:49.740 --> 04:51.180
+Again, don't need to understand
+
+04:51.180 --> 04:53.973
+this entire docker compose file now.
+
+04:54.853 --> 04:57.540
+It is going to download and run it, that's all.
+
+04:57.540 --> 04:58.560
+In Docker sections,
+
+04:58.560 --> 05:01.380
+we'll see how to write this file from scratch
+
+05:01.380 --> 05:02.970
+and even build the images.
+
+05:02.970 --> 05:07.710
+There are images here for our Vprofile project.
+
+05:07.710 --> 05:09.990
+This is the image for the database.
+
+05:09.990 --> 05:11.970
+This is a ready made Memcached image.
+
+05:11.970 --> 05:14.070
+This is ready made RabbitMQ image.
+
+05:14.070 --> 05:18.360
+This is the Tomcat image for Vprofile project
+
+05:18.360 --> 05:20.310
+and this is the Nginx image
+
+05:20.310 --> 05:22.320
+for the Vprofile project.
+
+05:22.320 --> 05:25.530
+So we go to Docker Hub.
+
+05:25.530 --> 05:26.910
+I want to quickly show you this,
+
+05:26.910 --> 05:28.170
+where these images are located.
+
+05:28.170 --> 05:29.350
+You go to Docker Hub
+
+05:30.270 --> 05:32.700
+and you can search with this name.
+
+05:32.700 --> 05:37.473
+This is the account name, vprocontainers.
+
+05:38.430 --> 05:39.570
+Go to Docker Hub
+
+05:39.570 --> 05:42.690
+and here is that.
+
+05:42.690 --> 05:43.830
+So that's the account name
+
+05:43.830 --> 05:46.860
+and you see that these are the images in this account.
+
+05:46.860 --> 05:48.540
+There are three images.
+
+05:48.540 --> 05:50.610
+Or you may see more later
+
+05:50.610 --> 05:52.410
+when I add more images.
+
+05:52.410 --> 05:55.830
+So I have created these images and stored over here.
+
+05:55.830 --> 05:58.773
+We'll see later how to create this from the scratch.
+
+06:00.240 --> 06:01.320
+So for now,
+
+06:01.320 --> 06:04.293
+what we need to do is click on this raw button here.
+
+06:07.440 --> 06:12.270
+Right, get that link, copy that link,
+
+06:12.270 --> 06:16.350
+go to your VM and simply wait.
+
+06:16.350 --> 06:18.930
+Let's create a folder, compose.
+
+06:18.930 --> 06:21.780
+Let's get into that folder, say wget
+
+06:21.780 --> 06:24.400
+and paste that link, Shift + Insert
+
+06:25.410 --> 06:27.093
+for Git Bash to paste.
+
+06:30.090 --> 06:31.740
+Okay, my download has failed
+
+06:31.740 --> 06:33.360
+and I wanted to show you this.
+
+06:33.360 --> 06:35.820
+I think this is because of the restrictions
+
+06:35.820 --> 06:38.460
+put on GitHub in India.
+
+06:38.460 --> 06:41.250
+So if this fails for you also,
+
+06:41.250 --> 06:43.650
+you can get this compose file
+
+06:43.650 --> 06:45.873
+from the resource section.
+
+06:46.770 --> 06:48.630
+Right, so once you download the resource, unzip it,
+
+06:48.630 --> 06:51.120
+you'll see compose folder, right?
+
+06:51.120 --> 06:56.120
+Open that through Notepad or whatever you want,
+
+06:59.040 --> 07:01.420
+and copy this entire content
+
+07:02.790 --> 07:07.597
+and let's create that file ourself, vim docker-compose.yml.
+
+07:09.930 --> 07:13.110
+Make sure the spelling is correct and Shift + Insert
+
+07:13.110 --> 07:16.263
+and paste everything and save and quit.
+
+07:17.700 --> 07:22.273
+Right, now all you need to do is say docker compose up -d.
+
+07:23.370 --> 07:25.560
+So -d is to run it in the background.
+
+07:25.560 --> 07:27.330
+So it's going to read this compose file,
+
+07:27.330 --> 07:29.490
+bring up all the containers
+
+07:29.490 --> 07:32.520
+and this is going to take time for the first time
+
+07:32.520 --> 07:34.893
+because it's going to download all the images.
+
+07:36.180 --> 07:39.030
+Okay, so it's pulling up all the images.
+
+07:39.030 --> 07:39.960
+Pulling all the images
+
+07:39.960 --> 07:41.460
+and it's gonna bring up the container.
+
+07:41.460 --> 07:42.810
+I'm gonna pause my screen
+
+07:42.810 --> 07:44.673
+and resume when this is done.
+
+07:45.870 --> 07:47.850
+Okay, I think all my containers are up.
+
+07:47.850 --> 07:50.883
+Let me check, docker compose ps.
+
+07:52.890 --> 07:54.780
+Okay, all five containers are running.
+
+07:54.780 --> 07:57.420
+Docker images, if we see,
+
+07:57.420 --> 07:59.040
+we should see those five images
+
+07:59.040 --> 08:02.010
+from which the containers are created.
+
+08:02.010 --> 08:06.150
+Now let's access it from the browser, ip addr show,
+
+08:06.150 --> 08:08.013
+check the IP address of the VM.
+
+08:10.200 --> 08:11.920
+Right, enp0s9.
+
+08:11.920 --> 08:14.580
+Okay, this, well kind of IP,
+
+08:14.580 --> 08:18.640
+okay, 192. 168. 1.7 or 56.82.
+
+08:18.640 --> 08:21.240
+Okay, any of this, this 192 IP address,
+
+08:21.240 --> 08:22.650
+not the other one.
+
+08:22.650 --> 08:26.100
+Okay, any 192, 168 IP, copy that
+
+08:26.100 --> 08:28.353
+and let's go to the browser.
+
+08:34.740 --> 08:37.410
+So this is accessing the VM on port 80
+
+08:37.410 --> 08:40.500
+and on port 80, we have Nginx container,
+
+08:40.500 --> 08:43.020
+Nginx container routes to the Tomcat container.
+
+08:43.020 --> 08:46.350
+We get this login page from the Tomcat container
+
+08:46.350 --> 08:49.830
+and we can use the username admin_vp
+
+08:49.830 --> 08:53.250
+and same password and click on login.
+
+08:53.250 --> 08:55.920
+This should validate the database container also.
+
+08:55.920 --> 08:56.910
+We're able to log in
+
+08:56.910 --> 08:59.580
+so database container is working fine.
+
+08:59.580 --> 09:01.080
+We check RabbitMQ.
+
+09:01.080 --> 09:02.490
+It should generate queue.
+
+09:02.490 --> 09:05.100
+So RabbitMQ container is also good.
+
+09:05.100 --> 09:07.530
+Click on all users.
+
+09:07.530 --> 09:09.183
+Right, select any of the user.
+
+09:11.520 --> 09:13.740
+Right, the data is inserted in cache
+
+09:13.740 --> 09:16.593
+so Memcached container is also working fine.
+
+09:17.760 --> 09:19.863
+Right, so data is coming from the cache.
+
+09:21.120 --> 09:23.250
+So that was validation, a quick validation.
+
+09:23.250 --> 09:24.210
+We know about all this.
+
+09:24.210 --> 09:26.580
+We did it in Vprofile project, right?
+
+09:26.580 --> 09:30.270
+So that's how you can pull the container images
+
+09:30.270 --> 09:32.280
+and run the containers.
+
+09:32.280 --> 09:33.900
+You see how easy it is
+
+09:33.900 --> 09:35.910
+to run projects on containers,
+
+09:35.910 --> 09:37.350
+applications on containers,
+
+09:37.350 --> 09:40.650
+and that's why one of a very big reason
+
+09:40.650 --> 09:43.920
+the world is shifting towards the container.
+
+09:43.920 --> 09:47.070
+And we'll talk in detail about this in Docker lecture.
+
+09:47.070 --> 09:50.010
+Now you have to do this docker compose down
+
+09:50.010 --> 09:51.870
+and this is going to stop the container
+
+09:51.870 --> 09:54.180
+and remove the container.
+
+09:54.180 --> 09:59.180
+One more command, let me show you, docker system prune -a.
+
+10:00.060 --> 10:03.450
+This command will remove all the stopped containers
+
+10:03.450 --> 10:06.900
+and remove all the images if they're not used.
+
+10:06.900 --> 10:08.490
+So everything will be clean.
+
+10:08.490 --> 10:10.740
+Then you can log out,
+
+10:10.740 --> 10:13.353
+exit and power off the VM.
+
+10:15.180 --> 10:16.140
+Right, now whenever you want,
+
+10:16.140 --> 10:17.400
+you can power on the VM
+
+10:17.400 --> 10:19.560
+and do the docker compose up
+
+10:19.560 --> 10:22.230
+in the same folder where you have compose file
+
+10:22.230 --> 10:26.190
+and check it yourself whenever you want, right?
+
+10:26.190 --> 10:27.750
+So that is all in this lecture.
+
+10:27.750 --> 10:30.360
+We'll see about Docker
+
+10:30.360 --> 10:32.523
+much in detail in the Docker section.

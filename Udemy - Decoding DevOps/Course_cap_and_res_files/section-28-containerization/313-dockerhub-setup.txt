@@ -1,0 +1,226 @@
+WEBVTT
+
+00:00.750 --> 00:03.210
+-: Okay, so since we made our decisions
+
+00:03.210 --> 00:04.773
+on what all images to build,
+
+00:05.880 --> 00:08.820
+once we below images, we'll be hosting it on Docker Hub.
+
+00:08.820 --> 00:12.120
+So if you don't have Docker Hub account still,
+
+00:12.120 --> 00:14.190
+then sign up, create an account on Docker Hub,
+
+00:14.190 --> 00:15.270
+and log in.
+
+00:15.270 --> 00:17.853
+Once you log in, get into organizations.
+
+00:18.720 --> 00:20.920
+So what I'm going to show you next
+
+00:21.960 --> 00:23.940
+is not mandatory to do.
+
+00:23.940 --> 00:27.960
+It's not compulsory you create the organization.
+
+00:27.960 --> 00:29.550
+The reason why I'm telling you this,
+
+00:29.550 --> 00:32.580
+because creating organization now is not free.
+
+00:32.580 --> 00:36.649
+When I recorded the lecture, it was a free option.
+
+00:36.649 --> 00:37.482
+$0.
+
+00:38.515 --> 00:39.780
+But now it's not there.
+
+00:39.780 --> 00:40.613
+Don't worry.
+
+00:40.613 --> 00:42.450
+You don't need to really purchase this.
+
+00:42.450 --> 00:45.720
+You can just watch the lecture how to create it
+
+00:45.720 --> 00:49.560
+and what is the benefit of organization in Docker Hub.
+
+00:49.560 --> 00:53.310
+The reason I kept it is because I want you to know
+
+00:53.310 --> 00:57.540
+that in real time, companies do use organization plan
+
+00:57.540 --> 01:00.630
+so they can collaborate together multiple development course
+
+01:00.630 --> 01:03.120
+and devops can collaborate together
+
+01:03.120 --> 01:05.433
+to work on a Docker image building.
+
+01:06.660 --> 01:10.920
+So take a look how the organization can be created
+
+01:10.920 --> 01:12.300
+and what are the benefits of it.
+
+01:12.300 --> 01:13.560
+You don't need to do it.
+
+01:13.560 --> 01:16.740
+You can just watch and skip this.
+
+01:16.740 --> 01:17.703
+Please take a look.
+
+01:18.750 --> 01:20.340
+We're going to create an organization
+
+01:20.340 --> 01:21.990
+so we can
+
+01:21.990 --> 01:23.620
+collaboratively work together
+
+01:24.660 --> 01:25.770
+in our team.
+
+01:25.770 --> 01:28.350
+So I will go the free team.
+
+01:28.350 --> 01:31.113
+Okay, but, you know this really is a good option.
+
+01:32.490 --> 01:35.700
+But, it's, no, we just want to practice
+
+01:35.700 --> 01:37.920
+on our project, so free one should be fine.
+
+01:37.920 --> 01:39.993
+So organization namespace.
+
+01:41.130 --> 01:43.347
+So we'll say "vprofile."
+
+01:45.090 --> 01:46.230
+Company name?
+
+01:46.230 --> 01:48.307
+I'm going to give "visualpath."
+
+01:51.780 --> 01:53.727
+And I'll select "create organization."
+
+01:54.840 --> 01:58.440
+So, what are the benefits of organizations really?
+
+01:58.440 --> 02:01.020
+Well, one thing for sure is we can collaborate.
+
+02:01.020 --> 02:03.150
+We can have, all for the free account,
+
+02:03.150 --> 02:04.653
+we can have three members.
+
+02:05.730 --> 02:09.450
+If you want more members to collaborate, we need to pay.
+
+02:09.450 --> 02:11.640
+But that should be fine for now.
+
+02:11.640 --> 02:13.770
+We can have repositories
+
+02:13.770 --> 02:16.050
+named as the organization's name
+
+02:16.050 --> 02:17.523
+and not the account name.
+
+02:19.623 --> 02:21.090
+We can also create teams,
+
+02:21.090 --> 02:22.413
+different teams over here.
+
+02:23.490 --> 02:26.430
+Settings, if you go "linked accounts"
+
+02:26.430 --> 02:30.450
+you can link your GitHub or Bitbucket account with this.
+
+02:30.450 --> 02:33.060
+Docker Hub also provides you can do this integration.
+
+02:33.060 --> 02:34.500
+As soon as there is a comment,
+
+02:34.500 --> 02:37.980
+it can fetch your Docker file and build the image for you.
+
+02:37.980 --> 02:39.360
+So you don't need to set up your own
+
+02:39.360 --> 02:41.610
+continuous integration pipeline,
+
+02:41.610 --> 02:43.290
+which will be convenient.
+
+02:43.290 --> 02:45.540
+It can set default privacy.
+
+02:45.540 --> 02:47.853
+So by default, we have public,
+
+02:48.900 --> 02:50.970
+but we can go private.
+
+02:50.970 --> 02:54.570
+But then we need multiple private repositories
+
+02:54.570 --> 02:55.980
+and we don't have
+
+02:55.980 --> 02:57.483
+because we are a free account.
+
+03:01.080 --> 03:02.670
+We have notifications as well.
+
+03:02.670 --> 03:06.030
+We can send notifications of build failures
+
+03:06.030 --> 03:08.520
+on email or on Slack,
+
+03:08.520 --> 03:10.020
+and that should be convenient.
+
+03:11.040 --> 03:12.390
+So, that, this is good.
+
+03:12.390 --> 03:13.950
+I have created an organization.
+
+03:13.950 --> 03:15.780
+You also created an organization with
+
+03:15.780 --> 03:17.223
+whatever name you prefer.

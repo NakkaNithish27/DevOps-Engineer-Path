@@ -1,0 +1,577 @@
+WEBVTT
+
+00:00.180 --> 00:01.200
+Instructor: Okay, let's take a look
+
+00:01.200 --> 00:03.269
+at our remote_websetup folder.
+
+00:03.269 --> 00:06.810
+We have the multios_websetup script.
+
+00:06.810 --> 00:08.340
+And we are going to improve this code.
+
+00:08.340 --> 00:11.163
+So once again, Control + A and Control + I.
+
+00:12.450 --> 00:15.120
+So improve this code as per development standards,
+
+00:15.120 --> 00:17.460
+and use functions.
+
+00:17.460 --> 00:19.740
+Okay, that's making suggestions.
+
+00:19.740 --> 00:21.990
+And I'm going to accept this one.
+
+00:21.990 --> 00:23.790
+Or you can just take a look at the code,
+
+00:23.790 --> 00:26.070
+what it's suggesting, ask more question,
+
+00:26.070 --> 00:28.470
+you know, make it more interactive,
+
+00:28.470 --> 00:30.390
+you know, talk to it, develop it
+
+00:30.390 --> 00:33.420
+as per your need and standards both.
+
+00:33.420 --> 00:37.050
+So it's the same way what we did in the first script.
+
+00:37.050 --> 00:40.533
+In the websetup.sh script, we did same thing it is doing.
+
+00:41.820 --> 00:44.280
+But, also, you see a few more new things, like, for example,
+
+00:44.280 --> 00:46.200
+this local, local packages.
+
+00:46.200 --> 00:49.050
+Now, there is scope of variable,
+
+00:49.050 --> 00:51.450
+global variable and local variable.
+
+00:51.450 --> 00:54.300
+Local variable, it is just for the function.
+
+00:54.300 --> 00:57.600
+So select the code, do /explain in the chat,
+
+00:57.600 --> 01:00.420
+and it will explain that this local is used
+
+01:00.420 --> 01:02.280
+to define the variable local.
+
+01:02.280 --> 01:04.920
+Scope will be local in the function,
+
+01:04.920 --> 01:07.113
+within the function, not outside of it.
+
+01:07.980 --> 01:09.810
+So once this function exits,
+
+01:09.810 --> 01:13.500
+this variable is also gone, or its value is gone.
+
+01:13.500 --> 01:17.010
+Once again, there are suggestions. You can apply them again.
+
+01:17.010 --> 01:20.700
+So all the functions and then the main function,
+
+01:20.700 --> 01:23.670
+so there is a main function that calls other function
+
+01:23.670 --> 01:25.020
+before calling these function.
+
+01:25.020 --> 01:27.090
+It checks the operating system.
+
+01:27.090 --> 01:29.850
+It sets the right variable, like we did.
+
+01:29.850 --> 01:31.680
+But this time, it is in the function.
+
+01:31.680 --> 01:33.480
+So do this, either, you know,
+
+01:33.480 --> 01:37.500
+set httpd or set apache2, based on the operating system.
+
+01:37.500 --> 01:39.030
+And then call all these functions.
+
+01:39.030 --> 01:40.770
+And finally, you just see here, main.
+
+01:40.770 --> 01:41.880
+So when you run the script,
+
+01:41.880 --> 01:44.250
+basically it is going to call main,
+
+01:44.250 --> 01:47.820
+which is going to test the operating system,
+
+01:47.820 --> 01:51.060
+and then it is going to call all the other functions.
+
+01:51.060 --> 01:54.420
+So I'm going to save this one and go to webdeploy.sh.
+
+01:54.420 --> 01:56.260
+And let's improve this one also
+
+01:58.200 --> 02:02.130
+Improve as per developmental practices.
+
+02:02.130 --> 02:04.140
+Okay, that's something, a few things you already know.
+
+02:04.140 --> 02:06.210
+Let's, oh no, I'm not going to accept this,
+
+02:06.210 --> 02:07.440
+because I know there's a problem.
+
+02:07.440 --> 02:11.970
+I tested this code, and it just reads the first host,
+
+02:11.970 --> 02:14.100
+execute the command on the first host,
+
+02:14.100 --> 02:17.340
+and then it simply exits, does not go to the next host.
+
+02:17.340 --> 02:20.940
+And that was the problem with the while, while loop.
+
+02:20.940 --> 02:22.740
+While loop was giving that problem.
+
+02:22.740 --> 02:25.560
+So I then changed it to for loop.
+
+02:25.560 --> 02:27.660
+Now, I already know that problem, right?
+
+02:27.660 --> 02:30.750
+So I can, while I'm chatting with this,
+
+02:30.750 --> 02:32.910
+and it's making suggestion, instead of accepting it,
+
+02:32.910 --> 02:35.790
+I'm just going to ask to use a for loop
+
+02:35.790 --> 02:37.440
+instead of while loop.
+
+02:37.440 --> 02:38.790
+You know, that is just a requirement.
+
+02:38.790 --> 02:40.980
+I'm not saying it's not going to work.
+
+02:40.980 --> 02:43.780
+Use for loop instead of
+
+02:46.110 --> 02:46.943
+while loop.
+
+02:48.340 --> 02:49.680
+Okay, I'm going to accept it.
+
+02:49.680 --> 02:52.680
+I'm going to tell you one more interesting thing.
+
+02:52.680 --> 02:56.850
+Now, we know this part from our previous scripting session.
+
+02:56.850 --> 02:57.840
+We assign the variable,
+
+02:57.840 --> 02:59.700
+and then we have here condition check,
+
+02:59.700 --> 03:02.790
+whether, you know, this file exist or not,
+
+03:02.790 --> 03:05.970
+the host file, this exist or not.
+
+03:05.970 --> 03:08.790
+If it does not exist, you see that, negation.
+
+03:08.790 --> 03:12.930
+If it does not exist, then, you know, exit this script.
+
+03:12.930 --> 03:15.420
+If it exist, now there's another condition.
+
+03:15.420 --> 03:18.060
+If you know this, if this script does not exist,
+
+03:18.060 --> 03:19.710
+then also terminate it.
+
+03:19.710 --> 03:22.200
+Otherwise, simply execute the code.
+
+03:22.200 --> 03:24.810
+So interesting thing that I want to show you here
+
+03:24.810 --> 03:29.640
+is we are reading input from a file, right, in the for loop.
+
+03:29.640 --> 03:33.000
+But here, it is reading input from an array.
+
+03:33.000 --> 03:36.360
+This is a way to define array in Bash scripting,
+
+03:36.360 --> 03:39.750
+not define actually access the elements in the array.
+
+03:39.750 --> 03:41.790
+So what's happening here is we have...
+
+03:41.790 --> 03:43.740
+Wait, let me save this first.
+
+03:43.740 --> 03:45.060
+Okay, go to this file, right?
+
+03:45.060 --> 03:47.070
+So we have the list of host, you know,
+
+03:47.070 --> 03:49.980
+this simply list of string or text.
+
+03:49.980 --> 03:52.170
+The first thing is we need to store it into an array.
+
+03:52.170 --> 03:56.160
+So that's what it did over here, mapfile -t hosts.
+
+03:56.160 --> 03:59.550
+This takes as an input from this command, grep.
+
+03:59.550 --> 04:04.550
+So it's reading the file and storing it into an array.
+
+04:04.603 --> 04:07.110
+Now, array is this list of elements,
+
+04:07.110 --> 04:08.550
+like, you know, you have variable,
+
+04:08.550 --> 04:10.560
+and we have its value, a string.
+
+04:10.560 --> 04:13.500
+An array will be something like this. I'll show you.
+
+04:13.500 --> 04:15.360
+Something like this, exactly like this,
+
+04:15.360 --> 04:18.510
+hosts, you give the name of the variable, equal to,
+
+04:18.510 --> 04:22.410
+and in parenthesis you give the list of strings,
+
+04:22.410 --> 04:24.180
+list of text you can see here.
+
+04:24.180 --> 04:27.240
+So that's what it is developing over here with mapfile.
+
+04:27.240 --> 04:30.780
+And mapfile is designed to read the input,
+
+04:30.780 --> 04:32.970
+and it's going to put it into this variable.
+
+04:32.970 --> 04:35.520
+It's reading the input from this grep command.
+
+04:35.520 --> 04:37.770
+So this command is going to read it one by one
+
+04:37.770 --> 04:40.380
+and keep storing it into the host,
+
+04:40.380 --> 04:41.880
+which will become an array.
+
+04:41.880 --> 04:45.300
+And now we are going to iterate over that array.
+
+04:45.300 --> 04:46.410
+So how do you iterate?
+
+04:46.410 --> 04:48.180
+You know you need to have every element,
+
+04:48.180 --> 04:50.130
+like you want web01, web02.
+
+04:50.130 --> 04:52.680
+So you give array square bracket, at the array,
+
+04:52.680 --> 04:55.800
+that is going to fetch the element from the array.
+
+04:55.800 --> 04:59.910
+Basically, web01 first, it will be web01.
+
+04:59.910 --> 05:02.640
+And then the script execution will happen.
+
+05:02.640 --> 05:03.960
+Then, again, it's going to come back.
+
+05:03.960 --> 05:05.940
+Then the value of host at the array,
+
+05:05.940 --> 05:08.043
+it will be web02, likewise.
+
+05:08.880 --> 05:13.140
+Right, and now you can surely test all the scripts,
+
+05:13.140 --> 05:15.270
+you know, get into your script box, create the folder,
+
+05:15.270 --> 05:16.680
+copy these files over there,
+
+05:16.680 --> 05:18.900
+and execute and test it for yourself.
+
+05:18.900 --> 05:21.180
+If it does not work, if there is some error, you know,
+
+05:21.180 --> 05:24.930
+you can just select things, and you can say /fix.
+
+05:24.930 --> 05:26.430
+or if you don't understand anything,
+
+05:26.430 --> 05:30.510
+you can select the code, and you can say /explain.
+
+05:30.510 --> 05:34.500
+My point is just don't just take the AI information
+
+05:34.500 --> 05:35.850
+and keep applying it.
+
+05:35.850 --> 05:37.443
+Check it. Learn from it.
+
+05:38.310 --> 05:40.980
+If you know your tools, if you know the skills,
+
+05:40.980 --> 05:44.640
+you can ask right question to the AI tools.
+
+05:44.640 --> 05:46.710
+Now, just to prove that,
+
+05:46.710 --> 05:49.800
+I'm going to do one last thing in this section.
+
+05:49.800 --> 05:52.800
+I'm going to ask Copilot to develop everything,
+
+05:52.800 --> 05:55.830
+all the scripts for me, to set up Tomcat.
+
+05:55.830 --> 05:58.080
+So let's open the inline chat.
+
+05:58.080 --> 06:00.450
+So click on this, say Open Chat,
+
+06:00.450 --> 06:02.550
+and I'm going to say here /new
+
+06:02.550 --> 06:05.160
+to create a new workspace for me.
+
+06:05.160 --> 06:07.020
+And I'm going to write this message.
+
+06:07.020 --> 06:10.080
+It's not perfect, but it will do.
+
+06:10.080 --> 06:13.500
+Write Tomcat setup scripts based on OS, RPM-based,
+
+06:13.500 --> 06:16.150
+and here, instead of Debian, I'm going to say Ubuntu.
+
+06:17.670 --> 06:19.980
+So RPM-based, Ubuntu-based,
+
+06:19.980 --> 06:21.870
+use developmental best practices.
+
+06:21.870 --> 06:25.290
+There should be another script to push Tomcat setup script
+
+06:25.290 --> 06:28.230
+and execute it on the list of hosts.
+
+06:28.230 --> 06:29.850
+So I'm also saying that list of hosts
+
+06:29.850 --> 06:31.740
+should be coming from another file.
+
+06:31.740 --> 06:33.240
+Now, this is the same thing what we did
+
+06:33.240 --> 06:36.720
+with the remote_websetup folder over here, right?
+
+06:36.720 --> 06:37.950
+We have written all the scripts,
+
+06:37.950 --> 06:40.380
+and based on all the information that I have,
+
+06:40.380 --> 06:43.350
+or I can say based on the skills that I have,
+
+06:43.350 --> 06:45.210
+I'm asking right question.
+
+06:45.210 --> 06:47.640
+Let's see whether it's right or not.
+
+06:47.640 --> 06:50.370
+Okay, so it suggested me, there will be this folder,
+
+06:50.370 --> 06:51.673
+and there will be the scripts.
+
+06:51.673 --> 06:53.340
+I can click on this.
+
+06:53.340 --> 06:57.540
+So a separate script for RPM-based Tomcat setup
+
+06:57.540 --> 07:00.630
+and separate script for Ubuntu-based,
+
+07:00.630 --> 07:04.470
+and then there is a deploy_tomcat_setup script, right?
+
+07:04.470 --> 07:07.230
+Again, this is using the developmental best practices.
+
+07:07.230 --> 07:09.933
+It's checking whether the host file exist or not.
+
+07:09.933 --> 07:11.550
+It's going to create the array.
+
+07:11.550 --> 07:13.050
+It's going to run it in the for loop.
+
+07:13.050 --> 07:15.210
+And based on the operating system,
+
+07:15.210 --> 07:16.830
+it's going to push the script.
+
+07:16.830 --> 07:18.270
+Check that out, scp,
+
+07:18.270 --> 07:21.450
+it's pushing the script to the target machine.
+
+07:21.450 --> 07:22.830
+You know, let's create the workspace,
+
+07:22.830 --> 07:25.020
+and let's get it all in one.
+
+07:25.020 --> 07:27.423
+So I'm just going to select a parent folder.
+
+07:28.530 --> 07:31.470
+Okay, there tomcat-setup-project.
+
+07:31.470 --> 07:34.500
+You have a host file here, sample names.
+
+07:34.500 --> 07:38.820
+You have README.md file, how to execute, what does what,
+
+07:38.820 --> 07:39.840
+and the scripts folder
+
+07:39.840 --> 07:42.393
+where you have the deploy_tomcat_setup script.
+
+07:44.130 --> 07:46.590
+That is going to push the script
+
+07:46.590 --> 07:48.000
+based on the operating system.
+
+07:48.000 --> 07:50.790
+So if the OS is Ubuntu,
+
+07:50.790 --> 07:52.980
+then it's going to push this script.
+
+07:52.980 --> 07:56.400
+If the OS is RPM-based, like CentOS,
+
+07:56.400 --> 07:59.013
+it is going to push this script.
+
+07:59.970 --> 08:03.780
+So now the skills that you have learned in Bash scripting
+
+08:03.780 --> 08:06.870
+and using the superpower of Copilot,
+
+08:06.870 --> 08:10.980
+you can develop scripts very easily in very less time.
+
+08:10.980 --> 08:14.040
+Again, test it in the test environment on the VMs
+
+08:14.040 --> 08:17.280
+before you actually run it on actual machines.
+
+08:17.280 --> 08:20.880
+I hope you have learned enough in this AI tool,
+
+08:20.880 --> 08:25.680
+and you can use these skills in the course and in real time.
+
+08:25.680 --> 08:27.750
+Thank you so much for watching these lectures.
+
+08:27.750 --> 08:29.400
+I'll see you in the next section.

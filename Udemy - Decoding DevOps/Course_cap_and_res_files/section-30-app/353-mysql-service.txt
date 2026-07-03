@@ -1,0 +1,232 @@
+WEBVTT
+
+00:00.660 --> 00:02.250
+Instructor: Okay, so the deployment definition
+
+00:02.250 --> 00:03.083
+creates the pod,
+
+00:03.083 --> 00:06.000
+and that pod needs to be connected by Tomcat service
+
+00:06.000 --> 00:07.563
+and also Memcache service.
+
+00:09.270 --> 00:10.110
+So in Kubernetes,
+
+00:10.110 --> 00:12.630
+we do not connect pods like this directly, right,
+
+00:12.630 --> 00:16.200
+we don't give the pod IV because pod are volatile, right,
+
+00:16.200 --> 00:19.290
+they get deleted, recreated through deployment,
+
+00:19.290 --> 00:20.880
+so we cannot rely on the pod IP,
+
+00:20.880 --> 00:24.030
+so we create a service for them, like a load balancer,
+
+00:24.030 --> 00:26.130
+internal load balancer.
+
+00:26.130 --> 00:29.880
+Okay, an internal load balancer in AWS, sorry,
+
+00:29.880 --> 00:32.070
+an internal load balancer in Kubernetes
+
+00:32.070 --> 00:35.283
+is called a service of type cluster IP,
+
+00:36.120 --> 00:39.570
+so I just search for it, I got this generative text,
+
+00:39.570 --> 00:42.870
+I just copy it and just paste it here
+
+00:42.870 --> 00:45.300
+and then I'm going to start changing the names
+
+00:45.300 --> 00:48.030
+and the port number also, first is the name,
+
+00:48.030 --> 00:51.750
+I'm going to give the name of this services vprodb,
+
+00:51.750 --> 00:54.480
+this is very important, reason I'll tell you.
+
+00:54.480 --> 00:56.280
+We already discussed that,
+
+00:56.280 --> 00:59.880
+or we already seen multiple times in this project set up,
+
+00:59.880 --> 01:04.260
+Myskill will be connected by our Tomcat application
+
+01:04.260 --> 01:06.870
+or v-profile application is going to connect
+
+01:06.870 --> 01:10.620
+to Myskill service through application.properties file,
+
+01:10.620 --> 01:13.740
+the application.properties file has information.
+
+01:13.740 --> 01:18.740
+Okay, if we go, once again, source, main, resources,
+
+01:18.810 --> 01:21.150
+application.properties file, right?
+
+01:21.150 --> 01:23.520
+So application.properties file,
+
+01:23.520 --> 01:27.000
+says the Myskill service name is vprodb,
+
+01:27.000 --> 01:29.640
+this needs to resolve into the IP address.
+
+01:29.640 --> 01:33.330
+So in our Tomcat image that we'll be using for this project
+
+01:33.330 --> 01:35.790
+has the same application.properties file,
+
+01:35.790 --> 01:37.800
+it's going to, our v-profile application
+
+01:37.800 --> 01:41.370
+is going to look for a DB that is with this name vprodb
+
+01:41.370 --> 01:43.710
+and port number 3306.
+
+01:43.710 --> 01:46.200
+So we need to be careful while giving the service name,
+
+01:46.200 --> 01:49.350
+this will be the service name, the service port number,
+
+01:49.350 --> 01:50.850
+right, so coming back to here.
+
+01:52.830 --> 01:54.870
+So that's why our service name will be vprodb,
+
+01:54.870 --> 01:58.410
+it's going to look for a service name, vbprodb, okay,
+
+01:58.410 --> 02:03.060
+then specification, selector, so find a pod that has
+
+02:03.060 --> 02:08.060
+so and so label, so our DB pod has this label,
+
+02:08.460 --> 02:12.927
+app: vprodb, that's how we connect the service to the pod
+
+02:12.927 --> 02:14.880
+and we give the label.
+
+02:14.880 --> 02:18.453
+So any port that has this label,
+
+02:20.760 --> 02:23.670
+app: vprodb, it's going to route the request over there,
+
+02:23.670 --> 02:28.670
+on port, 3306, so port's here to mention the port number
+
+02:29.790 --> 02:33.120
+and the target port, okay, so this will be the target port,
+
+02:33.120 --> 02:35.730
+here we need to give 3306,
+
+02:35.730 --> 02:39.090
+but I have given here a name, vprodb-port,
+
+02:39.090 --> 02:42.150
+the reason is, in the DB deployment definition,
+
+02:42.150 --> 02:45.603
+if we see container port 3306, we have given this name.
+
+02:46.890 --> 02:51.540
+So like that we can give name to the port in the pod, right,
+
+02:51.540 --> 02:52.620
+it's a very good thing, you know,
+
+02:52.620 --> 02:54.480
+really, if you wish to change the back,
+
+02:54.480 --> 02:56.970
+the port number of your service,
+
+02:56.970 --> 03:00.210
+you don't need to make changes in the service, right,
+
+03:00.210 --> 03:01.380
+here you don't need to make any change,
+
+03:01.380 --> 03:03.300
+you can keep the name as it is in the backend,
+
+03:03.300 --> 03:05.940
+you can keep changing the port number if you wish to,
+
+03:05.940 --> 03:08.760
+now only if you build the image like that,
+
+03:08.760 --> 03:10.770
+anyways, leave that concept.
+
+03:10.770 --> 03:12.950
+We can give here the port number 3306,
+
+03:12.950 --> 03:16.113
+so we can give the name of the port that we have given here,
+
+03:17.310 --> 03:18.690
+okay, this is the front end port,
+
+03:18.690 --> 03:22.380
+the service is going to listen on port 3306
+
+03:22.380 --> 03:24.690
+and route the request to the targetPort,
+
+03:24.690 --> 03:25.883
+type: ClusterIP internal.
+
+03:27.450 --> 03:29.500
+Okay, let me restructure it a little bit,
+
+03:30.390 --> 03:33.340
+okay, selector I have given here, alright, let's save this,
+
+03:35.746 --> 03:36.579
+okay, great.
+
+03:36.579 --> 03:39.810
+So we have the service, we have the DB deployment manifest,
+
+03:39.810 --> 03:43.350
+and we have the PVC, so database is all set,
+
+03:43.350 --> 03:46.620
+now let's move on to Memcache and then RabbitMQ
+
+03:46.620 --> 03:48.600
+and then we'll go to Tomcat.
+
+03:48.600 --> 03:51.050
+So complete this and join me in the next lecture.

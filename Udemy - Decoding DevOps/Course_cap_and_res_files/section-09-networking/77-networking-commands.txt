@@ -1,0 +1,765 @@
+WEBVTT
+
+0
+00:00.610 --> 00:06.220
+Welcome in this session, we will be seeing some networking commands in Linux and also on Windows,
+
+1
+00:06.940 --> 00:12.060
+and for that very purpose, I have created two virtual machines by using vagrant file.
+
+2
+00:12.420 --> 00:17.020
+It's the same vagrant file that we used in multi VM section of our vagrant.
+
+3
+00:21.310 --> 00:30.190
+So one vm is a web01, it has a static IP,40.11 and db01 40.12.
+
+4
+00:30.970 --> 00:38.410
+web01 is running a Web service apache2 on Ubuntu. db01 is running a database service.
+
+5
+00:38.410 --> 00:41.050
+Maria DB and talking about port numbers
+
+6
+00:41.050 --> 00:43.950
+apache2 service is running on Port 80.
+
+7
+00:43.960 --> 00:49.490
+Maria DB Service is running on port 3306 and we will find that out.
+
+8
+00:50.110 --> 00:52.600
+So first, let me log into the web01.
+
+9
+00:52.720 --> 00:57.010
+Consider this just a testing ground.
+
+10
+00:58.070 --> 01:03.890
+You can run these commands from any Linux machine or even some commands on Windows machine, so I'm
+
+11
+01:03.890 --> 01:04.970
+in web01
+
+12
+01:06.810 --> 01:11.010
+We're going to some we're going to run some command, which you need a root privileges, so I will
+
+13
+01:11.010 --> 01:12.570
+always switch to root user.
+
+14
+01:13.830 --> 01:18.810
+First, command I'm running is ifconfig. This command will show you all the network interfaces
+
+15
+01:19.080 --> 01:22.410
+or the active network interfaces, their names.
+
+16
+01:24.670 --> 01:26.480
+And their IP addresses.
+
+17
+01:27.100 --> 01:29.240
+So this is connected to the NAT Network.
+
+18
+01:29.260 --> 01:35.890
+This is the static IP that we have given and this is the loop back address loop back address, lo,
+
+19
+01:36.610 --> 01:40.390
+this IP address, 127.0.0.1
+
+20
+01:41.140 --> 01:44.190
+This is used when the computer is referring to itself.
+
+21
+01:44.950 --> 01:47.170
+You can say this is the local network interface.
+
+22
+01:48.270 --> 01:54.760
+And this will be the address of the computer on this network, 192.168.40 network
+
+23
+01:54.780 --> 01:56.250
+This will be the IP address.
+
+24
+01:56.890 --> 01:59.820
+So this computer is connected to two network.
+
+25
+02:00.000 --> 02:00.930
+One is this one.
+
+26
+02:00.930 --> 02:07.380
+The other one is this one, 10.0.2,    192.168.40
+
+27
+02:08.040 --> 02:13.710
+If I've ifconfig command does not work in your operating system, you can try ip addr show
+
+28
+02:13.950 --> 02:14.580
+ip addr show
+
+29
+02:15.420 --> 02:18.660
+So ifconfig command is not available in your Linux systems.
+
+30
+02:19.820 --> 02:21.340
+So ip addr show
+
+31
+02:21.470 --> 02:27.020
+So this is just to check your own IP address now, if you have any other IP address and you want to
+
+32
+02:27.020 --> 02:33.680
+see whether it's connected, like I'm going to give IP address of db01, 192.168.40.12
+
+33
+02:34.040 --> 02:36.100
+Well, that's the IP address of DB zero one.
+
+34
+02:36.620 --> 02:42.980
+So I use ping command, ping command sends, 4 network packets, ICMP packet in Windows Machine in
+
+35
+02:42.980 --> 02:43.550
+Linux machine.
+
+36
+02:43.550 --> 02:47.240
+It keeps on sending unlimited packets and how to do ctrl+c
+
+37
+02:47.240 --> 02:47.570
+ctrl+c
+
+38
+02:48.830 --> 02:56.540
+So it is sending the ICMP packets to this IP address, and when this IP address receives when this network
+
+39
+02:56.540 --> 03:00.380
+interface, which has this IP address receives, the packet. It is going to reply back.
+
+40
+03:01.360 --> 03:06.820
+And you can see 12 packets were transmitted, 12 received, zero percent packet loss.
+
+41
+03:06.850 --> 03:10.740
+So there is a network connectivity from your machine to this IP address.
+
+42
+03:11.410 --> 03:13.840
+So that's what ping really reveals.
+
+43
+03:16.030 --> 03:21.010
+Now, if I want to connect to that machine with the name and not with IP address, I will need a DNS
+
+44
+03:21.010 --> 03:27.100
+server or I can make an entry in /etc/hosts file.
+
+45
+03:27.100 --> 03:30.220
+You will find in almost every operating system.
+
+46
+03:31.610 --> 03:35.210
+And you can give the IP address of your target machine.
+
+47
+03:38.140 --> 03:42.850
+168, dot 40, dot 12 and the name db01
+
+48
+03:43.940 --> 03:52.520
+Then you can refer to that machine with the name, like you can say ping db01 and you will
+
+49
+03:52.520 --> 03:54.380
+see it resolves to that IP address.
+
+50
+03:55.450 --> 04:00.390
+So ping command shows whether there is a connectivity or not, it can show if there is any packet loss,
+
+51
+04:00.820 --> 04:06.880
+But if you want to trace the complete path that your computer will take to reach the target machine,
+
+52
+04:06.910 --> 04:08.920
+then you can use Traceroute.
+
+53
+04:09.370 --> 04:14.530
+Now, Traceroute will not be working properly in a virtual machine, virtual box.
+
+54
+04:14.800 --> 04:18.420
+So I'm going to log out from here in the Windows machine.
+
+55
+04:18.880 --> 04:25.690
+Either you can use command prompt or powershell or you can use git bash and you can run trace route command.
+
+56
+04:26.820 --> 04:29.790
+So that's the command tracert
+
+57
+04:30.750 --> 04:37.740
+And you can give a destination like I will give www.google.in
+
+58
+04:38.730 --> 04:39.540
+And hit enter.
+
+59
+04:41.370 --> 04:46.590
+So this command is going to send three packets to the destination, which is Google dot com, that's
+
+60
+04:46.590 --> 04:52.680
+currently the IP address, and it is going to show me all the hops that it is going to take to reach
+
+61
+04:53.070 --> 04:54.000
+the Google server.
+
+62
+04:55.210 --> 05:01.570
+Hops could be the routers, so it reached at this place, then it took the next hop over here, then
+
+63
+05:01.570 --> 05:03.970
+the next hop, then the next hop.
+
+64
+05:06.970 --> 05:08.550
+So it is sending three packets.
+
+65
+05:08.620 --> 05:09.440
+This is the first.
+
+66
+05:09.460 --> 05:10.170
+This is second.
+
+67
+05:10.180 --> 05:10.920
+This is the third.
+
+68
+05:11.290 --> 05:17.940
+It shows the latency also 256 milliseconds for the first packet with the second and third is one millisecond.
+
+69
+05:17.950 --> 05:20.230
+So we can consider this as one millisecond.
+
+70
+05:21.510 --> 05:27.330
+Second router is at this place, that's the third one, so totally 8 Hops.
+
+71
+05:28.680 --> 05:32.730
+It also shows the IP address or the name of the router that it.
+
+72
+05:33.850 --> 05:36.090
+Went through to reach the Google server.
+
+73
+05:37.660 --> 05:43.750
+This command is mostly used when you want to see there is any latency in between you, your computer
+
+74
+05:44.080 --> 05:51.250
+or a computer to some target machine. You can find out if, you know, if you are seeing some you're
+
+75
+05:51.250 --> 05:55.930
+seeing all three packets having too much latency, then you can find out, OK, the problem is over
+
+76
+05:55.930 --> 06:00.440
+here and it's not at your local network or not at the server.
+
+77
+06:00.730 --> 06:03.190
+The problem could be somewhere in the middle on the Internet.
+
+78
+06:04.480 --> 06:07.390
+OK, let's login back to the web01
+
+79
+06:11.120 --> 06:15.950
+Next, command, we are seeing is netstat -antp, with this option, this comand is going to
+
+80
+06:15.950 --> 06:18.050
+show all the TCP open ports.
+
+81
+06:19.350 --> 06:20.400
+In the current machine.
+
+82
+06:20.760 --> 06:23.850
+OK, so we have port number 22, port number 80.
+
+83
+06:24.510 --> 06:25.760
+It's not showing PID.
+
+84
+06:25.830 --> 06:28.530
+I have to be the root user, runthe command once again.
+
+85
+06:28.530 --> 06:31.890
+-antp
+
+86
+06:33.670 --> 06:42.520
+OK, so it shows for 22 is open, port 80 is open for anyone to access and this is the process ID service
+
+87
+06:42.520 --> 06:44.760
+name or the process name, right?
+
+88
+06:44.860 --> 06:45.610
+This is the process.
+
+89
+06:45.610 --> 06:47.680
+So there's an apache2 service running on port 80.
+
+90
+06:48.340 --> 06:49.180
+That's the process ID
+
+91
+06:49.180 --> 06:52.000
+And there's an SSHD service running and that's the process.
+
+92
+06:53.110 --> 07:00.700
+And you can run ps -ef command and grep for this process I.D. and you should find it, ps -ef
+
+93
+07:00.880 --> 07:07.870
+grep, let's say one one or I'll do it for a apache three, three, three or you know, I just see a
+
+94
+07:07.870 --> 07:09.370
+apache2 process.
+
+95
+07:10.720 --> 07:13.440
+So I find the process ID, 3306.
+
+96
+07:13.450 --> 07:21.010
+And from that I can find out what port number, if it's using any port number and I will say grep for 3336
+
+97
+07:21.010 --> 07:21.730
+.
+
+98
+07:23.720 --> 07:27.650
+So I can say this process has opened this port, port 80
+
+99
+07:29.660 --> 07:33.350
+The new command is also ss -tunlp
+
+100
+07:36.200 --> 07:43.580
+There, again, 22, 22, you see the process I also want to see the process ID also process name.
+
+101
+07:44.640 --> 07:48.120
+This this is to see the open ports on your machine.
+
+102
+07:48.890 --> 07:53.150
+There's also one more command called and nmap and nmap will not be installed.
+
+103
+07:53.150 --> 07:56.120
+So you have to install nmap, I will say apt install nmap.
+
+104
+07:56.600 --> 08:01.100
+And if any command it is saying not present, you can just find it on the Internet.
+
+105
+08:02.060 --> 08:05.210
+The right package and install that, that command will be available then.
+
+106
+08:06.230 --> 08:11.470
+Now nmap command, use it carefully, because in some countries it's even illegal to use this command
+
+107
+08:11.870 --> 08:18.620
+and it also depends from where you are running, what is your purpose or don't run nmap on any website,
+
+108
+08:18.620 --> 08:19.670
+any public website.
+
+109
+08:20.570 --> 08:23.780
+And if you know what you're doing, OK, use it for troubleshooting purposes.
+
+110
+08:23.780 --> 08:26.120
+Only if I just hit nmap.
+
+111
+08:29.290 --> 08:33.010
+It's going to show you lot of options you can say nmap localhost.
+
+112
+08:36.810 --> 08:40.500
+It shows the open ports, so 22 and 80 are open ports.
+
+113
+08:41.680 --> 08:48.430
+You can do nmap on a target machine, like I'm going to do it on db01, and that's actually
+
+114
+08:48.430 --> 08:52.270
+the main purpose of a nmap. Scanning the ports of a target.
+
+115
+08:53.330 --> 09:01.580
+So on db01, you have port  22 open port 111, rpcbind and 3306 for mysql
+
+116
+09:01.580 --> 09:02.000
+mysql
+
+117
+09:03.210 --> 09:05.550
+This is when you're trying to connect two machines together.
+
+118
+09:05.790 --> 09:10.800
+They are not able to connect because of some issues from some firewall you can use nmap to scan the
+
+119
+09:10.800 --> 09:12.300
+port, whether they're open or not.
+
+120
+09:15.840 --> 09:18.900
+OK, next, command is dig. dig is going to show me.
+
+121
+09:20.630 --> 09:24.770
+DNS look up, so if I said www.google.com
+
+122
+09:27.700 --> 09:28.870
+So it is.
+
+123
+09:30.600 --> 09:35.700
+Its IP address is this. There is A record, It is showing me the records in the DNS server, this is the
+
+124
+09:35.700 --> 09:36.480
+DNS server.
+
+125
+09:38.140 --> 09:42.280
+This is used to see whether, you know, your DNS resolution from your computer is working or not.
+
+126
+09:42.850 --> 09:47.530
+That means a name can be resolved to an IP address or any other records.
+
+127
+09:48.550 --> 09:52.300
+Thers is another command also an nslookup, which will be also similar to this?
+
+128
+09:52.300 --> 09:55.750
+And you can say this is an older version of dig.
+
+129
+09:57.850 --> 10:05.120
+Right, again, name, IP address, name, IP address, that's IPv6  by the way, and that's IPv4
+
+130
+10:05.120 --> 10:05.590
+ipv4
+
+131
+10:06.010 --> 10:12.700
+And this is the DNS server that is resolving and it's that's the port number. dig  and nslook 
+
+132
+10:12.700 --> 10:13.480
+for dn queries.
+
+133
+10:15.260 --> 10:21.320
+route -n, this command is going to show you the gateways, so for this network interface, the
+
+134
+10:21.320 --> 10:22.580
+gateway is this.
+
+135
+10:23.490 --> 10:25.080
+Or you can just run route.
+
+136
+10:26.900 --> 10:32.510
+route command, you can update the route tables also, but mostly we're using it to just see the
+
+137
+10:32.510 --> 10:33.140
+gateways.
+
+138
+10:34.870 --> 10:36.670
+OK, next, command is arp
+
+139
+10:38.370 --> 10:42.750
+This command is to view or add the content to the kernels ARP table.
+
+140
+10:43.970 --> 10:51.050
+So kernel will maintain a table of all IP or name and mapping Mac address, and so its saying for
+
+141
+10:51.050 --> 10:54.200
+db01, the Mac address is this.
+
+142
+10:56.860 --> 10:59.140
+OK, next, command is mtr.
+
+143
+11:00.550 --> 11:07.690
+So this is same like tracert, but this is really live, you know, continuously showing, you
+
+144
+11:07.690 --> 11:11.610
+know, if you want to see where where is the packet loss and if it's frequent, you know, you can just
+
+145
+11:11.620 --> 11:11.950
+run it.
+
+146
+11:12.460 --> 11:13.720
+But as you see.
+
+147
+11:15.380 --> 11:21.140
+From the vm, there is a problem with this, OK, let's logout see if you have mtr command in windows
+
+148
+11:21.140 --> 11:22.820
+windows you don't have.
+
+149
+11:23.920 --> 11:34.300
+OK, I'm going to login again, clear the screen, so mtr will say www.google.com
+
+150
+11:37.140 --> 11:37.430
+.
+
+151
+11:37.850 --> 11:43.050
+So it is showing all the hop taken and also where do you have any loss. At this place
+
+152
+11:43.130 --> 11:47.120
+You see, there's some packet loss and I can see the dynamically.
+
+153
+11:48.570 --> 11:53.070
+So if you're getting a slow Internet or in between two systems is a slow connectivity, you can find
+
+154
+11:53.070 --> 11:59.460
+out where the problem is, where the packet loss is happening, or also if you're not able to reach
+
+155
+11:59.460 --> 12:05.400
+to a destination, it will go to a particular place and then it will start failing. 100 percent packet loss
+
+156
+12:05.580 --> 12:06.100
+will be there.
+
+157
+12:07.020 --> 12:12.030
+That means the problem is that that particular place you can figure out whether it's your local area
+
+158
+12:12.030 --> 12:15.090
+network or it's whether it's the server or it's somewhere in the middle.
+
+159
+12:16.940 --> 12:22.670
+OK, are you can do ctrl+c to that command. I have shown you a nmap command and you
+
+160
+12:22.670 --> 12:25.190
+can run it on the target machine.
+
+161
+12:26.250 --> 12:31.850
+It will show you the open ports, but you can also use the telnet command to see whether a particular
+
+162
+12:31.850 --> 12:34.450
+port is open on the target machine or not.
+
+163
+12:35.500 --> 12:40.900
+Like, you can say, telnet and you can give the IP address or the hostname, I'm going to give the
+
+164
+12:40.900 --> 12:41.860
+IP address now.
+
+165
+12:43.650 --> 12:49.810
+That's the db01 IP, and I'm going to say 3306, so trying to connect from web01
+
+166
+12:49.930 --> 12:53.050
+to db01 on 3306
+
+167
+12:55.380 --> 13:04.500
+OK, there is says connected, but the mariadb server is rejecting it now, and I'm not willing to connect
+
+168
+13:04.500 --> 13:08.130
+to this IP address where the port is open, it was connected.
+
+169
+13:09.540 --> 13:11.600
+You can try 22, which is for ssh.
+
+170
+13:12.510 --> 13:13.100
+There you go.
+
+171
+13:13.110 --> 13:19.580
+SSH, it opened the connection you have to use control and the square bracket, hit enter
+
+172
+13:20.400 --> 13:22.800
+And from that telnet, you can quit.
+
+173
+13:24.750 --> 13:26.850
+OK, so these are some commands.
+
+174
+13:28.240 --> 13:31.060
+You have seen I have config IP addr show.
+
+175
+13:31.980 --> 13:32.430
+ping
+
+176
+13:33.960 --> 13:39.450
+netstat, we have also seen Traceroute, but that is outside, we have seen it from the Windows
+
+177
+13:39.450 --> 13:42.420
+machine because in the vm it does not work properly.
+
+178
+13:42.840 --> 13:45.330
+So run it from your host machine from your host machine.
+
+179
+13:46.670 --> 13:47.420
+netstat
+
+180
+13:48.470 --> 13:57.320
+We can find out a process I.D. and then you can grep for what port it is running on, ss, nmap if it's
+
+181
+13:57.320 --> 13:58.640
+not available install it
+
+182
+14:00.520 --> 14:11.200
+dig and nslookup for DNS queries. route command to see the Gateway, arp to see the kernels ARP table.
+
+183
+14:12.490 --> 14:18.100
+mtr, which is seemed similar, like Traceroute, but dynamic.
+
+184
+14:19.250 --> 14:20.000
+And telnet
+
+185
+14:21.910 --> 14:27.160
+There are many more Linux networking command, if you just put it on Google, you'll find so many sites
+
+186
+14:27.520 --> 14:31.590
+and sometimes the other tools are the third party tools are also very helpful.
+
+187
+14:31.600 --> 14:37.090
+There are many more commands like tcpdump, Wireshark, but for a basic network troubleshooting
+
+188
+14:37.090 --> 14:42.190
+these things will be enough for you. We will see throughout the course how you're going to use these tools.
+
+189
+14:42.370 --> 14:44.250
+And that will be all in this video.
+
+190
+14:44.260 --> 14:45.730
+I will see you in the next one.

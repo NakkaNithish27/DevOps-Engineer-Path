@@ -1,0 +1,115 @@
+WEBVTT
+
+00:01.200 --> 00:02.820
+Instructor: All right, in this lecture, we are going
+
+00:02.820 --> 00:04.170
+to create internet gateway.
+
+00:04.170 --> 00:05.340
+It's a very simple lecture.
+
+00:05.340 --> 00:07.500
+You just need to create internet gateway, that's all
+
+00:07.500 --> 00:08.700
+and you move on.
+
+00:08.700 --> 00:12.060
+In the next lecture, we are going to associate
+
+00:12.060 --> 00:15.150
+that internet gateway with the public subnet
+
+00:15.150 --> 00:16.860
+through the route table.
+
+00:16.860 --> 00:17.940
+So pretty simple lecture.
+
+00:17.940 --> 00:19.683
+Just go to internet gateways.
+
+00:20.820 --> 00:23.070
+You should see an internet gateway over here.
+
+00:23.070 --> 00:25.380
+This is for the default VPC.
+
+00:25.380 --> 00:27.060
+Let's change the name here.
+
+00:27.060 --> 00:32.060
+Let's give it default internet gateway, IGW.
+
+00:33.990 --> 00:35.250
+Let's create it.
+
+00:35.250 --> 00:38.283
+Sorry, let's just name it, it's already created.
+
+00:39.750 --> 00:41.760
+Okay, so creating internet gateway, very simple.
+
+00:41.760 --> 00:44.550
+Click on internet, create internet gateway.
+
+00:44.550 --> 00:45.570
+Let's give it a name.
+
+00:45.570 --> 00:47.737
+We'll say V profile-IGW.
+
+00:54.019 --> 00:55.920
+What's wrong with me?
+
+00:55.920 --> 00:57.810
+Okay, IGW.
+
+00:57.810 --> 01:00.573
+And let's click on Create Internet Gateway.
+
+01:04.140 --> 01:05.820
+Okay, so the internet gateway is created,
+
+01:05.820 --> 01:07.530
+but you see state detached.
+
+01:07.530 --> 01:10.350
+Internet gateway needs to be attached to a VPC.
+
+01:10.350 --> 01:14.010
+So click on action, attach to VPC.
+
+01:14.010 --> 01:17.610
+Select our VPC V profile, VPC
+
+01:17.610 --> 01:18.810
+and you see this dropdown.
+
+01:18.810 --> 01:23.490
+There is also an AWS CLI command line to do the same thing
+
+01:23.490 --> 01:27.663
+through the CLI, just attach internet gateway.
+
+01:29.280 --> 01:30.113
+Okay, that is all.
+
+01:30.113 --> 01:31.860
+You have now two internet gateway,
+
+01:31.860 --> 01:35.822
+one is for the default VPC, one is for our VPC,
+
+01:35.822 --> 01:37.650
+V profile VPC.
+
+01:37.650 --> 01:38.550
+In the next lecture,
+
+01:38.550 --> 01:41.160
+we will see how to connect this internet gateway
+
+01:41.160 --> 01:42.513
+to the public subnets.

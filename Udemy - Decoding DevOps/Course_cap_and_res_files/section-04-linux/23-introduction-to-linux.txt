@@ -1,0 +1,868 @@
+WEBVTT
+
+00:00.640 --> 00:03.240
+Hello and welcome to the Linux section.
+
+00:03.440 --> 00:08.280
+Linux is the foundation on which DevOps and this entire course stands.
+
+00:08.760 --> 00:11.720
+This is where your real technical strength begins.
+
+00:12.360 --> 00:15.520
+If you're already a Linux administrator, you can skip this section.
+
+00:15.760 --> 00:20.280
+But if you are not, then mastering this chapter is absolutely essential.
+
+00:20.760 --> 00:25.040
+I have designed this section with one goal maximum efficiency.
+
+00:25.600 --> 00:29.200
+You will learn a lot of Linux in a very short amount of time.
+
+00:29.560 --> 00:34.160
+Quick, practical and focused on what truly matters for DevOps.
+
+00:34.600 --> 00:37.360
+All right, let's take a look at what you will be learning.
+
+00:37.800 --> 00:42.800
+Basics command like copying files, moving files, directories and stuff like that.
+
+00:43.240 --> 00:47.440
+We'll understand Linux file systems and the text files.
+
+00:47.440 --> 00:52.360
+Also how to edit the files, how to change the files, file permissions, stuff like that.
+
+00:52.480 --> 00:59.520
+We'll see filters and redirection which I feel is a really very important topic for DevOps.
+
+01:00.570 --> 01:02.970
+will see users and groups in Linux.
+
+01:03.370 --> 01:05.650
+We'll see what is sudo and how to use it.
+
+01:06.290 --> 01:15.810
+We'll see software management like RPM, Debian, yum, apt, etc. etc. we'll see services and processes
+
+01:15.810 --> 01:24.370
+in Linux and we'll see a lot of commands which will be good to know being a DevOps or any Linux guy.
+
+01:26.090 --> 01:31.450
+We'll be doing some server management, will be setting up web servers and database servers on our Linux
+
+01:31.490 --> 01:32.010
+VMs.
+
+01:34.250 --> 01:36.250
+So we'll be working basically in these four areas.
+
+01:36.250 --> 01:43.410
+In Linux one will understand commands files softwares and servers.
+
+01:46.130 --> 01:48.850
+And you should be really good in these four areas.
+
+01:51.130 --> 01:53.530
+If you're in IT industry you must have already here.
+
+01:53.570 --> 01:57.250
+You must have already heard the word open source.
+
+01:58.010 --> 02:02.010
+If you are not aware about open source, you may generally think open source is about free.
+
+02:02.010 --> 02:05.970
+Softwares with open source is much more than that.
+
+02:06.530 --> 02:08.250
+And it's not just about free software.
+
+02:08.250 --> 02:10.450
+Even some open source software are not free.
+
+02:11.290 --> 02:18.010
+Well, I totally believe that today in the IT industry we have progressed so much because of open source
+
+02:18.010 --> 02:18.890
+softwares.
+
+02:19.490 --> 02:20.170
+Yes that's true.
+
+02:20.170 --> 02:26.090
+If you go back and look at the open source history, you'll understand that most of the popular software
+
+02:26.090 --> 02:30.810
+that you must be using is either open source or used to be open source.
+
+02:31.090 --> 02:32.530
+So what really is open source?
+
+02:32.530 --> 02:36.890
+Basically open source is the code freely available.
+
+02:36.890 --> 02:39.210
+The code which was used to create the software.
+
+02:39.490 --> 02:46.210
+That code is freely available for anybody to inspect, modify, enhance and then redistribute.
+
+02:46.770 --> 02:53.690
+So if you're creating a software and you made it open source, you can expect people around the world
+
+02:53.690 --> 02:59.220
+to contribute to your software, make it much more better and more secure.
+
+02:59.260 --> 03:00.340
+More enhanced.
+
+03:00.900 --> 03:04.980
+And that way, other people also become contributor to your open source project.
+
+03:05.380 --> 03:11.660
+Now compare that with a software that is developed by an organization, a company where you have some
+
+03:11.700 --> 03:16.260
+few brilliant heads, let's say 510 people working and creating a software.
+
+03:16.260 --> 03:21.380
+Compare that with open source software, where you will be having hundreds or even thousands of people
+
+03:21.380 --> 03:22.660
+contributing to a software.
+
+03:23.940 --> 03:25.980
+So that's what open source software are.
+
+03:26.020 --> 03:28.060
+It just doesn't mean it's free.
+
+03:28.820 --> 03:30.620
+That's a common misconception.
+
+03:34.700 --> 03:39.980
+Now Linux is an open source operating system or should I say open source kernel.
+
+03:41.620 --> 03:50.580
+In 1984, the open source version of Unix utilities came in Unix I'm talking about, which was distributed
+
+03:50.580 --> 03:59.660
+under GPL license in 1991, a guy named Linus Torvalds, who really changed everything in the IT industry.
+
+03:59.700 --> 04:00.500
+Literally.
+
+04:01.020 --> 04:06.300
+This brilliant mind created a Unix like kernel and made it open source.
+
+04:06.300 --> 04:08.700
+He made the kernel open source.
+
+04:09.340 --> 04:12.020
+It was a kernel which was similar to Unix.
+
+04:12.860 --> 04:15.500
+Also ships with it some new utilities.
+
+04:15.500 --> 04:16.180
+The tools.
+
+04:16.980 --> 04:24.700
+And after that, brilliant minds around the world started using that kernel, which is called Linux
+
+04:24.700 --> 04:31.460
+kernel, and started developing some utilities around it to create a complete operating system.
+
+04:32.460 --> 04:39.220
+So in today's time when you talk about Linux operating system like CentOS or Ubuntu or Kali Linux or
+
+04:39.260 --> 04:43.700
+Debian or Red Hat Linux, they are using the Linux kernel.
+
+04:43.740 --> 04:45.900
+Of course, it's upgraded now.
+
+04:46.580 --> 04:52.860
+So let's say Red hat has took that kernel and created its own utilities packaging system and created
+
+04:52.860 --> 04:56.070
+a complete operating system, which we call it as Red Hat Linux.
+
+04:56.390 --> 05:02.390
+And there are Red Hat Enterprise Linux, CentOS Linux, fedora Linux same way canonical created ubuntu.
+
+05:02.430 --> 05:04.790
+Then you have Debian, then you have open source.
+
+05:05.470 --> 05:11.150
+And now there are lots and lots of Linux operating system in Android phone is Linux.
+
+05:11.670 --> 05:18.270
+So it all happened because of Linus Torvalds, who gave us the Unix like kernel, which we call it as
+
+05:18.270 --> 05:19.230
+Linux kernel.
+
+05:22.550 --> 05:27.510
+Let's see some Linux principles which are very important for anyone to understand.
+
+05:27.750 --> 05:35.310
+And especially for DevOps, Linux everything is considered as a file, including the hardware, your
+
+05:35.310 --> 05:37.150
+mouse, your keyboard, printer.
+
+05:37.310 --> 05:40.990
+Everything will be considered as a file by Linux operating system.
+
+05:41.430 --> 05:43.510
+And we can literally see that file.
+
+05:43.630 --> 05:46.390
+And when I say file, it just doesn't mean the text file.
+
+05:46.390 --> 05:49.150
+It could be any other file, which we will understand later.
+
+05:50.350 --> 05:52.670
+In Linux we have small single purpose program.
+
+05:52.670 --> 05:54.320
+We don't have bulky programs.
+
+05:54.320 --> 05:56.040
+We do have, but very rarely.
+
+05:56.200 --> 06:01.800
+Mostly we have small single purpose programs, and there will be an ability to change these programs
+
+06:01.800 --> 06:04.320
+together to perform complex operations.
+
+06:05.000 --> 06:11.320
+You know, that may really sound similar to continuous delivery, continuous integration where we have
+
+06:11.360 --> 06:18.840
+small programs, small automation, we combine them together to perform more complex pipeline operations.
+
+06:20.760 --> 06:23.560
+We avoid captive user interface in Linux.
+
+06:24.200 --> 06:29.560
+That means we don't like the graphical software's next, next, next finish done right.
+
+06:29.600 --> 06:36.280
+We know if you open a software or any tool and it is waiting for user input, that means it has captured
+
+06:36.280 --> 06:37.160
+the user interface.
+
+06:37.160 --> 06:43.160
+The user has to be there and click or write something so the program can continue.
+
+06:43.800 --> 06:46.960
+We are going to avoid that in this course also.
+
+06:46.960 --> 06:49.520
+And being a DevOps also, you should avoid those things.
+
+06:50.360 --> 06:54.400
+Otherwise it's difficult to run things in the background or automate such things.
+
+06:55.640 --> 06:56.320
+Configuration.
+
+06:56.360 --> 07:00.360
+Configuration data are stored in text file in Linux, which is very good.
+
+07:00.400 --> 07:03.800
+Being a DevOps for us so we can very easily make changes to the files.
+
+07:03.840 --> 07:08.440
+We don't need to go to like say settings and tabs and advanced tab.
+
+07:08.480 --> 07:08.960
+Right.
+
+07:09.360 --> 07:11.520
+So very easily we can change settings.
+
+07:13.960 --> 07:14.960
+So why Linux.
+
+07:15.000 --> 07:17.760
+I mean it's a really very broad question.
+
+07:18.000 --> 07:22.240
+Why Linux for DevOps or why Linux for server or why Linux at all?
+
+07:22.440 --> 07:24.200
+Okay, first of all it's open source.
+
+07:24.240 --> 07:24.640
+Okay.
+
+07:24.800 --> 07:26.640
+So you get huge community support.
+
+07:26.840 --> 07:28.320
+You get new new updates.
+
+07:29.160 --> 07:31.160
+It supports wide variety of hardware.
+
+07:31.200 --> 07:33.040
+Now you must have already seen that.
+
+07:33.080 --> 07:34.320
+You know it runs on your phone.
+
+07:34.320 --> 07:36.640
+It runs on your laptop, it runs on your server.
+
+07:36.680 --> 07:39.880
+And different, different other hardwares of the servers or desktops.
+
+07:40.760 --> 07:44.480
+And there's a lot of customization you can do in Linux operating system.
+
+07:44.840 --> 07:48.720
+Most of the servers out there are running Linux operating system.
+
+07:49.240 --> 07:51.810
+Even some of the very popular supercomputers.
+
+07:52.970 --> 07:57.250
+Automation is so easy to do it on Linux compared to, let's say, windows.
+
+07:58.170 --> 07:59.490
+Now windows is also catching up.
+
+07:59.490 --> 08:02.290
+Now you have PowerShell and you know, new, new things are coming up.
+
+08:02.450 --> 08:06.290
+But when it comes to Linux, there are many, many, many ways to automate.
+
+08:06.290 --> 08:07.410
+One thing in Linux.
+
+08:09.050 --> 08:13.890
+And Linux is considered as a secure operating system compared to Microsoft Windows.
+
+08:14.490 --> 08:17.570
+But that could be debatable topic and I would leave that up to you.
+
+08:19.450 --> 08:19.610
+Okay.
+
+08:19.610 --> 08:19.930
+Let's see.
+
+08:19.970 --> 08:21.730
+Architecture of Linux a high level view.
+
+08:21.770 --> 08:22.490
+Very simple.
+
+08:22.490 --> 08:28.770
+You have the hardware which is your compute resource, your Ram, CPU network.
+
+08:29.050 --> 08:29.450
+Right.
+
+08:29.490 --> 08:31.210
+That's compute resource hardware.
+
+08:31.210 --> 08:32.890
+On top of that there will be kernel.
+
+08:33.290 --> 08:37.930
+Now in your Linux operating system you have Linux kernel, which will read or understand the hardware
+
+08:38.450 --> 08:42.090
+and can pass signal through to and fro to your hardware.
+
+08:42.130 --> 08:47.970
+To shell from shell, you can execute commands and expect a return.
+
+08:48.690 --> 08:55.170
+And you should also have a lot of tools built around your Linux kernel, which you can use starting
+
+08:55.170 --> 09:02.370
+from very simple commands like CD or VI or Cat or RLS to all the way to graphical software's.
+
+09:02.370 --> 09:07.850
+Also like browsers readers like PDF readers.
+
+09:08.570 --> 09:14.450
+So user will connect to these tools, which in turn will send the information to the kernel.
+
+09:15.010 --> 09:18.290
+And that's the kernel that Linus Torvalds has developed.
+
+09:21.610 --> 09:21.890
+Okay.
+
+09:21.890 --> 09:25.410
+Let's see some popular Linux distros on the desktop side.
+
+09:25.610 --> 09:26.250
+Desktop.
+
+09:26.290 --> 09:29.730
+Like if you want to install it on your laptop or on your desktop.
+
+09:30.570 --> 09:32.930
+Some popular name they really changes, you know.
+
+09:33.250 --> 09:38.290
+Uh, usually the most popular one is Ubuntu Linux or Linux Mint.
+
+09:38.490 --> 09:42.250
+You know, or you can just Google top ten Linux distros, right?
+
+09:42.290 --> 09:43.850
+You will find that the latest one.
+
+09:44.090 --> 09:45.770
+And again you have your own preference.
+
+09:45.770 --> 09:47.980
+Also Ubuntu Linux is the most popular one.
+
+09:47.980 --> 09:51.540
+Then you have Linux Mint, which is also very easy to use.
+
+09:51.540 --> 09:58.500
+Arch Linux you have Fedora Linux, you have from Red hat, and then you have Debian and Open Source.
+
+09:59.260 --> 10:02.260
+So you can try and use this operating system on your laptop.
+
+10:02.260 --> 10:07.580
+I really recommend you do dual boot, and you use Linux operating system as much as possible for your
+
+10:07.580 --> 10:08.500
+desktop needs.
+
+10:09.020 --> 10:11.940
+And that way you will become very comfortable with Linux systems.
+
+10:12.660 --> 10:16.300
+So these are desktop but we are focusing more on server.
+
+10:16.580 --> 10:18.860
+So popular server Linux operating system.
+
+10:18.860 --> 10:23.380
+The most popular name is Red Hat Enterprise Linux which is obviously from Red hat.
+
+10:24.860 --> 10:31.420
+This is considered as the most stable and secure Linux operating system and it is not open source.
+
+10:32.340 --> 10:33.860
+There is licensing for it.
+
+10:34.460 --> 10:38.100
+Then you have Ubuntu Server, which is open source and quite popular.
+
+10:38.100 --> 10:43.460
+And my personal favorite, I would say this is the easiest Linux operating system, but some people
+
+10:43.460 --> 10:45.700
+will disagree with that in terms of security.
+
+10:45.700 --> 10:46.950
+And we will discuss that.
+
+10:47.950 --> 10:52.030
+Then you have centaurs, which is similar to Red Hat Enterprise Linux, but it is open source.
+
+10:52.270 --> 10:57.350
+Centaurs and Rachel are almost similar, but centaurs is open source.
+
+10:57.390 --> 10:59.390
+Red Hat Enterprise Linux is not.
+
+11:00.590 --> 11:02.270
+Then you have Suse Enterprise Linux.
+
+11:02.790 --> 11:05.270
+You have a few more names, but these are the popular ones.
+
+11:06.110 --> 11:12.750
+Now I will take you to Wikipedia to show you the list of all the Linux operating systems we have today.
+
+11:14.110 --> 11:15.830
+So you can open this site.
+
+11:17.030 --> 11:19.710
+List of Linux distribution in Wikipedia.
+
+11:21.670 --> 11:25.190
+So you have first the RPM based and then you have Debian based.
+
+11:25.190 --> 11:27.590
+Then you have Pacman based Gentoo based.
+
+11:27.710 --> 11:30.230
+These are different different packaging methods.
+
+11:30.230 --> 11:32.750
+So RPM based Red Hat Linux centaurs.
+
+11:32.790 --> 11:33.910
+Fedora open source.
+
+11:33.950 --> 11:39.190
+Open source is also uh RPM based in CentOS again Clearos.
+
+11:39.230 --> 11:40.430
+Miracle Linux.
+
+11:40.590 --> 11:47.150
+Oracle Linux, which is Oracle Linux, is similar to Red Hat Enterprise Linux Amazon Linux will be using
+
+11:47.190 --> 11:50.110
+Amazon Linux also when you start using EC2 instances.
+
+11:50.830 --> 11:53.510
+Fedora based you have a lot of names you have there.
+
+11:53.510 --> 11:54.870
+Open source based you have.
+
+11:54.910 --> 11:56.230
+These are popular names.
+
+11:57.470 --> 12:04.070
+Okay, if you are just still in the very upper side of the page, Debian based backtrack, which I don't
+
+12:04.070 --> 12:04.830
+think it's anymore.
+
+12:04.830 --> 12:05.950
+You have Kali Linux.
+
+12:06.350 --> 12:10.870
+This is used by the penetration testers ubuntu.
+
+12:11.510 --> 12:16.110
+Then you have kubuntu, Lubuntu, xubuntu, edubuntu.
+
+12:16.150 --> 12:21.630
+These are all ubuntu based and Ubuntu is Debian based, so it's similar to Debian operating system.
+
+12:25.030 --> 12:27.950
+Linux elementary OS which I used for desktop.
+
+12:27.950 --> 12:32.550
+It was nice like Mac OS, Linux Mint.
+
+12:32.550 --> 12:35.070
+You have many, many, many, many operating systems.
+
+12:35.070 --> 12:36.070
+Linux operating system.
+
+12:36.070 --> 12:38.110
+You can keep scrolling and reading about them.
+
+12:39.390 --> 12:40.990
+So why I'm showing you all this.
+
+12:41.390 --> 12:44.240
+It's really I want to show you the scale of Linux operating system.
+
+12:44.240 --> 12:45.200
+The flavors.
+
+12:45.400 --> 12:47.160
+These are called flavors of Linux.
+
+12:47.160 --> 12:50.080
+So there are many, many Linux flavors out there.
+
+12:50.680 --> 12:57.920
+Like also your Android is Linux, so I don't want you confuse more with many, many Linux operating
+
+12:57.920 --> 12:58.480
+system.
+
+12:58.880 --> 13:01.280
+But I want to show you there are many available.
+
+13:01.320 --> 13:05.120
+But if you're working in IT industry you will see two popular names.
+
+13:05.480 --> 13:09.000
+One is RPM based and the other one is Debian based RPM based.
+
+13:09.000 --> 13:17.280
+You have Red Hat Enterprise Linux, CentOS, Oracle Linux, and now you also have Amazon Linux which
+
+13:17.280 --> 13:22.320
+is on AWS, and then you have Debian based Ubuntu Server, Kali Linux.
+
+13:22.320 --> 13:25.320
+And there are many, many, many names in Debian operating system.
+
+13:25.920 --> 13:31.520
+The major difference between these two family of operating system is the packaging method of the software.
+
+13:31.840 --> 13:33.240
+That's where the difference start.
+
+13:33.960 --> 13:40.720
+RPM based means you have a software which is packaged in RPM format like you have.
+
+13:40.760 --> 13:46.640
+Exe msi apk like that this RPM and deb for Debian.
+
+13:47.120 --> 13:52.280
+So before I make you understand the difference between these two family, let me tell you which one
+
+13:52.280 --> 13:53.440
+will be used when.
+
+13:54.120 --> 14:00.640
+So Red hat is considered as stable and secure operating system, especially Red Hat Enterprise Linux.
+
+14:00.640 --> 14:02.200
+You cannot download and install.
+
+14:02.240 --> 14:06.800
+I mean, you should not download and install software in Oracle Linux from outside.
+
+14:07.040 --> 14:09.640
+You download it only from Red hat repository.
+
+14:09.920 --> 14:16.240
+So Red hat is going to test all the softwares and packages before it releases it to its users.
+
+14:16.840 --> 14:19.080
+Like same like Apple.
+
+14:19.480 --> 14:19.720
+Okay.
+
+14:19.760 --> 14:26.920
+Which will test the softwares very thoroughly for any security or for any performance flaw.
+
+14:27.560 --> 14:29.680
+But then you have Debian based here.
+
+14:29.680 --> 14:35.800
+You get lots and lots of softwares very easily, very easy to install, very easy to set up.
+
+14:36.080 --> 14:38.200
+It focuses more on user friendliness.
+
+14:38.880 --> 14:43.930
+So if you need latest and greatest and open source software, you go with Debian based like ubuntu.
+
+14:44.610 --> 14:46.290
+So I'll tell you my personal preferences.
+
+14:46.290 --> 14:51.970
+If you want to run servers, I will prefer RedHat operating system if I want to use it for DevOps.
+
+14:51.970 --> 14:58.490
+For some automation purpose, I will be using ubuntu because I may need latest and greatest libraries
+
+14:58.490 --> 15:00.490
+and softwares to do some automation.
+
+15:01.010 --> 15:07.210
+And I don't want to get into software installation problems, so I'll prefer Debian based for DevOps
+
+15:07.210 --> 15:10.930
+purpose and Red hat based for server based.
+
+15:10.970 --> 15:15.450
+Again, it's your choice, but you can do either of it on any of the operating system.
+
+15:16.210 --> 15:19.290
+There is no hard and fast rule, but that's a general mentality.
+
+15:20.290 --> 15:25.170
+So these two popular family are used in IT industry.
+
+15:25.210 --> 15:27.010
+RPM based or Debian based.
+
+15:28.730 --> 15:33.010
+Again, as I said there will be packaging difference first to start with.
+
+15:33.010 --> 15:35.210
+But then there are more command differences.
+
+15:38.010 --> 15:43.740
+So RPM base will have software that ends with RPM, and Debian will have software that ends with Deb.
+
+15:43.740 --> 15:46.300
+So Debian software, let's say you want to install Google Chrome.
+
+15:46.300 --> 15:48.260
+So package name will be something like this.
+
+15:48.540 --> 15:52.140
+Google Chrome, some blah blah blah version dot deb.
+
+15:52.820 --> 15:57.460
+If you install it the command will be dpkg hyphen I and the package name.
+
+15:58.060 --> 16:04.740
+Sure, there are many ways of installing a software in Ubuntu or Debian, but this is a very manual
+
+16:04.740 --> 16:05.060
+way.
+
+16:05.980 --> 16:06.180
+If.
+
+16:06.180 --> 16:06.460
+Same thing.
+
+16:06.460 --> 16:10.820
+If you want to install Google Chrome on a red hat machine, then you will have software named Google
+
+16:10.820 --> 16:17.860
+Chrome, some version dot rpm, Red hat package manager and to install the command will be different
+
+16:17.900 --> 16:21.500
+rpm hyphen I've there we have dpkg hyphen I.
+
+16:21.700 --> 16:23.900
+So you see the packaging is different.
+
+16:23.900 --> 16:25.700
+So then the commands are also different.
+
+16:25.700 --> 16:27.660
+Then their file names will be different.
+
+16:28.100 --> 16:30.020
+Like that you will see many many differences.
+
+16:30.020 --> 16:33.380
+Then in our day to day life we will see difference between commands.
+
+16:34.100 --> 16:37.340
+So being DevOps you should be comfortable in any Linux operating system.
+
+16:38.940 --> 16:42.620
+Okay, now let's get started with basic commands of Linux.
+
+16:43.620 --> 16:45.340
+But before we do that, one last thing.
+
+16:45.340 --> 16:49.060
+We'll understand the directory structure in Linux.
+
+16:51.140 --> 16:55.180
+We'll log into the Linux VM's Linux operating system and see all these directories.
+
+16:55.180 --> 16:59.100
+But to get started with some important directories home directories.
+
+16:59.100 --> 17:02.340
+Every user in Linux will have its home directory.
+
+17:02.780 --> 17:05.180
+Now directory means really folders.
+
+17:05.180 --> 17:07.580
+If you are from windows background you'll call them as folders.
+
+17:07.580 --> 17:09.500
+But now we call them as directories.
+
+17:10.180 --> 17:13.260
+Root user is the admin user.
+
+17:13.260 --> 17:17.660
+All powerful user in Linux and its home directory will be root.
+
+17:18.580 --> 17:24.620
+A normal user's home directory will be slash home slash user name like vagrant user.
+
+17:24.660 --> 17:30.180
+The home directory will be slash home slash vagrant user executable commands.
+
+17:30.180 --> 17:34.620
+Generally you know the commands that we are running Linux cat pwd.
+
+17:34.780 --> 17:39.910
+These commands will be located in slash bin or slash user slash bin.
+
+17:40.070 --> 17:44.710
+Or you can have them placed into slash usr local bin.
+
+17:45.910 --> 17:51.790
+These commands will be executed by normal user, but for root user the commands will be located in slash
+
+17:52.110 --> 17:52.510
+bin.
+
+17:52.750 --> 18:01.990
+These commands can be executed by root user like installing a software rpm command or dpkg command,
+
+18:01.990 --> 18:05.550
+or m or apt command, or adding a user like user add command.
+
+18:05.870 --> 18:11.510
+So such kind of system admin commands will be located in slash sbin or slash usar slash sbin.
+
+18:11.670 --> 18:15.630
+Or you can create your own commands in usr local bin.
+
+18:16.630 --> 18:23.030
+If you connect some external device like USB drive or CD, it will be automatically mounted either on
+
+18:23.030 --> 18:31.390
+slash media or slash configuration data will be stored in slash, etc. and this is where we're going
+
+18:31.390 --> 18:36.670
+to spend a lot of time like network configuration, server configuration.
+
+18:37.110 --> 18:38.510
+User configuration.
+
+18:38.510 --> 18:41.910
+Although configuration most of the configuration will be in UTC.
+
+18:42.390 --> 18:46.430
+Any temporary data you want to keep it will be you can put it in slash temp.
+
+18:46.470 --> 18:52.870
+It's temporary and there's a chance of that getting deleted when you reboot, so be careful with that.
+
+18:53.630 --> 19:01.590
+Kernel and bootloader is located in slash boot server data here also will spend a lot of time slash
+
+19:02.150 --> 19:06.670
+slash var or slash SV like websites web server you are running.
+
+19:06.670 --> 19:11.750
+So website files you're going to put them into slash var HTML, something like that.
+
+19:12.390 --> 19:17.190
+Or MySQL data var lib mysql directory okay.
+
+19:17.230 --> 19:22.910
+So mostly the server data will be in this directory system information will be stored in slash proc
+
+19:22.910 --> 19:23.870
+or slash SSIS.
+
+19:24.310 --> 19:29.310
+Popular libraries will be stored in slash lib usr lib or usr local lib.
+
+19:30.150 --> 19:35.470
+Okay now let's get into our Linux machine, our VMs and see all this directory structure.

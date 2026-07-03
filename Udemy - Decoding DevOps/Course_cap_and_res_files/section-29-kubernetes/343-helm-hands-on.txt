@@ -1,0 +1,985 @@
+WEBVTT
+
+00:00.240 --> 00:06.000
+Okay, so for this exercise you should have a Kubernetes cluster running and nginx ingress controller
+
+00:06.000 --> 00:06.480
+installed.
+
+00:06.480 --> 00:09.360
+So I have Kubernetes cluster I have created it.
+
+00:11.440 --> 00:19.160
+With this command and then with Kops update cluster command I'm going to set up the ingress controller,
+
+00:19.680 --> 00:22.000
+same as what we did in the previous ingress exercise.
+
+00:22.000 --> 00:26.400
+I'll also put this command in the resource okay.
+
+00:26.440 --> 00:27.120
+So I applied it.
+
+00:27.160 --> 00:31.240
+It should start creating the ingress controller by the time.
+
+00:31.240 --> 00:34.280
+Let's copy the kube config file.
+
+00:34.760 --> 00:37.840
+So I'm on my Kops instance.
+
+00:37.840 --> 00:43.200
+And from here I am going to copy this kube config file into my local machine.
+
+00:43.600 --> 00:46.760
+So I'm going to copy this entire kube config file first.
+
+00:50.040 --> 00:55.840
+Start to end everything I'm going to copy this I'm going to open another git bash terminal.
+
+00:56.240 --> 00:57.880
+Open my kube config file.
+
+00:57.880 --> 00:59.920
+If you don't have create one.
+
+01:00.440 --> 01:01.840
+I'm going to first create the folder.
+
+01:02.120 --> 01:03.720
+Create the folder cube.
+
+01:03.720 --> 01:11.320
+And then in that I'm going to create the config file and paste this content over here.
+
+01:11.320 --> 01:15.840
+If you already have it you can remove the existing content and just replace that.
+
+01:17.840 --> 01:18.120
+Okay.
+
+01:18.120 --> 01:22.760
+Once this is copied you should have the cube CTL command in your system.
+
+01:23.120 --> 01:29.040
+So if you're using windows Mac OS can use this command brew install Kubernetes hyphen CLI.
+
+01:29.680 --> 01:32.640
+So that way we will have the cube ctl.
+
+01:32.680 --> 01:38.800
+So I'm going to run kubectl get nodes spelling mistake get nodes.
+
+01:39.920 --> 01:43.000
+Okay so I do have access to my Kubernetes cluster.
+
+01:43.440 --> 01:43.800
+Okay.
+
+01:43.800 --> 01:45.960
+Now we are going to open VSCode.
+
+01:46.120 --> 01:49.560
+And we are going to install one extension called Amazon Cube.
+
+01:50.040 --> 01:55.080
+So go to extensions and search for Amazon Cube.
+
+01:56.920 --> 01:57.520
+This one.
+
+01:58.410 --> 02:02.010
+So the name says the most capable generative AI powered.
+
+02:02.050 --> 02:10.450
+Now, seriously, I have used many AI powered assistant for writing my code, and so far, in my opinion,
+
+02:10.450 --> 02:14.250
+Amazon Q is the best in terms of DevOps.
+
+02:14.290 --> 02:15.690
+Of course I'm saying okay.
+
+02:15.730 --> 02:16.810
+Anyways, that's my view.
+
+02:16.810 --> 02:17.650
+Let's install it.
+
+02:17.690 --> 02:23.530
+We also have copilot so we can use copilot also, but for helm chart definitely use Amazon.
+
+02:23.530 --> 02:24.610
+Q no kidding.
+
+02:25.250 --> 02:26.410
+Okay, I think it's installed.
+
+02:26.410 --> 02:27.650
+I'm going to go to this option.
+
+02:27.650 --> 02:30.090
+You see this option over here Amazon Q you see this symbol.
+
+02:30.090 --> 02:35.010
+Click on it and you're going to say use for free and continue.
+
+02:35.890 --> 02:37.450
+It's going to open up your browser.
+
+02:37.450 --> 02:38.250
+Let's click on.
+
+02:38.650 --> 02:44.450
+So here in the basic details I'm going to give here the email address that is for my AWS account okay.
+
+02:44.490 --> 02:50.690
+After filling in necessary details putting password verification code everything you will get this option
+
+02:50.730 --> 02:52.970
+say allow access for your VS code.
+
+02:53.330 --> 02:57.530
+Okay, it took a while for me to get It this chat login.
+
+02:58.050 --> 03:03.490
+If you are facing still some issue like it's still loading, you can click on this sign out, close
+
+03:03.530 --> 03:06.610
+VSCode, open again and then again try to sign in.
+
+03:07.170 --> 03:08.050
+It should work.
+
+03:09.130 --> 03:13.970
+Okay, now create a folder somewhere on your system with the name WordPress.
+
+03:13.970 --> 03:16.370
+Then open that folder from VSCode.
+
+03:17.450 --> 03:23.170
+I have created a folder WordPress hyphen in F drive, so I'm going to open that file.
+
+03:23.170 --> 03:27.490
+Open folder f drive WordPress K8's select folder.
+
+03:29.210 --> 03:33.890
+Okay, so as we discussed, the idea is to first create a WordPress application.
+
+03:33.890 --> 03:37.410
+So we need the WordPress app and MySQL DB.
+
+03:38.010 --> 03:43.450
+So one way is we can simply, you know, open a browser, Google it and find the definition files,
+
+03:43.650 --> 03:45.570
+copy paste them, make changes.
+
+03:46.370 --> 03:51.730
+The other way is to ask Amazon developer to create it for us.
+
+03:51.730 --> 03:54.050
+So let's try the browser first.
+
+03:54.570 --> 04:00.610
+So I did some googling and I found this documentation of deploying WordPress and MySQL with persistent
+
+04:00.610 --> 04:01.410
+volumes.
+
+04:02.010 --> 04:04.330
+So let's take a look what it has.
+
+04:04.450 --> 04:08.330
+So we have the service definition here.
+
+04:08.330 --> 04:14.250
+A service will get created with port 3306 for the app WordPress selector.
+
+04:14.610 --> 04:19.450
+And there is also a persistent volume claim of 20 GB.
+
+04:19.970 --> 04:22.850
+So it will create based on the storage class that we have.
+
+04:22.850 --> 04:26.370
+Like we are running Kubernetes cluster on AWS by using cops.
+
+04:27.010 --> 04:33.450
+So if we use this storage class is going to create an EBS volume of size 20 GB.
+
+04:33.490 --> 04:36.010
+That will be our persistent volume claim.
+
+04:36.930 --> 04:41.090
+And then we can map this as a volume to our MySQL app.
+
+04:41.690 --> 04:46.490
+Anyways, let's take a look again like a deployment WordPress MySQL.
+
+04:46.970 --> 04:49.330
+So the image is MySQL 8.0.
+
+04:49.690 --> 04:50.890
+And take a look over here.
+
+04:50.890 --> 04:53.860
+MySQL root password is defined from a secret.
+
+04:53.860 --> 04:55.620
+So we need to create secret as well.
+
+04:56.180 --> 04:58.020
+MySQL database variable.
+
+04:58.300 --> 05:01.740
+Database name WordPress MySQL user variable.
+
+05:01.740 --> 05:07.540
+That will also be WordPress MySQL password coming from a secret okay.
+
+05:07.580 --> 05:10.420
+And if you see volume mounts here, here you see volumes.
+
+05:10.420 --> 05:12.140
+So this will be the name of the volume.
+
+05:12.140 --> 05:14.940
+And it is coming from a persistent volume claim.
+
+05:15.140 --> 05:19.780
+So if we do this EBS volume will get created as the persistent volume claim.
+
+05:19.780 --> 05:23.780
+And that will be attached to var lib MySQL mount point.
+
+05:25.300 --> 05:26.820
+So that is about MySQL.
+
+05:26.820 --> 05:32.180
+So we have MySQL deployment and we have a PVC and we have a service.
+
+05:32.580 --> 05:33.580
+Let's scroll down.
+
+05:34.100 --> 05:39.540
+So we see WordPress here service WordPress of type load balancer.
+
+05:39.540 --> 05:41.860
+So it will create a load balancer will be not doing this.
+
+05:41.860 --> 05:50.020
+We'll be using ingress controller and a persistent volume claim again of 20 GB for this one deployment.
+
+05:50.460 --> 05:53.580
+So it's deploying Container of this image WordPress.
+
+05:53.580 --> 05:57.340
+This will be downloaded again from Docker Hub and there is some tag to it.
+
+05:57.820 --> 06:01.540
+Some variables define MySQL password that will be coming from the secret.
+
+06:01.540 --> 06:07.220
+Again persistent volume claim that will be mapped as a volume to var HTML.
+
+06:07.900 --> 06:14.060
+So we can take these things, you know, create our files and change the settings that we need and run
+
+06:14.060 --> 06:14.340
+it.
+
+06:14.780 --> 06:15.260
+You know what.
+
+06:15.300 --> 06:18.900
+No thank you will use Amazon Q developer.
+
+06:19.500 --> 06:21.180
+So go back to your VS code.
+
+06:21.220 --> 06:23.860
+Make sure you're on the right folder that you selected.
+
+06:24.060 --> 06:25.340
+Go to Amazon Q.
+
+06:25.380 --> 06:27.220
+It should open the chat over here.
+
+06:27.740 --> 06:34.500
+And over here you can put your question to generate the Kubernetes definition file okay.
+
+06:34.540 --> 06:36.940
+So before we write the prompt I want to show you a few things.
+
+06:36.940 --> 06:43.940
+So we have nginx ingress controller write an ingress controller of type nginx.
+
+06:44.380 --> 06:50.620
+And we are going to ask all this Kubernetes to create a PVC for us persistent volume claim.
+
+06:50.820 --> 06:53.020
+We need to define the storage class over there.
+
+06:53.300 --> 07:00.380
+So if we do cube CTL get SC storage class, we should see a storage class named as default.
+
+07:01.020 --> 07:03.140
+And the provisioner is aws EBS.
+
+07:03.180 --> 07:07.740
+Now this by default when we create Kubernetes cluster with cops on AWS.
+
+07:07.780 --> 07:10.020
+Of course it creates this storage class.
+
+07:10.020 --> 07:12.380
+So we're going to mention this as the storage class.
+
+07:12.820 --> 07:16.140
+So you should have all the information before you write the prompt.
+
+07:16.980 --> 07:21.540
+And don't expect that you know in the first attempt itself you will get everything right.
+
+07:21.540 --> 07:25.580
+I have tried it several prompt to get the exact thing that I need.
+
+07:25.900 --> 07:31.620
+First I was struggling with GitHub Copilot and I tried different other generative AI also.
+
+07:31.620 --> 07:37.420
+I also use ChatGPT many other things and there are so many edits after you write the to write.
+
+07:37.460 --> 07:43.700
+I know after I write the prompt, Amazon Q was the one that got everything correct, but I tried, you
+
+07:43.700 --> 07:48.300
+know, give few more, try to get the no write code that I was looking for.
+
+07:48.430 --> 07:50.110
+So I'm going to show you the prompt.
+
+07:50.470 --> 07:51.670
+So that's the prompt.
+
+07:52.390 --> 07:54.750
+WordPress set up Kubernetes definition files.
+
+07:54.750 --> 08:04.430
+And I'm saying separate files for WordPress app, MySQL app service DB service, PVC and ingress PVC
+
+08:04.470 --> 08:13.070
+should use storage class default secret file should contain all db users and db password for MySQL and
+
+08:13.070 --> 08:13.990
+WordPress both.
+
+08:14.030 --> 08:18.110
+Now the reason this prompt is so long is because I tried other things.
+
+08:18.390 --> 08:20.230
+Few attempts to get the right prompt, you know?
+
+08:20.270 --> 08:23.150
+First was giving everything in one single file or few files.
+
+08:23.150 --> 08:24.230
+Everything in one.
+
+08:24.670 --> 08:27.030
+The storage class was not default.
+
+08:27.030 --> 08:30.590
+Something else, and the secret file was also a little scrambled.
+
+08:30.590 --> 08:38.630
+So slowly I got to this prompt and of course finally ingress will be nginx with hostname and I've given
+
+08:38.630 --> 08:40.070
+the hostname over here.
+
+08:40.470 --> 08:43.750
+So let me change that one to WordPress maybe.
+
+08:44.470 --> 08:49.710
+So make sure you change this with the domain that you have, you have created a hosted zone.
+
+08:49.990 --> 08:52.390
+Sorry, the the domain that you purchased.
+
+08:52.390 --> 08:58.150
+Make sure that domain is there because we're going to also need to edit those DNS records.
+
+08:58.150 --> 08:59.470
+I'm going to use GoDaddy.
+
+08:59.710 --> 09:01.910
+So I'm using that domain from GoDaddy.
+
+09:02.030 --> 09:07.150
+And once this is created I am going to add this WordPress entry over there as well.
+
+09:07.950 --> 09:10.870
+So I'm going to put all this into the lecture resource.
+
+09:10.870 --> 09:13.430
+I'm going to hit this and let's see what happens.
+
+09:13.430 --> 09:18.750
+So Amazon Q takes longer time than any other code assistant I have seen.
+
+09:18.750 --> 09:21.750
+But it gets the optimum result okay.
+
+09:21.790 --> 09:27.230
+So it's working and it's going to think it's going to generate one file at a time okay.
+
+09:27.230 --> 09:28.430
+So it's work is completed.
+
+09:28.430 --> 09:30.430
+It's also telling what it has done.
+
+09:30.430 --> 09:31.870
+So it has created many files.
+
+09:31.870 --> 09:32.590
+Let's take a look.
+
+09:32.590 --> 09:34.390
+Let's click on this button over here.
+
+09:34.870 --> 09:36.830
+So we have MySQL deployment.
+
+09:37.110 --> 09:38.790
+Oh I forgot to change one thing here.
+
+09:38.790 --> 09:42.030
+It should be MySQL 8.0.
+
+09:42.070 --> 09:43.590
+There is no 5.0.
+
+09:43.630 --> 09:44.790
+It's going to throw error.
+
+09:45.110 --> 09:46.710
+So make sure you change that.
+
+09:47.350 --> 09:50.790
+Or better put this in the prompt itself that you use this particular image.
+
+09:51.150 --> 09:53.030
+So it generates this or anything else.
+
+09:53.030 --> 09:56.630
+Anyways I'm going to zip this content and put this in the lecture resource.
+
+09:56.630 --> 09:59.790
+So you can use this also the lecture resource.
+
+09:59.790 --> 10:02.470
+Or you can ask Amazon Q to develop it for you.
+
+10:02.910 --> 10:05.030
+So we have MySQL deployment.
+
+10:05.030 --> 10:06.110
+We have PVC.
+
+10:06.230 --> 10:10.950
+You see storage class name default and has given ten GB of size.
+
+10:10.950 --> 10:13.950
+Let's reduce it to just one GB.
+
+10:14.510 --> 10:21.750
+So PVC or persistent volume claim for the storage class works like this.
+
+10:21.750 --> 10:26.070
+You already need to have a storage class with this name.
+
+10:26.990 --> 10:29.950
+As per this definition file, you can have another.
+
+10:29.990 --> 10:35.670
+You can create other storage class as well since we are using Kubernetes cluster created by cops.
+
+10:36.310 --> 10:39.550
+So we have a storage class with the name default.
+
+10:40.150 --> 10:43.550
+The provisioner here is AWS hyphen EBS.
+
+10:44.680 --> 10:50.800
+So when we submit this information that I need a persistent volume claim with this name access mode
+
+10:50.800 --> 10:58.200
+read write once storage class name default and we are requesting the resource of one GB.
+
+10:58.440 --> 10:59.880
+Storage is one GB.
+
+11:00.120 --> 11:06.800
+So it's going to go and talk to this storage class, which in turn will create an EBS volume of one
+
+11:06.800 --> 11:07.680
+GB size.
+
+11:07.680 --> 11:10.640
+And remember its name is MySQL hyphen PVC.
+
+11:11.120 --> 11:16.640
+Now if we check in the MySQL deployment, if we scroll down here we are creating a volume.
+
+11:16.640 --> 11:18.200
+This is the name of the volume.
+
+11:18.440 --> 11:21.280
+And the volume is coming from the persistent volume claim.
+
+11:21.280 --> 11:22.480
+And that's the name.
+
+11:23.760 --> 11:26.960
+So that means the PVC with this name should exist.
+
+11:26.960 --> 11:34.840
+So it is going to declare that as this volume with this name and then this, this name over here, if
+
+11:34.840 --> 11:38.960
+you see in volume months this name, this is the volume is mounted at this path.
+
+11:40.080 --> 11:42.200
+So this is how the PVC works.
+
+11:42.800 --> 11:51.720
+and we have MySQL service with the name WordPress MySQL port 3306 and the selector that will match with
+
+11:51.760 --> 11:53.040
+MySQL deployment.
+
+11:53.680 --> 11:56.120
+And then for WordPress WordPress deployment.
+
+11:56.120 --> 11:57.480
+Let's look at the image.
+
+11:58.320 --> 12:00.800
+So we have the image name as WordPress latest.
+
+12:00.800 --> 12:01.200
+Fine.
+
+12:01.200 --> 12:01.840
+That's okay.
+
+12:02.440 --> 12:08.920
+And we need to pass some variables to this container because it needs the access to the database.
+
+12:08.960 --> 12:16.160
+And for that purpose we have to define these variables WordPress db user WordPress db name of WordPress
+
+12:16.160 --> 12:16.960
+db host.
+
+12:16.960 --> 12:21.640
+So all this information, some are coming from secret and some are directly defined.
+
+12:21.680 --> 12:22.320
+Like this.
+
+12:22.880 --> 12:24.200
+Let's take a look at the secret.
+
+12:24.200 --> 12:31.080
+So here you have the secret the MySQL root password, MySQL password, database name and MySQL user.
+
+12:31.880 --> 12:37.680
+We have a PVC for WordPress app, also five GB in size.
+
+12:38.520 --> 12:41.560
+Let's reduce it to Two three GB.
+
+12:44.320 --> 12:45.800
+Control S to save.
+
+12:46.000 --> 12:49.000
+So go through all this definition files.
+
+12:49.680 --> 12:54.440
+They are pretty self-explanatory based on what we did previously in this Kubernetes section.
+
+12:55.040 --> 13:04.000
+And once you have gone through all these files, we can work on converting these files into helm charts.
+
+13:04.880 --> 13:10.120
+So I request you to pause this lecture and go through the files and then resume.
+
+13:11.320 --> 13:13.280
+Now we can create helm charts first.
+
+13:13.320 --> 13:14.680
+We'll do it manually.
+
+13:15.080 --> 13:21.280
+Once we understand the structure then we are going to use Amazon Q developer in the next lecture to
+
+13:21.320 --> 13:23.160
+develop the helm charts from these files.
+
+13:23.200 --> 13:26.680
+So go to your browser and search for install helm.
+
+13:27.520 --> 13:28.960
+Or you can come to this link.
+
+13:32.560 --> 13:35.280
+So you can install helm through Package manager.
+
+13:35.280 --> 13:39.770
+Like for Mac OS you can use brew install helm For windows.
+
+13:39.770 --> 13:43.570
+Open chocolatey as administrator and execute this command.
+
+13:43.610 --> 13:44.330
+Choco install.
+
+13:44.330 --> 13:44.890
+Kubernetes.
+
+13:44.890 --> 13:45.410
+Hyphen.
+
+13:45.410 --> 13:45.810
+Helm.
+
+14:12.330 --> 14:14.130
+Okay, helm is installed for me.
+
+14:14.130 --> 14:18.410
+Now I am going to open the terminal from VSCode.
+
+14:19.010 --> 14:22.170
+New terminal for windows user.
+
+14:22.170 --> 14:26.050
+You can switch to git bash in the terminal.
+
+14:26.050 --> 14:28.050
+Make sure you are in the right folder.
+
+14:28.330 --> 14:33.730
+Execute pwd and here execute the command helm create and the chart name.
+
+14:33.730 --> 14:36.130
+So I'm going to give WP hyphen chart.
+
+14:39.450 --> 14:41.210
+And this should create a folder structure.
+
+14:41.210 --> 14:46.490
+If you see here on the left side, here you have the values dot YAML file, where you can mention the
+
+14:46.490 --> 14:49.890
+values of your variables and the templates.
+
+14:49.890 --> 14:57.970
+You can put your templates like you have for deployment.yaml, dot YAML, ingress, dot YAML, service,
+
+14:58.010 --> 15:00.050
+dot YAML, service account dot YAML.
+
+15:00.050 --> 15:05.450
+So based on the resource that you're using, you can add those definition file as the templates.
+
+15:05.810 --> 15:08.330
+So let's take a look at deployment.yaml.
+
+15:08.730 --> 15:13.650
+So if you see here instead of the name like we directly give the name of the deployment.
+
+15:13.650 --> 15:15.490
+Instead of that there's something else over here.
+
+15:15.490 --> 15:18.530
+These are the variables or the structure.
+
+15:18.850 --> 15:26.530
+So two curly braces in between that you see include including helm is used to import something from
+
+15:26.530 --> 15:27.250
+outside.
+
+15:28.090 --> 15:35.130
+So include WP hyphen chart dot full name is going to give the full name of the chart in specification
+
+15:35.130 --> 15:40.890
+we are giving here replica, but this replica value will not be directly given.
+
+15:40.890 --> 15:42.170
+There is a condition over here.
+
+15:42.170 --> 15:44.450
+First let's look at the variable values.
+
+15:44.850 --> 15:46.290
+Values dot replica.
+
+15:46.290 --> 15:46.530
+Count.
+
+15:46.610 --> 15:50.290
+Now when it says values it's going to check the values dot YAML file.
+
+15:50.530 --> 15:53.450
+And that's going to look for a variable called replica count.
+
+15:53.490 --> 15:55.250
+So let's go to Values.yaml.
+
+15:55.650 --> 15:57.370
+You see the variable the replica count.
+
+15:57.370 --> 15:58.610
+Its value is one.
+
+15:59.610 --> 16:00.930
+So either you can give it directly.
+
+16:00.930 --> 16:09.090
+But if you have some condition like for example over here it says if this variable is not defined values
+
+16:09.090 --> 16:10.890
+dot auto scaling dot enabled.
+
+16:10.890 --> 16:15.970
+If its value is not true, then assign this variable.
+
+16:15.970 --> 16:18.170
+So values dot auto scaling dot enabled.
+
+16:18.170 --> 16:20.850
+So once again we go to values dot YAML file.
+
+16:21.170 --> 16:25.690
+We look for the variable auto scaling in that you have another variable enabled.
+
+16:25.930 --> 16:28.050
+Its value is false okay.
+
+16:28.050 --> 16:29.690
+Like that in values dot YAML file.
+
+16:29.690 --> 16:36.500
+If you see there are some other variables like readiness probe dot http deep get dot path will give
+
+16:36.500 --> 16:37.020
+you this.
+
+16:37.700 --> 16:37.940
+Okay.
+
+16:37.940 --> 16:39.820
+Now let's look at the chart dot YAML file.
+
+16:39.820 --> 16:46.420
+This is the file which says the name of the chart, a description type and version.
+
+16:47.060 --> 16:49.860
+And if you see if you read here this is the chart version.
+
+16:49.860 --> 16:55.980
+This version number should incremented should be incremented each time you make changes to the chart
+
+16:55.980 --> 16:57.100
+and its templates.
+
+16:57.100 --> 17:02.860
+So when we are doing any upgrade right when we're making changes to our templates, the variable values,
+
+17:03.180 --> 17:06.180
+then we should change the version of our chart.
+
+17:06.740 --> 17:08.460
+There's one more version over here.
+
+17:08.500 --> 17:09.180
+App version.
+
+17:09.180 --> 17:11.100
+This is different and this is different.
+
+17:11.100 --> 17:12.380
+This is the chart version.
+
+17:12.380 --> 17:14.420
+This is your application version.
+
+17:14.780 --> 17:18.980
+So value of app version will be something like now we're deploying WordPress.
+
+17:18.980 --> 17:25.820
+So WordPress version or your own custom application if you have the developer will give some version
+
+17:25.820 --> 17:29.980
+or there will be a release mechanism where the version will be given like we have seen in CI CD.
+
+17:30.460 --> 17:32.260
+So those versions will be given here.
+
+17:32.700 --> 17:39.940
+Now if you are going to create your own helm chart from Kubernetes files, then we are going to basically
+
+17:39.940 --> 17:41.140
+remove these things.
+
+17:41.140 --> 17:45.260
+So I'm going to select all the files that I'm not going to use here and replace it with mine.
+
+17:45.780 --> 17:47.500
+So first I'm going to delete this.
+
+17:48.380 --> 17:49.460
+All the templates.
+
+17:51.140 --> 17:53.460
+This also can be used to conduct tests.
+
+17:53.460 --> 17:55.340
+So I'm not going to use that.
+
+17:55.340 --> 17:57.580
+So I'm going to delete that test as well.
+
+17:58.460 --> 18:01.620
+Values dot YAML file I'm going to define my own variables.
+
+18:01.620 --> 18:07.380
+So I'm going to basically select this and delete everything and save the file.
+
+18:07.420 --> 18:13.180
+Now we are going to copy these files or templates our Kubernetes definition files.
+
+18:13.180 --> 18:16.620
+We're going to copy and put it into the templates.
+
+18:18.540 --> 18:21.460
+And then we start modifying our template.
+
+18:22.620 --> 18:27.220
+So for the name I'm going to replace that with with the two curly brace.
+
+18:27.220 --> 18:29.020
+And I'm going to put the include there.
+
+18:30.300 --> 18:30.540
+Okay.
+
+18:30.580 --> 18:33.060
+So include VPI dot full name.
+
+18:33.580 --> 18:37.780
+Sorry, this should be WP hyphen chart dot full name.
+
+18:38.180 --> 18:39.540
+Now this is my app deployment.
+
+18:39.540 --> 18:41.180
+So I'm going to say hyphen app.
+
+18:42.020 --> 18:44.260
+So this is using the existing variable.
+
+18:44.260 --> 18:46.820
+But I want to define the variable and use it.
+
+18:46.820 --> 18:49.300
+So take some example of image.
+
+18:49.300 --> 18:56.260
+So here I'm going to replace these two things the image name and the tag name with the variable.
+
+18:56.260 --> 19:01.100
+So first I'm going to you know it's already code suggested me.
+
+19:02.340 --> 19:09.020
+So values dot mysql dot image dot repository colon values dot image mysql dot image dot tag.
+
+19:09.060 --> 19:10.540
+So I need to create this variable.
+
+19:10.540 --> 19:11.980
+First I'm going to save this file.
+
+19:12.340 --> 19:14.180
+And I'm going to go to values.
+
+19:14.620 --> 19:18.180
+I'm going to declare the variable MySQL and this a dictionary variable.
+
+19:18.420 --> 19:20.020
+Here I'm going to give image.
+
+19:22.780 --> 19:28.180
+In that we have repository code suggestion.
+
+19:28.180 --> 19:29.220
+Let me remove this.
+
+19:31.310 --> 19:33.270
+And the tag a dot zero.
+
+19:33.910 --> 19:40.190
+So this way you can define variables over here and use this variable in your templates.
+
+19:40.550 --> 19:44.190
+And you can use other templating mechanism like conditions and width.
+
+19:44.230 --> 19:46.670
+There are few other things that we'll be seeing in the next lecture.
+
+19:46.670 --> 19:50.550
+So I wanted you to understand the structure of helm chart.
+
+19:50.550 --> 19:56.830
+So when you develop helm charts by using any code assistant, and if things don't work as you expected,
+
+19:56.830 --> 19:58.710
+you know what to change where.
+
+19:59.150 --> 20:02.510
+Otherwise you really don't need to write all these files manually.
+
+20:02.990 --> 20:08.350
+Use code assistant like Copilot, Amazon, Q anything of your choice.
+
+20:08.870 --> 20:10.750
+So that's what we'll be doing in the next lecture.
+
+20:10.750 --> 20:14.190
+So just go through the structure, try to make sense of it.
+
+20:14.870 --> 20:16.990
+Create some test helm charts.
+
+20:17.030 --> 20:18.190
+Go through the structure.
+
+20:18.190 --> 20:20.390
+Look at the code, try to understand it.
+
+20:20.870 --> 20:24.910
+And once you're done, join me in the next lecture where we're going to create the complete helm chart
+
+20:24.910 --> 20:27.350
+for our WordPress application.
+
+20:27.350 --> 20:29.230
+So wrap this up and join me in the next one.

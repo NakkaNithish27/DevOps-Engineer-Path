@@ -1,0 +1,826 @@
+WEBVTT
+
+00:00.990 --> 00:02.070
+Professor: Welcome.
+
+00:02.070 --> 00:05.220
+In this lecture we will see job triggers.
+
+00:05.220 --> 00:09.080
+So far we are running Jenkins job or the pipeline manually.
+
+00:09.080 --> 00:11.850
+We click on Build Now button
+
+00:11.850 --> 00:15.660
+but Jenkins jobs can also execute automatically
+
+00:15.660 --> 00:19.260
+and there are various triggers which you can use.
+
+00:19.260 --> 00:23.220
+So you don't need to manually click on a Build Now button.
+
+00:23.220 --> 00:25.500
+Let's see, some popular triggers.
+
+00:25.500 --> 00:27.903
+The most famous one, Git Webhooks.
+
+00:28.771 --> 00:32.380
+In this Git repository like GitHub
+
+00:33.472 --> 00:35.444
+will send adjacent payload whenever
+
+00:35.444 --> 00:38.370
+there is a commit in the repository.
+
+00:38.370 --> 00:42.183
+So your GitHub repository will trigger your Jenkins job.
+
+00:43.110 --> 00:44.910
+The other one is poll SCM
+
+00:44.910 --> 00:47.403
+which is just the opposite of Git Webhook.
+
+00:48.240 --> 00:50.520
+In poll SCM Jenkins will check
+
+00:50.520 --> 00:53.550
+for commit in Git repository.
+
+00:53.550 --> 00:55.500
+In an interval that you specified
+
+00:55.500 --> 00:58.350
+like let's say you said check every five minutes
+
+00:58.350 --> 01:00.870
+or every minute for any new commit
+
+01:00.870 --> 01:03.360
+if there is any new commit in the GI repository
+
+01:03.360 --> 01:04.893
+the job will get triggered.
+
+01:05.880 --> 01:07.770
+Scheduled job, pretty simple.
+
+01:07.770 --> 01:09.720
+You mention date and time
+
+01:09.720 --> 01:12.960
+like an alarm clock in crown job format
+
+01:12.960 --> 01:15.150
+and Jenkins will make sure your job runs
+
+01:15.150 --> 01:16.600
+at that particular time
+
+01:17.726 --> 01:19.743
+or in some intervals that you specified.
+
+01:21.300 --> 01:22.290
+Remote triggers.
+
+01:22.290 --> 01:24.750
+Now this is slightly complicated
+
+01:24.750 --> 01:26.700
+and most of the people will skip this one
+
+01:26.700 --> 01:30.300
+but I think this is one very helpful trigger
+
+01:30.300 --> 01:33.123
+for DevOps engineer or architect.
+
+01:34.500 --> 01:35.340
+By using this
+
+01:35.340 --> 01:38.790
+you can trigger Jenkins jobs from anywhere, from a script,
+
+01:38.790 --> 01:42.330
+from an Ansible playbook, from anywhere for that matter.
+
+01:42.330 --> 01:44.400
+And there are tokens and secrets
+
+01:44.400 --> 01:46.740
+and URL multiple things goes into that
+
+01:46.740 --> 01:48.630
+and you get an API call,
+
+01:48.630 --> 01:51.270
+which you can use to trigger your Jenkins job.
+
+01:51.270 --> 01:54.690
+And do not worry, I have a piece of document for this one.
+
+01:54.690 --> 01:57.140
+We'll go through it and we'll set up the trigger.
+
+01:58.020 --> 01:59.820
+Build after other projects are built.
+
+01:59.820 --> 02:00.810
+This is pretty simple.
+
+02:00.810 --> 02:03.420
+You just select that after this job is completed
+
+02:03.420 --> 02:04.650
+run this particular job.
+
+02:04.650 --> 02:09.390
+So here trigger is completion of a previous job
+
+02:09.390 --> 02:11.460
+a previous job gets completed, and then
+
+02:11.460 --> 02:13.263
+after that your job gets triggered.
+
+02:14.100 --> 02:17.400
+Now these are some popular triggers, but not all.
+
+02:17.400 --> 02:20.400
+And of course we cannot cover all the triggers
+
+02:20.400 --> 02:24.750
+but I'm sure this, these triggers are more than enough.
+
+02:24.750 --> 02:28.505
+So to set up a proper and successful pipeline.
+
+02:28.505 --> 02:31.020
+Now let's see the steps that we are going to take
+
+02:31.020 --> 02:33.270
+in order to learn all these triggers.
+
+02:33.270 --> 02:35.640
+First we need to create a gate repository.
+
+02:35.640 --> 02:37.620
+You cannot use my Git repository.
+
+02:37.620 --> 02:39.990
+Now you have to create your own Git repository.
+
+02:39.990 --> 02:44.040
+So I will show you how we can do that.
+
+02:44.040 --> 02:46.830
+Then we'll set up an SSH authentication to our
+
+02:46.830 --> 02:48.273
+GitHub repository.
+
+02:49.110 --> 02:51.360
+And we'll create a Jenkinsfile.
+
+02:51.360 --> 02:55.380
+We'll place it in our Git repository and we'll commit it.
+
+02:55.380 --> 02:58.650
+Then we'll create a Jenkins job, which will access this
+
+02:58.650 --> 03:01.140
+jenkinsfile from our Git repository.
+
+03:01.140 --> 03:04.710
+And then we will start testing our triggers.
+
+03:04.710 --> 03:07.440
+So step one to four is the setup that we need
+
+03:07.440 --> 03:08.820
+or prerequisite site that we need
+
+03:08.820 --> 03:11.310
+in order to learn these triggers.
+
+03:11.310 --> 03:13.650
+Once you learn how to use different triggers
+
+03:13.650 --> 03:16.353
+you can put them in any job you want.
+
+03:17.580 --> 03:19.320
+So what are you waiting for?
+
+03:19.320 --> 03:21.228
+Let's get into the action.
+
+03:21.228 --> 03:25.353
+Okay, so first we'll create a Git repository on GitHub.
+
+03:26.580 --> 03:29.640
+So log into your GitHub account and create a new repository.
+
+03:29.640 --> 03:30.573
+Click on new.
+
+03:32.220 --> 03:34.080
+You can create repository with any name.
+
+03:34.080 --> 03:34.913
+I will give the name
+
+03:34.913 --> 03:39.283
+as jenkinstriggers and I will keep this as private.
+
+03:42.000 --> 03:44.460
+You can use private or public because we are not
+
+03:44.460 --> 03:47.730
+going to store anything that is really private for us.
+
+03:47.730 --> 03:51.813
+Just a simple jenkinsfile and we'll see create repository.
+
+03:54.720 --> 03:56.400
+Okay, so repository is created
+
+03:56.400 --> 03:59.310
+and we will be using the SSH link.
+
+03:59.310 --> 04:01.950
+So before we clone this Git repository
+
+04:01.950 --> 04:06.420
+we need to store our SSH keys in our GitHub account.
+
+04:06.420 --> 04:09.270
+If you already did this in Git section
+
+04:09.270 --> 04:11.430
+you can just directly start cloning this.
+
+04:11.430 --> 04:15.000
+If you have not done it, then create the SSH keys
+
+04:15.000 --> 04:19.230
+open git bash in Windows Macs open terminal
+
+04:19.230 --> 04:21.197
+and the command SSH-keygen.
+
+04:26.610 --> 04:29.250
+So it'll generate the private and the public key.
+
+04:29.250 --> 04:32.130
+Now, I already have the key, so I'm not going to overwrite
+
+04:32.130 --> 04:33.573
+I'm just going to say no.
+
+04:35.070 --> 04:38.220
+If you don't have the keys, then just hit enter
+
+04:38.220 --> 04:42.090
+until the keys gets created and you should find the keys
+
+04:42.090 --> 04:46.420
+in your home directory, tilde /.SSH
+
+04:47.610 --> 04:50.220
+and you should see the public key and the private key.
+
+04:50.220 --> 04:52.840
+We will take the content of the public key
+
+05:01.620 --> 05:04.020
+we'll copy this content public key again
+
+05:04.020 --> 05:05.460
+and not the private key.
+
+05:05.460 --> 05:06.960
+Private key is a very long one.
+
+05:06.960 --> 05:08.790
+This is the public key.
+
+05:08.790 --> 05:10.540
+So copy the public key
+
+05:11.520 --> 05:16.263
+go to your GitHub account, go to settings.
+
+05:19.470 --> 05:23.280
+This is the accounts setting, not the repository settings.
+
+05:23.280 --> 05:24.930
+So you need to click over here
+
+05:24.930 --> 05:29.930
+and come to the settings and go to SSH and GPG keys.
+
+05:31.560 --> 05:35.913
+Click on new SSH key here and give a title.
+
+05:37.230 --> 05:38.880
+I will just say my laptop
+
+05:38.880 --> 05:41.580
+and I'm going to paste the public key here.
+
+05:41.580 --> 05:44.013
+Again, public key, not the private key here.
+
+05:45.030 --> 05:46.443
+Add SSH keys.
+
+05:48.480 --> 05:50.223
+Enter the password if it asks.
+
+05:51.510 --> 05:52.620
+Okay, public key stored.
+
+05:52.620 --> 05:55.683
+Now let's go to a repository that we just created.
+
+05:56.850 --> 05:58.953
+Okay, there Jenkins triggers.
+
+06:00.210 --> 06:02.910
+And click over here on SSH.
+
+06:02.910 --> 06:04.560
+And you need to use this link
+
+06:04.560 --> 06:08.010
+not the HTTPS, SSH link.
+
+06:08.010 --> 06:09.720
+Just copy it.
+
+06:09.720 --> 06:11.133
+Let's go to Git Bash.
+
+06:12.030 --> 06:12.863
+Clear the screen.
+
+06:12.863 --> 06:17.630
+I will create a directory in F.
+
+06:22.890 --> 06:24.333
+You can create it anywhere.
+
+06:25.380 --> 06:26.980
+I will go to this directory
+
+06:31.440 --> 06:36.440
+and I will say Git clone and paste the URL shift.
+
+06:36.990 --> 06:39.090
+Insert it.
+
+06:39.090 --> 06:42.360
+Enter. It'll ask you this.
+
+06:42.360 --> 06:43.293
+Say yes.
+
+06:46.170 --> 06:47.850
+Okay, so you cloned the repository.
+
+06:47.850 --> 06:49.353
+You should see it over here.
+
+06:52.710 --> 06:54.480
+Now we'll place a jenkinsfile into this.
+
+06:54.480 --> 06:56.440
+This is will be a very very simple jenkinsfile
+
+06:56.440 --> 06:58.413
+which will just print a message.
+
+07:00.180 --> 07:03.000
+So I open my sublime text editor.
+
+07:03.000 --> 07:05.520
+You can use any editor of your choice
+
+07:05.520 --> 07:07.320
+and I will have this code over here.
+
+07:07.320 --> 07:12.175
+Pretty simple pipeline agent, any stages, only one stage.
+
+07:12.175 --> 07:14.310
+Stage name I have given us build.
+
+07:14.310 --> 07:19.310
+Step is just to echo this message.
+
+07:19.650 --> 07:22.350
+So we really not doing any build part over here
+
+07:22.350 --> 07:24.840
+we are just using the simple jenkinsfile.
+
+07:24.840 --> 07:27.480
+Now you can store your original jenkinsfile
+
+07:27.480 --> 07:30.990
+which we already created, but for now, just keep it simple.
+
+07:30.990 --> 07:34.953
+Just create the simple jenkinsfile and let's save it.
+
+07:37.290 --> 07:38.123
+Save it.
+
+07:38.123 --> 07:41.040
+I'm going to save it in F, Gitrepos, jenkinstriggers.
+
+07:41.040 --> 07:43.470
+This is our repository.
+
+07:43.470 --> 07:46.500
+I will say file type all files
+
+07:46.500 --> 07:51.500
+and file name will be Jenkinsfile, J capital.
+
+07:53.610 --> 07:55.230
+Save it.
+
+07:55.230 --> 07:57.090
+Okay, once you save this file, and
+
+07:57.090 --> 07:59.460
+if you'd like to use VIM editor, whatever editor
+
+07:59.460 --> 08:03.480
+just create the jenkinsfile in the repository.
+
+08:03.480 --> 08:04.860
+Oops. I don't know.
+
+08:04.860 --> 08:07.710
+For some reason it named it as jenkinsfiles.groovy.
+
+08:07.710 --> 08:10.740
+I'm gonna rename it to just jenkinsfile.
+
+08:10.740 --> 08:13.570
+Yeah, just jenkinsfile.
+
+08:13.570 --> 08:17.027
+Okay. Now we'll say Git add dot,
+
+08:17.027 --> 08:19.810
+Git commit -m
+
+08:21.570 --> 08:24.033
+will say first commit.
+
+08:26.130 --> 08:30.153
+Git push origin master.
+
+08:32.100 --> 08:33.300
+Okay, that's done.
+
+08:33.300 --> 08:34.833
+Let's go to GitHub and check.
+
+08:37.200 --> 08:38.910
+Let's refresh the page.
+
+08:38.910 --> 08:40.479
+And we should see the jenkinsfile.
+
+08:40.479 --> 08:42.450
+Now if you want, you can add other things over here
+
+08:42.450 --> 08:45.823
+but for this exercise, we just need the simple jenkinsfile.
+
+08:48.550 --> 08:50.310
+Okay, now let's go to Jenkins
+
+08:50.310 --> 08:54.570
+and create a job that can fetch this jenkinsfile
+
+08:54.570 --> 08:56.250
+and run the job.
+
+08:56.250 --> 08:57.990
+So let's go to Jenkins.
+
+08:57.990 --> 09:00.690
+Now, before we create the job
+
+09:00.690 --> 09:03.062
+there is one step that we need to do.
+
+09:03.062 --> 09:05.580
+And this step is a precautionary measure
+
+09:05.580 --> 09:08.790
+of for an error that you may get.
+
+09:08.790 --> 09:12.660
+When you try to access your Git repository from Jenkins.
+
+09:12.660 --> 09:16.443
+You may get this error host key verification failed.
+
+09:18.090 --> 09:19.320
+And you may get this
+
+09:19.320 --> 09:23.610
+because Jenkins is doing SSH to the Git repository.
+
+09:23.610 --> 09:26.700
+You will see your Git repository, URL here
+
+09:26.700 --> 09:28.020
+and it'll do an SSH
+
+09:28.020 --> 09:31.680
+to the GitHub account or GitHub server.
+
+09:31.680 --> 09:34.320
+And if you remember, whenever you do SSH
+
+09:34.320 --> 09:37.590
+for the first time to any Linux machine
+
+09:37.590 --> 09:39.930
+you get a question asked,
+
+09:39.930 --> 09:42.210
+this is a fingerprint do you accept the connection?
+
+09:42.210 --> 09:43.043
+Yes or no?
+
+09:43.043 --> 09:46.920
+You say yes, and then you enter in the shell.
+
+09:46.920 --> 09:50.190
+Now Jenkins will be also trying to do the same thing.
+
+09:50.190 --> 09:53.790
+And if you have strict host key checking enabled
+
+09:53.790 --> 09:55.170
+it'll not accept the connection
+
+09:55.170 --> 09:58.770
+and you will get this error host key verification failed.
+
+09:58.770 --> 10:03.600
+So all you need to do is go to manage Jenkins,
+
+10:03.600 --> 10:04.500
+in the security,
+
+10:04.500 --> 10:08.703
+configure global security, scroll down,
+
+10:10.980 --> 10:11.970
+and here you will see
+
+10:11.970 --> 10:15.090
+get host key verification configuration.
+
+10:15.090 --> 10:17.010
+In this, you have to select the option
+
+10:17.010 --> 10:21.930
+accept first connection and say Apply save.
+
+10:25.140 --> 10:27.330
+Or you can just click on save.
+
+10:27.330 --> 10:29.460
+So remember, whenever you see this error,
+
+10:29.460 --> 10:30.293
+host key verification,
+
+10:30.293 --> 10:32.910
+this is the step that you need to take.
+
+10:32.910 --> 10:35.220
+Let's go to Jenkins dashboard
+
+10:35.220 --> 10:37.683
+and type time to create the pipeline.
+
+10:38.550 --> 10:42.270
+Say create job, you can again, give any name to the job.
+
+10:42.270 --> 10:44.820
+I'm just going to say build.
+
+10:44.820 --> 10:45.653
+That's all.
+
+10:45.653 --> 10:47.583
+Build, pipeline.
+
+10:49.200 --> 10:50.133
+Say, okay.
+
+10:53.160 --> 10:54.243
+Let's come down.
+
+10:55.710 --> 10:58.440
+In the pipeline, I'm going to say pipeline script
+
+10:58.440 --> 11:00.510
+from SCM, source code manager.
+
+11:00.510 --> 11:04.380
+And the source code manager is Git we are using
+
+11:04.380 --> 11:06.840
+and we have to give here the repository, URL.
+
+11:06.840 --> 11:08.530
+So let's get the repository, URL
+
+11:12.060 --> 11:16.170
+click on the code and SSH URL again, not HTTPS.
+
+11:16.170 --> 11:17.610
+We are using SSH URL.
+
+11:17.610 --> 11:18.443
+Copy this.
+
+11:20.400 --> 11:21.990
+Paste it.
+
+11:21.990 --> 11:23.520
+And we need to store the credential.
+
+11:23.520 --> 11:27.693
+So we are going to say add Jenkins.
+
+11:29.550 --> 11:31.950
+Now we are using SSH keys, right?
+
+11:31.950 --> 11:33.090
+So we have to select here
+
+11:33.090 --> 11:36.647
+SSH username with private key, right?
+
+11:38.460 --> 11:40.143
+I will give some ID here.
+
+11:41.340 --> 11:43.170
+I say gitsshkey.
+
+11:43.170 --> 11:45.630
+Username will be your GitHub account.
+
+11:45.630 --> 11:47.710
+So I'm giving my GitHub account
+
+11:48.900 --> 11:51.423
+and private key enter, directly.
+
+11:52.740 --> 11:55.893
+Add and let's copy the private key now.
+
+11:57.150 --> 11:59.163
+Open Git Bash or your terminal.
+
+12:01.004 --> 12:06.004
+cat ~/.ssh/id_rsa.
+
+12:06.960 --> 12:11.160
+Now this is the private key, right?
+
+12:11.160 --> 12:12.063
+So let's copy it.
+
+12:20.070 --> 12:20.903
+Copy.
+
+12:22.140 --> 12:24.990
+Make sure you copied properly like I did.
+
+12:24.990 --> 12:27.393
+Do not copy any extra characters.
+
+12:29.100 --> 12:32.940
+Let's go there and let's paste the private key.
+
+12:32.940 --> 12:37.547
+Once again, private key in Jenkins, public key in GitHub.
+
+12:39.180 --> 12:40.890
+And let's say add.
+
+12:40.890 --> 12:42.420
+Okay, let's select our credential.
+
+12:42.420 --> 12:44.040
+I'm going to select Git, SSH key.
+
+12:44.040 --> 12:45.420
+That is my credential.
+
+12:45.420 --> 12:48.090
+And you see the error just goes away.
+
+12:48.090 --> 12:51.870
+That means we are authenticated to our repository.
+
+12:51.870 --> 12:56.870
+And this job, basically pipeline script from SCM
+
+12:56.880 --> 13:00.210
+from this GIT repository, use this key for login.
+
+13:00.210 --> 13:02.790
+Branch master because we are storing
+
+13:02.790 --> 13:04.350
+just in the master branch.
+
+13:04.350 --> 13:05.940
+Script path.
+
+13:05.940 --> 13:07.440
+So where is your jenkinsfile?
+
+13:07.440 --> 13:08.430
+You can give the path.
+
+13:08.430 --> 13:11.700
+Now our jenkinsfile is just in the top
+
+13:11.700 --> 13:14.430
+the root directory that's here
+
+13:14.430 --> 13:16.710
+in the repository itself.
+
+13:16.710 --> 13:20.080
+So we just give the file name and we'll say save
+
+13:21.690 --> 13:23.253
+and we will say build now.
+
+13:26.160 --> 13:31.110
+Okay, so that got completed because it's pretty simple.
+
+13:31.110 --> 13:33.840
+But the code of the pipeline script
+
+13:33.840 --> 13:34.980
+that's not the point here.
+
+13:34.980 --> 13:37.650
+The point is, we are using jenkinsfile
+
+13:37.650 --> 13:40.290
+from our repository.
+
+13:40.290 --> 13:42.450
+And we are using SSH authentication.
+
+13:42.450 --> 13:46.053
+Now this is very safe and now very popular method.
+
+13:46.890 --> 13:50.055
+Okay? So we created the Git repository on GitHub.
+
+13:50.055 --> 13:51.960
+We did the SSH authentication.
+
+13:51.960 --> 13:54.270
+We copied the public key there, cloned the repository.
+
+13:54.270 --> 13:57.390
+We placed the jenkinsfile, we committed it.
+
+13:57.390 --> 14:00.870
+We created a Jenkins job, which you have seen just now.
+
+14:00.870 --> 14:04.020
+Now in the next video, we will test our triggers
+
+14:04.020 --> 14:06.960
+we'll learn all the different kinds of triggers.
+
+14:06.960 --> 14:09.753
+So complete this setup and join me in the next lecture.

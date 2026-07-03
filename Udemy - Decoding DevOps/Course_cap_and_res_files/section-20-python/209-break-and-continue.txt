@@ -1,0 +1,801 @@
+WEBVTT
+
+1
+00:00:00.910 --> 00:00:02.900
+Break and continue.
+
+2
+00:00:03.890 --> 00:00:06.020
+Now, I'm not asking you to take a break.
+
+3
+00:00:06.530 --> 00:00:09.858
+These are two Python statements break and
+
+4
+00:00:09.884 --> 00:00:12.930
+continue that we use generally in loops.
+
+5
+00:00:13.370 --> 00:00:16.774
+We have seen in the previous video, a loop
+
+6
+00:00:16.882 --> 00:00:21.390
+start at a point and ends after an event.
+
+7
+00:00:21.560 --> 00:00:26.322
+So for loop, when the sequence completes, when the
+
+8
+00:00:26.336 --> 00:00:29.674
+iteration completes, in the sequence, the for loop ends,
+
+9
+00:00:29.842 --> 00:00:33.270
+while loop will end when the condition becomes false.
+
+10
+00:00:34.850 --> 00:00:37.698
+And in middle of these two points where
+
+11
+00:00:37.724 --> 00:00:41.406
+it starts and ends, there are no changes.
+
+12
+00:00:41.528 --> 00:00:44.994
+But we can use a break statement to
+
+13
+00:00:45.032 --> 00:00:47.478
+break out of the loop even before it
+
+14
+00:00:47.504 --> 00:00:51.020
+completes, maybe after a certain condition is met.
+
+15
+00:00:51.590 --> 00:00:56.466
+Or we can skip the execution of a certain event
+
+16
+00:00:56.528 --> 00:01:01.050
+and then continue with the loop till it ends.
+
+17
+00:01:01.430 --> 00:01:03.140
+Let's learn it by an example.
+
+18
+00:01:07.950 --> 00:01:14.700
+Let me name it as Brick and continue.
+
+19
+00:01:17.410 --> 00:01:21.746
+Okay, let's iterate over A for loop for I in
+
+20
+00:01:21.808 --> 00:01:29.198
+and I will give a string DevOps. print i.
+
+21
+00:01:29.344 --> 00:01:31.720
+Now we know what happens when we execute this.
+
+22
+00:01:32.230 --> 00:01:35.270
+It's going to start at D and end at S.
+
+23
+00:01:35.380 --> 00:01:38.418
+Once that completes, the loop ends and I'll
+
+24
+00:01:38.454 --> 00:01:45.150
+give a print statement out of loop.
+
+25
+00:01:49.230 --> 00:01:50.830
+Maybe I want to break in the middle.
+
+26
+00:01:50.880 --> 00:01:52.030
+Maybe I'm looking for something.
+
+27
+00:01:52.080 --> 00:01:54.398
+If I found that something I don't
+
+28
+00:01:54.434 --> 00:01:56.290
+want loop to continue unnecessary.
+
+29
+00:01:56.670 --> 00:01:58.250
+So I'll give a condition.
+
+30
+00:01:58.310 --> 00:02:10.322
+I'll say if I value is capital O in the DevOps, I
+
+31
+00:02:10.336 --> 00:02:14.980
+will say I have found what I was looking for, like found.
+
+32
+00:02:19.190 --> 00:02:21.380
+And I will say break.
+
+33
+00:02:22.490 --> 00:02:23.898
+So it is going to check this
+
+34
+00:02:23.924 --> 00:02:26.310
+condition every time the loop runs.
+
+35
+00:02:26.630 --> 00:02:28.734
+First, the value of I is D.
+
+36
+00:02:28.832 --> 00:02:32.010
+It will print that we'll check I is equal to O.
+
+37
+00:02:32.060 --> 00:02:33.406
+That condition is false.
+
+38
+00:02:33.478 --> 00:02:35.190
+So it will continue with the loop.
+
+39
+00:02:35.510 --> 00:02:38.598
+Same will be done for E v for O.
+
+40
+00:02:38.744 --> 00:02:39.800
+It will match.
+
+41
+00:02:40.190 --> 00:02:41.686
+When the value of I is O, it's
+
+42
+00:02:41.698 --> 00:02:44.970
+going to check I is equal to O. That is true.
+
+43
+00:02:45.080 --> 00:02:46.662
+It's going to print this and it's going to
+
+44
+00:02:46.676 --> 00:02:48.958
+say break and will break out of the loop.
+
+45
+00:02:48.994 --> 00:02:51.020
+It will not go for P and S.
+
+46
+00:02:51.530 --> 00:02:56.730
+Let's run this so that's break statement breaks
+
+47
+00:02:57.170 --> 00:02:59.314
+the execution of loop or terminates the loop
+
+48
+00:02:59.362 --> 00:03:01.220
+and then execute the rest of the code.
+
+49
+00:03:01.670 --> 00:03:03.462
+Now let's do same for the continue.
+
+50
+00:03:03.536 --> 00:03:04.986
+Let's see how continue works.
+
+51
+00:03:05.108 --> 00:03:07.258
+Now continue, or should I say skip?
+
+52
+00:03:07.414 --> 00:03:09.620
+Right, So I will say continue.
+
+53
+00:03:11.090 --> 00:03:13.760
+Instead of break, I will give here continue.
+
+54
+00:03:14.870 --> 00:03:21.282
+And I'm going to take this out from here and print it.
+
+55
+00:03:21.476 --> 00:03:29.902
+After checking the condition, value of
+
+56
+00:03:29.976 --> 00:03:34.570
+I is the I variable.
+
+57
+00:03:36.810 --> 00:03:37.174
+Okay.
+
+58
+00:03:37.212 --> 00:03:39.410
+Now here, as soon as the loop starts, execution
+
+59
+00:03:39.470 --> 00:03:41.134
+starts going to check the value of I.
+
+60
+00:03:41.172 --> 00:03:43.834
+If it's O, then it will execute our code.
+
+61
+00:03:43.932 --> 00:03:46.594
+Else it will just do the print over here.
+
+62
+00:03:46.752 --> 00:03:50.962
+So it's going to execute my logic every time, except when the
+
+63
+00:03:50.976 --> 00:03:54.814
+value of I is O, it's going to print this and say
+
+64
+00:03:54.852 --> 00:03:57.454
+continue and will not execute the logic of my code.
+
+65
+00:03:57.492 --> 00:03:59.738
+It will continue the execution.
+
+66
+00:03:59.834 --> 00:04:02.578
+So in this case, the value of I will not be
+
+67
+00:04:02.604 --> 00:04:08.198
+printed when the value is o, continue is more like skip.
+
+68
+00:04:08.294 --> 00:04:10.680
+Skip that and do the rest of it.
+
+69
+00:04:13.390 --> 00:04:15.940
+So you see, when the value of I is o,
+
+70
+00:04:16.810 --> 00:04:20.414
+at that time it just says found my data.
+
+71
+00:04:20.512 --> 00:04:22.660
+Continue did not execute this.
+
+72
+00:04:23.530 --> 00:04:26.810
+It continued with the operation or with the iterations.
+
+73
+00:04:28.090 --> 00:04:30.794
+Okay, let's see one more example with break and
+
+74
+00:04:30.832 --> 00:04:35.930
+Continue for this, let me open another notebook.
+
+75
+00:04:42.230 --> 00:04:46.230
+Okay, let's do some test on the vaccine of coronavirus.
+
+76
+00:04:46.850 --> 00:04:53.110
+So I take a list of vaccines and before
+
+77
+00:04:53.160 --> 00:04:54.778
+I make a test on this, before I run
+
+78
+00:04:54.804 --> 00:04:57.022
+it on a loop, I'm going to shuffle it.
+
+79
+00:04:57.216 --> 00:04:59.218
+Every time I execute my code, it's going to
+
+80
+00:04:59.244 --> 00:05:02.878
+shuffle the positions of all the elements will change.
+
+81
+00:05:03.024 --> 00:05:04.738
+We have a function for that.
+
+82
+00:05:04.884 --> 00:05:08.110
+First we need to use this library random.
+
+83
+00:05:09.090 --> 00:05:20.690
+And in that we have random shuffle variable vaccines.
+
+84
+00:05:21.850 --> 00:05:24.902
+Now after this, let's print vaccines and
+
+85
+00:05:24.916 --> 00:05:26.450
+you will see it will be shuffled.
+
+86
+00:05:29.030 --> 00:05:30.426
+You see, the order was first
+
+87
+00:05:30.488 --> 00:05:32.602
+moderna, then pfizer, then sputnik.
+
+88
+00:05:32.686 --> 00:05:34.198
+If you see after I shuffled
+
+89
+00:05:34.234 --> 00:05:36.990
+it, first is pfizer, then CoronaVac.
+
+90
+00:05:37.490 --> 00:05:38.902
+Okay, while I'm doing that, I'll
+
+91
+00:05:38.926 --> 00:05:39.906
+let you know in a moment now
+
+92
+00:05:39.968 --> 00:05:42.502
+Now from this shuffled value, I'm
+
+93
+00:05:42.526 --> 00:05:44.334
+going to take a random value.
+
+94
+00:05:44.432 --> 00:05:48.870
+Again, we can use a random function, random.choice
+
+95
+00:05:53.910 --> 00:05:57.670
+and I'll store the value in the variable lucky.
+
+96
+00:05:59.130 --> 00:06:01.562
+Yeah, we are testing it only based on luck.
+
+97
+00:06:01.586 --> 00:06:02.830
+We are not scientists.
+
+98
+00:06:03.630 --> 00:06:06.250
+Let's print lucky.
+
+99
+00:06:10.090 --> 00:06:12.014
+Okay, covaxin was lucky this time.
+
+100
+00:06:12.052 --> 00:06:13.420
+Let's run it once again.
+
+101
+00:06:13.810 --> 00:06:15.410
+This time CoronaVac.
+
+102
+00:06:15.910 --> 00:06:16.938
+Again, CoronaVac.
+
+103
+00:06:16.974 --> 00:06:20.270
+That is from China, moderna. Okay, nice.
+
+104
+00:06:20.320 --> 00:06:21.846
+Some random values.
+
+105
+00:06:22.038 --> 00:06:24.938
+Now, from the list of the vaccines, we'll just run
+
+106
+00:06:24.964 --> 00:06:27.698
+a print statement that I'm testing this vaccine and if
+
+107
+00:06:27.724 --> 00:06:31.842
+that vaccine is in the lucky or lucky draw, we'll
+
+108
+00:06:31.866 --> 00:06:34.518
+declare that vaccine as the test was successful.
+
+109
+00:06:34.674 --> 00:06:37.142
+I know not more of a scientific way
+
+110
+00:06:37.156 --> 00:06:40.046
+of testing but good to learn our program.
+
+111
+00:06:40.228 --> 00:06:45.138
+Okay, so I'm going to say for vac in vaccines.
+
+112
+00:06:45.234 --> 00:06:47.090
+So it's going to iterate over this.
+
+113
+00:06:47.260 --> 00:06:50.750
+I'll print a statement that I am testing this vaccine,
+
+114
+00:06:56.270 --> 00:07:05.700
+star and bold testing vaccine and let's give the name.
+
+115
+00:07:08.410 --> 00:07:09.880
+Okay, let's run that.
+
+116
+00:07:10.870 --> 00:07:13.430
+Okay, so we're testing all the vaccines.
+
+117
+00:07:15.610 --> 00:08:01.058
+Now out of that, if I found my
+
+118
+00:08:01.084 --> 00:08:04.420
+lucky vaccine, I would like to break.
+
+119
+00:08:08.450 --> 00:08:10.854
+Okay, so the logic is very simple.
+
+120
+00:08:11.012 --> 00:08:14.338
+We are just taking a lucky number, a lucky vaccine.
+
+121
+00:08:14.374 --> 00:08:18.260
+We're comparing whenever you're iterating if the current
+
+122
+00:08:18.590 --> 00:08:21.118
+name of the vaccine vac, in the vac variable
+
+123
+00:08:21.214 --> 00:08:23.730
+is equal to lucky, then we print that
+
+124
+00:08:23.780 --> 00:08:25.674
+this test is successful and then we break.
+
+125
+00:08:25.712 --> 00:08:28.398
+We don't need to go and iterate over the
+
+126
+00:08:28.424 --> 00:08:30.198
+rest of the vaccine, but we don't know which
+
+127
+00:08:30.224 --> 00:08:32.850
+we'll find because that's a random choice.
+
+128
+00:08:33.950 --> 00:08:35.120
+Let's run it.
+
+129
+00:08:37.650 --> 00:08:43.090
+See that sputnik five, again sputnik.
+
+130
+00:08:43.590 --> 00:08:50.378
+Okay, this time CoronaVac, moderna, AstraZeneca.
+
+131
+00:08:50.414 --> 00:08:53.014
+But you see it's performing the test for other
+
+132
+00:08:53.052 --> 00:08:56.446
+vaccines and why not print a message that this
+
+133
+00:08:56.508 --> 00:08:59.170
+test was failed for the other vaccines
+
+134
+00:09:03.130 --> 00:09:05.418
+Okay, so this will only get executed
+
+135
+00:09:05.574 --> 00:09:07.960
+if the vaccine is not lucky, right?
+
+136
+00:09:09.010 --> 00:09:09.374
+Yeah.
+
+137
+00:09:09.412 --> 00:09:12.594
+So moderna test failed, CoronaVac test failed.
+
+138
+00:09:12.642 --> 00:09:13.840
+Sputnik five.
+
+139
+00:09:27.110 --> 00:09:29.190
+So that's how break works, right?
+
+140
+00:09:29.360 --> 00:09:31.038
+When you found what we're looking for,
+
+141
+00:09:31.124 --> 00:09:33.390
+then we don't want to iterate unnecessary.
+
+142
+00:09:34.610 --> 00:09:37.460
+Take a look again at the logic of the code
+
+143
+00:09:41.250 --> 00:09:43.620
+and let me run it once again just for fun.
+
+144
+00:09:46.170 --> 00:09:46.570
+Okay.
+
+145
+00:09:46.620 --> 00:09:48.010
+This time Covaxin
+
+146
+00:09:48.390 --> 00:09:50.630
+Okay, so Break breaks the loop
+
+147
+00:09:50.750 --> 00:09:52.800
+and does not iterate after that.
+
+148
+00:09:53.310 --> 00:09:56.186
+But Continue will continue the loop execution.
+
+149
+00:09:56.318 --> 00:10:00.600
+Let's take the entire script and copy it into new cell.
+
+150
+00:10:01.470 --> 00:10:04.980
+And instead of Break, let's give Continue.
+
+151
+00:10:05.850 --> 00:10:07.440
+What will be the difference?
+
+152
+00:10:07.890 --> 00:10:09.950
+Well, if you find our lucky vaccine,
+
+153
+00:10:10.010 --> 00:10:11.880
+it's going to print this message.
+
+154
+00:10:12.510 --> 00:10:15.286
+But then we want to test the other vaccines also.
+
+155
+00:10:15.468 --> 00:10:18.190
+So one of them will be successful, all the other
+
+156
+00:10:18.360 --> 00:10:20.614
+will be failure by the logic of our code.
+
+157
+00:10:20.772 --> 00:10:23.470
+But in any case, I'm iterating till the end.
+
+158
+00:10:23.640 --> 00:10:25.262
+Except only for one lucky.
+
+159
+00:10:25.286 --> 00:10:26.820
+I'm going to print a message.
+
+160
+00:10:27.210 --> 00:10:29.446
+So when the lucky founds, it's going to say Continue.
+
+161
+00:10:29.508 --> 00:10:30.958
+It's not going to print the
+
+162
+00:10:30.984 --> 00:10:32.760
+failed message, it will Continue.
+
+163
+00:10:33.450 --> 00:10:34.798
+Okay, let's test it.
+
+164
+00:10:34.884 --> 00:10:36.060
+Let's run this.
+
+165
+00:10:37.350 --> 00:10:40.282
+Okay, so you see CoVaccine, it says failed modern, it
+
+166
+00:10:40.296 --> 00:10:43.930
+says failed, AstraZeneca it says it's a successful one.
+
+167
+00:10:44.100 --> 00:10:46.702
+And then it continues with the rest of it.
+
+168
+00:10:46.836 --> 00:10:49.474
+For AstraZeneca it's not going to print this
+
+169
+00:10:49.512 --> 00:10:52.222
+message because Continue hits, it continues with the
+
+170
+00:10:52.236 --> 00:10:54.960
+iteration, continues with the rest of them.
+
+171
+00:10:57.030 --> 00:11:00.430
+So you will see all the vaccines being tested.
+
+172
+00:11:02.710 --> 00:11:04.900
+Okay, let's run it few more times.
+
+173
+00:11:07.790 --> 00:11:08.154
+OK.
+
+174
+00:11:08.192 --> 00:11:13.460
+This time covaxin at the end, let's run once again.
+
+175
+00:11:16.310 --> 00:11:16.854
+OK?
+
+176
+00:11:16.952 --> 00:11:18.274
+No, this time CoronaVac.
+
+177
+00:11:18.322 --> 00:11:20.482
+But again testing other vaccines till
+
+178
+00:11:20.506 --> 00:11:24.140
+the end so that's Continue.
+
+179
+00:11:24.530 --> 00:11:27.082
+When it hits Continue, then it continues
+
+180
+00:11:27.106 --> 00:11:29.730
+with the iteration, doesn't execute your logic.
+
+181
+00:11:30.830 --> 00:11:33.380
+So this is more of a lucky guess over here.
+
+182
+00:11:33.770 --> 00:11:35.970
+But if you're doing automation, maybe you're looking
+
+183
+00:11:36.020 --> 00:11:40.458
+for some data, maybe some file or some
+
+184
+00:11:40.484 --> 00:11:42.690
+kind of data in multiple servers.
+
+185
+00:11:43.130 --> 00:11:44.694
+And if you find what you're looking
+
+186
+00:11:44.732 --> 00:11:46.520
+for, maybe you'd like to break.
+
+187
+00:11:48.230 --> 00:11:51.018
+You don't want to check it in other servers, right?
+
+188
+00:11:51.104 --> 00:11:53.840
+That could be one example for Continue.
+
+189
+00:11:54.170 --> 00:11:55.818
+Maybe for some server you want
+
+190
+00:11:55.844 --> 00:11:58.282
+to skip execution of some task.
+
+191
+00:11:58.306 --> 00:12:00.270
+Maybe you're trying to restart a service and you
+
+192
+00:12:00.320 --> 00:12:03.586
+don't want to restart on a particular server or few servers.
+
+193
+00:12:03.778 --> 00:12:06.430
+But the rest of it you may want to restart.
+
+194
+00:12:06.490 --> 00:12:09.740
+So Continue will kind of work like a skip for you.
+
+195
+00:12:10.250 --> 00:12:12.906
+So that's all in Break and Continue,
+
+196
+00:12:13.088 --> 00:12:14.874
+we have implemented the knowledge of for
+
+197
+00:12:14.912 --> 00:12:17.660
+loops conditions and Break and Continue.
+
+198
+00:12:18.050 --> 00:12:20.034
+So let's break this video now
+
+199
+00:12:20.072 --> 00:12:21.822
+and continue with the next video.
+
+200
+00:12:21.956 --> 00:12:22.920
+I'll see you in the next one.

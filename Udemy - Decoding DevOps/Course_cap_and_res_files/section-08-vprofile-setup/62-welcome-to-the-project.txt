@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.762 --> 00:00:02.487
+Welcome to the project section.
+
+2
+00:00:02.562 --> 00:00:04.625
+This is your first project.
+
+3
+00:00:05.137 --> 00:00:08.037
+We have a product called VProfile.
+
+4
+00:00:08.186 --> 00:00:10.572
+It is a website written in Java.
+
+5
+00:00:10.692 --> 00:00:12.725
+Consists of multiple services.
+
+6
+00:00:13.237 --> 00:00:15.262
+You will be deploying this
+
+7
+00:00:15.400 --> 00:00:18.737
+product on five virtual machines.
+
+8
+00:00:19.162 --> 00:00:22.992
+Like we have WordPress, where we have Apache
+
+9
+00:00:23.127 --> 00:00:26.742
+and MySQL service running on the same VM.
+
+10
+00:00:26.877 --> 00:00:30.352
+Here you will be having five services running
+
+11
+00:00:30.445 --> 00:00:34.942
+in five different virtual machines. In real time.
+
+12
+00:00:34.990 --> 00:00:37.702
+You will be working in a product and
+
+13
+00:00:37.720 --> 00:00:39.817
+you should have a local copy of that
+
+14
+00:00:39.865 --> 00:00:42.537
+product where you can do your experiments.
+
+15
+00:00:42.687 --> 00:00:46.162
+This project is created keeping this scenario in mind.
+
+16
+00:00:46.300 --> 00:00:46.875
+Take a look.

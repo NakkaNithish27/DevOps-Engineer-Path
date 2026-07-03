@@ -1,0 +1,453 @@
+WEBVTT
+
+0
+00:00.720 --> 00:01.320
+Welcome.
+
+1
+00:01.860 --> 00:09.000
+In this lecture, we will talk about difference between monolithic and microservices application.
+
+2
+00:09.720 --> 00:14.310
+And first, I don't want you to think about here VMs and servers and stuff.
+
+3
+00:15.410 --> 00:19.250
+Think it from a user or a developer point of view.
+
+4
+00:20.630 --> 00:28.040
+What do you see right now on your screen is a Java application just like the vprofile and it's written
+
+5
+00:28.040 --> 00:36.590
+in Java and this V profile service has many sub services in it, like a user interface from which users
+
+6
+00:36.590 --> 00:38.030
+will log in and see their dashboard.
+
+7
+00:39.220 --> 00:43.420
+Posts so user can create or read posts.
+
+8
+00:45.120 --> 00:47.670
+Chat users can chat with each other.
+
+9
+00:48.660 --> 00:52.620
+And notification, anything happens user it gets notifications.
+
+10
+00:52.950 --> 00:57.330
+So these are the sub services from this main service.
+
+11
+00:57.660 --> 01:02.370
+And to host this entire application, we have used Tomcat server.
+
+12
+01:03.370 --> 01:08.350
+Now all these sub services are part of one big service or one big application.
+
+13
+01:09.010 --> 01:17.140
+If you want to make any change to any of the sub service, then you need to redeploy the entire entire
+
+14
+01:17.320 --> 01:18.280
+artifact.
+
+15
+01:18.970 --> 01:22.720
+So in the vprofile we have the vprofile-v2.war
+
+16
+01:22.730 --> 01:26.320
+That is the artifact that contains all these sub services.
+
+17
+01:27.430 --> 01:32.770
+And everything needs to be redone in Java because it has started through its journey from Java.
+
+18
+01:32.800 --> 01:34.630
+So everything is in Java.
+
+19
+01:35.980 --> 01:37.450
+This is a monolithic.
+
+20
+01:39.020 --> 01:41.480
+The entire application, sub services.
+
+21
+01:41.480 --> 01:45.920
+Everything is in just one single application and it's like an elephant.
+
+22
+01:46.280 --> 01:49.580
+Difficult to move or slow while moving.
+
+23
+01:51.920 --> 01:55.320
+Nowadays you'll hear a term called microservices.
+
+24
+01:55.340 --> 01:55.970
+A lot.
+
+25
+01:57.200 --> 02:01.370
+So how is a microservice application is different than this?
+
+26
+02:03.140 --> 02:06.230
+This is the architecture of a microservice application.
+
+27
+02:07.830 --> 02:11.580
+So the sub services we're talking about, the same thing,
+
+28
+02:11.580 --> 02:13.770
+we're going to call them as micro service.
+
+29
+02:15.380 --> 02:15.750
+Like.
+
+30
+02:15.770 --> 02:22.250
+User interface for user interface, there will be a separate application built and let's say it's written in
+
+31
+02:22.250 --> 02:22.790
+Java.
+
+32
+02:23.790 --> 02:28.920
+And for chat another application is built, which is written in Node.js.
+
+33
+02:30.690 --> 02:32.970
+For notification python
+
+34
+02:33.750 --> 02:38.310
+And now these all are different, different application or different different services.
+
+35
+02:38.790 --> 02:41.340
+They will work together, but they are different.
+
+36
+02:41.910 --> 02:45.750
+They can be deployed on different server and they can interact with each other.
+
+37
+02:45.750 --> 02:51.840
+But microservices applications, microservices will interact through an API gateway.
+
+38
+02:52.080 --> 02:56.130
+So this will be interacting or communicating with APIs.
+
+39
+02:57.610 --> 02:58.820
+So it really doesn't matter.
+
+40
+02:59.320 --> 03:03.510
+It's Java or Python or any of the technology use.
+
+41
+03:03.520 --> 03:08.020
+As long as they provide APIs to interact, they can interact with each other.
+
+42
+03:08.530 --> 03:10.600
+Of course they should be designed to interact.
+
+43
+03:13.090 --> 03:20.110
+Now the vprofile was one single monolithic application, but if you have multiple application, multiple
+
+44
+03:20.110 --> 03:23.920
+microservices, you need to deploy them and run them.
+
+45
+03:23.920 --> 03:24.760
+And for that.
+
+46
+03:25.990 --> 03:27.010
+Like for.
+
+47
+03:27.940 --> 03:29.320
+A monolithic application.
+
+48
+03:29.320 --> 03:33.130
+One artifact you deployed on one Linux server running Tomcat.
+
+49
+03:33.520 --> 03:33.860
+Fine.
+
+50
+03:34.210 --> 03:40.150
+But when you have multiple application, multiple services, then you will need then multiple servers
+
+51
+03:40.150 --> 03:40.840
+to run them.
+
+52
+03:41.290 --> 03:42.430
+Remember, isolation.
+
+53
+03:43.560 --> 03:43.890
+Right.
+
+54
+03:44.070 --> 03:49.830
+So for Python, for Node, for Tomcat, for all this different different servers.
+
+55
+03:50.640 --> 03:51.780
+So you can see the problem.
+
+56
+03:51.780 --> 03:57.090
+Microservices solves a lot of problems for the developers.
+
+57
+03:58.370 --> 04:01.160
+All the applications can be developed independently.
+
+58
+04:01.640 --> 04:04.310
+They can have their own languages, their own libraries.
+
+59
+04:04.760 --> 04:09.680
+But when you want to run them together, isolated, you need multiple servers.
+
+60
+04:09.680 --> 04:14.270
+So you see the cost goes very high from an operations point of view.
+
+61
+04:16.020 --> 04:18.870
+If you already understood what I'm going to say next.
+
+62
+04:19.230 --> 04:21.090
+This is isolation problem.
+
+63
+04:21.090 --> 04:22.890
+And for isolation, what do we do?
+
+64
+04:24.010 --> 04:25.900
+Well, we can containerise it
+
+65
+04:27.150 --> 04:29.490
+And we can run on a platform like Docker.
+
+66
+04:29.850 --> 04:31.860
+So they are different services.
+
+67
+04:32.280 --> 04:33.510
+Want to run isolated.
+
+68
+04:33.660 --> 04:38.310
+Well, let's build images for them and run it together on the Docker platform.
+
+69
+04:39.550 --> 04:47.260
+So now you see why microservices and containers or Dockers are spoken in the same sentences.
+
+70
+04:48.520 --> 04:53.980
+Docker or in Container You can run any container, but when it comes to microservices, the best way to run
+
+71
+04:53.980 --> 05:00.100
+microservices is to containerised them and run in a Docker platform or any container runtime environment.
+
+72
+05:00.580 --> 05:05.680
+Otherwise, if you do not use Docker or you do not use containers, you're going to end up investing
+
+73
+05:05.680 --> 05:08.500
+a lot of money on the servers, on the infrastructure.
+
+74
+05:09.130 --> 05:12.610
+That's why whenever there is microservices, you will see containers.
+
+75
+05:13.840 --> 05:21.790
+If you want to take a few more real time examples, think about big, huge companies like Amazon and
+
+76
+05:21.880 --> 05:23.140
+Amazon e-commerce.
+
+77
+05:23.890 --> 05:30.040
+From where we can purchase many things now, how many sub services microservices are there?
+
+78
+05:30.050 --> 05:35.200
+You know, you log in, there's a dashboard for that, there is a separate service or we can say a separate
+
+79
+05:35.200 --> 05:37.090
+container for cart.
+
+80
+05:38.150 --> 05:40.960
+Separate container. For payment gateway, another container.
+
+81
+05:41.540 --> 05:46.760
+So if you look microservices from a user point of view, you can understand it very easily.
+
+82
+05:47.480 --> 05:53.000
+Sure, there are a lot of details and technicality that goes from a developer point of view.
+
+83
+05:53.900 --> 05:58.370
+From a user point of view, we can understand like this and from a DevOps point of view.
+
+84
+05:59.270 --> 06:05.750
+We know if it's microservice, there will be containerization and we have to run it on a container runtime
+
+85
+06:05.750 --> 06:06.410
+environment.
+
+86
+06:07.680 --> 06:08.580
+From AWS
+
+87
+06:08.580 --> 06:12.090
+perspective, what are microservices?
+
+88
+06:12.270 --> 06:18.840
+Microservices are an architectural and organisational approach to software development.
+
+89
+06:19.320 --> 06:23.250
+So you see it's never mentioned here about DevOps and servers and stuff.
+
+90
+06:23.250 --> 06:29.790
+It's the architectural design, you know, design and the approach of software development.
+
+91
+06:30.420 --> 06:34.520
+That software is composed of small independent services.
+
+92
+06:34.530 --> 06:40.590
+The microservices which you talked about that communicate over well-defined APIs.
+
+93
+06:41.730 --> 06:47.460
+Microservices architecture make applications easier to scale and faster to develop.
+
+94
+06:48.700 --> 06:55.210
+We will learn about scaling and stuff later we have AWS and then we'll do Kubernetes and we'll talk about
+
+95
+06:55.210 --> 06:57.910
+scaling. But faster to develop.
+
+96
+06:58.450 --> 06:59.560
+They are independent.
+
+97
+07:00.460 --> 07:06.460
+Their development can happen parallelly together and we can use different, different technologies for
+
+98
+07:06.460 --> 07:08.250
+different microservices.
+
+99
+07:08.260 --> 07:15.910
+We can use Node, we can use Java, we can use Python, Ruby, and they're going to communicate over
+
+100
+07:15.910 --> 07:17.230
+well-defined APIs.
+
+101
+07:17.230 --> 07:18.820
+So there will be an API gateway.
+
+102
+07:18.820 --> 07:20.290
+Now all this we will learn later.
+
+103
+07:21.040 --> 07:26.020
+I just want you to solidify your knowledge of microservices from a DevOps perspective.
+
+104
+07:26.590 --> 07:30.280
+You don't need to really deep dive into microservices, how to develop them.
+
+105
+07:30.280 --> 07:33.730
+As long as you're not a developer, you don't need to deep dive that much.
+
+106
+07:34.210 --> 07:38.890
+Yes, if you're a developer, of course you need to understand it much in-depth, much in detail.
+
+107
+07:38.890 --> 07:41.410
+And you should also know how to develop microservices.
+
+108
+07:42.370 --> 07:46.000
+So take a look on this URL, read about microservices.
+
+109
+07:46.630 --> 07:54.130
+If you want to watch some videos, read some blogs, please do that and get a clear picture of what
+
+110
+07:54.280 --> 07:55.780
+are microservices.
+
+111
+07:56.380 --> 07:57.970
+That would be all in this video.
+
+112
+07:57.970 --> 07:59.380
+I will see you in the next one.

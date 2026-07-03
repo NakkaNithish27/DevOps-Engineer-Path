@@ -1,0 +1,847 @@
+WEBVTT
+
+00:00.330 --> 00:01.470
+Instructor: All right, in this lecture
+
+00:01.470 --> 00:05.040
+we are going to set up Nexus Server and SonarQube Server
+
+00:05.040 --> 00:06.810
+on EC2 instance.
+
+00:06.810 --> 00:10.200
+Nexus will be running on Amazon Linux 2023
+
+00:10.200 --> 00:13.350
+and SonarQube on Ubuntu 24.
+
+00:13.350 --> 00:16.128
+Let's take a look at the steps that we will be using
+
+00:16.128 --> 00:17.610
+to set up this server.
+
+00:17.610 --> 00:20.220
+Basically we are using the user data script,
+
+00:20.220 --> 00:22.974
+so come to the source code URL,
+
+00:22.974 --> 00:26.511
+github.com/hkcoder/vprofile-project
+
+00:26.511 --> 00:29.043
+and switch to the branch atom.
+
+00:30.150 --> 00:32.613
+In this you have the folder user data,
+
+00:33.480 --> 00:36.273
+and you should have here nexus-setup.sh.
+
+00:37.110 --> 00:38.010
+It's a simple script,
+
+00:38.010 --> 00:41.370
+same way we set up Tomcat 10 service also.
+
+00:41.370 --> 00:45.090
+Like in Tomcat we install JDK, then we download the binary,
+
+00:45.090 --> 00:47.100
+create the user, create systemd file.
+
+00:47.100 --> 00:49.470
+Same way here also Nexus Setup.
+
+00:49.470 --> 00:52.200
+We download the key and set the repository file.
+
+00:52.200 --> 00:56.760
+We install JDK 17, create the folder,
+
+00:56.760 --> 01:01.760
+download the binary, extract it, create the Nexus user,
+
+01:02.310 --> 01:05.130
+create the systemd file for Nexus Service,
+
+01:05.130 --> 01:07.203
+start and enable Nexus Service.
+
+01:08.919 --> 01:12.780
+Now let's check the user data script for SonarQube.
+
+01:12.780 --> 01:14.373
+So sonar-setup.sh.
+
+01:15.300 --> 01:17.340
+This script will set up three services,
+
+01:17.340 --> 01:21.869
+SonarQube service itself, database PostgreSQL,
+
+01:21.869 --> 01:25.903
+and NGINX service is a front end for SonarQube.
+
+01:25.903 --> 01:27.930
+Like in VProfile project we have NGINX service
+
+01:27.930 --> 01:29.550
+in the front end, then we have Tomcat,
+
+01:29.550 --> 01:31.620
+and then we have MySQL database.
+
+01:31.620 --> 01:34.950
+But we did set up all in three different machines.
+
+01:34.950 --> 01:39.750
+Here, all in one machine, NGINX, SonarQube Service,
+
+01:39.750 --> 01:41.640
+and PostgreSQL.
+
+01:41.640 --> 01:44.010
+Here there are some commands which you may not have seen
+
+01:44.010 --> 01:46.860
+previously in bash scripting or in Linux.
+
+01:46.860 --> 01:49.200
+So let me just explain you those things.
+
+01:49.200 --> 01:51.810
+Now Postgres Service and NGINX Service,
+
+01:51.810 --> 01:55.320
+sorry SonarQube Service takes a lot of resource
+
+01:55.320 --> 01:58.177
+from the system, and in order to give more resources
+
+01:58.177 --> 02:01.320
+to the process of SonarQube, we have to make
+
+02:01.320 --> 02:03.030
+some operating system level changes.
+
+02:03.030 --> 02:04.410
+That can be done like this.
+
+02:04.410 --> 02:07.110
+Open this file systemctl.conf
+
+02:07.110 --> 02:10.492
+and these are the entries that you need to give over there.
+
+02:10.492 --> 02:11.640
+This is from the documentation.
+
+02:11.640 --> 02:16.440
+So the maximum file size that can be opened you limit,
+
+02:16.440 --> 02:18.090
+and then in limits.conf file,
+
+02:18.090 --> 02:22.020
+the SonarQube process can open how many files.
+
+02:22.020 --> 02:24.390
+So these two files needs to be changed,
+
+02:24.390 --> 02:26.790
+and once you make the changes to these files,
+
+02:26.790 --> 02:29.460
+you need to reboot the Linux operating system.
+
+02:29.460 --> 02:32.160
+Apart from that, other things are pretty straightforward.
+
+02:32.160 --> 02:35.580
+I install JDK, download PostgreSQL,
+
+02:35.580 --> 02:36.630
+and start the service.
+
+02:36.630 --> 02:39.240
+Like MySQL service, we create the database,
+
+02:39.240 --> 02:41.459
+here also we create the database, we grant privilege.
+
+02:41.459 --> 02:44.520
+The user of the DB will be Sonar,
+
+02:44.520 --> 02:47.760
+it's password you've seen here, admin123,
+
+02:47.760 --> 02:49.650
+and then download and set up SonarQube
+
+02:49.650 --> 02:53.040
+same way as we do Nexus or Tomcat setup.
+
+02:53.040 --> 02:56.256
+Similar way, download the binary, extract it, create a user,
+
+02:56.256 --> 03:00.022
+create a systemd file for it, start the Nexus.
+
+03:00.022 --> 03:04.530
+Sorry, start the SonarQube service.
+
+03:04.530 --> 03:05.850
+Oh my bad.
+
+03:05.850 --> 03:06.683
+This is the Sonar properties file.
+
+03:06.683 --> 03:09.630
+So this file is like we have application properties file
+
+03:09.630 --> 03:10.980
+for VProfile.
+
+03:10.980 --> 03:13.950
+We mentioned the database username and password.
+
+03:13.950 --> 03:15.720
+So this kind of information will be
+
+03:15.720 --> 03:17.940
+in the sonar.properties file.
+
+03:17.940 --> 03:19.643
+And then you have the systemd file,
+
+03:21.210 --> 03:24.060
+start and enable SonarQube service.
+
+03:24.060 --> 03:26.460
+Then on the front end there's NGINX service
+
+03:26.460 --> 03:27.660
+we are installing.
+
+03:27.660 --> 03:30.030
+We take the request on port 80
+
+03:30.030 --> 03:32.670
+and then we route the request on port 9,000.
+
+03:32.670 --> 03:36.240
+This is the port number of SonarQube, right?
+
+03:36.240 --> 03:41.010
+Like Nexus runs on port 8081, Tomcat on 8080,
+
+03:41.010 --> 03:44.790
+Jenkins on 8080, SonarQube's web port is 9,000.
+
+03:44.790 --> 03:46.560
+This is from the configuration file.
+
+03:46.560 --> 03:48.363
+If you want you can change that.
+
+03:50.340 --> 03:53.520
+Once everything is done we restart the NGINX service,
+
+03:53.520 --> 03:55.723
+and then there is definitely a reboot,
+
+03:55.723 --> 03:58.770
+because in the beginning we made OS level changes.
+
+03:58.770 --> 04:02.040
+So for that we need to reboot this OS.
+
+04:02.040 --> 04:04.200
+So there is a reboot command.
+
+04:04.200 --> 04:07.350
+Now let's go ahead and set up Nexus and SonarQube service
+
+04:07.350 --> 04:08.280
+one by one.
+
+04:08.280 --> 04:11.460
+You should already already have Jenkins server.
+
+04:11.460 --> 04:12.300
+You can shut it down.
+
+04:12.300 --> 04:14.670
+You don't need to start it for this lecture.
+
+04:14.670 --> 04:17.520
+I'll click on launch instance and launch Nexus Service.
+
+04:17.520 --> 04:21.333
+So I'm going to give it name as Nexus Server.
+
+04:23.850 --> 04:27.123
+OS, I will go with Amazon Linux 2023 AMI.
+
+04:28.590 --> 04:33.330
+Instance type needs to be bigger, T2 or T3 Medium.
+
+04:33.330 --> 04:35.370
+We need to go with medium.
+
+04:35.370 --> 04:37.380
+And we'll just power on when we need it,
+
+04:37.380 --> 04:39.870
+otherwise most of the time your Nexus and SonarQube
+
+04:39.870 --> 04:42.060
+both will be down.
+
+04:42.060 --> 04:44.430
+Remember, whenever you use it then only power on,
+
+04:44.430 --> 04:45.510
+otherwise keep it down.
+
+04:45.510 --> 04:46.860
+Key pair.
+
+04:46.860 --> 04:48.750
+Let's create a new key pair.
+
+04:48.750 --> 04:50.643
+Nexus key, I'm giving the name.
+
+04:52.560 --> 04:54.123
+Security group rule edit.
+
+04:54.960 --> 04:57.120
+Create a new security group.
+
+04:57.120 --> 04:59.520
+Name I have given Nexus-sg.
+
+04:59.520 --> 05:02.340
+First, yeah, 22 from my IP,
+
+05:02.340 --> 05:05.370
+and then one more rule that will say port 8081.
+
+05:07.860 --> 05:12.860
+So the front end web browser port number is 8081 for Nexus.
+
+05:13.800 --> 05:17.370
+And we'll see here from my IP.
+
+05:17.370 --> 05:19.920
+And also one more rule,
+
+05:19.920 --> 05:24.150
+port 8081 from Jenkins Security Group.
+
+05:24.150 --> 05:27.893
+The source should be the Jenkins Security Group.
+
+05:27.893 --> 05:28.726
+Why?
+
+05:28.726 --> 05:31.590
+Because we will be uploading our artifact
+
+05:31.590 --> 05:33.600
+to Nexus Service from Jenkins.
+
+05:33.600 --> 05:38.340
+So Jenkins will connect to Nexus Service on port 8081.
+
+05:38.340 --> 05:41.070
+So we need to make sure the Jenkins security group
+
+05:41.070 --> 05:45.243
+is allowed to access Nexus on port 8081.
+
+05:50.310 --> 05:52.740
+Allow Jenkins to communicate with Nexus.
+
+05:52.740 --> 05:54.450
+I've just given a description.
+
+05:54.450 --> 05:58.140
+And in advanced details go to user data
+
+05:58.140 --> 06:00.690
+and come to the script Nexus.
+
+06:00.690 --> 06:02.190
+Okay, we are setting up Nexus.
+
+06:02.190 --> 06:06.270
+So nexus-setup.sh, copy all the content from here,
+
+06:06.270 --> 06:09.570
+just click on this copy button and paste it.
+
+06:09.570 --> 06:14.340
+Make sure you check it, and if you're good, launch instance.
+
+06:14.340 --> 06:16.140
+Let's go for the next instance,
+
+06:16.140 --> 06:17.403
+which is SonarQube.
+
+06:18.390 --> 06:19.770
+Launch instance.
+
+06:19.770 --> 06:24.600
+Sonar Server, Ubuntu, Ubuntu 24,
+
+06:24.600 --> 06:25.893
+free tier eligible.
+
+06:27.000 --> 06:32.000
+Instance type, okay, this one also T2 medium or T3 medium.
+
+06:33.690 --> 06:35.613
+Remember we need 4GB of memory.
+
+06:36.660 --> 06:40.443
+Key pair, let's create a key, Sonar Key I've given the name.
+
+06:44.160 --> 06:47.620
+Edit create security group with the name sonar-sg.
+
+06:47.620 --> 06:50.970
+Okay, so the rule 22 from my IP,
+
+06:50.970 --> 06:54.240
+and we have NGINX service in the front end.
+
+06:54.240 --> 06:56.760
+So we can just give here port 80,
+
+06:56.760 --> 06:59.610
+or you can select HTTP also from the type,
+
+06:59.610 --> 07:01.890
+and first, yes of course my IP
+
+07:01.890 --> 07:03.810
+we need to check from the browser,
+
+07:03.810 --> 07:07.140
+and we need to also give port 80
+
+07:07.140 --> 07:10.173
+from the Jenkins Security Group.
+
+07:11.670 --> 07:12.503
+Why?
+
+07:12.503 --> 07:15.810
+Because Jenkins will be uploading the code analysis results
+
+07:15.810 --> 07:17.253
+to SonarQube Server.
+
+07:18.090 --> 07:20.340
+So it'll contact Sonar on port 80.
+
+07:20.340 --> 07:23.340
+So make sure you put Jenkins Security Group over here.
+
+07:23.340 --> 07:24.693
+Allow it on port 80.
+
+07:26.160 --> 07:29.883
+Give some description, advanced details,
+
+07:31.320 --> 07:36.320
+user data, okay, open sonar-setup.sh script,
+
+07:36.540 --> 07:40.230
+copy everything, and put it out there,
+
+07:40.230 --> 07:42.183
+and say launch instance.
+
+07:44.490 --> 07:46.590
+Okay, so this will take some time.
+
+07:46.590 --> 07:49.740
+It's a lot of steps plus it's also going to reboot
+
+07:49.740 --> 07:51.030
+this machine.
+
+07:51.030 --> 07:55.650
+Let's go back to Nexus.
+
+07:55.650 --> 07:58.620
+Let's take its public IP, let's do the SSH to it.
+
+07:58.620 --> 08:00.543
+So I'm going to open my Git Bash.
+
+08:02.280 --> 08:05.160
+So ssh -I key pot ec2-user.
+
+08:05.160 --> 08:08.760
+Remember it's Amazon Linux, so ec2-user is the user.
+
+08:08.760 --> 08:10.563
+At the public IP.
+
+08:12.750 --> 08:14.043
+Okay, login, yes.
+
+08:15.960 --> 08:18.360
+Okay, let me switch to root user
+
+08:18.360 --> 08:20.970
+and check the Nexus Service.
+
+08:20.970 --> 08:24.123
+Systemctl status nexus.
+
+08:25.290 --> 08:27.510
+Okay, it says active, running.
+
+08:27.510 --> 08:28.863
+The service is running.
+
+08:29.820 --> 08:32.430
+Right here is the Nexus home directory.
+
+08:32.430 --> 08:36.870
+Remember this ls/opt/nexus.
+
+08:36.870 --> 08:37.830
+That's the place.
+
+08:37.830 --> 08:39.603
+You can check the Java version.
+
+08:42.690 --> 08:44.610
+That's Java 17.
+
+08:44.610 --> 08:46.080
+Anyways, the service is running.
+
+08:46.080 --> 08:49.020
+Let's just check it from the browser as well.
+
+08:49.020 --> 08:51.720
+So take its public IP, put in the browser,
+
+08:51.720 --> 08:55.803
+colon port 8081, enter.
+
+08:58.590 --> 09:00.330
+Okay, so that's the front end.
+
+09:00.330 --> 09:02.250
+We can click on sign in and login,
+
+09:02.250 --> 09:05.100
+but lemme talk about one very common problem
+
+09:05.100 --> 09:08.490
+that you will see while you're accessing Nexus
+
+09:08.490 --> 09:09.810
+from the browser.
+
+09:09.810 --> 09:14.430
+If you have some kind of VPN or proxy in your browser
+
+09:14.430 --> 09:18.840
+or a VPN dialed in, then you may not get the next screen.
+
+09:18.840 --> 09:22.620
+So I recommend you stop your VPN, browser-based VPN
+
+09:22.620 --> 09:25.020
+or any normal VPN for now.
+
+09:25.020 --> 09:26.070
+And then when you stop it,
+
+09:26.070 --> 09:29.010
+make sure you update the security group rule also of Nexus,
+
+09:29.010 --> 09:30.960
+your IP might be different.
+
+09:30.960 --> 09:33.930
+So once you stop your proxy VPN,
+
+09:33.930 --> 09:37.667
+then you can click on sign in here and you get this window.
+
+09:37.667 --> 09:40.860
+In this place you have the password,
+
+09:40.860 --> 09:43.050
+initial password of Nexus.
+
+09:43.050 --> 09:44.970
+So copy this file path.
+
+09:44.970 --> 09:49.263
+Go to Nexus where you did ssh do a cat,
+
+09:50.340 --> 09:54.660
+give the path, hit enter, and that is the password.
+
+09:54.660 --> 09:55.500
+There is no new line.
+
+09:55.500 --> 09:57.480
+Okay, keep in mind the square bracket,
+
+09:57.480 --> 09:59.160
+this is where is the prompt starts.
+
+09:59.160 --> 10:02.733
+So you have to copy till here, copy this,
+
+10:04.380 --> 10:07.770
+and give the username that is admin as it says.
+
+10:07.770 --> 10:10.380
+And the password you need to paste there.
+
+10:10.380 --> 10:11.910
+Sign in.
+
+10:11.910 --> 10:14.520
+Okay, if you're not getting this wizard as I'm getting,
+
+10:14.520 --> 10:16.650
+then definitely there is something that is blocking
+
+10:16.650 --> 10:17.490
+in your network.
+
+10:17.490 --> 10:19.620
+Some proxy, some VPN, some firewall.
+
+10:19.620 --> 10:21.030
+Please do check that.
+
+10:21.030 --> 10:22.290
+If there's nothing on your computer,
+
+10:22.290 --> 10:24.180
+it might be in your network.
+
+10:24.180 --> 10:26.940
+So switch to a different network and try.
+
+10:26.940 --> 10:29.670
+Okay, go next, password.
+
+10:29.670 --> 10:31.305
+Let me give some password over here.
+
+10:31.305 --> 10:33.540
+I'm keeping simple password,
+
+10:33.540 --> 10:35.730
+but as I told you previously, also in real time,
+
+10:35.730 --> 10:38.760
+make sure the password is long and complicated.
+
+10:38.760 --> 10:40.260
+Go next.
+
+10:40.260 --> 10:41.970
+Okay, we'll enable anonymous access
+
+10:41.970 --> 10:44.280
+so we can just download from the repository
+
+10:44.280 --> 10:45.303
+whenever we want.
+
+10:46.363 --> 10:48.240
+Next and next.
+
+10:48.240 --> 10:49.620
+Okay, finish.
+
+10:49.620 --> 10:50.460
+Okay, so we are in.
+
+10:50.460 --> 10:52.470
+Just do remember the password that you have set,
+
+10:52.470 --> 10:54.180
+otherwise save it somewhere.
+
+10:54.180 --> 10:57.930
+I have given username as admin and password as admin123.
+
+10:57.930 --> 10:59.280
+I'm telling you because you're going to see
+
+10:59.280 --> 11:00.600
+my Pipeline code.
+
+11:00.600 --> 11:03.330
+in that also, you'll see the passwords.
+
+11:03.330 --> 11:05.190
+Whatever you give, make sure you remember it
+
+11:05.190 --> 11:08.670
+and use it whenever you're using any Nexus plugin.
+
+11:08.670 --> 11:10.950
+So Nexus is basically a software repository,
+
+11:10.950 --> 11:12.000
+you can click on browse
+
+11:12.000 --> 11:13.470
+and you can see different repository.
+
+11:13.470 --> 11:16.470
+Later I'll show you how you can create repository
+
+11:16.470 --> 11:20.190
+and store your artifact from Nexus to here.
+
+11:20.190 --> 11:21.450
+Let's now check SonarQube.
+
+11:21.450 --> 11:23.010
+I think now this will be up.
+
+11:23.010 --> 11:27.723
+So copy it's public IP and just put it in the browser.
+
+11:28.650 --> 11:30.390
+You don't need to enter any port,
+
+11:30.390 --> 11:32.210
+because there's NGINX running on port 80.
+
+11:32.210 --> 11:34.983
+So just put the IP anyways, it goes on port 80.
+
+11:37.020 --> 11:38.100
+Okay, this might take some time.
+
+11:38.100 --> 11:39.840
+Yeah, okay, it's up.
+
+11:39.840 --> 11:41.190
+Okay, click on login.
+
+11:41.190 --> 11:45.510
+And the username is admin and the password is also admin.
+
+11:45.510 --> 11:48.303
+Do remember to reset this password.
+
+11:49.170 --> 11:50.580
+Okay, so this is a dashboard.
+
+11:50.580 --> 11:53.010
+We are going to, automatically from Jenkins,
+
+11:53.010 --> 11:54.240
+we're going to create projects
+
+11:54.240 --> 11:56.923
+and upload the results over here and display it.
+
+11:58.005 --> 12:01.410
+It looks kind of nice, the charts, and graphs, and stuff.
+
+12:01.410 --> 12:04.860
+Okay, there's one more last thing that we need to do.
+
+12:04.860 --> 12:05.940
+While creating the security group,
+
+12:05.940 --> 12:09.750
+I told you Jenkins will contact SonarQube server on port 80,
+
+12:09.750 --> 12:12.840
+but SonarQube also going to contact Jenkins.
+
+12:12.840 --> 12:14.880
+It's going to send the results,
+
+12:14.880 --> 12:19.050
+the status of the test result, whether it passed or failed.
+
+12:19.050 --> 12:21.900
+And it contacts Jenkins on port 8080,
+
+12:21.900 --> 12:23.760
+'cause that's what we'll mention in the SonarQube.
+
+12:23.760 --> 12:27.480
+So you need to add one rule in Jenkins security group.
+
+12:27.480 --> 12:31.863
+So go to Jenkins, security, Jenkins Security Group,
+
+12:32.970 --> 12:35.460
+inbound rule, edit inbound rule.
+
+12:35.460 --> 12:38.250
+Once again, we are editing Jenkins Security Group.
+
+12:38.250 --> 12:40.980
+We are allowing connection from SonarQube.
+
+12:40.980 --> 12:45.180
+We add a rule, we say port 8080 is allowed
+
+12:45.180 --> 12:48.210
+from the SonarQube Security Group.
+
+12:48.210 --> 12:49.677
+Where is it?
+
+12:49.677 --> 12:51.097
+Here.
+
+12:51.097 --> 12:53.397
+I give some description that allows SonarQube like that.
+
+12:53.397 --> 12:56.400
+So you will know that this is SonarQube Security Group.
+
+12:56.400 --> 12:57.690
+Save the rule.
+
+12:57.690 --> 12:58.523
+Okay, that is it.
+
+12:58.523 --> 13:01.380
+Now what you can do is you can shut down these instances.
+
+13:01.380 --> 13:02.400
+We don't need them now.
+
+13:02.400 --> 13:05.670
+Once we need them, we are going to power on and use it.
+
+13:05.670 --> 13:06.900
+For now, shut them down,
+
+13:06.900 --> 13:09.360
+because you see they're not T2 Micro.
+
+13:09.360 --> 13:11.253
+And then join me in the next lecture.

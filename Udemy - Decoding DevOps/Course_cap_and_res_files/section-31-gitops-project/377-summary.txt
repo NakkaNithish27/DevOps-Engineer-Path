@@ -1,0 +1,850 @@
+WEBVTT
+
+1
+00:00:00.750 --> 00:00:01.920
+<v Instructor>Okay, so before we begin,</v>
+
+2
+00:00:01.920 --> 00:00:04.500
+just let's make sure that we have the latest change
+
+3
+00:00:04.500 --> 00:00:06.000
+in our local machine.
+
+4
+00:00:06.000 --> 00:00:07.980
+All the repository run git pull,
+
+5
+00:00:07.980 --> 00:00:09.930
+or better, you delete all the repository
+
+6
+00:00:09.930 --> 00:00:12.300
+and clone it again if you have made changes locally
+
+7
+00:00:12.300 --> 00:00:14.010
+and remote both.
+
+8
+00:00:14.010 --> 00:00:16.860
+So I'm doing a git pull on vprofile-app.
+
+9
+00:00:16.860 --> 00:00:18.480
+You see the main hat changes
+
+10
+00:00:18.480 --> 00:00:20.910
+because we have merged to the main branch
+
+11
+00:00:20.910 --> 00:00:22.080
+and that happened in GitHub,
+
+12
+00:00:22.080 --> 00:00:25.110
+so we need to pull the changes locally also,
+
+13
+00:00:25.110 --> 00:00:28.530
+let's also go to vprofile-helm,
+
+14
+00:00:28.530 --> 00:00:30.483
+there also, we need to run a git pull.
+
+15
+00:00:31.770 --> 00:00:33.390
+If you see any conflict, any issue,
+
+16
+00:00:33.390 --> 00:00:34.500
+you don't need to work on it.
+
+17
+00:00:34.500 --> 00:00:37.830
+Just delete the repository and clone it once again.
+
+18
+00:00:37.830 --> 00:00:39.210
+Okay, now let's begin.
+
+19
+00:00:39.210 --> 00:00:41.370
+Actually, I'm not going to do anything in this lecture.
+
+20
+00:00:41.370 --> 00:00:42.870
+I'm going to ask you to do,
+
+21
+00:00:42.870 --> 00:00:45.990
+this lecture is about assigning some tasks to you
+
+22
+00:00:45.990 --> 00:00:47.880
+and make sure you do it.
+
+23
+00:00:47.880 --> 00:00:49.920
+So you need to take care of two things.
+
+24
+00:00:49.920 --> 00:00:53.400
+One is about this CICD pipeline
+
+25
+00:00:53.400 --> 00:00:56.160
+whenever we make a change, okay,
+
+26
+00:00:56.160 --> 00:00:59.040
+so whenever we make a change in the code,
+
+27
+00:00:59.040 --> 00:01:01.890
+we know that it pushes the docker image
+
+28
+00:01:01.890 --> 00:01:04.890
+and updates the values.yaml file.
+
+29
+00:01:04.890 --> 00:01:06.990
+And when the values.yaml file is updated
+
+30
+00:01:06.990 --> 00:01:08.760
+or anything in the health chart is updated,
+
+31
+00:01:08.760 --> 00:01:11.310
+Argo CD is going to fetch and run it.
+
+32
+00:01:11.310 --> 00:01:14.880
+But that may not be the case for you,
+
+33
+00:01:14.880 --> 00:01:17.130
+let's say for your production environment,
+
+34
+00:01:17.130 --> 00:01:20.460
+this should happen with an approval.
+
+35
+00:01:20.460 --> 00:01:23.790
+The Argo should pull the changes based on the approval.
+
+36
+00:01:23.790 --> 00:01:25.230
+So how do you do it?
+
+37
+00:01:25.230 --> 00:01:28.800
+Well, instead of updating the image tag directly
+
+38
+00:01:28.800 --> 00:01:33.300
+in the values.yaml file, you raise a pull request from here
+
+39
+00:01:33.300 --> 00:01:35.790
+to update the values.yaml file.
+
+40
+00:01:35.790 --> 00:01:38.760
+So not a direct change, a pull request.
+
+41
+00:01:38.760 --> 00:01:42.720
+So you need to update this pipeline, vprofile-app pipeline
+
+42
+00:01:42.720 --> 00:01:44.340
+and at the end, instead of updating,
+
+43
+00:01:44.340 --> 00:01:47.160
+there should be a pull request.
+
+44
+00:01:47.160 --> 00:01:49.920
+This is first task you need to do.
+
+45
+00:01:49.920 --> 00:01:52.830
+So once the pull request is created, you need to test it.
+
+46
+00:01:52.830 --> 00:01:54.930
+You need to see that there is a pull request
+
+47
+00:01:54.930 --> 00:01:58.200
+on your GitHub actions in the Helm repository,
+
+48
+00:01:58.200 --> 00:02:01.260
+and then you approve that pull request.
+
+49
+00:02:01.260 --> 00:02:04.050
+Then the Argo will fetch the latest changes.
+
+50
+00:02:04.050 --> 00:02:07.380
+This is the first thing that you need to work on.
+
+51
+00:02:07.380 --> 00:02:10.543
+The second is you need to set up this pipeline,
+
+52
+00:02:10.543 --> 00:02:13.410
+vprofile-infra Terraform pipeline
+
+53
+00:02:13.410 --> 00:02:14.700
+and this is how it should be
+
+54
+00:02:14.700 --> 00:02:18.860
+once you create a new branch in Terraform,
+
+55
+00:02:18.860 --> 00:02:21.750
+in vprofile-infra, it should validate the change
+
+56
+00:02:21.750 --> 00:02:25.290
+and plan the change, validate and plan, that's all.
+
+57
+00:02:25.290 --> 00:02:28.440
+Whenever there is a pull request, validate and plan,
+
+58
+00:02:28.440 --> 00:02:29.550
+let me repeat once again,
+
+59
+00:02:29.550 --> 00:02:32.910
+whenever there's a pull request, validate and plan,
+
+60
+00:02:32.910 --> 00:02:34.920
+and when you merge it to the main branch,
+
+61
+00:02:34.920 --> 00:02:37.530
+then it should give you applied trigger.
+
+62
+00:02:37.530 --> 00:02:39.930
+It should not apply automatically.
+
+63
+00:02:39.930 --> 00:02:43.770
+There should be a manual button where you click on apply
+
+64
+00:02:43.770 --> 00:02:47.340
+and then you should apply the changes to EKS cluster.
+
+65
+00:02:47.340 --> 00:02:49.230
+That means Terraform apply will run
+
+66
+00:02:49.230 --> 00:02:52.140
+only when you click a button manually.
+
+67
+00:02:52.140 --> 00:02:54.960
+So create a branch, raise a pull request.
+
+68
+00:02:54.960 --> 00:02:57.390
+Pull request should run, validate and plan.
+
+69
+00:02:57.390 --> 00:02:59.580
+When it's merged, then it should run apply,
+
+70
+00:02:59.580 --> 00:03:02.940
+not actually run, it should give you a button, you click,
+
+71
+00:03:02.940 --> 00:03:05.220
+it's all doable, it's very easy.
+
+72
+00:03:05.220 --> 00:03:06.480
+When you click on apply,
+
+73
+00:03:06.480 --> 00:03:07.800
+then it should apply the changes.
+
+74
+00:03:07.800 --> 00:03:10.110
+There should be also something like DRIFT detection.
+
+75
+00:03:10.110 --> 00:03:13.470
+It should check the difference. You can do it later.
+
+76
+00:03:13.470 --> 00:03:16.440
+First, you know, complete this validate plan and apply.
+
+77
+00:03:16.440 --> 00:03:18.450
+It should also keep checking your code
+
+78
+00:03:18.450 --> 00:03:21.060
+against the EKS cluster.
+
+79
+00:03:21.060 --> 00:03:23.610
+If there is any changes, then it should give you again,
+
+80
+00:03:23.610 --> 00:03:28.110
+the apply button or apply the changes that you can decide.
+
+81
+00:03:28.110 --> 00:03:32.190
+The third task is to add the Slack notifications.
+
+82
+00:03:32.190 --> 00:03:35.910
+We have created Slack variable, Slack webhook QL,
+
+83
+00:03:35.910 --> 00:03:37.680
+so for these two pipeline
+
+84
+00:03:37.680 --> 00:03:39.630
+there should be a Slack notification.
+
+85
+00:03:39.630 --> 00:03:42.690
+You should get a notification for every changes.
+
+86
+00:03:42.690 --> 00:03:45.810
+You have to achieve all this by using prompt
+
+87
+00:03:45.810 --> 00:03:47.640
+on GitHub Copilot, Amazon Q
+
+88
+00:03:47.640 --> 00:03:51.300
+or whatever code assistance you are using.
+
+89
+00:03:51.300 --> 00:03:52.680
+You create the prompt.
+
+90
+00:03:52.680 --> 00:03:55.560
+As I'm speaking you speak to the GitHub copilot
+
+91
+00:03:55.560 --> 00:03:59.460
+or any code assistance and make sure it is fulfilled.
+
+92
+00:03:59.460 --> 00:04:01.650
+And troubleshoot, when you get the issue,
+
+93
+00:04:01.650 --> 00:04:03.630
+that's how you are going to learn.
+
+94
+00:04:03.630 --> 00:04:05.550
+Once you are done, you need to repeat this,
+
+95
+00:04:05.550 --> 00:04:08.010
+all these lectures, once again,
+
+96
+00:04:08.010 --> 00:04:10.680
+you'll have to create your own document.
+
+97
+00:04:10.680 --> 00:04:11.940
+Yes, you can use the document
+
+98
+00:04:11.940 --> 00:04:13.590
+provided in this lecture resources,
+
+99
+00:04:13.590 --> 00:04:15.510
+but better you create your own document,
+
+100
+00:04:15.510 --> 00:04:18.600
+complete the entire setup twice, thrice,
+
+101
+00:04:18.600 --> 00:04:20.760
+make sure you're comfortable with everything
+
+102
+00:04:20.760 --> 00:04:23.343
+and then only declare this course as complete.
+
+103
+00:04:24.180 --> 00:04:27.520
+So once again, you need to add a pull request here
+
+104
+00:04:28.380 --> 00:04:29.850
+in the Helm repository.
+
+105
+00:04:29.850 --> 00:04:33.150
+You need to create a pipeline for Terraform
+
+106
+00:04:33.150 --> 00:04:35.130
+and you need to add Slack notification.
+
+107
+00:04:35.130 --> 00:04:37.080
+These three things you need to do.
+
+108
+00:04:37.080 --> 00:04:38.370
+Once you're done, once you're good,
+
+109
+00:04:38.370 --> 00:04:40.350
+you can do the follow the cleanup process
+
+110
+00:04:40.350 --> 00:04:41.700
+that I'm going to show you now.
+
+111
+00:04:41.700 --> 00:04:44.460
+Okay the cleanup will be mostly reverse.
+
+112
+00:04:44.460 --> 00:04:47.340
+First, remove the entry from code,
+
+113
+00:04:47.340 --> 00:04:50.010
+add your from your domain register for Argo CD
+
+114
+00:04:50.010 --> 00:04:53.910
+and vprofile is confirmed.
+
+115
+00:04:53.910 --> 00:04:55.890
+If you have no plan of repeating this again,
+
+116
+00:04:55.890 --> 00:04:58.800
+you can delete the Sonar kube server,
+
+117
+00:04:58.800 --> 00:05:00.900
+but I recommend you just stop it and keep it.
+
+118
+00:05:00.900 --> 00:05:02.820
+So whenever you want, you can just power
+
+119
+00:05:02.820 --> 00:05:04.890
+and start you doing your practice,
+
+120
+00:05:04.890 --> 00:05:07.860
+or anyways, it's not a big deal to spin a Sonar server
+
+121
+00:05:07.860 --> 00:05:09.450
+you know how to do it.
+
+122
+00:05:09.450 --> 00:05:11.670
+Before we delete the EKS cluster,
+
+123
+00:05:11.670 --> 00:05:12.960
+we need to delete the controller
+
+124
+00:05:12.960 --> 00:05:15.180
+otherwise there will be load balancer there.
+
+125
+00:05:15.180 --> 00:05:19.410
+So kubectl get ingress -n vprofile,
+
+126
+00:05:19.410 --> 00:05:21.510
+first delete the ingress of vprofile,
+
+127
+00:05:21.510 --> 00:05:26.510
+so kubectl delete ingress,
+
+128
+00:05:26.760 --> 00:05:28.020
+or before that, let me show you,
+
+129
+00:05:28.020 --> 00:05:29.790
+these are the two load balancers.
+
+130
+00:05:29.790 --> 00:05:30.780
+If you check in your region
+
+131
+00:05:30.780 --> 00:05:32.790
+you should see two different load balancer.
+
+132
+00:05:32.790 --> 00:05:35.550
+One is for vprofile, the other one is for Argo CD.
+
+133
+00:05:35.550 --> 00:05:38.190
+Make sure you delete the ingress
+
+134
+00:05:38.190 --> 00:05:40.260
+so it keeps you to your delete ingress,
+
+135
+00:05:40.260 --> 00:05:42.600
+pro-ingress, that's the name,
+
+136
+00:05:42.600 --> 00:05:45.870
+if you have not changed, you'll have the same name,
+
+137
+00:05:45.870 --> 00:05:48.960
+vprofile -n, that's the namespace.
+
+138
+00:05:48.960 --> 00:05:51.390
+For some reason, if you're not able to delete the ingress
+
+139
+00:05:51.390 --> 00:05:53.100
+and the load balancer is still is there,
+
+140
+00:05:53.100 --> 00:05:56.340
+just make sure you delete the load balancer manually
+
+141
+00:05:56.340 --> 00:05:58.740
+from the AWS console, but you have to delete it,
+
+142
+00:05:58.740 --> 00:06:01.890
+otherwise Terraform destroy will also fail,
+
+143
+00:06:01.890 --> 00:06:04.683
+and check the Argo CD ingress.
+
+144
+00:06:05.700 --> 00:06:08.440
+Okay, there it is, kubectl delete ingress,
+
+145
+00:06:10.843 --> 00:06:15.843
+argocd-ingress -n argocd, that's the namespace.
+
+146
+00:06:17.640 --> 00:06:18.630
+Okay, once this is done,
+
+147
+00:06:18.630 --> 00:06:21.150
+you need to delete this service account.
+
+148
+00:06:21.150 --> 00:06:21.983
+So remember this command,
+
+149
+00:06:21.983 --> 00:06:24.990
+eksctl create iamserviceaccount,
+
+150
+00:06:24.990 --> 00:06:28.230
+this is for AWS load balancer controller.
+
+151
+00:06:28.230 --> 00:06:30.570
+We attach a policy, we need to delete this.
+
+152
+00:06:30.570 --> 00:06:32.667
+So instead of eksctl create,
+
+153
+00:06:32.667 --> 00:06:35.130
+you just need to remove the create
+
+154
+00:06:35.130 --> 00:06:37.143
+and update it with delete,
+
+155
+00:06:41.250 --> 00:06:42.810
+delete only this much.
+
+156
+00:06:42.810 --> 00:06:45.450
+Oh, I think I should remove this attached policy also.
+
+157
+00:06:45.450 --> 00:06:46.293
+This is wrong.
+
+158
+00:06:48.960 --> 00:06:50.130
+Yeah, only this much,
+
+159
+00:06:50.130 --> 00:06:53.430
+eksctl delete iamserviceaccount, cluster name, namespace
+
+160
+00:06:53.430 --> 00:06:54.870
+and the name.
+
+161
+00:06:54.870 --> 00:06:56.490
+This will take some time.
+
+162
+00:06:56.490 --> 00:06:57.480
+Okay, this is done.
+
+163
+00:06:57.480 --> 00:07:00.060
+Now we can delete the cluster.
+
+164
+00:07:00.060 --> 00:07:02.130
+This one policy that we have created,
+
+165
+00:07:02.130 --> 00:07:04.680
+if you want, you can delete that policy through the console
+
+166
+00:07:04.680 --> 00:07:07.623
+or from this command, don't need to,
+
+167
+00:07:08.880 --> 00:07:11.820
+policy is not going to create any harm.
+
+168
+00:07:11.820 --> 00:07:12.840
+Okay, now let's me,
+
+169
+00:07:12.840 --> 00:07:14.973
+let me run the Terraform destroy command.
+
+170
+00:07:15.870 --> 00:07:18.573
+Let me go to the repository vprofile -infra,
+
+171
+00:07:19.410 --> 00:07:23.520
+first, terraform init, it's not required,
+
+172
+00:07:23.520 --> 00:07:25.110
+but just to make sure if I have,
+
+173
+00:07:25.110 --> 00:07:26.910
+because I make a lot of changes to the code,
+
+174
+00:07:26.910 --> 00:07:29.021
+so I'm just writing Terraform in it.
+
+175
+00:07:29.021 --> 00:07:31.021
+Okay, terraform destroy.
+
+176
+00:07:34.830 --> 00:07:37.260
+Now keep in mind you just need to run terraform apply.
+
+177
+00:07:37.260 --> 00:07:39.030
+You don't need to go through the whole process
+
+178
+00:07:39.030 --> 00:07:40.260
+of generating the prompt
+
+179
+00:07:40.260 --> 00:07:42.240
+and generating the code eks et cetera.
+
+180
+00:07:42.240 --> 00:07:44.220
+We don't need to do all those things.
+
+181
+00:07:44.220 --> 00:07:45.720
+You can run terraform apply,
+
+182
+00:07:45.720 --> 00:07:48.090
+and from there you can start following.
+
+183
+00:07:48.090 --> 00:07:51.630
+You can continue from this step, eksctl create
+
+184
+00:07:51.630 --> 00:07:53.700
+because this policy will be already there.
+
+185
+00:07:53.700 --> 00:07:55.770
+So you don't need to do anything just terraform apply
+
+186
+00:07:55.770 --> 00:07:58.830
+and then start following steps from here till the end
+
+187
+00:07:58.830 --> 00:08:00.870
+and you get the same setup.
+
+188
+00:08:00.870 --> 00:08:02.790
+But make sure you do the cleanup in the same order
+
+189
+00:08:02.790 --> 00:08:03.990
+that I have shown,
+
+190
+00:08:03.990 --> 00:08:05.700
+and then you can do terraform apply
+
+191
+00:08:05.700 --> 00:08:07.530
+and follow from this step.
+
+192
+00:08:07.530 --> 00:08:10.380
+Every time it'll work. I have tested it multiple times.
+
+193
+00:08:10.380 --> 00:08:12.330
+If you have any doubt, post it in the Q&amp;A,
+
+194
+00:08:12.330 --> 00:08:14.730
+I'll happy to, I'll be happy to answer.
+
+195
+00:08:14.730 --> 00:08:16.920
+Okay terraform destroy, yes,
+
+196
+00:08:16.920 --> 00:08:20.520
+so great job really if you have reached till here,
+
+197
+00:08:20.520 --> 00:08:22.740
+do this project multiple times
+
+198
+00:08:22.740 --> 00:08:25.020
+until you get the complete hang of it.
+
+199
+00:08:25.020 --> 00:08:28.890
+This is a pure gold mine, trust me.
+
+200
+00:08:28.890 --> 00:08:32.310
+This will be a great added advantage in your resume.
+
+201
+00:08:32.310 --> 00:08:33.891
+When you talk in the interview,
+
+202
+00:08:33.891 --> 00:08:35.250
+when you're talking in the project meeting,
+
+203
+00:08:35.250 --> 00:08:39.330
+you will sound professional and confident after this.
+
+204
+00:08:39.330 --> 00:08:42.510
+If you have any problem in executing any step,
+
+205
+00:08:42.510 --> 00:08:44.250
+any command, anything,
+
+206
+00:08:44.250 --> 00:08:47.730
+just take a look at what is the basic that you're missing.
+
+207
+00:08:47.730 --> 00:08:51.540
+It's Linux, it's yaml, it's Kubernetes, it's Helm,
+
+208
+00:08:51.540 --> 00:08:53.070
+and you make sure you practice that
+
+209
+00:08:53.070 --> 00:08:55.530
+and then again come back to the project.
+
+210
+00:08:55.530 --> 00:08:57.810
+But really great job overall.
+
+211
+00:08:57.810 --> 00:09:01.230
+Thank you very much for watching and following it.
+
+212
+00:09:01.230 --> 00:09:03.033
+I wish you all the very best.
+

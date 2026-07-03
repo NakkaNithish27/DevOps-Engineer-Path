@@ -1,0 +1,542 @@
+WEBVTT
+
+1
+00:00:00.570 --> 00:00:01.403
+<v Instructor>Welcome.</v>
+
+2
+00:00:01.403 --> 00:00:02.236
+In this lecture,
+
+3
+00:00:02.236 --> 00:00:04.860
+we are going to set up Google Cloud account.
+
+4
+00:00:04.860 --> 00:00:09.330
+Google Cloud Platform, also called as GCP in short,
+
+5
+00:00:09.330 --> 00:00:12.300
+is the same distributed global infrastructure
+
+6
+00:00:12.300 --> 00:00:15.720
+that powers Google Search, YouTube, Gmail,
+
+7
+00:00:15.720 --> 00:00:17.730
+and all the Google services.
+
+8
+00:00:17.730 --> 00:00:19.860
+GCP offers a Free tier account
+
+9
+00:00:19.860 --> 00:00:24.860
+and $300 credit that you can use to test and learn GCP.
+
+10
+00:00:25.350 --> 00:00:26.820
+Just like AWS,
+
+11
+00:00:26.820 --> 00:00:31.230
+GCP has regions, zones, edge points, and fiber network.
+
+12
+00:00:31.230 --> 00:00:33.180
+A region is a geographical area
+
+13
+00:00:33.180 --> 00:00:35.970
+with multiple clustered data centers,
+
+14
+00:00:35.970 --> 00:00:39.780
+and this clustered data center is called as a zone.
+
+15
+00:00:39.780 --> 00:00:43.860
+So multiple zones together makes a region.
+
+16
+00:00:43.860 --> 00:00:47.280
+GCP also has edge points across the globe
+
+17
+00:00:47.280 --> 00:00:49.560
+to provide low latency to the user.
+
+18
+00:00:49.560 --> 00:00:51.300
+And of course, it's a fiber network
+
+19
+00:00:51.300 --> 00:00:54.030
+that is scattered across the globe.
+
+20
+00:00:54.030 --> 00:00:55.710
+This is Google's private network
+
+21
+00:00:55.710 --> 00:00:59.550
+for connecting its data centers, edge points, zones.
+
+22
+00:00:59.550 --> 00:01:04.110
+Let's take a look at all the regions and zones of GCP.
+
+23
+00:01:04.110 --> 00:01:05.250
+If you visit this website,
+
+24
+00:01:05.250 --> 00:01:09.960
+cloud.google.com/about/locations,
+
+25
+00:01:09.960 --> 00:01:13.590
+you can take a look at the regions of GCP.
+
+26
+00:01:13.590 --> 00:01:16.560
+Like for example, let's take a look at us-central1.
+
+27
+00:01:16.560 --> 00:01:19.740
+This is the one that we will be using in our project.
+
+28
+00:01:19.740 --> 00:01:22.260
+You can choose to use other region also.
+
+29
+00:01:22.260 --> 00:01:24.780
+So while I'm recording this at this time,
+
+30
+00:01:24.780 --> 00:01:26.460
+it has 42 regions,
+
+31
+00:01:26.460 --> 00:01:31.380
+127 zones, and 200-plus network edge locations.
+
+32
+00:01:31.380 --> 00:01:36.150
+Now, some regions will have this green leaf symbol,
+
+33
+00:01:36.150 --> 00:01:37.920
+which is low CO2.
+
+34
+00:01:37.920 --> 00:01:40.590
+This region emits low carbon dioxide,
+
+35
+00:01:40.590 --> 00:01:42.750
+so less carbon footprint.
+
+36
+00:01:42.750 --> 00:01:45.420
+Okay, now let's create the GCP account.
+
+37
+00:01:45.420 --> 00:01:48.720
+So log into your Google account from the same browse.,
+
+38
+00:01:48.720 --> 00:01:50.160
+Just search for Google Cloud
+
+39
+00:01:50.160 --> 00:01:53.310
+or come to this website, cloud.google.com.
+
+40
+00:01:53.310 --> 00:01:55.350
+To go to Google Console, there's a button here.
+
+41
+00:01:55.350 --> 00:01:57.480
+You can just click on Console,
+
+42
+00:01:57.480 --> 00:01:58.313
+and that's it.
+
+43
+00:01:58.313 --> 00:02:01.380
+You're logged into Google Cloud Console or GCP Console.
+
+44
+00:02:01.380 --> 00:02:03.750
+You can start using Google Services from here,
+
+45
+00:02:03.750 --> 00:02:06.870
+but there will be many services that we will be using,
+
+46
+00:02:06.870 --> 00:02:09.630
+and you need to have some credits.
+
+47
+00:02:09.630 --> 00:02:10.463
+So as I told you,
+
+48
+00:02:10.463 --> 00:02:13.200
+Google offers $300 in credit, which you can use.
+
+49
+00:02:13.200 --> 00:02:15.654
+So just click on the Start free button,
+
+50
+00:02:15.654 --> 00:02:18.813
+select your country, and say Agree &amp; continue.
+
+51
+00:02:19.860 --> 00:02:20.940
+Fill in your details,
+
+52
+00:02:20.940 --> 00:02:23.700
+name, address, and payment method.
+
+53
+00:02:23.700 --> 00:02:27.060
+There is no upfront cost of creating Google account,
+
+54
+00:02:27.060 --> 00:02:29.580
+but there will be a small verification charge,
+
+55
+00:02:29.580 --> 00:02:30.690
+and it's a temporary hold.
+
+56
+00:02:30.690 --> 00:02:33.630
+That money will be also returned back to your account.
+
+57
+00:02:33.630 --> 00:02:35.073
+In USD, it's just $1.
+
+58
+00:02:35.910 --> 00:02:37.920
+In other currency, it's way more less.
+
+59
+00:02:37.920 --> 00:02:40.470
+Like in India, it's just two rupees.
+
+60
+00:02:40.470 --> 00:02:41.760
+If you're based out in India,
+
+61
+00:02:41.760 --> 00:02:43.860
+do not use UPI.
+
+62
+00:02:43.860 --> 00:02:45.870
+Use debit or credit card.
+
+63
+00:02:45.870 --> 00:02:47.730
+There's no problem in using UPI,
+
+64
+00:02:47.730 --> 00:02:49.830
+but the only thing is you will get scared
+
+65
+00:02:49.830 --> 00:02:53.040
+if it shows 15,000 autopay debit,
+
+66
+00:02:53.040 --> 00:02:54.030
+which will not happen
+
+67
+00:02:54.030 --> 00:02:58.290
+because we are not going to use even the $300 credit also.
+
+68
+00:02:58.290 --> 00:03:01.560
+Okay, anyways, fill in all the details and go Next.
+
+69
+00:03:01.560 --> 00:03:03.930
+Once you're in, you will see here an option,
+
+70
+00:03:03.930 --> 00:03:05.133
+My First Project,
+
+71
+00:03:06.330 --> 00:03:08.970
+and click here on New project.
+
+72
+00:03:08.970 --> 00:03:11.220
+Give project a name.
+
+73
+00:03:11.220 --> 00:03:14.250
+Like I have given vprofile-project,
+
+74
+00:03:14.250 --> 00:03:18.270
+and I'm going to create all the resources in this project.
+
+75
+00:03:18.270 --> 00:03:21.180
+And this makes everything very manageable.
+
+76
+00:03:21.180 --> 00:03:22.890
+From the dropdown here,
+
+77
+00:03:22.890 --> 00:03:25.710
+you can select your project.
+
+78
+00:03:25.710 --> 00:03:28.560
+So this is the user interface, the console.
+
+79
+00:03:28.560 --> 00:03:30.990
+You can search your services over here,
+
+80
+00:03:30.990 --> 00:03:34.230
+like Compute Engine or Cloud SQL,
+
+81
+00:03:34.230 --> 00:03:37.140
+or you can click over here in the navigation menu.
+
+82
+00:03:37.140 --> 00:03:41.220
+You can take a look at the list of most used services here,
+
+83
+00:03:41.220 --> 00:03:43.920
+or you can also go View all products.
+
+84
+00:03:43.920 --> 00:03:47.880
+Here, you can see all the GCP services.
+
+85
+00:03:47.880 --> 00:03:50.070
+We're going to go over this in the project
+
+86
+00:03:50.070 --> 00:03:51.630
+when we set up everything.
+
+87
+00:03:51.630 --> 00:03:55.140
+We're going to set up everything from the command line.
+
+88
+00:03:55.140 --> 00:03:56.970
+This is called as Cloud Shell.
+
+89
+00:03:56.970 --> 00:03:59.520
+You can click on this button over here.
+
+90
+00:03:59.520 --> 00:04:02.550
+Say continue. Say Authorize.
+
+91
+00:04:02.550 --> 00:04:03.540
+In the same browser here,
+
+92
+00:04:03.540 --> 00:04:05.910
+you can see the GCloud Shell.
+
+93
+00:04:05.910 --> 00:04:08.820
+You can open it in a new window also.
+
+94
+00:04:08.820 --> 00:04:11.310
+Like in AWS, we have AWS CLI.
+
+95
+00:04:11.310 --> 00:04:14.130
+Here, we you have GCloud Shell.
+
+96
+00:04:14.130 --> 00:04:16.890
+Few commands that you should be very well aware
+
+97
+00:04:16.890 --> 00:04:20.313
+before you start using Google Cloud from the Shell.
+
+98
+00:04:21.360 --> 00:04:25.023
+The first one is gcloud auth login.
+
+99
+00:04:26.040 --> 00:04:27.840
+So if you got logged out
+
+100
+00:04:27.840 --> 00:04:31.590
+or if you're using Cloud Shell from your computer
+
+101
+00:04:31.590 --> 00:04:33.780
+and you need to log into your GCP account,
+
+102
+00:04:33.780 --> 00:04:37.170
+you have to run this command, gcloud auth login.
+
+103
+00:04:37.170 --> 00:04:38.280
+Hit Enter.
+
+104
+00:04:38.280 --> 00:04:40.110
+Now for me, I'm already authenticated,
+
+105
+00:04:40.110 --> 00:04:42.450
+so it's asking me, "Do you really want to again do it?"
+
+106
+00:04:42.450 --> 00:04:43.743
+I'm saying just Yes.
+
+107
+00:04:44.610 --> 00:04:47.220
+It's going to gimme a long endpoint that I need to click
+
+108
+00:04:47.220 --> 00:04:48.690
+and open it in the browser,
+
+109
+00:04:48.690 --> 00:04:49.680
+and you have to make sure
+
+110
+00:04:49.680 --> 00:04:52.500
+that you are logged into your same account
+
+111
+00:04:52.500 --> 00:04:53.370
+from that browser.
+
+112
+00:04:53.370 --> 00:04:55.980
+Like if you're running GCloud Shell in your computer
+
+113
+00:04:55.980 --> 00:04:58.860
+from command line and you run gcloud auth login,
+
+114
+00:04:58.860 --> 00:04:59.693
+if you click on this,
+
+115
+00:04:59.693 --> 00:05:02.040
+it's going to open your default browser,
+
+116
+00:05:02.040 --> 00:05:04.080
+and you have to just make sure your default browser,
+
+117
+00:05:04.080 --> 00:05:06.570
+you have logged in with that Google account
+
+118
+00:05:06.570 --> 00:05:08.400
+because when you click on this,
+
+119
+00:05:08.400 --> 00:05:10.170
+you'll get a verification code.
+
+120
+00:05:10.170 --> 00:05:13.440
+So you need to copy that and paste it over there.
+
+121
+00:05:13.440 --> 00:05:16.560
+You hit Enter, and you are logged in.
+
+122
+00:05:16.560 --> 00:05:18.540
+So gcloud auth login is the command
+
+123
+00:05:18.540 --> 00:05:22.803
+to login to your GCP account from the Google Cloud Shell.
+
+124
+00:05:23.940 --> 00:05:27.363
+The next command is gcloud projects list,
+
+125
+00:05:28.350 --> 00:05:30.510
+the project that you want to use,
+
+126
+00:05:30.510 --> 00:05:34.710
+and the command would be gcloud config set project
+
+127
+00:05:34.710 --> 00:05:36.690
+and the project name or the ID.
+
+128
+00:05:36.690 --> 00:05:40.083
+So I'm going to select the project name and paste it there.
+
+129
+00:05:41.094 --> 00:05:44.340
+And then you should see your project name also
+
+130
+00:05:44.340 --> 00:05:45.990
+in the prompt.
+
+131
+00:05:45.990 --> 00:05:48.630
+Okay, then that would be all in this lecture.
+
+132
+00:05:48.630 --> 00:05:50.760
+Complete the setup and join me the next lecture
+
+133
+00:05:50.760 --> 00:05:52.770
+where we are going to see all the commands
+
+134
+00:05:52.770 --> 00:05:55.620
+that we are going to use in this project.
+
+135
+00:05:55.620 --> 00:05:56.820
+See you in the next one.
+

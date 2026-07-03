@@ -1,0 +1,289 @@
+WEBVTT
+
+00:00.330 --> 00:01.410
+Instructor: Hello and welcome.
+
+00:01.410 --> 00:04.920
+In this lecture, we are going to talk about GitHub Copilot.
+
+00:04.920 --> 00:07.380
+It's an AI tool from GitHub.
+
+00:07.380 --> 00:10.950
+It gets integrated with your code editors like VS Code
+
+00:10.950 --> 00:15.000
+and it will be your assistant in developing your code.
+
+00:15.000 --> 00:19.140
+It's trained on billions of lines of public code
+
+00:19.140 --> 00:22.470
+and that is where it derives its intelligence from.
+
+00:22.470 --> 00:24.150
+In your day-to-day coding work,
+
+00:24.150 --> 00:28.950
+it will help with code suggestions, code completions,
+
+00:28.950 --> 00:31.890
+writing inline documentation in your code,
+
+00:31.890 --> 00:34.233
+and also fixing mistakes in your code.
+
+00:35.070 --> 00:37.650
+So how does it really help us, right?
+
+00:37.650 --> 00:41.130
+Well, you can write code faster, accurate,
+
+00:41.130 --> 00:43.620
+and you will be also learning from GitHub Copilot.
+
+00:43.620 --> 00:46.350
+When it makes core suggestion, you will know
+
+00:46.350 --> 00:48.120
+how better you can write this code.
+
+00:48.120 --> 00:51.030
+Now, GitHub Copilot is not completely free.
+
+00:51.030 --> 00:52.170
+You get the free trial,
+
+00:52.170 --> 00:54.750
+but after that, you have subscription.
+
+00:54.750 --> 00:57.720
+We are going to use Copilot in this course,
+
+00:57.720 --> 01:00.420
+but we'll keep it in the free trial.
+
+01:00.420 --> 01:03.750
+But please do check the Copilot subscription fees
+
+01:03.750 --> 01:06.330
+if you wanted to use more.
+
+01:06.330 --> 01:08.820
+So let's set up our VS Code
+
+01:08.820 --> 01:12.870
+and integrate GitHub Copilot with our VS Code.
+
+01:12.870 --> 01:14.400
+Then in upcoming lectures,
+
+01:14.400 --> 01:16.800
+we are going to see how to use it.
+
+01:16.800 --> 01:20.280
+We are going to use it in several sections in this course.
+
+01:20.280 --> 01:24.210
+So you will be using it and learning it at the same time.
+
+01:24.210 --> 01:25.137
+So open VS Code
+
+01:25.137 --> 01:27.270
+and I'll show you how you can integrate
+
+01:27.270 --> 01:28.983
+GitHub Copilot with VS Code.
+
+01:31.140 --> 01:34.020
+VS Code or Visual Studio Code from Microsoft
+
+01:34.020 --> 01:37.050
+is the most famous code editor
+
+01:37.050 --> 01:39.543
+used by developers and DevOps around the world.
+
+01:40.470 --> 01:44.583
+It integrates with your code repositories like GitHub.
+
+01:45.900 --> 01:49.770
+So you can clone your repository
+
+01:49.770 --> 01:52.440
+and you can make comments from here
+
+01:52.440 --> 01:53.520
+or you can open folder,
+
+01:53.520 --> 01:55.500
+you can open the existing repository
+
+01:55.500 --> 01:57.330
+and start editing your code.
+
+01:57.330 --> 01:58.830
+This comes with a lot of features,
+
+01:58.830 --> 02:01.530
+but you can add more features through extensions.
+
+02:01.530 --> 02:03.780
+If you click on this symbol over here, Extensions,
+
+02:03.780 --> 02:06.180
+you will get many popular extensions.
+
+02:06.180 --> 02:07.560
+You can search for the extensions
+
+02:07.560 --> 02:10.560
+like we are going to search Copilot now,
+
+02:10.560 --> 02:14.550
+but you see this Python, Jupyter, C/C++.
+
+02:14.550 --> 02:17.160
+Based on what programming language you're using,
+
+02:17.160 --> 02:18.570
+you can install that extension
+
+02:18.570 --> 02:20.520
+and you will get support.
+
+02:20.520 --> 02:22.893
+So I'm going to search for Copilot.
+
+02:23.730 --> 02:25.380
+You see you have GitHub Copilot.
+
+02:25.380 --> 02:26.747
+You have GitHub Copilot Chat.
+
+02:26.747 --> 02:28.320
+Now if you install Copilot,
+
+02:28.320 --> 02:29.730
+you'll also install the Chat.
+
+02:29.730 --> 02:31.710
+So click on Install.
+
+02:31.710 --> 02:33.720
+Make sure you log into your GitHub account
+
+02:33.720 --> 02:36.000
+from your default browser.
+
+02:36.000 --> 02:37.577
+So my default browser is Brave
+
+02:37.577 --> 02:42.570
+and I have logged into my GitHub account from Brave.
+
+02:42.570 --> 02:44.010
+You should see a symbol over here.
+
+02:44.010 --> 02:46.320
+This is the symbol of Copilot.
+
+02:46.320 --> 02:49.590
+Click on Sign into use Copilot.
+
+02:49.590 --> 02:51.270
+So it'll go to your default browser
+
+02:51.270 --> 02:52.530
+and with your GitHub account,
+
+02:52.530 --> 02:53.733
+you can say Continue.
+
+02:54.840 --> 02:56.730
+Open Visual Studio Code.
+
+02:56.730 --> 02:58.053
+So it's a set.
+
+02:58.950 --> 03:02.850
+We are going to see how to use this in upcoming lectures.
+
+03:02.850 --> 03:04.590
+One thing I want to show you over here
+
+03:04.590 --> 03:06.180
+is if you click on this icon over here,
+
+03:06.180 --> 03:07.810
+you can see Open chat
+
+03:09.150 --> 03:11.250
+and you can chat with it.
+
+03:11.250 --> 03:12.540
+Now this is on free trial,
+
+03:12.540 --> 03:14.910
+so you have some limitation.
+
+03:14.910 --> 03:16.470
+If you click on the symbol over here,
+
+03:16.470 --> 03:18.480
+you will see that how much you have used,
+
+03:18.480 --> 03:22.830
+88.6% of code completion in my free trial
+
+03:22.830 --> 03:26.010
+and 37% of chat messages.
+
+03:26.010 --> 03:28.830
+So use it wisely before I start showing you
+
+03:28.830 --> 03:32.133
+how to use it in your day-to-day work in DevOps.
+
+03:33.480 --> 03:34.890
+Now if you want to use it more,
+
+03:34.890 --> 03:37.380
+you can go with the subscription.
+
+03:37.380 --> 03:38.790
+And when you start the subscription,
+
+03:38.790 --> 03:39.810
+30 days is free.
+
+03:39.810 --> 03:41.790
+You don't need to do this in the course.
+
+03:41.790 --> 03:44.430
+But when you want to use it later,
+
+03:44.430 --> 03:46.470
+you can anytime check the subscription
+
+03:46.470 --> 03:48.390
+and you can subscribe for it.
+
+03:48.390 --> 03:51.090
+Now as I said, we are going to use the free version
+
+03:51.090 --> 03:52.350
+most of the time in this course,
+
+03:52.350 --> 03:54.900
+almost all the time in the course.
+
+03:54.900 --> 03:58.170
+So please do not worry about the subscription for now.
+
+03:58.170 --> 03:59.580
+That would be all in this lecture.
+
+03:59.580 --> 04:01.130
+I will see you in the next one.

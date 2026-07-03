@@ -1,0 +1,329 @@
+WEBVTT
+
+0
+00:00.500 --> 00:01.430
+Hello and welcome.
+
+1
+00:02.890 --> 00:06.430
+We're going to first learn ec2 service in AWS.
+
+2
+00:07.900 --> 00:11.460
+Ec2 is one of the most popular service of AWS
+
+3
+00:12.280 --> 00:15.790
+Its long form is elastic compute cloud.
+
+4
+00:17.650 --> 00:23.350
+This service is basically is about a virtual machines and the related services.
+
+5
+00:28.660 --> 00:36.820
+So Ec2  basically provides you Web services for managing and provisioning virtual machines inside
+
+6
+00:36.820 --> 00:39.040
+Amazon Cloud or Amazon's data centers.
+
+7
+00:40.120 --> 00:44.320
+You can easily scale up or scale down your resource in ec2.
+
+8
+00:44.890 --> 00:52.060
+For example, if you have eight GB of RAM, you can go from GB to 16 GB or can even scale down from
+
+9
+00:52.060 --> 00:53.500
+eight GB to four GB.
+
+10
+00:54.310 --> 00:56.190
+That's just one example on the RAM part.
+
+11
+00:56.350 --> 01:00.940
+Then you have CPU network and storage, other features that you can scale up and scale down.
+
+12
+01:01.480 --> 01:02.890
+So it's elastic in nature.
+
+13
+01:04.510 --> 01:10.180
+And you're going to pay only for what you're using or how much you're using and a different pricing
+
+14
+01:10.180 --> 01:10.930
+model on that.
+
+15
+01:10.940 --> 01:11.830
+We'll talk about it.
+
+16
+01:13.980 --> 01:20.310
+Ec2 service is very famous for getting integrated with other services like S3, EFS,
+
+17
+01:20.820 --> 01:23.190
+RDS, DynamoDB and Lambda.
+
+18
+01:23.190 --> 01:26.670
+Many, many, many other services which will be also doing.
+
+19
+01:27.920 --> 01:30.280
+Let's quickly talk about the pricing on ec2.
+
+20
+01:31.260 --> 01:35.220
+First you have OnDemand, which will be using throughout our course.
+
+21
+01:35.820 --> 01:38.820
+And really, we are really not going to pay for it all the time.
+
+22
+01:38.820 --> 01:39.960
+We are going to use free tier.
+
+23
+01:39.990 --> 01:41.880
+But OnDemand is pay per hour.
+
+24
+01:41.890 --> 01:47.760
+So if you launch an ec2 instance, a virtual machine, you will be paying hourly basis or seconds.
+
+25
+01:47.760 --> 01:53.610
+also sometime. You have reserved also that you can reserve the capacity for 1 to 3 years and on which
+
+26
+01:53.610 --> 01:54.600
+you get discounts.
+
+27
+01:55.500 --> 01:57.270
+You have also spot instances.
+
+28
+01:57.780 --> 02:04.650
+Spot instances are basically the unused ec2 resources on which you can bid and you get huge, huge
+
+29
+02:04.650 --> 02:05.720
+discounts on that.
+
+30
+02:05.760 --> 02:12.480
+But the problem with this is if someone outbids you, your ec2 instance will be gone, but then you
+
+31
+02:12.480 --> 02:14.820
+use it in the mixture of auto scaling group and all.
+
+32
+02:14.820 --> 02:16.890
+And this will save you a lot of money.
+
+33
+02:18.040 --> 02:20.100
+Then you also you have a dedicated host.
+
+34
+02:20.110 --> 02:24.610
+If you don't want to go with a complete, like,  if you don't want to go with the virtual machine,
+
+35
+02:24.610 --> 02:28.990
+you can dedicate a complete physical server for yourself, which will be very expensive.
+
+36
+02:29.620 --> 02:33.070
+We will be doing on demand and in course we'll be using the free tier.
+
+37
+02:34.520 --> 02:38.330
+Let's talk about the components in the ec2 instance or ec2 service.
+
+38
+02:39.460 --> 02:40.600
+The launch an ec2 instance.
+
+39
+02:40.600 --> 02:43.630
+Primarily, you need an AMI, Amazon machine image.
+
+40
+02:44.590 --> 02:47.050
+This is a ready made virtual machine like vagrant
+
+41
+02:47.060 --> 02:53.110
+we have seen vagrant boxes here we have AMI and you have a huge list to choose from.
+
+42
+02:54.070 --> 02:55.510
+You have an instance type.
+
+43
+02:55.540 --> 03:01.480
+This will be the size of your instance, the compute resource, how much amount of CPU, ram, network
+
+44
+03:01.480 --> 03:03.160
+speed or storage speed.
+
+45
+03:03.790 --> 03:05.830
+So you will have a huge variety to choose from.
+
+46
+03:05.830 --> 03:06.670
+We'll go through them.
+
+47
+03:09.880 --> 03:11.800
+EBS Elastic BLOCK Store.
+
+48
+03:11.800 --> 03:13.120
+This will be the storage.
+
+49
+03:13.930 --> 03:21.340
+So on AMI we primarily have a storage like 8 GB for Linux machine and 30 GB for Windows Machine.
+
+50
+03:21.340 --> 03:27.370
+And then you have different, different sizes of AMI that will be using the EBS service and you can
+
+51
+03:27.370 --> 03:31.090
+choose and add your own storage also, which will be seing in the next session.
+
+52
+03:33.750 --> 03:40.230
+Also to mention EBS is really the virtual hard disks on which you can store your operating system
+
+53
+03:40.230 --> 03:41.760
+and also store your data.
+
+54
+03:44.510 --> 03:51.110
+You'll have Tag to every resource in AWS. You can use simple key value pairs and define tags like
+
+55
+03:51.120 --> 03:57.270
+name of an ec2 instance, the project, the customer who owns this or the environment.
+
+56
+03:57.290 --> 03:59.200
+You can set as many as tags you want.
+
+57
+03:59.210 --> 04:01.970
+It is very good for filtering and also for billing.
+
+58
+04:03.250 --> 04:05.050
+Security group you will have on every ec2 instance.
+
+59
+04:05.050 --> 04:10.150
+This is basically a firewall for inbound and outbound traffic.
+
+60
+04:11.740 --> 04:14.380
+To log in to an ec2 instance, you will need a key pair.
+
+61
+04:15.810 --> 04:16.530
+For Linux machine.
+
+62
+04:16.530 --> 04:20.640
+These are basically ssh keys, ssh log in keys, so public key and private key.
+
+63
+04:21.270 --> 04:22.890
+As we have seen in the bash scripting.
+
+64
+04:22.890 --> 04:25.320
+So you just create a key download it for yourself.
+
+65
+04:25.320 --> 04:30.210
+The private key, the public key will be injected in the instance so you can use it to log in to your
+
+66
+04:30.210 --> 04:32.580
+ec2 instance. For Linux machine.
+
+67
+04:32.580 --> 04:35.340
+You can use the key to do an SSH, for Windows machine.
+
+68
+04:35.370 --> 04:37.560
+You will use the key to generate the password.
+
+69
+04:39.400 --> 04:41.190
+Creating ec2 instant is very easy.
+
+70
+04:41.200 --> 04:42.340
+We're going to see that next.
+
+71
+04:42.610 --> 04:43.900
+It's basically wizard based.
+
+72
+04:43.900 --> 04:49.390
+So you choose what AMI you want, you select the instance type and then there'll be some configuration
+
+73
+04:49.390 --> 04:54.130
+for the instance, like network, it's permission and some scripts to execute.
+
+74
+04:54.790 --> 04:57.100
+After that you will decide on the storage.
+
+75
+04:57.970 --> 04:59.350
+This is where EBS comes in.
+
+76
+04:59.350 --> 05:03.400
+You can add extra storage if you want or you can go with the default AMI storage.
+
+77
+05:04.210 --> 05:06.670
+Then you select the tags, what tags you want.
+
+78
+05:06.670 --> 05:10.330
+You can give key value pairs and do as much as tagging you want.
+
+79
+05:11.020 --> 05:14.770
+Then you create or select a security group which is a firewall.
+
+80
+05:15.310 --> 05:19.780
+Finally, you review the instance, choose a login key, and the instance gets created.
+
+81
+05:21.370 --> 05:24.990
+So let's take a quick view of how we're going to create an ec2 instance now.

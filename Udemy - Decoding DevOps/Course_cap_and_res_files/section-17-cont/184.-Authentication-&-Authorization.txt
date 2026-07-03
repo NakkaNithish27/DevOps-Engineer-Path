@@ -1,0 +1,1081 @@
+WEBVTT
+
+1
+00:00:00.550 --> 00:00:02.230
+Welcome to the Jenkins Security session.
+
+2
+00:00:02.290 --> 00:00:03.318
+In this session, we are going
+
+3
+00:00:03.344 --> 00:00:05.970
+to talk about authentication and authorization.
+
+4
+00:00:06.950 --> 00:00:09.114
+So far, we're using admin user and
+
+5
+00:00:09.152 --> 00:00:12.418
+doing whatever we can in the Jenkins.
+
+6
+00:00:12.574 --> 00:00:15.522
+Once you create a pipeline, you may handle it over to
+
+7
+00:00:15.536 --> 00:00:19.590
+the developers or the testers or ops or non ops team.
+
+8
+00:00:19.760 --> 00:00:22.770
+How much privilege do you want them to have?
+
+9
+00:00:22.880 --> 00:00:24.934
+Do you want them complete privilege?
+
+10
+00:00:25.102 --> 00:00:28.014
+Like if you're using Jenkins at an organization level
+
+11
+00:00:28.112 --> 00:00:31.974
+and there are multiple projects, CICD pipelines running from
+
+12
+00:00:32.012 --> 00:00:35.298
+Jenkins, then you don't want a non admin to
+
+13
+00:00:35.384 --> 00:00:39.010
+get an admin access and have complete privilege.
+
+14
+00:00:39.190 --> 00:00:42.214
+So you can fine tune authentication and authorization.
+
+15
+00:00:42.322 --> 00:00:46.066
+In Jenkins, authentication is login,
+
+16
+00:00:46.258 --> 00:00:48.210
+authorization is the privilege.
+
+17
+00:00:50.030 --> 00:00:51.958
+So don't share login details, don't
+
+18
+00:00:51.994 --> 00:00:53.960
+give full access to other people.
+
+19
+00:00:55.250 --> 00:00:59.358
+You can create a user can sign up themselves on
+
+20
+00:00:59.384 --> 00:01:02.818
+the Jenkins, or you can even integrate Jenkins with LDAP.
+
+21
+00:01:02.914 --> 00:01:07.234
+So if you have LDAP integration, so all the users
+
+22
+00:01:07.282 --> 00:01:09.858
+that are in your company and your project in the
+
+23
+00:01:09.884 --> 00:01:12.862
+Active Directory can log in to the Jenkins.
+
+24
+00:01:12.946 --> 00:01:15.810
+But that's login, it's authentication.
+
+25
+00:01:16.970 --> 00:01:19.338
+We can decide how much authorization they
+
+26
+00:01:19.364 --> 00:01:21.582
+have, how much privilege do they have.
+
+27
+00:01:21.716 --> 00:01:24.858
+So we can give permission on the Jenkins, like they
+
+28
+00:01:24.884 --> 00:01:27.774
+have admin access or read access, or access on the
+
+29
+00:01:27.812 --> 00:01:31.066
+jobs, or access on the credentials or plugins.
+
+30
+00:01:31.258 --> 00:01:32.900
+So you can fine tune that.
+
+31
+00:01:33.230 --> 00:01:35.650
+But again, that will be for the entire Jenkins.
+
+32
+00:01:35.830 --> 00:01:37.978
+If you have multiple projects, you don't
+
+33
+00:01:38.014 --> 00:01:40.854
+want a developer from Project A to
+
+34
+00:01:40.892 --> 00:01:44.826
+access content of Project B, right?
+
+35
+00:01:44.948 --> 00:01:48.082
+So you have also permission on the jobs.
+
+36
+00:01:48.106 --> 00:01:51.526
+You can decide a user can access how many jobs
+
+37
+00:01:51.658 --> 00:01:54.582
+and what a user can do on that job.
+
+38
+00:01:54.716 --> 00:01:56.934
+You can give just view access, or you can give
+
+39
+00:01:56.972 --> 00:02:00.534
+build access, you can give configure access, or you can
+
+40
+00:02:00.572 --> 00:02:03.450
+also add all the users in a role.
+
+41
+00:02:03.830 --> 00:02:06.522
+You can create a role with some privilege and you
+
+42
+00:02:06.536 --> 00:02:08.720
+can give that to a user or a group.
+
+43
+00:02:09.169 --> 00:02:11.660
+So let's see how that can be done.
+
+44
+00:02:11.990 --> 00:02:14.838
+Okay, so I'm going to use two browsers in this
+
+45
+00:02:14.984 --> 00:02:17.958
+Internet Explorer or the Edge browser where I'm logged in
+
+46
+00:02:17.984 --> 00:02:21.634
+currently with admin user, and I will also have Firefox
+
+47
+00:02:21.682 --> 00:02:25.506
+browser from where I'll test the logins first.
+
+48
+00:02:25.568 --> 00:02:27.390
+Let's go to manage Jenkins.
+
+49
+00:02:28.070 --> 00:02:29.458
+And in the security section
+
+50
+00:02:29.494 --> 00:02:31.280
+you have configured global security.
+
+51
+00:02:33.110 --> 00:02:34.870
+Okay, so first you have authentication.
+
+52
+00:02:34.990 --> 00:02:36.718
+So who can login?
+
+53
+00:02:36.874 --> 00:02:37.818
+See a few options.
+
+54
+00:02:37.904 --> 00:02:40.530
+Here you have delegate to server container.
+
+55
+00:02:41.090 --> 00:02:42.498
+We don't want to do that.
+
+56
+00:02:42.644 --> 00:02:48.050
+We have Jenkins on user database,
+
+57
+00:02:48.110 --> 00:02:50.280
+so user can sign up themselves.
+
+58
+00:02:50.610 --> 00:02:52.726
+So when someone access the URL, they'll get a
+
+59
+00:02:52.728 --> 00:02:54.322
+sign up button and they can sign up with
+
+60
+00:02:54.336 --> 00:02:57.046
+their credentials and then they can log in.
+
+61
+00:02:57.228 --> 00:02:58.930
+The other option is LDAP.
+
+62
+00:02:59.370 --> 00:03:01.354
+And this will be good if you're using
+
+63
+00:03:01.512 --> 00:03:04.222
+Jenkins for an organization, there will be many
+
+64
+00:03:04.356 --> 00:03:07.462
+users, employees in an organization, and they'll be
+
+65
+00:03:07.476 --> 00:03:10.690
+already into the Active Directory or any centralized
+
+66
+00:03:11.130 --> 00:03:12.778
+authentication mechanism like that.
+
+67
+00:03:12.804 --> 00:03:14.590
+So you can get the details from the It
+
+68
+00:03:14.640 --> 00:03:18.266
+team about the server and all the other details.
+
+69
+00:03:18.398 --> 00:03:20.782
+You can fill that and save this.
+
+70
+00:03:20.856 --> 00:03:25.106
+So then the users from LDAP can log in to Jenkins.
+
+71
+00:03:25.238 --> 00:03:26.890
+So these are really two good options.
+
+72
+00:03:27.000 --> 00:03:28.694
+We are not going to see the LDAP,
+
+73
+00:03:28.742 --> 00:03:31.570
+we're just seeing Jenkins on user database.
+
+74
+00:03:32.070 --> 00:03:35.158
+The other option for authentication is the
+
+75
+00:03:35.184 --> 00:03:38.218
+operating system user and group, which I
+
+76
+00:03:38.244 --> 00:03:41.006
+really don't recommend, that should be separate.
+
+77
+00:03:41.198 --> 00:03:43.954
+So we'll go with this allow users to sign up.
+
+78
+00:03:44.112 --> 00:03:45.718
+Then once the user is logged in,
+
+79
+00:03:45.744 --> 00:03:47.294
+what the user can do, authorization.
+
+80
+00:03:47.402 --> 00:03:49.966
+So you have some really funny options here.
+
+81
+00:03:50.088 --> 00:03:53.134
+Anyone can do anything, which is really no
+
+82
+00:03:53.172 --> 00:03:57.000
+security legacy mode, which enables anonymous access.
+
+83
+00:03:57.870 --> 00:04:00.180
+You have logged in, users can do anything.
+
+84
+00:04:00.570 --> 00:04:04.114
+Now, if you combine that with allow users to sign up, so
+
+85
+00:04:04.152 --> 00:04:06.922
+anybody can sign up and then they can log in and do
+
+86
+00:04:06.936 --> 00:04:10.920
+anything, which is not a good option, not at all.
+
+87
+00:04:11.550 --> 00:04:13.210
+You have just two good options here.
+
+88
+00:04:13.260 --> 00:04:14.700
+Matrix based security.
+
+89
+00:04:15.150 --> 00:04:18.634
+So this is fine tuning permission at the Jenkins level.
+
+90
+00:04:18.791 --> 00:04:21.202
+So what a user can do, let's say if
+
+91
+00:04:21.216 --> 00:04:24.658
+you say add, you give a user name and
+
+92
+00:04:24.684 --> 00:04:26.374
+you can decide what this user can do.
+
+93
+00:04:26.412 --> 00:04:29.422
+If you check mark this administrator full access.
+
+94
+00:04:29.616 --> 00:04:32.222
+And I will keep that because that's
+
+95
+00:04:32.246 --> 00:04:34.226
+the user I have admin user.
+
+96
+00:04:34.418 --> 00:04:36.002
+But if you see you have credentials
+
+97
+00:04:36.026 --> 00:04:38.830
+section, you have Agent Job section.
+
+98
+00:04:39.270 --> 00:04:41.678
+So a user, you can give permission.
+
+99
+00:04:41.714 --> 00:04:43.966
+Like a user can build or
+
+100
+00:04:44.028 --> 00:04:47.362
+cancel configure, create like that.
+
+101
+00:04:47.376 --> 00:04:48.670
+You can fine tune.
+
+102
+00:04:49.170 --> 00:04:54.674
+So I'm going to save this first, all right?
+
+103
+00:04:54.712 --> 00:04:57.198
+And now I'm going to use the Firefox browser
+
+104
+00:04:57.354 --> 00:05:01.300
+and use this URL to login or sign up.
+
+105
+00:05:02.650 --> 00:05:03.014
+Okay?
+
+106
+00:05:03.052 --> 00:05:05.414
+So from Firefox, where I'm not logged in with any
+
+107
+00:05:05.452 --> 00:05:08.138
+user, and now I get a button, create an account.
+
+108
+00:05:08.284 --> 00:05:10.838
+So I click on that and I'll give
+
+109
+00:05:10.864 --> 00:05:13.900
+a username, I will give my name there
+
+110
+00:05:15.710 --> 00:05:19.100
+and I'll just give some fake email address.
+
+111
+00:05:28.890 --> 00:05:29.902
+Okay, just showing you.
+
+112
+00:05:29.916 --> 00:05:31.260
+OK, so create account.
+
+113
+00:05:38.410 --> 00:05:39.458
+OK, it says success.
+
+114
+00:05:39.544 --> 00:05:40.614
+The account is created.
+
+115
+00:05:40.662 --> 00:05:43.370
+The user detail goes to the Jenkins database.
+
+116
+00:05:44.050 --> 00:05:46.610
+I say go back to the top page.
+
+117
+00:05:46.660 --> 00:05:51.966
+I click on this and I don't have any permission.
+
+118
+00:05:52.038 --> 00:05:54.530
+Okay, overall or read permission is missing.
+
+119
+00:05:55.030 --> 00:05:59.390
+Now let's give this user some privilege. Okay?
+
+120
+00:05:59.440 --> 00:06:01.338
+So back to my edge browser.
+
+121
+00:06:01.494 --> 00:06:03.700
+I will go to configure global security.
+
+122
+00:06:08.090 --> 00:06:09.610
+So I will say add user.
+
+123
+00:06:09.670 --> 00:06:11.550
+I will give the username.
+
+124
+00:06:14.130 --> 00:06:16.894
+So if user already exists, you should see it like that.
+
+125
+00:06:16.932 --> 00:06:19.906
+But if you're trying to add a user, let's say
+
+126
+00:06:19.908 --> 00:06:22.810
+I'm trying to add a user name, let's say DevOps.
+
+127
+00:06:24.090 --> 00:06:25.702
+If the user does not exist in
+
+128
+00:06:25.716 --> 00:06:27.214
+the database, you will see like that. Okay?
+
+129
+00:06:27.252 --> 00:06:29.518
+Cross mark. So you can do that.
+
+130
+00:06:29.544 --> 00:06:30.998
+You can add user gives permission
+
+131
+00:06:31.034 --> 00:06:32.770
+and then user can sign up.
+
+132
+00:06:32.940 --> 00:06:35.210
+But that really goes against the ethics.
+
+133
+00:06:35.390 --> 00:06:37.702
+So have the user sign up and
+
+134
+00:06:37.716 --> 00:06:39.194
+then you can give the privilege.
+
+135
+00:06:39.362 --> 00:06:42.982
+So first I will say read privilege. Okay?
+
+136
+00:06:43.056 --> 00:06:44.220
+Overall read.
+
+137
+00:06:45.510 --> 00:06:46.800
+Let me save this.
+
+138
+00:06:48.510 --> 00:06:51.026
+So this read privilege is really pointless.
+
+139
+00:06:51.218 --> 00:06:53.182
+Okay, back to Firefox browser where
+
+140
+00:06:53.196 --> 00:06:54.842
+I'm logged in as user.
+
+141
+00:06:54.986 --> 00:07:00.554
+Let's refresh, you see?
+
+142
+00:07:00.592 --> 00:07:01.698
+Yeah, that's the read permission.
+
+143
+00:07:01.734 --> 00:07:03.698
+As I said, pointless. There's really nothing.
+
+144
+00:07:03.784 --> 00:07:06.830
+Okay, let's add some more permission.
+
+145
+00:07:13.310 --> 00:07:15.198
+Okay, so I'm going to say I want to give
+
+146
+00:07:15.224 --> 00:07:18.294
+this user permission on the job so this user can
+
+147
+00:07:18.332 --> 00:07:22.830
+build the job, cancel the job, cannot configure.
+
+148
+00:07:24.830 --> 00:07:25.866
+Oh yeah, I see.
+
+149
+00:07:25.928 --> 00:07:28.522
+Can configure, can create but cannot delete.
+
+150
+00:07:28.546 --> 00:07:30.030
+Okay, I'll remove the delete
+
+151
+00:07:30.710 --> 00:07:33.510
+read also in the workspace.
+
+152
+00:07:34.730 --> 00:07:36.270
+Okay, selectively.
+
+153
+00:07:40.470 --> 00:07:41.880
+Okay, now let's check.
+
+154
+00:07:47.470 --> 00:07:50.414
+Okay, now the user has access to all the
+
+155
+00:07:50.452 --> 00:07:53.200
+jobs and that is the problem with this.
+
+156
+00:07:53.710 --> 00:07:56.502
+Now if it's just for a project users
+
+157
+00:07:56.586 --> 00:07:58.562
+that belongs to that project itself, you have
+
+158
+00:07:58.576 --> 00:08:01.480
+just those projects job, then this is fine.
+
+159
+00:08:01.990 --> 00:08:04.490
+If there are other projects also the user will get access
+
+160
+00:08:04.540 --> 00:08:07.480
+to other projects also, which is not a good idea.
+
+161
+00:08:08.170 --> 00:08:09.940
+So let's see the next one.
+
+162
+00:08:14.150 --> 00:08:15.930
+Okay, we'll say here now
+
+163
+00:08:15.980 --> 00:08:19.450
+project based metrics authorization strategy.
+
+164
+00:08:19.510 --> 00:08:21.260
+My god, that's a long name.
+
+165
+00:08:21.650 --> 00:08:25.534
+Okay, anyway, select that, add your user.
+
+166
+00:08:25.642 --> 00:08:29.586
+I'm adding the user and we have
+
+167
+00:08:29.588 --> 00:08:30.822
+to give first the read access.
+
+168
+00:08:30.896 --> 00:08:32.022
+That's the minimum you have to
+
+169
+00:08:32.035 --> 00:08:33.426
+give and you have to save.
+
+170
+00:08:33.607 --> 00:08:35.850
+And you know what the read access really means?
+
+171
+00:08:35.900 --> 00:08:36.919
+It's nothing.
+
+172
+00:08:40.169 --> 00:08:43.186
+Now you can go to a job.
+
+173
+00:08:43.248 --> 00:08:44.698
+Let's say I want user to get
+
+174
+00:08:44.724 --> 00:08:46.440
+access to this build test job.
+
+175
+00:08:46.950 --> 00:08:49.982
+I go to this job, I'm still logged
+
+176
+00:08:50.006 --> 00:08:51.518
+in here in the edge admin user.
+
+177
+00:08:51.554 --> 00:08:55.798
+Okay, now you get an option here
+
+178
+00:08:55.824 --> 00:08:58.582
+enable project based security and now you
+
+179
+00:08:58.596 --> 00:09:01.474
+can decide what user can access this.
+
+180
+00:09:01.512 --> 00:09:06.466
+So I will say team run user should have
+
+181
+00:09:06.528 --> 00:09:08.962
+on the you have credentials, I'll select all of
+
+182
+00:09:08.976 --> 00:09:13.286
+them and then I'll remove maybe delete.
+
+183
+00:09:13.478 --> 00:09:15.850
+Even if I remove this user has configured access,
+
+184
+00:09:15.900 --> 00:09:18.780
+this user can open the job and do anything.
+
+185
+00:09:20.670 --> 00:09:25.320
+OK, delete or I'll remove the configure also.
+
+186
+00:09:25.770 --> 00:09:29.290
+Okay, so this reuser cannot delete anything
+
+187
+00:09:29.340 --> 00:09:31.740
+or can't even configure this job.
+
+188
+00:09:32.310 --> 00:09:35.040
+This is only for this job build test job.
+
+189
+00:09:37.450 --> 00:09:39.650
+Okay, now let's go to Firefox.
+
+190
+00:09:41.410 --> 00:09:44.654
+Okay, see now imran user gets
+
+191
+00:09:44.692 --> 00:09:46.454
+access only to that particular job.
+
+192
+00:09:46.492 --> 00:09:48.280
+Now it has to be job specific.
+
+193
+00:09:48.730 --> 00:09:51.062
+Sure it may take more time but it
+
+194
+00:09:51.076 --> 00:09:52.634
+is the tightest security that you can do.
+
+195
+00:09:52.672 --> 00:09:56.882
+Now also if you want you can create like if
+
+196
+00:09:56.896 --> 00:09:59.390
+you have many users, you can create a role and
+
+197
+00:09:59.440 --> 00:10:02.138
+you can add user into that role or you can
+
+198
+00:10:02.164 --> 00:10:05.990
+give user that roles that comes with a plugin.
+
+199
+00:10:07.330 --> 00:10:09.350
+So let's go to manage plugins.
+
+200
+00:10:10.330 --> 00:10:11.438
+Okay, so the plugin name
+
+201
+00:10:11.464 --> 00:10:14.598
+is role based authorization strategy.
+
+202
+00:10:14.634 --> 00:10:16.706
+I just typed role and it's showing up.
+
+203
+00:10:16.828 --> 00:10:21.002
+Okay, it's one very popular plug in where you
+
+204
+00:10:21.016 --> 00:10:24.074
+can create a role with some privilege and then
+
+205
+00:10:24.112 --> 00:10:27.362
+you can give this role to users so you
+
+206
+00:10:27.376 --> 00:10:30.290
+don't have to individually give permission to a user.
+
+207
+00:10:31.090 --> 00:10:33.446
+Okay, let's go to dashboard manage.
+
+208
+00:10:33.508 --> 00:10:37.754
+Jenkins okay, now we should get one
+
+209
+00:10:37.792 --> 00:10:41.920
+new option here, configure global security.
+
+210
+00:10:47.690 --> 00:10:50.850
+Okay, you get a new option here, role based strategy.
+
+211
+00:10:52.610 --> 00:10:54.270
+You click on that and that's it.
+
+212
+00:10:54.320 --> 00:10:55.410
+Just save this.
+
+213
+00:10:55.580 --> 00:11:01.554
+We'll have a different page to set up that okay.
+
+214
+00:11:01.592 --> 00:11:02.778
+So you get here, manage and
+
+215
+00:11:02.804 --> 00:11:05.610
+assign roles in the security section.
+
+216
+00:11:06.890 --> 00:11:09.330
+And here you can see manage roles
+
+217
+00:11:10.430 --> 00:11:11.794
+and you can create a role.
+
+218
+00:11:11.842 --> 00:11:15.330
+Let's say I want to add a role named DevOps.
+
+219
+00:11:17.450 --> 00:11:22.030
+Scroll horizontally, say add and let's
+
+220
+00:11:22.090 --> 00:11:25.040
+give some privilege to it, okay?
+
+221
+00:11:25.730 --> 00:11:27.930
+So maybe at the job level, build,
+
+222
+00:11:28.040 --> 00:11:35.130
+cancel, configure, create, delete, discover Movespace, okay?
+
+223
+00:11:35.180 --> 00:11:35.662
+Not delete.
+
+224
+00:11:35.686 --> 00:11:38.418
+Let's not give delete on the run, on the
+
+225
+00:11:38.444 --> 00:11:42.918
+view, on the agent as per the requirement agents.
+
+226
+00:11:43.004 --> 00:11:49.882
+Also I'll give full permission, credentials, just
+
+227
+00:11:49.956 --> 00:11:53.340
+view permission and overall read access.
+
+228
+00:11:53.790 --> 00:11:55.006
+So let's say I've created a
+
+229
+00:11:55.008 --> 00:11:57.074
+role named DevOps with some privilege.
+
+230
+00:11:57.242 --> 00:11:58.620
+Let's save this.
+
+231
+00:12:00.150 --> 00:12:03.574
+Now we can add user into the role. Okay?
+
+232
+00:12:03.612 --> 00:12:05.830
+I come into assign role section, I will
+
+233
+00:12:06.000 --> 00:12:09.598
+give the user name and now I can
+
+234
+00:12:09.624 --> 00:12:11.522
+select this user belongs to which role.
+
+235
+00:12:11.546 --> 00:12:12.734
+I will say DevOps role.
+
+236
+00:12:12.782 --> 00:12:14.222
+So if you have many roles, you'll
+
+237
+00:12:14.246 --> 00:12:15.610
+see all the roles over here.
+
+238
+00:12:15.720 --> 00:12:16.798
+So it's pretty easy to
+
+239
+00:12:16.824 --> 00:12:18.154
+manage from this dashboard, right?
+
+240
+00:12:18.192 --> 00:12:20.318
+You can set already the roles.
+
+241
+00:12:20.474 --> 00:12:23.794
+Whenever a user signs up, you can select that
+
+242
+00:12:23.832 --> 00:12:26.170
+user and add it into a particular role.
+
+243
+00:12:26.730 --> 00:12:31.358
+All right, let's see if this coming back to firefox.
+
+244
+00:12:31.394 --> 00:12:34.078
+Now you see the user is having the
+
+245
+00:12:34.104 --> 00:12:36.670
+role and that role has some privileges.
+
+246
+00:12:39.070 --> 00:12:39.434
+Okay?
+
+247
+00:12:39.472 --> 00:12:41.474
+Now one last thing in this, you
+
+248
+00:12:41.512 --> 00:12:44.166
+have now a new option, manage users.
+
+249
+00:12:44.298 --> 00:12:47.522
+So you can add user yourself.
+
+250
+00:12:47.656 --> 00:12:49.758
+This goes into the Jenkins own database.
+
+251
+00:12:49.794 --> 00:12:51.470
+So you can say create user.
+
+252
+00:12:51.790 --> 00:12:53.834
+You can give a user name.
+
+253
+00:12:53.932 --> 00:13:06.140
+I will say Sheldon, like from Big Bang Theory@don.com.
+
+254
+00:13:07.670 --> 00:13:09.558
+Okay, so I gave some information about the
+
+255
+00:13:09.584 --> 00:13:13.230
+user and I say create user, right?
+
+256
+00:13:13.280 --> 00:13:15.500
+And then you can do the
+
+257
+00:13:16.070 --> 00:13:19.326
+authorization of this user, right? Not here.
+
+258
+00:13:19.388 --> 00:13:21.418
+You have to go into the configured
+
+259
+00:13:21.454 --> 00:13:23.550
+global security and you can add this
+
+260
+00:13:23.600 --> 00:13:27.234
+user and give the right privilege here.
+
+261
+00:13:27.332 --> 00:13:29.074
+If you want, you can reset the user.
+
+262
+00:13:29.122 --> 00:13:30.898
+You can give the public key upload
+
+263
+00:13:30.934 --> 00:13:33.078
+the public keys if you want.
+
+264
+00:13:33.104 --> 00:13:34.350
+Key based logins.
+
+265
+00:13:35.690 --> 00:13:37.722
+OK, that's one new thing in the
+
+266
+00:13:37.736 --> 00:13:40.040
+Jenkins we can add users now.
+
+267
+00:13:41.390 --> 00:13:43.460
+Previously it was only sign up.
+
+268
+00:13:44.210 --> 00:13:46.518
+Alright, so that is all in
+
+269
+00:13:46.544 --> 00:13:51.150
+Jenkins security authentication and authorization.
+
+270
+00:13:51.650 --> 00:13:54.060
+So wrap this up and join me in the next video.

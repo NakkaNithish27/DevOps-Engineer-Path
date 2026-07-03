@@ -1,0 +1,559 @@
+WEBVTT
+
+00:00.360 --> 00:01.000
+All right.
+
+00:01.000 --> 00:05.880
+So in this lecture we are going to build the Docker image from a Docker file and publish it.
+
+00:06.240 --> 00:12.600
+And to publish or push our Docker image we will be using GitLab provided container registry.
+
+00:12.640 --> 00:15.800
+Yes GitLab provides a container registry.
+
+00:16.160 --> 00:23.040
+If you check here in the deploy section, we have here container registry so we can host our Docker
+
+00:23.040 --> 00:24.320
+images over here.
+
+00:24.600 --> 00:27.520
+The best part is the authentication can be done inside.
+
+00:27.680 --> 00:29.520
+Inside the GitLab environment itself.
+
+00:29.520 --> 00:37.880
+GitLab provides us variables for the registry URI, for Docker username and for Docker password all
+
+00:37.880 --> 00:38.880
+inbuilt variable.
+
+00:38.880 --> 00:45.160
+We can use those variables directly in our pipeline and push the Docker image to the container registry
+
+00:45.160 --> 00:46.760
+provided by GitLab.
+
+00:47.160 --> 00:53.000
+Now if not, you can use Docker Hub, you can use Amazon ECR, you can use Google Container Registry,
+
+00:53.000 --> 00:56.080
+you can use any other third party container registry.
+
+00:56.080 --> 01:01.680
+But mostly I have seen when people use GitLab, they use this entire ecosystem.
+
+01:01.680 --> 01:03.040
+We have repository.
+
+01:03.080 --> 01:04.080
+We have pipelines.
+
+01:04.080 --> 01:05.240
+We have container registry.
+
+01:05.280 --> 01:10.960
+We have package registry, security, deployment everything inbuilt into this GitLab.
+
+01:11.320 --> 01:13.280
+So we will be also doing the same thing.
+
+01:13.320 --> 01:19.160
+We'll mention a stage where we build the Docker image and publish it to GitLab container registry.
+
+01:19.440 --> 01:20.920
+So let's open our VSCode.
+
+01:21.280 --> 01:27.240
+And after security scanning we are going to mention the stage docker build and publish.
+
+01:27.240 --> 01:31.560
+And before itself we're going to mention it over here in the stages.
+
+01:36.800 --> 01:38.400
+Now let's add all the steps.
+
+01:39.680 --> 01:45.600
+So the image that we will be using is Docker image latest version.
+
+01:46.240 --> 01:48.760
+Now this Docker image just provides the CLI.
+
+01:48.800 --> 01:51.400
+It does not provide the docker docker daemon.
+
+01:51.680 --> 01:56.680
+We need the Docker daemon, the service, the docker service running to execute the docker build commands,
+
+01:57.120 --> 02:03.010
+and GitLab for security reason does not allow us to run the Docker daemon directly over here.
+
+02:03.530 --> 02:08.050
+We need to mention it as a sidecar by using an option called services.
+
+02:09.570 --> 02:14.290
+And we mention this docker dent which is docker inside Docker.
+
+02:15.010 --> 02:16.050
+No space here.
+
+02:16.410 --> 02:20.690
+Now what happens with this is it runs the Docker CLI container.
+
+02:21.210 --> 02:25.930
+And as a sidecar to this container it runs a Docker container.
+
+02:25.970 --> 02:27.250
+So there are two containers here.
+
+02:27.530 --> 02:28.770
+This is the main container.
+
+02:28.770 --> 02:32.010
+This is the sidecar that will be the daemon.
+
+02:32.290 --> 02:38.090
+And in that it will run the Docker service which provides us the docker build time environment.
+
+02:38.570 --> 02:41.690
+So this container connects to this container.
+
+02:42.490 --> 02:46.170
+And once again this is for security reason in GitLab.
+
+02:47.010 --> 02:47.850
+Oh sorry.
+
+02:50.690 --> 02:50.970
+Okay.
+
+02:50.970 --> 02:53.970
+We'll provide this needs for this stage.
+
+02:55.850 --> 02:59.090
+So it should run after the security scan stage.
+
+02:59.330 --> 03:01.210
+We're going to mention two variables.
+
+03:01.210 --> 03:04.970
+One is for the image tag and one is to disable the TLS.
+
+03:05.570 --> 03:06.090
+Variables.
+
+03:06.090 --> 03:09.570
+Colon this variable Docker underscore underscore certain.
+
+03:09.890 --> 03:10.930
+We are giving none.
+
+03:10.930 --> 03:18.450
+Now when the Docker daemon runs in this dent, it creates TLS certificates and the client needs to provide
+
+03:18.450 --> 03:22.810
+those certificate for the usage of this daemon.
+
+03:23.370 --> 03:26.250
+Now, since we are doing all this internally, we don't need to do that.
+
+03:26.250 --> 03:27.370
+So we're disabling that.
+
+03:27.410 --> 03:32.130
+Even if we provide that, it gives a lot of overhead and it's really not required over here.
+
+03:33.250 --> 03:35.250
+Now we need to mention the stages.
+
+03:35.490 --> 03:39.210
+Sorry, the commands to build the Docker image and publish it.
+
+03:39.210 --> 03:42.010
+And before that we need to provide the authentication also.
+
+03:42.250 --> 03:45.530
+So with script we're going to execute all those commands.
+
+03:47.650 --> 03:52.010
+A print message to just say that we are logging into the container registry.
+
+03:52.650 --> 03:54.090
+And then the command to log in.
+
+03:55.490 --> 03:58.850
+So this is the command docker login hyphen u the username.
+
+03:58.850 --> 04:06.290
+This is the inbuilt GitLab variable, which gives us the registry username and then the password we
+
+04:06.290 --> 04:09.050
+need to provide as a standard input we are providing.
+
+04:09.050 --> 04:12.050
+And that is coming from this echo message.
+
+04:12.490 --> 04:15.170
+So it prints the password not over here.
+
+04:15.730 --> 04:19.010
+This is piped so it passes it as a standard input.
+
+04:19.010 --> 04:23.090
+So you will get the password over here without even leaking it in the logs.
+
+04:23.090 --> 04:25.490
+And then the CI registry URI.
+
+04:26.170 --> 04:32.050
+So the default command to login to Docker registries docker login hyphen you username and password.
+
+04:32.330 --> 04:35.050
+And at the end the registry URI.
+
+04:35.050 --> 04:37.210
+So all this we are passing as the variable.
+
+04:37.810 --> 04:41.050
+And next we can build the Docker image and then push it.
+
+04:41.050 --> 04:45.490
+Let's put a message building docker image with custom docker file.
+
+04:48.650 --> 04:52.010
+So docker build hyphen f the path of the docker file.
+
+04:52.010 --> 04:53.530
+We need to update this docker file.
+
+04:53.530 --> 04:54.730
+We'll do that in a moment.
+
+04:55.170 --> 04:57.770
+The tag will be the registry image.
+
+04:58.530 --> 05:00.970
+This is again inbuilt variable.
+
+05:01.530 --> 05:04.330
+You can check in the predefined variables documentation.
+
+05:04.570 --> 05:06.250
+This gives us something like this.
+
+05:07.290 --> 05:08.970
+The GitLab registry endpoint.
+
+05:09.010 --> 05:10.730
+Slash your group name.
+
+05:10.770 --> 05:12.450
+Slash the project name.
+
+05:12.850 --> 05:17.730
+So that will be our registry name with the repository.
+
+05:17.730 --> 05:21.130
+So complete repository URI colon the image tag.
+
+05:21.570 --> 05:25.650
+So image tag we are defining as the current commit message.
+
+05:25.850 --> 05:28.010
+Sorry not message the current commit ID.
+
+05:28.370 --> 05:34.370
+We are storing that into this variable and then we're using it and the context is current working directory.
+
+05:34.890 --> 05:40.170
+So in the current working directory and this will be cloned into this Docker image.
+
+05:40.170 --> 05:44.130
+This Docker container everything will be cloned and it's going to execute the commands.
+
+05:44.610 --> 05:46.570
+The path we have mentioned of the docker file.
+
+05:46.570 --> 05:48.410
+We need to update this docker file.
+
+05:50.210 --> 05:56.610
+So currently this Docker file pulls the source code from our default GitHub repository.
+
+05:57.250 --> 05:58.090
+We don't need this.
+
+05:58.090 --> 05:59.850
+We need to remove these two lines.
+
+05:59.970 --> 06:04.700
+Let's add here copy dot to a folder called slash app.
+
+06:05.300 --> 06:09.540
+So all the content will be copied into the slash app of this Maven container.
+
+06:09.820 --> 06:12.100
+We'll set that as the work directory.
+
+06:12.100 --> 06:15.780
+So everything executes in slash app where we have our source code.
+
+06:15.980 --> 06:22.460
+And then the instruction to run the command Mvn install that will build the artifact that should be
+
+06:22.460 --> 06:23.740
+copied into this image.
+
+06:23.740 --> 06:32.100
+So copy from build image here the path will be slash app slash target slash v profile hyphen v2 dot
+
+06:32.100 --> 06:32.420
+var.
+
+06:32.420 --> 06:39.460
+This will be copied to the location of the default Tomcat application, so make this changes and save
+
+06:39.460 --> 06:40.180
+this file.
+
+06:40.820 --> 06:46.660
+Come to your pipeline file and last command will be a simple one just to push this docker image.
+
+06:47.340 --> 06:56.340
+Docker push the registry image URI which includes the registry URI and the image repository and the
+
+06:56.340 --> 06:56.820
+tag.
+
+06:56.820 --> 07:01.180
+So this one it basically takes and push it at this location.
+
+07:01.380 --> 07:04.420
+So let's save this and let's commit and push.
+
+07:04.940 --> 07:05.460
+Yes.
+
+07:05.740 --> 07:08.020
+Commit message Docker build and publish.
+
+07:09.900 --> 07:10.380
+Accept.
+
+07:10.380 --> 07:11.300
+Commit message.
+
+07:11.860 --> 07:13.780
+Let's take a look at the pipeline.
+
+07:14.620 --> 07:15.900
+The pipeline got triggered.
+
+07:16.460 --> 07:18.620
+Let's wait until this is completed.
+
+07:18.940 --> 07:19.340
+All right.
+
+07:19.340 --> 07:22.060
+So all the jobs completed successfully.
+
+07:22.100 --> 07:25.820
+Notify is skipped because it says notify on failure.
+
+07:25.820 --> 07:26.700
+So there's no failure.
+
+07:26.700 --> 07:27.940
+So this job is skipped.
+
+07:28.580 --> 07:30.860
+So Docker build and publish also completed.
+
+07:30.860 --> 07:33.420
+Let's take a look for log.
+
+07:34.420 --> 07:34.620
+Okay.
+
+07:34.660 --> 07:35.980
+So take a look over here.
+
+07:36.940 --> 07:42.740
+So it prepares the executor docker and then pulls our Docker image and runs the container.
+
+07:42.740 --> 07:44.900
+And it starts the service docker dent.
+
+07:45.580 --> 07:45.860
+There.
+
+07:45.860 --> 07:50.540
+It pulls that Docker dent image waiting for the service to be up and running.
+
+07:50.940 --> 07:53.540
+And the Docker cli wants both become available.
+
+07:53.540 --> 07:56.540
+It's going to run the command from the docker container.
+
+07:57.260 --> 07:57.860
+This one.
+
+07:58.500 --> 08:01.940
+So logging into the container logs in there, you see.
+
+08:01.980 --> 08:03.860
+Nothing is printed, so it's good.
+
+08:04.340 --> 08:11.020
+It basically stores all this information into this container file dot docker config dot JSON.
+
+08:11.020 --> 08:15.060
+Here you have the authentication stored for the Docker registry.
+
+08:15.460 --> 08:17.140
+Right over here it does the login.
+
+08:17.140 --> 08:18.500
+And this creates this file.
+
+08:18.740 --> 08:21.340
+And then building the image the docker build command.
+
+08:23.140 --> 08:30.580
+And once the docker build completes then we have the docker push command to push our Docker image to
+
+08:30.620 --> 08:32.180
+GitLab container registry.
+
+08:32.220 --> 08:34.420
+You see that that is completed.
+
+08:34.420 --> 08:38.620
+So we should be able to see our image in the container registry.
+
+08:38.620 --> 08:40.580
+So go to Deploy container registry.
+
+08:40.980 --> 08:42.300
+That's the repository.
+
+08:42.540 --> 08:45.660
+If you click on that you should see the image with the tag.
+
+08:45.700 --> 08:49.100
+If you copy this let's put it over here in the browser.
+
+08:49.140 --> 08:49.940
+Let's see this.
+
+08:50.500 --> 08:57.060
+You see the registry URL, the group name, the project name colon, the tag.
+
+08:57.060 --> 09:03.380
+So that's the complete Docker image information which can be used to pull to a container runtime environment
+
+09:03.380 --> 09:07.060
+or to the Kubernetes cluster and run the container from this.
+
+09:07.260 --> 09:07.500
+Right.
+
+09:07.500 --> 09:08.620
+So that was pretty amazing.
+
+09:08.620 --> 09:11.140
+We have the container registry in GitLab itself.
+
+09:11.460 --> 09:14.260
+And along with this GitLab is complete ecosystem.
+
+09:14.260 --> 09:21.300
+It provides many things like in plan you will be seeing in real time the developers creating issues
+
+09:21.900 --> 09:23.860
+and tracking them on the issue boards.
+
+09:23.940 --> 09:24.820
+Click on the issues.
+
+09:25.620 --> 09:31.140
+So like a product enhancement or bug tracking, everything can be done through this.
+
+09:31.140 --> 09:34.060
+And this can be linked to your commit your pull request.
+
+09:34.060 --> 09:36.380
+And that is connected to the pipelines.
+
+09:37.180 --> 09:41.820
+The developers are going to set the milestones have documentation in the wiki.
+
+09:42.580 --> 09:42.780
+Right.
+
+09:42.780 --> 09:44.700
+So this is a complete ecosystem.
+
+09:44.700 --> 09:48.980
+You have everything related to code build security related.
+
+09:48.980 --> 09:56.860
+You can do security configurations, static application security testing, Sast infrastructure as a
+
+09:56.860 --> 09:57.820
+code scanning.
+
+09:59.300 --> 09:59.500
+Right.
+
+09:59.540 --> 10:04.510
+Application security testing, container scanning, and many other things.
+
+10:05.310 --> 10:06.150
+In deployment.
+
+10:06.150 --> 10:10.030
+You can deploy your builds based on what you are doing.
+
+10:10.070 --> 10:14.710
+Like you can store it as a container registry, or if you're building packages, you can store it in
+
+10:14.710 --> 10:15.870
+package registries.
+
+10:16.990 --> 10:23.030
+You have this operate section over here where you can connect your or your GitLab agent.
+
+10:23.070 --> 10:28.830
+You can implement to connect it to Kubernetes cluster or Terraform or Google Cloud.
+
+10:29.550 --> 10:34.350
+For monitor, you can send alerts to any third party alert mechanism.
+
+10:34.350 --> 10:35.710
+There's also service desk.
+
+10:35.710 --> 10:37.590
+So you have the whole ecosystem.
+
+10:37.590 --> 10:44.870
+There's a lot of settings that you can use to make changes on your GitLab project based on your requirements.
+
+10:45.270 --> 10:51.150
+So this whole ecosystem, I would like you to take some time and explore these different options.
+
+10:51.590 --> 10:54.190
+This will be all very helpful in project building.
+
+10:54.870 --> 10:57.750
+So take some time before you move to the next lectures.
+
+10:58.430 --> 11:00.070
+That should be all in this lecture.
+
+11:00.070 --> 11:01.510
+I will see you in the next one.

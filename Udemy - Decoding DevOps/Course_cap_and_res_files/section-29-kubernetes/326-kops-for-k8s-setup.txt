@@ -1,0 +1,1426 @@
+WEBVTT
+
+00:00.030 --> 00:00.863
+Instructor: Okay.
+
+00:00.863 --> 00:03.780
+To set up Kubernetes cluster with Kops we need to have,
+
+00:03.780 --> 00:05.730
+we need to do some prerequisites,
+
+00:05.730 --> 00:09.400
+first you need to have a domain where we are going to
+
+00:11.704 --> 00:14.340
+use it for Kubernetes DNS records.
+
+00:14.340 --> 00:18.243
+So like I have a domain from GoDaddy, groophy.in.
+
+00:19.410 --> 00:20.430
+So you should also have,
+
+00:20.430 --> 00:22.780
+if you've gone through the prerequisites video.
+
+00:24.240 --> 00:26.700
+We need a Linux vm.
+
+00:26.700 --> 00:30.120
+We can use vagrant vm but I'm going to use EC2 instance.
+
+00:30.120 --> 00:33.180
+If you wish to use your vagrant vm, you can do that.
+
+00:33.180 --> 00:35.823
+This VM will be only to set up the Kops,
+
+00:36.965 --> 00:40.650
+kubectl, shh keys, and awscli.
+
+00:40.650 --> 00:42.120
+So this will be our base machine
+
+00:42.120 --> 00:43.830
+to launch the Kubernetes cluster
+
+00:43.830 --> 00:47.550
+with Kops, this will be not part of the Kubernetes cluster.
+
+00:47.550 --> 00:49.900
+And this VM we are going to install Kops cube CTL,
+
+00:49.900 --> 00:52.427
+which going to generate SSH keys
+
+00:52.427 --> 00:54.450
+and we are going to install a AWS CLI
+
+00:54.450 --> 00:56.583
+and also a configure AWS CLI.
+
+00:58.020 --> 00:59.070
+In AWS account,
+
+00:59.070 --> 01:00.720
+we need an S3 bucket
+
+01:00.720 --> 01:03.990
+an IAM user for our AWS CLI,
+
+01:03.990 --> 01:07.080
+we're gonna need a Route 53 hosted zone,
+
+01:07.080 --> 01:08.913
+which will be our subdomain.
+
+01:09.990 --> 01:12.150
+So after creating the hosted zone, we are going
+
+01:12.150 --> 01:13.830
+to give its entry.
+
+01:13.830 --> 01:17.444
+We'll get the NS servers, name server URLs.
+
+01:17.444 --> 01:19.950
+We are going to give its entry in our domain.
+
+01:19.950 --> 01:21.540
+I'm going to use GoDaddy
+
+01:21.540 --> 01:23.880
+and I'm going to create four DNS records,
+
+01:23.880 --> 01:28.620
+NS record, which is going to point out to a subdomain
+
+01:28.620 --> 01:32.850
+to name server from AWS Route 53.
+
+01:32.850 --> 01:37.625
+So domain on GoDaddy, subdomain on Amazon Route 53.
+
+01:37.625 --> 01:40.830
+Okay, so let's do the prerequisites first.
+
+01:40.830 --> 01:43.260
+Okay, I'm on my AWS management console
+
+01:43.260 --> 01:45.720
+and I'm in North Virginia region.
+
+01:45.720 --> 01:48.090
+The code is US East one.
+
+01:48.090 --> 01:50.276
+We are going to launch an EC2 instance over here.
+
+01:50.276 --> 01:53.310
+And from there we are going to execute Kops command
+
+01:53.310 --> 01:55.740
+that will create the Kubernetes cluster.
+
+01:55.740 --> 01:58.530
+So the instance that we will launch now is not part
+
+01:58.530 --> 02:02.324
+of the cluster, we're just using it to launch the cluster.
+
+02:02.324 --> 02:04.470
+So let's launch the instance first
+
+02:04.470 --> 02:08.070
+and then we'll install all the necessary tools in that.
+
+02:08.070 --> 02:10.500
+So click on launch instances.
+
+02:10.500 --> 02:12.190
+I'll simply name it as Kops
+
+02:13.170 --> 02:16.930
+Ubuntu, AMI, Ubuntu 24, free tier eligible
+
+02:18.090 --> 02:20.850
+instance Type T2 micro is fine, we just need
+
+02:20.850 --> 02:23.460
+to execute the commands from here.
+
+02:23.460 --> 02:26.600
+Key pair will create a key, I will name it
+
+02:26.600 --> 02:30.225
+as Kops key, PEM format, create key pair,
+
+02:30.225 --> 02:32.640
+okay, network settings.
+
+02:32.640 --> 02:34.500
+Edit, we'll create a security group.
+
+02:34.500 --> 02:36.093
+We'll name it as Kops SG,
+
+02:38.190 --> 02:42.000
+same in the description, 22 from my IP.
+
+02:42.000 --> 02:44.940
+We need to assess such to this instance
+
+02:44.940 --> 02:47.283
+and then simply say launch instance.
+
+02:48.360 --> 02:51.617
+Okay? So we are going to run Kops command from this instance
+
+02:51.617 --> 02:55.350
+and Kops is going to talk to all the AWS services.
+
+02:55.350 --> 02:56.580
+And in order to do that we need
+
+02:56.580 --> 03:01.140
+to install AWS CLI in this and set the access keys.
+
+03:01.140 --> 03:02.760
+So we need an user,
+
+03:02.760 --> 03:06.000
+IM user that has the privilege to do that.
+
+03:06.000 --> 03:08.054
+So let's create an IM user.
+
+03:08.054 --> 03:10.503
+So go to IM service,
+
+03:11.777 --> 03:16.320
+users, create user, let's give it a name.
+
+03:16.320 --> 03:20.310
+Kops admin, go Next,
+
+03:20.310 --> 03:22.620
+policies, attach policies directly.
+
+03:22.620 --> 03:26.070
+And we are going to give it administrator access.
+
+03:26.070 --> 03:28.080
+Kops command is going to do a lot of things,
+
+03:28.080 --> 03:30.410
+going to touch lot of services starting from VPC.
+
+03:30.410 --> 03:32.820
+It is going to create a VPC in that,
+
+03:32.820 --> 03:34.890
+it's going to create auto scaling group access,
+
+03:34.890 --> 03:38.010
+the S3 bucket access Route 53.
+
+03:38.010 --> 03:40.050
+So it needs access to many services.
+
+03:40.050 --> 03:43.470
+So I'm simply giving it as administrator access.
+
+03:43.470 --> 03:46.113
+Go next, create user.
+
+03:47.760 --> 03:49.800
+Okay, let's create the access key for this user.
+
+03:49.800 --> 03:52.950
+Click on the user, go to security credentials
+
+03:52.950 --> 03:55.053
+and say create access key.
+
+03:56.460 --> 03:57.780
+CLI,
+
+03:57.780 --> 04:02.780
+I understand, and go next, create access key.
+
+04:03.300 --> 04:05.130
+Okay, now you can download the CSV file,
+
+04:05.130 --> 04:06.750
+but I'm going to keep it as it is.
+
+04:06.750 --> 04:08.430
+I'm going to copy directly from here
+
+04:08.430 --> 04:10.350
+and store it in my instance.
+
+04:10.350 --> 04:13.330
+So let's SH to our Kops instance
+
+04:14.310 --> 04:16.050
+yet it's public ip.
+
+04:16.050 --> 04:18.570
+Open your Git Bash or terminal
+
+04:18.570 --> 04:22.590
+ssh -i path of the key open tool is the user, add
+
+04:22.590 --> 04:24.303
+the public IP of Kops.
+
+04:25.650 --> 04:26.483
+Yes.
+
+04:27.600 --> 04:29.550
+Okay, let me clear the screen.
+
+04:29.550 --> 04:31.090
+Let's switch to root user
+
+04:32.070 --> 04:34.863
+and I'm going to run first the command apt update.
+
+04:38.250 --> 04:41.043
+Okay, apt update completed successfully.
+
+04:42.330 --> 04:44.910
+Let's install AWS CLI.
+
+04:44.910 --> 04:48.843
+So snap install AWS-CLI --classic.
+
+04:53.040 --> 04:55.803
+So we are going to install AWS CLI with snap.
+
+05:00.600 --> 05:02.640
+Okay, now let's store the access key.
+
+05:02.640 --> 05:05.283
+So we'll run the command AWS configure.
+
+05:08.820 --> 05:10.080
+Let's get the access key.
+
+05:10.080 --> 05:12.660
+If you have downloaded the CSV file, you can open that.
+
+05:12.660 --> 05:15.543
+I'm just going to copy it from here. Copy access key.
+
+05:20.640 --> 05:22.413
+Copy the secret key.
+
+05:23.970 --> 05:25.500
+I know you can see my secret key,
+
+05:25.500 --> 05:27.360
+but I'm going to delete this user as soon
+
+05:27.360 --> 05:28.953
+as the recording is completed.
+
+05:29.910 --> 05:32.820
+My region code is US east one, so I'm going to give
+
+05:32.820 --> 05:35.523
+that, format JSON.
+
+05:36.750 --> 05:39.630
+Make sure you check the region name before you enter.
+
+05:39.630 --> 05:42.540
+I wanted to create in North Virginia, US east one.
+
+05:42.540 --> 05:44.910
+So I've given us east one.
+
+05:44.910 --> 05:47.984
+Okay, next we need to generate the SSH key,
+
+05:47.984 --> 05:50.177
+SSH-keygen.
+
+05:51.120 --> 05:54.960
+Hit Enter, enter, enter, enter.
+
+05:54.960 --> 05:58.053
+Okay, now you should have the SSH key over here.
+
+05:59.160 --> 06:02.103
+This is the public key and this is the private key.
+
+06:03.930 --> 06:06.990
+Okay, now we need to install the Kops tool itself
+
+06:06.990 --> 06:08.340
+so, we can clear the screen.
+
+06:08.340 --> 06:10.500
+Let's go to the browser.
+
+06:10.500 --> 06:12.880
+Just search for install Kops in your browser
+
+06:14.070 --> 06:16.260
+and it should come to this documentation.
+
+06:16.260 --> 06:17.100
+Pretty simple step.
+
+06:17.100 --> 06:19.830
+We download the binary, we make it executable
+
+06:19.830 --> 06:22.410
+and we move it to USR local bin.
+
+06:22.410 --> 06:23.853
+So let's copy this command,
+
+06:28.140 --> 06:32.220
+let's make it executable and move it to USR local bins.
+
+06:32.220 --> 06:34.290
+Now when you run the command Kops,
+
+06:34.290 --> 06:35.973
+you should see this output,
+
+06:37.140 --> 06:38.940
+that means Kops is installed.
+
+06:38.940 --> 06:41.370
+Now we also need to install Kube CTL
+
+06:41.370 --> 06:44.880
+that we will be using later that will the command line tool
+
+06:44.880 --> 06:46.800
+to access our cluster.
+
+06:46.800 --> 06:49.740
+So just search for install Kube CTL.
+
+06:49.740 --> 06:52.450
+It's in the Kubernetes documentation, install tools
+
+06:53.430 --> 06:55.440
+and we need to install it on Linux.
+
+06:55.440 --> 06:57.630
+So let's click on this link
+
+06:57.630 --> 07:00.960
+and we can download it by using curl command.
+
+07:00.960 --> 07:02.160
+So let's click on that
+
+07:02.160 --> 07:05.610
+or you can use the package manager also like Apt or snap.
+
+07:05.610 --> 07:06.930
+What I'm going to use this method.
+
+07:06.930 --> 07:10.597
+So this command is going to download the binary of Kube CTL.
+
+07:12.000 --> 07:15.100
+So we're going to learn in detail about this Kube CTL binary
+
+07:16.140 --> 07:17.640
+CLI, how to use it.
+
+07:17.640 --> 07:19.200
+Let's download it first
+
+07:19.200 --> 07:20.613
+and then,
+
+07:24.030 --> 07:27.150
+okay, this command over here, this install command is going
+
+07:27.150 --> 07:29.490
+to make this binary executable
+
+07:29.490 --> 07:33.363
+and copy to USR local bin all at once.
+
+07:35.220 --> 07:36.600
+Okay, now let's run this command
+
+07:36.600 --> 07:38.310
+to check whether it's installed or not.
+
+07:38.310 --> 07:42.573
+Cube, CTL version -- client.
+
+07:43.860 --> 07:46.440
+Okay, it's installed, don't worry, you're going
+
+07:46.440 --> 07:48.783
+to learn Kube CTL in detail.
+
+07:49.650 --> 07:51.120
+Now let me show you the command
+
+07:51.120 --> 07:53.103
+that we will be running from here.
+
+07:53.940 --> 07:55.350
+So that is the command that is going
+
+07:55.350 --> 07:57.750
+to create the cluster, Kops create cluster.
+
+07:57.750 --> 08:00.930
+So we need to have Kops binary, which we have installed.
+
+08:00.930 --> 08:02.130
+We're going to give it a name.
+
+08:02.130 --> 08:03.930
+We'll come to that in a moment.
+
+08:03.930 --> 08:05.970
+We mentioned the bucket state.
+
+08:05.970 --> 08:09.690
+Where do you need to store the information of this cluster?
+
+08:09.690 --> 08:11.160
+So basically this command is going
+
+08:11.160 --> 08:12.990
+to just create the information
+
+08:12.990 --> 08:15.810
+of the cluster in this S3 bucket.
+
+08:15.810 --> 08:18.090
+So we need to create an S3 bucket
+
+08:18.090 --> 08:20.730
+and then with Kops update cluster command it is going
+
+08:20.730 --> 08:23.310
+to actually apply all that configuration
+
+08:23.310 --> 08:25.050
+and create the cluster.
+
+08:25.050 --> 08:27.810
+So what do we need now we need to create a bucket
+
+08:27.810 --> 08:30.480
+and we also need to create the DNS zone.
+
+08:30.480 --> 08:32.850
+I'll come to that in a moment.
+
+08:32.850 --> 08:36.180
+We are going to create this zone in Route 53
+
+08:36.180 --> 08:39.360
+where we have all the records which say like
+
+08:39.360 --> 08:42.510
+for example API means the control plane node,
+
+08:42.510 --> 08:45.330
+they'll have the IP address of the master node,
+
+08:45.330 --> 08:48.570
+the control plane like that for the worker node also.
+
+08:48.570 --> 08:51.840
+And we can create more records over there as we need.
+
+08:51.840 --> 08:53.280
+But Kops is initially going
+
+08:53.280 --> 08:55.680
+to create all this records by itself.
+
+08:55.680 --> 09:00.030
+But first we need to create that hosted zone in Route 53.
+
+09:00.030 --> 09:01.980
+So first let's create the S3 bucket
+
+09:01.980 --> 09:04.860
+and then we will create the hosted zone.
+
+09:04.860 --> 09:06.933
+So let's go to the S3 service.
+
+09:08.640 --> 09:11.760
+I will see create bucket, geneal purpose
+
+09:11.760 --> 09:13.680
+and we need to give bucket a name.
+
+09:13.680 --> 09:15.030
+The name needs to be unique.
+
+09:15.030 --> 09:18.210
+You cannot give the same name that I have given.
+
+09:18.210 --> 09:21.870
+So I'm giving this name Kops state 956.
+
+09:21.870 --> 09:24.570
+I've given this number just to make this bucket unique.
+
+09:24.570 --> 09:26.120
+You need to give something else
+
+09:27.240 --> 09:28.770
+and simply create the bucket.
+
+09:28.770 --> 09:30.060
+That's all.
+
+09:30.060 --> 09:32.790
+I'm going to make sure I store it over here.
+
+09:32.790 --> 09:36.123
+You can download this command from the resource section,
+
+09:37.020 --> 09:37.890
+not now.
+
+09:37.890 --> 09:39.290
+I'll give you time for that.
+
+09:42.960 --> 09:45.270
+Right no, just note down the bucket name
+
+09:45.270 --> 09:47.220
+or you can anytime go to S3 dashboard
+
+09:47.220 --> 09:48.960
+and get the bucket name.
+
+09:48.960 --> 09:50.700
+Okay, now the last thing we need to do is we need
+
+09:50.700 --> 09:52.530
+to create the DNS zone,
+
+09:52.530 --> 09:54.810
+the hosted zone we call it in Route 53.
+
+09:54.810 --> 09:59.610
+So let's go to Route 53. Search for Route 53.
+
+09:59.610 --> 10:02.760
+Route 53 is a DNS service from AWS
+
+10:02.760 --> 10:04.783
+where you can create a hosted zone.
+
+10:04.783 --> 10:09.450
+Basically a place to manage the records, the DNS records.
+
+10:09.450 --> 10:11.220
+You can also purchase a domain,
+
+10:11.220 --> 10:14.053
+but the domain from here are expensive compared
+
+10:14.053 --> 10:18.450
+to other service provider like GoDaddy or other provider.
+
+10:18.450 --> 10:20.610
+But it gives lot many other benefits.
+
+10:20.610 --> 10:22.860
+So that's why it's expensive.
+
+10:22.860 --> 10:24.750
+But we are going to do some cost management.
+
+10:24.750 --> 10:26.100
+We already have the domain.
+
+10:26.100 --> 10:30.923
+So I have it from GoDaddy and my domain is HKHInfotech.xyz
+
+10:33.240 --> 10:35.100
+To create a hosted zone,
+
+10:35.100 --> 10:38.190
+a hosted public zone, you need to have a domain.
+
+10:38.190 --> 10:40.020
+So you don't have a domain here,
+
+10:40.020 --> 10:41.700
+I already have it from GoDaddy.
+
+10:41.700 --> 10:43.830
+I'll see you how you can manage this.
+
+10:43.830 --> 10:46.173
+So first click on create hosted zone.
+
+10:46.173 --> 10:47.520
+You need to give the name.
+
+10:47.520 --> 10:49.677
+So I'm going to give the name as kubevpro.,
+
+10:52.440 --> 10:55.453
+and my domain name, why I've given that,
+
+10:55.453 --> 10:57.840
+I will come there in a moment.
+
+10:57.840 --> 10:58.950
+So just give that,
+
+10:58.950 --> 11:02.790
+give some name like kubevpro.your domain name,
+
+11:02.790 --> 11:04.650
+the domain that you already have purchased.
+
+11:04.650 --> 11:06.870
+Give that domain name exactly as it is.
+
+11:06.870 --> 11:10.650
+Don't give the domain name that I have given. This is mine.
+
+11:10.650 --> 11:13.440
+I'm going to go there and make the changes.
+
+11:13.440 --> 11:14.970
+So give your domain name
+
+11:14.970 --> 11:16.950
+and make sure it's public hosted zone
+
+11:16.950 --> 11:18.840
+and say create hosted zone.
+
+11:18.840 --> 11:20.970
+Okay? So when you create this hosted zone,
+
+11:20.970 --> 11:24.090
+it is going to give you a record
+
+11:24.090 --> 11:26.370
+Kubevpro.HKHinfoteck.XYZ.
+
+11:26.370 --> 11:28.740
+This points to this DNS server.
+
+11:28.740 --> 11:31.350
+So these are the four DNS servers
+
+11:31.350 --> 11:33.303
+that will hold all your records.
+
+11:36.480 --> 11:41.480
+Okay? Now the problem here is first the Kubevpro needs to be
+
+11:41.850 --> 11:44.805
+resolved and for that is going to go to this domain,
+
+11:44.805 --> 11:47.190
+HK infoteck.xyz.
+
+11:47.190 --> 11:48.570
+Let me explain you like this.
+
+11:48.570 --> 11:50.400
+So let's say this should be the record,
+
+11:50.400 --> 11:54.180
+API.kubevpro.HKHinfoteck.xyz.
+
+11:54.180 --> 11:57.843
+This needs to resolve to the IP address of the master node.
+
+11:58.770 --> 12:01.500
+So first your DNS servers wherever you're located is going
+
+12:01.500 --> 12:03.990
+to go and check at this domain.
+
+12:03.990 --> 12:06.213
+Does it have any record for Kubevpro?
+
+12:07.230 --> 12:09.150
+Now this domain is from GoDaddy
+
+12:09.150 --> 12:12.060
+and there is no record for Kubevpro over there.
+
+12:12.060 --> 12:13.290
+So it's going to immediately fail.
+
+12:13.290 --> 12:15.810
+It's not going to go here, also API.
+
+12:15.810 --> 12:19.920
+So what we will do now is we'll create a record in GoDaddy,
+
+12:19.920 --> 12:23.220
+like I have it from GoDaddy's, that is domain.
+
+12:23.220 --> 12:24.900
+So I'm going to create a record over there
+
+12:24.900 --> 12:28.680
+that says it points to these DNS servers.
+
+12:28.680 --> 12:33.167
+So when we do that, it's going to go first to GoDaddy. Okay?
+
+12:33.167 --> 12:34.050
+So for Kubevpro it is going to go to GoDaddy
+
+12:35.940 --> 12:38.580
+and in GoDaddy we'll have the NS record that points
+
+12:38.580 --> 12:43.050
+to the Route 53 NS servers, these servers, right?
+
+12:43.050 --> 12:45.240
+So then it is going to go to Route 53
+
+12:45.240 --> 12:47.107
+and there in the hosted zone will have a record
+
+12:47.107 --> 12:51.087
+that says API IP address is so and so.
+
+12:51.087 --> 12:53.343
+Oh, this should be the master node, my bad.
+
+12:57.330 --> 13:00.180
+Now this record will be automatically created by Kops.
+
+13:00.180 --> 13:01.830
+All we need to do is go to GoDaddy
+
+13:01.830 --> 13:06.033
+and create NS record that points to the Route 53 NS servers.
+
+13:07.200 --> 13:11.193
+So I go to GoDaddy here to my domain, I say DNS.
+
+13:12.084 --> 13:13.350
+Here we have all the records.
+
+13:13.350 --> 13:14.950
+I'm going to say add new record
+
+13:15.960 --> 13:19.170
+and it'll be NS or name server.
+
+13:19.170 --> 13:21.545
+Let's give the name Kubevpro here
+
+13:21.545 --> 13:24.330
+because that is the hosted zone
+
+13:24.330 --> 13:26.313
+that we created in Route 53, Kubevpro.
+
+13:27.930 --> 13:29.650
+And we need four records over here.
+
+13:29.650 --> 13:32.883
+So I'm going to just click it three more times,
+
+13:33.750 --> 13:38.643
+NS, NS, NS,
+
+13:40.500 --> 13:45.273
+and give it here in the name here and here.
+
+13:46.320 --> 13:48.750
+Okay, now let's go to Route 53 hosted zone.
+
+13:48.750 --> 13:52.270
+Let's copy this values one by one, copy the first value
+
+13:53.340 --> 13:55.263
+and paste it over here.
+
+13:57.060 --> 13:58.443
+Get the second value.
+
+13:59.850 --> 14:01.653
+So these are all the NS servers.
+
+14:14.190 --> 14:17.700
+Just make sure this name matches with the hosted zone name
+
+14:17.700 --> 14:19.800
+that you have created.
+
+14:19.800 --> 14:22.683
+If you're all good, then say save all records.
+
+14:23.520 --> 14:26.430
+Okay, so I have all these four records created
+
+14:26.430 --> 14:29.820
+and I know this is more confusing,
+
+14:29.820 --> 14:32.760
+but once the cluster is created I'm going to show you
+
+14:32.760 --> 14:35.130
+how this actually works.
+
+14:35.130 --> 14:37.380
+So when you see it's working mechanism,
+
+14:37.380 --> 14:39.153
+then you will better understand it.
+
+14:40.200 --> 14:41.940
+Okay, now from this lecture resource,
+
+14:41.940 --> 14:45.423
+download this text file where you will have this command,
+
+14:46.320 --> 14:47.400
+open that text file
+
+14:47.400 --> 14:50.730
+and make the required changes starting with the name.
+
+14:50.730 --> 14:52.230
+So have the right name,
+
+14:52.230 --> 14:56.164
+Kubevpro.HKHinfoteck.XYZ bucket.
+
+14:56.164 --> 14:59.400
+That is the S3 bucket that I have created.
+
+14:59.400 --> 15:00.800
+So that is the correct name.
+
+15:01.807 --> 15:03.750
+Zones, so I'm going to use US East 1A
+
+15:03.750 --> 15:06.810
+and US East 1B North Virginia,
+
+15:06.810 --> 15:07.920
+node count two.
+
+15:07.920 --> 15:10.680
+So two worker node will create it.
+
+15:10.680 --> 15:12.510
+Node size will be T3 small.
+
+15:12.510 --> 15:14.730
+So this is not going to be free,
+
+15:14.730 --> 15:16.620
+but once our work is done, I'll show you how
+
+15:16.620 --> 15:19.440
+to delete the cluster so you can save money.
+
+15:19.440 --> 15:21.590
+Don't worry for some time it won't be much.
+
+15:22.470 --> 15:25.980
+Control plane size, T3 medium, yes we need T3 medium
+
+15:25.980 --> 15:29.400
+because it's going to run so many services.
+
+15:29.400 --> 15:33.120
+DNS zone, that's the same where you have the name,
+
+15:33.120 --> 15:34.860
+should be exactly same.
+
+15:34.860 --> 15:35.880
+Node volume size.
+
+15:35.880 --> 15:37.620
+So it's going to have an EBS volume
+
+15:37.620 --> 15:39.690
+and we are mentioning the size as 12 GB.
+
+15:39.690 --> 15:41.820
+That's minimum, if we don't mention it,
+
+15:41.820 --> 15:44.340
+it's going to create a huge volume size.
+
+15:44.340 --> 15:45.690
+So just to save the cost
+
+15:45.690 --> 15:47.850
+we are giving the size over here in real time.
+
+15:47.850 --> 15:50.220
+Don't give the size, let it create its own volume
+
+15:50.220 --> 15:53.220
+of its own size, which would be very much required
+
+15:53.220 --> 15:55.200
+for the production use case.
+
+15:55.200 --> 15:57.630
+Control volume size also
+
+15:57.630 --> 16:00.090
+12 GB and SSH public key.
+
+16:00.090 --> 16:02.880
+Make sure this path is correct.
+
+16:02.880 --> 16:05.610
+So we are creating it with the root user.
+
+16:05.610 --> 16:08.283
+So in the root user home directory,
+
+16:10.357 --> 16:14.853
+.SSH ID_ed pub.
+
+16:16.050 --> 16:19.710
+So check the proper name to LS ~ /.ssh,
+
+16:19.710 --> 16:21.630
+get the proper name
+
+16:21.630 --> 16:24.030
+and make sure you put the right name over there.
+
+16:25.020 --> 16:27.330
+Okay, it's time to create the cluster now.
+
+16:27.330 --> 16:29.940
+Just two commands and we will be done.
+
+16:29.940 --> 16:33.360
+So copy this command, Kops create cluster,
+
+16:33.360 --> 16:37.623
+go to your terminal, Git bash and paste it and hit enter.
+
+16:38.670 --> 16:42.183
+Now this should create the configuration in the S3 bucket.
+
+16:43.050 --> 16:45.930
+Okay, now we can run the Kops update cluster command
+
+16:45.930 --> 16:48.380
+and we can give the name of our cluster --
+
+16:49.398 --> 16:50.700
+and yes --- admin.
+
+16:50.700 --> 16:53.250
+But remember now we have mentioned the bucket.
+
+16:53.250 --> 16:55.650
+Now every time we run the Kops command,
+
+16:55.650 --> 16:58.920
+we need to mention the bucket, the state.
+
+16:58.920 --> 17:00.960
+There is a variable also that you can set,
+
+17:00.960 --> 17:03.270
+but that will be in the runtime only.
+
+17:03.270 --> 17:05.773
+You can export a variable and mention the bucket.
+
+17:05.773 --> 17:08.880
+But we are not going to run the Kops command too many times.
+
+17:08.880 --> 17:12.063
+So this is fine, Kops update cluster.
+
+17:15.240 --> 17:17.640
+Okay, it's the same command except we have given the bucket
+
+17:17.640 --> 17:20.760
+path -- state S3 and the bucket path.
+
+17:20.760 --> 17:24.375
+Hit enter. Now this will start creating the cluster.
+
+17:24.375 --> 17:25.541
+This is going to take some time.
+
+17:25.541 --> 17:28.080
+So I'm going to pause my recording
+
+17:28.080 --> 17:30.480
+and resume when this is completed.
+
+17:30.480 --> 17:31.710
+If you need a break like 10,
+
+17:31.710 --> 17:34.650
+15 minutes break, you can take it now.
+
+17:34.650 --> 17:37.110
+Okay, so I was waiting like for 15 minutes and
+
+17:37.110 --> 17:38.910
+after that I'm going to run this command
+
+17:38.910 --> 17:41.280
+Kops validate cluster -- name,
+
+17:41.280 --> 17:44.190
+the name of the cluster -- state equal
+
+17:44.190 --> 17:47.746
+to S3 : // and the bucket name.
+
+17:47.746 --> 17:50.880
+So give the name of your and the right bucket name.
+
+17:50.880 --> 17:52.146
+Hit enter.
+
+17:52.146 --> 17:55.830
+If everything is good, you should get this,
+
+17:55.830 --> 17:57.480
+cluster is ready.
+
+17:57.480 --> 17:59.820
+You should see the control plane, the master node,
+
+17:59.820 --> 18:02.550
+and you should see the two worker nodes.
+
+18:02.550 --> 18:05.430
+Okay, so if you remember we also installed Kube CTL.
+
+18:05.430 --> 18:09.000
+Now what happens is when the Kops creates the cluster,
+
+18:09.000 --> 18:11.160
+it creates a cube config file.
+
+18:11.160 --> 18:16.110
+If you do LS-A, you should see a folder here, .cube.
+
+18:16.110 --> 18:18.190
+In this folder you have
+
+18:21.360 --> 18:22.920
+a file called config.
+
+18:22.920 --> 18:25.800
+Let's take a look in this file, I'll just clear the screen.
+
+18:25.800 --> 18:28.510
+I'll say cat.kube config
+
+18:30.050 --> 18:32.100
+and a lot of information.
+
+18:32.100 --> 18:34.230
+But let's look at the most important information
+
+18:34.230 --> 18:35.163
+that we want.
+
+18:44.670 --> 18:48.030
+So right now we are looking for the clusters world.
+
+18:48.030 --> 18:50.687
+So now we'll be using the command KubeCTL,
+
+18:50.687 --> 18:51.900
+we'll say Kube CTL get nodes.
+
+18:51.900 --> 18:53.100
+It'll get the information.
+
+18:53.100 --> 18:55.050
+But how does it know where
+
+18:55.050 --> 18:56.593
+to fetch all this information from?
+
+18:56.593 --> 19:00.390
+Kube CTL command goes and checks the master node
+
+19:00.390 --> 19:02.100
+for the information.
+
+19:02.100 --> 19:03.420
+Here you should have server.
+
+19:03.420 --> 19:06.210
+And here you should have the server name,
+
+19:06.210 --> 19:08.280
+with this name it is going to access it.
+
+19:08.280 --> 19:09.450
+So if you look over here,
+
+19:09.450 --> 19:14.450
+http://api.Kubevpro.hkhinfoteck.xyz.
+
+19:15.777 --> 19:19.830
+Now this needs to resolve to an IP address.
+
+19:19.830 --> 19:21.810
+If not, this is not going to work right?
+
+19:21.810 --> 19:25.800
+The other things are the certificate and login information.
+
+19:25.800 --> 19:29.100
+So let's run the command Kube CTL,
+
+19:29.100 --> 19:32.730
+get nodes and it's working.
+
+19:32.730 --> 19:35.910
+So this uses, the Kube CTL uses the Kube config file
+
+19:35.910 --> 19:38.640
+to access the information from the master node.
+
+19:38.640 --> 19:40.560
+That is the control plane node.
+
+19:40.560 --> 19:42.720
+So how is it resolving the API part?
+
+19:42.720 --> 19:44.553
+So let's go to AWS console.
+
+19:46.470 --> 19:49.800
+If you go to Route 53 hosted zone, open your hosted zone
+
+19:49.800 --> 19:51.450
+and if you see here refresher,
+
+19:51.450 --> 19:55.779
+you should have a record here, API.Kubevpro.
+
+19:55.779 --> 19:57.690
+And you should see the IP address over here.
+
+19:57.690 --> 20:00.900
+That's the public IP of your master node.
+
+20:00.900 --> 20:03.970
+There's also one more record here, API.internal
+
+20:05.400 --> 20:08.880
+that should have the private IP of the worker node, sorry,
+
+20:08.880 --> 20:10.770
+master node, control plane.
+
+20:10.770 --> 20:13.230
+So let's go to EC2 instances.
+
+20:13.230 --> 20:15.750
+You should see here a control plane node
+
+20:15.750 --> 20:17.640
+and two worker nodes.
+
+20:17.640 --> 20:21.330
+If you check the public IP and the private IP,
+
+20:21.330 --> 20:23.400
+this will be matching with the record
+
+20:23.400 --> 20:24.840
+that was created here.
+
+20:24.840 --> 20:28.260
+And all this was done automatically by Kops, right?
+
+20:28.260 --> 20:29.860
+So when it wants to resolve this
+
+20:31.980 --> 20:35.250
+api.Kubevpro.hkhinfoteck.xyz, it's going to go
+
+20:35.250 --> 20:37.950
+to this domain, which is GoDaddy here,
+
+20:37.950 --> 20:39.630
+is going to check Kubevpro.
+
+20:39.630 --> 20:43.110
+And this is going to point to the hosted zone, sorry,
+
+20:43.110 --> 20:46.260
+the Route 53 name server, the DNS server.
+
+20:46.260 --> 20:50.130
+Then it is going to go to here and check for API
+
+20:50.130 --> 20:52.740
+and it'll find the IP address.
+
+20:52.740 --> 20:54.270
+Alright, so this was done automatically.
+
+20:54.270 --> 20:57.150
+Now it is also going to create a VPC.
+
+20:57.150 --> 21:00.690
+If you go to VPC when within the co squad,
+
+21:00.690 --> 21:02.880
+the first thing it does, it creates the VPC.
+
+21:02.880 --> 21:05.983
+In the V PCs you should see a VPC for your
+
+21:05.983 --> 21:09.600
+Kubernetes cluster, it should have all the subnets
+
+21:09.600 --> 21:10.830
+and everything.
+
+21:10.830 --> 21:13.140
+Instances, it manages through autoscaling group.
+
+21:13.140 --> 21:15.990
+So if you go to autoscaling group,
+
+21:15.990 --> 21:17.610
+you should see three autoscaling group,
+
+21:17.610 --> 21:21.750
+one for the master node, the two other for the worker nodes.
+
+21:21.750 --> 21:23.820
+So for autoscaling group you should also have the
+
+21:23.820 --> 21:25.740
+launch templates.
+
+21:25.740 --> 21:28.468
+The instances do have the security group.
+
+21:28.468 --> 21:31.500
+If you go to security, you should see the security group
+
+21:31.500 --> 21:33.240
+of all these instances.
+
+21:33.240 --> 21:36.600
+So all this is managed by the Kops, right?
+
+21:36.600 --> 21:38.700
+So I recommend you take a look
+
+21:38.700 --> 21:41.460
+and once you are done, you can delete the cluster.
+
+21:41.460 --> 21:43.080
+Don't keep it running.
+
+21:43.080 --> 21:45.810
+When you need to create, you can anytime run the Kops create
+
+21:45.810 --> 21:48.090
+cluster command and Kops update cluster command
+
+21:48.090 --> 21:49.625
+to create the cluster.
+
+21:49.625 --> 21:52.560
+I recommend you delete if you are not using it
+
+21:52.560 --> 21:55.410
+because it is instance of bigger size.
+
+21:55.410 --> 21:58.920
+So the command to delete the cluster is simply Kops delete
+
+21:58.920 --> 22:02.223
+cluster, the name of the cluster, -- state.
+
+22:03.060 --> 22:05.763
+And at the end you need to give -- Yes.
+
+22:08.340 --> 22:10.743
+So this one command should delete your cluster.
+
+22:12.570 --> 22:15.540
+Again, it is going to take some time to delete the cluster
+
+22:15.540 --> 22:17.668
+because it's going to clean all the things instances,
+
+22:17.668 --> 22:21.090
+auto scaling, groove, VPC, everything it's going to delete,
+
+22:21.090 --> 22:23.010
+even the DNS records.
+
+22:23.010 --> 22:25.768
+So when you are not using cluster deleted,
+
+22:25.768 --> 22:28.080
+you can anytime create it.
+
+22:28.080 --> 22:30.210
+Just running this command,
+
+22:30.210 --> 22:34.080
+Kops create cluster command and Kops update cluster command.
+
+22:34.080 --> 22:35.760
+Once the cluster is deleted,
+
+22:35.760 --> 22:39.183
+you can also shut down the Kops EC2 instance,
+
+22:40.470 --> 22:43.740
+but only after it deletes the cluster on it is completed,
+
+22:43.740 --> 22:46.170
+then you can shut down the Kops EC2 instance
+
+22:46.170 --> 22:47.003
+whenever you need.
+
+22:47.003 --> 22:47.836
+You can power on
+
+22:47.836 --> 22:50.940
+and execute your command to create the cluster.
+
+22:50.940 --> 22:53.520
+Right then, that will be all in this lecture.
+
+22:53.520 --> 22:55.323
+I will see you in the next one.

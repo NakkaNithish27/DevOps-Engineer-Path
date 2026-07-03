@@ -1,0 +1,538 @@
+WEBVTT
+
+00:00.180 --> 00:01.620
+Instructor: So let's say in the real world,
+
+00:01.620 --> 00:05.400
+you got a task of containerizing a project.
+
+00:05.400 --> 00:07.500
+What will be your first step?
+
+00:07.500 --> 00:08.820
+Well, technically, the first step
+
+00:08.820 --> 00:11.700
+will be to start writing the Dockerfile,
+
+00:11.700 --> 00:14.010
+but in order to start writing the Dockerfile,
+
+00:14.010 --> 00:18.300
+you need to know the services, tools, softwares used
+
+00:18.300 --> 00:21.210
+in that application, in that project, and their version.
+
+00:21.210 --> 00:23.820
+That's the first thing you need to note down.
+
+00:23.820 --> 00:26.763
+What are the different services or tools used?
+
+00:27.660 --> 00:29.007
+So in our vprofile application,
+
+00:29.007 --> 00:34.007
+we have MySQL, Tomcat, Maven, JDK,
+
+00:35.400 --> 00:37.740
+so you need to prepare the list of all the tools
+
+00:37.740 --> 00:40.200
+and services that are used in the project,
+
+00:40.200 --> 00:42.386
+and the most important part is their versions,
+
+00:42.386 --> 00:45.360
+what versions are used.
+
+00:45.360 --> 00:47.105
+You will get all this information from the developers
+
+00:47.105 --> 00:50.790
+who create or write the application code.
+
+00:50.790 --> 00:53.203
+Okay, let's look at the source code and the project set up,
+
+00:53.203 --> 00:55.650
+what we did earlier.
+
+00:55.650 --> 00:58.440
+We did set up vprofile-project manually.
+
+00:58.440 --> 00:59.777
+We have gone through all the steps
+
+00:59.777 --> 01:02.640
+of installing every service,
+
+01:02.640 --> 01:05.782
+so go to github.com/hkhcoder/vprofile/project
+
+01:05.782 --> 01:10.782
+and switch to the branch local here, local branch.
+
+01:10.800 --> 01:15.210
+Go to Vagrant, manual provisioning,
+
+01:15.210 --> 01:18.000
+vprofile project setup, this PDF.
+
+01:18.000 --> 01:21.000
+You can download it in your local machine.
+
+01:21.000 --> 01:22.290
+If you're not able to download it,
+
+01:22.290 --> 01:24.810
+you can download it from the resource section,
+
+01:24.810 --> 01:26.310
+but anyways, you did all this project.
+
+01:26.310 --> 01:28.034
+The reason why I'm showing you this is,
+
+01:28.034 --> 01:29.867
+whenever you get into any project,
+
+01:29.867 --> 01:32.250
+you need to containerize it,
+
+01:32.250 --> 01:35.730
+you need to first get all the services and their versions.
+
+01:35.730 --> 01:39.998
+So we are here provisioning nginx, Tomcat, RabbitMQ,
+
+01:39.998 --> 01:44.373
+Memcache, MySQL, Elasticsearch, that we skipped,
+
+01:45.570 --> 01:47.040
+and in Tomcat, if you remember,
+
+01:47.040 --> 01:52.040
+we built the artifact by using JDK and Maven,
+
+01:52.200 --> 01:54.134
+so if you need little recalling,
+
+01:54.134 --> 01:56.460
+then I recommend you pause the lecture
+
+01:56.460 --> 01:59.250
+and go through this PDF, this document,
+
+01:59.250 --> 02:02.250
+go through all the steps that we executed
+
+02:02.250 --> 02:03.334
+in order to set up a service,
+
+02:03.334 --> 02:04.950
+because that is very important.
+
+02:04.950 --> 02:05.970
+In real time, also,
+
+02:05.970 --> 02:08.520
+you need to go through the entire setup versions,
+
+02:08.520 --> 02:10.530
+what configuration changes you made,
+
+02:10.530 --> 02:12.270
+everything you need to know
+
+02:12.270 --> 02:14.275
+so you can build a proper Dockerfile
+
+02:14.275 --> 02:16.650
+that will give you a Docker image.
+
+02:16.650 --> 02:18.810
+So at the end, what we will be doing
+
+02:18.810 --> 02:21.654
+is we will have a Docker image for MySQL, Memcache,
+
+02:21.654 --> 02:26.654
+RabbitMQ, Tomcat, nginx, and there are ready-made images,
+
+02:27.360 --> 02:30.063
+official Docker images, on Docker Hub.
+
+02:31.590 --> 02:32.880
+So you can come to Docker Hub,
+
+02:32.880 --> 02:37.293
+and you can search for your image, like for example, MySQL.
+
+02:38.160 --> 02:39.630
+So you can take this Docker image,
+
+02:39.630 --> 02:41.055
+but you will need some customization,
+
+02:41.055 --> 02:44.940
+like we need to inject our own SQL file into that.
+
+02:44.940 --> 02:46.126
+For example, we have Tomcat,
+
+02:46.126 --> 02:48.780
+we need to inject our artifact,
+
+02:48.780 --> 02:51.630
+nginx, we need to inject some configuration,
+
+02:51.630 --> 02:53.546
+so the first step is, get to know the services
+
+02:53.546 --> 02:57.330
+and their setup, and most important, their versions.
+
+02:57.330 --> 02:59.850
+So make a list of the services.
+
+02:59.850 --> 03:03.090
+So we have five services, MySQL, Memcache, RabbitMQ,
+
+03:03.090 --> 03:04.680
+Tomcat, and nginx.
+
+03:04.680 --> 03:06.810
+Also, remember the tools that we need to use,
+
+03:06.810 --> 03:10.380
+like in the Tomcat, or before building a Tomcat image,
+
+03:10.380 --> 03:13.530
+we need to upload our artifact in the Tomcat,
+
+03:13.530 --> 03:15.240
+and how do we build the artifact?
+
+03:15.240 --> 03:19.350
+We build it by using Maven, and Maven needs JDK,
+
+03:19.350 --> 03:21.840
+so let's write that down as well.
+
+03:21.840 --> 03:23.513
+So this is the list for our vprofile project.
+
+03:23.513 --> 03:26.346
+Now, in your real project, you may have a longer list
+
+03:26.346 --> 03:29.830
+or a smaller list, but all the tools and services,
+
+03:29.830 --> 03:34.380
+make a list of it and jot down the versions.
+
+03:34.380 --> 03:36.720
+So here are all the versions of the tools and services
+
+03:36.720 --> 03:41.010
+that we're gonna use in the vprofile project or we used.
+
+03:41.010 --> 03:44.130
+Now, we are going to use the same version
+
+03:44.130 --> 03:46.410
+for the Docker images.
+
+03:46.410 --> 03:47.313
+Let me show you.
+
+03:48.240 --> 03:50.460
+So on Docker Hub, I search for MySQL.
+
+03:50.460 --> 03:53.640
+I go to the MySQL Docker image.
+
+03:53.640 --> 03:55.410
+This is the official Docker image,
+
+03:55.410 --> 03:57.059
+and a Docker image will have multiple versions.
+
+03:57.059 --> 04:01.260
+These versions are called as tags in Docker.
+
+04:01.260 --> 04:03.570
+Tags, you see that? Click on that.
+
+04:03.570 --> 04:07.530
+So you need to know which tag of the image to use,
+
+04:07.530 --> 04:11.430
+and that you will know based on the version of your service.
+
+04:11.430 --> 04:15.390
+So MySQL, we want to use 8.0.33,
+
+04:15.390 --> 04:17.790
+so let's find if we have that,
+
+04:17.790 --> 04:19.445
+or you can get a closer one if you don't have that one,
+
+04:19.445 --> 04:21.810
+but we do have this.
+
+04:21.810 --> 04:23.932
+You see there are different tags, 9-oraclelinux9,
+
+04:23.932 --> 04:28.860
+9oracle, nine, and there comes 8.4.3.
+
+04:28.860 --> 04:31.233
+I go to the next page.
+
+04:32.830 --> 04:34.830
+Okay, somewhere after three, four pages,
+
+04:34.830 --> 04:37.770
+I found this, 8.0.33.
+
+04:37.770 --> 04:41.490
+So based on the version of your services and tools,
+
+04:41.490 --> 04:45.840
+you need to find the tag for that official Docker image.
+
+04:45.840 --> 04:47.850
+Now, I recommend you take note of this
+
+04:47.850 --> 04:52.200
+and find all this images on Docker Hub with their versions.
+
+04:52.200 --> 04:54.330
+They might be with different names, but anyways,
+
+04:54.330 --> 04:58.350
+I found all of them, and I have the tags also,
+
+04:58.350 --> 05:00.600
+and that will be the next step that I'm going to write
+
+05:00.600 --> 05:02.040
+over here in this file now,
+
+05:02.040 --> 05:05.310
+the Docker image name and their tag.
+
+05:05.310 --> 05:08.400
+Okay, so after scanning through Docker Hub
+
+05:08.400 --> 05:10.231
+and matching the version, I come up with these tags,
+
+05:10.231 --> 05:15.231
+so MySQL 8.0.33. there is a MySQL image with this tag.
+
+05:16.080 --> 05:17.554
+Memcache latest is fine.
+
+05:17.554 --> 05:20.310
+That matches with 1.6,
+
+05:20.310 --> 05:24.330
+so Memcache 1.6 version is available with the latest tag.
+
+05:24.330 --> 05:28.740
+Rabbit MQ 4.0 is available with the latest tag.
+
+05:28.740 --> 05:31.677
+Maven, this image we'll use to build our artifact.
+
+05:31.677 --> 05:34.528
+Our vprofile source code will take and build the artifact.
+
+05:34.528 --> 05:36.960
+For that, we'll need the Maven image,
+
+05:36.960 --> 05:40.680
+and we need 3.9.9 with JDK 21.
+
+05:40.680 --> 05:45.680
+So I found this tag, 3.9.9-eclipse-temurin-21-jammy.
+
+05:47.310 --> 05:50.640
+I know, long tag name, but I only tested it,
+
+05:50.640 --> 05:53.490
+so I know this is going to work,
+
+05:53.490 --> 05:55.290
+but when you get a real task,
+
+05:55.290 --> 05:58.080
+then you need to test different tags.
+
+05:58.080 --> 06:00.810
+You need to take the closest one and see which one works.
+
+06:00.810 --> 06:02.970
+You need to try different tags.
+
+06:02.970 --> 06:05.820
+Tomcat 10 with JDK 21.
+
+06:05.820 --> 06:09.480
+So we know Tomcat runs on Java, and we need Java 21,
+
+06:09.480 --> 06:10.880
+and we need Tomcat version 10,
+
+06:10.880 --> 06:14.823
+so I found a tag that has the tag 10-jdk21.
+
+06:16.170 --> 06:18.780
+That gives me JDK 21 with Tomcat version 10,
+
+06:18.780 --> 06:22.800
+and nginx 1.27 matches with the latest tag,
+
+06:22.800 --> 06:24.960
+so I'll just use the latest tag.
+
+06:24.960 --> 06:26.428
+So this will be the first step
+
+06:26.428 --> 06:29.103
+when you containerize any project.
+
+06:30.120 --> 06:32.116
+Okay, now, coming back to the first task
+
+06:32.116 --> 06:35.340
+that you need to do, your assignment for this lecture is,
+
+06:35.340 --> 06:40.340
+go through this document, vprofile project setup, manually.
+
+06:40.560 --> 06:41.928
+If you did not do this project previously,
+
+06:41.928 --> 06:44.146
+you should do it on virtual machines.
+
+06:44.146 --> 06:46.410
+Then only you'll understand the setup.
+
+06:46.410 --> 06:47.730
+If you need a little recalling,
+
+06:47.730 --> 06:49.500
+then go through all the steps,
+
+06:49.500 --> 06:51.810
+the configuration, every step.
+
+06:51.810 --> 06:53.520
+What do we do with MySQL?
+
+06:53.520 --> 06:54.877
+We run this command, we create user,
+
+06:54.877 --> 06:58.260
+we grant privileges, all these steps.
+
+06:58.260 --> 07:01.500
+Same for Memcache, RabbitMQ, Tomcat,
+
+07:01.500 --> 07:03.600
+go through all the steps.
+
+07:03.600 --> 07:06.960
+So that's your first assignment or task for this lecture.
+
+07:06.960 --> 07:10.920
+The second assignment or task for this lecture is,
+
+07:10.920 --> 07:15.900
+go to hub.docker.com, go through all the images
+
+07:15.900 --> 07:18.540
+you have taken list, starting with MySQL,
+
+07:18.540 --> 07:21.780
+and you are going to read this documentation.
+
+07:21.780 --> 07:24.180
+These two things are very important.
+
+07:24.180 --> 07:27.487
+You should know the steps to set up your project,
+
+07:27.487 --> 07:31.920
+and then how you can make the changes in the Docker image.
+
+07:31.920 --> 07:34.059
+That you'll get to know through this documentation
+
+07:34.059 --> 07:36.300
+on Docker Hub, like in MySQL,
+
+07:36.300 --> 07:39.150
+how do you run a Docker MySQL image?
+
+07:39.150 --> 07:41.790
+This is the variable you need to export,
+
+07:41.790 --> 07:43.530
+and that is MySQL root password,
+
+07:43.530 --> 07:46.920
+so you will know how to set the root password for MySQL,
+
+07:46.920 --> 07:50.190
+how you can get logs, that's a common command anyways,
+
+07:50.190 --> 07:55.190
+how you can set the configuration, hyphen V, that is volume,
+
+07:56.940 --> 08:00.480
+uploading your configuration into this Docker container
+
+08:00.480 --> 08:01.800
+at this folder.
+
+08:01.800 --> 08:06.240
+So like this, go through all the Docker images from the list
+
+08:06.240 --> 08:08.250
+and look at their settings.
+
+08:08.250 --> 08:09.540
+This is very important, then only you'll be able
+
+08:09.540 --> 08:11.970
+to containerize in real time.
+
+08:11.970 --> 08:13.979
+When we write the Dockerfile in upcoming lectures,
+
+08:13.979 --> 08:17.910
+we'll go through the setup of our services,
+
+08:17.910 --> 08:20.188
+and then we will see how we can make the changes
+
+08:20.188 --> 08:22.834
+in the Dockerfile by using all the information
+
+08:22.834 --> 08:25.173
+that is provided by Docker Hub.
+
+08:26.220 --> 08:29.160
+So that will be all in this lecture.
+
+08:29.160 --> 08:30.710
+I will see you in the next one.

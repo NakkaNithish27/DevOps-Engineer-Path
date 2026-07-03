@@ -1,0 +1,652 @@
+WEBVTT
+
+00:00.240 --> 00:00.720
+All right.
+
+00:00.720 --> 00:05.960
+So in this lecture we are going to discuss about the tools that we will be using in this section starting
+
+00:05.960 --> 00:07.320
+with Prometheus.
+
+00:08.440 --> 00:09.200
+Grafana.
+
+00:11.600 --> 00:12.240
+Loki.
+
+00:13.080 --> 00:14.280
+Node exporter.
+
+00:14.800 --> 00:17.880
+Cromdale is outdated so we have removed it.
+
+00:19.360 --> 00:21.560
+Alloy alert manager.
+
+00:21.560 --> 00:22.560
+And there are few more.
+
+00:23.080 --> 00:25.640
+Let's understand the use case of these tools.
+
+00:25.640 --> 00:27.400
+First of all, the Prometheus.
+
+00:27.920 --> 00:32.280
+So Prometheus is the open source monitoring and alerting toolkit.
+
+00:32.800 --> 00:37.960
+That is also one more reason why it is so popular because of its open source nature.
+
+00:37.960 --> 00:39.520
+You can customize it a lot.
+
+00:40.080 --> 00:42.360
+So this basically collects the metrics.
+
+00:42.680 --> 00:45.600
+You can think of it as a database in the monitoring.
+
+00:45.640 --> 00:50.200
+Not exactly database, but it stores all the information, all the metrics.
+
+00:50.520 --> 00:52.000
+It pulls the metrics.
+
+00:52.200 --> 00:54.760
+And this process is called as scraping.
+
+00:55.120 --> 00:57.040
+So system exposes endpoints.
+
+00:57.040 --> 01:02.430
+And Prometheus is going to go and scrape all the information, all the metrics and store it into its
+
+01:02.430 --> 01:03.070
+database.
+
+01:03.790 --> 01:10.590
+It stores all this information into a time series data, which is very helpful in charting graphs and
+
+01:10.590 --> 01:14.350
+bar charts and etc. the many amazing things that you can do with that.
+
+01:14.710 --> 01:20.230
+So Prometheus, in order to get the information from Prometheus, you need to use prom QL, its own
+
+01:20.230 --> 01:21.270
+query language.
+
+01:21.750 --> 01:26.790
+You can integrate this with the Alert Manager service to send notifications.
+
+01:27.150 --> 01:32.150
+But Grafana is better and we're going to use Grafana to integrate with Alert Manager.
+
+01:32.670 --> 01:36.510
+This is ideal for any cloud native application, especially Kubernetes.
+
+01:36.990 --> 01:40.390
+You can monitor Kubernetes, you can run it on Kubernetes.
+
+01:40.750 --> 01:45.550
+So Kubernetes, all the pods, containers, all that monitoring comes with it, plus infrastructure
+
+01:45.550 --> 01:49.510
+monitoring and all the different kinds of monitoring you can achieve with Prometheus.
+
+01:50.670 --> 01:59.510
+So one example metric we want to check total CPU seconds or better I'll show the metrics or checks from
+
+01:59.510 --> 02:00.550
+Prometheus UI.
+
+02:01.270 --> 02:03.380
+So this is Prometheus dashboard.
+
+02:03.660 --> 02:04.620
+Nothing fancy.
+
+02:04.980 --> 02:10.940
+If you're thinking about fancy dashboard and all that is in Grafana, this is going to collect and store
+
+02:10.980 --> 02:12.060
+the metrics.
+
+02:12.460 --> 02:17.220
+Like if you go to the status and you check the target health, you can see different endpoints that
+
+02:17.220 --> 02:18.900
+it is collecting the metrics from.
+
+02:19.300 --> 02:20.660
+You can see its state.
+
+02:20.660 --> 02:24.260
+You can see last scrape when it's scraped the metrics.
+
+02:24.260 --> 02:28.340
+So these endpoints will be exposing metrics that Prometheus is going to collect.
+
+02:28.340 --> 02:29.740
+This is called as scraping.
+
+02:30.020 --> 02:32.700
+Once we set up this you can understand much better.
+
+02:33.100 --> 02:35.140
+It has its own query language.
+
+02:35.140 --> 02:36.980
+We're going to talk about this in detail.
+
+02:36.980 --> 02:40.300
+But just few examples like there is a metric called up.
+
+02:40.740 --> 02:42.460
+You can execute this.
+
+02:43.100 --> 02:47.500
+So it's going to fetch the information like one means it is up, zero means it is down.
+
+02:47.900 --> 02:54.420
+And you can mention labels here like app is equal to node one.
+
+02:56.980 --> 03:00.380
+So it shows only the matched label.
+
+03:00.420 --> 03:01.980
+There are many more things many more queries.
+
+03:01.980 --> 03:03.300
+We're going to learn that later.
+
+03:03.850 --> 03:05.650
+Let's talk about the next tool, Grafana.
+
+03:06.210 --> 03:12.210
+So all that fancy thing which you must have visualized, the charts, graphs, notification alerts,
+
+03:12.210 --> 03:13.810
+all this is in Grafana.
+
+03:14.210 --> 03:17.530
+It's an open source dashboard and visualization tool.
+
+03:18.170 --> 03:21.810
+So it can connect to Prometheus Loki which we're going to talk about.
+
+03:21.850 --> 03:25.050
+So log management and there are many other data sources that you can mention.
+
+03:25.050 --> 03:28.930
+So it can fetch all that information from these monitoring and logging tools.
+
+03:29.330 --> 03:31.850
+And based on that information you can create panels.
+
+03:31.850 --> 03:34.250
+You can create graphs stuff like that.
+
+03:34.970 --> 03:37.810
+So features will custom dashboards.
+
+03:37.810 --> 03:39.970
+There's many things you can customize in this.
+
+03:40.210 --> 03:44.490
+Seriously I have never seen any such flexible monitoring tool.
+
+03:44.970 --> 03:47.370
+You get many many many options.
+
+03:47.770 --> 03:49.170
+Anyways, we'll see that later.
+
+03:49.370 --> 03:51.450
+So alerts and notification it can send.
+
+03:51.490 --> 03:54.450
+It can integrate with alert manager and send notifications.
+
+03:55.290 --> 04:02.850
+You can see different kinds of data and you can visualize in different format graph charts, bar charts,
+
+04:02.890 --> 04:09.800
+pie diagrams Arms, and mostly mostly for metrics, logs and traces or golden pillars.
+
+04:10.280 --> 04:12.200
+So you have the monitoring stack.
+
+04:12.240 --> 04:12.560
+Stack.
+
+04:12.600 --> 04:18.280
+You have Prometheus, you have Loki, many other things, and think Grafana as the front end of all
+
+04:18.280 --> 04:18.800
+this.
+
+04:18.800 --> 04:20.720
+So that's how Grafana looks.
+
+04:20.720 --> 04:24.800
+You usually access it through the browser but changes customization.
+
+04:24.800 --> 04:26.880
+You can do it through JSON as well.
+
+04:27.360 --> 04:29.280
+So I go to dashboard.
+
+04:29.280 --> 04:30.400
+I see here not team.
+
+04:30.400 --> 04:31.400
+I see the project.
+
+04:31.560 --> 04:32.440
+I can see the graph.
+
+04:32.440 --> 04:33.480
+This is for disk I o.
+
+04:33.520 --> 04:35.840
+This is for disk space utilization.
+
+04:35.840 --> 04:37.040
+You can see the graphs.
+
+04:37.520 --> 04:43.120
+You can see the thresholds, the different kinds of visualization not just graphs.
+
+04:43.120 --> 04:47.640
+You have things like gauge, pie chart and many other things based on the requirement.
+
+04:47.640 --> 04:50.000
+You can configure it for your metrics.
+
+04:50.000 --> 04:51.240
+So this is for metrics.
+
+04:51.280 --> 04:57.360
+The Prometheus collects the metrics and Grafana access that and can create the charts and send the notifications.
+
+04:57.680 --> 05:00.480
+So that's what Grafana is in short okay.
+
+05:00.520 --> 05:04.480
+So that was about metrics and the graphs or the panels.
+
+05:05.000 --> 05:06.150
+Then we have Loki.
+
+05:06.670 --> 05:07.910
+We talked about logs, right?
+
+05:07.950 --> 05:10.750
+So Loki is a log aggregation system.
+
+05:10.750 --> 05:18.350
+You can push logs to Loki and it can store it efficiently using labels, which you can use to sort find
+
+05:18.390 --> 05:18.910
+things.
+
+05:19.510 --> 05:25.830
+And once you integrate it with Grafana, like we integrate Prometheus like that, we can integrate Grafana
+
+05:25.830 --> 05:26.550
+with Loki.
+
+05:27.190 --> 05:29.190
+Then you can see the visualization.
+
+05:29.470 --> 05:32.990
+And of course you can create the alerts notifications also.
+
+05:33.710 --> 05:36.030
+So again this is for modern day applications.
+
+05:36.390 --> 05:37.750
+Cloud native containers.
+
+05:37.750 --> 05:38.550
+Kubernetes.
+
+05:39.070 --> 05:43.630
+So like Prometheus is for metrics Loki is for logs.
+
+05:44.110 --> 05:45.470
+Now these are all servers.
+
+05:45.510 --> 05:46.190
+Grafana.
+
+05:46.190 --> 05:47.470
+Prometheus Loki.
+
+05:47.910 --> 05:50.870
+Now let's talk about the client side node exporter.
+
+05:51.270 --> 05:57.150
+So you need to have this agent in your system which can expose the metrics.
+
+05:57.670 --> 06:02.110
+So node exporter exposes metrics and Prometheus is going to scrape it.
+
+06:02.590 --> 06:09.140
+So it's a very lightweight agent which is for system metrics like CPU utilization, disk memory.
+
+06:09.500 --> 06:11.620
+The infrastructure monitoring we talked about.
+
+06:11.620 --> 06:13.260
+So this is the agent for that.
+
+06:13.700 --> 06:20.300
+So it runs on Linux or different kinds of servers exposes different kinds of metrics CPU memory disk
+
+06:20.300 --> 06:21.100
+network.
+
+06:22.100 --> 06:26.180
+And this this metrics will be scraped by Prometheus.
+
+06:27.740 --> 06:29.340
+Now promptly is outdated.
+
+06:29.620 --> 06:32.940
+But I'm going to still talk about it because many organizations still use this.
+
+06:32.940 --> 06:40.220
+Prompted to push logs to Loki like node exporter exposes metrics to Prometheus.
+
+06:40.460 --> 06:47.460
+Prometheus is going to scrape it promptly, is going to push the logs promptly is going to push logs
+
+06:47.860 --> 06:48.700
+to Loki.
+
+06:49.180 --> 06:54.780
+So logs from containers or servers, any text log files, it can send it to Loki.
+
+06:55.540 --> 07:02.580
+So it reads the logs or any standard output, adds labels to it and sends it to Loki.
+
+07:03.180 --> 07:09.600
+Now Grafana is going to get it from Loki and it will be structured and the structure is important.
+
+07:09.600 --> 07:13.480
+So we can create the graphs, the charts, the notifications.
+
+07:14.000 --> 07:19.800
+So this basically is a log forwarder for Loki, but it is outdated very recently.
+
+07:19.800 --> 07:21.680
+Its support is also stopped.
+
+07:22.160 --> 07:24.920
+So what do we use alloy now.
+
+07:24.960 --> 07:26.360
+Alloy is all in one.
+
+07:26.880 --> 07:29.680
+If you use alloy you don't even need to use node exporter.
+
+07:30.360 --> 07:33.760
+It's called as the unified agent from Grafana Labs.
+
+07:34.600 --> 07:35.880
+It can collect metrics.
+
+07:35.880 --> 07:39.040
+It can collect logs traces, profiles.
+
+07:39.440 --> 07:42.320
+So all in all in one you can replace it with node.
+
+07:42.360 --> 07:47.800
+You can also replace the node exporter but current state I'll tell you node exporter is still used a
+
+07:47.800 --> 07:48.320
+lot.
+
+07:48.800 --> 07:51.040
+Promptly is phasing out instead of prompt.
+
+07:51.360 --> 07:57.360
+We are using alloy slowly node exporter will also phase out and alloy will be used for everything.
+
+07:57.760 --> 07:58.240
+Once again.
+
+07:58.240 --> 08:06.520
+Remember alloy is an agent that can collect metrics, logs, traces and send it to Loki and Prometheus
+
+08:06.520 --> 08:07.040
+also.
+
+08:07.680 --> 08:11.630
+And of course it works with Grafana cloud or even self-hosted.
+
+08:11.630 --> 08:15.830
+Yes, there's Grafana cloud also, but we're going to set up everything our own.
+
+08:15.870 --> 08:19.110
+We need to understand the entire infrastructure.
+
+08:19.110 --> 08:20.310
+So we're going to set up everything.
+
+08:20.310 --> 08:22.390
+We're not going to use self-hosted, sorry.
+
+08:22.390 --> 08:23.470
+We're not going to use cloud.
+
+08:23.470 --> 08:25.230
+We're going to do the self-hosted.
+
+08:25.470 --> 08:29.430
+So alloy is one agent for all observability data.
+
+08:30.350 --> 08:37.470
+Then you have alert manager works with Prometheus to handle alerts can send notification to slack,
+
+08:37.510 --> 08:40.310
+email pagerduty or any kind of webhooks.
+
+08:40.830 --> 08:48.990
+So let's say the CPU spikes above 6080 or this getting full or X amount of requests are failing for
+
+08:48.990 --> 08:50.910
+user some HTTP request.
+
+08:51.230 --> 08:55.950
+So for all this we can create alert in alert manager and we get notifications.
+
+08:57.150 --> 09:01.870
+So this basically is a delivery system alert delivery system for Prometheus.
+
+09:02.430 --> 09:07.830
+Now let's take a look at the architecture diagram and understand the setup that we will be doing in
+
+09:07.830 --> 09:15.700
+this section Okay, so Prometheus, Grafana, Loki, these are the servers and application server or
+
+09:15.700 --> 09:19.660
+any kind of server database container, pod, Kubernetes, anything.
+
+09:20.100 --> 09:21.540
+This is what we are monitoring.
+
+09:21.940 --> 09:30.300
+So alloy or prompt you can read the logs, structure it, label it and send this logs to Loki.
+
+09:30.940 --> 09:39.340
+So Loki is a log aggregation tool and Loki receives log from alloy or prompt tail.
+
+09:40.020 --> 09:46.580
+Then we have node exporter that exposes metrics and Prometheus is going to scrape it.
+
+09:46.580 --> 09:50.580
+So this arrow is wrong just for visualization.
+
+09:50.580 --> 09:56.100
+Prometheus on the other hand, is going to go to the metrics and scrape it.
+
+09:56.620 --> 09:58.900
+So this arrow will make more sense.
+
+09:59.300 --> 10:02.460
+Now node exporter is not the only way to expose the metrics.
+
+10:02.460 --> 10:04.580
+Node exporter is for the system metrics.
+
+10:04.980 --> 10:11.570
+Usually developer create their application and exposes Is matrix, which Prometheus can scrape.
+
+10:12.370 --> 10:20.730
+Now Prometheus and Loki both can be integrated with Grafana, and Grafana can show the dashboard, the
+
+10:20.730 --> 10:23.410
+panels that we have seen in previous lectures.
+
+10:23.610 --> 10:24.890
+Sorry, in the same lecture.
+
+10:25.450 --> 10:27.210
+So this is the whole architecture.
+
+10:27.730 --> 10:34.010
+These different services runs on different ports or exposes different ports which are default, which
+
+10:34.010 --> 10:35.530
+can be changed very easily.
+
+10:35.890 --> 10:40.050
+But as a DevOps engineer, when you're doing the setup or when you're doing automation of this entire
+
+10:40.050 --> 10:47.810
+setup on Kubernetes or on any kind of server, you should know the port numbers, which will help you
+
+10:47.810 --> 10:51.050
+decide the firewall rules and accessibility.
+
+10:51.570 --> 10:55.690
+So let's take a look at the port numbers, the default port numbers of these services.
+
+10:56.530 --> 11:00.210
+So you see Grafana at the top which we can access its dashboard.
+
+11:00.210 --> 11:02.810
+We can access on port 3000.
+
+11:03.290 --> 11:05.610
+You see here that's the Grafana IP.
+
+11:05.610 --> 11:07.610
+And that's the port number 3000.
+
+11:07.650 --> 11:08.770
+Now again this is default.
+
+11:08.770 --> 11:09.690
+We can change it.
+
+11:10.560 --> 11:18.280
+Prometheus we can access on port 1990, and Grafana is also going to access Prometheus on port 1990
+
+11:18.560 --> 11:22.040
+to get all the data so we can create the dashboard panels.
+
+11:22.680 --> 11:28.160
+So basically Grafana executes Prometheus query from QL to fetch the information.
+
+11:28.160 --> 11:31.840
+We're going to understand that in the next lecture or next to next lecture.
+
+11:32.320 --> 11:35.240
+And those queries it's going to run on port 1990.
+
+11:35.840 --> 11:37.080
+You see there Prometheus.
+
+11:37.120 --> 11:39.080
+We are accessing here on 1990.
+
+11:39.120 --> 11:41.920
+Once again it is the default port which we can change.
+
+11:42.960 --> 11:48.200
+We are going to set an application on an EC2 instance and install node exporter.
+
+11:48.200 --> 11:48.680
+In this.
+
+11:48.680 --> 11:53.880
+This node exporter is going to expose the metrics on port 9100.
+
+11:54.440 --> 12:00.880
+So Prometheus is going to scrape the metrics from this application on port 9100.
+
+12:01.360 --> 12:06.600
+We will be hosting the application, and the application will be also exposing the metrics that will
+
+12:06.600 --> 12:08.760
+be on port 5000.
+
+12:09.040 --> 12:10.480
+Again these are the port.
+
+12:10.480 --> 12:11.200
+We can change it.
+
+12:11.200 --> 12:13.270
+But understand this is the access.
+
+12:13.710 --> 12:16.470
+These services connect each other on ports.
+
+12:16.750 --> 12:19.430
+As a DevOps engineer, we should be aware about this.
+
+12:19.950 --> 12:25.030
+Now prompt tail or ally is going to push logs to Loki.
+
+12:25.510 --> 12:31.150
+Now Loki will be listening on port 3100 and logs will be pushed to it.
+
+12:31.630 --> 12:35.110
+Unlike Prometheus, Prometheus is going to scrape the metric.
+
+12:35.430 --> 12:37.150
+Loki is going to receive it.
+
+12:37.630 --> 12:44.190
+So prompt tail or ally is going to push the logs to Loki, which can be collected by Grafana.
+
+12:44.470 --> 12:47.990
+So Grafana will connect to Loki on port 3100.
+
+12:48.030 --> 12:51.230
+Grafana will connect to Prometheus on port 1990.
+
+12:51.590 --> 12:58.510
+Prometheus is going to scrape the metrics on port 9100, and application metrics also can be scraped
+
+12:58.510 --> 13:00.470
+that will be defined by the developers.
+
+13:01.030 --> 13:05.830
+So download this document this image from this lecture resource and take a look.
+
+13:06.270 --> 13:10.950
+In the next lecture we are going to start the setup of these tools these services.
+
+13:11.350 --> 13:13.230
+So wrap this up and join me in the next one.

@@ -1,0 +1,262 @@
+WEBVTT
+
+00:00.330 --> 00:01.530
+Instructor: All right, so let's take a look
+
+00:01.530 --> 00:04.020
+at the architecture diagram once again.
+
+00:04.020 --> 00:06.060
+The user accessed the load balancer,
+
+00:06.060 --> 00:08.310
+which is through the correct host path,
+
+00:08.310 --> 00:11.250
+then the ingress will match it to the Tomcat service.
+
+00:11.250 --> 00:14.220
+Tomcat service is going to forward the request to the pod
+
+00:14.220 --> 00:17.070
+where we have our vProfile application running.
+
+00:17.070 --> 00:19.260
+That needs connectivity to the backend service
+
+00:19.260 --> 00:23.400
+like database, so it's going to connect to the DBService.
+
+00:23.400 --> 00:25.350
+And our vProfile application
+
+00:25.350 --> 00:28.050
+has application properties file where the information
+
+00:28.050 --> 00:30.390
+is mentioned of the backend services.
+
+00:30.390 --> 00:33.810
+In this case, literally the Kubernetes service information,
+
+00:33.810 --> 00:37.590
+like WebPro DB, port 3306, right, like that.
+
+00:37.590 --> 00:40.650
+So with that information it's going to find a DB
+
+00:40.650 --> 00:43.980
+with the Pro DB name, right, connect the service.
+
+00:43.980 --> 00:46.050
+Service is going to forward the request
+
+00:46.050 --> 00:48.510
+to the pod, database pod.
+
+00:48.510 --> 00:51.270
+And the data is stored in EBS volume,
+
+00:51.270 --> 00:54.390
+that is claimed by persistent volume claim
+
+00:54.390 --> 00:56.553
+and created by storage class.
+
+00:57.450 --> 01:01.230
+The DB container also requires the password
+
+01:01.230 --> 01:02.880
+to run MySQL root password.
+
+01:02.880 --> 01:05.760
+That password is saved in the secret.
+
+01:05.760 --> 01:09.630
+Okay, so once again, go through all your definition files,
+
+01:09.630 --> 01:11.520
+compare it with the architecture diagram,
+
+01:11.520 --> 01:13.950
+make sure you understood everything.
+
+01:13.950 --> 01:17.610
+I'll also recommend you draw yourself these diagrams
+
+01:17.610 --> 01:19.950
+and, you know, write your own information.
+
+01:19.950 --> 01:21.570
+It'll be easier for you when you sit
+
+01:21.570 --> 01:22.650
+in the project meetings,
+
+01:22.650 --> 01:25.230
+when you want to really containerize applications.
+
+01:25.230 --> 01:28.500
+And also very helpful when you're talking in the interview.
+
+01:28.500 --> 01:30.660
+Okay, now it's time to wrap up stuff.
+
+01:30.660 --> 01:34.233
+So first we need to delete the ingress controller.
+
+01:35.520 --> 01:37.230
+Okay, so the command that we use
+
+01:37.230 --> 01:40.290
+to create the ingress controller.
+
+01:40.290 --> 01:43.080
+In the same command, we have to just do kubectl delete
+
+01:43.080 --> 01:44.790
+instead of apply.
+
+01:44.790 --> 01:49.170
+So that is going to start deleting the controller.
+
+01:49.170 --> 01:51.870
+Okay, this is going to take some time.
+
+01:51.870 --> 01:54.630
+Okay, it should also delete the load balancer
+
+01:54.630 --> 01:55.780
+that was created by it.
+
+01:56.700 --> 01:58.920
+Okay, next, let's delete everything
+
+01:58.920 --> 02:01.350
+that we created, one simple command.
+
+02:01.350 --> 02:05.220
+Let's go to our repository, kubedefs,
+
+02:05.220 --> 02:10.120
+and we'll say kubectl delete -f, dot.
+
+02:13.080 --> 02:15.870
+That should delete everything including the PVC.
+
+02:15.870 --> 02:18.510
+And when we delete the volume claim,
+
+02:18.510 --> 02:20.763
+it's going to also delete the EBS volume.
+
+02:21.750 --> 02:24.000
+Okay, once you're done, you can delete the cluster.
+
+02:24.000 --> 02:27.600
+You can say kops delete cluster, find the previous command,
+
+02:27.600 --> 02:30.390
+or use the kops validate cluster command.
+
+02:30.390 --> 02:34.350
+Instead of validate, just put delete and say --yes,
+
+02:34.350 --> 02:35.940
+and hit Enter.
+
+02:35.940 --> 02:37.620
+And that is going to take some time,
+
+02:37.620 --> 02:41.280
+like a lot of time, to delete the entire cluster.
+
+02:41.280 --> 02:43.230
+And if you're done here,
+
+02:43.230 --> 02:45.750
+you don't need the Kubernetes cluster moving forward,
+
+02:45.750 --> 02:50.750
+then you can also remove the hosted zone from route 53.
+
+02:52.170 --> 02:53.700
+And kOps EC2 instance,
+
+02:53.700 --> 02:55.980
+I recommend you just shut down and keep it,
+
+02:55.980 --> 02:57.540
+you know, because there's a lot of prerequisites
+
+02:57.540 --> 02:58.860
+we did over there.
+
+02:58.860 --> 03:00.900
+But anyways, if you don't need it, you can delete
+
+03:00.900 --> 03:03.090
+the kOps EC2 instance also.
+
+03:03.090 --> 03:03.923
+You have the lecture,
+
+03:03.923 --> 03:05.790
+you have all the resources, whenever you want,
+
+03:05.790 --> 03:08.370
+you can create everything from the scratch.
+
+03:08.370 --> 03:11.310
+So if you're not going to use it for a long time,
+
+03:11.310 --> 03:13.080
+I recommend you just simply delete everything.
+
+03:13.080 --> 03:14.490
+Just delete the Kubernetes cluster,
+
+03:14.490 --> 03:16.830
+after that, delete the kOps instance.
+
+03:16.830 --> 03:19.773
+Route 53 hosted zone, also makes sure you delete.
+
+03:20.730 --> 03:23.370
+Okay, and that was all.
+
+03:23.370 --> 03:25.020
+Right, I know it's long,
+
+03:25.020 --> 03:26.737
+there's a lot of things that happened
+
+03:26.737 --> 03:30.870
+that you know, came together over here in a very short time.
+
+03:30.870 --> 03:32.130
+But if you do it few times
+
+03:32.130 --> 03:35.310
+and you know, if you make sure you know the architecture,
+
+03:35.310 --> 03:38.190
+you know the application, like vProfile application here,
+
+03:38.190 --> 03:39.690
+now you know the basics of Kubernetes.
+
+03:39.690 --> 03:41.670
+You can anytime do this.
+
+03:41.670 --> 03:43.770
+All right then, it was great.
+
+03:43.770 --> 03:46.530
+I also really enjoyed recording this lecture.
+
+03:46.530 --> 03:49.590
+Thank you so much for watching and completing it.
+
+03:49.590 --> 03:51.140
+I will see you in the next one.

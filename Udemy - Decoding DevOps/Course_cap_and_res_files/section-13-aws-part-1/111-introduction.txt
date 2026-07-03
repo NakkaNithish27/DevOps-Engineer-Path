@@ -1,0 +1,561 @@
+WEBVTT
+
+0
+00:01.520 --> 00:03.890
+Hello and welcome to the AWS sessions.
+
+1
+00:04.640 --> 00:09.590
+In this video, we're going to talk about AWS in general, its infrastructure, how it is spread
+
+2
+00:09.590 --> 00:17.240
+across the world, and how we can leverage that to create our infrastructure, you will need an AWS free tier
+
+3
+00:17.300 --> 00:21.130
+account, which we have already covered how to do it in prerqusites video.
+
+4
+00:21.150 --> 00:22.430
+So please go through that.
+
+5
+00:22.940 --> 00:29.360
+If you have not done, set a AWS free tier account, set an alarm for billing, go to IAM
+
+6
+00:29.360 --> 00:30.950
+set up an IAM user.
+
+7
+00:31.730 --> 00:35.900
+If you don't know what I'm talking about right now, then check the prerequisites video.
+
+8
+00:37.860 --> 00:45.120
+So before we continue, let me tell you this, this will be mostly hands on as the rest of the course,
+
+9
+00:45.120 --> 00:51.120
+but whenever we need some explanation on AWS service, we are going to pull up slides and run through
+
+10
+00:51.120 --> 00:52.820
+some theory and some diagrams.
+
+11
+00:53.760 --> 00:57.150
+But I promise to keep it minimum and have more HANDSON.
+
+12
+00:58.280 --> 01:06.950
+So AWS is the biggest cloud computing provider today, with more than 46 percent market share, as
+
+13
+01:06.950 --> 01:12.200
+we're speaking right now, and it may grow or go less, that depends on the future.
+
+14
+01:12.770 --> 01:17.960
+But until this time, it's the biggest cloud computing provider or public cloud computing provider.
+
+15
+01:21.790 --> 01:25.960
+And for that reason, AWS is spread across the world, across the globe.
+
+16
+01:26.860 --> 01:34.300
+It has its presence in so many countries, which is called regions, and it's every day growing .  Within
+
+17
+01:34.300 --> 01:36.960
+the region, it has multiple zones.
+
+18
+01:37.150 --> 01:40.180
+Think of zones as multiple data centers.
+
+19
+01:40.690 --> 01:42.820
+One zone is multiple data center.
+
+20
+01:42.830 --> 01:46.750
+And in a region, you may have minimum two zones and maximum.
+
+21
+01:46.750 --> 01:54.150
+I have seen six zones and a single zone means multiple data centers, clustered data centers.
+
+22
+01:54.520 --> 01:55.320
+So it's huge.
+
+23
+01:55.330 --> 02:01.360
+I'm going to show you nice diagrams and 3D view of the globe to make you understand how its spread.
+
+24
+02:03.940 --> 02:10.180
+So AWS. claims that global infrastructure is the most secure, extensive and reliable cloud platform,
+
+25
+02:10.870 --> 02:17.620
+and currently, as I'm speaking in December 2020, it has 175 fully featured services.
+
+26
+02:18.070 --> 02:19.820
+That's too many services.
+
+27
+02:20.170 --> 02:22.480
+I'll go through the services, not all of them.
+
+28
+02:22.750 --> 02:27.370
+But I will help you understand how these services are distributed for different categories.
+
+29
+02:29.040 --> 02:38.580
+It has 77 availability zones with 24 geographic regions, so as I told you, you have zones in a region.
+
+30
+02:39.300 --> 02:45.720
+So one region will have minimum two zones and a single zone is a multiple cluster data centers.
+
+31
+02:46.080 --> 02:48.620
+So total 77 availability zones.
+
+32
+02:49.200 --> 02:51.540
+And this is in December 2020.
+
+33
+02:52.230 --> 02:57.750
+And it has announced plans for 15 more availability zones, five more AWS regions.
+
+34
+02:58.170 --> 03:00.660
+One new region is coming up in Hyderabad.
+
+35
+03:01.440 --> 03:04.650
+And then you have Indonesia, Japan, Spain, Switzerland.
+
+36
+03:04.650 --> 03:07.920
+There are new data centers are coming up on new regions we can see.
+
+37
+03:10.750 --> 03:13.990
+So it can be best understood by looking at the entire globe.
+
+38
+03:14.050 --> 03:21.100
+This is a link to a website where we can see all this, OK, if you visit the site infrastructure.aws
+
+39
+03:21.240 --> 03:24.370
+you will see the globe and see how we do it.
+
+40
+03:27.000 --> 03:34.560
+OK, so you can use your cursor and rotate the entire globe, you can see, as I told you, Hyderabad is
+
+41
+03:34.560 --> 03:37.970
+an upcoming region and you should see its presence.
+
+42
+03:37.980 --> 03:39.090
+It's in Bahrain.
+
+43
+03:39.090 --> 03:40.110
+It's in Europe.
+
+44
+03:40.110 --> 03:41.550
+It's so many countries.
+
+45
+03:41.760 --> 03:43.650
+These are the regions we are seeing mostly.
+
+46
+03:44.650 --> 03:46.930
+OK, where did I click, I clicked on spain
+
+47
+03:47.000 --> 03:48.580
+OK, it says coming soon.
+
+48
+03:49.670 --> 03:55.900
+OK, so we click on the Region, it  will tell you what really region is,  you click on Availability Zone and
+
+49
+03:55.900 --> 03:59.200
+it will show you some sample and tell you what is an availability zone.
+
+50
+03:59.560 --> 04:00.730
+The data centers.
+
+51
+04:02.310 --> 04:07.380
+So you can see you can read about it, you know, one of availablty Zone will have many, many data centres
+
+52
+04:07.380 --> 04:15.780
+in it and how it is now secure and the surveillance and the uptime, all of that along with that, with
+
+53
+04:16.110 --> 04:19.050
+a regions and zone, it will also have local zones.
+
+54
+04:19.740 --> 04:21.450
+So these are the new types of.
+
+55
+04:22.730 --> 04:29.840
+Data centers from AWS, which will place compute storage database and some other services closer
+
+56
+04:29.840 --> 04:36.110
+to a large population, like in a big city where a lot of customers, like that. Then you have point
+
+57
+04:36.110 --> 04:36.890
+of presence.
+
+58
+04:38.250 --> 04:44.100
+Which are also the edge location, so it is going to cache. This is for the AWS content delivery network
+
+59
+04:44.430 --> 04:48.980
+where it is going to cache the data which will be used by the users.
+
+60
+04:49.010 --> 04:53.130
+It's a very small data centers compared to the availability zones.
+
+61
+04:54.180 --> 04:57.640
+Then you have ground stations and you have network and you can see all of that.
+
+62
+04:57.660 --> 05:02.280
+OK, check the color yellow for region, green for region, which is coming soon.
+
+63
+05:04.210 --> 05:10.120
+Like you see, Hyderabad is Green, let me see if I can zone that, I cannot zoom it.
+
+64
+05:10.850 --> 05:12.310
+that much is the size.
+
+65
+05:18.570 --> 05:24.720
+So some city in China where we have this region has three availability zones, so you can check like
+
+66
+05:24.720 --> 05:25.020
+that.
+
+67
+05:27.420 --> 05:31.890
+So if you want to understand how those regions and zones really work, so if you have multiple zones,
+
+68
+05:31.890 --> 05:34.220
+you can do high availability for your infrastructure.
+
+69
+05:34.740 --> 05:40.020
+You can, let's say place 2 webserver in one zone and other 2 in the other zones.
+
+70
+05:40.300 --> 05:44.130
+So if you have total 4 Webster, you can distribute them to get high availability.
+
+71
+05:44.700 --> 05:50.970
+Even if a zone goes down or if becomes slow, then other part of your infrastructure will be
+
+72
+05:50.970 --> 05:51.870
+still up and running.
+
+73
+05:52.950 --> 05:59.640
+We have multiple regions you can cater global audience and you can also set a disaster recovery, and
+
+74
+05:59.640 --> 06:02.250
+this is not a feature that you can just enable.
+
+75
+06:02.250 --> 06:06.690
+You have to do a lot of things when you are doing a disaster recovery in between two regions.
+
+76
+06:08.400 --> 06:14.880
+Also, when you're running a project, It will have compliances right, about the data residency.
+
+77
+06:16.730 --> 06:23.900
+Security and other compliance, so those things should be fitting in with the AWB compliance and for
+
+78
+06:23.900 --> 06:27.130
+that reason also you have regions at different, different countries.
+
+79
+06:28.440 --> 06:34.370
+And geographic expansion, of course, we need expanding your business, you can use the global infrastructure,
+
+80
+06:34.380 --> 06:37.650
+you don't have to build your data centers around the world.
+
+81
+06:39.770 --> 06:45.890
+So availability zone, as I said, you can have multiple availability zone and you can distribute your
+
+82
+06:45.890 --> 06:50.720
+infrastructure among multiple availability zones in a region to get high availability.
+
+83
+06:52.370 --> 06:57.410
+So, for an example, if you're launching a virtual machine, which we call it as instance, you need
+
+84
+06:57.410 --> 07:03.050
+a place, you can select the availability zone or you can let AWS decides the availability zone
+
+85
+07:03.050 --> 07:03.500
+for you.
+
+86
+07:06.480 --> 07:11.220
+And when you're designing application, the infrastructure layout, you can select the multiple zones
+
+87
+07:11.220 --> 07:16.410
+in a region and distribute your infrastructure and the traffic will also that is coming towards your
+
+88
+07:16.410 --> 07:18.060
+infrastructure, will get distributed.
+
+89
+07:19.420 --> 07:21.040
+So that's some overall theory.
+
+90
+07:22.230 --> 07:27.720
+On AWS regions and zones and its edge locations, let see AWS  console.
+
+91
+07:29.790 --> 07:32.010
+So I'm logged into the AWS management console.
+
+92
+07:32.950 --> 07:37.630
+With my root count, I have explained in the prerequisites video, how to get this and how to use
+
+93
+07:37.630 --> 07:41.770
+IAM user. So login into the AWS  management console within an IAM user.
+
+94
+07:43.120 --> 07:51.010
+And when I said AWS has 175 fully featured services and you can see them over here, there are
+
+95
+07:51.010 --> 07:56.830
+so many services and you can go in and there are more services, but really don't get scared by looking
+
+96
+07:56.830 --> 07:58.210
+at the number of services.
+
+97
+07:58.210 --> 08:00.160
+You don't have to learn all of them.
+
+98
+08:00.580 --> 08:05.500
+It's based on what area you're working in, where is your expertise.
+
+99
+08:06.160 --> 08:09.120
+Based on that, you will be using a particular service.
+
+100
+08:09.130 --> 08:15.490
+Like, for example, if you are a system admin or a  devops, you want a virtual machine, you can use
+
+101
+08:15.490 --> 08:16.540
+ec2 service
+
+102
+08:17.610 --> 08:23.550
+But then there is a quantum technology Amazon bracket, you may not need to learn that.
+
+103
+08:25.200 --> 08:32.850
+Or media services have you, also have sources in machine learning, you will have services in analytics
+
+104
+08:33.720 --> 08:36.260
+application or robotics or Iot.
+
+105
+08:36.270 --> 08:42.570
+So there are many sections based on the user requirement AWS is catering the right service for a particular
+
+106
+08:42.570 --> 08:43.020
+user.
+
+107
+08:44.670 --> 08:51.690
+Our focus in the course will be on sysops and devops services and also some developer services like
+
+108
+08:51.690 --> 08:58.430
+we are going to see ec2 service, beanstalk service, which is more related to the devops.
+
+109
+08:58.470 --> 09:06.680
+Storage services we will see, s3,efs,glacier. Database services like RDS and also elasticcache.
+
+110
+09:07.260 --> 09:09.630
+Then there are services for migration and transfer.
+
+111
+09:10.260 --> 09:16.170
+We are also going to see some networking services like VPC Cloud Front Route 53 also will be seeing
+
+112
+09:16.170 --> 09:21.320
+developer tools like Code Comit Code, Artifact Code, Build Code, Deploy Code Pipeline.
+
+113
+09:21.930 --> 09:28.830
+So based on our requirement, as I said, we are going to focus more on sys Ops and devops services
+
+114
+09:28.830 --> 09:33.960
+will be also seeing monitoring services like Cloud Watch and also some compliance services.
+
+115
+09:35.240 --> 09:41.780
+I think sysops gives you a very solid ground on AWS services based on that, you can learn then most of
+
+116
+09:41.780 --> 09:44.210
+the other services in AWS, which will be very easy.
+
+117
+09:44.540 --> 09:49.400
+If you have good hands on the sysops services of AWS, then you should be able to learn the
+
+118
+09:49.400 --> 09:55.550
+devops services, the developer services, security services, networking services..
+
+119
+09:55.550 --> 09:58.340
+Again then the path is based on your requirement.
+
+120
+10:00.290 --> 10:01.950
+Here we have the regions.
+
+121
+10:02.750 --> 10:08.690
+So in a project, you can decide based on the requirement or you will already told to use a particular region to use
+
+122
+10:08.690 --> 10:10.410
+or a few regions to use.
+
+123
+10:10.820 --> 10:15.210
+So when you select a particular region, right now its north California.
+
+124
+10:15.260 --> 10:19.510
+So it will be using the zones in the north California region.
+
+125
+10:19.700 --> 10:22.070
+So my data will, whatever data, I am storing over here.
+
+126
+10:22.080 --> 10:27.110
+will is going to not California data centers, but for some compliance reason.
+
+127
+10:27.110 --> 10:28.570
+you don't want to keep it in US.
+
+128
+10:28.580 --> 10:35.690
+You can probably go to European regions, or to cater your audience based on their geographic location.
+
+129
+10:36.830 --> 10:40.910
+So for this course, I will be mostly using AWS based region.
+
+130
+10:40.940 --> 10:42.770
+You are free to choose any other region.
+
+131
+10:42.800 --> 10:49.550
+I still recommend use U.S. based region because some other regions like Singapore, Mumbai, Tokyo,
+
+132
+10:49.550 --> 10:51.550
+are expensive compared to U.S. region.
+
+133
+10:52.310 --> 10:54.940
+Not that we will be spending money too much on.
+
+134
+10:54.950 --> 11:01.040
+AWS, we will be using Free-tier mostly, but there are certain places where we have to go above free-tier
+
+135
+11:01.040 --> 11:04.540
+and spend some money on AWS services.
+
+136
+11:04.550 --> 11:10.040
+And when that comes, I'm going to alert you and will show you also how to clean up once you're done
+
+137
+11:10.040 --> 11:11.600
+so you don't spend too much money.
+
+138
+11:12.950 --> 11:14.610
+So that is all in this video.
+
+139
+11:14.630 --> 11:17.890
+I will see you in the next one where we actually do something nice.

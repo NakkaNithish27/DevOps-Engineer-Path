@@ -1,0 +1,343 @@
+WEBVTT
+
+00:03.270 --> 00:04.620
+Instructor: Okay, I'm in exercise folder.
+
+00:04.620 --> 00:07.470
+I'm going to copy exercise nine.
+
+00:07.470 --> 00:10.683
+Sorry, exercise 10 to exercise 11.
+
+00:11.610 --> 00:13.443
+Let's get into exercise 11.
+
+00:15.360 --> 00:16.980
+Okay as I told you in the previous lecture
+
+00:16.980 --> 00:19.470
+we are going to talk about loops.
+
+00:19.470 --> 00:21.483
+Now let's look at the use case first.
+
+00:25.320 --> 00:29.160
+Okay, so we have a playbook and it installs a package.
+
+00:29.160 --> 00:31.800
+Just one single package, right?
+
+00:31.800 --> 00:36.450
+What if we need to install 2, 5, 10, 20 packages?
+
+00:36.450 --> 00:37.350
+Many, many packages.
+
+00:37.350 --> 00:38.750
+What if you want to do that?
+
+00:39.900 --> 00:42.690
+Right do we copy these task again and again
+
+00:42.690 --> 00:43.950
+for that many times?
+
+00:43.950 --> 00:46.980
+No, we will use loops.
+
+00:46.980 --> 00:48.690
+It's pretty simple.
+
+00:48.690 --> 00:53.400
+Just below this task we have to say loop.
+
+00:57.480 --> 01:01.980
+Okay, colon and its value will be a list.
+
+01:01.980 --> 01:04.200
+Now we can give the entire list here
+
+01:04.200 --> 01:07.540
+or we can have a list variable
+
+01:08.400 --> 01:10.440
+and we can give this variable value over here.
+
+01:10.440 --> 01:11.790
+Sorry, variable name over here.
+
+01:11.790 --> 01:13.860
+First we'll just go with the list.
+
+01:13.860 --> 01:17.730
+So we'll say hyphen, and first we'll say chrony.
+
+01:17.730 --> 01:19.200
+And the next package, let's go
+
+01:19.200 --> 01:24.060
+with some simple packages here, like wget, right?
+
+01:24.060 --> 01:27.293
+We'll go with git and zip, unzip.
+
+01:34.530 --> 01:36.480
+Right so these are the list of packages.
+
+01:36.480 --> 01:39.180
+Now here, instead of the name of the package
+
+01:39.180 --> 01:40.950
+we have to give the variable.
+
+01:40.950 --> 01:45.660
+We have to give double quotes, curly brace, two curly brace.
+
+01:45.660 --> 01:48.510
+And in the two curly brace we have to give a variable item
+
+01:48.510 --> 01:52.290
+this exact name item, that's the variable name
+
+01:52.290 --> 01:53.853
+the loop is going to return.
+
+01:55.320 --> 01:58.440
+So this loop is going to have a variable called item
+
+01:58.440 --> 02:01.710
+and it is going to loop your task as many as time
+
+02:01.710 --> 02:02.670
+you have the items.
+
+02:02.670 --> 02:06.183
+So this task, yum task is going to run how many times?
+
+02:08.250 --> 02:09.600
+Right five times.
+
+02:09.600 --> 02:12.180
+1, 2, 3, 4, 5.
+
+02:12.180 --> 02:14.700
+And every time the value of item will be changing.
+
+02:14.700 --> 02:16.050
+First it'll be chrony
+
+02:16.050 --> 02:19.770
+then it will be wget, git, zip, unzip, like that.
+
+02:19.770 --> 02:21.690
+Okay same we will give for apt.
+
+02:21.690 --> 02:25.513
+So I'm going to copy this six yy and going to paste it here.
+
+02:31.320 --> 02:32.250
+Now we have a condition
+
+02:32.250 --> 02:34.290
+so we are pasting it below the condition.
+
+02:34.290 --> 02:37.320
+If there is no condition just directly here itself
+
+02:37.320 --> 02:40.410
+make sure it's in the same column as the module name.
+
+02:40.410 --> 02:43.803
+Now here, the package name is not chrony, it's ntp.
+
+02:47.160 --> 02:48.690
+And here we need to change
+
+02:48.690 --> 02:51.513
+from the name to the variable name.
+
+02:56.370 --> 02:58.560
+Okay, I'm thinking of adding one more task.
+
+02:58.560 --> 02:59.883
+Let's add one more task.
+
+03:01.290 --> 03:03.720
+Let's test this one first, then we'll add that task.
+
+03:03.720 --> 03:05.700
+Same task, similar task.
+
+03:05.700 --> 03:07.350
+Let's see how this one works first.
+
+03:07.350 --> 03:12.350
+So let's save and quit and let's execute the playbook.
+
+03:18.630 --> 03:20.520
+Now look at the output.
+
+03:20.520 --> 03:22.170
+It's going to be a little bigger.
+
+03:29.610 --> 03:30.873
+Okay, let's take a look.
+
+03:32.940 --> 03:36.150
+So you see the task is running multiple times, right?
+
+03:36.150 --> 03:37.953
+For each package.
+
+03:43.770 --> 03:46.500
+Right on web zero three, ntp, wget and git
+
+03:46.500 --> 03:47.430
+was already installed.
+
+03:47.430 --> 03:50.400
+The zip was not installed so it installed that one.
+
+03:50.400 --> 03:54.093
+Right? Now let's look at the documentation of loops.
+
+03:55.530 --> 03:58.263
+Ansible loops, let's look at this first one.
+
+04:01.050 --> 04:04.110
+Okay now there are two types of loop first of all,
+
+04:04.110 --> 04:06.153
+loop and with_ item.
+
+04:08.904 --> 04:12.360
+Now this is similar with_ items or you can give loop also
+
+04:12.360 --> 04:14.760
+but loop gives you much more functionality.
+
+04:14.760 --> 04:16.590
+Now this is the basic one that we use, right?
+
+04:16.590 --> 04:19.080
+This is a task to add a user
+
+04:19.080 --> 04:21.810
+and you can give the list of user over there.
+
+04:21.810 --> 04:24.190
+Now you can also give a variable
+
+04:25.410 --> 04:28.140
+and this variable will be a list variable
+
+04:28.140 --> 04:29.970
+that you need to define variables file
+
+04:29.970 --> 04:33.813
+like in group works all file, or based on your use case.
+
+04:36.630 --> 04:41.630
+Now you can pass values as a string, right?
+
+04:41.640 --> 04:45.000
+One string at a time, or you can pass a dictionary also.
+
+04:45.000 --> 04:47.490
+Now, when you have a dictionary, you can have multiple keys
+
+04:47.490 --> 04:52.490
+in the dictionary, like over here it is using item.name.
+
+04:54.420 --> 04:57.300
+So item will be this one in the first iteration
+
+04:57.300 --> 05:00.450
+and .name is going to return test user one.
+
+05:00.450 --> 05:04.290
+And then it has item.groups, right?
+
+05:04.290 --> 05:07.650
+So another key item.groups, it's value is wheel.
+
+05:07.650 --> 05:12.630
+So you can pass multiple values also per iteration.
+
+05:12.630 --> 05:16.110
+Then you need to have a dictionary variable instead
+
+05:16.110 --> 05:18.330
+of mentioning a string.
+
+05:18.330 --> 05:19.350
+Now, I love this feature
+
+05:19.350 --> 05:20.900
+'cause I've used it many times.
+
+05:23.070 --> 05:26.580
+Okay and there are much more complex loops also,
+
+05:26.580 --> 05:27.993
+you see complex loops.
+
+05:29.618 --> 05:33.930
+Like retrying a task until a condition is met, right?
+
+05:33.930 --> 05:38.100
+And many other examples, we are, we have over here
+
+05:38.100 --> 05:41.070
+you can take a look, but for now
+
+05:41.070 --> 05:43.680
+we'll keep it simple is enough for now.
+
+05:43.680 --> 05:46.560
+When the need comes, then you can go with the complex one.
+
+05:46.560 --> 05:48.900
+But mostly we use this one only
+
+05:48.900 --> 05:51.333
+and the max, the dictionary variables.
+
+05:52.320 --> 05:56.140
+Now, as you know, we can use ChatGPT also to generate
+
+05:57.060 --> 05:58.740
+the playbook for us, right?
+
+05:58.740 --> 06:00.423
+So you can try that also.
+
+06:01.980 --> 06:04.260
+So I'm giving you many more options
+
+06:04.260 --> 06:05.460
+don't get confused, right?
+
+06:05.460 --> 06:08.550
+We start with a basic loop and you know how to write it
+
+06:08.550 --> 06:10.740
+now it's pretty simple, but whenever you need
+
+06:10.740 --> 06:12.927
+you have documentation, you have ChatGPT
+
+06:12.927 --> 06:16.500
+and a simple Google will also help you many times.
+
+06:16.500 --> 06:18.150
+So test this out.
+
+06:18.150 --> 06:21.420
+Try to add some more tasks like adding multiple users
+
+06:21.420 --> 06:23.550
+in the playbook or to the playbook.
+
+06:23.550 --> 06:27.333
+Try that also and then join me in the next lecture.

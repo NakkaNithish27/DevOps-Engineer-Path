@@ -1,0 +1,310 @@
+WEBVTT
+
+00:00.270 --> 00:02.010
+Instructor: Okay, so far, so good,
+
+00:02.010 --> 00:03.990
+but can it be better?
+
+00:03.990 --> 00:06.180
+Can we do everything with Copilot?
+
+00:06.180 --> 00:07.173
+Of course, we can.
+
+00:08.010 --> 00:10.560
+But, remember, if Copilot is doing everything,
+
+00:10.560 --> 00:12.600
+you also need to review the content,
+
+00:12.600 --> 00:14.880
+that is reverse engineering.
+
+00:14.880 --> 00:16.650
+I never recommend large amount of code
+
+00:16.650 --> 00:18.810
+written by the AI tool,
+
+00:18.810 --> 00:22.920
+'cause then finding the mistakes will be a problem,
+
+00:22.920 --> 00:26.910
+and reading these many lines of code can also be a problem.
+
+00:26.910 --> 00:30.000
+What we are going to do is simple work with Copilot now.
+
+00:30.000 --> 00:32.250
+We are going to create entire directory structure
+
+00:32.250 --> 00:35.100
+with Vagrantfile scripts for provisioning.
+
+00:35.100 --> 00:36.270
+Everything whatever we did
+
+00:36.270 --> 00:40.470
+in website setup and WordPress setup,
+
+00:40.470 --> 00:42.450
+we will ask Copilot to do it for us.
+
+00:42.450 --> 00:44.670
+So let's open the chat.
+
+00:44.670 --> 00:48.120
+So click on this dropdown and click on Open Chat.
+
+00:48.120 --> 00:48.990
+Let's clear this,
+
+00:48.990 --> 00:52.860
+click on this + symbol to get a new chat window.
+
+00:52.860 --> 00:54.750
+So we need to create entire new workspace,
+
+00:54.750 --> 00:56.640
+like, we have this folder structure sent to us,
+
+00:56.640 --> 00:58.590
+finance, wordpress,
+
+00:58.590 --> 01:00.600
+this entire structure, we need to create,
+
+01:00.600 --> 01:03.810
+so for that we need to give /new, new command.
+
+01:03.810 --> 01:05.580
+So this will be working in the workspace
+
+01:05.580 --> 01:10.470
+so you'll automatically get @workspace /new.
+
+01:10.470 --> 01:15.440
+Now I'm going to write "Create a folder structure for me
+
+01:17.520 --> 01:19.767
+with Vagrantfile,"
+
+01:21.270 --> 01:23.700
+And I'll give all the details that I need in the Vagrantfile
+
+01:23.700 --> 01:25.590
+and also about the script.
+
+01:25.590 --> 01:27.897
+So I have given "Create a folder structure with Vagrantfile
+
+01:27.897 --> 01:31.110
+and provisioning script," it'll be two different files,
+
+01:31.110 --> 01:32.490
+VM setting, box name,
+
+01:32.490 --> 01:33.840
+mention the right box name,
+
+01:33.840 --> 01:37.110
+I have mentioned here, ubuntu/jammy64 for Windows.
+
+01:37.110 --> 01:39.630
+macOS Intel chip can use the same box,
+
+01:39.630 --> 01:41.400
+for macOS M series chip,
+
+01:41.400 --> 01:44.940
+use the right box, box/arm64,
+
+01:44.940 --> 01:47.700
+private network, I have mentioned, public network,
+
+01:47.700 --> 01:49.950
+and I've said, "Mention path of the script
+
+01:49.950 --> 01:50.850
+in the provisioning,"
+
+01:50.850 --> 01:53.940
+so not the command, mention the path of the script,
+
+01:53.940 --> 01:55.500
+and what should be in the script.
+
+01:55.500 --> 01:58.290
+We'll mention that provisioning script
+
+01:58.290 --> 02:02.010
+should set up website from tooplate.com.
+
+02:02.010 --> 02:03.183
+Let's see what it does.
+
+02:04.620 --> 02:07.340
+Okay, so this is what it has proposed
+
+02:07.340 --> 02:10.530
+to create a new folder, Vagrantfile there,
+
+02:10.530 --> 02:14.160
+and provisioning script there, and a README file.
+
+02:14.160 --> 02:16.890
+Let's click on Create Workspace.
+
+02:16.890 --> 02:18.330
+You need to select the parent folder,
+
+02:18.330 --> 02:20.340
+it'll ask you the question for that.
+
+02:20.340 --> 02:23.430
+So I'm just gonna say do it in the vagrant-vm folder only,
+
+02:23.430 --> 02:25.270
+Select Parent folder.
+
+02:25.270 --> 02:28.170
+Okay, so you see the folder structure is created over here,
+
+02:28.170 --> 02:30.570
+you can see the provisioning script,
+
+02:30.570 --> 02:32.580
+you see the Vagrantfile over here,
+
+02:32.580 --> 02:34.590
+it has mentioned the provisioner,
+
+02:34.590 --> 02:38.850
+a shell and path of provision.sh, which is the script there,
+
+02:38.850 --> 02:41.260
+and it has also the README.md file
+
+02:42.750 --> 02:45.423
+that explains everything about this project.
+
+02:46.290 --> 02:48.720
+Okay, now let's try the same for WordPress.
+
+02:48.720 --> 02:50.223
+Let's Open Chat,
+
+02:51.090 --> 02:54.187
+and I'm going to copy the previous text still here,
+
+02:54.187 --> 02:57.180
+"Provisioning setup script should be,"
+
+02:57.180 --> 03:00.960
+and over here, /new, and paste this,
+
+03:00.960 --> 03:03.030
+make sure you change the IP address,
+
+03:03.030 --> 03:07.110
+I'm going to change it to 79,
+
+03:07.110 --> 03:11.853
+and I will say provisioning script should set up WordPress.
+
+03:13.260 --> 03:14.700
+I will also add extra memory,
+
+03:14.700 --> 03:19.700
+I'm going to say Memory 2 gb and 2 cpu.
+
+03:23.400 --> 03:24.663
+Okay, let's hit Enter.
+
+03:26.790 --> 03:29.550
+Okay, so it's proposing this folder structure.
+
+03:29.550 --> 03:34.143
+I'm gonna say Create Workspace, select the parent folder.
+
+03:35.310 --> 03:38.610
+And now you see a new workspace, my-wordpress-vagrant,
+
+03:38.610 --> 03:40.110
+check the provisioning script.
+
+03:42.690 --> 03:45.450
+Now, I'm not saying that this will be 100% correct,
+
+03:45.450 --> 03:47.820
+you need to modify your prompt.
+
+03:47.820 --> 03:50.520
+If you expect you know the desired result that you want,
+
+03:50.520 --> 03:52.410
+you need to keep talking to it.
+
+03:52.410 --> 03:53.700
+Also, review your code.
+
+03:53.700 --> 03:55.350
+You know, this is a test environment,
+
+03:55.350 --> 03:57.720
+so, you know, we can execute and test it also,
+
+03:57.720 --> 04:00.180
+but when you generate scripts like that automatically,
+
+04:00.180 --> 04:02.850
+or the entire script in real-time,
+
+04:02.850 --> 04:05.190
+you need to be very careful before you execute it,
+
+04:05.190 --> 04:07.020
+you need to test it on your test environment
+
+04:07.020 --> 04:08.940
+like we have Vagrant environment.
+
+04:08.940 --> 04:10.740
+Later, we're going to see cloud computing environment,
+
+04:10.740 --> 04:12.960
+containers, many other things.
+
+04:12.960 --> 04:16.200
+I want you to take help from the AI tools,
+
+04:16.200 --> 04:17.430
+but, at the same time,
+
+04:17.430 --> 04:19.890
+you should be also aware about all the lines of code
+
+04:19.890 --> 04:22.080
+that it has written for you, all right?
+
+04:22.080 --> 04:22.980
+So go ahead, test it,
+
+04:22.980 --> 04:27.870
+you can use different kinds of prompts to modify the output.
+
+04:27.870 --> 04:29.010
+So, play around with it,
+
+04:29.010 --> 04:32.010
+we are going to see more of Copilot and other AI tools
+
+04:32.010 --> 04:34.920
+in the upcoming sections of the codes.
+
+04:34.920 --> 04:36.709
+That would be all in this lecture.
+
+04:36.709 --> 04:37.653
+Thank you.

@@ -1,0 +1,1171 @@
+WEBVTT
+
+00:02.910 --> 00:05.070
+Instructor: Now we have to do some file operations.
+
+00:05.070 --> 00:08.580
+We have configuration file of NTP.
+
+00:08.580 --> 00:12.040
+We have to update the changes in the NTP configuration file
+
+00:13.530 --> 00:15.930
+and then restart the service.
+
+00:15.930 --> 00:20.930
+So let's copy the exercise 11 to exercise 12.
+
+00:22.620 --> 00:24.670
+Let's get into exercise 12
+
+00:26.340 --> 00:28.380
+and now I'm going to go to the documentation,
+
+00:28.380 --> 00:30.360
+but I'm going to run the top command
+
+00:30.360 --> 00:33.003
+to engage this session so it doesn't time out.
+
+00:36.103 --> 00:39.540
+Okay, so Ansible file modules,
+
+00:39.540 --> 00:40.893
+all the file modules.
+
+00:42.300 --> 00:44.700
+Okay, so we have many file modules.
+
+00:44.700 --> 00:46.650
+I told you this in the previous lecture also.
+
+00:46.650 --> 00:48.150
+As a DevOps engineer,
+
+00:48.150 --> 00:50.190
+we do a lot of file operations, right?
+
+00:50.190 --> 00:53.610
+We archive files, so we have archive module.
+
+00:53.610 --> 00:57.180
+We add or remove content from the file.
+
+00:57.180 --> 00:59.760
+So we have blockinfile
+
+00:59.760 --> 01:02.370
+that can update the content of the file.
+
+01:02.370 --> 01:04.500
+Copy module where we take a file
+
+01:04.500 --> 01:07.110
+and push it to the target machine.
+
+01:07.110 --> 01:11.070
+Fetch to fetch the files, opposite of copy.
+
+01:11.070 --> 01:14.370
+File modules, manage file and file properties
+
+01:14.370 --> 01:16.470
+like if you want to change the permissions
+
+01:16.470 --> 01:18.180
+on ownership of existing file,
+
+01:18.180 --> 01:19.890
+or if you want to create a directory,
+
+01:19.890 --> 01:22.260
+or if you want to create mp file.
+
+01:22.260 --> 01:24.270
+Okay, this is very different than copy module.
+
+01:24.270 --> 01:26.460
+Copy module is to push the file.
+
+01:26.460 --> 01:28.170
+File module is going to make changes
+
+01:28.170 --> 01:31.200
+to the existing files in the target location.
+
+01:31.200 --> 01:33.868
+Finding the file and like many things we have,
+
+01:33.868 --> 01:36.810
+iso_extract, lineinfile,
+
+01:36.810 --> 01:38.550
+replace the content of the file.
+
+01:38.550 --> 01:42.600
+Synchronize which uses rsync to synchronize content
+
+01:42.600 --> 01:45.060
+between two directories or files.
+
+01:45.060 --> 01:46.380
+It can be local to local
+
+01:46.380 --> 01:49.620
+or remote to local also, template,
+
+01:49.620 --> 01:52.080
+So let's look at the copy module.
+
+01:52.080 --> 01:54.390
+We will be using template module in this exercise,
+
+01:54.390 --> 01:56.010
+but let's look at the copy module
+
+01:56.010 --> 01:59.640
+and we already know copy module, right?
+
+01:59.640 --> 02:01.770
+But there are some interesting option also.
+
+02:01.770 --> 02:03.610
+We are going to first update a file
+
+02:04.500 --> 02:06.300
+or update a file content.
+
+02:06.300 --> 02:08.760
+Very simple content we have, right?
+
+02:08.760 --> 02:12.660
+So we can use this example over here, content.
+
+02:12.660 --> 02:14.220
+So let me copy this.
+
+02:14.220 --> 02:16.080
+So option here is content, there's no source.
+
+02:16.080 --> 02:17.700
+We're not pushing an existing file
+
+02:17.700 --> 02:19.300
+which is in our control machine.
+
+02:22.980 --> 02:24.640
+So let's open the playbook
+
+02:26.988 --> 02:28.323
+and let's go to the end,
+
+02:29.910 --> 02:31.653
+and this is a simple warmup.
+
+02:33.360 --> 02:35.190
+So I don't need to write anything,
+
+02:35.190 --> 02:36.060
+I just copied everything,
+
+02:36.060 --> 02:38.520
+so I'm just going to simply paste it, Shift + Insert,
+
+02:38.520 --> 02:40.593
+and make the indentation, right?
+
+02:45.910 --> 02:47.970
+Okay, so I'm going to update
+
+02:47.970 --> 02:52.830
+or create this file etc/motd banner.
+
+02:52.830 --> 02:54.720
+This is a Linux banner file.
+
+02:54.720 --> 02:55.701
+So whenever you log in,
+
+02:55.701 --> 02:57.930
+whatever the content is in this file,
+
+02:57.930 --> 02:59.610
+it'll simply print that.
+
+02:59.610 --> 03:02.790
+So the content we are going to make here
+
+03:02.790 --> 03:07.790
+as this server is managed by Ansible.
+
+03:14.550 --> 03:16.500
+So whenever anybody log in,
+
+03:16.500 --> 03:18.540
+they know that it is managed by Ansible
+
+03:18.540 --> 03:20.700
+so no manual changes.
+
+03:20.700 --> 03:22.260
+So we can also write that message,
+
+03:22.260 --> 03:26.613
+no manual changes please, like that,
+
+03:27.540 --> 03:32.103
+and we'll name this task to Banner file.
+
+03:34.320 --> 03:36.540
+Okay, so with copy model you can use a source also.
+
+03:36.540 --> 03:37.680
+You can use content also.
+
+03:37.680 --> 03:38.520
+We are using content
+
+03:38.520 --> 03:40.500
+because we have very simple content, right?
+
+03:40.500 --> 03:42.270
+If you had one line like that,
+
+03:42.270 --> 03:44.670
+it's better to use the content option
+
+03:44.670 --> 03:46.173
+instead of managing a file.
+
+03:47.340 --> 03:49.020
+Okay, I think there is some indentation issue.
+
+03:49.020 --> 03:50.043
+Let's look at that.
+
+03:52.290 --> 03:56.103
+All right, this is not in the right column.
+
+03:59.190 --> 04:00.930
+I think this should be better.
+
+04:00.930 --> 04:03.483
+Let's see, we'll quit, let's run it.
+
+04:10.710 --> 04:14.280
+Okay, that worked, it created a banner file.
+
+04:14.280 --> 04:16.320
+Let's log in and see if it works
+
+04:16.320 --> 04:19.050
+and we need to log in actually for one reason.
+
+04:19.050 --> 04:20.280
+This was a simple warmup,
+
+04:20.280 --> 04:22.440
+but our actual task is now.
+
+04:22.440 --> 04:25.260
+We have the NTP or chrony configuration file.
+
+04:25.260 --> 04:27.750
+We need to update that configuration file,
+
+04:27.750 --> 04:31.200
+and the best way to update a configuration file
+
+04:31.200 --> 04:33.570
+is to have your own configuration file
+
+04:33.570 --> 04:37.260
+and replace it with the existing configuration file, okay?
+
+04:37.260 --> 04:39.483
+That's the best way we've been doing so far.
+
+04:40.560 --> 04:42.150
+So let's log in.
+
+04:42.150 --> 04:44.190
+Let me check the inventory file.
+
+04:44.190 --> 04:45.420
+Let's get the IP address.
+
+04:45.420 --> 04:48.630
+We're going to log into one CentOS and one Ubuntu.
+
+04:48.630 --> 04:52.170
+So first let's log into CentOS, ssh -i.
+
+04:52.170 --> 04:56.940
+The login key, username ec2-user and the rate
+
+04:56.940 --> 04:58.893
+and db01 will log in.
+
+05:01.920 --> 05:02.753
+Okay, we are in
+
+05:02.753 --> 05:06.090
+and look at the banner, right?
+
+05:06.090 --> 05:08.250
+Okay, so the chrony configuration file
+
+05:08.250 --> 05:12.723
+is at this location, etc/chrony.conf.
+
+05:14.190 --> 05:15.750
+Okay, I'm doing a cat to this file
+
+05:15.750 --> 05:18.300
+because I need to copy the entire content of this file
+
+05:18.300 --> 05:21.180
+and dump it in my control machine.
+
+05:21.180 --> 05:23.010
+Before that, this is the configuration
+
+05:23.010 --> 05:24.750
+we need to update, pool.
+
+05:24.750 --> 05:26.850
+This is the NTP server, okay?
+
+05:26.850 --> 05:28.590
+Now we have the NTP agent
+
+05:28.590 --> 05:31.410
+which is going to sync the time with the NTP server,
+
+05:31.410 --> 05:32.940
+so where is the NTP server?
+
+05:32.940 --> 05:34.590
+Now most of the company will maintain,
+
+05:34.590 --> 05:37.860
+the bigger companies will maintain their own NTP server
+
+05:37.860 --> 05:41.700
+and their existing NTP servers in your country
+
+05:41.700 --> 05:43.890
+on your location nearby which you can sync with.
+
+05:43.890 --> 05:46.830
+So we'll use existing NTP server
+
+05:46.830 --> 05:48.210
+and when we want to use that,
+
+05:48.210 --> 05:51.330
+we need to mention that server name over here, right?
+
+05:51.330 --> 05:54.180
+So it is going to go to that NTP server, fetch the time,
+
+05:54.180 --> 05:57.813
+and sync your server with the time of the NTP server.
+
+05:58.890 --> 06:01.623
+So first, we'll take all this content.
+
+06:04.680 --> 06:05.520
+I have selected it.
+
+06:05.520 --> 06:06.910
+I'm going to copy this
+
+06:08.160 --> 06:10.650
+and exit from here
+
+06:10.650 --> 06:13.410
+and come back to the control machine,
+
+06:13.410 --> 06:17.250
+and we will create here a folder called as templates
+
+06:17.250 --> 06:19.563
+because we'll be using templates module.
+
+06:20.490 --> 06:23.880
+So I'm going to say vim templates.
+
+06:23.880 --> 06:26.080
+Inside that I'm going to say ntpconf_centos.
+
+06:32.130 --> 06:33.810
+Now this name does not matter.
+
+06:33.810 --> 06:35.970
+We're going to push it with a different name,
+
+06:35.970 --> 06:38.283
+but let's just have the files first.
+
+06:40.020 --> 06:41.370
+Okay, so create templates folder.
+
+06:41.370 --> 06:44.100
+It's not mandatory to create with the name templates.
+
+06:44.100 --> 06:46.530
+But when we see in the roles,
+
+06:46.530 --> 06:47.730
+we will need this name.
+
+06:47.730 --> 06:50.280
+So for now, let's create the folder with the name templates
+
+06:50.280 --> 06:52.740
+and put your configuration file there.
+
+06:52.740 --> 06:55.110
+Make sure you name it correctly so you can identify this
+
+06:55.110 --> 06:57.420
+is for CentOS and this is for Ubuntu.
+
+06:57.420 --> 06:59.400
+Now let's log into Ubuntu.
+
+06:59.400 --> 07:02.643
+Let's get the IP, ssh -i.
+
+07:03.630 --> 07:07.470
+Clientkey, username ubuntu, at the rate,
+
+07:07.470 --> 07:10.473
+and that's the Ubuntu IP web03.
+
+07:15.660 --> 07:17.220
+Okay, so we are in web03
+
+07:17.220 --> 07:19.740
+and let's switch to route user,
+
+07:19.740 --> 07:22.953
+and here, oh, wait, sudo -i.
+
+07:25.380 --> 07:27.600
+Okay, here the NTP configuration file name
+
+07:27.600 --> 07:31.470
+is etc/ntp.conf, okay?
+
+07:31.470 --> 07:32.880
+It's near about similar,
+
+07:32.880 --> 07:35.010
+but of course, it will have some differences
+
+07:35.010 --> 07:39.153
+because this is for a different operating system altogether.
+
+07:40.980 --> 07:43.050
+So copy the entire content.
+
+07:43.050 --> 07:46.383
+Make sure you copy it properly, exit from here.
+
+07:49.166 --> 07:51.270
+All right, and then in the templates folder,
+
+07:51.270 --> 07:55.247
+you need to create it with the name ntpconf_ubuntu, right?
+
+07:56.970 --> 07:58.680
+This is just for identification.
+
+07:58.680 --> 08:00.530
+As I told you, you can give any name.
+
+08:02.910 --> 08:06.660
+Okay, now let's update the playbook first, right?
+
+08:06.660 --> 08:09.180
+Or second task, first, we copied the configuration file
+
+08:09.180 --> 08:10.140
+in our control machine.
+
+08:10.140 --> 08:12.210
+Now let's update the playbook.
+
+08:12.210 --> 08:15.090
+And as I told you, we will be using template module, why?
+
+08:15.090 --> 08:18.930
+I'll tell that you, I'll talk about that in a moment.
+
+08:18.930 --> 08:23.930
+So name Deploy ntp agent conf on centos.
+
+08:28.020 --> 08:29.643
+So two tasks obviously.
+
+08:31.800 --> 08:35.160
+The module name is template, colon.
+
+08:35.160 --> 08:37.590
+Now this is similar to the copy module,
+
+08:37.590 --> 08:40.680
+so we have src option here, right?
+
+08:40.680 --> 08:41.760
+So we have it in
+
+08:41.760 --> 08:46.293
+the templates folder, templates/ntpconf_centos.
+
+08:47.820 --> 08:49.080
+Make sure you give the correct name.
+
+08:49.080 --> 08:54.080
+Destination will be /etc/chrony.conf.
+
+08:56.880 --> 08:59.010
+Okay, the destination name matters
+
+08:59.010 --> 09:03.993
+and we'll also give the option for a backup yes.
+
+09:04.860 --> 09:06.940
+And obviously the condition
+
+09:07.950 --> 09:10.440
+when ansible_distribution is equal to CentOS
+
+09:10.440 --> 09:14.250
+and exactly similar task with the condition changes.
+
+09:14.250 --> 09:16.710
+Not exactly the many changes we have to make,
+
+09:16.710 --> 09:18.063
+so let's copy this.
+
+09:19.140 --> 09:21.570
+Okay, so Deploy ntp conf on,
+
+09:21.570 --> 09:26.100
+first of all, you have to change the title in Ubuntu
+
+09:26.100 --> 09:30.300
+and here the configuration file name, we have given Ubuntu.
+
+09:30.300 --> 09:31.800
+I'll just go Ubuntu,
+
+09:31.800 --> 09:35.980
+and it's configuration destination name is ntp.conf
+
+09:37.740 --> 09:40.080
+and the distribution is Ubuntu.
+
+09:40.080 --> 09:43.683
+That's a lot of changes, right, okay, anyways.
+
+09:45.630 --> 09:48.030
+Okay, now this is a configuration change.
+
+09:48.030 --> 09:50.220
+Template module, first of all, works similar
+
+09:50.220 --> 09:52.050
+to the copy module with some changes
+
+09:52.050 --> 09:54.120
+which we'll talk in a moment.
+
+09:54.120 --> 09:56.760
+But anyways, whenever we change a configuration,
+
+09:56.760 --> 09:59.643
+the next step is we restart the service, right?
+
+10:00.480 --> 10:02.520
+So after this, we will give the condition
+
+10:02.520 --> 10:04.860
+to restart the NTP and chrony service,
+
+10:04.860 --> 10:07.500
+so we already have the task to start the service.
+
+10:07.500 --> 10:08.980
+You can copy the same task
+
+10:09.840 --> 10:11.690
+and we are going to make the changes.
+
+10:12.540 --> 10:15.720
+Okay, first of all, the title name
+
+10:15.720 --> 10:18.060
+and so I simply copied the task, right?
+
+10:18.060 --> 10:21.000
+I'm just going to in the beginning give restart here
+
+10:21.000 --> 10:25.560
+and here the state should be restarted instead of started.
+
+10:25.560 --> 10:30.560
+There also, restart, and here the state is restarted.
+
+10:34.800 --> 10:35.790
+Okay, this should work.
+
+10:35.790 --> 10:37.090
+Let's save and quit
+
+10:39.030 --> 10:41.913
+and let's execute our playbook.
+
+10:49.631 --> 10:52.710
+Okay, so we're simply deploying the configuration file.
+
+10:52.710 --> 10:55.050
+We have not made any changes,
+
+10:55.050 --> 10:58.200
+but still for web03 it says change.
+
+10:58.200 --> 10:59.880
+It should have given okay.
+
+10:59.880 --> 11:01.530
+Let's see what is the difference.
+
+11:01.530 --> 11:03.123
+Let's look at the file content.
+
+11:06.305 --> 11:07.460
+Did we put anything extra in the code?
+
+11:07.460 --> 11:09.510
+Let's go at the beginning.
+
+11:09.510 --> 11:10.980
+I think let's go at the end.
+
+11:10.980 --> 11:13.230
+I think we copied an extra space over there.
+
+11:13.230 --> 11:15.510
+That's why there was a change.
+
+11:15.510 --> 11:17.660
+But anyways, the configuration file is good
+
+11:18.900 --> 11:21.090
+and the service got restarted.
+
+11:21.090 --> 11:23.910
+This is a problem.
+
+11:23.910 --> 11:28.530
+Even we have not made any configuration change.
+
+11:28.530 --> 11:32.373
+The service is still restarted for CentOS,
+
+11:34.500 --> 11:36.450
+and we'll come back to it and we'll fix it.
+
+11:36.450 --> 11:39.060
+Let's first focus on the template module.
+
+11:39.060 --> 11:41.250
+So why did I use template module
+
+11:41.250 --> 11:42.870
+instead of using copy module?
+
+11:42.870 --> 11:47.730
+Well, there's one simple and very important difference.
+
+11:47.730 --> 11:49.230
+We know copy module takes the file
+
+11:49.230 --> 11:52.380
+and directly dumps in the target location.
+
+11:52.380 --> 11:54.420
+Template model is intelligent.
+
+11:54.420 --> 11:56.040
+It will read the file
+
+11:56.040 --> 11:59.373
+if you have any template, any Jinja2 template.
+
+12:00.390 --> 12:01.800
+Now what's Jinja2 template?
+
+12:01.800 --> 12:04.230
+Well, it's a whole story for itself,
+
+12:04.230 --> 12:08.550
+but to begin with, we are using variables, right?
+
+12:08.550 --> 12:10.920
+We define variables, and then we use variable
+
+12:10.920 --> 12:13.170
+in the playbook, right?
+
+12:13.170 --> 12:15.120
+Now the structure that we give double quotes,
+
+12:15.120 --> 12:18.600
+curly braces, that's actually the Jinja2 templating.
+
+12:18.600 --> 12:20.640
+In Jinja2 templating, you have variables
+
+12:20.640 --> 12:22.470
+and conditions also that you can put,
+
+12:22.470 --> 12:24.870
+so you can design your configuration file
+
+12:24.870 --> 12:28.560
+based on some conditions or loops also.
+
+12:28.560 --> 12:32.250
+And template module is going to read your template file,
+
+12:32.250 --> 12:34.020
+look for any templating that you have done,
+
+12:34.020 --> 12:36.510
+and then from that, extract the actual content
+
+12:36.510 --> 12:39.150
+and then push it to the target location.
+
+12:39.150 --> 12:42.723
+Let's start with very simple one by defining the variable.
+
+12:43.890 --> 12:45.570
+I think I have group-vars over here.
+
+12:45.570 --> 12:48.090
+Yes, group-vars/all file,
+
+12:48.090 --> 12:51.300
+and in this file is already two variables.
+
+12:51.300 --> 12:54.783
+If you don't have, create this file, group_vars/all file.
+
+12:55.680 --> 12:58.410
+I'm going to give here the NTP server name.
+
+12:58.410 --> 13:01.647
+I'm going to say for NTP server ntp0:,
+
+13:03.600 --> 13:05.550
+and let me get, well, let me see.
+
+13:05.550 --> 13:06.540
+When I code this file,
+
+13:06.540 --> 13:08.610
+I don't want it to hang now.
+
+13:08.610 --> 13:10.950
+So NTP server, where do we find NTP server?
+
+13:10.950 --> 13:12.150
+Simply we can Google.
+
+13:12.150 --> 13:15.930
+Now I'm using Oregon region, Oregon, Oregon.
+
+13:15.930 --> 13:18.510
+I don't know how to pronounce it also properly,
+
+13:18.510 --> 13:22.593
+but let's see if I can use some NTP server from USA.
+
+13:24.480 --> 13:28.620
+So I just searched NTP servers in Oregon
+
+13:28.620 --> 13:31.560
+and well, I can go with this one
+
+13:31.560 --> 13:33.510
+which is in North America, right?
+
+13:33.510 --> 13:36.990
+So generally you have four NTP server to sync with.
+
+13:36.990 --> 13:39.420
+If not one, it syncs with the other one.
+
+13:39.420 --> 13:42.393
+So let's take this value, copy this,
+
+13:44.850 --> 13:47.700
+and let's open a group_vars/all file,
+
+13:47.700 --> 13:50.760
+and let's give here NTP server value
+
+13:50.760 --> 13:53.793
+as this one, ntp1 and ntp1.
+
+14:00.630 --> 14:02.270
+Okay, so these are the four variables,
+
+14:02.270 --> 14:04.680
+ntp0, ntp1, ntp2, ntp3,
+
+14:04.680 --> 14:07.230
+and these four are the values for it.
+
+14:07.230 --> 14:09.210
+So I got it directly from the internet, okay?
+
+14:09.210 --> 14:12.210
+No big deal, let's save this file.
+
+14:12.210 --> 14:15.600
+You can mention any NTP server you want, whatever location.
+
+14:15.600 --> 14:17.940
+You can Google and find the NTP servers.
+
+14:17.940 --> 14:21.210
+It's just for the example, right?
+
+14:21.210 --> 14:25.320
+So we have four NTP server variables defined
+
+14:25.320 --> 14:28.140
+and now we can use it in our template.
+
+14:28.140 --> 14:29.640
+So let's go to the template.
+
+14:29.640 --> 14:32.343
+First, let's go to ntp centos.
+
+14:34.020 --> 14:35.880
+Let's go at the beginning.
+
+14:35.880 --> 14:37.860
+So here you have option pool
+
+14:37.860 --> 14:39.570
+and you have to give the NTP server detail.
+
+14:39.570 --> 14:41.520
+I'm gonna copy that, Y, Y.
+
+14:41.520 --> 14:45.150
+One, two, three, okay,
+
+14:45.150 --> 14:47.670
+and I'm going to change this values.
+
+14:47.670 --> 14:49.470
+Instead of the static values,
+
+14:49.470 --> 14:51.000
+I'm going to give here the variable
+
+14:51.000 --> 14:54.360
+the same way we do it in the playbook, okay?
+
+14:54.360 --> 14:55.560
+So I will remove this.
+
+14:55.560 --> 14:59.043
+I'll say double quotes, curly brace,
+
+15:01.962 --> 15:03.127
+and here I'll say ntp0
+
+15:04.781 --> 15:06.180
+and I should have copied after this, right?
+
+15:06.180 --> 15:08.190
+No big deal, I'm gonna copy it, Y, Y.
+
+15:08.190 --> 15:11.013
+One, two, three, going to remove this one.
+
+15:17.010 --> 15:20.193
+And here I'll change it to ntp0, one, two, three.
+
+15:21.210 --> 15:23.850
+One, this one to two,
+
+15:23.850 --> 15:26.493
+and the last one to three.
+
+15:28.890 --> 15:30.330
+All right, so these are the four variables
+
+15:30.330 --> 15:32.700
+that we have defined group-vars/all file
+
+15:32.700 --> 15:35.010
+and now we can use the variables in the templates.
+
+15:35.010 --> 15:36.630
+Now if this is a copy module,
+
+15:36.630 --> 15:40.470
+it is going to dump the exact same content in the target.
+
+15:40.470 --> 15:41.820
+But if it's the template module,
+
+15:41.820 --> 15:42.720
+then it's going to read,
+
+15:42.720 --> 15:44.580
+it's going to find is there any template?
+
+15:44.580 --> 15:46.620
+Yes, there is, there are variables.
+
+15:46.620 --> 15:49.380
+It's going to find its values, change the content,
+
+15:49.380 --> 15:51.150
+create a different file, right?
+
+15:51.150 --> 15:53.430
+With the values, and then push that file
+
+15:53.430 --> 15:56.220
+to the target location, right?
+
+15:56.220 --> 15:58.377
+Interesting, let's save and quit
+
+15:58.377 --> 16:00.903
+and let's do the same for the Ubuntu.
+
+16:01.830 --> 16:03.780
+Now don't worry about the NTP configuration.
+
+16:03.780 --> 16:06.390
+We are not learning NTP configuration here.
+
+16:06.390 --> 16:08.880
+Here you have pool, similar thing.
+
+16:08.880 --> 16:10.503
+Already four values here.
+
+16:11.580 --> 16:15.393
+Let's change these four values to the variables.
+
+16:36.490 --> 16:37.770
+Okay, so same thing,
+
+16:37.770 --> 16:40.353
+what I did in the CentOS configuration file.
+
+16:41.820 --> 16:44.403
+Variables instead of the static values.
+
+16:45.720 --> 16:46.553
+Now think about it.
+
+16:46.553 --> 16:49.020
+If I want to really change the NTP server details,
+
+16:49.020 --> 16:51.420
+I don't need to change it in both configuration file.
+
+16:51.420 --> 16:54.570
+I need to just change in the variable file, right?
+
+16:54.570 --> 16:57.060
+If like that, you have multiple configuration file out
+
+16:57.060 --> 17:01.920
+in general files where we use similar values or same values.
+
+17:01.920 --> 17:03.930
+We can put their variables
+
+17:03.930 --> 17:05.730
+and we can just change the value
+
+17:05.730 --> 17:07.620
+of variable whenever we want,
+
+17:07.620 --> 17:10.203
+and all the configuration files will be affected.
+
+17:11.910 --> 17:15.243
+Ansible playbook, let's execute the playbook.
+
+17:19.260 --> 17:20.793
+Okay, seems that worked.
+
+17:21.780 --> 17:24.870
+All right, configuration file changed there, there,
+
+17:24.870 --> 17:26.487
+and the service got restarted
+
+17:26.487 --> 17:27.660
+and we are happy, right?
+
+17:27.660 --> 17:29.070
+The service is getting restarted,
+
+17:29.070 --> 17:31.680
+but every time I run the playbook,
+
+17:31.680 --> 17:34.590
+every time the service is getting restarted.
+
+17:34.590 --> 17:37.410
+That is the problem, right?
+
+17:37.410 --> 17:40.260
+We are keeping that one for the next lecture.
+
+17:40.260 --> 17:42.540
+We'll add one more task just to show you the problem.
+
+17:42.540 --> 17:45.760
+So now I'm going to once again, update the playbook
+
+17:47.820 --> 17:49.290
+and adding some tasks.
+
+17:49.290 --> 17:52.050
+Let's say we have some tasks to create a folder, right?
+
+17:52.050 --> 17:55.323
+So to create a folder, you can use file module.
+
+17:56.370 --> 17:57.963
+Let me give a name first.
+
+17:59.040 --> 18:02.273
+Create a folder, okay?
+
+18:04.067 --> 18:07.590
+File module, okay, let's look at the documentation.
+
+18:07.590 --> 18:11.253
+File modules, manage files and file properties.
+
+18:12.540 --> 18:13.923
+Let's look at the example.
+
+18:15.330 --> 18:17.910
+Okay, then create a directory if it does not exist,
+
+18:17.910 --> 18:19.770
+so you have to say path of the directory
+
+18:19.770 --> 18:21.300
+and you have to say state as directory,
+
+18:21.300 --> 18:24.030
+and you can give the permission also.
+
+18:24.030 --> 18:26.160
+I'm just going to copy this two line, right?
+
+18:26.160 --> 18:30.210
+Paste it there, path etc, some directory.
+
+18:30.210 --> 18:31.650
+Now this doesn't matter.
+
+18:31.650 --> 18:33.330
+You can give any path, whatever you want.
+
+18:33.330 --> 18:34.330
+I'm going to say etc
+
+18:35.280 --> 18:38.993
+or I'll say opt/test21, okay?
+
+18:45.090 --> 18:47.190
+What we are trying to do is we are adding
+
+18:47.190 --> 18:50.220
+one new task in the playbook, right?
+
+18:50.220 --> 18:52.590
+And only that task should get executed
+
+18:52.590 --> 18:55.170
+because all the other things are good, right?
+
+18:55.170 --> 18:56.220
+So we add one task.
+
+18:56.220 --> 18:57.600
+We execute the playbook.
+
+18:57.600 --> 18:58.863
+Let's see what happens.
+
+19:00.990 --> 19:04.110
+Okay, so it created the folder, right?
+
+19:04.110 --> 19:06.690
+But along with that, it restarted the service.
+
+19:06.690 --> 19:08.730
+The configuration file was not changed, right?
+
+19:08.730 --> 19:11.190
+But again, the service got restarted.
+
+19:11.190 --> 19:13.110
+Do we really want that?
+
+19:13.110 --> 19:14.760
+No, right, in a production environment,
+
+19:14.760 --> 19:16.770
+this can disrupt so many things
+
+19:16.770 --> 19:18.780
+which is really not a good thing.
+
+19:18.780 --> 19:20.640
+We need to restart the service
+
+19:20.640 --> 19:23.490
+only when we need to restart the service.
+
+19:23.490 --> 19:26.610
+Not unnecessary, and how to handle that?
+
+19:26.610 --> 19:28.560
+That's what we are going to see in the next lecture
+
+19:28.560 --> 19:30.333
+which is about handlers.
+
+19:32.190 --> 19:33.150
+So wrap this up
+
+19:33.150 --> 19:34.750
+and join me in the next lecture.

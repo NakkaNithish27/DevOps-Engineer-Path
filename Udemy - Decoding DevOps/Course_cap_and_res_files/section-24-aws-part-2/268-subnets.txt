@@ -1,0 +1,208 @@
+WEBVTT
+
+00:01.290 --> 00:03.450
+Instructor: Okay, in this lecture we are going to create
+
+00:03.450 --> 00:07.710
+our four subnets in the VPC that we just created.
+
+00:07.710 --> 00:09.600
+So for that, it's pretty simple.
+
+00:09.600 --> 00:10.923
+Just go to Subnets,
+
+00:13.020 --> 00:15.003
+and let's click on Create subnet.
+
+00:15.990 --> 00:17.730
+Select our VPC.
+
+00:17.730 --> 00:18.600
+Be careful.
+
+00:18.600 --> 00:21.213
+Select our VPC, do not select default VPC.
+
+00:22.290 --> 00:24.640
+Make sure you see the range correct over there.
+
+00:26.730 --> 00:29.040
+So, if you can create one subnet at a time,
+
+00:29.040 --> 00:31.212
+or you can create all four subnet at the same time.
+
+00:31.212 --> 00:32.676
+So you just, let's just say
+
+00:32.676 --> 00:37.676
+add new subnet two, three, and four, okay?
+
+00:38.970 --> 00:40.590
+Yeah, so four subnet.
+
+00:40.590 --> 00:42.300
+Now, it's just about filling the blanks
+
+00:42.300 --> 00:44.100
+because we have everything with us.
+
+00:44.100 --> 00:46.500
+We have already documented everything,
+
+00:46.500 --> 00:49.350
+so we are going to just do simple copy paste.
+
+00:49.350 --> 00:53.280
+Okay, so the first subnet range
+
+00:53.280 --> 00:54.690
+which will be our public subnet.
+
+00:54.690 --> 00:57.030
+Oops, sorry. Wrong place.
+
+00:57.030 --> 01:00.213
+The range goes here, the name goes here.
+
+01:01.380 --> 01:06.060
+I'm going to call it as vpro-pubsub-1
+
+01:06.060 --> 01:08.970
+like publicsubnet1, easy to identify.
+
+01:08.970 --> 01:10.500
+And availability zone,
+
+01:10.500 --> 01:15.150
+carefully we are selecting 1a for the first public subnet.
+
+01:15.150 --> 01:17.580
+Okay, that is the IP range.
+
+01:17.580 --> 01:19.233
+Let's go to the next block.
+
+01:20.730 --> 01:22.680
+Okay, so vpro-pubsub-2,
+
+01:22.680 --> 01:24.510
+I have given the name for the second subnet.
+
+01:24.510 --> 01:27.393
+Availability zone, select 1b.
+
+01:29.580 --> 01:34.173
+And the range 172.20.2.0/24.
+
+01:35.340 --> 01:39.430
+Make sure these two public subnet have two different zones
+
+01:40.380 --> 01:41.730
+and different range, of course.
+
+01:41.730 --> 01:43.593
+1.0 and here, 2.0.
+
+01:46.140 --> 01:48.588
+Okay, third one, vpro-privsub-1.
+
+01:48.588 --> 01:51.033
+Availability zone 1a.
+
+01:52.710 --> 01:55.713
+And CIDR block, 3.0/24.
+
+01:56.880 --> 02:01.290
+Let's go to the fourth one, vpro-privsub-2.
+
+02:01.290 --> 02:03.063
+Availability zone 1b.
+
+02:06.234 --> 02:09.480
+And CIDR block 4.0/24.
+
+02:09.480 --> 02:11.550
+So, four subnet information we have given.
+
+02:11.550 --> 02:14.190
+Before you click on Create Subnet, take a look once again.
+
+02:14.190 --> 02:16.770
+Make sure the naming convention, the zones,
+
+02:16.770 --> 02:18.940
+CIDR block are all good
+
+02:20.370 --> 02:22.170
+based on what we have decided earlier.
+
+02:22.170 --> 02:23.610
+Later, you can make changes.
+
+02:23.610 --> 02:26.853
+You can add, remove subnets, but for now, stick to the plan.
+
+02:28.050 --> 02:30.540
+Take a look and click on Create subnet.
+
+02:30.540 --> 02:33.003
+So, this will create all four subnets for us.
+
+02:36.540 --> 02:38.160
+Okay, so now we have given the name
+
+02:38.160 --> 02:39.810
+public subnet and private subnet,
+
+02:39.810 --> 02:42.636
+but there is nothing public about public subnet.
+
+02:42.636 --> 02:44.611
+Technically speaking, all these four subnets
+
+02:44.611 --> 02:48.423
+are private subnets because they have private IP range.
+
+02:49.770 --> 02:51.720
+There's nothing public about public subnet,
+
+02:51.720 --> 02:56.720
+and all these subnets are inaccessible inside, outside.
+
+02:56.910 --> 02:59.790
+It means if you place an instance in public subnet,
+
+02:59.790 --> 03:02.100
+it won't be able to access the internet.
+
+03:02.100 --> 03:03.570
+It won't have a public IP,
+
+03:03.570 --> 03:07.110
+so you won't be able to access it from outside also.
+
+03:07.110 --> 03:10.680
+So functionally, these subnets are useless for now.
+
+03:10.680 --> 03:11.700
+But in the next lecture,
+
+03:11.700 --> 03:13.650
+we are going to create a route table
+
+03:13.650 --> 03:17.703
+and attach it to our subnet and put an internet gateway.
+
+03:19.050 --> 03:20.130
+So, take a look once again.
+
+03:20.130 --> 03:22.500
+Make sure that in the right VPC,
+
+03:22.500 --> 03:24.063
+right CIDR blocks are there,
+
+03:25.110 --> 03:26.960
+and then join me in the next lecture.

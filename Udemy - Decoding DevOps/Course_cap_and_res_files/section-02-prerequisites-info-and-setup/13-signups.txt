@@ -1,0 +1,466 @@
+WEBVTT
+
+00:00.270 --> 00:02.370
+Instructor: So we'll create an account on GitHub.
+
+00:02.370 --> 00:04.908
+We'll talk about purchasing a domain,
+
+00:04.908 --> 00:07.323
+creating an account on Docker hub,
+
+00:07.323 --> 00:10.563
+and also creating account on Sonar Cloud.
+
+00:11.684 --> 00:13.950
+And then after that, we are going
+
+00:13.950 --> 00:16.218
+to talk about AWS free tier account
+
+00:16.218 --> 00:17.896
+and few other changes that we are going
+
+00:17.896 --> 00:20.730
+to make in the AWS account.
+
+00:20.730 --> 00:23.133
+So let's get started with GitHub first.
+
+00:24.116 --> 00:27.633
+So open your browser, go to github.com.
+
+00:30.540 --> 00:32.010
+It's a simple signup process.
+
+00:32.010 --> 00:34.860
+You give a username, you give the email address,
+
+00:34.860 --> 00:37.173
+password, and say sign up.
+
+00:38.130 --> 00:40.680
+And from your inbox, you confirm that email address,
+
+00:40.680 --> 00:43.653
+and then you should be able to log in to github.com.
+
+00:45.450 --> 00:48.093
+So fill in your right details and say sign up.
+
+00:51.450 --> 00:53.100
+Okay, I need to do some verification.
+
+00:53.100 --> 00:53.949
+Spiral Galaxy.
+
+00:53.949 --> 00:56.635
+Okay, that's the Spiral Galaxy maybe?
+
+00:56.635 --> 00:58.323
+Yes.
+
+00:59.612 --> 01:01.893
+Okay, so account verified there.
+
+01:03.270 --> 01:07.950
+I don't want any offers or announcements.
+
+01:07.950 --> 01:10.350
+I'm going to go for a free plan
+
+01:10.350 --> 01:12.753
+and that should be fine for our projects.
+
+01:15.330 --> 01:16.743
+Welcome to GitHub.
+
+01:17.725 --> 01:20.880
+So select what kind of work do you do mainly?
+
+01:20.880 --> 01:25.880
+So I'm gonna say teacher and a student.
+
+01:26.446 --> 01:28.260
+Oh, I can select either of it.
+
+01:28.260 --> 01:29.093
+Okay.
+
+01:29.093 --> 01:30.483
+So I'll say I'm a teacher,
+
+01:32.220 --> 01:34.710
+at most, software engineer.
+
+01:34.710 --> 01:36.540
+How much programming experience do you have?
+
+01:36.540 --> 01:38.793
+Select whatever you are good at.
+
+01:42.594 --> 01:46.361
+What do you plan to use GitHub for?
+
+01:46.361 --> 01:49.353
+Learn Git and GitHub, host project.
+
+01:51.150 --> 01:53.370
+That should be good for now.
+
+01:53.370 --> 01:54.920
+And you can see complete setup.
+
+01:57.570 --> 01:58.830
+After this, check your inbox.
+
+01:58.830 --> 01:59.910
+You should get an email.
+
+01:59.910 --> 02:01.653
+Verify that email address.
+
+02:15.160 --> 02:18.333
+Okay, so my email is verified.
+
+02:20.670 --> 02:21.591
+So that is done.
+
+02:21.591 --> 02:23.406
+We have created account on GitHub.
+
+02:23.406 --> 02:24.684
+That should be fine for now.
+
+02:24.684 --> 02:27.123
+We'll use it later.
+
+02:28.227 --> 02:32.430
+Next, we will talk about purchasing a domain.
+
+02:32.430 --> 02:36.960
+I will show you now how to purchase a very low cost domain.
+
+02:36.960 --> 02:40.358
+And we will need this domain to do some real time
+
+02:40.358 --> 02:42.655
+or production use cases.
+
+02:42.655 --> 02:45.487
+And in order to perform those steps,
+
+02:45.487 --> 02:50.223
+which we use in real time, you will need a paid domain.
+
+02:51.202 --> 02:52.460
+But if you still don't want
+
+02:52.460 --> 02:54.690
+to purchase the domain, it is fine.
+
+02:54.690 --> 02:57.690
+You can skip those use cases,
+
+02:57.690 --> 03:01.114
+but I still strongly recommend you buy the domain.
+
+03:01.114 --> 03:03.813
+So I will sign into GoDaddy.
+
+03:05.776 --> 03:07.958
+If you do not have an account, you can create an account.
+
+03:07.958 --> 03:10.290
+It's a pretty simple step.
+
+03:10.290 --> 03:13.200
+You click on create an account, fill the details,
+
+03:13.200 --> 03:15.723
+and then log in with that username and password.
+
+03:17.430 --> 03:20.050
+So I have logged into my GoDaddy account
+
+03:20.922 --> 03:23.455
+and now I will search a domain.
+
+03:23.455 --> 03:27.766
+Now this is the trick. If you go for domains like .com,
+
+03:27.766 --> 03:32.766
+.in with very common names like my DevOps,
+
+03:32.877 --> 03:36.540
+or my projects, anything that is a very common name,
+
+03:36.540 --> 03:37.890
+those domains will be expensive.
+
+03:37.890 --> 03:42.063
+So I will be using some name like hkhinfo,
+
+03:44.310 --> 03:47.913
+and I say .xyz.
+
+03:49.830 --> 03:51.183
+And I say search.
+
+03:52.170 --> 03:57.170
+Now you see hkhinfo.xyz is 169 and hkhinfo.com is 139.
+
+03:58.470 --> 03:59.806
+This may look lower,
+
+03:59.806 --> 04:04.806
+but once you reach the cart, this will be easily 900 rupees
+
+04:05.730 --> 04:08.018
+and you can translate that into your own currency.
+
+04:08.018 --> 04:12.432
+Now I'll go with this hkhinfo.xyz, make it yours.
+
+04:12.432 --> 04:14.707
+And it says here you see five years.
+
+04:14.707 --> 04:16.576
+I'm gonna reduce that to one year.
+
+04:16.576 --> 04:20.130
+That is now like 169.
+
+04:20.130 --> 04:21.000
+See that?
+
+04:21.000 --> 04:24.342
+And I'll click on continue to cart.
+
+04:24.342 --> 04:25.834
+Here, it'll offer you a few other things
+
+04:25.834 --> 04:27.707
+like full domain protection and stuff.
+
+04:27.707 --> 04:29.304
+We don't need those things.
+
+04:29.304 --> 04:31.024
+We'll say free privacy protection.
+
+04:31.024 --> 04:35.840
+And we don't need any website from GoDaddy.
+
+04:35.840 --> 04:38.712
+We will deploy our own website.
+
+04:38.712 --> 04:43.233
+So now let's again click on continue to cart.
+
+04:45.090 --> 04:48.210
+Okay, you see it's still 169 INR.
+
+04:48.210 --> 04:49.560
+If you see a bigger number here,
+
+04:49.560 --> 04:51.840
+make sure you reduce this to one year.
+
+04:51.840 --> 04:54.150
+Make sure the domain is .xyz
+
+04:54.150 --> 04:56.760
+and no other things are selected.
+
+04:56.760 --> 05:00.840
+Now you can sure go for .com or .in
+
+05:00.840 --> 05:02.310
+or whatever you want,
+
+05:02.310 --> 05:05.127
+but keep in mind you have to pay extra money for that.
+
+05:05.127 --> 05:08.520
+And we really don't need in that in this course.
+
+05:08.520 --> 05:10.168
+So I'll say, I'm ready to pay,
+
+05:10.168 --> 05:14.310
+and then we fill in all the details and make the purchase.
+
+05:14.310 --> 05:15.143
+Once again,
+
+05:15.143 --> 05:17.370
+if you're still not comfortable purchasing the domain,
+
+05:17.370 --> 05:18.855
+you can do it later.
+
+05:18.855 --> 05:22.340
+When you think you want to do that production use cases,
+
+05:22.340 --> 05:27.243
+or if you want, you can totally skip those exercises also.
+
+05:28.260 --> 05:30.522
+But once again, I recommend,
+
+05:30.522 --> 05:32.823
+strongly recommend you purchase a domain.
+
+05:33.750 --> 05:35.236
+Okay, so once you have the domain,
+
+05:35.236 --> 05:40.080
+the next thing we'll do is create an account on Docker Hub.
+
+05:40.080 --> 05:42.630
+I just need to create account, that's all.
+
+05:42.630 --> 05:44.373
+So let's go to Docker Hub.
+
+05:46.650 --> 05:48.163
+Search for Docker Hub on the net,
+
+05:48.163 --> 05:51.393
+you should find Docker hub site.
+
+05:52.641 --> 05:54.780
+That's the wrong one.
+
+05:54.780 --> 05:57.097
+Docker Hub hub.docker.com.
+
+06:01.952 --> 06:03.869
+Okay, so we'll sign up.
+
+06:05.430 --> 06:09.349
+So give some ID like a username,
+
+06:09.349 --> 06:13.053
+kubeimran I'm giving.
+
+06:14.125 --> 06:15.630
+And give your email address
+
+06:15.630 --> 06:18.480
+and password and say sign up.
+
+06:18.480 --> 06:20.070
+I'm not a robot.
+
+06:20.070 --> 06:20.903
+Sign up.
+
+06:23.110 --> 06:24.870
+Okay, you need to choose a plan.
+
+06:24.870 --> 06:26.310
+You can go with the free plan.
+
+06:26.310 --> 06:27.423
+That should be fine.
+
+06:28.950 --> 06:30.720
+Verifying your email address.
+
+06:30.720 --> 06:31.970
+So I should get an email.
+
+06:37.975 --> 06:40.983
+And let's me refresh it once again.
+
+06:46.890 --> 06:49.740
+So we created account on Docker Hub.
+
+06:49.740 --> 06:51.870
+And that's all for now on Docker Hub.
+
+06:51.870 --> 06:54.060
+We are going to store our Docker images on this
+
+06:54.060 --> 06:55.503
+in the Docker projects.
+
+06:57.060 --> 06:59.670
+Okay, last thing in the signup, we have Sonar Cloud.
+
+06:59.670 --> 07:01.623
+Let's log into the Sonar Cloud.
+
+07:04.140 --> 07:05.820
+Okay, first of all, make sure you're logged
+
+07:05.820 --> 07:09.690
+into your GitHub account in the same browser
+
+07:09.690 --> 07:11.010
+because we are going to sign up
+
+07:11.010 --> 07:15.330
+with GitHub account on Sonar Cloud and open the tab
+
+07:15.330 --> 07:20.330
+and enter https://sonarcloud.io,
+
+07:20.430 --> 07:22.320
+or you can simply Google Sonar Cloud
+
+07:22.320 --> 07:24.000
+and you will get the link.
+
+07:24.000 --> 07:24.833
+Hit enter.
+
+07:26.147 --> 07:28.560
+Okay, so there's sign up and there is login.
+
+07:28.560 --> 07:33.240
+You have to click on sign up and you have to select GitHub.
+
+07:33.240 --> 07:35.490
+You can sign up with other providers also,
+
+07:35.490 --> 07:36.718
+but we will be using GitHub
+
+07:36.718 --> 07:39.360
+because you already have a GitHub account now,
+
+07:39.360 --> 07:41.282
+so click on GitHub.
+
+07:41.282 --> 07:43.923
+click on Authorize Sonar Cloud.
+
+07:45.510 --> 07:47.820
+And that is all really in the Sonar cloud.
+
+07:47.820 --> 07:52.050
+We will see how to use this in the projects.
+
+07:52.050 --> 07:54.720
+So signup process completed.
+
+07:54.720 --> 07:55.553
+So we are doing good.
+
+07:55.553 --> 07:57.704
+We have GitHub account now, we have a domain.
+
+07:57.704 --> 07:59.345
+We have created account on Docker Hub,
+
+07:59.345 --> 08:00.985
+and we have a Sonar Cloud account,
+
+08:00.985 --> 08:02.727
+and we have configured the organization
+
+08:02.727 --> 08:05.133
+and project in Sonar Cloud.

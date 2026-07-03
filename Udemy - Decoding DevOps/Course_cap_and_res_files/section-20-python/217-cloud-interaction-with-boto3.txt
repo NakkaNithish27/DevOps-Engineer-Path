@@ -1,0 +1,607 @@
+WEBVTT
+
+00:00.880 --> 00:01.240
+Okay.
+
+00:01.240 --> 00:09.240
+So I'm going to ask ChatGPT how to automate AWS cloud task in Python and let's see what we get.
+
+00:11.920 --> 00:15.720
+So it says it's commonly done using Boto three library.
+
+00:16.400 --> 00:18.480
+And we can install that by using pip.
+
+00:18.480 --> 00:20.680
+So we're going to say pip install boto three.
+
+00:21.240 --> 00:25.480
+And then we need to set the AWS access credentials as well.
+
+00:25.840 --> 00:27.920
+So that means we need AWS CLI.
+
+00:27.960 --> 00:32.920
+So once we run AWS configure it's going to ask us the credentials that we're going to set.
+
+00:32.920 --> 00:35.080
+So first we need to install Boto3.
+
+00:35.680 --> 00:37.960
+Then we need to create an IAM user.
+
+00:38.000 --> 00:42.520
+Get the access key set the credentials and then we can start writing the code.
+
+00:42.520 --> 00:44.440
+So let's look at the code in a moment.
+
+00:44.440 --> 00:46.240
+But before that let's do the setup.
+
+00:47.160 --> 00:48.560
+First let's create the IAM user.
+
+00:48.560 --> 00:50.120
+So let's go to IAM service.
+
+00:50.160 --> 00:52.440
+Go to users say create user.
+
+00:54.160 --> 00:58.560
+I'm going to call it as Python admin because I'm going to give administrator access.
+
+00:58.600 --> 01:01.650
+Go next attach policies directly.
+
+01:02.170 --> 01:04.050
+And I will say administrator access.
+
+01:04.090 --> 01:07.730
+Be careful with that because we are going to use access key and secret key.
+
+01:08.210 --> 01:16.130
+So as soon as you're done with this activity, make sure to delete this user to go to next create user.
+
+01:16.730 --> 01:20.170
+Now go to the user and go to Security credentials.
+
+01:20.290 --> 01:20.970
+Get the.
+
+01:21.010 --> 01:22.170
+Get to the access key.
+
+01:22.210 --> 01:26.610
+Secret access key CLI command line interface.
+
+01:26.730 --> 01:29.050
+I understand the risk and go next.
+
+01:29.690 --> 01:31.130
+So create access key.
+
+01:31.290 --> 01:33.490
+I'm going to first copy the access key.
+
+01:34.010 --> 01:40.050
+So in windows you can open your git bash or PowerShell any command line utility basically in Mac OS.
+
+01:40.090 --> 01:43.770
+Open your terminal and run the command AWS configure.
+
+01:46.490 --> 01:50.130
+AWS CLI should be already installed for you, so just hit this command.
+
+01:50.610 --> 01:52.730
+It should ask you for the access key.
+
+01:52.730 --> 01:54.370
+So paste the access key.
+
+01:55.170 --> 01:57.250
+Now let's copy the secret access key.
+
+01:58.050 --> 02:01.130
+So I'm pasting the secret access key which I should not show you.
+
+02:01.130 --> 02:03.660
+But I'm going to delete it as soon as this is done.
+
+02:04.500 --> 02:05.660
+So set the region.
+
+02:05.660 --> 02:09.460
+I'm going to keep it as US East one and format as JSON.
+
+02:09.460 --> 02:11.020
+I'm going to keep it as default.
+
+02:11.900 --> 02:12.980
+Let's test the credential.
+
+02:12.980 --> 02:15.700
+I'm going to run aws s3 ls command.
+
+02:16.500 --> 02:18.620
+This should list all the S3 buckets for me.
+
+02:19.060 --> 02:22.140
+So this shows the credentials are working fine.
+
+02:22.860 --> 02:29.140
+If you get an error, make sure you check the policy access policies administrator access is attached
+
+02:29.140 --> 02:33.260
+or not and check also the credentials if you're given correct or not.
+
+02:33.940 --> 02:35.700
+Okay, now let's do the other things.
+
+02:35.700 --> 02:37.420
+Let's install Boto3.
+
+02:37.420 --> 02:40.340
+But I'm not going to install Boto3 directly on the system.
+
+02:40.340 --> 02:42.820
+I'm going to do it on the virtual environment.
+
+02:43.180 --> 02:44.620
+I'm going to show you what I mean.
+
+02:45.180 --> 02:46.700
+So right now I can do it like this.
+
+02:46.740 --> 02:49.260
+You know, pip install boto3.
+
+02:49.940 --> 02:51.900
+So this gets installed on the system.
+
+02:51.900 --> 02:56.660
+And then when I run the Python program I need to import this boto3.
+
+02:56.700 --> 03:02.860
+Maybe I have some other project where I have different version of boto and not only bought some other
+
+03:02.860 --> 03:07.620
+Python libraries I'm using, I have different version for one project and different versions of libraries
+
+03:07.620 --> 03:08.860
+for other projects.
+
+03:09.100 --> 03:10.980
+So how do I segregate that?
+
+03:11.180 --> 03:13.500
+We can do that by using virtual environment.
+
+03:13.500 --> 03:15.260
+First create a folder somewhere.
+
+03:15.420 --> 03:18.140
+So I'm going to create it on F drive.
+
+03:18.660 --> 03:19.180
+So anywhere.
+
+03:19.180 --> 03:24.100
+Or you can use your previous project folder in PyCharm just keeping it clean.
+
+03:24.100 --> 03:25.700
+So I'm creating it somewhere else.
+
+03:25.700 --> 03:27.460
+And then I get into that folder.
+
+03:30.100 --> 03:35.180
+And here I'm going to run a command python hyphen m v, e and v.
+
+03:36.340 --> 03:38.180
+And then you give the name of the environment.
+
+03:38.180 --> 03:42.100
+So I'm going to say as DevOps okay.
+
+03:42.140 --> 03:47.380
+Now after completing this if you run the command ls, you should see a folder there with your virtual
+
+03:47.380 --> 03:48.460
+environment name.
+
+03:48.900 --> 03:51.700
+And in order to use this you know, let's do ls.
+
+03:51.740 --> 03:54.820
+Over here you should see some folder structure in windows.
+
+03:54.820 --> 03:57.660
+You will see scripts in Mac OS or Linux.
+
+03:57.660 --> 03:59.060
+You should see here bin.
+
+04:00.300 --> 04:03.870
+So to activate virtual environment in Linux or Mac OS.
+
+04:03.910 --> 04:04.670
+Run this command.
+
+04:04.710 --> 04:07.110
+Source the name of the folder.
+
+04:07.150 --> 04:07.590
+Slash.
+
+04:07.630 --> 04:07.990
+Bin.
+
+04:07.990 --> 04:08.430
+Slash.
+
+04:08.470 --> 04:09.150
+Activate.
+
+04:09.590 --> 04:13.510
+If you're using windows, then run the name of the folder.
+
+04:13.510 --> 04:14.470
+The virtual environment.
+
+04:14.470 --> 04:17.230
+In our case it's DevOps slash scripts slash.
+
+04:17.270 --> 04:17.990
+Activate.
+
+04:18.430 --> 04:25.310
+So let's try this to say DevOps slash scripts.
+
+04:27.510 --> 04:28.790
+Slash activate.
+
+04:30.110 --> 04:31.750
+So actually nothing happened.
+
+04:31.750 --> 04:33.830
+If I run this command in PowerShell it will work.
+
+04:33.830 --> 04:36.510
+But if I'm using git bash then I have to do it like this.
+
+04:36.910 --> 04:42.470
+Source DevOps scripts activate for Mac OS instead of scripts.
+
+04:42.470 --> 04:44.030
+The folder name is bin.
+
+04:44.550 --> 04:47.830
+So when you run this command, your virtual environment will be activated.
+
+04:47.830 --> 04:49.230
+You should get something like this.
+
+04:49.270 --> 04:51.710
+The name of the environment in parenthesis.
+
+04:52.430 --> 04:53.550
+Let me clear the screen.
+
+04:53.790 --> 04:59.590
+Now if I'm going to install any library like boto3 with Pip.
+
+04:59.590 --> 05:01.550
+So I'm going to say pip install Boto3.
+
+05:01.550 --> 05:06.480
+So this is going to install the library in the virtual environment, not on the system directly.
+
+05:08.760 --> 05:10.720
+Okay, so the Boto3 is installed.
+
+05:10.720 --> 05:13.320
+Now I'm going to run the command python and hit enter.
+
+05:13.320 --> 05:18.000
+So I get into Python interpreter and I'm going to say import boto3 to test it.
+
+05:18.600 --> 05:19.600
+And it works.
+
+05:20.280 --> 05:22.000
+Now if I exit from here.
+
+05:22.000 --> 05:25.760
+So type exit and parenthesis exit from the Python interpreter.
+
+05:27.200 --> 05:29.120
+You see virtual environment is still active.
+
+05:29.120 --> 05:31.960
+To deactivate you have to run the command deactivate.
+
+05:33.080 --> 05:36.560
+Now that DevOps virtual environment is deactivated.
+
+05:37.160 --> 05:44.840
+Now if I run Python, I get into the interpreter and if I say import boto3, you will get an error.
+
+05:45.320 --> 05:49.720
+If you already have Boto3 installed on your system, of course it will work, but in my case I have
+
+05:49.720 --> 05:51.440
+not installed boto3 in the system.
+
+05:51.440 --> 05:53.960
+I have installed it in the virtual environment.
+
+05:54.600 --> 05:56.240
+Okay, so let me exit.
+
+05:57.040 --> 06:02.560
+Now before we start writing some script or code, let me show you the basic connection setup and how
+
+06:02.560 --> 06:07.730
+to use methods for different Python resources like EC2, S3.
+
+06:08.410 --> 06:11.290
+So for that case I'm going to again activate the environment.
+
+06:11.290 --> 06:13.210
+So source the folder name DevOps.
+
+06:13.210 --> 06:14.850
+Inside that I have scripts.
+
+06:16.170 --> 06:18.330
+And in that we have activate file.
+
+06:19.130 --> 06:20.930
+So this activated the environment.
+
+06:21.170 --> 06:24.650
+And I'm going to get into the Python interpreter.
+
+06:24.650 --> 06:26.930
+So just type Python and hit enter.
+
+06:27.890 --> 06:31.530
+And I'm going to import Boto three.
+
+06:32.010 --> 06:35.930
+Just want to show you how to use boto three basic structure how to use the methods.
+
+06:36.290 --> 06:38.330
+And then we can start writing our scripts.
+
+06:39.570 --> 06:40.050
+Oh wait.
+
+06:40.090 --> 06:45.730
+Before this let me create one text file because I'm going to create an S3 bucket and upload a text file.
+
+06:45.730 --> 06:51.970
+So use anything vim editor or anything and create some text file in the same directory.
+
+06:52.290 --> 06:54.770
+I'm creating some file solar system dot txt.
+
+06:54.770 --> 06:56.850
+I'm going to mention the name of the planets.
+
+06:57.530 --> 06:59.850
+Okay, some file with some content.
+
+07:00.610 --> 07:08.540
+Then again make sure your environment is active and then get into the interpreter import.
+
+07:10.980 --> 07:12.580
+I'm going to clear the screen first.
+
+07:14.740 --> 07:18.860
+Okay Python then import boto3.
+
+07:20.420 --> 07:24.180
+So Boto3 library has one connect method.
+
+07:24.980 --> 07:26.660
+I mean sorry client method.
+
+07:26.660 --> 07:30.500
+By using that you can connect to the service that you want to.
+
+07:30.980 --> 07:39.020
+So let's take a variable I will name it as S3 equal to Boto3 dot client.
+
+07:39.020 --> 07:44.580
+So we access that method and we give the name of the service in the parenthesis.
+
+07:44.580 --> 07:46.220
+That's the argument we are passing.
+
+07:46.460 --> 07:47.580
+That will be S3.
+
+07:47.980 --> 07:51.180
+So that connection information will be stored into this variable.
+
+07:52.180 --> 07:59.980
+Now if you run dear S3 data on S3, you should see a whole list of available methods or functions a
+
+07:59.980 --> 08:00.740
+huge list.
+
+08:01.220 --> 08:03.460
+So for example you can see here copy.
+
+08:03.500 --> 08:05.310
+You can see a create bucket.
+
+08:05.710 --> 08:07.870
+So I can say S3 dot create bucket.
+
+08:07.870 --> 08:13.350
+And I can pass some argument which will be the bucket name to create the S3 bucket like that.
+
+08:13.350 --> 08:18.670
+There are many other things to upload, files to download, file to list to delete or delete object
+
+08:18.670 --> 08:20.390
+is there, download file is there.
+
+08:20.750 --> 08:24.310
+So you can check this whole list from the Boto3 documentation.
+
+08:24.310 --> 08:27.190
+Or you can use ChatGPT or any other AI tool.
+
+08:27.590 --> 08:34.390
+So let's create a bucket control L I'm going to clean this first okay.
+
+08:34.390 --> 08:35.670
+So that's what we did first right.
+
+08:35.670 --> 08:38.830
+We said S3 and we connected to S3 service.
+
+08:38.830 --> 08:43.350
+So now we have S3 object once again let's can do that.
+
+08:43.390 --> 08:48.230
+So I'm going to say S3 dot create underscore bucket.
+
+08:48.230 --> 08:53.910
+That's the method I'm using or function I'm going to give the parenthesis and give the name of the bucket.
+
+08:53.910 --> 08:55.470
+That's the argument you can pass.
+
+08:55.670 --> 08:58.470
+But also you need to give the name of the argument.
+
+08:58.470 --> 09:03.790
+So that will be bucket in B caps equal to and the name of the bucket.
+
+09:03.790 --> 09:05.390
+So the name of the bucket will be a string.
+
+09:05.390 --> 09:08.270
+So we need to put it into a single quote or double quotes.
+
+09:08.270 --> 09:09.470
+And let's give some name.
+
+09:10.110 --> 09:12.350
+Boto python something and give some numbers.
+
+09:12.350 --> 09:13.110
+Just make it unique.
+
+09:13.110 --> 09:15.630
+Don't give same, otherwise you will not be able to create it.
+
+09:16.230 --> 09:22.230
+So you see we get a response metadata in JSON format HTTP status code 200.
+
+09:22.270 --> 09:24.310
+That means this worked successfully.
+
+09:24.750 --> 09:27.910
+And now let's upload a file into this bucket.
+
+09:27.910 --> 09:31.630
+So I'm going to first list that file that I created I forgot its name.
+
+09:31.630 --> 09:34.950
+So I'm going to say import os os dot system.
+
+09:37.110 --> 09:39.510
+Dot system parenthesis.
+
+09:39.550 --> 09:42.430
+In this I'm going to run the command list okay.
+
+09:42.430 --> 09:42.630
+Yeah.
+
+09:42.630 --> 09:43.910
+That's the name of the file.
+
+09:44.430 --> 09:47.750
+Wrong name I've given solar system instead of system.
+
+09:48.390 --> 09:53.190
+Anyways I'm going to run the command S3 upload underscore file.
+
+09:53.190 --> 09:54.190
+That's the method name.
+
+09:54.190 --> 09:56.830
+Again you can run the command and find that name.
+
+09:57.310 --> 09:59.510
+And you need to pass your three arguments.
+
+09:59.510 --> 10:01.950
+First will be the name of the file.
+
+10:02.230 --> 10:03.230
+Again it's a string.
+
+10:03.230 --> 10:05.280
+So make sure you get in the single quote?
+
+10:05.920 --> 10:08.640
+So that's the name of the file, comma.
+
+10:08.680 --> 10:10.600
+The next argument will be the bucket name.
+
+10:10.600 --> 10:11.800
+Again single quote.
+
+10:11.800 --> 10:12.920
+Because it's a string.
+
+10:12.920 --> 10:19.680
+This is the name of the S3 bucket and the object name, which I'm going to keep the same same name of
+
+10:19.680 --> 10:20.200
+the file.
+
+10:20.200 --> 10:23.240
+Or you can change the name okay.
+
+10:23.280 --> 10:25.680
+Just these three arguments and hit enter.
+
+10:26.280 --> 10:27.640
+And this should upload the file.
+
+10:27.680 --> 10:30.560
+Now let's go to AWS console and see ourselves.
+
+10:31.520 --> 10:31.760
+Right.
+
+10:31.760 --> 10:34.360
+So I see the S3 bucket got created.
+
+10:34.680 --> 10:36.720
+And in this I should have the file.
+
+10:38.680 --> 10:45.680
+So now you got an idea how to interact with AWS cloud services by using Python boto3.
+
+10:46.400 --> 10:52.120
+In the next lecture we are going to write scripts to interact with other services also like EC2 and
+
+10:52.120 --> 10:56.560
+the sub services in EC2 like Keypair, security group instances, load balancers.
+
+10:57.080 --> 11:03.360
+I'm also going to show you how to create complex automation scripts by using generative AI.
+
+11:03.640 --> 11:05.960
+So wrap this up and join me in the next one.

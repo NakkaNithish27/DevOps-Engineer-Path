@@ -1,0 +1,562 @@
+WEBVTT
+
+00:00.320 --> 00:00.960
+All right.
+
+00:00.960 --> 00:03.600
+So now we are going to get started with the pipelines.
+
+00:04.040 --> 00:08.800
+In the previous lecture we created the repository we cloned and we signed it with our VS code.
+
+00:09.120 --> 00:12.920
+Now this is a git repository and it's same as any other git repository.
+
+00:12.960 --> 00:15.600
+You have branches, you have tags, you have commits.
+
+00:16.120 --> 00:23.440
+If you want to set up a pipeline for this source code, you need to create a file in the same repository
+
+00:23.800 --> 00:26.240
+and that file will be in YAML format.
+
+00:26.720 --> 00:33.120
+When you have the pipeline file in the repository, your pipeline will be visible over here, build
+
+00:33.160 --> 00:35.760
+here you have pipelines and you click on pipelines.
+
+00:36.080 --> 00:38.200
+So right now we do not have any pipeline.
+
+00:38.200 --> 00:43.360
+But there are some templates that you can go through to understand the syntax, the structure of this
+
+00:43.360 --> 00:44.040
+pipeline.
+
+00:44.440 --> 00:48.000
+So click on Try Test template for this hello world.
+
+00:48.520 --> 00:50.120
+Well we are not creating it like this.
+
+00:50.120 --> 00:54.440
+We are going to do it in our local machine, in the VSCode and in our repository.
+
+00:54.480 --> 00:58.160
+We will be having this file dot gitlab ci dot yml.
+
+00:58.560 --> 01:00.520
+And yes you can create it here also.
+
+01:00.520 --> 01:02.900
+But we're not going to do that I'm going to cancel this.
+
+01:02.900 --> 01:04.020
+This is just to show you.
+
+01:04.260 --> 01:08.060
+So most of this is common to line 17 here.
+
+01:08.060 --> 01:09.700
+This is where your pipeline begins.
+
+01:09.700 --> 01:13.500
+So first you define stages the list of stages.
+
+01:13.500 --> 01:15.580
+So list will be like this.
+
+01:16.020 --> 01:17.380
+You see stages colon.
+
+01:17.380 --> 01:18.700
+And then you give the space.
+
+01:18.700 --> 01:22.860
+And in the same column you define all the stages of your pipeline.
+
+01:22.860 --> 01:25.900
+So here you have first hyphen space build.
+
+01:26.220 --> 01:28.340
+Then you have test and you have deploy.
+
+01:28.340 --> 01:34.500
+So that shows you that this pipeline has three stages which we call it as a job.
+
+01:34.500 --> 01:39.060
+So first build now here if you see build job here this is a different name.
+
+01:39.060 --> 01:40.740
+This is for your identification.
+
+01:41.100 --> 01:46.940
+But stage colon here you have to give the same name as you have given in the stage stages.
+
+01:47.220 --> 01:52.260
+So stage build and then you have script and you can give the command.
+
+01:53.060 --> 01:54.380
+Now where does this run.
+
+01:55.060 --> 01:59.020
+So GitLab like GitHub actions has its own runners.
+
+01:59.540 --> 02:05.400
+Or you can add runner and you can mention the runner name over there majority of the time, or even
+
+02:05.600 --> 02:06.840
+when I work in real time.
+
+02:06.840 --> 02:09.400
+We define a container image name.
+
+02:09.400 --> 02:11.840
+So what it does, it pulls a container.
+
+02:12.040 --> 02:19.040
+Container image, creates a container from that and execute your script, your steps inside that container.
+
+02:19.040 --> 02:20.520
+And where does that container run?
+
+02:20.840 --> 02:25.800
+If you do not define any runner, it runs on the GitLab predefined runners.
+
+02:26.760 --> 02:33.320
+Or you can add your own runner and mention that you need to run this container on this specific runner.
+
+02:33.360 --> 02:37.800
+Now, I said majority of the time we use container, but that's not the only option you can use shell
+
+02:37.840 --> 02:38.360
+executor.
+
+02:38.360 --> 02:43.520
+Also, you can just execute shell command let's say on an EC2 instance or any machine.
+
+02:43.880 --> 02:44.080
+Okay.
+
+02:44.120 --> 02:45.000
+So it will be like this.
+
+02:45.000 --> 02:45.840
+You have job.
+
+02:45.840 --> 02:49.000
+You mentioned the script, you have job, you mentioned the script.
+
+02:49.280 --> 02:52.040
+And this is the most simplest pipeline.
+
+02:52.080 --> 02:55.920
+We are going to have many more setting in our pipeline as we create.
+
+02:56.240 --> 02:57.160
+So let's get started.
+
+02:57.160 --> 02:59.680
+And we're going to talk about runners and all later.
+
+02:59.680 --> 03:01.840
+First let's create a sample pipeline.
+
+03:01.840 --> 03:02.960
+So close this one.
+
+03:04.280 --> 03:09.790
+Open your VS code and over here itself in your repository click on new file.
+
+03:09.790 --> 03:14.310
+Give this file this name dot gitlab ci dot yml.
+
+03:14.350 --> 03:14.990
+Hit enter.
+
+03:15.550 --> 03:16.990
+First mention the stages.
+
+03:16.990 --> 03:22.750
+So say stages colon, hit enter, give space hyphen and mention the name of the stage.
+
+03:23.150 --> 03:25.430
+So first let's start with the build stage.
+
+03:25.830 --> 03:28.430
+And then we're going to have also the test stage.
+
+03:28.430 --> 03:31.990
+Just two stage in the first pipeline that we are creating.
+
+03:32.550 --> 03:35.070
+Let's also define some variables.
+
+03:35.070 --> 03:41.830
+So say variables colon and then say project underscore name in caps colon and give the name of your
+
+03:41.830 --> 03:42.390
+project.
+
+03:42.390 --> 03:44.150
+So I'm going to say V profile.
+
+03:44.550 --> 03:47.870
+So that's how you define variable in the pipeline.
+
+03:47.870 --> 03:53.190
+You can of course store variables and secrets in the GitLab that I'm going to show you later.
+
+03:53.470 --> 03:55.110
+Let's just first work with this.
+
+03:55.550 --> 03:57.230
+So let's define the build stage first.
+
+03:57.230 --> 04:00.510
+So I'm going to give a comment that this is going to be the build stage.
+
+04:00.950 --> 04:04.670
+And I'm going to give name as build hyphen job colon.
+
+04:04.670 --> 04:08.490
+But then I'm going to say stage colon build.
+
+04:08.530 --> 04:11.490
+Now this name should match with the stage that you have defined.
+
+04:11.490 --> 04:13.530
+If it doesn't match this, you're going to get an error.
+
+04:13.810 --> 04:16.690
+That stage build is not in the stages.
+
+04:16.850 --> 04:18.690
+You will get this error in the pipeline.
+
+04:18.690 --> 04:19.810
+I'll show you that later.
+
+04:20.210 --> 04:24.010
+Now we are using inbuilt runners on GitLab.
+
+04:24.010 --> 04:27.370
+We are not adding our own runner on that inbuilt runner.
+
+04:27.370 --> 04:32.370
+We want to run a container and then execute our commands in that container.
+
+04:32.370 --> 04:35.970
+So I'm going to run npm install on the source code.
+
+04:35.970 --> 04:36.930
+We have the source code.
+
+04:36.930 --> 04:38.370
+We have pom.xml file.
+
+04:38.370 --> 04:45.930
+Here we are going to run mvn dot install to build the stage, and I want to run it on an image that
+
+04:45.930 --> 04:48.970
+is from Docker Hub, a maven image.
+
+04:49.090 --> 04:53.690
+So I'm going to define that in image colon maven image.
+
+04:53.690 --> 04:54.890
+This is in the Docker Hub.
+
+04:54.890 --> 04:58.290
+And with this tag 3.9.9 hyphen eclipse.
+
+04:58.290 --> 05:00.250
+Hyphen tambourine hyphen 17.
+
+05:00.690 --> 05:02.250
+This is available in the Docker Hub.
+
+05:02.250 --> 05:05.930
+So what's going to happen when it runs the stage on the runner.
+
+05:06.410 --> 05:07.450
+The inbuilt runner.
+
+05:07.450 --> 05:12.510
+It's going to fetch that this image in that runner and create a container from that.
+
+05:13.590 --> 05:17.110
+And on that container I want it to run Mvn install.
+
+05:17.390 --> 05:22.030
+So I'm going to say script colon and I can give list of commands.
+
+05:22.030 --> 05:24.510
+So first I'm saying echo building projects.
+
+05:24.830 --> 05:26.270
+And then I'm giving the command.
+
+05:26.510 --> 05:33.750
+Once again this command is going to run a container running from this image on inbuilt runner from GitLab.
+
+05:34.230 --> 05:34.470
+Okay.
+
+05:34.510 --> 05:38.710
+Now like this I'm going to create a testing stage similar to this.
+
+05:38.710 --> 05:43.030
+I'm going to simply copy this and create one more stage over here.
+
+05:43.030 --> 05:47.230
+I'm going to change its name as first the command test stage.
+
+05:47.230 --> 05:49.590
+Here I'm going to say test job.
+
+05:50.350 --> 05:52.790
+But the stage name I need to match as this.
+
+05:52.830 --> 05:53.830
+Exactly same.
+
+05:53.830 --> 05:58.790
+So I'm going to just say here test same image I would be using.
+
+05:58.830 --> 06:08.510
+And I'm going to say testing, running unit test to say running unit tests in the project.
+
+06:09.510 --> 06:13.730
+I'm going to run two commands here Mvn test and Mvn Checkstyle colon Checkstyle.
+
+06:14.170 --> 06:15.650
+So two different stage.
+
+06:15.890 --> 06:19.650
+Each stage is going to run a container, then close it once it's done.
+
+06:20.210 --> 06:24.330
+And I'm going to say that run this stage only on the main branch.
+
+06:24.490 --> 06:31.930
+So for that purpose I can use here the keyword only colon hyphen main.
+
+06:32.450 --> 06:35.650
+Now there are better ways to do this which we're going to see in the next lecture.
+
+06:35.650 --> 06:40.050
+But for now we're just going to keep the same one only main over here also.
+
+06:40.050 --> 06:42.490
+And also for the test job.
+
+06:42.490 --> 06:45.290
+Now this will be running only on the main branch.
+
+06:45.330 --> 06:51.490
+Any other branch, your pipeline will not run the stage because you're just given the name of this branch
+
+06:51.530 --> 06:52.130
+as main.
+
+06:52.130 --> 06:53.690
+So only main branch.
+
+06:53.690 --> 06:56.850
+When you commit, then only it is going to run this pipeline.
+
+06:57.370 --> 06:59.010
+Okay, now let's save this.
+
+06:59.970 --> 07:04.010
+And I'm going to commit this commit and push.
+
+07:06.770 --> 07:12.470
+A commit message first build and test pipeline Except commit message.
+
+07:13.110 --> 07:15.990
+Okay, once it is committed, it is going to trigger the pipeline.
+
+07:15.990 --> 07:17.550
+Let's go to the GitLab.
+
+07:18.310 --> 07:19.750
+Let's go to our project.
+
+07:20.030 --> 07:24.310
+So you need to go into your project and go to build and pipelines.
+
+07:24.710 --> 07:28.350
+And you should see the pipeline failed for some reason.
+
+07:28.350 --> 07:29.270
+Let's take a look.
+
+07:30.030 --> 07:34.030
+So here it says before you can run the pipelines we need to verify your account.
+
+07:34.030 --> 07:36.270
+So click on Verify My account.
+
+07:36.910 --> 07:38.310
+Mention your phone number.
+
+07:38.590 --> 07:45.670
+You will get an SMS and solve the puzzle okay so after verification the pipeline won't run.
+
+07:45.990 --> 07:46.990
+We need to trigger this.
+
+07:46.990 --> 07:47.710
+Once again.
+
+07:48.350 --> 07:52.510
+The error for the failed pipeline was due to the user not being verified.
+
+07:52.510 --> 07:53.270
+It is verified.
+
+07:53.270 --> 07:55.230
+Now let's make one more comment.
+
+07:55.510 --> 07:59.790
+So in the VS code, let's go to the README.md file and make some changes.
+
+08:02.030 --> 08:04.070
+Let's add some extra hash.
+
+08:04.510 --> 08:08.870
+Save this and then we can say commit and push.
+
+08:09.630 --> 08:10.870
+Give a commit message.
+
+08:10.910 --> 08:12.030
+Accept the commit.
+
+08:12.510 --> 08:16.220
+Now go to pipelines once again and you should see your pipeline running.
+
+08:16.740 --> 08:18.260
+Click on the status running.
+
+08:18.700 --> 08:21.700
+Here you can see the pipeline was for this commit.
+
+08:21.740 --> 08:23.060
+The commit ID you can see.
+
+08:23.460 --> 08:25.220
+You can see what has changed.
+
+08:25.220 --> 08:26.300
+What was committed.
+
+08:26.300 --> 08:28.620
+Due to that the pipeline got triggered.
+
+08:28.940 --> 08:32.580
+And for the branch which branch it is running for that is for main branch.
+
+08:32.940 --> 08:34.580
+Let's click on this build job.
+
+08:35.220 --> 08:37.580
+You should see here running with GitLab runner.
+
+08:37.580 --> 08:40.740
+As I told you there are inbuilt runner that it is using.
+
+08:41.020 --> 08:42.140
+It's already succeeded.
+
+08:42.140 --> 08:45.620
+Let me scroll up full log okay.
+
+08:45.620 --> 08:45.980
+Over here.
+
+08:46.020 --> 08:48.700
+Preparing docker plus machine executor.
+
+08:48.700 --> 08:52.380
+So GitLab has many different executors.
+
+08:52.980 --> 08:59.580
+So you have SSH executor where it where it can SSH to a machine and execute commands which you mentioned
+
+08:59.820 --> 09:01.300
+or simply shell executor.
+
+09:01.300 --> 09:06.060
+When you add a runner you can mention this executor as shell and you can run the command.
+
+09:06.060 --> 09:07.820
+You have parallels or VirtualBox.
+
+09:07.820 --> 09:09.620
+You have Docker, you have Kubernetes.
+
+09:09.980 --> 09:12.740
+And this is all useful when you add your own runner.
+
+09:12.740 --> 09:15.920
+You can define what kind of executor you want.
+
+09:15.960 --> 09:18.720
+As I told you, majority of the time it's going to be Docker.
+
+09:19.080 --> 09:21.480
+But then of course you have other use cases also.
+
+09:21.720 --> 09:27.600
+So here you see it's preparing Docker executor using Docker executor with image.
+
+09:28.240 --> 09:34.040
+And here you see this message running on the runner name via this.
+
+09:34.440 --> 09:37.320
+So on that runner it is running the container force.
+
+09:37.320 --> 09:40.800
+It's cloning our git repository.
+
+09:40.840 --> 09:44.240
+So you don't need to mention any specific instruction to clone the source code.
+
+09:44.240 --> 09:48.160
+It's going to clone the source code and then execute your step.
+
+09:48.160 --> 09:49.840
+So executing step script.
+
+09:50.560 --> 09:52.800
+In that script you have mentioned an echo command.
+
+09:52.800 --> 09:54.200
+And then mvn install.
+
+09:54.520 --> 10:00.520
+Let's go back to the pipelines once again says it's passed both the jobs completed successfully.
+
+10:00.520 --> 10:04.840
+You can rerun a job if there is any requirement.
+
+10:05.680 --> 10:06.040
+All right.
+
+10:06.040 --> 10:07.720
+So that would be all in this lecture.
+
+10:07.720 --> 10:13.200
+In the next lecture we are going to see many more things more variables, conditions artifacts and many
+
+10:13.200 --> 10:13.720
+more stuff.
+
+10:13.720 --> 10:16.920
+So complete this lecture and then join me in the next one.

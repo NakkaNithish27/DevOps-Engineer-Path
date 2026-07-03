@@ -1,0 +1,502 @@
+WEBVTT
+
+00:01.410 --> 00:03.090
+-: Okay, in this lecture we are going to see
+
+00:03.090 --> 00:05.220
+how to rollback.
+
+00:05.220 --> 00:08.190
+We'll see each and every command how to rollback.
+
+00:08.190 --> 00:11.677
+But before that, let's ask ChatGPT how to roll back.
+
+00:11.677 --> 00:15.597
+"Git rollback commands".
+
+00:21.950 --> 00:24.720
+Okay, so it is saying you can use a combination of git reset
+
+00:24.720 --> 00:26.943
+git revert and git checkout.
+
+00:28.110 --> 00:30.467
+And it is showing you the command
+
+00:30.467 --> 00:31.300
+and the information about it.
+
+00:31.300 --> 00:34.140
+Don't worry, we are going to do this and learn it
+
+00:34.140 --> 00:36.060
+but I wanted to show you ChatGPT
+
+00:36.060 --> 00:39.600
+in case you forget the command or you forgot the the method.
+
+00:39.600 --> 00:42.660
+Then you can anytime use ChatGPT and ask it
+
+00:42.660 --> 00:46.140
+or you can give specific command also and ask it to explain.
+
+00:46.140 --> 00:47.670
+So you can use Git reset
+
+00:47.670 --> 00:51.145
+you can use Git reset --hard.
+
+00:51.145 --> 00:51.978
+We, we are going to use both of this.
+
+00:51.978 --> 00:54.900
+We are going to also use git revert and git checkout.
+
+00:54.900 --> 00:55.740
+What does that mean?
+
+00:55.740 --> 00:58.770
+We know git checkouts switches between branches
+
+00:58.770 --> 01:01.020
+but there's also one more nice use case
+
+01:01.020 --> 01:02.460
+of git checkout for rollback.
+
+01:02.460 --> 01:04.650
+We'll be seeing that as well.
+
+01:04.650 --> 01:07.350
+And there actually a few more ways that we will be seeing
+
+01:07.350 --> 01:10.290
+in this lecture, but anytime you feel
+
+01:10.290 --> 01:13.860
+that you're not doing it right, just check with ChatGPT.
+
+01:13.860 --> 01:15.210
+Is your command correct or not?
+
+01:15.210 --> 01:20.210
+Ask questions, like I'll say explain git reset --hard
+
+01:21.180 --> 01:22.293
+with an example.
+
+01:25.440 --> 01:28.050
+As you see, it's explaining you A, B, C, D
+
+01:28.050 --> 01:29.073
+this is your branch,
+
+01:30.510 --> 01:32.043
+or the commit history, sorry.
+
+01:34.200 --> 01:36.000
+Right, but all this you'll understand when you
+
+01:36.000 --> 01:37.230
+actually do it, right?
+
+01:37.230 --> 01:40.673
+In case you don't remember, you can come to ChatGPT
+
+01:40.673 --> 01:42.660
+and confirm it once again.
+
+01:42.660 --> 01:43.493
+Because when you're
+
+01:43.493 --> 01:45.540
+doing versioning you need to be absolutely sure what
+
+01:45.540 --> 01:46.894
+you're doing.
+
+01:46.894 --> 01:48.060
+You have to, because you have to push it and share it
+
+01:48.060 --> 01:52.020
+with your fellow DevOps engineers and developers as well.
+
+01:52.020 --> 01:55.620
+And sure we can roll back whatever mistakes we do
+
+01:55.620 --> 01:58.050
+but I think the ChatGPT is a really very good tool to
+
+01:58.050 --> 02:00.630
+confirm the commands that we are running and we
+
+02:00.630 --> 02:03.210
+are doing it right or wrong, right?
+
+02:03.210 --> 02:08.210
+So let's, let's do it ourself and see how we can roll
+
+02:08.220 --> 02:09.243
+back the changes.
+
+02:10.590 --> 02:13.199
+Okay? Now we are going to see how to rollback
+
+02:13.199 --> 02:15.150
+and there are different, different levels where
+
+02:15.150 --> 02:16.440
+we can rollback.
+
+02:16.440 --> 02:21.187
+First let's up edit any file and I'll just
+
+02:22.560 --> 02:24.033
+put some content over here.
+
+02:25.050 --> 02:27.050
+Okay, I have put some content over here.
+
+02:34.410 --> 02:37.620
+Okay, now I want to rollback this before even I get
+
+02:37.620 --> 02:38.820
+into the staging area.
+
+02:38.820 --> 02:43.593
+So I can say Git checkout and I can give the file name.
+
+02:48.720 --> 02:53.490
+All went back to how it was. So git checkout
+
+02:53.490 --> 02:55.500
+and the file name is going to just rollback
+
+02:55.500 --> 02:56.880
+if you made the changes have
+
+02:56.880 --> 02:59.343
+and have not gone into staging or commit area.
+
+03:03.019 --> 03:04.463
+Okay, let's do it once again.
+
+03:11.100 --> 03:13.530
+Okay, again, few more lines.
+
+03:13.530 --> 03:16.323
+Actually I'm taking things from some existing playbook.
+
+03:18.060 --> 03:19.890
+You can put any content you want.
+
+03:19.890 --> 03:22.380
+Okay? You can see git status.
+
+03:22.380 --> 03:23.880
+There's also one more command,
+
+03:28.692 --> 03:29.525
+git diff, okay?
+
+03:31.540 --> 03:32.970
+Git diff can show you the difference
+
+03:32.970 --> 03:35.973
+in the file that you have changed, right?
+
+03:37.461 --> 03:39.960
+So jupiter1.rb file, it is saying
+
+03:39.960 --> 03:43.350
+that there these lines that were added, right?
+
+03:43.350 --> 03:46.770
+Now, if I'm good I can continue or if I'm not
+
+03:46.770 --> 03:48.903
+I can say git checkout and I can rollback.
+
+03:50.550 --> 03:53.070
+Okay? So let's say I'm good, right?
+
+03:53.070 --> 03:56.280
+So you can do git status, right?
+
+03:56.280 --> 03:58.290
+Which says there is a change and then you can
+
+03:58.290 --> 04:03.290
+say git diff where you can see what exactly is the change.
+
+04:03.300 --> 04:07.950
+If you're good you're going to say git add index it, oops
+
+04:07.950 --> 04:12.950
+space. And you can then again check git status
+
+04:16.020 --> 04:17.580
+and you can say git diff
+
+04:17.580 --> 04:20.520
+but just git diff command is not going to work now.
+
+04:20.520 --> 04:24.153
+You have to give an option, git diff --cached.
+
+04:25.440 --> 04:27.938
+So it's going to do the check, the difference
+
+04:27.938 --> 04:29.338
+of the file that was staged.
+
+04:32.070 --> 04:33.510
+So if you're already staged it, you want to
+
+04:33.510 --> 04:35.340
+see the difference from the current commit
+
+04:35.340 --> 04:39.273
+and the next that is going to happen git diff --cached.
+
+04:40.200 --> 04:42.300
+Right. If you want to go back from this level
+
+04:42.300 --> 04:46.250
+you can say git restore --staged and you can
+
+04:49.904 --> 04:50.753
+give the file name.
+
+04:55.800 --> 04:59.160
+Okay, now let's check git status.
+
+04:59.160 --> 05:03.960
+Says modified. Git diff, right?
+
+05:03.960 --> 05:06.213
+So back before we are staging.
+
+05:07.470 --> 05:09.720
+And at every level you can roll back first level
+
+05:09.720 --> 05:12.030
+git checkout and the file name when
+
+05:12.030 --> 05:16.590
+you're staged then git restore, git restore --staged
+
+05:16.590 --> 05:19.170
+and the file name. Okay, that is from the staging area.
+
+05:19.170 --> 05:21.446
+But what if you're already committed?
+
+05:21.446 --> 05:26.240
+So now let's again do git add and say git commit now.
+
+05:30.690 --> 05:31.633
+Git commit -m.
+
+05:40.230 --> 05:42.790
+Okay, now git status, everything is good
+
+05:43.920 --> 05:47.010
+Git diff, nothing.
+
+05:47.010 --> 05:49.320
+Git diff --cashed, nothing.
+
+05:49.320 --> 05:50.370
+Things are already committed.
+
+05:50.370 --> 05:52.923
+So git log --oneline.
+
+05:55.620 --> 05:56.580
+Get commit id.
+
+05:56.580 --> 05:59.280
+And then you can check the difference between the current
+
+05:59.280 --> 06:00.453
+commit that you did.
+
+06:01.800 --> 06:04.143
+Git diff, you can give the previous commit,
+
+06:05.070 --> 06:07.353
+dot dot and the current commit.
+
+06:09.379 --> 06:11.310
+And then you can see the difference.
+
+06:11.310 --> 06:13.560
+Now if you want to roll back from here, if you want to
+
+06:13.560 --> 06:15.030
+go back to your previous commit,
+
+06:15.030 --> 06:18.390
+you can just say Git revert Head.
+
+06:24.000 --> 06:26.820
+So Head is that pointer which is currently pointing
+
+06:26.820 --> 06:29.250
+to this commit id.
+
+06:29.250 --> 06:31.410
+And if I say get revert head, so it's gonna go
+
+06:31.410 --> 06:34.350
+to the previous commit or I can even mention
+
+06:34.350 --> 06:36.810
+the commit ID git head and I can mention the commit,
+
+06:36.810 --> 06:39.930
+and at that level the content will go.
+
+06:39.930 --> 06:42.930
+It will also ask me a message for the reverting,
+
+06:42.930 --> 06:44.643
+like the commit message.
+
+06:47.520 --> 06:48.570
+So now rollback.
+
+06:48.570 --> 06:52.110
+Okay, Git jupiter1.rb.
+
+06:52.110 --> 06:53.340
+See there is nothing.
+
+06:53.340 --> 06:56.253
+But now if you do git log --oneline,
+
+06:58.770 --> 07:01.113
+you should actually see a new commit.
+
+07:02.070 --> 07:04.770
+Okay? That is for revert, which is assimilar.
+
+07:04.770 --> 07:08.400
+The content here is assimilar as this one, right?
+
+07:08.400 --> 07:12.630
+So we are here, we made some changes, we came at this place
+
+07:12.630 --> 07:14.280
+then we wanted to roll back over here
+
+07:14.280 --> 07:16.950
+but it created a new commit.
+
+07:16.950 --> 07:20.280
+So when you revert, it is also going to store
+
+07:20.280 --> 07:23.193
+the history of what changes you made.
+
+07:24.090 --> 07:28.320
+But if you don't want to store any history whatsoever
+
+07:28.320 --> 07:30.573
+then you can use Git reset command.
+
+07:33.840 --> 07:37.260
+Git reset --hard
+
+07:37.260 --> 07:38.943
+and you give the commit id.
+
+07:42.840 --> 07:45.840
+Now here you go back to that particular commit ID
+
+07:45.840 --> 07:48.960
+and all the commit ID after that
+
+07:48.960 --> 07:51.570
+all the commit history after that is removed.
+
+07:51.570 --> 07:53.970
+The data and all the history is removed.
+
+07:53.970 --> 07:57.510
+So this is a more direct way of a rollback, right?
+
+07:57.510 --> 08:01.350
+Git revert is a softer way where you are storing the history
+
+08:01.350 --> 08:02.880
+also. Okay?
+
+08:02.880 --> 08:07.410
+So let me run the history command when I said history, okay
+
+08:07.410 --> 08:09.510
+let's talk about now reverting and rollback.
+
+08:09.510 --> 08:12.720
+So we made changes to this file and if I want to roll
+
+08:12.720 --> 08:14.910
+back before I stage, I can use Git checkout
+
+08:14.910 --> 08:18.000
+and the file path, okay? Can roll it back.
+
+08:18.000 --> 08:20.350
+But if you have already staged the change
+
+08:21.900 --> 08:24.060
+now you can compare with git diff.
+
+08:24.060 --> 08:25.140
+If you already staged
+
+08:25.140 --> 08:28.050
+you can say git diff --cached.
+
+08:28.050 --> 08:31.530
+If you want to restore from after you already staged, right?
+
+08:31.530 --> 08:34.207
+And then you want to restore, then you can say git Restore
+
+08:34.207 --> 08:36.123
+-: -stage and the file name.
+
+08:37.590 --> 08:41.160
+But if you have already committed and you want to roll back
+
+08:41.160 --> 08:45.213
+then you can use Git revert or Git reset.
+
+08:46.950 --> 08:49.500
+So based on your requirement, what you want to do, right?
+
+08:49.500 --> 08:51.510
+But make sure you use git diff command to really
+
+08:51.510 --> 08:54.660
+check what are the differences between two commits.
+
+08:54.660 --> 08:56.520
+So you want to see something is not working now
+
+08:56.520 --> 08:59.040
+you just made some code change, things are breaking.
+
+08:59.040 --> 09:00.270
+You want to see the difference
+
+09:00.270 --> 09:02.730
+from the previous commit, use git diff.
+
+09:02.730 --> 09:04.080
+It's a very useful command.

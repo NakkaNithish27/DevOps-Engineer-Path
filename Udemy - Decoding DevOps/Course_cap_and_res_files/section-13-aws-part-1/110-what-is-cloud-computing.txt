@@ -1,0 +1,269 @@
+WEBVTT
+
+0
+00:00.390 --> 00:05.880
+Imagine a datacentre with many computers or servers.
+
+1
+00:06.540 --> 00:08.700
+Many computers, many servers.
+
+2
+00:09.820 --> 00:17.110
+Hundreds or even thousands of computers running together to provide compute resource to an organization
+
+3
+00:17.380 --> 00:19.210
+or to its branches.
+
+4
+00:20.680 --> 00:27.700
+Now imagine all these computers are virtualized, hypervisors are installed on them.
+
+5
+00:28.000 --> 00:34.120
+So virtualization team can create virtual machines and allott it to the right individual.
+
+6
+00:34.690 --> 00:40.630
+So if the employees in the organization need a virtual machine or computer to do some computation,
+
+7
+00:40.990 --> 00:47.800
+they will contact the virtualization team to provide them the compute resource. Virtualization team.
+
+8
+00:47.800 --> 00:53.890
+Working with D.C. Ops team will work around the clock to create, manage and maintain these virtual
+
+9
+00:53.890 --> 00:56.530
+machines or virtual storage as well.
+
+10
+00:57.010 --> 01:02.050
+So more bigger the company, more administration will be required for the virtualized platform.
+
+11
+01:02.410 --> 01:04.510
+So this is a virtualization.
+
+12
+01:06.260 --> 01:08.540
+Before cloud computing came in.
+
+13
+01:08.930 --> 01:15.410
+Now, as you see similar virtualized platforms, but instead of contacting virtualization team to provide
+
+14
+01:15.410 --> 01:23.660
+virtual resources, you have a self-help portal, a website or even command line to access that virtualized
+
+15
+01:23.660 --> 01:24.350
+platform.
+
+16
+01:25.310 --> 01:30.440
+So if you need a virtual machine, you can just log in, create a virtual machine for yourself.
+
+17
+01:31.540 --> 01:35.380
+On even virtual storage, on any virtual service, for that matter.
+
+18
+01:36.770 --> 01:39.410
+This is called as cloud computing.
+
+19
+01:39.950 --> 01:43.220
+Accessing your virtualized resource over the network.
+
+20
+01:44.840 --> 01:52.790
+So now from anywhere you can connect to your cloud portal through APIs, create, maintain and manage
+
+21
+01:52.820 --> 01:55.040
+virtual resources for yourself.
+
+22
+01:55.100 --> 02:00.350
+Now, if this is for the organization, this is called a private cloud computing.
+
+23
+02:01.440 --> 02:08.460
+But if this is done for the public that anybody can sign up with the cloud provider with just their
+
+24
+02:08.460 --> 02:09.030
+card.
+
+25
+02:10.780 --> 02:13.930
+Then that is called public cloud computing.
+
+26
+02:14.730 --> 02:16.480
+AWS, Azure, google cloud
+
+27
+02:16.750 --> 02:21.430
+are some of the big names in the public cloud computing environment.
+
+28
+02:22.680 --> 02:25.890
+In this course, we will be using AWS cloud computing.
+
+29
+02:26.820 --> 02:30.450
+And let's see what AWS has to say about cloud computing.
+
+30
+02:31.660 --> 02:38.980
+On demand delivery of IT resources over the Internet with pay as you go pricing.
+
+31
+02:39.520 --> 02:41.710
+So you don't need to procure hardware.
+
+32
+02:42.610 --> 02:49.390
+You can access any computing power, storage or databases from cloud provider like 
+
+33
+02:49.390 --> 02:50.170
+AWS
+
+34
+02:51.260 --> 02:52.920
+So who is using cloud computing?
+
+35
+02:52.940 --> 02:58.400
+Well, in today's time, more than 90% of the organizations are using cloud computing.
+
+36
+02:59.270 --> 03:03.500
+And of course, they will use because there are a lot of benefits of using cloud computing.
+
+37
+03:04.130 --> 03:11.150
+Starting with agility, it's very easy and quick to get started with cloud computing.
+
+38
+03:12.830 --> 03:14.750
+You just need your card details.
+
+39
+03:15.750 --> 03:19.920
+You can sign up with AWS and start creating your compute resources.
+
+40
+03:21.540 --> 03:24.720
+Elasticity you can grow or shrink.
+
+41
+03:26.510 --> 03:29.990
+Your resources whenever you want and how much ever you need.
+
+42
+03:31.780 --> 03:32.620
+Cost saving.
+
+43
+03:32.620 --> 03:39.490
+Of course, if you can grow and shrink your resource as per your need, you also have control over the
+
+44
+03:39.490 --> 03:39.970
+cost.
+
+45
+03:40.900 --> 03:43.510
+And the big part which most of the people are missing.
+
+46
+03:44.350 --> 03:47.020
+You can go global in minutes.
+
+47
+03:49.770 --> 03:55.470
+If you have a global audience, then you can use the cloud providers global data centers.
+
+48
+03:56.510 --> 03:58.460
+And serve your global audience.
+
+49
+03:59.360 --> 04:00.770
+Types of cloud computing.
+
+50
+04:02.710 --> 04:08.950
+In this course, we will be using different services of AWS cloud that may fall under this bracket.
+
+51
+04:09.340 --> 04:10.870
+Infrastructure as a service.
+
+52
+04:11.710 --> 04:13.960
+So far I was talking about virtual machines.
+
+53
+04:15.180 --> 04:20.340
+And if you have virtual machines, you need to manage the operating system of that virtual machine, ec2
+
+54
+04:20.370 --> 04:21.560
+ec2 service of AWS.
+
+55
+04:21.610 --> 04:24.180
+is an example of infrastructure as a service.
+
+56
+04:24.660 --> 04:30.330
+Then you have platform as a service, where you don't need to worry about the virtualized platform also.
+
+57
+04:30.810 --> 04:33.450
+You just select your platform.
+
+58
+04:33.990 --> 04:36.380
+For example, you need an Oracle database.
+
+59
+04:36.390 --> 04:38.280
+You don't need to create a virtual machine.
+
+60
+04:39.120 --> 04:41.310
+You can use AWS RDS Service
+
+61
+04:42.500 --> 04:49.790
+And AWS will do everything for you to provision your Oracle database. Software as a service much,
+
+62
+04:49.790 --> 04:50.660
+much easier.
+
+63
+04:51.290 --> 04:53.450
+Just subscribe and start using them.
+
+64
+04:55.210 --> 04:58.330
+So we will be seeing all these three kinds of services.
+
+65
+04:59.370 --> 04:59.640
+From AWS
+
+66
+05:00.390 --> 05:05.910
+So join me in the next lecture and see for yourself of what is a cloud computing.

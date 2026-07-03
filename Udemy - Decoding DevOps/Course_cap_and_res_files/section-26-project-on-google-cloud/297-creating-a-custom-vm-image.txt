@@ -1,0 +1,622 @@
+WEBVTT
+
+00:00.160 --> 00:00.560
+All right.
+
+00:00.560 --> 00:03.920
+In this lecture we are going to work on our application server.
+
+00:04.040 --> 00:05.040
+So this is the flow.
+
+00:05.280 --> 00:12.480
+We're going to launch a VM instance with this script that will set up the Tomcat service deploy profile
+
+00:12.480 --> 00:13.520
+application in it.
+
+00:13.560 --> 00:15.160
+And we'll come back to the script in a moment.
+
+00:15.160 --> 00:17.040
+Let me just go through the flow first.
+
+00:17.560 --> 00:23.200
+So we are going to launch the instance same as we launch the bastion host with a starter script.
+
+00:23.200 --> 00:23.680
+Same here.
+
+00:23.680 --> 00:28.720
+We're going to launch an EC2 instance with the startup script that is going to set the Tomcat service
+
+00:28.720 --> 00:29.920
+and V profile application.
+
+00:29.920 --> 00:34.760
+We are going to wait for some time because it takes time to run all these commands.
+
+00:34.760 --> 00:36.560
+Once it's ready, we are going to log in to it.
+
+00:36.560 --> 00:40.960
+We're going to confirm that Tomcat service is running and we profile application is working fine.
+
+00:41.640 --> 00:45.400
+Then we are going to stop this instance so we can take its snapshot.
+
+00:46.000 --> 00:49.440
+And the reason of taking the snapshot is so we can create the image.
+
+00:49.440 --> 00:50.520
+So this is the process.
+
+00:50.520 --> 00:52.360
+We first take the snapshot.
+
+00:52.840 --> 00:56.000
+And from that snapshot we create an image a custom image.
+
+00:56.280 --> 00:58.600
+Same like in AWS we have Ami.
+
+00:58.960 --> 01:00.400
+Here we have this custom image.
+
+01:00.400 --> 01:01.860
+This will be our golden image.
+
+01:02.380 --> 01:05.260
+So once our army is ready, we're going to delete this instance.
+
+01:05.260 --> 01:06.460
+We don't need it anymore.
+
+01:06.940 --> 01:13.620
+And then we create an instance template like in AWS we have launch configuration or launch template
+
+01:13.860 --> 01:15.300
+where we see for this image.
+
+01:15.300 --> 01:17.540
+When we launch this should be the instance type.
+
+01:17.540 --> 01:22.860
+This should be the zone region and all the other details that you want to add like firewall rules and
+
+01:22.860 --> 01:23.340
+stuff.
+
+01:23.660 --> 01:27.860
+So all the launch information we're going to store into an instance template.
+
+01:28.580 --> 01:31.620
+And then we're going to create a managed instance group.
+
+01:31.620 --> 01:33.780
+Same like auto scaling group in AWS.
+
+01:34.260 --> 01:39.420
+So the whole purpose here is to create an auto scaling group with all the details of our app server.
+
+01:39.580 --> 01:41.780
+So we create the instance, we create its image.
+
+01:41.780 --> 01:45.100
+Then we create the template and then we create the auto scaling group.
+
+01:45.100 --> 01:50.260
+Mentioning that template we define the port number in that auto scaling group.
+
+01:50.260 --> 01:52.180
+Sorry, in this managed instance group.
+
+01:52.700 --> 01:56.180
+And then all the other details that we're going to do or see later.
+
+01:56.180 --> 01:59.220
+First let's work till the template or manage instance group.
+
+01:59.580 --> 02:02.020
+So this is the script first part you already seen.
+
+02:02.020 --> 02:04.280
+We create a user added into sudoers file.
+
+02:04.320 --> 02:08.400
+So this is so we can SSH to our instance and the rest of the part.
+
+02:08.440 --> 02:14.280
+You have already seen this previously in V profile project automated on the VMs.
+
+02:14.320 --> 02:18.880
+We have seen this script, the same script except this one works for ubuntu.
+
+02:18.920 --> 02:23.040
+That one was for CentOS or any redhat rpm based.
+
+02:23.720 --> 02:25.680
+But anyways, let me just quickly go through it.
+
+02:26.160 --> 02:29.000
+So that is the Tomcat download URL.
+
+02:29.040 --> 02:36.120
+We run apt update, we install JDK, we download tomcat binary extract it.
+
+02:36.560 --> 02:37.840
+So that will be a tarball.
+
+02:37.840 --> 02:39.200
+We're going to extract that one.
+
+02:39.600 --> 02:40.800
+We add a Tomcat user.
+
+02:40.800 --> 02:44.040
+We copy the Tomcat data to Tomcat home directory.
+
+02:44.360 --> 02:45.640
+We set up this folder.
+
+02:46.200 --> 02:48.560
+We give it Tomcat user ownership.
+
+02:48.840 --> 02:55.720
+Then we create the systemctl file so we can manage it through systemctl command that we systemctl enable
+
+02:55.720 --> 02:57.520
+or start Tomcat like that.
+
+02:57.960 --> 03:01.000
+Then we download Maven 3.9.9.
+
+03:01.200 --> 03:03.820
+Unzip it copies at this location.
+
+03:04.340 --> 03:06.100
+Then we clone our source code.
+
+03:06.100 --> 03:09.860
+We profile source code and build it by using Maven.
+
+03:10.300 --> 03:17.900
+We remove the default Tomcat application and we copy our V profile application into Tomcat home folder
+
+03:18.380 --> 03:19.260
+web apps.
+
+03:19.860 --> 03:21.660
+Then we start the Tomcat service.
+
+03:22.460 --> 03:24.780
+So first we need to create this file.
+
+03:24.780 --> 03:27.980
+And then we're going to launch the instance and mention the script.
+
+03:28.340 --> 03:35.660
+So copy everything from cat till you see EOF in caps eof not eol.
+
+03:35.700 --> 03:36.660
+Okay uff.
+
+03:37.220 --> 03:41.580
+And paste it here in the Google Shell Cloud Shell hit enter.
+
+03:43.020 --> 03:45.820
+You should see here app golden.sh.
+
+03:45.860 --> 03:47.340
+Just do a cat to it.
+
+03:48.060 --> 03:51.580
+At the end of this file you should see systemctl restart tomcat.
+
+03:52.100 --> 03:55.060
+And at the beginning of this file you should see bin bash.
+
+03:55.660 --> 03:58.460
+If you see anything else then delete the file.
+
+03:58.460 --> 03:59.500
+Create it once again.
+
+04:00.060 --> 04:05.600
+Now let's launch the instance same as we launch the bastion host So the so the instance that we're going
+
+04:05.640 --> 04:09.240
+to launch its name will be Golden V profile hyphen Golden.
+
+04:09.240 --> 04:14.840
+We're going to launch it into us Central1 A and it is going to be in the private subnet.
+
+04:15.320 --> 04:17.240
+Now we are not going to use this instance.
+
+04:17.240 --> 04:20.040
+We are just going to create image from this instance.
+
+04:20.320 --> 04:22.080
+So we can put it in public subnet also.
+
+04:22.080 --> 04:27.960
+But the reason I'm putting it in the private subnet is so we can test test our private subnet.
+
+04:28.160 --> 04:33.160
+When we launch the instance in the private subnet it is going to execute a script that's going to download
+
+04:33.160 --> 04:34.480
+packages from the internet.
+
+04:34.480 --> 04:40.200
+So that is going to test if the internet request goes from the private subnet to the internet through
+
+04:40.200 --> 04:43.160
+the Nat gateway, uh, cloud Nat, I should say.
+
+04:43.640 --> 04:44.920
+So that's one thing I want to test.
+
+04:44.920 --> 04:50.520
+The other thing is I should be able to do ssh from the bastion host, from the bastion host to the instance
+
+04:50.520 --> 04:51.640
+in the private subnet.
+
+04:51.640 --> 04:55.720
+So both the things will be tested if we launch it into the private subnet.
+
+04:56.200 --> 04:56.440
+Okay.
+
+04:56.480 --> 04:59.640
+So this is the command gcloud compute instances.
+
+04:59.640 --> 05:09.460
+Create the name zone us Central1 a machine type E2 small E2 micro won't work here because we have Maven
+
+05:09.460 --> 05:12.820
+running Tomcat running, so it's just going to freeze.
+
+05:13.340 --> 05:15.340
+We're putting it in the private subnet.
+
+05:15.500 --> 05:17.300
+We're giving it no public address.
+
+05:17.300 --> 05:18.860
+No address means no public address.
+
+05:18.860 --> 05:20.700
+It will have the private IP of course.
+
+05:21.140 --> 05:23.820
+And the tag is going to be tag app.
+
+05:23.820 --> 05:24.900
+That is this tag.
+
+05:25.580 --> 05:31.180
+Now when we launch instance with this tag it is going to look for any firewall rule that has the tag
+
+05:31.220 --> 05:32.060
+as app.
+
+05:32.220 --> 05:34.540
+And there are two firewall rules like that.
+
+05:34.900 --> 05:39.420
+So if you go to firewall rules you should see here the allow ssh bastion.
+
+05:39.660 --> 05:41.380
+You see it has the tag as app.
+
+05:41.500 --> 05:45.620
+It allows 22 from the bastion security group.
+
+05:46.260 --> 05:48.820
+So this firewall rule will be applied to our instance.
+
+05:48.820 --> 05:52.660
+The other firewall rule is allow load balancer to app.
+
+05:53.060 --> 05:55.460
+This firewall rule also has the tag as app.
+
+05:55.620 --> 06:01.020
+And this allows port 8080 connection from the load balancer IP range.
+
+06:01.620 --> 06:08.560
+So both these firewall rules will be applied to our instance when we mentioned the tag as app and we're
+
+06:08.560 --> 06:15.600
+setting it up on ubuntu, same as we did for bastion host, and with the script app Golden Dot such
+
+06:15.640 --> 06:17.120
+that we had just created.
+
+06:17.760 --> 06:19.240
+So let's launch this instance.
+
+06:20.800 --> 06:27.000
+So once the instance comes into the running state from that time, wait almost like ten minutes, because
+
+06:27.000 --> 06:29.880
+it will take all that time to set up your profile application.
+
+06:29.880 --> 06:33.320
+So if you want to break, take it now and come back after ten minutes.
+
+06:34.200 --> 06:35.280
+Okay, I've waited enough.
+
+06:35.280 --> 06:36.440
+Now it's time to test.
+
+06:36.920 --> 06:39.880
+First we need to copy the login key to bastion host.
+
+06:39.920 --> 06:41.800
+We do SSH to bastion host.
+
+06:41.800 --> 06:45.440
+From there we're going to log in to the V profile Golden instance.
+
+06:46.240 --> 06:53.800
+So go to the location where you have your keys that we created to ssh keygen and do a cat to your private
+
+06:53.800 --> 06:55.120
+key not the public key.
+
+06:56.080 --> 06:57.160
+Keep it as it is.
+
+06:57.640 --> 07:05.080
+Copy the bastion host public IP, not the private IP, the external IP and do ssh hyphen I your private
+
+07:05.080 --> 07:11.700
+key path username is DevOps at the rate bastion host IP okay.
+
+07:11.740 --> 07:14.220
+Once you are in switch to root user.
+
+07:15.780 --> 07:16.900
+Scroll up.
+
+07:16.900 --> 07:18.380
+Copy the private key.
+
+07:18.780 --> 07:18.940
+Okay.
+
+07:18.980 --> 07:19.900
+Do not copy anything.
+
+07:19.940 --> 07:22.740
+Extra character just from the start till the end.
+
+07:22.780 --> 07:23.460
+Till here.
+
+07:24.060 --> 07:27.980
+Copy that content and create a file here.
+
+07:28.260 --> 07:37.700
+I'll just call it as GCP key dot PEM and paste the content in this shift, insert no extra characters,
+
+07:37.700 --> 07:42.380
+save and quit and make sure you give it permission as 400.
+
+07:42.420 --> 07:45.340
+Read only the key name.
+
+07:46.580 --> 07:49.180
+And now from here we'll use this key.
+
+07:51.220 --> 07:59.020
+For the user DevOps that we already have copied at the rate and the V profile golden instance private
+
+07:59.020 --> 07:59.580
+IP.
+
+08:00.020 --> 08:05.700
+So from public subnet we are getting inside the private subnet right.
+
+08:05.740 --> 08:08.800
+So if this works, it's going to test our firewall rules.
+
+08:08.840 --> 08:11.120
+The connectivity from public to private subnet.
+
+08:12.640 --> 08:13.360
+And it worked.
+
+08:13.400 --> 08:14.160
+We are in.
+
+08:14.520 --> 08:15.000
+Okay.
+
+08:15.040 --> 08:18.800
+Now let's test if our script got executed successfully or not.
+
+08:18.800 --> 08:21.120
+So check systemctl status.
+
+08:21.120 --> 08:21.920
+Tomcat.
+
+08:22.200 --> 08:24.080
+You should see active running.
+
+08:24.360 --> 08:27.280
+That means all the installation, all the download worked.
+
+08:28.880 --> 08:32.000
+Hit Q to quit and run this command.
+
+08:32.040 --> 08:38.400
+Curl http colon slash slash localhost colon 8080.
+
+08:38.960 --> 08:41.320
+So we can see the v profile application.
+
+08:41.560 --> 08:42.720
+You should see the HTML file.
+
+08:42.720 --> 08:45.000
+You should see registration and login.
+
+08:45.440 --> 08:47.880
+This is the V profile HTML file.
+
+08:48.640 --> 08:49.720
+So everything is working.
+
+08:49.720 --> 08:53.920
+Now we are going to take a snapshot and create image from that.
+
+08:54.400 --> 08:58.080
+Come back to gcloud shell and switch off the instance power off.
+
+08:58.080 --> 08:59.800
+You can do it from the console.
+
+08:59.800 --> 09:04.280
+Also, you can do it from the command line like this gcloud compute instances.
+
+09:04.280 --> 09:06.520
+Stop the name of the instance zone.
+
+09:07.420 --> 09:08.380
+Let me remove this hyphen.
+
+09:08.380 --> 09:09.540
+Hyphen quite from here.
+
+09:11.020 --> 09:11.940
+Oh, I got locked out.
+
+09:11.940 --> 09:12.980
+Let me log in again.
+
+09:12.980 --> 09:14.140
+GCloud auth login.
+
+09:16.540 --> 09:18.340
+And then I set my project.
+
+09:19.100 --> 09:19.300
+Okay.
+
+09:19.300 --> 09:20.980
+Let me stop the instance once again.
+
+09:21.740 --> 09:22.860
+This will take some time.
+
+09:24.220 --> 09:24.500
+Okay.
+
+09:24.540 --> 09:25.020
+It stopped.
+
+09:25.060 --> 09:26.740
+Now let's take a snapshot.
+
+09:27.380 --> 09:28.860
+A very simple command for that.
+
+09:29.300 --> 09:32.060
+GCloud compute disks snapshot.
+
+09:32.380 --> 09:35.100
+The name of the instance and the snapshot name.
+
+09:35.300 --> 09:36.340
+And the zone name.
+
+09:40.740 --> 09:42.260
+This will also take some time.
+
+09:43.500 --> 09:43.740
+Okay.
+
+09:43.740 --> 09:44.180
+It's done.
+
+09:44.180 --> 09:49.900
+You should see this snapshot in the VM instance in the Compute Engine instance section in snapshots.
+
+09:50.460 --> 09:54.500
+So there's a snapshot 2.77 2.17 GB.
+
+09:55.100 --> 09:58.420
+Now from this snapshot we're going to create the image the custom image.
+
+09:59.260 --> 10:01.540
+So gcloud compute image create.
+
+10:01.540 --> 10:02.420
+And the image name.
+
+10:02.420 --> 10:03.060
+That's the command.
+
+10:03.100 --> 10:10.720
+Pretty simple gcloud compute images create image name, which we're using this when we profile image
+
+10:11.240 --> 10:17.080
+and source snapshot from which snapshot you are creating the image you mentioned that which is our view
+
+10:17.080 --> 10:19.840
+profile snapshot that we have already created.
+
+10:21.120 --> 10:26.640
+And hyphen storage, hyphen location will be the region where you want to store the custom image.
+
+10:26.960 --> 10:32.480
+So we're going to keep it in the same region us Central1 a let's hit enter.
+
+10:33.520 --> 10:34.680
+So this will take some time.
+
+10:34.680 --> 10:37.520
+Let's go and check the images in the snapshot below.
+
+10:37.520 --> 10:42.240
+Snapshot you have images and you should see here image getting created.
+
+10:42.240 --> 10:43.920
+The status is still refreshing.
+
+10:43.960 --> 10:45.200
+It's going to take some time.
+
+10:45.760 --> 10:47.920
+Okay, the machine image is ready.
+
+10:48.440 --> 10:50.640
+Now we can safely delete this instance.
+
+10:51.120 --> 10:54.360
+So gcloud compute instances instead of stop.
+
+10:54.400 --> 10:58.880
+You're going to say delete the instance name and the zone.
+
+11:00.120 --> 11:01.400
+Do you want to continue.
+
+11:01.440 --> 11:03.800
+Yes okay.
+
+11:03.800 --> 11:04.960
+The instance is deleted.
+
+11:04.960 --> 11:06.000
+Join me in the next lecture.
+
+11:06.000 --> 11:09.600
+We are going to create the launch template and managed instance group.

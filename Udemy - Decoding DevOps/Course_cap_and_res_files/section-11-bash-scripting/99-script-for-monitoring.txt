@@ -1,0 +1,661 @@
+WEBVTT
+
+00:00.900 --> 00:02.730
+Instructor: Welcome back.
+
+00:02.730 --> 00:05.119
+I know in previous scripts you must be thinking
+
+00:05.119 --> 00:07.980
+"-gt, -eq, what is that?"
+
+00:07.980 --> 00:10.020
+Yes, you understood that those are operator
+
+00:10.020 --> 00:14.130
+which are comparing, but where did that come from?
+
+00:14.130 --> 00:17.880
+Well, Bash has many operators that you can use.
+
+00:17.880 --> 00:21.000
+Some of them are displayed on the screen right now
+
+00:21.000 --> 00:23.460
+from the "Decoding DEVOPS Book."
+
+00:23.460 --> 00:25.410
+Like exclamation is a negation.
+
+00:25.410 --> 00:27.300
+If anything is true, it will make it false.
+
+00:27.300 --> 00:29.880
+If anything is false, it will make it true.
+
+00:29.880 --> 00:34.260
+-: n, if a string length is greater than zero,
+
+00:34.260 --> 00:35.310
+it will be true.
+
+00:35.310 --> 00:38.010
+And -z is the opposite of that.
+
+00:38.010 --> 00:41.730
+Or to compare instead of eq, you can use single equal to,
+
+00:41.730 --> 00:42.630
+Not equal to,
+
+00:42.630 --> 00:45.090
+you can use exclamation and the equal to symbol
+
+00:45.090 --> 00:47.670
+and eq, gt, we have seen.
+
+00:47.670 --> 00:49.530
+Lt is for less than,
+
+00:49.530 --> 00:51.453
+and then we have single operators.
+
+00:52.830 --> 00:56.220
+What I mean by that is they just need single operand.
+
+00:56.220 --> 00:58.080
+So -d and you give a path
+
+00:58.080 --> 01:01.560
+and it'll say true if the directory exists.
+
+01:01.560 --> 01:05.040
+-: e if the file exists, -r if the file exists
+
+01:05.040 --> 01:08.523
+and it has read permission and there are a few others.
+
+01:10.020 --> 01:13.623
+Now, we'll use some of them in the upcoming script,
+
+01:14.580 --> 01:16.860
+but I want to show you the use case
+
+01:16.860 --> 01:20.580
+of the question mark variable,
+
+01:20.580 --> 01:23.160
+which is used a lot.
+
+01:23.160 --> 01:27.180
+So we have seen that if a command is failing,
+
+01:27.180 --> 01:31.320
+the exit code $? value should be nonzero.
+
+01:31.320 --> 01:33.180
+But if the command works,
+
+01:33.180 --> 01:37.800
+its exit code should be zero.
+
+01:37.800 --> 01:42.800
+Zero means true in Bash scripting and nonzero means false.
+
+01:43.380 --> 01:47.220
+Or we can just use the numbers. So let's take an example.
+
+01:47.220 --> 01:50.163
+I'm running the command systemctl status httpd.
+
+01:52.718 --> 01:53.551
+The process is running.
+
+01:53.551 --> 01:56.430
+Whenever there is a process running, there will be PID file
+
+01:56.430 --> 01:58.470
+that will get created.
+
+01:58.470 --> 02:03.237
+So if httpd is running, there should be a PID file for it,
+
+02:03.237 --> 02:07.940
+/var/run/httpd/httpd.pid.
+
+02:09.300 --> 02:11.340
+This file will contain the process ID,
+
+02:11.340 --> 02:14.883
+but if the process is dead, let's stop this process,
+
+02:17.580 --> 02:20.430
+then that file will cease to exist.
+
+02:20.430 --> 02:22.500
+You see? No such file or directory.
+
+02:22.500 --> 02:24.540
+Now, if we get no such file or directory,
+
+02:24.540 --> 02:28.290
+then the $? question mark value will be nonzero.
+
+02:28.290 --> 02:32.280
+Hmm. Now that is something we can use.
+
+02:32.280 --> 02:34.743
+So let's start the httpd process first.
+
+02:37.080 --> 02:39.240
+The PID file appears.
+
+02:39.240 --> 02:40.410
+Now we will write a script
+
+02:40.410 --> 02:42.360
+that will detect if a process is running.
+
+02:42.360 --> 02:45.123
+If it's not running, it'll start the process.
+
+02:46.660 --> 02:49.573
+Renmae the script as 11_monit.sh.
+
+02:51.854 --> 02:54.030
+And by the way, there is a tool called as Monit
+
+02:54.030 --> 02:56.070
+that does exactly same thing
+
+02:56.070 --> 02:58.680
+and you are really writing a script
+
+02:58.680 --> 03:03.063
+that monitors process and can take action as well.
+
+03:08.430 --> 03:10.260
+Okay, so script runs that command
+
+03:10.260 --> 03:13.830
+and the exit code should be one,
+
+03:13.830 --> 03:17.430
+so $? =, sorry.
+
+03:17.430 --> 03:21.780
+It should be yeah, -eq 0
+
+03:21.780 --> 03:23.040
+if the file exists
+
+03:23.040 --> 03:24.660
+and we just save, the file exists,
+
+03:24.660 --> 03:26.433
+that means the process is running.
+
+03:28.020 --> 03:30.870
+Else we will say the process is not running
+
+03:30.870 --> 03:32.943
+and we will also start the process.
+
+03:34.320 --> 03:35.340
+Yeah, that's what we can do.
+
+03:35.340 --> 03:37.500
+Now, we can really conclude the script.
+
+03:37.500 --> 03:38.610
+But what if there is a problem
+
+03:38.610 --> 03:40.230
+and this process does not start?
+
+03:40.230 --> 03:41.910
+The user should be informed that it tried
+
+03:41.910 --> 03:44.730
+to start the process, but it did not start.
+
+03:44.730 --> 03:48.600
+That means we are going to use one more condition there now.
+
+03:48.600 --> 03:51.450
+We are going to give a nested condition.
+
+03:51.450 --> 03:52.283
+Okay, there.
+
+03:52.283 --> 03:53.730
+So I'm starting the process
+
+03:53.730 --> 03:57.180
+and if this works, the exit code should be zero.
+
+03:57.180 --> 03:58.013
+And if it's zero,
+
+03:58.013 --> 03:59.880
+that means the process started successfully.
+
+03:59.880 --> 04:02.490
+Else, the process failed to start
+
+04:02.490 --> 04:05.160
+and now you should contact the admin.
+
+04:05.160 --> 04:07.203
+So there is a nested condition there.
+
+04:10.200 --> 04:13.893
+Just make sure you're closing the conditions properly.
+
+04:14.760 --> 04:18.753
+So this is a nested condition inside the else block.
+
+04:19.830 --> 04:23.710
+And I will also put few other commands like date
+
+04:24.570 --> 04:27.543
+and I will make it a little more readable for the user.
+
+04:29.220 --> 04:31.320
+Okay, so some hashes there
+
+04:31.320 --> 04:33.750
+and we are redirecting the output to dev now
+
+04:33.750 --> 04:36.120
+because we're really not interested in seeing its output.
+
+04:36.120 --> 04:38.550
+We just interested in the exit code.
+
+04:38.550 --> 04:41.040
+Now I said I'm making it readable for the user.
+
+04:41.040 --> 04:43.350
+If you wanted to make readable for yourself,
+
+04:43.350 --> 04:45.510
+please use comments.
+
+04:45.510 --> 04:47.620
+The reason I gave those hashes and date
+
+04:48.540 --> 04:50.580
+is because I'm going to make it
+
+04:50.580 --> 04:55.410
+as a regular process, which checks our httpd process
+
+04:55.410 --> 04:57.000
+and it will also redirect.
+
+04:57.000 --> 04:59.010
+We are going to also going to redirect all the output
+
+04:59.010 --> 05:01.590
+to a file, like a log file.
+
+05:01.590 --> 05:03.540
+And we'll see that in a moment how we'll do that.
+
+05:03.540 --> 05:08.253
+But let's first save this file and let's test it.
+
+05:15.540 --> 05:17.430
+Okay, so it says http process is running.
+
+05:17.430 --> 05:19.570
+Let's try and stop the process
+
+05:22.440 --> 05:24.843
+and now let's execute the script once again.
+
+05:27.060 --> 05:29.820
+There, it found out, httpd process is not running,
+
+05:29.820 --> 05:30.960
+it is starting the process
+
+05:30.960 --> 05:32.810
+and the process started successfully.
+
+05:37.380 --> 05:39.420
+Now, this really is a nice script,
+
+05:39.420 --> 05:41.010
+but it's going to become more awesome
+
+05:41.010 --> 05:43.020
+if it runs automatically by itself,
+
+05:43.020 --> 05:44.910
+let's say every minute.
+
+05:44.910 --> 05:47.550
+So if our process goes down for some reason,
+
+05:47.550 --> 05:49.410
+it is going to check that and start it
+
+05:49.410 --> 05:51.030
+and it's going to check that every minute,
+
+05:51.030 --> 05:53.280
+like a monitoring tool.
+
+05:53.280 --> 05:55.320
+And for that we need to schedule the script
+
+05:55.320 --> 05:57.270
+and we are going to do it through cron jobs.
+
+05:57.270 --> 05:59.373
+So run crontab -e.
+
+06:00.810 --> 06:03.633
+Oh, before that, let's get the path of our script,
+
+06:04.574 --> 06:08.430
+/opt/scripts/11_monit.sh.
+
+06:10.210 --> 06:12.030
+Okay, let's copy the path
+
+06:12.030 --> 06:15.900
+and let's run crontab -e.
+
+06:15.900 --> 06:18.333
+Cron jobs are scheduled tasks.
+
+06:19.568 --> 06:22.710
+So crontab -e is going to edit. Let's open this.
+
+06:22.710 --> 06:24.510
+It's going to open the Vim Editor.
+
+06:24.510 --> 06:26.640
+You go into insert mode
+
+06:26.640 --> 06:28.170
+and then you can give the command
+
+06:28.170 --> 06:29.340
+that you want to run basically.
+
+06:29.340 --> 06:32.640
+And when you want to run it, that schedule you need to pass.
+
+06:32.640 --> 06:35.823
+So we five values over here.
+
+06:36.750 --> 06:41.580
+I'll put two hashes or a single hash, which will be ignored.
+
+06:41.580 --> 06:44.820
+So the first value is going to be the minute.
+
+06:44.820 --> 06:47.730
+The second is going to be the hour of the minute.
+
+06:47.730 --> 06:48.933
+So I'll just say HH.
+
+06:50.880 --> 06:52.290
+Then date of the month,
+
+06:52.290 --> 06:57.290
+like 1st, 2nd, till 31st and then the month itself.
+
+06:57.450 --> 07:00.450
+I'll give small m here, one being January
+
+07:00.450 --> 07:02.700
+and 12 being December, like that.
+
+07:02.700 --> 07:06.690
+And then a day of the week, zero being Sunday,
+
+07:06.690 --> 07:08.850
+one being Monday like that.
+
+07:08.850 --> 07:11.790
+So for example, if you want to run something
+
+07:11.790 --> 07:15.420
+every night at 8:30 PM so I'm going to say 30, the minute,
+
+07:15.420 --> 07:17.940
+and 8 PM I said, so 20.
+
+07:17.940 --> 07:22.590
+Day of the month or a date of the month, 1, 2, 3.
+
+07:22.590 --> 07:23.880
+So I'm going to say here star,
+
+07:23.880 --> 07:27.060
+that means run it on every date and which month?
+
+07:27.060 --> 07:28.560
+I'm gonna say run it every month.
+
+07:28.560 --> 07:30.900
+So just star there.
+
+07:30.900 --> 07:32.250
+Day of the week, I want to run it,
+
+07:32.250 --> 07:33.780
+let's say from Monday to Friday.
+
+07:33.780 --> 07:36.930
+So 1-5, that's a range.
+
+07:36.930 --> 07:39.090
+Okay, so that's one example, right?
+
+07:39.090 --> 07:41.840
+And then you can give the command that you want to run.
+
+07:44.850 --> 07:47.190
+Both are commented, so it's not going to really work.
+
+07:47.190 --> 07:48.990
+Now, I want to run my script every minute.
+
+07:48.990 --> 07:52.740
+So I'm going to say star and for hour also, every hour,
+
+07:52.740 --> 07:55.830
+and then every date, every month
+
+07:55.830 --> 07:59.670
+and every day of the week, Sunday to Saturday.
+
+07:59.670 --> 08:00.750
+And this is going to run,
+
+08:00.750 --> 08:03.030
+but it's going to generate the output that I want
+
+08:03.030 --> 08:06.030
+to store all that output to a file.
+
+08:06.030 --> 08:09.210
+I'm going to save it into /var/log/,
+
+08:09.210 --> 08:14.210
+I'm gonna say /monit_httpd.log.
+
+08:14.790 --> 08:17.490
+So all the output goes into this file
+
+08:17.490 --> 08:19.410
+because we need the output
+
+08:19.410 --> 08:22.053
+to track what's going on with our httpd process.
+
+08:23.130 --> 08:24.843
+Okay, now let's save this.
+
+08:27.060 --> 08:29.070
+All right, so we have installed new cron job.
+
+08:29.070 --> 08:31.500
+Now let's stop our httpd process.
+
+08:31.500 --> 08:32.730
+It's going to run every minute,
+
+08:32.730 --> 08:35.310
+so we have to just wait and watch.
+
+08:35.310 --> 08:36.660
+So it's been more than a minute
+
+08:36.660 --> 08:38.370
+when I stopped the httpd process,
+
+08:38.370 --> 08:41.790
+now the log file should have been created by now.
+
+08:41.790 --> 08:42.960
+There the file is created.
+
+08:42.960 --> 08:45.410
+Let's look at the content of the file,
+
+08:45.410 --> 08:47.823
+/var/log/monit.
+
+08:49.920 --> 08:50.753
+There you see.
+
+08:50.753 --> 08:52.440
+So it's like more than two minutes now.
+
+08:52.440 --> 08:54.150
+So first the process I stopped.
+
+08:54.150 --> 08:55.557
+So it says now I tried to start
+
+08:55.557 --> 08:59.700
+and it is running at this particular date and time.
+
+08:59.700 --> 09:03.300
+And then again, it ran after one more minute
+
+09:03.300 --> 09:05.370
+and then it was already running, right?
+
+09:05.370 --> 09:06.660
+Let's stop it once again.
+
+09:06.660 --> 09:09.660
+And you can try that, you know, stop it, start it, right?
+
+09:09.660 --> 09:11.553
+And you can tell the logs.
+
+09:19.110 --> 09:20.373
+Okay, there you see?
+
+09:21.480 --> 09:23.220
+And really congratulations,
+
+09:23.220 --> 09:26.283
+you have created a monitoring plugin.
+
+09:27.150 --> 09:29.970
+Now, yeah, there is an actual tool that can do that
+
+09:29.970 --> 09:32.670
+in a much more sophisticated way,
+
+09:32.670 --> 09:34.440
+but the point of this whole exercise
+
+09:34.440 --> 09:38.717
+was to train you on scripting an intelligent script.
+
+09:42.120 --> 09:45.393
+Okay, now, same script, but with a little different logic.
+
+09:50.160 --> 09:52.380
+So we are basically checking here the exit code,
+
+09:52.380 --> 09:57.090
+but we can do one more thing or really the other way.
+
+09:57.090 --> 10:01.990
+I can just give here the operator -f
+
+10:03.390 --> 10:04.533
+and give the file.
+
+10:07.320 --> 10:10.190
+So -f operator, see, single operand,
+
+10:10.190 --> 10:12.570
+it just checks whether this file exists or not.
+
+10:12.570 --> 10:13.830
+If this file exists,
+
+10:13.830 --> 10:16.110
+that means your process is running.
+
+10:16.110 --> 10:17.130
+Else, it is not running
+
+10:17.130 --> 10:19.380
+and it tries to start the process.
+
+10:19.380 --> 10:22.470
+So it's really just the matter of creativity.
+
+10:22.470 --> 10:24.903
+But at the end of the day, the result matters.
+
+10:26.190 --> 10:28.770
+Both script does the same work.
+
+10:28.770 --> 10:31.050
+And trust me, there are many, many more methods
+
+10:31.050 --> 10:32.940
+to do the same thing.
+
+10:32.940 --> 10:34.650
+And this will all come with experience
+
+10:34.650 --> 10:38.280
+and you can make your choices which method to use,
+
+10:38.280 --> 10:40.680
+or you may have your own style.
+
+10:40.680 --> 10:44.730
+I'm a big fan of exit codes, especially in Bash scripting,
+
+10:44.730 --> 10:47.040
+so I usually use that.
+
+10:47.040 --> 10:49.350
+All right, so we did good work here.
+
+10:49.350 --> 10:51.630
+Let's see in the next lecture how we are going
+
+10:51.630 --> 10:54.960
+to do repetitive task through loops.
+
+10:54.960 --> 10:56.560
+So I'll see you in the next one.

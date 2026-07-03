@@ -1,0 +1,1666 @@
+WEBVTT
+
+00:01.410 --> 00:03.540
+Instructor: Hello and welcome.
+
+00:03.540 --> 00:05.850
+In this lecture we are going to talk
+
+00:05.850 --> 00:07.683
+about a tool called Vagrant.
+
+00:09.450 --> 00:14.130
+We use this tool to manage virtual machines automatically.
+
+00:14.130 --> 00:18.420
+So in short, Vagrant is a VM automation tool
+
+00:18.420 --> 00:23.040
+or it manages VM's lifecycle right from creating,
+
+00:23.040 --> 00:25.323
+making changes, and cleaning up.
+
+00:26.760 --> 00:30.900
+Vagrant tool is not a replacement of any hypervisor
+
+00:30.900 --> 00:33.600
+like VMware or Oracle VM VirtualBox.
+
+00:33.600 --> 00:34.710
+It does not replace that.
+
+00:34.710 --> 00:36.090
+It's on top of that.
+
+00:36.090 --> 00:41.090
+It uses those tools to create and manage virtual machines.
+
+00:41.970 --> 00:46.020
+Now, Vagrant solves a problem and what is that problem?
+
+00:46.020 --> 00:47.020
+We should know that.
+
+00:48.270 --> 00:51.510
+When we create or manage a VM manually,
+
+00:51.510 --> 00:53.760
+there are many issues with that.
+
+00:53.760 --> 00:55.980
+Starting with OS installation,
+
+00:55.980 --> 00:58.530
+there are many steps that we need to go through
+
+00:58.530 --> 01:02.400
+while installing OS on a virtual machine.
+
+01:02.400 --> 01:04.080
+That's one problem.
+
+01:04.080 --> 01:05.220
+There are other problems.
+
+01:05.220 --> 01:07.650
+It's time consuming process,
+
+01:07.650 --> 01:09.840
+many steps you have to go through,
+
+01:09.840 --> 01:13.770
+the installation itself takes huge amount of time,
+
+01:13.770 --> 01:17.013
+and if you have multiple VMs, multiply that time,
+
+01:19.290 --> 01:22.980
+and when there are many steps, manual,
+
+01:22.980 --> 01:24.903
+there is a chance of human error.
+
+01:26.280 --> 01:28.620
+Automation in general, not only about Vagrant,
+
+01:28.620 --> 01:33.060
+but any automation address this very specific problem.
+
+01:33.060 --> 01:34.203
+Human errors.
+
+01:36.810 --> 01:38.370
+For one or two VM, it's fine,
+
+01:38.370 --> 01:43.200
+but when you have many VMs like five or six VMs,
+
+01:43.200 --> 01:47.400
+and you want to replicate the same on another computer,
+
+01:47.400 --> 01:48.600
+it's really tough, you need to go
+
+01:48.600 --> 01:51.390
+through the whole process once again.
+
+01:51.390 --> 01:55.110
+Or you can use documents
+
+01:55.110 --> 01:57.780
+to show all the installation
+
+01:57.780 --> 01:59.793
+and provisioning steps of the VM.
+
+02:00.660 --> 02:04.470
+So there are many issues when you manage the VMs manually,
+
+02:04.470 --> 02:06.753
+but if you're using Vagrant,
+
+02:07.980 --> 02:09.690
+it solves all those problems.
+
+02:09.690 --> 02:12.330
+Starting with OS installation.
+
+02:12.330 --> 02:14.880
+In Vagrant, there is no OS installation.
+
+02:14.880 --> 02:19.880
+Yes, Vagrant set up virtual machines by using VM Images
+
+02:20.100 --> 02:23.220
+or in Vagrant, they're called as Box.
+
+02:23.220 --> 02:25.440
+These are ready-made virtual machines
+
+02:25.440 --> 02:27.180
+stored on Vagrant Cloud.
+
+02:27.180 --> 02:31.230
+You have freely available boxes or images on Vagrant Cloud,
+
+02:31.230 --> 02:32.670
+which Vagrant will download
+
+02:32.670 --> 02:34.773
+and keep it in your local computer.
+
+02:35.880 --> 02:38.250
+And then from that box,
+
+02:38.250 --> 02:41.853
+You can create as many as VMs you want, as many as times.
+
+02:44.610 --> 02:48.000
+All the VM settings will be in a file called Vagrantfile,
+
+02:48.000 --> 02:52.080
+V capital, and you can make changes
+
+02:52.080 --> 02:55.050
+to the VM settings like RAM, CPU,
+
+02:55.050 --> 02:57.023
+IP addresses all through this Vagrantfile.
+
+02:57.023 --> 02:59.883
+This is a text file which you can open and and edit.
+
+03:00.750 --> 03:03.180
+You can also do provisioning with Vagrant.
+
+03:03.180 --> 03:05.250
+Provisioning generally means
+
+03:05.250 --> 03:08.010
+when the OS is completely booted,
+
+03:08.010 --> 03:09.960
+you want to execute some commands on it.
+
+03:09.960 --> 03:11.550
+Maybe you're setting up some server,
+
+03:11.550 --> 03:12.960
+web server, database server,
+
+03:12.960 --> 03:15.240
+anything you go through so many commands.
+
+03:15.240 --> 03:18.240
+So all those commands you can mention in the Vagrant file
+
+03:18.240 --> 03:20.350
+and Vagrant will provision it for you
+
+03:21.480 --> 03:25.260
+and they're very simple to use a Vagrant commands.
+
+03:25.260 --> 03:29.280
+You have vagrant init boxname, which mentions the box name,
+
+03:29.280 --> 03:30.600
+and then you do vagrant up.
+
+03:30.600 --> 03:34.170
+vagrant up will create the VM if it's already there,
+
+03:34.170 --> 03:36.660
+it will power on the VM,
+
+03:36.660 --> 03:40.350
+vagrant ssh to log in, vagrant halt to power off,
+
+03:40.350 --> 03:42.270
+vagrant destroy to delete.
+
+03:42.270 --> 03:44.070
+We'll see all these commands.
+
+03:44.070 --> 03:44.910
+But before that,
+
+03:44.910 --> 03:47.940
+let's understand the architecture of Vagrant.
+
+03:47.940 --> 03:50.190
+Okay, so that's how Vagrant work.
+
+03:50.190 --> 03:51.810
+It's architecture.
+
+03:51.810 --> 03:53.520
+You have to create a Vagrantfile.
+
+03:53.520 --> 03:55.950
+You put the VM information over there
+
+03:55.950 --> 03:58.380
+and you run the command vagrant up.
+
+03:58.380 --> 04:00.570
+Vagrant is going to read the Vagrantfile,
+
+04:00.570 --> 04:03.150
+and see if the box, which is the image,
+
+04:03.150 --> 04:05.250
+is available in your local machine.
+
+04:05.250 --> 04:07.440
+If it's not available in your local machine,
+
+04:07.440 --> 04:11.280
+it will go to Vagrant Cloud, download the image,
+
+04:11.280 --> 04:14.340
+and then it is gonna contact the hypervisor,
+
+04:14.340 --> 04:17.400
+which in our case is Oracle VM VirtualBox,
+
+04:17.400 --> 04:18.780
+and that's the default hypervisor.
+
+04:18.780 --> 04:21.330
+If you want to use VMware Workstation and other,
+
+04:21.330 --> 04:23.070
+you can use that as well.
+
+04:23.070 --> 04:26.820
+But the default hypervisor is Oracle VirtualBox.
+
+04:26.820 --> 04:29.130
+So it will contact the Oracle VirtualBox,
+
+04:29.130 --> 04:31.830
+and give the information of creating the VM,
+
+04:31.830 --> 04:34.110
+and then the VM will get created.
+
+04:34.110 --> 04:37.830
+You can create one or many VM by using Vagrant.
+
+04:37.830 --> 04:40.890
+The simple to use Vagrant commands like vagrant halt,
+
+04:40.890 --> 04:43.410
+vagrant reload, vagrant destroy,
+
+04:43.410 --> 04:45.060
+and when you reload,
+
+04:45.060 --> 04:47.370
+it's gonna read the Vagrantfile when it's coming up.
+
+04:47.370 --> 04:49.410
+So any changes will be applied.
+
+04:49.410 --> 04:51.150
+If you were to log into a Linux VM,
+
+04:51.150 --> 04:53.430
+you can do vagrant ssh,
+
+04:53.430 --> 04:55.630
+and like that, there are many more commands.
+
+04:56.640 --> 04:58.950
+There are very simple steps
+
+04:58.950 --> 05:01.980
+to create virtual machine with vagrant.
+
+05:01.980 --> 05:05.253
+First you need to create a folder in your computer.
+
+05:06.210 --> 05:09.813
+Then you place a Vagrantfile in that folder,
+
+05:10.830 --> 05:13.293
+you issue the command vagrant up,
+
+05:14.190 --> 05:18.573
+and then you can use vagrant ssh to log into the VM,
+
+05:19.410 --> 05:23.220
+and you can use later vagrant halt to power off,
+
+05:23.220 --> 05:26.400
+or vagrant destroy to delete the VM.
+
+05:26.400 --> 05:28.053
+So let's get started then.
+
+05:29.190 --> 05:30.660
+Vagrant is a command line tool.
+
+05:30.660 --> 05:33.810
+It's not a graphical tool and to execute vagrant commands
+
+05:33.810 --> 05:35.790
+or to execute commands in general,
+
+05:35.790 --> 05:39.240
+we are going to use Git Bash in Windows.
+
+05:39.240 --> 05:42.270
+Mac OS user can use Terminal.
+
+05:42.270 --> 05:44.910
+So I'm going to open Git Bash,
+
+05:44.910 --> 05:47.490
+Macs OS user open your Terminal,
+
+05:47.490 --> 05:49.500
+execute the command pwd.
+
+05:49.500 --> 05:52.170
+This shows the present working directory.
+
+05:52.170 --> 05:54.630
+So I'm in C/Users/imran,
+
+05:54.630 --> 05:56.280
+this is the user's home directory.
+
+05:56.280 --> 05:58.290
+This is the user imran
+
+05:58.290 --> 06:02.670
+and imran user is in the imran user's home directory.
+
+06:02.670 --> 06:04.710
+This symbol over here, tilde,
+
+06:04.710 --> 06:07.740
+this also represents the home directory.
+
+06:07.740 --> 06:09.000
+This will change if you move
+
+06:09.000 --> 06:11.880
+to other directories or folders.
+
+06:11.880 --> 06:15.900
+Now I will be creating my files in F Drive.
+
+06:15.900 --> 06:18.420
+If you do not have F Drive or any other drive,
+
+06:18.420 --> 06:20.310
+you can do it in C Drive.
+
+06:20.310 --> 06:23.790
+Macs OS user should be using a Desktop.
+
+06:23.790 --> 06:27.830
+So I will be saying mkdir /f/
+
+06:29.130 --> 06:31.833
+vagrant-vms,
+
+06:32.820 --> 06:34.080
+hit Enter,
+
+06:34.080 --> 06:38.010
+Mac OS user instead of F, you have to do this,
+
+06:38.010 --> 06:41.073
+you have to say tilde /Desktop.
+
+06:42.120 --> 06:43.233
+You can issue this.
+
+06:44.670 --> 06:46.650
+So this command created a folder
+
+06:46.650 --> 06:48.420
+called vagrant-vms in F drive,
+
+06:48.420 --> 06:52.800
+this command created a folder called vagrant-vms in Desktop,
+
+06:52.800 --> 06:54.810
+Mac OS user used Desktop,
+
+06:54.810 --> 06:58.860
+Windows user you can use F or any other drive that you have.
+
+06:58.860 --> 07:00.690
+Now let's get into the F drive.
+
+07:00.690 --> 07:05.690
+So the command is cd /f/vagrant-vms/.
+
+07:06.120 --> 07:08.370
+You see here the prompt is changed.
+
+07:08.370 --> 07:10.323
+I can use pwd to check it.
+
+07:11.580 --> 07:15.390
+ls command is to list the content of this folder.
+
+07:15.390 --> 07:16.680
+There's nothing in it.
+
+07:16.680 --> 07:19.590
+We are going to create two more folders here.
+
+07:19.590 --> 07:22.680
+mkdir centos a
+
+07:22.680 --> 07:25.533
+and mkdir ubuntu.
+
+07:27.720 --> 07:30.900
+We do ls and you should see two folders
+
+07:30.900 --> 07:32.493
+in vagrant-vms folder.
+
+07:33.720 --> 07:35.610
+I'm going to issue a command called clear.
+
+07:35.610 --> 07:37.560
+This is going to just clear the screen.
+
+07:39.240 --> 07:41.700
+You can always use up arrow,
+
+07:41.700 --> 07:44.973
+down arrow to see the previously executed commands.
+
+07:47.250 --> 07:49.110
+Okay, once again ls.
+
+07:49.110 --> 07:53.763
+And I'm going to get into centos folder here, cd centos.
+
+07:54.750 --> 07:57.480
+If you see currently I'm in this folder,
+
+07:57.480 --> 07:59.430
+you can also issue the complete path,
+
+07:59.430 --> 08:04.430
+cd /f/vagrant-vms /centos/ like this.
+
+08:04.784 --> 08:09.120
+Or you can do like this cd /f/, get into F drive,
+
+08:09.120 --> 08:12.090
+then you say cd vagrant-vms,
+
+08:12.090 --> 08:14.643
+then you can say cd centos.
+
+08:15.720 --> 08:17.190
+For now, just execute the command.
+
+08:17.190 --> 08:18.900
+I will be explaining about this path
+
+08:18.900 --> 08:21.060
+and everything in Linux section.
+
+08:21.060 --> 08:23.100
+If you are lost, just use pwd,
+
+08:23.100 --> 08:25.770
+and ls to find out where you are.
+
+08:25.770 --> 08:27.333
+Okay, let's clear the screen.
+
+08:28.200 --> 08:30.690
+ls, you see there is no file over here.
+
+08:30.690 --> 08:33.090
+We are going to place a Vagrantfile over here
+
+08:33.090 --> 08:36.180
+with the command called vagrant init and the box name,
+
+08:36.180 --> 08:38.910
+but first we have to find the box name.
+
+08:38.910 --> 08:42.270
+So I'm going to open Vagrant Cloud.
+
+08:42.270 --> 08:44.050
+So just Google Vagrant Cloud
+
+08:47.100 --> 08:51.693
+open that link and we will search here CentOS nine.
+
+08:53.850 --> 08:57.030
+So here we have ready-made VM images.
+
+08:57.030 --> 08:59.700
+In Vagrant, we call them as box.
+
+08:59.700 --> 09:01.890
+So give the name, search for your box.
+
+09:01.890 --> 09:05.553
+So I've given CentOS nine, so there is generic CentOS nine,
+
+09:06.600 --> 09:11.600
+and a few other boxes like boxomatic, eurolinux-vagrant.
+
+09:12.210 --> 09:13.886
+So we will be using this one,
+
+09:13.886 --> 09:16.530
+eurolinux-vagrant/centos-stream-9,
+
+09:16.530 --> 09:17.433
+click on that.
+
+09:18.589 --> 09:19.422
+If you come down,
+
+09:19.422 --> 09:23.070
+you see it supports VirtualBox and few other hypervisor
+
+09:23.070 --> 09:26.010
+like libvirt and VMware Workstation.
+
+09:26.010 --> 09:30.180
+We have VirtualBox so we'll be using this box,
+
+09:30.180 --> 09:33.570
+and this specific box has few requirements
+
+09:33.570 --> 09:35.550
+that we need in this Linux section.
+
+09:35.550 --> 09:37.680
+So we'll specifically using this box
+
+09:37.680 --> 09:41.220
+and copy its name from here, exactly from here,
+
+09:41.220 --> 09:44.970
+not from here because it'll copy extra space there.
+
+09:44.970 --> 09:49.860
+So copy that and go to Git Bash.
+
+09:49.860 --> 09:53.010
+Make sure you are in the same folder,
+
+09:53.010 --> 09:54.690
+vagrant init,
+
+09:54.690 --> 09:57.360
+and paste the box name here,
+
+09:57.360 --> 10:01.413
+you can use Shift + Insert in Git Bash to paste,
+
+10:02.810 --> 10:05.013
+or you can right click and paste also.
+
+10:05.894 --> 10:08.040
+Okay, it says a Vagrantfile has been placed
+
+10:08.040 --> 10:08.880
+in this directory.
+
+10:08.880 --> 10:12.120
+If we do ls, we should see the Vagrantfile.
+
+10:12.120 --> 10:17.120
+We can use cat command to print the content of this file.
+
+10:17.160 --> 10:20.940
+So cat Vagrantfile, V capital,
+
+10:20.940 --> 10:23.610
+you can just type Vag and hit Tab,
+
+10:23.610 --> 10:26.463
+and it will complete the rest of it like that.
+
+10:28.620 --> 10:31.590
+Okay, so if you come up here,
+
+10:31.590 --> 10:33.120
+there's so many lines in this file,
+
+10:33.120 --> 10:34.920
+you don't need to understand these lines.
+
+10:34.920 --> 10:37.800
+We'll talk about them later in Vagrant section.
+
+10:37.800 --> 10:39.750
+For now, just look at this line,
+
+10:39.750 --> 10:43.080
+config vm.box and there's the box name.
+
+10:43.080 --> 10:44.760
+Now let's say suppose you make a mistake
+
+10:44.760 --> 10:46.140
+in running vagrant init command
+
+10:46.140 --> 10:47.790
+and you give the wrong box name.
+
+10:47.790 --> 10:50.763
+You can anytime open this file and edit it.
+
+10:52.350 --> 10:54.780
+So you can go from the explorer right here,
+
+10:54.780 --> 10:56.217
+wherever you have your Vagrantfile,
+
+10:56.217 --> 10:59.460
+and you can double click on the Vagrantfile,
+
+10:59.460 --> 11:04.460
+and you can open it through Notepad also or Notepad++,
+
+11:07.170 --> 11:08.460
+right, so if you make any mistake,
+
+11:08.460 --> 11:12.510
+just edit and make the change, save the file.
+
+11:12.510 --> 11:14.060
+That's all, don't do any other changes.
+
+11:14.060 --> 11:15.873
+We will talk about this later.
+
+11:17.070 --> 11:18.573
+Come back to Git Bash,
+
+11:19.410 --> 11:22.230
+again, make sure you are in the correct folder
+
+11:22.230 --> 11:24.873
+and issue the command of vagrant up.
+
+11:27.180 --> 11:30.210
+Okay, here you may get some errors,
+
+11:30.210 --> 11:33.180
+not mandatory but if you get any error
+
+11:33.180 --> 11:37.200
+which says schannel: next InitializeSecurityContext,
+
+11:37.200 --> 11:42.200
+or a Vbox hardening zero x eight zero,
+
+11:42.420 --> 11:44.730
+and you see some numbers over there.
+
+11:44.730 --> 11:48.870
+This is caused mostly by your antivirus.
+
+11:48.870 --> 11:53.870
+You need to disable your antivirus and then try once again.
+
+11:54.120 --> 11:57.960
+Now some antivirus are a little difficult to disable,
+
+11:57.960 --> 11:59.670
+so you need to make sure you completely
+
+11:59.670 --> 12:03.780
+disable the antivirus and then do vagrant up once again.
+
+12:03.780 --> 12:06.390
+If you have any VPN connected,
+
+12:06.390 --> 12:09.600
+please stop it or disconnect it.
+
+12:09.600 --> 12:12.210
+If you are in a corporate network,
+
+12:12.210 --> 12:15.660
+you would be behind a proxy server
+
+12:15.660 --> 12:19.290
+that will also cause these kind of issues.
+
+12:19.290 --> 12:23.730
+So try disabling your antivirus, disconnect your VPN,
+
+12:23.730 --> 12:25.350
+and if you are in a corporate network,
+
+12:25.350 --> 12:27.720
+make sure you're using some other internet.
+
+12:27.720 --> 12:31.770
+Okay, in a minute or so, the VM is up.
+
+12:31.770 --> 12:36.090
+So Vagrant actually downloaded the box from Vagrant Cloud,
+
+12:36.090 --> 12:37.920
+stored it on our local machine,
+
+12:37.920 --> 12:40.170
+and from that it created the VM.
+
+12:40.170 --> 12:42.780
+You can run the command vagrant box list
+
+12:42.780 --> 12:45.540
+to see the downloaded boxes.
+
+12:45.540 --> 12:47.970
+You can see that box is downloaded.
+
+12:47.970 --> 12:52.710
+vagrant status command to check the status of the VM
+
+12:52.710 --> 12:54.063
+if it's running or not.
+
+12:56.010 --> 12:57.820
+Okay? It says the VM is running
+
+12:59.280 --> 13:01.461
+and it's running on VirtualBox.
+
+13:01.461 --> 13:03.630
+If you open a VirtualBox now,
+
+13:03.630 --> 13:05.913
+you should see a VM over there.
+
+13:07.500 --> 13:08.976
+See that? centos_default.
+
+13:08.976 --> 13:11.370
+That centos is the folder name.
+
+13:11.370 --> 13:12.870
+I'm just showing you don't need to do anything
+
+13:12.870 --> 13:14.190
+from the VirtualBox.
+
+13:14.190 --> 13:16.173
+Okay? Close it or minimize it.
+
+13:17.550 --> 13:18.960
+To log into this VM,
+
+13:18.960 --> 13:21.340
+you can issue the command vagrant ssh
+
+13:22.200 --> 13:25.260
+and it will use the ssh command in the background
+
+13:25.260 --> 13:27.183
+and log in inside the VM.
+
+13:29.430 --> 13:32.130
+Okay, see that we are in the VM.
+
+13:32.130 --> 13:33.810
+Okay, how do we know we are in the VM?
+
+13:33.810 --> 13:34.980
+Look at the prompt.
+
+13:34.980 --> 13:36.780
+Okay, it is changed now.
+
+13:36.780 --> 13:40.680
+This was the prompt of my computer.
+
+13:40.680 --> 13:42.570
+Now the prompt is changed here.
+
+13:42.570 --> 13:46.320
+Here you see vagrant as the username.
+
+13:46.320 --> 13:48.300
+Let me clear the screen.
+
+13:48.300 --> 13:51.630
+Oh wait, I'm going to issue the command whoami,
+
+13:51.630 --> 13:54.060
+which says which user you are currently.
+
+13:54.060 --> 13:56.130
+So it says vagrant, that's the user.
+
+13:56.130 --> 13:59.070
+If you look here, the user is imran,
+
+13:59.070 --> 14:01.710
+right, host name, that's localhost.
+
+14:01.710 --> 14:04.350
+You are not given any specific host name.
+
+14:04.350 --> 14:09.350
+pwd says you are in /home/vagrant folder of the VM.
+
+14:10.913 --> 14:13.080
+You can use a command sudo -i.
+
+14:13.080 --> 14:17.013
+This command will switch from vagrant user to root user.
+
+14:18.840 --> 14:21.227
+See, prompt is changed and you can run whoami,
+
+14:22.860 --> 14:24.663
+it says root user.
+
+14:25.590 --> 14:26.970
+These are just get to know command.
+
+14:26.970 --> 14:28.410
+We'll talk about these commands
+
+14:28.410 --> 14:30.993
+in detail later in the next section.
+
+14:31.830 --> 14:34.890
+When you issue the command exit, it is going to log out.
+
+14:34.890 --> 14:36.270
+Right now we are root user,
+
+14:36.270 --> 14:38.970
+so exit means logout from root user.
+
+14:38.970 --> 14:40.530
+Now we are in vagrant user.
+
+14:40.530 --> 14:44.073
+If we do exit, it's going to log out from the VM.
+
+14:45.900 --> 14:47.640
+Right, how do I know I'm logged out?
+
+14:47.640 --> 14:49.470
+Look at the prompt.
+
+14:49.470 --> 14:51.887
+Right, if we want to power off this VM,
+
+14:51.887 --> 14:54.630
+we are going to use the command vagrant halt,
+
+14:54.630 --> 14:56.223
+which will power off the VM,
+
+15:00.840 --> 15:04.293
+okay, vagrant vm, vagrant status,
+
+15:05.550 --> 15:08.700
+it says it's powered off, you can check in the VirtualBox.
+
+15:08.700 --> 15:11.220
+It should be off, right?
+
+15:11.220 --> 15:12.510
+If you want to bring it up again,
+
+15:12.510 --> 15:14.280
+you can just issue the command vagrant up.
+
+15:14.280 --> 15:16.920
+Now this time the VM already exists,
+
+15:16.920 --> 15:19.173
+so it's going to power on the VM that's all.
+
+15:28.290 --> 15:30.120
+If you ever want to reboot this VM,
+
+15:30.120 --> 15:32.610
+you can issue the command of vagrant reload,
+
+15:32.610 --> 15:35.370
+which will reboot the VM.
+
+15:35.370 --> 15:36.690
+Now, when it reboots,
+
+15:36.690 --> 15:39.736
+it is going to read the new changes in the Vagrantfile.
+
+15:39.736 --> 15:41.712
+If you make any changes in the Vagrantfile,
+
+15:41.712 --> 15:45.090
+it is going to apply those changes, but not the box name.
+
+15:45.090 --> 15:46.170
+If you change the box name,
+
+15:46.170 --> 15:48.783
+you have to delete the VM and recreate.
+
+15:49.800 --> 15:52.353
+We'll see the command to delete the VM in a moment.
+
+15:53.460 --> 15:57.570
+All the time, remember, you need to be in this folder
+
+15:57.570 --> 16:00.690
+to execute those Vagrant commands.
+
+16:00.690 --> 16:02.670
+Vagrantfile is in this folder,
+
+16:02.670 --> 16:04.920
+so you need to be in that folder
+
+16:04.920 --> 16:07.290
+to execute the Vagrant commands
+
+16:07.290 --> 16:11.793
+like vagrant up, vagrant ssh, vagrant reload, et cetera.
+
+16:14.940 --> 16:18.870
+Okay, Vagrant VM is up or just the VM is up.
+
+16:18.870 --> 16:22.980
+You can use the command vagrant destroy to delete the VM.
+
+16:22.980 --> 16:23.880
+It's pretty simple.
+
+16:23.880 --> 16:26.250
+You destroy, it deletes, you do vagrant up,
+
+16:26.250 --> 16:28.950
+it creates a VM once again.
+
+16:28.950 --> 16:31.113
+So I'm going to say vagrant destroy.
+
+16:32.850 --> 16:34.740
+It's going to take a moment to delete the VM.
+
+16:34.740 --> 16:36.690
+It is going to ask you a question first
+
+16:37.530 --> 16:40.353
+and you can say Y, yes to delete the VM,
+
+16:42.270 --> 16:45.303
+and VM is gone, you can check, vagrant status,
+
+16:46.650 --> 16:49.440
+and you see it says not created the vagrant
+
+16:49.440 --> 16:51.750
+or the VM is deleted.
+
+16:51.750 --> 16:55.050
+You can check in the VirtualBox also it's gone now.
+
+16:55.050 --> 16:56.040
+Okay, but no problem.
+
+16:56.040 --> 16:57.570
+Make sure you're in the same folder
+
+16:57.570 --> 16:59.220
+and you issue the command vagrant up.
+
+16:59.220 --> 17:01.320
+It will create a VM.
+
+17:01.320 --> 17:03.060
+So this is going to be a new VM, okay?
+
+17:03.060 --> 17:06.060
+The previous one is gone deleted.
+
+17:06.060 --> 17:08.730
+So any changes you make in that VM, everything will be gone.
+
+17:08.730 --> 17:10.260
+It's deleted.
+
+17:10.260 --> 17:12.600
+vagrant up is creating now a new VM.
+
+17:12.600 --> 17:14.160
+Now, when it is creating the VM,
+
+17:14.160 --> 17:18.000
+the box is already present in your computer now, right?
+
+17:18.000 --> 17:20.553
+So it simply says importing base box.
+
+17:21.630 --> 17:24.240
+Okay? Now it's not going to again download the box.
+
+17:24.240 --> 17:25.803
+It's already in our computer.
+
+17:26.940 --> 17:29.000
+Now I know there's so many Vagrant commands
+
+17:29.000 --> 17:30.450
+or so many commands, don't worry,
+
+17:30.450 --> 17:34.090
+I'm gonna just reiterate everything once this is completed
+
+17:34.980 --> 17:37.110
+and by the time you complete Linux section,
+
+17:37.110 --> 17:39.093
+you will be a pro in command line.
+
+17:39.930 --> 17:42.090
+So if you're feeling it difficult, don't worry.
+
+17:42.090 --> 17:44.070
+This is just the beginning.
+
+17:44.070 --> 17:45.870
+We'll be practicing command line so much
+
+17:45.870 --> 17:48.783
+that it becomes very natural to you.
+
+17:49.620 --> 17:51.120
+Okay? This is newly created VM.
+
+17:51.120 --> 17:53.040
+I'm going to show you one more command since we are here.
+
+17:53.040 --> 17:56.280
+vagrant box list.
+
+17:56.280 --> 18:00.063
+This will list all the downloaded box on your computer.
+
+18:00.930 --> 18:02.760
+So you see I have some boxes.
+
+18:02.760 --> 18:06.150
+I have bento/ubuntu-22, geerlingguy/centos7,
+
+18:06.150 --> 18:08.490
+ubuntu/focal64.
+
+18:08.490 --> 18:11.340
+You might be just having this one single box.
+
+18:11.340 --> 18:13.800
+Okay, I'm going to now power off this VM
+
+18:13.800 --> 18:15.993
+and let's move to the Ubuntu VM now.
+
+18:17.220 --> 18:20.760
+So vagrant halt to power off, keep it there.
+
+18:20.760 --> 18:22.680
+Okay, let me clear the screen.
+
+18:22.680 --> 18:26.910
+Now we have to get into the folder /f/vagrant-vms ubuntu.
+
+18:26.910 --> 18:29.760
+We are in this folder, right, centos.
+
+18:29.760 --> 18:31.800
+So I'm going to show you one more command here.
+
+18:31.800 --> 18:34.040
+It's option actually cd ..
+
+18:35.070 --> 18:38.010
+This is going to take you one level up,
+
+18:38.010 --> 18:41.220
+check now you are in vagrant-vms folder,
+
+18:41.220 --> 18:44.460
+ls, and you can do cd ubuntu.
+
+18:44.460 --> 18:47.340
+So you can just say ub, right,
+
+18:47.340 --> 18:51.690
+you can type like that and you can use Tab to complete this,
+
+18:51.690 --> 18:54.270
+right, if it's that, if that's the only name here,
+
+18:54.270 --> 18:56.043
+it will complete it automatically.
+
+18:57.690 --> 19:00.000
+Okay, now I'm in ubuntu folder,
+
+19:00.000 --> 19:02.970
+or you can just say /f/vagrant-vms,
+
+19:02.970 --> 19:05.790
+or whatever path you had given previously.
+
+19:05.790 --> 19:07.590
+You can do like this and like that also,
+
+19:07.590 --> 19:10.050
+you can come into the ubuntu folder.
+
+19:10.050 --> 19:12.360
+Okay, let's find out now, ubuntu box.
+
+19:12.360 --> 19:14.403
+Let's go back to the Vagrant Cloud.
+
+19:15.750 --> 19:16.713
+Vagrant Cloud.
+
+19:18.360 --> 19:22.023
+Now here, search with the name ubuntu jammy.
+
+19:24.570 --> 19:27.150
+This box, this is the one that we will be using,
+
+19:27.150 --> 19:30.060
+ubuntu/jammy Jellyfish is the complete name
+
+19:30.060 --> 19:32.793
+of Ubuntu 22 server OS.
+
+19:33.929 --> 19:35.613
+Now let's copy this name.
+
+19:38.100 --> 19:41.730
+Let's come to Git Bash.
+
+19:41.730 --> 19:43.230
+All right, check here.
+
+19:43.230 --> 19:44.430
+It should be in this folder
+
+19:44.430 --> 19:47.250
+or you can just directly give the complete path
+
+19:47.250 --> 19:49.680
+of the folder to reach there.
+
+19:49.680 --> 19:53.703
+That also we can do and run the command vagrant init.
+
+19:55.170 --> 19:58.900
+Shift + Insert to paste the box name
+
+19:59.820 --> 20:01.503
+or just right click and paste.
+
+20:04.069 --> 20:05.760
+A Vagrantfile is created there
+
+20:05.760 --> 20:09.213
+and all you need to do now is vagrant up.
+
+20:12.490 --> 20:13.740
+Okay, the VM is up.
+
+20:13.740 --> 20:17.403
+Let's check it's status, vagrant status,
+
+20:19.290 --> 20:21.333
+and it says it is running,
+
+20:23.010 --> 20:25.350
+right now I want to show you one more command over here.
+
+20:25.350 --> 20:26.610
+Now we have two VMs, right?
+
+20:26.610 --> 20:27.930
+When you run vagrant status,
+
+20:27.930 --> 20:30.130
+it's going to show you VM status
+
+20:32.340 --> 20:36.420
+of the VM that is in that particular folder, right?
+
+20:36.420 --> 20:38.610
+But if you want to see status of all the VM,
+
+20:38.610 --> 20:42.573
+you can say vagrant global -status.
+
+20:47.310 --> 20:50.550
+Okay so, you see some other VMs also
+
+20:50.550 --> 20:52.203
+that I had created previously.
+
+20:53.370 --> 20:55.020
+So this one, right?
+
+20:55.020 --> 20:56.400
+This is powered off CentOS,
+
+20:56.400 --> 20:58.560
+and this Ubuntu one, this is running.
+
+20:58.560 --> 20:59.880
+Now there are some old entries.
+
+20:59.880 --> 21:02.520
+I'm gonna say --prune.
+
+21:02.520 --> 21:03.360
+You don't need to do this.
+
+21:03.360 --> 21:06.390
+If you have some extra VMs that you see through Vagrant
+
+21:06.390 --> 21:07.890
+but not through VirtualBox,
+
+21:07.890 --> 21:10.413
+you can run this command to clean this table.
+
+21:12.510 --> 21:14.130
+Okay? See, all the entries are gone, right?
+
+21:14.130 --> 21:17.130
+So two VMs CentOS which is powered off
+
+21:17.130 --> 21:18.750
+and Ubuntu, which is running.
+
+21:18.750 --> 21:21.480
+You can see the folder they're present in.
+
+21:21.480 --> 21:24.210
+Right, clear the screen.
+
+21:24.210 --> 21:26.463
+So once again, vagrant status,
+
+21:28.470 --> 21:29.490
+right, this VM is running.
+
+21:29.490 --> 21:32.073
+We can do vagrant ssh to log in.
+
+21:35.130 --> 21:38.520
+Okay? We are in, you see the prompt is changed.
+
+21:38.520 --> 21:40.293
+Let me clear the screen.
+
+21:41.190 --> 21:42.947
+Okay, we are in the VM.
+
+21:42.947 --> 21:47.040
+sudo -i to switch to root user,
+
+21:47.040 --> 21:50.130
+right, exit to log out from root user.
+
+21:50.130 --> 21:54.420
+Once again, exit to log out from the VM itself,
+
+21:54.420 --> 21:56.610
+right, observe the prompt, okay?
+
+21:56.610 --> 21:59.070
+Everything of the prompt, the username,
+
+21:59.070 --> 22:02.610
+the host name, the tilde, the dollar, the hash.
+
+22:02.610 --> 22:06.600
+We are going to talk about this in detail in Linux section.
+
+22:06.600 --> 22:09.540
+For now, you're going to observe more,
+
+22:09.540 --> 22:13.503
+okay, I'm going to do vagrant halt to power off the VM.
+
+22:14.730 --> 22:17.373
+Once again, I need to be in the same folder.
+
+22:20.550 --> 22:24.120
+Okay? I'm using up arrow to see previously executed command,
+
+22:24.120 --> 22:27.600
+vagrant global-status, hyphen, hyphen, global-status.
+
+22:27.600 --> 22:29.180
+get that one, hit Enter,
+
+22:31.050 --> 22:33.450
+right, so you can anytime use this command to find out
+
+22:33.450 --> 22:36.360
+where your VMs are and what are the status,
+
+22:36.360 --> 22:38.160
+and then you can go to that folder,
+
+22:38.160 --> 22:43.160
+I'm gonna say cd/f/vagrant-vms/centos seven.
+
+22:44.520 --> 22:45.903
+Sorry, just centos.
+
+22:46.830 --> 22:49.713
+And issue the command vagrant up,
+
+22:50.610 --> 22:52.800
+right now I'm in centos folder.
+
+22:52.800 --> 22:55.023
+So it's going to bring up this CentOS VM,
+
+22:56.526 --> 22:59.190
+and if you want, you can observe VirtualBox.
+
+22:59.190 --> 23:02.670
+Again, observe, don't make any changes through VirtualBox.
+
+23:02.670 --> 23:05.523
+Everything will be managed through Vagrant now.
+
+23:07.020 --> 23:09.870
+Okay, see that CentOS VM is coming up,
+
+23:09.870 --> 23:12.420
+okay, don't make any change once again through VirtualBox,
+
+23:12.420 --> 23:14.040
+don't power off, power on the OS.
+
+23:14.040 --> 23:16.350
+Vagrant won't know what's happening
+
+23:16.350 --> 23:20.160
+and it may give you false status of the VM, okay?
+
+23:20.160 --> 23:21.690
+And if you are good with this,
+
+23:21.690 --> 23:23.370
+you can bring up the VM through Vagrant,
+
+23:23.370 --> 23:25.620
+log in, do all those thing, exit, power off.
+
+23:25.620 --> 23:27.000
+You can do everything.
+
+23:27.000 --> 23:28.770
+Then you don't need these two VMs,
+
+23:28.770 --> 23:29.940
+which we created manually.
+
+23:29.940 --> 23:31.980
+You can simply remove them.
+
+23:31.980 --> 23:33.900
+If you want, you can keep them.
+
+23:33.900 --> 23:37.740
+There's no harm, but we are really not going to use them.
+
+23:37.740 --> 23:40.110
+Remove, delete all files.
+
+23:40.110 --> 23:43.050
+Make sure you're deleting the right VM, not the Vagrant VMs.
+
+23:43.050 --> 23:45.033
+Okay? The old VMs that we created,
+
+23:45.960 --> 23:49.833
+Ubuntu VM, Remove, Delete all files.
+
+23:51.330 --> 23:53.250
+Okay? So as per this lecture,
+
+23:53.250 --> 23:56.670
+you need to create these two VMs, log in, logout,
+
+23:56.670 --> 23:59.490
+and then vagrant halt power off them, right?
+
+23:59.490 --> 24:02.430
+And keep them because we will be using them
+
+24:02.430 --> 24:05.373
+in Linux section to learn Linux.
+
+24:07.020 --> 24:09.930
+For some reason, CentOS VM takes a really long time
+
+24:09.930 --> 24:13.170
+to shut down, but that is fine.
+
+24:13.170 --> 24:14.040
+Let it take time.
+
+24:14.040 --> 24:17.340
+It's gonna be a graceful shutdown.
+
+24:17.340 --> 24:19.140
+If it doesn't shut down gracefully,
+
+24:19.140 --> 24:21.423
+it is going to force and power off.
+
+24:22.470 --> 24:25.230
+Always before you power off your computer,
+
+24:25.230 --> 24:28.170
+make sure you power off the VM, okay?
+
+24:28.170 --> 24:32.160
+Power off the VM first and then power off your computer.
+
+24:32.160 --> 24:35.040
+Okay? I'm going to clear the screen
+
+24:35.040 --> 24:37.890
+and show you one command, history.
+
+24:37.890 --> 24:41.733
+This command will show all the previously executed commands.
+
+24:44.250 --> 24:46.620
+Okay? Nice view.
+
+24:46.620 --> 24:48.570
+So I'm scrolling up.
+
+24:48.570 --> 24:50.340
+Okay, from here, 513, right?
+
+24:50.340 --> 24:54.600
+So pwd to check the present working directory.
+
+24:54.600 --> 24:57.780
+cd to get into that folder, or wait before that,
+
+24:57.780 --> 24:58.923
+we created the folder,
+
+24:59.820 --> 25:01.950
+right there, right? 502.
+
+25:01.950 --> 25:03.180
+So create the folder.
+
+25:03.180 --> 25:08.040
+So Windows user make had given the path slash F or slash C,
+
+25:08.040 --> 25:11.870
+whatever, Mac OS user had given the command Desktop.
+
+25:11.870 --> 25:13.533
+We go into that folder,
+
+25:14.460 --> 25:18.420
+right, create centos folder, create ubuntu folder.
+
+25:18.420 --> 25:20.010
+We go into centos folder,
+
+25:20.010 --> 25:22.110
+or we can go to the centos folder
+
+25:22.110 --> 25:24.810
+by giving the complete path, right?
+
+25:24.810 --> 25:27.960
+Then we issue the command vagrant init box name,
+
+25:27.960 --> 25:29.400
+which creates the Vagrantfile.
+
+25:29.400 --> 25:33.000
+You can print the Vagrantfile content by using cat,
+
+25:33.000 --> 25:35.550
+vagrant up to bring up the VM,
+
+25:35.550 --> 25:38.340
+vagrant status to check the status of the VM,
+
+25:38.340 --> 25:41.340
+vagrant ssh to log into the VM,
+
+25:41.340 --> 25:44.790
+vagrant halt to power off the VM,
+
+25:44.790 --> 25:48.390
+vagrant up to power on the created VM,
+
+25:48.390 --> 25:50.160
+which is already there, it's powered off.
+
+25:50.160 --> 25:52.890
+You can do vagrant up to power it on,
+
+25:52.890 --> 25:54.840
+vagrant reload to reboot,
+
+25:54.840 --> 25:56.853
+vagrant destroy to delete,
+
+25:57.780 --> 26:01.860
+right vagrant box list to list the available boxes
+
+26:01.860 --> 26:03.033
+on your computer,
+
+26:04.590 --> 26:07.320
+right, then we did the similar thing for Ubuntu.
+
+26:07.320 --> 26:09.210
+We went into the Ubuntu folder,
+
+26:09.210 --> 26:11.490
+vagrant init the box name,
+
+26:11.490 --> 26:13.110
+vagrant up, vagrant status,
+
+26:13.110 --> 26:17.010
+and also vagrant global-status to check the status
+
+26:17.010 --> 26:18.037
+of all the VMs,
+
+26:19.290 --> 26:22.470
+right, once again, vagrant halt to power off.
+
+26:22.470 --> 26:25.740
+Anytime you can use this command to check that the status
+
+26:25.740 --> 26:28.860
+of all your VMs, and you can move to that folder
+
+26:28.860 --> 26:32.490
+and power on them or power off them or delete them, right?
+
+26:32.490 --> 26:36.990
+So don't stop here, do your experiments,
+
+26:36.990 --> 26:39.390
+but keep these VMs as it is, okay?
+
+26:39.390 --> 26:42.600
+You can create the VMs in other folders, bring them up,
+
+26:42.600 --> 26:45.180
+may use different boxes, try them,
+
+26:45.180 --> 26:46.530
+and make sure you're very good
+
+26:46.530 --> 26:49.230
+with creating a VM through Vagrant.
+
+26:49.230 --> 26:52.590
+That's the main motto of this lecture.
+
+26:52.590 --> 26:54.960
+And also make sure you keep these two VMs,
+
+26:54.960 --> 26:57.090
+which we created in this lecture.
+
+26:57.090 --> 26:57.960
+If you destroy them,
+
+26:57.960 --> 27:00.870
+you can just do vagrant up to create them,
+
+27:00.870 --> 27:02.880
+vagrant halt power off those VMs.
+
+27:02.880 --> 27:06.030
+Keep it because we will be using these VMs
+
+27:06.030 --> 27:07.473
+in the Linux section.
+
+27:08.370 --> 27:11.670
+So that is all in this lecture.
+
+27:11.670 --> 27:14.163
+Wrap this up and join me in the next one.

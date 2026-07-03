@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00.030 --> 00:03.780
+Instructor: Okay, so if you wish to test the script,
+
+00:03.780 --> 00:05.550
+you can either copy the script
+
+00:05.550 --> 00:06.870
+to the VM and run it,
+
+00:06.870 --> 00:08.250
+or you can use the sync folder.
+
+00:08.250 --> 00:10.860
+You already copied it into the sync folder.
+
+00:10.860 --> 00:13.860
+So in the VM, in /vagrant folder,
+
+00:13.860 --> 00:15.150
+you should see your scripts.
+
+00:15.150 --> 00:17.760
+Make sure you save when you edit your scripts
+
+00:17.760 --> 00:19.140
+in VS Code.
+
+00:19.140 --> 00:23.370
+Use Ctrl + S or use this option to save the script first.
+
+00:23.370 --> 00:27.720
+Okay, now let's go to the next script, websetup.sh.
+
+00:27.720 --> 00:29.760
+Okay, now we are going to see a few new things
+
+00:29.760 --> 00:31.650
+in GitHub Copilot.
+
+00:31.650 --> 00:35.880
+And again, we are also going to learn from the suggestions.
+
+00:35.880 --> 00:40.880
+Okay, so you do this, select the entire code in websetup.sh
+
+00:41.100 --> 00:42.420
+and you need to open the chat.
+
+00:42.420 --> 00:44.790
+You can use Ctrl + I or Cmd + I
+
+00:44.790 --> 00:46.650
+based on your operating system.
+
+00:46.650 --> 00:49.863
+So I have Windows, I'm going to do Ctrl + I,
+
+00:51.180 --> 00:52.440
+okay, first go through the script
+
+00:52.440 --> 00:55.830
+if you don't remember everything, a simple web setup script,
+
+00:55.830 --> 00:57.870
+download the artifact from twoplay.com
+
+00:57.870 --> 00:59.700
+and set up the website.
+
+00:59.700 --> 01:02.640
+Pretty simple, but can it be better? Of course, it can be.
+
+01:02.640 --> 01:04.350
+Let's ask Copilot.
+
+01:04.350 --> 01:06.120
+So improve the code according to
+
+01:06.120 --> 01:08.730
+developmental best practices.
+
+01:08.730 --> 01:10.730
+You can write this prompt and hit enter.
+
+01:12.540 --> 01:15.240
+Okay, it has definitely made suggestions,
+
+01:15.240 --> 01:17.340
+and good ones actually.
+
+01:17.340 --> 01:19.470
+First I'm going to accept this
+
+01:19.470 --> 01:21.330
+and then we'll go through the code.
+
+01:21.330 --> 01:26.190
+So this line, so this actually is to exit the script
+
+01:26.190 --> 01:27.360
+if something fails,
+
+01:27.360 --> 01:29.460
+and this is actually much better,
+
+01:29.460 --> 01:31.440
+let's understand each options.
+
+01:31.440 --> 01:32.640
+Let's select this line
+
+01:32.640 --> 01:34.970
+and again open the chat, in-line chat,
+
+01:34.970 --> 01:39.813
+Ctrl + I or Command I, and we'll say /explain.
+
+01:40.800 --> 01:44.070
+And now let's hit enter. So these are the slash commands.
+
+01:44.070 --> 01:45.630
+It's making some info,
+
+01:45.630 --> 01:47.910
+giving some information, and it's too small.
+
+01:47.910 --> 01:52.320
+I'm gonna say view in chat. Okay, this is better.
+
+01:52.320 --> 01:54.840
+So it says the set, this command is common.
+
+01:54.840 --> 01:58.590
+Best practice in Bash scripting -e option script to,
+
+01:58.590 --> 02:03.480
+immediately exit if any command returns a non-zero status
+
+02:03.480 --> 02:04.770
+already seen in Bash scripting
+
+02:04.770 --> 02:06.720
+what does non-zero mean, so, right, failure,
+
+02:06.720 --> 02:10.560
+zero means the previous command was successful, right?
+
+02:10.560 --> 02:12.690
+Then you have the -u option. Check this out.
+
+02:12.690 --> 02:15.900
+If the variables are not defined,
+
+02:15.900 --> 02:17.370
+then it is going to also terminate,
+
+02:17.370 --> 02:19.050
+and check out this, we have variables.
+
+02:19.050 --> 02:20.610
+If it's not defined correctly,
+
+02:20.610 --> 02:23.460
+if you have the wrong values, basically not defined,
+
+02:23.460 --> 02:25.050
+does not have any value when,
+
+02:25.050 --> 02:28.920
+and this is very helpful when you take user input.
+
+02:28.920 --> 02:31.020
+So the user is not entering the value,
+
+02:31.020 --> 02:32.640
+then the variable is not defined.
+
+02:32.640 --> 02:34.950
+You don't want your commands to get executed
+
+02:34.950 --> 02:37.210
+with non-defined variables.
+
+02:37.210 --> 02:39.273
+It is going to give you weird results.
+
+02:40.320 --> 02:41.820
+And then you have -o pipefail,
+
+02:43.820 --> 02:46.590
+so if any command in the pipeline fails,
+
+02:46.590 --> 02:49.140
+it's going to fail the end task script,
+
+02:49.140 --> 02:50.460
+basically exit the script,
+
+02:50.460 --> 02:52.260
+you don't want to continue.
+
+02:52.260 --> 02:53.940
+Right, good work, so we have seen two things.
+
+02:53.940 --> 02:55.410
+We have improved our code
+
+02:55.410 --> 02:57.360
+and we have also seen how
+
+02:57.360 --> 03:02.360
+to ask the Copilot, the AI tool for the explanation.
+
+03:02.400 --> 03:04.980
+Next things, let me close this one.
+
+03:04.980 --> 03:07.443
+This over here, look, this is a function.
+
+03:08.460 --> 03:10.020
+I just gave a comment here, function,
+
+03:10.020 --> 03:13.530
+so it has created functions, multiple functions, no wait,
+
+03:13.530 --> 03:15.510
+it has just created one function.
+
+03:15.510 --> 03:17.160
+Anyways, let's just take a look at this one
+
+03:17.160 --> 03:19.140
+and then we'll add more functions.
+
+03:19.140 --> 03:21.300
+So function basically is a reusable code
+
+03:21.300 --> 03:24.150
+we're going to see more about this in Python scripting,
+
+03:24.150 --> 03:27.150
+so something you want to do repetitively.
+
+03:27.150 --> 03:29.250
+So instead of writing those lines of code again
+
+03:29.250 --> 03:31.620
+and again, you can create a function,
+
+03:31.620 --> 03:33.210
+write your line of code over there,
+
+03:33.210 --> 03:35.010
+and then you can call it whenever you need.
+
+03:35.010 --> 03:36.570
+For example, this log function.
+
+03:36.570 --> 03:39.150
+So this is how you define a function in Bash scripting.
+
+03:39.150 --> 03:40.650
+So log (),
+
+03:40.650 --> 03:43.110
+and then in-between curly braces you write your code.
+
+03:43.110 --> 03:45.060
+So we have two echo statements,
+
+03:45.060 --> 03:48.720
+in-between we have echo dollar I, what is dollar?
+
+03:48.720 --> 03:52.860
+No sorry, dollar 1, dollar 1, that's the first argument.
+
+03:52.860 --> 03:55.650
+Now here, this function is getting called, log,
+
+03:55.650 --> 03:59.430
+and we are passing this text over here or string.
+
+03:59.430 --> 04:01.650
+This goes over here. This will be the dollar 1.
+
+04:01.650 --> 04:03.030
+So when you call this,
+
+04:03.030 --> 04:05.490
+it's going to simply print this lines.
+
+04:05.490 --> 04:08.580
+It's going to say echo installing packages.
+
+04:08.580 --> 04:10.710
+And then again, print the hash.
+
+04:10.710 --> 04:13.110
+Okay, let's select our code.
+
+04:13.110 --> 04:17.343
+Open in-line chat. I will ask it to add more functions.
+
+04:20.130 --> 04:23.730
+Okay, it made suggestions and I'm going to accept this.
+
+04:23.730 --> 04:26.340
+And now if you see if we have installing dependencies,
+
+04:26.340 --> 04:29.463
+this as a function, installing the packages.
+
+04:30.390 --> 04:32.610
+And from this function, we are calling another function.
+
+04:32.610 --> 04:35.370
+And all this functions are called here,
+
+04:35.370 --> 04:36.960
+main script execution.
+
+04:36.960 --> 04:38.970
+So these are the functions that are just defined,
+
+04:38.970 --> 04:40.380
+over here we are calling them,
+
+04:40.380 --> 04:42.870
+so one by one, all the functions are called.
+
+04:42.870 --> 04:45.720
+And if you see it's all in right order.
+
+04:45.720 --> 04:48.123
+So let's save this and you can test it.

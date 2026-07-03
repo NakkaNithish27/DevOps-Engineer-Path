@@ -1,0 +1,487 @@
+WEBVTT
+
+00:00.960 --> 00:03.560
+Instructor: All right, time to validate all this.
+
+00:04.440 --> 00:08.070
+So if we hit the same VURL what we did previously,
+
+00:08.070 --> 00:11.760
+we as a user won't be able to tell any difference
+
+00:11.760 --> 00:15.750
+whether it's coming from cached location of CloudFront
+
+00:15.750 --> 00:17.463
+or from the load balancer.
+
+00:18.510 --> 00:21.570
+But we can use Inspect tools in the browser
+
+00:21.570 --> 00:24.990
+and find out from where exactly it is coming.
+
+00:24.990 --> 00:27.060
+It's routed from where.
+
+00:27.060 --> 00:30.960
+So to show you that I am going to use a different browser,
+
+00:30.960 --> 00:33.910
+you can use any browser, but make sure you clear the cache.
+
+00:35.400 --> 00:38.670
+So open a different browser, what you used previously
+
+00:38.670 --> 00:40.680
+to access vprofile.
+
+00:40.680 --> 00:41.790
+If you're using the same browser,
+
+00:41.790 --> 00:44.070
+make sure you clear the cache.
+
+00:44.070 --> 00:45.450
+So I'm using Firefox
+
+00:45.450 --> 00:47.670
+and again, in the Firefox I will say,
+
+00:47.670 --> 00:49.893
+New Private Window like Incognito.
+
+00:50.880 --> 00:53.860
+Okay, so I'm going to hit F12 on my keyboard
+
+00:57.360 --> 01:01.320
+and make sure to click on Console option here.
+
+01:01.320 --> 01:03.420
+Let's enter the URL of our website,
+
+01:03.420 --> 01:07.237
+https://vprofile.hkhinfo.xyz.
+
+01:10.590 --> 01:11.423
+That is for me.
+
+01:11.423 --> 01:14.550
+Enter your URL, make sure it's https.
+
+01:14.550 --> 01:15.383
+Hit enter.
+
+01:18.000 --> 01:20.040
+Okay, so you'll see the site loaded.
+
+01:20.040 --> 01:24.690
+And now let's take this get request.
+
+01:24.690 --> 01:27.340
+And now make sure you're on the Headers, scroll down.
+
+01:28.650 --> 01:30.060
+Okay, the font is very small.
+
+01:30.060 --> 01:31.803
+You have to look for a via.
+
+01:33.090 --> 01:37.680
+Okay, there via, you see this url.cloudfront.net.
+
+01:37.680 --> 01:39.840
+It's coming from CloudFront.
+
+01:39.840 --> 01:43.380
+So that validates that when we enter this URL,
+
+01:43.380 --> 01:44.680
+it goes to the CloudFront.
+
+01:45.540 --> 01:48.900
+CloudFront redirects it to the load balancer
+
+01:48.900 --> 01:51.900
+and that in turn goes to the instance.
+
+01:51.900 --> 01:53.670
+The website gets loaded on a browser
+
+01:53.670 --> 01:58.110
+and also gets cached in the CloudFront edge location,
+
+01:58.110 --> 02:01.260
+the nearest edge location to us.
+
+02:01.260 --> 02:04.320
+So next time, if user does the same thing,
+
+02:04.320 --> 02:06.870
+all the cache content from the CloudFront will be delivered
+
+02:06.870 --> 02:10.410
+to the user's browser instead of going to the load balancer.
+
+02:10.410 --> 02:11.730
+The new content obviously,
+
+02:11.730 --> 02:15.000
+which is not present in the edge locations,
+
+02:15.000 --> 02:17.460
+will be fetched from the load balancer
+
+02:17.460 --> 02:18.963
+from the instances basically.
+
+02:20.610 --> 02:24.150
+Alright, so now I want you to do your own research
+
+02:24.150 --> 02:26.310
+on what is CloudFront.
+
+02:26.310 --> 02:27.780
+You already did it.
+
+02:27.780 --> 02:30.870
+So you can very easily understand now if you read it,
+
+02:30.870 --> 02:33.030
+there are many different providers.
+
+02:33.030 --> 02:35.160
+One other popular name is CloudFlare
+
+02:35.160 --> 02:36.870
+and there are many other.
+
+02:36.870 --> 02:40.480
+Some big companies have their own CDN
+
+02:41.760 --> 02:45.860
+and some users services like AWS CloudFront or CloudFlare
+
+02:45.860 --> 02:47.133
+or anything like that.
+
+02:48.420 --> 02:52.530
+All right, so we did really a lot of things in this project.
+
+02:52.530 --> 02:55.923
+It was a really an amazing experience.
+
+02:56.970 --> 03:00.450
+Let's take a look once again at the architecture.
+
+03:00.450 --> 03:02.790
+Okay, so let's revise our architecture now.
+
+03:02.790 --> 03:06.930
+User Access, Amazon Route 53 to CloudFront,
+
+03:06.930 --> 03:09.880
+application load balancer, which is part of Beanstalk
+
+03:10.950 --> 03:15.333
+monitored by CloudWatch alarms, artifacts in S3 buckets.
+
+03:16.740 --> 03:20.760
+Amazon MQ ,instead of Rabbit MQ, EC2 instance,
+
+03:20.760 --> 03:24.090
+we are using Amazon MQ, ElasticCache,
+
+03:24.090 --> 03:26.700
+instead of using Memcached from an EC2 instance
+
+03:26.700 --> 03:30.150
+and Amazon RDS, instead of using MySQL
+
+03:30.150 --> 03:31.923
+running on an EC2 instance.
+
+03:34.800 --> 03:36.480
+Okay, time to do the cleanup.
+
+03:36.480 --> 03:38.820
+We have many services that we have created.
+
+03:38.820 --> 03:43.200
+Let's delete them one by one starting from a CloudFront.
+
+03:43.200 --> 03:47.130
+So CloudFront cannot be deleted so easily.
+
+03:47.130 --> 03:48.420
+I mean not in one shot.
+
+03:48.420 --> 03:49.860
+You have to force disable it.
+
+03:49.860 --> 03:53.460
+So select your CloudFront distribution and say Disable.
+
+03:53.460 --> 03:55.350
+And then you are going to come back.
+
+03:55.350 --> 03:58.440
+Once it is completely disabled, then only we can delete it.
+
+03:58.440 --> 04:00.330
+So let's go to RDS.
+
+04:00.330 --> 04:03.270
+Let's delete RDS, right?
+
+04:03.270 --> 04:08.133
+So select your RDS, and Action and Delete.
+
+04:09.300 --> 04:11.790
+Create final snapshot, uncheck that,
+
+04:11.790 --> 04:13.980
+Retain automatic backups, uncheck that.
+
+04:13.980 --> 04:16.110
+We don't want any backups or anything.
+
+04:16.110 --> 04:19.170
+We just want to cleanly remove everything.
+
+04:19.170 --> 04:21.900
+So you have to put a check mark on this
+
+04:21.900 --> 04:25.233
+I acknowledge and type here, delete me and say Delete.
+
+04:26.580 --> 04:29.130
+So this will also take some time, but it'll get deleted.
+
+04:29.130 --> 04:30.380
+Let's go to ElasticCache,
+
+04:31.860 --> 04:33.423
+Memcached caches.
+
+04:34.470 --> 04:39.280
+Select our caching service Action, Delete,
+
+04:41.100 --> 04:44.523
+type the name and say Delete.
+
+04:46.110 --> 04:47.673
+Let's go to the Brokers.
+
+04:49.620 --> 04:52.893
+Amazon MQ, select and say Delete.
+
+04:53.880 --> 04:57.543
+Give the broker name, and say Delete.
+
+04:59.370 --> 05:00.660
+Okay, so we have Beanstalk,
+
+05:00.660 --> 05:02.760
+but when you try to delete this Beanstalk,
+
+05:02.760 --> 05:05.940
+it is going to delete everything except the security group.
+
+05:05.940 --> 05:08.340
+Because security group we have edited manually
+
+05:08.340 --> 05:11.220
+and we need to remove the rule.
+
+05:11.220 --> 05:13.200
+I mean, not the Beanstalk Security group we edited,
+
+05:13.200 --> 05:16.020
+we allowed that backend security group
+
+05:16.020 --> 05:17.820
+should allow connection from Beanstalk.
+
+05:17.820 --> 05:20.520
+So that creates a connection.
+
+05:20.520 --> 05:21.720
+So go to Security Groups,
+
+05:21.720 --> 05:23.850
+your vprofile backend security group,
+
+05:23.850 --> 05:25.780
+Inbound Rule, Edit
+
+05:26.640 --> 05:28.140
+and remove the rule that says
+
+05:28.140 --> 05:30.330
+Allow connection from Beanstalk.
+
+05:30.330 --> 05:31.380
+Remove that rule.
+
+05:31.380 --> 05:32.550
+Or you can remove any rule
+
+05:32.550 --> 05:35.523
+or all the rule if you want, save it.
+
+05:36.690 --> 05:38.382
+So once you remove that rule
+
+05:38.382 --> 05:41.130
+from vprofile backend security group,
+
+05:41.130 --> 05:42.840
+then you can delete your Beanstalk.
+
+05:42.840 --> 05:44.790
+So go to your Beanstalk Environment,
+
+05:44.790 --> 05:49.293
+select your Environment, Action, and Terminate.
+
+05:50.940 --> 05:52.860
+Give the name over here, say Terminate.
+
+05:52.860 --> 05:53.820
+Now this will also take
+
+05:53.820 --> 05:56.340
+a very long time to terminate, right?
+
+05:56.340 --> 05:57.750
+Don't close your and stuff,
+
+05:57.750 --> 06:01.200
+you know, wait until everything is removed cleanly.
+
+06:01.200 --> 06:03.000
+Let's go to CloudFront.
+
+06:03.000 --> 06:04.350
+Okay, it's still okay.
+
+06:04.350 --> 06:05.490
+Yeah, it's disabled now.
+
+06:05.490 --> 06:10.053
+So now I can remove it and check mark that, refresh.
+
+06:11.550 --> 06:15.960
+Okay, no, it's still in deploying state.
+
+06:15.960 --> 06:17.790
+So that needs to go.
+
+06:17.790 --> 06:19.020
+Then only we can delete it.
+
+06:19.020 --> 06:21.020
+So I'm going to wait for some more time.
+
+06:22.620 --> 06:23.640
+Okay, so few,
+
+06:23.640 --> 06:26.640
+in few minutes that deploying state went away
+
+06:26.640 --> 06:30.450
+and now I can select this and say Delete.
+
+06:30.450 --> 06:34.950
+So CloudFront distribution is removed.
+
+06:34.950 --> 06:38.220
+Let's also remove the DNS record that we created.
+
+06:38.220 --> 06:41.670
+So go to GoDaddy or your domain registrar,
+
+06:41.670 --> 06:44.493
+select that vprofile and say Delete.
+
+06:45.450 --> 06:46.503
+Delete Record.
+
+06:49.620 --> 06:51.030
+Okay, that is gone.
+
+06:51.030 --> 06:54.063
+CloudFront is gone, database is gone.
+
+06:55.080 --> 06:57.600
+Memcached says still deleting,
+
+06:57.600 --> 07:00.840
+Broker, Amazon MQ, that is gone.
+
+07:00.840 --> 07:02.253
+Beanstalk environment.
+
+07:03.480 --> 07:06.423
+Okay, so the terminating is still in progress.
+
+07:08.310 --> 07:09.753
+Okay, Memcached is gone.
+
+07:10.920 --> 07:15.480
+If you want, you can also remove the backend security group.
+
+07:15.480 --> 07:16.833
+Its purpose is done.
+
+07:19.650 --> 07:22.350
+Vprofile backend security group, delete security group
+
+07:24.360 --> 07:26.640
+and keep it if you want.
+
+07:26.640 --> 07:27.750
+It doesn't harm anything,
+
+07:27.750 --> 07:30.750
+but you know, let's delete it if you're not going to use it.
+
+07:35.137 --> 07:37.230
+Okay, and the Beanstalk is also gone,
+
+07:37.230 --> 07:39.213
+so we need a complete cleanup.
+
+07:40.680 --> 07:42.483
+So really good work.
+
+07:44.220 --> 07:45.510
+Now, whenever you have time,
+
+07:45.510 --> 07:49.620
+go through all the lectures of this project once again.
+
+07:49.620 --> 07:52.860
+You can increase the speed of the video
+
+07:52.860 --> 07:54.510
+and let everything sink in.
+
+07:54.510 --> 07:56.280
+If you want to take notes, take notes.
+
+07:56.280 --> 07:59.640
+If you want to draw, draw the architecture diagram.
+
+07:59.640 --> 08:03.360
+Just make sure you are able to explain all this
+
+08:03.360 --> 08:04.623
+in simple words.
+
+08:06.120 --> 08:08.490
+So that will be all in this project.
+
+08:08.490 --> 08:11.853
+I will see you in the next one, take care.

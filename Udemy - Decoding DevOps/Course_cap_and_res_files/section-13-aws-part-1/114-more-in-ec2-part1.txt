@@ -1,0 +1,1198 @@
+WEBVTT
+
+00:01.050 --> 00:02.310
+Instructor: Before you launch an instance,
+
+00:02.310 --> 00:04.170
+let me tell you a general best practice
+
+00:04.170 --> 00:06.420
+of creating an EC2 instance.
+
+00:06.420 --> 00:07.800
+When you're launching an EC2 instance,
+
+00:07.800 --> 00:09.420
+definitely you have some requirements.
+
+00:09.420 --> 00:12.720
+So first point is gather the requirement.
+
+00:12.720 --> 00:15.600
+If you get a task like launch a web server
+
+00:15.600 --> 00:17.610
+with an operating system, so and so,
+
+00:17.610 --> 00:20.070
+storage and compute size,
+
+00:20.070 --> 00:22.710
+we are going to jot down the requirement.
+
+00:22.710 --> 00:24.600
+I'll show you how you can collect those requirements.
+
+00:24.600 --> 00:26.790
+So first part is gather the requirement.
+
+00:26.790 --> 00:30.360
+Once you have the requirement, then create the key pair.
+
+00:30.360 --> 00:32.490
+This you can do while launching the instance also,
+
+00:32.490 --> 00:35.880
+but do it before you launch the instance.
+
+00:35.880 --> 00:39.060
+Then create the security group, which is the firewall,
+
+00:39.060 --> 00:42.000
+and then finally, start launching your instance.
+
+00:42.000 --> 00:43.860
+And when you're going through the launch process,
+
+00:43.860 --> 00:45.240
+you can select your security group,
+
+00:45.240 --> 00:46.410
+you can select your key pair,
+
+00:46.410 --> 00:48.030
+and you can make all the decisions
+
+00:48.030 --> 00:49.443
+based on your requirement.
+
+00:51.420 --> 00:52.890
+Talking about requirement gathering,
+
+00:52.890 --> 00:55.560
+like if you're going to launch an EC2 instance,
+
+00:55.560 --> 00:57.450
+you may need some information.
+
+00:57.450 --> 01:00.420
+And mind you, this is not all the requirement gathering
+
+01:00.420 --> 01:01.350
+that you would be doing.
+
+01:01.350 --> 01:04.530
+You could be doing less or more based on your requirements.
+
+01:04.530 --> 01:06.150
+But some general requirement gathering
+
+01:06.150 --> 01:07.980
+like operating system,
+
+01:07.980 --> 01:10.140
+what operating system you're going to choose?
+
+01:10.140 --> 01:13.173
+Okay, so this will tell you which AMI to go with.
+
+01:14.220 --> 01:17.850
+Size, RAM, CPU, network, speed, how much you need?
+
+01:17.850 --> 01:20.520
+Based on that you'll be selecting the instance type, okay?
+
+01:20.520 --> 01:22.770
+So let's say you are doing it
+
+01:22.770 --> 01:26.220
+for a development environment, we can go with minimum.
+
+01:26.220 --> 01:28.020
+Storage size. What you're going to store?
+
+01:28.020 --> 01:30.120
+First is primarily operating system storage,
+
+01:30.120 --> 01:31.980
+and then any application that you're running
+
+01:31.980 --> 01:33.840
+that storage, right?
+
+01:33.840 --> 01:35.913
+So let's say, we get 10 gigs.
+
+01:37.170 --> 01:40.080
+The project that you're working on get...
+
+01:40.080 --> 01:41.670
+You know, such kind of information is helpful
+
+01:41.670 --> 01:43.740
+while tagging the instance.
+
+01:43.740 --> 01:47.070
+Services or applications that will be running.
+
+01:47.070 --> 01:51.180
+Like for example, you could be running SSH, HTTP, MySQL
+
+01:51.180 --> 01:52.563
+or any other service.
+
+01:54.930 --> 01:56.460
+Environment, this for which environment.
+
+01:56.460 --> 01:58.020
+Development, QA staging,
+
+01:58.020 --> 02:00.390
+it's pre-prod, production environment.
+
+02:00.390 --> 02:02.643
+Based on that, so many decisions can be made.
+
+02:04.200 --> 02:06.060
+The login user, who is going to log in,
+
+02:06.060 --> 02:08.010
+who will be the owner?
+
+02:08.010 --> 02:09.330
+This is used for tagging also.
+
+02:09.330 --> 02:10.830
+This is used for, you know...
+
+02:10.830 --> 02:12.693
+It's helpful for tracking also.
+
+02:13.590 --> 02:17.040
+And based on all this requirement and the right process,
+
+02:17.040 --> 02:19.920
+we are going to now launch an EC2 instance.
+
+02:19.920 --> 02:22.983
+Okay, so back to AWS console in EC2.
+
+02:23.940 --> 02:26.370
+So in previous lecture, we deleted the instance,
+
+02:26.370 --> 02:30.210
+and you should see this instance in terminated state.
+
+02:30.210 --> 02:31.740
+Terminated means gone.
+
+02:31.740 --> 02:34.350
+This information will be there for two hours
+
+02:34.350 --> 02:37.320
+but the information will be also gone.
+
+02:37.320 --> 02:39.540
+If you select this instance and go to instant state,
+
+02:39.540 --> 02:42.270
+you see you cannot do anything over here.
+
+02:42.270 --> 02:44.250
+Now let's launch this instance once again,
+
+02:44.250 --> 02:46.020
+but this time we'll do it properly.
+
+02:46.020 --> 02:49.440
+So first, we are going to go to key pairs.
+
+02:49.440 --> 02:52.050
+Network and security. Go to key pairs.
+
+02:52.050 --> 02:55.143
+We already have a key. We are going to delete this key.
+
+02:56.970 --> 03:00.363
+To confirm, type Delete, D capital, Delete.
+
+03:01.410 --> 03:02.940
+Okay, so the public key is gone
+
+03:02.940 --> 03:06.000
+and the private key that we downloaded in previous lecture
+
+03:06.000 --> 03:08.250
+is also now useless.
+
+03:08.250 --> 03:09.840
+So you better go to your downloads folder
+
+03:09.840 --> 03:11.430
+and delete that key as well,
+
+03:11.430 --> 03:13.740
+so we don't have any confusion.
+
+03:13.740 --> 03:17.160
+Okay, so let's click on create key pair.
+
+03:17.160 --> 03:18.690
+Let's give key a name.
+
+03:18.690 --> 03:21.210
+Now name is extremely important
+
+03:21.210 --> 03:23.460
+when you're working in projects.
+
+03:23.460 --> 03:25.500
+So if you naming convention you remember
+
+03:25.500 --> 03:28.770
+you should have the project name, the environment name,
+
+03:28.770 --> 03:30.390
+the key is four.
+
+03:30.390 --> 03:34.290
+Now you can use one key for all your instances
+
+03:34.290 --> 03:37.200
+or you can use a separate key for every instance.
+
+03:37.200 --> 03:39.180
+So let's say if you have 100 instances,
+
+03:39.180 --> 03:41.130
+you're going to create 100 keys.
+
+03:41.130 --> 03:42.450
+Both are wrong.
+
+03:42.450 --> 03:46.410
+You should not have one key for all your instances.
+
+03:46.410 --> 03:51.120
+Also, you should not have separate key for every instance.
+
+03:51.120 --> 03:52.920
+You can use, you can divide keys.
+
+03:52.920 --> 03:54.810
+Let's say you have different types
+
+03:54.810 --> 03:56.400
+of environment in your project,
+
+03:56.400 --> 03:59.130
+dev, qa, staging, production.
+
+03:59.130 --> 04:02.523
+So for every environment, create a separate key.
+
+04:03.450 --> 04:07.500
+So I'm on tooplate.com and I selected a template, Moso,
+
+04:07.500 --> 04:11.043
+and let's say this is my project name.
+
+04:11.970 --> 04:15.210
+So I give the project name hyphen,
+
+04:15.210 --> 04:16.980
+the environment it is for.
+
+04:16.980 --> 04:19.050
+So I'm going to say it's for dev environment
+
+04:19.050 --> 04:22.830
+and I'm going to give it region name also
+
+04:22.830 --> 04:24.660
+because you might have this instance
+
+04:24.660 --> 04:25.830
+in different environment.
+
+04:25.830 --> 04:28.080
+For different environment, you need different keys.
+
+04:28.080 --> 04:31.050
+You cannot have same key in different environment.
+
+04:31.050 --> 04:32.670
+Key are region-specific.
+
+04:32.670 --> 04:35.400
+So this key will be only available in North Virginia
+
+04:35.400 --> 04:37.080
+when I'm creating.
+
+04:37.080 --> 04:39.930
+Key five format, pem we are going with,
+
+04:39.930 --> 04:42.510
+you can use ppk also if you're using PuTTY,
+
+04:42.510 --> 04:45.330
+but if you're using terminal or Git Bash like me,
+
+04:45.330 --> 04:47.550
+you can use pem format.
+
+04:47.550 --> 04:49.473
+Let's give a tag also to this.
+
+04:50.340 --> 04:54.690
+A name tag, same name, and let's say Create key pair.
+
+04:54.690 --> 04:58.650
+Okay, private key is downloaded with me in my computer
+
+04:58.650 --> 05:00.390
+and that's the public key.
+
+05:00.390 --> 05:01.290
+That will be the lock
+
+05:01.290 --> 05:03.483
+and this will be the key to open that lock.
+
+05:04.410 --> 05:07.110
+Next, let's go to security group.
+
+05:07.110 --> 05:08.640
+Let's go.
+
+05:08.640 --> 05:11.730
+Yeah, there, Network and security, Security Groups.
+
+05:11.730 --> 05:14.790
+So we have this security group from the previous instance.
+
+05:14.790 --> 05:15.963
+Let's delete this.
+
+05:16.830 --> 05:19.680
+Delete security group. Delete.
+
+05:19.680 --> 05:20.580
+Now if you get an error
+
+05:20.580 --> 05:23.340
+that, you know, you're not able to delete the security group
+
+05:23.340 --> 05:25.940
+because there is a network interface attached to it,
+
+05:27.240 --> 05:29.620
+in that case, go to network interfaces
+
+05:30.810 --> 05:33.540
+like any computer has a network adapter.
+
+05:33.540 --> 05:37.740
+Our VM also we did Vagrant VM on virtual box
+
+05:37.740 --> 05:40.440
+where we have bridge adapter, different kinds of adapters.
+
+05:40.440 --> 05:43.470
+Your computer needs a Wi-Fi adapter,
+
+05:43.470 --> 05:44.790
+ethernet adapter, like that.
+
+05:44.790 --> 05:47.700
+This EC2 instances also needs network interface.
+
+05:47.700 --> 05:48.960
+So when we create the instance,
+
+05:48.960 --> 05:51.450
+it also creates the network interface,
+
+05:51.450 --> 05:55.530
+and the security group rule that we apply the IPs,
+
+05:55.530 --> 05:58.260
+everything is for the network interface.
+
+05:58.260 --> 06:00.950
+That network interface is connected to the instance.
+
+06:00.950 --> 06:03.570
+So if you see any network interface over here selected,
+
+06:03.570 --> 06:05.070
+go to Action.
+
+06:05.070 --> 06:07.560
+First, try to disassociate.
+
+06:07.560 --> 06:08.490
+Sorry, detach.
+
+06:08.490 --> 06:12.210
+First, try to detach, and then after that click on Delete
+
+06:12.210 --> 06:14.430
+to delete that network interface.
+
+06:14.430 --> 06:17.343
+Go back to security group. Let's create security group.
+
+06:18.270 --> 06:20.400
+Let's give security group a name.
+
+06:20.400 --> 06:25.110
+So the project name, hyphen, web.
+
+06:25.110 --> 06:26.460
+Now this is for web servers,
+
+06:26.460 --> 06:28.740
+so that's why I'm giving the name web.
+
+06:28.740 --> 06:31.080
+The security group case is also similar to key pair.
+
+06:31.080 --> 06:33.840
+You can use one security group for all your instances
+
+06:33.840 --> 06:35.640
+or you can have separate security group
+
+06:35.640 --> 06:37.380
+for separate instances.
+
+06:37.380 --> 06:39.090
+Again, both are wrong.
+
+06:39.090 --> 06:40.740
+You should divide the security group
+
+06:40.740 --> 06:43.950
+based on your environment and then the type of service.
+
+06:43.950 --> 06:45.300
+Let's say all web servers,
+
+06:45.300 --> 06:48.090
+you're putting it in one security group
+
+06:48.090 --> 06:50.580
+and those instances
+
+06:50.580 --> 06:53.013
+or those web servers are for dev environment.
+
+06:54.270 --> 06:57.600
+According to that, we're giving the naming convention.
+
+06:57.600 --> 06:59.520
+Now if you're trying to skip naming convention
+
+06:59.520 --> 07:01.560
+and give whatever you want,
+
+07:01.560 --> 07:03.660
+trust me, it's a very, very bad practice.
+
+07:03.660 --> 07:07.473
+You're going to suffer a lot in real time due to this.
+
+07:08.340 --> 07:11.250
+Right now I cannot tell you who the whole story,
+
+07:11.250 --> 07:12.810
+it will only come with experience.
+
+07:12.810 --> 07:16.500
+Don't go there. Use proper naming convention.
+
+07:16.500 --> 07:19.440
+Now in security group, you have two kinds of rules.
+
+07:19.440 --> 07:21.270
+Security group is firewall.
+
+07:21.270 --> 07:22.200
+So in any firewall,
+
+07:22.200 --> 07:25.320
+you have inbound rules and you have outbound rules.
+
+07:25.320 --> 07:29.250
+The traffic coming towards your instance, that's inbound.
+
+07:29.250 --> 07:31.560
+The traffic going out of your instance
+
+07:31.560 --> 07:34.440
+or of your server is outbound.
+
+07:34.440 --> 07:37.260
+So I have seen this many people when things are not working
+
+07:37.260 --> 07:39.210
+when they don't understand the firewalls.
+
+07:39.210 --> 07:41.763
+What they do is, I'll show you, Add rule,
+
+07:42.900 --> 07:47.900
+type, All TCP or post All traffic,
+
+07:49.410 --> 07:51.280
+allowed from any IPv4
+
+07:52.140 --> 07:56.880
+and also all traffic allowed from any IPv6.
+
+07:58.440 --> 07:59.273
+I'm not kidding,
+
+07:59.273 --> 08:01.920
+but in some very sophisticated projects also
+
+08:01.920 --> 08:03.870
+I have seen these things.
+
+08:03.870 --> 08:06.630
+So this rule simply means there's no restriction.
+
+08:06.630 --> 08:09.303
+There are no gates, no doors, no windows.
+
+08:10.200 --> 08:13.830
+Anybody can come to the party. It's like that.
+
+08:13.830 --> 08:16.470
+Now before we move ahead and add these rules,
+
+08:16.470 --> 08:18.393
+let's take a look once again.
+
+08:19.650 --> 08:20.883
+This is a firewall,
+
+08:22.800 --> 08:25.440
+and a virtual firewall that controls the traffic
+
+08:25.440 --> 08:26.340
+for your instance.
+
+08:26.340 --> 08:28.950
+You can have one security group connected
+
+08:28.950 --> 08:29.880
+to multiple instance
+
+08:29.880 --> 08:31.950
+or you can apply one security group rule
+
+08:31.950 --> 08:33.780
+to multiple instances.
+
+08:33.780 --> 08:37.290
+And these are basically rules for your incoming traffic
+
+08:37.290 --> 08:38.823
+and your outgoing traffic.
+
+08:39.990 --> 08:42.960
+And they're stateful, so if you are saying inbound traffic,
+
+08:42.960 --> 08:47.130
+you're allowing port 22 to do SSH 21.
+
+08:47.130 --> 08:49.530
+The same outbound rule be automatically updated.
+
+08:49.530 --> 08:51.080
+You don't need to mention that.
+
+08:54.180 --> 08:56.040
+So two kinds of rules in security group,
+
+08:56.040 --> 08:57.570
+inbound rule and outbound rule.
+
+08:57.570 --> 08:58.890
+Inbound rule is the traffic
+
+08:58.890 --> 09:00.750
+that is coming towards your instance.
+
+09:00.750 --> 09:04.350
+Outbound, the traffic that is generating from your instance
+
+09:04.350 --> 09:05.910
+and going out.
+
+09:05.910 --> 09:07.800
+So if you don't know firewalls,
+
+09:07.800 --> 09:10.440
+think of them as the watchman
+
+09:10.440 --> 09:14.010
+or the gatekeeper who has a register,
+
+09:14.010 --> 09:16.200
+and from the register will be checked
+
+09:16.200 --> 09:18.540
+who is allowed to come in
+
+09:18.540 --> 09:21.150
+and also who is allowed to go out,
+
+09:21.150 --> 09:22.560
+and where are you coming from.
+
+09:22.560 --> 09:25.860
+That is also important, okay?
+
+09:25.860 --> 09:29.520
+Watchman probably for a party or a bouncer maybe.
+
+09:29.520 --> 09:31.650
+So if you're coming from a particular place
+
+09:31.650 --> 09:35.640
+and you want to go in, it will be checked in the register
+
+09:35.640 --> 09:37.860
+that is there entry for you.
+
+09:37.860 --> 09:39.960
+If it's there, you are allowed in.
+
+09:39.960 --> 09:42.600
+And similar way, if you're going out of the party,
+
+09:42.600 --> 09:44.850
+are you allowed to go out?
+
+09:44.850 --> 09:47.910
+That will be weird for humans to do that.
+
+09:47.910 --> 09:50.910
+But, you know, the outbound rules are set sometimes
+
+09:50.910 --> 09:52.830
+to increase more security.
+
+09:52.830 --> 09:54.600
+So let's set proper rules.
+
+09:54.600 --> 09:56.940
+We will remove these entries.
+
+09:56.940 --> 09:58.170
+We'll add specific rule.
+
+09:58.170 --> 10:01.200
+One thing we need to SSH to this instance.
+
+10:01.200 --> 10:03.130
+So you can select type SSH
+
+10:04.050 --> 10:06.720
+where it'll select the default port as 22
+
+10:06.720 --> 10:10.950
+or you can say Custom TCP rule 22.
+
+10:10.950 --> 10:14.250
+Now you do not want people to do SSH to your instance
+
+10:14.250 --> 10:16.560
+except who are managing it.
+
+10:16.560 --> 10:21.540
+So mostly it'll be your IP, like your corporate office IP.
+
+10:21.540 --> 10:23.070
+And when you're sitting in that network,
+
+10:23.070 --> 10:26.370
+you can just do my IP and it'll give you that public IP.
+
+10:26.370 --> 10:30.960
+And in corporate networks, the public IPs will be static.
+
+10:30.960 --> 10:33.300
+Okay, so for now, we'll keep this rule.
+
+10:33.300 --> 10:35.880
+Again, once we deploy our web service,
+
+10:35.880 --> 10:39.330
+we'll come back and add the rule for port 80.
+
+10:39.330 --> 10:42.660
+Do not add rules in advance.
+
+10:42.660 --> 10:45.660
+We know there is SSH, we are going to do SSH,
+
+10:45.660 --> 10:47.700
+so that's why we're adding this rule.
+
+10:47.700 --> 10:49.260
+We are not installing anything on that.
+
+10:49.260 --> 10:50.340
+There's no web service running,
+
+10:50.340 --> 10:52.290
+so there's no point in adding any rule.
+
+10:52.290 --> 10:55.950
+Once we do that setup, then we will add the rule.
+
+10:55.950 --> 10:59.190
+The outbound rules says all traffic can go anywhere.
+
+10:59.190 --> 11:01.410
+This destination going out.
+
+11:01.410 --> 11:03.780
+Now if you make any change in the outbound rule,
+
+11:03.780 --> 11:07.650
+you will not have internet connectivity to your instance.
+
+11:07.650 --> 11:11.160
+Plain and simple, because the internet traffic goes out
+
+11:11.160 --> 11:12.903
+on various different ports.
+
+11:13.800 --> 11:16.320
+Most of the times, this is handled by a proxy.
+
+11:16.320 --> 11:19.740
+So here, outbound rule will be given for the proxy IP
+
+11:19.740 --> 11:23.010
+and the proxy server will handle the internet traffic.
+
+11:23.010 --> 11:25.320
+But for now, we have to keep it as it is.
+
+11:25.320 --> 11:27.120
+All traffic allowed from anywhere.
+
+11:27.120 --> 11:30.000
+Do not touch outbound rule ever
+
+11:30.000 --> 11:32.700
+until unless I tell you to do
+
+11:32.700 --> 11:36.990
+because we'll need lot of internet stuff in this course,
+
+11:36.990 --> 11:38.670
+for our instance, of course.
+
+11:38.670 --> 11:41.130
+Okay, now that is all. You can give the tag.
+
+11:41.130 --> 11:42.753
+I'm going to give the name tag.
+
+11:44.430 --> 11:48.240
+Same name, try to give more tags in real time,
+
+11:48.240 --> 11:50.190
+so it makes more sense.
+
+11:50.190 --> 11:52.674
+Okay, click Create security group.
+
+11:52.674 --> 11:55.830
+Okay, so have the key pair and we have the security group.
+
+11:55.830 --> 11:58.260
+Now let's go ahead and launch our instance.
+
+11:58.260 --> 11:59.910
+So I'm going to say go to instances
+
+11:59.910 --> 12:02.190
+and say launch instances.
+
+12:02.190 --> 12:04.593
+I'm going to give four tags over here.
+
+12:07.530 --> 12:10.350
+Name, project, environment, owner.
+
+12:10.350 --> 12:13.410
+Now I usually use these tags
+
+12:13.410 --> 12:15.900
+if no naming conventions are mentioned,
+
+12:15.900 --> 12:18.090
+but if naming conventions are mentioned,
+
+12:18.090 --> 12:19.680
+there is a standard in the organization,
+
+12:19.680 --> 12:21.390
+you better follow that.
+
+12:21.390 --> 12:22.380
+Now, resource types.
+
+12:22.380 --> 12:25.110
+I want to tag my volumes and network interface
+
+12:25.110 --> 12:27.510
+so I can identify the volumes
+
+12:27.510 --> 12:30.240
+and network interface belongs to which project,
+
+12:30.240 --> 12:34.233
+who is the owner and for which instance it's connected to.
+
+12:35.610 --> 12:38.280
+We'll see about volumes in later lectures.
+
+12:38.280 --> 12:39.780
+Okay, now come down.
+
+12:39.780 --> 12:42.480
+For this one, we are going to go with Ubuntu.
+
+12:42.480 --> 12:45.403
+The latest one, Ubuntu Server 24, free tier eligible.
+
+12:45.403 --> 12:47.310
+So just select it.
+
+12:47.310 --> 12:49.800
+You don't need to worry much about this one.
+
+12:49.800 --> 12:53.310
+Scroll down, t2.micro will keep that as the instance type.
+
+12:53.310 --> 12:55.800
+Key pair, we have already created the key
+
+12:55.800 --> 12:57.660
+and we are going to select that one.
+
+12:57.660 --> 13:02.010
+See, it's easy to understand that this key can be used
+
+13:02.010 --> 13:03.420
+for this instance, right?
+
+13:03.420 --> 13:06.990
+This is for Moso project dev environment, North Virginia.
+
+13:06.990 --> 13:08.910
+We can simply select this key.
+
+13:08.910 --> 13:12.330
+Network settings, edit, and security group,
+
+13:12.330 --> 13:15.360
+select security group, drop down,
+
+13:15.360 --> 13:17.040
+and now we can find our security group.
+
+13:17.040 --> 13:20.010
+Let's say you have some 50 security group
+
+13:20.010 --> 13:22.230
+and if you don't have proper naming convention,
+
+13:22.230 --> 13:24.270
+how hard it'll be to select, right?
+
+13:24.270 --> 13:27.843
+So that's why I say use proper naming convention.
+
+13:29.160 --> 13:30.600
+Volume will keep it as it is.
+
+13:30.600 --> 13:33.840
+As I said, we are going to talk about this in later lecture.
+
+13:33.840 --> 13:35.760
+Now we are not going to put any
+
+13:35.760 --> 13:37.800
+user data commands over here.
+
+13:37.800 --> 13:39.360
+No user data commands or script.
+
+13:39.360 --> 13:40.890
+Simply launch the instance.
+
+13:40.890 --> 13:43.590
+Once the instance is launched we're going to SSH
+
+13:43.590 --> 13:45.600
+and then execute our commands.
+
+13:45.600 --> 13:48.600
+Okay, let's SSH to our instance. Let's select the instance.
+
+13:48.600 --> 13:51.570
+You should see the filter over your instance ID,
+
+13:51.570 --> 13:52.680
+remove this.
+
+13:52.680 --> 13:57.000
+Okay, so web01, which is in the running state right now.
+
+13:57.000 --> 13:58.473
+Take its public IP.
+
+13:59.340 --> 14:02.820
+I'm going to open Git Bash. Use terminal.
+
+14:02.820 --> 14:05.820
+If you're using macOS, ssh -i.
+
+14:05.820 --> 14:08.610
+My key is in the downloads folder.
+
+14:08.610 --> 14:10.350
+The key name is Moso.
+
+14:11.910 --> 14:13.500
+See, easy to do, right?
+
+14:13.500 --> 14:18.500
+The username for Ubuntu AMI, official Ubuntu AMI is Ubuntu.
+
+14:18.660 --> 14:21.750
+At the rate and use the public IP.
+
+14:21.750 --> 14:22.583
+Hit Enter.
+
+14:23.490 --> 14:25.053
+Are you sure? Yes.
+
+14:26.310 --> 14:28.440
+Okay, let's switch to root user.
+
+14:28.440 --> 14:30.660
+Let's clear the screen
+
+14:30.660 --> 14:33.843
+and let's execute our command to install.
+
+14:35.070 --> 14:40.070
+Apache 2, apt update &amp;&amp; apt install apache2 -y.
+
+14:45.210 --> 14:47.850
+In Ubuntu, when you install the service,
+
+14:47.850 --> 14:50.820
+most of the time, it will be in running state anyways,
+
+14:50.820 --> 14:52.320
+you don't need to do anything.
+
+14:54.060 --> 14:56.223
+Systemctl status apache2.
+
+14:57.240 --> 15:00.510
+It's active running. Q to quit.
+
+15:00.510 --> 15:02.820
+Okay, let's download the template.
+
+15:02.820 --> 15:04.440
+So use Brave browser
+
+15:04.440 --> 15:07.263
+because it will, you know, avoid too many ads.
+
+15:08.280 --> 15:10.170
+So find your favorite template
+
+15:10.170 --> 15:12.030
+or the project name that you have selected.
+
+15:12.030 --> 15:14.850
+Let's download this. Let's click on Download.
+
+15:14.850 --> 15:19.470
+Oh wait, we need to get the download URL.
+
+15:19.470 --> 15:22.023
+So hit F12 if you're using Brave browser.
+
+15:22.950 --> 15:25.290
+Make sure you are in the network tab
+
+15:25.290 --> 15:27.063
+and click on Download.
+
+15:29.040 --> 15:30.633
+Click on this zip.
+
+15:32.100 --> 15:33.900
+In the header, in the requested URL,
+
+15:33.900 --> 15:37.413
+you should get this URL, copy this URL.
+
+15:38.580 --> 15:40.833
+Copy, wget,
+
+15:41.730 --> 15:45.120
+shift insert to paste in Git Bash.
+
+15:45.120 --> 15:46.560
+I should download.
+
+15:46.560 --> 15:49.200
+Okay, should have the zip file.
+
+15:49.200 --> 15:50.523
+Let's unzip it.
+
+15:52.890 --> 15:56.883
+Okay, I need to install unzip, apt install unzip.
+
+16:00.120 --> 16:03.453
+Okay, I have installed unzip. Now let's unzip this.
+
+16:04.890 --> 16:09.890
+Now let's copy recursively everything from this folder
+
+16:10.440 --> 16:14.820
+to /var/www/html,
+
+16:14.820 --> 16:18.873
+and then we'll restart the Apache 2 service.
+
+16:24.210 --> 16:28.083
+Okay, we'll check the process, apache2.
+
+16:29.820 --> 16:30.720
+It's running.
+
+16:30.720 --> 16:33.963
+We'll see the content var/www/html.
+
+16:34.890 --> 16:36.960
+Content is already there.
+
+16:36.960 --> 16:41.960
+Let's check the port number ss hyphen tunlp, pipe, grep
+
+16:42.780 --> 16:47.163
+and use the root process ID, 2579 for me.
+
+16:49.410 --> 16:52.113
+Okay, it's hyphen, ss hyphen.
+
+16:54.570 --> 16:57.963
+Okay, so the port number 80 is allowed from anywhere.
+
+17:00.000 --> 17:02.190
+I think you know where I'm getting at, right?
+
+17:02.190 --> 17:05.700
+So now let's access our web01.
+
+17:05.700 --> 17:08.910
+Let's take its public IP. Let's put it in the browser.
+
+17:08.910 --> 17:11.610
+We know by default. it goes on protocol HTTP
+
+17:11.610 --> 17:13.080
+and port number 80, right?
+
+17:13.080 --> 17:16.380
+So when we hit that, we should see our web service,
+
+17:16.380 --> 17:18.420
+but we want...
+
+17:18.420 --> 17:20.193
+Why? You remember.
+
+17:21.030 --> 17:22.260
+That's right. Security group.
+
+17:22.260 --> 17:25.260
+Security group allows only port 22.
+
+17:25.260 --> 17:29.220
+Let's go back to our security group. Web01, security.
+
+17:29.220 --> 17:31.590
+Make sure you selected the running instance.
+
+17:31.590 --> 17:34.980
+Go the security group and edit inbound rules.
+
+17:34.980 --> 17:37.620
+Again, not outbound inbound rules.
+
+17:37.620 --> 17:39.150
+So only 22 is allowed.
+
+17:39.150 --> 17:43.807
+We are going to add here port 80 allowed from any IPv4
+
+17:44.670 --> 17:49.020
+and we're going to say port 80 allowed from any IPv6.
+
+17:49.020 --> 17:51.420
+Now I know I said allowing from anywhere is bad,
+
+17:51.420 --> 17:54.990
+but see this, we are hosting it for public, right?
+
+17:54.990 --> 17:56.400
+In real time, yeah.
+
+17:56.400 --> 17:59.370
+When we host a website, if you are hosting it for public,
+
+17:59.370 --> 18:02.100
+then of course we need to allow it from anywhere.
+
+18:02.100 --> 18:03.780
+So add those rules.
+
+18:03.780 --> 18:05.760
+Say, Save rules,
+
+18:05.760 --> 18:09.993
+and then let's refresh and we should see the website.
+
+18:11.670 --> 18:13.050
+Okay, so that is all in this lecture.
+
+18:13.050 --> 18:15.420
+Next lecture, we are going to see more settings
+
+18:15.420 --> 18:18.060
+and features of EC2 instance.
+
+18:18.060 --> 18:19.413
+So join me the next one.

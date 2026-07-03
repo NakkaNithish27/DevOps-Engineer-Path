@@ -1,0 +1,388 @@
+WEBVTT
+
+00:00.210 --> 00:01.740
+Instructor: Alright, in this lecture we are going
+
+00:01.740 --> 00:04.770
+to set up a Docker engine on a virtual machine.
+
+00:04.770 --> 00:07.590
+We're going to set up a VM with Vagrant.
+
+00:07.590 --> 00:09.690
+The Vagrant file is in the source code.
+
+00:09.690 --> 00:11.100
+We are going to clone the source code,
+
+00:11.100 --> 00:14.340
+the same source code we will be using in this project.
+
+00:14.340 --> 00:19.340
+So come to github.com/hkhcoder/vprofile-project,
+
+00:19.710 --> 00:22.470
+and copy the URL HTTPS link.
+
+00:22.470 --> 00:23.640
+Copy it.
+
+00:23.640 --> 00:27.390
+Open your VS code, click on the symbol over here,
+
+00:27.390 --> 00:31.110
+source control, and click on Clone Repository,
+
+00:31.110 --> 00:33.300
+and paste the URL,
+
+00:33.300 --> 00:34.563
+and click on that URL.
+
+00:35.880 --> 00:36.930
+Select your folder.
+
+00:36.930 --> 00:38.250
+I'm selecting F Drive.
+
+00:38.250 --> 00:40.380
+I've created a folder, Containerization,
+
+00:40.380 --> 00:42.723
+and say Select Repository Destination.
+
+00:46.890 --> 00:48.750
+Okay, so now we are going to switch to the branch.
+
+00:48.750 --> 00:51.300
+So click on this branch symbol over here,
+
+00:51.300 --> 00:55.380
+and select containers branch, select the containers.
+
+00:55.380 --> 00:58.230
+In this branch, you should see Docker files folder,
+
+00:58.230 --> 01:00.720
+you should see Vagrant folder.
+
+01:00.720 --> 01:03.030
+So based on your operating system, we are going to go
+
+01:03.030 --> 01:06.360
+to that particular folder and bring up the VM.
+
+01:06.360 --> 01:08.640
+We are going to do it through terminal, or Git Bash.
+
+01:08.640 --> 01:11.190
+So I'm going to open my Git Bash.
+
+01:11.190 --> 01:13.173
+Mac OS, you can open your terminal.
+
+01:15.600 --> 01:18.633
+Go to the folder where you have cloned the source code,
+
+01:20.550 --> 01:23.160
+and this you should find V profile project.
+
+01:23.160 --> 01:25.050
+Get inside that.
+
+01:25.050 --> 01:27.513
+And here, you should see Vagrant folder.
+
+01:29.100 --> 01:32.370
+Now if you're using Windows or Mac OS with Intel Chip,
+
+01:32.370 --> 01:33.480
+you go to this folder.
+
+01:33.480 --> 01:36.780
+If you're using Mac OS with M one, M two, M three chip,
+
+01:36.780 --> 01:39.210
+go to Mac OS ARM folder.
+
+01:39.210 --> 01:41.643
+So I will get into Windows folder.
+
+01:42.480 --> 01:43.713
+Let me clear the screen.
+
+01:44.730 --> 01:46.950
+So there is the Vagrant file, but before we bring up,
+
+01:46.950 --> 01:49.890
+let's check if we have any other VMs already running.
+
+01:49.890 --> 01:52.830
+We are going to shut them down, or delete them.
+
+01:52.830 --> 01:55.770
+Vagrant Space Global hyphen status.
+
+01:55.770 --> 01:57.300
+So I have few VMs running.
+
+01:57.300 --> 01:59.460
+I'm going to shut them down.
+
+01:59.460 --> 02:01.380
+It's already power off, I'm going to destroy them,
+
+02:01.380 --> 02:03.570
+and this one I'm going to power off.
+
+02:03.570 --> 02:06.270
+So I go to that folder, Python scripts,
+
+02:06.270 --> 02:08.700
+and I'm going to destroy this.
+
+02:08.700 --> 02:09.933
+Vagrant destroy.
+
+02:12.480 --> 02:13.860
+It's deleted.
+
+02:13.860 --> 02:17.673
+I'm going to the Ubuntu to folder, power off this VM.
+
+02:19.110 --> 02:21.990
+Okay, now let me go back to the folder.
+
+02:21.990 --> 02:26.223
+D, sorry, F, slash containerization.
+
+02:27.390 --> 02:30.243
+Go to V profile project Vagrant.
+
+02:31.770 --> 02:35.970
+And this we have Windows, Mac OS Intel.
+
+02:35.970 --> 02:37.650
+We have the Vagrant file, and let's bring
+
+02:37.650 --> 02:39.423
+up the VM Vagrant app.
+
+02:41.250 --> 02:43.620
+Okay, VM is up, let me log into it.
+
+02:43.620 --> 02:44.453
+Vagrant SSH.
+
+02:46.020 --> 02:49.350
+Okay, now let's get the step of installation.
+
+02:49.350 --> 02:52.710
+Go to the website docs.docker.com.
+
+02:52.710 --> 02:55.620
+Or you can just Google "Docker documentation".
+
+02:55.620 --> 02:57.270
+Go to manuals.
+
+02:57.270 --> 02:59.970
+Where you see Docker engine, click on that dropdown,
+
+02:59.970 --> 03:01.860
+and click on Install.
+
+03:01.860 --> 03:04.500
+Keep in mind, we have to install Docker engine,
+
+03:04.500 --> 03:06.033
+not Docker desktop.
+
+03:06.990 --> 03:10.680
+We have Ubuntu OS, so click on Ubuntu.
+
+03:10.680 --> 03:11.613
+Scroll down.
+
+03:13.260 --> 03:14.280
+Installation methods.
+
+03:14.280 --> 03:17.250
+Now these are the commands first we need to execute.
+
+03:17.250 --> 03:21.150
+So execute them one by one, first starting with apt update.
+
+03:21.150 --> 03:23.370
+I'm going to switch to root user first.
+
+03:23.370 --> 03:26.493
+So hyphen I, clear the screen, sudo apt update.
+
+03:27.870 --> 03:29.070
+Copy and paste the next command,
+
+03:29.070 --> 03:31.380
+which install CA certificates and Curl.
+
+03:31.380 --> 03:32.943
+Put a hyphen Y at the end.
+
+03:34.140 --> 03:34.973
+Hit Enter.
+
+03:36.600 --> 03:41.010
+Copy these three commands together, and paste it over here.
+
+03:41.010 --> 03:41.843
+Hit Enter.
+
+03:43.020 --> 03:44.400
+Okay, so we're in apt update,
+
+03:44.400 --> 03:46.980
+we install CA certificates and Curl.
+
+03:46.980 --> 03:49.650
+We set up the GPG key for Docker repository,
+
+03:49.650 --> 03:51.210
+now we are going to add information
+
+03:51.210 --> 03:52.650
+off the Docker repository.
+
+03:52.650 --> 03:56.193
+So copy this command carefully from a (indistinct) dev null,
+
+03:57.300 --> 03:59.103
+paste it here, hit Enter.
+
+04:00.390 --> 04:01.770
+Now we need to run apt update
+
+04:01.770 --> 04:04.863
+so it scans the latest repository of Docker.
+
+04:10.230 --> 04:12.300
+Okay, now it's time to install the Docker engine.
+
+04:12.300 --> 04:15.330
+So this is the command which installs Docker engines
+
+04:15.330 --> 04:18.723
+and the other dependencies, so let's copy this command,
+
+04:19.890 --> 04:23.310
+paste it, and make sure to hit hyphen Y at the end,
+
+04:23.310 --> 04:24.393
+and hit Enter.
+
+04:25.650 --> 04:27.090
+Okay, Docker engine is installed.
+
+04:27.090 --> 04:28.470
+Let's check the status system.
+
+04:28.470 --> 04:33.300
+CTL status Docker, and you should see it active running.
+
+04:33.300 --> 04:34.950
+Hit Q to quit.
+
+04:34.950 --> 04:36.510
+Now we are going to run one more command,
+
+04:36.510 --> 04:40.470
+which will add the Vagrant user into Docker group.
+
+04:40.470 --> 04:45.470
+User mode, hyphen small A, capital G, group name Docker,
+
+04:45.630 --> 04:47.400
+and the username Vagrant.
+
+04:47.400 --> 04:49.380
+Now what happens is, when you install Docker engine,
+
+04:49.380 --> 04:51.870
+you can run Docker command with root user,
+
+04:51.870 --> 04:53.760
+but normal user cannot run it.
+
+04:53.760 --> 04:54.593
+I'll show you.
+
+04:54.593 --> 04:57.450
+If you run Docker images, you can run it.
+
+04:57.450 --> 05:01.050
+Now we did add the Vagrant user into Docker group.
+
+05:01.050 --> 05:03.511
+You can see that, it's in the Docker group,
+
+05:03.511 --> 05:06.300
+but then this user need to log out and log in.
+
+05:06.300 --> 05:09.060
+Now, if I just exit, I go to Vagrant user,
+
+05:09.060 --> 05:12.150
+and if I run Docker images command,
+
+05:12.150 --> 05:14.280
+it will give me permission denied.
+
+05:14.280 --> 05:16.440
+This user needs to load its profile again,
+
+05:16.440 --> 05:19.194
+so for that, we can just log out from this user
+
+05:19.194 --> 05:20.853
+and log in again.
+
+05:22.440 --> 05:26.550
+Now the Vagrant user can run the Docker command.
+
+05:26.550 --> 05:28.080
+See that?
+
+05:28.080 --> 05:29.790
+If you're running it on EC two instance,
+
+05:29.790 --> 05:34.380
+then you can add the open to user into the Docker group.
+
+05:34.380 --> 05:37.440
+Once you are done, you can shut down the VM, exit from it,
+
+05:37.440 --> 05:39.033
+and do Vagrant halt.
+
+05:40.410 --> 05:42.090
+We don't need it now, we'll need it later
+
+05:42.090 --> 05:43.950
+when we write all our Docker files,
+
+05:43.950 --> 05:46.320
+and we build our Docker images.
+
+05:46.320 --> 05:48.120
+So at the time of building the Docker image,
+
+05:48.120 --> 05:49.140
+we will need this.
+
+05:49.140 --> 05:50.700
+That time we'll bring up this VM,
+
+05:50.700 --> 05:53.130
+and build our Docker images.
+
+05:53.130 --> 05:56.030
+So shut down the VM, and then join me in the next lecture.

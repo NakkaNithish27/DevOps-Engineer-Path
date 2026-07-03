@@ -1,0 +1,221 @@
+WEBVTT
+
+0
+00:00.570 --> 00:01.710
+Hello and welcome.
+
+1
+00:02.490 --> 00:08.910
+In this lecture we will talk about deploying our Docker images or should I say we are going to extend
+
+2
+00:08.910 --> 00:12.780
+our continuous integration pipeline to continuous delivery.
+
+3
+00:13.830 --> 00:18.990
+So we know continuous integration pipeline developer commits a go to GitHub.
+
+4
+00:19.620 --> 00:21.280
+Jenkins is going to fetch the code.
+
+5
+00:22.020 --> 00:22.860
+Run the test.
+
+6
+00:23.890 --> 00:25.060
+Do code analysis.
+
+7
+00:25.600 --> 00:27.250
+Upload the result to sonarqube.
+
+8
+00:27.700 --> 00:28.900
+Check for the quality gate.
+
+9
+00:28.900 --> 00:33.550
+If everything is good, it is going to publish our Docker image to Amazon ECR.
+
+10
+00:34.920 --> 00:43.940
+Now we need to host this Docker image or the Docker container to a Docker solution like ECS.
+
+11
+00:44.160 --> 00:51.420
+We will talk about ECS in the coming lecture, but for now you can understand ECS.
+
+12
+00:52.650 --> 00:55.620
+As a Docker container hosting platform.
+
+13
+00:55.620 --> 00:58.110
+So we package our image into Docker.
+
+14
+00:59.750 --> 01:09.230
+Docker images and then we host our Dockerized application on ECS, Amazon ECS
+
+15
+01:09.830 --> 01:14.120
+So when we issue the next stage, the next command.
+
+16
+01:15.470 --> 01:23.540
+Amazon ECS is going to fetch the docker image that we published, the latest image and host it on ECS.
+
+17
+01:27.360 --> 01:31.260
+So take a look once again at this architectural design of the pipeline.
+
+18
+01:32.420 --> 01:37.580
+And now I'm going to talk about Docker hosting platforms.
+
+19
+01:39.520 --> 01:39.850
+Okay.
+
+20
+01:39.850 --> 01:43.240
+So we containerised or dockerized our application.
+
+21
+01:43.510 --> 01:46.210
+That is, we created Docker images from that.
+
+22
+01:46.450 --> 01:47.920
+Now where do we host it?
+
+23
+01:48.460 --> 01:55.840
+So one local method or normal method is have a docker engine and just said Docker run, mentioned your
+
+24
+01:55.840 --> 01:59.620
+image name and it runs your application on the docker engine.
+
+25
+02:00.160 --> 02:04.060
+Now this is very much for testing and local development environment.
+
+26
+02:04.630 --> 02:09.940
+You do not want to run containers directly on Docker engine because then you need to manage setting
+
+27
+02:09.940 --> 02:15.340
+up Docker engine and the platform where it is running like easy to instance or virtual machines or physical
+
+28
+02:15.340 --> 02:22.060
+server, you need to manage the underlying platform and just the Docker engine doesn't give you production
+
+29
+02:22.060 --> 02:28.360
+related features like high availability, self-healing, and there are many other things.
+
+30
+02:28.360 --> 02:33.640
+So just running container run Docker engine is good for testing and local development environment,
+
+31
+02:34.150 --> 02:37.930
+but for production you need to go with Kubernetes.
+
+32
+02:38.290 --> 02:40.570
+Now, we are not taking Kubernetes now.
+
+33
+02:40.570 --> 02:43.660
+We have that in the leader section, quite in depth.
+
+34
+02:43.660 --> 02:49.900
+Kubernetes we are taking and we will see later how we can deploy our Docker images to Kubernetes platform.
+
+35
+02:50.230 --> 02:53.050
+And you can have a standalone Kubernetes platform.
+
+36
+02:53.440 --> 03:00.550
+You can use EKS, which is from AWS, elastic Kubernetes service or AKS, Azure Kubernetes service
+
+37
+03:00.910 --> 03:06.550
+or GKE, Google Kubernetes engine or OpenShift, which is from Red Hat. Really,
+
+38
+03:06.550 --> 03:12.250
+There are many Kubernetes solutions out there and we are going to talk about all those things in later
+
+39
+03:12.250 --> 03:12.790
+lectures.
+
+40
+03:13.240 --> 03:16.000
+But for now we need to deploy our container.
+
+41
+03:16.930 --> 03:21.430
+And we can use Amazon ECS for that, elastic container service.
+
+42
+03:23.170 --> 03:30.010
+So Amazon ECS, as the documentation says, it run highly secure, reliable, scalable containers.
+
+43
+03:30.490 --> 03:36.970
+So this is, I think, the most quick and easy way to run containers reliably or securely.
+
+44
+03:37.300 --> 03:38.680
+And we can also scale it.
+
+45
+03:39.610 --> 03:46.030
+Now, before we go to Kubernetes, we'll be using Amazon ECS, so it says, launche thousands of containers
+
+46
+03:46.030 --> 03:50.440
+across the cloud using preferred CD and automation tools.
+
+47
+03:50.440 --> 03:51.850
+And that's what we want to do.
+
+48
+03:52.890 --> 04:00.480
+We are setting up a pipeline and we will deliver our application, dockerized application to ECS platform.
+
+49
+04:02.300 --> 04:02.630
+All right.
+
+50
+04:02.630 --> 04:06.920
+So in the next lecture, we will see the pipeline code.
+
+51
+04:07.400 --> 04:13.490
+In order to do this, which is pretty simple, just one more stage we are going to add and then the
+
+52
+04:13.490 --> 04:14.540
+prerequisites.
+
+53
+04:15.770 --> 04:21.890
+That we need to fulfill in order to deploy Docker images to ECS platform.
+
+54
+04:22.490 --> 04:24.530
+So wrap this up and join me in the next lecture.

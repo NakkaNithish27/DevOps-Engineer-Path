@@ -1,0 +1,574 @@
+WEBVTT
+
+00:00.800 --> 00:01.160
+Okay.
+
+00:01.160 --> 00:03.240
+So this is completed successfully.
+
+00:03.240 --> 00:04.040
+So let's take a look.
+
+00:04.040 --> 00:05.560
+Once again click on actions.
+
+00:05.920 --> 00:08.680
+So you can see all your workflow configured over here.
+
+00:08.680 --> 00:15.560
+If you go back to your code your repository in the repository you should see GitHub.com slash workflows.
+
+00:15.560 --> 00:17.520
+And you should see your file over here.
+
+00:17.880 --> 00:22.680
+And see we have mentioned here that it's going to run when there is a push on the main branch, and
+
+00:22.680 --> 00:23.840
+we are on the main branch.
+
+00:23.840 --> 00:27.600
+So as soon as we make a commit, the workflow will get triggered.
+
+00:27.960 --> 00:30.280
+Let's click on the workflow and the workflow.
+
+00:30.280 --> 00:33.040
+We have two jobs build and testing.
+
+00:33.080 --> 00:35.680
+Let's click on the first job build.
+
+00:35.960 --> 00:38.880
+Here you can see the output set up job.
+
+00:39.400 --> 00:45.120
+So current runner version runner image provisioner operating system runner image.
+
+00:45.360 --> 00:47.080
+So all this it is doing by itself.
+
+00:47.080 --> 00:50.200
+We just mentioned that we want to run it on ubuntu latest runner.
+
+00:50.560 --> 00:54.400
+And you see it's also downloading this action checkout action.
+
+00:54.880 --> 00:58.000
+Then it executes all the stages in our workflow.
+
+00:58.360 --> 00:59.520
+So first one is this code.
+
+00:59.520 --> 01:01.120
+Checkout it clones the source code.
+
+01:01.120 --> 01:02.480
+Then we have Maven build.
+
+01:02.480 --> 01:04.720
+These are all the steps right?
+
+01:04.760 --> 01:07.760
+So in workflow you have the job.
+
+01:08.240 --> 01:10.160
+And in job you have steps.
+
+01:10.880 --> 01:14.040
+We define just two steps code checkout and maven build.
+
+01:14.040 --> 01:16.840
+But the others it takes care of itself.
+
+01:17.360 --> 01:19.800
+And keep this in mind this is all in runtime.
+
+01:19.800 --> 01:24.360
+Whatever gets built over here gets destroyed when the job is completed.
+
+01:24.360 --> 01:28.200
+So we need to take out the artifact if you want to store it.
+
+01:28.240 --> 01:32.080
+We can define the artifact and then we can see the artifact down here as well.
+
+01:33.880 --> 01:38.240
+Let's also make some mistakes in our workflow and see what happens.
+
+01:38.480 --> 01:42.800
+So first mistake I'm going to do I'm going to define a different version over here.
+
+01:43.480 --> 01:45.120
+Check out at V 16.
+
+01:45.120 --> 01:51.480
+And then also I'm to change this command or wait I'll change the command over here I'll give it us instead
+
+01:51.480 --> 01:54.360
+of Maven Mvn I'm going to just say Maven.
+
+01:55.080 --> 01:56.200
+So I'm going to save this.
+
+01:56.200 --> 01:57.360
+So I have two mistakes.
+
+01:57.360 --> 01:59.760
+Let's see how our what happens.
+
+02:00.360 --> 02:01.160
+Commit and push.
+
+02:01.480 --> 02:02.920
+Give a commit message.
+
+02:05.800 --> 02:05.960
+Okay.
+
+02:06.000 --> 02:07.920
+Click on actions you should see.
+
+02:09.200 --> 02:09.920
+Ah, okay.
+
+02:09.960 --> 02:11.160
+It took some time, but it's there.
+
+02:11.200 --> 02:11.640
+Okay.
+
+02:11.680 --> 02:12.680
+So it's failed.
+
+02:12.720 --> 02:13.760
+Let's click on this.
+
+02:14.240 --> 02:15.640
+So build job failed.
+
+02:15.640 --> 02:16.720
+Let's click on that.
+
+02:18.040 --> 02:18.280
+All right.
+
+02:18.280 --> 02:21.320
+So it says unable to resolve action.
+
+02:21.360 --> 02:23.840
+Unable to find version V 16.
+
+02:24.240 --> 02:30.720
+Showing this purposefully because when you are using AI tools to generate the code many times the versions
+
+02:30.720 --> 02:31.280
+are wrong.
+
+02:31.640 --> 02:33.360
+That's my own personal experience.
+
+02:33.360 --> 02:35.280
+So give a different version names.
+
+02:35.280 --> 02:37.200
+And because of that, the pipeline failed.
+
+02:37.440 --> 02:43.720
+So make sure you check that the version usually is different, so you should find the right version
+
+02:43.720 --> 02:45.840
+for your actions that you're defining.
+
+02:46.240 --> 02:52.360
+So go to marketplace and search for your action that you're using like we're using checkout.
+
+02:52.360 --> 02:53.840
+So let's search for checkout.
+
+02:54.400 --> 02:57.560
+Let's check out this is the one that we're using checkout v4.
+
+02:57.560 --> 02:59.400
+But always look at the example.
+
+02:59.880 --> 03:01.640
+Okay here it's v5.
+
+03:02.520 --> 03:03.800
+So let's copy that.
+
+03:03.840 --> 03:05.520
+What do I need to copy is just one word.
+
+03:05.520 --> 03:07.360
+So I just give v5.
+
+03:08.440 --> 03:10.800
+V5 save it.
+
+03:11.200 --> 03:13.000
+Previously we defined v4 and it worked.
+
+03:13.000 --> 03:13.600
+We have seen it.
+
+03:13.600 --> 03:15.040
+Let's test it with v5.
+
+03:15.520 --> 03:16.840
+And then let's commit and push.
+
+03:16.840 --> 03:18.400
+This time the error will change.
+
+03:18.560 --> 03:20.960
+Right now commit and push.
+
+03:21.360 --> 03:21.800
+Yes.
+
+03:22.280 --> 03:25.240
+Give a commit message and save it.
+
+03:25.560 --> 03:26.840
+Accept commit message.
+
+03:27.360 --> 03:30.480
+Okay let's check once again let's go back to actions.
+
+03:31.000 --> 03:31.200
+Okay.
+
+03:31.240 --> 03:32.000
+It's running.
+
+03:33.520 --> 03:33.840
+Okay.
+
+03:33.840 --> 03:35.240
+So that's working.
+
+03:35.800 --> 03:37.000
+You could check out worked.
+
+03:37.000 --> 03:39.240
+So V5 works you can use v5.
+
+03:39.280 --> 03:41.080
+Now I want to see this one.
+
+03:41.120 --> 03:41.960
+Let's go back.
+
+03:44.240 --> 03:45.160
+Okay so that worked.
+
+03:45.160 --> 03:48.320
+But the testing is going to fail because we have given a wrong command.
+
+03:48.520 --> 03:49.480
+So let it run.
+
+03:50.040 --> 03:50.240
+Okay.
+
+03:50.280 --> 03:51.240
+Testing started.
+
+03:52.040 --> 03:52.800
+I want to show you this.
+
+03:53.040 --> 03:54.800
+Before even you get into the job.
+
+03:54.800 --> 03:57.440
+You can also see the error over here also.
+
+03:57.800 --> 03:58.880
+But more detail.
+
+03:58.880 --> 04:03.000
+You better get into the job and you see the exact step that it failed.
+
+04:03.480 --> 04:06.240
+So it's clearly maven command not found.
+
+04:06.840 --> 04:08.040
+Okay, so we know what to do.
+
+04:08.080 --> 04:08.920
+Let's fix it.
+
+04:08.920 --> 04:13.800
+And then we'll see a few other things in GitHub actions that we'll be using in the next lectures.
+
+04:14.640 --> 04:16.040
+Fix Mvn test.
+
+04:16.080 --> 04:16.880
+Save it.
+
+04:18.360 --> 04:18.840
+Okay.
+
+04:19.240 --> 04:20.200
+Commit and push.
+
+04:20.800 --> 04:23.160
+Give a commit message and say accept.
+
+04:23.160 --> 04:24.200
+Commit message.
+
+04:27.880 --> 04:28.240
+Okay.
+
+04:28.240 --> 04:31.800
+That's running and it will complete in some time.
+
+04:32.200 --> 04:32.480
+Okay.
+
+04:32.480 --> 04:36.560
+So that would be the basic working of GitHub actions workflow.
+
+04:37.400 --> 04:40.560
+Its job and the steps in upcoming lecture.
+
+04:40.560 --> 04:44.920
+We are going to see many features and use cases of GitHub actions.
+
+04:45.360 --> 04:47.400
+We'll do something more meaningful.
+
+04:47.400 --> 04:53.680
+We are going to clone the source code, build it, test it, and then build a Docker image and upload
+
+04:53.680 --> 04:55.280
+it to Amazon ECR.
+
+04:55.320 --> 04:57.320
+All that we'll be doing from the next lectures.
+
+04:57.640 --> 05:03.720
+Before I close this one, I want to show here one last thing and that is variables and also the secrets.
+
+05:03.720 --> 05:05.990
+So go to settings.
+
+05:06.350 --> 05:06.550
+Okay.
+
+05:06.590 --> 05:08.030
+This is the repository setting.
+
+05:08.790 --> 05:12.350
+Over here you see secrets and variables.
+
+05:13.150 --> 05:14.870
+Click on actions.
+
+05:15.790 --> 05:22.350
+So over here you can store secret data like access keys, passwords and all.
+
+05:22.390 --> 05:24.870
+Secretly these will be stored encrypted.
+
+05:25.190 --> 05:27.910
+And then you can call it in your workflow.
+
+05:28.350 --> 05:32.230
+So your two tab here secrets that will store the data encrypted.
+
+05:32.230 --> 05:35.950
+And then you have variables which are just normal variables that you can define.
+
+05:36.310 --> 05:40.150
+But before you define variables and secret you need to set environment.
+
+05:40.630 --> 05:43.110
+So you can click over here on environments.
+
+05:43.550 --> 05:50.710
+Now environment name as it says it represents it infrastructure environment like dev QA staging production.
+
+05:51.150 --> 05:57.510
+So let's say you use one variable in your workflow, but its value is different based on the environment
+
+05:57.510 --> 05:58.070
+for production.
+
+05:58.070 --> 06:00.550
+It's different for dev and staging it's different.
+
+06:00.710 --> 06:02.470
+So you can keep your workflow intact.
+
+06:02.470 --> 06:08.670
+You can use the same variable, same variable name in the workflow, but its value you can define as
+
+06:08.670 --> 06:09.790
+per the environment.
+
+06:09.990 --> 06:11.190
+So let's set an environment.
+
+06:11.670 --> 06:17.950
+Let's click on New Environment and let's give a name I'm giving as production and say configure environment
+
+06:17.990 --> 06:18.150
+okay.
+
+06:18.190 --> 06:19.470
+So we have environment.
+
+06:19.470 --> 06:24.230
+And now we can add variables and secrets into this environment.
+
+06:24.710 --> 06:28.350
+And also this environment has different settings.
+
+06:29.030 --> 06:32.110
+No restriction means any job can use this.
+
+06:32.670 --> 06:34.630
+Variables and secrets from this environment.
+
+06:34.630 --> 06:40.950
+Then you have protected branch only like the main branch, main branches are usually protected so nobody
+
+06:40.950 --> 06:42.870
+can commit to them directly.
+
+06:42.910 --> 06:45.670
+It will be always going through the pull request.
+
+06:45.950 --> 06:47.030
+So set an environment.
+
+06:47.390 --> 06:49.070
+Set an environment for protected branch.
+
+06:49.070 --> 06:51.590
+Then it can be used only by the protected branch.
+
+06:51.590 --> 06:53.790
+No other branch can use those environment.
+
+06:54.270 --> 06:59.870
+Or you can define a list of the branches and tags on which the environment can be used.
+
+06:59.870 --> 07:01.750
+So like that there are settings for this.
+
+07:02.270 --> 07:08.070
+Let's scroll down and store some variables and secret into this just to show you later we are going
+
+07:08.070 --> 07:10.590
+to define proper variables and secret to use.
+
+07:10.950 --> 07:13.390
+So just click on Manage Environment Secrets.
+
+07:15.550 --> 07:19.030
+Select your environment and here you can add the secret.
+
+07:19.030 --> 07:22.030
+Add environment secret can give secret a name.
+
+07:22.470 --> 07:24.870
+So just give the name of the secret and its value.
+
+07:24.870 --> 07:26.310
+And you say add secret.
+
+07:26.710 --> 07:29.470
+Similar way you store the environment variable.
+
+07:30.030 --> 07:33.870
+Give the name of the variable and its value and say add variable.
+
+07:34.270 --> 07:36.270
+So secrets are stored encrypted.
+
+07:36.270 --> 07:37.910
+Once you store you cannot see this.
+
+07:37.910 --> 07:39.830
+But environment variables are different.
+
+07:39.870 --> 07:45.030
+Like if you go to edit for a secret, you cannot see its value.
+
+07:45.230 --> 07:48.910
+You can just update the value, but you cannot see the saved value.
+
+07:48.910 --> 07:51.150
+That's because it's encrypted, doesn't want to show you.
+
+07:51.710 --> 07:57.550
+But if you go to environment variable edit, you can see the value and then if you want, you can update
+
+07:57.550 --> 07:57.870
+it.
+
+07:59.950 --> 08:00.270
+Okay.
+
+08:00.310 --> 08:05.070
+So play around a little bit over here into the GitHub actions and look at different settings.
+
+08:05.510 --> 08:07.310
+Also spend some time over here.
+
+08:07.350 --> 08:11.510
+Go to New Workflow and take a look at a different workflow.
+
+08:11.510 --> 08:12.990
+For example, the Docker image.
+
+08:12.990 --> 08:15.910
+If you click on configure, just do not commit anything.
+
+08:15.910 --> 08:17.550
+Just take a look at the workflow.
+
+08:17.550 --> 08:19.950
+Different settings you have here.
+
+08:20.550 --> 08:25.710
+Just cancel changes again go to actions new workflow.
+
+08:25.750 --> 08:33.190
+If you scroll down you can see deploy to X, build and deploy GKE, OpenShift octopus deploy different
+
+08:33.190 --> 08:34.550
+kind of workflow.
+
+08:35.150 --> 08:41.390
+And in fact, when I first started working on GitHub actions, I was mostly learning it through these
+
+08:41.390 --> 08:43.550
+sample workflows with different settings.
+
+08:43.750 --> 08:50.150
+But now we have many things we can use the AI tools ChatGPT Copilot, Amazon Q many coding assistant
+
+08:50.190 --> 08:52.950
+tool we can use to write the code for us.
+
+08:52.950 --> 09:00.470
+But before we get into those AI tools, we will have some good hands on workflows and different settings
+
+09:00.470 --> 09:01.430
+inside that.
+
+09:02.070 --> 09:03.110
+So take your time.
+
+09:03.110 --> 09:08.750
+Spend some time with this workflow, take a look at these different workflows and then join me in the
+
+09:08.750 --> 09:09.470
+next lecture.

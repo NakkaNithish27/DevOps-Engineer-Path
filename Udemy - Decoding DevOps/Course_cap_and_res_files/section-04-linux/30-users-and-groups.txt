@@ -1,0 +1,661 @@
+WEBVTT
+
+0
+00:00.900 --> 00:04.800
+In this video, we will be understanding about users and groups.
+
+1
+00:06.040 --> 00:13.600
+In a Linux operating system. So users and group are used to control access to files and resources or
+
+2
+00:13.600 --> 00:17.590
+programs or processes, basically files, everything is a file.
+
+3
+00:18.310 --> 00:22.800
+So every file in the system will be owned by a user and an associated group with it.
+
+4
+00:23.740 --> 00:32.140
+And then you can really control the access on that file by specifying how much permission or authorization
+
+5
+00:32.140 --> 00:33.400
+is to that user.
+
+6
+00:34.090 --> 00:36.610
+Every user will have a unique user ID.
+
+7
+00:37.570 --> 00:44.890
+Which we call it as uid, and all this uid information will be stored in /etc/passwd file, which we
+
+8
+00:44.890 --> 00:47.350
+have already seen, but now we understand it much better.
+
+9
+00:48.010 --> 00:53.050
+There's also an /etc/shadow file which will have encrypted password and some other information like
+
+10
+00:53.050 --> 00:55.690
+expiry of the user and a few other things.
+
+11
+00:56.530 --> 00:57.490
+And you create a user.
+
+12
+00:57.500 --> 01:01.120
+Usually we assign a home dir and that's done by default.
+
+13
+01:01.150 --> 01:03.520
+Sometimes we restrict the home dir also.
+
+14
+01:05.990 --> 01:14.030
+Well, there are three kinds of users in Linux, one is a root user and its user ID is zero group id is zero,
+
+15
+01:14.030 --> 01:21.860
+its home directory  /root and it has a login shell /bin/bash that's the path of bash shell.
+
+16
+01:22.760 --> 01:28.380
+Then you have a regular user, like you have a vagrant user or we can create a user like imran user
+
+17
+01:28.380 --> 01:32.990
+or any other user, this user will always have user id more than 1000.
+
+18
+01:34.360 --> 01:39.880
+It will have a group, its group id will be more than 1000 and these are default numbers, if you
+
+19
+01:39.880 --> 01:41.020
+wish, you can change them.
+
+20
+01:41.840 --> 01:46.190
+And will have a home dir and a log in shell.
+
+21
+01:47.470 --> 01:54.250
+Then there is other kind of user called a service user or system users like FTP, ssh, Apache
+
+22
+01:54.400 --> 01:55.160
+and many more.
+
+23
+01:55.930 --> 01:58.380
+Now, these are not the usual login user.
+
+24
+01:58.390 --> 02:00.360
+You don't use this user to log into the system.
+
+25
+02:00.370 --> 02:07.180
+They have user ID starting from one to triple nine and group will have group ID from one to triple nine.
+
+26
+02:07.720 --> 02:14.350
+and they will have home directory, probably the /var or /etc or may not even have sometimes home directory
+
+27
+02:14.350 --> 02:14.880
+properly.
+
+28
+02:15.430 --> 02:22.240
+They will not have a login shell you will see /sbin/nologin or /sbin/false
+
+29
+02:22.630 --> 02:26.610
+So to prevent people accessing shell from this user.
+
+30
+02:26.620 --> 02:30.970
+So you know, if someone gets hold of this user, these users will not even have password set, but
+
+31
+02:31.270 --> 02:35.220
+someone get hold of this user, they will not be able to get any shell to execute commands.
+
+32
+02:36.010 --> 02:38.320
+These are for the processes running in the background.
+
+33
+02:39.210 --> 02:43.320
+OK, now let's get into our shell of our linux system.
+
+34
+02:44.470 --> 02:47.590
+So logon to the vm and switch to root user.
+
+35
+02:50.190 --> 02:53.850
+First, let's understand the /etc/passwd file.
+
+36
+02:58.870 --> 03:01.720
+That's the entire file, lets just get first
+
+37
+03:02.920 --> 03:06.070
+One line of the file, /etc/passwd
+
+38
+03:07.940 --> 03:09.260
+OK, let me clear the screen.
+
+39
+03:10.210 --> 03:11.490
+And let's do it once again.
+
+40
+03:13.490 --> 03:20.480
+So there are total seven columns here, the first one is the user name, then the second one is X,
+
+41
+03:20.480 --> 03:23.120
+which means there is a link to shadow file.
+
+42
+03:23.120 --> 03:26.030
+Shadow file will hold the password encrypted.
+
+43
+03:26.990 --> 03:34.760
+Then you have the user I.D. root user ID is usually zero group I.D., there will be a primary group
+
+44
+03:34.760 --> 03:41.360
+for every user that we create and root's group I.D. is zero zero.
+
+45
+03:41.900 --> 03:43.800
+And then you have the comment.
+
+46
+03:44.300 --> 03:45.650
+Any comment you want to put?
+
+47
+03:46.750 --> 03:55.330
+Then you have /root, which is the home dir of the root user, then the logging shell. Let's search
+
+48
+03:55.330 --> 03:55.990
+for.
+
+49
+03:57.230 --> 04:00.770
+vagrant user, /etc/passwd
+
+50
+04:02.190 --> 04:09.330
+OK, so vagrant, that's the user name, link to shadow file, user id 1000, group id one thousand.
+
+51
+04:09.750 --> 04:15.120
+Some comment, home dir of our current user and the login shell.
+
+52
+04:17.310 --> 04:24.180
+So theres root user and theres normal user, and then you have these other users, which are system
+
+53
+04:24.180 --> 04:24.870
+users.
+
+54
+04:27.600 --> 04:36.330
+Like bin, Daemon, adm, lp. If you see the logging shell /bin/nologin, their home
+
+55
+04:36.330 --> 04:38.550
+dir, /bin, /sbin.
+
+56
+04:39.590 --> 04:41.360
+There's also for ssh
+
+57
+04:42.550 --> 04:44.080
+A user called sshd.
+
+58
+04:45.320 --> 04:50.720
+Will be seeing later, will be setting up other servers like the webserver, database server, and you'll see there's
+
+59
+04:50.720 --> 04:54.080
+a user that gets created when you install those packages.
+
+60
+04:55.290 --> 05:02.130
+Now, let's check the group file /etc/group, this file will have the group information.
+
+61
+05:03.550 --> 05:10.210
+So there that's the vagrant group and that's the groupid, one thousand, and there's a user called
+
+62
+05:10.210 --> 05:15.560
+Vagrant in this group, like that you should have groups of other users.
+
+63
+05:15.580 --> 05:20.410
+These are the primary groups, we are seeing now, we will also see how we can create our own group and add
+
+64
+05:20.410 --> 05:21.310
+users in that.
+
+65
+05:22.440 --> 05:25.290
+So that's route user, sorry Root Group.
+
+66
+05:26.100 --> 05:30.180
+Now the group name and the user name is similar, right?
+
+67
+05:30.610 --> 05:34.260
+And even there userid, groupid is also similar, like we do grep.
+
+68
+05:35.190 --> 05:43.320
+To /etc/passwd and we do grep vagrant to /etc/.group.
+
+69
+05:45.380 --> 05:50.540
+All right, so there's striking similarities, user I.D. username is same and the group name is also
+
+70
+05:50.540 --> 05:56.760
+same, user ID is same, and the group id is also same, but it's really very easy to understand.
+
+71
+05:56.780 --> 05:59.150
+This is from the group file and this is from /etc/passwd file.
+
+72
+05:59.720 --> 06:03.110
+So this is user information and this is group information.
+
+73
+06:03.710 --> 06:07.740
+After groupid colon, you will see the user that belongs to that group.
+
+74
+06:07.760 --> 06:12.030
+So for this group, Vagrant, we have a user called a vagrant in that.
+
+75
+06:12.790 --> 06:14.430
+OK, that's confusing.
+
+76
+06:14.450 --> 06:17.420
+We are going to create some users and group and you will understand very well.
+
+77
+06:18.810 --> 06:24.330
+OK, some commands we have, like id command and we give the user name and it will give information about
+
+78
+06:24.330 --> 06:26.300
+that user, right.
+
+79
+06:26.340 --> 06:33.240
+Like it's user I.D., its group I.D. and other groups where it belongs to, so vagrant user belongs to
+
+80
+06:33.240 --> 06:35.910
+a group vagrant and also a group wheel.
+
+81
+06:37.390 --> 06:39.160
+Now, let's add our own user.
+
+82
+06:40.490 --> 06:42.410
+So I will add a user.
+
+83
+06:42.440 --> 06:55.890
+Let's say ansible and I will add a user named Jenkins and I will add a user named AWS, just some name,
+
+84
+06:55.910 --> 07:08.030
+OK, you can give any name and you should see then tail -4 /etc/passwd, you should see the user's information
+
+85
+07:08.030 --> 07:09.310
+now passwd file
+
+86
+07:09.320 --> 07:14.990
+You should also see is similar information in the group file for the group that got created.
+
+87
+07:16.240 --> 07:22.090
+OK, so when we created user Ansible, it created a group called us Ansible, which is the primary group.
+
+88
+07:23.060 --> 07:24.770
+You can also run id command.
+
+89
+07:28.850 --> 07:33.680
+Now we will create a group, groupadd devops.
+
+90
+07:35.000 --> 07:37.500
+This command is going to create the group.
+
+91
+07:38.060 --> 07:42.010
+Now I want to add all these three users into the group devops.
+
+92
+07:42.440 --> 07:43.370
+There are two ways.
+
+93
+07:44.980 --> 07:47.230
+One, I can use the usermod, command.
+
+94
+07:49.500 --> 07:56.370
+And I'll use the option -aG means the supplementary group or the secondary
+
+95
+07:56.370 --> 07:56.700
+group.
+
+96
+07:57.700 --> 08:04.870
+If you use a small g, that will be the primary group, so I want to add user into the group devops,
+
+97
+08:04.900 --> 08:06.880
+the user I'm going to say is Ansible.
+
+98
+08:08.570 --> 08:10.880
+OK, now, if you do, id ansible.
+
+99
+08:12.900 --> 08:15.810
+You should see Ansible user is in the group DevOps.
+
+100
+08:16.630 --> 08:25.890
+OK, let's also grep for ansible from /etc/group file or I will search for devops in the group file.
+
+101
+08:26.910 --> 08:27.960
+So devops group.
+
+102
+08:28.910 --> 08:31.760
+You see now devops group has the user ansible in it.
+
+103
+08:32.930 --> 08:39.010
+Now, that's one way of adding a user into the group, we add ansible user to devops group.
+
+104
+08:39.680 --> 08:41.450
+You can directly edit the group file.
+
+105
+08:41.450 --> 08:45.680
+also, /etc/group, open the file.
+
+106
+08:46.710 --> 08:52.100
+And you find your group devops and you want to add users here, you can just say comma separated.
+
+107
+08:52.110 --> 08:58.410
+I want to add Jenkins' and I also want to add aws user,  comma separated.
+
+108
+08:58.410 --> 09:01.860
+You can give as many as users you want and save this file.
+
+109
+09:03.510 --> 09:09.180
+And then lets run id on aws user and you should see it's in the devops group.
+
+110
+09:10.380 --> 09:18.330
+Now, nobody can use this user to log in from outside or any normal user cannot use this to log in because
+
+111
+09:18.690 --> 09:20.280
+it does not have any password set.
+
+112
+09:21.120 --> 09:23.920
+So to set the password, you can use the passwd command.
+
+113
+09:23.970 --> 09:24.420
+passwd command
+
+114
+09:24.750 --> 09:26.670
+Or you can use it to reset the password also
+
+115
+09:26.670 --> 09:29.880
+passwd and will say ansible.
+
+116
+09:31.200 --> 09:37.800
+And it will ask me a new password, I will set some password and I've set a simple password for now.
+
+117
+09:39.960 --> 09:44.100
+OK, I will set also password for aws
+
+118
+09:48.380 --> 09:51.470
+And also, let's set it for jenkins.
+
+119
+09:58.870 --> 10:03.520
+If you want to reset, then you can do the same thing if you forgot the password of that user, but
+
+120
+10:03.520 --> 10:08.780
+this can be done only by root user to resetting someone's password. Now being a root user.
+
+121
+10:08.800 --> 10:12.640
+I really don't need any password to access other user.
+
+122
+10:12.640 --> 10:17.580
+I can simply say su - and the username and no password will be asked.
+
+123
+10:18.490 --> 10:19.000
+You see that?
+
+124
+10:20.170 --> 10:25.150
+I have switched as ansible user, no password asked.
+
+125
+10:26.770 --> 10:33.170
+See, I am in the ansible home directory, but from here. I'm a normal user now, Ansible, I want to switch
+
+126
+10:33.170 --> 10:36.590
+to, let's say, aws.
+
+127
+10:38.290 --> 10:45.460
+It's asking me password and I have to know the password, then only I can switch. Or from aws User.
+
+128
+10:45.460 --> 10:50.350
+I want to switch to Jenkins' user. Again its asking the password.
+
+129
+10:52.000 --> 10:55.090
+OK, and you can use exit to log out.
+
+130
+10:56.210 --> 11:01.780
+Exit from Jenkins, then exit from aws., then exit from Ansible.
+
+131
+11:04.790 --> 11:11.270
+OK, let's clear the screen, few more handy commands. The last command, which will show you.
+
+132
+11:12.960 --> 11:18.120
+The user who logged into this systems last and you'll see the time also, so we've been logging in
+
+133
+11:18.120 --> 11:24.090
+as vagrant users. We will see the event their vagrant user logged in at this particular time.
+
+134
+11:25.380 --> 11:28.680
+And this vagrant user, it's already logged in.
+
+135
+11:30.350 --> 11:34.750
+who command, which will show you the current logged in user.
+
+136
+11:35.250 --> 11:35.850
+whoami
+
+137
+11:35.850 --> 11:38.190
+You've already been seeing this. One more useful.
+
+138
+11:38.190 --> 11:38.490
+command
+
+139
+11:38.850 --> 11:46.200
+lsof -u and a username, this command will list all the open file by this user.
+
+140
+11:47.010 --> 11:49.020
+So if it's not installed, so you can install it.
+
+141
+11:50.070 --> 11:50.820
+lsof
+
+142
+11:54.300 --> 11:56.100
+OK, yum, install lsof -y.
+
+143
+12:05.600 --> 12:09.860
+So before you're deleting any user, you're doing some, you know, serious user operation, you can
+
+144
+12:09.860 --> 12:12.020
+see this user has opened.
+
+145
+12:12.020 --> 12:13.250
+How many files?
+
+146
+12:14.330 --> 12:17.840
+And then based on the information, you can decide what to do with this user.
+
+147
+12:19.620 --> 12:24.750
+If you do lsof -u aws, we don't see anything because that user is not logged in.
+
+148
+12:26.280 --> 12:31.200
+That's also one more way to find out what user is logged in and doing what.
+
+149
+12:32.220 --> 12:33.660
+Really useful command.
+
+150
+12:34.620 --> 12:42.030
+OK, now let's talk about deleting the user so you can use usedel command to delete a user and you
+
+151
+12:42.030 --> 12:45.850
+give a user name, let's say, aws, so it will just delete the user.
+
+152
+12:45.870 --> 12:51.120
+But if you see its home dir will still exist and it's mailing spool will also exist.
+
+153
+12:51.660 --> 12:56.700
+If you want to delete a user with its home directory also, then you use -r
+
+154
+12:57.300 --> 13:03.810
+So I say userdel -r jenkins and now you should see the home directories also gone.
+
+155
+13:04.680 --> 13:09.750
+You can also delete the group by using groupdel command and you give the groupname devops
+
+156
+13:10.950 --> 13:12.060
+The group got deleted.
+
+157
+13:13.800 --> 13:18.930
+OK, so you have seen some user operations now, but it will be really more effective when you see it
+
+158
+13:18.930 --> 13:24.270
+with file permissions and sudo, then you will understand its real uses.
+
+159
+13:24.270 --> 13:26.190
+As of now, just practice this.
+
+160
+13:26.190 --> 13:28.470
+How to add user, remove user and group.
+
+161
+13:29.070 --> 13:36.390
+I will remove the ansible user also, but I have to also remove the home dir
+
+162
+13:38.120 --> 13:42.220
+Of aws user, rm -rf /home/aws
+
+163
+13:44.390 --> 13:50.900
+As usual, run the history command to see the commands that you have executed and you can practice it
+
+164
+13:50.900 --> 13:51.260
+again.

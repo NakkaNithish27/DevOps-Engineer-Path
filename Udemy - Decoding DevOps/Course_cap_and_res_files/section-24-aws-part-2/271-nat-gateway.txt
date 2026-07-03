@@ -1,0 +1,352 @@
+WEBVTT
+
+00:00.727 --> 00:01.961
+Instructor: Alright, so, so far,
+
+00:01.961 --> 00:05.250
+whatever we have created is free of cost.
+
+00:05.250 --> 00:08.182
+We're not going to get any bill for this, but now,
+
+00:08.182 --> 00:13.182
+we are going to create a NAT Gateway, and that is not free.
+
+00:14.640 --> 00:17.511
+So if you want to take a break, take it now.
+
+00:17.511 --> 00:20.190
+Once you start with NAT Gateway,
+
+00:20.190 --> 00:24.028
+you have to go until you finish this entire VPC.
+
+00:24.028 --> 00:25.450
+Complete all the lecture
+
+00:25.450 --> 00:28.590
+and then we are going to do the cleanup.
+
+00:28.590 --> 00:30.131
+So if you have the time, continue
+
+00:30.131 --> 00:32.569
+with me or else take a break
+
+00:32.569 --> 00:36.655
+and come back when you have enough time to complete the rest
+
+00:36.655 --> 00:39.813
+of this lectures on VPC.
+
+00:41.550 --> 00:43.798
+Okay, so before we go to the NAT gateway,
+
+00:43.798 --> 00:45.810
+we have to go to elastic IPs.
+
+00:45.810 --> 00:48.772
+We need to create one elastic IP that will be associated
+
+00:48.772 --> 00:50.100
+with the NAT gateway.
+
+00:50.100 --> 00:52.169
+NAT gateway will have a static public IP,
+
+00:52.169 --> 00:56.434
+and that is how the NAT gateway connects to the internet.
+
+00:56.434 --> 01:01.020
+To connect to internet, you need to have a public IP.
+
+01:01.020 --> 01:04.198
+It can be static or dynamic, but in our case,
+
+01:04.198 --> 01:05.792
+this entire VPC network is controlled
+
+01:05.792 --> 01:09.630
+by us and we are not locating dynamic IPs.
+
+01:09.630 --> 01:13.860
+We are locating a elastic IP, which is a static public IP.
+
+01:13.860 --> 01:16.727
+So click on locate elastic IP address,
+
+01:16.727 --> 01:21.310
+and let's give it a tag, a name tag.
+
+01:21.310 --> 01:26.097
+I'll say vprofile hyphen NAT hyphen Elastic IP.
+
+01:26.097 --> 01:29.404
+So easy to identify when you want to detach or remove this.
+
+01:29.404 --> 01:30.633
+Allocate.
+
+01:31.763 --> 01:32.640
+That's all.
+
+01:32.640 --> 01:35.310
+You just need to create the elastic IP.
+
+01:35.310 --> 01:37.585
+We are going to attach it in the NAT Gateway.
+
+01:37.585 --> 01:39.543
+Go to the NAT Gateways now.
+
+01:40.402 --> 01:42.813
+Click on Create NAT Gateway.
+
+01:45.060 --> 01:49.716
+We'll name it as vpro hyphen NAT hyphen Gateway.
+
+01:49.716 --> 01:51.300
+Selecting the subnet.
+
+01:51.300 --> 01:52.133
+This is crucial.
+
+01:52.133 --> 01:56.031
+Now, NAT Gateway serves the private subnet,
+
+01:56.031 --> 02:00.623
+but it needs to stay in the public subnet so it can connect
+
+02:00.623 --> 02:04.677
+to the internet through the internet gateway.
+
+02:04.677 --> 02:07.951
+Once again, NAT Gateway lives in the public subnet
+
+02:07.951 --> 02:11.910
+and it connects the internet through the internet gateway.
+
+02:11.910 --> 02:16.230
+So NAT Gateway will be always placed in the public subnet.
+
+02:16.230 --> 02:19.963
+So place it in public subnet one, sorry, not this one.
+
+02:19.963 --> 02:21.150
+Vpro public subnet one.
+
+02:21.150 --> 02:24.303
+Make sure you place it in other right subnet.
+
+02:26.190 --> 02:28.260
+You can place it in public Subnet one or two,
+
+02:28.260 --> 02:29.093
+does not matter
+
+02:29.093 --> 02:31.796
+because we are just creating one NAT gateway.
+
+02:31.796 --> 02:36.330
+And let's associate elastic IP that we created earlier.
+
+02:36.330 --> 02:38.610
+If you have not created, you can create it from Hero.
+
+02:38.610 --> 02:40.300
+So you can click on allocate elastic IP.
+
+02:40.300 --> 02:42.847
+It'll create, and then you can select it.
+
+02:42.847 --> 02:43.680
+Okay, that's all.
+
+02:43.680 --> 02:44.700
+It's pretty simple.
+
+02:44.700 --> 02:46.893
+Then click on Create NAT Gateway.
+
+02:48.202 --> 02:51.540
+Okay, it'll take some time to create the NAT gateway.
+
+02:51.540 --> 02:52.373
+The state is pending.
+
+02:52.373 --> 02:56.163
+It'll become available in few minutes.
+
+02:56.163 --> 02:58.569
+By the time it is getting created, let's not waste time.
+
+02:58.569 --> 03:00.480
+Let's go to the route table.
+
+03:00.480 --> 03:04.260
+Create the route table for the private subnet
+
+03:04.260 --> 03:06.090
+and attach it to the NAT gateway.
+
+03:06.090 --> 03:09.213
+So go to route tables, click on create route table.
+
+03:10.440 --> 03:11.273
+Let's give it a name
+
+03:11.273 --> 03:13.410
+with vpro hyphen private hyphen route table.
+
+03:13.410 --> 03:18.410
+Select our V profile VPC and click on create route table.
+
+03:20.065 --> 03:23.490
+Okay, let's do the subnet associations first.
+
+03:23.490 --> 03:26.709
+Go to subnet associations, edit subnet associations,
+
+03:26.709 --> 03:29.614
+and make sure you select the private subnet,
+
+03:29.614 --> 03:32.361
+two private subnets.
+
+03:32.361 --> 03:33.961
+Save.
+
+03:33.961 --> 03:35.553
+Go to the route.
+
+03:37.058 --> 03:38.223
+Add route.
+
+03:39.660 --> 03:41.265
+And all the traffic that doesn't belong
+
+03:41.265 --> 03:45.213
+to the local goes to the NAT Gateway.
+
+03:45.213 --> 03:49.574
+And this rule makes your private subnet private
+
+03:49.574 --> 03:53.670
+because the traffic is routed through the NAT Gateway.
+
+03:53.670 --> 03:54.813
+Save changes.
+
+03:55.710 --> 03:57.665
+Let's take a look at the NAT Gateway.
+
+03:57.665 --> 03:59.310
+It's status.
+
+03:59.310 --> 04:00.398
+You see that?
+
+04:00.398 --> 04:02.853
+It's in available state now.
+
+04:04.590 --> 04:08.670
+Okay, so we again have now a fully functional subnet.
+
+04:08.670 --> 04:12.020
+This is, these are the two private subnets now, right?
+
+04:12.020 --> 04:13.923
+Let's go to the subnets.
+
+04:15.630 --> 04:17.957
+So now we can even start using this public
+
+04:17.957 --> 04:19.584
+and private subnet both.
+
+04:19.584 --> 04:23.070
+The instances that you launch in these subnets.
+
+04:23.070 --> 04:24.870
+We get the IP,
+
+04:24.870 --> 04:29.128
+private IP for all the instance you launch in any subnet
+
+04:29.128 --> 04:32.482
+and public IP you will get when you launch the instance
+
+04:32.482 --> 04:33.713
+in the public subnet,
+
+04:33.713 --> 04:38.409
+but the public IP only and private IP only, no names.
+
+04:38.409 --> 04:40.020
+When we launch instance,
+
+04:40.020 --> 04:43.945
+we also see we get a DNS host name, EC2 hyphen something,
+
+04:43.945 --> 04:45.300
+something, something, right?
+
+04:45.300 --> 04:46.652
+172 hyphen hyphen.
+
+04:46.652 --> 04:49.590
+For public and private, we both get host names,
+
+04:49.590 --> 04:51.990
+but that is not by default.
+
+04:51.990 --> 04:53.375
+So we have to enable that.
+
+04:53.375 --> 04:55.230
+Go to your VPC,
+
+04:55.230 --> 05:00.230
+find your VPC action, edit VPC settings,
+
+05:00.325 --> 05:04.020
+scroll down and say Enable DNS host names.
+
+05:04.020 --> 05:06.445
+So the instances will also get the host names
+
+05:06.445 --> 05:11.445
+along with the IPs, public or private both, and say save.
+
+05:15.720 --> 05:17.520
+Alright, so as per the architectural diagram,
+
+05:17.520 --> 05:19.170
+we have created VPC.
+
+05:19.170 --> 05:21.210
+We have created four zones, sorry,
+
+05:21.210 --> 05:23.280
+four subnets to public to private.
+
+05:23.280 --> 05:24.113
+We have internet gateway
+
+05:24.113 --> 05:27.150
+and NAT Gateway connected through the route tables.
+
+05:27.150 --> 05:30.900
+In the next lecture, we will start using this VPC.
+
+05:30.900 --> 05:32.820
+We will create bastion host instances
+
+05:32.820 --> 05:35.190
+in the private subnets and even the load balancer
+
+05:35.190 --> 05:38.009
+and see how this entire setup works for us.
+
+05:38.009 --> 05:39.933
+So see you in the next lecture.

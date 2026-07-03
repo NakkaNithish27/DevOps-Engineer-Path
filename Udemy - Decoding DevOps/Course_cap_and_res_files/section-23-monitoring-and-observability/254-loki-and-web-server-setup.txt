@@ -1,0 +1,1102 @@
+WEBVTT
+
+00:00.360 --> 00:00.880
+All right.
+
+00:00.880 --> 00:03.800
+So we have set up Grafana and Prometheus.
+
+00:03.800 --> 00:08.080
+Now it's time to set up Loki and the web application server.
+
+00:08.600 --> 00:11.160
+Let's take a look at the Loki setup script.
+
+00:11.640 --> 00:17.040
+Loki is our log aggregation server, so it's setup is similar to Prometheus.
+
+00:17.080 --> 00:22.200
+We download the binary, we extract it, we set up the systemd file and start and enable Loki.
+
+00:22.680 --> 00:24.040
+So Loki version.
+
+00:24.160 --> 00:28.120
+So some variables that we are setting first is Loki version the download URL.
+
+00:28.120 --> 00:29.160
+This is from GitHub.
+
+00:29.480 --> 00:32.680
+And once we download we get this zip file with this name.
+
+00:33.200 --> 00:36.160
+When you extract, you get a binary file with this name.
+
+00:36.560 --> 00:39.440
+So setting all this as a variable which we can use in our script.
+
+00:39.800 --> 00:44.920
+It's a temporary folder that we are setting where we are going to download all this configuration directory.
+
+00:44.920 --> 00:47.640
+So HTC Loki is the configuration directory.
+
+00:47.680 --> 00:49.760
+Data will be stored at var lib.
+
+00:49.800 --> 00:53.080
+Loki binaries will be in usr local bin.
+
+00:53.600 --> 00:58.200
+And this is the service file which will help us enable systemctl service.
+
+00:58.640 --> 01:01.120
+So again similar process we set the directory.
+
+01:01.160 --> 01:02.610
+We go into that directory.
+
+01:02.850 --> 01:05.770
+We're installing unzip first, then we download Loki.
+
+01:05.810 --> 01:11.050
+We unzip it, we move the binary to usr local bin with the name Loki.
+
+01:11.730 --> 01:16.330
+We give this binary file executable permission and then you can run the Loki command.
+
+01:16.370 --> 01:17.090
+Loki hyphen.
+
+01:17.090 --> 01:19.890
+Hyphen version should tell you the version of Loki.
+
+01:20.290 --> 01:21.250
+So that's the binary.
+
+01:21.250 --> 01:22.890
+We need to run it through systemctl.
+
+01:22.890 --> 01:25.370
+So we need to set up Loki user.
+
+01:25.410 --> 01:26.010
+We need to.
+
+01:26.530 --> 01:26.730
+Yeah.
+
+01:26.770 --> 01:29.210
+First this the group, we create the Loki group.
+
+01:29.210 --> 01:30.730
+Then we create the Loki user.
+
+01:30.730 --> 01:36.490
+Add it in Loki Group, we're creating two folders in the data directory chunks and rules.
+
+01:37.090 --> 01:40.850
+We give data directory ownership of Loki User and Loki group.
+
+01:41.130 --> 01:43.450
+We create the configuration folder, etc..
+
+01:43.490 --> 01:43.930
+Loki.
+
+01:44.490 --> 01:47.810
+And in that folder we create this file config.yml.
+
+01:47.850 --> 01:49.890
+This will be the Loki's configuration.
+
+01:49.930 --> 01:53.970
+You don't need to understand anything for now, except few things like it's going to be running on port
+
+01:54.010 --> 01:55.010
+3100.
+
+01:55.050 --> 01:56.610
+We're going to take a look at Loki.
+
+01:56.850 --> 02:00.690
+When we do log aggregation in detail, we'll take a look at this configuration.
+
+02:00.930 --> 02:05.820
+So that's the configuration file of Loki, and the configuration directory also should have ownership
+
+02:05.820 --> 02:07.700
+of Loki user and Loki group.
+
+02:08.100 --> 02:10.140
+Then we set up the systemctl file.
+
+02:10.140 --> 02:11.100
+So Execstart.
+
+02:11.140 --> 02:15.420
+You see here is the binary path and the configuration path mentioned over here.
+
+02:16.100 --> 02:18.580
+Once we do this we are allowing firewall.
+
+02:18.580 --> 02:21.700
+Rule 3100 is the Ubuntu Firewall.
+
+02:21.700 --> 02:27.460
+UFW allow 3100 systemctl daemon reload, enable and start Loki.
+
+02:27.940 --> 02:34.860
+Now once you start Loki, after a few minutes, if you run this command, you should get output as ready.
+
+02:35.540 --> 02:41.420
+If you get that Loki is running and this command should give you the metrics for Loki.
+
+02:42.140 --> 02:45.180
+We're dropping this query from here and we'll see the output.
+
+02:45.380 --> 02:47.460
+So once we run the script, we can see the output.
+
+02:47.860 --> 02:50.060
+So first let's launch the EC2 instance.
+
+02:50.060 --> 02:54.340
+I'm going to say launch instance naming it as Loki Server Ubuntu.
+
+02:55.780 --> 03:02.940
+Make sure the instance type is T2 micro same key pair network setting edit create the security group
+
+03:02.940 --> 03:03.870
+for Loki.
+
+03:04.230 --> 03:09.270
+So Loki, hyphen, SG and same name in the description I'm giving.
+
+03:09.870 --> 03:14.110
+And the security group rule 22 from my IP so we can ssh.
+
+03:14.830 --> 03:18.110
+So Loki is going to run on port 3100.
+
+03:18.150 --> 03:22.150
+We need to allow this port from our application or web server.
+
+03:22.430 --> 03:24.190
+So it can push logs.
+
+03:24.230 --> 03:28.910
+Alloy should be able to push the log to Loki on port 3100.
+
+03:29.270 --> 03:34.510
+So 3100 allowed from our web server and 3100 allowed from Grafana.
+
+03:34.510 --> 03:36.510
+So we do not have our web server yet.
+
+03:37.110 --> 03:42.430
+So for now I'm just going to say 3100 allowed from anywhere.
+
+03:43.750 --> 03:45.670
+Definitely not production use case.
+
+03:45.710 --> 03:51.070
+We are going to change that later anyways, but for now just keep 3100 allowed from anywhere and say
+
+03:51.070 --> 04:00.350
+launch instance once you see Loki running as such to it as such, hyphen I key path one two at the rate
+
+04:00.350 --> 04:01.750
+the public IP of Loki.
+
+04:04.040 --> 04:07.840
+Switch to root user sudo hyphen I oops.
+
+04:08.000 --> 04:08.960
+Sudo hyphen I.
+
+04:09.560 --> 04:13.280
+Clear the screen and let's download the setup script.
+
+04:13.400 --> 04:15.760
+So go to GitHub to our project repository.
+
+04:15.760 --> 04:18.440
+Switch to monitoring branch locate setup script.
+
+04:18.880 --> 04:19.800
+Click on raw.
+
+04:21.120 --> 04:25.440
+Get this link wget and paste this link.
+
+04:25.480 --> 04:26.400
+Shift insert.
+
+04:27.440 --> 04:28.920
+Make this executable.
+
+04:31.080 --> 04:32.640
+And let's run this.
+
+04:34.920 --> 04:42.480
+So here it is going to wait for one 20s that much I have seen, it takes time to make the service ready
+
+04:42.480 --> 04:44.200
+but it could take little longer also.
+
+04:44.200 --> 04:45.560
+Anyways, let's wait and see.
+
+04:46.880 --> 04:50.200
+Okay, it completed but it still says Ingestor is not ready.
+
+04:50.960 --> 04:51.880
+Let's take a look.
+
+04:53.320 --> 04:55.040
+So let's take a look at that command.
+
+04:55.160 --> 04:56.360
+Let's run it once again.
+
+05:00.680 --> 05:01.680
+And now it's ready.
+
+05:02.120 --> 05:04.040
+It takes more than one 20s.
+
+05:04.040 --> 05:06.370
+Maybe you can set it for one 80s.
+
+05:06.610 --> 05:08.290
+We can also check Loki version.
+
+05:08.290 --> 05:09.090
+Loki hyphen.
+
+05:09.090 --> 05:10.090
+Hyphen version.
+
+05:11.370 --> 05:14.570
+Okay, so here we can confirm Loki is set up and running.
+
+05:15.050 --> 05:16.690
+We can shut down this EC2 instance.
+
+05:16.690 --> 05:19.050
+Let's move on to the web application server now.
+
+05:22.090 --> 05:22.370
+Okay.
+
+05:22.370 --> 05:23.570
+So once again come to GitHub.
+
+05:23.570 --> 05:24.890
+Go to monitoring branch.
+
+05:24.890 --> 05:28.170
+Here you have a script web node setup dot ssh.
+
+05:28.610 --> 05:29.650
+Now this is pretty long.
+
+05:29.650 --> 05:36.690
+But most of the things are not relevant to monitoring stack here except the node exporter and alloy.
+
+05:37.370 --> 05:40.730
+The other things are just to generate metrics and logs.
+
+05:40.730 --> 05:42.130
+So we can monitor.
+
+05:42.130 --> 05:48.050
+We can do log aggregation like I have set up a Titan application just to name that I have given.
+
+05:48.050 --> 05:54.610
+I just fetched a template from 2.com, and I am hosting it on a Python flask app, which is also generating
+
+05:54.610 --> 05:55.090
+metrics.
+
+05:55.090 --> 06:00.210
+So application metrics also we have we also have the system metrics through node exporter.
+
+06:00.690 --> 06:04.370
+Then we are running some script that is going to generate log files.
+
+06:04.890 --> 06:08.050
+So alloy can push these logs to Loki.
+
+06:08.570 --> 06:10.090
+So let's take a look at the script.
+
+06:10.530 --> 06:11.650
+So this is a log script.
+
+06:11.690 --> 06:12.410
+Please do not worry.
+
+06:12.410 --> 06:16.450
+Most of the things are just relevant to generating metrics and logs.
+
+06:16.690 --> 06:21.210
+Only node, exporter and alloy is the thing that will be relevant to the monitoring stack.
+
+06:21.410 --> 06:23.170
+So first basic system setup.
+
+06:23.170 --> 06:24.090
+Let's take a look.
+
+06:24.090 --> 06:28.690
+So we are setting up hostname over here apt update apt upgrade.
+
+06:28.690 --> 06:33.850
+We install zip, unzip and stress a tool that we are going to use to stress our system.
+
+06:34.250 --> 06:35.650
+So we get some metrics.
+
+06:35.890 --> 06:41.770
+Now here we are installing node exporter Prometheus node exporter and same story.
+
+06:41.810 --> 06:47.930
+We are going to download the binary, unzip it, set up the service file for it system file with the
+
+06:47.930 --> 06:48.290
+user.
+
+06:48.290 --> 06:50.850
+Of course the user is going to be Prometheus.
+
+06:50.850 --> 06:56.090
+Group is Prometheus var lib node is the folder where it is going to store the data.
+
+06:56.890 --> 06:58.690
+So that is node exporter exec.
+
+06:58.690 --> 07:00.810
+Start just running.
+
+07:00.810 --> 07:06.050
+This binary will start exposing the metrics the system metrics CPU memory disk.
+
+07:06.780 --> 07:09.740
+So we start and enable node.
+
+07:09.780 --> 07:11.300
+The service name will be node.
+
+07:11.340 --> 07:15.060
+Node because that is the name of our service file node.
+
+07:15.540 --> 07:15.860
+Okay.
+
+07:15.860 --> 07:17.500
+That sets up node exporter.
+
+07:17.980 --> 07:21.380
+Again you can check that in the Prometheus download section.
+
+07:21.780 --> 07:26.460
+You have here node exporter Linux amd64.
+
+07:27.020 --> 07:28.700
+So we just extract this binary.
+
+07:28.740 --> 07:30.500
+It has just this binary.
+
+07:30.500 --> 07:31.100
+That's it.
+
+07:31.420 --> 07:33.100
+The zip file will have just this binary.
+
+07:33.140 --> 07:35.060
+We are running this binary as a service.
+
+07:35.060 --> 07:35.660
+Simple.
+
+07:36.100 --> 07:37.420
+So that's node exporter.
+
+07:37.460 --> 07:43.420
+Now this Titan app, the name that I have given because the template of 2.com is Titan.
+
+07:43.940 --> 07:46.900
+This I'm hosting it as a Python flask application.
+
+07:46.900 --> 07:49.780
+So only if you're interested in this you can take a look.
+
+07:49.820 --> 07:51.980
+Otherwise you can simply skip it in real time.
+
+07:51.980 --> 07:56.260
+You will have real applications that is going to generate metrics and logs.
+
+07:56.580 --> 07:56.860
+All right.
+
+07:56.860 --> 07:57.820
+But if you're interested.
+
+07:57.820 --> 08:05.300
+So we install Python Python three which will be installed in ubuntu 24 Python virtual environment.
+
+08:05.740 --> 08:12.670
+We clone our repository code of profile project repository, and we switch to monitoring branch after
+
+08:12.670 --> 08:14.310
+we switch to monitoring branch.
+
+08:14.510 --> 08:18.350
+And this will have a folder called Titan here.
+
+08:18.550 --> 08:24.390
+So we create a folder of Titan and move this Titan folder all the content to opt Titan folder.
+
+08:24.670 --> 08:25.750
+Here I can show you better.
+
+08:25.750 --> 08:27.150
+So this is the Titan folder.
+
+08:27.670 --> 08:31.590
+So in this we have this template from two play.com.
+
+08:32.150 --> 08:35.710
+And one more HTML file that I created is a payment link.
+
+08:35.990 --> 08:40.990
+Nothing fancy, just the page and the JavaScript CSS from play.com.
+
+08:41.190 --> 08:42.950
+This is the main file App.py.
+
+08:43.390 --> 08:47.150
+If you're interested in Python flask application, you can take a look over here.
+
+08:47.510 --> 08:49.590
+This is to create logs.
+
+08:49.950 --> 08:53.110
+This is also going to generate logs and some metrics.
+
+08:53.470 --> 08:59.430
+So we're hosting the two Play.com template here and the payment HTML file here.
+
+08:59.430 --> 09:01.990
+This is the routing rule and metrics.
+
+09:02.270 --> 09:05.550
+This is where we exposes the metrics of the application.
+
+09:05.870 --> 09:08.190
+And we run it on port 5000.
+
+09:10.200 --> 09:11.800
+So that's what we are doing in this script.
+
+09:11.800 --> 09:14.080
+We are hosting it as a Python application.
+
+09:14.080 --> 09:20.080
+We activate the Python virtual environment, install some dependencies and just execute.
+
+09:20.080 --> 09:21.160
+Permission to this.
+
+09:21.480 --> 09:25.000
+Now we can simply run this Python three app.py.
+
+09:25.040 --> 09:30.120
+We can run this, but we run everything as a service because we are DevOps, we should manage everything
+
+09:30.160 --> 09:30.960
+as a service.
+
+09:30.960 --> 09:32.640
+So again same thing.
+
+09:33.120 --> 09:36.040
+We are creating a system file for Python application.
+
+09:36.280 --> 09:40.960
+That's the command that will be running when we run systemctl start Titan.
+
+09:41.320 --> 09:43.560
+This is the path it is going to run.
+
+09:43.880 --> 09:48.640
+So again it's not much related to the monitoring stack just some application.
+
+09:49.440 --> 09:51.720
+Now load generation script we are running two.
+
+09:51.760 --> 09:53.320
+So we're going to run two script over here.
+
+09:53.320 --> 09:56.680
+One is load dot and another is generate multi logs.
+
+09:57.200 --> 10:00.400
+This is going to use the stress command and stress our system.
+
+10:00.400 --> 10:04.440
+So we get some metrics on CPU and even disk IO.
+
+10:05.040 --> 10:09.730
+And this script is going to generate logs in var log Titan folder.
+
+10:10.130 --> 10:11.930
+So we download this script and we run it.
+
+10:11.930 --> 10:14.410
+If you are interested you can take a look at this script.
+
+10:14.690 --> 10:16.450
+So this is load dot s h.
+
+10:16.930 --> 10:19.930
+So a script that runs a while loop that runs continuously.
+
+10:19.930 --> 10:20.570
+While true.
+
+10:20.890 --> 10:22.170
+So this is the stress command.
+
+10:22.170 --> 10:22.730
+It is running.
+
+10:22.730 --> 10:25.490
+And it's going to be doing it in random duration.
+
+10:25.490 --> 10:27.890
+So we can see spikes going up and down.
+
+10:28.250 --> 10:29.610
+And CPU worker.
+
+10:29.650 --> 10:32.890
+The number of CPUs that needs to stress will be also random.
+
+10:32.890 --> 10:36.410
+So we see the proper graph that we can use it as a metric.
+
+10:36.770 --> 10:39.010
+And then the generate multi logs.
+
+10:40.050 --> 10:43.010
+So it's going to create this folder var log Titan.
+
+10:43.010 --> 10:47.130
+And store some fake logs into these three files.
+
+10:47.170 --> 10:50.370
+App one dot log app two dot log app three dot log.
+
+10:50.930 --> 10:52.130
+So do not panic.
+
+10:52.370 --> 10:55.890
+I have created this script by using GitHub copilot.
+
+10:56.210 --> 11:03.210
+Of course I made many changes, but the ultimate aim was to, you know, have some log files which we
+
+11:03.250 --> 11:05.970
+can fetch and display on Grafana.
+
+11:06.530 --> 11:11.580
+So once again not part of monitoring stack, but you need to have some log files, some load, so we
+
+11:11.580 --> 11:14.700
+can scrape them and visualize it in Grafana.
+
+11:15.180 --> 11:15.460
+Okay.
+
+11:15.460 --> 11:18.100
+Now here we are configuring an alloy.
+
+11:18.580 --> 11:21.100
+Alloy is the agent like we have node exporter.
+
+11:21.100 --> 11:23.180
+As an agent that exposes metrics.
+
+11:23.620 --> 11:27.620
+Alloy can expose metrics and push logs to Loki.
+
+11:28.020 --> 11:31.340
+Installation is pretty simple, just apt install alloy.
+
+11:31.380 --> 11:35.180
+We need to of course set the alloy repository.
+
+11:35.180 --> 11:35.540
+This.
+
+11:35.540 --> 11:38.380
+All these commands are from the alloy documentation directly.
+
+11:38.820 --> 11:41.540
+Alloy configuration will be at this path etc..
+
+11:41.580 --> 11:43.260
+Alloy config dot alloy.
+
+11:43.980 --> 11:48.540
+And we're going to take a look at this configuration later when we do log aggregation.
+
+11:48.540 --> 11:53.060
+But few things you need to know because you need to change these IP addresses.
+
+11:53.660 --> 11:56.460
+The Prometheus IP you need to mention over here.
+
+11:56.940 --> 12:00.940
+This is where alloy is going to push the metrics to Prometheus.
+
+12:01.460 --> 12:05.220
+And our flask app is exposing metrics over here.
+
+12:05.260 --> 12:07.660
+Slash metrics on port 5000.
+
+12:08.020 --> 12:09.660
+So this you can leave as it is.
+
+12:09.660 --> 12:14.430
+No need to change anything over here, because locally itself, it is going to get the metrics from
+
+12:14.430 --> 12:17.790
+the Titan Flask app and expose it at slash metrics.
+
+12:18.550 --> 12:21.230
+This for default metrics here.
+
+12:21.270 --> 12:25.630
+Actually we should have the port number 9100 the node exporter.
+
+12:25.630 --> 12:27.350
+But anyways we'll change that later.
+
+12:28.190 --> 12:31.190
+For the log it's going to push to the Loki.
+
+12:31.190 --> 12:33.310
+So mention Loki Private IP over here.
+
+12:33.310 --> 12:36.190
+We're going to download the script and mention these IP addresses.
+
+12:36.550 --> 12:41.790
+So once we download this script in the EC2 instance we'll update this and then we'll run this.
+
+12:42.190 --> 12:48.550
+So alloy also has a web page which you can access and see the health of logs and metrics whether it's
+
+12:48.550 --> 12:49.510
+pushing or not.
+
+12:49.870 --> 12:52.830
+And by default it runs on port 123, four, five.
+
+12:53.390 --> 12:56.030
+And by default it listens only on local.
+
+12:56.030 --> 13:02.510
+So if you want to access it from the browser on EC2 instance, you need to mention this setting in etc..
+
+13:02.550 --> 13:04.870
+Default alloy configuration file.
+
+13:05.070 --> 13:09.990
+You need to add this argument server listen address 0.0.0.
+
+13:09.990 --> 13:14.440
+That means listens on any IP on port one, two, three, four, five.
+
+13:14.920 --> 13:17.000
+And then we simply restart alloy.
+
+13:17.400 --> 13:22.600
+So once again if we check alloy we are just installing alloy from the repository.
+
+13:22.640 --> 13:23.800
+APT install alloy.
+
+13:24.040 --> 13:29.240
+But we are making the configuration changes with these two files and restart alloy.
+
+13:29.240 --> 13:32.160
+So that will set alloy and then the firewall.
+
+13:32.160 --> 13:35.400
+Rule 22 for my IP 9100.
+
+13:35.480 --> 13:44.000
+This is for the node exporter which is going to expose the metrics 3100 for Loki is actually not required
+
+13:44.000 --> 13:47.400
+because we are going to push it to Loki, not the other way around.
+
+13:47.400 --> 13:48.960
+So this is not really required.
+
+13:49.280 --> 13:50.240
+Port 5000.
+
+13:50.280 --> 13:55.560
+The Titan app is going to listen on port 5000 and alloy port 12345.
+
+13:56.080 --> 13:59.640
+Yeah, I know developer should have got little more creative with the port number.
+
+13:59.960 --> 14:01.680
+But anyways, let's keep the default.
+
+14:02.280 --> 14:06.000
+So once again we are going to set up the application server on EC2.
+
+14:06.040 --> 14:09.960
+So there will be Titan app, there will be node exporter and there will be alloy.
+
+14:10.240 --> 14:14.650
+And we are running some script in the background to generate logs and generate fake load.
+
+14:15.090 --> 14:16.450
+So let's set this up.
+
+14:17.050 --> 14:18.090
+So launch instance.
+
+14:18.330 --> 14:29.330
+Let's name it as simply web zero one ubuntu 24 T2 micro instance type same key pair security group.
+
+14:29.330 --> 14:36.570
+Click on edit naming it as web hyphen SG 22 from my IP so we can SSH.
+
+14:37.210 --> 14:41.450
+It's running the application on port 5000.
+
+14:41.690 --> 14:43.610
+So 5000 from my IP.
+
+14:44.050 --> 14:46.210
+And Prometheus is going to scrape it.
+
+14:46.210 --> 14:49.530
+So 5000 allowed from Prometheus.
+
+14:50.250 --> 14:55.610
+So Prometheus Security Group Prometheus Security group.
+
+14:55.810 --> 15:01.890
+And the description Prometheus not scaring scraping I know it's scaring now, but don't worry.
+
+15:01.930 --> 15:04.090
+We're going to fix that by learning it.
+
+15:04.090 --> 15:04.930
+By knowing it.
+
+15:05.410 --> 15:06.010
+Okay then.
+
+15:06.010 --> 15:13.010
+Node exporter port 9100 so Prometheus can scrape it 9100.
+
+15:13.010 --> 15:13.100
+Zero.
+
+15:13.140 --> 15:15.100
+Now we also want to see it from the browser.
+
+15:15.100 --> 15:16.700
+So we're going to do my IP.
+
+15:17.100 --> 15:27.620
+And then once again 9100 from Prometheus source Prometheus security group Prometheus keyring.
+
+15:27.620 --> 15:30.660
+Sorry, scraping so low key.
+
+15:30.700 --> 15:35.820
+We don't need to do anything because low key we are going to push the logs to low key right on port
+
+15:35.860 --> 15:36.860
+3100.
+
+15:36.900 --> 15:39.860
+We push it to low key so we don't need to add anything over here.
+
+15:40.140 --> 15:40.780
+This should be it.
+
+15:40.780 --> 15:41.780
+Let's launch it.
+
+15:44.540 --> 15:44.780
+Okay.
+
+15:44.820 --> 15:45.740
+It's in running status.
+
+15:45.740 --> 15:53.420
+Now let me copy the public IP and ssh ssh hyphen a key path ubuntu at the rate the public IP of web
+
+15:53.420 --> 15:53.980
+server.
+
+15:56.580 --> 15:58.500
+Let's switch to root user.
+
+15:59.180 --> 16:00.300
+Clear the screen.
+
+16:00.660 --> 16:02.380
+Let's download the setup script.
+
+16:02.740 --> 16:07.540
+So go to monitoring branch web node setup script raw.
+
+16:08.100 --> 16:09.380
+Copy the endpoint.
+
+16:11.820 --> 16:14.460
+Wget and the URL shift insert.
+
+16:15.540 --> 16:17.060
+Let's make it executable.
+
+16:20.340 --> 16:21.620
+Now, before we run it.
+
+16:21.660 --> 16:23.260
+We need to change the IPS.
+
+16:23.900 --> 16:25.900
+So go to the alloy section.
+
+16:26.860 --> 16:27.100
+Right.
+
+16:27.100 --> 16:29.660
+This is where we are creating at this line number.
+
+16:30.060 --> 16:32.260
+Line number could change when I make the changes.
+
+16:32.460 --> 16:37.620
+So Prometheus endpoint here you need to give the private IP of Prometheus not the public IP.
+
+16:37.980 --> 16:42.900
+So go to insert mode and remove this section which says Prometheus IP.
+
+16:44.260 --> 16:47.460
+Oh get the private IP of Prometheus.
+
+16:47.980 --> 16:52.220
+So go to instances as the Prometheus.
+
+16:52.220 --> 16:52.740
+It's off.
+
+16:52.740 --> 16:57.100
+But we should have the private IP as the private IP of Prometheus.
+
+16:57.620 --> 16:59.340
+Okay, shift insert to paste.
+
+16:59.340 --> 17:00.860
+Make sure you make no mistakes.
+
+17:00.900 --> 17:05.060
+HTTP colon slash slash private IP colon 1990.
+
+17:05.420 --> 17:07.260
+Okay, let's get the low key private IP.
+
+17:07.260 --> 17:09.140
+Also go to low key.
+
+17:09.860 --> 17:11.340
+Make sure you select low key here.
+
+17:11.380 --> 17:12.980
+Get the private IP of low key.
+
+17:13.260 --> 17:17.750
+Sometimes you select the wrong instance, so make sure you selected correct instance.
+
+17:17.750 --> 17:19.150
+Low key private IP.
+
+17:19.710 --> 17:20.630
+Let's come down.
+
+17:20.630 --> 17:22.710
+We should find low key somewhere here.
+
+17:23.470 --> 17:23.910
+Aha.
+
+17:23.950 --> 17:24.670
+Found it.
+
+17:26.150 --> 17:26.430
+Oh.
+
+17:29.590 --> 17:30.550
+You had one job.
+
+17:30.750 --> 17:31.110
+Yes.
+
+17:31.110 --> 17:31.950
+You're right Loki.
+
+17:32.430 --> 17:33.550
+We'll do our job.
+
+17:33.550 --> 17:38.310
+We'll change this Loki IP string to the actual Loki IP.
+
+17:39.230 --> 17:41.070
+Make sure the syntax is correct.
+
+17:41.070 --> 17:45.590
+And save and quit this file and then run it.
+
+17:48.950 --> 17:51.870
+Okay, it took some time, but it got completed successfully.
+
+17:52.190 --> 17:53.950
+Let's take a look from the browser.
+
+17:54.390 --> 18:01.310
+So, web zero one IP, you exit on port 5000 and you should be able to see the Titan app.
+
+18:02.590 --> 18:08.390
+This is the template I got from two 8.com which I have hosted on Python flask app.
+
+18:08.390 --> 18:11.550
+And also one more page is slash payment.
+
+18:12.470 --> 18:15.800
+And also we are exposing Metrics.
+
+18:15.800 --> 18:18.760
+So 5000 slash metrics.
+
+18:18.760 --> 18:23.920
+This is the Titan application metrics, not the system metrics.
+
+18:24.400 --> 18:25.120
+You see here.
+
+18:25.160 --> 18:29.080
+This these metrics all related to HTTP.
+
+18:30.040 --> 18:38.240
+The node exporter metrics will be on port 9100 slash metrics.
+
+18:41.960 --> 18:42.280
+Yeah.
+
+18:42.280 --> 18:45.320
+This is the metrics exposed by the node exporter.
+
+18:45.720 --> 18:53.120
+So you can find here CPU disk all the system related metrics that Prometheus is going to scrape.
+
+18:53.600 --> 19:02.600
+Now also if you run siphon if grep load.sh you should see a script running in the background.
+
+19:02.600 --> 19:04.120
+This is running stress command.
+
+19:04.120 --> 19:07.240
+So if you run top command we should be able to see some load.
+
+19:07.240 --> 19:10.200
+Average CPU utilization is 50%.
+
+19:10.440 --> 19:11.080
+You see it's down.
+
+19:11.080 --> 19:12.960
+It's going to spike up and down.
+
+19:13.320 --> 19:14.880
+Now it's dead I think.
+
+19:14.880 --> 19:20.290
+So it's going to run the stress command and stress the load Q to quit from here, you can take a look
+
+19:20.290 --> 19:21.290
+for some time.
+
+19:22.450 --> 19:27.690
+And then we also have a script that generates logs if you generate.
+
+19:28.970 --> 19:29.170
+Okay.
+
+19:29.210 --> 19:30.530
+So that's the script.
+
+19:30.970 --> 19:36.930
+And this should be generating logs in var log log Titan.
+
+19:38.170 --> 19:38.690
+See here.
+
+19:38.690 --> 19:40.850
+App one log two log three log.
+
+19:40.890 --> 19:43.170
+Now these logs access error and info.
+
+19:43.210 --> 19:46.490
+This is created by the Titan Flask app.
+
+19:46.930 --> 19:49.890
+Now when we power off this this script are going to be dead.
+
+19:49.930 --> 19:52.010
+They're not going to come up when we power on again.
+
+19:52.050 --> 19:53.850
+We have to run them again later.
+
+19:54.090 --> 19:59.650
+But all those nice things in the later lecture, we are done here, we are going to shut down this instance
+
+20:00.410 --> 20:03.730
+of zero one instance state stop instance stop.
+
+20:04.130 --> 20:08.210
+Now remember, when you power on these instances it's public IP will change.
+
+20:08.690 --> 20:11.010
+And also your public IP might also change.
+
+20:11.010 --> 20:13.050
+So later you need to update the security group.
+
+20:13.050 --> 20:15.730
+Also we'll talk about all that in the next lecture.
+
+20:16.090 --> 20:18.090
+So wrap this up and join me in the next one.

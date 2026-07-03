@@ -1,0 +1,472 @@
+WEBVTT
+
+00:00.540 --> 00:01.530
+Instructor: Welcome.
+
+00:01.530 --> 00:05.370
+In this lecture we will see deployment
+
+00:05.370 --> 00:08.160
+of a microservice application.
+
+00:08.160 --> 00:09.903
+The name is EMart.
+
+00:11.100 --> 00:13.410
+This application was designed
+
+00:13.410 --> 00:15.693
+by using microservice architecture.
+
+00:17.430 --> 00:20.040
+In the front end you have an API Gateway
+
+00:20.040 --> 00:25.040
+created with nginx and this listens at three endpoints,
+
+00:25.860 --> 00:30.810
+root, slash api, slash web api.
+
+00:30.810 --> 00:33.450
+When the user access the URL of the website,
+
+00:33.450 --> 00:36.720
+it'll be redirected to root,
+
+00:36.720 --> 00:39.630
+which is an app written in Angular.
+
+00:39.630 --> 00:43.443
+This will give the front end also called client app.
+
+00:44.610 --> 00:48.780
+And this will in turn connect to slash api,
+
+00:48.780 --> 00:53.270
+which will be served by an application Mart api NodeJS.
+
+00:54.720 --> 00:58.440
+And it also needs MongoDB Database.
+
+00:58.440 --> 01:01.710
+And the MongoDB Database we are going to deploy
+
+01:01.710 --> 01:03.960
+as a container, but it could be
+
+01:03.960 --> 01:06.630
+an independent service running from a server
+
+01:06.630 --> 01:08.193
+or from any other endpoint.
+
+01:09.630 --> 01:13.380
+This application also has slash web api,
+
+01:13.380 --> 01:17.373
+which connects to an application, Books api,
+
+01:18.300 --> 01:21.810
+which is written in Java and this also needs a database,
+
+01:21.810 --> 01:23.733
+a MySQL Database.
+
+01:27.660 --> 01:30.390
+So all these apps that you see over here, nginx,
+
+01:30.390 --> 01:34.830
+Angular, NodeJS, Java, Mongo, MySQL,
+
+01:34.830 --> 01:37.530
+all these will be containers.
+
+01:37.530 --> 01:41.610
+EMart app represents an e-commerce application,
+
+01:41.610 --> 01:44.400
+like Amazon, Flipkart.
+
+01:44.400 --> 01:46.740
+And then application can start like this
+
+01:46.740 --> 01:51.510
+and you can keep adding more microservices
+
+01:51.510 --> 01:54.180
+like maybe another URL for videos,
+
+01:54.180 --> 01:58.800
+another URL for payment gateway, another URL for cart.
+
+02:00.510 --> 02:02.370
+So you see, it's very scalable
+
+02:02.370 --> 02:05.220
+from a developer point of view as well.
+
+02:05.220 --> 02:07.200
+So we'll see a brief introduction
+
+02:07.200 --> 02:12.200
+of how to set this up on our virtual machine.
+
+02:12.510 --> 02:14.550
+And it'll be similar how we have seen
+
+02:14.550 --> 02:18.270
+for vPro Profile Project, V Profile was monolithic,
+
+02:18.270 --> 02:20.073
+this is microservice.
+
+02:21.120 --> 02:23.190
+But from implementing point of view,
+
+02:23.190 --> 02:25.350
+we'll have a similar thing, we'll have Docker
+
+02:25.350 --> 02:27.180
+and we'll have Docker Compose.
+
+02:27.180 --> 02:28.983
+So let's take a look into that.
+
+02:30.120 --> 02:32.430
+Okay, so I'm going to use the same wagon file
+
+02:32.430 --> 02:34.890
+which was used in previous lecture,
+
+02:34.890 --> 02:39.890
+which for me is in F, container, intro, folder.
+
+02:43.980 --> 02:45.120
+You don't have this magnet file,
+
+02:45.120 --> 02:47.280
+go download it from the resource
+
+02:47.280 --> 02:48.510
+and place it into the folder.
+
+02:48.510 --> 02:50.610
+If you already have, you just need to bring it up.
+
+02:50.610 --> 02:55.610
+But before we bring up migrant global status,
+
+02:55.830 --> 02:57.633
+hyphen, hyphen, prune.
+
+02:59.610 --> 03:01.500
+Check if all the other VMs are powered off.
+
+03:01.500 --> 03:05.670
+If they are not, power them off and bring up the VM.
+
+03:05.670 --> 03:06.573
+Vagrant up.
+
+03:10.800 --> 03:13.054
+VM is up. Let's log in into that.
+
+03:13.054 --> 03:17.133
+Vagrant SSH and switch to root user.
+
+03:18.630 --> 03:20.740
+Now this one will be slightly different
+
+03:21.600 --> 03:23.820
+than a vPro Profile Project on containers.
+
+03:23.820 --> 03:25.650
+Here we are also going to build the image,
+
+03:25.650 --> 03:27.750
+but don't worry, it's just one command.
+
+03:27.750 --> 03:29.310
+Same command.
+
+03:29.310 --> 03:31.170
+Over here the Docker compose file
+
+03:31.170 --> 03:36.000
+is going to build the images and run containers from them.
+
+03:36.000 --> 03:38.163
+So we need the complete source code.
+
+03:40.950 --> 03:44.283
+Okay, this repository EMart app.
+
+03:46.920 --> 03:48.003
+Clone the URL.
+
+03:50.670 --> 03:53.733
+Git clone, shift, insert.
+
+03:55.720 --> 03:57.960
+Okay, you should have EMart app folder.
+
+03:57.960 --> 03:59.550
+Get into that.
+
+03:59.550 --> 04:01.260
+Do LS.
+
+04:01.260 --> 04:05.130
+And here you have a Docker compose dot YAML file.
+
+04:05.130 --> 04:06.610
+Let's open this file
+
+04:08.430 --> 04:12.120
+and you will see there is an extra step over here, build,
+
+04:12.120 --> 04:16.770
+which is going to build images from Docker files.
+
+04:16.770 --> 04:19.350
+Again, we will learn about this in detail later
+
+04:19.350 --> 04:22.080
+in Docker section, but just wanted to show you
+
+04:22.080 --> 04:25.080
+Docker compose can do this also, can build image,
+
+04:25.080 --> 04:26.700
+and then run containers from that.
+
+04:26.700 --> 04:28.740
+Or you can mention the image path,
+
+04:28.740 --> 04:31.980
+which is available in the Docker hub repository
+
+04:31.980 --> 04:35.580
+from where it can fetch and run, or it can build and run.
+
+04:35.580 --> 04:38.737
+So here we have a container called client api,
+
+04:39.777 --> 04:44.693
+web api, nginx, and eMongo, also EMart db.
+
+04:49.861 --> 04:51.643
+So let's come out of it.
+
+04:53.550 --> 04:58.443
+Check if there are any existing images or any container.
+
+04:59.370 --> 05:01.860
+There's nothing because in the previous lecture,
+
+05:01.860 --> 05:04.410
+if you remember, I have removed all the images
+
+05:04.410 --> 05:05.403
+and containers.
+
+05:06.330 --> 05:08.160
+Okay, so time to build and run.
+
+05:08.160 --> 05:11.673
+Same command, Docker compose up, hyphen D.
+
+05:12.870 --> 05:15.240
+Now this is going to take a very long time
+
+05:15.240 --> 05:17.310
+because it's going to build the images
+
+05:17.310 --> 05:19.620
+and there are no JS images over here
+
+05:19.620 --> 05:22.440
+and that takes long time to build.
+
+05:22.440 --> 05:23.760
+So you can run this command
+
+05:23.760 --> 05:26.100
+and if this fails for some reason,
+
+05:26.100 --> 05:29.820
+then you can do this also, Docker compose build first.
+
+05:29.820 --> 05:33.030
+And once this is completed, then you can see Docker compose
+
+05:33.030 --> 05:36.063
+up hyphen, sorry, up hyphen D.
+
+05:38.430 --> 05:40.140
+So I'm going to pause my screen
+
+05:40.140 --> 05:42.933
+and come back when this is completed.
+
+05:43.830 --> 05:45.540
+Okay, container seems to be running.
+
+05:45.540 --> 05:46.373
+Let me check.
+
+05:46.373 --> 05:49.353
+Docker, compose ps.
+
+05:51.240 --> 05:53.490
+So we have total six containers running.
+
+05:53.490 --> 05:56.100
+You can check Docker ps hyphen A.
+
+05:56.100 --> 05:57.840
+If you have any exited container.
+
+05:57.840 --> 05:59.850
+Sometimes for some reason the container
+
+05:59.850 --> 06:02.190
+will get exit into exit state.
+
+06:02.190 --> 06:04.950
+And don't worry, this composed file will handle it
+
+06:04.950 --> 06:07.740
+automatically if any container goes into exit state,
+
+06:07.740 --> 06:09.660
+it is going to restart those containers
+
+06:09.660 --> 06:11.370
+and make sure they run.
+
+06:11.370 --> 06:14.700
+So from the browser will be accessing this nginx container,
+
+06:14.700 --> 06:16.830
+that is running on port 80.
+
+06:16.830 --> 06:21.160
+So let's check the IP address of this VM
+
+06:26.850 --> 06:29.160
+and that's the IP address.
+
+06:29.160 --> 06:30.123
+Let's copy that.
+
+06:32.130 --> 06:33.490
+Let's go to a browser
+
+06:37.560 --> 06:40.560
+and we dial the port 80 which is not even necessary.
+
+06:40.560 --> 06:42.813
+That's the default port for HTTP.
+
+06:43.740 --> 06:48.740
+So it goes like this, HTTP colon slash slash, like that.
+
+06:52.020 --> 06:54.843
+And that is the application.
+
+06:58.620 --> 07:02.790
+Now this is the front end and it's also getting information
+
+07:02.790 --> 07:04.560
+from the node api.
+
+07:04.560 --> 07:08.040
+We can also register, click on register.
+
+07:08.040 --> 07:11.250
+Let's give some email address.
+
+07:11.250 --> 07:13.480
+Let's enter some password
+
+07:16.200 --> 07:17.580
+Next.
+
+07:17.580 --> 07:19.383
+And it's asking ID number.
+
+07:20.490 --> 07:22.680
+Let's enter some number.
+
+07:22.680 --> 07:27.120
+Let's give first name and city,
+
+07:27.120 --> 07:30.057
+I'm going to select maybe New Delhi.
+
+07:36.420 --> 07:38.073
+And I will say a register.
+
+07:39.210 --> 07:40.530
+I think that got registered.
+
+07:40.530 --> 07:44.760
+Now this information is going in the MySQL database.
+
+07:44.760 --> 07:47.253
+Let's enter the password now to login.
+
+07:48.090 --> 07:50.070
+And we are in, it says Hi Imran.
+
+07:50.070 --> 07:52.290
+And we have the product list.
+
+07:52.290 --> 07:56.610
+And here we have the Booksmart that goes
+
+07:56.610 --> 07:59.103
+to the Java application books api.
+
+08:02.970 --> 08:04.623
+And that is all.
+
+08:06.840 --> 08:09.840
+So this was a glimpse of a microservice application
+
+08:09.840 --> 08:11.583
+running on Docker platform.
+
+08:13.110 --> 08:14.550
+Let's do the cleanup now.
+
+08:14.550 --> 08:16.740
+So Docker composed.
+
+08:16.740 --> 08:19.410
+Make sure you're in the same folder, EMart app.
+
+08:19.410 --> 08:20.910
+Docker composed down,
+
+08:20.910 --> 08:23.680
+which is going to stop and remove all the containers
+
+08:24.900 --> 08:29.340
+and Docker system, prune hyphen A,
+
+08:29.340 --> 08:32.070
+which is going to remove all the stopped containers
+
+08:32.070 --> 08:35.823
+and images and everything that are of no use.
+
+08:38.760 --> 08:43.760
+Exit from the VM and make sure you do a vagrant halt.
+
+08:47.550 --> 08:49.020
+So that is all in this lecture.
+
+08:49.020 --> 08:50.793
+I will see you in the next one.

@@ -1,0 +1,695 @@
+WEBVTT
+
+00:00.930 --> 00:01.920
+-: In previous lecture
+
+00:01.920 --> 00:04.740
+we have seen how we can set up inventory file.
+
+00:04.740 --> 00:07.170
+We did it for just one single host.
+
+00:07.170 --> 00:09.630
+Now we are going to do it
+for the other two host.
+
+00:09.630 --> 00:11.370
+And we'll see a few more concepts
+
+00:11.370 --> 00:14.250
+in inventory like groupings and variables.
+
+00:14.250 --> 00:18.540
+So I'm going to get into 'vprofile' folder
+
+00:18.540 --> 00:22.947
+and I'm going to copy from 'exercise1' to 'exercise2'.
+
+00:25.650 --> 00:27.447
+Okay, let's get into 'exercise2'.
+
+00:30.390 --> 00:32.493
+Okay, so let's open the inventory file.
+
+00:33.510 --> 00:35.190
+And now we know how to add one host
+
+00:35.190 --> 00:36.870
+we can like that add multiple hosts.
+
+00:36.870 --> 00:39.480
+So copy these four lines.
+
+00:39.480 --> 00:42.630
+Come to 'web01' and say 4yy,
+
+00:42.630 --> 00:44.430
+quickly copies the four line.
+
+00:44.430 --> 00:48.960
+Then just say, come at the last line and say P to paste
+
+00:48.960 --> 00:53.190
+and let's change 'web01' to 'web02'
+
+00:53.190 --> 00:57.273
+and come down once again
+and say P once again.
+
+00:58.350 --> 01:00.450
+Using via editor copy paste methods, okay?
+
+01:00.450 --> 01:02.730
+You can use your own copy paste method also
+
+01:02.730 --> 01:04.170
+whatever you want.
+
+01:04.170 --> 01:08.190
+Okay, let's change this to 'db01'.
+
+01:08.190 --> 01:11.580
+Make sure they are all in the same line, okay?
+
+01:11.580 --> 01:14.730
+YAML space is very important.
+
+01:14.730 --> 01:16.380
+In the same column I should say,
+
+01:16.380 --> 01:17.213
+not line.
+
+01:17.213 --> 01:19.470
+Okay, now everything is same
+but the IP is different.
+
+01:19.470 --> 01:24.470
+So we have to check the IP of 'web02'.
+
+01:24.540 --> 01:26.673
+Get the private IP of 'web02'
+
+01:27.930 --> 01:29.883
+and change it.
+
+01:36.420 --> 01:38.637
+And then same for 'db01'.
+
+01:39.510 --> 01:41.130
+So remove that.
+
+01:41.130 --> 01:43.767
+Let's get the IP of 'db01'.
+
+01:45.270 --> 01:48.333
+Private IP once again,
+paste it there.
+
+01:50.100 --> 01:52.260
+And let's test it first.
+
+01:52.260 --> 01:54.510
+So username and login key are same.
+
+01:54.510 --> 01:55.773
+Okay, the host changed.
+
+01:56.700 --> 01:58.650
+Okay, so once again ansible.
+
+01:58.650 --> 02:01.497
+Now we will do ping to 'web02'.
+
+02:05.910 --> 02:06.810
+That works.
+
+02:06.810 --> 02:09.837
+Let's do it to 'db01'.
+
+02:14.580 --> 02:16.950
+Okay, that also works nice, right?
+
+02:16.950 --> 02:21.950
+But what if like this
+you have 10, 20, 50,
+
+02:22.380 --> 02:24.210
+and like that many, many host, right?
+
+02:24.210 --> 02:25.890
+Doing a ping to each and every machine
+
+02:25.890 --> 02:28.080
+is going to take like forever, right?
+
+02:28.080 --> 02:28.913
+So don't worry,
+
+02:28.913 --> 02:30.873
+there is a concept of grouping.
+
+02:33.210 --> 02:35.280
+So you need to definitely have
+
+02:35.280 --> 02:37.560
+the host information first of all, right?
+
+02:37.560 --> 02:39.330
+In the host column, right?
+
+02:39.330 --> 02:41.850
+You mentioned the all the host information.
+
+02:41.850 --> 02:44.970
+And then in the same column of the host,
+
+02:44.970 --> 02:46.890
+so that was what, two space?
+
+02:46.890 --> 02:48.600
+One, two,
+two space.
+
+02:48.600 --> 02:51.553
+You have to mention this 'children:',
+
+02:54.330 --> 02:58.560
+and then you need to mention
+the group name inside this.
+
+02:58.560 --> 03:03.560
+So I will say 'webservers:',
+hit enter.
+
+03:05.130 --> 03:08.070
+1, 2, 3, 4, 5, 6.
+
+03:08.070 --> 03:09.840
+And I have to say 'hosts'.
+
+03:09.840 --> 03:13.710
+So what are the hosts of the group web server?
+
+03:13.710 --> 03:15.360
+So that's pretty simple now.
+
+03:15.360 --> 03:17.850
+Hosts are already defined up here, right?
+
+03:17.850 --> 03:18.867
+'web01',
+
+03:20.130 --> 03:22.020
+and once again
+
+03:22.020 --> 03:24.432
+make sure it's in the same line,
+
+03:24.432 --> 03:25.587
+and 'web02'.
+
+03:28.320 --> 03:29.490
+Okay, so this is one group,
+
+03:29.490 --> 03:31.830
+web servers group
+and these are the host.
+
+03:31.830 --> 03:33.933
+Like that we can create multiple groups.
+
+03:35.430 --> 03:38.850
+So I'm going to again copy paste,
+
+03:38.850 --> 03:42.330
+4yy and paste there
+
+03:42.330 --> 03:46.170
+and this will be 'dbserver'.
+
+03:46.170 --> 03:48.990
+Again, make sure they are in the same column.
+
+03:48.990 --> 03:50.580
+Same column.
+
+03:50.580 --> 03:53.160
+Host 'db01'.
+
+03:53.160 --> 03:55.530
+So yes, you can have a single host also in a group
+
+03:55.530 --> 03:57.990
+or you can have multiple host also.
+
+03:57.990 --> 04:01.830
+You can also have group of groups.
+
+04:01.830 --> 04:02.880
+So that means, you know,
+
+04:02.880 --> 04:05.760
+I have here two groups, right?
+
+04:05.760 --> 04:08.880
+I can group this group together
+
+04:08.880 --> 04:11.403
+in a parent group,
+pretty simple.
+
+04:13.042 --> 04:14.340
+In the same group line
+
+04:14.340 --> 04:15.690
+I'll give a group name.
+
+04:15.690 --> 04:20.690
+I'll say 'dc-oregon'.
+
+04:20.820 --> 04:23.460
+Now, "-" is not at all recommended,
+
+04:23.460 --> 04:24.570
+It'll give you a warning
+
+04:24.570 --> 04:25.950
+or it may also give you error
+
+04:25.950 --> 04:28.230
+if you're using a different version of Ansibles.
+
+04:28.230 --> 04:31.410
+So don't use "-", you can use "_", okay?
+
+04:31.410 --> 04:34.860
+Other things, we have to end this 'web01' with a ":"
+
+04:34.860 --> 04:36.780
+and 'web02' also with the ":"
+
+04:36.780 --> 04:38.887
+and 'db01' also with the ":".
+
+04:39.900 --> 04:42.780
+Again, of course the group name also with the ":".
+
+04:42.780 --> 04:45.870
+Now, I'm going to give here now again
+
+04:45.870 --> 04:47.760
+two space in the inside,
+
+04:47.760 --> 04:49.266
+and here you have to say again,
+
+04:49.266 --> 04:50.580
+'children:'
+
+04:50.580 --> 04:53.130
+and you know now the rest, right?
+
+04:53.130 --> 04:56.556
+You can give the group names.
+
+04:56.556 --> 04:58.587
+So right, so we have 'webservers:'
+
+05:07.590 --> 05:09.810
+and 'dbservers:'.
+
+05:09.810 --> 05:12.390
+So basically we have now three groups,
+
+05:12.390 --> 05:16.560
+webservers, dbservers, and dc_oregon,
+
+05:16.560 --> 05:18.160
+or whatever you want to name it.
+
+05:19.110 --> 05:21.240
+Webservers dbservers are normal group,
+
+05:21.240 --> 05:23.670
+they contains the host names.
+
+05:23.670 --> 05:27.360
+But dc_oregon is a parent group that has more children
+
+05:27.360 --> 05:30.570
+and those children will be the group name, okay?
+
+05:30.570 --> 05:32.880
+They should be group name and not the host name.
+
+05:32.880 --> 05:35.710
+It'll look for this group here
+
+05:37.080 --> 05:39.120
+and find the hosts from that group.
+
+05:39.120 --> 05:40.470
+So when I say dc_oregon
+
+05:40.470 --> 05:42.760
+that means all these three host
+
+05:43.680 --> 05:46.590
+are these two groups, okay?
+
+05:46.590 --> 05:50.553
+Look at the structure and save and quit.
+
+05:53.010 --> 05:53.843
+Okay, so now what?
+
+05:53.843 --> 05:56.850
+Now we have groups on which we can execute modules.
+
+05:56.850 --> 05:58.590
+The the first module that we learn,
+
+05:58.590 --> 06:01.590
+vim module, we are going to execute that.
+
+06:01.590 --> 06:03.420
+Okay, so instead of 'web02'
+
+06:03.420 --> 06:08.400
+now I'm going to say here the group name 'webservers'.
+
+06:08.400 --> 06:10.290
+Make sure the group name is correct
+
+06:10.290 --> 06:12.210
+as whatever is mentioned in the inventory file,
+
+06:12.210 --> 06:13.623
+otherwise it won't work.
+
+06:15.900 --> 06:16.777
+Okay, you see when I say 'webservers'
+
+06:16.777 --> 06:19.530
+there are two host, right?
+
+06:19.530 --> 06:20.700
+When I say 'dbserver'
+
+06:20.700 --> 06:22.893
+you know that's just 'db01', right?
+
+06:26.700 --> 06:28.020
+This is not just about ping, okay?
+
+06:28.020 --> 06:30.573
+Any module like that you can execute for the group.
+
+06:31.440 --> 06:33.393
+'dc_oregon', let's do that.
+
+06:39.485 --> 06:42.120
+So 'dc_oregon means the two groups
+
+06:42.120 --> 06:44.790
+which contains the other three host.
+
+06:44.790 --> 06:46.500
+But if you really want to execute something
+
+06:46.500 --> 06:50.940
+on all the hosts you can directly here mention it as all
+
+06:50.940 --> 06:54.000
+if you remember the name in the inventory file, right?
+
+06:54.000 --> 06:54.990
+All at the beginning,
+
+06:54.990 --> 06:56.853
+all means all the hosts.
+
+06:58.560 --> 07:00.193
+You can also use "*"
+
+07:01.470 --> 07:03.873
+but you have to put it into single code.
+
+07:05.430 --> 07:08.280
+The single code mention "*".
+
+07:08.280 --> 07:10.803
+That also means all.
+
+07:11.880 --> 07:13.380
+You can also do it like this.
+
+07:13.380 --> 07:15.060
+You can save 'web*'.
+
+07:15.060 --> 07:18.483
+That means any host that starts with the word web.
+
+07:21.570 --> 07:23.160
+All right, so similar regular expression
+
+07:23.160 --> 07:25.587
+that we learned in Linux Star and there.
+
+07:25.587 --> 07:28.023
+So, so you can use those as well.
+
+07:28.980 --> 07:31.380
+Okay, now one last thing in the inventory file
+
+07:31.380 --> 07:34.110
+and we will do it with a different exercise.
+
+07:34.110 --> 07:37.860
+I'm going to say 'cp -r exercise2'
+
+07:37.860 --> 07:40.950
+copy with the names, 'exercise3'.
+
+07:40.950 --> 07:43.470
+Now creating another exercise for this one
+
+07:43.470 --> 07:44.640
+it's a very simple concept,
+
+07:44.640 --> 07:46.170
+but very very important concept.
+
+07:46.170 --> 07:49.200
+We are going to learn more about this incoming lecture.
+
+07:49.200 --> 07:51.513
+The concept is basically variables.
+
+07:53.940 --> 07:57.603
+So we have variables at the host level here.
+
+07:58.830 --> 08:01.863
+Host level variable has highest priority.
+
+08:02.760 --> 08:04.590
+That means there are other places also
+
+08:04.590 --> 08:06.210
+where we can define variables, right?
+
+08:06.210 --> 08:08.610
+Well, we can define variables at the group level.
+
+08:08.610 --> 08:12.183
+Also, group will have lower priority compared to host.
+
+08:13.380 --> 08:17.490
+If it does not find variables at the group level,
+
+08:17.490 --> 08:18.570
+sorry, host level,
+
+08:18.570 --> 08:21.000
+then only it'll go at the group level.
+
+08:21.000 --> 08:22.500
+Now we have a group, 'dc_oregon',
+
+08:22.500 --> 08:25.170
+that contains all the three hosts, right?
+
+08:25.170 --> 08:27.630
+So if we define these two variables at the group level
+
+08:27.630 --> 08:30.300
+we don't need to define it at every host level,
+
+08:30.300 --> 08:32.943
+the login key and the user.
+
+08:34.380 --> 08:37.390
+Okay, let me copy this and come down
+
+08:38.400 --> 08:42.060
+and 'dc_oregon, where you have children in the same column
+
+08:42.060 --> 08:43.600
+mentioned 'vars:',
+
+08:45.540 --> 08:50.250
+and inside that let's paste this.
+
+08:50.250 --> 08:51.990
+Okay, I have to make sure
+
+08:51.990 --> 08:54.123
+it is properly formatted.
+
+08:54.960 --> 08:56.850
+So we defined it at the group level,
+
+08:56.850 --> 08:58.620
+at dc_oregon group level.
+
+08:58.620 --> 09:00.270
+Now we are going to remove this because
+
+09:00.270 --> 09:01.920
+host level has higher priority anyways,
+
+09:01.920 --> 09:04.860
+it is going to use the host
+if it's already defined.
+
+09:04.860 --> 09:06.633
+So let me remove this.
+
+09:08.520 --> 09:10.737
+And for 'web02'.
+
+09:15.210 --> 09:16.320
+And for 'web01'.
+
+09:16.320 --> 09:18.990
+So now you should only have the IP address
+
+09:18.990 --> 09:20.433
+Ansible host variable,
+
+09:20.433 --> 09:25.140
+login user and the key should be defined at the group level.
+
+09:25.140 --> 09:26.850
+And let's save and quote this,
+
+09:26.850 --> 09:28.683
+make sure the structure is correct.
+
+09:29.820 --> 09:31.357
+And now let's test it.
+
+09:31.357 --> 09:36.357
+'ansible all -m ping-i inventory' path,
+
+09:36.960 --> 09:39.723
+oops, space.
+
+09:43.950 --> 09:45.390
+Okay, that worked.
+
+09:45.390 --> 09:47.760
+Try to change it and see
+
+09:47.760 --> 09:49.530
+if it's really using those or not
+
+09:49.530 --> 09:52.230
+because definitely it needs username and password.
+
+09:52.230 --> 09:54.930
+I'm gonna just say ec2 -,
+
+09:54.930 --> 09:57.570
+and you know that's a wrong username, right?
+
+09:57.570 --> 09:59.610
+So it's going to try to use that user
+
+09:59.610 --> 10:01.830
+for all the machine and it is going to fail.
+
+10:01.830 --> 10:02.663
+See that?
+
+10:02.663 --> 10:05.250
+Look at the error,
+permission denied.
+
+10:05.250 --> 10:07.290
+It is using the user called ec2,
+
+10:07.290 --> 10:09.450
+there is no such user in this machine
+
+10:09.450 --> 10:11.460
+so that's why permission denied.
+
+10:11.460 --> 10:12.630
+So permission denied you'll get
+
+10:12.630 --> 10:14.580
+if the username or the login key
+
+10:14.580 --> 10:17.610
+any of this is wrong or both of them are wrong.
+
+10:17.610 --> 10:21.647
+So we know ec2-user is the correct user, right?
+
+10:22.890 --> 10:25.770
+So either login key or the username,
+
+10:25.770 --> 10:26.670
+anything is wrong,
+
+10:26.670 --> 10:28.293
+you will get permission denied.
+
+10:30.660 --> 10:32.310
+It works now.
+
+10:32.310 --> 10:33.240
+Okay, so in this lecture
+
+10:33.240 --> 10:35.370
+we have focused on the inventory file
+
+10:35.370 --> 10:37.680
+and we used a very simple module called ping
+
+10:37.680 --> 10:38.610
+to test the login.
+
+10:38.610 --> 10:39.780
+In the coming lectures
+
+10:39.780 --> 10:41.820
+we are going to see how we can use
+
+10:41.820 --> 10:44.010
+modules to make changes to these machines,
+
+10:44.010 --> 10:45.360
+like installing packages
+
+10:45.360 --> 10:48.630
+and managing services
+and files and et cetera.
+
+10:48.630 --> 10:50.340
+So test all this
+
+10:50.340 --> 10:52.053
+and join me in the next lecture.

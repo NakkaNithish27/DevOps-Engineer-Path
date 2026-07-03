@@ -1,0 +1,301 @@
+WEBVTT
+
+00:00.540 --> 00:02.790
+Instructor: Okay, so you can open this link,
+
+00:02.790 --> 00:05.820
+this source code link from your browser,
+
+00:05.820 --> 00:10.560
+github.com/hkhcoder/vprofile-project
+
+00:10.560 --> 00:13.953
+and then select the branch, kubeapp.
+
+00:14.940 --> 00:16.620
+We have one more branch, skelkube,
+
+00:16.620 --> 00:18.720
+that we will be using from the next lecture
+
+00:18.720 --> 00:20.790
+when we start writing everything.
+
+00:20.790 --> 00:23.970
+I just want to show you already written code,
+
+00:23.970 --> 00:25.530
+all the manifest files.
+
+00:25.530 --> 00:27.090
+You can check those files
+
+00:27.090 --> 00:29.160
+and you can match with the architecture diagram
+
+00:29.160 --> 00:32.280
+so you really get an idea where we are going
+
+00:32.280 --> 00:35.460
+and what really we need to accomplish in this project.
+
+00:35.460 --> 00:36.753
+So go to kubeapp first.
+
+00:38.470 --> 00:39.303
+Here you have.
+
+00:39.303 --> 00:42.780
+Now, this branch is created from the Docker branch,
+
+00:42.780 --> 00:44.400
+from the containers branch.
+
+00:44.400 --> 00:45.450
+You'll have Docker files,
+
+00:45.450 --> 00:47.700
+you'll have the docker-compose file.
+
+00:47.700 --> 00:49.050
+So it's the same source code.
+
+00:49.050 --> 00:52.233
+In this, we have created this folder called kubedefs.
+
+00:53.790 --> 00:55.020
+So, kubedefs folder.
+
+00:55.020 --> 00:57.660
+And in that we have all the files.
+
+00:57.660 --> 01:00.450
+Let's clone this source code in our local machine
+
+01:00.450 --> 01:02.043
+on VS code and take a look.
+
+01:03.150 --> 01:05.193
+Click on the repository name somewhere,
+
+01:06.390 --> 01:07.800
+click on this dropdown,
+
+01:07.800 --> 01:10.323
+and go to HTTPS, say Copy.
+
+01:11.340 --> 01:15.810
+Open VS code and click on the Source Control button here.
+
+01:15.810 --> 01:19.110
+Click on Clone Repository, paste the URL there,
+
+01:19.110 --> 01:22.083
+and click on that clone URL from so and so,
+
+01:22.980 --> 01:25.080
+and select a location where you want to save.
+
+01:25.080 --> 01:27.330
+I'm going to save it in the F Drive,
+
+01:27.330 --> 01:29.820
+creating a folder kubeapp over there,
+
+01:29.820 --> 01:33.330
+and I'll say Select as Repository Destination.
+
+01:33.330 --> 01:34.163
+Open.
+
+01:37.230 --> 01:42.180
+Okay, let's switch to the branch kubeapp, this one.
+
+01:42.180 --> 01:45.930
+Right, in kubeapp branch, you have kubedefs.
+
+01:45.930 --> 01:47.280
+This one.
+
+01:47.280 --> 01:49.173
+And here you have all the manifests.
+
+01:50.160 --> 01:52.740
+Now, to enable some support from, you know,
+
+01:52.740 --> 01:55.050
+while you're writing the Kubernetes definition files,
+
+01:55.050 --> 01:56.700
+with these definition files,
+
+01:56.700 --> 01:58.620
+you can install a Kubernetes extension.
+
+01:58.620 --> 02:02.400
+So just go to extensions and search there for Kubernetes.
+
+02:02.400 --> 02:05.610
+The first one you can install, Kubernetes.
+
+02:05.610 --> 02:06.933
+Install, installing.
+
+02:08.220 --> 02:10.170
+It's going to throw you an error on Kubectl.
+
+02:10.170 --> 02:11.940
+You can ignore that.
+
+02:11.940 --> 02:13.890
+Later, we are going to talk about that.
+
+02:14.880 --> 02:17.310
+Okay, so these are the files that we intend to write.
+
+02:17.310 --> 02:19.800
+We need to write a secret
+
+02:19.800 --> 02:24.420
+that is going to store two variables: db-pass and rmq-pass.
+
+02:24.420 --> 02:27.930
+We have a PVC, PersistentVolumeClaim
+
+02:27.930 --> 02:31.350
+that is going to claim a volume of 3GB.
+
+02:31.350 --> 02:33.450
+Its name will be this, right?
+
+02:33.450 --> 02:36.420
+Then we are going to write the deployment manifest.
+
+02:36.420 --> 02:40.410
+One is for the app, which is the Tomcat, vproapp.
+
+02:40.410 --> 02:45.410
+One for a database, one for RabbitMQ, and one for Memcache.
+
+02:47.700 --> 02:50.730
+And if you see, we have a service definition file
+
+02:50.730 --> 02:52.650
+for our every pod,
+
+02:52.650 --> 02:55.230
+and it is of type: ClusterIP.
+
+02:55.230 --> 02:57.480
+As I said, this will be all for internal communication.
+
+02:57.480 --> 03:01.473
+For external communication, we will be having ingress.
+
+03:03.150 --> 03:08.150
+So if the host URL, if the user accesses with this name,
+
+03:08.280 --> 03:10.890
+it is going to route the request to the load balancer.
+
+03:10.890 --> 03:12.870
+Load balancer is going to forward the request
+
+03:12.870 --> 03:16.050
+to the ingress controller, nginx.ingress controller,
+
+03:16.050 --> 03:17.850
+where this rule will be checked.
+
+03:17.850 --> 03:20.940
+If the URL that user is asking is this,
+
+03:20.940 --> 03:25.470
+then forward the request to a service with this name.
+
+03:25.470 --> 03:27.570
+So it's going to look for a service
+
+03:27.570 --> 03:29.850
+with the name vproapp-service,
+
+03:29.850 --> 03:32.280
+and just an example right now, okay,
+
+03:32.280 --> 03:33.870
+we are going to write this.
+
+03:33.870 --> 03:36.450
+We'll have a service already with this name,
+
+03:36.450 --> 03:39.090
+which is going to route the request to app,
+
+03:39.090 --> 03:41.220
+whose name is vproapp.
+
+03:41.220 --> 03:42.180
+We'll understand all this.
+
+03:42.180 --> 03:43.620
+We are going to write all this from the scratch.
+
+03:43.620 --> 03:45.600
+Just wanted to show you,
+
+03:45.600 --> 03:49.890
+we have four deployments, four services,
+
+03:49.890 --> 03:51.660
+of type: ClusterIP,
+
+03:51.660 --> 03:55.860
+one secret, one PersistentVolumeClaim,
+
+03:55.860 --> 03:58.290
+and then for front end we have ingress.
+
+03:58.290 --> 04:00.300
+So all this we need to write.
+
+04:00.300 --> 04:03.360
+So I've created a skeleton for this in another branch.
+
+04:03.360 --> 04:05.220
+So click on this branch symbol
+
+04:05.220 --> 04:07.503
+and switch to the branch skelkube,
+
+04:08.340 --> 04:11.490
+S-K-E-L-K-U-B-E, skelkube.
+
+04:11.490 --> 04:12.393
+Switch to that.
+
+04:14.070 --> 04:16.140
+There's also exactly same branch
+
+04:16.140 --> 04:19.080
+and replica of the kubapp branch,
+
+04:19.080 --> 04:23.010
+but here we have kubedefs, all the files we have,
+
+04:23.010 --> 04:24.780
+they don't have anything, no content.
+
+04:24.780 --> 04:27.630
+Then this content, we are going to write.
+
+04:27.630 --> 04:30.330
+So take a look once again on all the definition files,
+
+04:30.330 --> 04:32.520
+match it with the architecture diagram
+
+04:32.520 --> 04:34.830
+that you're seeing in the previous lecture.
+
+04:34.830 --> 04:37.463
+And once you're good, then join me in the next lecture.

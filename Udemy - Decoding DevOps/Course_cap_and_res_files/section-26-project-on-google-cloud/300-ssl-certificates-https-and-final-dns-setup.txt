@@ -1,0 +1,430 @@
+WEBVTT
+
+00:00.240 --> 00:05.880
+Okay, so this is so far the flow that we have created for V profile a front end.
+
+00:06.240 --> 00:12.400
+Now when I say V profile front end and back end here the V profile backend means our database or memcache
+
+00:12.400 --> 00:15.080
+service or private subnets.
+
+00:15.080 --> 00:16.760
+These are the backend V profile.
+
+00:16.760 --> 00:21.960
+Front end is all about it's load balancer and the app server of course which receives the request.
+
+00:22.240 --> 00:28.640
+And then V profile front end which is the load balancer to application server connection in the in this
+
+00:28.640 --> 00:34.920
+front end also we have front end and back end in load balancer backend means simply the managed instance
+
+00:34.920 --> 00:38.840
+group, which is basically just the collection of our instances.
+
+00:39.280 --> 00:44.320
+So when the request comes from the client, the load balancer will have a forwarding rule which says
+
+00:44.320 --> 00:46.200
+that the request comes on port 80.
+
+00:46.240 --> 00:48.720
+Then it should go to HTTP proxy.
+
+00:49.120 --> 00:55.200
+And for HTTP proxy there will be a URL map created that for this HTTP proxy route.
+
+00:55.200 --> 01:01.720
+The request to this backend service that basically means our instances or V profile application running
+
+01:01.720 --> 01:02.920
+on port 8080.
+
+01:03.740 --> 01:13.740
+Okay, so from internet to HTTP proxy and the URL map, which maps the proxy to the backend backend
+
+01:13.740 --> 01:18.140
+of the load balancer that sends the request to our instance, which is in the private subnet.
+
+01:18.900 --> 01:25.380
+So in production in real time we definitely have a URL that will be Https secure connection.
+
+01:25.860 --> 01:29.900
+So that URL should resolve to the IP address of the load balancer.
+
+01:30.220 --> 01:32.220
+So we need to create an entry in GoDaddy.
+
+01:32.700 --> 01:39.940
+And if Https is involved there needs to be a valid certificate that proves your domain in my case.
+
+01:39.980 --> 01:41.660
+HGH infotech.xyz.
+
+01:41.700 --> 01:42.820
+This should be proven.
+
+01:43.220 --> 01:47.260
+So a certificate authority like Google or Amazon or CERT Manager.
+
+01:47.260 --> 01:49.460
+There are many authorities like that we sign.
+
+01:49.980 --> 01:52.180
+They prove the validity of your domain.
+
+01:53.260 --> 01:54.780
+But we are using Google.
+
+01:54.780 --> 02:01.860
+So in GCP itself we can create a certificate validate it by making the entry in our domain registrar
+
+02:01.900 --> 02:02.620
+like GoDaddy.
+
+02:02.660 --> 02:08.840
+It verifies our certificate and that certificate we can use for the Https connection in the load balancer.
+
+02:09.400 --> 02:14.080
+So the first thing will be to create the certificate and make sure it's validated.
+
+02:14.960 --> 02:15.240
+Okay.
+
+02:15.280 --> 02:19.840
+So my domain variable holds this value in HGH infotech.xyz.
+
+02:19.960 --> 02:23.960
+Your should hold your own domain and subdomain.
+
+02:24.000 --> 02:28.080
+I have kept as GCP you can keep the same or you can change if you want.
+
+02:28.120 --> 02:31.880
+Just edit bashrc file and make the changes if it's required.
+
+02:32.320 --> 02:35.840
+So we need to create a certificate in certificate Manager service.
+
+02:36.960 --> 02:42.320
+So in GCP first we need to start the DNS authorization that you are the owner of this domain.
+
+02:42.320 --> 02:43.400
+You have to prove that.
+
+02:43.640 --> 02:45.920
+So I need to prove that I'm the owner of this domain.
+
+02:46.320 --> 02:47.240
+And this is how we do it.
+
+02:47.560 --> 02:53.560
+So I say gcloud certificate manager DNS authorization create or hyphen.
+
+02:54.000 --> 02:57.120
+The subdomain given here and domain will be this.
+
+02:57.600 --> 03:05.280
+So if you run this command this should create the DNS authorization with the name auth hyphen GCP.
+
+03:05.920 --> 03:09.890
+And let's describe this now The same command.
+
+03:09.890 --> 03:11.690
+Instead of create, you say describe.
+
+03:15.130 --> 03:15.410
+Okay.
+
+03:15.410 --> 03:18.170
+Now take a look here DNS resource record.
+
+03:18.530 --> 03:20.410
+So this is the challenge.
+
+03:20.410 --> 03:21.370
+This is the name.
+
+03:22.610 --> 03:24.930
+And this should resolve to this.
+
+03:24.970 --> 03:28.930
+If you are able to prove this then it is going to give you the certificate.
+
+03:29.290 --> 03:33.050
+So I'm going to go to GoDaddy I go to my products.
+
+03:33.050 --> 03:37.890
+So if you have if you're using GoDaddy you can follow the same step or just use your domain registrar.
+
+03:37.930 --> 03:39.250
+Go to your domains.
+
+03:39.650 --> 03:41.490
+Sorry your domains DNS record.
+
+03:41.530 --> 03:42.930
+Go to your domains DNS record.
+
+03:42.930 --> 03:44.010
+So this is my domain.
+
+03:45.050 --> 03:46.250
+I go to domain.
+
+03:47.610 --> 03:51.570
+Go to DNS, click on Add New record.
+
+03:51.570 --> 03:55.010
+And this is going to be CNAME record because name to name mapping.
+
+03:55.370 --> 04:01.250
+And the name will be this underscore Acme hyphen challenge what you see over here before the domain
+
+04:01.250 --> 04:01.490
+name.
+
+04:01.490 --> 04:02.290
+Copy that.
+
+04:03.570 --> 04:04.530
+That should be the name.
+
+04:04.530 --> 04:10.530
+Make sure there is no dot and the domain name here in the value you need to put this data string.
+
+04:10.530 --> 04:14.710
+So copy this and paste it here in the value.
+
+04:15.390 --> 04:22.550
+Make sure you remove that dot, that full stop at the end and click on save okay.
+
+04:22.590 --> 04:27.190
+So the DNS authorization entry is done but the certificate is not yet created.
+
+04:27.190 --> 04:28.750
+We're going to create the certificate.
+
+04:29.070 --> 04:30.630
+So in front end Touche.
+
+04:30.670 --> 04:33.750
+We have this command that is going to create the certificate for us.
+
+04:34.990 --> 04:41.790
+So gcloud certificate manager certificates create certificate with this name cert hyphen the subdomain
+
+04:41.790 --> 04:49.670
+I'm giving and the domain for star dot domain like my domain in this case infotech.xyz.
+
+04:50.150 --> 04:56.390
+The certificate will be also for the subdomains DNS authorization we just created.
+
+04:56.390 --> 04:58.870
+So this is the DNS authorization is going to check.
+
+04:58.910 --> 05:02.910
+It's going to check from this that if Acme challenge resolves to that endpoint.
+
+05:03.350 --> 05:05.590
+So with this command it's going to create the certificate.
+
+05:06.470 --> 05:08.950
+So certificate is created in few minutes.
+
+05:08.950 --> 05:11.310
+We should see the certificate as active.
+
+05:11.870 --> 05:18.490
+But by the time we are going to create a certificate map entry that is basically just a placeholder
+
+05:18.490 --> 05:22.450
+to keep this certificate from where we can choose it in our load balancer.
+
+05:22.970 --> 05:24.610
+So these two command and we are done.
+
+05:25.170 --> 05:27.450
+GCloud certificate manager maps create.
+
+05:27.490 --> 05:32.490
+This creates a map with this name and add our certificate in that map.
+
+05:33.170 --> 05:40.410
+So let's execute these two commands gcloud certificate hyphen manager maps create map and the map name.
+
+05:40.450 --> 05:43.290
+Once again this is just a placeholder to keep our certificate.
+
+05:43.850 --> 05:45.290
+So we created the placeholder.
+
+05:45.290 --> 05:47.210
+Let's put our certificate into this.
+
+05:47.810 --> 05:50.770
+So gcloud certificate manager maps entries.
+
+05:50.770 --> 05:55.770
+Create this entry for this map which we just created.
+
+05:56.210 --> 06:01.490
+And add our certificate in that cert hyphen sub domain that certificate.
+
+06:04.010 --> 06:06.490
+And sorry of course the hostname is there.
+
+06:07.530 --> 06:08.330
+Okay this is done.
+
+06:08.330 --> 06:10.050
+Let's describe our certificate.
+
+06:10.050 --> 06:14.210
+If the time is passed, we should be able to see it in active state.
+
+06:15.950 --> 06:16.270
+Okay.
+
+06:16.310 --> 06:17.270
+Let me scroll up.
+
+06:17.870 --> 06:21.990
+So gcloud certificate manager certificates describe or certificate name.
+
+06:22.670 --> 06:26.470
+So you should see the status authorized and status active.
+
+06:27.110 --> 06:29.430
+And now we can start using this certificate.
+
+06:30.030 --> 06:38.310
+So in the previous one we created the HTTP proxy and the forwarding rule to create https proxy.
+
+06:38.350 --> 06:39.350
+We need the certificate.
+
+06:39.350 --> 06:41.990
+And the certificate is active and authorized.
+
+06:42.350 --> 06:45.070
+So now we are going to create Https proxy.
+
+06:45.270 --> 06:46.590
+Create the forwarding rule.
+
+06:47.190 --> 06:51.190
+Add our load balancer IP in GoDaddy and we are done.
+
+06:52.150 --> 06:56.990
+So that's the command gcloud compute target https proxy create.
+
+06:58.270 --> 06:59.950
+Connect it to the URL map.
+
+06:59.950 --> 07:07.390
+Mention the certificate or basically certificate map and then create an Https forwarding rule.
+
+07:08.070 --> 07:09.230
+So let's wrap this up.
+
+07:09.910 --> 07:14.710
+Okay so let's create https proxy with this name V profile hyphen https proxy.
+
+07:15.110 --> 07:17.070
+The URL map that we already created.
+
+07:17.070 --> 07:20.680
+URL v profile hyphen an URL map and the subdomain.
+
+07:21.200 --> 07:29.080
+So once again that's the command gcloud compute target https proxy, create proxy name url map, and
+
+07:29.080 --> 07:31.640
+the certificate certificate map.
+
+07:31.640 --> 07:35.520
+I should say we created a certificate map so we can just give the certificate map name.
+
+07:38.680 --> 07:40.320
+Okay that got created.
+
+07:41.000 --> 07:44.720
+Now let's finally create the forwarding rule okay.
+
+07:44.760 --> 07:48.920
+So this is the command gcloud compute forwarding rules.
+
+07:48.920 --> 07:58.400
+Create create forwarding rule with this name target https proxy is this target https proxy.
+
+07:58.400 --> 08:04.880
+Is this the profile hyphen https hyphen proxy that we just created for the load balancer IP.
+
+08:04.920 --> 08:11.040
+The static IP that we created is going to take some time okay.
+
+08:11.080 --> 08:11.960
+Got created.
+
+08:12.920 --> 08:19.640
+Now let's get the load balancer static IP and add this entry in the domain registrar in GoDaddy Domain
+
+08:19.640 --> 08:20.320
+registrar.
+
+08:20.740 --> 08:26.580
+So gcloud compute addresses describe the load balancer hyphen hyphen global.
+
+08:28.900 --> 08:30.820
+And that is our IP.
+
+08:30.860 --> 08:34.660
+Let's copy this IP and let's create a record.
+
+08:35.180 --> 08:36.380
+So add new record.
+
+08:36.380 --> 08:38.540
+And this is going to be of type A.
+
+08:39.140 --> 08:44.420
+Give the name vpro GCP and the value load balancer IP.
+
+08:44.820 --> 08:45.580
+Save it.
+
+08:46.180 --> 08:46.300
+Okay.
+
+08:46.340 --> 08:49.860
+You need to wait for a few minutes or maybe an hour sometimes.
+
+08:50.340 --> 08:58.500
+Once this record is published you should be able to access it on https, vpro gcp dot your domain name.
+
+09:00.380 --> 09:03.580
+You should see the web page fully functional.
+
+09:03.900 --> 09:05.900
+You should see the certificate validity.
+
+09:05.940 --> 09:07.060
+Connection is secure.
+
+09:07.060 --> 09:12.900
+It says and you can check it's issued by organization Google Trust Services.
+
+09:13.820 --> 09:16.220
+So that completes the entire flow.
+
+09:16.820 --> 09:18.700
+Let's talk about it in the next lecture.
+
+09:19.420 --> 09:22.820
+Let's run through the entire flow and then we'll do the clean up.
+
+09:23.380 --> 09:24.380
+So join me in the next one.

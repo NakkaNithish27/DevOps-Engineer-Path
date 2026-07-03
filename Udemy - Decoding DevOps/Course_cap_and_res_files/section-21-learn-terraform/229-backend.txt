@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00.420 --> 00:03.600
+Instructor: Okay, this lecture is short but very crucial.
+
+00:03.600 --> 00:04.650
+So we know so far
+
+00:04.650 --> 00:06.870
+when we create the Terraform infrastructure,
+
+00:06.870 --> 00:10.230
+it creates a terraform.tfstate file,
+
+00:10.230 --> 00:12.780
+which stores the state information.
+
+00:12.780 --> 00:14.790
+And that's the best part about the Terraform.
+
+00:14.790 --> 00:16.950
+And it's also the worst part.
+
+00:16.950 --> 00:18.990
+I'm executing it locally on my machine.
+
+00:18.990 --> 00:20.940
+The .tfstate file is on my machine.
+
+00:20.940 --> 00:22.830
+If I'm working in a team,
+
+00:22.830 --> 00:26.103
+my team members also should have the same state file.
+
+00:27.060 --> 00:28.200
+I know what you're thinking.
+
+00:28.200 --> 00:30.180
+Source code, we can put this in the source code.
+
+00:30.180 --> 00:33.840
+Yes, this will be in the version control system like GitHub,
+
+00:33.840 --> 00:36.120
+but that is when you are done doing your code,
+
+00:36.120 --> 00:37.890
+then you are going to push it.
+
+00:37.890 --> 00:40.050
+Plus there is all crucial critical information
+
+00:40.050 --> 00:41.820
+that goes with that.
+
+00:41.820 --> 00:44.130
+So never maintain this in the source code
+
+00:44.130 --> 00:46.620
+where you have the core of the Terraform itself.
+
+00:46.620 --> 00:48.120
+We can mention it somewhere else.
+
+00:48.120 --> 00:49.350
+Like in AWS case,
+
+00:49.350 --> 00:53.160
+we can store the .tfstate file in S3 bucket.
+
+00:53.160 --> 00:55.290
+And Terraform has that integration.
+
+00:55.290 --> 00:58.530
+You have to just mention resource called backend
+
+00:58.530 --> 01:01.350
+and mention your bucket name, region,
+
+01:01.350 --> 01:04.830
+and also the path where you want to store the .tfstate file.
+
+01:04.830 --> 01:06.660
+So first we need to create an S3 bucket
+
+01:06.660 --> 01:10.170
+and then we'll mention its information in our code.
+
+01:10.170 --> 01:13.230
+So go to your AWS account and go to S3 service
+
+01:13.230 --> 01:15.360
+and see Create bucket.
+
+01:15.360 --> 01:17.400
+Give a unique bucket name.
+
+01:17.400 --> 01:20.310
+I've given terraformstate and I have added some numbers
+
+01:20.310 --> 01:22.410
+just so it becomes unique.
+
+01:22.410 --> 01:24.750
+You have to give a different bucket name.
+
+01:24.750 --> 01:26.200
+And simply create the bucket.
+
+01:27.540 --> 01:30.810
+So open your bucket and create a folder in that.
+
+01:30.810 --> 01:33.090
+I'll just give the name as terraform
+
+01:33.090 --> 01:35.370
+and I'll just say Create folder.
+
+01:35.370 --> 01:37.590
+Okay, so get your bucket name and your folder name.
+
+01:37.590 --> 01:41.820
+Now let's put this information in our Terraform code.
+
+01:41.820 --> 01:46.680
+So once again, I'm going to copy, paste the exercise,
+
+01:46.680 --> 01:48.900
+rename it with Exercise6.
+
+01:48.900 --> 01:53.643
+In this I'll create a file called as backend.tf.
+
+01:58.200 --> 02:00.510
+Terraform, in the block you have to say backend,
+
+02:00.510 --> 02:01.680
+and the name of the backend,
+
+02:01.680 --> 02:04.260
+that is s3 for us in double quotes.
+
+02:04.260 --> 02:07.830
+And in the block you mention the bucket name.
+
+02:07.830 --> 02:09.720
+Key, that is basically the path,
+
+02:09.720 --> 02:13.530
+so your folder name slash any other name
+
+02:13.530 --> 02:14.400
+that you wish to give.
+
+02:14.400 --> 02:16.950
+Region, make sure your region is same
+
+02:16.950 --> 02:18.990
+where you created the bucket.
+
+02:18.990 --> 02:21.150
+So my bucket is in us-east-1.
+
+02:21.150 --> 02:24.030
+That's why I have given us-east-1.
+
+02:24.030 --> 02:25.803
+Okay, save this information.
+
+02:26.670 --> 02:29.010
+Go to Exercise6.
+
+02:29.010 --> 02:30.153
+terraform init.
+
+02:31.110 --> 02:32.430
+So when you do terraform init,
+
+02:32.430 --> 02:35.460
+it says, "Initializing the backend...".
+
+02:35.460 --> 02:36.780
+So if you're given wrong bucket name
+
+02:36.780 --> 02:41.343
+or there is some problem, that is going to throw the error.
+
+02:42.240 --> 02:43.740
+But in my case, everything is good.
+
+02:43.740 --> 02:45.210
+So it initialize the backend.
+
+02:45.210 --> 02:47.800
+Now we can do terraform plan
+
+02:49.290 --> 02:51.333
+and then I'll do terraform apply.
+
+02:52.920 --> 02:53.793
+yes.
+
+02:56.070 --> 02:59.370
+Okay, so the execution completed successfully.
+
+02:59.370 --> 03:03.960
+So we know we have a terraform.tfstate file, right?
+
+03:03.960 --> 03:05.220
+That maintains the information,
+
+03:05.220 --> 03:08.070
+but we said the information should go here.
+
+03:08.070 --> 03:10.050
+So let's check the terraform.tfstate file.
+
+03:10.050 --> 03:12.960
+You see there is nothing here.
+
+03:12.960 --> 03:16.920
+Now let's go to the S3 bucket, terraform/ folder.
+
+03:16.920 --> 03:19.170
+And here we have a file called backend.
+
+03:19.170 --> 03:22.860
+Let's click on that and let's click on Open.
+
+03:22.860 --> 03:25.810
+And now you see all the information is mentioned over here.
+
+03:28.080 --> 03:32.010
+Now the biggest benefit is you can put the source code
+
+03:32.010 --> 03:34.890
+in your repository like GitHub or Bitbucket.
+
+03:34.890 --> 03:35.820
+You're working in a team.
+
+03:35.820 --> 03:37.350
+They'll have the exact same code,
+
+03:37.350 --> 03:39.990
+but .tfstate file is going to be in the S3 bucket.
+
+03:39.990 --> 03:42.063
+And in the execution,
+
+03:42.900 --> 03:47.400
+the S3 bucket .tfstate file will get updated in the runtime.
+
+03:47.400 --> 03:51.660
+So everyone in the team will have same .tfstate file
+
+03:51.660 --> 03:53.943
+coming from a remote location, S3 bucket.
+
+03:55.200 --> 03:59.070
+So there are other ways also of mentioning your backend,
+
+03:59.070 --> 04:00.600
+not only S3.
+
+04:00.600 --> 04:04.347
+You can integrate with HCP Terraform.
+
+04:04.347 --> 04:07.620
+HCP is an application that is provided by Terraform.
+
+04:07.620 --> 04:09.450
+So you know, centralized team.
+
+04:09.450 --> 04:11.970
+So team can, you know, have a centralized location
+
+04:11.970 --> 04:13.950
+where they can maintain the state,
+
+04:13.950 --> 04:15.660
+they can store the secret information
+
+04:15.660 --> 04:17.280
+like passwords and all.
+
+04:17.280 --> 04:21.450
+You can have access controls, really enterprise level work.
+
+04:21.450 --> 04:24.840
+But you also get a free account if you have a small team.
+
+04:24.840 --> 04:26.400
+And so if you're using HCP,
+
+04:26.400 --> 04:29.460
+then you can mention backend as remote
+
+04:29.460 --> 04:31.410
+and organization, your organization name
+
+04:31.410 --> 04:35.400
+that is in the HCP and the workspace that you create there.
+
+04:35.400 --> 04:39.060
+So then HCP will manage your state file.
+
+04:39.060 --> 04:42.540
+Otherwise you already have seen the S3.
+
+04:42.540 --> 04:44.550
+And you can also use Console,
+
+04:44.550 --> 04:46.770
+Console Database instead of S3.
+
+04:46.770 --> 04:48.060
+My point is there are different ways
+
+04:48.060 --> 04:52.470
+of mentioning a centralized location for the state file
+
+04:52.470 --> 04:55.440
+and you should always use that in real time.
+
+04:55.440 --> 04:58.290
+Centralized .tfstate file.
+
+04:58.290 --> 05:01.113
+And if you're done here, you can destroy everything.
+
+05:05.550 --> 05:07.710
+And then that is all in this lecture.
+
+05:07.710 --> 05:09.453
+I will see you in the next one.

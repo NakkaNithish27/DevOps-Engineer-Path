@@ -1,0 +1,607 @@
+WEBVTT
+
+00:00.160 --> 00:01.320
+Hello and welcome.
+
+00:02.120 --> 00:05.960
+In this lecture we are going to talk about the thresholds.
+
+00:05.960 --> 00:13.000
+And if a metric breaches the threshold then how should we send the notification for notification.
+
+00:13.000 --> 00:16.560
+In earlier lecture we did integrate slack with Grafana.
+
+00:17.160 --> 00:21.800
+In this lecture we are going to create a panel an alert and a threshold.
+
+00:22.200 --> 00:26.680
+If our metric breaches the threshold we'll get a notification on our slack channel.
+
+00:27.120 --> 00:29.560
+So this is the query that we will be using.
+
+00:30.080 --> 00:34.400
+This query shows the available root file system usage.
+
+00:34.400 --> 00:39.240
+So how much of the root partition is utilized in percentage.
+
+00:39.680 --> 00:42.320
+So let's test that query on Prometheus first.
+
+00:42.760 --> 00:44.120
+So let's understand this query.
+
+00:44.120 --> 00:48.640
+So we have a metric available file system size in bytes.
+
+00:48.640 --> 00:50.920
+And we are taking a label of root.
+
+00:50.920 --> 00:53.160
+So that is the root partition mount point root.
+
+00:53.400 --> 00:56.600
+Another label is this is for the system web server system.
+
+00:56.880 --> 01:01.230
+And we divide that with the root File system size in bytes.
+
+01:01.750 --> 01:06.190
+So first let me remove this and this also from the beginning.
+
+01:06.430 --> 01:07.630
+And let's see what we get.
+
+01:08.110 --> 01:11.110
+Now here we get the available size.
+
+01:11.110 --> 01:12.230
+To see it in percentage.
+
+01:12.230 --> 01:14.630
+We're going to multiply this with 100.
+
+01:16.830 --> 01:23.110
+So this is available now if you want to see the used we need to subtract this with one and then multiply
+
+01:23.110 --> 01:23.990
+with 100.
+
+01:23.990 --> 01:28.350
+So here we say parenthesis one minus.
+
+01:28.350 --> 01:31.950
+And we should close this parenthesis here.
+
+01:34.470 --> 01:36.830
+So this is the used percentage.
+
+01:36.830 --> 01:39.110
+Around 47% is used.
+
+01:39.910 --> 01:42.430
+Let's use this query to create a panel.
+
+01:43.990 --> 01:47.510
+So in Grafana in the system row we are going to create that.
+
+01:47.910 --> 01:49.910
+So we say add visualization.
+
+01:50.230 --> 01:53.070
+Let's put this query and say run query.
+
+01:55.110 --> 01:58.380
+And for legends we need to change this one.
+
+02:00.860 --> 02:02.220
+So we take the label app.
+
+02:02.220 --> 02:07.380
+We get here the app name web 101 hyphen system and the mount point its value route.
+
+02:07.860 --> 02:12.700
+Let's give panel a proper name root file system usage in percentage.
+
+02:13.340 --> 02:14.780
+Transparent background.
+
+02:15.220 --> 02:18.900
+Standard options unit percentage 0 to 100.
+
+02:19.620 --> 02:23.820
+So you should see here in the y axis the percentage.
+
+02:24.180 --> 02:25.620
+And let's save this.
+
+02:28.140 --> 02:35.780
+Now we need to set a rule a threshold that if it breaches above let's say 60%, we should get a notification.
+
+02:35.780 --> 02:39.060
+So we can create the rules from alert rules here also.
+
+02:39.100 --> 02:43.420
+Or we can click here on the alert and say new alert rule.
+
+02:43.780 --> 02:45.260
+Let's give this a name.
+
+02:45.580 --> 02:48.940
+We'll call it as Root Disk Usage Alert.
+
+02:49.420 --> 02:53.180
+It will take the query automatically if you just click the tab there on alert.
+
+02:53.180 --> 02:55.620
+But if you come to alert rules then you need to write the query.
+
+02:55.620 --> 02:59.570
+Once again make sure data source is Prometheus selected over here.
+
+02:59.850 --> 03:00.810
+And scroll down.
+
+03:00.810 --> 03:04.290
+Let's look at the condition so we can see here when query.
+
+03:04.450 --> 03:09.450
+So that's the query is above let's say 65%.
+
+03:09.930 --> 03:13.330
+And let's scroll down here evaluation period.
+
+03:13.330 --> 03:16.370
+So you need to select a group here which is not defined.
+
+03:16.690 --> 03:18.930
+So click on new evaluation group.
+
+03:19.890 --> 03:25.050
+So name I have given as high frequency check I want to evaluate it every minute.
+
+03:25.530 --> 03:27.410
+And once you create a group you select it.
+
+03:27.410 --> 03:33.610
+Then you can select this for many other rules for which you want a high frequency checks.
+
+03:34.010 --> 03:36.690
+And like that you can have multiple groups here.
+
+03:36.690 --> 03:37.810
+You can select the interval.
+
+03:37.810 --> 03:40.250
+So I'm going to keep it as one minute and say create.
+
+03:40.650 --> 03:47.470
+So if this alert comes into alarm state there is a pending period also which is by default here one
+
+03:47.470 --> 03:47.730
+minute.
+
+03:47.730 --> 03:50.730
+So it's going to wait one minute before it sends an alert.
+
+03:51.370 --> 03:53.970
+If you scroll down there is configure notification.
+
+03:53.970 --> 03:54.290
+Here.
+
+03:54.290 --> 03:58.320
+You should see your slack tighten alerts that we have configured earlier.
+
+03:58.760 --> 04:03.840
+If you want to customize the message, you can mention the summary and description over here.
+
+04:04.200 --> 04:07.320
+Otherwise it will just send the default message.
+
+04:07.640 --> 04:08.720
+So let's save this.
+
+04:09.840 --> 04:13.400
+So that's the threshold that we have set above 65.
+
+04:13.440 --> 04:17.480
+Let's go back to our panel and also visualize it in the same way.
+
+04:17.480 --> 04:21.280
+In the panel we should be able to see the threshold values.
+
+04:21.640 --> 04:23.040
+So let's go to dashboards.
+
+04:24.160 --> 04:32.000
+Tighten prod this rule file system usage edit okay over here in the right hand side scroll down first
+
+04:32.000 --> 04:34.400
+I want to change this one to this style.
+
+04:34.960 --> 04:37.080
+I'll scroll down and find threshold.
+
+04:38.800 --> 04:45.240
+We'll say threshold 65 thresholds mode percentage show threshold.
+
+04:45.320 --> 04:46.600
+And there's different options.
+
+04:46.640 --> 04:51.720
+This as a line or as filled regions and lines.
+
+04:52.400 --> 04:55.030
+Let's refresh this Okay.
+
+04:55.030 --> 04:59.710
+I need to select your threshold mode as absolute because it is showing at 48%.
+
+05:00.150 --> 05:03.550
+So click on absolute okay.
+
+05:03.550 --> 05:05.910
+So it doesn't it does not show the red line.
+
+05:05.910 --> 05:09.510
+That is because it has never gone above 49 also.
+
+05:09.910 --> 05:16.150
+But we're going to make it do it by creating a file a fake file actually I'll show you how we can do
+
+05:16.150 --> 05:16.390
+that.
+
+05:16.390 --> 05:18.390
+So switch to the web server.
+
+05:19.230 --> 05:26.150
+Make sure 22 is allowed from your IP to the web server, and get the web server public ip ssh to it.
+
+05:27.950 --> 05:29.710
+Switch to root user.
+
+05:30.870 --> 05:31.870
+Clear the screen.
+
+05:32.590 --> 05:34.510
+Let's check the disk space DFI.
+
+05:34.510 --> 05:36.950
+Fine, so it's 47% full.
+
+05:37.470 --> 05:39.270
+Available is 3.6 GB.
+
+05:39.310 --> 05:43.750
+So if I create a one GB of file I think it should go above 65%.
+
+05:43.750 --> 05:44.630
+Let's try that.
+
+05:45.310 --> 05:50.190
+So this is the command f allocate hyphen L1G for one GB file.
+
+05:50.190 --> 05:51.190
+And that's the file path.
+
+05:51.190 --> 05:55.300
+It's in the temp folder If you run this command, then let's run D5.
+
+05:56.380 --> 05:59.220
+Okay, still 63%.
+
+05:59.380 --> 06:02.180
+Let's delete this and create it once again.
+
+06:03.260 --> 06:04.180
+Slash temp.
+
+06:07.260 --> 06:09.180
+Around 1.5 GB.
+
+06:11.860 --> 06:18.020
+I just don't want to fill this disk because it's just eight GB of size and root partition system will
+
+06:18.020 --> 06:18.940
+hang totally.
+
+06:18.940 --> 06:20.900
+So being very careful with this.
+
+06:20.940 --> 06:22.540
+Okay 70%.
+
+06:22.900 --> 06:23.580
+That's good.
+
+06:23.980 --> 06:24.180
+Okay.
+
+06:24.180 --> 06:25.460
+Let's go back to Grafana.
+
+06:27.060 --> 06:28.260
+Let's refresh this.
+
+06:28.660 --> 06:29.780
+So wait for more.
+
+06:29.940 --> 06:30.220
+Yeah.
+
+06:30.260 --> 06:30.580
+Okay.
+
+06:30.580 --> 06:30.820
+Yeah.
+
+06:30.820 --> 06:31.540
+There it is.
+
+06:32.060 --> 06:32.260
+Okay.
+
+06:32.260 --> 06:33.940
+By the time open the slack channel.
+
+06:33.940 --> 06:35.700
+So let's do the slack login.
+
+06:36.780 --> 06:39.260
+Login to slack, my Google account.
+
+06:39.860 --> 06:42.780
+Select your workspace if it's asked you.
+
+06:43.300 --> 06:44.780
+So mine is Titan monitoring.
+
+06:45.220 --> 06:46.180
+Now click on this.
+
+06:46.180 --> 06:47.580
+Use slack in your browser.
+
+06:48.180 --> 06:48.380
+Okay.
+
+06:48.380 --> 06:53.890
+Just make sure you save this dashboard before you exit from here and go to alert rules, you should
+
+06:53.890 --> 06:58.370
+see the one rule that is firing and firing for one minute.
+
+06:58.770 --> 07:00.890
+We should see the alert.
+
+07:00.930 --> 07:01.570
+See that?
+
+07:02.370 --> 07:07.130
+Now it will send the notification again based on the timing that we have given.
+
+07:07.330 --> 07:09.770
+But if you want, we can silence the notification.
+
+07:09.770 --> 07:14.050
+Also, those notification timings can be set through notification policies.
+
+07:14.050 --> 07:17.250
+So let's go to notification policies over here in the alerting.
+
+07:17.570 --> 07:20.010
+So for slack we'll select this.
+
+07:20.010 --> 07:21.530
+No policies for slack.
+
+07:21.730 --> 07:24.210
+So we're going to create a policy for slack.
+
+07:24.810 --> 07:26.850
+So click here on new child policy.
+
+07:27.330 --> 07:31.090
+Okay we need to put a label over here that is going to match our alert.
+
+07:31.530 --> 07:34.130
+But we have not created any labels for alert.
+
+07:34.130 --> 07:35.650
+We have given alert a name.
+
+07:35.650 --> 07:37.770
+So let's first create the names.
+
+07:38.010 --> 07:38.570
+Sorry.
+
+07:38.610 --> 07:40.210
+Let's create the labels for the alert.
+
+07:40.210 --> 07:41.690
+So go to Alert Rules.
+
+07:42.090 --> 07:45.690
+Find your alert over here click on edit.
+
+07:46.570 --> 07:47.690
+So that's the name.
+
+07:48.050 --> 07:49.010
+Let's scroll down.
+
+07:49.010 --> 07:50.440
+Here we have the label.
+
+07:50.440 --> 07:51.760
+So let's see add label.
+
+07:53.480 --> 07:59.760
+So give a label I have given alert name is equal to root disk alert and same one.
+
+08:00.200 --> 08:01.320
+Oops I clicked it again.
+
+08:01.320 --> 08:06.360
+So okay just type it and hit enter and then say save.
+
+08:06.840 --> 08:10.240
+Okay this is the same label we are going to use in the notification policy.
+
+08:10.240 --> 08:13.600
+So go to Notification policies Add child policy.
+
+08:13.840 --> 08:19.000
+Let's give that same label alert name equal to same value over here.
+
+08:19.560 --> 08:23.320
+Choose contact point as slack and just say save policy.
+
+08:23.680 --> 08:27.240
+So this policy is the child policy of this main default policy.
+
+08:27.240 --> 08:32.280
+And if we look at the default policy, if we edit this we look at the timing options.
+
+08:32.280 --> 08:34.320
+Here we can see the timing options.
+
+08:34.720 --> 08:41.160
+So repeat interval over here is by default four hours which is the wait time before sending a notification
+
+08:41.160 --> 08:43.680
+that has already been sent successfully.
+
+08:44.080 --> 08:46.440
+So based on your requirement you can change this.
+
+08:46.720 --> 08:54.350
+And just for testing purpose we can just say one minute of the default policy of the group interval.
+
+08:54.390 --> 08:56.110
+Also, we need to give one minute.
+
+08:57.630 --> 08:59.710
+And this one I'm going to give two minutes.
+
+09:00.190 --> 09:04.790
+So group interval is the wait time before sending a notification about changes.
+
+09:05.110 --> 09:06.750
+So the first notification is sent.
+
+09:06.750 --> 09:08.870
+After that there might be change also.
+
+09:09.190 --> 09:10.310
+And the alert is fixed.
+
+09:10.310 --> 09:16.870
+So that is this time wait time before sending notification about changes should not be this low.
+
+09:16.910 --> 09:17.750
+The repeat interval.
+
+09:17.750 --> 09:18.790
+But we are just testing it.
+
+09:18.790 --> 09:25.510
+So that's why we are giving update policy and our alert is still in the firing state if we go to dashboard.
+
+09:27.630 --> 09:28.590
+Checker panel.
+
+09:29.910 --> 09:31.190
+So it's in still alert.
+
+09:31.190 --> 09:32.870
+And let's check the slack.
+
+09:32.910 --> 09:36.510
+If you wait for a minute you should see another alert quickly.
+
+09:36.510 --> 09:39.430
+And then after a few minutes you'll get more alerts.
+
+09:39.910 --> 09:42.390
+So now it's better we delete this file.
+
+09:42.710 --> 09:43.910
+Wait, my session is hanging.
+
+09:43.910 --> 09:45.630
+I need to log out and log in again.
+
+09:45.950 --> 09:51.460
+I'll delete this file because I don't want this system to be completely hanged if more data is stored
+
+09:51.460 --> 09:52.740
+over here from Grafana.
+
+09:52.780 --> 09:54.540
+This is going to increase the disk space.
+
+09:54.940 --> 09:55.140
+Okay.
+
+09:55.180 --> 09:58.620
+So login again and I'm going to delete that file.
+
+10:02.300 --> 10:04.300
+And wait for a few minutes.
+
+10:06.700 --> 10:08.100
+See last 15 minutes.
+
+10:08.940 --> 10:10.500
+Last five minutes.
+
+10:11.300 --> 10:11.700
+Okay.
+
+10:11.700 --> 10:12.380
+It dropped.
+
+10:12.660 --> 10:16.860
+Now based on our setting we should also get a result notification also.
+
+10:16.900 --> 10:17.100
+Okay.
+
+10:17.100 --> 10:18.340
+You see that result?
+
+10:19.500 --> 10:19.820
+Okay.
+
+10:19.860 --> 10:20.980
+So now take your time.
+
+10:21.020 --> 10:22.460
+Play with Grafana dashboard.
+
+10:22.460 --> 10:23.660
+Create more panels.
+
+10:23.660 --> 10:28.340
+We have few more queries over here that you can use to create more panels.
+
+10:28.340 --> 10:30.540
+If you want to create dashboard alerts.
+
+10:30.980 --> 10:33.180
+Now play with it for a few hours.
+
+10:33.700 --> 10:39.820
+Look at different settings, use ChatGPT to get more information and once you are good with this, then
+
+10:39.820 --> 10:42.780
+we can go to Log aggregation in the next lecture.
+
+10:43.180 --> 10:46.220
+So complete this setup and then join me in the next lecture.

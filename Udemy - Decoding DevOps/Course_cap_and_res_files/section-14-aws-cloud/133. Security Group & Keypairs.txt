@@ -1,0 +1,637 @@
+WEBVTT
+
+00:00.300 --> 00:01.530
+Instructor: Hello and welcome.
+
+00:01.530 --> 00:05.310
+In this lecture, we are going to create security groups
+
+00:05.310 --> 00:06.483
+and key pairs.
+
+00:07.650 --> 00:11.730
+So we need to create total three security groups.
+
+00:11.730 --> 00:13.650
+One will be for the load balancer,
+
+00:13.650 --> 00:15.780
+Application Load Balancer,
+
+00:15.780 --> 00:19.170
+which will listen from the internet traffic.
+
+00:19.170 --> 00:23.010
+So the rules will be HTTP and HTTPS.
+
+00:23.010 --> 00:24.420
+Initially, it'll be HTTP,
+
+00:24.420 --> 00:28.500
+but later, we'll remove that and we'll keep only HTTPS.
+
+00:28.500 --> 00:31.080
+So the port number will be default, 443,
+
+00:31.080 --> 00:33.240
+allow from anywhere.
+
+00:33.240 --> 00:36.090
+Next security group will be for the application,
+
+00:36.090 --> 00:38.370
+our Tomcat instances.
+
+00:38.370 --> 00:41.340
+So Tomcat service listens on port 8080.
+
+00:41.340 --> 00:43.350
+So we have to mention here a rule,
+
+00:43.350 --> 00:48.350
+port 8080 allowed from the load balancer security group.
+
+00:48.450 --> 00:51.000
+We'll also allow port 22 from our IP
+
+00:51.000 --> 00:53.820
+so we can SSH to these instances.
+
+00:53.820 --> 00:57.690
+Now our vprofile application living in the Tomcat instance
+
+00:57.690 --> 01:00.870
+will connect to the backend services.
+
+01:00.870 --> 01:05.160
+Our vprofile application will connect to backend instances
+
+01:05.160 --> 01:06.720
+for three services.
+
+01:06.720 --> 01:10.860
+One is MySQL, port number 3306;
+
+01:10.860 --> 01:14.280
+Memcache, port number 11211;
+
+01:14.280 --> 01:17.373
+and RabbitMQ on port 5672.
+
+01:18.210 --> 01:22.800
+So here we have to give first three rules for Memcache,
+
+01:22.800 --> 01:24.930
+for MySQL, for RabbitMQ,
+
+01:24.930 --> 01:26.580
+these three port numbers allowed
+
+01:26.580 --> 01:30.270
+from the Tomcat instance security group,
+
+01:30.270 --> 01:33.600
+and also the port 22 from My IP
+
+01:33.600 --> 01:35.913
+so we can SSH to this instance.
+
+01:36.840 --> 01:38.430
+We can find out this port number
+
+01:38.430 --> 01:41.250
+in our application.properties file for application.
+
+01:41.250 --> 01:43.950
+So if you come to the source code,
+
+01:43.950 --> 01:47.700
+and you can be in any branch, I'm on awsliftandshift branch
+
+01:47.700 --> 01:50.700
+because this is the branch we will be using in this project.
+
+01:50.700 --> 01:54.480
+So we can check in src, main,
+
+01:54.480 --> 01:58.650
+resources, application.properties file.
+
+01:58.650 --> 02:03.650
+Now here we have db01:3306,
+
+02:03.930 --> 02:06.655
+MySQL port 3306.
+
+02:06.655 --> 02:08.970
+Memcache, 11211.
+
+02:08.970 --> 02:11.343
+And RabbitMQ, 5672.
+
+02:12.360 --> 02:14.490
+Okay, so once again, three security group:
+
+02:14.490 --> 02:18.990
+load balancer, Tomcat instance, and backend security group.
+
+02:18.990 --> 02:20.160
+Okay, so let's get started.
+
+02:20.160 --> 02:21.720
+Let's go to EC2 service
+
+02:21.720 --> 02:24.240
+and start creating the security group.
+
+02:24.240 --> 02:26.040
+Let's go to Security groups.
+
+02:26.040 --> 02:27.210
+You can go from here
+
+02:27.210 --> 02:31.170
+or you can click over here, Security Groups.
+
+02:31.170 --> 02:32.940
+So first, we will create security group
+
+02:32.940 --> 02:34.260
+for the load balancer.
+
+02:34.260 --> 02:36.393
+So click on Create security group.
+
+02:37.350 --> 02:40.290
+Scroll up, give security group a name,
+
+02:40.290 --> 02:43.375
+vprofile-ELB-SG.
+
+02:43.375 --> 02:45.480
+And let's give some description.
+
+02:45.480 --> 02:48.780
+Security Group for the vprofile load balancer.
+
+02:48.780 --> 02:49.770
+Scroll down.
+
+02:49.770 --> 02:52.020
+Very carefully edit inbound rules.
+
+02:52.020 --> 02:54.480
+Do not touch the outbound rules.
+
+02:54.480 --> 02:56.160
+It should remain the same.
+
+02:56.160 --> 02:58.620
+If you make changes to the outbound rules,
+
+02:58.620 --> 03:01.740
+your instance will not get any internet traffic.
+
+03:01.740 --> 03:03.960
+So add inbound rules.
+
+03:03.960 --> 03:07.680
+So we will select first HTTP,
+
+03:07.680 --> 03:10.590
+allowed from any IPv4.
+
+03:10.590 --> 03:13.413
+Once again, same thing, HTTP,
+
+03:14.580 --> 03:17.370
+allowed from any IPv6.
+
+03:17.370 --> 03:19.140
+Anywhere because we are hosting it
+
+03:19.140 --> 03:21.030
+for the public on the internet.
+
+03:21.030 --> 03:22.650
+That's why the anywhere rule.
+
+03:22.650 --> 03:25.530
+And also, we have to add the rule for HTTPS
+
+03:25.530 --> 03:28.710
+because later, when we set up the load balancer,
+
+03:28.710 --> 03:32.460
+we are going to add a domain certificate
+
+03:32.460 --> 03:36.570
+that we created in this AWS signup lecture.
+
+03:36.570 --> 03:39.030
+In the prerequisite section, we created a certificate
+
+03:39.030 --> 03:40.050
+that we will be using
+
+03:40.050 --> 03:43.410
+so we can use then HTTPS secure connection.
+
+03:43.410 --> 03:45.720
+Again, same thing, any IPv4.
+
+03:45.720 --> 03:49.683
+And then, HTTPS, any IPv6.
+
+03:50.580 --> 03:52.020
+Okay, we updated the rules,
+
+03:52.020 --> 03:55.530
+and once again, do not touch outbound rules.
+
+03:55.530 --> 03:57.453
+Say Create security group.
+
+03:59.760 --> 04:02.160
+Okay, let's go over the next one.
+
+04:02.160 --> 04:03.543
+Create security group.
+
+04:05.040 --> 04:08.523
+This is for the application Tomcat instance.
+
+04:09.720 --> 04:12.570
+Name: vprofile-app-sg.
+
+04:12.570 --> 04:17.570
+And description: Security group for tomcat app server.
+
+04:17.670 --> 04:20.220
+Inbound rules, add rules.
+
+04:20.220 --> 04:22.740
+So Tomcat listens on port 8080,
+
+04:22.740 --> 04:25.200
+so we will here say,
+
+04:25.200 --> 04:27.093
+I'll keep it Custom TCP,
+
+04:28.200 --> 04:31.140
+I'll say 8080,
+
+04:31.140 --> 04:34.560
+allowed from the load balancer security group.
+
+04:34.560 --> 04:37.230
+So in the source, you just type sg
+
+04:37.230 --> 04:41.010
+and select the load balancer security group.
+
+04:41.010 --> 04:42.900
+You can give some description:
+
+04:42.900 --> 04:46.200
+Allows traffic from vprofile load balancer.
+
+04:46.200 --> 04:48.780
+And also, we need to SSH to the instance,
+
+04:48.780 --> 04:52.173
+so we'll say 22 from My IP.
+
+04:53.340 --> 04:55.440
+And again, if you're using broadband,
+
+04:55.440 --> 04:58.410
+normal internet connection, your public IP will change,
+
+04:58.410 --> 05:01.440
+so if you're not able to SSH to the instance,
+
+05:01.440 --> 05:04.050
+let's say the next day, make sure you edit the rule
+
+05:04.050 --> 05:07.113
+and you again say My IP so it'll update your IP.
+
+05:08.220 --> 05:10.770
+Okay. Again, do not touch the outbound rules.
+
+05:10.770 --> 05:12.153
+Create security group.
+
+05:13.170 --> 05:16.110
+Okay, the last one, the backend security group.
+
+05:16.110 --> 05:17.797
+Let's give it a name.
+
+05:17.797 --> 05:19.680
+So, vprofile backend security group.
+
+05:19.680 --> 05:21.510
+And the description I have given,
+
+05:21.510 --> 05:23.520
+which makes things much clearer:
+
+05:23.520 --> 05:26.310
+Security group for mysql, memcache &amp; rabbitmq
+
+05:26.310 --> 05:31.080
+allow from tomcat, or I should say allowed from,
+
+05:31.080 --> 05:33.960
+allowed from tomcat app server.
+
+05:33.960 --> 05:34.793
+Let's add the rule.
+
+05:34.793 --> 05:36.990
+We need to add first, there's three rules,
+
+05:36.990 --> 05:41.490
+first for MySQL, you can just directly type 3306,
+
+05:41.490 --> 05:43.983
+or you can also search for MySQL here,
+
+05:44.910 --> 05:47.913
+which by default is 3306.
+
+05:49.050 --> 05:53.460
+And the source should be the app security group, okay?
+
+05:53.460 --> 05:55.380
+App, not the load balancer security group.
+
+05:55.380 --> 05:57.633
+Make sure you select this properly here.
+
+05:58.650 --> 06:02.400
+And the next rule will be 11211.
+
+06:02.400 --> 06:04.020
+This is for Memcache.
+
+06:04.020 --> 06:05.640
+Once again, same source.
+
+06:05.640 --> 06:08.370
+Source will be app security group.
+
+06:08.370 --> 06:09.203
+Okay.
+
+06:09.203 --> 06:11.493
+Then 5672.
+
+06:13.020 --> 06:17.580
+Again, source is the app security group.
+
+06:17.580 --> 06:21.180
+And port 22 from My IP
+
+06:21.180 --> 06:23.820
+so we can SSH to this instance.
+
+06:23.820 --> 06:25.710
+And there's also one more thing that people do.
+
+06:25.710 --> 06:28.893
+Instead of adding one rule at a time, you can also do this.
+
+06:30.210 --> 06:33.690
+All traffic allowed from the security group
+
+06:33.690 --> 06:35.193
+of the application.
+
+06:37.260 --> 06:39.360
+This makes things easier,
+
+06:39.360 --> 06:40.590
+but from a security point of view,
+
+06:40.590 --> 06:42.600
+this is not a good idea.
+
+06:42.600 --> 06:43.562
+All right.
+
+06:43.562 --> 06:46.590
+Just make sure this is the application security group.
+
+06:46.590 --> 06:48.780
+If you're again confused about the port number,
+
+06:48.780 --> 06:51.990
+check the application.properties file.
+
+06:51.990 --> 06:56.190
+src, main, resources,
+
+06:56.190 --> 06:58.830
+application.properties file, right?
+
+06:58.830 --> 07:02.853
+3306, 11211, and 5672.
+
+07:04.620 --> 07:06.240
+Okay, again, if you're not able to SSH,
+
+07:06.240 --> 07:09.900
+make sure you update the rule of My IP.
+
+07:09.900 --> 07:11.160
+Okay, after adding all the rules,
+
+07:11.160 --> 07:13.290
+making sure outbound rule is this,
+
+07:13.290 --> 07:15.183
+we will create the security group.
+
+07:16.410 --> 07:19.890
+Okay, now we need to add one more rule over here.
+
+07:19.890 --> 07:22.590
+The services will be also interacting with each other,
+
+07:22.590 --> 07:25.710
+like Memcache will be connecting to MySQL.
+
+07:25.710 --> 07:29.160
+Now, these rules are set on the instance.
+
+07:29.160 --> 07:31.365
+The security group is not a container
+
+07:31.365 --> 07:33.450
+where you put the instances.
+
+07:33.450 --> 07:36.810
+When you create the instance, it borrows all these rules
+
+07:36.810 --> 07:38.340
+from the security group that you select,
+
+07:38.340 --> 07:40.680
+so every instance will have the security group.
+
+07:40.680 --> 07:44.280
+So if MySQL instance does not have a rule
+
+07:44.280 --> 07:48.390
+that says allow 3306 from Memcache instance,
+
+07:48.390 --> 07:53.390
+then the request from Memcache to MySQL will fail.
+
+07:53.460 --> 07:55.500
+So we need to add one rule here.
+
+07:55.500 --> 07:58.260
+After creating the security group, you can add that rule.
+
+07:58.260 --> 08:00.900
+Just say Edit inbound rules
+
+08:00.900 --> 08:02.973
+and we'll add a rule here which says,
+
+08:04.170 --> 08:08.610
+all traffic allowed from itself,
+
+08:08.610 --> 08:10.383
+its own security group,
+
+08:11.280 --> 08:13.253
+there, vprofile backend security group.
+
+08:13.253 --> 08:16.440
+See, we are editing the vprofile backend security group
+
+08:16.440 --> 08:20.133
+and we are saying all the traffic is allowed within itself.
+
+08:21.120 --> 08:23.670
+So when you give this rule, did I select it right?
+
+08:23.670 --> 08:28.350
+Once again, backend security group, okay?
+
+08:28.350 --> 08:31.260
+So all the instances within the security group
+
+08:31.260 --> 08:33.660
+can connect with each other on any port.
+
+08:33.660 --> 08:35.433
+And this rule is perfectly safe,
+
+08:36.450 --> 08:39.720
+provided the instances are not compromised.
+
+08:39.720 --> 08:41.940
+Okay, let's save this rule.
+
+08:41.940 --> 08:43.770
+Okay, now let's go to key pairs
+
+08:43.770 --> 08:46.050
+and create a login key for our instance.
+
+08:46.050 --> 08:48.150
+So I'll say Create key pair.
+
+08:48.150 --> 08:51.327
+I'll give key a name, vprofile-prod-key.
+
+08:56.587 --> 08:58.590
+.pem format,
+
+08:58.590 --> 09:01.320
+because I use Git Bash or Terminal.
+
+09:01.320 --> 09:05.610
+If you are going to use PuTTY, then you can use .ppk format.
+
+09:05.610 --> 09:07.053
+And say Create key pair.
+
+09:07.890 --> 09:10.110
+Okay, key is downloaded.
+
+09:10.110 --> 09:13.320
+Okay, so once again, we created three security group,
+
+09:13.320 --> 09:16.710
+app for the load balancer, for the Tomcat instance,
+
+09:16.710 --> 09:19.140
+and for the backend instances.
+
+09:19.140 --> 09:20.790
+I know I'm stressing this too much,
+
+09:20.790 --> 09:23.430
+but in real time, this is very essential
+
+09:23.430 --> 09:24.390
+for you to understand.
+
+09:24.390 --> 09:25.470
+Being a DevOps engineer,
+
+09:25.470 --> 09:28.050
+you need to have this networking knowledge,
+
+09:28.050 --> 09:29.550
+firewall knowledge.
+
+09:29.550 --> 09:32.100
+If you don't, you'll end up allowing all traffic
+
+09:32.100 --> 09:35.790
+from anywhere, which is a huge security risk.
+
+09:35.790 --> 09:39.390
+So understanding the port number of your service
+
+09:39.390 --> 09:40.980
+and the flow, right?
+
+09:40.980 --> 09:42.600
+Like the Tomcat instance
+
+09:42.600 --> 09:45.660
+connects to these backend services.
+
+09:45.660 --> 09:47.940
+So we can give the security group
+
+09:47.940 --> 09:50.700
+of the Tomcat instances as a source,
+
+09:50.700 --> 09:54.450
+so no other traffic is coming from no other place.
+
+09:54.450 --> 09:56.400
+All right, then that would be all in this lecture.
+
+09:56.400 --> 09:58.050
+I will see you in the next one
+
+09:58.050 --> 10:00.930
+where we will create these instances
+
+10:00.930 --> 10:02.940
+and set all these services.
+
+10:02.940 --> 10:04.140
+See you in the next one.

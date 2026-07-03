@@ -1,0 +1,760 @@
+WEBVTT
+
+00:00.120 --> 00:01.280
+Hello and welcome.
+
+00:01.280 --> 00:06.920
+In this lecture we will be talking about code scanning, specifically security code scanning, one of
+
+00:06.920 --> 00:12.200
+the necessary stage in your pipeline before publishing your artifact.
+
+00:12.440 --> 00:17.440
+There are many popular tools that you can include in your pipeline to do code scanning.
+
+00:17.640 --> 00:19.600
+I have listed here a few sneak.
+
+00:19.960 --> 00:26.680
+It can be used for static application security testing and also software composition analysis.
+
+00:27.000 --> 00:33.880
+Now Sast scans your source code for security issues like SQL injection, XSS insecure functions.
+
+00:34.200 --> 00:39.600
+C, on the other hand, scans the open source dependencies like Maven, npm, pip, and again, this
+
+00:39.600 --> 00:43.200
+is also for the known vulnerabilities, the security vulnerabilities.
+
+00:43.720 --> 00:47.280
+Then you have the most popular name sonar cube or sonar cloud.
+
+00:47.560 --> 00:50.240
+You can use it for code quality plus security.
+
+00:50.240 --> 00:53.520
+Both SEM group is a lightweight Sast tool.
+
+00:54.040 --> 00:58.960
+And then you have Trivy, which is very popular nowadays in a container environment.
+
+00:58.960 --> 01:05.650
+And again it scans the container also image and also infrastructure as a code like Terraform, cloud
+
+01:05.650 --> 01:07.890
+formation, Kubernetes, even helm charts.
+
+01:08.370 --> 01:11.370
+And that's what we will be using in this lecture.
+
+01:12.130 --> 01:16.610
+So in the GitLab pipeline we need to mention a stage security scan.
+
+01:17.290 --> 01:22.810
+And the image that we will be using is Aqua TV image from directly from Docker Hub.
+
+01:23.210 --> 01:28.410
+So going to pull this container, pull this image, run a container and execute some command on that.
+
+01:28.410 --> 01:31.930
+Before running the command, we need to set the entry point as null.
+
+01:31.930 --> 01:32.730
+And why that?
+
+01:32.730 --> 01:35.250
+I'll tell you that in the pipeline setup.
+
+01:35.610 --> 01:38.730
+So we will be running it after the build stage.
+
+01:39.210 --> 01:41.370
+So we're going to give their needs build job.
+
+01:41.490 --> 01:45.650
+And the command that we will be running will be this TV fs file system.
+
+01:45.650 --> 01:50.370
+So we are scanning file system just the source code not the container image over here.
+
+01:50.610 --> 01:52.850
+But you can scan the container image also.
+
+01:53.130 --> 01:59.410
+So format will be JSON format, vulnerability type will be OS and library and output.
+
+01:59.410 --> 02:01.690
+We are going to store it in this file.
+
+02:02.330 --> 02:05.700
+The dot at the end represents the current working directory.
+
+02:05.700 --> 02:09.940
+So you will have the source code in this container and in the source code.
+
+02:09.940 --> 02:13.340
+It's going to run this command which is going to generate this file in output.
+
+02:13.780 --> 02:17.860
+So once we have this file we are going to also save it as an artifact.
+
+02:18.340 --> 02:24.460
+So in this lecture we will be doing code scanning by using Treeview image and storing its output as
+
+02:24.460 --> 02:25.300
+an artifact.
+
+02:25.300 --> 02:26.460
+So let's get into it.
+
+02:27.100 --> 02:31.500
+So open your vscode open GitLab CI dot yml file.
+
+02:31.900 --> 02:33.500
+So we have a build stage.
+
+02:33.500 --> 02:36.820
+After build stage I want to run the code scanning stage.
+
+02:37.100 --> 02:41.940
+In fact I want to run this test job plus code scanning at the same time.
+
+02:42.260 --> 02:49.740
+And if I want to run that then I need to put here an entry which says needs colon in square bracket.
+
+02:49.740 --> 02:54.820
+I give the name of the job build job, build hyphen job.
+
+02:55.260 --> 02:57.580
+That's this job name build hyphen job.
+
+02:57.940 --> 03:00.780
+So test job will run after the build job.
+
+03:00.780 --> 03:02.300
+That's what anyways happens.
+
+03:02.580 --> 03:05.860
+But at the same time I want to run the security scanning job.
+
+03:05.860 --> 03:07.390
+So in security scanning job.
+
+03:07.390 --> 03:11.470
+Also, I will mention the same entry which will work like this.
+
+03:11.470 --> 03:16.310
+After the build job test and code scanning job will run together parallelly.
+
+03:16.910 --> 03:20.190
+So let's mention the code scanning job after this.
+
+03:21.430 --> 03:27.310
+So from the first column I have given security hyphen, scan, colon and inside that stage name as security
+
+03:27.670 --> 03:30.310
+image name Aqua cv colon.
+
+03:30.310 --> 03:35.550
+Latest and name of the image I have given in indented.
+
+03:35.550 --> 03:40.990
+I have given inside it because I'm going to add one more entry over here and why and what I'll explain
+
+03:40.990 --> 03:43.510
+in a moment, but let's do it like this.
+
+03:43.510 --> 03:52.350
+First we'll add the needs stage needs colon and here build job.
+
+03:55.750 --> 04:00.390
+So in that way security scan job will also run after the build job like the test job.
+
+04:00.430 --> 04:00.950
+Same.
+
+04:00.990 --> 04:02.590
+Both the jobs will run parallelly.
+
+04:02.990 --> 04:05.470
+Now I need to mention the command script.
+
+04:05.470 --> 04:06.110
+Colon.
+
+04:06.510 --> 04:07.710
+And this is the command.
+
+04:07.790 --> 04:10.530
+Of course I need to give hyphen here and then start the command.
+
+04:11.050 --> 04:12.410
+So the command is trivy.
+
+04:12.410 --> 04:14.690
+And that many option that comes with the trivy command.
+
+04:14.690 --> 04:17.610
+We can go through the documentation of TV.
+
+04:17.930 --> 04:20.810
+But I want to just scan the source code.
+
+04:21.130 --> 04:23.610
+So I say FS file system format.
+
+04:23.610 --> 04:25.610
+That is the output in JSON.
+
+04:25.970 --> 04:27.370
+Exit code zero.
+
+04:27.770 --> 04:31.810
+So even if the code scanning fails, it's going to go to the next stage.
+
+04:31.810 --> 04:36.930
+This is useful when you want to set the quality gates later and needs to send the notification.
+
+04:37.170 --> 04:38.570
+We'll talk about that in a moment.
+
+04:39.010 --> 04:41.250
+Vulnerability type OS and library.
+
+04:41.250 --> 04:47.890
+So operating system related vulnerability and library related vulnerabilities and output stored into
+
+04:47.890 --> 04:48.450
+this file.
+
+04:48.490 --> 04:50.090
+Tree view results dot JSON.
+
+04:50.130 --> 04:51.450
+This you can give anything.
+
+04:51.810 --> 04:53.570
+And here you have dot at the end.
+
+04:53.890 --> 05:02.850
+So what happens is at this stage the pipeline will pull this container image run it scan sorry.
+
+05:02.890 --> 05:06.130
+Clone your source code, all the source code in the container.
+
+05:06.370 --> 05:12.140
+And in that container where you have source code at that place, it is going to run the TV command.
+
+05:12.180 --> 05:14.940
+That's what Dot means in the current working directory.
+
+05:15.300 --> 05:19.020
+And the current working directory will be where you have the source code in the container.
+
+05:19.300 --> 05:24.020
+Now there is a problem with this with images like this which comes with the tools inbuilt.
+
+05:24.500 --> 05:26.020
+Now listen to this carefully.
+
+05:26.020 --> 05:31.340
+There are many tools that you will be using in real time and there are images available for that.
+
+05:31.620 --> 05:38.140
+So either you can use that image and execute your commands like we are doing with TV over here.
+
+05:38.460 --> 05:41.700
+The other way is you take a base image like Ubuntu or Debian.
+
+05:42.060 --> 05:47.100
+You run the container and you install those tools in the container and then run it.
+
+05:47.540 --> 05:54.980
+So for example, here I can take a Debian image, run the container and install TV in that, and then
+
+05:54.980 --> 05:56.180
+run the TV command.
+
+05:56.580 --> 06:01.180
+Now the second option takes a little longer time and we really don't need to install and run.
+
+06:01.540 --> 06:03.980
+But why people generally do it because of this.
+
+06:04.500 --> 06:08.940
+The face error while they are using tools built in the container.
+
+06:09.900 --> 06:11.580
+So take a look at this here.
+
+06:11.620 --> 06:17.070
+That's the stage where we are running the container, pulling the image, running the container and
+
+06:17.070 --> 06:18.470
+executing the command.
+
+06:19.390 --> 06:20.230
+And that's the command.
+
+06:20.270 --> 06:23.830
+That's the command for this job that has failed.
+
+06:24.110 --> 06:25.030
+And there's nothing wrong.
+
+06:25.070 --> 06:27.430
+It's the same command that we are writing in the pipeline.
+
+06:27.430 --> 06:32.590
+The problem is when this container runs, it already runs the command trivy.
+
+06:32.910 --> 06:35.670
+Now what happens is the container runs.
+
+06:35.670 --> 06:36.550
+It runs.
+
+06:36.550 --> 06:38.350
+The first command it runs is Trivy.
+
+06:38.390 --> 06:39.830
+That will be the entry point.
+
+06:39.830 --> 06:42.550
+That will be the entry point, the first command that runs.
+
+06:42.870 --> 06:47.110
+And with that command again we are saying run Trivy.
+
+06:47.110 --> 06:54.310
+So the command the complete command will be actually Trivy TV fs which will fail and it is not highlighted
+
+06:54.310 --> 06:54.950
+anywhere.
+
+06:55.230 --> 07:00.150
+You simply see that unknown command as search for trivy usage is blah blah blah.
+
+07:00.670 --> 07:03.950
+Now whenever you see such kind of error, usage is so and so.
+
+07:03.990 --> 07:08.630
+It's usually the mistake with the command that you have given and not exactly the command.
+
+07:08.670 --> 07:12.230
+The format, like the container already runs the command.
+
+07:12.230 --> 07:15.110
+Then you run the command again, plus you pass the options.
+
+07:15.110 --> 07:16.200
+That's the problem.
+
+07:16.600 --> 07:21.240
+So to solve the problem, we need to first nullify the first command.
+
+07:21.280 --> 07:24.560
+The container is running by doing entry point.
+
+07:24.560 --> 07:26.000
+So we say entry point.
+
+07:26.040 --> 07:28.840
+The first command will be nothing.
+
+07:28.840 --> 07:31.200
+Just run the command that I have given.
+
+07:31.880 --> 07:33.800
+So that way there will be no command.
+
+07:33.800 --> 07:36.400
+When the container is running it will just execute our command.
+
+07:36.760 --> 07:40.840
+And after that you might need to do something like maybe set quality gate or something else.
+
+07:40.840 --> 07:43.960
+So you can use one option here after script.
+
+07:44.800 --> 07:49.200
+It's after underscore script after underscore script colon.
+
+07:49.480 --> 07:53.520
+And you can mention the commands that we'll just say ls hyphen la.
+
+07:54.080 --> 07:57.520
+This is just to show you you might need to run some other commands.
+
+07:58.360 --> 08:02.760
+Then the output when the pipeline completes the output this file will be also gone.
+
+08:02.760 --> 08:06.200
+So we need to make sure we save this file as an artifact.
+
+08:06.640 --> 08:09.160
+So in the same line you need to say artifacts colon.
+
+08:09.160 --> 08:13.240
+And over here you mention the path and you mention the path.
+
+08:13.280 --> 08:14.240
+This is in list format.
+
+08:14.240 --> 08:16.720
+So there could be multiple files that you can mention.
+
+08:17.080 --> 08:20.450
+So this is that same file that you want to save as an artifact.
+
+08:20.450 --> 08:25.890
+And we're seeing when always that means anyways, whatever happens pass or fail this stage.
+
+08:26.210 --> 08:27.850
+Still see if this artifact.
+
+08:28.250 --> 08:32.690
+Now we also have the artifact from the build job that we would like to save.
+
+08:32.690 --> 08:36.050
+So let's put that artifact option in the build job as well.
+
+08:36.810 --> 08:38.490
+So let's scroll down.
+
+08:38.490 --> 08:40.610
+Let's take this artifacts.
+
+08:42.690 --> 08:45.730
+I'm running after script two times now.
+
+08:45.730 --> 08:51.050
+I'll take after script also from here, let's copy this whole thing and put it at the build stage.
+
+08:52.050 --> 08:52.210
+Okay.
+
+08:52.250 --> 08:56.610
+In the same column after script have given artifacts and artifact path is different.
+
+08:56.650 --> 09:03.410
+It's target slash v profile hyphen v two dot var.
+
+09:03.930 --> 09:05.890
+So you can give an absolute path.
+
+09:05.890 --> 09:09.850
+Or you can give a regular expression like you can say star dot var.
+
+09:10.050 --> 09:14.490
+Like if you have jar files, multiple jar files, you can just start or jar or anything that you want
+
+09:14.490 --> 09:14.850
+to save.
+
+09:14.850 --> 09:19.860
+You can give the regular expression, okay, let's save this and let's test it.
+
+09:20.180 --> 09:23.620
+So I'm going to save control S let's commit and push.
+
+09:26.180 --> 09:27.700
+Give a commit message.
+
+09:28.300 --> 09:29.700
+Accept the commit message.
+
+09:31.380 --> 09:31.700
+Okay.
+
+09:31.740 --> 09:33.100
+The pipeline failed.
+
+09:33.100 --> 09:34.780
+And let me show you why it failed.
+
+09:35.060 --> 09:39.300
+So it says YAML, invalid error, security scan, job chosen stage.
+
+09:39.300 --> 09:41.220
+Security does not exist.
+
+09:41.940 --> 09:45.700
+So we have not defined the stage in our pipeline.
+
+09:45.700 --> 09:48.780
+We have mentioned the stage here.
+
+09:48.820 --> 09:49.980
+Security scan.
+
+09:50.500 --> 09:51.940
+The stage name is security.
+
+09:52.220 --> 09:57.420
+But here also we need to add that hyphen security.
+
+09:57.900 --> 10:03.780
+Save this and commit and push a commit message.
+
+10:04.260 --> 10:05.220
+Accept the commit.
+
+10:06.980 --> 10:07.740
+Let's check.
+
+10:08.620 --> 10:09.820
+Let's go to pipelines.
+
+10:10.220 --> 10:10.900
+And it's running.
+
+10:10.900 --> 10:14.820
+Now let's check the stages okay I waited for some time.
+
+10:14.820 --> 10:18.980
+Now you see the build job completed and test and security executed at the same time.
+
+10:18.980 --> 10:20.420
+Security already completed.
+
+10:20.620 --> 10:22.270
+Test is taking a little longer.
+
+10:22.630 --> 10:24.150
+And now that is also completed.
+
+10:24.150 --> 10:27.270
+So we are running test and security job parallelly now.
+
+10:27.870 --> 10:29.670
+And we should also have artifact.
+
+10:29.710 --> 10:32.830
+We have saved artifact from build job and security scan.
+
+10:32.870 --> 10:33.670
+Scan job.
+
+10:34.110 --> 10:37.190
+So here itself in the build section you can see artifacts.
+
+10:37.750 --> 10:42.910
+So you can see the artifact one minute ago for security scan and build job.
+
+10:42.990 --> 10:44.190
+Let's click on build job.
+
+10:44.910 --> 10:45.190
+Sorry.
+
+10:45.230 --> 10:45.710
+My bad.
+
+10:45.910 --> 10:46.910
+Uh, downloading it.
+
+10:46.910 --> 10:47.950
+Let's download it.
+
+10:48.590 --> 10:48.990
+Okay.
+
+10:49.070 --> 10:50.030
+Downloads a zip file.
+
+10:50.030 --> 10:52.190
+If you open that, you should see your artifact.
+
+10:52.230 --> 10:57.190
+We have mentioned start, but we got the file that we're looking for.
+
+10:57.710 --> 10:58.470
+Security scan.
+
+10:58.470 --> 11:00.190
+Let's download this artifact also.
+
+11:00.750 --> 11:04.070
+So you should see the JSON file in zip format.
+
+11:04.070 --> 11:06.430
+If you open it opens in the VS code itself.
+
+11:07.230 --> 11:11.150
+So you see all the vulnerability in the code.
+
+11:11.190 --> 11:16.390
+Of course the next stage should be to check the vulnerability and decide whether to pass this job or
+
+11:16.390 --> 11:16.830
+not.
+
+11:17.310 --> 11:19.990
+And based on that, send the notification also.
+
+11:20.710 --> 11:23.890
+And that can be easily done with this.
+
+11:24.410 --> 11:25.330
+Now we're not doing it.
+
+11:25.330 --> 11:26.650
+I'm just showing you exit codes.
+
+11:26.650 --> 11:28.650
+We have given zero, so there's no quality gate.
+
+11:28.650 --> 11:30.770
+Just runs the job and completes it.
+
+11:31.010 --> 11:37.850
+But if we give one and it finds any vulnerability which are high in the severity, it is going to fail
+
+11:37.850 --> 11:38.250
+this job.
+
+11:38.250 --> 11:41.090
+And then you can send the notification after this.
+
+11:41.450 --> 11:47.850
+You can also mention the severity like you can say hyphen f and severity for what you want to fail it
+
+11:47.850 --> 11:50.130
+for medium high critical you can decide.
+
+11:50.170 --> 11:52.450
+I've given all three here just to show you.
+
+11:52.490 --> 11:53.810
+Now this is tool specific.
+
+11:54.010 --> 11:54.930
+Very specific.
+
+11:54.930 --> 11:58.610
+Different tools have different way of setting quality gates.
+
+11:59.130 --> 12:06.250
+In the DevOps projects course I have used Sonarqube scanner and mentioned a proper quality gates.
+
+12:06.570 --> 12:12.330
+If you have subscribed to DevOps projects course, you can check GitOps by using GitLab project.
+
+12:12.330 --> 12:17.650
+I've mentioned everything in detail over there, but as I said here, it's just hands on learning of
+
+12:17.690 --> 12:18.410
+GitLab.
+
+12:18.730 --> 12:23.290
+And of course we have project in this course also where we'll see the quality gates and all the other
+
+12:23.290 --> 12:23.770
+things.
+
+12:24.330 --> 12:28.940
+For now, let's add a notification mimicking option that sends the notification.
+
+12:29.260 --> 12:32.100
+I'm going to remove this one and keep it as zero.
+
+12:33.220 --> 12:34.260
+Let's remove all this.
+
+12:35.060 --> 12:35.980
+Keep it as it is.
+
+12:35.980 --> 12:36.780
+Let's save it.
+
+12:37.180 --> 12:38.620
+Just one final stage.
+
+12:38.660 --> 12:42.660
+Notify on failure stage name notify script.
+
+12:42.660 --> 12:44.980
+And just giving echo command over here.
+
+12:44.980 --> 12:50.700
+There should be something that sends actual notification like slack or email notification.
+
+12:50.700 --> 12:53.620
+And this job is going to run only on failure.
+
+12:53.660 --> 12:54.300
+Only run.
+
+12:54.300 --> 12:57.540
+If the previous job failed then run this.
+
+12:57.540 --> 12:59.180
+So we're just mimicking the stage here.
+
+12:59.220 --> 13:02.580
+Of course you will have a command that sends the actual notification.
+
+13:02.980 --> 13:09.980
+I also need to mention this stage up here in the stages and hyphen notify.
+
+13:10.540 --> 13:11.300
+Save this.
+
+13:11.860 --> 13:15.180
+Let's commit and push this a commit message.
+
+13:15.220 --> 13:16.540
+Accept the commit message.
+
+13:18.020 --> 13:19.620
+So take a look at this pipeline.
+
+13:19.620 --> 13:24.220
+How it completes, how you get all the jobs, how it executes parallelly one by one.
+
+13:24.620 --> 13:29.950
+Do a little bit research on different security code scanning tools that are available in the market,
+
+13:29.950 --> 13:31.990
+and how to run them in the pipeline.
+
+13:31.990 --> 13:39.750
+It will be useful for you to make decisions in real time and also talk about this in the interviews.
+
+13:40.270 --> 13:46.710
+If you work in a project where security is managed by the DevOps itself, or the security is top notch,
+
+13:46.710 --> 13:50.230
+you will definitely have code scanning security scanning tools.
+
+13:50.550 --> 13:54.590
+You can work with the security team, understand it, and include it in your pipeline.
+
+13:54.950 --> 14:02.670
+So if more and more security is included in your DevOps CI CD pipeline, it will be also called as DevSecOps.
+
+14:03.070 --> 14:07.150
+And this is one of the very mandatory stage in DevSecOps security code scanning.
+
+14:07.510 --> 14:11.390
+So I recommend you do a little bit of more research from your side.
+
+14:11.830 --> 14:16.670
+You have already seen how you can include a security scanning stage in your pipeline.
+
+14:16.870 --> 14:22.390
+The tools will vary based on your project, but now you have hands on on how to do code scanning in
+
+14:22.390 --> 14:23.270
+your pipeline.
+
+14:23.710 --> 14:25.230
+So that would be all in this lecture.
+
+14:25.230 --> 14:28.950
+In the next lecture we are going to build and publish Docker image.
+
+14:28.950 --> 14:30.630
+So wrap this up and join me in the next one.

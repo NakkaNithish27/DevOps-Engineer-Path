@@ -1,0 +1,31 @@
+stages:
+  - build
+  - test
+
+variables:
+  PROJECT_NAME: vprofile
+  JAVA_OPTS: ${JAVA_OPTIONS}
+
+# Build stage
+build-job: 
+  stage: build
+  image: maven:3.9.9-eclipse-temurin-17
+  only:
+    - main
+  script:
+    - echo "Building the project ${PROJECT_NAME}-test."
+    - echo "Java Options are ${JAVA_OPTS}"
+    - echo "My Secret is that ${MY_SECRET}"
+    - echo "The source of the pipeline trigger is $CI_PIPELINE_SOURCE for branch $CI_COMMIT_BRANCH"
+    - mvn install
+
+# Test stage
+test-job: 
+  stage: test
+  image: maven:3.9.9-eclipse-temurin-17
+  only:
+    - main
+  script:
+    - echo "Running Unit Tests in the ${PROJECT_NAME}-test."
+    - mvn test
+    - mvn checkstyle:checkstyle

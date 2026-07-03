@@ -1,0 +1,275 @@
+---
+
+# App Repo and Pipeline  
+
+# Step 1 - Initialize App Repo with vprofile app code  
+ Open app repo in vscode
+Copy these into the root of your new GitHub repo:
+- `src/` — Java application source code
+- `pom.xml` — Maven build configuration
+- `Docker-files/` — Dockerfiles for app, db, and web
+
+# Step 2 Push to github
+```bash
+git add .
+git commit -m "initial commit"
+git push -u origin main
+```
+
+---
+
+## Step 3 — Set Up SonarQube on AWS EC2
+
+### 3a. Launch EC2 Instance
+
+- AMI: Ubuntu 22.04
+- Instance type: `t3.medium` (minimum — SonarQube needs 2GB RAM)
+- Security Group inbound rules:
+
+| Port | Protocol | Source    | Purpose              |
+|------|----------|-----------|----------------------|
+| 22   | TCP      | Your IP   | SSH access           |
+| 80   | TCP      | 0.0.0.0/0 | SonarQube web UI     |
+
+### 3b. Sonar Userdata
+
+https://github.com/hkhcoder/vprofile-project/blob/electron/userdata/sonar-setup.sh
+
+### 3c. Generate SonarQube Token
+
+1. Open `http://<your-ec2-ip>` in a browser
+2. Login with `admin` / `admin`, set a new password
+3. Go to **My Account → Security → Generate Token**
+4. Name it `github-actions`, type: **Global Analysis Token**
+5. Copy the token — you will store it as a GitHub secret in Step 6
+
+### 3d. Create sonar-project.properties
+
+Create this file in the root of your `vprofile-java-app` repo:
+
+```properties
+sonar.projectKey=vprofile-java99
+sonar.projectName=vprofile-java99
+sonar.projectVersion=1.0
+
+sonar.sources=src/
+sonar.java.binaries=target/classes
+
+sonar.junit.reportsPath=target/surefire-reports/
+sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+sonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
+
+```
+
+
+---
+
+## Step 4 — Set Up AWS Resources
+
+### 4a. Create ECR Repository
+
+1. Go to **AWS Console → ECR → Create repository**
+2. Name: `vproappimg`
+3. Visibility: **Private**
+4. Note your ECR URI format: `<account-id>.dkr.ecr.<region>.amazonaws.com/vproappimg`
+
+### 4b. Create IAM User for GitHub Actions
+
+1. Go to **AWS Console → IAM → Users → Create user**
+2. Name: `github-actions-user`
+3. Attach these policies directly:
+   - `AmazonEC2ContainerRegistryFullAccess`
+   - `AmazonEKSClusterPolicy` (if deploying to EKS)
+4. Go to the user → **Security credentials → Create access key**
+5. Select **Application running outside AWS**
+6. Copy the **Access Key ID** and **Secret Access Key** — store in Step 5
+
+---
+## Step 5 — Set Up Slack Notifications (Optional)
+
+### 5a. Create Slack App and Webhook
+
+1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App → From scratch**
+2. Name: `GitHub Actions`, select your workspace
+3. Go to **Incoming Webhooks → Activate Incoming Webhooks → Add New Webhook to Workspace**
+4. Select the channel you want notifications in (e.g. `#deployments`)
+5. Copy the webhook URL — format: `https://hooks.slack.com/services/xxx/yyy/zzz`
+
+### 5b. Store Webhook as GitHub Secret
+
+| Secret Name     | Value                  |
+|-----------------|------------------------|
+| `SLACK_WEBHOOK` | Your Slack webhook URL |
+
+---
+## Step 6 — Create GitHub Secrets and Variables
+
+### 6a. Create GitHub Personal Access Token (PAT)
+
+The pipeline needs to push to your `vprofile-helm` repo from a workflow running
+in `vprofile-java-app`. A PAT is required for cross-repo access.
+
+1. Go to GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens**
+2. Click **Generate new token**
+3. Set:
+   - Token name: `helm-pipeline`
+   - Expiration: your preference
+   - Repository access: **Only select repositories** → select `vprofile-helm`
+   - Permissions → Contents: **Read and write**
+4. Copy the token and store it as `GITOPS_PAT` secret above
+
+
+### 6b. GitHub Secrets
+
+Go to your `vprofile-java-app` repo → **Settings → Secrets and variables → Actions → Secrets**
+
+Create these secrets:
+
+| Secret Name             | Value                                              |
+|-------------------------|----------------------------------------------------|
+| `SONAR_TOKEN`           | Token generated in Step 3c                        |
+| `AWS_ACCESS_KEY_ID`     | IAM user access key from Step 4a                  |
+| `AWS_SECRET_ACCESS_KEY` | IAM user secret key from Step 4a                  |
+| `HELM_REPO_USER`        | Your GitHub username (owner of `vprofile-helm`) |
+| `GITOPS_PAT`            | GitHub PAT with `repo` write scope (see 5b)       |
+| `SLACK_WEBHOOK`         | Your Slack webhook URL        
+
+
+### 6c. GitHub Variables (non-secret)
+
+Go to **Settings → Secrets and variables → Actions → Variables**
+
+Create these variables:
+
+| Variable Name    | Value                          |
+|------------------|--------------------------------|
+| `AWS_REGION`     | `us-east-1` (your ECR region) |
+| `ECR_REPOSITORY` | `vproappimg`                   |
+| `HELM_REPO_NAME` | `vprofile-helm`                   |
+
+
+---
+
+
+
+---
+
+## Step 7 — Create the GitHub Actions Pipeline
+Create branch feature-x push it ot github
+Use below prompt
+
+### The Prompt Used to Generate ci.yml
+
+```
+I have a Java Spring MVC application built with Maven. I need a GitHub Actions
+CI/CD pipeline with the following exact flow:
+
+1. feature branch push → no pipeline runs
+2. PR to main → run: Maven build, unit tests, Checkstyle, SonarQube scan,
+   SonarQube quality gate check. Block merge if quality gate fails.
+3. merge to main → build Docker image, push to Amazon ECR with commit SHA and latest as
+   tag, then update the image and SHA tag fields in a Helm values.yaml file in a
+   separate Helm GitHub repo.
+
+Details:
+- Java 21, Maven, Tomcat, WAR packaging
+- SonarQube is self-hosted on EC2 (not SonarCloud), use
+  sonarsource/sonarqube-scan-action@v2 and
+  sonarsource/sonarqube-quality-gate-action@v1.1.0
+  Use exsiting sonar-project.properties  for sonar settings.
+
+- Add Maven and SonarQube dependency caching to speed up PR builds
+
+- Dockerfile is at Docker-files/app/multistage/Dockerfile
+
+- ECR repository name: vprofileappimg, region: us-east-1
+
+- Add Maven and SonarQube dependency caching to speed up PR builds
+
+- Helm repo name: vprofile-helm, values file path:
+  helm/vprofile/values.yaml
+
+- Structure of values.yaml file.
+    app:
+      image: 
+      tag: 
+      replicas: 1
+      containerPort: 8080
+      servicePort: 8080
+
+- The values.yaml has an app.image and app.tag field that need to be updated
+  using yq
+
+
+- Use GitHub secrets: SONAR_TOKEN, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,
+  HELM_REPO_USER, GITOPS_PAT
+
+- Pass ECR registry and image tag between jobs using job outputs
+
+- The docker and helm jobs must NOT run on PRs, only on push to main
+```
+
+###Secrets defined in GitHub
+SONAR_TOKEN
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+HELM_REPO_USER
+GITOPS_PAT
+SLACK_WEBHOOK
+
+###Variables defined in GitHub
+AWS_REGION
+ECR_REPOSITORY
+HELM_REPO_NAME
+SONAR_HOST_URL
+
+
+
+
+### The Final ci.yml Structure
+
+```
+trigger:
+  push → main          (docker + helm jobs only)
+  pull_request → main  (sonar job only)
+
+jobs:
+  build-and-sonar      → runs on: pull_request only
+  docker-build-push    → runs on: push to main only, outputs image_tag + ecr_registry
+  update-helm        → runs on: push to main only, needs docker-build-push
+```
+
+---
+
+## Step 8 — Branch Protection Rule
+
+Enforce the quality gate by blocking direct pushes to main and requiring the
+PR check to pass before merging.
+
+1. Go to repo → **Settings → Branches → Add branch ruleset**
+2. Target: `main`
+3. Enable:
+   - **Require a pull request before merging**
+   - **Require status checks to pass** → add `build-and-sonar`
+   - **Block force pushes**
+
+---
+
+## Step 9 — Working Branch Flow
+
+Always work on a feature branch, never directly on main:
+
+```bash
+# Create and switch to a feature branch
+git checkout -b feature-your-name
+
+# After making changes, push the branch (sets upstream on first push)
+git push -u origin feature-your-name
+
+# Then raise a PR on GitHub targeting main
+# Pipeline runs build-and-sonar automatically
+# Once quality gate passes, merge the PR
+# Pipeline then runs docker-build-push and update-helm
+```
+
+---

@@ -1,0 +1,1288 @@
+WEBVTT
+
+00:03.330 --> 00:06.780
+-: Okay, in this lecture we are going to go through
+
+00:06.780 --> 00:07.860
+some more modules.
+
+00:07.860 --> 00:11.460
+We will understand how to find a module,
+
+00:11.460 --> 00:14.070
+how to use it, and if we get into problem,
+
+00:14.070 --> 00:16.440
+how do we solve it?
+
+00:16.440 --> 00:19.050
+This will be your very regular work as a DevOps engineer.
+
+00:19.050 --> 00:20.670
+You need to write playbook.
+
+00:20.670 --> 00:22.890
+There'll be different kinds of tasks.
+
+00:22.890 --> 00:26.490
+You need to find modules for your task, use it.
+
+00:26.490 --> 00:29.040
+If it fails, you need to troubleshoot.
+
+00:29.040 --> 00:32.280
+First, let's take a look at the module index.
+
+00:32.280 --> 00:34.170
+You can search "ansible module index".
+
+00:34.170 --> 00:35.290
+Let's open this link
+
+00:37.230 --> 00:39.900
+So, you can click on 'All modules' and find all the modules,
+
+00:39.900 --> 00:41.820
+the list that we have seen in the previous lecture.
+
+00:41.820 --> 00:44.280
+But then, there is this segregation, right?
+
+00:44.280 --> 00:46.530
+You have cloud modules,
+
+00:46.530 --> 00:49.383
+you have database modules, you have files modules.
+
+00:50.880 --> 00:53.190
+So first, we will assign ourself a task
+
+00:53.190 --> 00:57.810
+of copying a file from control machine to web servers.
+
+00:57.810 --> 01:01.350
+And then they will assign one more task on database
+
+01:01.350 --> 01:04.890
+to add a database and create database users.
+
+01:04.890 --> 01:07.500
+Let's start first with files modules.
+
+01:07.500 --> 01:09.726
+So, let's look at the files modules.
+
+01:09.726 --> 01:13.950
+See there are many different modules in the file section.
+
+01:13.950 --> 01:15.150
+You have copy.
+
+01:15.150 --> 01:16.890
+Copy files to remote location.
+
+01:16.890 --> 01:18.570
+That's what we're looking for.
+
+01:18.570 --> 01:22.170
+Then there is file module, manage files and file properties.
+
+01:22.170 --> 01:23.790
+If you want to change later the permission
+
+01:23.790 --> 01:26.310
+of the file, create a directory.
+
+01:26.310 --> 01:28.620
+You have archive module, block in file.
+
+01:28.620 --> 01:33.150
+These modules are used a lot by DevOps.
+
+01:33.150 --> 01:36.750
+Being a DevOps, our job will be majorly managing files.
+
+01:36.750 --> 01:39.660
+Their configuration of files could be an archive
+
+01:39.660 --> 01:41.790
+it could be an artifact, a text file,
+
+01:41.790 --> 01:43.770
+configuration files, scripts.
+
+01:43.770 --> 01:46.140
+We deal with files a lot.
+
+01:46.140 --> 01:51.140
+And these files modules will help you execute those tasks.
+
+01:51.330 --> 01:52.770
+So, I recommend you take some time
+
+01:52.770 --> 01:55.290
+and go through all these modules one by one.
+
+01:55.290 --> 01:56.940
+There are not many.
+
+01:56.940 --> 01:59.850
+In this lecture, we will be just using the copy module.
+
+01:59.850 --> 02:01.170
+In later lectures, we'll be using
+
+02:01.170 --> 02:03.437
+some more modules from this.
+
+02:03.437 --> 02:04.590
+So, let's look at copy module.
+
+02:04.590 --> 02:07.320
+We have already seen this in previous lectures.
+
+02:07.320 --> 02:08.910
+We can directly go to the example.
+
+02:08.910 --> 02:10.410
+That's what we will be doing.
+
+02:10.410 --> 02:12.570
+Copy file with owner and permission.
+
+02:12.570 --> 02:14.190
+We will copy this.
+
+02:14.190 --> 02:16.803
+We'll copy the copy module, like that.
+
+02:18.450 --> 02:20.370
+Okay, let me go to vprofile,
+
+02:20.370 --> 02:23.850
+and here we have exercise 5.
+
+02:23.850 --> 02:24.690
+Let's copy that.
+
+02:24.690 --> 02:28.110
+Exercise 5 to exercise 6.
+
+02:28.110 --> 02:30.093
+Let's get into exercise 6.
+
+02:33.390 --> 02:35.400
+We will open the playbook.
+
+02:35.400 --> 02:38.010
+Now, 'web-db'.
+
+02:38.010 --> 02:38.843
+You know what?
+
+02:38.843 --> 02:40.339
+I'm going to rename this,
+
+02:40.339 --> 02:44.703
+'mv web-db' to just web.
+
+02:46.230 --> 02:48.520
+We'll not have the 'db' play here
+
+02:50.190 --> 02:52.283
+just 'web.yaml'.
+
+02:55.680 --> 02:57.783
+And we will remove the 'db' task,
+
+02:59.720 --> 03:01.113
+or 'db' play.
+
+03:03.150 --> 03:04.560
+And we are going to,
+
+03:04.560 --> 03:05.433
+all right, yeah.
+
+03:06.540 --> 03:09.480
+We are going to paste the content that we copied
+
+03:09.480 --> 03:10.410
+from the copy module.
+
+03:10.410 --> 03:13.050
+And when you copy paste, this is what happens, right?
+
+03:13.050 --> 03:13.890
+It goes here and there.
+
+03:13.890 --> 03:15.660
+So, make sure you first thing you do
+
+03:15.660 --> 03:20.049
+is you correct the structure of yaml.
+
+03:20.049 --> 03:20.882
+Okay?
+
+03:20.882 --> 03:22.032
+So, module there and...
+
+03:27.360 --> 03:28.290
+Okay.
+
+03:28.290 --> 03:31.440
+Now, let's change the content here.
+
+03:31.440 --> 03:34.470
+So copy, I'll say, 'index file'.
+
+03:38.092 --> 03:39.900
+'index file'
+
+03:39.900 --> 03:42.063
+And 'src', source.
+
+03:45.060 --> 03:47.340
+So, we'll be creating a folder called 'files'.
+
+03:47.340 --> 03:50.370
+And in that we'll place the file index.html.
+
+03:50.370 --> 03:52.443
+And destination, we will say,
+
+03:53.760 --> 03:56.310
+'var/www/html/index.html'
+
+03:56.310 --> 03:58.080
+also mention the complete path.
+
+03:58.080 --> 04:00.630
+Also mention the file name, right?
+
+04:00.630 --> 04:03.540
+Owner will keep it as 'root'.
+
+04:03.540 --> 04:06.300
+Now, we really don't need the owner and the group.
+
+04:06.300 --> 04:07.650
+We don't want this.
+
+04:07.650 --> 04:09.570
+We just wanted to copy the file.
+
+04:09.570 --> 04:10.403
+That's all.
+
+04:10.403 --> 04:12.360
+So, you can remove these options.
+
+04:12.360 --> 04:16.500
+These are not mandatory options or arguments.
+
+04:16.500 --> 04:19.200
+So, a module may have mandatory option,
+
+04:19.200 --> 04:23.880
+one or two, and most of the options will be optionals.
+
+04:23.880 --> 04:25.380
+Or arguments will be optional.
+
+04:25.380 --> 04:27.090
+Let's look at that.
+
+04:27.090 --> 04:29.160
+So, looking at the parameters or arguments,
+
+04:29.160 --> 04:32.430
+you see destination, this is required.
+
+04:32.430 --> 04:36.195
+That's a mandatory option, okay?
+
+04:36.195 --> 04:38.770
+If you look at the source, it's not mandatory
+
+04:39.690 --> 04:40.800
+because there are other ways also.
+
+04:40.800 --> 04:43.170
+Instead of mentioning the file path to copy,
+
+04:43.170 --> 04:45.303
+you can also mention the content.
+
+04:46.350 --> 04:47.460
+You can say content,
+
+04:47.460 --> 04:50.340
+and you can literally write the text content there
+
+04:50.340 --> 04:52.260
+and it's going to dump that text content
+
+04:52.260 --> 04:55.110
+on the destination file, which is required.
+
+04:55.110 --> 04:57.870
+The few interesting options like backup.
+
+04:57.870 --> 05:00.000
+You can take backup of the existing file.
+
+05:00.000 --> 05:01.860
+Now, we are going to push this file
+
+05:01.860 --> 05:05.670
+and if there in the destination, the same file exists.
+
+05:05.670 --> 05:09.270
+It is going to take the backup of that file first,
+
+05:09.270 --> 05:10.953
+and then push your file.
+
+05:11.790 --> 05:13.890
+We'll use that and we'll see how it works.
+
+05:14.730 --> 05:19.647
+So we'll say here, 'backup: yes'.
+
+05:20.490 --> 05:21.323
+Okay?
+
+05:21.323 --> 05:23.370
+But this file does not exist in the files folder.
+
+05:23.370 --> 05:24.330
+There's no such folder.
+
+05:24.330 --> 05:25.710
+So, let's see.
+
+05:25.710 --> 05:28.620
+Let's create a folder with name, 'files'.
+
+05:28.620 --> 05:31.260
+And in that, we'll create the file with the name,
+
+05:31.260 --> 05:34.440
+'index.html'.
+
+05:34.440 --> 05:36.490
+Or you could have given other names also.
+
+05:37.470 --> 05:40.860
+Whatever name or path you give in the playbook,
+
+05:40.860 --> 05:43.683
+the file path with the same name should exist.
+
+05:44.610 --> 05:46.597
+We'll write here as you know,
+
+05:46.597 --> 05:50.037
+"learning modules in ansible".
+
+05:52.500 --> 05:53.550
+Or whatever you want to write.
+
+05:53.550 --> 05:54.960
+Just write it.
+
+05:54.960 --> 05:57.660
+And now, let's test this.
+
+05:57.660 --> 05:59.149
+Ansible, not Amsible.
+
+05:59.149 --> 06:01.223
+"ansible-playbook-i inventory", and the playbook path.
+
+06:03.660 --> 06:04.563
+Let's run it.
+
+06:07.380 --> 06:10.230
+Okay, so it made some changes, right?
+
+06:10.230 --> 06:13.680
+Now, I will log into one of the machine,
+
+06:13.680 --> 06:15.690
+so it pushed at web zero one and web zero two.
+
+06:15.690 --> 06:17.580
+I'm going to log in at one of the machine
+
+06:17.580 --> 06:19.350
+and see the backup file.
+
+06:19.350 --> 06:23.550
+So, the user is 'ec2-user@' the rate,
+
+06:23.550 --> 06:25.833
+and state the IP.
+
+06:30.420 --> 06:34.320
+Okay, I'm in the web01.
+
+06:34.320 --> 06:38.547
+Let's do 'cd/var/www/html'.
+
+06:38.547 --> 06:39.720
+And let's do 'ls'.
+
+06:40.599 --> 06:42.540
+And you see the file, 'index.html'?
+
+06:42.540 --> 06:43.953
+That's the file we pushed.
+
+06:44.970 --> 06:47.733
+Look at the content and there is the backup file.
+
+06:48.917 --> 06:49.750
+Okay?
+
+06:49.750 --> 06:51.090
+And you see it has mentioned the timestamp
+
+06:51.090 --> 06:52.833
+when the backup was taken.
+
+06:54.030 --> 06:57.933
+So, 'index.html.19', something, something.
+
+07:00.090 --> 07:03.450
+So, this was our previous index.html file.
+
+07:03.450 --> 07:06.960
+So you see, you look at the options, or parameters,
+
+07:06.960 --> 07:10.200
+and you can find interesting options to use
+
+07:10.200 --> 07:11.550
+which may enhance your playbook.
+
+07:11.550 --> 07:13.443
+And look at the examples, of course.
+
+07:13.443 --> 07:14.820
+Now, this was pretty easy.
+
+07:14.820 --> 07:16.410
+Let's log out from here.
+
+07:16.410 --> 07:17.243
+Log out.
+
+07:17.243 --> 07:19.083
+Let's come back to the control machine.
+
+07:20.550 --> 07:21.383
+And you know what?
+
+07:21.383 --> 07:25.260
+I will change the host name of this control machine,
+
+07:25.260 --> 07:26.823
+just because if I log in,
+
+07:27.780 --> 07:30.330
+you should see which machine I am in.
+
+07:30.330 --> 07:31.163
+Control.
+
+07:32.460 --> 07:36.440
+And hostname control, not mandatory, just okay.
+
+07:36.440 --> 07:38.730
+So, it says you must be the root user.
+
+07:38.730 --> 07:40.180
+So, I'm going to say, 'sudo'.
+
+07:43.658 --> 07:46.533
+Okay, and let me log out and log in again.
+
+07:49.140 --> 07:49.973
+Okay.
+
+07:49.973 --> 07:50.806
+So, now you see I'm in the control machine.
+
+07:50.806 --> 07:53.670
+This is just to show you so you can see where I am logged in
+
+07:53.670 --> 07:56.270
+because I'm going to log in now to db machines also.
+
+07:57.480 --> 07:59.040
+Okay, so that was pretty simple, right?
+
+07:59.040 --> 08:00.780
+We found the module, we used it.
+
+08:00.780 --> 08:02.520
+No problem, no issues.
+
+08:02.520 --> 08:04.200
+Because copy is a very simple module.
+
+08:04.200 --> 08:07.020
+It uses SCP command in the Linux.
+
+08:07.020 --> 08:09.210
+But there are some modules, or many modules
+
+08:09.210 --> 08:11.520
+that needs some dependencies.
+
+08:11.520 --> 08:13.830
+There are some requirements that needs to be fulfilled
+
+08:13.830 --> 08:16.080
+before you use those modules.
+
+08:16.080 --> 08:18.363
+And we'll see that particular example now.
+
+08:19.270 --> 08:23.240
+Now, you have to copy exercise 5 to exercise 7,
+
+08:24.570 --> 08:27.363
+because we need the db playbook here.
+
+08:28.230 --> 08:30.000
+Exercise 7.
+
+08:30.000 --> 08:34.497
+Let's rename this to just the 'db.yaml'.
+
+08:38.550 --> 08:41.490
+Let's open 'db.yaml'.
+
+08:41.490 --> 08:42.870
+Okay, so the task is this.
+
+08:42.870 --> 08:44.400
+This is the database playbook.
+
+08:44.400 --> 08:46.740
+It installs the database service.
+
+08:46.740 --> 08:49.533
+Let me remove this play, web play here.
+
+08:51.450 --> 08:52.283
+Okay.
+
+08:55.350 --> 08:57.480
+So, this installs mariadb server,
+
+08:57.480 --> 08:58.740
+it starts the service.
+
+08:58.740 --> 08:59.850
+I want to do now more.
+
+08:59.850 --> 09:03.270
+I want to create a database named accounts.
+
+09:03.270 --> 09:06.390
+And I want to create a user named vprofile
+
+09:06.390 --> 09:09.933
+in the database in the mysql or mariadb database.
+
+09:10.980 --> 09:13.650
+So, that's a task assigned to us.
+
+09:13.650 --> 09:14.843
+The first thing is we know what we have to do.
+
+09:14.843 --> 09:16.530
+We have to find the module.
+
+09:16.530 --> 09:19.263
+So, let's go and check the modules for database.
+
+09:21.030 --> 09:23.610
+Okay so, do we have a database module section.
+
+09:23.610 --> 09:27.237
+If not, we can simply Google also, "database modules".
+
+09:28.920 --> 09:32.231
+And if we come down, we have here Mysql.
+
+09:32.231 --> 09:35.130
+'Mysql_db'.
+
+09:35.130 --> 09:36.363
+Now, let's take a look.
+
+09:37.890 --> 09:41.280
+And we'll directly go to the example section,
+
+09:41.280 --> 09:42.663
+generally what we do.
+
+09:43.500 --> 09:45.870
+So, create a new database with name 'bobdata'
+
+09:45.870 --> 09:47.040
+and that's what you wanted to do.
+
+09:47.040 --> 09:48.420
+You wanted to create a new database.
+
+09:48.420 --> 09:49.623
+Let's copy this.
+
+09:51.480 --> 09:52.313
+Paste it.
+
+09:53.940 --> 09:54.773
+Yeah.
+
+09:54.773 --> 09:57.370
+Let's fix the indentation structure
+
+09:59.825 --> 10:02.100
+'accounts'.
+
+10:02.100 --> 10:03.030
+Okay, this is it, right?
+
+10:03.030 --> 10:03.863
+Plain and simple.
+
+10:03.863 --> 10:05.343
+Create a new database with the name account
+
+10:05.343 --> 10:07.890
+name of the database, state, present.
+
+10:07.890 --> 10:09.390
+Let's save and quit,
+
+10:09.390 --> 10:14.390
+and let's execute this "ansible-playbook-i inventory
+
+10:15.120 --> 10:16.343
+and db.yaml".
+
+10:21.360 --> 10:23.250
+Okay, that failed.
+
+10:23.250 --> 10:25.170
+Now, remember what I told you,
+
+10:25.170 --> 10:26.160
+some modules are,
+
+10:26.160 --> 10:29.490
+there are many modules that needs dependencies.
+
+10:29.490 --> 10:33.600
+And these dependencies are mostly the Python dependencies.
+
+10:33.600 --> 10:36.480
+Now, what exactly is happening here?
+
+10:36.480 --> 10:38.790
+We know Ansible creates Python scripts.
+
+10:38.790 --> 10:43.247
+It will dump in the destination, which is db01 now,
+
+10:43.247 --> 10:46.920
+at the remote location and execute those Python scripts.
+
+10:46.920 --> 10:50.190
+Those Python scripts will need some Python dependency
+
+10:50.190 --> 10:51.120
+for certain module.
+
+10:51.120 --> 10:56.120
+For example, a MySQL module is required for Python 2.7
+
+10:56.220 --> 10:59.370
+either by MySQL or MySQL-Python.
+
+10:59.370 --> 11:03.870
+That's the Python dependency or Python module
+
+11:03.870 --> 11:06.960
+that is required to connect to the database.
+
+11:06.960 --> 11:10.230
+Now, if you'd have read the documentation properly,
+
+11:10.230 --> 11:12.120
+in the requirements itself, it is given.
+
+11:12.120 --> 11:14.790
+The below requirements are needed on the host
+
+11:14.790 --> 11:17.220
+that executes this module.
+
+11:17.220 --> 11:18.840
+So, which host is executing this?
+
+11:18.840 --> 11:19.740
+Db01.
+
+11:19.740 --> 11:21.783
+The scripts are running on db01.
+
+11:22.770 --> 11:25.080
+Some Python MySQL libraries.
+
+11:25.080 --> 11:28.140
+Well you know, most of the Python MySQL libraries
+
+11:28.140 --> 11:31.230
+can be installed through package manager like yaml apt.
+
+11:31.230 --> 11:33.363
+And there's also PIP that you can use.
+
+11:35.910 --> 11:38.640
+We will 'ssh' to db01.
+
+11:38.640 --> 11:41.670
+And find out the exact package name.
+
+11:41.670 --> 11:43.830
+Something key to the inventory file
+
+11:44.860 --> 11:46.067
+db01
+
+11:46.067 --> 11:48.957
+'ssh -i clientkey'.
+
+11:50.610 --> 11:52.770
+'ec2-user@'
+
+11:52.770 --> 11:54.633
+The rate, IP.
+
+11:57.300 --> 11:59.613
+Okay, I'm in db01.
+
+12:01.140 --> 12:03.150
+This is CentOS machine.
+
+12:03.150 --> 12:06.300
+And to find the package, we can use yum search,
+
+12:06.300 --> 12:08.430
+and I'll say, "python".
+
+12:08.430 --> 12:11.340
+And it will give you a huge list
+
+12:11.340 --> 12:13.770
+of Python dependencies packages.
+
+12:13.770 --> 12:16.067
+From that, I'm going to filter 'grep -i mysql'.
+
+12:23.790 --> 12:27.840
+So if you're lucky, you can find the Python dependency
+
+12:27.840 --> 12:29.910
+as a package from yaml apt.
+
+12:29.910 --> 12:32.880
+Otherwise you can use PIP also.
+
+12:32.880 --> 12:34.142
+So, here we got it.
+
+12:34.142 --> 12:36.093
+'Python 3, PyMySQL', this one.
+
+12:36.990 --> 12:38.040
+Let's copy the name.
+
+12:38.040 --> 12:41.790
+Now, we can just run yum install by MySQL here
+
+12:41.790 --> 12:43.380
+at this package name and it will install.
+
+12:43.380 --> 12:44.430
+But, that will be manual.
+
+12:44.430 --> 12:46.680
+We need to do everything from the playbook.
+
+12:46.680 --> 12:48.600
+So once you find out the dependency,
+
+12:48.600 --> 12:52.863
+log out from the DB machine and open your playbook.
+
+12:55.920 --> 12:58.920
+And there is a yum package here.
+
+12:58.920 --> 12:59.753
+Yum task.
+
+12:59.753 --> 13:00.870
+Let's copy that.
+
+13:00.870 --> 13:03.360
+I'll say, '4yy'.
+
+13:03.360 --> 13:05.343
+And then paste it here.
+
+13:09.120 --> 13:10.620
+I will say, 'install pymysql'.
+
+13:14.970 --> 13:16.620
+And then, here the package name,
+
+13:16.620 --> 13:19.023
+the exact package name that we copied.
+
+13:22.380 --> 13:23.733
+Remove that full stop.
+
+13:25.140 --> 13:26.580
+And let's test it now.
+
+13:26.580 --> 13:29.670
+So, it is going to install the dependency first on db01,
+
+13:29.670 --> 13:32.250
+and then it is going to use that DB module.
+
+13:32.250 --> 13:33.693
+Let's see if it works.
+
+13:36.210 --> 13:38.043
+Okay, now we get another error.
+
+13:39.750 --> 13:42.033
+And a solution to this is simple, actually.
+
+13:43.140 --> 13:47.490
+But, let's do a Google search and let's see what we get.
+
+13:47.490 --> 13:49.530
+It's basically a problem with the socket file.
+
+13:49.530 --> 13:50.490
+I'll tell you in a moment.
+
+13:50.490 --> 13:51.573
+Let's copy this.
+
+13:53.070 --> 13:54.210
+Okay, throw the error over there.
+
+13:54.210 --> 13:57.270
+I should really omit this numbers and all.
+
+13:57.270 --> 13:58.350
+Anyways.
+
+13:58.350 --> 14:00.037
+Okay so, something from Stack overflow,
+
+14:00.037 --> 14:02.437
+"Access denied for user MySQL."
+
+14:02.437 --> 14:03.660
+Okay, not this one.
+
+14:03.660 --> 14:05.663
+Let's put "ansible" here.
+
+14:08.283 --> 14:11.850
+Okay, "Ansible unable to find", blah blah, blah.
+
+14:11.850 --> 14:14.100
+Problem is basically Ansible is not able to connect
+
+14:14.100 --> 14:17.820
+to MySQL server be because it does not know how to connect.
+
+14:17.820 --> 14:18.930
+That's the point.
+
+14:18.930 --> 14:21.060
+Or should I see the Python scripts that are running, right?
+
+14:21.060 --> 14:22.910
+They don't know how to connect to it.
+
+14:23.940 --> 14:25.350
+So, here it is asking us
+
+14:25.350 --> 14:27.663
+to mention the socket file location.
+
+14:28.590 --> 14:32.820
+Socket file in Linux is used to connect processes together.
+
+14:32.820 --> 14:34.920
+If one process wants to connect to other process,
+
+14:34.920 --> 14:36.930
+uses the socket file.
+
+14:36.930 --> 14:40.140
+But this is a wrong location of the socket file.
+
+14:40.140 --> 14:42.480
+In CentOS, the location is different.
+
+14:42.480 --> 14:44.973
+I think it will be here somewhere mentioned.
+
+14:46.560 --> 14:48.060
+Let me see.
+
+14:48.060 --> 14:48.893
+'Var/lib'.
+
+14:48.893 --> 14:51.845
+Yes, 'var/lib/mysql is the MySQL
+
+14:51.845 --> 14:54.750
+or MariaDB default home directory.
+
+14:54.750 --> 14:56.700
+So, we need to use this one, this path.
+
+15:03.586 --> 15:07.590
+So, let's copy that option and that path.
+
+15:07.590 --> 15:09.303
+Let's open the playbook.
+
+15:10.920 --> 15:13.893
+And there, we need to mention this option.
+
+15:15.150 --> 15:16.153
+Okay.
+
+15:16.153 --> 15:17.940
+Let's save and quit.
+
+15:17.940 --> 15:19.563
+And let's test it.
+
+15:34.290 --> 15:36.660
+Okay, that work changed.
+
+15:36.660 --> 15:38.280
+So, you see we got few issues.
+
+15:38.280 --> 15:39.630
+One was with the dependency
+
+15:39.630 --> 15:42.990
+and one was with the MySQL server.
+
+15:42.990 --> 15:45.810
+So, one we found out by ourselves.
+
+15:45.810 --> 15:49.800
+The other one we found out from the Stack Overflow.
+
+15:49.800 --> 15:52.980
+You know, I did this purposefully, actually.
+
+15:52.980 --> 15:56.040
+Now, we have community MySQL module also
+
+15:56.040 --> 15:58.263
+where all this is already mentioned.
+
+15:59.190 --> 16:01.770
+So, you just search for "mysql ansible modules"
+
+16:01.770 --> 16:04.650
+or like that for any service you'll see "Community.Mysql".
+
+16:04.650 --> 16:08.220
+This is developed by the community, not by the Ansible.
+
+16:08.220 --> 16:11.910
+I mean, not the Ansible vendor, but the Ansible community.
+
+16:11.910 --> 16:13.533
+So, ansible_dbmodule.
+
+16:15.510 --> 16:17.700
+And as usual, we have the requirements.
+
+16:17.700 --> 16:20.583
+But, we failed first and then we look at the requirement.
+
+16:23.670 --> 16:26.130
+And in the example, if you see,
+
+16:26.130 --> 16:27.780
+you have there, right?
+
+16:27.780 --> 16:29.553
+Also, when you get in the errors,
+
+16:30.570 --> 16:34.050
+right, you can see, you know, in the notes,
+
+16:34.050 --> 16:35.190
+commonly found errors.
+
+16:35.190 --> 16:38.490
+You see Python, MySQL dependencies
+
+16:38.490 --> 16:41.280
+explicitly mentioning the socket file.
+
+16:41.280 --> 16:42.990
+All those things are mentioned.
+
+16:42.990 --> 16:46.350
+But I wanted you to fail on this one and then fix it.
+
+16:46.350 --> 16:48.720
+But now you know, if you read properly,
+
+16:48.720 --> 16:50.580
+you won't even get into those problems.
+
+16:50.580 --> 16:52.350
+But anyways, you will get into problem.
+
+16:52.350 --> 16:54.060
+Don't worry, it will happen.
+
+16:54.060 --> 16:56.880
+There are many, many modules and we can find how
+
+16:56.880 --> 16:59.913
+solutions to fix those issues, right?
+
+17:00.960 --> 17:03.930
+So now, we will be using this Community MySQL module.
+
+17:03.930 --> 17:05.370
+I'm going to replace that module
+
+17:05.370 --> 17:07.500
+with the community MySQL module.
+
+17:07.500 --> 17:09.390
+So it says, first you need to run this command
+
+17:09.390 --> 17:11.880
+to install community MySQL module.
+
+17:11.880 --> 17:13.980
+So, I'm going to copy this command "ansible galaxy
+
+17:13.980 --> 17:17.010
+collection install community.mysql".
+
+17:17.010 --> 17:18.423
+Let's run that command.
+
+17:21.270 --> 17:22.103
+Right?
+
+17:22.103 --> 17:24.933
+And let's look at the name of the model exactly.
+
+17:26.503 --> 17:28.860
+'community.mysql'.
+
+17:28.860 --> 17:31.440
+So, I open the playbook and I'm going to simply add
+
+17:31.440 --> 17:32.823
+in the beginning here,
+
+17:34.271 --> 17:36.717
+'community.mysql'.
+
+17:38.220 --> 17:39.210
+I think, yeah.
+
+17:39.210 --> 17:41.116
+That's the right spelling.
+
+17:41.116 --> 17:46.116
+'community.mysql.mysql_db'
+
+17:46.920 --> 17:48.570
+Okay, let's save and quit.
+
+17:48.570 --> 17:50.340
+Okay, if we have one more task to do.
+
+17:50.340 --> 17:51.900
+We also need to add the user.
+
+17:51.900 --> 17:53.793
+So, let's look at that module.
+
+17:55.800 --> 17:57.510
+'Mysql_user module'.
+
+17:57.510 --> 18:00.783
+Add or remove a user from MySQL database.
+
+18:02.220 --> 18:05.400
+And for this also, you need to install this dependencies.
+
+18:05.400 --> 18:07.920
+Not dependencies, these modules actually,
+
+18:07.920 --> 18:09.810
+in the Ansible control machine.
+
+18:09.810 --> 18:11.103
+You already did that.
+
+18:13.260 --> 18:15.840
+In the example, over here, create database.
+
+18:15.840 --> 18:17.013
+Let's copy this.
+
+18:19.380 --> 18:22.413
+Let's open DB playbook.
+
+18:23.430 --> 18:25.080
+Let's paste it there.
+
+18:25.080 --> 18:27.393
+Let's fix the indentation and everything.
+
+18:28.770 --> 18:29.610
+Okay, there.
+
+18:29.610 --> 18:30.443
+I kept it simple.
+
+18:30.443 --> 18:33.210
+Create database with username 'vprofile'
+
+18:33.210 --> 18:36.180
+and that's the name of the database and some password,
+
+18:36.180 --> 18:38.100
+which is very childish.
+
+18:38.100 --> 18:39.930
+Anyways, I'll keep that.
+
+18:39.930 --> 18:40.763
+Or, you know what?
+
+18:40.763 --> 18:41.596
+Let's change it.
+
+18:43.170 --> 18:45.844
+Let's change it to single code,
+
+18:45.844 --> 18:49.563
+'admin943', something.
+
+18:50.430 --> 18:52.770
+Okay, let's save and quit.
+
+18:52.770 --> 18:54.090
+And this time we are going to execute
+
+18:54.090 --> 18:55.983
+the community MySQL module.
+
+19:01.710 --> 19:03.240
+Okay, again, same error.
+
+19:03.240 --> 19:06.420
+Access denied for that user route
+
+19:06.420 --> 19:08.520
+because there's no socket file mentioned.
+
+19:08.520 --> 19:10.500
+Let's copy that socket file.
+
+19:10.500 --> 19:12.120
+You see you solve once,
+
+19:12.120 --> 19:15.243
+and then you can use it as many as times.
+
+19:18.090 --> 19:19.053
+Okay?
+
+19:19.053 --> 19:20.790
+So the same option, 'login_unix_socket'
+
+19:20.790 --> 19:23.310
+and the path of the socket file.
+
+19:23.310 --> 19:25.233
+And then, let's run the playbook.
+
+19:27.360 --> 19:28.193
+All right.
+
+19:28.193 --> 19:29.370
+That is done.
+
+19:29.370 --> 19:31.680
+Now, that was quite long and intense lecture.
+
+19:31.680 --> 19:32.880
+We just learned two modules,
+
+19:32.880 --> 19:36.060
+but from that are three including copy.
+
+19:36.060 --> 19:39.480
+But with that, we have learned skills
+
+19:39.480 --> 19:42.480
+of finding the module, using it, troubleshooting it,
+
+19:42.480 --> 19:44.343
+fixing it, and reusing it.
+
+19:45.193 --> 19:48.150
+Okay, from here on the journey for you will be easy
+
+19:48.150 --> 19:50.070
+to write any playbook.
+
+19:50.070 --> 19:52.500
+But there are many more things with playbook
+
+19:52.500 --> 19:55.140
+and out of playbook in the Ansible
+
+19:55.140 --> 19:57.510
+that we are going to see in the coming lectures.
+
+19:57.510 --> 20:00.093
+So, wrap this up and join me in the next lecture.

@@ -1,0 +1,955 @@
+WEBVTT
+
+00:00.360 --> 00:03.660
+Instructor: Welcome to Ansible Variables section.
+
+00:03.660 --> 00:05.070
+Now, variables are as same
+
+00:05.070 --> 00:07.290
+as you see in other programming languages
+
+00:07.290 --> 00:09.570
+in other tools that we have seen previously.
+
+00:09.570 --> 00:13.380
+Like in Bash, in Python, even in Jenkins.
+
+00:13.380 --> 00:15.810
+Ansible, also, you can define your own variables.
+
+00:15.810 --> 00:19.050
+There are existing variables in Ansible that you can use
+
+00:19.050 --> 00:21.630
+or you can generate variables in the run time.
+
+00:21.630 --> 00:25.380
+It's as similar as any other programming language or tools.
+
+00:25.380 --> 00:27.480
+First, we'll be seeing how to define variable
+
+00:27.480 --> 00:30.270
+in the playbook, which is pretty simple.
+
+00:30.270 --> 00:31.740
+You just say vars colon
+
+00:31.740 --> 00:34.590
+and you do variable colon and its value, right?
+
+00:34.590 --> 00:37.380
+So here you see two variables, HTTP underscore port
+
+00:37.380 --> 00:38.213
+and sqluser.
+
+00:39.090 --> 00:40.830
+And this comes just below the task
+
+00:40.830 --> 00:44.790
+or you can see before task,
+
+00:44.790 --> 00:46.800
+just below the host configuration,
+
+00:46.800 --> 00:48.090
+in the global play declaration,
+
+00:48.090 --> 00:51.570
+you can define variables.
+
+00:51.570 --> 00:54.660
+We have also seen variables in the inventory file,
+
+00:54.660 --> 00:57.270
+but that is not where we define the variables,
+
+00:57.270 --> 00:59.070
+our own custom variables.
+
+00:59.070 --> 01:02.130
+We have inventory-based variables.
+
+01:02.130 --> 01:04.200
+That means if you want to define some variable
+
+01:04.200 --> 01:05.280
+for all the host,
+
+01:05.280 --> 01:09.420
+we can create a file group vars, underscore vars slash all.
+
+01:09.420 --> 01:11.070
+Okay? At this part you create a file,
+
+01:11.070 --> 01:13.173
+file named "all", you define variables.
+
+01:14.109 --> 01:14.942
+Those variables can be used
+
+01:14.942 --> 01:17.880
+by all the hosts from our inventory file.
+
+01:17.880 --> 01:20.430
+Again, this will be our own custom variables.
+
+01:20.430 --> 01:21.450
+Here we are not talking
+
+01:21.450 --> 01:25.530
+about the Ansible user, the login keynote, not those.
+
+01:25.530 --> 01:28.050
+The variables that you want to use in the playbook,
+
+01:28.050 --> 01:32.820
+like HTTP port, user, a skill user, passwords,
+
+01:32.820 --> 01:35.220
+and we have better way of managing password.
+
+01:35.220 --> 01:38.910
+Okay? So the all file will be for all the host,
+
+01:38.910 --> 01:41.190
+if you want for a particular group,
+
+01:41.190 --> 01:42.030
+let's say for website,
+
+01:42.030 --> 01:43.770
+or I want to define some variables,
+
+01:43.770 --> 01:47.430
+I can give group vars slash group name.
+
+01:47.430 --> 01:50.040
+The group name that is defining the inventory file.
+
+01:50.040 --> 01:55.040
+For host specific, host underscore vars slash hostname.
+
+01:55.261 --> 01:56.340
+So, if I have a host name "web zero one"
+
+01:56.340 --> 02:00.030
+and I want to give host specific variable,
+
+02:00.030 --> 02:03.270
+I will define it in "web zero one" file,
+
+02:03.270 --> 02:05.520
+which is in host vars directory.
+
+02:05.520 --> 02:08.820
+So, this is defining variable outside of your playbook.
+
+02:08.820 --> 02:09.693
+We'll see this.
+
+02:10.710 --> 02:12.240
+Then you have roles in Ansible.
+
+02:12.240 --> 02:14.010
+We'll be seeing that later in the roles.
+
+02:14.010 --> 02:17.940
+Also, you have two files where you can define variables,
+
+02:17.940 --> 02:19.710
+vars and defaults.
+
+02:19.710 --> 02:21.870
+I don't want you to memorize all this right now.
+
+02:21.870 --> 02:23.460
+We'll be doing this.
+
+02:23.460 --> 02:25.320
+My point is there are different places
+
+02:25.320 --> 02:27.783
+where you can define variables in Ansible.
+
+02:29.640 --> 02:31.980
+Now, those were our own custom variables.
+
+02:31.980 --> 02:33.540
+We are defining them.
+
+02:33.540 --> 02:36.180
+Ansible has also its own variables.
+
+02:36.180 --> 02:38.400
+The majority of its variable gets generated
+
+02:38.400 --> 02:39.930
+from the setup module.
+
+02:39.930 --> 02:42.000
+Now, you don't need to run setup module.
+
+02:42.000 --> 02:43.598
+When you execute the playbook,
+
+02:43.598 --> 02:48.360
+the first task that gets executed, gathering facts,
+
+02:48.360 --> 02:50.761
+that task will run the setup module
+
+02:50.761 --> 02:53.970
+and generate the fact variables.
+
+02:53.970 --> 02:54.803
+Okay?
+
+02:54.803 --> 02:55.890
+Some example of fact variables.
+
+02:55.890 --> 02:58.568
+When it is running, let's say, on web zero one,
+
+02:58.568 --> 03:01.530
+you'll have Ansible underscore os underscore family variable
+
+03:01.530 --> 03:03.930
+and its value will be like operating system,
+
+03:03.930 --> 03:06.600
+operating system family like Red Hat, Debian.
+
+03:06.600 --> 03:08.400
+You have processor cores,
+
+03:08.400 --> 03:10.560
+Ansible underscore processor underscore cores.
+
+03:10.560 --> 03:12.630
+It'll tell you number of CPU cores.
+
+03:12.630 --> 03:14.370
+And let's say it's running for web zero one.
+
+03:14.370 --> 03:15.660
+So, it'll tell you CPU cores
+
+03:15.660 --> 03:17.550
+of web zero one.
+
+03:17.550 --> 03:19.530
+Kernel version, Ansible devices,
+
+03:19.530 --> 03:21.990
+the connected device information.
+
+03:21.990 --> 03:24.069
+Ansible default ipv4.
+
+03:24.069 --> 03:27.013
+It'll give you the Mac address Gateway IP.
+
+03:27.013 --> 03:30.810
+Ansible architecture, whether it's 64 bit, 32 bit.
+
+03:30.810 --> 03:31.643
+Like that,
+
+03:32.492 --> 03:33.750
+there'll be many, many, many fact variables
+
+03:33.750 --> 03:36.540
+that will get generated through setup module.
+
+03:36.540 --> 03:39.750
+And we can use these variables to put its values
+
+03:39.750 --> 03:41.430
+in, let's say, configuration files
+
+03:41.430 --> 03:45.870
+or make decisions based on host information like 64 bit,
+
+03:45.870 --> 03:49.140
+install this package, 32 bit, install the other package.
+
+03:49.140 --> 03:51.240
+We can use it with conditions,
+
+03:51.240 --> 03:53.160
+decision making in our playbook.
+
+03:53.160 --> 03:55.020
+We'll be seeing that.
+
+03:55.020 --> 03:58.020
+Okay, so these are called "fact variables".
+
+03:58.020 --> 03:59.730
+This gets generated automatically
+
+03:59.730 --> 04:01.230
+when you execute the playbook.
+
+04:02.700 --> 04:06.750
+The other way is storing the output of a task.
+
+04:06.750 --> 04:08.340
+We are executing a task
+
+04:08.340 --> 04:12.180
+or any module that we run returns output in JSON format.
+
+04:12.180 --> 04:14.970
+We can store that output into a variable
+
+04:14.970 --> 04:16.770
+and then we can use it, right?
+
+04:16.770 --> 04:19.833
+So, you execute a task, which will have a module.
+
+04:20.820 --> 04:22.870
+It returns the output in JSON format
+
+04:23.912 --> 04:25.470
+and by using a register option,
+
+04:25.470 --> 04:28.410
+we can store its output into a variable.
+
+04:28.410 --> 04:30.660
+So, this is runtime variable.
+
+04:30.660 --> 04:32.490
+We would have stored the output
+
+04:32.490 --> 04:34.143
+into a variable for a reason.
+
+04:35.314 --> 04:36.210
+Maybe the next task we are executing
+
+04:36.210 --> 04:38.310
+needs some decision making
+
+04:38.310 --> 04:41.283
+or some output of the previous task.
+
+04:42.833 --> 04:44.670
+So, then, we can use that stored variable value
+
+04:44.670 --> 04:46.740
+into the next task
+
+04:46.740 --> 04:48.780
+or maybe just print it.
+
+04:48.780 --> 04:49.613
+Okay?
+
+04:50.710 --> 04:51.930
+So talking again, once again,
+
+04:51.930 --> 04:53.760
+you can define variable in the playbook,
+
+04:53.760 --> 04:54.990
+your own custom variable.
+
+04:54.990 --> 04:58.380
+You can define it in group vars, host vars.
+
+04:58.380 --> 05:00.651
+You can define it in the roles.
+
+05:00.651 --> 05:03.210
+Then there are variable that gets generated
+
+05:03.210 --> 05:05.943
+through setup module, gathering facts task.
+
+05:07.080 --> 05:08.673
+These are runtime variables.
+
+05:10.626 --> 05:11.460
+Another runtime variables.
+
+05:11.460 --> 05:16.089
+You store the output of a task into a variable
+
+05:16.089 --> 05:18.450
+and then you can use it or just print it in the playbook.
+
+05:18.450 --> 05:21.090
+Now let's see all this one by one.
+
+05:21.090 --> 05:23.040
+Okay, so let's get started.
+
+05:23.040 --> 05:27.300
+We will copy exercise seven to exercise eight.
+
+05:27.300 --> 05:29.103
+We'll get into exercise eight.
+
+05:32.679 --> 05:33.512
+Okay, so as we are talking about variables
+
+05:33.512 --> 05:34.830
+we'll start with very simple ones.
+
+05:34.830 --> 05:37.083
+So let's open the playbook.
+
+05:38.010 --> 05:39.270
+We'll define some variables
+
+05:39.270 --> 05:41.820
+in the playbook and we'll use in the playbook.
+
+05:41.820 --> 05:43.590
+You see I'm stressing on in
+
+05:43.590 --> 05:45.840
+because it's really not a good way.
+
+05:45.840 --> 05:49.920
+We are going to see how to define variables outside
+
+05:49.920 --> 05:52.860
+of the playbook also, which is a good practice.
+
+05:52.860 --> 05:56.670
+But first for learning purpose, let's define the variables.
+
+05:56.670 --> 05:58.890
+So before tasks,
+
+05:58.890 --> 06:00.900
+I'm going to say "vars colon"
+
+06:00.900 --> 06:03.030
+and still a dictionary format.
+
+06:03.030 --> 06:04.440
+So, what do you want to define?
+
+06:04.440 --> 06:06.240
+Let's say starting with the database name
+
+06:06.240 --> 06:07.857
+we'll say "DB name".
+
+06:09.120 --> 06:13.813
+DB name, and we'll say, I will say, "electric",
+
+06:16.320 --> 06:17.433
+just different name.
+
+06:18.630 --> 06:23.139
+And what else do we have in the playbook, right?
+
+06:23.139 --> 06:25.636
+So, we have the username,
+
+06:25.636 --> 06:28.200
+we have the password, let's use that also.
+
+06:28.200 --> 06:29.700
+So, first, we are defining a variable.
+
+06:29.700 --> 06:30.783
+Then we'll use them.
+
+06:32.760 --> 06:37.740
+Current DB user and DB pass
+
+06:37.740 --> 06:39.327
+will say "tesla",
+
+06:40.770 --> 06:42.270
+not the Tesla, Tesla company
+
+06:42.270 --> 06:45.333
+the Tesla inventor of alternate current.
+
+06:46.200 --> 06:47.490
+Okay, so this is defining variable
+
+06:47.490 --> 06:50.280
+like that, you can define as many variables you want.
+
+06:50.280 --> 06:51.420
+How to use it.
+
+06:51.420 --> 06:53.670
+Well, here, we want to,
+
+06:53.670 --> 06:57.870
+instead of giving this DB name directly,
+
+06:57.870 --> 07:01.011
+we are going to give the variable over here.
+
+07:01.011 --> 07:02.160
+And this is the format.
+
+07:02.160 --> 07:04.050
+You have to give double codes
+
+07:04.050 --> 07:08.340
+in that two calibres opening, two Calibres crew closing.
+
+07:08.340 --> 07:12.120
+And inside that, you have to give the variable name.
+
+07:12.120 --> 07:13.553
+I know.
+
+07:13.553 --> 07:14.566
+A little complicated.
+
+07:14.566 --> 07:15.571
+Not complicated.
+
+07:15.571 --> 07:16.589
+Little extra characters.
+
+07:16.589 --> 07:18.150
+In Bash, we have just dollar and the variable name.
+
+07:18.150 --> 07:20.130
+Here, we have like this.
+
+07:20.130 --> 07:21.930
+Okay, let's go for the other one.
+
+07:21.930 --> 07:24.000
+Let's go with this one.
+
+07:24.000 --> 07:24.963
+Username.
+
+07:26.220 --> 07:29.313
+DB user and here, DB password.
+
+07:32.373 --> 07:34.273
+Okay, so those three things I'm using.
+
+07:35.189 --> 07:36.660
+And how do and when do we use variable, right?
+
+07:36.660 --> 07:39.330
+Things that come again and again in our scripts,
+
+07:39.330 --> 07:40.440
+in our code,
+
+07:40.440 --> 07:41.850
+or the things that might be
+
+07:41.850 --> 07:45.930
+of reusability, sorry, reusable property.
+
+07:45.930 --> 07:48.750
+Like, I use this playbook in this project,
+
+07:48.750 --> 07:50.430
+I use it in another project,
+
+07:50.430 --> 07:51.480
+things will change, right?
+
+07:51.480 --> 07:54.210
+So the properties, those changes,
+
+07:54.210 --> 07:57.840
+those things we use as variable, right?
+
+07:57.840 --> 08:01.803
+So, same way, any other programming language here, also.
+
+08:02.640 --> 08:04.863
+So I'll just say, "create database"
+
+08:07.848 --> 08:09.023
+and here also, create a new database.
+
+08:09.883 --> 08:12.420
+Okay? Now let's save and quote this
+
+08:12.420 --> 08:13.500
+and let's test it.
+
+08:13.500 --> 08:16.350
+Ansible hyphen playbook, db dot yaml.
+
+08:23.086 --> 08:23.970
+Okay, you see changed, change-
+
+08:23.970 --> 08:26.100
+We really don't know what changed.
+
+08:26.100 --> 08:27.480
+Actually, we know, right?
+
+08:27.480 --> 08:29.910
+But the point is it's not printing all that information,
+
+08:29.910 --> 08:31.268
+right?
+
+08:31.268 --> 08:32.280
+Whether it has used those variables or not.
+
+08:32.280 --> 08:34.410
+But we can use VV and we can see
+
+08:34.410 --> 08:36.000
+whether it is printing or not,
+
+08:36.000 --> 08:37.653
+using that variable or not.
+
+08:39.060 --> 08:42.210
+All right, we see here, DB electric, right?
+
+08:42.210 --> 08:44.190
+User current.
+
+08:44.190 --> 08:45.551
+All right?
+
+08:45.551 --> 08:47.820
+But you can also print from the playbook.
+
+08:47.820 --> 08:49.230
+Now, if you want,
+
+08:49.230 --> 08:51.585
+you can have a task which can print variables for you
+
+08:51.585 --> 08:56.585
+and that you can do by using a module called "debug".
+
+08:56.708 --> 08:58.470
+You can see hyphen, debug,
+
+08:58.470 --> 09:01.170
+and you can just see here, "var colon"
+
+09:01.170 --> 09:02.883
+and just cue the variable name.
+
+09:06.630 --> 09:08.103
+Or this one maybe.
+
+09:09.884 --> 09:10.717
+It's a two y y.
+
+09:11.807 --> 09:13.140
+We paste it.
+
+09:13.140 --> 09:17.050
+You can also use msg
+
+09:19.336 --> 09:21.270
+and in double quotes you can give whatever message you want.
+
+09:21.270 --> 09:22.950
+But now when you're using message,
+
+09:22.950 --> 09:24.390
+and you're giving everything double code,
+
+09:24.390 --> 09:28.620
+then you need to put this variable like this,
+
+09:28.620 --> 09:30.708
+in proper format.
+
+09:30.708 --> 09:32.730
+And you can put your message.
+
+09:32.730 --> 09:37.730
+I can see "The DB name is" so and so.
+
+09:38.520 --> 09:39.961
+Right?
+
+09:39.961 --> 09:40.987
+Here, we'll print dbuser.
+
+09:47.841 --> 09:49.260
+So, debug model is used for printing purpose, right?
+
+09:49.260 --> 09:52.470
+Like we have echo in Bash and print in Python, like that.
+
+09:52.470 --> 09:53.670
+Here we have debug.
+
+09:53.670 --> 09:55.980
+You can print a message
+
+09:55.980 --> 09:58.110
+or you can just print the variable name.
+
+09:58.110 --> 09:59.756
+For that,
+
+09:59.756 --> 10:01.253
+you just need to give the name of the variable,
+
+10:01.253 --> 10:02.460
+don't need to put in curly braces.
+
+10:02.460 --> 10:04.953
+Now let's save and quit and test it.
+
+10:06.660 --> 10:09.920
+Oh, I don't want to do hyphen V V, let me cancel this.
+
+10:09.920 --> 10:12.480
+(notification sounds)
+
+10:12.480 --> 10:13.313
+Okay? Like that.
+
+10:13.313 --> 10:16.440
+Just execute in the playbook and see?
+
+10:16.440 --> 10:18.210
+See that debug module?
+
+10:18.210 --> 10:21.693
+The name is "electric" and here, just the variable value.
+
+10:23.610 --> 10:25.710
+Okay? Now since we are using a debug module,
+
+10:25.710 --> 10:28.110
+let me show you one more thing very quickly.
+
+10:28.110 --> 10:31.050
+It's pretty simple, very useful, very powerful,
+
+10:31.050 --> 10:33.915
+when you use it carefully.
+
+10:33.915 --> 10:38.580
+So, the module executes and it returns output.
+
+10:38.580 --> 10:41.430
+That output is by default suppressed, right?
+
+10:41.430 --> 10:43.290
+We see a different kind of output
+
+10:43.290 --> 10:44.790
+when we execute the playbook.
+
+10:44.790 --> 10:46.953
+The output is basically in JSON format.
+
+10:47.893 --> 10:48.960
+So, where does it go, right?
+
+10:48.960 --> 10:50.557
+Can we use it?
+
+10:50.557 --> 10:51.390
+Sure we can.
+
+10:51.390 --> 10:52.270
+This is how we can use it.
+
+10:53.351 --> 10:54.510
+So, what you have to do is just,
+
+10:54.510 --> 10:56.534
+in the same column of the module name,
+
+10:56.534 --> 11:00.910
+you have to say register colon
+
+11:01.890 --> 11:04.743
+and, sorry, not here.
+
+11:05.821 --> 11:06.654
+Yeah. Register colon space.
+
+11:06.654 --> 11:09.390
+And you give a name of a variable, anything.
+
+11:09.390 --> 11:10.767
+Like I will say, "dbout",
+
+11:12.210 --> 11:14.760
+like output of this DB module.
+
+11:14.760 --> 11:17.460
+And so it is going to store all that JSON output
+
+11:17.460 --> 11:18.390
+into this variable
+
+11:18.390 --> 11:22.080
+and you can use debug module to print that, right?
+
+11:22.080 --> 11:27.080
+Hyphen name, print, DB out variable
+
+11:28.410 --> 11:30.030
+and the module name "debug".
+
+11:30.030 --> 11:32.771
+Yes, you can do it both way, right?
+
+11:32.771 --> 11:34.410
+You can give a name to a module, sorry,
+
+11:34.410 --> 11:37.350
+name to a task and then give the module name,
+
+11:37.350 --> 11:39.540
+or you can give just hyphen and module name.
+
+11:39.540 --> 11:41.070
+Like, instead of giving hyphen debug
+
+11:41.070 --> 11:44.910
+I have given hyphen name and then the module name down here.
+
+11:44.910 --> 11:47.758
+And I'll simply say here, var colon,
+
+11:47.758 --> 11:50.223
+and that is the variable.
+
+11:53.070 --> 11:54.510
+Okay? Once again, take a look.
+
+11:54.510 --> 11:56.280
+Register is in the same column
+
+11:56.280 --> 11:59.913
+as the module and you give the variable limit.
+
+12:01.095 --> 12:02.190
+It'll store all that output into this variable
+
+12:02.190 --> 12:04.893
+and then with debug, you can simply print it.
+
+12:07.290 --> 12:08.133
+Oops. Yeah.
+
+12:10.920 --> 12:14.253
+Okay, so let me clear the screen and let's run the playbook.
+
+12:19.200 --> 12:22.257
+Okay, see that last task print "DB out variable".
+
+12:23.139 --> 12:23.972
+And that's the all-
+
+12:23.972 --> 12:26.550
+Now that was all the output which you got from here
+
+12:26.550 --> 12:29.316
+because this task was already done.
+
+12:29.316 --> 12:30.314
+It just printed.
+
+12:30.314 --> 12:31.313
+Okay, right?
+
+12:31.313 --> 12:32.250
+So, nothing is changed.
+
+12:32.250 --> 12:35.133
+And so you can use debug module to print.
+
+12:36.537 --> 12:37.594
+You can print variables, you can print messages.
+
+12:37.594 --> 12:40.710
+And mostly it is used for troubleshooting purpose only.
+
+12:40.710 --> 12:42.060
+That's why it's called a "debug".
+
+12:42.060 --> 12:45.360
+You really don't need to print messages from the playbook.
+
+12:45.360 --> 12:47.010
+Playbook anyways is very verbose.
+
+12:47.010 --> 12:48.510
+It gives you correct messages.
+
+12:48.510 --> 12:49.590
+If you write your playbook,
+
+12:49.590 --> 12:52.170
+if you name your task properly,
+
+12:52.170 --> 12:53.310
+you get proper messages.
+
+12:53.310 --> 12:55.800
+You don't need to use debug module for that.
+
+12:55.800 --> 12:58.290
+Okay, so quickly reiterate what we did here.
+
+12:58.290 --> 13:00.870
+Vas, we defined three variables.
+
+13:00.870 --> 13:04.620
+We are using debug module to print two of those variable,
+
+13:04.620 --> 13:06.270
+two different method of printing.
+
+13:07.800 --> 13:11.310
+And then over here, we are using those variables.
+
+13:11.310 --> 13:12.450
+This is the syntax
+
+13:12.450 --> 13:14.070
+of using the variable,
+
+13:14.070 --> 13:16.413
+double quotes, two curly braces.
+
+13:17.340 --> 13:21.030
+And also, we have seen how to register output of a module
+
+13:21.030 --> 13:24.693
+of a task and then you can print it by using debug module.
+
+13:25.710 --> 13:27.060
+Okay? That is all in this lecture.
+
+13:27.060 --> 13:27.930
+In the next lecture,
+
+13:27.930 --> 13:30.390
+we are going to see how to define variable
+
+13:30.390 --> 13:32.730
+outside of the playbook.
+
+13:32.730 --> 13:34.180
+So, let me quit from here
+
+13:35.689 --> 13:36.893
+and I'll see you in the next lecture.

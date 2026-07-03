@@ -1,0 +1,244 @@
+WEBVTT
+
+00:00.900 --> 00:02.700
+Instructor: So in our application stack,
+
+00:02.700 --> 00:07.700
+we have Elastic Beanstalk, which will create EC2 instances
+
+00:08.760 --> 00:11.850
+where we can host our vprofile application.
+
+00:11.850 --> 00:15.630
+For this EC2 instance, Elastic Beanstalk will create
+
+00:15.630 --> 00:17.730
+a security group.
+
+00:17.730 --> 00:19.890
+Beanstalk will also have one more security group
+
+00:19.890 --> 00:22.890
+that will be for the load balancer that it creates.
+
+00:22.890 --> 00:26.460
+And there will be automatically rules set by Beanstalk
+
+00:26.460 --> 00:30.450
+to allow traffic from load balancer security group
+
+00:30.450 --> 00:32.970
+to application security group.
+
+00:32.970 --> 00:37.651
+Now the backend services, we have Amazon MQ,
+
+00:37.651 --> 00:40.323
+RDS, and ElastiCache.
+
+00:41.340 --> 00:42.900
+For these backend services,
+
+00:42.900 --> 00:44.910
+we will create a security group,
+
+00:44.910 --> 00:46.620
+we'll call it as backend security group.
+
+00:46.620 --> 00:50.190
+And when we create these services, we will make sure
+
+00:50.190 --> 00:54.690
+that they all come in the same backend security group.
+
+00:54.690 --> 00:57.120
+And we also need to add one rule in the backend security
+
+00:57.120 --> 00:59.970
+group that says, allow all traffic within itself
+
+00:59.970 --> 01:02.760
+so these services can interact with each other.
+
+01:02.760 --> 01:05.148
+And later when we create Beanstalk,
+
+01:05.148 --> 01:08.760
+and the Beanstalk security group is created that time,
+
+01:08.760 --> 01:11.340
+we need to update the rules in the security group
+
+01:11.340 --> 01:15.379
+of backend saying, traffic from Beanstalk security group
+
+01:15.379 --> 01:19.260
+is allowed to interact with these services.
+
+01:19.260 --> 01:20.500
+So that's what we'll do in this lecture.
+
+01:20.500 --> 01:22.260
+We'll create backend security group
+
+01:22.260 --> 01:24.899
+and we'll also create a key pair, login key pair
+
+01:24.899 --> 01:28.410
+for the Beanstalk EC2 instance.
+
+01:28.410 --> 01:31.140
+So I'm in my AWS management console,
+
+01:31.140 --> 01:33.690
+I'm in North Virginia region.
+
+01:33.690 --> 01:36.963
+I will go to EC2 service to create the security group.
+
+01:38.850 --> 01:40.660
+Let me go to security groups
+
+01:41.610 --> 01:43.773
+and say create security group.
+
+01:44.651 --> 01:47.190
+Let's give security group a name.
+
+01:47.190 --> 01:49.350
+So vprofile backend security group
+
+01:49.350 --> 01:51.093
+because this is for backend.
+
+01:52.920 --> 01:55.411
+I'm giving the name vprofile-rearch
+
+01:55.411 --> 01:58.080
+as in rearchitecture backend security group.
+
+01:58.080 --> 01:59.850
+So we'll know the security group is
+
+01:59.850 --> 02:02.460
+for a rearchitecturing project.
+
+02:02.460 --> 02:04.740
+And you don't need to add any rules over here.
+
+02:04.740 --> 02:05.730
+Just keep it as it is.
+
+02:05.730 --> 02:07.500
+Make sure outbound rules are like this
+
+02:07.500 --> 02:09.483
+and just say create security group.
+
+02:11.310 --> 02:13.380
+Yeah, once the security group is created,
+
+02:13.380 --> 02:16.189
+then you go to edit inbound rules,
+
+02:16.189 --> 02:21.189
+say add rule, and you have to give here all traffic there.
+
+02:24.900 --> 02:27.780
+All traffic allowed within itself.
+
+02:27.780 --> 02:30.060
+So its own security group ID
+
+02:30.060 --> 02:32.160
+you have to give in the source.
+
+02:32.160 --> 02:34.629
+And that's why we first created
+
+02:34.629 --> 02:36.600
+the security group without any rule.
+
+02:36.600 --> 02:38.670
+So after creating the security group,
+
+02:38.670 --> 02:41.403
+we will get its security group ID.
+
+02:42.360 --> 02:43.530
+So this rule we are adding,
+
+02:43.530 --> 02:47.579
+so all the backend services, ElastiCache, RabbitMQ,
+
+02:47.579 --> 02:51.003
+RDS, they can all interact with each other.
+
+02:52.290 --> 02:54.630
+Once you add this rule, give some description
+
+02:54.630 --> 02:56.730
+and you can say, save rules.
+
+02:56.730 --> 02:57.780
+And that's all, this is the only
+
+02:57.780 --> 02:59.010
+rule that we are going to add now.
+
+02:59.010 --> 03:01.380
+Later when we create Beanstalk,
+
+03:01.380 --> 03:03.360
+when we get the Beanstalk security group ID,
+
+03:03.360 --> 03:05.610
+that time we'll edit the security group again.
+
+03:05.610 --> 03:07.290
+That is in later lecture.
+
+03:07.290 --> 03:09.440
+Now let's go and create the key pair.
+
+03:09.440 --> 03:11.370
+So let's go to key pairs.
+
+03:11.370 --> 03:12.600
+Now this key pair we are creating,
+
+03:12.600 --> 03:15.611
+so we can log into Beanstalk EC2 instance.
+
+03:15.611 --> 03:17.490
+It's not mandatory to log in.
+
+03:17.490 --> 03:19.380
+Everything will be managed by Beanstalk.
+
+03:19.380 --> 03:22.352
+But in case where we need to do troubleshooting,
+
+03:22.352 --> 03:25.890
+that time, we need to log into the instance
+
+03:25.890 --> 03:28.020
+to see what's happening inside.
+
+03:28.020 --> 03:29.820
+So let's say create key pair.
+
+03:29.820 --> 03:34.112
+Let's give it a name, vprofile-rearch-key.
+
+03:34.112 --> 03:36.873
+And create key pair.
+
+03:38.370 --> 03:39.480
+That is all in this lecture.
+
+03:39.480 --> 03:43.680
+In the next lecture we will see how to create RDS instance.
+
+03:43.680 --> 03:46.023
+So wrap this up and join me in the next one.

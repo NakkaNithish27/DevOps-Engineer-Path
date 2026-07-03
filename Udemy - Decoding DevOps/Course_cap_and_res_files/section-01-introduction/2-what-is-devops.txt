@@ -1,0 +1,859 @@
+WEBVTT
+
+00:01.020 --> 00:02.970
+Imran: Did you know that DevOps
+
+00:02.970 --> 00:05.580
+can accomplish task in minutes,
+
+00:05.580 --> 00:09.513
+which used to take hours or even days of work?
+
+00:10.950 --> 00:12.960
+So the companies can focus
+
+00:12.960 --> 00:15.783
+more on their business or the product?
+
+00:18.210 --> 00:20.400
+And maybe that's why IT industry
+
+00:20.400 --> 00:24.243
+is adopting DevOps at such a rapid pace.
+
+00:26.460 --> 00:27.660
+In next few minutes,
+
+00:27.660 --> 00:30.030
+I will show you how thousands of companies
+
+00:30.030 --> 00:33.123
+are evolving and adopting DevOps culture.
+
+00:35.010 --> 00:36.720
+Hi, welcome.
+
+00:36.720 --> 00:38.100
+My name is Imran.
+
+00:38.100 --> 00:40.860
+I'm a DevOps consultant and a trainer.
+
+00:40.860 --> 00:43.860
+Let me help you understand what is DevOps,
+
+00:43.860 --> 00:45.420
+and how it can solve
+
+00:45.420 --> 00:47.643
+some business-critical problems.
+
+00:50.040 --> 00:53.283
+Everyone likes a good story and here it is.
+
+00:54.930 --> 00:56.100
+Meet Emma.
+
+00:56.100 --> 00:57.450
+She's an artist,
+
+00:57.450 --> 01:00.393
+and has a passion of collecting artworks.
+
+01:01.500 --> 01:03.660
+Emma has her own art gallery
+
+01:03.660 --> 01:06.423
+from where she sells artwork to the public.
+
+01:08.520 --> 01:10.710
+Emma wants to expand her business online
+
+01:10.710 --> 01:12.123
+through a mobile app.
+
+01:14.310 --> 01:17.040
+Users around the world can access her gallery,
+
+01:17.040 --> 01:19.413
+and make a purchase through a mobile app.
+
+01:22.050 --> 01:24.990
+Emma does not have a team who can do this.
+
+01:24.990 --> 01:27.300
+She'll need a team of developers,
+
+01:27.300 --> 01:29.310
+testers and admin like people
+
+01:29.310 --> 01:31.410
+who can accomplish this task.
+
+01:31.410 --> 01:34.590
+So Emma approaches a software consulting firm,
+
+01:34.590 --> 01:36.063
+and explains her idea.
+
+01:37.493 --> 01:41.160
+(upbeat instrumental music)
+
+01:44.340 --> 01:47.220
+Reggie, the Director of Dev and Ops Team,
+
+01:47.220 --> 01:50.100
+explains her process of development,
+
+01:50.100 --> 01:52.833
+delivery and service of the software.
+
+01:55.050 --> 01:57.030
+Avi is the Project Manager
+
+01:57.030 --> 01:58.893
+of Software Development Team.
+
+02:01.380 --> 02:04.620
+Avi explains the software development process
+
+02:04.620 --> 02:05.453
+to Emma.
+
+02:09.000 --> 02:09.900
+Freddy.
+
+02:09.900 --> 02:11.583
+Head of the Operations.
+
+02:13.830 --> 02:17.580
+Explains Emma, how the mobile app will be hosted
+
+02:17.580 --> 02:18.783
+on the cloud server.
+
+02:20.760 --> 02:22.680
+So Emma decides to sign the deal
+
+02:22.680 --> 02:24.513
+after meeting all these experts.
+
+02:27.300 --> 02:29.520
+Emma is curious by nature,
+
+02:29.520 --> 02:31.260
+and she wants to understand
+
+02:31.260 --> 02:33.510
+the software development process.
+
+02:33.510 --> 02:35.705
+So here we go.
+
+02:35.705 --> 02:39.372
+(upbeat instrumental music)
+
+02:42.210 --> 02:45.540
+Software development is a very well-defined,
+
+02:45.540 --> 02:47.163
+and organized process.
+
+02:48.030 --> 02:52.140
+First phase, requirement gathering and analysis.
+
+02:52.140 --> 02:53.700
+Information will be collected
+
+02:53.700 --> 02:56.910
+like product features for the users.
+
+02:56.910 --> 02:58.530
+How it'll be used.
+
+02:58.530 --> 03:00.450
+Some user requirements.
+
+03:00.450 --> 03:02.010
+Current state of the market,
+
+03:02.010 --> 03:03.303
+and few other things.
+
+03:05.130 --> 03:07.350
+Second phase, planning.
+
+03:07.350 --> 03:09.060
+What do we want?
+
+03:09.060 --> 03:11.820
+It determines the cost and resource required
+
+03:11.820 --> 03:13.830
+for implementation of the product,
+
+03:13.830 --> 03:16.173
+and also the risks associated with it.
+
+03:18.000 --> 03:20.190
+Third phase, designing.
+
+03:20.190 --> 03:22.260
+Architects will design the software
+
+03:22.260 --> 03:25.110
+based on the inputs from previous phase.
+
+03:25.110 --> 03:27.780
+Architects will produce design documents.
+
+03:27.780 --> 03:29.670
+These will be basically roadmap
+
+03:29.670 --> 03:30.723
+for the developers.
+
+03:32.760 --> 03:34.320
+Development phase.
+
+03:34.320 --> 03:36.360
+This is where developers
+
+03:36.360 --> 03:38.280
+will write the software code
+
+03:38.280 --> 03:40.470
+based on the design,
+
+03:40.470 --> 03:42.670
+and they already look very excited about it.
+
+03:44.556 --> 03:48.223
+(upbeat instrumental music)
+
+03:51.300 --> 03:52.860
+Software testing.
+
+03:52.860 --> 03:55.260
+In this phase, the software will be tested
+
+03:55.260 --> 03:58.470
+by software testers for any defects.
+
+03:58.470 --> 03:59.700
+Software will be promoted
+
+03:59.700 --> 04:03.093
+to production only after fixing all the issues.
+
+04:04.204 --> 04:07.740
+(upbeat instrumental music)
+
+04:07.740 --> 04:08.970
+Deployment.
+
+04:08.970 --> 04:09.930
+At this stage,
+
+04:09.930 --> 04:11.070
+software is deployed
+
+04:11.070 --> 04:12.600
+to the production environment
+
+04:12.600 --> 04:16.042
+so users can start using the product.
+
+04:16.042 --> 04:19.770
+(upbeat instrumental music)
+
+04:19.770 --> 04:22.770
+It's the responsibility of system admin,
+
+04:22.770 --> 04:24.810
+and the entire operations team
+
+04:24.810 --> 04:28.080
+to make sure software is up and running
+
+04:28.080 --> 04:28.953
+all the time.
+
+04:30.720 --> 04:33.000
+Final phase, maintenance.
+
+04:33.000 --> 04:35.070
+It is a balance between
+
+04:35.070 --> 04:37.439
+regular changes and uptime.
+
+04:37.439 --> 04:41.106
+(upbeat instrumental music)
+
+04:44.594 --> 04:48.330
+(upbeat instrumental music)
+
+04:48.330 --> 04:51.000
+Let's see the entire process again.
+
+04:51.000 --> 04:54.900
+First requirement gathering, then planning.
+
+04:54.900 --> 04:57.120
+Architects designs the software,
+
+04:57.120 --> 04:59.730
+developer create the software,
+
+04:59.730 --> 05:02.640
+testing is conducted by software testers,
+
+05:02.640 --> 05:04.590
+and operations team will deploy,
+
+05:04.590 --> 05:06.003
+and maintain the software.
+
+05:08.250 --> 05:10.170
+This entire process is called
+
+05:10.170 --> 05:12.990
+a software development lifecycle.
+
+05:12.990 --> 05:15.227
+In short, SDLC.
+
+05:15.227 --> 05:18.894
+(upbeat instrumental music)
+
+05:23.850 --> 05:27.000
+There are different models in SDLC.
+
+05:27.000 --> 05:28.413
+We have waterfall model.
+
+05:30.270 --> 05:31.103
+Agile.
+
+05:32.610 --> 05:33.443
+Spiral.
+
+05:34.560 --> 05:37.920
+Big Bang and there are few others.
+
+05:37.920 --> 05:40.440
+You can understand these models as path
+
+05:40.440 --> 05:43.530
+or a roadways to reach the same destination
+
+05:43.530 --> 05:45.510
+as you choose a roadway
+
+05:45.510 --> 05:50.190
+based on different factors like cost,
+
+05:50.190 --> 05:53.583
+risk and time taken to reach your destination.
+
+05:54.960 --> 05:56.520
+In a waterfall model,
+
+05:56.520 --> 05:58.110
+each phase must be completed
+
+05:58.110 --> 06:00.150
+before the next phase can begin.
+
+06:00.150 --> 06:01.530
+Requirement completes
+
+06:01.530 --> 06:03.390
+then only planning begins,
+
+06:03.390 --> 06:05.760
+and then development starts.
+
+06:05.760 --> 06:08.100
+When everything is completed,
+
+06:08.100 --> 06:10.380
+all the features will be tested,
+
+06:10.380 --> 06:13.173
+and then maintenance phase starts.
+
+06:15.210 --> 06:17.160
+It is very difficult here to go back,
+
+06:17.160 --> 06:18.150
+and change something
+
+06:18.150 --> 06:21.360
+that was not well-thought out in the planning.
+
+06:21.360 --> 06:22.770
+Working software is produced
+
+06:22.770 --> 06:24.810
+very late in the lifecycle.
+
+06:24.810 --> 06:27.093
+It may take months in our case.
+
+06:29.160 --> 06:30.930
+Emma is not sure about
+
+06:30.930 --> 06:33.210
+all the requirement at once.
+
+06:33.210 --> 06:34.410
+She would like to observe
+
+06:34.410 --> 06:35.790
+the product development,
+
+06:35.790 --> 06:39.450
+and alter or add new ideas along the line.
+
+06:39.450 --> 06:43.200
+So Waterfall model is a no-go.
+
+06:43.200 --> 06:44.730
+So instead of developing
+
+06:44.730 --> 06:46.650
+all the requirements for months,
+
+06:46.650 --> 06:48.960
+it can be divided into smaller lists.
+
+06:48.960 --> 06:51.120
+Work on the list for two to four weeks,
+
+06:51.120 --> 06:51.990
+and then move on
+
+06:51.990 --> 06:54.783
+to the next list and so on and so forth.
+
+06:56.850 --> 06:59.820
+This lifecycle is called as Agile.
+
+06:59.820 --> 07:02.853
+Each iteration could be two to four weeks.
+
+07:07.710 --> 07:09.390
+Demonstration of the features
+
+07:09.390 --> 07:10.440
+can be given to Emma
+
+07:10.440 --> 07:12.390
+after every iteration.
+
+07:12.390 --> 07:15.060
+and based on the feedback from Emma,
+
+07:15.060 --> 07:18.093
+new ideas can be injected in the next iteration.
+
+07:19.508 --> 07:23.008
+(soft instrumental music)
+
+07:27.000 --> 07:30.693
+So the development gets started with Agile SDLC.
+
+07:34.110 --> 07:35.880
+Developers has started coding
+
+07:35.880 --> 07:37.293
+after all the planning.
+
+07:40.380 --> 07:41.880
+Avi has instructed Freddy
+
+07:41.880 --> 07:43.350
+from the operations team
+
+07:43.350 --> 07:45.570
+to deploy the code on the servers
+
+07:45.570 --> 07:47.700
+so it can be further tested
+
+07:47.700 --> 07:49.263
+by the software testers.
+
+07:52.230 --> 07:54.660
+The operations team started deploying the code
+
+07:54.660 --> 07:57.363
+to the server as per the instructions,
+
+07:58.860 --> 08:01.380
+but at times, testers are not able
+
+08:01.380 --> 08:02.910
+to access the servers
+
+08:02.910 --> 08:04.983
+or even their test cases are failing.
+
+08:07.920 --> 08:09.570
+Avi has informed Freddy
+
+08:09.570 --> 08:11.610
+about the failed deployment.
+
+08:11.610 --> 08:14.100
+Freddy is confused as everything was done
+
+08:14.100 --> 08:15.720
+as per the instructions,
+
+08:15.720 --> 08:17.283
+and servers looks healthy.
+
+08:19.253 --> 08:23.550
+Agile SDLC puts extra stress on the ops team.
+
+08:23.550 --> 08:25.830
+There will be regular code changes.
+
+08:25.830 --> 08:27.300
+These changes needs to be deployed
+
+08:27.300 --> 08:29.490
+on the servers so testers
+
+08:29.490 --> 08:31.590
+can conduct their testings.
+
+08:31.590 --> 08:33.540
+And this happens several times
+
+08:33.540 --> 08:35.940
+in a single iteration like that.
+
+08:35.940 --> 08:37.713
+You have several lacerations to go.
+
+08:39.000 --> 08:40.560
+Ops team is tired
+
+08:40.560 --> 08:42.840
+with regular deployment requests.
+
+08:42.840 --> 08:44.490
+There are clear instructions
+
+08:44.490 --> 08:47.160
+which causes the deployment failures.
+
+08:47.160 --> 08:48.600
+Ops team is also occupied
+
+08:48.600 --> 08:50.220
+with production support.
+
+08:50.220 --> 08:53.853
+They need to maintain system uptime all the time.
+
+08:56.970 --> 09:00.060
+In-between these failures and fixes,
+
+09:00.060 --> 09:03.453
+Avi has passed the deadline of demonstration.
+
+09:04.800 --> 09:06.780
+Emma is waiting for a long time
+
+09:06.780 --> 09:09.813
+to see the first glimpse of her mobile app.
+
+09:11.940 --> 09:14.670
+Somehow the team convinces Emma,
+
+09:14.670 --> 09:16.893
+and explains her about the delay.
+
+09:18.360 --> 09:20.790
+Avi is not happy with the ops team.
+
+09:20.790 --> 09:23.220
+He reaches out to Freddy to tell him
+
+09:23.220 --> 09:24.873
+that this cannot be repeating.
+
+09:26.461 --> 09:28.502
+(horn blowing)
+
+09:28.502 --> 09:30.870
+(upbeat instrumental music)
+
+09:30.870 --> 09:33.300
+Dev and ops are all support.
+
+09:33.300 --> 09:34.440
+Dev is Agile.
+
+09:34.440 --> 09:37.170
+All about regular and quick changes.
+
+09:37.170 --> 09:39.180
+Ops is ITIL-driven.
+
+09:39.180 --> 09:40.860
+Provides stable environment
+
+09:40.860 --> 09:41.703
+for the product.
+
+09:43.020 --> 09:45.390
+There's a big wall of confusion in-between
+
+09:45.390 --> 09:47.010
+these two parties.
+
+09:47.010 --> 09:50.670
+A developer task their code over the wall and ops
+
+09:50.670 --> 09:52.440
+team responsibility is to deploy
+
+09:52.440 --> 09:54.063
+the core on the servers.
+
+09:56.220 --> 10:00.000
+Developers complain about delay in deployments.
+
+10:00.000 --> 10:03.180
+Ops team complains about unclear instructions,
+
+10:03.180 --> 10:05.493
+and tossing their work over the wall.
+
+10:09.330 --> 10:11.160
+Emma has existing customers
+
+10:11.160 --> 10:13.020
+who wants to use the app,
+
+10:13.020 --> 10:16.440
+but there are frequent delays and errors.
+
+10:16.440 --> 10:18.243
+Emma is not so happy.
+
+10:22.260 --> 10:25.200
+Reggie, the director understands this very well,
+
+10:25.200 --> 10:27.300
+that unhappy customer could mean
+
+10:27.300 --> 10:29.253
+direct business loss.
+
+10:32.340 --> 10:35.250
+Reggie once attended an Agile conference
+
+10:35.250 --> 10:37.463
+where the host talked about DevOps
+
+10:38.700 --> 10:42.240
+as how it fixes the code delivery issues.
+
+10:42.240 --> 10:45.240
+Reggie understood that Dev is Agile,
+
+10:45.240 --> 10:48.512
+but OPS is still waterfall.
+
+10:48.512 --> 10:51.522
+(upbeat instrumental music)
+
+10:51.522 --> 10:55.050
+(audience applauding)
+
+10:55.050 --> 10:58.440
+So Reggie decides to bring in a DevOps consultant
+
+10:58.440 --> 11:00.960
+who can fix the code delivery issue,
+
+11:00.960 --> 11:03.453
+and skyrocket the business.
+
+11:06.930 --> 11:08.250
+He explains to everyone
+
+11:08.250 --> 11:10.950
+that he does not have a magic wand.
+
+11:10.950 --> 11:13.440
+Everyone has to work collaboratively,
+
+11:13.440 --> 11:15.240
+communicate effectively,
+
+11:15.240 --> 11:18.393
+and integrate the entire code delivery process.
+
+11:20.520 --> 11:24.690
+He explains and train dev team on ops concepts,
+
+11:24.690 --> 11:26.100
+so they can communicate with
+
+11:26.100 --> 11:28.023
+ops team more effectively.
+
+11:30.120 --> 11:33.390
+He also trained ops team on Agile concepts
+
+11:33.390 --> 11:36.303
+so ops can collaborate with dev team,
+
+11:38.010 --> 11:40.620
+and the most important factor,
+
+11:40.620 --> 11:42.600
+automation training and instruction
+
+11:42.600 --> 11:44.913
+to every team across the board.
+
+11:47.940 --> 11:49.890
+Automation of each and every task
+
+11:49.890 --> 11:51.750
+in code delivery process,
+
+11:51.750 --> 11:54.420
+like code build, code testing,
+
+11:54.420 --> 11:56.940
+software testing, infra changes,
+
+11:56.940 --> 11:59.100
+deployments and everything
+
+11:59.100 --> 12:00.663
+that comes along the way.
+
+12:02.520 --> 12:04.740
+Wall of confusion is brought down
+
+12:04.740 --> 12:06.510
+like the Berlin Wall,
+
+12:06.510 --> 12:09.090
+and the decides to work together,
+
+12:09.090 --> 12:12.870
+and together and together.
+
+12:12.870 --> 12:15.063
+Okay, he seems very happy to work together.
+
+12:17.160 --> 12:20.340
+Everyone collaborates like the Avengers.
+
+12:20.340 --> 12:21.450
+The Sharp.
+
+12:21.450 --> 12:22.530
+The smart.
+
+12:22.530 --> 12:23.680
+And intelligent
+
+12:27.030 --> 12:30.420
+Except our superheroes are the developers.
+
+12:30.420 --> 12:31.740
+Testers.
+
+12:31.740 --> 12:33.150
+Builders this team.
+
+12:33.150 --> 12:35.820
+This is admins, DB admins.
+
+12:35.820 --> 12:37.593
+And everyone across the board.
+
+12:39.120 --> 12:42.153
+So the dev and ops start working together.
+
+12:44.040 --> 12:45.960
+Each and every task is automated
+
+12:45.960 --> 12:49.050
+in the delivery process by every team
+
+12:49.050 --> 12:51.963
+so the whole process can be integrated together.
+
+12:55.830 --> 12:57.750
+So finally, they automated,
+
+12:57.750 --> 13:00.390
+and integrated the delivery process.
+
+13:00.390 --> 13:02.130
+Good job, everyone on board.
+
+13:02.130 --> 13:03.953
+Really, good job.
+
+13:03.953 --> 13:07.620
+(upbeat instrumental music)
+
+13:09.930 --> 13:11.760
+Let's see the entire automated
+
+13:11.760 --> 13:13.383
+DevOps lifecycle now.
+
+13:14.442 --> 13:18.109
+(upbeat instrumental music)
+
+14:22.070 --> 14:25.620
+Aa a completely automated DevOps lifecycle,
+
+14:25.620 --> 14:29.010
+no human intervention, so no human errors.
+
+14:29.010 --> 14:32.553
+It's a reputable and time-saver of course.
+
+14:33.673 --> 14:37.173
+(soft instrumental music)
+
+14:39.120 --> 14:40.860
+Emma, any request now
+
+14:40.860 --> 14:43.050
+can be delivered very quickly
+
+14:43.050 --> 14:46.743
+because everything is automated.
+
+14:50.370 --> 14:53.313
+Emma is happy to see her happy customers.
+
+14:56.190 --> 14:58.050
+Finally, an idea has become
+
+14:58.050 --> 15:00.764
+a full-fledged business.
+
+15:00.764 --> 15:04.681
+(upbeat instrumental music)
+
+15:04.681 --> 15:07.848
+(audience applauding)

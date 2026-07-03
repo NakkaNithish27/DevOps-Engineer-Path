@@ -1,0 +1,433 @@
+WEBVTT
+
+00:00.300 --> 00:01.230
+Instructor: Welcome.
+
+00:01.230 --> 00:03.630
+In this lecture, we are going to create ingress
+
+00:03.630 --> 00:06.270
+for our Tomcat service.
+
+00:06.270 --> 00:08.850
+So we know service of type cluster IPs
+
+00:08.850 --> 00:10.140
+for internal communication.
+
+00:10.140 --> 00:13.170
+It gives an endpoint for the pod.
+
+00:13.170 --> 00:14.640
+So you can have multiple replicas
+
+00:14.640 --> 00:17.340
+of the pod under one service, like a load balancer,
+
+00:17.340 --> 00:20.010
+but this service is internal load balancer.
+
+00:20.010 --> 00:22.380
+Now, Tomcat application, our application running
+
+00:22.380 --> 00:25.170
+in the Tomcat needs to be hosted publicly.
+
+00:25.170 --> 00:29.790
+So there will be an external communication coming in.
+
+00:29.790 --> 00:31.830
+So we need an external load balancer
+
+00:31.830 --> 00:34.110
+and that load balancer should route the request
+
+00:34.110 --> 00:37.620
+to our internal service.
+
+00:37.620 --> 00:39.060
+In Kubernetes, that can be done
+
+00:39.060 --> 00:40.833
+by an ingress controller.
+
+00:41.730 --> 00:43.710
+Right, so let's say we have a load balancer
+
+00:43.710 --> 00:46.440
+like application load balancer in AWS,
+
+00:46.440 --> 00:48.510
+and then we have Kubernetes cluster in via service.
+
+00:48.510 --> 00:49.560
+How does it connect?
+
+00:49.560 --> 00:50.850
+How do we connect?
+
+00:50.850 --> 00:54.120
+We connect the max, connect the application load balancer
+
+00:54.120 --> 00:56.220
+and forward the request to the node.
+
+00:56.220 --> 00:57.390
+But when it comes to the node,
+
+00:57.390 --> 00:59.340
+it does not know what to do with it.
+
+00:59.340 --> 01:01.650
+So the ingress controller, right,
+
+01:01.650 --> 01:05.250
+ingress controller, can set up that communication,
+
+01:05.250 --> 01:08.610
+can manage the external load balancer for you
+
+01:08.610 --> 01:11.190
+and connect it with the internal load balancer.
+
+01:11.190 --> 01:14.070
+We're going to use ingress controller, NGINX,
+
+01:14.070 --> 01:17.100
+NGINX Ingress controller, we will be using
+
+01:17.100 --> 01:19.920
+and that is going to create an application load balancer
+
+01:19.920 --> 01:23.253
+for us, and then we can set the Ingress rules.
+
+01:24.120 --> 01:25.650
+Creating ingress control is pretty easy.
+
+01:25.650 --> 01:27.740
+You download the definition file and simply run it.
+
+01:27.740 --> 01:30.540
+It creates all the pods and everything for it.
+
+01:30.540 --> 01:33.690
+Basically, it gives you a ready-made automated set up
+
+01:33.690 --> 01:35.820
+where you can just write the Ingress rule
+
+01:35.820 --> 01:38.820
+and decide what redirects where.
+
+01:38.820 --> 01:40.830
+So we will create an Ingress rule
+
+01:40.830 --> 01:43.950
+that will say if the request is coming for,
+
+01:43.950 --> 01:47.280
+let's say, vProfile.hkhinfotech.com,
+
+01:47.280 --> 01:49.650
+then route the request to the Tomcat service
+
+01:49.650 --> 01:51.720
+and the Tomcat service is going to route the request
+
+01:51.720 --> 01:52.980
+to the pod.
+
+01:52.980 --> 01:56.130
+So this service will be the Tomcat service
+
+01:56.130 --> 01:58.410
+of type cluster IP, right?
+
+01:58.410 --> 02:00.690
+So this definition file is going to create a service
+
+02:00.690 --> 02:02.610
+of type cluster IP internal,
+
+02:02.610 --> 02:05.970
+and Ingress is going to forward the request to this service.
+
+02:05.970 --> 02:09.150
+That in turn, is going to forward it to the pod
+
+02:09.150 --> 02:11.133
+with this label.
+
+02:13.020 --> 02:14.820
+Okay, this is one example of Ingress.
+
+02:14.820 --> 02:17.010
+Ingress, you can have variety of rules.
+
+02:17.010 --> 02:19.350
+For example, if the URL is coming
+
+02:19.350 --> 02:22.380
+and it's path at the end is /testpath,
+
+02:22.380 --> 02:25.050
+then the backend routed to the service with this name
+
+02:25.050 --> 02:26.460
+and at this port number.
+
+02:26.460 --> 02:28.290
+So you can do path-based routing,
+
+02:28.290 --> 02:30.720
+you can do URL-based routing.
+
+02:30.720 --> 02:31.950
+Right, here's one more example.
+
+02:31.950 --> 02:36.240
+You can have multiple rules, let's say for foo.bar.com,
+
+02:36.240 --> 02:38.220
+if there is a slash bar at the end,
+
+02:38.220 --> 02:40.230
+then redirect it to this service.
+
+02:40.230 --> 02:42.330
+But if there is a slash forward at the end,
+
+02:42.330 --> 02:44.770
+then redirect it to that service.
+
+02:44.770 --> 02:46.440
+Okay, and the API version
+
+02:46.440 --> 02:50.940
+is networking.k8s.io/v1 kind ingress,
+
+02:50.940 --> 02:52.920
+and then you mentioned specification,
+
+02:52.920 --> 02:54.690
+the rules, basically.
+
+02:54.690 --> 02:56.820
+So let's create an Ingress rule.
+
+02:56.820 --> 02:59.800
+So go to this file appingress.yaml.
+
+02:59.800 --> 03:03.870
+Okay, so first apiVersion networking.k8s.io/v1
+
+03:03.870 --> 03:05.370
+kind ingress metadata,
+
+03:05.370 --> 03:06.870
+name of your ingress.
+
+03:06.870 --> 03:09.000
+So I've given name as vpro-ingress.
+
+03:09.000 --> 03:11.493
+This annotation, this is the skeleton.
+
+03:12.660 --> 03:14.490
+Okay, specification,
+
+03:14.490 --> 03:16.650
+so Ingress class name will be nginx.
+
+03:16.650 --> 03:19.650
+We will create an ingress controller.
+
+03:19.650 --> 03:21.930
+Its name will be nginx, nginx ingress controller,
+
+03:21.930 --> 03:24.210
+that we'll do when we set up the cluster
+
+03:24.210 --> 03:26.490
+and you can have multiple ingress controller
+
+03:26.490 --> 03:28.260
+in your Kubernetes cluster.
+
+03:28.260 --> 03:30.930
+We will be using nginx ingress controller, we'll create that
+
+03:30.930 --> 03:33.840
+and we'll say, "Now use this ingress controller."
+
+03:33.840 --> 03:36.060
+Okay, and then you mentioned the rules.
+
+03:36.060 --> 03:37.623
+So you just see rules.
+
+03:38.970 --> 03:40.470
+So you can give any number of rules.
+
+03:40.470 --> 03:42.300
+We just have one rule over here.
+
+03:42.300 --> 03:44.520
+A number is you have multiple service where you want
+
+03:44.520 --> 03:46.740
+to route the request from external.
+
+03:46.740 --> 03:48.030
+So we can give multiple rules.
+
+03:48.030 --> 03:51.600
+We just have one rule which is just one requirement
+
+03:51.600 --> 03:54.090
+that if the host name is this,
+
+03:54.090 --> 03:56.460
+like in the URL, if it's this.
+
+03:56.460 --> 03:59.910
+So I've given here, vprofile.mydomain.
+
+03:59.910 --> 04:02.120
+You have to make sure you give your domain over here
+
+04:02.120 --> 04:05.610
+because we are going to add this rule in the GoDaddy,
+
+04:05.610 --> 04:08.670
+in the domain registrar that this vprofile,
+
+04:08.670 --> 04:12.990
+this domain matches to, the load balancer endpoint.
+
+04:12.990 --> 04:15.810
+This will make more sense when we actually do it,
+
+04:15.810 --> 04:19.503
+but you know, this basically, the host-based routing.
+
+04:20.490 --> 04:22.410
+Then we give the protocol http
+
+04:22.410 --> 04:26.370
+and in that we mention the path and everything.
+
+04:26.370 --> 04:29.880
+Inside that, paths:, again, path-based,
+
+04:29.880 --> 04:30.990
+we can have multiple paths.
+
+04:30.990 --> 04:33.930
+So we're just going to say path /,
+
+04:33.930 --> 04:37.590
+that means just this host name /.
+
+04:37.590 --> 04:39.690
+Now after that, there is no extra thing.
+
+04:39.690 --> 04:41.100
+Just if the user enters this,
+
+04:41.100 --> 04:43.560
+then route it to the backend, right?
+
+04:43.560 --> 04:45.333
+So in that, you give the backend.
+
+04:47.040 --> 04:48.990
+So backend is the service
+
+04:48.990 --> 04:52.380
+and the name of the service, vproapp-service, right?
+
+04:52.380 --> 04:55.860
+That's the name of our service, okay?
+
+04:55.860 --> 04:58.530
+Routed on port number 8080.
+
+04:58.530 --> 05:00.750
+So this is again, path-based routing only,
+
+05:00.750 --> 05:01.800
+but we're giving the host name.
+
+05:01.800 --> 05:03.810
+We're not giving any extra path after that.
+
+05:03.810 --> 05:04.643
+You know, if you have something
+
+05:04.643 --> 05:06.720
+like you know, / login or / video,
+
+05:06.720 --> 05:08.850
+so you can create multiple rules like that.
+
+05:08.850 --> 05:11.460
+So under same external load balancer,
+
+05:11.460 --> 05:14.610
+one external load balancer you can have multiple rules
+
+05:14.610 --> 05:17.310
+like that set through ingress, right?
+
+05:17.310 --> 05:20.660
+This is an amazing thing for microservices.
+
+05:20.660 --> 05:24.780
+In microservices, you have many APIs that you need to expose
+
+05:24.780 --> 05:26.460
+to the outside world.
+
+05:26.460 --> 05:29.189
+So you can have all that rules of your APIs,
+
+05:29.189 --> 05:31.290
+especially now, path-based.
+
+05:31.290 --> 05:33.242
+You know, / videos goes here,
+
+05:33.242 --> 05:35.700
+/ payment goes there, can have a separate,
+
+05:35.700 --> 05:38.280
+separate cluster of your services,
+
+05:38.280 --> 05:40.980
+pod clusters of your service, right?
+
+05:40.980 --> 05:44.340
+Anyways, we just need one and we have created that.
+
+05:44.340 --> 05:46.800
+So save this definition file
+
+05:46.800 --> 05:48.960
+and next lecture, we'll commit this source code
+
+05:48.960 --> 05:50.970
+into the repository and then we're going
+
+05:50.970 --> 05:52.830
+to launch a Kubernetes cluster,
+
+05:52.830 --> 05:56.490
+fetch all this data over there and run it, right?
+
+05:56.490 --> 05:58.410
+And that was all in this lecture.
+
+05:58.410 --> 05:59.610
+See you in the next one.

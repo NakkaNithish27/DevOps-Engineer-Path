@@ -1,0 +1,961 @@
+WEBVTT
+
+00:00.810 --> 00:03.480
+Instructor: Welcome to the last lecture of this section.
+
+00:03.480 --> 00:06.210
+In this lecture, we are going to create a CodePipeline
+
+00:06.210 --> 00:09.270
+that is going to build the artifact
+
+00:09.270 --> 00:11.520
+from our source code present in Bitbucket
+
+00:11.520 --> 00:15.480
+and then deploy that artifact to Beanstalk environment.
+
+00:15.480 --> 00:18.150
+But first, we have the build project.
+
+00:18.150 --> 00:20.400
+We need to test this project.
+
+00:20.400 --> 00:24.363
+So open your build project and click on Start Build.
+
+00:25.530 --> 00:28.410
+As soon as you do that, click on Phase Details
+
+00:28.410 --> 00:30.360
+because if you stick to build logs,
+
+00:30.360 --> 00:32.880
+it might hang your browser.
+
+00:32.880 --> 00:35.400
+So we will first test whether this build
+
+00:35.400 --> 00:37.950
+completes or not successfully.
+
+00:37.950 --> 00:41.640
+This one is going to fail because I have made one mistake
+
+00:41.640 --> 00:45.660
+and I want to show you how you can check and fix things.
+
+00:45.660 --> 00:49.590
+Once we fix this, we will create the CodePipeline.
+
+00:49.590 --> 00:51.330
+So I'll pause the recording now
+
+00:51.330 --> 00:55.020
+and resume when this is completed or when this fails.
+
+00:55.020 --> 00:57.960
+Okay, so as you see, this failed in the pre-build stage
+
+00:57.960 --> 01:00.480
+and you see some message over here
+
+01:00.480 --> 01:02.820
+which might tell you a bit about why it failed,
+
+01:02.820 --> 01:05.100
+but the details will be in the build logs,
+
+01:05.100 --> 01:06.960
+so click on Build Logs
+
+01:06.960 --> 01:10.833
+and we'll click on this Tail Logs so it goes till the end.
+
+01:12.000 --> 01:13.923
+So whenever the build fails,
+
+01:14.820 --> 01:16.260
+look for the error in the logs
+
+01:16.260 --> 01:19.410
+and then check where it starts from.
+
+01:19.410 --> 01:21.960
+So in our case, you see till here everything is fine,
+
+01:21.960 --> 01:23.340
+says running command,
+
+01:23.340 --> 01:24.903
+and then here it failed,
+
+01:25.770 --> 01:29.850
+sed hyphen e expression, unterminated s command.
+
+01:29.850 --> 01:33.150
+So there is some problem in the sed command.
+
+01:33.150 --> 01:35.100
+So let's take a look at that.
+
+01:35.100 --> 01:39.270
+Now from here itself, I can show you sed works like this.
+
+01:39.270 --> 01:40.620
+We have seen the Linux section, right?
+
+01:40.620 --> 01:44.163
+It searches for this and then replaces with this, right?
+
+01:45.120 --> 01:47.340
+And the search and replace terminates
+
+01:47.340 --> 01:49.560
+when it sees the backward slash,
+
+01:49.560 --> 01:51.300
+sorry forward slash.
+
+01:51.300 --> 01:53.610
+So between these two forward slash,
+
+01:53.610 --> 01:54.810
+this is the search criteria.
+
+01:54.810 --> 01:57.090
+And in between these forward slashes,
+
+01:57.090 --> 01:58.920
+which at the end there is no forward slash,
+
+01:58.920 --> 02:02.790
+there should be the string that will replace it.
+
+02:02.790 --> 02:03.870
+So let's close this.
+
+02:03.870 --> 02:07.740
+So this information we have given in build spec file, right?
+
+02:07.740 --> 02:09.570
+If you remember, so let's go to build spec file.
+
+02:09.570 --> 02:14.220
+Let's go back to build job. Click on it, go to Edit.
+
+02:14.220 --> 02:17.580
+So you can make changes like the source code and stuff.
+
+02:17.580 --> 02:19.053
+Many things you can change.
+
+02:20.850 --> 02:22.290
+And that's our build spec file.
+
+02:22.290 --> 02:25.530
+We are going to put a forward slash there.
+
+02:25.530 --> 02:30.120
+And once we fix this, we are going to say Update Project.
+
+02:30.120 --> 02:32.190
+Now let's run it once again.
+
+02:32.190 --> 02:36.180
+Once again, click on Phase Details and wait for some time.
+
+02:36.180 --> 02:39.300
+Okay, so the build completed successfully.
+
+02:39.300 --> 02:41.220
+Now let's create the CodePipeline, right?
+
+02:41.220 --> 02:44.490
+So we have the source code which is in Bitbucket.
+
+02:44.490 --> 02:46.950
+We have a Beanstalk environment
+
+02:46.950 --> 02:49.140
+where we want to deploy the artifact.
+
+02:49.140 --> 02:50.970
+We have the RDS.
+
+02:50.970 --> 02:54.450
+So our view profile application will connect to RDS
+
+02:54.450 --> 02:57.423
+by using the application properties file information.
+
+02:58.260 --> 03:01.350
+And that file is in the source code,
+
+03:01.350 --> 03:05.820
+which will be fetched by our CodeBuild project.
+
+03:05.820 --> 03:08.130
+It's going to build the artifact.
+
+03:08.130 --> 03:11.490
+And all this we need to now combine with CodePipeline.
+
+03:11.490 --> 03:14.883
+So scroll down here and you can see Pipeline.
+
+03:15.750 --> 03:17.010
+Pipelines.
+
+03:17.010 --> 03:19.470
+So these are all developer tools over here.
+
+03:19.470 --> 03:22.410
+You can either go to Pipeline by clicking over here
+
+03:22.410 --> 03:25.500
+or you can search for CodePipeline here.
+
+03:25.500 --> 03:27.180
+You need to click on this Getting Started
+
+03:27.180 --> 03:29.229
+in the CodePipeline.
+
+03:29.229 --> 03:32.880
+Okay, so AWS CodePipeline, visualize and automate
+
+03:32.880 --> 03:36.450
+different stages of your software release process.
+
+03:36.450 --> 03:38.220
+Same like what we do in Jenkins.
+
+03:38.220 --> 03:40.080
+We create pipeline in Jenkins.
+
+03:40.080 --> 03:43.270
+Similar way in AWS, we use AWS CodePipeline.
+
+03:44.160 --> 03:45.570
+It's a continuous integration
+
+03:45.570 --> 03:46.950
+and continuous delivery service
+
+03:46.950 --> 03:49.260
+for fast and reliable application
+
+03:49.260 --> 03:51.540
+and infrastructure updates.
+
+03:51.540 --> 03:53.670
+So whenever there is a code change,
+
+03:53.670 --> 03:55.620
+CodePipeline will detect the code change,
+
+03:55.620 --> 03:57.150
+it is going to fetch the code,
+
+03:57.150 --> 03:59.040
+build it through CodeBuild,
+
+03:59.040 --> 04:01.200
+and deploy it in the target.
+
+04:01.200 --> 04:03.300
+In our case, the target will be Beanstalk.
+
+04:03.300 --> 04:05.940
+So let's click on Create Pipeline.
+
+04:05.940 --> 04:07.800
+Okay, so choose Creation Options.
+
+04:07.800 --> 04:10.710
+So you have deployment, continuous integration, automation,
+
+04:10.710 --> 04:12.120
+build custom pipeline.
+
+04:12.120 --> 04:14.250
+So we're going to do build custom.
+
+04:14.250 --> 04:17.040
+We check in deployment, you have push to ECR.
+
+04:17.040 --> 04:19.610
+So if you have Docker build process, you can host it on ECR.
+
+04:19.610 --> 04:23.490
+We have ECS where we can run our containers.
+
+04:23.490 --> 04:25.190
+We have CloudFormation, Terraform.
+
+04:26.160 --> 04:29.880
+And in continuous integration, you will see build tools.
+
+04:29.880 --> 04:32.220
+But we're interested in this one, build custom pipeline,
+
+04:32.220 --> 04:34.650
+so click on that, go Next.
+
+04:34.650 --> 04:37.140
+Let's give pipeline a name.
+
+04:37.140 --> 04:39.393
+So I'm giving it as vprocicdpipeline.
+
+04:41.010 --> 04:43.410
+So this is going to create a role,
+
+04:43.410 --> 04:45.540
+a service role that should have access
+
+04:45.540 --> 04:50.190
+to all these services like CodeBuild and Beanstalk
+
+04:50.190 --> 04:51.960
+because we're going to do deploy it on Beanstalk,
+
+04:51.960 --> 04:52.920
+but there's one problem.
+
+04:52.920 --> 04:55.470
+Recently, this role does not create
+
+04:55.470 --> 04:58.530
+any permission for Beanstalk or deployment will fail.
+
+04:58.530 --> 05:00.450
+So after we're done creating this pipeline,
+
+05:00.450 --> 05:02.700
+we're going to find this role in IAM
+
+05:02.700 --> 05:05.910
+and we'll add permission for Beanstalk.
+
+05:05.910 --> 05:07.590
+So for now, let's just keep it as it is.
+
+05:07.590 --> 05:08.970
+Let's go Next.
+
+05:08.970 --> 05:09.900
+Source provider.
+
+05:09.900 --> 05:12.750
+Now, you need to select the source code over here.
+
+05:12.750 --> 05:15.420
+So our source score is in Bitbucket
+
+05:15.420 --> 05:18.000
+and you should see the repository over here,
+
+05:18.000 --> 05:19.860
+the connection name first of all,
+
+05:19.860 --> 05:22.030
+and then you should see the repository
+
+05:22.920 --> 05:24.210
+because we already connected it
+
+05:24.210 --> 05:27.480
+while we're doing the CodeBuild project.
+
+05:27.480 --> 05:29.763
+Branch, aws-ci.
+
+05:31.020 --> 05:33.990
+Now this source code, we need to provide this information
+
+05:33.990 --> 05:36.330
+so it detects the commit,
+
+05:36.330 --> 05:38.400
+and so that will be an event, right?
+
+05:38.400 --> 05:40.170
+It detects a commit as an event
+
+05:40.170 --> 05:42.573
+and that event will trigger this pipeline.
+
+05:43.440 --> 05:45.180
+Okay, let's go Next.
+
+05:45.180 --> 05:48.630
+So what is the build option that you're executing over here?
+
+05:48.630 --> 05:50.220
+Do you want to execute some commands
+
+05:50.220 --> 05:52.470
+or you want other build providers?
+
+05:52.470 --> 05:54.330
+Click on other build providers
+
+05:54.330 --> 05:55.380
+and we're using CodeBuild,
+
+05:55.380 --> 05:56.670
+so we are going to select CodeBuild,
+
+05:56.670 --> 06:01.140
+but you see here you have option for ECR and Jenkins also.
+
+06:01.140 --> 06:03.420
+We are going to select CodeBuild
+
+06:03.420 --> 06:05.763
+and see our project name over there.
+
+06:06.990 --> 06:09.360
+And then you have some options like it's a single build
+
+06:09.360 --> 06:12.900
+or you want to like build multiples, batch build.
+
+06:12.900 --> 06:14.403
+You have the region name.
+
+06:16.620 --> 06:17.883
+Let's go Next.
+
+06:19.080 --> 06:20.910
+Test provider, you can select
+
+06:20.910 --> 06:22.200
+where you want to test this code.
+
+06:22.200 --> 06:24.690
+You can have another CodeBuild project
+
+06:24.690 --> 06:26.820
+that can test your code
+
+06:26.820 --> 06:28.980
+or do code analysis or any other thing.
+
+06:28.980 --> 06:32.370
+You have other options also over here provided by AWS.
+
+06:32.370 --> 06:33.930
+So we do not have anything over here.
+
+06:33.930 --> 06:37.863
+We're just going to go Next, skip to the next stage.
+
+06:38.820 --> 06:42.300
+Deploy provider, so this is where we select the Beanstalk.
+
+06:42.300 --> 06:45.183
+So search for Beanstalk, AWS Elastic Beanstalk.
+
+06:46.560 --> 06:48.150
+Select your application
+
+06:48.150 --> 06:53.150
+and select your environment name from here and then go Next.
+
+06:53.220 --> 06:57.090
+Okay, let's review everything, if you're good with all this.
+
+06:57.090 --> 06:58.770
+Now before I complete the review,
+
+06:58.770 --> 07:01.950
+I'm going to get the service role name.
+
+07:01.950 --> 07:03.510
+Okay, I just copy the service role name
+
+07:03.510 --> 07:05.160
+because we need to edit this
+
+07:05.160 --> 07:08.160
+and add Beanstalk permission over here.
+
+07:08.160 --> 07:12.120
+So copy the service role name and then say Create Pipeline.
+
+07:12.120 --> 07:14.730
+As soon as you create a pipeline, it will start the trigger,
+
+07:14.730 --> 07:16.203
+it will start the pipeline.
+
+07:17.040 --> 07:18.720
+Okay, there it started the pipeline.
+
+07:18.720 --> 07:21.900
+You know what, I'm going to stop the execution
+
+07:21.900 --> 07:24.840
+and I will say stop execution, which is in progress,
+
+07:24.840 --> 07:26.253
+this one and just say stop.
+
+07:27.413 --> 07:28.470
+And the reason I stopped it
+
+07:28.470 --> 07:31.770
+because it will fail in the deploy stage, that's why.
+
+07:31.770 --> 07:34.260
+Even if it fails, you can just retry
+
+07:34.260 --> 07:35.670
+after adding permission to the role.
+
+07:35.670 --> 07:37.743
+So go to IAM service here,
+
+07:38.822 --> 07:39.655
+IAM,
+
+07:41.520 --> 07:43.290
+go to Roles.
+
+07:43.290 --> 07:45.450
+In the search, paste the pipeline name,
+
+07:45.450 --> 07:48.450
+which you copied, sorry, the role name.
+
+07:48.450 --> 07:50.400
+Once you find your role name,
+
+07:50.400 --> 07:51.810
+or let's say even if you missed it,
+
+07:51.810 --> 07:53.370
+you can go back to your pipeline,
+
+07:53.370 --> 07:55.983
+you can click on Pipelines,
+
+07:57.000 --> 07:58.800
+go to your pipeline,
+
+07:58.800 --> 08:00.510
+can go to Settings,
+
+08:00.510 --> 08:04.380
+and here also you can find the role name, right?
+
+08:04.380 --> 08:05.523
+This is the role name.
+
+08:06.870 --> 08:09.590
+Okay, so find the role name, search it, click on it.
+
+08:09.590 --> 08:11.836
+So you see it has some policies.
+
+08:11.836 --> 08:13.846
+This is for CodeBuild, this is for CodeConnections,
+
+08:13.846 --> 08:15.750
+this is for CodePipeline, nothing for Beanstalk,
+
+08:15.750 --> 08:18.480
+so we are going to click on this dropdown
+
+08:18.480 --> 08:21.360
+and say Attach Policies.
+
+08:21.360 --> 08:22.563
+Search for Beanstalk.
+
+08:23.718 --> 08:26.432
+AdministratorAccess-AWSElasticBeanstalk.
+
+08:26.432 --> 08:28.050
+Put a check mark on that.
+
+08:28.050 --> 08:30.360
+Scroll down, say Add Permission.
+
+08:30.360 --> 08:33.270
+So that's done. We can trigger the pipeline now.
+
+08:33.270 --> 08:34.620
+So go back to your pipeline
+
+08:37.770 --> 08:39.963
+and click on Release Change,
+
+08:40.830 --> 08:41.663
+Release.
+
+08:42.570 --> 08:46.680
+Some error I got on things related to the pipeline.
+
+08:46.680 --> 08:48.510
+So open the CodePipeline from somewhere else
+
+08:48.510 --> 08:49.680
+if you face this error.
+
+08:49.680 --> 08:50.730
+Let's check the pipeline.
+
+08:50.730 --> 08:52.410
+It says it's in progress.
+
+08:52.410 --> 08:54.210
+After some time, the build completed
+
+08:54.210 --> 08:56.880
+and the deploy stage has started.
+
+08:56.880 --> 08:59.880
+Let's check the Beanstalk environment.
+
+08:59.880 --> 09:00.930
+You see the Batch 1:
+
+09:00.930 --> 09:03.600
+Starting application deployment command.
+
+09:03.600 --> 09:05.400
+So we have rolling update,
+
+09:05.400 --> 09:07.994
+we have selected while creating Beanstalk,
+
+09:07.994 --> 09:12.000
+and we have two instances and we selected 50%.
+
+09:12.000 --> 09:13.860
+So that's one out of two instance.
+
+09:13.860 --> 09:16.380
+So one instance deployment is going on.
+
+09:16.380 --> 09:19.740
+Once it is good, it's going to move to the next instance.
+
+09:19.740 --> 09:21.210
+So I'm going to pause the recording
+
+09:21.210 --> 09:23.640
+and resume when the deployment is completed.
+
+09:23.640 --> 09:27.360
+Okay, so the deployment is completed and is successful.
+
+09:27.360 --> 09:29.763
+Let's go to the CodePipeline.
+
+09:29.763 --> 09:33.360
+Now, here also it says the deployment is completed.
+
+09:33.360 --> 09:36.630
+Let's go to the environment and let's find this URL.
+
+09:36.630 --> 09:38.760
+Yeah, this one. Let's click on this.
+
+09:38.760 --> 09:41.910
+That should redirect to the load balancer of the Beanstalk
+
+09:41.910 --> 09:44.580
+and that should show us the application.
+
+09:44.580 --> 09:48.000
+So enter the username and password, same, admin_vp,
+
+09:48.000 --> 09:51.120
+and same password, admin_vp.
+
+09:51.120 --> 09:52.290
+Login.
+
+09:52.290 --> 09:54.690
+Now, this login should prove the connection
+
+09:54.690 --> 09:56.730
+to the RDS instance,
+
+09:56.730 --> 09:58.650
+and we do not have anything else.
+
+09:58.650 --> 10:00.922
+We don't have RabbitMQ and Memcached
+
+10:00.922 --> 10:02.400
+or Elasticsearch, anything.
+
+10:02.400 --> 10:05.490
+We just wanted to prove the CodePipeline deployment,
+
+10:05.490 --> 10:08.060
+which we have proved by doing this project.
+
+10:08.060 --> 10:11.790
+In DevOps projects course, we have this much in detail,
+
+10:11.790 --> 10:13.980
+we have many more thing that is more close
+
+10:13.980 --> 10:18.360
+to real-time environment like testings, repositories.
+
+10:18.360 --> 10:22.027
+But I wanted you to have a taste of AWS CodePipeline.
+
+10:23.460 --> 10:24.660
+And that is why this section.
+
+10:24.660 --> 10:28.350
+Now our CodePipeline, as we see when we make a code change,
+
+10:28.350 --> 10:30.660
+it is going to trigger the pipeline.
+
+10:30.660 --> 10:32.070
+So let's test that last thing
+
+10:32.070 --> 10:34.200
+and then we're going to do the cleanup.
+
+10:34.200 --> 10:36.840
+So either from the command line you can open your terminal,
+
+10:36.840 --> 10:38.040
+you can go to that folder
+
+10:38.040 --> 10:40.890
+where we cloned the source code from Bitbucket.
+
+10:40.890 --> 10:42.690
+You can make any commit over there
+
+10:42.690 --> 10:46.620
+or you can just do it directly from the Bitbucket UI also.
+
+10:46.620 --> 10:49.990
+So let's go to the branch aws-ci
+
+10:50.861 --> 10:53.310
+and let's open README.md file.
+
+10:53.310 --> 10:55.230
+Let's click on Edit.
+
+10:55.230 --> 10:57.150
+Okay, don't make any meaningful change.
+
+10:57.150 --> 11:00.390
+You know, just add or remove some hash
+
+11:00.390 --> 11:03.423
+over here in the second line and make a commit.
+
+11:05.280 --> 11:08.550
+I can give some commit message. Let's click on Commit.
+
+11:08.550 --> 11:10.470
+Now, this come commit should trigger the pipeline.
+
+11:10.470 --> 11:12.330
+So let's go to CodePipeline.
+
+11:12.330 --> 11:13.800
+Let's go back.
+
+11:13.800 --> 11:15.420
+You see that was fast, right?
+
+11:15.420 --> 11:18.123
+As soon as I made a commit, triggered the pipeline.
+
+11:19.320 --> 11:21.090
+Okay, and I already went to the build stage
+
+11:21.090 --> 11:23.730
+and then it's going to go to the deployment stage.
+
+11:23.730 --> 11:24.660
+All right, so you can wait
+
+11:24.660 --> 11:26.490
+until this deployment is completed.
+
+11:26.490 --> 11:30.240
+And once it is done, you should do the cleanup,
+
+11:30.240 --> 11:31.740
+starting with the database.
+
+11:31.740 --> 11:36.450
+So go to the RDS, find your database and delete it.
+
+11:36.450 --> 11:38.760
+Action, Delete.
+
+11:38.760 --> 11:40.740
+Uncheck create final snapshot.
+
+11:40.740 --> 11:42.510
+I acknowledge.
+
+11:42.510 --> 11:44.520
+To confirm, type delete me here
+
+11:44.520 --> 11:46.380
+and click on Delete
+
+11:46.380 --> 11:49.530
+and then you can delete the environment.
+
+11:49.530 --> 11:51.360
+But before you delete the environment,
+
+11:51.360 --> 11:56.360
+we need to update the security group rules of RDS.
+
+11:56.730 --> 12:00.660
+So go to EC2, go to Security Group.
+
+12:00.660 --> 12:03.300
+Okay, the security group of RDS is anyways gone
+
+12:03.300 --> 12:05.430
+because we deleted the RDS instance.
+
+12:05.430 --> 12:06.780
+Oh wait, it's here.
+
+12:06.780 --> 12:10.050
+Okay, so edit the security group rule of the RDS
+
+12:10.050 --> 12:12.000
+and remove this line
+
+12:12.000 --> 12:14.940
+because this is connected to the Beanstalk, right?
+
+12:14.940 --> 12:18.000
+So when you try to delete the Beanstalk environment,
+
+12:18.000 --> 12:20.220
+it's going to fail because it will say that
+
+12:20.220 --> 12:22.350
+the security group is referred somewhere else
+
+12:22.350 --> 12:24.600
+and it will stop the deletion process.
+
+12:24.600 --> 12:27.990
+So make sure the RDS security group rule, you delete.
+
+12:27.990 --> 12:32.070
+Save and you go back to Beanstalk environment and delete it.
+
+12:32.070 --> 12:34.320
+So Elastic Beanstalk, go to Application,
+
+12:34.320 --> 12:35.790
+select your application name.
+
+12:35.790 --> 12:38.550
+In the actions, delete application.
+
+12:38.550 --> 12:40.950
+And the application will delete the environment first
+
+12:40.950 --> 12:42.950
+and then it will delete the application.
+
+12:45.090 --> 12:46.200
+So once it is deleted,
+
+12:46.200 --> 12:47.940
+or even if it's not deleted,
+
+12:47.940 --> 12:50.190
+you can still delete the pipeline.
+
+12:50.190 --> 12:53.070
+So go to your CodePipeline,
+
+12:53.070 --> 12:54.993
+select it and say Delete Pipeline.
+
+12:56.820 --> 12:58.200
+Delete.
+
+12:58.200 --> 13:00.750
+Then you can go to your CodeBuild build project
+
+13:00.750 --> 13:01.650
+and you can delete it.
+
+13:01.650 --> 13:03.190
+It's not necessary because
+
+13:04.500 --> 13:06.300
+as long as you don't run the build,
+
+13:06.300 --> 13:10.230
+it's not going to have any charge, any kind of bill.
+
+13:10.230 --> 13:12.720
+But just for the sake of cleanup, you can delete it
+
+13:12.720 --> 13:14.040
+because we have the build spec file,
+
+13:14.040 --> 13:17.253
+we can anytime quickly create the build project.
+
+13:19.740 --> 13:21.090
+Okay, so we cleaned everything
+
+13:21.090 --> 13:22.860
+except the Bitbucket repository.
+
+13:22.860 --> 13:26.040
+That we'll keep it for now because whenever you need,
+
+13:26.040 --> 13:27.480
+you can create the build project
+
+13:27.480 --> 13:29.760
+and pipeline anytime you want.
+
+13:29.760 --> 13:31.350
+I hope you have learned something new
+
+13:31.350 --> 13:34.350
+and you gained some more confidence on CI/CD.
+
+13:34.350 --> 13:36.630
+Once you know how to do CI/CD from Jenkins,
+
+13:36.630 --> 13:40.080
+you can do CI/CD from any other tool, any other cloud.
+
+13:40.080 --> 13:41.160
+And that was the whole purpose
+
+13:41.160 --> 13:43.383
+of adding this section in this course.
+
+13:44.310 --> 13:45.870
+So that was all in this project.
+
+13:45.870 --> 13:47.420
+I will see you in the next one.

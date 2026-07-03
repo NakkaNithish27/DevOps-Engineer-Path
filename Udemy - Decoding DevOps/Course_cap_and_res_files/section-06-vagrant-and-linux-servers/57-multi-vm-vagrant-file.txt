@@ -1,0 +1,907 @@
+WEBVTT
+
+00:00.570 --> 00:02.730
+instructor: Hello, and welcome.
+
+00:02.730 --> 00:03.630
+In this lecture,
+
+00:03.630 --> 00:07.593
+we are going to talk about Multi VM Vagrantfile,
+
+00:08.460 --> 00:10.353
+what is that, and why do we need it?
+
+00:11.310 --> 00:14.430
+Well, if we look at our previous Vagrantfile,
+
+00:14.430 --> 00:17.430
+we have a folder and we placed a Vagrantfile in that folder.
+
+00:17.430 --> 00:22.320
+So you can have just one VM per folder.
+
+00:22.320 --> 00:24.300
+If you want multiple Vms,
+
+00:24.300 --> 00:26.400
+then you need to manage different folders.
+
+00:26.400 --> 00:28.920
+You need to manage them with different commands.
+
+00:28.920 --> 00:30.480
+It'll be very convenient
+
+00:30.480 --> 00:32.850
+if we can manage multiple VMs together
+
+00:32.850 --> 00:34.980
+from one single Vagrantfile.
+
+00:34.980 --> 00:39.300
+This would be specially for an application stack
+
+00:39.300 --> 00:43.057
+that needs multiple services running in multiple Vms,
+
+00:44.070 --> 00:47.010
+like database on a separate VM,
+
+00:47.010 --> 00:49.336
+application service on a separate VM,
+
+00:49.336 --> 00:51.060
+frontend service on a separate VM.
+
+00:51.060 --> 00:54.570
+But together they work and form one single application.
+
+00:54.570 --> 00:58.423
+In such cases, you need to create a multi VM Vagrantfile.
+
+00:59.940 --> 01:02.730
+So I am in the Vagrant documentation.
+
+01:02.730 --> 01:04.950
+You can simply Google Vagrant documentation.
+
+01:04.950 --> 01:09.060
+You can come to this link, and there are all the steps,
+
+01:09.060 --> 01:10.770
+different settings of Vagrantfile,
+
+01:10.770 --> 01:13.230
+and many other thing that you can learn
+
+01:13.230 --> 01:14.613
+from the documentation.
+
+01:15.540 --> 01:17.460
+Like in CLI, if you click here;
+
+01:17.460 --> 01:22.323
+we have the box command, Vagrant box add,
+
+01:23.250 --> 01:26.883
+Vagrant box list, Vagrant box prune, remove.
+
+01:27.930 --> 01:29.230
+You can check in the init.
+
+01:30.720 --> 01:32.040
+Vagrant init box name,
+
+01:32.040 --> 01:34.710
+and you can say vagrant init -m box name,
+
+01:34.710 --> 01:37.353
+which creates Vagrantfile without any comments,
+
+01:38.370 --> 01:40.620
+-: f to overwrite an existing Vagrantfile,
+
+01:40.620 --> 01:42.270
+and many other options.
+
+01:42.270 --> 01:44.400
+See different arguments that you can provide
+
+01:44.400 --> 01:45.963
+to the Vagrant command.
+
+01:47.100 --> 01:49.213
+And also let's look at Vagrantfile;
+
+01:52.104 --> 01:52.937
+config.vm,
+
+01:52.937 --> 01:54.900
+what are the other different settings you can give
+
+01:54.900 --> 01:56.463
+with config.vm?
+
+01:58.230 --> 02:00.060
+So you have section separate
+
+02:00.060 --> 02:02.160
+for different different settings.
+
+02:02.160 --> 02:04.803
+I wanted to come here to Multi-Machine.
+
+02:06.270 --> 02:08.340
+You can read about what is a multi-machine
+
+02:08.340 --> 02:10.340
+since we're already discussing about it.
+
+02:11.270 --> 02:12.103
+If you come down here,
+
+02:12.103 --> 02:13.857
+you have an example of a multi VM Vagrantfile.
+
+02:13.857 --> 02:15.930
+You can simply copy this,
+
+02:15.930 --> 02:18.990
+paste it in a file called Vagrantfile.
+
+02:18.990 --> 02:21.540
+You have to create a file with the name Vagrantfile,
+
+02:21.540 --> 02:23.160
+V capital, paste this content
+
+02:23.160 --> 02:25.740
+and then you can make the changes.
+
+02:25.740 --> 02:29.700
+if you look closely, the setting,
+
+02:29.700 --> 02:31.290
+and then it closes over here.
+
+02:31.290 --> 02:32.310
+And then inside that,
+
+02:32.310 --> 02:35.550
+you have config.vm.define.
+
+02:35.550 --> 02:38.610
+And then a name web do web,
+
+02:38.610 --> 02:43.610
+this will be the name of this VM web.vm.box,
+
+02:43.770 --> 02:46.320
+where you can mention the box, and an end keyword.
+
+02:46.320 --> 02:50.730
+So this is one VM and this is the other VM like that.
+
+02:50.730 --> 02:54.093
+You can have multiple VMs in one single Vagrantfile.
+
+02:55.320 --> 02:57.780
+Of course, you can mention other commands,
+
+02:57.780 --> 03:02.780
+or other settings like the config.vm.network.
+
+03:03.120 --> 03:05.760
+Provisioning, hostname also you can set.
+
+03:05.760 --> 03:07.560
+All the settings that we have seen previously,
+
+03:07.560 --> 03:10.230
+you can define for separate Vms.
+
+03:10.230 --> 03:12.360
+And that is some work, really.
+
+03:12.360 --> 03:13.620
+But that is only at the beginning,
+
+03:13.620 --> 03:16.050
+once you have a one single multi VM Vagrantfile,
+
+03:16.050 --> 03:18.090
+you can just copy paste that file,
+
+03:18.090 --> 03:22.410
+make the changes, and create other Vagrantfiles also.
+
+03:22.410 --> 03:27.410
+And now this is a very perfect place to introduce ChatGPT.
+
+03:27.840 --> 03:29.520
+Yes, you heard it right,
+
+03:29.520 --> 03:32.613
+the famous AI tool that generates text.
+
+03:33.570 --> 03:37.590
+So if you already have an account on ChatGPT, just open it.
+
+03:37.590 --> 03:41.160
+If you do not have ChatGPT account, just sign up.
+
+03:41.160 --> 03:42.060
+It's pretty simple,
+
+03:42.060 --> 03:45.303
+mention your email address and sign up on ChatGPT,
+
+03:46.140 --> 03:48.600
+and open it like I did.
+
+03:48.600 --> 03:51.540
+So that's the UI of the ChatGPT.
+
+03:51.540 --> 03:56.540
+We'll ask ChatGPT, what is vagrant or Vagrant?
+
+03:58.140 --> 03:59.073
+It's thinking.
+
+04:00.870 --> 04:03.783
+And it's started printing sometimes it's very slow.
+
+04:06.780 --> 04:09.150
+I thought I will show you the power of ChatGPT
+
+04:09.150 --> 04:12.423
+but it's actually very slow today, I don't know why?
+
+04:13.590 --> 04:15.780
+It happens sometimes.
+
+04:15.780 --> 04:19.200
+So ChatGPT generates text.
+
+04:19.200 --> 04:21.810
+And we will be writing a lot of text in this course
+
+04:21.810 --> 04:23.583
+and in your DevOps career.
+
+04:24.450 --> 04:28.080
+Most of the time that text will be the scripts,
+
+04:28.080 --> 04:29.970
+the configuration files.
+
+04:29.970 --> 04:32.700
+Now, instead of you writing it all one by one,
+
+04:32.700 --> 04:36.060
+you can ask ChatGPT to do it for you.
+
+04:36.060 --> 04:40.830
+But do not always depend on ChatGPT at least in this course,
+
+04:40.830 --> 04:45.150
+do not use ChatGPT, just test it and that is fine.
+
+04:45.150 --> 04:48.720
+If you start using ChatGPT for the convenience
+
+04:48.720 --> 04:52.200
+in this course, then you will not learn.
+
+04:52.200 --> 04:53.033
+As a DevOps,
+
+04:53.033 --> 04:55.950
+you should be able to write each and every line
+
+04:55.950 --> 04:57.960
+of your script and code.
+
+04:57.960 --> 05:00.300
+I said you should be able to,
+
+05:00.300 --> 05:02.250
+but that not necessarily means
+
+05:02.250 --> 05:04.350
+that you should be always doing that.
+
+05:04.350 --> 05:07.200
+Yes. For the help, you can use ChatGPT.
+
+05:07.200 --> 05:08.073
+So watch now.
+
+05:09.480 --> 05:12.313
+So I will ask it, Sample Vagrantfile?
+
+05:20.640 --> 05:23.220
+Okay, there it's showing us a sample Vagrantfile.
+
+05:23.220 --> 05:25.653
+It's also explaining us the concept of that,
+
+05:26.700 --> 05:27.990
+all the options.
+
+05:27.990 --> 05:32.160
+And instead of writing the multi VM Vagrantfile
+
+05:32.160 --> 05:33.480
+which we can do, no big deal,
+
+05:33.480 --> 05:35.460
+we copy paste the content from the documentation,
+
+05:35.460 --> 05:37.350
+we make the changes, we can do that.
+
+05:37.350 --> 05:39.030
+But I wanted to introduce ChatGPT,
+
+05:39.030 --> 05:41.030
+that's why I'm doing it through ChatGPT.
+
+05:42.390 --> 05:44.400
+So I'm going to put this content over here,
+
+05:44.400 --> 05:48.047
+multivm Vagrantfile with web01, Ubuntu20,
+
+05:48.047 --> 05:51.510
+web02 Ubuntu20 db01 with centos7.
+
+05:51.510 --> 05:53.070
+Private IP for all the vms.
+
+05:53.070 --> 05:55.200
+And provisioning for db01.
+
+05:55.200 --> 05:58.380
+I also said, Set hostname also.
+
+05:58.380 --> 06:00.270
+Let's see what it does.
+
+06:00.270 --> 06:02.430
+Now it may generate a different output for you
+
+06:02.430 --> 06:05.730
+compared to mine or same?
+
+06:05.730 --> 06:06.573
+Let's find out.
+
+06:09.150 --> 06:12.840
+Okay, it's also started explaining all the lines
+
+06:12.840 --> 06:14.445
+in the Vagrantfile.
+
+06:14.445 --> 06:16.530
+So you have the code ready over here
+
+06:16.530 --> 06:18.577
+but if you are thinking that,
+
+06:18.577 --> 06:22.470
+"Hey, ChatGPT is doing everything, what am I going to do?"
+
+06:22.470 --> 06:25.383
+And think about it, what did I put?
+
+06:26.400 --> 06:27.570
+Multi VM Vagrantfile,
+
+06:27.570 --> 06:29.987
+I should know what is a multi VM Vagrantfile.
+
+06:29.987 --> 06:31.800
+Web01, I have to put box name.
+
+06:31.800 --> 06:34.710
+Web02, I have to put box name db01.
+
+06:34.710 --> 06:37.380
+What are private IPs in the Vagrantfile,
+
+06:37.380 --> 06:38.460
+and what is provisioning?
+
+06:38.460 --> 06:40.620
+I should already know this,
+
+06:40.620 --> 06:42.960
+I should know what to ask?
+
+06:42.960 --> 06:44.430
+So it's not going to replace you,
+
+06:44.430 --> 06:46.030
+it's going to be your assistant.
+
+06:47.580 --> 06:51.693
+Okay, let's copy this code, and let's go to VS Code.
+
+06:52.680 --> 06:55.320
+I'm going to create a new folder over here.
+
+06:55.320 --> 06:59.043
+New folder, we'll name it as multivm.
+
+07:00.120 --> 07:03.090
+And in this folder, let's create a new file,
+
+07:03.090 --> 07:06.840
+and we have to make sure the file name is Vagrantfile,
+
+07:06.840 --> 07:08.673
+V capital, no extension.
+
+07:10.110 --> 07:12.033
+And we will paste the content here.
+
+07:13.714 --> 07:15.030
+We are not gonna take it for granted,
+
+07:15.030 --> 07:16.293
+we'll make changes.
+
+07:17.460 --> 07:20.760
+One thing is 56, is the range.
+
+07:20.760 --> 07:22.427
+And I'll say 41, 56.
+
+07:24.775 --> 07:29.057
+41, 56, Now I could have given this one also in ChatGPT,
+
+07:29.940 --> 07:32.793
+but let's do something by ourself in this lecture.
+
+07:34.321 --> 07:36.043
+Okay, 56.42.
+
+07:40.950 --> 07:42.870
+okay, this provisioning is active there,
+
+07:42.870 --> 07:44.943
+let's put some packages here.
+
+07:46.950 --> 07:51.950
+I will say, wget unzip mysql, not mysql...
+
+07:52.260 --> 07:57.260
+The package name is mariadb-server.
+
+07:57.360 --> 07:58.350
+So in Cento OS,
+
+07:58.350 --> 08:01.228
+the package name is mariadb-server
+
+08:01.228 --> 08:02.523
+for the MySQL database.
+
+08:03.630 --> 08:08.333
+And this command will change it to systemctl start mariadb,
+
+08:11.010 --> 08:12.453
+that's the service name.
+
+08:14.190 --> 08:16.293
+systemctl enable mariadb.
+
+08:17.460 --> 08:18.600
+Okay, let's save this,
+
+08:18.600 --> 08:20.550
+If you want to make any other change, you can do that.
+
+08:20.550 --> 08:22.600
+See, this is how we can set the hostname.
+
+08:23.487 --> 08:26.347
+You have to give a name to the VM here,
+
+08:26.347 --> 08:30.514
+web01, and then this will be in this pipe symbols.
+
+08:31.566 --> 08:32.935
+We have web zero,
+
+08:32.935 --> 08:36.448
+and that's why the settings are web01.vm.box,
+
+08:36.448 --> 08:38.040
+web01.vm.hostname.
+
+08:38.040 --> 08:40.050
+Similarly, you look here it's web02,
+
+08:40.050 --> 08:41.580
+the settings are like that.
+
+08:41.580 --> 08:43.860
+Web02.vm.
+
+08:43.860 --> 08:48.860
+There; db01, so whatever is in between this pipe symbol,
+
+08:48.900 --> 08:51.960
+the settings will be starting with the same name.
+
+08:51.960 --> 08:53.520
+For programmer it's a class object,
+
+08:53.520 --> 08:56.460
+so you can easily understand what I'm saying.
+
+08:56.460 --> 08:58.170
+For non programmer, once again,
+
+08:58.170 --> 09:01.140
+whatever you see in the pipe symbol name should be similar.
+
+09:01.140 --> 09:03.780
+So if you happen to copy paste this
+
+09:03.780 --> 09:05.610
+to add one more extra VM.
+
+09:05.610 --> 09:07.410
+So when you copy paste,
+
+09:07.410 --> 09:09.570
+just make sure you make the changes to the names
+
+09:09.570 --> 09:11.013
+and all the lines.
+
+09:12.300 --> 09:14.910
+And most importantly the IP address,
+
+09:14.910 --> 09:19.290
+the IP address cannot be same in one same network.
+
+09:19.290 --> 09:24.290
+We have 56.41, so we should change it to let's say 42 here,
+
+09:24.510 --> 09:26.973
+and this one will change it to 43.
+
+09:28.650 --> 09:33.300
+So the network 192.168.56,
+
+09:33.300 --> 09:36.490
+this is the network range network IP,
+
+09:36.490 --> 09:38.730
+we will understand all that in the networking section
+
+09:38.730 --> 09:40.563
+but till here is the network part.
+
+09:42.150 --> 09:46.710
+And in the network you cannot have duplicate IP addresses,
+
+09:46.710 --> 09:48.900
+so IPs should be different.
+
+09:48.900 --> 09:51.630
+So let's save that, can do Control + S
+
+09:51.630 --> 09:53.223
+or you can say File, Save.
+
+09:54.750 --> 09:56.403
+And let's go to Git Bash.
+
+09:58.650 --> 10:03.007
+Let's go to the folder f/vagrant-vms, and multivm.
+
+10:05.910 --> 10:06.990
+There's our Vagrantfile
+
+10:06.990 --> 10:09.270
+and let's bring up the VM Vagrant up.
+
+10:09.270 --> 10:10.680
+Okay, check global status,
+
+10:10.680 --> 10:14.640
+make sure all the other VMs are powered off or deleted.
+
+10:14.640 --> 10:16.020
+We have three VMs over here,
+
+10:16.020 --> 10:17.640
+if you have any more VMs running,
+
+10:17.640 --> 10:20.370
+there is a chance you may run out of resource
+
+10:20.370 --> 10:21.203
+on your computer.
+
+10:21.203 --> 10:25.410
+So make sure all the other VMs are off or destroyed.
+
+10:25.410 --> 10:28.110
+So this is going to take some time to bring up the VM.
+
+10:29.880 --> 10:31.410
+I'm going to pause my screen
+
+10:31.410 --> 10:33.483
+and resume when this is completed.
+
+10:34.830 --> 10:36.600
+Okay, observe the VM name,
+
+10:36.600 --> 10:37.800
+it used to be default
+
+10:37.800 --> 10:39.835
+but now we have a name to the VM,
+
+10:39.835 --> 10:43.680
+web01, web02, db01 like that.
+
+10:43.680 --> 10:47.283
+Web02 is also up, db01 is coming up.
+
+10:48.570 --> 10:51.300
+So this box was not available on my computer,
+
+10:51.300 --> 10:52.533
+so it's downloading it.
+
+10:53.640 --> 10:54.780
+Okay, the VM is up
+
+10:54.780 --> 10:58.770
+and we used to log in like this; vagrant ssh, right?
+
+10:58.770 --> 11:01.230
+But now we have multiple VM,
+
+11:01.230 --> 11:02.523
+so what will it say?
+
+11:04.170 --> 11:06.570
+This command requires a specific VM name
+
+11:06.570 --> 11:08.760
+to target in a multi VM environment.
+
+11:08.760 --> 11:10.110
+So we need to provide the name
+
+11:10.110 --> 11:12.903
+and we have the name like ssh web01.
+
+11:15.870 --> 11:16.800
+And we are in,
+
+11:16.800 --> 11:19.620
+you see that there's the hostname also set.
+
+11:19.620 --> 11:20.673
+Let's exit from that.
+
+11:22.050 --> 11:25.663
+Now, the way we are going to manage these multi Vms
+
+11:26.790 --> 11:28.170
+is mostly through name like,
+
+11:28.170 --> 11:31.770
+let's say you want to power off one single VM and not all.
+
+11:31.770 --> 11:33.390
+So you can say, vagrant halt.
+
+11:33.390 --> 11:34.500
+When you say vagrant halt,
+
+11:34.500 --> 11:36.060
+it's going to power off all the VMs.
+
+11:36.060 --> 11:37.650
+So you want to do a specific one,
+
+11:37.650 --> 11:40.173
+you can say, web02 power off.
+
+11:41.400 --> 11:44.573
+Same way; destroy or bring vagrant up web02,
+
+11:46.830 --> 11:49.170
+and like that you can bring up also you can say,
+
+11:49.170 --> 11:50.973
+vagrant up web02.
+
+11:52.350 --> 11:53.700
+I'm not going to do that,
+
+11:53.700 --> 11:55.800
+it takes a very long time.
+
+11:55.800 --> 11:58.050
+If you want to delete any specific VM,
+
+11:58.050 --> 12:01.953
+you can say, vagrant destroy web01.
+
+12:03.630 --> 12:05.250
+But if you say, vagrant destroy,
+
+12:05.250 --> 12:07.027
+it's going to destroy all the VMs.
+
+12:08.640 --> 12:11.852
+So you make sure give specific name of the VM
+
+12:11.852 --> 12:15.450
+unless you don't mean to do it on all the VMs,
+
+12:15.450 --> 12:16.650
+except Vagrant SSH;
+
+12:16.650 --> 12:20.970
+there, you definitely need to provide the name of the VM.
+
+12:20.970 --> 12:24.480
+Anytime where you want to add any extra VM,
+
+12:24.480 --> 12:25.800
+you can go to your Vagrantfile,
+
+12:25.800 --> 12:28.413
+you can copy paste the settings,
+
+12:31.410 --> 12:32.640
+and make the changes.
+
+12:32.640 --> 12:37.140
+I'm going to change all the web02 to web03.
+
+12:37.140 --> 12:37.973
+I did that.
+
+12:37.973 --> 12:40.350
+And also I need to change the IP address.
+
+12:40.350 --> 12:44.473
+So 42 is already given for db01, I can say 43 here or 44.
+
+12:45.690 --> 12:47.850
+I'm going to save this file,
+
+12:47.850 --> 12:52.493
+and come back and I can say, vagrant up web03.
+
+12:56.524 --> 12:57.780
+So it is going to read the Vagrantfile,
+
+12:57.780 --> 13:00.513
+look for web03 setting and bring up your VM.
+
+13:02.850 --> 13:05.490
+Now, what multi VM doesn't mean you put all your VM
+
+13:05.490 --> 13:06.750
+in one single Vagrantfile.
+
+13:06.750 --> 13:10.260
+It is for a specific project that we are going to see
+
+13:10.260 --> 13:13.230
+in the project set up section later
+
+13:13.230 --> 13:15.840
+for our project vprofile project
+
+13:15.840 --> 13:17.910
+where we have multiple VMs requirement,
+
+13:17.910 --> 13:20.040
+we are going to have one single Vagrantfile
+
+13:20.040 --> 13:22.050
+with everything in it.
+
+13:22.050 --> 13:24.300
+But for a different project or different use cases,
+
+13:24.300 --> 13:27.900
+I create a different folder with a different Vagrantfile.
+
+13:27.900 --> 13:30.333
+So make sure you do that segregation.
+
+13:31.410 --> 13:32.760
+So play with this;
+
+13:32.760 --> 13:37.680
+once you are done, destroy --force,
+
+13:37.680 --> 13:38.513
+force I'm giving,
+
+13:38.513 --> 13:41.160
+so it doesn't ask me the question yes or no?
+
+13:41.160 --> 13:43.260
+So I'm just giving vagrant destroy --force,
+
+13:43.260 --> 13:45.213
+it's going to delete all the VMs now.
+
+13:51.390 --> 13:52.500
+It deleted all the VMs.
+
+13:52.500 --> 13:54.517
+Web01, was anyways deleted so it says,
+
+13:54.517 --> 13:56.550
+"not created. Moving on..."
+
+13:56.550 --> 13:58.353
+And you should also move on now.
+
+13:59.310 --> 14:02.670
+Also, you can use ChatGPT to search for the errors
+
+14:02.670 --> 14:04.140
+that you get.
+
+14:04.140 --> 14:08.880
+But remember, you need to know what you have to search?
+
+14:08.880 --> 14:11.070
+Later, you can generate bash scripts.
+
+14:11.070 --> 14:12.510
+After you learn Bash scripting,
+
+14:12.510 --> 14:15.060
+you can generate Ansible playbook,
+
+14:15.060 --> 14:18.060
+you can generate Terraform code, and Jenkins file,
+
+14:18.060 --> 14:20.343
+and many other things through ChatGPT.
+
+14:21.240 --> 14:23.970
+So use it, but not always.
+
+14:23.970 --> 14:25.560
+When you are learning, learn it.
+
+14:25.560 --> 14:27.600
+Write everything by yourself.
+
+14:27.600 --> 14:30.000
+Once you are confident on your ability,
+
+14:30.000 --> 14:34.113
+then try to test ChatGPT or when you get any error.
+
+14:35.310 --> 14:37.800
+I hope you enjoyed this section.
+
+14:37.800 --> 14:41.610
+Let's wrap it up with a goodbye,
+
+14:41.610 --> 14:43.383
+I will see you in the next section.

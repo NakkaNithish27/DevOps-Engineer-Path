@@ -1,0 +1,820 @@
+WEBVTT
+
+00:00.330 --> 00:01.380
+Instructor: Hello and welcome.
+
+00:01.380 --> 00:02.220
+In this lecture,
+
+00:02.220 --> 00:05.583
+we are going to create a Bitbucket repository.
+
+00:07.950 --> 00:10.350
+So here are the steps that we are going to execute.
+
+00:10.350 --> 00:13.470
+We are going to log into bitbucket.org.
+
+00:13.470 --> 00:15.250
+We are going to create an account
+
+00:16.230 --> 00:19.470
+and then create an empty repository over there.
+
+00:19.470 --> 00:23.760
+This is, again, it's a Git repository, same like GitHub.
+
+00:23.760 --> 00:26.880
+Then we will use key-based authentication.
+
+00:26.880 --> 00:31.880
+So we will generate SSH keys in our local computer,
+
+00:32.010 --> 00:34.470
+which should give us public key and private key.
+
+00:34.470 --> 00:38.220
+We will copy the public key to our Bitbucket account.
+
+00:38.220 --> 00:41.250
+We will create an SSH configuration file,
+
+00:41.250 --> 00:43.260
+which will hold the information
+
+00:43.260 --> 00:47.400
+that if we are trying to push it on bitbucket.org,
+
+00:47.400 --> 00:50.643
+then it is going to use the keys that we have defined.
+
+00:52.650 --> 00:54.360
+So once we have authentication,
+
+00:54.360 --> 00:59.360
+then we are going to take our GitHub repository source code.
+
+01:00.360 --> 01:04.860
+So basically we will clone vprofile application
+
+01:04.860 --> 01:06.210
+from GitHub repository,
+
+01:06.210 --> 01:10.200
+we will remove the GitHub URL from that,
+
+01:10.200 --> 01:13.440
+and add the Bitbucket repository URL
+
+01:13.440 --> 01:15.393
+that we have created in the first step.
+
+01:16.410 --> 01:20.523
+Then we are going to push this code to Bitbucket repository.
+
+01:21.510 --> 01:24.270
+So in short, create a Bitbucket repository,
+
+01:24.270 --> 01:27.270
+use SSH keys for the authentication,
+
+01:27.270 --> 01:29.400
+take repository from GitHub,
+
+01:29.400 --> 01:32.670
+and migrate it to Bitbucket repository.
+
+01:32.670 --> 01:33.933
+Let's get started, then.
+
+01:35.220 --> 01:39.528
+Okay, so first we will create account on Bitbucket
+
+01:39.528 --> 01:42.090
+and I'm going to use my Google account.
+
+01:42.090 --> 01:45.030
+So you can also use a Google account.
+
+01:45.030 --> 01:48.750
+Sign into your Google account, and in the same browser,
+
+01:48.750 --> 01:51.483
+in another tab, open bitbucket.org.
+
+01:57.120 --> 02:00.870
+Click on Log In, or you can also click on Get It Free.
+
+02:00.870 --> 02:02.463
+And I'm using Google,
+
+02:04.470 --> 02:07.080
+so once you select your Google account,
+
+02:07.080 --> 02:09.000
+it is going to give you this window
+
+02:09.000 --> 02:11.523
+to create a Bitbucket account,
+
+02:12.690 --> 02:15.333
+and we'll just say create account.
+
+02:16.800 --> 02:19.530
+Okay, let's close this popup here.
+
+02:19.530 --> 02:21.000
+Alright, so first thing we have to do
+
+02:21.000 --> 02:23.043
+is we have to create a workspace.
+
+02:24.480 --> 02:27.030
+So workspace is like kind of a placeholder,
+
+02:27.030 --> 02:30.270
+which will store our Git repository,
+
+02:30.270 --> 02:33.630
+and I'm going to give my workspace a name.
+
+02:33.630 --> 02:36.810
+I just said devopscicd here to make sure this is unique.
+
+02:36.810 --> 02:38.520
+You can give something else.
+
+02:38.520 --> 02:41.310
+I'll say agree and create workspace.
+
+02:41.310 --> 02:43.980
+Okay, see that workspace ID is already taken,
+
+02:43.980 --> 02:45.723
+so let me give a different name.
+
+02:48.060 --> 02:52.560
+Okay, so I have given AWSCICD45 just to make it unique.
+
+02:52.560 --> 02:54.750
+You have to give a different name than this.
+
+02:54.750 --> 02:56.580
+You cannot give the same name.
+
+02:56.580 --> 02:59.010
+So I'll say agree and create workspace.
+
+02:59.010 --> 03:00.960
+Okay, so the workspace is created.
+
+03:00.960 --> 03:02.190
+Let me close this.
+
+03:02.190 --> 03:03.660
+Next, next.
+
+03:03.660 --> 03:05.030
+Got it.
+
+03:05.030 --> 03:07.110
+Okay, so we created the account,
+
+03:07.110 --> 03:09.000
+we created a workspace for us,
+
+03:09.000 --> 03:11.820
+and in this, we are going to create a repository.
+
+03:11.820 --> 03:15.123
+So just click on here, create repository.
+
+03:16.020 --> 03:17.760
+So first we need to give project name,
+
+03:17.760 --> 03:20.400
+so I'm just going to say here, vprofile,
+
+03:20.400 --> 03:25.120
+and repository name, I will just give as vproapp,
+
+03:26.130 --> 03:28.380
+and I'll make sure it is a private repository.
+
+03:28.380 --> 03:30.990
+And anyways, we are going to use authentication
+
+03:30.990 --> 03:34.500
+from our local system to Bitbucket repository
+
+03:34.500 --> 03:36.450
+and also from AWS services
+
+03:36.450 --> 03:39.570
+that we will see in further lectures.
+
+03:39.570 --> 03:41.460
+Now I want to create an empty repository
+
+03:41.460 --> 03:44.070
+because I'm going to push my code
+
+03:44.070 --> 03:45.810
+from GitHub repository over here,
+
+03:45.810 --> 03:49.020
+so I need this repository to be completely empty.
+
+03:49.020 --> 03:51.930
+So include a read me file, no,
+
+03:51.930 --> 03:55.140
+and include a Git file, no,
+
+03:55.140 --> 03:57.570
+and I will just say create repository.
+
+03:57.570 --> 04:01.263
+So this should create a branch in the repository.
+
+04:02.460 --> 04:04.140
+There, it created a repository,
+
+04:04.140 --> 04:06.570
+and there is a branch called Main,
+
+04:06.570 --> 04:11.570
+and you will see here the command to add this URL.
+
+04:12.090 --> 04:16.620
+So in an empty repository or in any Git repository,
+
+04:16.620 --> 04:17.850
+you can run this command.
+
+04:17.850 --> 04:22.850
+It will add this as the URL for the remote Git repository.
+
+04:23.220 --> 04:24.770
+We'll see that in a moment now.
+
+04:26.160 --> 04:28.530
+Okay, next step is we are going to create SSH keys.
+
+04:28.530 --> 04:31.200
+So for Windows user, you can open Git bash.
+
+04:31.200 --> 04:34.053
+For MacOS, you can open your terminal.
+
+04:36.810 --> 04:39.333
+Okay, let's do ls.ssh.
+
+04:40.380 --> 04:41.430
+So there are no keys.
+
+04:41.430 --> 04:44.703
+We will get into this folder, cd .ssh,
+
+04:46.920 --> 04:50.733
+and we will run here a command ssh-keygen.
+
+04:55.230 --> 04:56.063
+Hit enter.
+
+04:57.060 --> 05:00.420
+So it is asking the name or path to the repository,
+
+05:00.420 --> 05:01.860
+to the keys.
+
+05:01.860 --> 05:03.060
+So if we just give the name,
+
+05:03.060 --> 05:05.307
+it is going to create it in this folder, .ssh,
+
+05:05.307 --> 05:07.110
+and that's where we want,
+
+05:07.110 --> 05:09.823
+and I'm going to give name as vprobit_rsa.
+
+05:14.430 --> 05:19.430
+And then just hit enter, enter, enter, and let's do ls now.
+
+05:20.804 --> 05:21.960
+Now we should see here two keys,
+
+05:21.960 --> 05:24.810
+a private key and a public key.
+
+05:24.810 --> 05:29.810
+Now let's do cat to this public key, vprobit_rsa.pub.
+
+05:30.180 --> 05:32.193
+Make sure the public key.
+
+05:33.060 --> 05:35.103
+So that's the public key.
+
+05:36.300 --> 05:39.090
+We will copy this public key,
+
+05:39.090 --> 05:43.530
+and we'll save it or store it on our Bitbucket account.
+
+05:43.530 --> 05:45.630
+So let's go back to Bitbucket.
+
+05:45.630 --> 05:48.450
+Okay, so you see the symbol over here, this gear cog symbol.
+
+05:48.450 --> 05:52.503
+Click on that and go to Personal Bitbucket Settings.
+
+05:53.790 --> 05:56.040
+Here you should see SSH keys.
+
+05:56.040 --> 06:00.390
+Click on that and say add key.
+
+06:00.390 --> 06:04.650
+Let's give a label, as in the title to your key,
+
+06:04.650 --> 06:08.613
+and then just paste it over here and say add key.
+
+06:10.440 --> 06:14.280
+And let's go back, and we have to create a config file.
+
+06:14.280 --> 06:15.207
+So when we do
+
+06:15.207 --> 06:19.710
+git push or git pull in Bitbucket repositories,
+
+06:19.710 --> 06:21.960
+then it should use these keys for login,
+
+06:21.960 --> 06:24.630
+this private key to login to our Bitbucket account.
+
+06:24.630 --> 06:26.940
+We will mention that in the config file.
+
+06:26.940 --> 06:30.630
+So in the same folder, .ssh in your home directory,
+
+06:30.630 --> 06:33.093
+you have to create a file called config.
+
+06:36.330 --> 06:37.233
+INSERT mode.
+
+06:38.880 --> 06:40.620
+Insert this content in this file.
+
+06:40.620 --> 06:42.630
+I will put this in the resource section.
+
+06:42.630 --> 06:45.420
+You can download it from the resource and copy paste it,
+
+06:45.420 --> 06:48.480
+or you can just type it, so it's pretty simple.
+
+06:48.480 --> 06:52.230
+It says if the host is bitbucket.org,
+
+06:52.230 --> 06:53.970
+then the preferred authentication method
+
+06:53.970 --> 06:56.730
+is by using the public key,
+
+06:56.730 --> 07:00.390
+and this is the login file, authentication file.
+
+07:00.390 --> 07:02.160
+You can say this is the private key.
+
+07:02.160 --> 07:03.630
+It's going to use the private key
+
+07:03.630 --> 07:05.970
+to connect to bitbucket.org
+
+07:05.970 --> 07:09.030
+where we have stored the public key.
+
+07:09.030 --> 07:11.163
+Okay, let's save this information.
+
+07:12.780 --> 07:14.550
+Okay, now come to the repositories.
+
+07:14.550 --> 07:16.800
+You can just click here on the repositories,
+
+07:16.800 --> 07:18.420
+select your repositories,
+
+07:18.420 --> 07:21.510
+and here you should see the command to clone the repository.
+
+07:21.510 --> 07:25.230
+Make sure SSH is selected over here, SSH,
+
+07:25.230 --> 07:30.120
+and that's the command to clone our repository by using SSH.
+
+07:30.120 --> 07:34.620
+So let's copy this command, and before running this command,
+
+07:34.620 --> 07:36.480
+before cloning the repository,
+
+07:36.480 --> 07:38.970
+I have to run one more command.
+
+07:38.970 --> 07:41.670
+So open the terminal and execute this command,
+
+07:41.670 --> 07:45.690
+ssh -T git@bitbucket.org.
+
+07:47.610 --> 07:50.640
+So when you run this command, it should ask you a prompt.
+
+07:50.640 --> 07:52.170
+Just say yes.
+
+07:52.170 --> 07:54.720
+So it is going to store the fingerprint of Bitbucket
+
+07:54.720 --> 07:56.790
+in the known host file.
+
+07:56.790 --> 07:58.800
+That's the key fingerprint.
+
+07:58.800 --> 08:00.900
+Now, when I was running the git clone command
+
+08:00.900 --> 08:03.000
+for our repository,
+
+08:03.000 --> 08:04.743
+it was not asking this prompt.
+
+08:05.880 --> 08:09.090
+It was just stuck at one point.
+
+08:09.090 --> 08:10.890
+So then I figured out the problem is
+
+08:10.890 --> 08:14.430
+that it was not invoking this prompt for some reason,
+
+08:14.430 --> 08:17.700
+and so I execute this command.
+
+08:17.700 --> 08:19.050
+This is also a test to check
+
+08:19.050 --> 08:21.810
+whether our keys are authenticating or not,
+
+08:21.810 --> 08:24.780
+and you can see you can use Git to connect to Bitbucket,
+
+08:24.780 --> 08:27.120
+but the shell access is disabled, of course.
+
+08:27.120 --> 08:28.923
+Now we can copy this command.
+
+08:30.600 --> 08:31.740
+So copy the command,
+
+08:31.740 --> 08:35.640
+and let's move to temp directory, cs temp.
+
+08:35.640 --> 08:36.750
+Because this is just a test,
+
+08:36.750 --> 08:40.695
+we are not going to clone this or push our code like this.
+
+08:40.695 --> 08:41.730
+This is just a test whether we are able
+
+08:41.730 --> 08:45.240
+to clone our repository by using SSH or not,
+
+08:45.240 --> 08:48.120
+so let's execute this command and figure out.
+
+08:48.120 --> 08:50.490
+So cloning into vproapp.
+
+08:50.490 --> 08:52.800
+You appear to have cloned an empty repository.
+
+08:52.800 --> 08:54.210
+So that worked.
+
+08:54.210 --> 08:55.620
+We know repository's empty,
+
+08:55.620 --> 08:58.248
+but if you do ls -ltr at the end,
+
+08:58.248 --> 09:01.440
+you should be able to see here the repository.
+
+09:01.440 --> 09:02.273
+You can do like this.
+
+09:02.273 --> 09:07.273
+Also cat vproapp/.git/config file in that repository.
+
+09:07.800 --> 09:09.753
+You can see here the remote URL.
+
+09:10.590 --> 09:13.920
+So it successfully cloned the repository.
+
+09:13.920 --> 09:16.320
+So that was just a test.
+
+09:16.320 --> 09:21.240
+Now we are going to clone our vprofile project source code,
+
+09:21.240 --> 09:23.550
+remove the GitHub URL from that,
+
+09:23.550 --> 09:26.700
+and add this URL in our repository.
+
+09:26.700 --> 09:30.843
+So it's migrating code from GitHub to Bitbucket.
+
+09:33.060 --> 09:38.060
+Okay, so come to github.com/hkhcoder/vprofile-project.
+
+09:39.360 --> 09:44.160
+That's our repository, and let's clone this source code.
+
+09:44.160 --> 09:48.360
+So get the HTTPS URL, copy that, open your terminal,
+
+09:48.360 --> 09:53.360
+and I'm going to go to D drive,
+
+09:53.640 --> 09:55.170
+so choose the location
+
+09:55.170 --> 09:56.760
+where you want to clone the source code.
+
+09:56.760 --> 10:00.642
+So I'm just creating it in D drive.
+
+10:00.642 --> 10:02.823
+You can do it somewhere else if you want.
+
+10:05.670 --> 10:10.670
+So I'm creating a folder in D drive /d/aws-cicd
+
+10:10.830 --> 10:12.783
+and then I do cd into that folder,
+
+10:14.730 --> 10:19.730
+and I'm going to once again copy this URL and paste it.
+
+10:19.980 --> 10:22.113
+Right, I had to run the git clone command.
+
+10:23.280 --> 10:25.503
+So git clone and the URL.
+
+10:25.503 --> 10:26.753
+We clone our source code.
+
+10:28.230 --> 10:31.050
+Okay, and then we get into our source code.
+
+10:31.050 --> 10:32.403
+Let's clear the screen.
+
+10:33.540 --> 10:34.830
+Okay, so I'm in the repository.
+
+10:34.830 --> 10:39.123
+We can do cat .git/config.
+
+10:41.100 --> 10:42.930
+So we should see here github.com.
+
+10:42.930 --> 10:44.250
+We have to remove this URL,
+
+10:44.250 --> 10:47.133
+but before that, we need to check out to a branch.
+
+10:48.270 --> 10:51.690
+So do git checkout aws-ci.
+
+10:51.690 --> 10:52.890
+So I check out to the branch.
+
+10:52.890 --> 10:55.860
+So this repository has many branches.
+
+10:55.860 --> 10:58.860
+I want to check out aws-ci branch and the main branch.
+
+10:58.860 --> 11:00.840
+These two branch I want to check out.
+
+11:00.840 --> 11:03.540
+That means I want to move it to Bitbucket.
+
+11:03.540 --> 11:05.790
+So whatever branches you want to migrate,
+
+11:05.790 --> 11:07.740
+you need to do this checkout.
+
+11:07.740 --> 11:09.630
+You need to check out to those branch,
+
+11:09.630 --> 11:11.680
+and those branches only will be moved
+
+11:12.720 --> 11:14.913
+because if I do git branch -a,
+
+11:15.900 --> 11:18.330
+you should see a lot of other branches,
+
+11:18.330 --> 11:20.310
+but I'm going to check out only this.
+
+11:20.310 --> 11:23.430
+I'm going to move only these two branches main and aws-ci.
+
+11:23.430 --> 11:27.093
+So execute this command git checkout aws-ci.
+
+11:28.050 --> 11:30.480
+Also, if your repository has some tags,
+
+11:30.480 --> 11:32.727
+you can execute this command to fetch the tags,
+
+11:32.727 --> 11:37.170
+git fetch --tags, which will fetch all the tags as well.
+
+11:37.170 --> 11:41.010
+So git checkout branch name, and fetch the tags,
+
+11:41.010 --> 11:45.180
+and now let's execute this command, git remote rm origin.
+
+11:45.180 --> 11:49.497
+This is going to remove the GitHub URL.
+
+11:49.497 --> 11:53.220
+You can do cat .git/config.
+
+11:53.220 --> 11:56.793
+You can see that the remote URL section is gone completely.
+
+11:57.810 --> 11:59.310
+Now execute and wait.
+
+11:59.310 --> 12:02.340
+First git remote add origin,
+
+12:02.340 --> 12:05.280
+and then you need to give your URL over there
+
+12:05.280 --> 12:06.933
+where you want to push this code.
+
+12:07.980 --> 12:11.400
+I guess so from here, just copy this URL, just the URL.
+
+12:11.400 --> 12:13.470
+Don't copy the git clone command.
+
+12:13.470 --> 12:18.470
+git@bitbucket.org, and that's URL, and paste it over here.
+
+12:19.830 --> 12:23.130
+So this is going to add now this remote URL.
+
+12:23.130 --> 12:26.673
+If you do cat git/config, you should see here Bitbucket URL.
+
+12:27.780 --> 12:29.340
+Okay, now we do git push.
+
+12:29.340 --> 12:31.440
+So git push origin --all.
+
+12:31.440 --> 12:35.190
+That means all the branches on which you did checkout,
+
+12:35.190 --> 12:36.060
+all those branches,
+
+12:36.060 --> 12:38.610
+so we have two branches, main and aws-ci.
+
+12:38.610 --> 12:41.400
+These two branches are all branches.
+
+12:41.400 --> 12:44.313
+It is going to push to this repository.
+
+12:45.840 --> 12:47.010
+Okay, that's done.
+
+12:47.010 --> 12:48.600
+Let's go and check it ourself.
+
+12:48.600 --> 12:50.343
+Let's refresh the page,
+
+12:51.600 --> 12:53.880
+and then you should see here code over here,
+
+12:53.880 --> 12:57.300
+main and aws-ci branch.
+
+12:57.300 --> 12:59.460
+Okay, so now let me run the history command
+
+12:59.460 --> 13:02.610
+and show all the steps to you once again.
+
+13:02.610 --> 13:05.280
+So we create a folder, get to that folder,
+
+13:05.280 --> 13:07.140
+and we clone our source code,
+
+13:07.140 --> 13:10.080
+the source from where we want to migrate.
+
+13:10.080 --> 13:13.050
+We clone the source code, we get into the repository,
+
+13:13.050 --> 13:14.460
+and we do checkout
+
+13:14.460 --> 13:17.070
+to as many as branch we want to push to the remote,
+
+13:17.070 --> 13:18.570
+to the target repository.
+
+13:18.570 --> 13:22.020
+Do a checkout, and we can fetch the tags.
+
+13:22.020 --> 13:23.850
+We don't have any tags in our repository,
+
+13:23.850 --> 13:26.940
+but if you have, we can do fetch the tags.
+
+13:26.940 --> 13:31.940
+We remove the URL, and then we add the target URL,
+
+13:33.120 --> 13:34.650
+and then we push all the branch.
+
+13:34.650 --> 13:36.777
+So these are the steps to migrate
+
+13:36.777 --> 13:39.363
+Git to Git repository with all the histories.
+
+13:40.650 --> 13:41.670
+Now in the next lecture,
+
+13:41.670 --> 13:44.040
+we are going to use AWS CodeBuild service,
+
+13:44.040 --> 13:45.540
+which will fetch the source code
+
+13:45.540 --> 13:47.730
+and build it into an artifact,
+
+13:47.730 --> 13:50.763
+so wrap this up and join me in the next lecture.

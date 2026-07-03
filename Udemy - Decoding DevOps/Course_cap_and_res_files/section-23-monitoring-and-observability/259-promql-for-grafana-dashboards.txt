@@ -1,0 +1,709 @@
+WEBVTT
+
+00:00.360 --> 00:06.200
+All right, so I know you are waiting for the panels to see the graphs, the bar charts, I know that,
+
+00:06.680 --> 00:07.520
+but hold on.
+
+00:07.560 --> 00:09.600
+We are going to organize a little bit.
+
+00:09.640 --> 00:15.720
+Go through the Prometheus queries that we will use to create panels in Grafana.
+
+00:16.120 --> 00:22.720
+Once we are good with all this, creating panels in Grafana will be easy and fun.
+
+00:23.200 --> 00:24.840
+So first let's organize.
+
+00:24.840 --> 00:26.680
+So we are going to create panels.
+
+00:26.680 --> 00:29.880
+And panels are together called as dashboard.
+
+00:30.120 --> 00:32.680
+So click on dashboards on the left side here.
+
+00:33.160 --> 00:40.440
+So dashboards usually in an organization represents environment like a dashboard for dev environment
+
+00:40.440 --> 00:42.520
+dashboard for production environment.
+
+00:42.760 --> 00:47.760
+And like that in one project you can have or you will have multiple dashboards.
+
+00:48.240 --> 00:51.760
+And in Grafana you can like that have multiple projects.
+
+00:52.240 --> 00:56.480
+So to group them together, the best idea is to first create a folder.
+
+00:56.480 --> 01:01.560
+So when you are here in the dashboard click on this drop down and say Create New folder.
+
+01:02.310 --> 01:05.030
+The folder name I'm giving after the project name.
+
+01:05.030 --> 01:07.470
+I'm saying tighten monitoring, create a folder.
+
+01:07.790 --> 01:09.670
+Okay, so we're already in the folder.
+
+01:09.790 --> 01:10.990
+Let's go back to dashboard.
+
+01:10.990 --> 01:12.150
+You see the folder.
+
+01:12.350 --> 01:13.510
+Let's click on the folder.
+
+01:13.550 --> 01:16.230
+Now in the folder we are going to create dashboard.
+
+01:16.670 --> 01:18.870
+So click on Create Dashboard.
+
+01:19.350 --> 01:23.150
+Click on settings here give dashboard a name.
+
+01:24.110 --> 01:26.190
+Okay this is better tighten prod.
+
+01:26.750 --> 01:30.030
+And you see here folder title monitoring is anywhere selected.
+
+01:30.030 --> 01:30.950
+Just scroll down.
+
+01:30.990 --> 01:32.430
+Oh no wait just here itself.
+
+01:32.430 --> 01:34.150
+Click on Save dashboard.
+
+01:34.510 --> 01:38.550
+You see whenever you make changes to dashboard you need to click on Save Dashboard.
+
+01:38.550 --> 01:42.390
+If you move on without doing that, it will not be saved okay.
+
+01:42.430 --> 01:43.110
+So it is saved.
+
+01:43.110 --> 01:44.550
+Let's go back to dashboard.
+
+01:44.550 --> 01:47.190
+So we have the folder titled monitoring.
+
+01:47.470 --> 01:49.310
+Inside we have tighten prod like that.
+
+01:49.310 --> 01:52.070
+We can have tighten dev QA staging like that.
+
+01:52.510 --> 02:00.030
+Now in one environment of a project you will have different kinds of metrics like we have system related
+
+02:00.030 --> 02:02.670
+metrics CPU, disk memory.
+
+02:03.110 --> 02:09.870
+Then we have application related metrics, like how many HTTP requests are coming in to monitor the
+
+02:09.870 --> 02:12.630
+application, and you might have more than that.
+
+02:13.030 --> 02:17.950
+Like for business KPI monitoring, we have seen different kinds of monitoring if you remember, in the
+
+02:17.950 --> 02:19.110
+introduction lecture.
+
+02:19.470 --> 02:24.270
+So for one project in one environment you will have multiple types of monitoring.
+
+02:24.550 --> 02:28.950
+And it's better we segregate them into different rows.
+
+02:29.510 --> 02:31.110
+So do one thing here.
+
+02:31.110 --> 02:34.270
+Click on add in the dropdown and find row.
+
+02:34.710 --> 02:34.910
+Okay.
+
+02:34.950 --> 02:41.390
+You will find this setting in the Titan prod or in your dashboard add new row and there is a small gear
+
+02:41.430 --> 02:42.190
+symbol over here.
+
+02:42.190 --> 02:44.310
+Click on that and change the name.
+
+02:44.750 --> 02:46.150
+So I'm naming it as system.
+
+02:46.150 --> 02:51.150
+So all my system metrics will come inside that I'll add one more row.
+
+02:51.950 --> 02:56.030
+This one I'm going to name it as application or business.
+
+02:56.030 --> 02:58.950
+Whatever the purpose is let's say update.
+
+02:59.350 --> 03:04.270
+So this is generally how we organize but it really depends on your use case.
+
+03:04.270 --> 03:08.460
+Once again you can have different dashboards itself.
+
+03:08.500 --> 03:11.300
+Oh wait, save dashboard I forgot to click on Save dashboard.
+
+03:11.300 --> 03:12.100
+It alerted me.
+
+03:12.140 --> 03:13.060
+Save dashboard.
+
+03:13.540 --> 03:14.100
+Save.
+
+03:14.500 --> 03:14.700
+Yeah.
+
+03:14.700 --> 03:20.060
+So I was saying so you can have different folder for the environment itself right.
+
+03:20.060 --> 03:23.140
+You have one Grafana for the entire project.
+
+03:23.140 --> 03:25.300
+So then the naming convention will change.
+
+03:25.620 --> 03:27.700
+But make sure you organize it properly.
+
+03:28.140 --> 03:35.060
+So once you have this folder structure all this thing set proper organized, then create a list of metrics
+
+03:35.060 --> 03:37.060
+that you want to monitor.
+
+03:37.740 --> 03:40.220
+So I have created this chart over here.
+
+03:40.420 --> 03:42.460
+You can download it from the lecture resource.
+
+03:43.020 --> 03:44.500
+Different columns in this.
+
+03:44.500 --> 03:52.260
+The one thing that you should be working on in this lecture is the metrics is the metric metric.
+
+03:52.540 --> 03:55.220
+So we are going to create panels in Grafana.
+
+03:55.940 --> 04:03.100
+And let's say for CPU utilization we want to create a panel that shows how much CPU is utilized on a
+
+04:03.140 --> 04:03.940
+time scale.
+
+04:04.260 --> 04:07.500
+And this is the query that we are going to execute.
+
+04:07.980 --> 04:09.580
+So let me start with a simple one.
+
+04:09.580 --> 04:10.100
+This one.
+
+04:11.260 --> 04:16.780
+And yeah, also before you start running these queries copy pasting, just make sure that you change
+
+04:16.780 --> 04:25.260
+here the job name with the job that you have configured in Prometheus like web server or web server
+
+04:25.260 --> 04:25.660
+system.
+
+04:25.660 --> 04:30.700
+This is the same name that we have given in Prometheus configuration file.
+
+04:31.140 --> 04:32.700
+You don't need to switch to Prometheus.
+
+04:32.700 --> 04:36.940
+You can just from the query of Prometheus, you can just type here up metric executed.
+
+04:36.940 --> 04:39.820
+And you should see here this is web server app stat.
+
+04:39.820 --> 04:41.140
+And this is web server system.
+
+04:41.140 --> 04:42.340
+This is Prometheus.
+
+04:42.860 --> 04:46.060
+So make sure you replace it in the sheet accordingly.
+
+04:46.060 --> 04:52.460
+So when you copy paste you don't have problem like over here for node memory total I have here job name
+
+04:52.460 --> 04:52.980
+as.
+
+04:55.420 --> 04:57.020
+Web server system.
+
+04:57.420 --> 05:01.940
+So whatever name you have given it should be appearing there on Prometheus Query dashboard.
+
+05:02.220 --> 05:05.860
+So in this sheet make sure you replace it with the right names for the job.
+
+05:05.860 --> 05:06.820
+This is the label.
+
+05:06.980 --> 05:09.490
+Now I'm going to show you how this is going to work.
+
+05:09.730 --> 05:13.450
+So this metric is going to show us the available memory.
+
+05:13.450 --> 05:16.850
+So let me copy this paste it here.
+
+05:16.890 --> 05:17.850
+Execute it.
+
+05:18.370 --> 05:21.330
+Now this is going to show available memory in MB.
+
+05:21.370 --> 05:22.850
+And how does that work.
+
+05:23.290 --> 05:24.930
+Let's decode it one by one like that.
+
+05:24.930 --> 05:27.730
+You're going to do it for every query and you are going to do it.
+
+05:27.730 --> 05:29.410
+I'm not going to show you every query.
+
+05:29.770 --> 05:30.530
+I'll show you a few.
+
+05:30.530 --> 05:33.930
+And then you please work on do your own research.
+
+05:34.170 --> 05:35.250
+Otherwise like this.
+
+05:35.250 --> 05:38.130
+If you just simply copy paste, you're not going to learn these queries.
+
+05:38.570 --> 05:39.650
+Understand the structure.
+
+05:39.650 --> 05:42.410
+This is the main essence of the panels.
+
+05:42.850 --> 05:47.010
+Based on this information, only the panels will show the data.
+
+05:47.570 --> 05:49.650
+Okay, so the first thing is here is the metric.
+
+05:49.650 --> 05:51.010
+So let me remove everything.
+
+05:51.010 --> 05:58.730
+Just put here the metric node underscore memory underscore mem total bytes.
+
+05:58.770 --> 06:01.890
+This one I say execute.
+
+06:04.610 --> 06:04.930
+Okay.
+
+06:04.970 --> 06:09.280
+Now so we have just one node that shows in real time there will be multiple nodes.
+
+06:09.320 --> 06:12.320
+Now, if you want to filter from that, you need to use labels.
+
+06:12.720 --> 06:15.560
+So to use labels you use use curly braces.
+
+06:15.560 --> 06:17.040
+And in that you use the label.
+
+06:17.040 --> 06:27.000
+For example I'm giving here is job web server system job is equal to double quotes web server system.
+
+06:28.240 --> 06:32.320
+So this simply means show me the metric where the label is this.
+
+06:33.040 --> 06:39.840
+So if you have like here 20 3000s of them it will it is going to show you all the entries that has this
+
+06:39.840 --> 06:40.400
+label.
+
+06:40.560 --> 06:41.160
+It could be one.
+
+06:41.160 --> 06:42.040
+It could be many.
+
+06:42.520 --> 06:43.280
+So execute.
+
+06:43.320 --> 06:44.520
+Right now we just have one.
+
+06:44.520 --> 06:44.960
+Yes.
+
+06:45.600 --> 06:46.400
+So this is cool.
+
+06:46.400 --> 06:48.200
+But this shows in bytes.
+
+06:48.520 --> 06:50.440
+It's really not human readable format.
+
+06:50.760 --> 06:53.600
+We are going to see it in MB or GBS.
+
+06:53.880 --> 06:54.640
+The memory.
+
+06:54.840 --> 06:56.160
+That's the total Ram size.
+
+06:56.600 --> 06:57.320
+So what do we do.
+
+06:57.360 --> 07:02.920
+Well once we divide it with 1024 you know what is that.
+
+07:02.920 --> 07:03.480
+Right.
+
+07:03.480 --> 07:13.040
+So bit 1024 is bytes 1024 bytes is equal to one kilobytes one KB 1024 KB is equal to one MB.
+
+07:14.040 --> 07:17.040
+So now if I execute divide it with 1024.
+
+07:17.080 --> 07:19.480
+That means this is showing me in KB kilobytes.
+
+07:19.800 --> 07:24.120
+If I divide it again with 1024I see this in MB.
+
+07:25.240 --> 07:33.760
+If I again divide it with 1024, I'm going to see nothing zero point decimal values showing it in GB,
+
+07:33.800 --> 07:34.080
+right.
+
+07:34.080 --> 07:35.400
+But it's really not.
+
+07:35.400 --> 07:36.800
+We have just t two micro instance.
+
+07:36.800 --> 07:39.440
+So it's better we use it divide it two times.
+
+07:39.440 --> 07:47.440
+So we get MB and instead of giving that 1024 many times you can just say 1024 to the power to the power
+
+07:47.480 --> 07:48.440
+the caret symbol.
+
+07:48.440 --> 07:50.280
+This is on the number six.
+
+07:50.280 --> 07:51.560
+You shift six.
+
+07:51.560 --> 07:52.360
+You get this.
+
+07:52.840 --> 07:55.800
+And I'm going to say 21024 to the power two.
+
+07:56.200 --> 07:57.720
+So I see this in MB.
+
+07:58.280 --> 08:02.240
+If I raise it to the power three I see it in GB okay.
+
+08:02.280 --> 08:04.080
+So that's what this metric is.
+
+08:04.640 --> 08:07.760
+This returns now here also I should replace this one.
+
+08:07.760 --> 08:09.360
+This is not node.
+
+08:12.550 --> 08:16.390
+This here web server hyphen system.
+
+08:16.990 --> 08:19.390
+Okay, now let me show you CPU utilization.
+
+08:19.830 --> 08:19.990
+Okay.
+
+08:20.030 --> 08:21.950
+This can get a little messy, but stay with me.
+
+08:21.950 --> 08:22.950
+Try to stay with me.
+
+08:23.390 --> 08:29.350
+Searching for node underscore CPU underscore seconds underscore total.
+
+08:29.670 --> 08:35.390
+Or you can also see the type of metric this is counter counter means you know increases right 1234 like
+
+08:35.390 --> 08:35.750
+that.
+
+08:36.470 --> 08:37.790
+Then there is also gauge.
+
+08:37.830 --> 08:42.070
+We'll take a look at gauge later in memory while we create panel in Grafana.
+
+08:42.110 --> 08:43.350
+That time we'll see the gauge.
+
+08:43.710 --> 08:46.790
+So let's take this let's execute this.
+
+08:47.230 --> 08:56.230
+So this metrics shows the amount of CPU amount of seconds spent on CPU on different things like idle.
+
+08:56.710 --> 09:00.470
+For idle this many seconds were spent the idle time.
+
+09:00.470 --> 09:03.870
+Then you have nice, you have steel, you have user, you have system.
+
+09:04.230 --> 09:06.550
+Now I am looking only for the idle time.
+
+09:06.550 --> 09:17.550
+So I'm going to say here the label mod equal to Two idle, so only see the idle time, the free time,
+
+09:17.550 --> 09:19.030
+the CPU spent.
+
+09:19.790 --> 09:23.110
+Now I want to see that for last five minutes.
+
+09:23.910 --> 09:26.230
+Last five minutes so I can give a range.
+
+09:27.150 --> 09:28.790
+Square bracket five M.
+
+09:28.830 --> 09:31.590
+Now that's going to show me range.
+
+09:31.590 --> 09:32.470
+Range vectors, right?
+
+09:32.510 --> 09:34.270
+Every 15 seconds it checks.
+
+09:34.670 --> 09:36.230
+So how much was at this time.
+
+09:36.230 --> 09:37.550
+How much was at this time.
+
+09:38.270 --> 09:41.590
+Now I want to see what was the difference in between last two.
+
+09:41.990 --> 09:43.430
+The rate of change.
+
+09:43.590 --> 09:46.510
+For that we can use rate function or I rate.
+
+09:46.870 --> 09:48.590
+So I'm going to say I rate.
+
+09:49.070 --> 09:49.990
+And this query.
+
+09:50.030 --> 09:53.470
+Should be in parenthesis I rate in parenthesis starts.
+
+09:53.990 --> 09:56.310
+And so over here let's execute.
+
+09:56.790 --> 09:59.310
+So this is the difference every time it is checking.
+
+09:59.310 --> 10:00.790
+This is the average difference.
+
+10:01.110 --> 10:06.670
+And now if I multiply that with 100 I should get this in percentage.
+
+10:07.390 --> 10:10.030
+See 96% of time.
+
+10:10.550 --> 10:11.510
+It was idle.
+
+10:11.510 --> 10:14.660
+Now if I want to reverse it this is ideal time.
+
+10:14.660 --> 10:15.740
+How much was used.
+
+10:15.740 --> 10:18.300
+So I'm going to simply subtract all that with 100.
+
+10:18.940 --> 10:22.140
+So 100 minus put everything in parentheses again.
+
+10:22.420 --> 10:24.820
+And please take care of the opening and closing.
+
+10:24.860 --> 10:26.620
+This is it highlights.
+
+10:26.620 --> 10:30.620
+You know if you take your cursor it highlights where it's opening, where it's closing.
+
+10:31.180 --> 10:35.140
+So put entire query in parentheses and subtract it with 100.
+
+10:35.900 --> 10:36.980
+So you see two now.
+
+10:36.980 --> 10:41.020
+So that means the 2% of the time it was in used.
+
+10:41.220 --> 10:42.860
+Most of the time it was in idle.
+
+10:43.580 --> 10:44.940
+So that's the query here.
+
+10:44.940 --> 10:46.380
+Also there's one more thing here.
+
+10:46.380 --> 10:49.260
+We have also average by instance.
+
+10:49.260 --> 10:54.140
+So if you have like multiple instances here I'm talking about this instance label okay.
+
+10:54.860 --> 10:56.380
+So right now we just have one system.
+
+10:56.380 --> 10:57.700
+So it's just showing for one.
+
+10:58.420 --> 11:00.820
+But if you have many you can average.
+
+11:00.820 --> 11:03.300
+You can take an average of all the instances.
+
+11:03.700 --> 11:09.740
+So like one panel you can see where you see the average of all the instances together.
+
+11:10.140 --> 11:14.180
+Together as in based on the label that you have given, you can give a specific label.
+
+11:14.180 --> 11:15.700
+You can give specific name.
+
+11:16.300 --> 11:18.900
+So even by that is only if you have many.
+
+11:18.900 --> 11:20.100
+But we just have one here.
+
+11:20.100 --> 11:24.380
+So even if you don't give here avg instance, it's going to show us the same thing.
+
+11:26.060 --> 11:26.340
+Okay.
+
+11:26.500 --> 11:26.940
+Don't worry.
+
+11:26.940 --> 11:32.300
+These values are changing because there's this load dot script running in our web node machine.
+
+11:32.460 --> 11:34.380
+And that is taking the load up and down.
+
+11:34.380 --> 11:38.180
+And this is the last five minutes average five minutes.
+
+11:39.380 --> 11:39.740
+Okay.
+
+11:39.740 --> 11:43.780
+So like that go through all the queries copy them run them.
+
+11:43.780 --> 11:46.580
+If you are not understanding you can use ChatGPT.
+
+11:46.620 --> 11:52.540
+You should use ChatGPT to understand stuff or any other of your favorite AI tools.
+
+11:52.820 --> 11:57.620
+But before you move on to the next lecture, make sure all these queries are clear.
+
+11:57.620 --> 12:03.260
+If you have any doubt, post it in the Q&amp;A that you did not understand this particular step or this
+
+12:03.260 --> 12:04.140
+particular query.
+
+12:04.140 --> 12:05.540
+I will surely answer that.
+
+12:05.780 --> 12:10.220
+But before you move on to the next lecture, just make sure you execute all these queries.
+
+12:10.500 --> 12:11.460
+See the result.
+
+12:12.300 --> 12:16.140
+Do a little bit of research and then join me in the next lecture.
+
+12:16.460 --> 12:17.140
+See you there.

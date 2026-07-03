@@ -1,0 +1,774 @@
+WEBVTT
+
+1
+00:00:00.270 --> 00:00:03.270
+<v Instructor>Okay, so everything is settled for me.</v>
+
+2
+00:00:03.270 --> 00:00:06.420
+I have the ingress, all the other pods
+
+3
+00:00:06.420 --> 00:00:08.430
+and the services running.
+
+4
+00:00:08.430 --> 00:00:11.370
+So I need to get the ingress endpoint
+
+5
+00:00:11.370 --> 00:00:15.000
+so I can add the same information in my GoDaddy account.
+
+6
+00:00:15.000 --> 00:00:18.150
+So I'm going to get the endpoint of the ingress,
+
+7
+00:00:18.150 --> 00:00:20.103
+which is this one, host name you see there.
+
+8
+00:00:20.103 --> 00:00:22.680
+This is the endpoint. I'm gonna copy this.
+
+9
+00:00:22.680 --> 00:00:24.780
+Or you can get it through the command line also.
+
+10
+00:00:24.780 --> 00:00:28.456
+You can say kubectl get ingress -n vprofile,
+
+11
+00:00:28.456 --> 00:00:31.983
+kubectl get ingress -n vprofile is the namespace.
+
+12
+00:00:32.910 --> 00:00:35.400
+So you should get the endpoint
+
+13
+00:00:35.400 --> 00:00:36.780
+that points to the load balancer.
+
+14
+00:00:36.780 --> 00:00:41.780
+We need to add this against the vprofile host name.
+
+15
+00:00:42.000 --> 00:00:44.790
+So I'm in my GoDaddy account, I'm in my domain
+
+16
+00:00:44.790 --> 00:00:48.993
+and I'm going to go to DNS, DNS records, add new record,
+
+17
+00:00:50.520 --> 00:00:54.840
+type CNAME, vprofile as the host name,
+
+18
+00:00:54.840 --> 00:00:58.620
+value will be the endpoint, the load balancer endpoint.
+
+19
+00:00:58.620 --> 00:01:01.710
+Save this and wait for like 5, 10 minutes
+
+20
+00:01:01.710 --> 00:01:03.240
+until this record is published.
+
+21
+00:01:03.240 --> 00:01:06.000
+Then we can exit from the browser.
+
+22
+00:01:06.000 --> 00:01:08.340
+So by the time you're waiting, you can check
+
+23
+00:01:08.340 --> 00:01:10.590
+the status of everything.
+
+24
+00:01:10.590 --> 00:01:12.600
+Also bring up the sonar server.
+
+25
+00:01:12.600 --> 00:01:16.620
+We are going to see the complete flow of our CICD pipeline.
+
+26
+00:01:16.620 --> 00:01:18.180
+So once this is settled,
+
+27
+00:01:18.180 --> 00:01:21.750
+what we'll do is we'll check the pod, the DB pod, sorry,
+
+28
+00:01:21.750 --> 00:01:23.430
+the app pod.
+
+29
+00:01:23.430 --> 00:01:27.783
+We'll see the image and the tag.
+
+30
+00:01:29.280 --> 00:01:33.060
+So here we can see the container image name and it's tag.
+
+31
+00:01:33.060 --> 00:01:33.960
+What we are going to do is
+
+32
+00:01:33.960 --> 00:01:35.760
+once you bring up your sonar server,
+
+33
+00:01:35.760 --> 00:01:39.540
+we are going to make a commit in our app repository
+
+34
+00:01:39.540 --> 00:01:42.390
+and see how everything is pushed forward
+
+35
+00:01:42.390 --> 00:01:45.600
+and finally, our app image is updated automatically
+
+36
+00:01:45.600 --> 00:01:47.280
+by Argo CD.
+
+37
+00:01:47.280 --> 00:01:51.030
+We are also going to see the do's and don'ts in real time.
+
+38
+00:01:51.030 --> 00:01:52.500
+And finally we are going to see
+
+39
+00:01:52.500 --> 00:01:57.030
+how to create Terraform pipeline through GitHub Actions.
+
+40
+00:01:57.030 --> 00:02:00.420
+So take some time, make sure everything is ready,
+
+41
+00:02:00.420 --> 00:02:03.030
+and in a few minutes we'll access our vprofile application
+
+42
+00:02:03.030 --> 00:02:04.050
+from the browser.
+
+43
+00:02:04.050 --> 00:02:05.250
+Okay, let's take a look.
+
+44
+00:02:05.250 --> 00:02:10.250
+So, HTTPS:// vprofile.the domain.
+
+45
+00:02:10.410 --> 00:02:13.260
+Let's check it. I'll write.
+
+46
+00:02:13.260 --> 00:02:17.943
+So the username is admin_vp. The password is admin_vp.
+
+47
+00:02:18.990 --> 00:02:21.300
+So I'm logged in. So my DB pod is working.
+
+48
+00:02:21.300 --> 00:02:24.510
+The DB PVC everything is working. DB is verified.
+
+49
+00:02:24.510 --> 00:02:27.990
+Let's check RabbitMQ. RabbitMQ is also working.
+
+50
+00:02:27.990 --> 00:02:32.700
+Let's check Memcached. Click on all users. Select any user.
+
+51
+00:02:32.700 --> 00:02:34.590
+You should see data inserted in cache.
+
+52
+00:02:34.590 --> 00:02:37.350
+That means the Memcached is also working
+
+53
+00:02:37.350 --> 00:02:40.320
+and next time the data is coming from the caching.
+
+54
+00:02:40.320 --> 00:02:44.190
+So that is all from the deployment point of view.
+
+55
+00:02:44.190 --> 00:02:47.553
+Vprofile application is deployed by Argo CD.
+
+56
+00:02:49.020 --> 00:02:53.520
+It has fetched all the details from the repository,
+
+57
+00:02:53.520 --> 00:02:54.810
+the helm charts on the repository
+
+58
+00:02:54.810 --> 00:02:56.670
+and deployed around Kubernetes cluster.
+
+59
+00:02:56.670 --> 00:02:59.730
+Whenever we make any change in our helm charts,
+
+60
+00:02:59.730 --> 00:03:02.940
+like if you update any image, any port number, anything,
+
+61
+00:03:02.940 --> 00:03:04.770
+it'll make sure, Argo CD will make sure
+
+62
+00:03:04.770 --> 00:03:07.110
+it'll fetch the latest changes and deploy it.
+
+63
+00:03:07.110 --> 00:03:08.370
+And that's what we are gonna test now.
+
+64
+00:03:08.370 --> 00:03:12.390
+So do this, open the app repository from VS code.
+
+65
+00:03:12.390 --> 00:03:17.220
+So I'm going to go to desktop/gitops/vprofile-app.
+
+66
+00:03:17.220 --> 00:03:19.590
+Open this in the VS code.
+
+67
+00:03:19.590 --> 00:03:21.090
+Okay, before we make any changes,
+
+68
+00:03:21.090 --> 00:03:23.370
+I need to make sure I pull the latest changes.
+
+69
+00:03:23.370 --> 00:03:25.200
+So do a Git pull.
+
+70
+00:03:25.200 --> 00:03:27.450
+I know much better what I'm gonna do is,
+
+71
+00:03:27.450 --> 00:03:29.820
+I'm going to just simply delete this repository
+
+72
+00:03:29.820 --> 00:03:31.830
+and clone it once again.
+
+73
+00:03:31.830 --> 00:03:36.830
+So I don't have any conflicts. I need to close the VS code.
+
+74
+00:03:37.590 --> 00:03:39.210
+Okay, let me do it once again.
+
+75
+00:03:39.210 --> 00:03:42.180
+Okay, I'm going to clone this repository once again,
+
+76
+00:03:42.180 --> 00:03:46.173
+vprofile app repository, the SSH endpoint,
+
+77
+00:03:47.490 --> 00:03:49.650
+GIT clone and wait.
+
+78
+00:03:49.650 --> 00:03:51.720
+I need to say DevOps for sure.
+
+79
+00:03:51.720 --> 00:03:55.680
+Now github.com-devOps for sure.
+
+80
+00:03:55.680 --> 00:03:58.233
+That's what is in my SSH config file.
+
+81
+00:03:59.970 --> 00:04:01.500
+Okay, my repository is cloned.
+
+82
+00:04:01.500 --> 00:04:03.350
+I'm going to get into the repository.
+
+83
+00:04:04.560 --> 00:04:06.480
+And I'm going to switch to the branch,
+
+84
+00:04:06.480 --> 00:04:11.100
+feature-x, I think, yes.
+
+85
+00:04:11.100 --> 00:04:13.383
+And then I'm going to open this into VS code.
+
+86
+00:04:15.000 --> 00:04:16.800
+Okay, so I'm in feature X branch
+
+87
+00:04:16.800 --> 00:04:21.060
+and when I make any commit over here and push it to GitHub,
+
+88
+00:04:21.060 --> 00:04:22.810
+it's not going to run the pipeline.
+
+89
+00:04:23.730 --> 00:04:26.760
+Our pipeline is designed to run
+
+90
+00:04:26.760 --> 00:04:29.760
+whenever there is a pull request to the main branch
+
+91
+00:04:29.760 --> 00:04:32.223
+and when there is a push to the main branch.
+
+92
+00:04:33.150 --> 00:04:35.880
+Okay, so just make sure the sonar server is up and running.
+
+93
+00:04:35.880 --> 00:04:37.950
+Copy its public IP.
+
+94
+00:04:37.950 --> 00:04:39.693
+Go to vprofile app.
+
+95
+00:04:40.590 --> 00:04:43.040
+Settings, we need to update the sonar server URL.
+
+96
+00:04:44.730 --> 00:04:49.380
+Go to secrets and variables, actions, variables.
+
+97
+00:04:49.380 --> 00:04:50.703
+Edit sonar host URL.
+
+98
+00:04:52.560 --> 00:04:55.860
+Make sure you change the public IP to the latest one
+
+99
+00:04:55.860 --> 00:04:56.913
+and save it.
+
+100
+00:04:58.320 --> 00:05:00.240
+You need to enter the password
+
+101
+00:05:00.240 --> 00:05:03.030
+of your GitHub account once again.
+
+102
+00:05:03.030 --> 00:05:05.730
+So we are going to test this whole flow now.
+
+103
+00:05:05.730 --> 00:05:07.530
+Whenever we make a commit,
+
+104
+00:05:07.530 --> 00:05:09.810
+nothing happens when we raise this a pull request.
+
+105
+00:05:09.810 --> 00:05:11.850
+When we raise a pull request, right,
+
+106
+00:05:11.850 --> 00:05:13.620
+when we raise a pull request,
+
+107
+00:05:13.620 --> 00:05:16.980
+then the code analysis it happens.
+
+108
+00:05:16.980 --> 00:05:18.480
+If the quality gate is good,
+
+109
+00:05:18.480 --> 00:05:21.483
+then it'll push the Docker image to Amazon ECR,
+
+110
+00:05:23.100 --> 00:05:24.990
+and then it's going to update the image tag
+
+111
+00:05:24.990 --> 00:05:27.120
+into the helm repository.
+
+112
+00:05:27.120 --> 00:05:29.370
+Now whenever there is a change in the helm repository,
+
+113
+00:05:29.370 --> 00:05:31.920
+the Argo CD controller will make sure
+
+114
+00:05:31.920 --> 00:05:35.430
+it is going to fetch the latest changes and deployed.
+
+115
+00:05:35.430 --> 00:05:38.430
+So this is the whole flow. Now we are going to test.
+
+116
+00:05:38.430 --> 00:05:40.020
+So I'm in feature-X branch
+
+117
+00:05:40.020 --> 00:05:42.750
+and I'm going to make a change into the README file.
+
+118
+00:05:42.750 --> 00:05:45.600
+Nothing serious, just updating the README file.
+
+119
+00:05:45.600 --> 00:05:47.430
+I'm just adding some hash.
+
+120
+00:05:47.430 --> 00:05:48.990
+I'm going to save it
+
+121
+00:05:48.990 --> 00:05:52.500
+and I'm going to commit it through the command line.
+
+122
+00:05:52.500 --> 00:05:54.840
+So I'm going to open the terminal.
+
+123
+00:05:54.840 --> 00:05:57.243
+I'm going to switch to GIT Bash.
+
+124
+00:05:59.460 --> 00:06:04.460
+So git add. git commit -m test pipeline 99, just some name
+
+125
+00:06:12.630 --> 00:06:17.630
+and I'm going to say git push origin feature-x.
+
+126
+00:06:20.520 --> 00:06:24.033
+So feature-x branch, we are making a new commit.
+
+127
+00:06:26.010 --> 00:06:27.990
+Okay, now let's go to GitHub.
+
+128
+00:06:27.990 --> 00:06:30.303
+I mean vprofile app repository.
+
+129
+00:06:32.550 --> 00:06:35.700
+In actions, there is nothing yet triggered.
+
+130
+00:06:35.700 --> 00:06:37.893
+Once we raise a pull request,
+
+131
+00:06:38.790 --> 00:06:41.610
+it's already asking us to compare and make a pull request.
+
+132
+00:06:41.610 --> 00:06:43.680
+But anyways, let's go to pull request
+
+133
+00:06:43.680 --> 00:06:45.303
+and say new pull request.
+
+134
+00:06:46.350 --> 00:06:48.090
+Select the feature-x branch.
+
+135
+00:06:48.090 --> 00:06:50.310
+That is going to merge the changes to main branch.
+
+136
+00:06:50.310 --> 00:06:54.330
+That is a request and see create pull request.
+
+137
+00:06:54.330 --> 00:06:57.090
+You can add some title, give some description
+
+138
+00:06:57.090 --> 00:06:59.490
+and say create pull request.
+
+139
+00:06:59.490 --> 00:07:02.730
+Now this PR should trigger the pipeline
+
+140
+00:07:02.730 --> 00:07:05.550
+and code analysis should happen.
+
+141
+00:07:05.550 --> 00:07:06.810
+Now if I go to actions,
+
+142
+00:07:06.810 --> 00:07:09.480
+I should see the pipeline got triggered.
+
+143
+00:07:09.480 --> 00:07:11.370
+So it's going to run different stages
+
+144
+00:07:11.370 --> 00:07:13.560
+and let's wait until this is completed.
+
+145
+00:07:13.560 --> 00:07:16.560
+All right, so our code analysis got completed successfully.
+
+146
+00:07:16.560 --> 00:07:18.480
+Quality gate is good.
+
+147
+00:07:18.480 --> 00:07:22.230
+Now it's time to merge these changes to the main branch.
+
+148
+00:07:22.230 --> 00:07:27.230
+Before you do that, let's take a note of the app image tag.
+
+149
+00:07:27.390 --> 00:07:31.263
+Take a note at this tag or it's better from here, yeah,
+
+150
+00:07:32.370 --> 00:07:35.640
+or you can keep this tab open and another
+
+151
+00:07:35.640 --> 00:07:36.810
+and open another tab.
+
+152
+00:07:36.810 --> 00:07:38.790
+Anyways, take a note of the tag
+
+153
+00:07:38.790 --> 00:07:41.010
+because that should get updated.
+
+154
+00:07:41.010 --> 00:07:43.320
+So now I'm going to go to pull request.
+
+155
+00:07:43.320 --> 00:07:45.600
+That's the open pull request.
+
+156
+00:07:45.600 --> 00:07:49.140
+And let's merge the changes, merge pull request.
+
+157
+00:07:49.140 --> 00:07:51.750
+So some authorized party is going to
+
+158
+00:07:51.750 --> 00:07:53.310
+look at the pull request.
+
+159
+00:07:53.310 --> 00:07:55.470
+If everything checks out, fine,
+
+160
+00:07:55.470 --> 00:07:59.010
+he or she's going to confirm the merge.
+
+161
+00:07:59.010 --> 00:08:00.420
+And when the merge happens,
+
+162
+00:08:00.420 --> 00:08:04.590
+it's going to build a new Docker image, push it to ECR.
+
+163
+00:08:04.590 --> 00:08:07.143
+Let's go to the action, sorry, actions, yeah.
+
+164
+00:08:08.280 --> 00:08:11.100
+See that the merge request started.
+
+165
+00:08:11.100 --> 00:08:13.410
+Building the docker image, push it to ECR
+
+166
+00:08:13.410 --> 00:08:16.980
+and then it's going to update the helm values file
+
+167
+00:08:16.980 --> 00:08:19.140
+into helm repository.
+
+168
+00:08:19.140 --> 00:08:22.110
+So let's wait until this is completed. Or you know what?
+
+169
+00:08:22.110 --> 00:08:27.110
+By the time to open the helm repository, vprofile helm.
+
+170
+00:08:29.250 --> 00:08:31.170
+Okay, so that's the current tag
+
+171
+00:08:31.170 --> 00:08:33.470
+and I'm going to wait until this is completed.
+
+172
+00:08:35.130 --> 00:08:36.720
+Okay, new image is built.
+
+173
+00:08:36.720 --> 00:08:39.390
+Let's check whether it updated the tag.
+
+174
+00:08:39.390 --> 00:08:41.760
+Yes it did update the tag.
+
+175
+00:08:41.760 --> 00:08:45.663
+And let's go to now the Argo CD. This is the current tag.
+
+176
+00:08:47.340 --> 00:08:50.520
+Let me refresh this. Let's see what's going on here.
+
+177
+00:08:50.520 --> 00:08:53.160
+So the thing is updated yet, let's wait for a few minutes,
+
+178
+00:08:53.160 --> 00:08:58.160
+or you can click on sync and sync the latest changes.
+
+179
+00:08:58.800 --> 00:09:03.333
+Oh, you know what? Let's just click on sync, Synchronize.
+
+180
+00:09:04.980 --> 00:09:09.120
+Okay, there you should see, vpro app two seconds ago.
+
+181
+00:09:09.120 --> 00:09:11.310
+It's creating a new pod.
+
+182
+00:09:11.310 --> 00:09:12.840
+And once that is ready, it's going delete it.
+
+183
+00:09:12.840 --> 00:09:14.400
+Okay, this pod is healthy,
+
+184
+00:09:14.400 --> 00:09:16.650
+so it's going delete the another pod, the older pod.
+
+185
+00:09:16.650 --> 00:09:18.030
+Let's check
+
+186
+00:09:18.030 --> 00:09:20.480
+and you should see the latest tag in the new pod.
+
+187
+00:09:21.420 --> 00:09:24.150
+So that's the whole pipeline we have tested.
+
+188
+00:09:24.150 --> 00:09:26.910
+Now, based on your requirement, things might change
+
+189
+00:09:26.910 --> 00:09:29.790
+and you might need to put another pull request
+
+190
+00:09:29.790 --> 00:09:31.470
+in this whole pipeline.
+
+191
+00:09:31.470 --> 00:09:33.420
+We are gonna talk about that in the next lecture.
+
+192
+00:09:33.420 --> 00:09:36.600
+And also going to talk about the Terraform pipeline.
+
+193
+00:09:36.600 --> 00:09:37.800
+So see you the next one.
+

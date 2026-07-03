@@ -1,0 +1,702 @@
+WEBVTT
+
+1
+00:00:00.420 --> 00:00:01.290
+<v Instructor>All right, let's take a look</v>
+
+2
+00:00:01.290 --> 00:00:03.000
+at the quality gate.
+
+3
+00:00:03.000 --> 00:00:07.060
+Quality gate is or are the set of rules that you define
+
+4
+00:00:07.950 --> 00:00:09.480
+based on your project's requirement,
+
+5
+00:00:09.480 --> 00:00:12.860
+how much of error or issues you can tolerate.
+
+6
+00:00:12.860 --> 00:00:14.280
+So you can mention the threshold
+
+7
+00:00:14.280 --> 00:00:15.840
+based on what you can allow,
+
+8
+00:00:15.840 --> 00:00:17.430
+how much security issues you can allow,
+
+9
+00:00:17.430 --> 00:00:21.210
+or how many reliability issues you can allow.
+
+10
+00:00:21.210 --> 00:00:23.160
+So there are a huge set of rules
+
+11
+00:00:23.160 --> 00:00:26.160
+that you need to learn and understand.
+
+12
+00:00:26.160 --> 00:00:29.460
+That is really out of the scope of this course.
+
+13
+00:00:29.460 --> 00:00:31.890
+But I can show you how you can set the quality gate
+
+14
+00:00:31.890 --> 00:00:35.610
+and take one rule and decide whether it works or not.
+
+15
+00:00:35.610 --> 00:00:37.530
+So for this vprofile project,
+
+16
+00:00:37.530 --> 00:00:39.420
+if you go to the Project setting,
+
+17
+00:00:39.420 --> 00:00:42.360
+and if you come to, sorry, not here.
+
+18
+00:00:42.360 --> 00:00:43.680
+Here you have Quality gate.
+
+19
+00:00:43.680 --> 00:00:45.810
+If you click on this Quality gate,
+
+20
+00:00:45.810 --> 00:00:47.520
+you should see which quality gate it is using.
+
+21
+00:00:47.520 --> 00:00:50.700
+It is saying use the Sonar Way built-in Quality Gate.
+
+22
+00:00:50.700 --> 00:00:52.770
+We can create our own quality gate,
+
+23
+00:00:52.770 --> 00:00:54.960
+and then select that quality gate from here.
+
+24
+00:00:54.960 --> 00:00:57.870
+We don't have any other, just we have the default one.
+
+25
+00:00:57.870 --> 00:01:02.280
+So let's go to Quality gates, and click on Create.
+
+26
+00:01:02.280 --> 00:01:03.771
+Let's give quality gate a name.
+
+27
+00:01:03.771 --> 00:01:06.393
+I'm gonna say vprofile-qg,
+
+28
+00:01:07.470 --> 00:01:09.630
+like in caps, and say Create.
+
+29
+00:01:09.630 --> 00:01:11.730
+So it gives you some default rules
+
+30
+00:01:11.730 --> 00:01:13.680
+that has some default values.
+
+31
+00:01:13.680 --> 00:01:15.423
+Let's remove all this.
+
+32
+00:01:16.860 --> 00:01:19.080
+Remove all of it.
+
+33
+00:01:19.080 --> 00:01:21.330
+And let's set some quality gate that we can play with.
+
+34
+00:01:21.330 --> 00:01:23.193
+Let's go back to the projects.
+
+35
+00:01:24.030 --> 00:01:26.070
+Let's go to our project.
+
+36
+00:01:26.070 --> 00:01:29.010
+So we have here Security, Open issues.
+
+37
+00:01:29.010 --> 00:01:31.350
+There are actually three.
+
+38
+00:01:31.350 --> 00:01:33.750
+So we need to reduce this quality gate to two.
+
+39
+00:01:33.750 --> 00:01:35.910
+We're going to say only we can tolerate two.
+
+40
+00:01:35.910 --> 00:01:38.223
+So let's go back to Quality gates once again.
+
+41
+00:01:39.150 --> 00:01:41.190
+We profile quality gates.
+
+42
+00:01:41.190 --> 00:01:45.390
+Add condition on overall code,
+
+43
+00:01:45.390 --> 00:01:47.400
+Quality Gate fails when, let's say,
+
+44
+00:01:47.400 --> 00:01:52.400
+security issues value is greater than two.
+
+45
+00:01:52.830 --> 00:01:54.033
+Say Add condition.
+
+46
+00:01:55.530 --> 00:01:58.080
+Let's go back to the project and select this quality gate
+
+47
+00:01:58.080 --> 00:02:00.180
+for our vprofile project.
+
+48
+00:02:00.180 --> 00:02:02.130
+Go to vprofile project.
+
+49
+00:02:02.130 --> 00:02:03.603
+Click on Quality gate.
+
+50
+00:02:04.860 --> 00:02:08.340
+From this, select vprofile quality gate,
+
+51
+00:02:08.340 --> 00:02:09.363
+and say Save.
+
+52
+00:02:10.380 --> 00:02:11.700
+Save.
+
+53
+00:02:11.700 --> 00:02:13.950
+So even though we have set the quality gate,
+
+54
+00:02:13.950 --> 00:02:15.690
+our pipeline script doesn't pass
+
+55
+00:02:15.690 --> 00:02:17.520
+or fail based on the quality gate.
+
+56
+00:02:17.520 --> 00:02:20.790
+It will just upload the result to SonarQube server.
+
+57
+00:02:20.790 --> 00:02:22.830
+It doesn't check the quality gate.
+
+58
+00:02:22.830 --> 00:02:25.227
+A check from Sonar documentation,
+
+59
+00:02:25.227 --> 00:02:28.230
+the same one that we used in the previous lecture.
+
+60
+00:02:28.230 --> 00:02:30.483
+Here you see a stage quality gate.
+
+61
+00:02:31.440 --> 00:02:35.340
+So it says Quality Gate, steps, Timeout,
+
+62
+00:02:35.340 --> 00:02:37.740
+waitForQualityGate, abortPipeline: True.
+
+63
+00:02:37.740 --> 00:02:39.540
+So it's going to wait for the quality gate.
+
+64
+00:02:39.540 --> 00:02:42.450
+If it fails, it's going to abort the pipeline.
+
+65
+00:02:42.450 --> 00:02:45.630
+So let's check the opening and closing of this braces.
+
+66
+00:02:45.630 --> 00:02:47.310
+This is for timeout.
+
+67
+00:02:47.310 --> 00:02:51.000
+This one is for steps, and this one is for the stage.
+
+68
+00:02:51.000 --> 00:02:55.110
+So let's copy it from here to here, copy.
+
+69
+00:02:55.110 --> 00:02:56.340
+Come to our pipeline.
+
+70
+00:02:56.340 --> 00:02:59.070
+So this stage completes over here.
+
+71
+00:02:59.070 --> 00:03:03.153
+You see the highlighted one, and let's paste it here.
+
+72
+00:03:04.590 --> 00:03:07.620
+After this, you should see only two Calibers.
+
+73
+00:03:07.620 --> 00:03:10.593
+This is for stages and this is for the pipeline.
+
+74
+00:03:12.000 --> 00:03:13.080
+If you have doubt with this,
+
+75
+00:03:13.080 --> 00:03:15.150
+then just download the lecture resource
+
+76
+00:03:15.150 --> 00:03:19.650
+and use the pipeline that I have provided in this lecture.
+
+77
+00:03:19.650 --> 00:03:20.483
+Okay.
+
+78
+00:03:20.483 --> 00:03:22.623
+Anyways, let's copy this.
+
+79
+00:03:24.120 --> 00:03:27.270
+Oh wait, there's also one last thing that we need to do.
+
+80
+00:03:27.270 --> 00:03:31.680
+Now, this SonarQube server is going to check
+
+81
+00:03:31.680 --> 00:03:34.620
+for the quality gate and report the result
+
+82
+00:03:34.620 --> 00:03:36.750
+or output to Jenkins.
+
+83
+00:03:36.750 --> 00:03:38.220
+But how does it contact Jenkins?
+
+84
+00:03:38.220 --> 00:03:40.470
+How does it know where is Jenkins?
+
+85
+00:03:40.470 --> 00:03:42.840
+That is going to be happening through the webhooks.
+
+86
+00:03:42.840 --> 00:03:45.300
+So the same project settings,
+
+87
+00:03:45.300 --> 00:03:48.830
+go to vprofile project setting, click on Webhooks.
+
+88
+00:03:48.830 --> 00:03:51.300
+So you need to define where it needs to contact.
+
+89
+00:03:51.300 --> 00:03:54.000
+So click on Create here.
+
+90
+00:03:54.000 --> 00:03:55.830
+Give this a name.
+
+91
+00:03:55.830 --> 00:03:59.013
+Let's call it as jenkins-ci-webhook.
+
+92
+00:04:00.180 --> 00:04:01.467
+And here, the URL.
+
+93
+00:04:01.467 --> 00:04:02.850
+Now URL will be in this format.
+
+94
+00:04:02.850 --> 00:04:07.263
+You need to say http://, Jenkins private IP.
+
+95
+00:04:08.580 --> 00:04:10.140
+So select Jenkins server.
+
+96
+00:04:10.140 --> 00:04:12.330
+Copy its private IP.
+
+97
+00:04:12.330 --> 00:04:13.903
+Paste it here.
+
+98
+00:04:13.903 --> 00:04:16.478
+: 8080, the port number of Jenkins,
+
+99
+00:04:16.478 --> 00:04:21.330
+/sonarqube-webhook.
+
+100
+00:04:21.330 --> 00:04:23.460
+Make sure it's exactly this,
+
+101
+00:04:23.460 --> 00:04:26.130
+and no extra forward slash over here.
+
+102
+00:04:26.130 --> 00:04:30.603
+No spelling mistake, as it is, and say Create.
+
+103
+00:04:31.640 --> 00:04:35.010
+Now Jenkins should allow connection from Port 8080
+
+104
+00:04:35.010 --> 00:04:36.450
+from SonarQube.
+
+105
+00:04:36.450 --> 00:04:39.270
+You already did that, but also verified once again.
+
+106
+00:04:39.270 --> 00:04:41.793
+Go to the Jenkins Security group,
+
+107
+00:04:43.410 --> 00:04:45.060
+Edit inbound rules.
+
+108
+00:04:45.060 --> 00:04:46.650
+There should be a rule 8080 allowed
+
+109
+00:04:46.650 --> 00:04:48.720
+from the SonarQube Security group.
+
+110
+00:04:48.720 --> 00:04:50.880
+Just make sure this is SonarQube Security group.
+
+111
+00:04:50.880 --> 00:04:53.040
+We can search it once again.
+
+112
+00:04:53.040 --> 00:04:54.693
+Sonar Security group.
+
+113
+00:04:56.820 --> 00:04:58.560
+If all this is good, save it.
+
+114
+00:04:58.560 --> 00:04:59.580
+I don't need to save anything
+
+115
+00:04:59.580 --> 00:05:01.680
+because it was already as a test.
+
+116
+00:05:01.680 --> 00:05:02.700
+Okay, now it's time to test.
+
+117
+00:05:02.700 --> 00:05:04.713
+Let's copy the pipeline script.
+
+118
+00:05:05.700 --> 00:05:07.260
+Hopefully there are no syntax error
+
+119
+00:05:07.260 --> 00:05:09.990
+because I have not checked it against any tool.
+
+120
+00:05:09.990 --> 00:05:11.400
+So in the same one,
+
+121
+00:05:11.400 --> 00:05:14.700
+let's say Configure, code analysis configure,
+
+122
+00:05:14.700 --> 00:05:16.320
+and select all this, delete it,
+
+123
+00:05:16.320 --> 00:05:18.330
+and paste on new pipeline.
+
+124
+00:05:18.330 --> 00:05:19.163
+Save.
+
+125
+00:05:21.000 --> 00:05:22.383
+And let's say Build Now.
+
+126
+00:05:23.405 --> 00:05:25.055
+Okay, it's running. Go to Stages.
+
+127
+00:05:25.980 --> 00:05:27.630
+So I'm going to pause the lecture
+
+128
+00:05:27.630 --> 00:05:29.703
+and resume when this is completed.
+
+129
+00:05:30.630 --> 00:05:31.920
+Okay, so the pipeline completed.
+
+130
+00:05:31.920 --> 00:05:34.980
+Quality gate failed, but we need to check why it failed.
+
+131
+00:05:34.980 --> 00:05:36.540
+Click on it.
+
+132
+00:05:36.540 --> 00:05:38.880
+Okay, here it says the quality gate is error.
+
+133
+00:05:38.880 --> 00:05:41.610
+That means the pipeline aborted due to quality gate failure.
+
+134
+00:05:41.610 --> 00:05:43.410
+That's what we were expecting.
+
+135
+00:05:43.410 --> 00:05:45.180
+Let's go to SonarQube server.
+
+136
+00:05:45.180 --> 00:05:46.653
+Let's go to Projects.
+
+137
+00:05:47.640 --> 00:05:50.550
+Let's click on the vprofile project.
+
+138
+00:05:50.550 --> 00:05:52.680
+Okay, here it should show failed.
+
+139
+00:05:52.680 --> 00:05:53.790
+If not, just refresh.
+
+140
+00:05:53.790 --> 00:05:55.290
+It should be showing failed.
+
+141
+00:05:55.290 --> 00:05:56.910
+Overall Code, one fail.
+
+142
+00:05:56.910 --> 00:05:59.643
+You see three security issues is greater than two.
+
+143
+00:06:00.510 --> 00:06:02.850
+So that worked, and this was just to learn
+
+144
+00:06:02.850 --> 00:06:05.250
+how to set quality gates,
+
+145
+00:06:05.250 --> 00:06:08.850
+or moreover, to show you what exactly quality gate means.
+
+146
+00:06:08.850 --> 00:06:10.620
+Okay, setting these rules,
+
+147
+00:06:10.620 --> 00:06:12.510
+understanding these Sonar rules,
+
+148
+00:06:12.510 --> 00:06:14.850
+is really out of the scope of the course.
+
+149
+00:06:14.850 --> 00:06:16.710
+But based on your project requirement,
+
+150
+00:06:16.710 --> 00:06:18.960
+either developers, or you might be doing it,
+
+151
+00:06:18.960 --> 00:06:21.780
+then you need to learn SonarQube server in detail.
+
+152
+00:06:21.780 --> 00:06:24.720
+But that really depends on your job requirement.
+
+153
+00:06:24.720 --> 00:06:26.130
+But you will be good. Don't worry.
+
+154
+00:06:26.130 --> 00:06:27.390
+You need to understand this much,
+
+155
+00:06:27.390 --> 00:06:29.700
+how to set it, how to set these rules.
+
+156
+00:06:29.700 --> 00:06:32.160
+Based on the project you have different requirements.
+
+157
+00:06:32.160 --> 00:06:34.830
+Some allow some things. Some doesn't allow some things.
+
+158
+00:06:34.830 --> 00:06:38.370
+So it really depends on the project and the requirement.
+
+159
+00:06:38.370 --> 00:06:39.720
+Now, if we keep this as it is,
+
+160
+00:06:39.720 --> 00:06:41.400
+our pipeline will always fail.
+
+161
+00:06:41.400 --> 00:06:43.740
+So go to Quality gates,
+
+162
+00:06:43.740 --> 00:06:47.400
+and just switch back to, no, not here, Projects.
+
+163
+00:06:47.400 --> 00:06:51.390
+Go to Projects, vprofile, Quality gate,
+
+164
+00:06:51.390 --> 00:06:55.980
+and switch back to the default Sonar Quality Gates.
+
+165
+00:06:55.980 --> 00:06:57.780
+Or you can go to vprofile, Quality gate,
+
+166
+00:06:57.780 --> 00:06:59.610
+and change the rule.
+
+167
+00:06:59.610 --> 00:07:03.750
+Instead of two, you can give five security issues,
+
+168
+00:07:03.750 --> 00:07:05.010
+which is under the threshold
+
+169
+00:07:05.010 --> 00:07:06.630
+and your quality gate should pass.
+
+170
+00:07:06.630 --> 00:07:09.840
+Just make sure that this works, this passes,
+
+171
+00:07:09.840 --> 00:07:13.170
+otherwise we will not be able to follow the next lectures.
+
+172
+00:07:13.170 --> 00:07:15.630
+And once that is done, say Build Now,
+
+173
+00:07:15.630 --> 00:07:18.453
+and make sure this job passes successfully.
+
+174
+00:07:19.710 --> 00:07:21.150
+That should be it in this lecture.
+
+175
+00:07:21.150 --> 00:07:22.700
+I will see you in the next one.
+

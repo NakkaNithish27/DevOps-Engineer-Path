@@ -1,0 +1,490 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:01.133
+<v Instructor>Welcome.</v>
+
+2
+00:00:01.133 --> 00:00:02.370
+In this lecture,
+
+3
+00:00:02.370 --> 00:00:06.120
+we are going to create three repositories on GitHub
+
+4
+00:00:06.120 --> 00:00:09.030
+and set up authentication with our local machine.
+
+5
+00:00:09.030 --> 00:00:11.010
+So you need to have a GitHub account,
+
+6
+00:00:11.010 --> 00:00:13.680
+you need to have a VS Code installed.
+
+7
+00:00:13.680 --> 00:00:17.190
+In VS Code, you need to have Amazon Q extension
+
+8
+00:00:17.190 --> 00:00:21.510
+and make sure Amazon Q is signed in with your AWS account,
+
+9
+00:00:21.510 --> 00:00:25.350
+or you can create another account in Amazon.
+
+10
+00:00:25.350 --> 00:00:27.540
+You should have Git Bash on Windows
+
+11
+00:00:27.540 --> 00:00:31.530
+and Terminal in macOS with Git installed.
+
+12
+00:00:31.530 --> 00:00:33.540
+Log into your GitHub account,
+
+13
+00:00:33.540 --> 00:00:35.592
+click on New.
+
+14
+00:00:35.592 --> 00:00:39.000
+Give repository a name, vprofile-infra.
+
+15
+00:00:39.000 --> 00:00:41.940
+Now this represents there will be Terraform source code
+
+16
+00:00:41.940 --> 00:00:45.270
+to manage your EKS cluster on AWS.
+
+17
+00:00:45.270 --> 00:00:47.223
+Visibility will be Private.
+
+18
+00:00:48.103 --> 00:00:50.580
+README file and gitignore file,
+
+19
+00:00:50.580 --> 00:00:53.370
+this one will generate once our source code is ready,
+
+20
+00:00:53.370 --> 00:00:56.160
+so click on Create repository,
+
+21
+00:00:56.160 --> 00:00:58.473
+go back, click on this GitHub symbol.
+
+22
+00:00:59.340 --> 00:01:01.563
+Let's create the second repository, New,
+
+23
+00:01:02.490 --> 00:01:04.563
+vprofile-helm,
+
+24
+00:01:06.090 --> 00:01:09.810
+Private, Create repository.
+
+25
+00:01:09.810 --> 00:01:12.513
+Third one, New,
+
+26
+00:01:13.452 --> 00:01:16.260
+vprofile-app.
+
+27
+00:01:16.260 --> 00:01:18.840
+This will contain the application source code.
+
+28
+00:01:18.840 --> 00:01:23.070
+Once again, change it to Private and say Create repository.
+
+29
+00:01:23.070 --> 00:01:25.350
+Now, open your Git Bash
+
+30
+00:01:25.350 --> 00:01:27.453
+or Terminal if you're using macOS.
+
+31
+00:01:30.390 --> 00:01:31.800
+Type cd and hit Enter
+
+32
+00:01:31.800 --> 00:01:34.860
+so you are in your Home folder,
+
+33
+00:01:34.860 --> 00:01:36.653
+then do cd .ssh/,
+
+34
+00:01:36.653 --> 00:01:39.573
+come to this folder and run the command as such,
+
+35
+00:01:40.672 --> 00:01:43.710
+<v ->keygen, hit Enter.</v>
+
+36
+00:01:43.710 --> 00:01:46.440
+And here give the name of the repository,
+
+37
+00:01:46.440 --> 00:01:48.930
+sorry, of your GitHub account.
+
+38
+00:01:48.930 --> 00:01:52.380
+So mine is devops4sure, so I'm giving this.
+
+39
+00:01:52.380 --> 00:01:54.630
+Hit Enter, Enter, Enter.
+
+40
+00:01:54.630 --> 00:01:57.910
+Do ls and you should see here one public key
+
+41
+00:01:58.770 --> 00:02:00.573
+and the other one private key.
+
+42
+00:02:01.440 --> 00:02:05.580
+Public key, we are going to store in our GitHub account,
+
+43
+00:02:05.580 --> 00:02:07.590
+but first we are going to create
+
+44
+00:02:07.590 --> 00:02:09.900
+some configuration in the config file,
+
+45
+00:02:09.900 --> 00:02:14.550
+so do vim config, open this file.
+
+46
+00:02:14.550 --> 00:02:17.640
+So add this entry if you do not have.
+
+47
+00:02:17.640 --> 00:02:19.500
+You can get this from this lecture resource,
+
+48
+00:02:19.500 --> 00:02:20.333
+so I'm going to say
+
+49
+00:02:20.333 --> 00:02:23.430
+I'm going to go into insert mode
+
+50
+00:02:23.430 --> 00:02:26.820
+and github.com
+
+51
+00:02:26.820 --> 00:02:30.397
+hyphen, my account name, devops4sure.
+
+52
+00:02:31.860 --> 00:02:36.860
+And here you need to change your key name exactly as it is.
+
+53
+00:02:37.050 --> 00:02:41.520
+So mine is devops4sure, so I'm giving this.
+
+54
+00:02:41.520 --> 00:02:45.840
+Now, this will make sure when we clone our GitHub repository
+
+55
+00:02:45.840 --> 00:02:49.083
+in the URL, we are going to change -devops4sure.
+
+56
+00:02:50.310 --> 00:02:52.920
+When we do that, when it matches this name,
+
+57
+00:02:52.920 --> 00:02:55.530
+then it is going to use this private key
+
+58
+00:02:55.530 --> 00:02:57.303
+to log into your GitHub account.
+
+59
+00:02:58.260 --> 00:02:59.343
+Save this file.
+
+60
+00:03:00.780 --> 00:03:02.133
+Once again take a look.
+
+61
+00:03:03.570 --> 00:03:06.930
+The part of the key, you check the name.
+
+62
+00:03:06.930 --> 00:03:09.180
+Now, do a cat to your public key,
+
+63
+00:03:09.180 --> 00:03:11.880
+so mine is devops4sure.pub,
+
+64
+00:03:11.880 --> 00:03:13.737
+so that's my public key
+
+65
+00:03:13.737 --> 00:03:15.037
+so I'm going to copy this.
+
+66
+00:03:16.770 --> 00:03:19.050
+And go to your GitHub account,
+
+67
+00:03:19.050 --> 00:03:21.363
+go to the Settings,
+
+68
+00:03:22.757 --> 00:03:24.693
+SSH and GPG keys,
+
+69
+00:03:25.830 --> 00:03:27.453
+say New SSH key.
+
+70
+00:03:28.320 --> 00:03:29.153
+Give a title.
+
+71
+00:03:29.153 --> 00:03:30.540
+I have given my workstation
+
+72
+00:03:30.540 --> 00:03:32.550
+and paste your public key over here.
+
+73
+00:03:32.550 --> 00:03:34.290
+This name can be anything.
+
+74
+00:03:34.290 --> 00:03:36.030
+Just click on Add SSH key.
+
+75
+00:03:36.030 --> 00:03:37.530
+Make sure this is the public key
+
+76
+00:03:37.530 --> 00:03:38.520
+and not the private key.
+
+77
+00:03:38.520 --> 00:03:40.440
+Public key look like this.
+
+78
+00:03:40.440 --> 00:03:43.980
+So this is the lock we are putting in our GitHub account,
+
+79
+00:03:43.980 --> 00:03:45.600
+Add SSH key.
+
+80
+00:03:45.600 --> 00:03:47.820
+Now take your repository one by one.
+
+81
+00:03:47.820 --> 00:03:50.350
+First I'm going to go to vprofile-infra
+
+82
+00:03:51.420 --> 00:03:52.860
+and click on SSH,
+
+83
+00:03:52.860 --> 00:03:54.613
+you should have this kind of URL,
+
+84
+00:03:54.613 --> 00:03:57.150
+not HTTPS, SSH.
+
+85
+00:03:57.150 --> 00:03:58.500
+Copy this,
+
+86
+00:03:58.500 --> 00:04:00.330
+open your Terminal or Git Bash,
+
+87
+00:04:00.330 --> 00:04:01.920
+cd, Enter,
+
+88
+00:04:01.920 --> 00:04:04.500
+and go to the folder where you want to clone it.
+
+89
+00:04:04.500 --> 00:04:07.020
+So I have a D drive.
+
+90
+00:04:07.020 --> 00:04:07.853
+You know what?
+
+91
+00:04:07.853 --> 00:04:11.070
+For everyone's sake, I'm going to just go to Desktop.
+
+92
+00:04:11.070 --> 00:04:14.880
+I can do it like this ~/Desktop/,
+
+93
+00:04:14.880 --> 00:04:19.140
+and here I'm going to create a folder called gitops.
+
+94
+00:04:19.140 --> 00:04:20.133
+In this folder,
+
+95
+00:04:21.090 --> 00:04:22.770
+I'm going to say git clone
+
+96
+00:04:22.770 --> 00:04:24.780
+and paste that URL over here,
+
+97
+00:04:24.780 --> 00:04:26.850
+Shift + Insert in Git Bash.
+
+98
+00:04:26.850 --> 00:04:30.150
+And you need to change here hyphen,
+
+99
+00:04:30.150 --> 00:04:32.900
+the name that you have given in the configuration file.
+
+100
+00:04:33.900 --> 00:04:37.710
+So mine was host github.com-devops4sure,
+
+101
+00:04:37.710 --> 00:04:40.950
+so I've given that and I hit Enter
+
+102
+00:04:40.950 --> 00:04:42.690
+and that worked.
+
+103
+00:04:42.690 --> 00:04:45.390
+Now, if this is not working for some reason,
+
+104
+00:04:45.390 --> 00:04:47.620
+do this cat ~/.ssh
+
+105
+00:04:48.840 --> 00:04:51.180
+and check your config file content.
+
+106
+00:04:51.180 --> 00:04:53.727
+You see this, this should match github.com-,
+
+107
+00:04:54.690 --> 00:04:57.930
+the name you have given should match with this.
+
+108
+00:04:57.930 --> 00:05:01.170
+If that matches, then it is going to use your key.
+
+109
+00:05:01.170 --> 00:05:03.660
+Okay, now let me clear this screen
+
+110
+00:05:03.660 --> 00:05:05.820
+and clone the other repository as well,
+
+111
+00:05:05.820 --> 00:05:10.143
+git clone vprofile-helm, that is the name.
+
+112
+00:05:11.670 --> 00:05:15.150
+The last one, third one, vprofile-app.
+
+113
+00:05:15.150 --> 00:05:17.163
+You can clone it in any order you want.
+
+114
+00:05:18.030 --> 00:05:19.410
+So at the end of this lecture,
+
+115
+00:05:19.410 --> 00:05:22.590
+you should have these three repositories cloned.
+
+116
+00:05:22.590 --> 00:05:26.580
+Then you get into vprofile-helm,
+
+117
+00:05:26.580 --> 00:05:30.303
+code ., this is going to open this in the VS Code.
+
+118
+00:05:32.760 --> 00:05:34.233
+I trust this author.
+
+119
+00:05:35.700 --> 00:05:37.110
+Okay, this is it for now.
+
+120
+00:05:37.110 --> 00:05:40.380
+In the next lecture, we are going to develop helm charts
+
+121
+00:05:40.380 --> 00:05:42.600
+for our vprofile application,
+
+122
+00:05:42.600 --> 00:05:43.950
+so join me in the next one.
+

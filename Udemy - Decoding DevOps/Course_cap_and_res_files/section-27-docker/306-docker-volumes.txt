@@ -1,0 +1,1269 @@
+WEBVTT
+
+1
+00:00:01.030 --> 00:00:04.890
+Containers are generally known for its volatile nature.
+
+2
+00:00:05.570 --> 00:00:08.130
+That's because containers are disposable.
+
+3
+00:00:08.450 --> 00:00:10.242
+The way you make any change in
+
+4
+00:00:10.256 --> 00:00:12.538
+a container is always through the image.
+
+5
+00:00:12.694 --> 00:00:14.382
+So if you want to add a package or a
+
+6
+00:00:14.396 --> 00:00:17.418
+configuration file or any serious change you want to do
+
+7
+00:00:17.444 --> 00:00:19.758
+in the container, you don't log in and make changes.
+
+8
+00:00:19.904 --> 00:00:21.310
+That's because they're disposable.
+
+9
+00:00:21.370 --> 00:00:23.514
+We delete them and we create an
+
+10
+00:00:23.552 --> 00:00:25.966
+updated container from an updated image.
+
+11
+00:00:26.098 --> 00:00:29.070
+And for that reason they are called as volatile.
+
+12
+00:00:30.050 --> 00:00:32.058
+If you store any data in the container and
+
+13
+00:00:32.084 --> 00:00:34.542
+if we have to replace it, we'll see in
+
+14
+00:00:34.556 --> 00:00:37.842
+Kubernetes when we do upgrades, rolling upgrades, it's going
+
+15
+00:00:37.856 --> 00:00:39.886
+to remove the container and create a new container.
+
+16
+00:00:39.898 --> 00:00:41.838
+So when it removes the container, all the
+
+17
+00:00:41.864 --> 00:00:44.742
+data will be also gone with it.
+
+18
+00:00:44.936 --> 00:00:47.514
+But what if you have a container that
+
+19
+00:00:47.552 --> 00:00:51.678
+is stateful like MySQL that needs DB, it
+
+20
+00:00:51.704 --> 00:00:54.382
+stores databases and reads from the database.
+
+21
+00:00:54.526 --> 00:00:56.434
+If you happen to replace that container,
+
+22
+00:00:56.482 --> 00:00:58.100
+all the data will be also gone.
+
+23
+00:00:58.490 --> 00:01:05.782
+So for that, we have container volumes so the data
+
+24
+00:01:05.856 --> 00:01:08.734
+in the container does not persist for a longer time.
+
+25
+00:01:08.892 --> 00:01:10.642
+Moreover, it will be difficult to get the
+
+26
+00:01:10.656 --> 00:01:13.234
+data from the container if you're using it.
+
+27
+00:01:13.272 --> 00:01:16.702
+Like you're making code changes live, right?
+
+28
+00:01:16.776 --> 00:01:18.974
+And we have seen it's in a separate
+
+29
+00:01:19.022 --> 00:01:21.758
+directory, it stores its data so it's tightly
+
+30
+00:01:21.794 --> 00:01:24.794
+coupled with that directory file system structure.
+
+31
+00:01:24.902 --> 00:01:27.518
+So if you want to move that data somewhere else, it's
+
+32
+00:01:27.554 --> 00:01:30.442
+very difficult or like let's say you can't do it.
+
+33
+00:01:30.636 --> 00:01:34.714
+So Docker has two options for persistent data.
+
+34
+00:01:34.812 --> 00:01:36.182
+One is volumes.
+
+35
+00:01:36.326 --> 00:01:39.830
+It's a wrapper where in the docker's volumes
+
+36
+00:01:39.890 --> 00:01:42.658
+directory, it will create a directory and then
+
+37
+00:01:42.684 --> 00:01:45.074
+you can attach that to your container.
+
+38
+00:01:45.182 --> 00:01:47.602
+So whatever data you store in a container at a
+
+39
+00:01:47.616 --> 00:01:51.050
+separate directory, you will attach it to a directory.
+
+40
+00:01:51.230 --> 00:01:53.554
+All the data from that container directory will be going
+
+41
+00:01:53.592 --> 00:01:56.318
+to the volumes which is in your host machine.
+
+42
+00:01:56.354 --> 00:01:58.270
+So it's safe on your host machine.
+
+43
+00:01:59.130 --> 00:02:01.346
+So all the volumes will be in this location.
+
+44
+00:02:01.418 --> 00:02:04.270
+/var/lib/docker/volume location in Linux,
+
+45
+00:02:04.950 --> 00:02:06.806
+another option is bind mount.
+
+46
+00:02:06.938 --> 00:02:09.110
+This is same as Vagrant Sync directories.
+
+47
+00:02:09.169 --> 00:02:12.118
+We have seen in Vagrant sync directory, where
+
+48
+00:02:12.144 --> 00:02:14.114
+you can take any directory from your host
+
+49
+00:02:14.162 --> 00:02:16.510
+machine and map it to a container directory.
+
+50
+00:02:17.310 --> 00:02:19.738
+And this is mostly when you want
+
+51
+00:02:19.764 --> 00:02:22.342
+to make changes to the container data.
+
+52
+00:02:22.416 --> 00:02:24.614
+You can do it from your host machine directory
+
+53
+00:02:24.662 --> 00:02:27.482
+and that will be reflecting into your container directory.
+
+54
+00:02:27.626 --> 00:02:30.358
+So you can select any directory from
+
+55
+00:02:30.384 --> 00:02:32.254
+your host machine and map it.
+
+56
+00:02:32.412 --> 00:02:36.070
+By the way, volume is also similar, but
+
+57
+00:02:36.120 --> 00:02:38.162
+volume is managed directly by the docker.
+
+58
+00:02:38.246 --> 00:02:40.310
+It will put the directories
+
+59
+00:02:40.370 --> 00:02:42.550
+in this /var/docker/volumes.
+
+60
+00:02:43.290 --> 00:02:46.260
+OK, so let's see both the options with an example.
+
+61
+00:02:48.750 --> 00:02:51.890
+For this, we will take a MySQL image.
+
+62
+00:02:52.070 --> 00:02:55.690
+Let's find an official MySQL image in Docker Hub,
+
+63
+00:02:56.610 --> 00:03:00.730
+you can just make a search search for MySQL.
+
+64
+00:03:03.850 --> 00:03:05.418
+Okay, there it's an official image.
+
+65
+00:03:05.454 --> 00:03:06.506
+Let's click on it.
+
+66
+00:03:06.628 --> 00:03:09.614
+The benefit of official images you can trust on it,
+
+67
+00:03:09.652 --> 00:03:12.640
+One. Second, you have the documentation to read from.
+
+68
+00:03:14.050 --> 00:03:16.182
+So what is My sequel? Blah, blah blah.
+
+69
+00:03:16.266 --> 00:03:17.658
+How to use this image?
+
+70
+00:03:17.694 --> 00:03:22.638
+Yes, so docker run as a name, name of a container.
+
+71
+00:03:22.794 --> 00:03:26.270
+E option is to export variables.
+
+72
+00:03:26.770 --> 00:03:28.614
+So you can set this variable
+
+73
+00:03:28.782 --> 00:03:30.818
+MySQL root password with a value.
+
+74
+00:03:30.904 --> 00:03:32.810
+And you definitely have to set that.
+
+75
+00:03:32.860 --> 00:03:34.394
+Otherwise your container does not
+
+76
+00:03:34.432 --> 00:03:37.382
+run MySQL container D.
+
+77
+00:03:37.456 --> 00:03:40.286
+And then you give the image name. Right?
+
+78
+00:03:40.348 --> 00:03:41.538
+But what about volumes?
+
+79
+00:03:41.574 --> 00:03:43.898
+It's going to store some data somewhere, right?
+
+80
+00:03:43.924 --> 00:03:44.786
+MySQL process.
+
+81
+00:03:44.848 --> 00:03:46.120
+So let's find that.
+
+82
+00:03:54.890 --> 00:03:58.280
+Okay, here we have caveat section where to store data.
+
+83
+00:03:58.610 --> 00:03:59.694
+You can read through it.
+
+84
+00:03:59.732 --> 00:04:02.480
+It says V option.
+
+85
+00:04:02.810 --> 00:04:04.318
+You pick up a host machine
+
+86
+00:04:04.354 --> 00:04:06.778
+directory, map it with /var/lib/mysql.
+
+87
+00:04:06.814 --> 00:04:08.578
+So that's the container volume.
+
+88
+00:04:08.614 --> 00:04:10.642
+That's the container directory where it's
+
+89
+00:04:10.666 --> 00:04:11.874
+going to store the data.
+
+90
+00:04:12.032 --> 00:04:14.718
+Now already, don't come to an assumption that
+
+91
+00:04:14.744 --> 00:04:16.998
+if MySQL by default stores data at this
+
+92
+00:04:17.024 --> 00:04:19.546
+location, it would be same in the container.
+
+93
+00:04:19.618 --> 00:04:20.682
+It could be or it could
+
+94
+00:04:20.696 --> 00:04:22.278
+be in a different directory also.
+
+95
+00:04:22.424 --> 00:04:23.902
+So one, if it's an official image,
+
+96
+00:04:23.926 --> 00:04:25.386
+you can find it directly like this.
+
+97
+00:04:25.448 --> 00:04:27.714
+But if it's an unofficial image, you can
+
+98
+00:04:27.752 --> 00:04:30.282
+also run inspect command and find where it
+
+99
+00:04:30.296 --> 00:04:31.866
+is going to store the data.
+
+100
+00:04:32.048 --> 00:04:37.582
+So let's pull this image docker pull MySQL and I'll
+
+101
+00:04:37.606 --> 00:04:41.970
+go with the tag five seven, just some random tag.
+
+102
+00:04:49.110 --> 00:04:50.770
+Okay, so the images here.
+
+103
+00:04:50.880 --> 00:04:57.334
+Now I want to know what is the volume directory, and
+
+104
+00:04:57.372 --> 00:05:01.466
+also I want to know what port number the process runs.
+
+105
+00:05:01.598 --> 00:05:04.150
+So you can run a command docker inspect
+
+106
+00:05:04.770 --> 00:05:06.660
+and you can give the image name.
+
+107
+00:05:08.610 --> 00:05:09.730
+Oh, wait a second.
+
+108
+00:05:09.840 --> 00:05:11.760
+I have to give the tag, I think.
+
+109
+00:05:12.150 --> 00:05:23.642
+Okay, so some information in JSON format like that's.
+
+110
+00:05:23.666 --> 00:05:28.682
+The ID when it was created from what container
+
+111
+00:05:28.706 --> 00:05:31.886
+it was created showing the container ID also hostname
+
+112
+00:05:32.078 --> 00:05:38.086
+few other information exposed ports 3306 and 33060.
+
+113
+00:05:38.148 --> 00:05:41.002
+So there are two ports that will be running if
+
+114
+00:05:41.016 --> 00:05:45.310
+you run the container from this, some environmental variables.
+
+115
+00:05:46.290 --> 00:05:48.878
+CMD, this is the command.
+
+116
+00:05:48.914 --> 00:05:50.902
+When you say docker run, it actually is going
+
+117
+00:05:50.916 --> 00:05:54.060
+to run this command, which creates the process.
+
+118
+00:05:54.570 --> 00:05:57.060
+With CMD, you could also have entry point.
+
+119
+00:05:57.510 --> 00:05:58.510
+We'll find that.
+
+120
+00:05:58.620 --> 00:05:59.714
+But yeah, volumes.
+
+121
+00:05:59.762 --> 00:06:02.338
+This is what we're looking /var/lib/mysql right?
+
+122
+00:06:02.364 --> 00:06:05.580
+So that's how we can find out entry point.
+
+123
+00:06:06.570 --> 00:06:08.422
+Now, entry point CMD works
+
+124
+00:06:08.496 --> 00:06:10.622
+together or sometimes individually.
+
+125
+00:06:10.766 --> 00:06:13.850
+If you see both, entry point will have higher priority.
+
+126
+00:06:13.910 --> 00:06:17.194
+It will run that script and then
+
+127
+00:06:17.292 --> 00:06:19.450
+it's going to run this command.
+
+128
+00:06:19.770 --> 00:06:22.886
+Okay, so now we know details about this image.
+
+129
+00:06:22.958 --> 00:06:25.450
+So we can run the right command.
+
+130
+00:06:26.970 --> 00:06:29.026
+So let's say docker run.
+
+131
+00:06:29.148 --> 00:06:32.918
+Wait, image name, five seven tag.
+
+132
+00:06:32.954 --> 00:06:36.166
+Okay, docker run name.
+
+133
+00:06:36.228 --> 00:06:37.462
+Let's give a name.
+
+134
+00:06:37.656 --> 00:06:39.070
+I will say DB.
+
+135
+00:06:39.810 --> 00:06:40.870
+Just DB.
+
+136
+00:06:42.990 --> 00:06:45.106
+Now let's give some different name like
+
+137
+00:06:45.168 --> 00:06:47.220
+V profile, DB, something like that.
+
+138
+00:06:47.910 --> 00:06:49.978
+I have to export a variable that
+
+139
+00:06:50.004 --> 00:06:52.090
+is mandatory to run this container.
+
+140
+00:06:52.470 --> 00:06:56.470
+So the variable is MYSQL_ROOT_PASSWORD
+
+141
+00:06:58.410 --> 00:07:00.218
+So which is going to set the MySQL
+
+142
+00:07:00.254 --> 00:07:04.702
+root password and we give some value.
+
+143
+00:07:04.896 --> 00:07:08.340
+I will say secret password, something like that.
+
+144
+00:07:08.730 --> 00:07:09.790
+Okay, port number.
+
+145
+00:07:09.840 --> 00:07:12.454
+We know it's going to run the service on 3306.
+
+146
+00:07:12.492 --> 00:07:16.498
+So I'm going to map some port with 3306 port.
+
+147
+00:07:16.644 --> 00:07:21.374
+So I will say 3030 of my host
+
+148
+00:07:21.422 --> 00:07:24.730
+machine maps with 3306 port of the container.
+
+149
+00:07:25.170 --> 00:07:27.420
+Okay, now volume V.
+
+150
+00:07:27.990 --> 00:07:30.566
+Now, first we're going to see bind mount.
+
+151
+00:07:30.698 --> 00:07:33.058
+We'll specify a directory path in our
+
+152
+00:07:33.084 --> 00:07:36.418
+host machine that will be mapped with
+
+153
+00:07:36.444 --> 00:07:39.326
+the container directory /var/lib/mysql.
+
+154
+00:07:39.458 --> 00:07:41.422
+So we need to create the directory and I
+
+155
+00:07:41.436 --> 00:07:43.334
+will do it here itself in the home directory.
+
+156
+00:07:43.382 --> 00:07:47.820
+I will say vprodbdata.
+
+157
+00:07:48.330 --> 00:07:50.230
+Okay, I created that directory.
+
+158
+00:07:50.610 --> 00:07:52.980
+Okay, now let's take the command once again.
+
+159
+00:07:55.990 --> 00:07:59.140
+So the host machine directory and complete path /home/
+
+160
+00:07:59.470 --> 00:08:05.658
+ubuntu/vprodbdata give the complete path and the container
+
+161
+00:08:05.694 --> 00:08:11.270
+directory /var/lib/mysql and then the image name,
+
+162
+00:08:11.320 --> 00:08:15.940
+which is MySQL the tag five seven.
+
+163
+00:08:17.290 --> 00:08:19.502
+Before we execute we're, we have to make sure
+
+164
+00:08:19.576 --> 00:08:21.450
+it is going to run in the background.
+
+165
+00:08:21.510 --> 00:08:23.740
+So we have to give hyphen d option
+
+166
+00:08:24.130 --> 00:08:27.678
+so it runs in the background detached mode.
+
+167
+00:08:27.714 --> 00:08:29.298
+Otherwise it's going to take up our shell
+
+168
+00:08:29.334 --> 00:08:31.120
+and will not be able to do anything.
+
+169
+00:08:32.230 --> 00:08:33.940
+Okay, let's run it now.
+
+170
+00:08:38.710 --> 00:08:39.674
+Continues running.
+
+171
+00:08:39.772 --> 00:08:42.650
+Let's check the directory vprodbdata.
+
+172
+00:08:42.820 --> 00:08:45.110
+And you should see now all the data
+
+173
+00:08:45.160 --> 00:08:49.070
+from /var/lib/mysql directory of the container.
+
+174
+00:08:50.050 --> 00:08:53.690
+You can log into this container docker exec
+
+175
+00:08:54.850 --> 00:09:00.830
+and let's give the container name bin.
+
+176
+00:09:03.350 --> 00:09:07.350
+So if you log in, we go to /var/lib/mysql.
+
+177
+00:09:09.990 --> 00:09:12.298
+You see exactly same data, right?
+
+178
+00:09:12.324 --> 00:09:15.862
+So this directory, this data is now stored in
+
+179
+00:09:15.876 --> 00:09:21.120
+the host machine directory with pro DB coming out.
+
+180
+00:09:23.130 --> 00:09:24.506
+So this is bind mount.
+
+181
+00:09:24.578 --> 00:09:27.734
+Now, even if I happen to delete
+
+182
+00:09:27.782 --> 00:09:30.130
+this container, so I'll stop the container
+
+183
+00:09:32.370 --> 00:09:34.930
+and I will also delete the container.
+
+184
+00:09:38.950 --> 00:09:42.520
+And let's check vprodbdata still there.
+
+185
+00:09:42.850 --> 00:09:47.130
+Bind mount is mostly used to inject data from host
+
+186
+00:09:47.190 --> 00:09:52.110
+machine to the container, like code developers are writing.
+
+187
+00:09:52.290 --> 00:09:54.326
+So while the container is running, they can do
+
+188
+00:09:54.388 --> 00:09:57.150
+all the code changes in the host machine directory
+
+189
+00:09:57.210 --> 00:09:59.370
+and that will be reflected in the container.
+
+190
+00:09:59.550 --> 00:10:01.538
+But for preserving data purpose, the
+
+191
+00:10:01.564 --> 00:10:04.950
+better option is volumes, docker volumes.
+
+192
+00:10:05.130 --> 00:10:10.550
+So docker volumes if you run volume,
+
+193
+00:10:11.590 --> 00:10:13.394
+yeah, it should show you other options.
+
+194
+00:10:13.552 --> 00:10:14.750
+Docker volume create.
+
+195
+00:10:14.800 --> 00:10:17.150
+For example, let's give a volume name.
+
+196
+00:10:17.320 --> 00:10:22.986
+I'll give my DB data, which creates a volume.
+
+197
+00:10:23.118 --> 00:10:25.910
+You can say docker volume LS.
+
+198
+00:10:27.490 --> 00:10:27.950
+All right.
+
+199
+00:10:28.000 --> 00:10:30.278
+Now let's take our command once again back. Now.
+
+200
+00:10:30.304 --> 00:10:31.458
+I have removed the container.
+
+201
+00:10:31.494 --> 00:10:34.790
+Okay, if you have not removed the container, then
+
+202
+00:10:34.840 --> 00:10:36.818
+while creating the container, you make sure you give
+
+203
+00:10:36.844 --> 00:10:39.950
+a different name and different host port.
+
+204
+00:10:40.000 --> 00:10:41.670
+Otherwise there will be a conflict.
+
+205
+00:10:41.850 --> 00:10:44.702
+I removed the container, so it's fine.
+
+206
+00:10:44.836 --> 00:10:46.070
+I'm rerunning it.
+
+207
+00:10:46.180 --> 00:10:47.942
+It's going to create a new container now with
+
+208
+00:10:47.956 --> 00:10:52.410
+the same name and host port for volume.
+
+209
+00:10:52.590 --> 00:10:57.182
+Instead of giving the entire path of the
+
+210
+00:10:57.196 --> 00:11:00.182
+directory, we'll just give the volume name.
+
+211
+00:11:00.376 --> 00:11:04.190
+So I'll just give my DB data that's more convenient.
+
+212
+00:11:04.930 --> 00:11:06.700
+Let's run this.
+
+213
+00:11:08.530 --> 00:11:08.966
+Okay.
+
+214
+00:11:09.028 --> 00:11:15.758
+Docker PS okay container is running now as
+
+215
+00:11:15.784 --> 00:11:17.198
+I told you, it should have stored the
+
+216
+00:11:17.224 --> 00:11:22.370
+data in VAR lib docker volumes Directory. Okay.
+
+217
+00:11:22.420 --> 00:11:24.434
+In the Volumes directory, you should find
+
+218
+00:11:24.592 --> 00:11:28.660
+your volume directory with the same name.
+
+219
+00:11:30.130 --> 00:11:31.718
+And inside that you should
+
+220
+00:11:31.744 --> 00:11:33.710
+have underscore Data Directory.
+
+221
+00:11:34.150 --> 00:11:35.474
+And inside this, you can see
+
+222
+00:11:35.512 --> 00:11:38.670
+your data from your MySQL container.
+
+223
+00:11:38.850 --> 00:11:41.438
+Again, if I happen to delete that container, the data is
+
+224
+00:11:41.464 --> 00:11:44.298
+still in my host machine in a volume, I can attach
+
+225
+00:11:44.334 --> 00:11:46.638
+it to the new container when it gets created.
+
+226
+00:11:46.794 --> 00:11:51.374
+And this use case for the volume option, most
+
+227
+00:11:51.412 --> 00:11:53.870
+of the use cases you want to preserve data
+
+228
+00:11:53.920 --> 00:11:56.450
+of the container to our host machine.
+
+229
+00:11:59.030 --> 00:12:02.314
+Now, about docker Inspect Command docker Inspect Command
+
+230
+00:12:02.362 --> 00:12:04.642
+you can run it also for your container
+
+231
+00:12:04.726 --> 00:12:09.402
+web vprodb that's our container docker inspector on
+
+232
+00:12:09.416 --> 00:12:12.174
+a container will give almost similar information with
+
+233
+00:12:12.212 --> 00:12:15.334
+more about container in JSON format.
+
+234
+00:12:15.382 --> 00:12:18.990
+So the container ID when it was created
+
+235
+00:12:19.370 --> 00:12:22.470
+path so this is the script it's running
+
+236
+00:12:22.640 --> 00:12:27.500
+arguments MySQL D status is running running true.
+
+237
+00:12:27.830 --> 00:12:30.418
+Some other information process ID in your host
+
+238
+00:12:30.454 --> 00:12:34.162
+machine from which image it got created.
+
+239
+00:12:34.186 --> 00:12:39.560
+So image ID log bar that's where it's storing the log.
+
+240
+00:12:41.270 --> 00:12:44.182
+So we can really retrieve the log of this container.
+
+241
+00:12:44.266 --> 00:12:48.634
+If you run the command docker logs and the container
+
+242
+00:12:48.682 --> 00:12:51.990
+name, we can see the logs of the container.
+
+243
+00:12:52.490 --> 00:12:54.378
+These logs are basically the one that is
+
+244
+00:12:54.404 --> 00:12:56.298
+getting generated by the process we run.
+
+245
+00:12:56.324 --> 00:12:58.186
+The process generates some output.
+
+246
+00:12:58.318 --> 00:13:01.078
+That's what you're seeing when you do docker logs.
+
+247
+00:13:01.114 --> 00:13:03.982
+Command docker logs and the container
+
+248
+00:13:04.006 --> 00:13:07.098
+name, which is good for troubleshooting. Right?
+
+249
+00:13:07.184 --> 00:13:08.970
+Let's go back to the Inspect Command.
+
+250
+00:13:12.990 --> 00:13:13.498
+Okay.
+
+251
+00:13:13.584 --> 00:13:17.554
+Binds so my DB data volume is bind with /var/lib/mysql
+
+252
+00:13:17.592 --> 00:13:20.578
+when you're troubleshooting or when you want to
+
+253
+00:13:20.604 --> 00:13:23.038
+know where is it really storing the data, you can
+
+254
+00:13:23.064 --> 00:13:26.878
+find that out through Binds, port binding likewise, right?
+
+255
+00:13:26.964 --> 00:13:31.200
+3306 is mapped with host port 33rd.
+
+256
+00:13:34.090 --> 00:13:35.534
+There's no quota, nothing set.
+
+257
+00:13:35.572 --> 00:13:37.922
+So memory zero means it can use as
+
+258
+00:13:37.936 --> 00:13:39.882
+much as memory, as much as CPU.
+
+259
+00:13:39.906 --> 00:13:47.958
+It wants more about mount option amount, information,
+
+260
+00:13:48.104 --> 00:13:53.478
+type, volume, volume name, location where it has
+
+261
+00:13:53.504 --> 00:13:57.750
+storing destination that's source, that's the destination.
+
+262
+00:13:58.130 --> 00:14:02.360
+Read write mode true exposed ports again,
+
+263
+00:14:02.810 --> 00:14:05.262
+environment variables that are set and you
+
+264
+00:14:05.276 --> 00:14:06.778
+can see all the environment variables.
+
+265
+00:14:06.814 --> 00:14:09.646
+The one that we have set CMD
+
+266
+00:14:09.778 --> 00:14:13.026
+what command it is running entry point.
+
+267
+00:14:13.148 --> 00:14:15.078
+This is the script that it runs first
+
+268
+00:14:15.224 --> 00:14:17.710
+and then it passed this as an argument.
+
+269
+00:14:17.890 --> 00:14:20.358
+So when you say docker run, it's going to actually run
+
+270
+00:14:20.384 --> 00:14:23.970
+the script and pass this as an argument to it.
+
+271
+00:14:24.140 --> 00:14:26.720
+That's how the entry point and CMD works together.
+
+272
+00:14:28.610 --> 00:14:31.338
+And also it has the IP address.
+
+273
+00:14:31.484 --> 00:14:34.758
+As you're talking about a container having an IP address,
+
+274
+00:14:34.904 --> 00:14:36.814
+and you can really ping to this IP also
+
+275
+00:14:36.862 --> 00:14:46.080
+Also that's replying back.
+
+276
+00:14:49.330 --> 00:14:51.266
+Okay, so this IP you will not be
+
+277
+00:14:51.268 --> 00:14:53.634
+able to connect out of your host machine.
+
+278
+00:14:53.802 --> 00:14:57.258
+This is a network inside the host machine.
+
+279
+00:14:57.414 --> 00:14:59.930
+So if you're already in the host machine, you
+
+280
+00:14:59.980 --> 00:15:02.118
+can use this IP to connect to your container.
+
+281
+00:15:02.154 --> 00:15:04.382
+Also, it's running MySQL service, so we
+
+282
+00:15:04.396 --> 00:15:07.802
+can use MySQL client, MySQL -h
+
+283
+00:15:07.996 --> 00:15:10.310
+Let's give the IP address of the container.
+
+284
+00:15:11.230 --> 00:15:15.194
+The user is root, not admin p.
+
+285
+00:15:15.232 --> 00:15:17.750
+And we have given password. Secret.
+
+286
+00:15:19.270 --> 00:15:23.620
+I have set my Secret Pass.
+
+287
+00:15:25.030 --> 00:15:26.500
+Okay, let's log in.
+
+288
+00:15:28.090 --> 00:15:30.530
+No, I think I've given the wrong password.
+
+289
+00:15:36.470 --> 00:15:38.562
+I need to check the password. Wait a second.
+
+290
+00:15:38.636 --> 00:15:39.922
+Let's do Docker Inspector.
+
+291
+00:15:39.946 --> 00:15:48.754
+It Secret Pass.
+
+292
+00:15:48.792 --> 00:15:50.182
+No, it was just Secret Pass.
+
+293
+00:15:50.256 --> 00:15:51.970
+I was giving wrong password.
+
+294
+00:15:52.350 --> 00:15:54.000
+Okay, let's try it once again.
+
+295
+00:15:57.130 --> 00:15:58.660
+Secret Pass.
+
+296
+00:15:59.470 --> 00:16:03.590
+Yes, I'm in show databases.
+
+297
+00:16:05.990 --> 00:16:06.740
+Right?
+
+298
+00:16:08.210 --> 00:16:10.294
+Okay, so you have not only just learned
+
+299
+00:16:10.342 --> 00:16:12.934
+docker volumes, you have learned Docker Inspect command.
+
+300
+00:16:12.982 --> 00:16:15.078
+How to read the data, how to find the
+
+301
+00:16:15.104 --> 00:16:18.942
+right command, right option for your container to run.
+
+302
+00:16:19.016 --> 00:16:20.722
+You Docker Inspect to the image.
+
+303
+00:16:20.746 --> 00:16:23.720
+You can find the volume, path, port number.
+
+304
+00:16:24.950 --> 00:16:26.178
+All right, once you're done with
+
+305
+00:16:26.204 --> 00:16:27.534
+this exercise, do the clean up.
+
+306
+00:16:27.572 --> 00:16:30.186
+Make sure you keep cleaning things.
+
+307
+00:16:30.308 --> 00:16:32.082
+Otherwise you'll end up having
+
+308
+00:16:32.216 --> 00:16:33.574
+many containers and images.
+
+309
+00:16:33.622 --> 00:16:34.606
+And easy to instance.
+
+310
+00:16:34.678 --> 00:16:36.978
+Just eight GB volume and T two
+
+311
+00:16:37.004 --> 00:16:38.950
+micro may go out of resource.
+
+312
+00:16:39.130 --> 00:16:43.940
+So I'm going to clean this docker, stop
+
+313
+00:16:45.890 --> 00:16:51.150
+the container, and let's remove the container.
+
+314
+00:16:57.630 --> 00:16:59.126
+And let's remove the image.
+
+315
+00:16:59.198 --> 00:17:02.640
+MySQL five dot seven.
+
+316
+00:17:05.410 --> 00:17:07.021
+Alright, that's all in this video.
+
+317
+00:17:07.096 --> 00:17:08.240
+I will see you in the next one.

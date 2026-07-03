@@ -1,0 +1,425 @@
+WEBVTT
+
+1
+00:00:00.850 --> 00:00:03.270
+Now we'll talk about modules.
+
+2
+00:00:03.590 --> 00:00:05.830
+A module will be a python script
+
+3
+00:00:05.950 --> 00:00:08.638
+or a package that has some functions
+
+4
+00:00:08.674 --> 00:00:11.266
+or methods available in that like random.
+
+5
+00:00:11.398 --> 00:00:13.674
+So I say import random and then I can
+
+6
+00:00:13.712 --> 00:00:18.406
+use methods from that random.randint or random.choice.
+
+7
+00:00:18.598 --> 00:00:20.298
+So random is the module and
+
+8
+00:00:20.324 --> 00:00:21.894
+that's the method inside that.
+
+9
+00:00:22.052 --> 00:00:23.638
+Now this module already exists.
+
+10
+00:00:23.734 --> 00:00:25.810
+What if I want to create my own modules?
+
+11
+00:00:25.870 --> 00:00:28.770
+Which is a very good idea when you have
+
+12
+00:00:28.820 --> 00:00:31.254
+some functions which you regularly use, it's better.
+
+13
+00:00:31.292 --> 00:00:34.690
+You put them into modules or a module
+
+14
+00:00:34.870 --> 00:00:36.534
+and then whenever you need it, you can
+
+15
+00:00:36.572 --> 00:00:39.082
+import those modules and call the methods.
+
+16
+00:00:39.226 --> 00:00:41.910
+So we'll see now how to write our own module.
+
+17
+00:00:42.230 --> 00:00:43.580
+It's very simple.
+
+18
+00:00:44.030 --> 00:00:46.050
+I'm just going to create a script.
+
+19
+00:00:47.750 --> 00:00:51.330
+I will name it as my modules.
+
+20
+00:00:52.850 --> 00:00:54.870
+You know what, let's give a different name.
+
+21
+00:00:55.040 --> 00:00:57.330
+I'll just name it as Modern.
+
+22
+00:00:57.770 --> 00:01:00.894
+Modern like Modern or Modern. Okay.
+
+23
+00:01:00.932 --> 00:01:02.840
+No Hyphen, nothing, just the name.
+
+24
+00:01:03.950 --> 00:01:06.042
+And I will take all my functions that
+
+25
+00:01:06.056 --> 00:01:12.030
+I have written, like this one, vaccine Feedback
+
+26
+00:01:12.590 --> 00:01:16.400
+and let's put variable length argument one.
+
+27
+00:01:17.150 --> 00:01:19.700
+So only the function, OK, not the calling.
+
+28
+00:01:20.810 --> 00:01:21.920
+That's the second.
+
+29
+00:01:23.090 --> 00:01:24.860
+Let's take the third one.
+
+30
+00:01:33.730 --> 00:01:34.094
+Okay.
+
+31
+00:01:34.132 --> 00:01:39.710
+I will also say here import random.
+
+32
+00:01:41.230 --> 00:01:45.522
+So this is my module file and I'm
+
+33
+00:01:45.546 --> 00:01:47.558
+not calling the function from here itself.
+
+34
+00:01:47.644 --> 00:01:48.770
+I'm going to call it from
+
+35
+00:01:48.820 --> 00:01:51.520
+a different script, a different program.
+
+36
+00:01:52.090 --> 00:01:54.590
+So I will create another script.
+
+37
+00:01:55.270 --> 00:01:57.390
+I will name it simply Caller.
+
+38
+00:01:57.510 --> 00:02:02.534
+Okay, name it anything, maybe have something
+
+39
+00:02:02.572 --> 00:02:04.360
+that already exists with that name.
+
+40
+00:02:05.710 --> 00:02:12.510
+Will let me just call Modern.
+
+41
+00:02:14.870 --> 00:02:16.782
+Okay, in order to call the functions that is
+
+42
+00:02:16.796 --> 00:02:20.898
+in my modern module, I have to import it. Import.
+
+43
+00:02:21.044 --> 00:02:22.890
+I'm going to give the name Modern.
+
+44
+00:02:24.590 --> 00:02:27.270
+Not PY, just the name.
+
+45
+00:02:27.440 --> 00:02:29.178
+And if you want, you can
+
+46
+00:02:29.264 --> 00:02:31.726
+just type here Modern, say dot.
+
+47
+00:02:31.918 --> 00:02:34.854
+It should show you all the functions available in that.
+
+48
+00:02:34.892 --> 00:02:35.130
+Okay.
+
+49
+00:02:35.180 --> 00:02:39.920
+Or you can just run a dir method on that.
+
+50
+00:02:40.730 --> 00:02:44.180
+Pass it in dir and let's run it.
+
+51
+00:02:47.430 --> 00:02:49.870
+I have to print it, sorry, print.
+
+52
+00:02:57.970 --> 00:03:00.902
+So there's some prebuilt modules like doc which
+
+53
+00:03:00.916 --> 00:03:03.798
+is going to return the doc string file,
+
+54
+00:03:03.834 --> 00:03:08.018
+the name of the file name package spec.
+
+55
+00:03:08.104 --> 00:03:09.278
+Yeah, that's the one.
+
+56
+00:03:09.364 --> 00:03:13.550
+Order Food, time activity, vaccine Feedback
+
+57
+00:03:14.950 --> 00:03:16.780
+OK, it's time to call them.
+
+58
+00:03:17.230 --> 00:03:18.700
+Let's comment this.
+
+59
+00:03:20.110 --> 00:03:26.906
+So I'll see modern dot, order Food I'll pass
+
+60
+00:03:26.968 --> 00:03:30.520
+all the same values that I used previously here.
+
+61
+00:03:38.750 --> 00:03:40.460
+Okay, let's see how it works.
+
+62
+00:03:43.050 --> 00:03:43.800
+Nice.
+
+63
+00:03:44.730 --> 00:03:46.334
+So I have to give the module
+
+64
+00:03:46.382 --> 00:03:49.546
+name dot and the function name, right?
+
+65
+00:03:49.608 --> 00:03:50.950
+vaccine Feedback.
+
+66
+00:03:57.010 --> 00:03:59.090
+Let's call the last one Modern.
+
+67
+00:04:13.490 --> 00:04:15.054
+Okay, so that's one way of
+
+68
+00:04:15.092 --> 00:04:17.250
+calling your functions in the module.
+
+69
+00:04:17.570 --> 00:04:21.466
+You can import all the functions
+
+70
+00:04:21.538 --> 00:04:24.440
+instead of importing the module name.
+
+71
+00:04:25.370 --> 00:04:27.740
+So let me give a comment over here.
+
+72
+00:04:29.450 --> 00:04:33.090
+So you can do this from the module name.
+
+73
+00:04:33.140 --> 00:04:34.254
+You can say import.
+
+74
+00:04:34.412 --> 00:04:37.998
+And you can give a name of a method, like
+
+75
+00:04:38.024 --> 00:04:40.926
+if you only want to call that particular method, right?
+
+76
+00:04:40.988 --> 00:04:42.320
+Let's say Order food.
+
+77
+00:04:42.650 --> 00:04:43.590
+Okay, like that.
+
+78
+00:04:43.640 --> 00:04:47.900
+Or you can say Star which will import everything.
+
+79
+00:04:49.310 --> 00:04:51.320
+Okay, let's comment this.
+
+80
+00:04:57.750 --> 00:04:58.318
+You know what?
+
+81
+00:04:58.344 --> 00:05:00.120
+Let's create another script for this.
+
+82
+00:05:00.510 --> 00:05:01.680
+Let's go back.
+
+83
+00:05:06.970 --> 00:05:08.522
+Okay, let's keep this as it
+
+84
+00:05:08.536 --> 00:05:12.590
+is and let's create another script.
+
+85
+00:05:17.870 --> 00:05:19.182
+Maybe I'm creating it at the
+
+86
+00:05:19.196 --> 00:05:21.680
+wrong place to create it here.
+
+87
+00:05:25.290 --> 00:05:26.470
+Okay, this should be good.
+
+88
+00:05:26.520 --> 00:05:28.200
+Okay, create is at that level.
+
+89
+00:05:30.790 --> 00:05:36.220
+I'll give this name call modern two.
+
+90
+00:05:37.390 --> 00:05:38.666
+Okay, so here I can see
+
+91
+00:05:38.728 --> 00:05:44.080
+from the module name import Star.
+
+92
+00:05:44.530 --> 00:05:47.786
+Then I can just directly give the method name
+
+93
+00:05:47.848 --> 00:05:52.610
+like order food and I can pass the values.
+
+94
+00:06:00.350 --> 00:06:04.374
+So now I don't have to say modern dot the method name.
+
+95
+00:06:04.412 --> 00:06:06.260
+I can directly give the method name.
+
+96
+00:06:07.070 --> 00:06:08.934
+So these are two ways of
+
+97
+00:06:09.092 --> 00:06:11.902
+calling your functions in a module.
+
+98
+00:06:12.046 --> 00:06:14.682
+Either you say import the module name then
+
+99
+00:06:14.696 --> 00:06:17.190
+you say dot and the function name.
+
+100
+00:06:17.360 --> 00:06:19.842
+Or you can say from modern import a particular
+
+101
+00:06:19.916 --> 00:06:22.640
+function or all the functions like Star.
+
+102
+00:06:23.090 --> 00:06:24.558
+Okay, then calling becomes easy.
+
+103
+00:06:24.584 --> 00:06:26.634
+You just give the name of the method so
+
+104
+00:06:26.672 --> 00:06:28.950
+all your functions will be loaded in the memory.
+
+105
+00:06:32.610 --> 00:06:35.350
+So that is all in the modules.
+
+106
+00:06:35.670 --> 00:06:36.880
+I will see you in the next video.

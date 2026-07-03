@@ -1,0 +1,45 @@
+WEBVTT
+
+0
+00:10.490 --> 00:11.720
+Hello and welcome.
+
+1
+00:12.620 --> 00:15.600
+This is a follow up video from the previous project.
+
+2
+00:15.950 --> 00:20.260
+In this video, we will see how to set up this entire stack automatically.
+
+3
+00:21.020 --> 00:23.090
+We are going to run just vagrant up.
+
+4
+00:23.090 --> 00:23.600
+command
+
+5
+00:23.990 --> 00:26.540
+All the VMS will be provisioned automatically.
+
+6
+00:26.540 --> 00:33.080
+And also all the services Nginx, Tomcat, Rabbitt, MQ, Memcache and MySQL will be also provisioned
+
+7
+00:33.080 --> 00:33.860
+automatically.
+
+8
+00:34.920 --> 00:42.030
+So a similar design as the previous project, except here, will be having bash scripts that will get
+
+9
+00:42.030 --> 00:43.380
+executed automatically.
+
+10
+00:44.440 --> 00:48.490
+And these bash scripts will provision all our services, the entire stack.

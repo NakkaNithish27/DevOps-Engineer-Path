@@ -1,0 +1,409 @@
+WEBVTT
+
+00:00.210 --> 00:01.650
+Instructor: Hello, and welcome.
+
+00:01.650 --> 00:03.300
+In this lecture, we are going to see
+
+00:03.300 --> 00:07.500
+how to install softwares or tools on a computer
+
+00:07.500 --> 00:10.320
+that we will need in this course.
+
+00:10.320 --> 00:12.600
+We are not going to install the software in the boring way,
+
+00:12.600 --> 00:14.970
+finding the software, downloading, installing.
+
+00:14.970 --> 00:17.520
+No, we are going to do it through command line.
+
+00:17.520 --> 00:20.070
+Windows users are going to use Chocolatey
+
+00:20.070 --> 00:23.430
+and macOS users are going to use Brew.
+
+00:23.430 --> 00:25.320
+So let's first see all the commands.
+
+00:25.320 --> 00:28.209
+So from your browser, open this URL,
+
+00:28.209 --> 00:33.209
+github.com/hkhcoder/vprofile-project.
+
+00:33.900 --> 00:38.100
+This is URL of our repository or source code,
+
+00:38.100 --> 00:39.900
+project source code.
+
+00:39.900 --> 00:42.600
+And in this, you have many branches.
+
+00:42.600 --> 00:47.010
+Click on this dropdown and find the branch called prereqs.
+
+00:47.010 --> 00:48.630
+Click on that branch.
+
+00:48.630 --> 00:50.430
+Here, you see four documents.
+
+00:50.430 --> 00:53.040
+They're same documents, but different formats.
+
+00:53.040 --> 00:55.950
+If you need PDF, you can download it on your machine
+
+00:55.950 --> 00:58.620
+or you can just view from here.
+
+00:58.620 --> 01:00.960
+Just click on this MD file.
+
+01:00.960 --> 01:02.460
+You can also download the document
+
+01:02.460 --> 01:04.503
+from this lecture resource.
+
+01:05.430 --> 01:08.610
+So for Windows user, you need to open PowerShell
+
+01:08.610 --> 01:13.610
+as administrator, macOS user can open Terminal.
+
+01:13.800 --> 01:16.890
+All you need to do is execute these commands.
+
+01:16.890 --> 01:19.170
+So first you have commands for the Windows user
+
+01:19.170 --> 01:22.293
+and then you have commands for the macOS user.
+
+01:23.220 --> 01:24.990
+If you're using MacBook macOS,
+
+01:24.990 --> 01:27.720
+then open your Terminal and execute this command.
+
+01:27.720 --> 01:29.610
+You can just copy it from here
+
+01:29.610 --> 01:31.290
+and then execute this command.
+
+01:31.290 --> 01:32.910
+When you execute these two commands,
+
+01:32.910 --> 01:35.730
+you should see a -k printed.
+
+01:35.730 --> 01:36.870
+When you execute this command,
+
+01:36.870 --> 01:40.110
+you will see -k printed on your Terminal.
+
+01:40.110 --> 01:40.943
+You're good.
+
+01:40.943 --> 01:43.140
+And then you can start using the these commands
+
+01:43.140 --> 01:45.120
+to install the softwares.
+
+01:45.120 --> 01:47.580
+And please don't worry about what are these tools,
+
+01:47.580 --> 01:49.260
+how to use them.
+
+01:49.260 --> 01:51.510
+I know you will have these kinds of questions,
+
+01:51.510 --> 01:55.530
+but in due time, you will be master of these tools.
+
+01:55.530 --> 01:58.170
+Before we start executing these commands,
+
+01:58.170 --> 02:01.410
+I want you to verify something.
+
+02:01.410 --> 02:04.240
+So Windows user, just search for PowerShell
+
+02:05.130 --> 02:07.980
+and click on Run as Administrator,
+
+02:07.980 --> 02:10.203
+macOS user, just open your Terminal.
+
+02:14.910 --> 02:17.310
+Okay, so Windows user run this command,
+
+02:17.310 --> 02:22.310
+choco list, macOS user use brew list.
+
+02:22.380 --> 02:25.113
+B-R-E-W list.
+
+02:27.630 --> 02:29.730
+You should see the list of installed software
+
+02:29.730 --> 02:31.170
+through Chocolatey.
+
+02:31.170 --> 02:35.460
+Now I want you to run this command, mvn -version
+
+02:35.460 --> 02:37.623
+and java -version.
+
+02:39.450 --> 02:41.310
+If you get error like this, well and good,
+
+02:41.310 --> 02:43.590
+you can continue and start installing your softwares.
+
+02:43.590 --> 02:45.900
+But if you see some versions over here
+
+02:45.900 --> 02:50.250
+of Maven or Java, then you need to uninstall them first.
+
+02:50.250 --> 02:53.950
+So for Windows user, you can say choco uninstall
+
+02:55.410 --> 02:56.670
+and the name of the package.
+
+02:56.670 --> 03:01.053
+So from the list you can search for Maven, M-A-V-E-N.
+
+03:02.550 --> 03:04.500
+Likewise, for Java also.
+
+03:04.500 --> 03:06.570
+Now Java package name might be different,
+
+03:06.570 --> 03:11.010
+like JDK 17 or Corretto JD 11, something like that.
+
+03:11.010 --> 03:13.203
+So make sure you get the package name.
+
+03:14.190 --> 03:15.780
+Right, so this is the package name.
+
+03:15.780 --> 03:18.180
+For example, this vscode is the package name.
+
+03:18.180 --> 03:19.013
+This is the version.
+
+03:19.013 --> 03:20.910
+So whatever you see in the package name,
+
+03:20.910 --> 03:21.990
+you have to do here.
+
+03:21.990 --> 03:24.570
+Choco uninstall and the package name.
+
+03:24.570 --> 03:27.960
+MacOS, same thing, brew uninstall and the package name.
+
+03:27.960 --> 03:31.260
+So with choco list or brew list,
+
+03:31.260 --> 03:33.270
+you will get the list of the packages,
+
+03:33.270 --> 03:35.190
+so it's easy for you to uninstall.
+
+03:35.190 --> 03:36.750
+Once you have it uninstalled,
+
+03:36.750 --> 03:37.920
+we can continue with the lecture
+
+03:37.920 --> 03:40.290
+and start installing the tools.
+
+03:40.290 --> 03:41.790
+All right, so come to the document
+
+03:41.790 --> 03:44.973
+and start installing all these tools one by one.
+
+03:45.900 --> 03:47.580
+Be on your respective terminal.
+
+03:47.580 --> 03:49.800
+PowerShell for Windows user,
+
+03:49.800 --> 03:51.870
+Terminal for macOS.
+
+03:51.870 --> 03:53.280
+Copy the command.
+
+03:53.280 --> 03:55.830
+First, choco install virtualbox,
+
+03:55.830 --> 03:57.600
+and whatever version you see over here,
+
+03:57.600 --> 03:59.220
+copy the command as it is.
+
+03:59.220 --> 04:02.430
+You may see a different version in the document.
+
+04:02.430 --> 04:05.643
+Whatever version you see, simply copy that and run it.
+
+04:06.660 --> 04:09.633
+So for PowerShell, just right click and paste.
+
+04:11.430 --> 04:12.780
+Click Enter.
+
+04:12.780 --> 04:13.613
+It will take some time,
+
+04:13.613 --> 04:15.510
+it might ask you question yes or no.
+
+04:15.510 --> 04:17.373
+You have to say Yes to install.
+
+04:18.630 --> 04:20.080
+Let's go to the next command.
+
+04:21.000 --> 04:22.650
+So that might take some time.
+
+04:22.650 --> 04:25.260
+So wait until that command completes.
+
+04:25.260 --> 04:26.910
+Once again, for macOS user,
+
+04:26.910 --> 04:29.880
+you have to use these commands, the brew commands
+
+04:29.880 --> 04:32.397
+instead of choco commands.
+
+04:32.397 --> 04:33.930
+Okay, VirtualBox is installed.
+
+04:33.930 --> 04:35.943
+Next, I'm going to install Vagrant.
+
+04:41.340 --> 04:44.193
+This will take long time Vagrant installation.
+
+04:46.830 --> 04:48.180
+So Vagrant is installed for me.
+
+04:48.180 --> 04:49.740
+I'm going for the next one, Git.
+
+04:49.740 --> 04:52.347
+Choco install git.
+
+04:52.347 --> 04:54.483
+Git is installed, go for the next one.
+
+04:55.500 --> 04:58.233
+Corretto 17, that's the Java 17.
+
+05:04.290 --> 05:06.417
+Installed, go for next.
+
+05:06.417 --> 05:07.250
+Maven.
+
+05:13.890 --> 05:15.900
+Maven is also done.
+
+05:15.900 --> 05:16.733
+Next,
+
+05:19.640 --> 05:20.883
+AWS CLI.
+
+05:26.093 --> 05:27.483
+AWS CLI installed.
+
+05:28.440 --> 05:29.340
+IntelliJ.
+
+05:29.340 --> 05:33.360
+Now you can choose IntelliJ or VSCode.
+
+05:33.360 --> 05:34.560
+Most of the time in the course,
+
+05:34.560 --> 05:37.890
+I will be using VSCode, but for Java requirement,
+
+05:37.890 --> 05:40.890
+we will be using IntelliJ also.
+
+05:40.890 --> 05:42.840
+But any case, you can use either of it.
+
+05:42.840 --> 05:46.683
+I recommend VSCode, or I'm installing both here.
+
+05:51.660 --> 05:53.433
+Next is VSCode.
+
+05:58.860 --> 06:00.600
+VSCode is already installed for me.
+
+06:00.600 --> 06:03.390
+I'm going for the next one, sublime.
+
+06:03.390 --> 06:05.310
+Let me refresh this page.
+
+06:05.310 --> 06:07.863
+Yeah, that's the command, installing Sublime3.
+
+06:13.290 --> 06:15.783
+And sublime3 is also installed.
+
+06:18.420 --> 06:22.093
+Okay, so now you should have all these tools installed.
+
+06:22.093 --> 06:25.800
+Oracle VM VirtualBox, Git Bash, Vagrant,
+
+06:25.800 --> 06:28.770
+Chocolatey or Brew based on your operating system.
+
+06:28.770 --> 06:33.600
+JDK 8, Maven, IntelliJ, and Sublime Text editor.
+
+06:33.600 --> 06:36.060
+If you have these tools now ready,
+
+06:36.060 --> 06:38.880
+then we can get on to the next thing,
+
+06:38.880 --> 06:41.523
+which is signing up at few accounts.

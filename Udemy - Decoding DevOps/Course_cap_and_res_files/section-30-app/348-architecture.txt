@@ -1,0 +1,502 @@
+WEBVTT
+
+00:00.360 --> 00:02.760
+Instructor: Hello, and welcome.
+
+00:02.760 --> 00:05.280
+In this lecture, we will understand the architecture
+
+00:05.280 --> 00:09.210
+of our application setup on Kubernetes cluster.
+
+00:09.210 --> 00:10.860
+And with that, we'll also take note
+
+00:10.860 --> 00:14.190
+of what are resources we need to create
+
+00:14.190 --> 00:15.723
+on the Kubernetes cluster.
+
+00:16.650 --> 00:18.180
+It's highly important for you
+
+00:18.180 --> 00:20.370
+to do Containerization project
+
+00:20.370 --> 00:22.901
+before you do this project.
+
+00:22.901 --> 00:24.390
+In Containerization project,
+
+00:24.390 --> 00:29.390
+we created Docker images for Tomcat,
+
+00:29.910 --> 00:33.180
+database MySQL, and Nginx.
+
+00:33.180 --> 00:37.080
+We will be using those images in this project.
+
+00:37.080 --> 00:42.080
+So I'm going to start by the database MySQL service.
+
+00:42.510 --> 00:45.930
+So in Kubernetes, if you want to run a database
+
+00:45.930 --> 00:49.290
+or any such service like that, you need to have a pod.
+
+00:49.290 --> 00:51.723
+So we will be having a database pod.
+
+00:52.620 --> 00:56.190
+Likewise, we will have a Memcache pod, RabbitMQ pod,
+
+00:56.190 --> 00:58.020
+and Tomcat pod.
+
+00:58.020 --> 00:59.670
+This pod will have the container
+
+00:59.670 --> 01:03.390
+that will be executed from the images that we mentioned.
+
+01:03.390 --> 01:05.973
+So for Tomcat and for database MySQL,
+
+01:07.260 --> 01:09.450
+we will use the images that we created
+
+01:09.450 --> 01:12.097
+in Containerization project.
+
+01:12.097 --> 01:16.290
+RabbitMQ and Memcache will use official Docker images.
+
+01:16.290 --> 01:17.580
+Now here I'm showing pod,
+
+01:17.580 --> 01:19.590
+but we are not going to directly run the pod,
+
+01:19.590 --> 01:22.140
+we will be having deployment.
+
+01:22.140 --> 01:25.590
+So we have to write a deployment manifest
+
+01:25.590 --> 01:27.496
+where we mention the pod information.
+
+01:27.496 --> 01:30.572
+So we will have one deployment of Tomcat,
+
+01:30.572 --> 01:32.959
+one deployment of RabbitMQ,
+
+01:32.959 --> 01:36.084
+one for Memcache, and one for database.
+
+01:36.084 --> 01:38.384
+And in that we mentioned the pod information,
+
+01:38.384 --> 01:41.580
+and the pod will have the container information.
+
+01:41.580 --> 01:44.340
+In Kubernetes, the pod do not directly interact
+
+01:44.340 --> 01:47.670
+or connect with each other, we use service.
+
+01:47.670 --> 01:49.080
+For internal communication,
+
+01:49.080 --> 01:52.080
+we use service of type ClusterIP.
+
+01:52.080 --> 01:53.970
+So if Tomcat pod
+
+01:53.970 --> 01:56.460
+or the container running inside the Tomcat pod
+
+01:56.460 --> 01:58.440
+needs to connect to the database,
+
+01:58.440 --> 02:01.980
+it is going to connect to the database service,
+
+02:01.980 --> 02:03.690
+which acts like a load balancer.
+
+02:03.690 --> 02:05.460
+That service is going to route the request
+
+02:05.460 --> 02:09.540
+to the database pod, which is running in the deployment.
+
+02:09.540 --> 02:11.970
+Now, database is a stateful application,
+
+02:11.970 --> 02:15.660
+stateful means, which stores and retrieves the data,
+
+02:15.660 --> 02:18.090
+which needs to access the data in the runtime.
+
+02:18.090 --> 02:20.100
+That kind of application is called a stateful.
+
+02:20.100 --> 02:24.062
+So database MySQL, which we will be using, is stateful,
+
+02:24.062 --> 02:27.603
+and the MySQL service stores the data in this location,
+
+02:27.603 --> 02:31.050
+/var/lib/mysql, this path, by default.
+
+02:31.050 --> 02:34.200
+Now, if the pod gets deleted or recreated,
+
+02:34.200 --> 02:35.580
+all the data will be gone,
+
+02:35.580 --> 02:37.530
+and when it gets created again,
+
+02:37.530 --> 02:39.420
+there will be new data.
+
+02:39.420 --> 02:40.740
+We don't want that to happen,
+
+02:40.740 --> 02:42.270
+so what we will be doing
+
+02:42.270 --> 02:43.920
+is we will be doing something
+
+02:43.920 --> 02:46.705
+called a PersistentVolumeClaim.
+
+02:46.705 --> 02:48.510
+A PersistentVolumeClaim
+
+02:48.510 --> 02:53.070
+can claim storage from a volume pool.
+
+02:53.070 --> 02:55.140
+Here we have StorageClass.
+
+02:55.140 --> 02:58.260
+When we create the Kubernetes cluster with kOps,
+
+02:58.260 --> 03:01.080
+it creates a StorageClass for EBS,
+
+03:01.080 --> 03:03.870
+it can understand StorageClass like a driver.
+
+03:03.870 --> 03:05.757
+Now, pod does not understand
+
+03:05.757 --> 03:07.980
+and Kubernetes does not understand the EBS
+
+03:07.980 --> 03:10.290
+or any other external volumes.
+
+03:10.290 --> 03:12.330
+So StorageClass, in essence,
+
+03:12.330 --> 03:15.060
+makes that external storage available
+
+03:15.060 --> 03:18.263
+and you can connect it by using PersistentVolumeClaim.
+
+03:18.263 --> 03:20.850
+So we can create a definition file
+
+03:20.850 --> 03:24.060
+where we say the PersistentVolumeClaim so and so name,
+
+03:24.060 --> 03:28.230
+and we need, let's say, 10 GB of storage.
+
+03:28.230 --> 03:31.891
+So PersistentVolumeClaim is going to talk to StorageClass
+
+03:31.891 --> 03:36.060
+and say that, you know, "I need this 5GB of volume."
+
+03:36.060 --> 03:38.220
+It's the responsibility of the StorageClass
+
+03:38.220 --> 03:40.620
+to talk to the external storage,
+
+03:40.620 --> 03:44.190
+create the storage, and give it to the claim.
+
+03:44.190 --> 03:47.970
+And then you can map that claim with your pod.
+
+03:47.970 --> 03:48.840
+So in database pod,
+
+03:48.840 --> 03:51.750
+we are going to say store value, MySQL,
+
+03:51.750 --> 03:54.810
+on so and so PersistentVolumeClaim,
+
+03:54.810 --> 03:55.830
+which behind the scene,
+
+03:55.830 --> 03:59.100
+will get the storage and connect it to the pod.
+
+03:59.100 --> 04:01.740
+Now, we are going to write all this definition one by one,
+
+04:01.740 --> 04:03.930
+so you'll understand it much better.
+
+04:03.930 --> 04:06.780
+Later also, you can come back to this architecture diagram
+
+04:06.780 --> 04:08.370
+and take a look once you're done writing
+
+04:08.370 --> 04:10.350
+all the definition files.
+
+04:10.350 --> 04:13.530
+Okay, so Amazon EBS is the volume
+
+04:13.530 --> 04:14.940
+that we will be using,
+
+04:14.940 --> 04:16.620
+I mean not, we will be doing anything,
+
+04:16.620 --> 04:20.433
+StorageClass will make it available for us for the DB pod.
+
+04:21.420 --> 04:24.990
+Also, the other thing we have secret.
+
+04:24.990 --> 04:26.790
+We need to store two password,
+
+04:26.790 --> 04:29.640
+one is for database and one is for RabbitMQ user.
+
+04:29.640 --> 04:34.140
+We are going to store its password safely in secret object.
+
+04:34.140 --> 04:36.960
+So we need to write a definition file for secret,
+
+04:36.960 --> 04:39.060
+storing two passwords in it,
+
+04:39.060 --> 04:42.240
+which will be later injected in this pod.
+
+04:42.240 --> 04:44.430
+Okay, so once again, let's talk about the backend.
+
+04:44.430 --> 04:47.520
+So we have the service of type ClusterIP
+
+04:47.520 --> 04:50.070
+for RabbitMQ, Memcache, and DB Pod,
+
+04:50.070 --> 04:51.840
+so they can communicate internally,
+
+04:51.840 --> 04:53.910
+this is for internal communication,
+
+04:53.910 --> 04:56.790
+a secret object where we are going to keep the password
+
+04:56.790 --> 04:59.340
+for RabbitMQ user and database,
+
+04:59.340 --> 05:00.720
+a PersistentVolumeClaim
+
+05:00.720 --> 05:03.930
+that is going to claim for the storage.
+
+05:03.930 --> 05:05.190
+So what are we looking at here?
+
+05:05.190 --> 05:08.130
+We need to write one definition for secret,
+
+05:08.130 --> 05:11.070
+one definition file for our manifest,
+
+05:11.070 --> 05:13.230
+we need to write one manifest for secret,
+
+05:13.230 --> 05:15.243
+one manifest for PersistentVolumeClaim.
+
+05:16.128 --> 05:19.200
+StorageClass will be available there, so two here.
+
+05:19.200 --> 05:21.480
+And then deployment manifest
+
+05:21.480 --> 05:26.220
+for RabbitMQ, Memcache, DB, and Tomcat.
+
+05:26.220 --> 05:31.220
+So four manifest for our pod to run,
+
+05:31.260 --> 05:33.990
+three for the service, backend service.
+
+05:33.990 --> 05:35.820
+And then for Tomcat also,
+
+05:35.820 --> 05:37.290
+we are going to have a service,
+
+05:37.290 --> 05:39.717
+and that will be also of type ClusterIP.
+
+05:40.770 --> 05:42.600
+The service of type ClusterIP
+
+05:42.600 --> 05:45.180
+is for internal communication.
+
+05:45.180 --> 05:47.040
+It does not have any public IP,
+
+05:47.040 --> 05:48.510
+so you cannot connect it externally.
+
+05:48.510 --> 05:50.880
+But we need to host our Tomcat,
+
+05:50.880 --> 05:53.160
+our Vprofile application running in Tomcat,
+
+05:53.160 --> 05:55.230
+we want to host it for the external world.
+
+05:55.230 --> 05:58.410
+So we need a public IP and public endpoint
+
+05:58.410 --> 05:59.580
+that we are going to manage
+
+05:59.580 --> 06:01.110
+with Ingress controller.
+
+06:01.110 --> 06:04.200
+We are going to have an NGINX Ingress Controller.
+
+06:04.200 --> 06:05.790
+The job of this Ingress controller
+
+06:05.790 --> 06:09.450
+is to manage an external load balancer for us.
+
+06:09.450 --> 06:11.760
+So in this case, we are doing everything on AWS,
+
+06:11.760 --> 06:14.550
+so we'll have an application load balancer.
+
+06:14.550 --> 06:18.630
+So when we create Ingress controller,
+
+06:18.630 --> 06:19.680
+NGINX Ingress Controller,
+
+06:19.680 --> 06:23.310
+it is going to create an application load balancer,
+
+06:23.310 --> 06:25.653
+and then we will write an Ingress rule,
+
+06:26.880 --> 06:29.130
+just one more manifest for Ingress
+
+06:29.130 --> 06:32.460
+that will say if the user is trying to access,
+
+06:32.460 --> 06:35.640
+let's say vprofile.hqinfotech.com,
+
+06:35.640 --> 06:38.940
+then route the request to this TomcatService.
+
+06:38.940 --> 06:41.820
+So whenever a user access this URL
+
+06:41.820 --> 06:43.950
+that will be mapped to this load balancer,
+
+06:43.950 --> 06:46.650
+we will also have GoDaddy record
+
+06:46.650 --> 06:48.450
+where we'll say this URL maps
+
+06:48.450 --> 06:49.980
+to this load balancer endpoint.
+
+06:49.980 --> 06:51.810
+And when it comes over here,
+
+06:51.810 --> 06:53.097
+it'll look at the URL,
+
+06:53.097 --> 06:54.750
+the URL matches the Ingress,
+
+06:54.750 --> 06:56.250
+Ingress will say, forward the request
+
+06:56.250 --> 06:57.570
+to this TomcatService,
+
+06:57.570 --> 07:00.360
+and then all the backend thing happens.
+
+07:00.360 --> 07:02.850
+We'll come back to this architecture diagram again and again
+
+07:02.850 --> 07:04.173
+in this project setup.
+
+07:05.070 --> 07:07.050
+In the next lecture, we are going to take a look
+
+07:07.050 --> 07:08.040
+at the source code,
+
+07:08.040 --> 07:10.440
+then you can match this architecture diagram
+
+07:10.440 --> 07:12.330
+with the definition file,
+
+07:12.330 --> 07:15.780
+the manifest that you're going to see in the next lecture.
+
+07:15.780 --> 07:17.130
+So join me in the next one.

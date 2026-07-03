@@ -1,0 +1,501 @@
+WEBVTT
+
+1
+00:00:00.970 --> 00:00:01.990
+Congratulations.
+
+2
+00:00:02.110 --> 00:00:04.902
+You have come to the end of the course.
+
+3
+00:00:05.096 --> 00:00:09.020
+I know it was not easy, but a job very well done.
+
+4
+00:00:09.830 --> 00:00:12.990
+Now you can start preparing for your interviews
+
+5
+00:00:13.490 --> 00:00:17.802
+and simultaneously mastering some more technologies that I
+
+6
+00:00:17.816 --> 00:00:19.160
+will tell you in a moment.
+
+7
+00:00:20.090 --> 00:00:21.620
+So what now?
+
+8
+00:00:22.490 --> 00:00:25.818
+Well, as you're preparing for interviews, I
+
+9
+00:00:25.844 --> 00:00:27.918
+recommend you practice the projects we did
+
+10
+00:00:27.944 --> 00:00:29.480
+in the course once again.
+
+11
+00:00:30.290 --> 00:00:33.754
+Or you can also subscribe for 20 DevOps
+
+12
+00:00:33.802 --> 00:00:36.886
+projects, which is also available on the Udemy.
+
+13
+00:00:37.078 --> 00:00:39.390
+I will give the link in the resource section.
+
+14
+00:00:40.430 --> 00:00:43.410
+Most of this project, or should I say around
+
+15
+00:00:43.460 --> 00:00:45.882
+six projects, are already covered in this course.
+
+16
+00:00:46.016 --> 00:00:48.358
+But if you want to know more projects,
+
+17
+00:00:48.454 --> 00:00:50.960
+then you can subscribe for the other course.
+
+18
+00:00:51.470 --> 00:00:53.598
+Now, the reason I'm telling you to
+
+19
+00:00:53.624 --> 00:00:55.302
+do this, practice it once again.
+
+20
+00:00:55.376 --> 00:00:57.594
+Or do the more projects so you
+
+21
+00:00:57.632 --> 00:01:00.030
+can write stories of your tasks.
+
+22
+00:01:00.530 --> 00:01:03.714
+And when you write the stories, you really
+
+23
+00:01:03.752 --> 00:01:05.358
+don't need to prepare for q amp a
+
+24
+00:01:05.384 --> 00:01:07.030
+question and answers for the interview.
+
+25
+00:01:07.090 --> 00:01:08.910
+You will have lot many things to talk
+
+26
+00:01:08.960 --> 00:01:11.662
+in the interview, also in the project meetings,
+
+27
+00:01:11.806 --> 00:01:15.020
+and you can present solutions to the problem
+
+28
+00:01:15.470 --> 00:01:17.850
+that you will be facing in the projects.
+
+29
+00:01:18.950 --> 00:01:20.574
+While you're doing that, you can
+
+30
+00:01:20.612 --> 00:01:24.478
+also prepare for some specialization.
+
+31
+00:01:24.574 --> 00:01:27.618
+Now, DevOps mostly is Jack of all and Master of
+
+32
+00:01:27.644 --> 00:01:31.566
+none, but I recommend that you become Master of One.
+
+33
+00:01:31.688 --> 00:01:34.158
+So, jack of all, Master of One.
+
+34
+00:01:34.304 --> 00:01:38.538
+So let's talk about some specialization that you can do,
+
+35
+00:01:38.564 --> 00:01:42.018
+which I feel will be an added advantage for you.
+
+36
+00:01:42.164 --> 00:01:43.458
+One area I recommend is
+
+37
+00:01:43.484 --> 00:01:46.030
+Cloud computing with automation skills.
+
+38
+00:01:46.210 --> 00:01:48.078
+So you can prepare for a
+
+39
+00:01:48.164 --> 00:01:50.300
+cloud, google Cloud, Azure Cloud.
+
+40
+00:01:50.870 --> 00:01:52.794
+And when I say specialization, you
+
+41
+00:01:52.832 --> 00:01:54.990
+should also go for certifications.
+
+42
+00:01:55.370 --> 00:01:57.378
+If you do not have actual work experience,
+
+43
+00:01:57.464 --> 00:02:01.054
+then you can backup that with certifications.
+
+44
+00:02:01.222 --> 00:02:02.874
+So for example, you're preparing for
+
+45
+00:02:02.912 --> 00:02:06.214
+AWS certification exam, like Associate Architect
+
+46
+00:02:06.262 --> 00:02:08.070
+or Systems Ops or DevOps.
+
+47
+00:02:08.810 --> 00:02:10.566
+Also learn how to automate it.
+
+48
+00:02:10.627 --> 00:02:13.542
+You can use TerraForm, which currently is
+
+49
+00:02:13.556 --> 00:02:16.530
+the best automation tool for multiple clouds.
+
+50
+00:02:17.450 --> 00:02:21.082
+The other specialization could be automation.
+
+51
+00:02:21.226 --> 00:02:23.014
+Lots and lots of automation.
+
+52
+00:02:23.182 --> 00:02:25.050
+You can master Ansible.
+
+53
+00:02:25.610 --> 00:02:31.462
+There's ansible certification also from Red Hat CI
+
+54
+00:02:31.486 --> 00:02:33.570
+CD projects, which we covered in this course.
+
+55
+00:02:33.620 --> 00:02:36.114
+And also we have 20 DevOps projects there.
+
+56
+00:02:36.152 --> 00:02:40.234
+Also you can learn more CICD products or projects.
+
+57
+00:02:40.282 --> 00:02:42.478
+Should I say Python programming?
+
+58
+00:02:42.514 --> 00:02:45.190
+I really recommend you get more hands on Python
+
+59
+00:02:45.250 --> 00:02:48.630
+programming that will open up more doors of automation.
+
+60
+00:02:49.010 --> 00:02:50.106
+So that's second
+
+61
+00:02:50.168 --> 00:02:53.130
+specialization, third containerization.
+
+62
+00:02:54.050 --> 00:02:56.262
+Now, Kubernetes is the hard skill in
+
+63
+00:02:56.276 --> 00:02:59.602
+today's time, and there's also Kubernetes certification.
+
+64
+00:02:59.746 --> 00:03:02.370
+So choose whatever you are inclined towards.
+
+65
+00:03:02.420 --> 00:03:05.494
+You are more interested either Cloud Computing
+
+66
+00:03:05.602 --> 00:03:10.090
+or programming, python Ansible or containerisation.
+
+67
+00:03:10.270 --> 00:03:12.186
+Doing all these three will take time,
+
+68
+00:03:12.248 --> 00:03:14.060
+but you should start with something.
+
+69
+00:03:14.870 --> 00:03:17.782
+Some of my recommendations after completing
+
+70
+00:03:17.806 --> 00:03:21.750
+this course learning more Python programming.
+
+71
+00:03:22.310 --> 00:03:26.598
+The Kubernetes Certification helm, which is an
+
+72
+00:03:26.624 --> 00:03:29.970
+amazing deployment tool for Kubernetes and very
+
+73
+00:03:30.020 --> 00:03:33.330
+well suited for DevOps job roles.
+
+74
+00:03:34.370 --> 00:03:39.260
+Cloud Certifications AWS Azure or Google Cloud
+
+75
+00:03:40.130 --> 00:03:44.970
+TerraForm cloud automation tool and DevSec ops.
+
+76
+00:03:45.530 --> 00:03:47.062
+So you learn DevOps.
+
+77
+00:03:47.146 --> 00:03:49.962
+If you also learn security like some
+
+78
+00:03:49.976 --> 00:03:53.118
+penetration testing or cyber security, you can
+
+79
+00:03:53.144 --> 00:03:55.678
+integrate security also in DevOps.
+
+80
+00:03:55.714 --> 00:03:57.990
+So that becomes DevSec ops.
+
+81
+00:03:58.310 --> 00:04:00.634
+And DevSec ops is really very rare
+
+82
+00:04:00.682 --> 00:04:02.540
+skill today to find in the market.
+
+83
+00:04:03.110 --> 00:04:06.042
+I even have planned to create a
+
+84
+00:04:06.056 --> 00:04:09.246
+Devsix ops course in few months.
+
+85
+00:04:09.308 --> 00:04:12.918
+Once it's ready, I will surely notify you. Okay?
+
+86
+00:04:12.944 --> 00:04:15.510
+Now let's quickly talk about interview preparation.
+
+87
+00:04:18.750 --> 00:04:19.762
+The first thing in the
+
+88
+00:04:19.776 --> 00:04:21.682
+interview obviously about yourself.
+
+89
+00:04:21.815 --> 00:04:23.786
+So that will be one resume.
+
+90
+00:04:23.978 --> 00:04:26.458
+I am uploading some resumes, some
+
+91
+00:04:26.484 --> 00:04:28.274
+sample resumes in the resource section.
+
+92
+00:04:28.322 --> 00:04:29.940
+You can download it from there.
+
+93
+00:04:30.690 --> 00:04:31.966
+Also prepare a very good
+
+94
+00:04:32.028 --> 00:04:33.720
+introductory speech about yourself.
+
+95
+00:04:34.290 --> 00:04:35.434
+So if someone asks you
+
+96
+00:04:35.472 --> 00:04:37.954
+tell me something about yourself. You should have a very
+
+97
+00:04:37.992 --> 00:04:39.914
+well prepared introductory speech.
+
+98
+00:04:40.022 --> 00:04:42.442
+What you are, what you can do,
+
+99
+00:04:42.636 --> 00:04:45.670
+mostly highlighting your skill sets in DevOps.
+
+100
+00:04:45.990 --> 00:04:48.850
+So these two things will get you the interview.
+
+101
+00:04:49.410 --> 00:04:52.570
+Then comes talking about the projects.
+
+102
+00:04:53.970 --> 00:04:56.602
+So talk about the Ciacd projects that
+
+103
+00:04:56.676 --> 00:04:59.102
+you can do, which you have performed.
+
+104
+00:04:59.126 --> 00:05:01.282
+So the stories that I told you to write
+
+105
+00:05:01.416 --> 00:05:04.622
+when you're preparing for the projects, when you're revising
+
+106
+00:05:04.646 --> 00:05:06.610
+the project, the stories will help you.
+
+107
+00:05:06.660 --> 00:05:08.640
+Talk about the projects that you did.
+
+108
+00:05:09.810 --> 00:05:12.394
+Make sure to call out all the tools that you
+
+109
+00:05:12.432 --> 00:05:15.814
+know, especially the one you are expert in and talk
+
+110
+00:05:15.852 --> 00:05:18.720
+about various kinds of automation that you can do.
+
+111
+00:05:19.470 --> 00:05:21.958
+Also one more thing, interviewer will be interested
+
+112
+00:05:22.044 --> 00:05:24.660
+to know about troubleshooting skills that you have
+
+113
+00:05:24.990 --> 00:05:28.378
+now, nobody can teach you troubleshooting, it's a
+
+114
+00:05:28.404 --> 00:05:31.786
+failure that you face while you're implementing something,
+
+115
+00:05:31.968 --> 00:05:34.226
+a CSV pipeline, doing some automation.
+
+116
+00:05:34.298 --> 00:05:36.406
+And then how did you resolve that?
+
+117
+00:05:36.528 --> 00:05:38.602
+So if you practice, you will definitely
+
+118
+00:05:38.676 --> 00:05:40.930
+get problems and you will solve those
+
+119
+00:05:40.980 --> 00:05:43.320
+problems and you have stories to tell.
+
+120
+00:05:44.010 --> 00:05:46.702
+Prepare in these three areas and I'm sure you
+
+121
+00:05:46.716 --> 00:05:49.090
+will find a very good job in DevOps.
+
+122
+00:05:49.590 --> 00:05:52.270
+So farewell and all the very
+
+123
+00:05:52.320 --> 00:05:55.082
+best for your future endeavors.
+
+124
+00:05:55.226 --> 00:05:57.550
+Thank you very much for joining this course.
+
+125
+00:05:57.720 --> 00:05:59.560
+I really really appreciate it.

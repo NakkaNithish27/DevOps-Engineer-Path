@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.180 --> 00:00:01.410
+<v Instructor>Okay, so these are the steps.</v>
+
+2
+00:00:01.410 --> 00:00:03.720
+We have set up Jenkins.
+
+3
+00:00:03.720 --> 00:00:07.080
+We have done a Nexus setup, Sonarqube setup,
+
+4
+00:00:07.080 --> 00:00:09.660
+and we have taken care of the security group rule.
+
+5
+00:00:09.660 --> 00:00:11.760
+Now let's take care of plugins.
+
+6
+00:00:11.760 --> 00:00:13.560
+So here are the plugins that we'll be using
+
+7
+00:00:13.560 --> 00:00:15.420
+in a few upcoming lectures,
+
+8
+00:00:15.420 --> 00:00:18.750
+Nexus plugin to integrate Nexus with Jenkins,
+
+9
+00:00:18.750 --> 00:00:21.480
+same Sonarqube plugin to integrate Sonarqube server
+
+10
+00:00:21.480 --> 00:00:23.580
+with Jenkins,
+
+11
+00:00:23.580 --> 00:00:26.670
+Git plugin, which we already have, and the tool as well,
+
+12
+00:00:26.670 --> 00:00:28.530
+Pipeline Maven integration plugin,
+
+13
+00:00:28.530 --> 00:00:31.980
+so we can execute pipeline code by using Maven
+
+14
+00:00:31.980 --> 00:00:33.690
+and BuildTimestamp plugin.
+
+15
+00:00:33.690 --> 00:00:35.130
+Some plugins we already have.
+
+16
+00:00:35.130 --> 00:00:36.750
+Some we are going to install.
+
+17
+00:00:36.750 --> 00:00:40.923
+So go to Manage Jenkins and click on Plugins.
+
+18
+00:00:42.330 --> 00:00:44.103
+Go to Available plugins.
+
+19
+00:00:45.030 --> 00:00:50.030
+Search for a Nexus plugin, Nexus Artifact Uploader.
+
+20
+00:00:50.100 --> 00:00:53.203
+Search for Sonarqube plugin.
+
+21
+00:00:53.203 --> 00:00:54.036
+Sonarqube.
+
+22
+00:00:55.252 --> 00:00:56.970
+Sonarqube Scanner.
+
+23
+00:00:56.970 --> 00:00:59.970
+Search for Maven,
+
+24
+00:00:59.970 --> 00:01:02.193
+Pipeline Maven Integration plugin.
+
+25
+00:01:03.180 --> 00:01:05.610
+Search for a timestamp.
+
+26
+00:01:05.610 --> 00:01:07.440
+Use this text, Timestamp.
+
+27
+00:01:07.440 --> 00:01:08.580
+See Build Timestamp.
+
+28
+00:01:08.580 --> 00:01:09.930
+If it's already installed,
+
+29
+00:01:09.930 --> 00:01:12.510
+check it in the Installed plugin section.
+
+30
+00:01:12.510 --> 00:01:13.560
+If it's not installed,
+
+31
+00:01:13.560 --> 00:01:15.960
+then you should see here in the Available plugin section
+
+32
+00:01:15.960 --> 00:01:18.030
+for a check mark there also.
+
+33
+00:01:18.030 --> 00:01:19.980
+Once you have checked all this plugin,
+
+34
+00:01:19.980 --> 00:01:21.510
+then click on Install.
+
+35
+00:01:21.510 --> 00:01:23.520
+It's going to take a moment to install.
+
+36
+00:01:23.520 --> 00:01:26.020
+Once it is installed, join me in the next lecture.
+

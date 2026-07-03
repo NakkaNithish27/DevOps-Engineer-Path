@@ -1,0 +1,517 @@
+WEBVTT
+
+0
+00:13.280 --> 00:14.660
+Welcome to the project.
+
+1
+00:15.170 --> 00:19.970
+This is an AWS. project, the name of this project is.
+
+2
+00:21.650 --> 00:24.410
+Refactoring with AWS.
+
+3
+00:32.320 --> 00:39.160
+So from our previous project, we have seen, we deployed the vprofile application stack on our local
+
+4
+00:39.160 --> 00:41.920
+machine and also on AWS Cloud.
+
+5
+00:49.450 --> 00:54.730
+From our previous project, we already know how to host our Web application stack on AWS Cloud.
+
+6
+00:55.610 --> 00:58.310
+And we used lift and shift strategy.
+
+7
+01:00.070 --> 01:04.860
+In this project, we will re architecture or refactor our services.
+
+8
+01:05.920 --> 01:09.760
+This strategy is called re architecture or refactoring.
+
+9
+01:12.480 --> 01:18.360
+This approach is used to boost agility or to improve business continuity.
+
+10
+01:19.930 --> 01:27.520
+So we can add new features, scale effectively and easily and have very good performance for our application
+
+11
+01:28.240 --> 01:28.890
+workload.
+
+12
+01:34.060 --> 01:41.230
+So let's take a scenario, let's say you're working on a project where the services are running on physical
+
+13
+01:41.230 --> 01:47.950
+machine, virtual machines or even cloud machines, like could be even ec2 instances.
+
+14
+01:49.550 --> 01:53.850
+And you're dealing with various services for your application workload.
+
+15
+01:54.170 --> 02:00.950
+You could be having databases, you could be having application, webservers, network services
+
+16
+02:00.950 --> 02:04.760
+like DNS, DHCP and many more services.
+
+17
+02:09.140 --> 02:14.990
+To manage all this, you need you need multiple teams, you need cloud computing team if you're using
+
+18
+02:14.990 --> 02:16.490
+cloud computing platforms.
+
+19
+02:17.560 --> 02:23.470
+You need virtualization team if you're doing virtualization on your data center, datacenter operations
+
+20
+02:23.470 --> 02:31.480
+team, monitoring team, sys admin team and few other teams will get involved in managing all this application
+
+21
+02:31.480 --> 02:32.080
+workload.
+
+22
+02:37.500 --> 02:40.440
+So there's really too much operational overhead.
+
+23
+02:42.300 --> 02:47.040
+Your teams are struggling for the uptime and regular scaling requirement.
+
+24
+02:48.240 --> 02:55.440
+Upfront capital expenditure and regular operational expenditure, if you're using your own local data
+
+25
+02:55.440 --> 03:00.720
+center and the processes will be manual and will be very difficult to automate.
+
+26
+03:00.750 --> 03:02.640
+If you have virtualization.
+
+27
+03:03.550 --> 03:07.330
+All these processes will be time consuming and very expensive.
+
+28
+03:12.470 --> 03:20.840
+So we can really use a cloud platform, but instead of using infrastructure as a service, will be using
+
+29
+03:20.840 --> 03:26.840
+mostly PASS and SAAS services, platform as a service and software as a service.
+
+30
+03:27.140 --> 03:33.830
+So if you're talking about AWS, we will not be going with regular instances, but will be using some
+
+31
+03:33.830 --> 03:41.630
+cloud managed services from AWS and cloud means we can code our infrastructure so we can have infrastructure
+
+32
+03:41.630 --> 03:42.320
+as a code.
+
+33
+03:46.660 --> 03:51.140
+And SAAS services are very easy to manage, flexible, elastic in nature.
+
+34
+03:51.760 --> 03:55.750
+Scaling will be mostly taken care of by the cloud vendor.
+
+35
+03:57.060 --> 04:00.840
+And of course, it's going to be pay as you go model.
+
+36
+04:01.970 --> 04:10.280
+With lots and lots of automation that we can do, so refactoring our application really gives us an
+
+37
+04:10.280 --> 04:18.290
+easy infrastructure to manage, very good performance, very convenient to scale, and you will not need
+
+38
+04:18.290 --> 04:20.230
+huge teams to manage all this.
+
+39
+04:20.990 --> 04:24.950
+So let's see AWS services that we are going to use in this project.
+
+40
+04:29.510 --> 04:37.550
+So instead of using regular ec2 instance to install our services, we will be using Beanstalk service.
+
+41
+04:39.560 --> 04:44.670
+And the service will in turn create an ec2 instance and host our application on it.
+
+42
+04:45.200 --> 04:48.560
+We don't need to manage this instance manually.
+
+43
+04:49.010 --> 04:50.960
+Beanstal service will take care of it.
+
+44
+04:51.620 --> 04:54.410
+Beanstalk service will also have a load balancer.
+
+45
+04:55.360 --> 04:57.280
+It will also have auto scaling.
+
+46
+04:59.430 --> 05:02.670
+An S3 bucket for storing the artifacts.
+
+47
+05:04.200 --> 05:06.600
+Or we can use even our own extra bucket.
+
+48
+05:07.910 --> 05:11.240
+Now, that's all about Frontend, let's talk about backbend.
+
+49
+05:17.620 --> 05:21.370
+In Backend, for database we will use RDS instances.
+
+50
+05:24.150 --> 05:30.180
+It's really like a platform as a service, so you get a database platform to choose from, you fill
+
+51
+05:30.180 --> 05:33.870
+in the requirements and the database is up and running in no time.
+
+52
+05:34.410 --> 05:36.090
+Scaling will be very easy.
+
+53
+05:36.580 --> 05:38.820
+Regular backups will be taken automatically.
+
+54
+05:39.480 --> 05:41.480
+And so many more amazing things with it.
+
+55
+05:43.330 --> 05:50.110
+We're going to use elasticache service instead of memcache, ActiveMQ in place of RabbittMQ.
+
+56
+05:51.990 --> 05:54.000
+Route 53 for DNS.
+
+57
+05:55.250 --> 05:58.320
+And cloud front for content delivery network.
+
+58
+05:58.940 --> 06:04.940
+So if you have a global audience, then using cloud front for content delivery network will be very
+
+59
+06:04.940 --> 06:06.110
+easy and convenient.
+
+60
+06:12.070 --> 06:13.900
+Let's keep the objective in mind.
+
+61
+06:15.030 --> 06:22.640
+We need a flexible infrastructure, very flexible, actually pay as we go model, infrastructure as a code,
+
+62
+06:23.400 --> 06:30.510
+and we need PASS and SAAS services for ease of managing our infrastructure.
+
+63
+06:31.350 --> 06:33.780
+So to have a low operational overhead.
+
+64
+06:40.460 --> 06:46.580
+So let's do a quick comparison between the services that we are going to use, Beanstalk for Tomcat instance
+
+65
+06:46.580 --> 06:50.960
+replacement, Beanstalk again will have load balancer and auto scaling.
+
+66
+06:54.670 --> 06:58.930
+EFS or S3 we can use instead of using NFS.
+
+67
+07:01.550 --> 07:10.160
+RDS, instead of having MySQL on VM/Ec2. Elasticache instead of memcache and active MQ instead
+
+68
+07:10.160 --> 07:19.280
+of Rabbitt MQ on VM/Ec2instance. Route 53 for DNS. Cloud Front to serve our global audience
+
+69
+07:19.460 --> 07:21.140
+content delivery network.
+
+70
+07:30.440 --> 07:37.550
+OK, time to see the architecture of our project, we'll be having ec2 instances, ELB auto scaling
+
+71
+07:37.550 --> 07:45.140
+from Beanstalk, S3, RDS elasticache, AcrtiveMQ, Route 53 and cloud front.
+
+72
+07:46.960 --> 07:53.600
+So user will access our URL, which will be resolved to an end point from Amazon Route 53.
+
+73
+07:54.100 --> 08:00.790
+The end point will be off Amazon cloud front content delivery network, which will cache so many things
+
+74
+08:01.300 --> 08:03.340
+to server the global audience.
+
+75
+08:04.440 --> 08:10.470
+From there, the request will be redirected to application load balancer, which is part of your elastic
+
+76
+08:10.470 --> 08:17.250
+Beanstalk, Application load balancer, will forward the request to EC2instance, which is in an auto
+
+77
+08:17.250 --> 08:23.220
+scaling group. Here our Tomcat application service, will be running and all this will be part of
+
+78
+08:23.220 --> 08:24.300
+Elastic Beanstalk.
+
+79
+08:25.830 --> 08:33.270
+There will be also Amazon cloud watch alarms that will be monitoring auto scaling group and will scale
+
+80
+08:33.270 --> 08:35.730
+out and scaling based on the requirement.
+
+81
+08:36.740 --> 08:42.800
+There will be a bucket where artifacts will be stored and we can deploy our latest artifact by just
+
+82
+08:43.130 --> 08:44.030
+clicking a button.
+
+83
+08:45.920 --> 08:54.500
+So our entire frontend will be managed by Beantalk. For Backend instead of rabbit MQ, we're
+
+84
+08:54.500 --> 08:56.030
+using Amazon MQ.
+
+85
+08:57.950 --> 09:04.100
+Instead of using memcache on ec2 instance, we're using elasticache.
+
+86
+09:06.010 --> 09:11.950
+And instead of using database running on ec2 instance, we are going to use Amazon RDS
+
+87
+09:15.050 --> 09:17.420
+So the user will access an end point.
+
+88
+09:18.820 --> 09:24.520
+That end point will be off Amazon cloud front that will send the request to application load balancer
+
+89
+09:24.520 --> 09:29.680
+in the Beanstalk that will forward the request to instances in the autoscaling group.
+
+90
+09:30.780 --> 09:36.990
+All this will be monitored by Amazon cloud, which alarms The artifacts will be stored in the S3 bucket.
+
+91
+09:37.860 --> 09:38.590
+For backend
+
+92
+09:38.910 --> 09:45.600
+It's going to access AmazonMQ, Elastic Cache and Amazon RDS Service.
+
+93
+09:47.480 --> 09:51.610
+Again, I recommend you to pause the video and watch this design once again.
+
+94
+09:53.630 --> 09:55.610
+Let's see the flow of execution now.
+
+95
+09:57.010 --> 10:03.970
+First we will obviously login to our AWS Account. We will create key pair for our Beanstalk instance, or Beanstalk
+
+96
+10:03.970 --> 10:09.790
+will launch an ec2 instance, so we will create a key pair, So in case you need to login, can use that key pair.
+
+97
+10:11.100 --> 10:16.950
+We'll create security group for backend services, elasticache, RDS and active MQ.
+
+98
+10:18.520 --> 10:20.350
+Then we will create RDS.
+
+99
+10:21.780 --> 10:25.260
+ElastiCache and Amazon active MQ.
+
+100
+10:27.100 --> 10:29.740
+Then we'll create Elastic Beanstalk Environment.
+
+101
+10:30.850 --> 10:37.100
+Next, we will update our backend security group to allow traffic from beanstalk security group so when beanstalk
+
+102
+10:37.100 --> 10:38.800
+gets created.
+
+103
+10:39.160 --> 10:43.200
+It will also create security group for its ec2 instance and also load balancer.
+
+104
+10:43.690 --> 10:50.350
+So we will allow traffic from beanstalk instance security group to access our backend services which are
+
+105
+10:50.350 --> 10:51.580
+in backend security group.
+
+106
+10:53.280 --> 10:57.780
+We're putting all our backend services in one security group, and they will need to interact with
+
+107
+10:57.780 --> 11:01.950
+each other, so we will also update backend security group.
+
+108
+11:02.310 --> 11:04.290
+So it allows the internal traffic.
+
+109
+11:07.810 --> 11:12.760
+So by now, our backend services will be also up and running, RDS will be up and running and we
+
+110
+11:12.760 --> 11:15.610
+need to initialize our RDS database.
+
+111
+11:15.820 --> 11:17.340
+So launch an ec2 instance.
+
+112
+11:17.350 --> 11:22.090
+And from there we will do a MySQL login to our RDS and initialize our database.
+
+113
+11:26.150 --> 11:33.590
+If you follow to our previous project, you know, our profile application returns to page at /login
+
+114
+11:33.600 --> 11:36.040
+so we need to change health check in Beanstalk.
+
+115
+11:36.650 --> 11:40.490
+So when we deploy our artifact, it should do a health check on /login.
+
+116
+11:42.120 --> 11:50.040
+And we will also add 443 https listener to our elastic load balancer, so ELB will be also to again get created
+
+117
+11:50.040 --> 11:53.520
+automatically by Beanstalk, it will be part of your Beanstalk environment.
+
+118
+11:55.480 --> 12:00.170
+Then we will build artifacts from our source code with the backend information.
+
+119
+12:00.550 --> 12:08.560
+So by now we should have endpoint of RDS, Endpoint of Amazon MQ and Endpoint of elasticache. We will feed
+
+120
+12:08.560 --> 12:12.340
+this information in our application properties file and we'll build the artifact.
+
+121
+12:13.800 --> 12:16.650
+Then we'll deploy the artifact to Beanstalk environment.
+
+122
+12:18.490 --> 12:24.940
+And we will create a content delivery network, using Amazon cloud front with SSL certificate, of course,
+
+123
+12:24.940 --> 12:26.680
+for https connection.
+
+124
+12:27.610 --> 12:34.750
+Once we have this, ready, we can update our load balancer and endpoint in GoDaddy, or we can also do
+
+125
+12:34.750 --> 12:38.230
+this on Amazon Route 53, public dns zones.
+
+126
+12:39.810 --> 12:42.950
+Once all this is ready, finally will test it from the URL.
+
+127
+12:43.900 --> 12:46.050
+OK, now let's make this happen.
+
+128
+12:47.240 --> 12:50.750
+So if you're done watching the intro, join me on AWS console.

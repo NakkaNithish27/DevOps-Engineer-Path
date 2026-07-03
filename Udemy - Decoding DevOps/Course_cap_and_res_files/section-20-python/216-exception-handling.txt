@@ -1,0 +1,565 @@
+WEBVTT
+
+00:00.240 --> 00:01.080
+Welcome.
+
+00:01.080 --> 00:04.760
+In this lecture we are going to talk about exception handling in Python.
+
+00:05.240 --> 00:07.480
+So for this lecture I'm going to create another folder.
+
+00:07.480 --> 00:10.440
+So go to new and say directory.
+
+00:10.880 --> 00:12.760
+And let's give directory a name.
+
+00:12.800 --> 00:14.320
+Exceptions.
+
+00:16.840 --> 00:23.920
+And in this let's create a Python file I'm going to say tr one dot p y tr.
+
+00:23.960 --> 00:26.040
+Like try one thing.
+
+00:26.040 --> 00:27.640
+You try one dot p y.
+
+00:28.360 --> 00:35.880
+Okay, let's write a simple code which takes input or integer input from the user and then use ten to
+
+00:35.920 --> 00:37.080
+divide that number.
+
+00:37.520 --> 00:39.400
+So I'm going to take a variable number.
+
+00:40.000 --> 00:41.920
+And I'm going to say in the int function.
+
+00:41.960 --> 00:46.800
+Well first I have to say equal to in the int function because I want only integer input.
+
+00:46.800 --> 00:48.840
+So I'm putting it into the integer function.
+
+00:48.840 --> 00:50.240
+And I'm going to say input.
+
+00:51.160 --> 00:53.560
+And then I'm going to give a message.
+
+00:53.560 --> 00:56.360
+To enter something enter a number.
+
+00:56.800 --> 00:58.720
+So the user enters the number.
+
+00:58.720 --> 01:01.120
+And this needs to be definitely of type int.
+
+01:01.360 --> 01:08.120
+And then I'm going to take a variable called result equal to ten divided by that number.
+
+01:08.440 --> 01:11.280
+So I'm going to just say ten divided by the variable number.
+
+01:12.040 --> 01:13.320
+Then let's print it.
+
+01:14.200 --> 01:14.600
+Okay.
+
+01:14.600 --> 01:20.040
+Now in this f function double quote because we're going to put the variable over there.
+
+01:20.040 --> 01:21.840
+So we'll give a message first.
+
+01:21.880 --> 01:26.880
+The result is and we'll give the variable in the curly brace.
+
+01:26.880 --> 01:33.280
+The variable is again the name result okay a pretty simple program takes the input from the user.
+
+01:33.400 --> 01:35.240
+Makes sure that this is an integer.
+
+01:35.760 --> 01:38.640
+And then ten divided by that number.
+
+01:38.680 --> 01:42.800
+Let me give a space here and let's put a few more print functions here.
+
+01:44.120 --> 01:45.080
+Program ends here.
+
+01:45.080 --> 01:47.920
+And happy coding okay let's save this.
+
+01:47.920 --> 01:51.000
+And let's run this here.
+
+01:51.480 --> 01:52.720
+Click run.
+
+01:53.200 --> 01:54.840
+So it's asking for the input.
+
+01:54.840 --> 01:57.520
+So I'm going to say two and hit enter.
+
+01:58.920 --> 02:03.840
+And it divides ten by two gives you the result and the program completes.
+
+02:04.520 --> 02:09.800
+But what happens if the user enters anything other than integer?
+
+02:10.480 --> 02:11.960
+So let's run this once again.
+
+02:13.240 --> 02:15.080
+And this time I'm going to give a string.
+
+02:15.080 --> 02:16.360
+So I'll say ABC.
+
+02:16.720 --> 02:17.800
+Let's see what happens.
+
+02:18.200 --> 02:19.640
+The program terminates.
+
+02:20.040 --> 02:24.760
+You get an error value error invalid literal for int.
+
+02:25.440 --> 02:27.000
+So this is a value error.
+
+02:27.840 --> 02:30.920
+It's expecting an integer but we're giving it a string.
+
+02:31.480 --> 02:37.720
+Maybe I don't want this program to terminate so abruptly but give a better message to the user.
+
+02:37.720 --> 02:40.080
+And that's what is called as exception handling.
+
+02:40.080 --> 02:41.160
+So this is an exception.
+
+02:41.160 --> 02:42.720
+We should know how to handle it.
+
+02:43.400 --> 02:46.680
+So same program right click to run dot p y.
+
+02:46.680 --> 02:48.120
+And we're going to say copy.
+
+02:49.320 --> 02:52.560
+And then right click on the exceptions folder that we created.
+
+02:52.560 --> 02:53.800
+And we'll say paste.
+
+02:54.280 --> 02:58.920
+Let's give the name as tr or try two dot p y.
+
+03:00.160 --> 03:00.440
+Okay.
+
+03:00.480 --> 03:04.280
+So first I'm going to take this print statement and move it.
+
+03:04.320 --> 03:06.000
+Head over here.
+
+03:08.590 --> 03:12.310
+And I'm going to say to try this code first.
+
+03:12.310 --> 03:16.190
+If this works, it's fine, otherwise the exception.
+
+03:16.630 --> 03:20.470
+So bring this to the next line and type try colon.
+
+03:20.470 --> 03:21.230
+That's the syntax.
+
+03:21.230 --> 03:23.590
+To try the code make sure this is indented properly.
+
+03:23.590 --> 03:26.430
+So I'm using tab to put this inside.
+
+03:27.670 --> 03:27.910
+All right.
+
+03:27.910 --> 03:30.150
+So this basically means try this code.
+
+03:30.150 --> 03:36.870
+And if there is some message or sorry some mistake some exception then get into except block.
+
+03:36.870 --> 03:42.630
+So accept and you can give what kind of error you're expecting like the value error.
+
+03:43.350 --> 03:45.990
+The may the different types of exception in Python.
+
+03:45.990 --> 03:48.190
+We're going to check the list in a moment.
+
+03:48.190 --> 03:49.950
+But let's complete this first.
+
+03:50.310 --> 03:51.790
+So I'm expecting a value error.
+
+03:51.790 --> 03:56.350
+And if the value error is there then you know do something like you know print this message.
+
+03:56.350 --> 04:04.230
+So I'm going to say print invalid input and enter a valid number okay let's save this.
+
+04:04.870 --> 04:06.430
+And let's run this.
+
+04:08.070 --> 04:11.270
+So first just enter normal integers.
+
+04:11.270 --> 04:13.030
+I'm going to enter two again.
+
+04:14.030 --> 04:16.350
+So it enters the try block.
+
+04:16.350 --> 04:19.030
+Everything goes well and it completes the program.
+
+04:19.030 --> 04:23.470
+It does not enter into accept so it executes the last three print statement.
+
+04:23.870 --> 04:25.630
+All right let's run it once again.
+
+04:26.590 --> 04:28.350
+This time going to put some string.
+
+04:29.310 --> 04:31.790
+So you see there it says invalid input.
+
+04:31.790 --> 04:34.710
+It is getting into the exception because it found the exception.
+
+04:34.710 --> 04:36.630
+The try it found the exception.
+
+04:36.630 --> 04:40.030
+It entered into the accept block executed our accept code.
+
+04:40.030 --> 04:42.270
+But again there are some other errors.
+
+04:42.630 --> 04:48.350
+We have given the print statement which is trying to print the variable result, but it does not exist
+
+04:48.350 --> 04:49.510
+because this failed.
+
+04:49.510 --> 04:49.710
+Right.
+
+04:49.710 --> 04:51.150
+So there is nothing in the result.
+
+04:51.150 --> 04:53.270
+So result variable is not defined.
+
+04:53.590 --> 04:55.590
+So now we are getting error for this one.
+
+04:56.110 --> 04:58.150
+So let's see how to handle that also.
+
+04:59.030 --> 05:01.110
+So copy tr two dot p y.
+
+05:01.950 --> 05:04.190
+And then in the exceptions paste it.
+
+05:04.510 --> 05:07.390
+Let's name it as tr three dot p y.
+
+05:08.230 --> 05:14.230
+So we need a method where we can execute some code when the try executes successfully.
+
+05:14.230 --> 05:20.150
+When this code completes successfully, we want one more block and that can be achieved by using else.
+
+05:22.390 --> 05:28.110
+So we'll get this print statement in the else block and let me save this first.
+
+05:28.830 --> 05:29.950
+So it works like this.
+
+05:29.950 --> 05:36.830
+So if the try this code works then the except will be skipped and it goes to the else.
+
+05:37.470 --> 05:41.510
+But if this fails it gets into the except and then the rest of the program.
+
+05:42.310 --> 05:45.790
+Let's execute this tr three dot p y run.
+
+05:48.990 --> 05:50.510
+Let's enter four here.
+
+05:52.270 --> 05:54.270
+So you see that the result is 2.5.
+
+05:54.270 --> 05:56.550
+So no except blocks there was no exception.
+
+05:56.550 --> 05:57.990
+So it directly went to else.
+
+05:57.990 --> 06:03.310
+After executing try and the rest of the program is completed okay.
+
+06:03.350 --> 06:03.910
+Very well.
+
+06:03.910 --> 06:05.470
+Let's execute it once again.
+
+06:10.230 --> 06:12.790
+This time I'm going to give zero.
+
+06:13.310 --> 06:14.230
+It's an integer.
+
+06:14.630 --> 06:17.350
+What happens when you divide any number by zero?
+
+06:18.470 --> 06:19.870
+Zero Division error.
+
+06:19.910 --> 06:22.230
+You cannot divide a number by zero.
+
+06:22.270 --> 06:22.990
+Here it is.
+
+06:22.990 --> 06:23.950
+Throwing another error.
+
+06:23.990 --> 06:25.390
+Zero division error.
+
+06:25.950 --> 06:29.190
+So we can add more exceptions as well.
+
+06:30.030 --> 06:32.030
+So this time TR4 dot pi.
+
+06:32.190 --> 06:33.150
+Copy this.
+
+06:33.190 --> 06:35.430
+Paste once again with the name.
+
+06:35.470 --> 06:38.070
+Try for dot pi.
+
+06:39.150 --> 06:46.550
+So I'm going to say add one more block here except and this one will be for zero division error except
+
+06:46.590 --> 06:53.270
+zero division error colon and a print statement that says you know you cannot divide a number by zero.
+
+06:54.310 --> 06:54.710
+Right.
+
+06:54.710 --> 06:57.430
+Let's save this and let's try this one.
+
+06:57.790 --> 06:58.750
+Let's run this.
+
+06:59.150 --> 07:02.190
+Let's enter zero.
+
+07:04.310 --> 07:08.270
+See it enters into that exception and says cannot divide a number by zero.
+
+07:08.990 --> 07:09.590
+So like this.
+
+07:09.590 --> 07:13.070
+There are many other kinds of different types of exception.
+
+07:13.070 --> 07:15.590
+Let's check a list on ChatGPT.
+
+07:16.710 --> 07:20.310
+So asking a question to ChatGPT, you know, for the python, try and accept.
+
+07:20.350 --> 07:24.150
+Give me a list of different types of exception I can use in the accept block.
+
+07:25.070 --> 07:26.630
+So you have many exception.
+
+07:26.670 --> 07:29.670
+That's the one that we'll be using once after this.
+
+07:29.670 --> 07:35.110
+This is you know, if you don't know different kinds of error or different types of exception, you
+
+07:35.110 --> 07:41.510
+can just say accept exception as some variable and then you can print some statement or if you're sure,
+
+07:41.790 --> 07:46.150
+like for example, arithmetic error you're expecting or zero division error you're expecting.
+
+07:46.150 --> 07:48.750
+Like we have seen a floating point error.
+
+07:48.990 --> 07:54.550
+There are many other different types key error, keyboard interrupt, memory error, name error.
+
+07:55.110 --> 07:59.790
+You know, in my real time experience, I have learned this exception by not executing, failing in
+
+07:59.790 --> 08:01.790
+the code, and then looking at the message.
+
+08:01.790 --> 08:03.630
+That's how I used to do it.
+
+08:03.630 --> 08:06.230
+But anyways, we have now many sophisticated tools.
+
+08:06.230 --> 08:11.550
+We have AI, so you know, we can easily get stuff or you also have the documentation.
+
+08:11.550 --> 08:13.390
+You can go through the documentation as well.
+
+08:14.310 --> 08:14.910
+Import error.
+
+08:14.950 --> 08:16.830
+You know you're trying to import some library.
+
+08:16.830 --> 08:21.500
+If that fails you say import export, import error, unable to import, blah blah blah.
+
+08:22.500 --> 08:27.740
+Okay, so for this program value error zero division error, I cannot really think of any other kind
+
+08:27.740 --> 08:29.420
+of error in this simple program.
+
+08:29.420 --> 08:32.860
+But you know, we don't know what to expect.
+
+08:32.860 --> 08:37.180
+So let's accept it.
+
+08:38.460 --> 08:38.820
+Sorry.
+
+08:38.860 --> 08:39.420
+Exception.
+
+08:39.420 --> 08:44.700
+You know, as a child I always had this problem of accept and expect.
+
+08:44.740 --> 08:47.460
+See still having it dyslexic anyways.
+
+08:47.500 --> 08:48.980
+Accept expect.
+
+08:50.180 --> 08:57.580
+Come on not again okay except exception as e colon.
+
+08:58.220 --> 09:00.260
+And then let's put some message.
+
+09:00.940 --> 09:03.620
+So an unexpected error occurred.
+
+09:04.060 --> 09:07.500
+And that exception will be stored into this variable E.
+
+09:07.540 --> 09:09.940
+And we just want to print that variable.
+
+09:10.140 --> 09:14.500
+Oh wait I need to give here a function also a function.
+
+09:14.500 --> 09:17.940
+And I'm going to put this variable over here curly brace e.
+
+09:19.060 --> 09:21.740
+So save this file and try to run this program.
+
+09:22.500 --> 09:29.260
+And as of now, there is no way to take a user input that enters into this exception block.
+
+09:29.300 --> 09:35.140
+I mean, we can enter string other things, you know, it can get into valueerror zero division error.
+
+09:35.740 --> 09:37.580
+So we need to make some changes in the code.
+
+09:37.580 --> 09:38.700
+So it enters this one.
+
+09:38.700 --> 09:40.100
+So take it as an exercise.
+
+09:40.100 --> 09:45.700
+Take this code, copy this code, put it into ChatGPT and ask what user input should I take.
+
+09:45.700 --> 09:48.740
+So it enters into this exception as E block.
+
+09:49.380 --> 09:50.780
+Okay, spend some time over here.
+
+09:50.780 --> 09:56.980
+Try and accept or exception handling is very much used in Python, especially when you're doing automation.
+
+09:57.020 --> 10:01.580
+Things can fail, it will fail and you should know a way to handle those.
+
+10:01.620 --> 10:03.540
+You know here we're just giving print statement.
+
+10:03.540 --> 10:08.980
+Maybe we need to do something else, execute some other code, or execute some other function if things
+
+10:08.980 --> 10:10.820
+fail right.
+
+10:10.860 --> 10:12.940
+So that should do for now.
+
+10:12.940 --> 10:14.620
+That would be all in this lecture.
+
+10:14.620 --> 10:16.700
+I will see you in the next lecture.
+
+10:17.380 --> 10:21.180
+We are also going to try cloud automation by using Python.
+
+10:21.780 --> 10:23.900
+So wrap this up and join me in the next lecture.

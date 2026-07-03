@@ -1,0 +1,297 @@
+WEBVTT
+
+0
+00:01.230 --> 00:08.730
+Welcome to the decision making part, so far, whatever scripts we have written are really series of commands
+
+1
+00:08.730 --> 00:11.310
+that executes, our script cannot make any decision.
+
+2
+00:11.310 --> 00:14.160
+But what if you want your script to make some decisions?
+
+3
+00:14.700 --> 00:20.580
+If something fails, you want to do something else, or if value of the variable so-and-so, then do
+
+4
+00:20.580 --> 00:22.140
+this, otherwise do something else.
+
+5
+00:23.280 --> 00:24.990
+Making the script smart.
+
+6
+00:25.890 --> 00:28.080
+And that's how we can do it through If statement.
+
+7
+00:28.230 --> 00:33.900
+So we say "if" we give some condition there. So condition is basically a test case, which we'll compare
+
+8
+00:33.900 --> 00:35.070
+something with something.
+
+9
+00:35.850 --> 00:39.450
+And if that is true, then it executes our commands.
+
+10
+00:39.630 --> 00:42.930
+If that is false, it does not execute our commands.
+
+11
+00:44.610 --> 00:47.130
+And we can do a few more thing if this fails.
+
+12
+00:47.160 --> 00:54.000
+We would like to execute something else or something else or something else so we can have "IF" condition,
+
+13
+00:54.000 --> 00:58.110
+then "Else IF" condition, "Else IF" condition, multiple "Else IF" condition.
+
+14
+00:58.350 --> 01:03.660
+If everything fails, then finally we can fall back to an "ELSE" and we'll see how that works.
+
+15
+01:04.790 --> 01:06.440
+So I'm back in my box.
+
+16
+01:07.100 --> 01:08.510
+Let's write it.
+
+17
+01:09.170 --> 01:12.140
+If 8if1.sh
+
+18
+01:15.880 --> 01:20.740
+OK, so what we will do in the script will take a number from a user and we'll compare if it's greater
+
+19
+01:20.740 --> 01:21.550
+than 100.
+
+20
+01:22.480 --> 01:24.750
+We print the message that it's greater than 100.
+
+21
+01:24.760 --> 01:27.820
+What if it's not greater than 100 will print another message.
+
+22
+01:28.780 --> 01:32.680
+So let's take read and take input from the user.
+
+23
+01:35.480 --> 01:37.130
+Let's take a variable NUM.
+
+24
+01:39.910 --> 01:45.250
+Now we will put a condition if square bracket and give a space.
+
+25
+01:46.710 --> 01:47.640
+Take the variable.
+
+26
+01:52.880 --> 01:55.820
+So we take the variable that user Enters.
+
+27
+01:55.850 --> 02:02.680
+We compare it, this is the operator -gt means greater than 100.
+
+28
+02:02.750 --> 02:06.080
+So two operand, we are comparing with an operator.
+
+29
+02:06.080 --> 02:16.490
+And if this is true, we say then and we will give  some space so it looks better. If this is true,
+
+30
+02:16.490 --> 02:20.000
+will say we have entered in the "IF" block and will give a command sleep.
+
+31
+02:20.570 --> 02:26.360
+So "sleep" waits for three seconds and then we print out a message.
+
+32
+02:28.390 --> 02:29.920
+Your number is greater than 100.
+
+33
+02:29.960 --> 02:34.670
+We'll give another echo, an empty line, and then we'll put some commands.
+
+34
+02:34.680 --> 02:35.390
+Let say date.
+
+35
+02:37.180 --> 02:38.170
+And we can close it.
+
+36
+02:38.920 --> 02:42.130
+So "fi" is for closing "if" is for opening.
+
+37
+02:42.490 --> 02:47.050
+Now, you really don't need to give any space, but it really looks better if you give some space.
+
+38
+02:48.100 --> 02:50.620
+Because in Python script, this will be mandatory.
+
+39
+02:50.620 --> 02:51.790
+Here, it's optional.
+
+40
+02:52.390 --> 02:56.020
+And finally will give a message that execution completed.
+
+41
+02:56.560 --> 02:59.410
+OK, let's run this or before that.
+
+42
+02:59.440 --> 03:00.040
+Take a look.
+
+43
+03:00.520 --> 03:05.170
+Square bracket, a space, variable, space, operator, space.
+
+44
+03:06.460 --> 03:10.390
+the other operand, space and the square brackets, so that is the syntax.
+
+45
+03:13.000 --> 03:20.780
+Then you're code "fi" closing, if this is true, it will execute this code, if this is false.
+
+46
+03:20.800 --> 03:22.260
+It will not execute this.
+
+47
+03:22.270 --> 03:23.890
+It will just execute the rest of the code.
+
+48
+03:24.700 --> 03:25.900
+So let's save this.
+
+49
+03:28.030 --> 03:29.400
+Let's make it executable.
+
+50
+03:33.060 --> 03:33.750
+Oops.
+
+51
+03:35.350 --> 03:36.100
++x
+
+52
+03:37.360 --> 03:38.830
+And let's run this.
+
+53
+03:40.000 --> 03:41.300
+OK, it's asking a number.
+
+54
+03:41.320 --> 03:44.590
+Let's enter something greater than 100, let's say 120.
+
+55
+03:46.120 --> 03:50.950
+Ok, we have entered the if block, because the condition was true and yes, your number is greater than
+
+56
+03:50.950 --> 03:53.710
+100, the date is printed and the rest of the code.
+
+57
+03:55.050 --> 03:58.530
+Now let's give something less than 100, let's say 50.
+
+58
+04:00.090 --> 04:04.710
+And you see, the condition was false, so it did not execute our "if" block.
+
+59
+04:05.310 --> 04:07.100
+What if you want to execute something else.
+
+60
+04:07.110 --> 04:09.390
+Let's copy the script with the name.
+
+61
+04:11.650 --> 04:12.220
+Nine.
+
+62
+04:13.490 --> 04:14.630
+we well say, unserscore there.
+
+63
+04:18.980 --> 04:21.110
+Now I can put an else block.
+
+64
+04:22.340 --> 04:24.170
+So we will basically say else.
+
+65
+04:25.510 --> 04:26.650
+Just before "fi"
+
+66
+04:28.550 --> 04:30.620
+And we will print another message here.
+
+67
+04:32.750 --> 04:37.180
+And this command will only get executed if this condition is false.
+
+68
+04:38.780 --> 04:41.420
+Which simply says your number is less than 100.
+
+69
+04:41.480 --> 04:42.920
+Let's save this.
+
+70
+04:47.050 --> 04:50.080
+Let us clear the screen and let's execute that.
+
+71
+04:53.310 --> 04:59.640
+OK, entera no, I'm going to say, 60, which is less than 100, so it should execute the "else" block
+
+72
+05:00.750 --> 05:03.570
+if I enter no greater than 100.
+
+73
+05:05.070 --> 05:06.300
+Then the "if" block.

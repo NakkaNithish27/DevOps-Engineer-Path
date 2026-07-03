@@ -1,0 +1,547 @@
+WEBVTT
+
+00:00.430 --> 00:01.860
+Instructor: Hello, and welcome.
+
+00:01.860 --> 00:05.523
+In this session, we'll be doing Maven, the build tool.
+
+00:07.064 --> 00:09.663
+So let's see what we are going to do in this.
+
+00:10.500 --> 00:13.590
+We are going to understand what is a build process.
+
+00:13.590 --> 00:15.753
+We'll see what are the build tools.
+
+00:16.650 --> 00:18.990
+We'll understand what is Maven.
+
+00:18.990 --> 00:20.943
+We'll see different Maven phases.
+
+00:21.870 --> 00:25.740
+We'll see Maven installation on Windows and Linux both
+
+00:25.740 --> 00:27.453
+and also with different versions.
+
+00:28.560 --> 00:30.510
+We'll go through the pom.xml file,
+
+00:30.510 --> 00:32.433
+which is the build file for Maven,
+
+00:33.780 --> 00:35.643
+and we'll see some Maven commands.
+
+00:38.230 --> 00:41.550
+Okay, first let's understand what really is a build process.
+
+00:41.550 --> 00:44.490
+Maven is a build tool, so what really is build?
+
+00:44.490 --> 00:46.230
+Well, developer write the code.
+
+00:46.230 --> 00:48.780
+We call it as simply source code.
+
+00:48.780 --> 00:51.900
+They're creating a product, a web application,
+
+00:51.900 --> 00:54.690
+a mobile app, anything that is a source code.
+
+00:54.690 --> 00:57.930
+They keep committing the changes to the source code,
+
+00:57.930 --> 00:59.940
+and while they commit the change,
+
+00:59.940 --> 01:01.020
+they would like to test it.
+
+01:01.020 --> 01:03.300
+So they will compile the code,
+
+01:03.300 --> 01:06.300
+and this is especially for the compiled languages,
+
+01:06.300 --> 01:09.990
+like Java, .NET, C, C#, like that.
+
+01:09.990 --> 01:11.490
+So they'll be compiled.
+
+01:11.490 --> 01:12.740
+They'll compile the code,
+
+01:13.590 --> 01:14.733
+then they'll test it.
+
+01:15.870 --> 01:20.160
+If it works as per their wish, then they will package it.
+
+01:20.160 --> 01:22.440
+So compile process is going to generate some files,
+
+01:22.440 --> 01:25.863
+the output files that they will package it into an archive.
+
+01:28.830 --> 01:30.900
+So a source is generated
+
+01:30.900 --> 01:34.293
+or changed programming language, like Java or .NET.
+
+01:35.790 --> 01:37.920
+Then the compile process will be there,
+
+01:37.920 --> 01:41.173
+a compile step, where if it's a Java code,
+
+01:41.173 --> 01:43.413
+a compiler like javac will be used.
+
+01:44.370 --> 01:46.800
+When it is compiled, the javac compiles it.
+
+01:46.800 --> 01:48.750
+It's going to generate the class files.
+
+01:49.950 --> 01:52.740
+There'll be unit test or integration test.
+
+01:52.740 --> 01:54.660
+So these unit tests are the tests written
+
+01:54.660 --> 01:58.770
+by the developers to test their own code.
+
+01:58.770 --> 02:00.960
+This is not the software testing.
+
+02:00.960 --> 02:05.130
+So a unit of code will be tested by a unit test.
+
+02:05.130 --> 02:10.130
+If that works fine, then the class files will be packaged.
+
+02:10.470 --> 02:12.843
+Now, based on what the target is,
+
+02:13.710 --> 02:16.530
+like, if it's a software for a Windows machine,
+
+02:16.530 --> 02:17.420
+that there will be EXE
+
+02:17.420 --> 02:21.450
+or MSI format of packaging or archiving.
+
+02:21.450 --> 02:25.680
+So EXE, MSI, these are the archive methods or extension.
+
+02:25.680 --> 02:28.410
+jar/war is for Java.
+
+02:28.410 --> 02:31.020
+So if a Java web application mostly will be packaged
+
+02:31.020 --> 02:35.340
+in WAR format or other languages, like Python, Ruby,
+
+02:35.340 --> 02:37.350
+the interpreted language, it'll be simply archived
+
+02:37.350 --> 02:39.393
+into Zip format or a tar file.
+
+02:40.740 --> 02:44.640
+Then also, if there is the step done by the developer
+
+02:44.640 --> 02:48.090
+of health check, that will be performed by the developers.
+
+02:48.090 --> 02:49.620
+So health check or code analysis,
+
+02:49.620 --> 02:52.230
+this process is going to find any upcoming bugs
+
+02:52.230 --> 02:54.840
+or security vulnerabilities in the code.
+
+02:54.840 --> 02:57.330
+So in short, this is the entire build process.
+
+02:57.330 --> 02:58.953
+Now there's a lot of steps.
+
+02:59.820 --> 03:02.220
+So developers, along with writing their code,
+
+03:02.220 --> 03:03.720
+regularly committing their code,
+
+03:03.720 --> 03:06.960
+they also need to regularly do this build process,
+
+03:06.960 --> 03:10.230
+which is too much work if they have to do it very regularly.
+
+03:10.230 --> 03:13.710
+So to automate these process, this build process,
+
+03:13.710 --> 03:15.990
+there are build tools.
+
+03:15.990 --> 03:19.140
+Build tools simply automate the build process,
+
+03:19.140 --> 03:21.540
+tools like Maven, which is for Java.
+
+03:21.540 --> 03:23.490
+It's based on XML format.
+
+03:23.490 --> 03:27.390
+So you mention in the XML file what you want to do,
+
+03:27.390 --> 03:28.560
+what are the dependencies,
+
+03:28.560 --> 03:31.500
+what is the versioning mechanism, all those things,
+
+03:31.500 --> 03:33.270
+and you run some Maven commands,
+
+03:33.270 --> 03:36.000
+and Maven tool is going to execute
+
+03:36.000 --> 03:38.580
+your build phases automatically.
+
+03:38.580 --> 03:40.380
+You don't need to run them manually,
+
+03:41.400 --> 03:43.680
+like Ant, which is, again, for Java.
+
+03:43.680 --> 03:47.040
+But here there is more scripting involved in Ant,
+
+03:47.040 --> 03:50.043
+and in general, Maven supersedes Ant.
+
+03:51.090 --> 03:53.910
+MSBuild, which is the Microsoft Build Engine,
+
+03:53.910 --> 03:57.090
+if you are writing code for the Microsoft product
+
+03:57.090 --> 03:59.193
+you'll be using build tool like MSBuild.
+
+04:00.120 --> 04:03.120
+And there's Gradle, which is in Groovy format
+
+04:03.120 --> 04:05.580
+and NANT, again for Windows.
+
+04:05.580 --> 04:08.430
+Or Make, which builds the executable program
+
+04:08.430 --> 04:11.130
+like our RPM WN packages
+
+04:11.130 --> 04:14.310
+or any program that's executed on the operating system,
+
+04:14.310 --> 04:17.130
+there's a Make build tool that can build
+
+04:17.130 --> 04:19.740
+from code to the program.
+
+04:19.740 --> 04:23.340
+And there are many, many build tools based on your target.
+
+04:23.340 --> 04:25.260
+Based on the programming language,
+
+04:25.260 --> 04:27.600
+the right build tool will be decided.
+
+04:27.600 --> 04:28.620
+So the developers
+
+04:28.620 --> 04:31.410
+or the software architects will already decide
+
+04:31.410 --> 04:32.400
+what is the build tool,
+
+04:32.400 --> 04:34.500
+and they'll set the build process already.
+
+04:35.490 --> 04:38.760
+We are going to do Maven
+
+04:38.760 --> 04:42.180
+because we are using a Java source code in this course,
+
+04:42.180 --> 04:44.700
+which will be built by the Maven tool.
+
+04:44.700 --> 04:47.703
+So Maven is really a build tool for Java.
+
+04:48.930 --> 04:51.873
+In Maven, you have multiple phases.
+
+04:53.760 --> 04:57.660
+You have first validate, then compile, then test.
+
+04:57.660 --> 05:00.840
+then package. integration, test, verify,
+
+05:00.840 --> 05:02.670
+install, and deploy.
+
+05:02.670 --> 05:07.380
+If you trigger any phase or if you start any phase,
+
+05:07.380 --> 05:09.960
+it will do all the previous phases.
+
+05:09.960 --> 05:11.430
+Like if you say, "Maven package,"
+
+05:11.430 --> 05:15.780
+it is going to do validate, compile, test, and then package.
+
+05:15.780 --> 05:17.853
+Well, let's understand this phases.
+
+05:21.090 --> 05:22.890
+First, the validate phase,
+
+05:22.890 --> 05:24.900
+so if you're on the command MVN validate,
+
+05:24.900 --> 05:26.340
+which will just check
+
+05:26.340 --> 05:28.410
+if the project directory structure is correct
+
+05:28.410 --> 05:31.560
+and all necessary information is available.
+
+05:31.560 --> 05:33.840
+If you say compile, it is going to use the compiler,
+
+05:33.840 --> 05:35.373
+and compile the source code.
+
+05:36.750 --> 05:41.070
+test is going to execute your unit testing framework.
+
+05:41.070 --> 05:42.617
+So this is a test on the source code
+
+05:42.617 --> 05:45.600
+so you don't need to deploy the source code anywhere,
+
+05:45.600 --> 05:47.790
+or you don't even need to package it.
+
+05:47.790 --> 05:50.520
+So developer will use some unit testing framework,
+
+05:50.520 --> 05:52.800
+and your Maven test process is going to invoke that
+
+05:52.800 --> 05:55.533
+and run all the unit test cases and return the result.
+
+05:57.030 --> 05:59.580
+Package phase is going to take the compiled source code
+
+05:59.580 --> 06:02.850
+and package it into right distributable format.
+
+06:02.850 --> 06:05.520
+Like, if the target is a web application,
+
+06:05.520 --> 06:08.040
+you'd be packaging it into JAR/WAR format.
+
+06:08.040 --> 06:11.130
+Now this packaging methods will be already defined
+
+06:11.130 --> 06:13.290
+in the pom.xml file,
+
+06:13.290 --> 06:14.540
+and we'll be seeing that.
+
+06:15.900 --> 06:17.460
+verify is going to run checks
+
+06:17.460 --> 06:19.680
+on the integration test results
+
+06:19.680 --> 06:22.233
+to check the quality criteria has been met or not.
+
+06:23.100 --> 06:25.410
+Install phase is going to install
+
+06:25.410 --> 06:27.480
+or should I say, download the dependencies
+
+06:27.480 --> 06:30.360
+and keep it in your local repository.
+
+06:30.360 --> 06:32.250
+So developer will mention the dependencies
+
+06:32.250 --> 06:36.873
+of their source code, the dependent library, and packages.
+
+06:38.070 --> 06:40.290
+They'll mention in pom.xml file,
+
+06:40.290 --> 06:42.090
+and when you executing any phase
+
+06:42.090 --> 06:43.290
+if you're saying Maven test,
+
+06:43.290 --> 06:45.810
+it's going to download the dependencies from the internet
+
+06:45.810 --> 06:48.990
+from Maven repositories and then use them.
+
+06:48.990 --> 06:51.480
+Install phase will download all the dependencies
+
+06:51.480 --> 06:53.340
+and keep it in the local repository
+
+06:53.340 --> 06:55.953
+so it doesn't need to be downloaded again and again.
+
+06:57.630 --> 07:01.290
+Then the deploy phase, which will take your package
+
+07:01.290 --> 07:04.110
+that you have created, and it's going to push it
+
+07:04.110 --> 07:05.850
+to some remote repository
+
+07:05.850 --> 07:06.780
+so it can be shared
+
+07:06.780 --> 07:09.420
+by other developers or the team members
+
+07:09.420 --> 07:11.580
+or even the DevOps engineers
+
+07:11.580 --> 07:14.283
+who want to deploy that package to some servers.
+
+07:15.270 --> 07:16.740
+Let's again check all this
+
+07:16.740 --> 07:20.343
+and few other phases from this documentation.
+
+07:23.100 --> 07:25.890
+So you have the build lifecycle in Maven.
+
+07:25.890 --> 07:28.830
+If you want to get this link directly from Google,
+
+07:28.830 --> 07:30.840
+just Google for Build Lifecycle Maven,
+
+07:30.840 --> 07:32.290
+and you should get this link.
+
+07:33.780 --> 07:37.020
+So different phases and that information,
+
+07:37.020 --> 07:38.940
+the command line, how you're going to use it,
+
+07:38.940 --> 07:42.540
+MVN verify to execute the verify phase,
+
+07:42.540 --> 07:45.690
+MVN clean deploy, which will first execute clean,
+
+07:45.690 --> 07:47.493
+and then it'll execute deploy.
+
+07:49.573 --> 07:53.310
+Okay, you have documentation on packaging, plugins,
+
+07:53.310 --> 07:55.610
+how to mention plugin in pom.xml file.
+
+07:55.610 --> 07:57.783
+We will go through that file in a moment,
+
+07:58.980 --> 08:02.310
+some lifecycle references and why they are used,
+
+08:02.310 --> 08:06.480
+their description, pre-clean, clean, post-clean
+
+08:06.480 --> 08:08.133
+validate, initialize,
+
+08:09.150 --> 08:10.710
+built-in lifecycle bindings,
+
+08:10.710 --> 08:13.200
+and you can see all these different options
+
+08:13.200 --> 08:14.880
+and why they are used.
+
+08:14.880 --> 08:18.870
+But mostly, this will be given to you by the developers
+
+08:18.870 --> 08:22.440
+which phase you need to run and what to expect.
+
+08:22.440 --> 08:24.660
+So take a look at the documentation,
+
+08:24.660 --> 08:27.870
+but you really don't need to spend too much time on this.
+
+08:27.870 --> 08:29.520
+This is majorly developers work.
+
+08:29.520 --> 08:31.260
+As a DevOps, we should be aware
+
+08:31.260 --> 08:34.710
+about a few things on a build tool like Maven
+
+08:34.710 --> 08:36.660
+and that's what we will see in the next lecture.
+
+08:36.660 --> 08:38.763
+We'll do some hands-on with Maven.

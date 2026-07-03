@@ -1,0 +1,109 @@
+WEBVTT
+
+0
+00:00.540 --> 00:06.690
+Welcome, in this session, we are going to create three virtual machines on which we can practice our
+
+1
+00:06.690 --> 00:10.740
+Bash scripts, the vagrant file is placed in the resources section.
+
+2
+00:10.740 --> 00:11.970
+You can download it from there.
+
+3
+00:12.480 --> 00:15.630
+First, you need to create a directory somewhere in your system.
+
+4
+00:25.250 --> 00:29.660
+In this directory, I'm going to place the vagrant file, which is in my downloads directory.
+
+5
+00:34.050 --> 00:40.080
+So I am copying vagrantfile from downloads dir to my bash scripts dir, where I've created in d drive.
+
+6
+00:42.280 --> 00:43.540
+Let's get into that dir.
+
+7
+00:47.520 --> 00:48.960
+Let's open this Vagrantfile
+
+8
+00:49.960 --> 00:54.640
+I'm using vim in gitbash, if you want, you can use notepad plus plus.
+
+9
+00:56.280 --> 01:01.800
+So there are VMs in this, script box, web01 and web02
+
+10
+01:03.250 --> 01:09.280
+All these three machines are using the same box, CentOS seven, and they have their own unique IP.
+
+11
+01:11.390 --> 01:17.240
+We're going to write all our scripts in script box, as you would have already guessed that. In first
+
+12
+01:17.240 --> 01:23.090
+part we will just write scripts on script box, then we will also push scripts to web01/02
+
+13
+01:24.040 --> 01:25.360
+We just need this one vm.
+
+14
+01:25.370 --> 01:26.540
+So let's bring it up.
+
+15
+01:28.250 --> 01:31.130
+I'm going to see vagrant up script box.
+
+16
+01:32.920 --> 01:37.450
+If you see a vagrant up, all three VMs will come up, but for now, we just need script box.
+
+17
+01:39.500 --> 01:40.380
+My VM is up.
+
+18
+01:40.400 --> 01:41.530
+I'm going to log into it.
+
+19
+01:46.180 --> 01:55.590
+OK, first thing, we will set the hostname, So we will open the file /etc/hostname file and we will give
+
+20
+01:55.600 --> 01:57.280
+name as script box.
+
+21
+02:00.130 --> 02:01.360
+Run the hostname, command.
+
+22
+02:04.270 --> 02:07.690
+And now let's log out and a logging.
+
+23
+02:11.230 --> 02:18.160
+OK, now you see the host name is script box likewise, we will do it for the other VMs also later, which
+
+24
+02:18.160 --> 02:22.240
+shows in the prompt so you can understand where you are currently connected to.
+
+25
+02:23.140 --> 02:27.100
+So we will do sudo -i I we are going to write all our script with the root user.
+
+26
+02:28.340 --> 02:31.610
+So bring up your vm, set the hostname, join me in the next video.

@@ -1,0 +1,1600 @@
+WEBVTT
+
+00:00.000 --> 00:02.850
+Instructor: Welcome to AWS console.
+
+00:02.850 --> 00:04.560
+In this lecture, we are going to see
+
+00:04.560 --> 00:08.670
+how to launch a virtual machine on AWS cloud,
+
+00:08.670 --> 00:11.790
+also called as EC2 instance.
+
+00:11.790 --> 00:16.410
+So, whenever you hear the word as EC2 or EC2 instances,
+
+00:16.410 --> 00:18.570
+or instances, in AWS,
+
+00:18.570 --> 00:21.660
+that means the virtual machine or virtual servers.
+
+00:21.660 --> 00:23.760
+So, while we're launching this instance,
+
+00:23.760 --> 00:25.830
+we are also going to see a lot of features
+
+00:25.830 --> 00:27.990
+and options in EC2.
+
+00:27.990 --> 00:30.030
+First, let's start with the region.
+
+00:30.030 --> 00:32.050
+So, I'm in North Virginia region.
+
+00:32.050 --> 00:35.490
+And usually, I stay in United States region
+
+00:35.490 --> 00:38.550
+because they're cheaper compared to some other.
+
+00:38.550 --> 00:40.770
+Some regions are expensive, but do not worry.
+
+00:40.770 --> 00:43.923
+Anyways, we are going to use most of the things free tier.
+
+00:45.174 --> 00:47.220
+But I still recommend you stay
+
+00:47.220 --> 00:50.370
+in any of the United States region.
+
+00:50.370 --> 00:52.080
+Region has a code.
+
+00:52.080 --> 00:56.760
+So, I'm in us-east-1 or I can say North Virginia.
+
+00:56.760 --> 01:01.020
+Now, let's search for the service EC2 over here, EC2.
+
+01:01.020 --> 01:04.470
+You can see here EC2 virtual servers in the cloud.
+
+01:04.470 --> 01:05.978
+Click on it.
+
+01:05.978 --> 01:08.040
+Here, it says Create, manage,
+
+01:08.040 --> 01:10.803
+and monitor virtual servers in the cloud.
+
+01:11.880 --> 01:14.433
+Okay. Now, let's click on this Dashboard.
+
+01:15.810 --> 01:18.880
+Okay, so this information over here about the resources,
+
+01:18.880 --> 01:20.490
+this is not auto refresh,
+
+01:20.490 --> 01:22.080
+so you make sure you click on refresh
+
+01:22.080 --> 01:24.600
+to get the latest status.
+
+01:24.600 --> 01:26.490
+You scroll down a little bit.
+
+01:26.490 --> 01:28.110
+You should see information over here.
+
+01:28.110 --> 01:31.110
+This service is operating normally.
+
+01:31.110 --> 01:33.030
+If there is any issue with the region,
+
+01:33.030 --> 01:35.700
+you should get the message over here.
+
+01:35.700 --> 01:39.240
+So, the region that I have selected is us-east-1,
+
+01:39.240 --> 01:43.950
+North Virginia, and we know the region is just a label.
+
+01:43.950 --> 01:45.540
+Region is not the data center.
+
+01:45.540 --> 01:48.960
+Zones are the physical data centers.
+
+01:48.960 --> 01:52.080
+So, us-east-1a, that's the zone,
+
+01:52.080 --> 01:56.940
+one of the zone in the region, us-east-1.
+
+01:56.940 --> 02:00.150
+So, likewise, you have then 1a, 1b, 1c, 1d.
+
+02:00.150 --> 02:04.593
+Any region you select, you will have minimum two zones.
+
+02:05.670 --> 02:08.850
+Also, take a look over here on the left side,
+
+02:08.850 --> 02:09.990
+you have many sections.
+
+02:09.990 --> 02:12.210
+You have the Dashboard that we are seeing right now.
+
+02:12.210 --> 02:13.290
+You have Instances.
+
+02:13.290 --> 02:16.863
+Again, instances means the virtual machine on AWS.
+
+02:17.760 --> 02:21.660
+Our virtual servers on AWS are called EC2 instances.
+
+02:21.660 --> 02:24.240
+You have Instances, you have Instances Types,
+
+02:24.240 --> 02:26.880
+a few other things that we'll see one by one.
+
+02:26.880 --> 02:30.270
+Images, Amazon Machine Image.
+
+02:30.270 --> 02:32.134
+Like in Vagrant, we have seen,
+
+02:32.134 --> 02:34.440
+we have Vagrant boxes like that.
+
+02:34.440 --> 02:36.630
+In AWS, we have AMI.
+
+02:36.630 --> 02:39.300
+So, AMIs are the Vagrant boxes of AWS,
+
+02:39.300 --> 02:40.500
+you can say like that.
+
+02:40.500 --> 02:43.680
+Just for understanding, but just call them as AMI.
+
+02:43.680 --> 02:46.140
+Then, you have Elastic Block Store.
+
+02:46.140 --> 02:49.410
+These are the hard disks, Volumes, Snapshot.
+
+02:49.410 --> 02:51.600
+We'll see them one by one later.
+
+02:51.600 --> 02:54.030
+Network &amp; Security, you see Security Groups.
+
+02:54.030 --> 02:55.919
+Those are the firewalls.
+
+02:55.919 --> 02:59.190
+Elastic IPs, reserved public IP.
+
+02:59.190 --> 03:01.140
+You can reserve a public IP
+
+03:01.140 --> 03:04.200
+and you can attach it to your instance.
+
+03:04.200 --> 03:05.040
+And few other things.
+
+03:05.040 --> 03:06.810
+You have Key Pairs, the login keys,
+
+03:06.810 --> 03:10.740
+Network Interfaces, Load Balancers, Auto Scaling.
+
+03:10.740 --> 03:13.637
+We'll see all these things one by one.
+
+03:13.637 --> 03:15.360
+And you know what? Enough talking now.
+
+03:15.360 --> 03:16.980
+Let's start launching an instance.
+
+03:16.980 --> 03:19.470
+So, you can click over here, Launch instance,
+
+03:19.470 --> 03:21.480
+or you can go to Instances
+
+03:21.480 --> 03:25.530
+and you can click over here in Launch Instances.
+
+03:25.530 --> 03:28.029
+Okay, let's click on Launch Instances.
+
+03:28.029 --> 03:29.490
+Okay, so the first one
+
+03:29.490 --> 03:33.390
+is naming the instance, also called as tags.
+
+03:33.390 --> 03:36.690
+So, first will be the name tag,
+
+03:36.690 --> 03:39.780
+which I'm going to give it as web01.
+
+03:39.780 --> 03:43.470
+You can add more tags, you click on add additional tags.
+
+03:43.470 --> 03:45.180
+You get this option.
+
+03:45.180 --> 03:46.290
+So, name web01,
+
+03:46.290 --> 03:50.040
+that will be the tag on the instances.
+
+03:50.040 --> 03:52.080
+But you can also tag other things
+
+03:52.080 --> 03:54.813
+like the volumes, the network interfaces.
+
+03:55.980 --> 03:57.420
+So, when we create this instance,
+
+03:57.420 --> 03:58.770
+we'll see that we have volumes
+
+03:58.770 --> 04:01.170
+and network interfaces on the instances.
+
+04:01.170 --> 04:02.373
+Add new tag.
+
+04:03.960 --> 04:04.920
+Let's give another tag.
+
+04:04.920 --> 04:09.060
+Let's say Project, Titan, the project name.
+
+04:09.060 --> 04:12.540
+Let's say I'm launching this instance for the Project Titan.
+
+04:12.540 --> 04:14.400
+And again, I'm going to volume,
+
+04:14.400 --> 04:17.544
+give the tag to the volume, to the network interfaces.
+
+04:17.544 --> 04:19.938
+Now, like that, you can add more tag.
+
+04:19.938 --> 04:22.050
+Tags are very good for filtering
+
+04:22.050 --> 04:23.880
+if you want to look for all the instances
+
+04:23.880 --> 04:25.830
+that belongs to Titan Project in the search,
+
+04:25.830 --> 04:27.300
+you can just queue Titan,
+
+04:27.300 --> 04:29.190
+and you'll get the list of all the instances.
+
+04:29.190 --> 04:32.550
+Or the environment tag like you know, dev environment,
+
+04:32.550 --> 04:35.190
+Q environment, production environment.
+
+04:35.190 --> 04:38.703
+So, like Env, and I'm going to say here Dev.
+
+04:39.540 --> 04:40.740
+So, the project you're working on
+
+04:40.740 --> 04:42.300
+will have the naming convention.
+
+04:42.300 --> 04:44.040
+You can use those naming conventions
+
+04:44.040 --> 04:45.990
+and give the proper tagging.
+
+04:45.990 --> 04:47.640
+Let's come down.
+
+04:47.640 --> 04:48.840
+Now, selecting the AMI,
+
+04:48.840 --> 04:52.470
+which image would you select to launch your instance?
+
+04:52.470 --> 04:54.600
+There is no OS installation here.
+
+04:54.600 --> 04:57.210
+We need to select the ready-made image.
+
+04:57.210 --> 04:59.730
+So, first, you have the common options, Amazon Linux,
+
+04:59.730 --> 05:02.550
+which is very similar to CentOS.
+
+05:02.550 --> 05:04.410
+I should say, no, exactly similar,
+
+05:04.410 --> 05:06.330
+except you have few changes over here
+
+05:06.330 --> 05:08.190
+like the download repositories.
+
+05:08.190 --> 05:10.050
+The software repositories will be different.
+
+05:10.050 --> 05:12.060
+Otherwise, most of it is same.
+
+05:12.060 --> 05:13.475
+So, like you have CentOS 9.
+
+05:13.475 --> 05:16.233
+Here, you have Amazon Linux 2023.
+
+05:17.130 --> 05:18.300
+You have Amazon Linux 2.
+
+05:18.300 --> 05:23.300
+That is the equivalent of CentOS 7 or RHEL 7.
+
+05:24.990 --> 05:28.800
+And this lecture, we'll go with Amazon Linux 2023 AMI.
+
+05:28.800 --> 05:31.380
+But then, we'll also look at other AMIs.
+
+05:31.380 --> 05:33.003
+So, the common options to macOS,
+
+05:34.170 --> 05:37.350
+you have Ubuntu, you have Windows, Red Hat,
+
+05:37.350 --> 05:41.310
+SUSE Linux, Debian, and you can search for more AMIs.
+
+05:41.310 --> 05:43.620
+So, if you click on Browse more AMIs.
+
+05:43.620 --> 05:46.770
+So, first section is quick start the popular AMIs.
+
+05:48.120 --> 05:49.380
+Now, take a look, scroll down,
+
+05:49.380 --> 05:51.483
+take a look at the AMI, read about them.
+
+05:52.588 --> 05:54.720
+And then, there is the marketplace
+
+05:54.720 --> 05:58.890
+where you can search for AMIs with softwares as well.
+
+05:58.890 --> 06:02.700
+Like if you're looking for a specific software like OpenVPN.
+
+06:02.700 --> 06:04.590
+So, if you select this, you launch the instance,
+
+06:04.590 --> 06:07.080
+you have the software inbuilt into that.
+
+06:07.080 --> 06:08.670
+Look at the charges.
+
+06:08.670 --> 06:09.862
+Like for example, this one,
+
+06:09.862 --> 06:12.450
+the streaming engine, Wowza.
+
+06:12.450 --> 06:16.530
+It is $85 per month, plus few other things.
+
+06:16.530 --> 06:18.480
+So, be careful while selecting the AMI.
+
+06:19.872 --> 06:22.354
+You have Splunk Enterprise.
+
+06:22.354 --> 06:25.860
+This will come with the Splunk software.
+
+06:25.860 --> 06:27.060
+And when you launch it later,
+
+06:27.060 --> 06:30.000
+you can give the license keys and stuff.
+
+06:30.000 --> 06:32.190
+So, some software comes with the licensing,
+
+06:32.190 --> 06:36.390
+some you can purchase license and add the information later.
+
+06:36.390 --> 06:38.430
+So, if we come to search over here
+
+06:38.430 --> 06:40.350
+and let's search for let's say, CentOS.
+
+06:40.350 --> 06:42.750
+Let's hit Enter and let's see what we get.
+
+06:42.750 --> 06:46.983
+So, we have CentOS Stream 9, CentOS Stream 8, CentOS 10.
+
+06:47.880 --> 06:50.081
+So, most of the CentOS will be free,
+
+06:50.081 --> 06:53.490
+but some of them will be with support
+
+06:53.490 --> 06:55.230
+and will be some charges to it.
+
+06:55.230 --> 06:59.017
+Most of them you see $0 per year, it's free.
+
+06:59.017 --> 07:02.010
+So, take a look, search for your favorite operating system
+
+07:02.010 --> 07:05.310
+or software over here, and just search.
+
+07:05.310 --> 07:06.510
+Don't do anything.
+
+07:06.510 --> 07:08.373
+Go back to Quick Start.
+
+07:09.720 --> 07:11.931
+Remove this entry.
+
+07:11.931 --> 07:15.540
+And make sure to select Amazon Linux 2023 AMI
+
+07:15.540 --> 07:18.660
+where you see Free tier eligible.
+
+07:18.660 --> 07:21.990
+That means we can select a free tier instance and this AMI.
+
+07:21.990 --> 07:24.573
+So, the entire instance will be free of charge.
+
+07:25.560 --> 07:27.900
+Okay, one final thing, there is community AMI.
+
+07:27.900 --> 07:30.210
+Now, these are the AMIs published by people like,
+
+07:30.210 --> 07:33.054
+you can also create your own AMI and publish it.
+
+07:33.054 --> 07:36.570
+I never use these AMIs.
+
+07:36.570 --> 07:39.000
+I always trust in building my own AMI
+
+07:39.000 --> 07:40.470
+instead of using community AMI.
+
+07:40.470 --> 07:43.893
+So, I go to AWS Marketplace most of the time.
+
+07:44.769 --> 07:46.620
+I create the instance,
+
+07:46.620 --> 07:48.387
+then I create my own custom AMI,
+
+07:48.387 --> 07:50.730
+and that's the standard actually.
+
+07:50.730 --> 07:51.870
+Okay, anyways, let's go back
+
+07:51.870 --> 07:55.897
+to Amazon Linux 2023 AMI in the quick start, select that.
+
+07:55.897 --> 07:57.693
+Confirm changes.
+
+07:59.790 --> 08:02.820
+Once again, take a look what AMI you have selected.
+
+08:02.820 --> 08:05.100
+Look at the username, ec2-user.
+
+08:05.100 --> 08:05.970
+So, that user,
+
+08:05.970 --> 08:08.130
+we are going to use to log into this instance.
+
+08:08.130 --> 08:09.930
+This is a Linux-based instance.
+
+08:09.930 --> 08:11.470
+So, we are going to do SSH.
+
+08:11.470 --> 08:14.790
+And to do SSH, we need the username and we need password
+
+08:14.790 --> 08:17.520
+or the login key that we'll see in a moment.
+
+08:17.520 --> 08:20.700
+Anyways, let's scroll down and look at the instance type.
+
+08:20.700 --> 08:23.400
+Instance type basically tells you how much CPU,
+
+08:23.400 --> 08:24.788
+how much RAM memory,
+
+08:24.788 --> 08:28.200
+and few other things like the storage speed
+
+08:28.200 --> 08:30.630
+and network speed, all those things, all those information,
+
+08:30.630 --> 08:34.041
+the resource information that you need for the instance.
+
+08:34.041 --> 08:37.320
+Now, t2.micro or t3.micro will be free tier-eligible.
+
+08:37.320 --> 08:40.140
+So, we are going to go with t2.micro right now.
+
+08:40.140 --> 08:43.545
+But if you click on dropdown, you should see a huge list,
+
+08:43.545 --> 08:47.250
+and you should see there, the number of CPUs,
+
+08:47.250 --> 08:50.820
+the number of memory, and the charges associated with that.
+
+08:50.820 --> 08:54.543
+If we go with t2.micro, there won't any charge whatsoever.
+
+08:55.710 --> 08:57.870
+If you wanna see more detail about this instance type,
+
+08:57.870 --> 09:01.890
+just search on the internet, EC2 instance type,
+
+09:01.890 --> 09:04.067
+and you can come to this documentation.
+
+09:04.067 --> 09:05.730
+You have different sections over here.
+
+09:05.730 --> 09:09.570
+General purpose, the M series, the most popular one.
+
+09:09.570 --> 09:13.560
+You should see here how many RAMs, CPU, towards.
+
+09:13.560 --> 09:17.940
+Like if you go with m8g.medium, one CPU, 4 GB memory,
+
+09:17.940 --> 09:20.580
+network speed, and EBS bandwidth,
+
+09:20.580 --> 09:25.580
+that's the storage bandwidth, the hard disk.
+
+09:25.680 --> 09:27.090
+You have Compute Optimized
+
+09:27.090 --> 09:28.350
+where you have the C series,
+
+09:28.350 --> 09:33.270
+which is for processor or CPU-intensive workloads.
+
+09:33.270 --> 09:34.410
+Memory Optimized,
+
+09:34.410 --> 09:38.610
+like for example, databases, accelerated computing you have.
+
+09:38.610 --> 09:41.190
+You have Storage Optimized, you have all this.
+
+09:41.190 --> 09:42.270
+So, based on your requirement,
+
+09:42.270 --> 09:45.180
+you can select one or you can later change it as well.
+
+09:45.180 --> 09:47.820
+Anyways, people most of the time in the beginning,
+
+09:47.820 --> 09:51.890
+in the project goals with M series, then based on the load,
+
+09:51.890 --> 09:55.023
+based on the computing, they changed the instance type.
+
+09:55.860 --> 09:56.730
+Let's come back.
+
+09:56.730 --> 09:58.980
+Let's make sure we have t2.micro.
+
+09:58.980 --> 10:01.920
+Be careful with this. Select t2.micro.
+
+10:01.920 --> 10:03.600
+Next is key pair, the login key.
+
+10:03.600 --> 10:05.088
+How do we log in?
+
+10:05.088 --> 10:08.220
+So, we can click on Create new key pair.
+
+10:08.220 --> 10:09.360
+As the name says, it's pair,
+
+10:09.360 --> 10:11.310
+you'll get the public IP and private IP.
+
+10:11.310 --> 10:13.808
+Public IP will be in the AWS
+
+10:13.808 --> 10:17.010
+and private key will be downloaded in your machine.
+
+10:17.010 --> 10:19.860
+So, let's give this a name. I'm going to say webloginkey.
+
+10:23.070 --> 10:24.600
+You have two type over here, .pem,
+
+10:24.600 --> 10:26.874
+we are going to go with .pem, P-E-M.
+
+10:26.874 --> 10:31.800
+Then, you have .ppk that is used for PuTTY or PuTTY.
+
+10:31.800 --> 10:34.830
+We are going to use Git Bash or Terminal.
+
+10:34.830 --> 10:37.080
+So, we'll go with .pem format.
+
+10:37.080 --> 10:38.613
+Say Create key pair.
+
+10:40.140 --> 10:40.973
+So, when you do that,
+
+10:40.973 --> 10:43.410
+it is going to download the private key.
+
+10:43.410 --> 10:46.931
+This is the private key. It's in my Downloads folder.
+
+10:46.931 --> 10:48.810
+So, this is the login key
+
+10:48.810 --> 10:52.590
+and this is the lock also called as the public key.
+
+10:52.590 --> 10:55.170
+Okay, next, network settings.
+
+10:55.170 --> 10:56.430
+So, these information,
+
+10:56.430 --> 10:58.350
+we'll talk about them in later lectures
+
+10:58.350 --> 11:02.640
+like the VPC subnet, auto-assigned public IP.
+
+11:02.640 --> 11:03.990
+What I want to show here first
+
+11:03.990 --> 11:07.080
+is the security group firewall,
+
+11:07.080 --> 11:08.940
+mandatory for every instance.
+
+11:08.940 --> 11:11.483
+So, if you do not create your own security group,
+
+11:11.483 --> 11:13.960
+this console will create it for you
+
+11:13.960 --> 11:16.620
+and you need to mention the rules over there.
+
+11:16.620 --> 11:20.379
+So, we are going to say here, Edit, click on Edit over here.
+
+11:20.379 --> 11:24.030
+Now, when you go here, you see security group name.
+
+11:24.030 --> 11:26.583
+We are going to change it to web-sg.
+
+11:27.570 --> 11:30.761
+Okay, in the description, I'm going to give the same
+
+11:30.761 --> 11:33.630
+or you can give some meaningful description
+
+11:33.630 --> 11:35.280
+or message over here.
+
+11:35.280 --> 11:37.230
+Here comes the rule, inbound rule,
+
+11:37.230 --> 11:39.420
+the traffic coming towards the instance.
+
+11:39.420 --> 11:41.853
+So, here, it's selected as type ssh.
+
+11:44.762 --> 11:46.563
+SSH port number is 22.
+
+11:47.640 --> 11:51.540
+Source types, from where you want to allow port 22,
+
+11:51.540 --> 11:54.240
+from where the access will be coming.
+
+11:54.240 --> 11:57.900
+So, I'm going to say My IP, when I click on the My IP,
+
+11:57.900 --> 12:00.750
+it's going to automatically find my public IP.
+
+12:00.750 --> 12:02.223
+It's my internet public IP.
+
+12:03.335 --> 12:05.670
+And also, this changes.
+
+12:05.670 --> 12:08.070
+I have this public IP right now.
+
+12:08.070 --> 12:10.110
+Maybe tomorrow it will be different.
+
+12:10.110 --> 12:12.120
+If you do not have a static public IP,
+
+12:12.120 --> 12:14.360
+most of the people don't have static public IP.
+
+12:14.360 --> 12:15.780
+For the router,
+
+12:15.780 --> 12:18.180
+they'll have the dynamic one, which changes regularly.
+
+12:18.180 --> 12:20.400
+So, when it changes, you need to update this rule.
+
+12:20.400 --> 12:22.770
+And we'll see that once we launch the instance.
+
+12:22.770 --> 12:27.770
+For now, just say ssh here in the type, source type, My IP.
+
+12:28.250 --> 12:31.500
+It will search your IP and really give some description.
+
+12:31.500 --> 12:36.500
+Allow 22 from my office.
+
+12:36.510 --> 12:40.050
+Any meaningful description you can give for this role.
+
+12:40.050 --> 12:41.130
+Scroll down.
+
+12:41.130 --> 12:45.180
+Storage type, sorry, yeah, type and size both.
+
+12:45.180 --> 12:47.760
+So, gp3, general purpose 3,
+
+12:47.760 --> 12:51.768
+the most common one right now, and the size, 8 GB.
+
+12:51.768 --> 12:53.970
+We'll keep it as it is in detail lecture.
+
+12:53.970 --> 12:56.202
+Later lecture we are going to see this in detail.
+
+12:56.202 --> 12:59.364
+Scroll down and you should see here Advanced details.
+
+12:59.364 --> 13:03.783
+Expand this and come till the end over here.
+
+13:05.517 --> 13:08.160
+User data, these are the commands
+
+13:08.160 --> 13:11.024
+or the script, basically commands only,
+
+13:11.024 --> 13:16.024
+that you want your instance to run when it's launched.
+
+13:16.170 --> 13:19.530
+In Vagrant, we have seen Vagrant provisioning same,
+
+13:19.530 --> 13:20.760
+same as that.
+
+13:20.760 --> 13:23.070
+But first line, now this is a Linux instance,
+
+13:23.070 --> 13:27.917
+so we need to give here #!/bin/bash.
+
+13:28.770 --> 13:30.900
+We know what is this from the bash scripting lecture,
+
+13:30.900 --> 13:32.340
+it's going to open up a bash shell
+
+13:32.340 --> 13:35.250
+and execute all the command that we mentioned down here.
+
+13:35.250 --> 13:40.250
+So, I'm going to say dnf install, wait, wrong spelling,
+
+13:40.920 --> 13:45.270
+dnf install httpd -y.
+
+13:45.270 --> 13:48.663
+And I'm going to say systemctl start httpd.
+
+13:50.411 --> 13:54.083
+And I'm gonna say systemctl enable httpd.
+
+13:55.526 --> 13:58.770
+Like that, you can give your commands over here.
+
+13:58.770 --> 14:00.390
+And when this instance is launched,
+
+14:00.390 --> 14:03.810
+it's ready, it's going to execute all those commands.
+
+14:03.810 --> 14:08.721
+So, let's keep that and let's click on Launch instance.
+
+14:08.721 --> 14:11.220
+Now, I have used dnf command over there
+
+14:11.220 --> 14:13.680
+because it's Amazon Linux, it's same as CentOS.
+
+14:13.680 --> 14:16.050
+You can use YUM install or DNF install.
+
+14:16.050 --> 14:18.120
+So, most of the CentOS command
+
+14:18.120 --> 14:21.379
+will work on Amazon Linux 2023.
+
+14:21.379 --> 14:22.560
+Okay, the instance is launched.
+
+14:22.560 --> 14:23.910
+This is the instance ID.
+
+14:23.910 --> 14:26.700
+Every resource in AWS will have an ID.
+
+14:26.700 --> 14:27.960
+So, this is the instance ID.
+
+14:27.960 --> 14:30.326
+If you click on that, it's going to open a new tab,
+
+14:30.326 --> 14:31.890
+and bring you over here
+
+14:31.890 --> 14:35.880
+where it will search for the instance type and show you.
+
+14:35.880 --> 14:37.470
+You can later remove this.
+
+14:37.470 --> 14:39.720
+You can click on this refresh.
+
+14:39.720 --> 14:41.460
+So, you see the name tag, web01.
+
+14:41.460 --> 14:43.680
+The instance ID, you see the instance state,
+
+14:43.680 --> 14:45.660
+it's in running state right now.
+
+14:45.660 --> 14:47.940
+Instance type, t2.micro.
+
+14:47.940 --> 14:50.130
+Status check, initializing.
+
+14:50.130 --> 14:53.940
+So, AWS will perform two health check on your instance.
+
+14:53.940 --> 14:56.569
+One is on the hardware, one is on the VM.
+
+14:56.569 --> 14:58.050
+And this will take time,
+
+14:58.050 --> 15:00.290
+but the instance, you can log in, you can use
+
+15:00.290 --> 15:02.910
+before even the health check completes.
+
+15:02.910 --> 15:07.044
+In which zone it was created, we have not selected any zone.
+
+15:07.044 --> 15:10.410
+If you do not select any zone, AWS will decide for you
+
+15:10.410 --> 15:13.217
+which zone your instance will be launched in.
+
+15:13.217 --> 15:17.370
+You'll get a public DNS name for your instance.
+
+15:17.370 --> 15:18.930
+This is accessible publicly.
+
+15:18.930 --> 15:23.331
+This name will resolve to a public IP, this one.
+
+15:23.331 --> 15:25.620
+Your public IP, you have elastic IP.
+
+15:25.620 --> 15:27.745
+We'll talk about that in later lecture.
+
+15:27.745 --> 15:31.230
+Elastic IP and public IPv4 both are public IPs,
+
+15:31.230 --> 15:33.360
+but elastic IP is reserve one.
+
+15:33.360 --> 15:35.880
+As I said, we'll talk about that in detail later.
+
+15:35.880 --> 15:39.420
+Security group, the login key, and the launch time.
+
+15:39.420 --> 15:42.780
+Please, please take a look at all this information.
+
+15:42.780 --> 15:44.790
+We are going to need them later.
+
+15:44.790 --> 15:46.170
+So, pause this lecture
+
+15:46.170 --> 15:49.501
+and go through all these details over here of the instance.
+
+15:49.501 --> 15:52.830
+EMI ID, there are many other information over here later.
+
+15:52.830 --> 15:54.780
+When you want to look for the information,
+
+15:54.780 --> 15:56.310
+you know where to go.
+
+15:56.310 --> 15:59.430
+You have status and alarms, you have monitoring,
+
+15:59.430 --> 16:03.042
+where you can see the CP utilization and few other things.
+
+16:03.042 --> 16:08.042
+In security, you have the security group name or the ID.
+
+16:08.070 --> 16:10.647
+In networking, you have the public IP, private IP,
+
+16:10.647 --> 16:13.020
+and all the networking-related details.
+
+16:13.020 --> 16:14.051
+You have storage.
+
+16:14.051 --> 16:15.750
+So, please pause the lecture
+
+16:15.750 --> 16:17.970
+and go through all this information.
+
+16:17.970 --> 16:20.550
+We'll go through them one
+
+16:20.550 --> 16:23.490
+by one in the lectures as we move forward.
+
+16:23.490 --> 16:24.810
+But I want you to be comfortable.
+
+16:24.810 --> 16:27.240
+Okay, let's get the public IP of the instance.
+
+16:27.240 --> 16:28.203
+Wait, before that.
+
+16:30.690 --> 16:31.530
+Take a look over here.
+
+16:31.530 --> 16:32.533
+You selected the instance
+
+16:32.533 --> 16:34.632
+and in the instance state,
+
+16:34.632 --> 16:37.650
+you can stop the instance, reboot, you can terminate.
+
+16:37.650 --> 16:39.120
+Action, there are many other things.
+
+16:39.120 --> 16:40.290
+One option is connect.
+
+16:40.290 --> 16:41.400
+If you click on Connect,
+
+16:41.400 --> 16:43.980
+it's going to show you methods of connecting.
+
+16:43.980 --> 16:47.969
+It will show you the username, the public IP.
+
+16:47.969 --> 16:49.830
+You can see here SSH client.
+
+16:49.830 --> 16:52.530
+If you're using any SSH client like we are going to use,
+
+16:52.530 --> 16:53.790
+we are going to use Git Bash.
+
+16:53.790 --> 16:56.236
+It has the SSH inbuilt.
+
+16:56.236 --> 16:58.290
+So, if you're using any SSH client,
+
+16:58.290 --> 17:00.570
+you can copy this command, ssh-i.
+
+17:00.570 --> 17:03.060
+The login key, ec2-user, at the rate,
+
+17:03.060 --> 17:06.420
+the public IP, public name of the instance.
+
+17:06.420 --> 17:09.780
+So, I'm going to copy this and go to Git Bash,
+
+17:09.780 --> 17:12.843
+and simply paste this and let's see what happens.
+
+17:13.950 --> 17:15.120
+Okay.
+
+17:15.120 --> 17:15.953
+Okay, it says,
+
+17:15.953 --> 17:19.470
+Warning: Identity file webloginkey.pem not accessible:
+
+17:19.470 --> 17:21.330
+No such file or directory.
+
+17:21.330 --> 17:26.330
+That is because I am in my home directory at this path.
+
+17:26.516 --> 17:29.580
+And this key does not exist over here.
+
+17:29.580 --> 17:33.330
+I have downloaded it and it went to the Downloads folder.
+
+17:33.330 --> 17:36.960
+ls, I can give here ~/Downloads/.
+
+17:36.960 --> 17:41.960
+So, tilde means this path, home directory path.
+
+17:42.000 --> 17:43.603
+And the webloginkey.
+
+17:45.164 --> 17:49.800
+Let me do ls -l.
+
+17:49.800 --> 17:52.290
+So, the login key exists in my Downloads folder.
+
+17:52.290 --> 17:53.370
+So, make sure you find out
+
+17:53.370 --> 17:56.220
+where is your Downloads folder, the path.
+
+17:56.220 --> 17:58.485
+Or if you're downloaded anywhere else,
+
+17:58.485 --> 18:00.450
+you can either switch to that folder,
+
+18:00.450 --> 18:03.150
+execute the command, or you can mention the path.
+
+18:03.150 --> 18:05.640
+So, let me clear the screen now
+
+18:05.640 --> 18:09.180
+and I'm going to do ssh -i Downloads.
+
+18:09.180 --> 18:10.830
+Because I'm already in my home folder,
+
+18:10.830 --> 18:13.110
+in the home folder, I have Downloads,
+
+18:13.110 --> 18:15.060
+and that I have webloginkey.
+
+18:15.060 --> 18:18.653
+I give the username, ec2-user, at the rate,
+
+18:18.653 --> 18:21.609
+and I go to my EC2 console.
+
+18:21.609 --> 18:23.760
+I'm going to get the public IP over here,
+
+18:23.760 --> 18:25.770
+copy the public IP,
+
+18:25.770 --> 18:27.180
+and then paste it over here.
+
+18:27.180 --> 18:28.340
+So, you can use the public IP
+
+18:28.340 --> 18:30.570
+or you can use the public DNS name.
+
+18:30.570 --> 18:33.270
+I use public IP all the time.
+
+18:33.270 --> 18:36.155
+Now, if I hit Enter,
+
+18:36.155 --> 18:38.160
+it's going to ask me, do you want to log in?
+
+18:38.160 --> 18:40.473
+Yes, sure. I accept this, yes.
+
+18:42.180 --> 18:43.830
+And I am in.
+
+18:43.830 --> 18:45.333
+Okay, let me exit.
+
+18:46.770 --> 18:48.000
+Let me clear the screen.
+
+18:48.000 --> 18:51.360
+Once again, let me show you, if I give a wrong username,
+
+18:51.360 --> 18:54.963
+let's say I have given just ec2 instead of ec2-user,
+
+18:56.460 --> 18:57.293
+permission denied.
+
+18:57.293 --> 18:59.950
+So, if I give a wrong login key
+
+18:59.950 --> 19:03.746
+or if I give wrong username, I will get this message.
+
+19:03.746 --> 19:06.330
+Let's fix this, ec2-user,
+
+19:06.330 --> 19:08.400
+and let's give a wrong public IP.
+
+19:08.400 --> 19:09.990
+Let's say 908.
+
+19:09.990 --> 19:11.600
+Anything, just give something wrong.
+
+19:11.600 --> 19:13.230
+Let's see what happens.
+
+19:13.230 --> 19:14.550
+It just could not resolve.
+
+19:14.550 --> 19:16.530
+I don't know what is this IP.
+
+19:16.530 --> 19:17.790
+So, look at the error message
+
+19:17.790 --> 19:20.910
+and understand what the error is.
+
+19:20.910 --> 19:23.460
+Permission denied is mostly authentication.
+
+19:23.460 --> 19:24.547
+You're able to reach this
+
+19:24.547 --> 19:27.780
+and this machine is denying, I do not allow this.
+
+19:27.780 --> 19:29.610
+You've given the wrong credential.
+
+19:29.610 --> 19:30.465
+If you get something like this,
+
+19:30.465 --> 19:32.946
+it's not even able to reach there.
+
+19:32.946 --> 19:36.270
+If you get a message for the no such file or directory,
+
+19:36.270 --> 19:39.300
+that means the login key, you have given wrong.
+
+19:39.300 --> 19:41.460
+Okay, let's once again come back.
+
+19:41.460 --> 19:45.273
+So, I'm going to give here ec2-user.
+
+19:46.740 --> 19:47.640
+Okay, I am in.
+
+19:47.640 --> 19:50.130
+I'm going to clear the screen now
+
+19:50.130 --> 19:53.670
+and switch to root user, sudo -i.
+
+19:53.670 --> 19:56.763
+Let me show you a few details, cat /etc/os-release.
+
+19:57.660 --> 19:59.790
+This is Amazon Linux 2023.
+
+19:59.790 --> 20:02.133
+It's same like Fedora or CentOS.
+
+20:02.970 --> 20:05.156
+And we executed, if you remember, we executed commands.
+
+20:05.156 --> 20:08.610
+systemctl status httpd.
+
+20:08.610 --> 20:11.190
+Let's see if it's installed or not.
+
+20:11.190 --> 20:15.000
+Yeah, it says active (running). Nice.
+
+20:15.000 --> 20:18.720
+Now, it should have a default webpage also.
+
+20:18.720 --> 20:22.230
+So, if I say curl local host.
+
+20:22.230 --> 20:23.340
+You know what? I'll do like this.
+
+20:23.340 --> 20:28.230
+http://127.0.0.1.
+
+20:28.230 --> 20:30.243
+So, that means the local IP.
+
+20:32.310 --> 20:35.130
+It shows something, some message, HTML page.
+
+20:35.130 --> 20:36.930
+It says it works.
+
+20:36.930 --> 20:39.480
+So, I'm accessing it from internally, it's working.
+
+20:39.480 --> 20:40.620
+Let me show you the process.
+
+20:40.620 --> 20:43.293
+ps -ef | grep http.
+
+20:44.567 --> 20:47.520
+You should see the Apache processes running.
+
+20:47.520 --> 20:52.520
+And let's see, ss -tunlp | grep.
+
+20:56.010 --> 20:59.333
+And I'll give the process ID over here, 3374.
+
+21:02.520 --> 21:06.600
+It says the port 80 is open for this process.
+
+21:06.600 --> 21:07.830
+So, I can access it locally.
+
+21:07.830 --> 21:09.900
+I see the process running, I see the port number.
+
+21:09.900 --> 21:12.930
+Now, let me exit over the internet.
+
+21:12.930 --> 21:14.700
+So, if I'm to access it over the internet,
+
+21:14.700 --> 21:16.893
+I'm going to take its public IP.
+
+21:17.760 --> 21:19.170
+Public IP, not private IP.
+
+21:19.170 --> 21:20.250
+Private IP is internal.
+
+21:20.250 --> 21:23.010
+Public IP is accessible over the internet.
+
+21:23.010 --> 21:24.600
+So, I'm going to open the browser,
+
+21:24.600 --> 21:29.600
+http://, I give the IP, and I'll say, colon, port 80.
+
+21:30.480 --> 21:32.640
+Now, I don't even need to give port 80
+
+21:32.640 --> 21:36.300
+because HTTP default port is 80.
+
+21:36.300 --> 21:37.133
+You're right.
+
+21:38.040 --> 21:40.110
+So, I can just remove this :80.
+
+21:40.110 --> 21:43.053
+I'm just going to hit this and let's see what happens.
+
+21:43.920 --> 21:45.090
+You know, it's just loading.
+
+21:45.090 --> 21:46.200
+It's not going to show anything.
+
+21:46.200 --> 21:48.060
+It's going to fail. Why?
+
+21:48.060 --> 21:49.500
+Any guesses?
+
+21:49.500 --> 21:51.060
+Come on, pause the lecture and think.
+
+21:51.060 --> 21:52.199
+Everything is running.
+
+21:52.199 --> 21:53.973
+Still, I'm not able to access it.
+
+21:53.973 --> 21:56.253
+We see the process, we see the port number.
+
+21:57.300 --> 21:59.043
+Let me go back to the instances.
+
+22:00.090 --> 22:01.800
+Go to Security.
+
+22:01.800 --> 22:04.113
+I go to the Security group, click on that.
+
+22:05.790 --> 22:08.790
+All right, I'm going to go to Edit inbound rules.
+
+22:08.790 --> 22:11.193
+We are editing inbound rules. Click on that.
+
+22:12.103 --> 22:15.690
+Here you see SSH 22 is allowed from my IP,
+
+22:15.690 --> 22:18.516
+but HTTP or port 80 is not allowed.
+
+22:18.516 --> 22:20.760
+So, I'm going to add the rule
+
+22:20.760 --> 22:24.690
+and I'm going to say drop down, and search for HTTP.
+
+22:24.690 --> 22:25.770
+I can either do this
+
+22:25.770 --> 22:30.747
+or I can say, just Custom TCP, I'll say Custom TCP,
+
+22:30.747 --> 22:32.700
+and I can give the port number 80.
+
+22:32.700 --> 22:33.903
+Both means same.
+
+22:34.830 --> 22:36.003
+Okay, let's keep both.
+
+22:37.920 --> 22:41.430
+Now, allowed from My IP, you can do this.
+
+22:41.430 --> 22:44.460
+Or if you want to expose it to the world,
+
+22:44.460 --> 22:48.218
+you're hosting a website, you can say any IPv4.
+
+22:48.218 --> 22:50.460
+And if some people are having IPv6,
+
+22:50.460 --> 22:54.660
+you have to say allow from any IPv6.
+
+22:54.660 --> 22:55.493
+Look at this.
+
+22:55.493 --> 22:59.313
+This means all IPv4, this means all IPv6.
+
+23:00.690 --> 23:03.510
+So, I'm going to remove this one,
+
+23:03.510 --> 23:05.100
+delete this one from My IP.
+
+23:05.100 --> 23:08.397
+I'm allowing it from anywhere, any IPv4 and any IPv6.
+
+23:08.397 --> 23:10.533
+And I'm going to say Save rules.
+
+23:11.610 --> 23:12.510
+Now, once again,
+
+23:12.510 --> 23:15.390
+let's go back to the browser and let's refresh.
+
+23:15.390 --> 23:17.763
+You see that? It shows the page, it works.
+
+23:18.600 --> 23:19.770
+Okay, now we are done here.
+
+23:19.770 --> 23:21.240
+Let's delete this instance.
+
+23:21.240 --> 23:23.079
+So, select the instance.
+
+23:23.079 --> 23:25.710
+Now, you can always refresh and check your instance.
+
+23:25.710 --> 23:26.853
+Select your instance.
+
+23:28.350 --> 23:31.800
+Instance state, and I'm going to terminate.
+
+23:31.800 --> 23:35.490
+Terminate means delete instance, gone, poof.
+
+23:35.490 --> 23:36.750
+I know you'll have questions like,
+
+23:36.750 --> 23:38.940
+how to recover if the instances are gone,
+
+23:38.940 --> 23:40.500
+we'll talk about that later.
+
+23:40.500 --> 23:42.630
+Let's just delete this instance for now.
+
+23:42.630 --> 23:45.161
+You now know how to launch an instance.
+
+23:45.161 --> 23:47.190
+Now, before moving to the next lecture,
+
+23:47.190 --> 23:49.350
+do this exercise at least three times.
+
+23:49.350 --> 23:51.060
+It's free, so please do it.
+
+23:51.060 --> 23:54.930
+For the practice, we're going to see best practices
+
+23:54.930 --> 23:58.260
+and the best ways to use and launch instances.
+
+23:58.260 --> 23:59.910
+I'll see you in the next lecture.

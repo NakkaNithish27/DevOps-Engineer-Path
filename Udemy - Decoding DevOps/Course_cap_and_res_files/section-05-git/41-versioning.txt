@@ -1,0 +1,994 @@
+WEBVTT
+
+00:00.440 --> 00:02.840
+So if you are on windows, just open your git bash.
+
+00:02.840 --> 00:07.920
+If you're having Mac OS, just install git and open your terminal.
+
+00:08.120 --> 00:08.480
+Okay.
+
+00:08.640 --> 00:12.800
+Choose to go into any folder drive directory you wish to.
+
+00:13.040 --> 00:17.640
+I'm going to F drive and I'm going to create a directory called git repository.
+
+00:19.000 --> 00:20.280
+And I get into that.
+
+00:21.720 --> 00:22.200
+Okay.
+
+00:22.240 --> 00:28.040
+Here I'm going to create a directory with name Titan.
+
+00:29.040 --> 00:30.960
+And that will be name of my repository.
+
+00:31.000 --> 00:31.720
+Okay Titan.
+
+00:31.720 --> 00:40.280
+And let me use some more text like Titan work okay I'll say Titan work is my repository okay.
+
+00:40.320 --> 00:43.640
+So I create just create a directory just like that wherever you wished.
+
+00:44.040 --> 00:47.520
+Get into that directory and you run the command git init.
+
+00:48.440 --> 00:56.480
+Now when you run this command it should create a dot git directory in your current directory.
+
+00:56.720 --> 00:57.680
+So let's hyphen a.
+
+00:57.720 --> 01:00.120
+If you do you should see a dot git directory.
+
+01:00.280 --> 01:05.490
+And this is going to maintain all the versions, all the history, all the configuration of your git
+
+01:05.490 --> 01:06.370
+repository.
+
+01:06.570 --> 01:09.610
+So Titan work is now your git repository.
+
+01:11.330 --> 01:14.570
+You should already see some difference like you're seeing here as master.
+
+01:14.770 --> 01:16.410
+Now it's not calling you master.
+
+01:17.130 --> 01:18.850
+That's the name of a branch you're going to see.
+
+01:18.850 --> 01:19.850
+What is a branch.
+
+01:20.730 --> 01:21.010
+Okay.
+
+01:21.010 --> 01:22.330
+Let's put some data over here.
+
+01:22.330 --> 01:26.410
+I'm going to put some bash scripts that I have previously.
+
+01:27.610 --> 01:28.090
+Oh, you know what?
+
+01:28.090 --> 01:29.410
+Let's just create our own file.
+
+01:29.410 --> 01:30.890
+Let's create some directories.
+
+01:30.890 --> 01:33.130
+I will say test.
+
+01:33.570 --> 01:34.890
+No, not test.
+
+01:35.530 --> 01:37.450
+I will give name, let's say Nebula.
+
+01:41.290 --> 01:42.250
+And few other names.
+
+01:42.250 --> 01:45.570
+Let's do Jupiter.
+
+01:49.170 --> 01:49.810
+Pluto.
+
+01:54.370 --> 01:54.610
+Okay.
+
+01:54.610 --> 01:55.810
+Let's have some three directories.
+
+01:55.810 --> 01:56.970
+Let's create some file.
+
+01:57.010 --> 01:57.450
+Dutch.
+
+02:00.490 --> 02:01.370
+Saturn.
+
+02:03.420 --> 02:06.500
+I'm just giving the name of some planets or stars or anything.
+
+02:12.100 --> 02:12.940
+Let's say pi.
+
+02:16.060 --> 02:19.300
+Okay, so I have some files and I have some directories.
+
+02:19.740 --> 02:23.580
+Now I'm going to copy some files.
+
+02:25.820 --> 02:29.500
+Or we'll create some files in all these directories.
+
+02:30.220 --> 02:30.780
+Touch.
+
+02:33.300 --> 02:33.980
+Jupiter.
+
+02:34.820 --> 02:37.220
+Okay so I created one one files in all the directories.
+
+02:37.220 --> 02:38.820
+Make sure the directories are not empty.
+
+02:38.860 --> 02:41.420
+Otherwise git will not keep track of it okay.
+
+02:41.580 --> 02:44.260
+Git keep track of files not directories.
+
+02:46.620 --> 02:46.900
+Okay.
+
+02:46.900 --> 02:47.500
+So some data.
+
+02:47.500 --> 02:49.180
+You can throw anything whatever you want over here.
+
+02:49.180 --> 02:52.380
+Any text file, any script or empty files or empty directories.
+
+02:52.420 --> 02:54.140
+No sorry not empty directories.
+
+02:54.860 --> 02:59.740
+So once I have made changes in my repository I will check its status.
+
+02:59.740 --> 03:05.750
+So git status run this command and it should tell you what is the current state of your repository.
+
+03:06.350 --> 03:08.630
+It is telling me untracked files.
+
+03:08.630 --> 03:10.710
+There are some files that are untracked.
+
+03:11.390 --> 03:14.230
+So that means it will be not considered for the committing.
+
+03:15.150 --> 03:17.510
+So first I have to make sure these gets tracked.
+
+03:17.510 --> 03:22.510
+So you have to run the command git add.
+
+03:22.870 --> 03:23.430
+Dot.
+
+03:23.910 --> 03:25.390
+Wait let me clear the screen.
+
+03:27.070 --> 03:31.430
+Git add dot dot means current working directory.
+
+03:31.470 --> 03:36.790
+Now we are saying that now all the files that are untracked start tracking them.
+
+03:37.990 --> 03:39.470
+This is called as staging.
+
+03:39.870 --> 03:43.310
+So now we have brought our files that have changed into staging area.
+
+03:43.310 --> 03:44.790
+But it's still not committed.
+
+03:44.830 --> 03:49.710
+If you run git status again it says changes needs to be committed.
+
+03:50.510 --> 03:53.470
+So we have new files we have added or made the change.
+
+03:53.630 --> 03:58.830
+I'm going to say now git commit m and the message.
+
+03:59.350 --> 04:02.150
+So for every commit that you do you have to give a message.
+
+04:02.710 --> 04:06.400
+So like I'm going to say now this is my first file, right?
+
+04:06.440 --> 04:08.360
+Or new files.
+
+04:10.200 --> 04:11.200
+New files.
+
+04:11.480 --> 04:11.960
+Committed.
+
+04:11.960 --> 04:12.800
+Something like that.
+
+04:14.480 --> 04:16.320
+Now it throws me an error, actually.
+
+04:16.840 --> 04:17.240
+Okay.
+
+04:17.800 --> 04:21.160
+Uh, when you're tracking, it will also.
+
+04:21.200 --> 04:21.400
+When.
+
+04:21.400 --> 04:21.520
+So.
+
+04:21.520 --> 04:22.000
+Very sorry.
+
+04:22.000 --> 04:26.000
+When the git is tracking, it will also track who made the change.
+
+04:26.000 --> 04:31.520
+So for that who you have to set, who is the user and what is the email address of it okay.
+
+04:31.560 --> 04:37.320
+And it gives you a command git config hyphen f and global and the email address.
+
+04:37.560 --> 04:43.600
+So you can give an email address that probably you're using for remote repository if you have not created
+
+04:43.600 --> 04:45.720
+one on any GitHub repository.
+
+04:45.720 --> 04:47.800
+If you have not created, then give anything.
+
+04:48.440 --> 04:52.920
+But if you have already created GitHub repository, then give the same email address.
+
+04:52.920 --> 04:55.640
+So it will be easy for to for us to track.
+
+04:56.040 --> 04:56.240
+Okay.
+
+04:56.280 --> 04:57.360
+So I'm going to say.
+
+05:00.000 --> 05:01.360
+This is the email address.
+
+05:03.880 --> 05:06.210
+And then also user dot name.
+
+05:07.410 --> 05:09.410
+So I'll just keep this as the user name.
+
+05:09.890 --> 05:11.770
+User dot name.
+
+05:11.810 --> 05:13.530
+Now this is a global setting.
+
+05:13.570 --> 05:14.770
+Git config.
+
+05:14.970 --> 05:17.650
+You have local settings and your global settings in git.
+
+05:17.850 --> 05:18.050
+Okay.
+
+05:18.090 --> 05:20.090
+Local means local to the repository.
+
+05:20.130 --> 05:23.690
+Global means it's all for for all the repository.
+
+05:23.890 --> 05:26.570
+So I'm setting global username and email address.
+
+05:27.410 --> 05:29.850
+Now I can run git commit command git.
+
+05:30.690 --> 05:32.290
+Let's run git commit once again.
+
+05:34.130 --> 05:36.330
+And now it says it started tracking now.
+
+05:36.850 --> 05:37.050
+Okay.
+
+05:37.130 --> 05:38.770
+13 files changes.
+
+05:38.810 --> 05:39.650
+Zero insertion.
+
+05:39.650 --> 05:41.410
+Because there's nothing in those files.
+
+05:41.490 --> 05:42.490
+Zero deletion.
+
+05:42.890 --> 05:44.450
+So you have not added anything in the file.
+
+05:44.450 --> 05:45.690
+Not you have removed the files.
+
+05:45.690 --> 05:46.810
+It's just new files.
+
+05:47.650 --> 05:48.770
+Git status.
+
+05:49.850 --> 05:51.610
+And it says now nothing to commit.
+
+05:51.610 --> 05:53.010
+Working tree is clean.
+
+05:53.930 --> 05:54.210
+Okay.
+
+05:54.210 --> 06:00.890
+So to quickly reiterate first you need to set up the global username and global email address.
+
+06:01.930 --> 06:02.130
+Okay.
+
+06:02.170 --> 06:04.410
+Then you create the directory wherever you want.
+
+06:04.410 --> 06:05.570
+You get into that directory.
+
+06:05.570 --> 06:08.460
+You initialize that initialize the directory with running git init command.
+
+06:09.580 --> 06:13.980
+Then you create a file, any file and you can say git add.
+
+06:14.140 --> 06:15.940
+So it comes into the staging area.
+
+06:16.140 --> 06:18.220
+Git commit for the local commit.
+
+06:19.380 --> 06:19.900
+Okay.
+
+06:19.980 --> 06:21.820
+Now this is happening locally.
+
+06:21.820 --> 06:23.460
+We are going to use remote repository.
+
+06:23.460 --> 06:25.420
+And we are going to use git hub for that.
+
+06:27.740 --> 06:29.820
+Well there's git hub and then there is bitbucket.
+
+06:29.820 --> 06:30.980
+There is code commit.
+
+06:30.980 --> 06:34.980
+And there are a few others where you can store your git repository.
+
+06:35.460 --> 06:37.060
+The most popular one is GitHub.
+
+06:37.660 --> 06:40.060
+And we're going to use that later in AWS.
+
+06:40.060 --> 06:42.140
+Part two will be also seeing code commit.
+
+06:42.420 --> 06:44.660
+If you want to use Bitbucket go for it.
+
+06:44.660 --> 06:46.420
+There will be not much difference.
+
+06:47.860 --> 06:49.180
+So we can do two things.
+
+06:49.180 --> 06:51.300
+We can clone the repository to local.
+
+06:51.300 --> 06:57.020
+We can create a remote repository, and then we can clone by running the command git clone and the URL
+
+06:57.020 --> 07:02.100
+of the repository, or from local to remote like we created repository now locally.
+
+07:02.380 --> 07:09.710
+And then we are going to add the remote repository location by running git remote add origin command
+
+07:10.270 --> 07:11.630
+and then we'll say git push.
+
+07:11.630 --> 07:15.390
+So it will push our local repository content to remote repository.
+
+07:16.310 --> 07:20.750
+Then if there is any change on the remote repository you can pull the changes by running git pull.
+
+07:22.830 --> 07:24.310
+Okay let's see this now.
+
+07:25.270 --> 07:25.510
+Okay.
+
+07:25.510 --> 07:27.830
+So open your browser and access github.com.
+
+07:27.830 --> 07:31.390
+If you have not created an account on GitHub, create one.
+
+07:31.390 --> 07:32.950
+Now click on sign up.
+
+07:33.230 --> 07:35.750
+Fill all the details and create an account.
+
+07:35.870 --> 07:39.030
+I already have an account and I'm going to log in with that account.
+
+07:41.550 --> 07:44.310
+So you can come to github.com slash login.
+
+07:44.350 --> 07:50.550
+Once you have signed up and you can log in enter your username, email address and password.
+
+07:53.270 --> 07:56.270
+So once you log in you should not see anything over here in this area.
+
+07:56.310 --> 07:58.950
+You see some repositories in my account.
+
+07:58.950 --> 08:00.950
+That's because I've created them previously.
+
+08:01.590 --> 08:06.950
+What we'll do we'll create a new repository and we'll give repository name.
+
+08:06.950 --> 08:13.160
+Same name Same as I have created locally, because I'm going to sync both the repositories together.
+
+08:13.800 --> 08:14.000
+Okay.
+
+08:14.000 --> 08:15.560
+It says Titan work is available.
+
+08:15.560 --> 08:15.800
+Okay.
+
+08:15.840 --> 08:16.920
+So that's a unique name.
+
+08:16.920 --> 08:17.440
+Nice.
+
+08:18.840 --> 08:19.720
+You have two options.
+
+08:19.720 --> 08:23.080
+You can have a public repository which anybody in the world can see.
+
+08:23.600 --> 08:24.920
+Private repository.
+
+08:25.400 --> 08:29.080
+People can only access it by giving authentication okay.
+
+08:29.240 --> 08:31.000
+So let's keep it private first.
+
+08:31.440 --> 08:33.560
+If you want you can add a Readme file.
+
+08:33.560 --> 08:38.200
+So that will be displayed in your GitHub page when you access your repository.
+
+08:38.840 --> 08:40.680
+But I'll not select anything for now.
+
+08:40.680 --> 08:43.680
+I'll just say private repository I'll say create repository.
+
+08:46.640 --> 08:46.920
+Okay.
+
+08:46.920 --> 08:49.160
+So repositories created and there is nothing in this.
+
+08:49.160 --> 08:50.240
+We just created it.
+
+08:50.240 --> 08:51.320
+That's the URL.
+
+08:51.480 --> 08:54.040
+So you get two URL https and ssh.
+
+08:54.280 --> 08:56.480
+First we'll see https.
+
+08:56.960 --> 09:00.720
+Later at the end of the git session we'll be also seeing ssh.
+
+09:02.200 --> 09:03.640
+So we'll take that URL.
+
+09:03.640 --> 09:07.080
+But this these are the series of commands that you need to do.
+
+09:07.360 --> 09:10.240
+It says you know create a new repository on the command line.
+
+09:10.280 --> 09:10.480
+Right.
+
+09:10.520 --> 09:19.200
+So git init, add some file, commit them and then add the remote repository path and then push back
+
+09:19.200 --> 09:19.840
+everything.
+
+09:20.760 --> 09:24.360
+Or if you already have an existing repository you can just run this command.
+
+09:25.320 --> 09:27.080
+And then you can push the changes.
+
+09:27.480 --> 09:27.880
+Okay.
+
+09:28.120 --> 09:29.600
+So let me copy that.
+
+09:30.680 --> 09:33.160
+This you have to enter from your repository.
+
+09:34.080 --> 09:34.360
+Okay.
+
+09:34.400 --> 09:38.920
+So I'm in the repository and I'm going to say paste here.
+
+09:41.120 --> 09:41.440
+Okay.
+
+09:41.440 --> 09:46.280
+Now when I do that there is a config file dot git config.
+
+09:47.920 --> 09:53.000
+This file you should see a new entry the remote repository path.
+
+09:54.920 --> 09:57.560
+Next command git branch hyphen m main.
+
+10:00.440 --> 10:04.200
+Which will change your branch name from master to main.
+
+10:04.400 --> 10:07.080
+And we'll see what our branches in a moment.
+
+10:07.800 --> 10:08.120
+Okay.
+
+10:08.160 --> 10:11.050
+Next it says git push u origin main.
+
+10:12.250 --> 10:20.850
+Basically pushing all the data to your GitHub repository remotely on branch main.
+
+10:31.090 --> 10:36.050
+Now when you run this command git push, there is a change that is happening on GitHub from our local
+
+10:36.050 --> 10:36.890
+repository.
+
+10:37.050 --> 10:40.730
+It's syncing local repository to remote repository.
+
+10:40.850 --> 10:42.730
+And for that you need authentication.
+
+10:42.730 --> 10:48.010
+So it will open up either a window that says enter Username and password.
+
+10:48.010 --> 10:51.690
+Or you could be seeing like this sign in with your browser.
+
+10:54.730 --> 10:58.570
+So I click on it and my authentication is succeeded I'm logged in.
+
+11:00.450 --> 11:03.130
+And now this authentication is saved on my windows machine.
+
+11:03.130 --> 11:04.650
+So I don't need to enter it again.
+
+11:05.050 --> 11:07.370
+So the changes is pushed to remote repository.
+
+11:07.890 --> 11:08.690
+Let's see that.
+
+11:09.210 --> 11:10.050
+Let's refresh.
+
+11:10.820 --> 11:11.340
+Okay.
+
+11:11.380 --> 11:13.020
+You see all the changes here.
+
+11:14.420 --> 11:16.340
+So you can see the directories and the files.
+
+11:16.340 --> 11:20.220
+You can see the commit message that we have given the commit time.
+
+11:20.220 --> 11:21.940
+It was done 16 minutes ago.
+
+11:22.820 --> 11:31.540
+You can click on a commit message and you can see who made the change, what time the changes was made.
+
+11:31.540 --> 11:34.020
+And this is the commit ID.
+
+11:34.700 --> 11:36.860
+So this commit ID is used for the versioning.
+
+11:37.700 --> 11:42.940
+You know now let's make some change some text based change in some files.
+
+11:42.940 --> 11:46.540
+Let's open let's see Saturn one dot p y.
+
+11:49.740 --> 11:51.580
+So I'll write some data over here.
+
+11:51.580 --> 11:56.900
+Some text Saturn has many moons.
+
+11:58.420 --> 11:58.700
+Yeah.
+
+11:58.700 --> 11:59.980
+Let's give them their name.
+
+11:59.980 --> 12:01.220
+One is Mimas.
+
+12:02.500 --> 12:03.260
+Dione.
+
+12:05.340 --> 12:07.180
+I'm just choosing the easy names.
+
+12:07.180 --> 12:07.740
+Rhea.
+
+12:12.230 --> 12:13.390
+Hyperion.
+
+12:14.710 --> 12:16.670
+Okay, let's say I made some changes.
+
+12:16.710 --> 12:18.110
+I save and quit.
+
+12:19.670 --> 12:20.030
+Yeah.
+
+12:20.030 --> 12:21.710
+If I check now git status.
+
+12:22.430 --> 12:24.350
+You see that file where I made change?
+
+12:24.350 --> 12:25.750
+It says it's modified.
+
+12:25.790 --> 12:28.310
+I need to say git add and that file name.
+
+12:29.470 --> 12:30.990
+Or I can just say dot also.
+
+12:33.190 --> 12:34.550
+Now I'm going to commit it.
+
+12:38.830 --> 12:40.350
+I'll give some commit message.
+
+12:46.670 --> 12:46.990
+Okay.
+
+12:46.990 --> 12:50.430
+Now this commit is done locally not remotely.
+
+12:50.430 --> 12:51.950
+I have not pushed any change.
+
+12:52.270 --> 12:56.270
+So to push the change I'm going to say git push origin main.
+
+13:03.670 --> 13:04.710
+So that's how we do.
+
+13:04.750 --> 13:05.870
+We make the change.
+
+13:06.670 --> 13:08.270
+We index them right.
+
+13:08.270 --> 13:12.910
+We do a staging and then we commit and then we push it.
+
+13:15.960 --> 13:18.240
+Let's come here to the GitHub repository.
+
+13:18.760 --> 13:20.920
+And now you should see Saturn one dot pi.
+
+13:20.960 --> 13:23.120
+You have commit message Saturn moon.
+
+13:23.360 --> 13:24.280
+Let's click on it.
+
+13:25.680 --> 13:28.120
+And you can see the plus symbols there.
+
+13:28.120 --> 13:30.400
+This means these lines were added.
+
+13:30.520 --> 13:32.280
+And you'll see green color.
+
+13:32.520 --> 13:34.480
+You can see this from command line also.
+
+13:36.880 --> 13:38.240
+Git log.
+
+13:41.200 --> 13:45.320
+This will show you all the previous commits in the current branch.
+
+13:46.520 --> 13:49.760
+And you can say git show and select a commit.
+
+13:50.600 --> 13:52.320
+That's a very long commit ID.
+
+13:52.800 --> 13:57.840
+We can get a smaller commit ID by saying git log hyphen hyphen one line.
+
+13:58.960 --> 14:02.640
+And I can say git show and the smaller commit id.
+
+14:05.800 --> 14:06.000
+Right.
+
+14:06.000 --> 14:11.640
+So the thing that I saw on GitHub similar thing, I'm seeing it on the command line by running the command
+
+14:11.640 --> 14:13.240
+git show and the commit ID.
+
+14:13.800 --> 14:14.000
+Okay.
+
+14:14.090 --> 14:15.650
+But first you need to get the commit id.
+
+14:15.650 --> 14:19.290
+So git log fn one line will give you smaller commit ID.
+
+14:19.690 --> 14:26.610
+If you just run git log it will show you the commit ID, the author, date and time, and the commit
+
+14:26.610 --> 14:27.290
+message.
+
+14:28.090 --> 14:31.530
+Okay, let's make for a few more changes to the same file.
+
+14:35.250 --> 14:35.610
+Okay.
+
+14:35.610 --> 14:35.970
+Let's see.
+
+14:35.970 --> 14:37.490
+I'm going to remove some.
+
+14:38.090 --> 14:39.490
+I'm going to add some.
+
+14:45.770 --> 14:48.250
+You know, some name I can't even pronounce.
+
+14:48.250 --> 14:48.970
+What are they.
+
+14:49.410 --> 14:50.130
+Phoebe.
+
+14:50.690 --> 14:51.370
+Thesis.
+
+14:51.730 --> 14:51.890
+Okay.
+
+14:51.890 --> 14:53.610
+Anyways, I'm just entering some text.
+
+14:59.170 --> 14:59.690
+And.
+
+15:00.530 --> 15:00.890
+Okay.
+
+15:00.930 --> 15:02.010
+Save and quit.
+
+15:03.490 --> 15:04.650
+So I've made some changes.
+
+15:04.650 --> 15:06.370
+I've added, I have removed.
+
+15:06.770 --> 15:07.330
+Now again.
+
+15:07.330 --> 15:10.890
+Git add dot git commit.
+
+15:10.890 --> 15:11.610
+Hyphen m.
+
+15:14.130 --> 15:14.930
+Updated.
+
+15:15.900 --> 15:19.220
+Saturn's moon names.
+
+15:20.780 --> 15:22.260
+And then I'm going to push it.
+
+15:22.300 --> 15:23.100
+Git push.
+
+15:23.340 --> 15:24.100
+Origin.
+
+15:24.500 --> 15:25.020
+Main.
+
+15:33.140 --> 15:33.580
+Okay.
+
+15:34.260 --> 15:37.900
+So git log hyphen hyphen one line.
+
+15:39.340 --> 15:43.700
+You can say git show and the current commit id.
+
+15:46.380 --> 15:48.860
+And you see some lines were removed somewhere.
+
+15:48.900 --> 15:49.980
+Some were added.
+
+15:50.020 --> 15:51.780
+You can see the same on GitHub.
+
+15:53.260 --> 15:56.860
+If you refresh the page you should see the new commit message.
+
+15:58.500 --> 16:03.220
+And you should see these lines were removed and some lines were added, right?
+
+16:03.580 --> 16:08.020
+If you want to see the actual file here you can see I click on Saturn one dot pie.
+
+16:08.980 --> 16:10.540
+You can edit the file as well.
+
+16:10.940 --> 16:13.020
+Let's put some use some other file.
+
+16:15.310 --> 16:17.110
+Saturn 10.py.
+
+16:17.150 --> 16:18.230
+Okay, let's edit it.
+
+16:21.910 --> 16:25.390
+Okay, I made some changes to Saturn 10.py file.
+
+16:30.950 --> 16:34.110
+And I give some commit message and I say commit changes.
+
+16:35.390 --> 16:40.430
+Now this is like assuming someone made change to the remote repository or someone pushed a new change.
+
+16:41.070 --> 16:44.510
+Okay, not V not I like I have not made any change.
+
+16:44.510 --> 16:46.550
+Some other contributor made the change.
+
+16:47.110 --> 16:50.510
+So I'm going to pull the latest change by doing git pull.
+
+16:55.910 --> 16:56.190
+Okay.
+
+16:56.190 --> 16:58.710
+It says this new file have some changes.
+
+16:59.350 --> 17:00.590
+I can check that file.
+
+17:03.390 --> 17:03.790
+Right.
+
+17:03.790 --> 17:05.510
+Again you can check git log.
+
+17:07.230 --> 17:08.150
+You can see all the comments.
+
+17:08.150 --> 17:10.830
+This is the latest commit commit message.
+
+17:11.350 --> 17:13.030
+And you can see who made the change.
+
+17:13.070 --> 17:14.950
+Of course here I have made the change.
+
+17:14.950 --> 17:17.510
+But any other contributor you will see the name.

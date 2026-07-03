@@ -1,0 +1,1973 @@
+WEBVTT
+
+1
+00:00:01.510 --> 00:00:04.834
+First we are going to see a website called As Hub.
+
+2
+00:00:04.942 --> 00:00:09.570
+docker.com and I think it's really the backbone of Docker.
+
+3
+00:00:09.890 --> 00:00:11.082
+This is the place where you
+
+4
+00:00:11.096 --> 00:00:13.350
+have images, lots of images.
+
+5
+00:00:13.790 --> 00:00:15.514
+Official, known official.
+
+6
+00:00:15.622 --> 00:00:16.962
+You can create your account, you
+
+7
+00:00:16.976 --> 00:00:19.230
+can put your own customized images.
+
+8
+00:00:19.550 --> 00:00:21.574
+So there are images for Mongo
+
+9
+00:00:21.682 --> 00:00:25.890
+traffic, postgres node redis, Ubuntu.
+
+10
+00:00:26.990 --> 00:00:28.582
+These are official images.
+
+11
+00:00:28.726 --> 00:00:31.890
+You should see their official image means
+
+12
+00:00:31.940 --> 00:00:33.750
+that is directly from the vendor.
+
+13
+00:00:34.970 --> 00:00:39.514
+MariaDB, Alpine, busy Box, docker, docker in Docker.
+
+14
+00:00:39.562 --> 00:00:41.130
+Wow, that's funny.
+
+15
+00:00:41.630 --> 00:00:47.310
+Nginx, memcache, httpd, registry
+
+16
+00:00:47.990 --> 00:00:50.338
+python, hello World, RabbitMQ.
+
+17
+00:00:50.434 --> 00:00:52.760
+The list will be on and on. Okay.
+
+18
+00:00:53.210 --> 00:00:55.002
+You can create your own images and
+
+19
+00:00:55.016 --> 00:00:56.900
+upload it to Docker Hub as well.
+
+20
+00:00:57.350 --> 00:01:00.990
+So Docker Hub is called As Registry.
+
+21
+00:01:02.750 --> 00:01:06.690
+Docker Hub is the registry for Docker images.
+
+22
+00:01:07.730 --> 00:01:09.766
+So what release Docker image.
+
+23
+00:01:09.898 --> 00:01:13.282
+We have seen one simple example hello world image
+
+24
+00:01:13.426 --> 00:01:16.810
+and the container got created from that image.
+
+25
+00:01:16.990 --> 00:01:19.050
+So a docker image is really
+
+26
+00:01:19.100 --> 00:01:21.670
+a stopped container which is archived.
+
+27
+00:01:21.790 --> 00:01:24.678
+Okay, just like you have VM image from
+
+28
+00:01:24.704 --> 00:01:27.214
+where you can create VMs or like AMI,
+
+29
+00:01:27.322 --> 00:01:31.110
+but cannot directly compare that virtual machine image.
+
+30
+00:01:31.670 --> 00:01:34.470
+Are we talking specifically about container images?
+
+31
+00:01:34.970 --> 00:01:37.258
+Image consists of multiple layers.
+
+32
+00:01:37.414 --> 00:01:39.330
+Each layer will be some data.
+
+33
+00:01:39.500 --> 00:01:41.566
+Like when you're building your own image, let's
+
+34
+00:01:41.578 --> 00:01:43.758
+say you have installed a package after install
+
+35
+00:01:43.844 --> 00:01:46.110
+Git that will create a layer.
+
+36
+00:01:46.910 --> 00:01:48.622
+After that you created a directory
+
+37
+00:01:48.706 --> 00:01:50.002
+that will create another layer.
+
+38
+00:01:50.026 --> 00:01:51.826
+So like there will be multiple layers.
+
+39
+00:01:51.958 --> 00:01:55.278
+It has its own file system format and all
+
+40
+00:01:55.304 --> 00:01:57.570
+the layers will be in read only mode.
+
+41
+00:01:58.490 --> 00:02:01.590
+And we mostly bundle our app in the image.
+
+42
+00:02:02.870 --> 00:02:05.062
+Container runs from the images.
+
+43
+00:02:05.206 --> 00:02:08.050
+No, literally they runs from the images.
+
+44
+00:02:08.169 --> 00:02:09.850
+They are connected to the image.
+
+45
+00:02:09.970 --> 00:02:10.930
+Unlike VMs.
+
+46
+00:02:10.990 --> 00:02:14.540
+When you create VMs from an image like we create
+
+47
+00:02:14.990 --> 00:02:18.798
+from Vagrant box, the box and VM are separate then
+
+48
+00:02:18.824 --> 00:02:21.394
+okay, the VM will be complete clone of the image.
+
+49
+00:02:21.442 --> 00:02:23.250
+But containers are not like that.
+
+50
+00:02:23.420 --> 00:02:25.390
+They are running from the images.
+
+51
+00:02:25.570 --> 00:02:26.854
+Like directly.
+
+52
+00:02:27.022 --> 00:02:30.380
+You can't remove image if the container is running.
+
+53
+00:02:31.130 --> 00:02:34.542
+Images are called as repositories when we
+
+54
+00:02:34.556 --> 00:02:36.354
+are talking in the registries, right?
+
+55
+00:02:36.392 --> 00:02:37.494
+In a Docker Hub, if you
+
+56
+00:02:37.532 --> 00:02:40.774
+see Tomcat, that's a repository.
+
+57
+00:02:40.822 --> 00:02:43.710
+Tomcat repository in Docker Hub registry.
+
+58
+00:02:45.710 --> 00:02:48.478
+So Docker images really the images becomes
+
+59
+00:02:48.514 --> 00:02:50.646
+containers when they run on Docker engine.
+
+60
+00:02:50.828 --> 00:02:52.530
+That's the simplest definition.
+
+61
+00:02:53.990 --> 00:02:56.734
+And Docker Hub is not the only registry.
+
+62
+00:02:56.842 --> 00:02:59.230
+You have other cloud based registries.
+
+63
+00:02:59.290 --> 00:03:01.822
+Like you have GCR, Google Container Registry.
+
+64
+00:03:01.966 --> 00:03:05.058
+You have Amazon ECR where you can create your own
+
+65
+00:03:05.084 --> 00:03:08.602
+images and you can upload there your own private registry.
+
+66
+00:03:08.746 --> 00:03:10.242
+You can build your own in
+
+67
+00:03:10.256 --> 00:03:13.642
+house solution to store your images.
+
+68
+00:03:13.726 --> 00:03:16.134
+You can use Nexus Three as a Docker registry or
+
+69
+00:03:16.172 --> 00:03:21.430
+J Frog artifactory or DTR which is Docker trusted registry.
+
+70
+00:03:21.490 --> 00:03:23.326
+It's container based registry.
+
+71
+00:03:23.398 --> 00:03:26.410
+You can find its image also on Docker Hub registry.
+
+72
+00:03:26.530 --> 00:03:27.930
+That's kind of funny.
+
+73
+00:03:28.610 --> 00:03:32.694
+Okay, any case, so container runs from the images guys
+
+74
+00:03:32.732 --> 00:03:34.390
+So you have an Ubuntu image
+
+75
+00:03:34.450 --> 00:03:36.210
+and you're running containers from that.
+
+76
+00:03:36.320 --> 00:03:39.330
+So as many containers you run from it, you can. OK.
+
+77
+00:03:39.380 --> 00:03:41.314
+Containers will have a thin read write layer.
+
+78
+00:03:41.362 --> 00:03:42.474
+All the data that you see
+
+79
+00:03:42.512 --> 00:03:44.886
+will be from the image. containers. Sorry.
+
+80
+00:03:44.948 --> 00:03:48.714
+Image layers will be all read only mode. Okay.
+
+81
+00:03:48.752 --> 00:03:51.990
+Maybe there is a directory opt data directory.
+
+82
+00:03:52.490 --> 00:03:55.986
+That's a layer and container referring to that.
+
+83
+00:03:56.108 --> 00:03:57.582
+If you get into the container, if you go to
+
+84
+00:03:57.596 --> 00:04:00.740
+that directory, you are actually accessing the image data.
+
+85
+00:04:01.070 --> 00:04:02.538
+So containers are not going to
+
+86
+00:04:02.564 --> 00:04:04.962
+replicate the entire image content.
+
+87
+00:04:05.096 --> 00:04:07.614
+And that's how it saves a lot of space.
+
+88
+00:04:07.772 --> 00:04:09.846
+It uses some aufs file system.
+
+89
+00:04:09.968 --> 00:04:12.222
+There's lot of technicality also in that.
+
+90
+00:04:12.356 --> 00:04:14.490
+But for a higher level understanding.
+
+91
+00:04:14.870 --> 00:04:17.670
+Container is just a thin read write layer.
+
+92
+00:04:18.589 --> 00:04:19.866
+And all the data you see in
+
+93
+00:04:19.868 --> 00:04:21.930
+the container is actually from the image.
+
+94
+00:04:22.250 --> 00:04:24.498
+To create a container, just a docker run.
+
+95
+00:04:24.584 --> 00:04:26.962
+Docker run will create the container from the image.
+
+96
+00:04:26.986 --> 00:04:30.234
+You have to specify the image as we did docker run.
+
+97
+00:04:30.332 --> 00:04:31.280
+Hello world.
+
+98
+00:04:32.330 --> 00:04:34.234
+Okay, so there are a lot of docker commands.
+
+99
+00:04:34.282 --> 00:04:37.078
+We'll see them now, but we'll go to Docker
+
+100
+00:04:37.114 --> 00:04:39.414
+Hub first and find some image for us.
+
+101
+00:04:39.572 --> 00:04:41.110
+Okay, back to Docker Hub.
+
+102
+00:04:41.230 --> 00:04:42.678
+Let's take a simple one.
+
+103
+00:04:42.704 --> 00:04:44.158
+You can go with NGINX.
+
+104
+00:04:44.194 --> 00:04:45.610
+Okay, let's go with NGINX.
+
+105
+00:04:45.730 --> 00:04:46.842
+NGINX is a web service.
+
+106
+00:04:46.916 --> 00:04:49.590
+We know it runs on port 80, right?
+
+107
+00:04:49.640 --> 00:04:50.840
+So let's take this.
+
+108
+00:04:51.170 --> 00:04:53.974
+So every official image will have nice documentation.
+
+109
+00:04:54.082 --> 00:04:55.040
+Read it.
+
+110
+00:04:55.370 --> 00:04:56.778
+If you want to just pull the
+
+111
+00:04:56.804 --> 00:04:58.678
+image, you can say docker pull nginx.
+
+112
+00:04:58.774 --> 00:04:59.850
+There's the command.
+
+113
+00:05:02.670 --> 00:05:06.430
+Okay, so I'll say here docker pull nginx.
+
+114
+00:05:08.010 --> 00:05:09.262
+This is going to pull the
+
+115
+00:05:09.276 --> 00:05:11.290
+image from Docker Hub by default.
+
+116
+00:05:11.610 --> 00:05:13.990
+By default it will go to Docker Hub.
+
+117
+00:05:15.210 --> 00:05:17.770
+Okay, now you should run the command docker images.
+
+118
+00:05:18.390 --> 00:05:19.894
+Right? We see two images. Okay.
+
+119
+00:05:19.932 --> 00:05:21.914
+One is the nginx that we have just pulled.
+
+120
+00:05:22.022 --> 00:05:23.760
+The other one was Hello World.
+
+121
+00:05:24.090 --> 00:05:27.490
+Okay, you see, it's called a repository.
+
+122
+00:05:28.410 --> 00:05:29.642
+They'll have a tag.
+
+123
+00:05:29.786 --> 00:05:31.286
+Every image will have a tag.
+
+124
+00:05:31.358 --> 00:05:32.978
+One image will have multiple tags.
+
+125
+00:05:33.014 --> 00:05:36.130
+Tags are mostly used for versioning latest.
+
+126
+00:05:36.510 --> 00:05:37.594
+It's just a name.
+
+127
+00:05:37.692 --> 00:05:39.682
+It really doesn't mean it's not a guarantee that
+
+128
+00:05:39.696 --> 00:05:43.670
+it's the latest image, but majorly for official images,
+
+129
+00:05:43.730 --> 00:05:46.090
+latest will really mean the latest image.
+
+130
+00:05:46.590 --> 00:05:48.142
+Image will have an ID.
+
+131
+00:05:48.336 --> 00:05:49.582
+It will have the time when it
+
+132
+00:05:49.596 --> 00:05:52.234
+was created and size of it.
+
+133
+00:05:52.332 --> 00:05:54.542
+One three three MB.
+
+134
+00:05:54.686 --> 00:05:55.800
+That's it.
+
+135
+00:05:56.310 --> 00:06:00.986
+Imagine you create a VM image which has NGINX.
+
+136
+00:06:01.178 --> 00:06:03.638
+If you take example of AWS itself, AMI
+
+137
+00:06:03.674 --> 00:06:06.000
+that's Linux is minimum eight GB size.
+
+138
+00:06:06.330 --> 00:06:09.960
+Compare that with 133 MB. What is it? Nothing.
+
+139
+00:06:10.530 --> 00:06:12.490
+Okay, now let's run container from that.
+
+140
+00:06:12.540 --> 00:06:15.074
+Okay, so let's read the documentation.
+
+141
+00:06:15.122 --> 00:06:16.438
+Let's keep reading it.
+
+142
+00:06:16.584 --> 00:06:18.002
+So we have different tags.
+
+143
+00:06:18.026 --> 00:06:20.950
+It is telling us you have a tags section.
+
+144
+00:06:21.750 --> 00:06:23.878
+You have different different tags that
+
+145
+00:06:23.904 --> 00:06:25.418
+you can pull any image.
+
+146
+00:06:25.454 --> 00:06:26.882
+You just have to know any tag.
+
+147
+00:06:26.906 --> 00:06:29.110
+You just have to say colon and the tag name.
+
+148
+00:06:29.280 --> 00:06:30.178
+Like I will do now.
+
+149
+00:06:30.204 --> 00:06:34.510
+I'll pull some image with different tag.
+
+150
+00:06:36.090 --> 00:06:38.122
+I will say this one. Okay.
+
+151
+00:06:38.256 --> 00:06:40.440
+I'm just doing it just for fun. Okay. Nothing.
+
+152
+00:06:49.030 --> 00:06:51.114
+Okay, now it's pulling some layers.
+
+153
+00:06:51.222 --> 00:06:52.574
+I think it's done already.
+
+154
+00:06:52.732 --> 00:06:54.398
+Oh, okay.
+
+155
+00:06:54.424 --> 00:06:55.600
+Let me clear the screen.
+
+156
+00:06:56.890 --> 00:06:59.102
+Now, you should see nginx here two times.
+
+157
+00:06:59.236 --> 00:07:01.914
+One with this tag mainline Alpine
+
+158
+00:07:01.962 --> 00:07:03.530
+Pearl and one with latest.
+
+159
+00:07:03.970 --> 00:07:05.718
+That's how you can mention the tags.
+
+160
+00:07:05.754 --> 00:07:10.880
+Okay, what is nginx and stuff?
+
+161
+00:07:11.570 --> 00:07:12.802
+How to use this image.
+
+162
+00:07:12.826 --> 00:07:16.806
+So every official image will have proper
+
+163
+00:07:16.868 --> 00:07:18.162
+documentation of how to run it.
+
+164
+00:07:18.176 --> 00:07:22.066
+It says Docker run, f name, name of the container.
+
+165
+00:07:22.198 --> 00:07:23.922
+V that is for volume option.
+
+166
+00:07:23.996 --> 00:07:25.220
+We'll see that later.
+
+167
+00:07:26.030 --> 00:07:27.670
+D nginx.
+
+168
+00:07:27.730 --> 00:07:29.134
+That's the name of the image.
+
+169
+00:07:29.242 --> 00:07:30.894
+Okay, so let me do it my way.
+
+170
+00:07:30.932 --> 00:07:34.590
+Now, so far we know docker run and
+
+171
+00:07:34.640 --> 00:07:37.558
+the image name docker and creates the container.
+
+172
+00:07:37.594 --> 00:07:38.922
+That's the image name.
+
+173
+00:07:39.116 --> 00:07:40.582
+I'll give a name to this image.
+
+174
+00:07:40.606 --> 00:07:41.910
+I'll say name.
+
+175
+00:07:42.020 --> 00:07:43.760
+I will say my web.
+
+176
+00:07:45.050 --> 00:07:46.998
+Okay, we have seen previously, when we
+
+177
+00:07:47.024 --> 00:07:49.506
+just run the container, it runs on
+
+178
+00:07:49.508 --> 00:07:51.106
+the foreground, it runs on the shell.
+
+179
+00:07:51.178 --> 00:07:52.278
+If you want to run it in the
+
+180
+00:07:52.304 --> 00:07:56.050
+background, you give D option detached mode.
+
+181
+00:07:56.110 --> 00:07:57.750
+So it runs in the background
+
+182
+00:07:58.910 --> 00:08:00.358
+so it doesn't capture our shell.
+
+183
+00:08:00.394 --> 00:08:01.542
+Also, now, this is going
+
+184
+00:08:01.556 --> 00:08:03.140
+to be continuously running process.
+
+185
+00:08:03.950 --> 00:08:05.782
+Not like Hello World, hello World runs
+
+186
+00:08:05.806 --> 00:08:06.894
+on the screen and that's it.
+
+187
+00:08:06.932 --> 00:08:08.946
+But this is going to be continuously running.
+
+188
+00:08:09.128 --> 00:08:11.182
+If you don't want it to run, it on a shell
+
+189
+00:08:11.206 --> 00:08:13.450
+So Hyphen, D, run it in background.
+
+190
+00:08:13.630 --> 00:08:15.438
+Now, nginx runs a web service, a
+
+191
+00:08:15.464 --> 00:08:18.750
+process we can access from port 80.
+
+192
+00:08:19.190 --> 00:08:20.298
+Now, that's what we know.
+
+193
+00:08:20.324 --> 00:08:22.222
+NGINX runs by default on port 80.
+
+194
+00:08:22.246 --> 00:08:24.390
+But you should also check from the documentation.
+
+195
+00:08:24.710 --> 00:08:26.350
+Or you can run the Docker Inspect
+
+196
+00:08:26.410 --> 00:08:28.170
+command also that I'll show you.
+
+197
+00:08:28.280 --> 00:08:30.234
+So you should be sure your
+
+198
+00:08:30.272 --> 00:08:32.549
+container is running on what port.
+
+199
+00:08:32.659 --> 00:08:35.374
+The process is running on what port in the container.
+
+200
+00:08:35.542 --> 00:08:38.419
+So you can map a host port.
+
+201
+00:08:38.809 --> 00:08:41.994
+You cannot connect to this container directly because
+
+202
+00:08:42.032 --> 00:08:44.206
+it's going to be in a private network.
+
+203
+00:08:44.338 --> 00:08:46.978
+In the host machine, there will be a private network.
+
+204
+00:08:47.014 --> 00:08:48.138
+It will be inside that.
+
+205
+00:08:48.224 --> 00:08:51.334
+Think of this like the private subnet instance.
+
+206
+00:08:51.382 --> 00:08:52.522
+Running in a private subnet.
+
+207
+00:08:52.546 --> 00:08:54.798
+You cannot access it like that.
+
+208
+00:08:54.824 --> 00:08:57.330
+This container will be running in a private network.
+
+209
+00:08:57.950 --> 00:08:59.478
+If you want to access it from the
+
+210
+00:08:59.504 --> 00:09:02.240
+outside, you have to map a host port.
+
+211
+00:09:03.230 --> 00:09:06.414
+So you access the host on that port, and
+
+212
+00:09:06.452 --> 00:09:07.962
+then it is going to route the request to
+
+213
+00:09:07.976 --> 00:09:10.770
+the container on port that you specified.
+
+214
+00:09:11.150 --> 00:09:12.990
+So I will say -p.
+
+215
+00:09:13.730 --> 00:09:15.346
+Let's take some examples.
+
+216
+00:09:15.418 --> 00:09:16.518
+70, 90.
+
+217
+00:09:16.604 --> 00:09:18.020
+That's the host port.
+
+218
+00:09:18.350 --> 00:09:20.490
+Container port is 80.
+
+219
+00:09:21.230 --> 00:09:24.570
+This is called port mapping or port forwarding.
+
+220
+00:09:25.610 --> 00:09:28.578
+You map a host port with the container port.
+
+221
+00:09:28.664 --> 00:09:31.506
+Now, host port should be free container port.
+
+222
+00:09:31.568 --> 00:09:33.414
+You need to know what process
+
+223
+00:09:33.572 --> 00:09:35.780
+the process runs on what port.
+
+224
+00:09:36.350 --> 00:09:38.300
+Okay, let's hit enter.
+
+225
+00:09:39.470 --> 00:09:41.190
+Okay, it returns a long number.
+
+226
+00:09:41.240 --> 00:09:42.978
+It's actually the container ID.
+
+227
+00:09:43.124 --> 00:09:44.790
+You can say docker ps.
+
+228
+00:09:45.770 --> 00:09:47.658
+Okay, so that's a small container ID.
+
+229
+00:09:47.744 --> 00:09:49.890
+It's running from this image, and it is running
+
+230
+00:09:49.940 --> 00:09:52.822
+some command, which is actually a script that runs
+
+231
+00:09:52.846 --> 00:09:57.306
+the nginx process and you can access it from
+
+232
+00:09:57.368 --> 00:10:00.462
+any IP address on port 7090.
+
+233
+00:10:00.656 --> 00:10:02.322
+Okay, that's the host port.
+
+234
+00:10:02.456 --> 00:10:06.766
+So we have to access our host machine.
+
+235
+00:10:06.838 --> 00:10:09.618
+Ours is easy to instance, let's copy its
+
+236
+00:10:09.644 --> 00:10:13.700
+IP address and give the port 70 90.
+
+237
+00:10:15.710 --> 00:10:17.300
+Okay, security group.
+
+238
+00:10:17.930 --> 00:10:19.386
+EC2 instance security group.
+
+239
+00:10:19.448 --> 00:10:21.870
+I told you we have to add a rule.
+
+240
+00:10:23.930 --> 00:10:28.098
+So add rule and I will say all traffic from my
+
+241
+00:10:28.124 --> 00:10:31.220
+IP because we are going to run many, many containers here.
+
+242
+00:10:33.410 --> 00:10:37.734
+Okay, let's save this and let's come back.
+
+243
+00:10:37.832 --> 00:10:40.650
+Let's refresh and there you go.
+
+244
+00:10:40.760 --> 00:10:43.650
+An nginx service running from a container.
+
+245
+00:10:44.210 --> 00:10:45.800
+It's continuously running.
+
+246
+00:10:46.610 --> 00:10:48.294
+If you want to stop it, you can say
+
+247
+00:10:48.332 --> 00:10:52.520
+docker stop and you can give the container ID
+
+248
+00:10:53.690 --> 00:10:56.180
+or you can give the container name also.
+
+249
+00:11:00.330 --> 00:11:01.394
+Okay, it is stopped.
+
+250
+00:11:01.442 --> 00:11:02.570
+You say docker PS.
+
+251
+00:11:02.630 --> 00:11:05.220
+It's not running docker ps -a
+
+252
+00:11:06.270 --> 00:11:08.438
+You should be seeing it in the exited status.
+
+253
+00:11:08.534 --> 00:11:12.778
+Okay, if I want to start it, I'm going to
+
+254
+00:11:12.804 --> 00:11:16.870
+say docker start and again container ID or the name
+
+255
+00:11:16.920 --> 00:11:23.030
+this time let's give the name docker PS.
+
+256
+00:11:24.010 --> 00:11:25.120
+Now it's running.
+
+257
+00:11:25.690 --> 00:11:26.990
+Okay, let's do a little
+
+258
+00:11:27.040 --> 00:11:29.034
+investigation on our host machine.
+
+259
+00:11:29.082 --> 00:11:30.942
+Let's run the process command ps -ef
+
+260
+00:11:30.966 --> 00:11:32.634
+ on my host machine.
+
+261
+00:11:32.742 --> 00:11:34.298
+As I told you, container is just
+
+262
+00:11:34.324 --> 00:11:35.958
+a process running from a directory.
+
+263
+00:11:36.054 --> 00:11:37.600
+So I need to prove that point.
+
+264
+00:11:39.310 --> 00:11:43.000
+So ps -ef I do and I should see it there.
+
+265
+00:11:43.930 --> 00:11:45.894
+That's the process ID of your container.
+
+266
+00:11:45.942 --> 00:11:47.690
+That's actually your container.
+
+267
+00:11:49.270 --> 00:11:51.590
+And this actually created one more process.
+
+268
+00:11:51.640 --> 00:11:54.110
+So there are two processes running from the container.
+
+269
+00:11:55.270 --> 00:11:58.122
+Now I told you a container running from a directory.
+
+270
+00:11:58.266 --> 00:11:59.042
+Yes.
+
+271
+00:11:59.236 --> 00:12:03.326
+So let's be the root user and we are
+
+272
+00:12:03.328 --> 00:12:07.430
+going to get into this directory /var/lib/docker.
+
+273
+00:12:10.970 --> 00:12:12.534
+you see different directories here,
+
+274
+00:12:12.572 --> 00:12:14.480
+there's a container directory in that.
+
+275
+00:12:15.410 --> 00:12:16.820
+Let's get into that.
+
+276
+00:12:17.870 --> 00:12:19.338
+And you should see here two
+
+277
+00:12:19.364 --> 00:12:21.630
+directories because we have two containers.
+
+278
+00:12:23.750 --> 00:12:25.400
+Okay, match that number.
+
+279
+00:12:27.110 --> 00:12:28.174
+That's the directory.
+
+280
+00:12:28.222 --> 00:12:30.440
+That's the complete container ID.
+
+281
+00:12:31.250 --> 00:12:34.390
+So let's get into that big directory
+
+282
+00:12:34.510 --> 00:12:36.006
+and you should see some data.
+
+283
+00:12:36.068 --> 00:12:39.826
+Okay, there is resolve.com file for resolving
+
+284
+00:12:39.898 --> 00:12:43.374
+container names, its host name and stuff. Okay.
+
+285
+00:12:43.412 --> 00:12:45.200
+I also told you one more thing
+
+286
+00:12:45.650 --> 00:12:48.178
+that containers runs directly from the images.
+
+287
+00:12:48.214 --> 00:12:50.682
+So what are the page also we are seeing our web page.
+
+288
+00:12:50.756 --> 00:12:52.710
+It's actually coming from the image.
+
+289
+00:12:53.390 --> 00:12:55.820
+The containers does not have any data
+
+290
+00:12:56.330 --> 00:12:59.180
+mostly if you're not storing anything.
+
+291
+00:12:59.570 --> 00:13:02.118
+So let's check the size of it.
+
+292
+00:13:02.144 --> 00:13:03.174
+du -sh
+
+293
+00:13:03.272 --> 00:13:05.550
+And let's check the size of this directory
+
+294
+00:13:06.110 --> 00:13:08.490
+and you see that it's just 40 KB.
+
+295
+00:13:09.410 --> 00:13:11.142
+There's just some configuration files you have.
+
+296
+00:13:11.156 --> 00:13:13.354
+The data is from the image directory.
+
+297
+00:13:13.522 --> 00:13:16.158
+Okay, but image directory you
+
+298
+00:13:16.184 --> 00:13:18.378
+will have distributed data.
+
+299
+00:13:18.464 --> 00:13:21.382
+If you do ls image, you should see overlay
+
+300
+00:13:21.406 --> 00:13:25.690
+two and you should see different directory structure.
+
+301
+00:13:25.870 --> 00:13:27.138
+There I prove my point.
+
+302
+00:13:27.224 --> 00:13:29.590
+Container is just a process running from a directory
+
+303
+00:13:29.650 --> 00:13:31.894
+and all the data is coming from the image.
+
+304
+00:13:32.062 --> 00:13:33.678
+Containers can store data.
+
+305
+00:13:33.764 --> 00:13:36.874
+You can have dynamic containers or stateful containers
+
+306
+00:13:36.922 --> 00:13:38.982
+that stores data or reads the data.
+
+307
+00:13:39.176 --> 00:13:41.046
+And if you're going to do that, you have
+
+308
+00:13:41.048 --> 00:13:43.026
+to make sure you connect volumes to it.
+
+309
+00:13:43.148 --> 00:13:44.502
+We'll be seeing that next.
+
+310
+00:13:44.636 --> 00:13:45.678
+But let's do a little more
+
+311
+00:13:45.704 --> 00:13:51.130
+experiment with this container docker PS.
+
+312
+00:13:51.870 --> 00:13:53.758
+So just try to become comfortable, right?
+
+313
+00:13:53.784 --> 00:13:56.290
+So you understand the technology, nothing real
+
+314
+00:13:56.340 --> 00:13:57.490
+time and all sorts of things.
+
+315
+00:13:57.540 --> 00:13:59.618
+For now, we're going to see that in Kubernetes.
+
+316
+00:13:59.714 --> 00:14:00.730
+For now, we're just getting
+
+317
+00:14:00.780 --> 00:14:02.220
+comfortable with this technology.
+
+318
+00:14:02.910 --> 00:14:05.458
+Okay, if you are having an urge to log into the
+
+319
+00:14:05.484 --> 00:14:08.738
+container like a VM, you do login like we do SSH,
+
+320
+00:14:08.834 --> 00:14:11.102
+but there is no SSH running in the container.
+
+321
+00:14:11.126 --> 00:14:12.670
+So you can't really do SSH.
+
+322
+00:14:12.990 --> 00:14:14.230
+So how do I log in?
+
+323
+00:14:14.280 --> 00:14:15.298
+Well, basically there is no
+
+324
+00:14:15.324 --> 00:14:16.630
+login because it's a process.
+
+325
+00:14:16.740 --> 00:14:18.600
+How can you really log into a process?
+
+326
+00:14:18.990 --> 00:14:22.342
+But you can attach to this container, or if
+
+327
+00:14:22.356 --> 00:14:24.274
+you don't want that, you can run commands also.
+
+328
+00:14:24.312 --> 00:14:30.190
+On this, there is an option docker exec and you give
+
+329
+00:14:30.240 --> 00:14:34.258
+the container name or the ID and then you can run
+
+330
+00:14:34.284 --> 00:14:37.690
+command like I would like to run ls /
+
+331
+00:14:39.730 --> 00:14:43.182
+Okay, so that command got executed in this container.
+
+332
+00:14:43.206 --> 00:14:46.458
+And you see that you should see similar directory
+
+333
+00:14:46.494 --> 00:14:49.034
+structure like you see in any operating system or
+
+334
+00:14:49.072 --> 00:14:53.150
+Linux operating system because it's a Linux container, right?
+
+335
+00:14:53.260 --> 00:14:55.982
+Okay, how can we get into that?
+
+336
+00:14:56.116 --> 00:14:58.254
+How can we attach not login
+
+337
+00:14:58.302 --> 00:15:01.670
+attach so same docker exec command.
+
+338
+00:15:02.590 --> 00:15:03.606
+So there's a trick.
+
+339
+00:15:03.678 --> 00:15:05.634
+You can do /bin/bah.
+
+340
+00:15:05.682 --> 00:15:09.678
+So if it has bash shell, of course it will have Bash shell
+
+341
+00:15:09.834 --> 00:15:12.506
+most of the time, or you can have other shell also.
+
+342
+00:15:12.568 --> 00:15:15.510
+But mostly you'll find the Bash shell in this path.
+
+343
+00:15:15.690 --> 00:15:19.238
+If we can do this, we can attach it.
+
+344
+00:15:19.264 --> 00:15:21.674
+But the problem is when I do that,
+
+345
+00:15:21.712 --> 00:15:23.658
+it just runs that command in the container.
+
+346
+00:15:23.694 --> 00:15:25.470
+I'm not connected to that shell.
+
+347
+00:15:25.530 --> 00:15:27.510
+So if you want to connect to that command
+
+348
+00:15:27.570 --> 00:15:31.874
+that you're running, you can say -it
+
+349
+00:15:31.912 --> 00:15:34.266
+interactive and T is for the TTY.
+
+350
+00:15:34.458 --> 00:15:38.558
+So what I'm really saying is run this command in this
+
+351
+00:15:38.584 --> 00:15:42.820
+container and attach me to that command to that process.
+
+352
+00:15:43.210 --> 00:15:48.798
+And when I do that, I'm in the
+
+353
+00:15:48.824 --> 00:15:52.830
+container I have attached to that process.
+
+354
+00:15:53.000 --> 00:15:56.898
+Now in the container, the container is really
+
+355
+00:15:56.924 --> 00:15:58.794
+a stripped down version of an operating system.
+
+356
+00:15:58.832 --> 00:16:00.294
+So you'll not find many things.
+
+357
+00:16:00.332 --> 00:16:01.782
+Like if you try to run, if
+
+358
+00:16:01.856 --> 00:16:04.362
+config command, it will not be there.
+
+359
+00:16:04.496 --> 00:16:07.722
+You try to run PS command, most of
+
+360
+00:16:07.736 --> 00:16:09.500
+the containers will not have that also.
+
+361
+00:16:10.490 --> 00:16:12.680
+But let's install this.
+
+362
+00:16:13.250 --> 00:16:15.574
+Let's install a package that will give us PS
+
+363
+00:16:15.622 --> 00:16:17.540
+command because I want to show you something.
+
+364
+00:16:18.350 --> 00:16:21.886
+So this is actually debian based container.
+
+365
+00:16:22.078 --> 00:16:26.034
+So I can run apt command apt update. See that?
+
+366
+00:16:26.072 --> 00:16:26.900
+That's working.
+
+367
+00:16:27.950 --> 00:16:33.086
+And I'm going to install procps
+
+368
+00:16:33.158 --> 00:16:36.010
+Okay, this should give me the process command.
+
+369
+00:16:36.390 --> 00:16:37.474
+Install it.
+
+370
+00:16:37.632 --> 00:16:40.198
+So installation is happening in the container. Now.
+
+371
+00:16:40.224 --> 00:16:43.430
+We are creating some data in the container
+
+372
+00:16:43.610 --> 00:16:45.886
+that's not recommended, but we are just learning
+
+373
+00:16:45.948 --> 00:16:48.926
+for now lets run ps -ef
+
+374
+00:16:49.118 --> 00:16:51.094
+And you see now the process
+
+375
+00:16:51.252 --> 00:16:54.922
+of the container only PID one.
+
+376
+00:16:54.996 --> 00:16:57.802
+The first process is the nginx process.
+
+377
+00:16:57.936 --> 00:17:00.120
+And that started this process.
+
+378
+00:17:01.650 --> 00:17:02.086
+Okay?
+
+379
+00:17:02.148 --> 00:17:04.369
+But we see one more process, bin bash.
+
+380
+00:17:04.490 --> 00:17:06.230
+That is the command that we executed.
+
+381
+00:17:06.290 --> 00:17:07.321
+And that's how we are attached.
+
+382
+00:17:07.346 --> 00:17:12.993
+We are currently connected to that process 34. Okay.
+
+383
+00:17:13.092 --> 00:17:14.530
+Now, if I type exit over
+
+384
+00:17:14.579 --> 00:17:16.982
+here, this process will be dead.
+
+385
+00:17:17.006 --> 00:17:18.046
+I'm attached to this process.
+
+386
+00:17:18.108 --> 00:17:19.738
+If I type exit, this process will be
+
+387
+00:17:19.763 --> 00:17:21.480
+killed and I will be thrown out.
+
+388
+00:17:23.430 --> 00:17:24.826
+Okay, I'm out.
+
+389
+00:17:25.008 --> 00:17:27.694
+I'm in the host machine back to my host machine. Okay.
+
+390
+00:17:27.732 --> 00:17:28.990
+So that's how you can get in
+
+391
+00:17:29.040 --> 00:17:30.926
+and get out of the container.
+
+392
+00:17:31.058 --> 00:17:32.858
+Some containers will not have bash shell.
+
+393
+00:17:32.894 --> 00:17:36.840
+So maybe you'll have just sh the shell. Okay.
+
+394
+00:17:42.850 --> 00:17:45.434
+Okay, so I have a container running, and
+
+395
+00:17:45.472 --> 00:17:47.990
+I have one container that is dead.
+
+396
+00:17:48.490 --> 00:17:52.826
+And I have three images. Okay?
+
+397
+00:17:52.948 --> 00:17:55.890
+So now I will remove the image docker RMI
+
+398
+00:17:55.950 --> 00:18:00.890
+and I'll remove NGINX image with this tag.
+
+399
+00:18:03.290 --> 00:18:06.162
+Okay, I can remove that. That's nice.
+
+400
+00:18:06.296 --> 00:18:14.050
+Okay, now let's also try to remove docker images.
+
+401
+00:18:15.030 --> 00:18:16.522
+Now let's try to remove the
+
+402
+00:18:16.536 --> 00:18:18.890
+image RMI to remove the image.
+
+403
+00:18:19.070 --> 00:18:20.974
+The latest one. Okay?
+
+404
+00:18:21.012 --> 00:18:22.070
+You don't need to give tag.
+
+405
+00:18:22.130 --> 00:18:23.594
+If you don't give, that means latest.
+
+406
+00:18:23.642 --> 00:18:26.594
+Anyways, it's going to throw me an error.
+
+407
+00:18:26.642 --> 00:18:29.878
+It is saying container with so and so.
+
+408
+00:18:29.904 --> 00:18:34.570
+ID is using it is using its referenced image.
+
+409
+00:18:35.850 --> 00:18:37.066
+That proves the point again,
+
+410
+00:18:37.128 --> 00:18:38.666
+containers running from the image.
+
+411
+00:18:38.798 --> 00:18:40.478
+So if I want to remove the image,
+
+412
+00:18:40.514 --> 00:18:43.030
+first I have to remove the container.
+
+413
+00:18:44.130 --> 00:18:45.398
+So if I try to remove
+
+414
+00:18:45.434 --> 00:18:47.760
+the container, let's see what happens.
+
+415
+00:18:49.890 --> 00:18:50.254
+Okay.
+
+416
+00:18:50.292 --> 00:18:51.626
+It says you cannot remove.
+
+417
+00:18:51.698 --> 00:18:52.978
+It is in a running state, so
+
+418
+00:18:53.004 --> 00:18:54.734
+you have to stop the container.
+
+419
+00:18:54.782 --> 00:18:58.450
+So first is I stopped the container
+
+420
+00:18:59.430 --> 00:19:01.570
+and then I remove the container.
+
+421
+00:19:02.490 --> 00:19:04.690
+And then I can remove the image.
+
+422
+00:19:07.750 --> 00:19:08.680
+All right?
+
+423
+00:19:09.190 --> 00:19:10.998
+Okay, let's test one more image.
+
+424
+00:19:11.034 --> 00:19:16.590
+There is an image called Ubuntu.
+
+425
+00:19:17.630 --> 00:19:18.282
+Yeah.
+
+426
+00:19:18.416 --> 00:19:20.850
+It's not going to be an entire Ubuntu operating system.
+
+427
+00:19:20.900 --> 00:19:22.018
+It's going to be a very smaller
+
+428
+00:19:22.054 --> 00:19:24.250
+version of Ubuntu in a container.
+
+429
+00:19:24.370 --> 00:19:28.290
+Okay, so let's pull that image and the latest tag.
+
+430
+00:19:32.370 --> 00:19:36.250
+Okay, so I want to now run a container from that.
+
+431
+00:19:36.300 --> 00:19:37.174
+Let's see what happens.
+
+432
+00:19:37.272 --> 00:19:42.530
+docker run ubuntu
+
+433
+00:19:45.110 --> 00:19:45.858
+OK, let's say.
+
+434
+00:19:45.884 --> 00:19:47.026
+Docker PS.
+
+435
+00:19:47.218 --> 00:19:48.162
+There's nothing.
+
+436
+00:19:48.296 --> 00:19:49.220
+What happened?
+
+437
+00:19:49.910 --> 00:19:51.570
+Docker ps -a
+
+438
+00:19:53.330 --> 00:19:56.874
+You see, that container is in exited state.
+
+439
+00:19:56.912 --> 00:19:59.086
+So it started and it's dead.
+
+440
+00:19:59.218 --> 00:20:02.206
+That's because it is running bash shell.
+
+441
+00:20:02.398 --> 00:20:04.630
+And you need to interact with the bash shell.
+
+442
+00:20:04.750 --> 00:20:07.220
+Otherwise it cannot be running like that.
+
+443
+00:20:07.730 --> 00:20:13.014
+So if you want to run it, so you have
+
+444
+00:20:13.052 --> 00:20:17.550
+to say hyphen it and you give the bin bash.
+
+445
+00:20:21.570 --> 00:20:22.042
+Okay.
+
+446
+00:20:22.116 --> 00:20:27.046
+I mean the container, if you check the process.
+
+447
+00:20:27.168 --> 00:20:28.738
+And now yes, PS command is here
+
+448
+00:20:28.764 --> 00:20:31.058
+in Ubuntu container in Ubuntu image.
+
+449
+00:20:31.214 --> 00:20:35.050
+So if you see the PID is the bash shell. Right?
+
+450
+00:20:35.220 --> 00:20:37.378
+And now if I exit, which is going
+
+451
+00:20:37.404 --> 00:20:40.210
+to kill this process, that's the main process.
+
+452
+00:20:40.380 --> 00:20:42.758
+The first process, if that is dead,
+
+453
+00:20:42.854 --> 00:20:44.510
+the container will be also dead.
+
+454
+00:20:44.630 --> 00:20:45.802
+I'm out.
+
+455
+00:20:45.996 --> 00:20:47.650
+Let's check docker PS.
+
+456
+00:20:47.970 --> 00:20:49.174
+It's not there.
+
+457
+00:20:49.332 --> 00:20:50.640
+ps -a
+
+458
+00:20:51.090 --> 00:20:53.638
+You see that one? Okay.
+
+459
+00:20:53.664 --> 00:20:54.706
+It's an exited state.
+
+460
+00:20:54.768 --> 00:20:57.180
+Because we actually killed that main process.
+
+461
+00:20:57.690 --> 00:21:00.720
+So that PID one is actually your container process.
+
+462
+00:21:01.830 --> 00:21:04.774
+For NGINX, it was NGINX process, but
+
+463
+00:21:04.812 --> 00:21:07.334
+for here, it was our bash shell.
+
+464
+00:21:07.502 --> 00:21:09.058
+Okay, let's do the clean up.
+
+465
+00:21:09.144 --> 00:21:10.450
+Docker RM.
+
+466
+00:21:11.070 --> 00:21:12.706
+Let's remove it with its name.
+
+467
+00:21:12.768 --> 00:21:17.050
+I will remove multiple like all the containers.
+
+468
+00:21:18.930 --> 00:21:20.350
+Since they're in a stop state,
+
+469
+00:21:20.400 --> 00:21:22.260
+exited state, I can remove them.
+
+470
+00:21:23.190 --> 00:21:24.430
+Check the images.
+
+471
+00:21:25.170 --> 00:21:26.830
+Let's remove the image.
+
+472
+00:21:27.510 --> 00:21:32.074
+Both the image one, two also and also this.
+
+473
+00:21:32.112 --> 00:21:33.000
+Hello, world.
+
+474
+00:21:34.710 --> 00:21:38.434
+Okay, so clean slate now. Okay.
+
+475
+00:21:38.472 --> 00:21:39.802
+So by running those commands, we
+
+476
+00:21:39.816 --> 00:21:41.234
+got comfortable with the containers.
+
+477
+00:21:41.282 --> 00:21:42.326
+Docker containers.
+
+478
+00:21:42.458 --> 00:21:43.490
+So we see images.
+
+479
+00:21:43.550 --> 00:21:45.374
+Let's list the images locally.
+
+480
+00:21:45.482 --> 00:21:47.786
+Docker run is to create the container.
+
+481
+00:21:47.918 --> 00:21:50.126
+PS is to list the containers.
+
+482
+00:21:50.258 --> 00:21:52.694
+ps -a is to list all the containers.
+
+483
+00:21:52.862 --> 00:21:55.522
+Docker exec is to run the commands on the container, and
+
+484
+00:21:55.536 --> 00:21:58.418
+we can use it also to attach to the container.
+
+485
+00:21:58.574 --> 00:22:01.870
+We can start, stop, restart or remove a container.
+
+486
+00:22:02.190 --> 00:22:04.418
+Docker RMI is to remove the image.
+
+487
+00:22:04.514 --> 00:22:05.978
+Again, there is a dependency.
+
+488
+00:22:06.134 --> 00:22:08.834
+Remember, you have to remove the container.
+
+489
+00:22:09.002 --> 00:22:11.580
+Docker Inspect will be seeing that in the next video.
+
+490
+00:22:12.870 --> 00:22:15.902
+Check the official documentation for more commands.
+
+491
+00:22:15.926 --> 00:22:17.950
+We'll be seeing more and more commands.
+
+492
+00:22:19.170 --> 00:22:20.758
+And we'll continue learning all
+
+493
+00:22:20.784 --> 00:22:22.000
+this from the next video.

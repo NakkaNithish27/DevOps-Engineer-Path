@@ -1,0 +1,405 @@
+WEBVTT
+
+0
+00:00.450 --> 00:06.510
+Welcome in this video, we will take a sample use case, we have some commands to execute which
+
+1
+00:06.510 --> 00:08.400
+will set up the website for us.
+
+2
+00:09.000 --> 00:14.460
+So instead of doing that, manually, running all the commands, we are going to write a script to do
+
+3
+00:14.460 --> 00:14.790
+that.
+
+4
+00:15.870 --> 00:22.170
+So I'm going to call this script as Web site, setup script.
+
+5
+00:25.190 --> 00:27.320
+All right, I just say, Web setup.
+
+6
+00:29.440 --> 00:33.670
+So I know all the commands to set up the website.
+
+7
+00:34.120 --> 00:39.760
+I'm talking about the similar example we've seen in Linux download it from tooplate.com and set it up so
+
+8
+00:39.760 --> 00:40.780
+we know all the commands.
+
+9
+00:40.780 --> 00:45.850
+You're going to simply record all those commands in this text file, which is basically your script.
+
+10
+00:46.720 --> 00:49.660
+So First Line Shebang Chan=recter
+
+11
+00:52.060 --> 01:02.130
+And first just simply will record the command, so if you have the command yum install wget unzip httpd
+
+12
+01:03.220 --> 01:04.270
+-y
+
+13
+01:04.780 --> 01:08.470
+And if the script executes from a normal user, I would like to give a sudo.
+
+14
+01:10.150 --> 01:16.150
+-y so it doesn't ask us any question because we have many things to do here year after this,
+
+15
+01:16.150 --> 01:18.100
+I will create a directory in the /tmp.
+
+16
+01:19.510 --> 01:21.610
+We'll call it as Web files.
+
+17
+01:22.900 --> 01:28.120
+And I'm going to use -p option, so if there directly exists, it will not through any error,
+
+18
+01:28.120 --> 01:29.530
+it will just simply ignore.
+
+19
+01:29.980 --> 01:32.350
+And then we will do cd into that dir.
+
+20
+01:36.030 --> 01:40.950
+So basically, we're going to create all our temporary files, in this directory, like we have to download
+
+21
+01:41.460 --> 01:44.280
+the artifact, so wget and the URL.
+
+22
+01:45.820 --> 01:49.030
+So I am at tooplate.com and let's get a template.
+
+23
+01:49.600 --> 01:51.580
+I'm using this health center.
+
+24
+01:54.140 --> 01:55.680
+So we need this, URL
+
+25
+01:56.710 --> 01:57.890
+Let's go to the downloads.
+
+26
+01:58.730 --> 01:59.140
+Lets hit F12
+
+27
+01:59.210 --> 02:06.200
+F12 in our browser, it should open up this tab for debugging and we should be in the network
+
+28
+02:06.200 --> 02:06.600
+tab.
+
+29
+02:06.620 --> 02:08.060
+Let's click on the download.
+
+30
+02:09.360 --> 02:15.270
+And you should see there the link to 2098_health.zip, let's copy that link.
+
+31
+02:18.350 --> 02:19.730
+And let's just paste it here.
+
+32
+02:21.250 --> 02:24.310
+Next, we would like to unzip that zip file.
+
+33
+02:27.250 --> 02:30.550
+And hopefully there is a directory inside that with the same name.
+
+34
+02:32.350 --> 02:39.280
+And we would like to copy all the content to /var/www/html, and then we would
+
+35
+02:39.280 --> 02:44.290
+like to do systemctl restart httpd.
+
+36
+02:45.960 --> 02:54.440
+Now, after installing, I would like here it to start first systemctl start httpd and a
+
+37
+02:54.450 --> 02:56.940
+systemctl enable httpd
+
+38
+02:59.130 --> 03:00.490
+I will just keep a sudo there.
+
+39
+03:02.410 --> 03:07.930
+And to copy here also, we need to do so because the district is owned by the root user, so you need
+
+40
+03:07.930 --> 03:08.680
+to do the sudo.
+
+41
+03:10.430 --> 03:11.930
+And I think that is it.
+
+42
+03:12.770 --> 03:17.900
+But also, I would like to do a clean up after this is done, I would like to remove.
+
+43
+03:19.150 --> 03:22.420
+This dir, which will contain the temporary files.
+
+44
+03:23.110 --> 03:23.860
+OK, this is good.
+
+45
+03:23.890 --> 03:29.590
+This should do the trick, but now I'm going to use comments and proper print statements.
+
+46
+03:30.190 --> 03:32.170
+So it also becomes much more readable.
+
+47
+03:33.680 --> 03:40.880
+All right, I have done it basically I did two things I made this a script readable for me and I have
+
+48
+03:40.880 --> 03:44.450
+made the script readable for the user who will be executing it.
+
+49
+03:44.460 --> 03:48.950
+So I used comments and I use proper print statements.
+
+50
+03:49.820 --> 03:50.050
+All right.
+
+51
+03:50.060 --> 03:53.540
+So along with the script that you write, try to do that.
+
+52
+03:54.380 --> 03:56.870
+So I did that for each and every step.
+
+53
+03:57.090 --> 03:58.460
+All you can see is section.
+
+54
+04:01.700 --> 04:05.540
+Same thing comment and making it readable for the user.
+
+55
+04:06.200 --> 04:08.060
+So let's execute this and test it.
+
+56
+04:11.720 --> 04:13.610
+And I'm going to use the absolute path.
+
+57
+04:15.920 --> 04:17.240
+But I can't do that.
+
+58
+04:17.510 --> 04:22.940
+I mean, the tab doesn't work, I'm not able to complete this because I have to make it executable first.
+
+59
+04:24.930 --> 04:29.220
+So I can go into that directory, make it executable, or I can just use absolute path.
+
+60
+04:31.890 --> 04:32.640
+Let's run this.
+
+61
+04:41.130 --> 04:41.460
+Huh
+
+62
+04:42.870 --> 04:49.500
+OK, we have some errors also in our script, which we will fix, but really it's not that readable.
+
+63
+04:50.100 --> 04:54.690
+I mean, it's just printing too much information for the user, which maybe user is not interested.
+
+64
+04:54.720 --> 04:57.290
+So first, let's fix the problem.
+
+65
+04:57.300 --> 04:58.350
+The problem is this.
+
+66
+04:58.770 --> 05:05.220
+When we unzip, we should have the directory with this name and not with the zip extensions.
+
+67
+05:05.220 --> 05:07.020
+So fix that.
+
+68
+05:07.440 --> 05:10.200
+And that is, again, on line number 28.
+
+69
+05:10.920 --> 05:12.030
+So that was one problem.
+
+70
+05:12.180 --> 05:13.080
+We fixed that.
+
+71
+05:13.800 --> 05:16.020
+The other thing is just generating too much information.
+
+72
+05:16.020 --> 05:18.360
+For example, installing package.
+
+73
+05:18.390 --> 05:20.910
+Maybe I don't want to see all that information.
+
+74
+05:20.910 --> 05:26.400
+So I'm going to redirect all the information to /dev/null
+
+75
+05:26.410 --> 05:26.870
+You know what?
+
+76
+05:26.880 --> 05:28.230
+I'm not going to use &.
+
+77
+05:28.230 --> 05:31.200
+I'll just use just the arrow >, just the redirection.
+
+78
+05:31.200 --> 05:34.950
+symbol, because if there is an error, I want to see it on the screen.
+
+79
+05:34.950 --> 05:38.730
+But if there is no error, then just put the output in the dev null.
+
+80
+05:39.150 --> 05:40.920
+So that generates some output.
+
+81
+05:40.920 --> 05:44.070
+And what else generates output, wget, the unzip.
+
+82
+05:44.670 --> 05:46.320
+Let's redirect this output as well.
+
+83
+05:50.230 --> 05:51.940
+And Unzip as well.
+
+84
+05:55.990 --> 06:01.990
+And this is not giving any output, bouncing a service, this is also fine, cleanup also should not give
+
+85
+06:01.990 --> 06:02.770
+me any output.
+
+86
+06:03.190 --> 06:03.560
+OK.
+
+87
+06:04.510 --> 06:05.200
+We did that.
+
+88
+06:08.500 --> 06:14.380
+How about we also print the status of the service at the end. After we are done with everything we can
+
+89
+06:14.380 --> 06:19.060
+say sudo systemctl status httpd
+
+90
+06:20.410 --> 06:21.410
+httpd
+
+91
+06:22.870 --> 06:27.700
+And also, maybe the content of /var/www/html
+
+92
+06:29.700 --> 06:30.840
+Let's do that once again.
+
+93
+06:39.940 --> 06:46.660
+OK, so the service is active, running and we should see the content of our /var/www/html dir.
+
+94
+06:47.080 --> 06:48.520
+OK, it's time to test it.
+
+95
+06:48.580 --> 06:50.610
+Let's get the IP address of the VM.
+
+96
+06:52.050 --> 06:53.430
+ifconfig the IP address.
+
+97
+06:53.440 --> 06:55.030
+Let's open that in the browser.
+
+98
+06:57.940 --> 07:00.010
+And the setup is completed.
+
+99
+07:01.920 --> 07:07.590
+So really, good work in the next video, we will learn about variables.
+
+100
+07:09.390 --> 07:11.580
+So wrap this up and join me in the next video.

@@ -1,0 +1,286 @@
+WEBVTT
+
+00:01.170 --> 00:03.320
+Instructor: Okay, so, in our repository,
+
+00:04.470 --> 00:06.213
+we have a "vagrant" folder.
+
+00:07.207 --> 00:08.877
+"Automated provisioning."
+
+00:10.260 --> 00:12.210
+Choose the one based on your operating system,
+
+00:12.210 --> 00:16.170
+Windows and MacOS with Intel chip, use this folder.
+
+00:16.170 --> 00:19.383
+And MacOS M1 and M2 chip, use the other one.
+
+00:21.180 --> 00:25.443
+Now, we had already cloned this source code in VSCode.
+
+00:26.490 --> 00:28.290
+So, let's look at it through VSCode.
+
+00:30.360 --> 00:34.623
+Automated provisioning, and let's check the vagrant file.
+
+00:36.420 --> 00:38.370
+Now, this is the same vagrant file
+
+00:38.370 --> 00:41.100
+which we used previously in manual provisioning,
+
+00:41.100 --> 00:43.590
+except you have one extra step in this.
+
+00:43.590 --> 00:46.950
+For every VM, there is a part of a script
+
+00:46.950 --> 00:48.750
+that we'll be executing.
+
+00:48.750 --> 00:51.810
+For DB01, the path is mysql.sh,
+
+00:51.810 --> 00:55.920
+and in the same folder, you have mysql.sh.
+
+00:55.920 --> 00:57.600
+It's a Shell script.
+
+00:57.600 --> 00:59.850
+Don't worry, it's a pretty simple Shell script.
+
+00:59.850 --> 01:01.860
+So, same command copied from the document
+
+01:01.860 --> 01:05.700
+and pasted in that file with some tweaks.
+
+01:05.700 --> 01:08.040
+If you're doing this in decoding devops codes,
+
+01:08.040 --> 01:11.310
+we have bash scripting sections separately,
+
+01:11.310 --> 01:13.830
+where I'm going to train you in bash scripting.
+
+01:13.830 --> 01:17.580
+But even if you don't have much idea about bash scripting,
+
+01:17.580 --> 01:20.400
+you can understand this file is very simple.
+
+01:20.400 --> 01:24.009
+Let's see. Mysql.sh.
+
+01:24.009 --> 01:25.170
+In the beginning of Shell script,
+
+01:25.170 --> 01:27.300
+you may have this hash exclamation,
+
+01:27.300 --> 01:28.980
+slash bin, slash bash.
+
+01:28.980 --> 01:32.790
+This is to open the bash Shell interpreter.
+
+01:32.790 --> 01:36.000
+It's the same black screen where we execute the command.
+
+01:36.000 --> 01:38.010
+So it's going to open a new Shell
+
+01:38.010 --> 01:39.723
+and execute all the command.
+
+01:41.130 --> 01:43.830
+First command here is a variable,
+
+01:43.830 --> 01:45.630
+and its value will be this.
+
+01:45.630 --> 01:48.900
+This is the database password that we are setting.
+
+01:48.900 --> 01:52.380
+Again, pretty simple for convenience purpose only.
+
+01:52.380 --> 01:54.600
+And similar command, install "mariadb,"
+
+01:54.600 --> 01:56.100
+start and enable mariadb.
+
+01:56.100 --> 01:58.950
+We clone the source code and deploy the schema.
+
+01:58.950 --> 02:01.650
+Manually, we will log into the sql command prompt
+
+02:01.650 --> 02:04.110
+and then run the sql code.
+
+02:04.110 --> 02:06.330
+If you want to run it from the Shell,
+
+02:06.330 --> 02:10.417
+then you can give the log in command. Oops, yeah.
+
+02:10.417 --> 02:15.417
+"mysql -u username -p password -e" to execute this query.
+
+02:16.650 --> 02:19.950
+So, you can do the sql queries from the Shell,
+
+02:19.950 --> 02:22.350
+but then you need to pass in the log in detail.
+
+02:22.350 --> 02:25.683
+So, similar commands to run the sql queries.
+
+02:26.730 --> 02:28.890
+At the end, you will see some firewall commands.
+
+02:28.890 --> 02:30.090
+You don't need to worry about that.
+
+02:30.090 --> 02:33.693
+We'll talk about firewalling AWS security groups.
+
+02:34.680 --> 02:38.280
+So, like that, every VM has its own Shell script.
+
+02:38.280 --> 02:41.760
+That's for memcache, memcache.sh. Take a look.
+
+02:41.760 --> 02:43.773
+It's pretty simple, same commands.
+
+02:45.040 --> 02:47.013
+And then we have a rabbit mq.
+
+02:48.540 --> 02:51.930
+Once again, pretty simple, same commands.
+
+02:51.930 --> 02:54.526
+Then we have tomcat.sh.
+
+02:54.526 --> 02:58.140
+This also tubuntu, not tubuntu, sorry.
+
+02:58.140 --> 03:02.280
+Ubuntu. Tomcat Ubuntu. That's a tongue twister, man.
+
+03:02.280 --> 03:05.433
+Tomcat Ubuntu script, that is for the Ubuntu.
+
+03:06.270 --> 03:08.010
+It's simpler than this one.
+
+03:08.010 --> 03:12.990
+So, here we have to set up tomcat systems manually.
+
+03:12.990 --> 03:16.560
+So, again, similar commands except with few tweaks,
+
+03:16.560 --> 03:21.393
+like variables and creating this file through cat Command.
+
+03:22.920 --> 03:24.120
+Because in the Shell script,
+
+03:24.120 --> 03:26.760
+we cannot use VIM editor and copy paste,
+
+03:26.760 --> 03:28.713
+and so with cat Command,
+
+03:29.970 --> 03:33.000
+we create this file and all this content
+
+03:33.000 --> 03:37.323
+will be injected into this file.
+
+03:38.190 --> 03:41.400
+This EOT you see, EOT or EOF, something like that,
+
+03:41.400 --> 03:44.400
+you will see and between that all the content will be there.
+
+03:45.330 --> 03:46.653
+All the content in between that
+
+03:46.653 --> 03:49.470
+will be injected into that file.
+
+03:49.470 --> 03:50.310
+So in the Shell script,
+
+03:50.310 --> 03:51.540
+if you need to create a file
+
+03:51.540 --> 03:54.240
+with a lot of content, this is the way.
+
+03:54.240 --> 03:56.430
+So, we created the system file here
+
+03:56.430 --> 03:58.950
+and then we start and enable tomcat,
+
+03:58.950 --> 04:01.200
+we clone the source code, run mvn install,
+
+04:01.200 --> 04:05.640
+deploy the artifact, same steps what we did manually.
+
+04:05.640 --> 04:09.240
+And, finally, in nginx.sh, that is also pretty simple.
+
+04:09.240 --> 04:12.273
+Install nginx, create that configuration file,
+
+04:13.740 --> 04:16.290
+and disable the default website,
+
+04:16.290 --> 04:20.970
+enable our website, start and enable nginx.
+
+04:20.970 --> 04:23.610
+So, without knowing bash Shell script,
+
+04:23.610 --> 04:27.060
+you will still be able to understand these scripts,
+
+04:27.060 --> 04:31.800
+these files, but in Decoding DevOps course,
+
+04:31.800 --> 04:33.300
+we have bash scripting section
+
+04:33.300 --> 04:36.420
+where you're going to learn much more advance
+
+04:36.420 --> 04:39.063
+in bash scripting than this. This is pretty basic.
+
+04:40.590 --> 04:41.820
+So, in the next lecture,
+
+04:41.820 --> 04:44.460
+let's bring up all this VM automatically
+
+04:44.460 --> 04:47.040
+and set up all the services automatically,
+
+04:47.040 --> 04:49.260
+and test our application.
+
+04:49.260 --> 04:50.660
+See you in the next lecture.

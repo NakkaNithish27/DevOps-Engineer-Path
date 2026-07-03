@@ -1,0 +1,433 @@
+WEBVTT
+
+0
+00:00.300 --> 00:08.130
+Protocol in general, as we call it, as set of rules. In networking communication  a protocol is
+
+1
+00:08.490 --> 00:15.510
+a formal specification that will define the procedure to communicate between sender and receiver or
+
+2
+00:15.510 --> 00:16.200
+vice versa.
+
+3
+00:17.190 --> 00:23.880
+It defines varieties of things like the format of communication, timing, sequence, how the error will
+
+4
+00:23.880 --> 00:31.110
+be handled, and a few other things. Like an extra HTTP protocol or FTP protocol or SSH  protocol.
+
+5
+00:32.840 --> 00:38.840
+So the client and the server that understands this protocols knows how to communicate by following that
+
+6
+00:38.840 --> 00:39.790
+particular protocol.
+
+7
+00:42.100 --> 00:49.150
+Talking about protocol of layer 4, transport layer, TCP and UDP protocol, all the other protocol
+
+8
+00:49.150 --> 00:54.190
+that we see in layer five, six and seven are divided in between these two.
+
+9
+00:55.990 --> 00:59.100
+So what's the TCP protocol and what's the UDP protocol there?
+
+10
+00:59.170 --> 01:00.730
+What are the differences between them?
+
+11
+01:01.450 --> 01:04.150
+TCP protocol is called a reliable protocol.
+
+12
+01:05.160 --> 01:12.210
+Like, for example, HTTP, when you're sending an email or uploading your picture by using HTTPS,
+
+13
+01:12.330 --> 01:14.850
+protocol, mostly that will happen, the web communication.
+
+14
+01:15.790 --> 01:20.770
+So you have a guarantee that your mail will receive at the end in the same format or your picture will
+
+15
+01:20.770 --> 01:24.340
+be received or uploaded in the same way as you have taken it.
+
+16
+01:24.730 --> 01:26.200
+So there is reliability over there.
+
+17
+01:26.620 --> 01:28.970
+It's connection oriented between source and destination.
+
+18
+01:28.990 --> 01:29.830
+There is a connection.
+
+19
+01:30.340 --> 01:33.270
+It performs three way handshake before transferring the data.
+
+20
+01:33.790 --> 01:38.290
+And it's all based on acknowledgement there'll be error detection if something fails, if a packet gets
+
+21
+01:38.290 --> 01:44.510
+dropped in the middle or corrupted. The error will be found out and the data will be retransmitted.
+
+22
+01:44.860 --> 01:46.950
+So that's why it's called reliable protocol.
+
+23
+01:47.740 --> 01:54.550
+So any application that wants a reliable communication like your browser using a website or from your
+
+24
+01:54.550 --> 01:56.680
+app, you are ordering your food.
+
+25
+01:57.520 --> 02:03.220
+So developer while developing this application, if they need reliability, they'll use reliable protocols like
+
+26
+02:03.220 --> 02:06.700
+HTTP, HTTPS, FTP based on the requirement.
+
+27
+02:07.510 --> 02:10.360
+UDP, on the other hand, is called unreliable protocol.
+
+28
+02:11.680 --> 02:12.010
+Yes.
+
+29
+02:12.070 --> 02:16.600
+There is also requirement of unreliable protocol, these protocols are connection less, you know, just
+
+30
+02:16.600 --> 02:20.110
+send the data and forget about it, whether it reaches its destination or not.
+
+31
+02:21.190 --> 02:27.830
+It's much faster than TCP, and that's why it is used sometimes, not sometimes by a particular protocol,
+
+32
+02:28.190 --> 02:29.420
+There is no acknowledgement.
+
+33
+02:29.440 --> 02:34.660
+So you know, just send  the data and whether it reaches its destination or not, there is no acknowledgement
+
+34
+02:34.660 --> 02:35.200
+about that.
+
+35
+02:35.860 --> 02:37.720
+There's no proper sequencing of data.
+
+36
+02:38.530 --> 02:41.380
+But sometimes speed matters more than reliability.
+
+37
+02:42.400 --> 02:47.070
+So protocols like DNS, DHCP, TFTP, these falls under UDP.
+
+38
+02:47.800 --> 02:53.500
+This is where you need fast data transmission like you enter the URL and that has to be transmitted,
+
+39
+02:53.750 --> 02:56.890
+transferred into an IP address and it has to be done very quickly.
+
+40
+02:57.790 --> 03:02.860
+DHCP client asking an IP address over the network, it should be faster.
+
+41
+03:03.890 --> 03:07.670
+so UDP protocol. So that's the difference between TCP and UDP protocol.
+
+42
+03:10.260 --> 03:12.090
+Protocols will have port numbers.
+
+43
+03:13.140 --> 03:14.790
+Default port numbers.
+
+44
+03:16.010 --> 03:25.010
+Like the DNS has 53 in UDP and 53 in TCP. HTTP port number is 80, HTTPS is 443
+
+45
+03:25.010 --> 03:27.290
+and so on and so forth.
+
+46
+03:28.870 --> 03:31.840
+Maybe take a screenshot of this or write it somewhere or by HEARTT.
+
+47
+03:32.780 --> 03:38.870
+And many other port numbers, default port that we're going to see throughout the course, it's important
+
+48
+03:38.870 --> 03:40.100
+for you to understand.
+
+49
+03:41.190 --> 03:44.770
+What port numbers for a particular protocol, a default port?
+
+50
+03:44.790 --> 03:52.250
+This will be very helpful when we are setting setting firewalls like Security Group or NACL and
+
+51
+03:52.290 --> 03:58.750
+we are going to do that in AWS and also some places at the operating system level.
+
+52
+03:59.850 --> 04:06.240
+So if you're wondering what are these numbers associated with, a protocol like a computer has an IP
+
+53
+04:06.240 --> 04:11.010
+address, a service running inside a computer will be having a port number.
+
+54
+04:11.310 --> 04:18.680
+For example, you're running a Web service which is running on which is using protocol HTTPS.
+
+55
+04:18.720 --> 04:24.990
+So the default port 443, that means it's serving the request on port number 443.
+
+56
+04:24.990 --> 04:25.300
+443
+
+57
+04:25.950 --> 04:31.200
+OK, think about a food court where you have multiple stalls.
+
+58
+04:31.800 --> 04:33.690
+Stall number one, you have Indian food.
+
+59
+04:33.690 --> 04:39.420
+Stall number two, you have Chinese, stall number three you have Italian, stall number four, you have
+
+60
+04:39.420 --> 04:39.960
+Thai.
+
+61
+04:40.230 --> 04:42.150
+And I already started getting hungry.
+
+62
+04:43.000 --> 04:50.610
+But my point is here you have a food court. Think of that as an IP address and address.
+
+63
+04:50.880 --> 04:55.320
+When you're going to a food court, maybe you're asking someone an address of the food court.
+
+64
+04:56.100 --> 05:03.450
+You go to a food court and there are multiple stalls serving you a cuisine, port number or stall
+
+65
+05:03.450 --> 05:10.740
+number one, Indian food, stall number two or port number two, serving Chinese food like that in a computer,
+
+66
+05:10.740 --> 05:12.240
+you'll have port numbers.
+
+67
+05:12.240 --> 05:22.740
+22 serving SSH service. Port 80 serving HTTP, Port 443 service HTTPS, 25 SMTP.
+
+68
+05:23.580 --> 05:24.750
+So in one computer.
+
+69
+05:25.750 --> 05:28.960
+Which has an IP address can be serving multiple services also.
+
+70
+05:29.830 --> 05:32.770
+So that's the relation, the IP address and port number thing.
+
+71
+05:34.500 --> 05:41.970
+And that's OSI 7 Layer model compared with the TCP IP protocol model. Right hand side you have
+
+72
+05:41.970 --> 05:43.380
+TCP IP protocol model.
+
+73
+05:44.160 --> 05:50.250
+So application layer in TCP IP = which is equivalent to 5,6,7 layer.
+
+74
+05:50.730 --> 05:52.260
+So you have protocol at this layer.
+
+75
+05:52.380 --> 05:59.400
+Telnet, FTP, DHCP, TFTP, SMTP and so many other. Transport layer.
+
+76
+05:59.400 --> 06:04.760
+You have TCP and UDP. At the network layer Internet, in TCP/IP
+
+77
+06:04.760 --> 06:13.830
+we call this Internet layer. ICMP ARP, RARP, IP, The IP address and layer two and one that is compared
+
+78
+06:13.830 --> 06:17.890
+to the network interface layer of TCP IP protocol model.
+
+79
+06:18.420 --> 06:22.440
+So left hand side you have OSI model and right hand side you have TCP IP model.
+
+80
+06:24.190 --> 06:29.860
+So I think now you must be starting to make some sense whatever, we are talking about different layers,
+
+81
+06:29.860 --> 06:33.290
+different protocols, put numbers and of course, the IP address.
+
+82
+06:33.610 --> 06:40.270
+So when a computer which is running, let's say tomcat  service, which is an application, a Web application
+
+83
+06:40.270 --> 06:45.160
+service, wants to communicate with a MySQL server to store some data.
+
+84
+06:46.640 --> 06:55.880
+A Tomcat server is going to send traffic to the destination IP address of my SQL Server and the port number
+
+85
+06:55.880 --> 06:58.280
+of the service, 3306
+
+86
+06:58.640 --> 07:00.540
+That's the default port for MySQL
+
+87
+07:01.310 --> 07:08.360
+That's how the Tomcat will have an assurity that it is going to reach to the MySQL server. IP with the
+
+88
+07:08.360 --> 07:08.580
+port number
+
+89
+07:08.600 --> 07:12.440
+That's how IP address and port numbers work together.
+
+90
+07:12.440 --> 07:16.430
+When you have two computers or two virtual machine, you want to connect each other.
+
+91
+07:16.700 --> 07:21.620
+You should know how they're communicating, what IP address they're using and what port number they're
+
+92
+07:21.620 --> 07:22.490
+communicating on.
+
+93
+07:23.460 --> 07:25.200
+And, of course, what protocol they're using.
+
+94
+07:27.220 --> 07:33.670
+In this course, we are going to see a project called as vprofile, it's a Java based project, and there are
+
+95
+07:33.670 --> 07:35.700
+multiple services in this project.
+
+96
+07:36.070 --> 07:43.240
+You have Nginx, Tomcat, Rabbitt, MQ, Memcache and MySQL, all these services we are going
+
+97
+07:43.240 --> 07:48.120
+to host in different, different virtual machines locally and also on the cloud.
+
+98
+07:49.000 --> 07:54.460
+So every virtual machine will have an IP address running, running a particular service like Nginx,
+
+99
+07:54.700 --> 08:00.430
+and that will be running on Port 80, for example, like Tomcat on board 8080, RabbitMQ 5672
+
+100
+08:00.430 --> 08:01.000
+5672
+
+101
+08:01.510 --> 08:05.590
+Memcache 11211, MySQL 3306
+
+102
+08:06.370 --> 08:11.180
+They all will be communicating with each other.
+
+103
+08:12.070 --> 08:18.760
+So when you work in a project, you should know what service is running in which server, what is the
+
+104
+08:18.760 --> 08:19.510
+IP address.
+
+105
+08:19.510 --> 08:20.780
+And it's running on what port number.
+
+106
+08:20.810 --> 08:26.680
+Because when you connect all of them together, there will be firewalls and other things that you
+
+107
+08:26.680 --> 08:27.790
+need to make changes to.

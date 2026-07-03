@@ -1,0 +1,181 @@
+WEBVTT
+
+0
+00:00.510 --> 00:07.830
+Continuous delivery is an automated process of delivering code changes to servers quickly and efficiently
+
+1
+00:08.190 --> 00:09.720
+at an enormous phase.
+
+2
+00:11.650 --> 00:13.240
+Hi, my name is Imran.
+
+3
+00:13.630 --> 00:17.110
+I'll be glad to explain you the continuous delivery process.
+
+4
+00:22.080 --> 00:28.440
+Continuous delivery is the extension of continuous integration, if you have not seen my previous video
+
+5
+00:28.440 --> 00:32.820
+on continuous integration, I recommend you watch it before you continue.
+
+6
+00:33.330 --> 00:36.430
+Wow, that's too many continuous in one sentence.
+
+7
+00:36.870 --> 00:37.620
+Let's dig in.
+
+8
+00:44.710 --> 00:51.870
+We have seen continuous integration is automation of our code build and test, developers any code, it
+
+9
+00:52.150 --> 00:54.640
+will be automatically built and tested.
+
+10
+00:57.610 --> 01:04.060
+If everything is good, the artifact generated from this process will be stored in software repositories.
+
+11
+01:06.950 --> 01:13.370
+The goal of CI is to detect defects at very early stage so it does not multiply.
+
+12
+01:20.800 --> 01:27.670
+Ops team will get regular requests to deploy the artifacts generated from the CI process on servers
+
+13
+01:27.970 --> 01:29.530
+for further testing.
+
+14
+01:31.960 --> 01:40.390
+Ops team with all the info they got deploy the artifacts to the servers, at times the deployment
+
+15
+01:40.390 --> 01:43.990
+also fails, which leads to higher lead time.
+
+16
+01:45.940 --> 01:50.560
+Dev & Ops team needs to work together to fix such deployment failures.
+
+17
+01:50.920 --> 01:52.900
+And this happens on and off.
+
+18
+01:54.680 --> 02:00.320
+We have to understand that in agile development, there will be regular code changes which needs to
+
+19
+02:00.320 --> 02:03.140
+be deployed on servers for further testing.
+
+20
+02:03.830 --> 02:07.130
+Deployment is not just about shipping the software to the servers.
+
+21
+02:07.550 --> 02:08.870
+It's more than that.
+
+22
+02:11.640 --> 02:18.900
+A deployment could mean also server provisioning, installing dependencies on servers, configuration
+
+23
+02:18.900 --> 02:25.680
+changes, network or firewall rules changes, and then deploy the artifact to the server and there could
+
+24
+02:25.680 --> 02:26.880
+be many more things.
+
+25
+02:30.560 --> 02:37.610
+Ops team will be flooded with such requests as CI process will generate faster and regularly.
+
+26
+02:45.440 --> 02:51.920
+After the manual deployment, information will be sent to the QA team for testing after conducting testing,
+
+27
+02:52.130 --> 02:54.200
+QA team will send information back.
+
+28
+02:54.830 --> 02:59.240
+There is too much of human intervention and manual approval in this process.
+
+29
+03:04.730 --> 03:11.360
+So as this terminator says automate it and save your time and also failures.
+
+30
+03:14.600 --> 03:18.140
+Any and every step in deployment should be automated.
+
+31
+03:29.650 --> 03:35.500
+There are a lot of automation tools available in the market, like ansible, puppet, chef for system
+
+32
+03:35.500 --> 03:42.490
+automation, terraform confirmation for cloud infrastructure, automation, Jenkins Octopus deploy
+
+33
+03:42.490 --> 03:43.990
+for CICD automation.
+
+34
+03:44.380 --> 03:47.470
+And there are many others to choose from based on your need.
+
+35
+03:49.980 --> 03:58.320
+Software testing also has to be automated. Any test process like functional, load, performance, databases,
+
+36
+03:58.470 --> 04:01.620
+network and security and any other test cases.
+
+37
+04:03.560 --> 04:09.680
+So Ops team, will write automation code for deployment testers will write automation code for software
+
+38
+04:09.680 --> 04:13.010
+testing and sync it with developers source code.
+
+39
+04:17.570 --> 04:25.370
+So now we have a process integrated with deployment automation, which triggers software testing, all
+
+40
+04:25.370 --> 04:28.450
+three teams and processes integrated together.
+
+41
+04:31.450 --> 04:33.520
+Continuous delivery process.
+
+42
+04:33.840 --> 04:34.530
+Have a look.
+
+43
+04:51.830 --> 04:56.710
+Automate every step and then stitch everything together.
+
+44
+04:59.940 --> 05:03.120
+That gives you continuous delivery automation.

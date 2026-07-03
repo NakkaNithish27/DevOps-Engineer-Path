@@ -1,0 +1,1351 @@
+WEBVTT
+
+00:00.160 --> 00:03.000
+Hello and welcome to the Auto Scaling Group exercise.
+
+00:03.520 --> 00:06.680
+There are a few ingredients that we need before we get started.
+
+00:06.680 --> 00:11.160
+Auto scaling Group is going to manage AWS instances for us.
+
+00:11.520 --> 00:12.840
+Group of instances.
+
+00:13.120 --> 00:18.400
+And if you need that those instances under load balancer you need to have a load balancer.
+
+00:18.640 --> 00:22.560
+And if you're using application load balancer we also need target group.
+
+00:22.760 --> 00:24.160
+So we need a target group.
+
+00:24.160 --> 00:26.920
+We need a load balancer application load balancer.
+
+00:27.280 --> 00:32.800
+And for auto scaling group to decide what settings for the instance should be like the security group,
+
+00:32.800 --> 00:36.400
+the key pair it also needs for that launch template.
+
+00:36.800 --> 00:42.800
+So we need launch template, target group and load balancer before we start auto scaling group.
+
+00:43.080 --> 00:48.840
+So we do have launch template that is for the previous inner inner peace instance.
+
+00:48.840 --> 00:50.240
+Then we created an Ami.
+
+00:50.280 --> 00:51.720
+With the EFS.
+
+00:51.760 --> 00:55.680
+It's not mandatory to have the EFS Ami for this exercise.
+
+00:55.960 --> 00:58.360
+You can use the previous Ami also.
+
+00:58.360 --> 01:02.560
+But I'm going to use the EFS Efdss EMI because I want to make one point later.
+
+01:02.560 --> 01:07.520
+So for that purpose, I'm using the inner peace EMI, which is connected to the Efdss.
+
+01:08.080 --> 01:10.280
+So I need a launch template for this one.
+
+01:10.760 --> 01:12.520
+So I'm going to create a new launch template.
+
+01:12.840 --> 01:17.040
+I will name it as Inner Peace Shared because sharing your peace with others.
+
+01:17.720 --> 01:20.040
+It will just have the efdss EMI.
+
+01:20.080 --> 01:20.720
+That's all.
+
+01:20.960 --> 01:22.280
+Otherwise everything will be same.
+
+01:22.280 --> 01:24.720
+So let me select my EMI.
+
+01:25.320 --> 01:32.880
+So that's the EMI inner peace EFS instance type T2 micro T2 micro.
+
+01:35.200 --> 01:36.120
+T3 micro.
+
+01:36.400 --> 01:38.200
+Keep your same inner peace key.
+
+01:39.320 --> 01:40.520
+Security group.
+
+01:41.440 --> 01:43.120
+Inner peace security group.
+
+01:43.640 --> 01:46.600
+You should have other security group also the one for load balancer.
+
+01:46.600 --> 01:47.400
+One for EFS.
+
+01:47.440 --> 01:48.960
+Make sure you select the right one.
+
+01:49.440 --> 01:54.000
+Just the inner peace Security group resource tags.
+
+01:54.480 --> 02:01.530
+I'll just give name as Inner Peace Web and this should tag the volume and network interface and create
+
+02:01.530 --> 02:02.570
+the launch template.
+
+02:02.610 --> 02:04.010
+Okay, launch template is ready.
+
+02:04.010 --> 02:06.850
+Let's go to the target group.
+
+02:06.850 --> 02:09.170
+So we are not adding any instance in the target group.
+
+02:09.210 --> 02:12.450
+Auto scaling group is going to fill this target group with instances.
+
+02:12.810 --> 02:14.970
+We just need to create the target group.
+
+02:15.410 --> 02:22.810
+Group of instances target group name I will name it as inner peace ASG hyphen t g, which represents
+
+02:22.810 --> 02:26.650
+that this is the target group for this auto scaling group that we are creating.
+
+02:26.690 --> 02:31.130
+Port 80 remains the default that we are using health check also default.
+
+02:31.170 --> 02:34.730
+Let's reduce the health threshold to two.
+
+02:35.330 --> 02:41.130
+So then you know the instance becomes healthy quickly as in just the two health check.
+
+02:41.130 --> 02:43.850
+And we get the health instance and go next.
+
+02:44.210 --> 02:47.570
+So don't need to add any instance we don't have I don't have any instance.
+
+02:47.570 --> 02:49.330
+Even if you have instance do not add it.
+
+02:49.330 --> 02:51.250
+Just go create target group.
+
+02:52.010 --> 02:56.050
+So we also need our instance to be under the load balancer.
+
+02:56.090 --> 02:57.530
+Now this is not mandatory.
+
+02:57.570 --> 03:00.450
+Auto scaling group does not mean you should have load balancer.
+
+03:00.810 --> 03:04.410
+Usually if you're serving a web traffic, you will have load balancer.
+
+03:04.410 --> 03:11.050
+But there are use cases where the instances should do some share working internal syncing internal communication.
+
+03:11.130 --> 03:11.370
+Don't.
+
+03:11.410 --> 03:12.530
+They don't need load balancer.
+
+03:12.530 --> 03:15.250
+In such case you don't need to create any load balancer.
+
+03:15.530 --> 03:19.210
+My point is not mandatory for auto scaling group to have load balancer.
+
+03:19.210 --> 03:21.050
+It's only based on your requirement.
+
+03:21.090 --> 03:24.410
+Our requirement is web server traffic from the internet.
+
+03:24.410 --> 03:27.210
+So we definitely need an application load balancer.
+
+03:27.210 --> 03:31.050
+So let's create one application load balancer create.
+
+03:31.850 --> 03:35.250
+So inner peace ASG hyphen Alb represents that.
+
+03:35.250 --> 03:38.610
+This is the load balancer for the auto scaling group.
+
+03:39.650 --> 03:40.610
+Let's scroll down.
+
+03:40.610 --> 03:42.570
+Let's select all these zones.
+
+03:46.330 --> 03:49.170
+So that means the instance can be in any of the zones.
+
+03:49.170 --> 03:54.610
+And the load balancer is going to serve the traffic to those instances distributed in these zones.
+
+03:55.610 --> 04:00.180
+Remove the default security group and add the load balancer security group.
+
+04:02.660 --> 04:04.180
+Listen on port 80.
+
+04:04.220 --> 04:05.060
+That's the listener.
+
+04:05.060 --> 04:07.700
+And forward the traffic to the target group.
+
+04:07.700 --> 04:11.700
+That's the target group that we created which does not have any instance now.
+
+04:11.700 --> 04:17.140
+But once auto scaling group adds the instance in this target group then it will be good.
+
+04:17.740 --> 04:18.460
+And that is it.
+
+04:18.460 --> 04:20.300
+Let's just create the load balancer.
+
+04:21.300 --> 04:27.860
+So wait for a few minutes until this load balancer gets in available state or active state.
+
+04:28.060 --> 04:29.180
+It's provisioning now.
+
+04:30.860 --> 04:31.100
+Okay.
+
+04:31.140 --> 04:33.380
+My load balancer is in active state now.
+
+04:35.980 --> 04:41.340
+Now let's go to the auto scaling groups and say Create Auto Scaling Group.
+
+04:41.740 --> 04:43.540
+Let's give Auto Scaling Group a name.
+
+04:44.260 --> 04:50.140
+Simply name it as NRP hyphen ASG and select the launch template.
+
+04:50.980 --> 04:58.620
+Now previously AWS had a launch configuration also, which is similar to launch template, but now it
+
+04:58.660 --> 05:00.380
+supports only launch template.
+
+05:00.380 --> 05:02.980
+So anyways we just have option to launch template.
+
+05:02.980 --> 05:03.700
+We already have it.
+
+05:03.740 --> 05:04.580
+We created it.
+
+05:05.140 --> 05:09.180
+So based on this information Auto Scaling group will decide everything.
+
+05:09.220 --> 05:14.380
+The security group key pair all the information that comes from the launch template.
+
+05:14.860 --> 05:15.700
+So go next.
+
+05:16.780 --> 05:18.940
+Now network we need to select the VPC.
+
+05:18.940 --> 05:24.820
+So we have just one default VPC will keep it as it is in that you select in which zone you want Auto
+
+05:24.820 --> 05:26.660
+Scaling group to launch your instance.
+
+05:26.940 --> 05:28.500
+So I'm going to select all of them.
+
+05:28.500 --> 05:33.460
+If you have some specific use case where you need to launch only in that particular zone, you can select
+
+05:33.460 --> 05:35.820
+only that zone or a group of zones.
+
+05:36.140 --> 05:37.860
+I've selected all the zones here.
+
+05:38.340 --> 05:43.100
+Let's say it has like ten instances to launch on which availability it should select.
+
+05:43.100 --> 05:44.020
+This is a new option.
+
+05:44.020 --> 05:46.580
+It has given balanced best effort.
+
+05:46.580 --> 05:53.380
+If launches fail in one easy auto scaling group will attempt to launch in another healthy Easy, which
+
+05:53.380 --> 05:54.020
+is a good option.
+
+05:54.020 --> 05:58.340
+Sometimes the AZ gets overwhelmed, Very rarely it happens.
+
+05:58.340 --> 06:00.380
+But anyways, you have that option.
+
+06:00.860 --> 06:03.420
+The balance only is going to launch it into the easy.
+
+06:03.460 --> 06:07.780
+If it fails, it's going to keep attempting to launch it into the same easy again.
+
+06:08.220 --> 06:12.980
+So as I said, if you have that kind of use case where you need to select that easy, only then you
+
+06:13.020 --> 06:14.900
+better go with balanced only.
+
+06:15.460 --> 06:15.700
+Okay.
+
+06:15.700 --> 06:16.020
+Let's go.
+
+06:16.060 --> 06:16.540
+Next.
+
+06:17.180 --> 06:18.180
+Load balancing option.
+
+06:18.220 --> 06:21.740
+Do you want this instances to be under a load balancer or no.
+
+06:21.740 --> 06:23.500
+So our use case says yes.
+
+06:24.100 --> 06:25.940
+And we have already a load balancer.
+
+06:25.940 --> 06:30.820
+So we're going to see attach to an existing load balancer which is load balancer.
+
+06:30.820 --> 06:33.300
+But basically it adds under the target group.
+
+06:33.300 --> 06:35.060
+So you need to select the target group.
+
+06:35.460 --> 06:39.580
+If you're using a classic load balancer then yes you need to select the load balancer.
+
+06:40.020 --> 06:45.100
+But if you're using Application Load balancer or Network Load Balancer, you will get option to select
+
+06:45.100 --> 06:46.180
+the target group.
+
+06:46.180 --> 06:49.140
+As I told you previously, we create the target group.
+
+06:49.180 --> 06:53.460
+Empty auto scaling group is going to add or remove instances from that target group.
+
+06:53.460 --> 06:57.070
+And this is where we select it Okay.
+
+06:57.070 --> 06:58.150
+This option health check.
+
+06:58.150 --> 07:00.510
+This is quite interesting and very helpful.
+
+07:00.510 --> 07:03.150
+Very necessary in web applications.
+
+07:03.430 --> 07:08.750
+So what autoscaling does is it launches instance and this group of instances that it maintains if any
+
+07:08.750 --> 07:14.470
+instance is unhealthy, it is going to remove that instance and add a healthy instance or add a replacement
+
+07:14.470 --> 07:15.150
+basically.
+
+07:15.470 --> 07:20.350
+So by default it has the EC2 health check to check the health of the instance.
+
+07:20.550 --> 07:22.830
+And EC2 health checks are pretty basic.
+
+07:23.030 --> 07:27.670
+This is just going to check the hardware on which it is running and the VM health.
+
+07:27.670 --> 07:35.710
+And if it is healthy it consider it as healthy, but the service running in that dies or gets overwhelmed
+
+07:35.710 --> 07:37.590
+if the process crashes.
+
+07:37.910 --> 07:42.310
+Let's say Apache process crashes, but the instance EC2 health just shows healthy.
+
+07:42.830 --> 07:47.070
+So Auto Scaling group will not know in that case whether the process is crashed or not.
+
+07:47.310 --> 07:48.190
+But there is a way.
+
+07:48.190 --> 07:52.630
+It has given us the option to turn on Elastic Load Balancer health check.
+
+07:53.030 --> 07:55.350
+We have seen this in the load balancer exercise.
+
+07:55.350 --> 07:58.670
+You can go back and revisit if you don't recall it.
+
+07:59.030 --> 08:00.470
+The health check on the target group.
+
+08:00.470 --> 08:06.150
+We mentioned the port number 80, the protocol http the health check path.
+
+08:06.710 --> 08:09.190
+That way we can check the protocol, the port number.
+
+08:09.190 --> 08:13.310
+If it's responding, then we consider it as healthy in load balancer.
+
+08:13.670 --> 08:17.590
+And that is a very good way of deciding whether the instance is healthy or not.
+
+08:17.990 --> 08:19.070
+So let's take an example.
+
+08:19.070 --> 08:23.110
+So we have a group of web servers in the EC2 instances.
+
+08:23.110 --> 08:26.470
+And one EC2 instance web service crashes.
+
+08:26.470 --> 08:27.550
+The process dies.
+
+08:28.150 --> 08:30.590
+The health check in the target group will fail.
+
+08:30.590 --> 08:34.190
+Health check in the target group will declare it as unhealthy.
+
+08:34.230 --> 08:36.150
+The auto scaling group will know it.
+
+08:36.670 --> 08:42.390
+Auto scaling Group will launch a replacement and remove the unhealthy instance.
+
+08:43.070 --> 08:48.030
+Now along with this, there's also one more health check Amazon EBS Health Check, which checks the
+
+08:48.030 --> 08:50.310
+root volume or any attached volumes.
+
+08:50.630 --> 08:55.160
+When these volumes are unhealthy, definitely the instance will be unhealthy.
+
+08:55.160 --> 08:56.440
+The process will be dead.
+
+08:56.680 --> 09:01.360
+You don't want such instance in the auto scaling group, so we can turn on this as well.
+
+09:01.920 --> 09:05.360
+Now in this case, you might be wondering the instance is deleted.
+
+09:05.360 --> 09:06.680
+What happens to the data?
+
+09:07.440 --> 09:15.080
+If you are storing data in the instance, make sure it is stored into a shared storage or into any file
+
+09:15.080 --> 09:20.360
+storage out of the instance not on the hard disk, not on the EBS volume.
+
+09:20.600 --> 09:26.000
+You need to design your application to use a shared storage or a file storage somewhere out.
+
+09:26.000 --> 09:29.040
+So if the instance gets deleted, your data is intact.
+
+09:29.600 --> 09:35.640
+Otherwise, there is no point of using auto scaling group because ASG will delete unhealthy instance
+
+09:35.640 --> 09:38.280
+or will coordinate will remove it from the group.
+
+09:38.720 --> 09:42.200
+There is option later I will show you to preserve that instance.
+
+09:42.680 --> 09:45.160
+But in any case you are using auto scaling group.
+
+09:45.160 --> 09:48.160
+You need to have shared storage or file storage.
+
+09:48.280 --> 09:52.440
+Store your dynamic data out of your instance.
+
+09:54.400 --> 09:56.240
+Okay, then let's go next.
+
+09:56.840 --> 09:58.520
+Okay, so first let's decide.
+
+09:58.560 --> 10:00.040
+Decide the desired capacity.
+
+10:00.080 --> 10:00.960
+How many you want.
+
+10:01.000 --> 10:03.640
+So let's say I want two instances.
+
+10:04.360 --> 10:07.400
+In general I'm just throwing a random number at this.
+
+10:07.400 --> 10:11.640
+Totally depends on your project requirement your business use case.
+
+10:11.960 --> 10:15.520
+So I'm just keeping it as two scaling limit.
+
+10:16.000 --> 10:20.640
+Now we will be using scaling policies for CPU utilization.
+
+10:20.640 --> 10:27.160
+If the CPU is below a certain point or above a certain point, ASG can decide whether to delete or keep
+
+10:27.160 --> 10:30.520
+the instances or the number of instances how much it should have.
+
+10:30.520 --> 10:32.640
+So we are saying that minimum it should have one.
+
+10:32.640 --> 10:35.920
+In any case, even if there is no load, there's nothing.
+
+10:35.920 --> 10:39.280
+At least I should have 1 or 2 based on your requirement.
+
+10:39.280 --> 10:41.560
+I'm just keeping it one maximum.
+
+10:41.560 --> 10:45.480
+If the load goes high, then maximum how many instances you want.
+
+10:45.520 --> 10:51.880
+So I'm saying I want maximum four instances and will enable target tracking scaling policy.
+
+10:52.320 --> 10:55.400
+So here we have option of CPU utilization.
+
+10:55.400 --> 10:57.080
+We have network in, network out.
+
+10:57.080 --> 10:57.640
+Also.
+
+10:57.960 --> 11:04.400
+This is also very useful in web traffic where more traffic coming in you add more instances when traffic
+
+11:04.880 --> 11:07.120
+reducing you remove instances.
+
+11:07.640 --> 11:10.160
+But let's keep CPU utilization for now.
+
+11:11.040 --> 11:12.200
+Target value 50.
+
+11:12.240 --> 11:15.200
+So combined group of the CPU utilization.
+
+11:15.200 --> 11:21.000
+If it's above 50 then it is going to add instances how many maximum it can go for.
+
+11:21.680 --> 11:26.200
+If it's below 50 it can remove instances minimum it can have one.
+
+11:26.920 --> 11:27.920
+That again depends.
+
+11:27.920 --> 11:30.120
+I'm just throwing some random numbers over here.
+
+11:30.560 --> 11:36.120
+We also have an option to disable scale in in this scale out policy.
+
+11:36.120 --> 11:39.040
+Let's say you don't want your instance to get deleted.
+
+11:39.040 --> 11:44.800
+If the CPU utilization or any of your metric that you selected, if it's, you know, less than the
+
+11:44.800 --> 11:48.000
+target value, you don't want your instance to get deleted.
+
+11:48.440 --> 11:50.760
+By default, auto scaling group will delete.
+
+11:50.800 --> 11:56.850
+If you don't want, you can put this check mark disable scaling to create only a scale out policy.
+
+11:58.850 --> 11:59.050
+Okay.
+
+11:59.090 --> 12:00.850
+Instance maintenance policy.
+
+12:00.890 --> 12:01.930
+This is a new one.
+
+12:02.290 --> 12:04.770
+So how do you want to delete or add instances?
+
+12:04.770 --> 12:10.650
+Do you want to delete first, add later or add first delete later or do both at a time.
+
+12:10.650 --> 12:12.090
+You have options for that.
+
+12:12.370 --> 12:14.490
+So launch before terminating.
+
+12:14.730 --> 12:15.450
+That's a good one.
+
+12:15.450 --> 12:21.930
+It launches the instance and wait for them to be ready before terminating the unhealthy instances.
+
+12:22.290 --> 12:27.930
+Right, this is good, but this adds cost because the instance needs to be ready.
+
+12:27.930 --> 12:29.930
+Then only it is going to delete the old one.
+
+12:30.170 --> 12:33.410
+This controls cost the terminate and launch at the same time.
+
+12:33.890 --> 12:36.130
+You can have custom behavior also.
+
+12:36.370 --> 12:38.130
+We are just keeping it no policy.
+
+12:38.610 --> 12:43.010
+So in this instance will launch before terminating the unhealthy one.
+
+12:43.010 --> 12:45.650
+But it's not going to wait for it to be healthy.
+
+12:47.730 --> 12:48.010
+Okay.
+
+12:48.050 --> 12:50.290
+There is additional scaling protection.
+
+12:50.450 --> 12:52.290
+And this is for newly launched instance.
+
+12:52.570 --> 12:57.330
+So if you enable this, then by default the newly launched instance will not be deleted.
+
+12:57.650 --> 13:00.010
+If you want that, you can enable it monitoring.
+
+13:00.010 --> 13:06.730
+You can have the metrics for this collected together in the CloudWatch, which will be really helpful
+
+13:06.730 --> 13:07.250
+later.
+
+13:07.850 --> 13:09.730
+Not enabling this.
+
+13:09.730 --> 13:11.210
+This might add some cost.
+
+13:11.690 --> 13:12.890
+Okay let's go next.
+
+13:13.210 --> 13:14.050
+Notification.
+
+13:14.050 --> 13:16.490
+You can add notification for these events.
+
+13:16.530 --> 13:16.930
+Launch.
+
+13:16.930 --> 13:17.410
+Terminate.
+
+13:17.410 --> 13:18.090
+Fail to launch.
+
+13:18.130 --> 13:21.290
+Fail to terminate and you can select your topic.
+
+13:21.570 --> 13:26.330
+In this case, you'll get notification if the instance is launched or terminated, or if there is any
+
+13:26.330 --> 13:28.050
+failure in launching and terminating.
+
+13:28.610 --> 13:29.450
+Let's go next.
+
+13:29.850 --> 13:30.290
+Tags.
+
+13:30.290 --> 13:31.210
+Let's add tag.
+
+13:31.210 --> 13:32.570
+Let's add name tag.
+
+13:34.170 --> 13:36.730
+Just giving a name inner Peace web ESG.
+
+13:36.890 --> 13:40.930
+Just so we can see when the instance gets launched it will have the name tag.
+
+13:41.850 --> 13:42.770
+Let's go next.
+
+13:43.330 --> 13:47.370
+So review all your settings that you have selected.
+
+13:48.650 --> 13:52.460
+Once you are good with all this you can see Create Auto scaling group.
+
+13:52.980 --> 13:57.820
+Now as soon as you create Auto Scaling Group, it will start launching instances and put it under the
+
+13:57.820 --> 13:58.620
+target group.
+
+13:58.900 --> 14:02.220
+So I'm going to wait for a few minutes until all this becomes stable.
+
+14:02.220 --> 14:05.300
+And then I'm going to show you more settings in Auto Scaling Group.
+
+14:05.740 --> 14:08.260
+Okay I was waiting for five minutes and now let's check.
+
+14:08.260 --> 14:12.780
+So it says it has two instances as per the two desired capacity.
+
+14:13.780 --> 14:15.420
+We should see the instances.
+
+14:16.220 --> 14:19.180
+So the two running instances they should be in the target group.
+
+14:19.180 --> 14:21.140
+Let's go and check the target groups.
+
+14:23.260 --> 14:23.420
+Okay.
+
+14:23.460 --> 14:24.500
+Two total targets.
+
+14:24.500 --> 14:25.540
+Both are healthy.
+
+14:25.540 --> 14:26.260
+Very good.
+
+14:26.260 --> 14:30.380
+And now it should be under load balancer.
+
+14:30.900 --> 14:34.420
+Let's get the endpoint of the load balancer and check the website.
+
+14:35.140 --> 14:37.500
+The DNS endpoint where is it okay here it is.
+
+14:37.540 --> 14:39.900
+Let's copy this and let's check.
+
+14:41.100 --> 14:41.780
+Great.
+
+14:42.020 --> 14:43.060
+It's coming.
+
+14:44.380 --> 14:45.820
+And also the images.
+
+14:45.820 --> 14:47.500
+Yes those are coming from EFS.
+
+14:47.540 --> 14:55.860
+Now I've used the EFS Ami and we know that we have stored these images in the EFS storage, so everything
+
+14:55.860 --> 14:57.260
+works together very well.
+
+14:57.300 --> 14:58.020
+Amazing.
+
+14:58.420 --> 15:02.660
+Now let's look at a few settings of Auto Scaling Group that will be very helpful for you.
+
+15:03.380 --> 15:06.780
+So starting with updating your application.
+
+15:06.780 --> 15:09.060
+So we have a website and developer writes code.
+
+15:09.060 --> 15:12.500
+They make changes and we need to deploy those changes.
+
+15:12.500 --> 15:15.980
+In the instances you cannot directly log into the instance and make changes.
+
+15:15.980 --> 15:19.380
+These are the group maintained by Auto Scaling group.
+
+15:19.380 --> 15:25.140
+So there is no manual changes, no logging into the instance and making the changes you need to make
+
+15:25.140 --> 15:25.700
+changes.
+
+15:25.700 --> 15:32.100
+You need to build a new army with your changes, update your launch template or create a new launch
+
+15:32.100 --> 15:35.220
+template and make the changes in the auto scaling group.
+
+15:35.660 --> 15:38.420
+Okay, so you can change the launch template.
+
+15:38.460 --> 15:45.060
+You can go to the details Edit so you can select the different version of your launch template.
+
+15:45.060 --> 15:47.460
+Or you can change the launch template itself.
+
+15:47.460 --> 15:51.300
+But when you do this you need to apply these changes.
+
+15:51.300 --> 15:56.020
+So I'm saying update launch template I'm updating with the previous template that I have that this is
+
+15:56.020 --> 15:56.980
+without EFS.
+
+15:57.540 --> 16:02.700
+Usually it will be the different version, the other version of the launch template.
+
+16:03.020 --> 16:05.660
+But I'm just changing the template itself, which you can do.
+
+16:06.220 --> 16:11.140
+And if you want to make other changes like you want to change the instance type and all, you can override
+
+16:11.140 --> 16:13.660
+those changes as well from launch template.
+
+16:14.460 --> 16:15.940
+And I'm going to say update.
+
+16:16.860 --> 16:22.740
+So now if let's say a new scaling event comes in, you know the load is going how it is going to launch
+
+16:22.740 --> 16:23.300
+new instance.
+
+16:23.300 --> 16:27.180
+The new instance will be from the new launch template that you have updated.
+
+16:27.500 --> 16:30.300
+But existing instance will be there as it is.
+
+16:30.300 --> 16:36.340
+So in order to do the complete refresh, you need to go to the instance refresh and you need to say
+
+16:36.380 --> 16:38.220
+start instance refresh.
+
+16:38.700 --> 16:43.420
+You can select how do you want the replacement, terminate and launch at the same time, or you want
+
+16:43.420 --> 16:47.180
+to launch the instance, wait and then terminate the old instance.
+
+16:47.580 --> 16:52.550
+I'm just keeping it as control cost terminate and launch at the same time.
+
+16:53.270 --> 16:54.750
+The few other options in this.
+
+16:54.750 --> 16:59.710
+Let's just go and simply start the instance refresh.
+
+17:00.430 --> 17:05.710
+Okay, you can look at the instance refresh history, or you can also look at the events in the auto
+
+17:05.710 --> 17:06.430
+scaling group.
+
+17:08.590 --> 17:13.990
+The activity in the auto scaling group here also you can look see the previous events.
+
+17:13.990 --> 17:14.830
+Those happened.
+
+17:15.390 --> 17:19.030
+You see it says launching a new instance terminating the instance.
+
+17:19.030 --> 17:21.910
+So both it did this at the same time okay.
+
+17:21.950 --> 17:24.870
+By the time this is happening let's take a look at instance management.
+
+17:24.870 --> 17:28.830
+So you can select an instance and you can perform some action.
+
+17:29.190 --> 17:31.070
+Right now this is the terminating instance.
+
+17:31.070 --> 17:32.390
+So let's say this one.
+
+17:33.110 --> 17:36.590
+So action you can detach an instance from the auto scaling group.
+
+17:36.590 --> 17:38.550
+You can set it on standby.
+
+17:38.550 --> 17:39.630
+When you do it on standby.
+
+17:39.630 --> 17:42.750
+It doesn't take activity in any scaling or scale out event.
+
+17:43.030 --> 17:45.670
+You can set a scaling to a particular instance.
+
+17:45.670 --> 17:47.830
+Let's say the you are troubleshooting.
+
+17:47.830 --> 17:50.870
+You want to You don't want the instance to get deleted.
+
+17:50.870 --> 17:53.830
+Maybe you log in your, you know, bringing down services.
+
+17:53.830 --> 17:57.270
+Maybe you're doing something, looking for something, some information.
+
+17:57.270 --> 18:00.750
+So that might trigger a scaling event if the process goes down.
+
+18:01.150 --> 18:05.870
+So while you're doing that, you can set a scaling protection so you can safely log into the instance,
+
+18:05.870 --> 18:07.030
+make the changes.
+
+18:07.310 --> 18:08.830
+The instance won't get deleted.
+
+18:09.550 --> 18:11.110
+And there is automatic scaling.
+
+18:12.430 --> 18:16.830
+So we are using a scaling policy target tracking policy.
+
+18:16.870 --> 18:18.550
+You can create your own policy.
+
+18:18.550 --> 18:23.870
+Also you can decide how many instances should be added if the load is so and so I'll just show you this
+
+18:23.870 --> 18:26.030
+quickly create dynamic scaling policy.
+
+18:26.630 --> 18:32.710
+So here I'm going to say step scaling I will give it a name I'm not doing this just showing you scale
+
+18:32.710 --> 18:33.030
+up.
+
+18:33.590 --> 18:36.110
+Now for this one you need to have a CloudWatch alarm.
+
+18:36.110 --> 18:38.470
+So you need to create a CloudWatch alarm.
+
+18:38.470 --> 18:40.070
+So I have one sample one.
+
+18:40.070 --> 18:40.950
+So I'm just keeping it.
+
+18:40.950 --> 18:44.110
+This is for not for this instance just a sample one.
+
+18:44.110 --> 18:47.310
+So I'm saying add uh one instance.
+
+18:47.310 --> 18:50.240
+If the capacity is 50, I can add more step.
+
+18:50.240 --> 18:55.760
+I can see if the capacity if the CPU utilization is, you know, 5060.
+
+18:56.760 --> 18:58.960
+If it's above 50, it launches one instance.
+
+18:58.960 --> 19:00.960
+But if it goes above 60, what do I do?
+
+19:01.240 --> 19:03.080
+Launch maybe two instances.
+
+19:03.560 --> 19:06.800
+Now these numbers are totally random.
+
+19:07.160 --> 19:12.800
+You have to decide this based on like if you are going to do this, you need to decide this based on
+
+19:12.800 --> 19:14.360
+the performance testing.
+
+19:14.520 --> 19:20.000
+There should be a testing team who makes the performance testing on your application.
+
+19:20.400 --> 19:25.240
+You need to have proper information that your instance works till how much and crashes one.
+
+19:25.240 --> 19:27.360
+Based on that you can decide these things.
+
+19:27.640 --> 19:32.360
+You can set up scaling policy, scale up policy both adding and removing this option.
+
+19:32.360 --> 19:38.200
+Also to remove you can have multiple policies in the auto scaling group just showing this option.
+
+19:38.200 --> 19:41.000
+So you should know such kind of thing exists in auto scaling group.
+
+19:41.000 --> 19:42.680
+These are very interesting options.
+
+19:42.680 --> 19:44.360
+So you're not setting any other policy.
+
+19:44.360 --> 19:48.280
+But we have here one new thing create predictive Addictive scaling policy.
+
+19:48.600 --> 19:52.240
+Now, this totally depends on the historical data, what happened previously.
+
+19:52.240 --> 19:57.120
+And based on that, if you enable this based on that, it can scale out in advance.
+
+19:57.800 --> 20:02.920
+Really out of the scope over here for DevOps or for this course.
+
+20:03.120 --> 20:05.200
+It's totally depends on the historical data.
+
+20:05.520 --> 20:09.000
+Once again, you should know such thing exists in Auto Scaling group.
+
+20:09.040 --> 20:10.600
+Yes, you can play with it later.
+
+20:11.760 --> 20:12.000
+Okay.
+
+20:12.040 --> 20:15.400
+Then in the same tab automatic scaling, you have scheduled action.
+
+20:15.400 --> 20:16.440
+This is useful.
+
+20:16.840 --> 20:20.000
+You can create a schedule action at a particular time.
+
+20:20.000 --> 20:23.160
+Let's say you know there's a sale coming in on a website.
+
+20:23.160 --> 20:27.720
+And you know there's many users that who are going to access the site.
+
+20:27.840 --> 20:31.920
+So you can decide at what particular time it starts.
+
+20:31.920 --> 20:34.200
+And you can also set the end time as well.
+
+20:34.200 --> 20:41.040
+So I'll say desired capacity should be ten, minimum should be five and maximum should be maybe 12.
+
+20:41.560 --> 20:44.520
+And you want it once or you want it like every week.
+
+20:44.520 --> 20:47.840
+Such thing happen like if you're selecting every week or every day.
+
+20:47.840 --> 20:52.800
+You also get an option for the end time when you want to end this scaling.
+
+20:53.120 --> 20:56.560
+So it's also one more very interesting option in auto scaling group.
+
+20:57.040 --> 21:00.040
+So take your time and go through different settings.
+
+21:00.080 --> 21:00.800
+Take a look.
+
+21:01.240 --> 21:02.240
+Don't be in a rush.
+
+21:02.640 --> 21:06.160
+We have free tier instances so don't need to worry.
+
+21:06.480 --> 21:09.320
+Just make sure after some time you delete the load balancer.
+
+21:09.360 --> 21:17.920
+Even if you don't delete the auto scaling group, we can just reduce the capacity to 000 everything
+
+21:17.920 --> 21:20.200
+and it is going to delete all the instances.
+
+21:20.600 --> 21:25.600
+You can have auto scaling group without any instances that also you can have no cost.
+
+21:26.040 --> 21:28.720
+But the only problem with this will be you have a load balancer.
+
+21:28.720 --> 21:33.040
+You cannot keep this load balancer for a long time, otherwise you'll get some cost.
+
+21:33.480 --> 21:38.560
+So this was quite a long lecture, but it really binds everything together that we have learned so far.
+
+21:39.000 --> 21:40.160
+You have instances here.
+
+21:40.200 --> 21:47.490
+Key pair security groups load balancer target groups Ami launch template everything, all of this that
+
+21:47.490 --> 21:48.530
+we have learned previously.
+
+21:48.530 --> 21:53.130
+It binds everything together, including the CloudWatch alarm and the EFS storage.
+
+21:53.130 --> 21:56.850
+Once again, make sure you have a shared storage or file storage.
+
+21:57.050 --> 21:59.890
+If you're using Auto Scaling Group and it is storing the data.
+
+21:59.890 --> 22:06.690
+If the data is dynamic, the data should be not living in the instance and this is called as stateless
+
+22:06.690 --> 22:07.370
+application.
+
+22:07.410 --> 22:10.530
+The application that doesn't store any data locally.
+
+22:11.010 --> 22:17.810
+Um, if it stores the data, the application is stateful, but you can store it outside and your instance
+
+22:17.810 --> 22:18.650
+becomes stateless.
+
+22:18.690 --> 22:21.770
+You know, even if you remove the instance, add it, delete, it doesn't matter.
+
+22:22.130 --> 22:28.690
+In this case, you're using instance only for its resource capacity, CPU, memory, operating system,
+
+22:28.690 --> 22:30.810
+but not for the data that goes out.
+
+22:31.450 --> 22:34.970
+Okay, once you're done playing with this, start deleting the load balancer.
+
+22:34.970 --> 22:41.570
+First, let's do the cleanup action delete load balancer confirm delete.
+
+22:42.210 --> 22:46.850
+You cannot just directly delete the instance in an auto scaling group even if you delete it, auto scaling
+
+22:46.850 --> 22:51.210
+group will create it again, because you have mentioned the desired capacity, it will always keep that
+
+22:51.210 --> 22:52.010
+capacity.
+
+22:52.450 --> 22:53.730
+So you want to delete the instance.
+
+22:53.730 --> 22:59.130
+Either you empty the auto scaling group, you set the desired capacity minimum capacity to zero.
+
+22:59.450 --> 23:02.890
+It will delete the instance, or you delete the auto scaling group itself.
+
+23:03.330 --> 23:06.970
+So for now, as a part of a cleanup, I am deleting auto scaling group.
+
+23:06.970 --> 23:07.730
+You don't need to do this.
+
+23:07.730 --> 23:08.490
+You can keep it.
+
+23:08.490 --> 23:10.490
+You can just reduce the capacity to zero.
+
+23:13.370 --> 23:17.570
+And target group again part of a cleanup not required.
+
+23:17.570 --> 23:18.290
+Not mandatory.
+
+23:18.330 --> 23:19.370
+No cost here.
+
+23:19.810 --> 23:20.970
+Removing the target group.
+
+23:20.970 --> 23:26.650
+Also finally Amis just going to keep one Ami which is connected to EFS.
+
+23:26.690 --> 23:31.330
+This one I'm going to remove action and deregister Ami.
+
+23:31.370 --> 23:33.330
+The option is deregister Ami.
+
+23:33.370 --> 23:34.690
+There is no delete option.
+
+23:34.730 --> 23:36.370
+Forced to deregister the Ami.
+
+23:36.970 --> 23:38.410
+Then you go to the snapshot.
+
+23:38.730 --> 23:42.090
+You check which snapshot is for your Ami.
+
+23:42.130 --> 23:43.930
+There are two snapshot over here.
+
+23:46.180 --> 23:47.700
+I should have named the snapshot.
+
+23:47.740 --> 23:49.900
+This is the problem if you don't name stuff properly.
+
+23:50.540 --> 23:56.700
+Even if I try to delete both, it is not going to let me delete the one that is connected to the Ami.
+
+23:58.940 --> 23:59.540
+Delete.
+
+24:00.540 --> 24:05.220
+I guess it's failed to delete the snapshot that is connected to the Ami, the one that we have registered
+
+24:05.220 --> 24:06.140
+that is gone.
+
+24:06.740 --> 24:10.700
+So that one Ami I'm keeping that is with EFS that we can use later also.
+
+24:11.140 --> 24:16.500
+Everything else you can delete, just make sure at the end go to the dashboard refresh and see you don't
+
+24:16.500 --> 24:17.340
+have anything extra.
+
+24:17.340 --> 24:18.700
+If you have you can delete them.
+
+24:18.980 --> 24:20.780
+I have one snapshot, one volume.
+
+24:20.780 --> 24:22.700
+I think the instance is still getting deleted.
+
+24:23.060 --> 24:25.580
+Okay, I have a running instance from the Auto scaling group.
+
+24:25.580 --> 24:30.780
+I'm going to terminate this one also that will anyways get terminated with Auto Scaling group.
+
+24:30.940 --> 24:32.620
+I'm just giving it extra help.
+
+24:32.820 --> 24:34.580
+Okay, so I'm good here.
+
+24:34.580 --> 24:36.220
+I have done proper cleanup.
+
+24:36.220 --> 24:38.060
+You also make sure you do proper cleanup.
+
+24:38.060 --> 24:39.220
+Just have one ami.
+
+24:39.580 --> 24:41.980
+And now with that note, I'm closing this lecture.
+
+24:41.980 --> 24:43.260
+Thank you very much for watching.
+
+24:43.260 --> 24:44.660
+I will see you in the next one.

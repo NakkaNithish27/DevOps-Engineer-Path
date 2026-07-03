@@ -1,0 +1,655 @@
+WEBVTT
+
+00:00.320 --> 00:04.720
+All right, then, let's get started with the final job of our workflow.
+
+00:05.480 --> 00:07.720
+Build and publish the Docker image.
+
+00:09.240 --> 00:15.000
+So open your main.yml file in the workflows and in the same column of the security scan.
+
+00:15.000 --> 00:21.440
+Create a new job with name, build and publish.
+
+00:22.440 --> 00:23.440
+So build and publish.
+
+00:23.440 --> 00:28.480
+That's the name I'm giving and the name attribute also same build and publish.
+
+00:29.120 --> 00:31.280
+This needs to run on ubuntu latest.
+
+00:33.760 --> 00:41.000
+In this job we are also going to login to the AWS account with the credentials that we stored in GitHub.
+
+00:41.040 --> 00:44.760
+Secrets and the environment name was their production.
+
+00:44.760 --> 00:50.160
+So we need to specify that the environment will be production in the GitHub environment.
+
+00:50.160 --> 00:54.280
+So we need to just mention here environment colon production.
+
+00:54.280 --> 00:58.360
+So we get access to to those secrets and environment variable.
+
+00:59.080 --> 01:03.110
+We want this job to run after all the previous job's complete.
+
+01:03.590 --> 01:05.030
+So we're going to see needs.
+
+01:05.030 --> 01:08.910
+And in square bracket we can give the previous job name.
+
+01:09.230 --> 01:11.510
+Build testing security scan.
+
+01:12.030 --> 01:15.150
+So it's going to check if all these three jobs are completed.
+
+01:15.150 --> 01:18.030
+Then only it's going to start build and publish job.
+
+01:18.470 --> 01:20.950
+And we want to run this only for the main branch.
+
+01:20.950 --> 01:27.710
+So we're going to give the condition over here if GitHub dot href is equal to the main branch.
+
+01:28.310 --> 01:30.310
+Now let's include the steps.
+
+01:30.750 --> 01:32.310
+So say steps colon.
+
+01:32.310 --> 01:36.510
+And inside that first we need to clone the source code.
+
+01:42.870 --> 01:45.590
+Now we need to build the Docker image and upload it.
+
+01:45.590 --> 01:47.590
+And this will be all in one command.
+
+01:47.950 --> 01:52.390
+And uploading it to ECR needs the authentication with the AWS account.
+
+01:52.390 --> 01:54.430
+And then we need to log in to the ECR.
+
+01:54.470 --> 02:00.510
+So there are few actions predefined actions that we can use AWS credentials action that is going to
+
+02:00.550 --> 02:03.060
+login to authenticate to our AWS account.
+
+02:03.060 --> 02:07.540
+And then there is login ECR action which is going to log into ECR service.
+
+02:07.940 --> 02:12.420
+Once we do that, we can build and upload the Docker image to ECR.
+
+02:12.580 --> 02:14.180
+So let's do that first.
+
+02:16.740 --> 02:20.220
+So first configuring the credentials that we have already saved.
+
+02:20.220 --> 02:25.660
+So for that we're going to use this action name configure AWS credentials that I have given.
+
+02:25.660 --> 02:28.460
+Actually I have copied all this directly from the documentation.
+
+02:28.460 --> 02:34.620
+So in this action it's clearly mentioned we need to pass these inputs AWS access key ID.
+
+02:35.140 --> 02:37.620
+And then we mention the access key ID.
+
+02:37.660 --> 02:41.820
+Now definitely we are not going to put the access key ID over here in plain text.
+
+02:41.820 --> 02:43.580
+That's why we stored into secrets.
+
+02:43.860 --> 02:50.020
+And in order to access the secrets we need to give it in this format we say dollar two, curly braces,
+
+02:50.020 --> 02:53.180
+opening secrets, and the name of the secret.
+
+02:53.180 --> 02:58.300
+This is exactly the same name I used in previous lecture to store this access key.
+
+02:58.620 --> 03:00.460
+Then you close the curly brace.
+
+03:00.860 --> 03:05.370
+Same way the secret key also that is also stored into secrets.
+
+03:05.890 --> 03:11.570
+And then AWS region that we have stored into environment variable to access that.
+
+03:11.930 --> 03:12.930
+Now I need to give here.
+
+03:12.970 --> 03:16.890
+Where's vars dot AWS underscore region.
+
+03:17.770 --> 03:21.370
+So by using this it is going to connect to our AWS account.
+
+03:21.370 --> 03:24.010
+And then we need to add one more stage over here.
+
+03:24.010 --> 03:27.370
+Sorry one more step over here to log in to our ECR.
+
+03:28.010 --> 03:29.010
+Now this is pretty simple.
+
+03:29.010 --> 03:35.170
+You just specify the action GitHub action to log into ECR credential is already configured here.
+
+03:35.410 --> 03:36.690
+So just this action.
+
+03:36.730 --> 03:40.450
+Of course the name login to Amazon ECR and uses this action.
+
+03:40.450 --> 03:45.010
+This is going to just simply login to Amazon ECR by using this credentials.
+
+03:45.450 --> 03:51.330
+Now we are also going to use its output later to get the ECR repository.
+
+03:51.330 --> 03:53.850
+Basically the output of this login.
+
+03:53.850 --> 03:59.530
+So if you want to use the output of any step you have to give an ID to it.
+
+04:00.370 --> 04:05.280
+You say ID colon and you just say login hyphen is here.
+
+04:05.320 --> 04:08.400
+Now this name we are going to reference in later step.
+
+04:09.360 --> 04:12.640
+And this is that next step looks complicated but it's simple.
+
+04:12.680 --> 04:13.560
+Let me explain.
+
+04:13.960 --> 04:14.880
+First the name.
+
+04:14.880 --> 04:20.560
+Now in this one step we are going to build the image, tag it and push it to Amazon ECR.
+
+04:20.600 --> 04:21.600
+All 3 in 1.
+
+04:22.240 --> 04:26.400
+And for this one we are not going to use any GitHub actions.
+
+04:26.400 --> 04:28.920
+There are, but let's do it through run.
+
+04:30.320 --> 04:32.200
+Okay first of all ID build image.
+
+04:32.200 --> 04:38.440
+So we have given an id a name to the step which we can reference later.
+
+04:39.080 --> 04:40.240
+Env environment.
+
+04:40.240 --> 04:43.320
+So to store these variables this will be in the runtime.
+
+04:43.320 --> 04:45.600
+So ECR underscore registry.
+
+04:46.040 --> 04:50.000
+This should get you the name of the registry not just name.
+
+04:50.000 --> 04:54.200
+Actually it's going to be the complete URI except the repository name.
+
+04:54.720 --> 04:59.440
+So repository this is the complete URI account name dot ECR.
+
+04:59.520 --> 05:04.680
+This entire URL slash v profile hyphen app image that is the repository name.
+
+05:05.040 --> 05:08.190
+So you get it till here.
+
+05:08.190 --> 05:10.350
+That will be your registry.
+
+05:10.350 --> 05:12.830
+If you're not using ECR, this will be Docker Hub.
+
+05:13.110 --> 05:17.630
+If you're using Google Container Registry, it will be your Google Container Registry information.
+
+05:18.110 --> 05:19.150
+So how do we get that?
+
+05:19.270 --> 05:20.590
+Well we say steps.
+
+05:21.630 --> 05:24.830
+So that gives access to the steps.
+
+05:24.830 --> 05:28.150
+And the step name is dot login hyphen ECR.
+
+05:28.150 --> 05:32.190
+So basically this step from that dot outputs.
+
+05:32.470 --> 05:35.030
+So when we log in it returns an outputs.
+
+05:35.030 --> 05:41.390
+And in that there is a key called registry that will have the URL or information about your registry
+
+05:41.390 --> 05:43.510
+that we are storing into this variable.
+
+05:44.030 --> 05:47.830
+Now yes, we can just set a variable and assign the value to it.
+
+05:47.830 --> 05:53.190
+But I wanted to show this to you how in runtime you can access the information and store it into a variable,
+
+05:53.190 --> 05:54.550
+and then you can use it.
+
+05:55.270 --> 05:55.910
+Image tags.
+
+05:55.910 --> 05:56.790
+The Docker image.
+
+05:56.790 --> 06:03.550
+We have the name colon, and we have a tag like the version of the Docker image that we are assigning
+
+06:03.590 --> 06:06.350
+it as this variable github.sh.
+
+06:06.350 --> 06:06.420
+Shh.
+
+06:06.460 --> 06:09.180
+This is going to get the latest commit ID.
+
+06:09.660 --> 06:11.380
+So this gets the latest commit ID.
+
+06:11.420 --> 06:14.460
+It will be very long and it will be storing it into this variable.
+
+06:14.460 --> 06:20.980
+So this environment is basically to assign value to these two variables which we are using over here.
+
+06:21.740 --> 06:24.020
+So run basically just runs the command.
+
+06:24.020 --> 06:32.420
+So when it creates this ubuntu latest VM or container in that it is going to run the command the shell
+
+06:32.420 --> 06:33.060
+commands.
+
+06:33.460 --> 06:37.260
+And the pipe here represents we are giving multiple commands at once.
+
+06:37.260 --> 06:39.860
+So in that case you give this pipe.
+
+06:39.860 --> 06:42.900
+In the next line you give all the command in one by one.
+
+06:43.260 --> 06:45.700
+So the first command is docker build hyphen f.
+
+06:45.740 --> 06:50.700
+You give the path of the docker file that we have created in the previous lecture.
+
+06:51.180 --> 06:55.380
+So Docker hyphen files in that you have app in that you have multi-stage.
+
+06:55.380 --> 06:56.540
+And that's the Docker file.
+
+06:56.540 --> 07:02.340
+So you give the complete path and hyphen T is to tag your image to give the name.
+
+07:02.340 --> 07:08.770
+So Docker ECR registry which will be this Slash ECR repository.
+
+07:08.810 --> 07:10.570
+Now this variable we have not defined.
+
+07:10.610 --> 07:13.250
+We are going to define it in the workflow itself.
+
+07:13.610 --> 07:17.490
+So that way you can also see how to define environment variable in the workflow.
+
+07:17.490 --> 07:20.450
+So let's go scroll up over here.
+
+07:20.490 --> 07:23.810
+Just before the permission let's say env colon.
+
+07:23.810 --> 07:28.330
+And in the next line let's define the variable ECR underscore repository.
+
+07:28.370 --> 07:33.130
+Now use it rarely do not usually define the variables in the workflow.
+
+07:33.170 --> 07:39.130
+It's better you store it into the GitHub secrets and vars instead of putting it over here.
+
+07:39.570 --> 07:45.290
+But just a use case I'm building so you can see that you can define variables here also and then use
+
+07:45.290 --> 07:45.610
+it.
+
+07:45.770 --> 07:48.250
+So I'm going to give it into single quote.
+
+07:48.490 --> 07:55.130
+Let's get the repository name that is v profile hyphen image V profile hyphen app image.
+
+07:55.130 --> 07:56.530
+That's the name that I have given.
+
+07:56.530 --> 07:58.490
+So I'm storing its value into this variable.
+
+07:58.490 --> 08:00.330
+And then we are simply referring it here.
+
+08:02.970 --> 08:05.050
+Over here with the repository name.
+
+08:05.210 --> 08:06.490
+Now for the repository name.
+
+08:06.490 --> 08:14.440
+So once again docker build hyphen f, the path of the docker file hyphen t to tag the image Docker image.
+
+08:14.800 --> 08:17.120
+So Docker image is always tagged like this.
+
+08:17.120 --> 08:24.760
+You give the registry name, slash the repository name colon the image tag docker image tag.
+
+08:25.080 --> 08:29.600
+So over here this is going to generate the whole URL which is this one.
+
+08:30.840 --> 08:34.080
+And for the tag we are using the latest GitHub commit.
+
+08:34.320 --> 08:36.880
+Over here we are storing this variable value.
+
+08:37.600 --> 08:42.040
+And at the end you have a dot that represents current working directory.
+
+08:42.320 --> 08:45.560
+That means run this docker build command in the current directory.
+
+08:45.560 --> 08:48.920
+Current directory means over here in the top level root directory.
+
+08:49.360 --> 08:55.840
+If we do not specify that dot, then it is going to get into this folder and execute the docker build
+
+08:55.840 --> 09:02.360
+command, which is what we don't want, because in the docker file we have mentioned copy all the content
+
+09:02.360 --> 09:07.760
+and we want this content to be copied into slash app folder of the container.
+
+09:08.040 --> 09:10.950
+So we can build the artifact.
+
+09:10.950 --> 09:14.790
+That's why we want our Docker build command to execute in this folder.
+
+09:14.790 --> 09:21.590
+So it gets this all these files and copies into copies it into the Docker container okay.
+
+09:21.630 --> 09:23.470
+Next is Docker push.
+
+09:23.470 --> 09:25.470
+So we simply say docker push.
+
+09:25.470 --> 09:29.830
+And we give the here uri colon the image.
+
+09:29.830 --> 09:35.030
+So once it is built with this name it's going to simply push it to ECR registry.
+
+09:35.350 --> 09:38.470
+Because we are already logged in over here to the ECR.
+
+09:38.990 --> 09:41.030
+And then the last line is just used.
+
+09:41.030 --> 09:44.390
+So we can refer its output in the later step.
+
+09:44.390 --> 09:45.750
+We do not have any later step.
+
+09:45.750 --> 09:47.670
+So we can simply remove this also.
+
+09:48.230 --> 09:48.910
+So its output.
+
+09:48.910 --> 09:50.990
+You want to store it into a variable.
+
+09:51.350 --> 09:57.110
+So if we deploy this container to container running service like ECS then we can refer to that.
+
+09:57.110 --> 09:58.510
+But we are not doing it over here.
+
+09:58.510 --> 10:00.430
+So this would be enough.
+
+10:00.790 --> 10:02.870
+Now it's time to test it.
+
+10:03.310 --> 10:04.190
+So save this file.
+
+10:04.190 --> 10:07.550
+Make sure you check the source code from this lecture resource.
+
+10:07.550 --> 10:09.670
+From this lecture resource you can get this file.
+
+10:09.780 --> 10:10.420
+Compare it.
+
+10:10.460 --> 10:13.500
+Make sure you don't make any mistakes, any typographical mistake.
+
+10:13.860 --> 10:18.420
+Put it into your main.yml file, save it and say commit and push.
+
+10:21.740 --> 10:23.380
+Give a commit message.
+
+10:23.420 --> 10:25.140
+Build and publish.
+
+10:27.340 --> 10:32.780
+Job added a commit message and accept the commit.
+
+10:34.780 --> 10:35.900
+Now let's take a look.
+
+10:38.620 --> 10:38.900
+Okay.
+
+10:38.900 --> 10:40.180
+The workflow is triggered.
+
+10:42.340 --> 10:44.460
+Let's wait until this completes.
+
+10:44.820 --> 10:45.260
+All right.
+
+10:45.260 --> 10:48.260
+My pipeline or workflow got completed successfully.
+
+10:48.260 --> 10:51.220
+Let's look at the build and publish job.
+
+10:51.220 --> 10:54.740
+So we have configured AWS credentials that work.
+
+10:54.780 --> 10:56.620
+Login to Amazon ECR.
+
+10:56.660 --> 10:57.340
+That worked.
+
+10:57.700 --> 10:58.580
+Everything worked.
+
+10:58.980 --> 10:59.980
+The build attack.
+
+11:00.020 --> 11:03.060
+This will be a long output huge output.
+
+11:06.620 --> 11:12.530
+Okay till here it builds the docker image and then exporting to image layers here.
+
+11:12.530 --> 11:17.330
+It's pushing it to the repository you see constructed properly the repository URI.
+
+11:17.850 --> 11:21.410
+If you go to container registry let's go to our repository.
+
+11:21.450 --> 11:23.410
+We should see the image.
+
+11:23.410 --> 11:24.410
+So you see the tag.
+
+11:24.410 --> 11:28.930
+This is the tag that is the GitHub latest commit ID.
+
+11:29.170 --> 11:30.570
+If you want we can check it.
+
+11:30.850 --> 11:31.770
+Let's copy this.
+
+11:32.490 --> 11:33.610
+Let's go to GitHub.
+
+11:35.730 --> 11:35.930
+Okay.
+
+11:35.970 --> 11:38.370
+Here you can see see that commit ID three b.
+
+11:38.410 --> 11:40.970
+Let's click on that okay.
+
+11:41.010 --> 11:44.930
+He's just showing the short version of that commit ID there.
+
+11:44.970 --> 11:46.650
+There is a button to copy the full.
+
+11:47.250 --> 11:50.850
+Copy that Ctrl f paste it here.
+
+11:50.890 --> 11:53.610
+You see that it's exactly same right?
+
+11:53.610 --> 11:55.890
+Then our workflow got completed successfully.
+
+11:55.890 --> 11:59.250
+Now if you want you can just go to workflow.
+
+11:59.250 --> 12:02.850
+Click on your workflow name and you can also run it manually.
+
+12:02.850 --> 12:08.530
+Run workflow because we have workflow dispatch in our pipeline as the event trigger, so we can run
+
+12:08.530 --> 12:09.130
+it manually.
+
+12:09.130 --> 12:13.520
+Also take a look at your source code once again.
+
+12:13.560 --> 12:14.760
+Your workflow file.
+
+12:15.200 --> 12:19.320
+Make sure you understand all these steps, all these settings.
+
+12:19.800 --> 12:25.440
+Now, no matter what kind of workflow you set, more or less you're going to use these kinds of steps
+
+12:25.480 --> 12:29.960
+like environment storing the variables, secrets, conditions.
+
+12:30.200 --> 12:34.520
+So I've tried to include as much as I could in this small amount of time.
+
+12:34.920 --> 12:36.840
+And don't worry, you don't need to stress too much.
+
+12:36.840 --> 12:41.440
+You have now the AI tools which can generate all this code very easily for you.
+
+12:41.720 --> 12:49.320
+But once you have knowledge on these basics or commonly used steps, actions and settings, then you
+
+12:49.320 --> 12:56.240
+can easily generate this kind of code or more complicated code by using coding assistants like GitHub,
+
+12:56.240 --> 12:58.920
+Copilot, Amazon Q, or even.
+
+12:58.920 --> 13:01.640
+If you want, you can use ChatGPT in the projects.
+
+13:01.640 --> 13:07.000
+We are going to integrate more tools to continuous delivery also, and many other settings will see
+
+13:07.000 --> 13:10.840
+in GitHub actions workflow all that in the projects.
+
+13:10.840 --> 13:12.360
+But that would be all for now.
+
+13:12.360 --> 13:13.760
+I'll see you in the next one.

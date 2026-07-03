@@ -1,0 +1,1012 @@
+WEBVTT
+
+00:00.280 --> 00:00.720
+All right.
+
+00:00.720 --> 00:03.160
+So now let's launch two EC2 instances.
+
+00:03.160 --> 00:05.640
+Swap zero one and zero two from the template.
+
+00:05.640 --> 00:08.400
+And then create the target group and load balancer.
+
+00:08.760 --> 00:10.960
+So let's go to Launch Templates.
+
+00:11.680 --> 00:16.760
+Select our template Action Launch instance from template.
+
+00:16.760 --> 00:19.720
+And I'm going to add two instances over here.
+
+00:20.040 --> 00:23.200
+Let's scroll down go to tags.
+
+00:23.200 --> 00:26.760
+And here we're going to name it as web 000.
+
+00:27.480 --> 00:31.080
+So both instances will have same tag and everything will be same.
+
+00:31.320 --> 00:37.040
+After the launch we can change the name name value tag let's say launch instance.
+
+00:37.400 --> 00:39.760
+Okay let's go back to instances.
+
+00:40.400 --> 00:40.680
+Okay.
+
+00:40.680 --> 00:46.480
+So the first one I'm going to change the name as web zero one and the second one as web zero two.
+
+00:50.360 --> 00:50.640
+Okay.
+
+00:50.640 --> 00:52.200
+I know you don't have peace yet.
+
+00:54.160 --> 00:57.440
+Once we create the load balancer, you will find inner peace.
+
+00:57.840 --> 01:00.200
+So let's go to load balancing section.
+
+01:00.480 --> 01:02.560
+Go to target groups first.
+
+01:03.160 --> 01:08.280
+So target group basically is just group of instances with health check.
+
+01:08.280 --> 01:11.120
+So you can register instance in the target group.
+
+01:11.120 --> 01:12.840
+You can also deregister from it.
+
+01:13.040 --> 01:19.360
+And load balancer is going to redirect the traffic to the to the target group which contains your instance.
+
+01:19.360 --> 01:21.640
+So let's click on Create Target group.
+
+01:21.760 --> 01:28.720
+You can have target group of instances IP addresses, lambda function and even application load balancer.
+
+01:28.720 --> 01:32.120
+So one load balancer can route request to other load balancer.
+
+01:32.400 --> 01:34.160
+We're just going with instances first.
+
+01:34.160 --> 01:40.280
+So instances protocol HTTP because we are running HTTP service in our instance.
+
+01:40.480 --> 01:42.680
+And that runs on the default port 80.
+
+01:42.720 --> 01:48.600
+If you use Non-default port like 80 8080, 90, anything else, any other service you're using, then
+
+01:48.600 --> 01:51.040
+make sure you update the port number over here.
+
+01:51.560 --> 01:53.760
+Scroll down health check.
+
+01:54.400 --> 01:59.960
+So there is this feature in the load balancer that it routes the request to the healthy instances and
+
+01:59.960 --> 02:02.400
+does not route the request to unhealthy instance.
+
+02:02.680 --> 02:06.120
+But the question is how does it know whether the instance is healthy or not?
+
+02:06.320 --> 02:08.800
+Well, that it knows through the health check.
+
+02:09.240 --> 02:14.760
+So target group can run periodic health check on the instance to check your service, and that it does
+
+02:14.760 --> 02:17.120
+by checking the protocol you have to mention.
+
+02:17.120 --> 02:20.760
+So there's two option http and https health check path.
+
+02:20.920 --> 02:26.800
+So in our instance we run the service Apache Service and it is serving the website from the default
+
+02:26.800 --> 02:28.840
+folder var HTML.
+
+02:29.080 --> 02:34.960
+But let's say if you're serving a website from a non default folder like default is var HTML.
+
+02:34.960 --> 02:39.720
+Inside that you have other folder like slash images or videos or something like that.
+
+02:39.720 --> 02:42.760
+Or maybe you created another folder inside that inner peace.
+
+02:43.400 --> 02:50.080
+And after giving the endpoint you need to give slash inner peace to access the website or the web page.
+
+02:50.440 --> 02:53.080
+Then you need to give that non default path.
+
+02:53.760 --> 02:57.000
+So slash here anyways means var ww HTML.
+
+02:57.000 --> 03:00.920
+We have website running from there, so we don't need to mention anything over here.
+
+03:01.280 --> 03:02.880
+Let's check the advanced health check.
+
+03:03.280 --> 03:07.360
+So HTTP default port is 80 and that's what it's selected over here.
+
+03:07.360 --> 03:08.080
+Traffic port.
+
+03:08.080 --> 03:12.640
+But if you are using Non-default port then you need to say override and mention the port.
+
+03:12.640 --> 03:16.920
+Let's say for example 1890 your web service is running on a non-default port.
+
+03:16.920 --> 03:18.080
+You need to mention that.
+
+03:18.080 --> 03:20.840
+But for us it's going to be the default port, which is 80.
+
+03:21.520 --> 03:23.480
+Next setting is healthy threshold.
+
+03:23.520 --> 03:24.480
+It says five.
+
+03:24.480 --> 03:28.000
+So five time it needs to return the healthy status.
+
+03:28.000 --> 03:30.480
+That means it's going to access the HTTP protocol.
+
+03:30.480 --> 03:34.200
+It's going to check the site on port 80 if it's healthy.
+
+03:34.440 --> 03:39.800
+And that needs to be done five times, then only it's going to declare the instance as healthy.
+
+03:39.840 --> 03:41.000
+But we are going to reduce that.
+
+03:41.000 --> 03:46.520
+And let's make it to two, because five times it's going to take a little bit of extra time.
+
+03:47.080 --> 03:47.600
+Unhealthy.
+
+03:47.640 --> 03:49.720
+Now what happens if the instance is unhealthy.
+
+03:49.720 --> 03:51.080
+It's going to check two times.
+
+03:51.080 --> 03:56.360
+If both the times it is showing unhealthy, then only it is going to declare the instances unhealthy
+
+03:56.640 --> 03:57.790
+and two is minimum.
+
+03:58.110 --> 04:03.790
+One is definitely not recommended because sometimes due to high load and all the service does not respond
+
+04:03.790 --> 04:05.190
+and it goes unhealthy.
+
+04:05.510 --> 04:10.910
+And in the same moment, if the health check is done and the instance declares as unhealthy, that will
+
+04:10.910 --> 04:11.550
+be bad, right?
+
+04:11.550 --> 04:13.190
+So mostly it will be two or higher.
+
+04:13.190 --> 04:15.070
+Always timeout.
+
+04:15.070 --> 04:20.110
+Is five seconds gonna wait five seconds before it goes to the next unhealthy health check.
+
+04:20.270 --> 04:23.190
+And this is going to happen all in the interval of 30s.
+
+04:23.190 --> 04:26.910
+So it's checking the healthy threshold for five times.
+
+04:27.150 --> 04:28.350
+So it's going to do the health check.
+
+04:28.350 --> 04:32.270
+Then it's going to wait 30s then again go to the next health check then wait 30s.
+
+04:32.270 --> 04:35.110
+So like that that is the interval success code.
+
+04:35.110 --> 04:42.430
+It is expecting us 200 200 is default healthy success code HTTP success code default is 200.
+
+04:42.670 --> 04:44.350
+So we're going to keep that as default.
+
+04:44.630 --> 04:48.150
+Now I have spent some time over here to go through each and every option over here.
+
+04:48.150 --> 04:50.910
+We are going to make changes to this option in the projects.
+
+04:50.910 --> 04:54.870
+When we deploy the set up the project, it's important for you to understand.
+
+04:54.870 --> 05:00.030
+I have seen many places where the services are live, healthy, running, but because of the misconfigured
+
+05:00.030 --> 05:01.790
+health check, the instances are unhealthy.
+
+05:02.590 --> 05:08.390
+So people waste time in fixing the service of the instance rather than focusing on the health check.
+
+05:08.590 --> 05:13.350
+So make sure you know the service, what protocol, what port number it is running, what is the health
+
+05:13.390 --> 05:16.630
+check path or what is the path where you are serving the traffic?
+
+05:16.830 --> 05:19.910
+All that you know, then you can configure the right health check.
+
+05:19.950 --> 05:28.150
+So for example, if we take any of this instance public IP, http, colon slash slash and the public
+
+05:28.150 --> 05:32.110
+IP we hit or the port number colon 80.
+
+05:32.150 --> 05:36.150
+So that's what goes by default right.
+
+05:36.190 --> 05:39.670
+So the protocol HTTP and the default port 80.
+
+05:39.710 --> 05:42.750
+Now we don't need to mention the default port if HTTP.
+
+05:42.790 --> 05:45.190
+That anyways means the port 80 default.
+
+05:45.510 --> 05:47.910
+If you have a non-default port you will give something like this.
+
+05:47.950 --> 05:50.110
+You know like you have 8090 port.
+
+05:50.470 --> 05:52.030
+And if your health check path.
+
+05:52.070 --> 05:55.470
+Sorry, if the website path is not just route root directory.
+
+05:55.470 --> 05:58.950
+You can give slash and you can give the path, let's say for example images.
+
+05:59.550 --> 06:06.230
+So once you know all this, the protocol the port number and the path you can configure the right health
+
+06:06.270 --> 06:06.710
+check.
+
+06:07.430 --> 06:07.910
+Okay.
+
+06:07.950 --> 06:11.470
+Let's keep everything default except the healthy threshold.
+
+06:11.470 --> 06:14.830
+I'm going to reduce it to two and say next.
+
+06:15.430 --> 06:18.110
+Oh of course we need to give the target group a name.
+
+06:18.670 --> 06:23.390
+Naming it as inner peace hyphen TG and then go next.
+
+06:23.910 --> 06:26.670
+Now you can register the instance now or you can do it later.
+
+06:26.670 --> 06:32.550
+Also I'm going to select both the instance that we have created, web zero one and web zero two.
+
+06:32.590 --> 06:35.550
+And you need to click on this button include as pending below.
+
+06:36.030 --> 06:40.990
+Make sure the port number is 80 over here which is the default port for our Apache service.
+
+06:41.750 --> 06:43.270
+They both are in the same zone.
+
+06:43.270 --> 06:44.550
+US East one D.
+
+06:45.270 --> 06:49.510
+Okay, once again you need to have these instances over here in the review target section.
+
+06:49.870 --> 06:53.430
+So you need to click on Include Pending below and make sure they're here.
+
+06:53.630 --> 06:55.550
+And then say create target group.
+
+06:55.990 --> 06:56.270
+Okay.
+
+06:56.310 --> 06:57.910
+So the target group is created.
+
+06:57.910 --> 07:02.310
+Now let's go to the load balancers and say create load balancer.
+
+07:03.230 --> 07:07.670
+So we have application load balancer network load balancer gateway load balancer.
+
+07:07.670 --> 07:10.390
+And over here you can see the classic load balancer.
+
+07:10.390 --> 07:13.870
+Also that is really very easy to create and run.
+
+07:13.870 --> 07:15.590
+Just you don't need target group.
+
+07:15.590 --> 07:21.030
+In classic load balancer you just create the load balancer add the instance and done but doesn't give
+
+07:21.070 --> 07:26.110
+too many options for application load balancer, HTTP and Https only.
+
+07:26.110 --> 07:26.870
+And that's what you want.
+
+07:26.910 --> 07:32.350
+Most of the cases you will have http and https traffic and it's a pretty decent load balancer, very
+
+07:32.350 --> 07:34.830
+easy to configure, very easy services to set up.
+
+07:35.110 --> 07:37.790
+And mostly it is used to serve the internet traffic.
+
+07:38.030 --> 07:41.190
+So we are going to go with the application load balancer.
+
+07:41.190 --> 07:42.270
+Click on create.
+
+07:42.590 --> 07:47.350
+Let's give it a name inner peace hyphen Alb application load balancer.
+
+07:48.230 --> 07:51.150
+There are two schemes internet facing and internal.
+
+07:51.510 --> 07:54.310
+As I said we are going to solve the internet traffic.
+
+07:54.590 --> 07:56.390
+So we're going to keep it as internet facing.
+
+07:56.390 --> 08:02.230
+But if you want it for some internal services that are used by some internal application, let's say
+
+08:02.230 --> 08:07.950
+you have a service running in an EC2 instance that wants to access some backend service.
+
+08:08.270 --> 08:12.430
+So for those backend services you can have an internal load balancer.
+
+08:12.550 --> 08:14.430
+But we are going to keep internet facing.
+
+08:14.950 --> 08:15.910
+Scroll down.
+
+08:16.430 --> 08:18.670
+You can see here zones and subnets.
+
+08:18.950 --> 08:21.470
+So our instances are in US east 1D.
+
+08:21.830 --> 08:25.750
+But usually you will have instances distributed among multiple zones.
+
+08:25.750 --> 08:27.270
+So you can select those zones.
+
+08:27.270 --> 08:29.390
+Or you can select just all the zones.
+
+08:29.430 --> 08:32.230
+Now each zone can have multiple subnets.
+
+08:32.230 --> 08:37.190
+And all this we're going to talk about in AWS part two when we cover VPC.
+
+08:37.550 --> 08:40.390
+For now just understand this is just a network.
+
+08:40.750 --> 08:42.830
+VPC is the main network.
+
+08:42.830 --> 08:47.150
+And in that you have subnet and one zone can have multiple subnets.
+
+08:47.150 --> 08:47.910
+We just have one.
+
+08:47.910 --> 08:54.790
+This is these are the default subnets or default network in your AWS account in North Virginia region.
+
+08:55.030 --> 08:56.910
+And I'm going to select all of them.
+
+08:58.470 --> 08:58.710
+Okay.
+
+08:58.710 --> 09:05.270
+Just to show you, you know, you can have the load balancer that can route traffic to all these zones
+
+09:05.270 --> 09:06.270
+in a region.
+
+09:07.870 --> 09:08.070
+Okay.
+
+09:08.110 --> 09:12.470
+Now the security group, the load balancer should have its own separate security group.
+
+09:12.470 --> 09:14.630
+This is not the instance security group.
+
+09:14.870 --> 09:17.590
+This is the load balancer security group we are talking about.
+
+09:17.870 --> 09:21.270
+So we don't have security group created already for load balancer.
+
+09:21.270 --> 09:22.270
+So let's create.
+
+09:22.310 --> 09:27.550
+We can click on this link Create new security Group and let's give it a name.
+
+09:27.670 --> 09:30.630
+Inner peace hyphen elb hyphen SG.
+
+09:31.030 --> 09:32.310
+That makes some sense.
+
+09:32.510 --> 09:35.510
+Have proper naming convention inbound rules.
+
+09:35.510 --> 09:38.110
+Now we are going to serve the internet traffic.
+
+09:38.110 --> 09:47.350
+So we need to give here port 80 allowed from any IPv4 and port 80 for any IPv6.
+
+09:48.070 --> 09:54.780
+So in the project we are going to see how to set up the secure connection https port 443.
+
+09:55.100 --> 09:58.860
+In such cases, you need to also have the port 443 here.
+
+09:59.180 --> 10:02.300
+But for now, we just have port 80 from anywhere.
+
+10:02.580 --> 10:07.660
+So give that rule and make sure you have edited inbound rules and not the outbound rules.
+
+10:08.180 --> 10:09.180
+And let's see.
+
+10:09.220 --> 10:10.500
+Create security group.
+
+10:10.780 --> 10:12.980
+Let's go back to the load balancer page.
+
+10:13.140 --> 10:14.020
+Refresh this.
+
+10:14.460 --> 10:18.820
+And in this you should find the Inner Peace ELB security group.
+
+10:18.820 --> 10:21.340
+Select that and uncheck the default one.
+
+10:21.380 --> 10:23.660
+We don't want the default security group.
+
+10:23.700 --> 10:23.900
+Okay.
+
+10:23.940 --> 10:27.700
+So once again we have given name to the load balancer internet facing.
+
+10:28.060 --> 10:29.860
+We selected all the zones.
+
+10:30.180 --> 10:34.500
+We selected the security group and now the listener and routing.
+
+10:34.500 --> 10:37.620
+So by default it is going to listen on port 80.
+
+10:37.660 --> 10:41.100
+That is the internet traffic coming towards the load balancer.
+
+10:41.460 --> 10:44.260
+Once it receives the traffic where should it redirect.
+
+10:44.260 --> 10:46.620
+So here you need to select the target group.
+
+10:47.020 --> 10:52.860
+In target group we have our two instances that serves the traffic on port 80 on HTTP protocol.
+
+10:53.900 --> 10:54.300
+Okay.
+
+10:55.660 --> 10:57.460
+So you can add multiple listeners.
+
+10:57.460 --> 10:59.860
+As I said, we just have port 80 for now.
+
+10:59.860 --> 11:00.460
+In project.
+
+11:00.460 --> 11:03.220
+We are also going to see HTTP 403.
+
+11:03.420 --> 11:08.220
+If you click here on Add Listener, you can say here HTTP 403.
+
+11:08.220 --> 11:09.660
+You can select the target group.
+
+11:10.020 --> 11:16.180
+But along with this you need to give the ACM certificate that we're using for encryption.
+
+11:16.180 --> 11:18.620
+Anyways that will be seen in the project.
+
+11:18.620 --> 11:20.340
+Let's remove the 403.
+
+11:20.740 --> 11:24.500
+But just you should know we can add we can add multiple listeners.
+
+11:25.340 --> 11:25.580
+Okay.
+
+11:25.620 --> 11:29.540
+Along with the load balancer setting, there are a few other services that you can integrate with the
+
+11:29.540 --> 11:31.460
+load balancer like CloudFront.
+
+11:31.500 --> 11:33.700
+Again we'll see that in the project.
+
+11:33.740 --> 11:37.100
+There is WAF AWS Web Application Firewall.
+
+11:37.100 --> 11:39.740
+This is different than our security group firewall.
+
+11:39.940 --> 11:41.780
+This works at the application level.
+
+11:41.780 --> 11:48.500
+It prevents the common attacks like DDoS, cross-site scripting and many other things you can decide
+
+11:48.540 --> 11:52.660
+you can deny traffic from a particular location IP addresses.
+
+11:52.700 --> 11:58.660
+You can block some zones you know in or areas you can do many more amazing things, but this works at
+
+11:58.660 --> 12:02.100
+the application level, not at the port and protocol level.
+
+12:02.300 --> 12:03.500
+And it's not free.
+
+12:04.100 --> 12:07.020
+But my recommendation is just go ahead and take a look.
+
+12:07.340 --> 12:12.420
+Collect some information on web application firewall, especially AWS WAF.
+
+12:12.740 --> 12:15.420
+When you work with the security team, it will be helpful.
+
+12:15.740 --> 12:21.660
+Not now find when you have free time, you can definitely go and dig a little deeper on WAF.
+
+12:22.180 --> 12:25.580
+Okay, for now, just scroll down and say Create Load Balancer.
+
+12:26.140 --> 12:29.420
+Okay, so we should see the load balancer created, but it takes some time.
+
+12:29.420 --> 12:30.540
+It says provisioning.
+
+12:30.540 --> 12:31.340
+Let's wait.
+
+12:32.300 --> 12:37.460
+Let me just click on Load Balancers Refresh and wait until this becomes available okay.
+
+12:37.500 --> 12:41.500
+So after few minutes the load balancer is active I can click on this load balancer.
+
+12:41.500 --> 12:45.300
+I should see here the DNS name.
+
+12:45.300 --> 12:50.900
+That's the end point to access the load balancer, which should route the traffic to the instance in
+
+12:50.900 --> 12:51.660
+the target group.
+
+12:52.140 --> 12:53.300
+So let's see this.
+
+12:54.020 --> 12:56.500
+Let's go and check this endpoint.
+
+12:57.020 --> 12:58.340
+It should not return anything.
+
+12:58.660 --> 13:02.820
+And there is one problem in our configuration not the load balancer configuration.
+
+13:02.820 --> 13:04.420
+Something else if you can figure out.
+
+13:04.820 --> 13:05.020
+Okay.
+
+13:05.060 --> 13:05.700
+Think about it.
+
+13:05.740 --> 13:08.980
+We are accessing the instance on HTTP port 80.
+
+13:09.300 --> 13:13.220
+And then load balancer routes the request to the instance.
+
+13:13.820 --> 13:14.740
+So why not.
+
+13:14.740 --> 13:19.980
+For any 500 error is usually the server side problem that is behind the load balancer.
+
+13:20.020 --> 13:21.660
+Your servers have some problem.
+
+13:22.100 --> 13:24.860
+So let's go to the target group.
+
+13:25.060 --> 13:27.940
+The target group target group go to the target group.
+
+13:27.980 --> 13:32.260
+We see the instance they are unhealthy two instance unhealthy.
+
+13:32.580 --> 13:33.380
+See unhealthy.
+
+13:33.420 --> 13:33.860
+Why?
+
+13:34.380 --> 13:36.500
+I mean I can access from the IP address right?
+
+13:36.540 --> 13:37.420
+No problem.
+
+13:37.420 --> 13:38.220
+It works.
+
+13:40.300 --> 13:42.020
+The same thing I configured in the health check.
+
+13:42.020 --> 13:47.140
+So what is in between the health check and the instance that is blocking the The traffic.
+
+13:47.740 --> 13:48.540
+Get it now.
+
+13:48.980 --> 13:53.980
+Okay, once again, I am able to access the instance, but the load balancer is not.
+
+13:54.820 --> 13:58.100
+Okay, let's check the target group of the instances.
+
+13:58.580 --> 14:02.380
+So load balancer is routing the traffic to the instance on port 80.
+
+14:02.540 --> 14:06.140
+Let's go to the instance security instance security group.
+
+14:06.140 --> 14:07.420
+Instance security group okay.
+
+14:07.460 --> 14:08.500
+Not load balancer.
+
+14:09.060 --> 14:11.260
+And let's click on edit inbound rule.
+
+14:11.660 --> 14:17.020
+So we see port 80 is allowed only from my IP and not allowed from the load balancer.
+
+14:17.620 --> 14:17.860
+Right.
+
+14:17.860 --> 14:19.420
+We're going to delete that rule.
+
+14:19.780 --> 14:21.260
+We are going to add one more rule.
+
+14:21.260 --> 14:24.300
+We can just say tcp IP sorry.
+
+14:24.300 --> 14:26.980
+We can just say HTTP takes 80 by default.
+
+14:26.980 --> 14:32.900
+And here we are going to type SG and let's find out inner peace.
+
+14:32.940 --> 14:35.340
+Application load balancer security group.
+
+14:35.980 --> 14:43.140
+So when we select that then this rule says any traffic coming from this security group on port 80 is
+
+14:43.140 --> 14:43.580
+allowed.
+
+14:43.620 --> 14:43.940
+Yes.
+
+14:43.940 --> 14:46.620
+You can mention in the source Security Group.
+
+14:46.620 --> 14:48.900
+Also, I'm just giving some description over here.
+
+14:48.900 --> 14:52.020
+This always helps allow it from the load balancer.
+
+14:52.020 --> 14:56.020
+So that is the application load balancer security group ID.
+
+14:56.580 --> 15:01.500
+We save the changes, but we need to wait for few minutes until the instance are healthy.
+
+15:01.500 --> 15:04.740
+In the target group we see in the target group the instance will be unhealthy.
+
+15:04.740 --> 15:09.220
+It's going to take some time to become this or to pass the health check.
+
+15:09.580 --> 15:13.380
+Once the instance are healthy over here, load balancer will start routing the traffic.
+
+15:13.860 --> 15:17.620
+So I'm going to pause recording and resume in few minutes okay.
+
+15:17.660 --> 15:20.420
+In less than two minutes the instance are healthy.
+
+15:20.700 --> 15:24.740
+So it conducted two health check in an interval of 30s.
+
+15:25.020 --> 15:28.100
+Both return as healthy, so instance declared as healthy.
+
+15:28.100 --> 15:31.220
+And now we should be able to access it from the load balancer.
+
+15:31.220 --> 15:32.340
+Let's try that.
+
+15:32.380 --> 15:36.940
+Let's go to the load balancer endpoint as the DNS name.
+
+15:36.940 --> 15:38.900
+Let's access it from the browser.
+
+15:39.900 --> 15:42.140
+And finally inner peace.
+
+15:45.410 --> 15:46.210
+Universe.
+
+15:47.010 --> 15:47.850
+Is that you?
+
+15:56.210 --> 15:56.770
+Exactly.
+
+15:56.770 --> 15:57.730
+No time to relax.
+
+15:57.730 --> 15:59.890
+We need to close this lecture.
+
+16:00.290 --> 16:03.170
+Let's take a quick look at the load balancer and few settings.
+
+16:03.410 --> 16:05.490
+So especially at the target group site.
+
+16:05.930 --> 16:10.610
+So in the targets of the instance you can register and de-register the instance.
+
+16:11.330 --> 16:15.970
+When you have group of instances like this you can conduct maintenance on them one by one.
+
+16:15.970 --> 16:20.650
+Maybe updating the package or OS update or any other changes you want.
+
+16:21.770 --> 16:27.570
+You don't want user traffic to get disrupted, so you can select the instance and you can deregister
+
+16:27.570 --> 16:33.570
+the instance from the group, conduct your maintenance, and then you can register it back in the load
+
+16:33.570 --> 16:34.090
+balancer.
+
+16:34.130 --> 16:36.210
+You can add or remove listener.
+
+16:36.210 --> 16:38.330
+You can add or remove target groups.
+
+16:38.850 --> 16:40.650
+You can change the security group.
+
+16:40.650 --> 16:43.890
+You can change many attributes of a load balancer.
+
+16:44.450 --> 16:48.850
+So before you delete and do the cleanup, make sure you go through the different settings.
+
+16:48.850 --> 16:49.530
+Take a look.
+
+16:49.810 --> 16:54.330
+Some of these settings we are going to use in the later lectures, like changing the port numbers,
+
+16:54.330 --> 16:59.690
+the security group secure Https traffic with the certificate and few stuff.
+
+17:00.770 --> 17:05.090
+Once you are done doing all that, then you can do the cleanup.
+
+17:05.090 --> 17:07.170
+And finally you can have the inner peace.
+
+17:07.170 --> 17:13.130
+So first delete the instance in the cleanup process and we have the launch template.
+
+17:13.130 --> 17:15.090
+We can launch them anytime we want.
+
+17:15.490 --> 17:22.050
+So action sorry instance state terminate the instance terminate and go to the target group and remove
+
+17:22.050 --> 17:28.090
+the target group action delete target group okay it's still in use.
+
+17:28.090 --> 17:30.810
+Let the instance get deleted okay.
+
+17:30.850 --> 17:32.930
+We can delete the load balancer first if you want.
+
+17:32.970 --> 17:37.770
+So select the load balancer action delete load balancer confirm.
+
+17:39.530 --> 17:40.850
+Now let's try the target group.
+
+17:40.850 --> 17:42.530
+Once again let me refresh.
+
+17:42.530 --> 17:42.610
+Fresh.
+
+17:43.570 --> 17:45.490
+You don't need to really delete the target group.
+
+17:45.490 --> 17:46.450
+You can keep it.
+
+17:46.650 --> 17:50.050
+There are no charges for this, but let's do the cleanup.
+
+17:50.410 --> 17:52.130
+Okay, now let's go to the dashboard.
+
+17:52.410 --> 17:54.330
+Make sure you refresh and check everything.
+
+17:54.330 --> 17:56.050
+You should have zero running instances.
+
+17:56.050 --> 18:01.970
+Two instances that will should be in the terminated state, zero load balancer, zero elastic IP address,
+
+18:01.970 --> 18:03.370
+and zero volumes.
+
+18:03.610 --> 18:07.130
+You should see one snapshot that is coming from the Ami.
+
+18:07.570 --> 18:10.610
+So if you go to the Amis you should have the Ami.
+
+18:11.250 --> 18:15.690
+Well select this owned by me okay that's the Ami.
+
+18:15.690 --> 18:20.490
+And you should have a snapshot of that ami or used by that Ami.
+
+18:20.770 --> 18:21.810
+See the snapshot.
+
+18:22.090 --> 18:23.450
+You cannot delete this snapshot.
+
+18:23.450 --> 18:24.730
+This is tied to the Ami.
+
+18:24.730 --> 18:29.610
+And keep the ami for some time, because we are going to use it in the upcoming further lectures.
+
+18:29.810 --> 18:34.610
+And once we are done, I'm going to show you how you can deregister the Army and then delete the snapshot.
+
+18:34.770 --> 18:37.610
+And now you have time to have your inner peace.
+
+18:38.010 --> 18:40.090
+And for me, it's time to dinner.
+
+18:40.090 --> 18:42.570
+Please see you in the next one.

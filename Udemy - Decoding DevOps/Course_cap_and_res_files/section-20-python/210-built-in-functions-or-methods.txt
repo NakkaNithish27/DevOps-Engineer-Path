@@ -1,0 +1,1229 @@
+WEBVTT
+
+1
+00:00:00.430 --> 00:00:02.626
+Welcome to Python documentation.
+
+2
+00:00:02.818 --> 00:00:04.170
+In this video we'll be talking
+
+3
+00:00:04.220 --> 00:00:06.466
+about built in functions and methods.
+
+4
+00:00:06.658 --> 00:00:08.602
+So Python has lot of built in functions
+
+5
+00:00:08.626 --> 00:00:10.254
+that can help you do variety of things.
+
+6
+00:00:10.292 --> 00:00:12.054
+You don't need to write code for them.
+
+7
+00:00:12.212 --> 00:00:13.422
+So these are list of the
+
+8
+00:00:13.436 --> 00:00:15.654
+built in functions that Python has.
+
+9
+00:00:15.692 --> 00:00:18.438
+We have used some of them like we have
+
+10
+00:00:18.464 --> 00:00:22.326
+print that we've been using a lot type we
+
+11
+00:00:22.328 --> 00:00:26.958
+are using to get the type of variable str.
+
+12
+00:00:27.044 --> 00:00:28.122
+We have not used it but you
+
+13
+00:00:28.136 --> 00:00:30.478
+can use it for type casting.
+
+14
+00:00:30.514 --> 00:00:32.322
+If you want to convert an integer to
+
+15
+00:00:32.336 --> 00:00:34.254
+string, you can just put that integer into
+
+16
+00:00:34.292 --> 00:00:35.982
+the string or the integer variable into the
+
+17
+00:00:35.996 --> 00:00:39.066
+string function and then it's type changes.
+
+18
+00:00:39.128 --> 00:00:41.806
+You have used input to take the user input.
+
+19
+00:00:41.998 --> 00:00:43.722
+There is a length function that's going to
+
+20
+00:00:43.736 --> 00:00:46.254
+give you the length and there are many
+
+21
+00:00:46.292 --> 00:00:48.438
+more you can use as per your need.
+
+22
+00:00:48.584 --> 00:00:50.850
+But the focus of this video is the data
+
+23
+00:00:50.900 --> 00:00:54.358
+type which we have learned string, list, tuple, dictionary.
+
+24
+00:00:54.454 --> 00:00:55.618
+We're going to see functions,
+
+25
+00:00:55.654 --> 00:00:57.200
+built in functions for that.
+
+26
+00:00:57.650 --> 00:00:59.178
+For this I found this
+
+27
+00:00:59.324 --> 00:01:02.790
+w three schools documentation helpful.
+
+28
+00:01:03.230 --> 00:01:04.878
+But you can get all those
+
+29
+00:01:04.904 --> 00:01:06.234
+things in your interpreter also.
+
+30
+00:01:06.272 --> 00:01:07.854
+But this is just a better view.
+
+31
+00:01:08.012 --> 00:01:11.802
+So Python overview, you have their
+
+32
+00:01:11.996 --> 00:01:14.178
+Python built in functions, right?
+
+33
+00:01:14.264 --> 00:01:16.100
+The same list as we've been seeing.
+
+34
+00:01:16.430 --> 00:01:19.398
+And there are examples also if you click on them I
+
+35
+00:01:19.424 --> 00:01:24.078
+want to show you this string methods for example, like for
+
+36
+00:01:24.104 --> 00:01:27.702
+example capitalize, it's going to convert the first character to the
+
+37
+00:01:27.716 --> 00:01:31.662
+upper case or count it returns the number of the times
+
+38
+00:01:31.796 --> 00:01:35.754
+a specified value occurs in a string find if you're looking
+
+39
+00:01:35.792 --> 00:01:37.710
+for a substring in a string.
+
+40
+00:01:38.090 --> 00:01:39.786
+And then you have some methods for list
+
+41
+00:01:39.848 --> 00:01:41.974
+and then you have methods for dictionaries.
+
+42
+00:01:42.142 --> 00:01:46.282
+We have used some dictionary methods, dictionary values
+
+43
+00:01:46.306 --> 00:01:48.198
+to return all the values or you can
+
+44
+00:01:48.224 --> 00:01:50.422
+use dictionary keys to return all keys.
+
+45
+00:01:50.566 --> 00:01:54.214
+So let's see some example for string, list, dictionary.
+
+46
+00:01:54.382 --> 00:01:56.814
+For this one I'm going to use PyCharm because this gives
+
+47
+00:01:56.852 --> 00:02:00.390
+a lot of help in finding the right methods for us.
+
+48
+00:02:00.440 --> 00:02:02.010
+So let's create a script.
+
+49
+00:02:06.090 --> 00:02:09.554
+Let's see first strings built in methods or functions.
+
+50
+00:02:09.602 --> 00:02:11.998
+I have a string here message is
+
+51
+00:02:12.024 --> 00:02:13.870
+the variable and that's the string.
+
+52
+00:02:21.310 --> 00:02:29.994
+Most of them are more than oh, that's a long sentence.
+
+53
+00:02:30.042 --> 00:02:30.506
+Yeah.
+
+54
+00:02:30.628 --> 00:02:32.282
+Okay, so in this sentence if you
+
+55
+00:02:32.296 --> 00:02:34.230
+see c is capital, it's a sentence.
+
+56
+00:02:34.290 --> 00:02:38.450
+So it should be capitalized c should be in upper case.
+
+57
+00:02:38.620 --> 00:02:49.194
+So if I just print it like that, okay,
+
+58
+00:02:49.232 --> 00:02:51.522
+so I can print it like that or I
+
+59
+00:02:51.536 --> 00:02:53.850
+can use a built in method for the print.
+
+60
+00:02:55.850 --> 00:02:57.646
+So after the string you hit a dot.
+
+61
+00:02:57.718 --> 00:03:01.110
+Now in PyCharm, if you're in PyCharm or any ID,
+
+62
+00:03:01.160 --> 00:03:05.026
+Python ID, then it should list all the available methods.
+
+63
+00:03:05.098 --> 00:03:06.354
+Like you see format you have
+
+64
+00:03:06.392 --> 00:03:08.478
+capitalized and few others.
+
+65
+00:03:08.624 --> 00:03:11.038
+You can just scroll down this list, you'll
+
+66
+00:03:11.074 --> 00:03:13.506
+see all the list, the entire list.
+
+67
+00:03:13.628 --> 00:03:16.580
+So let's say capitalize I want to use that.
+
+68
+00:03:17.870 --> 00:03:19.340
+Let's see what it does.
+
+69
+00:03:25.290 --> 00:03:26.614
+So that's what it did, right?
+
+70
+00:03:26.652 --> 00:03:30.082
+It made the first letter in the upper case.
+
+71
+00:03:30.156 --> 00:03:34.418
+But this does not happen on the string.
+
+72
+00:03:34.454 --> 00:03:36.542
+Actually, strings are immutable.
+
+73
+00:03:36.686 --> 00:03:41.830
+So if I print it once again, see, really
+
+74
+00:03:41.880 --> 00:03:44.638
+the value of the variable did not change, right?
+
+75
+00:03:44.664 --> 00:03:47.218
+If you want to change, then you can store that
+
+76
+00:03:47.244 --> 00:03:50.506
+into a variable and then you can print it back. Okay.
+
+77
+00:03:50.568 --> 00:03:54.718
+Like I'll say, message capitalize and
+
+78
+00:03:54.744 --> 00:03:56.580
+then store it back into message.
+
+79
+00:04:00.310 --> 00:04:03.050
+And this message I'll keep as m capital.
+
+80
+00:04:09.830 --> 00:04:10.230
+Okay?
+
+81
+00:04:10.280 --> 00:04:11.518
+So that's a different variable.
+
+82
+00:04:11.614 --> 00:04:13.854
+I'm storing the output of
+
+83
+00:04:14.012 --> 00:04:16.350
+this function into that variable.
+
+84
+00:04:18.930 --> 00:04:19.774
+So that is good.
+
+85
+00:04:19.812 --> 00:04:21.190
+I want to show you here one
+
+86
+00:04:21.240 --> 00:04:23.160
+built in function called as dir
+
+87
+00:04:29.470 --> 00:04:32.222
+If you're not coding on PyCham, but you
+
+88
+00:04:32.236 --> 00:04:33.854
+still want to see the available built in
+
+89
+00:04:33.892 --> 00:04:35.798
+functions, you can use dir function.
+
+90
+00:04:35.944 --> 00:04:38.654
+You can say dir and in that you can give
+
+91
+00:04:38.692 --> 00:04:43.480
+your variable like I want to give the string message.
+
+92
+00:04:44.290 --> 00:04:46.058
+So it's going to return all the
+
+93
+00:04:46.084 --> 00:04:47.930
+built in function for the string.
+
+94
+00:04:49.750 --> 00:04:51.038
+Oh, I have to print it.
+
+95
+00:04:51.064 --> 00:04:52.970
+Sorry, print.
+
+96
+00:04:59.570 --> 00:05:01.650
+So the output of the dir method.
+
+97
+00:05:03.170 --> 00:05:07.650
+So it is printing all the available built in functions.
+
+98
+00:05:08.510 --> 00:05:10.962
+It's in a list format, you see?
+
+99
+00:05:10.976 --> 00:05:13.350
+There is  capitalized, center, there is count.
+
+100
+00:05:15.170 --> 00:05:16.446
+So what do you put there?
+
+101
+00:05:16.508 --> 00:05:19.040
+Let's put a list, right?
+
+102
+00:05:24.030 --> 00:05:27.370
+So that's list built in methods.
+
+103
+00:05:31.990 --> 00:05:32.390
+Okay.
+
+104
+00:05:32.440 --> 00:05:33.542
+So you can use dir function.
+
+105
+00:05:33.616 --> 00:05:35.738
+You can put a string or a list or
+
+106
+00:05:35.764 --> 00:05:37.598
+a tuple or a dictionary and you can see
+
+107
+00:05:37.624 --> 00:05:40.178
+the available built in methods for it.
+
+108
+00:05:40.324 --> 00:05:42.820
+Okay, I'm going to comment that out now.
+
+109
+00:05:50.030 --> 00:05:52.242
+Okay, this is good for now.
+
+110
+00:05:52.436 --> 00:05:54.270
+Okay, let's see a few more example of
+
+111
+00:05:54.320 --> 00:05:55.914
+built in functions that we can use.
+
+112
+00:05:55.952 --> 00:06:00.482
+I'll say message upper.
+
+113
+00:06:00.626 --> 00:06:03.060
+Okay, make the entire thing upper case.
+
+114
+00:06:04.410 --> 00:06:06.190
+Yeah, everything is upper.
+
+115
+00:06:08.070 --> 00:06:10.570
+Or like that you have lower anyways, it's in lower case.
+
+116
+00:06:10.620 --> 00:06:13.682
+Or you have some nice methods
+
+117
+00:06:13.706 --> 00:06:15.360
+that's going to return boolean value.
+
+118
+00:06:16.770 --> 00:06:21.418
+Like you want to check whether it is an
+
+119
+00:06:21.444 --> 00:06:24.142
+alpha numeric or is alphabet, or is ASCII or
+
+120
+00:06:24.156 --> 00:06:26.590
+is decimal, or is digit or is lower.
+
+121
+00:06:26.640 --> 00:06:28.234
+Let's see islower.
+
+122
+00:06:28.272 --> 00:06:29.710
+So it's going to return a boolean value.
+
+123
+00:06:29.760 --> 00:06:30.910
+True or false.
+
+124
+00:06:32.370 --> 00:06:33.490
+So everything is in lower.
+
+125
+00:06:33.540 --> 00:06:35.520
+So it's returning is lower. True.
+
+126
+00:06:49.990 --> 00:06:51.820
+That should return false, right?
+
+127
+00:06:52.270 --> 00:06:53.634
+Yeah, that's false.
+
+128
+00:06:53.682 --> 00:06:55.034
+It's not in upper case, right?
+
+129
+00:06:55.072 --> 00:06:57.254
+Everything is in lower case, right?
+
+130
+00:06:57.352 --> 00:06:59.586
+Or you can like that check if it's alpha numeric.
+
+131
+00:06:59.718 --> 00:07:01.550
+These are good for data validation.
+
+132
+00:07:02.470 --> 00:07:04.982
+So based on, let's say the user entered or
+
+133
+00:07:04.996 --> 00:07:07.878
+you ran some queries, it returned some values.
+
+134
+00:07:07.914 --> 00:07:09.878
+You want to check whether it's alpha or
+
+135
+00:07:09.904 --> 00:07:12.218
+alpha numeric or if it's uppercase lower case.
+
+136
+00:07:12.244 --> 00:07:13.358
+And based on that, you can do
+
+137
+00:07:13.384 --> 00:07:15.890
+the further operation in your code. Okay.
+
+138
+00:07:16.000 --> 00:07:20.210
+Few interesting ones are find which
+
+139
+00:07:20.260 --> 00:07:21.962
+you may be using many times.
+
+140
+00:07:22.156 --> 00:07:25.430
+Like you are looking for some
+
+141
+00:07:25.480 --> 00:07:26.958
+substring in the message string.
+
+142
+00:07:26.994 --> 00:07:29.020
+Okay, maybe ready?
+
+143
+00:07:31.310 --> 00:07:31.674
+Okay.
+
+144
+00:07:31.712 --> 00:07:32.900
+So let's run that.
+
+145
+00:07:33.950 --> 00:07:35.602
+It returns a number 18.
+
+146
+00:07:35.746 --> 00:07:37.400
+Wait, let's comment this?
+
+147
+00:07:46.890 --> 00:07:48.034
+No, that should be fine.
+
+148
+00:07:48.072 --> 00:07:50.846
+Okay, so that's our entire string.
+
+149
+00:07:50.918 --> 00:07:52.882
+And from that string, message string, we
+
+150
+00:07:52.896 --> 00:07:55.198
+are checking whether ready substring exists on
+
+151
+00:07:55.224 --> 00:07:57.658
+that and it does exist, right?
+
+152
+00:07:57.684 --> 00:07:58.846
+And it returns a number.
+
+153
+00:07:58.968 --> 00:08:01.754
+That number is actually the index
+
+154
+00:08:01.802 --> 00:08:03.250
+value where it starts, right?
+
+155
+00:08:03.300 --> 00:08:06.238
+So if you count that from zero, you
+
+156
+00:08:06.264 --> 00:08:09.430
+will reach till 18 where the R starts.
+
+157
+00:08:09.750 --> 00:08:11.438
+And now if you want to just print
+
+158
+00:08:11.474 --> 00:08:13.570
+that substring, you can do a little math.
+
+159
+00:08:14.190 --> 00:08:18.710
+You can say message and you can say starts at 18.
+
+160
+00:08:18.890 --> 00:08:22.680
+And the number of character, so ready, is what? Five.
+
+161
+00:08:23.190 --> 00:08:25.810
+So 18 plus five, you get 23.
+
+162
+00:08:25.920 --> 00:08:29.640
+So we have to give 24 because it's still 24.
+
+163
+00:08:30.030 --> 00:08:31.260
+Let's run that.
+
+164
+00:08:32.610 --> 00:08:34.078
+So you can like that, you know
+
+165
+00:08:34.224 --> 00:08:36.049
+do a string slicing.
+
+166
+00:08:36.110 --> 00:08:39.000
+First find it and then slice out of it
+
+167
+00:08:39.630 --> 00:08:42.250
+if you're looking for something that does not exist.
+
+168
+00:08:44.190 --> 00:08:49.198
+So let's say looking for character, let's say
+
+169
+00:08:49.224 --> 00:08:52.442
+not, which does not exist in the string.
+
+170
+00:08:52.586 --> 00:08:55.090
+So it returns a minus one.
+
+171
+00:08:55.140 --> 00:08:57.578
+Minus one, the last index.
+
+172
+00:08:57.734 --> 00:08:59.902
+So what happens is it's going to travel through
+
+173
+00:08:59.976 --> 00:09:02.890
+this entire string, it reaches till the end.
+
+174
+00:09:03.060 --> 00:09:05.146
+If it did not find reaches till the end.
+
+175
+00:09:05.208 --> 00:09:07.994
+And that the last index value returns minus
+
+176
+00:09:08.042 --> 00:09:10.320
+one, that means it did not find that.
+
+177
+00:09:10.890 --> 00:09:13.558
+Okay, so these are some of them.
+
+178
+00:09:13.584 --> 00:09:15.038
+There are many string functions.
+
+179
+00:09:15.074 --> 00:09:16.860
+Whenever you need, you can use them.
+
+180
+00:09:27.070 --> 00:09:30.006
+Let's take one more example which will be also useful.
+
+181
+00:09:30.198 --> 00:09:34.218
+So I'll say sequence one, just a variable name equal
+
+182
+00:09:34.254 --> 00:09:38.320
+to and I'll give a tuple, I'll say 192.
+
+183
+00:09:50.770 --> 00:09:53.860
+So it's a sequence of string, right?
+
+184
+00:09:54.850 --> 00:09:56.534
+So all these strings I want to
+
+185
+00:09:56.572 --> 00:09:59.630
+join together by my own string.
+
+186
+00:09:59.950 --> 00:10:01.420
+So there's a join function.
+
+187
+00:10:03.310 --> 00:10:04.840
+Let me print that.
+
+188
+00:10:05.950 --> 00:10:07.854
+So I will say join it with this string.
+
+189
+00:10:07.902 --> 00:10:15.320
+Let's say dot and the join function.
+
+190
+00:10:15.770 --> 00:10:19.160
+And I will give the variable sequence one.
+
+191
+00:10:21.870 --> 00:10:23.938
+So all the strings in the sequence will be
+
+192
+00:10:23.964 --> 00:10:26.110
+taken and it will be joined by dot.
+
+193
+00:10:28.170 --> 00:10:29.280
+Do you see that?
+
+194
+00:10:29.670 --> 00:10:30.998
+Now that looks like an IP
+
+195
+00:10:31.034 --> 00:10:33.120
+address and it really does not.
+
+196
+00:10:33.870 --> 00:10:36.058
+Or maybe you have something like that, maybe you know
+
+197
+00:10:36.084 --> 00:10:38.654
+some date in your own pattern you want to print.
+
+198
+00:10:38.702 --> 00:10:51.520
+Okay, like with forward slash, with hyphen maybe.
+
+199
+00:10:55.670 --> 00:10:59.526
+These are some commonly used built in functions by us.
+
+200
+00:10:59.708 --> 00:11:00.922
+I mean to say DevOps.
+
+201
+00:11:01.006 --> 00:11:02.698
+When we get some data, we're
+
+202
+00:11:02.734 --> 00:11:04.266
+doing some cloud automation, something.
+
+203
+00:11:04.328 --> 00:11:07.614
+We get some data, we find that data and we process it.
+
+204
+00:11:07.652 --> 00:11:10.350
+And then based on that data, we do more operations.
+
+205
+00:11:10.670 --> 00:11:12.690
+So in such cases, data validation,
+
+206
+00:11:13.010 --> 00:11:16.434
+finding your string, combining them and
+
+207
+00:11:16.472 --> 00:11:19.230
+these operations will be very helpful. Okay?
+
+208
+00:11:19.280 --> 00:11:21.380
+Now let's go to list.
+
+209
+00:11:22.550 --> 00:11:25.534
+I told you one thing about list is they are mutable.
+
+210
+00:11:25.582 --> 00:11:27.738
+You can change it, but how do you change it?
+
+211
+00:11:27.764 --> 00:11:29.180
+That I did not tell you.
+
+212
+00:11:29.810 --> 00:11:33.982
+So you can edit a list through the builtin functions.
+
+213
+00:11:34.126 --> 00:11:35.840
+Okay, so let's take some example.
+
+214
+00:11:36.590 --> 00:11:38.370
+So, list of mountains.
+
+215
+00:11:39.170 --> 00:11:42.274
+I'm not so good with the geography, but I just kept
+
+216
+00:11:42.322 --> 00:11:45.740
+some name and I just print it just like that.
+
+217
+00:11:50.070 --> 00:11:52.618
+And now I would like to add edit this.
+
+218
+00:11:52.644 --> 00:11:55.246
+I want to add something into this.
+
+219
+00:11:55.368 --> 00:11:56.626
+So I'll take the list.
+
+220
+00:11:56.688 --> 00:12:00.818
+I'll say dot and you'll see all the built in methods.
+
+221
+00:12:00.854 --> 00:12:03.806
+I'll go with append and I'd
+
+222
+00:12:03.818 --> 00:12:08.230
+like to append Oregon mount.
+
+223
+00:12:11.830 --> 00:12:12.266
+Okay.
+
+224
+00:12:12.328 --> 00:12:16.130
+And let's also print it back again once it's appended.
+
+225
+00:12:18.370 --> 00:12:19.840
+Okay, let's run it.
+
+226
+00:12:21.010 --> 00:12:25.082
+Okay, so append is going to add it at the end, right?
+
+227
+00:12:25.276 --> 00:12:26.862
+You can also combine two lists
+
+228
+00:12:26.886 --> 00:12:28.850
+together which is called as extend.
+
+229
+00:12:33.950 --> 00:12:34.314
+Okay.
+
+230
+00:12:34.352 --> 00:12:35.538
+So I want to extend the
+
+231
+00:12:35.564 --> 00:12:37.820
+mountains list with my own list.
+
+232
+00:12:51.190 --> 00:12:52.720
+Let's print it back.
+
+233
+00:12:54.550 --> 00:12:56.342
+Okay, so the mountains list will
+
+234
+00:12:56.356 --> 00:12:58.840
+be combined with this list.
+
+235
+00:13:00.250 --> 00:13:01.420
+Let's run it.
+
+236
+00:13:02.410 --> 00:13:03.700
+Okay, see that?
+
+237
+00:13:04.570 --> 00:13:06.254
+Okay, that's still adding at the end.
+
+238
+00:13:06.292 --> 00:13:08.860
+What if I want to know insert somewhere in the middle.
+
+239
+00:13:09.730 --> 00:13:12.458
+So mountains and actually there is
+
+240
+00:13:12.484 --> 00:13:15.870
+a method called as insert. insert.
+
+241
+00:13:16.050 --> 00:13:19.180
+And I would like to insert it at the second position.
+
+242
+00:13:20.230 --> 00:13:22.360
+Okay, that will be actually the third, right?
+
+243
+00:13:22.810 --> 00:13:23.714
+Like that.
+
+244
+00:13:23.872 --> 00:13:27.770
+And I want to add there mount abu.
+
+245
+00:13:30.470 --> 00:13:32.420
+And again, let's print it back.
+
+246
+00:13:34.010 --> 00:13:36.198
+Now, one thing, let me remind you, when
+
+247
+00:13:36.224 --> 00:13:38.478
+I'm hitting run, it's executing everything again, right?
+
+248
+00:13:38.504 --> 00:13:41.154
+So mountains will be executed again.
+
+249
+00:13:41.192 --> 00:13:45.378
+So variable again, it's going to store the
+
+250
+00:13:45.404 --> 00:13:47.410
+value and then it's going to append.
+
+251
+00:13:47.470 --> 00:13:48.654
+So all the operation is doing
+
+252
+00:13:48.692 --> 00:13:50.660
+again whenever I'm running it.
+
+253
+00:13:54.330 --> 00:14:00.738
+See that there we get in edit comes also deleting.
+
+254
+00:14:00.774 --> 00:14:02.750
+Maybe I would like to delete.
+
+255
+00:14:03.190 --> 00:14:05.078
+So if you say pop it's just
+
+256
+00:14:05.104 --> 00:14:08.080
+going to remove the last one.
+
+257
+00:14:10.730 --> 00:14:12.370
+Okay, last one is satpuda
+
+258
+00:14:12.430 --> 00:14:13.806
+So let's run it.
+
+259
+00:14:13.988 --> 00:14:15.030
+You see that?
+
+260
+00:14:15.200 --> 00:14:16.902
+If I run it many times, that many
+
+261
+00:14:16.916 --> 00:14:19.950
+times it's going to pop.
+
+262
+00:14:20.000 --> 00:14:24.622
+Three times, right?
+
+263
+00:14:24.696 --> 00:14:26.338
+But what if I want to pop or
+
+264
+00:14:26.364 --> 00:14:29.254
+delete a particular item from that, right?
+
+265
+00:14:29.292 --> 00:14:33.542
+So I'm going to say pop
+
+266
+00:14:33.736 --> 00:14:37.600
+whatever is at the third position.
+
+267
+00:14:43.850 --> 00:14:45.318
+I didn't even count what it is.
+
+268
+00:14:45.344 --> 00:14:46.520
+Okay, let's find out.
+
+269
+00:14:48.990 --> 00:14:52.234
+So you got this 01234 five.
+
+270
+00:14:52.272 --> 00:14:54.060
+So k two will be gone. Okay?
+
+271
+00:14:56.130 --> 00:14:59.678
+See that k two is gone. Okay? Tuple.
+
+272
+00:14:59.714 --> 00:15:01.874
+There are not many because tuple is immutable.
+
+273
+00:15:01.982 --> 00:15:05.170
+So you can't make many, can't make any change to it.
+
+274
+00:15:05.280 --> 00:15:08.146
+So I'm going to directly go to now dictionary. Okay?
+
+275
+00:15:08.208 --> 00:15:11.398
+So let's take a dictionary, okay?
+
+276
+00:15:11.424 --> 00:15:13.620
+A dictionary from our previous example.
+
+277
+00:15:14.370 --> 00:15:17.290
+Okay, let's print the dictionary.
+
+278
+00:15:17.670 --> 00:15:19.822
+But I want to print only the keys of it.
+
+279
+00:15:19.836 --> 00:15:23.914
+So dot and you have the keys method, right?
+
+280
+00:15:23.952 --> 00:15:27.610
+That will just give you all the keys, right?
+
+281
+00:15:27.720 --> 00:15:30.206
+So name, skill, code, right? Those are the keys.
+
+282
+00:15:30.278 --> 00:15:33.250
+Or same way you have the values.
+
+283
+00:15:38.790 --> 00:15:40.990
+So you can get all the values.
+
+284
+00:15:42.150 --> 00:15:43.630
+These are the values.
+
+285
+00:15:45.810 --> 00:15:48.734
+You can also clear the entire dictionary.
+
+286
+00:15:48.782 --> 00:15:50.460
+You can say just dot clear.
+
+287
+00:15:51.330 --> 00:15:52.740
+Let's print it again.
+
+288
+00:15:54.210 --> 00:15:55.874
+So everything from this dictionary
+
+289
+00:15:55.922 --> 00:15:57.310
+will be gone, cleared.
+
+290
+00:15:59.010 --> 00:16:02.962
+You see, now we have an empty dictionary, okay?
+
+291
+00:16:03.036 --> 00:16:05.978
+Also we have few more and if we hit a dot
+
+292
+00:16:06.014 --> 00:16:10.894
+to the dictionary, you'll see we've seen values clear keys pop.
+
+293
+00:16:10.932 --> 00:16:12.562
+Okay, you can also remove you have to
+
+294
+00:16:12.576 --> 00:16:16.870
+give the key, copy, get, items, pop
+
+295
+00:16:16.920 --> 00:16:20.530
+item, you have few nice methods useful.
+
+296
+00:16:20.910 --> 00:16:23.218
+So sure, there are so many methods, we really can't go
+
+297
+00:16:23.244 --> 00:16:26.494
+through all of them, but as per your need find this.
+
+298
+00:16:26.652 --> 00:16:31.550
+You can do a simple Google search that I need a method
+
+299
+00:16:31.610 --> 00:16:33.526
+to do so and so, and you may get the result.
+
+300
+00:16:33.588 --> 00:16:36.214
+Okay, you can just check the Python three
+
+301
+00:16:36.252 --> 00:16:39.530
+documentation, or you can just run the methods.
+
+302
+00:16:39.650 --> 00:16:41.518
+Or if you're using PyCharm, you can just give
+
+303
+00:16:41.544 --> 00:16:44.040
+the data type dot and you get the list.
+
+304
+00:16:44.670 --> 00:16:47.078
+So that's all in built in methods and functions.
+
+305
+00:16:47.114 --> 00:16:50.942
+In the next session, the next video, we'll
+
+306
+00:16:50.966 --> 00:16:53.470
+be seeing how to write our own functions.
+
+307
+00:16:53.790 --> 00:16:55.000
+So I'll see you in the next one.

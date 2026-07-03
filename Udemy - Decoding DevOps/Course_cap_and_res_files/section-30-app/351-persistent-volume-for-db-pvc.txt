@@ -1,0 +1,298 @@
+WEBVTT
+
+00:00.690 --> 00:02.310
+Instructor: Okay, now we need to create
+
+00:02.310 --> 00:06.570
+a persistent volume claim for our database pod.
+
+00:06.570 --> 00:07.830
+Okay, let's once again take a look
+
+00:07.830 --> 00:09.213
+at the docker-compose file.
+
+00:10.440 --> 00:12.270
+So in the volumes in docker-compose,
+
+00:12.270 --> 00:14.250
+we create a volume called vprodbdata.
+
+00:14.250 --> 00:18.780
+This basically creates a folder in the Docker engine, right?
+
+00:18.780 --> 00:20.100
+And then we map that.
+
+00:20.100 --> 00:21.033
+Where is that?
+
+00:21.990 --> 00:24.240
+Right, we see volumes in the db container.
+
+00:24.240 --> 00:25.073
+We see volumes,
+
+00:25.073 --> 00:27.900
+we give the volume name and where to map it.
+
+00:27.900 --> 00:31.500
+Now we have to give similar thing in the DB definition file,
+
+00:31.500 --> 00:33.960
+and Kubernetes also has this volume concept,
+
+00:33.960 --> 00:36.540
+but again, it stores it in the local machine.
+
+00:36.540 --> 00:40.650
+So in Kubernetes, it'll be storing it in the worker node,
+
+00:40.650 --> 00:42.930
+which is not at all recommended.
+
+00:42.930 --> 00:44.790
+We need an external storage where it's stored,
+
+00:44.790 --> 00:47.580
+so we can deconnect, you know, decouple it,
+
+00:47.580 --> 00:49.350
+we can connect it to other pod.
+
+00:49.350 --> 00:51.150
+You know, if the pod gets deleted, recreated,
+
+00:51.150 --> 00:52.800
+we can reconnect this.
+
+00:52.800 --> 00:54.780
+Our data, our stateful application
+
+00:54.780 --> 00:56.490
+will be storing and retrieving data,
+
+00:56.490 --> 00:58.740
+that data should be safe.
+
+00:58.740 --> 01:01.650
+So for such a concept or requirement,
+
+01:01.650 --> 01:04.323
+Kubernetes gives us persistent volume.
+
+01:05.670 --> 01:07.080
+Right, in persistent volumes
+
+01:07.080 --> 01:09.570
+you need to manage all the storage by yourself.
+
+01:09.570 --> 01:13.200
+Like this will be the job of the Kubernetes administrator,
+
+01:13.200 --> 01:16.560
+definitely, to make sure the volumes are available,
+
+01:16.560 --> 01:20.850
+scalable, its backup, you know, was taken regularly,
+
+01:20.850 --> 01:21.683
+all those things.
+
+01:21.683 --> 01:24.870
+It is definitely a job of the administrator.
+
+01:24.870 --> 01:27.180
+And there's a lot of work that goes behind the scenes,
+
+01:27.180 --> 01:29.130
+a complete storage management.
+
+01:29.130 --> 01:31.530
+Now also Kubernetes gives us something
+
+01:31.530 --> 01:34.080
+called a storage classes, where these kind of things
+
+01:34.080 --> 01:35.970
+are kind of automated,
+
+01:35.970 --> 01:39.120
+again, you will need administrator for this one also,
+
+01:39.120 --> 01:41.670
+because whenever data comes, you need regular backups,
+
+01:41.670 --> 01:44.460
+maintenance, scalability, all those things.
+
+01:44.460 --> 01:47.910
+So also we have the Kubernetes cluster with the kOps.
+
+01:47.910 --> 01:51.180
+kOps creates a storage class.
+
+01:51.180 --> 01:55.410
+On AWS, it gives us the EBS volumes or also EFS,
+
+01:55.410 --> 01:56.700
+also it gives.
+
+01:56.700 --> 01:59.160
+So you don't need to write definitions like this
+
+01:59.160 --> 02:01.620
+and create a storage class and manage it.
+
+02:01.620 --> 02:05.340
+So you can just write the persistent volume claims.
+
+02:05.340 --> 02:08.160
+So when we have the cluster with kOps,
+
+02:08.160 --> 02:10.050
+Kubernetes cluster with kOps,
+
+02:10.050 --> 02:13.980
+it is going to have the ready made storage class
+
+02:13.980 --> 02:16.620
+which can claim for EBS volumes,
+
+02:16.620 --> 02:19.650
+which can manage EBS volumes basically for us.
+
+02:19.650 --> 02:21.960
+There is also storage class for EFS.
+
+02:21.960 --> 02:25.980
+So we just need to write the claim that I need,
+
+02:25.980 --> 02:27.840
+let's say 3GB, like a consumer, right?
+
+02:27.840 --> 02:31.440
+I need 3GB of volume, like 30GB of 200GB of volume,
+
+02:31.440 --> 02:34.110
+and the storage class will take care of it.
+
+02:34.110 --> 02:36.510
+So, you know, with any generative AI like ChatGPT
+
+02:36.510 --> 02:38.310
+or anything, or even from the definition file,
+
+02:38.310 --> 02:40.350
+you can just say, you know, PVC,
+
+02:40.350 --> 02:42.090
+persistent volume claim definition,
+
+02:42.090 --> 02:43.430
+and you'll get it, right?
+
+02:43.430 --> 02:45.930
+So I just did Kubernetes persistent volume claim,
+
+02:45.930 --> 02:49.170
+and its generative AI is giving me this PVC example.
+
+02:49.170 --> 02:51.360
+I'm just going to copy this one.
+
+02:51.360 --> 02:55.200
+Go to kubedefs and the PVC, the dbpvc,
+
+02:55.200 --> 02:57.180
+I'm going to paste it here.
+
+02:57.180 --> 03:02.180
+First, I'm gonna change the name, db-pv-claim.
+
+03:02.550 --> 03:04.470
+I'm also going to give it labels
+
+03:04.470 --> 03:07.530
+so we can easily recognize it and filter it,
+
+03:07.530 --> 03:12.360
+labels, I'll say app: vprodb.
+
+03:12.360 --> 03:14.640
+Okay, so the storage class name is very important.
+
+03:14.640 --> 03:17.790
+By default, there is a storage class called default.
+
+03:17.790 --> 03:19.290
+When we create the Kubernetes cluster,
+
+03:19.290 --> 03:21.270
+I'm going to show this to you.
+
+03:21.270 --> 03:25.350
+We have a storage class name called as default,
+
+03:25.350 --> 03:29.910
+that is basically going to give us the EBS.
+
+03:29.910 --> 03:32.430
+Okay, I need the size of 3GBs,
+
+03:32.430 --> 03:35.160
+so here I'm going to say storage 3GB.
+
+03:35.160 --> 03:36.510
+Access mode, ReadWriteOnce.
+
+03:37.808 --> 03:39.810
+Right, so when we execute this manifest
+
+03:39.810 --> 03:41.700
+on the Kubernetes cluster,
+
+03:41.700 --> 03:42.990
+or against the Kubernetes cluster,
+
+03:42.990 --> 03:44.910
+it's going to go and talk to the storage class
+
+03:44.910 --> 03:49.910
+called default, and ask it for a 3GB of volume,
+
+03:49.920 --> 03:51.000
+which it will give.
+
+03:51.000 --> 03:55.560
+And that PersistentVolumeClaim name will be db-pv-claim.
+
+03:55.560 --> 03:56.880
+We have given that name.
+
+03:56.880 --> 03:58.170
+In the pod definition,
+
+03:58.170 --> 04:03.170
+we'll say connect this volume to /var/lib/mysql, like that.
+
+04:03.600 --> 04:05.190
+Right, when this all connects together,
+
+04:05.190 --> 04:06.900
+you'll understand what I'm saying.
+
+04:06.900 --> 04:08.103
+Let me save this file.
+
+04:09.330 --> 04:10.980
+Okay, in next lecture, we'll write
+
+04:10.980 --> 04:13.920
+the DB deployment definition file,
+
+04:13.920 --> 04:17.193
+where we'll connect this PVC to our DB pod.
+
+04:18.270 --> 04:19.620
+So join me in the next one.

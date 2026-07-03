@@ -1,0 +1,225 @@
+WEBVTT
+
+0
+00:00.390 --> 00:03.480
+In this lecture, we will talk about command substitution.
+
+1
+00:05.380 --> 00:08.710
+Which you will really need if you really want to write some intelligent script.
+
+2
+00:09.870 --> 00:15.630
+What command substitution does it it takes the output of a command and stores it into the variable.
+
+3
+00:16.170 --> 00:20.500
+We can achieve that by using back ticks ` or $().
+
+4
+00:20.520 --> 00:26.010
+If you put a command in the  $ parentheses, then it's going to take the output of the command and store 
+
+5
+00:26.010 --> 00:27.030
+it into the variable.
+
+6
+00:27.510 --> 00:28.500
+So let's see that.
+
+7
+00:29.040 --> 00:31.500
+So let's see the command uptime.
+
+8
+00:32.190 --> 00:32.910
+It prints that.
+
+9
+00:33.450 --> 00:36.450
+I want to store its output into a variable.
+
+10
+00:36.880 --> 00:37.380
+Let's see.
+
+11
+00:37.380 --> 00:38.790
+I want to use variable up.
+
+12
+00:39.990 --> 00:46.080
+And if I put this into double quotes or single quotes or without a quotes, what happens is it just stores
+
+13
+00:46.080 --> 00:47.340
+the name of the command.
+
+14
+00:47.660 --> 00:48.030
+That's it.
+
+15
+00:48.330 --> 00:51.480
+What if I want to take its output and store it into the variable?
+
+16
+00:51.480 --> 00:55.200
+Then I'm going to use back ticks, not a single quotes.
+
+17
+00:55.230 --> 00:56.040
+Back ticks `
+
+18
+01:00.030 --> 01:03.000
+OK, let's take one more example, let's see um.
+
+19
+01:04.270 --> 01:11.110
+who, OK, so, who all are logged into the system, who command will return that, so let's see.
+
+20
+01:12.810 --> 01:20.820
+$ parentheses, and it will take a variable current_users.
+
+21
+01:24.800 --> 01:26.150
+Now, both does the same thing.
+
+22
+01:29.710 --> 01:31.360
+OK, now let's use.
+
+23
+01:32.950 --> 01:38.230
+filtering and get the right value that we're looking for, let's say I want to print a message saying
+
+24
+01:38.230 --> 01:43.420
+that the free ram is so-and-so, I sort of take this value, so I'm going to do some filtering.
+
+25
+01:43.420 --> 01:46.300
+I'm going to grep for Mem that gives me that line.
+
+26
+01:46.300 --> 01:48.700
+And then from that, I'm going to use awk.
+
+27
+01:49.330 --> 01:49.810
+And.
+
+28
+01:51.800 --> 01:52.370
+Print.
+
+29
+01:54.050 --> 02:01.670
+Dollar and lets count it. One, two, three, four, 4th one, 4th field, and I have to put
+
+30
+02:01.670 --> 02:02.660
+it into curly braces {}.
+
+31
+02:06.080 --> 02:12.920
+Right, and now I can use back ticks or $ parentheses and store that into a variable that would
+
+32
+02:12.920 --> 02:14.000
+say free.
+
+33
+02:15.040 --> 02:16.150
+Underscore Ram.
+
+34
+02:18.270 --> 02:28.370
+So now I can print a message saying free ram is $FREE_ RAM, the variable
+
+35
+02:29.980 --> 02:30.970
+mb
+
+36
+02:33.730 --> 02:38.020
+So you see, if we use little logic, we can filter the right data.
+
+37
+02:39.260 --> 02:43.700
+And store it into a variable, and then we can use however we want.
+
+38
+02:44.660 --> 02:49.250
+Now let's see a simple script that will print system information or the health of the system.
+
+39
+02:50.200 --> 02:51.520
+I have here a script.
+
+40
+02:53.140 --> 02:54.670
+Which I have already created.
+
+41
+02:56.330 --> 03:02.300
+So basically, prints Welcome $USER, on $HOSTNAME, so that uses a system variable
+
+42
+03:02.300 --> 03:09.620
+and then we're using command substitution to get the FREE_RAM size, and we're also taking another variable
+
+43
+03:09.620 --> 03:15.380
+load and we're taking the load from the uptime command again, filtering with command substitution,
+
+44
+03:16.160 --> 03:20.600
+We are storing the output, then the root free variable, which takes.
+
+45
+03:21.920 --> 03:24.950
+The free root partition utilization.
+
+46
+03:25.860 --> 03:28.020
+And then we are simply printing it all here.
+
+47
+03:29.130 --> 03:33.390
+Now we will use this script once again later in upcoming lectures.
+
+48
+03:34.200 --> 03:38.880
+But imagine you have a script like this, that prints system information whenever you login to your system,
+
+49
+03:39.270 --> 03:44.040
+and I'll show you how we are going to execute the script when we really log into the system.
+
+50
+03:44.550 --> 03:46.170
+So let's run the script.
+
+51
+03:57.770 --> 03:58.370
+There you go.
+
+52
+03:58.400 --> 04:04.400
+Welcome root on script box ,available free ram is 590 mb, current load average is this much and free
+
+53
+04:04.400 --> 04:05.840
+root partition is this much.
+
+54
+04:06.410 --> 04:08.890
+So we'll use this intelligence in upcoming lectures.
+
+55
+04:08.900 --> 04:10.430
+So I'll see you in the next one.

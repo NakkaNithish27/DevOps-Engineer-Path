@@ -1,0 +1,937 @@
+WEBVTT
+
+00:02.880 --> 00:03.713
+Instructor: All right.
+
+00:03.713 --> 00:06.540
+In this lecture we are going to build the artifact
+
+00:06.540 --> 00:08.670
+from the source code on our computer
+
+00:08.670 --> 00:11.010
+and we are going to push it to S3 bucket.
+
+00:11.010 --> 00:14.430
+And on the Tomcat instance app zero one, we are going
+
+00:14.430 --> 00:18.540
+to fetch that artifact and deploy to the Tomcat service.
+
+00:18.540 --> 00:20.010
+So on our computer we are going
+
+00:20.010 --> 00:23.310
+to build the artifact from the source code by using Maven
+
+00:23.310 --> 00:26.010
+and Maven needs JDK.
+
+00:26.010 --> 00:30.090
+Also we need to have AWSCLI so we can communicate
+
+00:30.090 --> 00:32.130
+with the S3 bucket.
+
+00:32.130 --> 00:36.573
+So Maven, JDK, and AWSCLI on our computer, we'll check that.
+
+00:37.708 --> 00:38.820
+We need an S3 bucket.
+
+00:38.820 --> 00:40.172
+So we'll create an S3 bucket
+
+00:40.172 --> 00:43.710
+for the authentication from our computer to S3 bucket,
+
+00:43.710 --> 00:46.110
+we need IAM keys.
+
+00:46.110 --> 00:51.110
+So we need to create IAM user generate AWS IAM keys,
+
+00:51.360 --> 00:53.220
+stored on our laptop,
+
+00:53.220 --> 00:55.920
+so this authentication can happen.
+
+00:55.920 --> 00:59.340
+In Tomcat server, again, we need AWSCLI to communicate with
+
+00:59.340 --> 01:00.690
+S3 bucket.
+
+01:00.690 --> 01:04.110
+For authentication, we will create IAM roles that will have
+
+01:04.110 --> 01:06.600
+permission to access S3 bucket and apply this
+
+01:06.600 --> 01:11.220
+IAM role on the EC2 instance Tomcat server app zero one.
+
+01:11.220 --> 01:12.750
+Okay, so first we'll do this part.
+
+01:12.750 --> 01:16.260
+We'll create an S3 bucket IAM user with IAM keys
+
+01:16.260 --> 01:17.910
+and IAM roles.
+
+01:17.910 --> 01:20.160
+Then we'll check a computer for the right versions
+
+01:20.160 --> 01:21.720
+of our softwares.
+
+01:21.720 --> 01:22.553
+Once that is done,
+
+01:22.553 --> 01:25.860
+we'll build the artifact and deploy to the app
+
+01:25.860 --> 01:28.770
+zero one instance, so let's first start with AWS.
+
+01:28.770 --> 01:30.000
+Let's do these three things.
+
+01:30.000 --> 01:33.240
+S3 bucket, IAM keys and IAM roles.
+
+01:33.240 --> 01:37.320
+I am on my AWS management console in North Virginia region
+
+01:37.320 --> 01:39.483
+and I'm going to the service S3.
+
+01:41.040 --> 01:44.940
+I'll say "Create Bucket", general purpose Bucket name I have
+
+01:44.940 --> 01:49.140
+given as vprofile-las-artifacts,
+
+01:49.140 --> 01:50.430
+you cannot give the same name,
+
+01:50.430 --> 01:51.930
+you have to give a different bucket name
+
+01:51.930 --> 01:55.170
+just to make it unique, you can add some numbers.
+
+01:55.170 --> 01:57.750
+Bucket names needs to be unique.
+
+01:57.750 --> 02:01.323
+So give a different name and just simply create it.
+
+02:02.880 --> 02:05.460
+Take a note of S3 bucket name.
+
+02:05.460 --> 02:07.860
+We will be using this in the command line.
+
+02:07.860 --> 02:09.000
+Talking about the command line.
+
+02:09.000 --> 02:12.420
+We need IAM access keys to store it on our laptop.
+
+02:12.420 --> 02:15.303
+So I'm going to go to IAM service,
+
+02:17.640 --> 02:22.450
+go to users, say create user, give user a name.
+
+02:22.450 --> 02:24.840
+Vprofile S3 Admin, that's the name I'm giving.
+
+02:24.840 --> 02:29.400
+Go next, attach policies directly select this option
+
+02:29.400 --> 02:31.050
+and search for S3.
+
+02:31.050 --> 02:32.970
+We just need S3 access.
+
+02:32.970 --> 02:35.080
+So we'll just give S3 full access
+
+02:36.210 --> 02:40.839
+and go next, see create user.
+
+02:40.839 --> 02:43.740
+Let's generate the access keys.
+
+02:43.740 --> 02:46.440
+So click on the user, go to security credentials,
+
+02:46.440 --> 02:49.804
+scroll down and see create access key.
+
+02:49.804 --> 02:52.440
+CLI use case. That's what we want to use.
+
+02:52.440 --> 02:56.460
+Command line. I understand the about recommendation
+
+02:56.460 --> 03:00.930
+and say next, create access keys.
+
+03:00.930 --> 03:03.420
+I'm going to click on download CSV file.
+
+03:03.420 --> 03:06.360
+So if you miss this, if you don't know the access key
+
+03:06.360 --> 03:09.120
+and secret key, now if you don't store it, save it,
+
+03:09.120 --> 03:10.740
+then you lose it, you're not recovered.
+
+03:10.740 --> 03:14.970
+You have to generate new access keys. So let's store it.
+
+03:14.970 --> 03:18.105
+You have store it in my downloads and say done.
+
+03:18.105 --> 03:21.810
+Okay, next we will create IAM roles.
+
+03:21.810 --> 03:23.910
+Now roles works like this.
+
+03:23.910 --> 03:27.360
+You can apply it on any AWS servers like most of them,
+
+03:27.360 --> 03:30.810
+like you can go to the instance, select the instance,
+
+03:30.810 --> 03:34.860
+see action actions, security,
+
+03:34.860 --> 03:36.990
+modify IAM role
+
+03:36.990 --> 03:40.230
+and you can select the role from the dropdown.
+
+03:40.230 --> 03:41.280
+Okay, let's cancel this.
+
+03:41.280 --> 03:45.090
+Let's create the role first, let's go to roles.
+
+03:45.090 --> 03:49.560
+We'll say create role, AWS service for AWS service.
+
+03:49.560 --> 03:53.320
+We are applying this role, use case ease for EC2
+
+03:55.350 --> 03:58.620
+and go next and select the permission.
+
+03:58.620 --> 04:03.300
+So we'll search for Amazon S3 Full access, come down,
+
+04:03.300 --> 04:04.173
+go next,
+
+04:05.880 --> 04:09.760
+let's give role a name, S3 admin I'm giving it
+
+04:10.898 --> 04:11.898
+and see create role.
+
+04:12.750 --> 04:15.540
+Okay, at the same time now, I'll apply this role.
+
+04:15.540 --> 04:18.780
+So select your instance app zero one,
+
+04:18.780 --> 04:22.383
+action, security, modify IAM role,
+
+04:23.460 --> 04:26.040
+drop down and select the S3 admin role.
+
+04:26.040 --> 04:30.240
+Now this role has the permission, S3 full access.
+
+04:30.240 --> 04:34.410
+So from our instance, we can run AWSCLI command
+
+04:34.410 --> 04:37.115
+to authenticate with the S3 service and only S3 service
+
+04:37.115 --> 04:40.260
+because it has just the permission for S3.
+
+04:40.260 --> 04:41.940
+If you need more permission, you can add,
+
+04:41.940 --> 04:44.310
+you can edit the role and you can add more permission
+
+04:44.310 --> 04:46.380
+or remove the permissions.
+
+04:46.380 --> 04:49.230
+Okay, so we're done with this S3 bucket created IAM keys
+
+04:49.230 --> 04:50.490
+and IAM roles created.
+
+04:50.490 --> 04:53.760
+We have also applied the IAM role to our instance.
+
+04:53.760 --> 04:56.172
+Now we'll come to our own computer.
+
+04:56.172 --> 04:58.890
+We need to build the artifact. So we need Maven.
+
+04:58.890 --> 05:00.120
+Maven needs JDK,
+
+05:00.120 --> 05:02.280
+and we also need AWSCLI command
+
+05:02.280 --> 05:05.700
+to push the artifact to S3 bucket.
+
+05:05.700 --> 05:07.290
+Okay, so come to your VS code
+
+05:07.290 --> 05:09.450
+or the editor that you're using.
+
+05:09.450 --> 05:11.040
+Now when we build the artifact,
+
+05:11.040 --> 05:13.800
+our artifact will have application.properties file
+
+05:13.800 --> 05:16.350
+that will have the backend service information.
+
+05:16.350 --> 05:19.380
+So first we need to make sure the backend service
+
+05:19.380 --> 05:20.520
+information is correct.
+
+05:20.520 --> 05:25.520
+So go to SRC, main resources,
+
+05:25.560 --> 05:27.450
+open application.properties file
+
+05:27.450 --> 05:29.340
+and we have here DB 01.
+
+05:29.340 --> 05:33.153
+Our host name will be DB 01 .V profile.N.
+
+05:34.080 --> 05:35.220
+So in Route 53,
+
+05:35.220 --> 05:38.820
+we created the record right DB 01 V profile in points
+
+05:38.820 --> 05:42.780
+to the private IP of DB 01 instance.
+
+05:42.780 --> 05:44.520
+Okay, so we have to make sure we have the right
+
+05:44.520 --> 05:46.247
+information in our code.
+
+05:46.247 --> 05:51.247
+So DB 01 V.profile.n and then MC 01 V.profile.n.
+
+05:52.740 --> 05:57.240
+And same with RMQ 01 .V.profile.n.
+
+05:57.240 --> 06:00.540
+Make sure to save this and did Control S,
+
+06:00.540 --> 06:04.050
+you can just click on file and click on save also.
+
+06:04.050 --> 06:07.260
+So now it's time to build the artifact from the source code.
+
+06:07.260 --> 06:11.220
+For that we need Maven and GDK and right version of it
+
+06:11.220 --> 06:13.200
+and let's check all that and build it and all
+
+06:13.200 --> 06:14.550
+we can do it through via score.
+
+06:14.550 --> 06:17.310
+We don't need to open separate Git Bash
+
+06:17.310 --> 06:19.800
+and within in VS code, you can do it like this.
+
+06:19.800 --> 06:21.730
+Control shift P
+
+06:23.130 --> 06:25.710
+and you get this, you have to search over here,
+
+06:25.710 --> 06:27.665
+select default profile
+
+06:27.665 --> 06:31.200
+and you'll get this here terminal select default profile.
+
+06:31.200 --> 06:34.620
+Click on that and from here you can select command prompt
+
+06:34.620 --> 06:35.970
+Git bash, PowerShell.
+
+06:35.970 --> 06:40.650
+So I'm going to select Git Bash, for Macs user,
+
+06:40.650 --> 06:43.500
+you can just select terminal from the list
+
+06:43.500 --> 06:46.500
+and once you select that, click on view
+
+06:46.500 --> 06:49.173
+and click on terminal here.
+
+06:50.490 --> 06:53.760
+And you see that, you see that Git Bash profile over here
+
+06:53.760 --> 06:55.380
+and you see you are in this path.
+
+06:55.380 --> 06:57.090
+So if you're not able to open this,
+
+06:57.090 --> 06:59.130
+you can just simply open Git Bash or terminal
+
+06:59.130 --> 07:01.830
+and go to your source code in this folder.
+
+07:01.830 --> 07:03.180
+Wherever you clone the source code,
+
+07:03.180 --> 07:04.800
+we can do it from there also.
+
+07:04.800 --> 07:09.450
+First, let's validate we have MVN-version
+
+07:09.450 --> 07:12.390
+command to check the version of Maven.
+
+07:12.390 --> 07:17.390
+So 3.9.9, this is what you need and Java 17.
+
+07:18.420 --> 07:20.430
+If you see different version than this,
+
+07:20.430 --> 07:24.033
+then go back to pre sites section.
+
+07:24.870 --> 07:27.960
+We have installing software lecture there.
+
+07:27.960 --> 07:30.780
+Over there, check how to install these versions,
+
+07:30.780 --> 07:34.080
+right versions of these tools based on your operating
+
+07:34.080 --> 07:37.500
+system, Mac OS or Windows user.
+
+07:37.500 --> 07:39.270
+And then install these tools.
+
+07:39.270 --> 07:42.060
+Once you have this, you can build the artifact.
+
+07:42.060 --> 07:44.047
+One more thing, you will check AWS.
+
+07:44.047 --> 07:45.400
+Just type AWS here
+
+07:48.150 --> 07:50.790
+and you should get this kind of output.
+
+07:50.790 --> 07:53.820
+That means AWSCLI is also installed.
+
+07:53.820 --> 07:56.670
+If it's not installed, again, check the lecture,
+
+07:56.670 --> 08:00.453
+installing software's lecture and install AWSCLI also.
+
+08:01.380 --> 08:02.490
+Okay, so everything is good.
+
+08:02.490 --> 08:04.770
+Now it's time to build the artifact.
+
+08:04.770 --> 08:09.480
+So I'm going to run the command MVN install. Okay?
+
+08:09.480 --> 08:11.880
+Make sure it is in this folder.
+
+08:11.880 --> 08:15.243
+So it reads all the files and builds the artifact.
+
+08:16.650 --> 08:18.300
+And once it builds the artifact,
+
+08:18.300 --> 08:20.460
+you should see a target folder over here.
+
+08:20.460 --> 08:24.393
+Let's hit enter. This is going to take some time.
+
+08:25.320 --> 08:27.480
+Okay, the build got completed successfully.
+
+08:27.480 --> 08:29.490
+I see a target folder over here.
+
+08:29.490 --> 08:33.630
+If you expand this, you should see here V profile-V2.war,
+
+08:33.630 --> 08:35.430
+that's the artifact.
+
+08:35.430 --> 08:38.673
+This is an archive of this folder.
+
+08:40.470 --> 08:43.284
+Okay? So once it's extracted on Tomcat server,
+
+08:43.284 --> 08:46.530
+it should have this folder, this content of the folder.
+
+08:46.530 --> 08:49.590
+You should have their web INF classes in
+
+08:49.590 --> 08:52.040
+that you should have application properties file.
+
+08:54.090 --> 08:57.180
+Okay, now it's time to copy the artifact to the S3 bucket.
+
+08:57.180 --> 08:59.640
+But before that we need to do one more thing.
+
+08:59.640 --> 09:02.643
+We need to run this command AWS configure.
+
+09:04.800 --> 09:06.750
+They should ask us the access key
+
+09:06.750 --> 09:10.290
+and secret key that we can store on a computer.
+
+09:10.290 --> 09:13.050
+Just run AWS space configure.
+
+09:13.050 --> 09:16.350
+So I'm going to put here the access key and the secret key.
+
+09:16.350 --> 09:19.140
+So from my downloads, I have opened the access key
+
+09:19.140 --> 09:21.090
+and secret key CSV file.
+
+09:21.090 --> 09:24.060
+You can use any editor and open that file
+
+09:24.060 --> 09:26.970
+and it's quite dangerous to show access key
+
+09:26.970 --> 09:28.950
+and secret key like this.
+
+09:28.950 --> 09:30.090
+But I'm going to make sure,
+
+09:30.090 --> 09:31.620
+after I complete this recording,
+
+09:31.620 --> 09:33.240
+I'm going to delete the access keys
+
+09:33.240 --> 09:35.550
+and even delete the user.
+
+09:35.550 --> 09:40.260
+Very, very careful in this part with the access keys,
+
+09:40.260 --> 09:42.810
+if you accidentally expose it
+
+09:42.810 --> 09:45.480
+and make sure quickly you delete those keys
+
+09:45.480 --> 09:49.140
+or remove those keys or even disable the user.
+
+09:49.140 --> 09:52.500
+Some people by mistake put their access keys in the source
+
+09:52.500 --> 09:54.687
+code repository, public repository.
+
+09:54.687 --> 09:57.270
+And what happens in that case,
+
+09:57.270 --> 10:00.840
+your keys will be taken from the public repository
+
+10:00.840 --> 10:03.750
+and people will start doing bitcoin mining in your AWS
+
+10:03.750 --> 10:05.880
+account and many other things
+
+10:05.880 --> 10:07.920
+that they can do hijack your account,
+
+10:07.920 --> 10:09.810
+demand ransom.
+
+10:09.810 --> 10:12.303
+Again, ransom also going to demand on bitcoins.
+
+10:13.560 --> 10:17.100
+So there are auto bots on the internet, sorry, I mean
+
+10:17.100 --> 10:18.373
+to say bots.
+
+10:18.373 --> 10:22.530
+Bots on the internet that scans this public repository
+
+10:22.530 --> 10:25.500
+and find these kind of information and use it.
+
+10:25.500 --> 10:27.270
+So be very careful.
+
+10:27.270 --> 10:30.630
+So I'm going to copy the access key here first, separated
+
+10:30.630 --> 10:34.590
+by comma there and put the access key there.
+
+10:34.590 --> 10:39.093
+Hit enter, then the secret key, separated by the comma.
+
+10:43.020 --> 10:45.840
+And it's also asking a default region.
+
+10:45.840 --> 10:49.080
+Mine is US East one, North Virginia.
+
+10:49.080 --> 10:50.103
+So I copy that.
+
+10:53.760 --> 10:55.893
+Default format, JSON.
+
+10:57.870 --> 10:59.970
+If you accidentally make some mistake
+
+10:59.970 --> 11:02.370
+and store the wrong keys, wrong information,
+
+11:02.370 --> 11:04.106
+you can edit it yourself.
+
+11:04.106 --> 11:06.130
+This is the path of the file,
+
+11:06.130 --> 11:10.320
+~/n your home directory.aws/credentials.
+
+11:10.320 --> 11:13.275
+This file will have the access key and the secret key.
+
+11:13.275 --> 11:15.963
+So if you make a mistake, you can anytime edit it.
+
+11:18.630 --> 11:22.510
+And also there's another file config file that will have
+
+11:24.337 --> 11:26.250
+the region and output.
+
+11:26.250 --> 11:28.587
+If you make a mistake there, you can edit this file also.
+
+11:28.587 --> 11:31.585
+You can use via editor or just normal editors.
+
+11:31.585 --> 11:35.040
+Okay, so we have the artifact in the target folder,
+
+11:35.040 --> 11:38.280
+vPro-V2.war.
+
+11:38.280 --> 11:42.150
+So we're going to push it to S3 bucket, so AWS S3,
+
+11:42.150 --> 11:45.930
+the service name cp, the action, copy,
+
+11:45.930 --> 11:50.930
+and we give the source target/ vPro profile V2.war,
+
+11:51.030 --> 11:55.290
+and the destination S3: -- and your bucket name.
+
+11:55.290 --> 11:59.070
+If you have a sub folder, you can give a forward slash
+
+11:59.070 --> 12:01.590
+and give the sub folder name over there.
+
+12:01.590 --> 12:03.480
+I'm just going to copy it here itself
+
+12:03.480 --> 12:05.973
+and the S3 bucket directly, hit enter.
+
+12:09.360 --> 12:10.530
+Okay, the upload completed.
+
+12:10.530 --> 12:12.960
+If you're getting any error over here like authentication,
+
+12:12.960 --> 12:14.670
+then make sure you store the access keys.
+
+12:14.670 --> 12:17.430
+Once again, if you're sure the access keys are correct,
+
+12:17.430 --> 12:19.800
+then check the permission attached to that
+
+12:19.800 --> 12:23.730
+IAM user, it should be S3 full access permission.
+
+12:23.730 --> 12:27.300
+You can run AWS S3 LS and the bucket path
+
+12:27.300 --> 12:29.583
+and you can list the content in the bucket.
+
+12:30.540 --> 12:32.121
+See the artifact is there.
+
+12:32.121 --> 12:35.040
+Okay, now it's time to log into our app zero one instance
+
+12:35.040 --> 12:37.109
+and fetch the artifact from there.
+
+12:37.109 --> 12:38.940
+Okay, so go to app zero one
+
+12:38.940 --> 12:43.110
+and get its public IP, again, app zero and public IP.
+
+12:43.110 --> 12:47.520
+Make sure SSH is allowed in the security group.
+
+12:47.520 --> 12:51.063
+SSH-I downloads, the key part.
+
+12:53.550 --> 12:58.113
+Username is Ubuntu, at the rate and the IP address.
+
+12:59.610 --> 13:01.410
+Okay, if you're getting connection timed out,
+
+13:01.410 --> 13:04.950
+edit the security group inbound Rule 22 from my IP,
+
+13:04.950 --> 13:06.300
+save it once again.
+
+13:06.300 --> 13:08.943
+Okay, let me switch to root user.
+
+13:11.010 --> 13:12.450
+Clear the screen.
+
+13:12.450 --> 13:16.278
+So we need to have AWSCLI on this instance.
+
+13:16.278 --> 13:19.248
+Usually we run the app command on Ubuntu,
+
+13:19.248 --> 13:23.130
+but there's also another package manager called snap.
+
+13:23.130 --> 13:24.210
+So that should be the command
+
+13:24.210 --> 13:26.370
+to install AWSCLI through snap.
+
+13:26.370 --> 13:31.370
+Snap install AWS-CLI--classic and hit enter.
+
+13:34.380 --> 13:35.670
+Okay, there it is installed.
+
+13:35.670 --> 13:39.409
+Let's run AWS command and it's installed.
+
+13:39.409 --> 13:43.260
+So let's copy the artifact from the S3 bucket.
+
+13:43.260 --> 13:46.390
+So the command will be AWS S3 CP
+
+13:47.370 --> 13:49.110
+source will be your S3 bucket,
+
+13:49.110 --> 13:51.960
+S3 : // the bucket name.
+
+13:51.960 --> 13:53.367
+That's my bucket name,
+
+13:53.367 --> 13:57.633
+/ the artifact name and destination, tmp.
+
+13:59.220 --> 14:00.423
+Let's hit enter.
+
+14:04.290 --> 14:06.000
+Okay, that was faster.
+
+14:06.000 --> 14:08.070
+So we have artifact at this location.
+
+14:08.070 --> 14:11.790
+Now, it's time to deploy the artifact.
+
+14:11.790 --> 14:13.867
+First we will stop the Tomcat service.
+
+14:13.867 --> 14:18.490
+So system CTL, stop, Tomcat 10
+
+14:19.380 --> 14:21.033
+can just say Tomcat 10.
+
+14:24.810 --> 14:27.240
+Okay, seeing some changes happened in the source
+
+14:27.240 --> 14:28.320
+configuration file.
+
+14:28.320 --> 14:31.440
+And we need to run system CTL daemon reload command.
+
+14:31.440 --> 14:34.500
+I did not make any change. It's just a warning.
+
+14:34.500 --> 14:37.233
+Still let's just run system CTL daemon reload.
+
+14:38.310 --> 14:40.623
+And then let's stop the Tomcat service.
+
+14:41.580 --> 14:46.170
+Okay, now we'll remove the default application on Tomcat.
+
+14:46.170 --> 14:47.640
+So it is in this path.
+
+14:47.640 --> 14:52.050
+You do LSV /var/ lib/Tomcat 10,
+
+14:52.050 --> 14:55.290
+that's the home directory of Tomcat on Ubuntu.
+
+14:55.290 --> 14:58.050
+And this you have web apps folder here,
+
+14:58.050 --> 14:59.610
+you should have the root folder.
+
+14:59.610 --> 15:02.360
+That's the default application. We need to remove that.
+
+15:05.670 --> 15:10.623
+Make sure you give the RM command, rm-rf.
+
+15:11.475 --> 15:14.160
+And this path, exactly this path, remove it.
+
+15:14.160 --> 15:17.680
+And now we'll copy our artifact with the same name.
+
+15:17.680 --> 15:19.380
+It'll say CP/tmp/ vprofile-V2.War.
+
+15:23.250 --> 15:27.453
+This path ends with root, sorry dot war.
+
+15:30.600 --> 15:32.250
+Okay, that should be the path.
+
+15:32.250 --> 15:35.940
+Hit enter, and let's start the Tomcat service.
+
+15:35.940 --> 15:37.830
+When we start the Tomcat service,
+
+15:37.830 --> 15:41.430
+that time it is going to extract it into root folder.
+
+15:41.430 --> 15:43.869
+So let's say start system ctl,
+
+15:43.869 --> 15:48.869
+start Tomcat 10, and let's do LS to web apps.
+
+15:48.900 --> 15:51.603
+Okay, still not extracted. Let's check once again.
+
+15:52.590 --> 15:56.340
+There. Okay, in few minutes our application will come up.
+
+15:56.340 --> 15:59.210
+Next lecture, we are going to set up a load balancer
+
+15:59.210 --> 16:02.310
+and access our application through the load balancer.
+
+16:02.310 --> 16:05.163
+So wrap this up and join me in the next lecture.

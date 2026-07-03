@@ -1,0 +1,883 @@
+WEBVTT
+
+1
+00:00:00.600 --> 00:00:02.610
+<v Narrator>Okay, so our Argo CD is installed.</v>
+
+2
+00:00:02.610 --> 00:00:04.620
+We have an Argo CD controller in that.
+
+3
+00:00:04.620 --> 00:00:07.530
+That is going to fetch the Helm charts
+
+4
+00:00:07.530 --> 00:00:10.650
+from this Helm repository.
+
+5
+00:00:10.650 --> 00:00:14.550
+And then when it runs our application pod,
+
+6
+00:00:14.550 --> 00:00:16.980
+the Tomcat web profile application pod,
+
+7
+00:00:16.980 --> 00:00:19.500
+which is stored in Amazon ECR.
+
+8
+00:00:19.500 --> 00:00:22.710
+So the EKS cluster will be fetching
+
+9
+00:00:22.710 --> 00:00:24.300
+or from the EKS cluster,
+
+10
+00:00:24.300 --> 00:00:27.960
+that docker pull command will get executed.
+
+11
+00:00:27.960 --> 00:00:32.220
+And EKS cluster needs permission to access Amazon ECR.
+
+12
+00:00:32.220 --> 00:00:33.053
+So two things.
+
+13
+00:00:33.053 --> 00:00:36.270
+We need to give Argo information about the Git repository,
+
+14
+00:00:36.270 --> 00:00:38.190
+and also in the EKS cluster,
+
+15
+00:00:38.190 --> 00:00:43.190
+we need to set access to Amazon ECR registry or repository.
+
+16
+00:00:44.160 --> 00:00:45.990
+So Git repository we are going to add
+
+17
+00:00:45.990 --> 00:00:47.790
+from the argocd command line.
+
+18
+00:00:47.790 --> 00:00:51.270
+First we need to log into Argo CD from the command line.
+
+19
+00:00:51.270 --> 00:00:52.473
+So this is the command:
+
+20
+00:00:54.840 --> 00:00:55.950
+argocd login
+
+21
+00:00:55.950 --> 00:01:00.450
+and the endpoint of your argocd --username admin.
+
+22
+00:01:00.450 --> 00:01:04.620
+Just make sure you are using your endpoint and not mine.
+
+23
+00:01:04.620 --> 00:01:06.633
+Enter. It's going to ask the password.
+
+24
+00:01:08.100 --> 00:01:10.023
+So I'm going to enter the password.
+
+25
+00:01:12.120 --> 00:01:13.260
+Okay, I'm logged in.
+
+26
+00:01:13.260 --> 00:01:15.450
+Now I'm going to go to the repository,
+
+27
+00:01:15.450 --> 00:01:17.640
+get the repository information.
+
+28
+00:01:17.640 --> 00:01:19.353
+So, vprofile Helm.
+
+29
+00:01:20.580 --> 00:01:25.050
+This repository, Argo CD needs to access this repository.
+
+30
+00:01:25.050 --> 00:01:27.990
+So get the SSH endpoint.
+
+31
+00:01:27.990 --> 00:01:32.100
+So the command will be argocd repo add git@github.com:
+
+32
+00:01:32.100 --> 00:01:34.780
+your account name slash your repository name .git
+
+33
+00:01:35.760 --> 00:01:37.590
+and the SSH key-path.
+
+34
+00:01:37.590 --> 00:01:39.330
+So this is my SSH key path,
+
+35
+00:01:39.330 --> 00:01:43.680
+the private key that we created earlier, if you remember.
+
+36
+00:01:43.680 --> 00:01:45.363
+You can check your key also.
+
+37
+00:01:47.400 --> 00:01:50.610
+So make sure in this command you mention your details,
+
+38
+00:01:50.610 --> 00:01:53.823
+your repository, and your key-path.
+
+39
+00:01:54.750 --> 00:01:56.730
+Okay, this is the same key that we have used
+
+40
+00:01:56.730 --> 00:01:59.310
+to set the Git SS authentication
+
+41
+00:01:59.310 --> 00:02:01.460
+when we are setting the three repositories.
+
+42
+00:02:02.670 --> 00:02:03.930
+Okay, I got this error.
+
+43
+00:02:03.930 --> 00:02:05.160
+I was trying to troubleshoot,
+
+44
+00:02:05.160 --> 00:02:07.410
+I couldn't find any problem,
+
+45
+00:02:07.410 --> 00:02:10.770
+then I tried that command once again and it just worked.
+
+46
+00:02:10.770 --> 00:02:12.930
+You can also add repository from the UI.
+
+47
+00:02:12.930 --> 00:02:15.450
+You can go to the Settings, Repositories,
+
+48
+00:02:15.450 --> 00:02:17.490
+and you can say connect repository
+
+49
+00:02:17.490 --> 00:02:20.370
+and mention all the details, the URL,
+
+50
+00:02:20.370 --> 00:02:23.700
+and you can paste the private key content over here.
+
+51
+00:02:23.700 --> 00:02:25.560
+That we also can do, but you can see that
+
+52
+00:02:25.560 --> 00:02:28.890
+I already have it connected, and it's Successful connection.
+
+53
+00:02:28.890 --> 00:02:31.780
+Okay, now I'm going to attach some policy to our EKS cluster
+
+54
+00:02:31.780 --> 00:02:34.950
+so it can access Amazon ECR.
+
+55
+00:02:34.950 --> 00:02:37.770
+So first get the node group name.
+
+56
+00:02:37.770 --> 00:02:38.943
+So run this command.
+
+57
+00:02:39.870 --> 00:02:41.310
+Or you can go to the EKS cluster
+
+58
+00:02:41.310 --> 00:02:44.190
+and get the node group name from there also.
+
+59
+00:02:44.190 --> 00:02:45.450
+So that's my node group name,
+
+60
+00:02:45.450 --> 00:02:48.240
+vprofile-eks-cluster-node-group.
+
+61
+00:02:48.240 --> 00:02:51.190
+Then find the role name that is attached to the node group.
+
+62
+00:02:53.130 --> 00:02:55.180
+You know what? Let's go from the browser.
+
+63
+00:02:57.420 --> 00:03:01.290
+We go to Compute, node-group.
+
+64
+00:03:01.290 --> 00:03:05.220
+And here you can see Node IAM role, that's the name.
+
+65
+00:03:05.220 --> 00:03:09.780
+So mine is vprofile-eks-cluster-node-role.
+
+66
+00:03:09.780 --> 00:03:13.620
+So we need to add a policy in this role.
+
+67
+00:03:13.620 --> 00:03:18.180
+The policy is AmazonEC2ContainerRegistryReadOnly.
+
+68
+00:03:18.180 --> 00:03:21.870
+You can find this role from AWS console IAM,
+
+69
+00:03:21.870 --> 00:03:24.150
+and you can attach policy like that also.
+
+70
+00:03:24.150 --> 00:03:25.860
+Let's do it through command line.
+
+71
+00:03:25.860 --> 00:03:28.323
+Just make sure you have the right role name.
+
+72
+00:03:32.160 --> 00:03:37.083
+Let's list the attached policies for this role.
+
+73
+00:03:37.980 --> 00:03:39.423
+So we should find this one.
+
+74
+00:03:40.440 --> 00:03:41.670
+Now before we move ahead,
+
+75
+00:03:41.670 --> 00:03:43.980
+let's commit all our Terraform code
+
+76
+00:03:43.980 --> 00:03:46.470
+to our vProfile Infra repository.
+
+77
+00:03:46.470 --> 00:03:50.040
+And then we are going to move to Helm repository.
+
+78
+00:03:50.040 --> 00:03:51.750
+We should generate a gitignore file
+
+79
+00:03:51.750 --> 00:03:53.910
+so it ignores our .terraform folder,
+
+80
+00:03:53.910 --> 00:03:57.600
+and also we will generate the README file.
+
+81
+00:03:57.600 --> 00:03:59.193
+So use GitHub Copilot.
+
+82
+00:04:00.300 --> 00:04:03.060
+So say generate a README file and gitignore file
+
+83
+00:04:03.060 --> 00:04:05.193
+to ignore .terraform folder.
+
+84
+00:04:07.050 --> 00:04:10.350
+Okay, generated the read me file and .gitignore file,
+
+85
+00:04:10.350 --> 00:04:13.770
+which excludes .terraform folder, which is good.
+
+86
+00:04:13.770 --> 00:04:16.530
+And also the log file, which is good.
+
+87
+00:04:16.530 --> 00:04:19.860
+So from command line, get into your repository.
+
+88
+00:04:19.860 --> 00:04:23.370
+Mine is at this part, in the Desktop/gitops folder.
+
+89
+00:04:23.370 --> 00:04:27.490
+I'm gonna say git add . git commit -m
+
+90
+00:04:30.073 --> 00:04:31.797
+"terraform code".
+
+91
+00:04:33.690 --> 00:04:38.130
+And then I'm gonna say git push origin main.
+
+92
+00:04:38.130 --> 00:04:40.530
+Okay, once your code is pushed,
+
+93
+00:04:40.530 --> 00:04:43.110
+the infrastructure code is pushed to GitHub,
+
+94
+00:04:43.110 --> 00:04:46.530
+you can open the Helm repository in VS Code
+
+95
+00:04:46.530 --> 00:04:49.200
+because we are going to create Argo CD manifest
+
+96
+00:04:49.200 --> 00:04:51.900
+and commit it in Helm repository.
+
+97
+00:04:51.900 --> 00:04:54.030
+So I'm going to say Open Folder.
+
+98
+00:04:54.030 --> 00:04:56.790
+So my Helm repository in Desktop, gitops folder.
+
+99
+00:04:56.790 --> 00:04:58.113
+So I'm going to open that.
+
+100
+00:04:59.160 --> 00:05:01.950
+Now you need to fetch the latest changes over here.
+
+101
+00:05:01.950 --> 00:05:03.510
+So you can say Git Pull,
+
+102
+00:05:03.510 --> 00:05:05.700
+or you can go to repository
+(message chiming)
+
+103
+00:05:05.700 --> 00:05:08.040
+over here and say Sync Changes.
+
+104
+00:05:08.040 --> 00:05:11.730
+Because our pipeline has updated the app image name
+
+105
+00:05:11.730 --> 00:05:15.900
+and tag that happened in the GitHub repository.
+
+106
+00:05:15.900 --> 00:05:18.660
+So we need to fetch the changes to the main branch,
+
+107
+00:05:18.660 --> 00:05:20.760
+or from the command line. Just do Git Pull
+
+108
+00:05:20.760 --> 00:05:23.160
+in the Helm repository.
+
+109
+00:05:23.160 --> 00:05:26.220
+Okay, here we are going to create two manifest.
+
+110
+00:05:26.220 --> 00:05:29.040
+One is for the project,
+
+111
+00:05:29.040 --> 00:05:30.930
+the other one will be for the application.
+
+112
+00:05:30.930 --> 00:05:33.720
+We are going to create two folders here.
+
+113
+00:05:33.720 --> 00:05:36.390
+So I'm going to do it through Terminal again,
+
+114
+00:05:36.390 --> 00:05:38.130
+open the new Terminal,
+
+115
+00:05:38.130 --> 00:05:40.863
+and I'm going to select here the Git Bash Terminal.
+
+116
+00:05:42.870 --> 00:05:46.380
+I'll create the folder called argocd.
+
+117
+00:05:46.380 --> 00:05:49.470
+And in that folder we are going to create two more folders.
+
+118
+00:05:49.470 --> 00:05:54.243
+One is projects, and the other one, we'll name it as apps.
+
+119
+00:05:56.460 --> 00:06:00.400
+Inside projects folder, we are going to create a file
+
+120
+00:06:01.380 --> 00:06:03.960
+named as vprofile-project.yaml.
+
+121
+00:06:06.780 --> 00:06:09.963
+And from this document, copy the project file first.
+
+122
+00:06:11.550 --> 00:06:14.430
+So when we do kubectl apply on this file,
+
+123
+00:06:14.430 --> 00:06:17.698
+it is going to create a project called vprofile
+
+124
+00:06:17.698 --> 00:06:19.680
+in the namespace argocd.
+
+125
+00:06:19.680 --> 00:06:21.900
+Now this is a custom resource of Argo CD,
+
+126
+00:06:21.900 --> 00:06:24.540
+nothing specific to Kubernetes.
+
+127
+00:06:24.540 --> 00:06:26.370
+In spec, we give some description.
+
+128
+00:06:26.370 --> 00:06:29.310
+Source repository, you need to mention here
+
+129
+00:06:29.310 --> 00:06:31.113
+the repository URL,
+
+130
+00:06:32.850 --> 00:06:35.310
+which is the same repository, the Helm repository,
+
+131
+00:06:35.310 --> 00:06:37.833
+because from here it's going to read the charts.
+
+132
+00:06:38.820 --> 00:06:42.660
+So get the SSH URL, mention it there,
+
+133
+00:06:42.660 --> 00:06:45.720
+and in destination you can see namespace vprofile
+
+134
+00:06:45.720 --> 00:06:47.970
+in this Kubernetes cluster.
+
+135
+00:06:47.970 --> 00:06:51.120
+Now this URL means local cluster.
+
+136
+00:06:51.120 --> 00:06:52.680
+The same cluster, Kubernetes cluster
+
+137
+00:06:52.680 --> 00:06:56.880
+where argocd is running, if argocd is going to maintain
+
+138
+00:06:56.880 --> 00:06:58.800
+some other remote Kubernetes cluster,
+
+139
+00:06:58.800 --> 00:07:01.980
+then you need to mention that endpoint over here.
+
+140
+00:07:01.980 --> 00:07:05.250
+Now creating application in Argo CD
+
+141
+00:07:05.250 --> 00:07:06.540
+is always through project.
+
+142
+00:07:06.540 --> 00:07:08.520
+If you do not define a project,
+
+143
+00:07:08.520 --> 00:07:11.010
+then it is going to use the default project.
+
+144
+00:07:11.010 --> 00:07:13.320
+But if you create your own project,
+
+145
+00:07:13.320 --> 00:07:15.210
+then you can set boundaries.
+
+146
+00:07:15.210 --> 00:07:18.750
+So this is the repository and this is the destination.
+
+147
+00:07:18.750 --> 00:07:22.710
+And then you can define the cluster resource whitelist also.
+
+148
+00:07:22.710 --> 00:07:26.490
+Namespaces also. So this way you can define the boundary.
+
+149
+00:07:26.490 --> 00:07:28.230
+Save this file.
+
+150
+00:07:28.230 --> 00:07:31.230
+In the apps folder, create another file,
+
+151
+00:07:31.230 --> 00:07:34.983
+call it as vprofile-app.yaml.
+
+152
+00:07:36.420 --> 00:07:40.503
+Copy this code from apiVersion till the end.
+
+153
+00:07:43.470 --> 00:07:46.530
+Okay, make sure you update the repoURL to your own.
+
+154
+00:07:46.530 --> 00:07:48.510
+This is again the Helm repository.
+
+155
+00:07:48.510 --> 00:07:50.220
+So this manifest is of kind,
+
+156
+00:07:50.220 --> 00:07:52.860
+application is going to create an application.
+
+157
+00:07:52.860 --> 00:07:54.830
+Name of the application will be vprofile.
+
+158
+00:07:54.830 --> 00:07:57.300
+Namespace is argocd.
+
+159
+00:07:57.300 --> 00:07:59.760
+Specification, that's the project name.
+
+160
+00:07:59.760 --> 00:08:03.117
+Source URL, that means it is going to go to this
+
+161
+00:08:03.117 --> 00:08:06.330
+Git repository in the main branch
+
+162
+00:08:06.330 --> 00:08:09.840
+and fetch the charts that are mentioned in this path,
+
+163
+00:08:09.840 --> 00:08:12.540
+and use this values.yaml file.
+
+164
+00:08:12.540 --> 00:08:15.030
+Now if you have multiple environments
+
+165
+00:08:15.030 --> 00:08:18.157
+like dev staging production, you can define different values
+
+166
+00:08:18.157 --> 00:08:21.720
+.yaml file, and then you can mention the path over here.
+
+167
+00:08:21.720 --> 00:08:24.900
+But the charts should be same, should be replicate...
+
+168
+00:08:24.900 --> 00:08:26.760
+I mean you should be able to replicate it.
+
+169
+00:08:26.760 --> 00:08:28.500
+Same chart, but values will be different,
+
+170
+00:08:28.500 --> 00:08:32.730
+like more replicas, more resources, more CPU, more RAM,
+
+171
+00:08:32.730 --> 00:08:34.800
+better, faster, storage, all those things
+
+172
+00:08:34.800 --> 00:08:37.590
+that you can mention in values.yaml file,
+
+173
+00:08:37.590 --> 00:08:39.750
+based on your environment.
+
+174
+00:08:39.750 --> 00:08:42.240
+So destination is the local Kubernetes cluster
+
+175
+00:08:42.240 --> 00:08:44.123
+in the namespace vprofile.
+
+176
+00:08:44.123 --> 00:08:46.170
+syncPolicy: true and true.
+
+177
+00:08:46.170 --> 00:08:48.570
+That means if anyone deletes a resource
+
+178
+00:08:48.570 --> 00:08:51.930
+from the repository, then it'll delete that resource
+
+179
+00:08:51.930 --> 00:08:53.823
+in the Kubernetes cluster also.
+
+180
+00:08:54.930 --> 00:08:56.010
+selfHeal, true.
+
+181
+00:08:56.010 --> 00:08:59.070
+That means if someone changes something in your application,
+
+182
+00:08:59.070 --> 00:09:02.790
+any resource, then it is going to check that and match it,
+
+183
+00:09:02.790 --> 00:09:04.410
+what is defined in the repository.
+
+184
+00:09:04.410 --> 00:09:06.360
+If it doesn't match, then it is going to apply
+
+185
+00:09:06.360 --> 00:09:09.150
+whatever is mentioned in the repository.
+
+186
+00:09:09.150 --> 00:09:10.950
+syncOptions: CreateNamespace, true.
+
+187
+00:09:10.950 --> 00:09:13.987
+If the namespace that is defined over here does not exist
+
+188
+00:09:13.987 --> 00:09:17.040
+in the cluster, then it is going to create it.
+
+189
+00:09:17.040 --> 00:09:18.900
+Save this file also.
+
+190
+00:09:18.900 --> 00:09:20.070
+We are going to commit it later.
+
+191
+00:09:20.070 --> 00:09:22.050
+First, let's create the application,
+
+192
+00:09:22.050 --> 00:09:23.910
+first create the project and then application
+
+193
+00:09:23.910 --> 00:09:26.250
+with kubectl command.
+
+194
+00:09:26.250 --> 00:09:27.693
+So open the Terminal.
+
+195
+00:09:28.680 --> 00:09:30.720
+Let me clear the screen here.
+
+196
+00:09:30.720 --> 00:09:35.720
+Kubectl apply -f first the project.
+
+197
+00:09:36.870 --> 00:09:40.860
+So, argocd. I'm already in argocd folder.
+
+198
+00:09:40.860 --> 00:09:44.760
+So I'm gonna see projects, and vprofile-project.yaml.
+
+199
+00:09:46.450 --> 00:09:49.260
+Okay, before I go to the next one here, the path is wrong.
+
+200
+00:09:49.260 --> 00:09:52.893
+It's helm/vprofile, -chart is not there.
+
+201
+00:09:56.670 --> 00:09:58.320
+Let's confirm that once.
+
+202
+00:09:58.320 --> 00:10:00.930
+In Helm repository, helm/vprofile.
+
+203
+00:10:00.930 --> 00:10:04.140
+Inside that you have Chart and values.yaml file.
+
+204
+00:10:04.140 --> 00:10:07.050
+So make sure it's as per the repository.
+
+205
+00:10:07.050 --> 00:10:11.280
+kubectl apply -f apps, and vprofile-app.yaml.
+
+206
+00:10:12.880 --> 00:10:17.220
+Okay, it says it's created. Let's take a look from the UI.
+
+207
+00:10:17.220 --> 00:10:21.930
+So log into your Argo CD. Let's check in the Projects.
+
+208
+00:10:21.930 --> 00:10:25.080
+We should have project here vprofile, nice.
+
+209
+00:10:25.080 --> 00:10:26.343
+And Applications.
+
+210
+00:10:27.270 --> 00:10:30.330
+Okay, we see the application, it says Healthy already.
+
+211
+00:10:30.330 --> 00:10:32.913
+Status is Unknown. Let's click on this.
+
+212
+00:10:34.110 --> 00:10:37.743
+Oh, okay. Vprofile-chart.
+
+213
+00:10:38.580 --> 00:10:41.070
+I don't think I have saved it.
+
+214
+00:10:41.070 --> 00:10:43.170
+After I made the changes I should save it.
+
+215
+00:10:44.100 --> 00:10:46.500
+Okay, let me delete it and create it once again.
+
+216
+00:10:50.860 --> 00:10:52.653
+Okay, then let me create it.
+
+217
+00:10:55.410 --> 00:10:58.440
+Okay, new progressing. Nice, okay.
+
+218
+00:10:58.440 --> 00:11:00.033
+Already started showing.
+
+219
+00:11:01.080 --> 00:11:04.470
+So db-pv-claim, app-secret.
+
+220
+00:11:04.470 --> 00:11:07.713
+Let's wait until all this is settled. Everything is created.
+

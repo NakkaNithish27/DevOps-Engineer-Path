@@ -1,0 +1,174 @@
+WEBVTT
+
+1
+00:00:00.420 --> 00:00:02.070
+<v Instructor>Okay, time to do some cleanup.</v>
+
+2
+00:00:02.070 --> 00:00:07.070
+So for instances, you can shut down Nexus and Sonar.
+
+3
+00:00:07.200 --> 00:00:10.290
+You can in fact delete Nexus and Sonar for now.
+
+4
+00:00:10.290 --> 00:00:11.370
+And whenever you need it,
+
+5
+00:00:11.370 --> 00:00:15.000
+you can just use the user data script and launch them.
+
+6
+00:00:15.000 --> 00:00:17.220
+So, I'm just going to terminate them
+
+7
+00:00:17.220 --> 00:00:18.510
+because for next lectures
+
+8
+00:00:18.510 --> 00:00:21.090
+you're going to not use Nexus and Sonar.
+
+9
+00:00:21.090 --> 00:00:22.503
+Just Jenkins is fine.
+
+10
+00:00:23.610 --> 00:00:26.160
+Jenkins, I recommend you stop it.
+
+11
+00:00:26.160 --> 00:00:28.350
+You don't need to delete it.
+
+12
+00:00:28.350 --> 00:00:30.630
+Because we have a few more lectures, we'll need Jenkins.
+
+13
+00:00:30.630 --> 00:00:32.160
+But anyways, even if you delete it,
+
+14
+00:00:32.160 --> 00:00:33.120
+you know the whole steps,
+
+15
+00:00:33.120 --> 00:00:35.910
+how to set up install plugins and everything.
+
+16
+00:00:35.910 --> 00:00:38.553
+So for now, just shut down Jenkins.
+
+17
+00:00:39.570 --> 00:00:41.523
+Instance state, stop.
+
+18
+00:00:43.410 --> 00:00:47.820
+Now, come to ECS and go to your service.
+
+19
+00:00:47.820 --> 00:00:52.020
+Click on your service name, click on Delete Service,
+
+20
+00:00:52.020 --> 00:00:57.020
+see Force Delete, and you can type here "delete", Delete.
+
+21
+00:00:57.960 --> 00:00:59.502
+So, once your service is deleted,
+
+22
+00:00:59.502 --> 00:01:02.070
+then you can delete the cluster.
+
+23
+00:01:02.070 --> 00:01:05.880
+So, go to your cluster. Select your cluster.
+
+24
+00:01:05.880 --> 00:01:08.553
+In the Actions here, select Delete Cluster,
+
+25
+00:01:09.570 --> 00:01:12.630
+give the name "delete," and the cluster name.
+
+26
+00:01:12.630 --> 00:01:16.083
+So, mine is vprofile, Delete.
+
+27
+00:01:17.040 --> 00:01:19.170
+It's gonna take some time.
+
+28
+00:01:19.170 --> 00:01:21.303
+And you have your registry,
+
+29
+00:01:22.140 --> 00:01:23.490
+ECR repository.
+
+30
+00:01:23.490 --> 00:01:24.840
+If you wish, you can delete it.
+
+31
+00:01:24.840 --> 00:01:26.136
+Even if you keep it, there's no problem.
+
+32
+00:01:26.136 --> 00:01:28.560
+There's no charges for this one.
+
+33
+00:01:28.560 --> 00:01:30.530
+But I just recommend cleaning it up
+
+34
+00:01:30.530 --> 00:01:32.030
+if you're not going to use it.
+
+35
+00:01:36.600 --> 00:01:38.416
+Make sure you check in the Instances section,
+
+36
+00:01:38.416 --> 00:01:41.490
+check the load balancers.
+
+37
+00:01:41.490 --> 00:01:45.090
+If you see the load balancer that was created by ECS,
+
+38
+00:01:45.090 --> 00:01:47.313
+make sure you delete this load balancer.
+
+39
+00:01:50.940 --> 00:01:52.800
+Check in the target groups.
+
+40
+00:01:52.800 --> 00:01:54.540
+You see the target group.
+
+41
+00:01:54.540 --> 00:01:56.433
+Make sure to remove this as well.
+
+42
+00:01:59.070 --> 00:02:01.440
+And that should be it in the cleanup process.
+
+43
+00:02:01.440 --> 00:02:02.273
+Thank you.
+

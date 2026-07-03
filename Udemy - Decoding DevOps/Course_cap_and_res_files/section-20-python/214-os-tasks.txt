@@ -1,0 +1,1306 @@
+WEBVTT
+
+00:00.300 --> 00:03.720
+Instructor: Hello, and welcome to Python for Automation.
+
+00:03.720 --> 00:06.840
+Now in a few videos, we will see how we can use Python
+
+00:06.840 --> 00:10.920
+to automate operating system task, especially Linux,
+
+00:10.920 --> 00:14.199
+but before you begin, let me give a disclaimer.
+
+00:14.199 --> 00:17.280
+All these things that we are going to do now with Python
+
+00:17.280 --> 00:22.020
+can be done very easily and much better by using Ansible,
+
+00:22.020 --> 00:23.940
+which we are going to learn next,
+
+00:23.940 --> 00:26.520
+but the idea of these exercises
+
+00:26.520 --> 00:29.970
+is for you to learn some programming skills,
+
+00:29.970 --> 00:33.160
+so when you use any automation tool like Ansible,
+
+00:33.160 --> 00:36.690
+Terraform, CloudFormation, you will be well prepared.
+
+00:36.690 --> 00:39.780
+You can master these automation tools
+
+00:39.780 --> 00:42.480
+if you have some hands-on programming,
+
+00:42.480 --> 00:45.570
+especially using Python for automation.
+
+00:45.570 --> 00:46.403
+That being said,
+
+00:46.403 --> 00:49.980
+you can use Python to do all kinds of automation.
+
+00:49.980 --> 00:52.470
+So let's see what we are going to do.
+
+00:52.470 --> 00:54.870
+So first we'll see how to use Python
+
+00:54.870 --> 00:57.600
+for executing operating system commands,
+
+00:57.600 --> 01:00.840
+and we'll write a script that is going to add a user,
+
+01:00.840 --> 01:04.620
+add groups, add user into the group.
+
+01:04.620 --> 01:06.780
+We'll create directories.
+
+01:06.780 --> 01:10.350
+We'll assign user and group ownership to the directory.
+
+01:10.350 --> 01:13.740
+While we are doing that, we'll be also checking condition
+
+01:13.740 --> 01:17.010
+that if the directory or user exist, do not add them,
+
+01:17.010 --> 01:18.720
+print the message to the user,
+
+01:18.720 --> 01:21.660
+but if it does not exist, then create it.
+
+01:21.660 --> 01:24.810
+So if else condition, we'll have number of users,
+
+01:24.810 --> 01:26.553
+so it is going to run in a loop.
+
+01:27.480 --> 01:30.840
+Once we see how to execute or automate local task,
+
+01:30.840 --> 01:33.840
+we will be seeing then SSH in Python.
+
+01:33.840 --> 01:37.320
+We'll be specifically seeing the library fabric.
+
+01:37.320 --> 01:38.550
+By using that, very easily,
+
+01:38.550 --> 01:41.580
+you can make SSH connection to Linux machines
+
+01:41.580 --> 01:43.563
+and execute tasks remotely.
+
+01:45.540 --> 01:46.560
+We'll see a script
+
+01:46.560 --> 01:48.570
+where we are going to provision web server
+
+01:48.570 --> 01:51.023
+by using Python Fabric.
+
+01:51.023 --> 01:54.385
+We'll see what are Python Virtual Environments,
+
+01:54.385 --> 01:59.070
+and we'll also find various other modules or libraries
+
+01:59.070 --> 02:02.070
+to integrate Python with other tools or technologies,
+
+02:02.070 --> 02:04.113
+like Jenkins or AWS.
+
+02:05.250 --> 02:06.360
+So when the time comes,
+
+02:06.360 --> 02:09.271
+you can automate AWS task or Jenkins task,
+
+02:09.271 --> 02:14.271
+you can call Jenkins jobs from your Python scripts.
+
+02:14.520 --> 02:16.383
+So let's get started.
+
+02:17.340 --> 02:19.740
+Alright, so for this lecture and the next lecture,
+
+02:19.740 --> 02:21.120
+we'll need some virtual machines.
+
+02:21.120 --> 02:22.590
+We'll create those virtual machines.
+
+02:22.590 --> 02:26.280
+I have uploaded Vagrant file to this lecture resource,
+
+02:26.280 --> 02:28.470
+so you can download it from the lecture resource.
+
+02:28.470 --> 02:30.723
+Download this file, pyvms.zip.
+
+02:31.710 --> 02:33.570
+So there's the zip file in the downloads folder,
+
+02:33.570 --> 02:35.070
+and I'm going to extract this.
+
+02:36.570 --> 02:39.600
+So if you have a Windows and MacOS with Intel chip,
+
+02:39.600 --> 02:42.300
+you can use Vagrant file from this folder.
+
+02:42.300 --> 02:44.970
+If you have MacOS with M1, M2, M3 chip,
+
+02:44.970 --> 02:47.310
+you can use Vagrant file from this folder.
+
+02:47.310 --> 02:50.280
+So copy this file into a folder of your choice.
+
+02:50.280 --> 02:52.110
+I'm going to create a folder in F drive
+
+02:52.110 --> 02:53.793
+and copy my Vagrant file there.
+
+02:54.630 --> 02:57.480
+So in F drive, I have created a pyvms folder
+
+02:57.480 --> 02:59.490
+and I'll copy the Vagrant file.
+
+02:59.490 --> 03:01.800
+So from the download pyvms folder,
+
+03:01.800 --> 03:05.043
+I'm going to go to Windows and copy this Vagrant file,
+
+03:06.030 --> 03:08.700
+and I'm going to go to the F drive pyvms folder
+
+03:08.700 --> 03:09.723
+and paste it.
+
+03:10.830 --> 03:13.020
+So choose and create the folder of your choice.
+
+03:13.020 --> 03:15.180
+Make sure that you use the right Vagrant file
+
+03:15.180 --> 03:17.190
+based on your operating system.
+
+03:17.190 --> 03:20.100
+Open Git bash or terminal for MacOS,
+
+03:20.100 --> 03:21.600
+and switch to that folder.
+
+03:21.600 --> 03:24.240
+So I'm going to go to f/pyvms.
+
+03:24.240 --> 03:25.440
+Now I have this Vagrant file.
+
+03:25.440 --> 03:27.033
+Let me open this Vagrant file.
+
+03:28.800 --> 03:32.797
+So three VMs, scriptbox, web01, web02.
+
+03:32.797 --> 03:36.600
+Scriptbox is Ubuntu, web01 is CentOS 9,
+
+03:36.600 --> 03:39.270
+and web02 is also Centos 9.
+
+03:39.270 --> 03:41.100
+They have their own IP address.
+
+03:41.100 --> 03:41.933
+Take a look.
+
+03:43.590 --> 03:45.540
+I'm going to quit from this file
+
+03:45.540 --> 03:47.730
+and bring up this virtual machine.
+
+03:47.730 --> 03:52.110
+So I'm just going to say first vagrant global-status
+
+03:52.110 --> 03:54.990
+to check if there are any existing VMs running.
+
+03:54.990 --> 03:56.790
+If there are, I'm going to go to that folder
+
+03:56.790 --> 03:58.710
+and power off those VMs.
+
+03:58.710 --> 04:01.020
+If you see some other VMs that you don't want to use,
+
+04:01.020 --> 04:04.230
+you can go to that folder and destroy that VM.
+
+04:04.230 --> 04:05.520
+Once you have a clean environment,
+
+04:05.520 --> 04:07.983
+you can do vagrant up in this folder.
+
+04:10.650 --> 04:13.050
+Okay, the virtual machines are coming up.
+
+04:13.050 --> 04:14.550
+So open VirtualBox.
+
+04:14.550 --> 04:16.860
+You should see the virtual machine coming up.
+
+04:16.860 --> 04:19.860
+If you see some VMs are taking long time to come up,
+
+04:19.860 --> 04:23.460
+just double click on that VM, and this screen should open.
+
+04:23.460 --> 04:25.260
+It should show some messages running.
+
+04:25.260 --> 04:26.093
+Keep it open.
+
+04:26.093 --> 04:27.660
+Do not close it, just minimize it.
+
+04:27.660 --> 04:30.540
+If you close it, the VM will get powered off.
+
+04:30.540 --> 04:32.610
+You can just minimize it.
+
+04:32.610 --> 04:34.020
+Wait for all the VMs to come up.
+
+04:34.020 --> 04:36.540
+As I said, if some VMs are taking longer to come up,
+
+04:36.540 --> 04:39.690
+just double click and look at the output.
+
+04:39.690 --> 04:40.980
+Okay, I'm going to pause the recording
+
+04:40.980 --> 04:43.710
+and resume when all the VMs are created.
+
+04:43.710 --> 04:44.880
+Okay, my VMs are up.
+
+04:44.880 --> 04:48.483
+I'm going to log into ScriptBox, vagrant ssh scriptbox.
+
+04:51.990 --> 04:54.720
+Okay, I'm going to switch to root user.
+
+04:54.720 --> 04:57.210
+So let's check the Python version that we have,
+
+04:57.210 --> 05:00.060
+but before that, let's check the operating system version.
+
+05:00.060 --> 05:03.510
+So I have here Ubuntu 22,
+
+05:03.510 --> 05:07.323
+and by default, Ubuntu 22 will have Python 3, python3.
+
+05:10.050 --> 05:12.690
+If you type python3 and hit enter,
+
+05:12.690 --> 05:16.500
+you'll get a Python 3 command line interface.
+
+05:16.500 --> 05:19.650
+If you want to exit, you can just do exit, parentheses,
+
+05:19.650 --> 05:21.600
+and you can exit from here.
+
+05:21.600 --> 05:24.960
+In case if you need Python 2, you can install it.
+
+05:24.960 --> 05:25.793
+So in Ubuntu,
+
+05:25.793 --> 05:29.660
+you have to say apt update &amp;&amp; apt install python2 -y.
+
+05:33.600 --> 05:35.550
+Hit enter and it should run apt update
+
+05:35.550 --> 05:37.053
+and then install Python 2.
+
+05:38.160 --> 05:41.245
+Okay, after this you should have Python tools,
+
+05:41.245 --> 05:43.350
+so just so if you just type Python and hit enter,
+
+05:43.350 --> 05:47.688
+wait, python2, yeah, you should get into the Python,
+
+05:47.688 --> 05:49.233
+into the Python 2 interpreter.
+
+05:50.520 --> 05:53.190
+Okay, but we will be using Python 3,
+
+05:53.190 --> 05:56.190
+but there are many machines today which uses Python 2
+
+05:56.190 --> 05:59.880
+so you should know how to now use both the interpreters.
+
+05:59.880 --> 06:01.110
+Okay, now let me clear the screen
+
+06:01.110 --> 06:04.440
+and let's get back to the Python 3 interpreter.
+
+06:04.440 --> 06:06.510
+Just type Python 3 and hit enter.
+
+06:06.510 --> 06:08.940
+You get Python 3 interpreter,
+
+06:08.940 --> 06:10.440
+and in this lecture, we will be learning
+
+06:10.440 --> 06:13.410
+how to execute Linux commands from Python.
+
+06:13.410 --> 06:14.520
+So we'll be writing script
+
+06:14.520 --> 06:17.520
+and we'll be mentioning the Linux commands over there,
+
+06:17.520 --> 06:19.890
+but I want to show you that directly,
+
+06:19.890 --> 06:22.650
+you cannot run Linux command from Python interpreter.
+
+06:22.650 --> 06:24.333
+So for example, if I run ls,
+
+06:24.333 --> 06:25.770
+it's going to throw me an error.
+
+06:25.770 --> 06:28.680
+ls is not defined because it's not a Python command.
+
+06:28.680 --> 06:30.780
+It's a Linux command, bash command,
+
+06:30.780 --> 06:34.350
+so if you want to execute bash Linux command
+
+06:34.350 --> 06:38.010
+or any operating system command from the Python interpreter,
+
+06:38.010 --> 06:40.530
+you have to import this library.
+
+06:40.530 --> 06:42.693
+You have to say import os,
+
+06:44.080 --> 06:46.710
+and in os, you have a method called system.
+
+06:46.710 --> 06:50.910
+So you say os system, and in parentheses
+
+06:50.910 --> 06:52.800
+you give the command in the double quotes.
+
+06:52.800 --> 06:56.490
+So now if I do ls, it executes.
+
+06:56.490 --> 06:59.040
+Now this is going to execute the command,
+
+06:59.040 --> 07:02.190
+show you the output, and return the exit code.
+
+07:02.190 --> 07:04.620
+So it's returning the exit code 0.
+
+07:04.620 --> 07:05.700
+Let's try one more command.
+
+07:05.700 --> 07:09.930
+We'll execute "pwd", okay?
+
+07:09.930 --> 07:10.763
+Or, who am I?
+
+07:10.763 --> 07:12.185
+Any command, right?
+
+07:12.185 --> 07:13.050
+It returns the exit code
+
+07:13.050 --> 07:15.630
+if the command executes successfully,
+
+07:15.630 --> 07:17.550
+it returns the exit code as zero,
+
+07:17.550 --> 07:18.690
+but the command fails.
+
+07:18.690 --> 07:20.430
+Let's give some gibberish command,
+
+07:20.430 --> 07:22.560
+which is not a real Linux command.
+
+07:22.560 --> 07:23.880
+Right now if I execute this,
+
+07:23.880 --> 07:27.840
+this is going to return the exit code non-zero.
+
+07:27.840 --> 07:31.890
+So remember this, os.system returns the exit code 0
+
+07:31.890 --> 07:34.140
+if the command executes successfully.
+
+07:34.140 --> 07:37.590
+It returns non-zero if the command fails.
+
+07:37.590 --> 07:41.400
+Now, OS has really many other methods like system.
+
+07:41.400 --> 07:42.840
+You can execute any command like that.
+
+07:42.840 --> 07:46.680
+There are many other methods, so if you use a dir function,
+
+07:46.680 --> 07:48.360
+now, dir function shows
+
+07:48.360 --> 07:51.600
+all the available methods in a module.
+
+07:51.600 --> 07:52.890
+So OS is a module.
+
+07:52.890 --> 07:56.550
+System is a method or function, also you can say.
+
+07:56.550 --> 07:58.680
+Let's call it function for now.
+
+07:58.680 --> 07:59.970
+So system is a function.
+
+07:59.970 --> 08:01.560
+Like that, there are many other functions.
+
+08:01.560 --> 08:03.813
+So if you just say dir os,
+
+08:04.773 --> 08:08.160
+it's going to list all the available functions or methods
+
+08:08.160 --> 08:10.143
+from OS module.
+
+08:11.127 --> 08:12.633
+Okay, there are many,
+
+08:13.560 --> 08:15.690
+some you might understand because you already know Linux,
+
+08:15.690 --> 08:18.780
+like for example, chown, change ownership, right,
+
+08:18.780 --> 08:23.250
+chmod, change the mod, chdir, CD, right?
+
+08:23.250 --> 08:24.153
+There are many.
+
+08:25.320 --> 08:27.750
+There are really many, many modules.
+
+08:27.750 --> 08:30.000
+So some of the module that you can use
+
+08:30.000 --> 08:32.820
+or maybe of your interest, apart from system,
+
+08:32.820 --> 08:37.260
+like system, we can give any command, but we have os.chdir.
+
+08:37.260 --> 08:39.813
+That is gonna change to directory like cd.
+
+08:40.650 --> 08:45.650
+os.getcwd, which is going to return same output as pwd.
+
+08:45.913 --> 08:46.746
+getpid or chmod, getsize, uname,
+
+08:50.520 --> 08:52.620
+and like that, there are many other.
+
+08:52.620 --> 08:55.740
+You can get the whole list of the methods by running dir,
+
+08:55.740 --> 08:57.240
+as we have seen.
+
+08:57.240 --> 08:59.804
+So one small example of a script.
+
+08:59.804 --> 09:03.030
+We import OS, we define a variable path,
+
+09:03.030 --> 09:06.240
+and we are going to check if os.path.isdir.
+
+09:06.240 --> 09:07.350
+That's a method.
+
+09:07.350 --> 09:09.240
+You specify the path of a file.
+
+09:09.240 --> 09:12.090
+If it exists, it's going to return true,
+
+09:12.090 --> 09:13.770
+and will print a message,
+
+09:13.770 --> 09:16.770
+else we can run, or sorry, else if,
+
+09:16.770 --> 09:19.590
+we can run os.path.is file.
+
+09:19.590 --> 09:21.900
+Now, isdirectory if it's a directory,
+
+09:21.900 --> 09:24.360
+is file if it's a file.
+
+09:24.360 --> 09:26.638
+We print a message that it's a file,
+
+09:26.638 --> 09:29.730
+else will say file or directory does not exist.
+
+09:29.730 --> 09:30.900
+That's a pretty simple script.
+
+09:30.900 --> 09:32.550
+We'll write and see how it works.
+
+09:35.760 --> 09:39.180
+Okay, now let's come out of this, exit and parentheses,
+
+09:39.180 --> 09:41.880
+hit enter, it'll exit the interpreter.
+
+09:41.880 --> 09:42.870
+Let me clear the screen.
+
+09:42.870 --> 09:44.790
+Let's create a folder in opt.
+
+09:44.790 --> 09:49.750
+I'll say opt, mkdir /opt/pyscripts.
+
+09:50.880 --> 09:52.533
+Let me see you into that.
+
+09:54.390 --> 09:56.820
+We'll create a Python script over here
+
+09:56.820 --> 10:00.883
+and I'll give the script name as check-file.py.
+
+10:03.510 --> 10:05.763
+First thing I'm going to say import os.
+
+10:08.070 --> 10:09.480
+I'll take a variable path.
+
+10:09.480 --> 10:12.930
+I will assign path of a file.
+
+10:12.930 --> 10:17.407
+I'll say /temp/testfile.txt.
+
+10:19.478 --> 10:21.330
+Okay, so it does not exist currently,
+
+10:21.330 --> 10:26.330
+but we'll check the condition, if os.path.isdir directory,
+
+10:27.950 --> 10:29.880
+and we give the path.
+
+10:29.880 --> 10:31.113
+We'll give the variable.
+
+10:33.030 --> 10:35.830
+If that returns true, we'll just give a print statement.
+
+10:38.640 --> 10:42.573
+We will see it is a directory.
+
+10:46.350 --> 10:49.800
+elif, we'll put one more condition, sorry.
+
+10:49.800 --> 10:53.023
+Yeah, os.path.isfile.
+
+10:59.992 --> 11:01.855
+We give the path.
+
+11:01.855 --> 11:06.022
+If that's a file, we are going to print a message,
+
+11:09.467 --> 11:10.717
+"It is a file,"
+
+11:13.230 --> 11:15.363
+else it does not exist.
+
+11:17.670 --> 11:19.140
+So either we are checking
+
+11:19.140 --> 11:20.790
+whether it's a directory or a file,
+
+11:20.790 --> 11:23.463
+or else we are assuming that it does not exist.
+
+11:25.020 --> 11:30.020
+We'll say, "File or directory does not exist."
+
+11:35.730 --> 11:39.030
+Okay, we are running Python 3,
+
+11:39.030 --> 11:41.400
+so we are going to mention
+
+11:41.400 --> 11:46.400
+the interpreter path user/bin/python3.
+
+11:53.040 --> 11:54.000
+Now some interpreter,
+
+11:54.000 --> 11:55.770
+you have to mention Python 2 or Python 3,
+
+11:55.770 --> 11:56.790
+whatever script you're writing.
+
+11:56.790 --> 11:59.010
+If you don't mention the interpreter,
+
+11:59.010 --> 12:01.320
+the script will fail because, by default,
+
+12:01.320 --> 12:05.040
+shell will think that it is executing these shell commands,
+
+12:05.040 --> 12:06.960
+but they're Python commands.
+
+12:06.960 --> 12:09.780
+So that should be the path of the Python 3 interpreter.
+
+12:09.780 --> 12:11.180
+Even though, we'll check it.
+
+12:16.170 --> 12:17.820
+Yes, that exists.
+
+12:17.820 --> 12:21.153
+Alright, Python 2 interpreter path is this one, python.
+
+12:22.020 --> 12:24.093
+Okay, let's make our script executable,
+
+12:27.810 --> 12:29.013
+and let's execute it.
+
+12:31.890 --> 12:34.620
+So it says file or directory does not exist.
+
+12:34.620 --> 12:37.170
+That's true because it does not exist.
+
+12:37.170 --> 12:40.320
+Let's create a directory.
+
+12:40.320 --> 12:44.793
+Oh, no, file, touch.
+
+12:49.470 --> 12:51.393
+Oops, I've given it two times.
+
+12:53.179 --> 12:56.220
+Okay, now the file exists, so it should print a message
+
+12:56.220 --> 13:00.694
+that file exists, right?
+
+13:00.694 --> 13:04.050
+So that's how you can run system commands.
+
+13:04.050 --> 13:08.010
+Okay, now let's do a task which we talked about.
+
+13:08.010 --> 13:10.260
+We'll create users, group, directories,
+
+13:10.260 --> 13:12.900
+we'll check conditions, whether they exist or not.
+
+13:12.900 --> 13:17.900
+So I will name this simply as ostasks.py.
+
+13:20.820 --> 13:25.820
+So Python 3, let's use interpreter, import os.
+
+13:26.010 --> 13:27.510
+Now let's create the list of user
+
+13:27.510 --> 13:29.673
+that we are going to add a variable.
+
+13:31.050 --> 13:34.740
+So I have list of the user, alpha, beta, gamma.
+
+13:34.740 --> 13:38.910
+That's my user, and I will print a message,
+
+13:38.910 --> 13:41.190
+and I'll give this hashes
+
+13:41.190 --> 13:43.530
+just like a title that I'm adding users.
+
+13:43.530 --> 13:46.710
+Now we going to execute user add command,
+
+13:46.710 --> 13:49.320
+and we are going to run user add command in the for loop,
+
+13:49.320 --> 13:51.870
+which I treats over this list.
+
+13:51.870 --> 13:54.840
+So every iteration we are going to add one user,
+
+13:54.840 --> 13:56.460
+but as we add user,
+
+13:56.460 --> 13:58.890
+we'll also check whether it exists or not.
+
+13:58.890 --> 14:02.070
+If it does not exist, then only we'll run the command,
+
+14:02.070 --> 14:06.330
+else, we'll print a message that user already exists.
+
+14:06.330 --> 14:08.490
+So let's write the for loop.
+
+14:08.490 --> 14:10.263
+So for user in user list,
+
+14:13.260 --> 14:16.170
+now I want to check whether first the user exists or not.
+
+14:16.170 --> 14:19.323
+So I'll run the command id and the user variable,
+
+14:20.640 --> 14:23.220
+and when I execute that, it will return an exit code.
+
+14:23.220 --> 14:27.540
+If it does not exist, it will return a non-zero exit code.
+
+14:27.540 --> 14:28.830
+Let's see it through an interpreter
+
+14:28.830 --> 14:31.500
+before we run this in the script.
+
+14:31.500 --> 14:33.500
+Okay, so let's get into the interpreter.
+
+14:34.410 --> 14:38.730
+I will say import os.
+
+14:38.730 --> 14:40.260
+I'll take a variable called user,
+
+14:40.260 --> 14:42.873
+and let's assign the value as alpha.
+
+14:44.880 --> 14:47.433
+Now I'm going to run the command in os.system,
+
+14:48.840 --> 14:50.343
+usual command, "id"
+
+14:51.360 --> 14:53.220
+and I want to put the variable over here.
+
+14:53.220 --> 14:54.870
+Now, I can't put the variable like this.
+
+14:54.870 --> 14:56.400
+It's in double quotes,
+
+14:56.400 --> 14:58.230
+so it'll not be considered as the variable,
+
+14:58.230 --> 15:01.110
+so I'm going to do string formatting.
+
+15:01.110 --> 15:03.340
+So I'm gonna say format.format
+
+15:04.350 --> 15:06.663
+and I will give the variable,
+
+15:07.500 --> 15:10.473
+and here I will give the curly braces.
+
+15:12.090 --> 15:13.770
+So id, and this will be replaced
+
+15:13.770 --> 15:17.820
+by the variable user's value, which is alpha.
+
+15:17.820 --> 15:20.010
+And when I run any command with os.system,
+
+15:20.010 --> 15:23.640
+it's going to return the exit code, okay?
+
+15:23.640 --> 15:25.020
+It's gonna print the message,
+
+15:25.020 --> 15:28.770
+but I can store this output into a variable.
+
+15:28.770 --> 15:30.783
+So I'll say ec, like exit code.
+
+15:33.450 --> 15:35.800
+So let's see, what do we have in the exit code?
+
+15:38.040 --> 15:39.423
+Oops, not double quotes.
+
+15:40.440 --> 15:42.840
+So we have the exit code 256,
+
+15:42.840 --> 15:45.510
+because that user does not exist, okay?
+
+15:45.510 --> 15:47.700
+But it's going to store only the exit code,
+
+15:47.700 --> 15:52.053
+not what it's printing, and that's exactly what we want.
+
+15:53.130 --> 15:54.873
+So let's open our script,
+
+15:55.890 --> 15:58.863
+and we will see now we'll take a variable exit code.
+
+16:00.150 --> 16:02.430
+Okay, so os.system "id",
+
+16:02.430 --> 16:05.490
+it's going to run it on the user variable
+
+16:05.490 --> 16:07.740
+and this user value will be first alpha
+
+16:07.740 --> 16:08.913
+in the first iteration.
+
+16:09.840 --> 16:11.130
+Well, if it does not exist,
+
+16:11.130 --> 16:13.950
+we are going to get a non-zero exit code,
+
+16:13.950 --> 16:18.950
+and then we can check if exit code is not equal to zero.
+
+16:23.640 --> 16:28.640
+Then we'll say we print a message saying that user,
+
+16:30.060 --> 16:32.220
+which comes from here, does not exist.
+
+16:32.220 --> 16:35.880
+Adding it, and few more print messages.
+
+16:35.880 --> 16:38.463
+Oh, let me fix the syntax, right?
+
+16:40.440 --> 16:41.790
+Okay, so we should get this,
+
+16:41.790 --> 16:43.980
+print message if the user does not exist,
+
+16:43.980 --> 16:48.980
+and then it runs the command useradd and the username,
+
+16:49.080 --> 16:50.970
+which will be replaced by this.
+
+16:50.970 --> 16:53.250
+So if the user does not exist, it's going to add,
+
+16:53.250 --> 16:55.240
+else we'll just print a message
+
+16:59.370 --> 17:01.320
+saying the user already exists.
+
+17:01.320 --> 17:02.433
+I'm skipping it.
+
+17:04.230 --> 17:05.493
+We can already test it.
+
+17:06.600 --> 17:07.923
+So let's log out.
+
+17:09.810 --> 17:11.763
+Let's make our script executable,
+
+17:14.250 --> 17:15.693
+and let's run this.
+
+17:20.255 --> 17:24.360
+Okay, you see it's printing message, user does not exist.
+
+17:24.360 --> 17:26.700
+Alpha, beta, gamma, and adding it.
+
+17:26.700 --> 17:28.290
+Now the user should be already added.
+
+17:28.290 --> 17:30.393
+Now if I run the script once again,
+
+17:32.370 --> 17:35.220
+it prints the user already exists message.
+
+17:35.220 --> 17:40.170
+So loop condition, system task, all working together.
+
+17:40.170 --> 17:41.400
+Now on the same principle,
+
+17:41.400 --> 17:44.733
+we'll add the group, and we'll add user into the group.
+
+17:49.260 --> 17:51.810
+So we wanted to add the group named science.
+
+17:51.810 --> 17:55.200
+So we are checking again in os.system,
+
+17:55.200 --> 17:57.273
+grep for science in etc/group file.
+
+17:58.200 --> 18:00.390
+Now if that exists, it's going to return zero.
+
+18:00.390 --> 18:05.280
+If it does not exist, it's gonna return non-zero exit code,
+
+18:05.280 --> 18:07.110
+which we are storing into the variable.
+
+18:07.110 --> 18:08.910
+Again, we are doing the same thing.
+
+18:08.910 --> 18:11.550
+If exit code not equal to zero,
+
+18:11.550 --> 18:13.890
+that means group does not exist.
+
+18:13.890 --> 18:18.120
+Print the message and run the command group add science,
+
+18:18.120 --> 18:20.913
+else, print the message that group already exists.
+
+18:22.410 --> 18:23.883
+Let's test this one also.
+
+18:36.240 --> 18:38.700
+So in the first, it says user does not exist.
+
+18:38.700 --> 18:43.020
+If I run it once again, it says user group,
+
+18:43.020 --> 18:44.430
+sorry, group already exists.
+
+18:44.430 --> 18:45.900
+Skipping it.
+
+18:45.900 --> 18:49.143
+Now let's add all the three users into the group science.
+
+18:54.540 --> 18:56.970
+So we are going to iterate again on the loop
+
+18:56.970 --> 18:59.013
+for user in userlist.
+
+19:00.270 --> 19:01.970
+That's where we have list of user.
+
+19:03.720 --> 19:05.520
+So let's print the message.
+
+19:05.520 --> 19:06.540
+Whenever we iterate,
+
+19:06.540 --> 19:09.360
+we are just going to say adding user
+
+19:09.360 --> 19:10.890
+in science group, right?
+
+19:10.890 --> 19:13.440
+And the variable comes again
+
+19:13.440 --> 19:15.483
+from the list for every iteration,
+
+19:16.800 --> 19:19.473
+and let's run the command os.system,
+
+19:21.840 --> 19:26.840
+give the command usermod -G, the group named science,
+
+19:30.930 --> 19:33.843
+and here I will give the format.
+
+19:42.067 --> 19:45.840
+Alright, first the value of user will be alpha.
+
+19:45.840 --> 19:47.010
+It's gonna print the message
+
+19:47.010 --> 19:49.920
+and it'll say usermode -G group name
+
+19:49.920 --> 19:52.200
+and the username alpha, right?
+
+19:52.200 --> 19:54.600
+And then for beta and then for gamma.
+
+19:54.600 --> 19:56.223
+Let's test this one as well.
+
+20:03.390 --> 20:07.113
+Okay, we have a syntax error, line number 37.
+
+20:09.030 --> 20:13.083
+Okay, there, print, the string should be in parentheses.
+
+20:18.114 --> 20:20.523
+Okay, let's test it once again.
+
+20:25.243 --> 20:28.050
+Okay, it says adding user alpha.
+
+20:28.050 --> 20:30.363
+Let's test id alpha.
+
+20:31.740 --> 20:33.840
+Yes, it's in the science group.
+
+20:33.840 --> 20:35.520
+Now I'm not checking any condition over here,
+
+20:35.520 --> 20:37.320
+but because it really doesn't matter
+
+20:38.700 --> 20:40.140
+if the user already exists.
+
+20:40.140 --> 20:42.300
+It's not gonna throw any error
+
+20:42.300 --> 20:44.400
+if it already exists in the group.
+
+20:44.400 --> 20:47.880
+Okay, now let's create a directory from our Python script
+
+20:47.880 --> 20:50.763
+and give the user and group ownership to that directory.
+
+20:51.840 --> 20:53.340
+Okay, we'll just print the message
+
+20:53.340 --> 20:57.000
+adding directory if os.path.is directory.
+
+20:57.000 --> 20:59.040
+We have already seen this example.
+
+20:59.040 --> 21:01.380
+We are checking whether this directory exists or not.
+
+21:01.380 --> 21:03.500
+If it exists, we print a message.
+
+21:03.500 --> 21:05.700
+If it already exists, we are skipping it.
+
+21:05.700 --> 21:10.530
+Otherwise, we'll say os.mkdir and we give the path.
+
+21:10.530 --> 21:14.220
+Now we can do os.system, and here we can say mkdir.
+
+21:14.220 --> 21:15.930
+We can do both ways,
+
+21:15.930 --> 21:17.940
+but I just wanted to show you this extra way
+
+21:17.940 --> 21:20.583
+of creating directory also, this method.
+
+21:22.260 --> 21:24.900
+Okay, so to give the ownership and the permission,
+
+21:24.900 --> 21:28.020
+again, with os.system, simple command.
+
+21:28.020 --> 21:29.370
+So first we print the message,
+
+21:29.370 --> 21:32.520
+assigning permission and ownership to the directory,
+
+21:32.520 --> 21:33.570
+and with os.system,
+
+21:33.570 --> 21:37.770
+we are going to say cshown: the group name and the path.
+
+21:37.770 --> 21:41.100
+So this directory will have a group of signs,
+
+21:41.100 --> 21:45.890
+and then we'll say permission chmod: 770 to this directory,
+
+21:48.210 --> 21:50.400
+and our task will be completed.
+
+21:50.400 --> 21:52.083
+Let's finish this.
+
+22:01.110 --> 22:03.963
+Okay, again, line number 46.
+
+22:07.282 --> 22:09.780
+Wrong syntax in the print statement.
+
+22:09.780 --> 22:11.073
+Parentheses missing.
+
+22:12.270 --> 22:13.143
+Let's fix that.
+
+22:19.120 --> 22:20.313
+Let's test it.
+
+22:22.950 --> 22:25.500
+Okay, so super, that's working.
+
+22:25.500 --> 22:30.500
+Let's check ls -ds /opt/science_directory.
+
+22:32.158 --> 22:34.440
+So yes, it's owned by the group science
+
+22:34.440 --> 22:37.350
+and permission is 770.
+
+22:37.350 --> 22:39.960
+So we achieved our task,
+
+22:39.960 --> 22:41.820
+and the purpose of this task was to show you
+
+22:41.820 --> 22:46.800
+how you can execute commands from Python scripts,
+
+22:46.800 --> 22:50.280
+and we have seen executing commands locally.
+
+22:50.280 --> 22:52.140
+In the next video, we will be seeing
+
+22:52.140 --> 22:57.140
+how we can execute commands remotely by using SSH in Python.
+
+22:57.304 --> 23:00.213
+So wrap this up, and join me in the next video.

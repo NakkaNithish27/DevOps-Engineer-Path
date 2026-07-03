@@ -1,0 +1,412 @@
+WEBVTT
+
+00:00.280 --> 00:01.440
+Hello and welcome.
+
+00:02.400 --> 00:05.280
+In this lecture we are going to get started with Grafana.
+
+00:06.240 --> 00:07.960
+So once again what is Grafana.
+
+00:08.400 --> 00:14.880
+Well it's a visualization tool we have executed from QL and we see the output is not really readable.
+
+00:15.040 --> 00:22.680
+It was not designed to Prometheus store metrics in structured format, which Grafana can read and show
+
+00:22.680 --> 00:27.840
+you visualization dashboards, graphs and you can set alert notifications.
+
+00:27.840 --> 00:33.720
+Also, there are numerous settings in Grafana to create your own dashboards.
+
+00:34.240 --> 00:41.120
+So based on the requirement of your project, your use cases, you can create your own dashboards from
+
+00:41.120 --> 00:43.760
+where you can monitor your entire infrastructure.
+
+00:44.440 --> 00:51.920
+In fact, the NOC team or SOC team who is going to monitor 24 by seven will usually have these on their
+
+00:51.920 --> 00:52.720
+screens.
+
+00:53.440 --> 00:59.720
+So let's power on Grafana Grafana EC2 instance, and let's do some customization first before we get
+
+00:59.720 --> 01:01.400
+started and create the dashboard.
+
+01:01.880 --> 01:06.680
+We're also going to take a look at the Prometheus query that we will be executing from Grafana.
+
+01:07.160 --> 01:10.240
+And once we are set with everything, we'll start creating panels.
+
+01:10.640 --> 01:10.880
+Okay.
+
+01:10.920 --> 01:12.240
+So let's go to EC2.
+
+01:12.280 --> 01:14.120
+Let's power on Grafana.
+
+01:15.840 --> 01:21.640
+If you are doing it after one day or few days, make sure you update the security group rule of Grafana
+
+01:22.480 --> 01:25.120
+because we allow 3000 from our IP.
+
+01:25.160 --> 01:26.520
+IP could change.
+
+01:26.680 --> 01:34.680
+So just to refresh this once again my IP save the rules, wait for a few minutes after powering on Grafana
+
+01:34.680 --> 01:36.120
+and then you can access it.
+
+01:36.360 --> 01:40.400
+It's dashboard from the browser on port 3000.
+
+01:41.640 --> 01:45.400
+Okay, so the login user was admin and we did reset the password.
+
+01:45.400 --> 01:47.360
+And I told you to remember the password.
+
+01:48.120 --> 01:48.440
+Okay.
+
+01:48.480 --> 01:52.520
+So the first thing is to connect Grafana with Prometheus server.
+
+01:52.520 --> 01:59.840
+And for that you click here on connections and click on data sources and say Add Data Source.
+
+02:00.400 --> 02:06.890
+So you see Grafana, you can select data source as Prometheus, Grafana, InfluxDB, Loki.
+
+02:06.930 --> 02:07.850
+Elasticsearch.
+
+02:07.890 --> 02:08.330
+Jaeger.
+
+02:08.370 --> 02:08.850
+Tempo.
+
+02:08.890 --> 02:09.570
+Zipkin.
+
+02:10.050 --> 02:10.930
+There's a huge list.
+
+02:10.970 --> 02:15.130
+SQL cloud we have Azure CloudWatch.
+
+02:15.330 --> 02:17.290
+This is the monitoring service.
+
+02:17.330 --> 02:19.930
+Amazon AWS Monitoring Service CloudWatch.
+
+02:19.930 --> 02:21.410
+You can fetch the data from there.
+
+02:21.410 --> 02:23.850
+Also from Grafana Cloud.
+
+02:23.850 --> 02:25.970
+So we have a cloud for Grafana.
+
+02:25.970 --> 02:29.810
+So instead of you setting up your own Grafana, you can access Grafana Cloud.
+
+02:29.850 --> 02:32.690
+You know you pay the subscription and start using it.
+
+02:33.010 --> 02:34.410
+So there's a huge list.
+
+02:34.450 --> 02:36.930
+It's really very flexible.
+
+02:36.970 --> 02:40.210
+You can use it not only with Prometheus but many other data source.
+
+02:40.370 --> 02:42.450
+But for now we're going to select Prometheus.
+
+02:43.250 --> 02:49.290
+You can give your own name is helpful when you have multiple Prometheus servers from where you're fetching
+
+02:49.290 --> 02:50.890
+data on your Grafana dashboard.
+
+02:51.610 --> 02:52.170
+Connection.
+
+02:52.170 --> 02:58.490
+This is going to be the private IP, because Grafana and Prometheus are in the same network, and usually
+
+02:58.490 --> 02:59.650
+that will be the case.
+
+03:00.210 --> 03:08.010
+So http colon slash slash get the private IP of Prometheus private IP, not the public IP.
+
+03:08.010 --> 03:10.730
+Because we shut down the power on public IP will change.
+
+03:10.730 --> 03:11.930
+So use private IP.
+
+03:13.170 --> 03:18.210
+So HTTP colon slash slash private IP of Prometheus colon port 1990.
+
+03:18.290 --> 03:20.450
+We see it's listening on port 1990.
+
+03:21.130 --> 03:27.570
+Now just make sure Prometheus Security Group allows 1990 from Grafana security Group.
+
+03:27.930 --> 03:28.930
+We did this already.
+
+03:28.970 --> 03:35.410
+If you have some issues with that just allow 1990 from anywhere on Prometheus Security Group.
+
+03:35.730 --> 03:40.410
+But the best and secure way is to allow 1990 from Grafana security Group.
+
+03:41.010 --> 03:45.370
+So this is the Prometheus Security Group 1990 allowed from Grafana Security Group.
+
+03:45.970 --> 03:46.450
+This will work.
+
+03:46.450 --> 03:47.530
+This will definitely work.
+
+03:47.530 --> 03:52.370
+But in case if you have mentioned a wrong security group, there might be some issues.
+
+03:52.610 --> 03:54.930
+So just try with 1990 from anywhere.
+
+03:54.970 --> 03:57.410
+You know, just create a new rule 1990 from anywhere.
+
+03:58.210 --> 03:59.690
+Only if you're having problem.
+
+03:59.730 --> 04:02.290
+Otherwise just keep it from Grafana security Group.
+
+04:02.490 --> 04:05.810
+Now we do not have any authentication with on Prometheus.
+
+04:05.810 --> 04:07.410
+We just access and we get the page.
+
+04:07.410 --> 04:08.970
+But in real time that won't be the case.
+
+04:08.970 --> 04:14.130
+There will be authentication and you need to select what kind of authentication is just basic authentication
+
+04:14.130 --> 04:15.370
+username or password.
+
+04:15.690 --> 04:17.810
+Or it will be OAuth token based.
+
+04:18.170 --> 04:19.890
+So right now we don't have any authentication.
+
+04:19.890 --> 04:21.570
+So we're just saying no authentication.
+
+04:22.170 --> 04:26.090
+You simply scroll down and you just say save and test.
+
+04:26.530 --> 04:29.850
+So I get a successfully successfully queried Prometheus API.
+
+04:29.850 --> 04:31.010
+And next you can start.
+
+04:31.010 --> 04:35.210
+So if you get any error, check the security group, check the port number, the IP address.
+
+04:35.450 --> 04:39.610
+Mostly the issue is somewhere here or the security group of Prometheus.
+
+04:40.450 --> 04:40.610
+So.
+
+04:40.650 --> 04:43.690
+But if you get this tested then it's already saved.
+
+04:43.730 --> 04:45.090
+The connection is already saved.
+
+04:45.610 --> 04:48.770
+Now all you can do is you can you run your own test also.
+
+04:48.770 --> 04:52.330
+So just once this is successful, just click once again on data sources.
+
+04:52.330 --> 04:54.250
+You should see Prometheus data Source.
+
+04:54.730 --> 04:59.410
+Click on explore and you see here the Prometheus is selected as the data source.
+
+04:59.810 --> 05:01.250
+This is where you run the query.
+
+05:01.290 --> 05:03.970
+You see here a this is the A query.
+
+05:03.970 --> 05:05.170
+You can have multiple query.
+
+05:05.210 --> 05:06.530
+It's the name does not matter.
+
+05:06.530 --> 05:07.930
+You can change that name also.
+
+05:08.130 --> 05:09.530
+So usually it will be like this.
+
+05:10.010 --> 05:11.690
+So you can select on the drop down.
+
+05:11.690 --> 05:14.010
+So one is builder and the other one is code.
+
+05:14.050 --> 05:16.890
+Usually we use code that's much better.
+
+05:16.930 --> 05:18.290
+But you can find it from here also.
+
+05:18.290 --> 05:25.410
+So let's say HTTP request total we select here select label and select the endpoint.
+
+05:25.450 --> 05:27.610
+We'll select the value as payment.
+
+05:27.610 --> 05:28.970
+You see showing all that.
+
+05:29.570 --> 05:31.290
+Let me refresh this run query.
+
+05:31.730 --> 05:32.890
+So you see the graph.
+
+05:33.370 --> 05:34.970
+We're going to build these kind of panels.
+
+05:34.970 --> 05:36.290
+These are called as panels.
+
+05:36.610 --> 05:37.930
+So different kinds of panel.
+
+05:37.930 --> 05:39.570
+This is just a graph based.
+
+05:40.090 --> 05:43.250
+And this was just a test to see if things are working or not.
+
+05:43.450 --> 05:47.010
+I'm going to come back to from QL once again in few minutes.
+
+05:47.410 --> 05:48.690
+Let's click on explain here.
+
+05:49.050 --> 05:51.330
+Once I click on explain you get the actual query.
+
+05:51.370 --> 05:52.010
+You see this.
+
+05:53.690 --> 05:56.570
+Let me copy that and let's go to code.
+
+05:56.610 --> 05:56.770
+Okay.
+
+05:56.770 --> 05:57.370
+This is builder.
+
+05:57.370 --> 05:58.170
+This is code.
+
+05:58.490 --> 06:00.290
+So you see it's already there in the code.
+
+06:00.290 --> 06:05.380
+And instead of this I'm going to remove the payment and then run the query once again.
+
+06:07.420 --> 06:09.260
+Or I can add one more query here.
+
+06:10.100 --> 06:11.580
+Let's go click on code.
+
+06:12.100 --> 06:15.860
+Let me copy this and let's put here payment.
+
+06:16.380 --> 06:17.940
+And let's run the query.
+
+06:18.900 --> 06:23.540
+So if you run the query you should see two lines over here in the graph.
+
+06:23.740 --> 06:30.180
+And you can see the details about this is for the green line is for the endpoint route and the yellow
+
+06:30.180 --> 06:30.540
+line.
+
+06:30.540 --> 06:32.220
+This is for payment.
+
+06:32.500 --> 06:35.740
+You can see all the other labels and you can see it in different format.
+
+06:35.780 --> 06:36.540
+This is lines.
+
+06:36.540 --> 06:38.020
+You can see it in bar format.
+
+06:38.020 --> 06:43.660
+Also these are the bars points stacked lines stacked bars.
+
+06:43.660 --> 06:44.460
+There are many other options.
+
+06:44.460 --> 06:46.060
+You can customize it heavily.
+
+06:46.780 --> 06:49.740
+So we'll come back to this Prometheus query from QL.
+
+06:50.140 --> 06:56.580
+But before that let's connect slack as a notification system as a contact point in our Grafana, so
+
+06:56.580 --> 06:59.660
+we can use it later to send notifications.
+
+07:00.260 --> 07:01.940
+So wrap this up and join me in the next lecture.

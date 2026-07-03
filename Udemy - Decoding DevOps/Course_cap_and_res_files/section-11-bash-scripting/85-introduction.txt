@@ -1,0 +1,197 @@
+WEBVTT
+
+0
+00:00.470 --> 00:03.440
+Hello and welcome to the Bash Scripting Session.
+
+1
+00:04.310 --> 00:10.910
+This is going to be one of the most exciting part in this course, especially if you are new to scripting.
+
+2
+00:11.850 --> 00:17.970
+If you have never done or done little or no programming or scripting in your life, then you must be
+
+3
+00:17.970 --> 00:19.050
+doubting yourself.
+
+4
+00:20.450 --> 00:21.980
+But don't do that.
+
+5
+00:22.940 --> 00:24.090
+Just follow along 
+
+6
+00:24.110 --> 00:28.490
+all the session and make sure you write all the scripts that I'm showing in the session.
+
+7
+00:29.180 --> 00:33.740
+The scripts are already in the resources section, but I recommend you write it yourself.
+
+8
+00:34.820 --> 00:40.730
+And if you're facing issues, errors in your scripts, then you can compare your script with my scripts
+
+9
+00:40.730 --> 00:43.250
+that I am attaching it in the resources section.
+
+10
+00:44.090 --> 00:48.170
+And one tip I would like to give you for troubleshooting scripts.
+
+11
+00:49.150 --> 00:55.930
+From my own experience, I have seen majority of the script failures are because of the typographical
+
+12
+00:55.930 --> 01:01.510
+mistakes, a spelling mistake here and there, a space you have missed here and there, and you get error.
+
+13
+01:02.670 --> 01:07.620
+And sometimes it's really very difficult to look at those or find out those syntax error.
+
+14
+01:07.860 --> 01:09.300
+It could be very, very simple.
+
+15
+01:09.840 --> 01:14.070
+So look carefully in your script whenever there is an error compare with my script.
+
+16
+01:15.270 --> 01:21.330
+Just keep doing the exercises and you'll find yourself by the end of this bash scripting session, you
+
+17
+01:21.330 --> 01:24.660
+would have gained amazing skill in scripting.
+
+18
+01:25.470 --> 01:28.860
+So what really is scripting or bash scripting?
+
+19
+01:30.350 --> 01:34.190
+Well, we have system admins from the beginning of the IT industry.
+
+20
+01:35.240 --> 01:38.420
+And we used Linux servers a lot.
+
+21
+01:39.170 --> 01:44.240
+And there are many Tasks, a system administrator, will perform to make sure the system is always up
+
+22
+01:44.240 --> 01:49.340
+and running and healthy and secure, regular patching, regular backups.
+
+23
+01:49.880 --> 01:52.850
+There are many tasks that sys admin when does the repetitively.
+
+24
+01:53.000 --> 01:54.440
+Again and again and again.
+
+25
+01:54.710 --> 01:56.690
+Maybe daily, maybe once in a week.
+
+26
+01:57.890 --> 02:00.170
+So we call such tasks, robotic tasks.
+
+27
+02:01.150 --> 02:07.990
+And instead of doing and executing those commands in the Linux system, we put all the commands in a
+
+28
+02:07.990 --> 02:08.860
+text file.
+
+29
+02:09.010 --> 02:16.720
+Yes, in a text file, and we let the system execute the file for us, which is a bash script.
+
+30
+02:17.670 --> 02:23.130
+And the word bash is for the bash shell, if you're doing scripting for the bash shell or in the bash shell,
+
+31
+02:23.910 --> 02:29.490
+that is called bash scripting, because there are other kinds of shell as well in Linux.
+
+32
+02:29.610 --> 02:36.620
+We have just sh. We have ksh, zsh.
+
+33
+02:37.350 --> 02:39.990
+So when we say shell scripting, it could mean any shell.
+
+34
+02:39.990 --> 02:44.940
+But when we say bash scripting, it means specifically bash shell script.
+
+35
+02:45.750 --> 02:49.860
+So to automate day to day regular task sys admins.
+
+36
+02:49.860 --> 02:52.170
+write, bash script in Linux system.
+
+37
+02:52.770 --> 02:55.590
+Now there are many fancier automation tool in the market.
+
+38
+02:55.600 --> 02:58.920
+You have Ansible, Puppet, Chef, salt stack, terraform
+
+39
+02:59.700 --> 03:02.520
+So why do use script or why to learn bash script.
+
+40
+03:03.240 --> 03:08.700
+When you learn these tools later, you will understand that many of the concepts in those tools are
+
+41
+03:08.700 --> 03:09.690
+derived from 
+
+42
+03:09.870 --> 03:12.330
+from bash scripts or scripts, for that matter.
+
+43
+03:12.900 --> 03:18.360
+So if you have good hands on bash scripting, then you can learn those tools very easily and can even
+
+44
+03:18.360 --> 03:19.470
+master those tools.
+
+45
+03:20.400 --> 03:26.520
+Moreover, in this course, the bash scripting is to give you confidence and knowledge in scripting.
+
+46
+03:28.230 --> 03:34.800
+So bash script, basically tells System what to do instead of we executing commands, bash script or the
+
+47
+03:34.800 --> 03:39.390
+text file will tell the system what commands to execute that is bash script.
+
+48
+03:40.660 --> 03:44.980
+So join me in the next lecture and see for yourself what really is a bash script.

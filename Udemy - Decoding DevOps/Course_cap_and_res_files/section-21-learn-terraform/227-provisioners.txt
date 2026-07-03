@@ -1,0 +1,649 @@
+WEBVTT
+
+00:00.240 --> 00:01.230
+Narrator: Hello and welcome.
+
+00:01.230 --> 00:03.090
+In this lecture we are gonna talk about
+
+00:03.090 --> 00:05.580
+provisioners in Terraform.
+
+00:05.580 --> 00:08.010
+Just search for Terraform Provisioners
+
+00:08.010 --> 00:10.320
+and you can come to this documentation.
+
+00:10.320 --> 00:12.030
+So the first thing we see over here
+
+00:12.030 --> 00:15.900
+is "Provisioners are a last resort."
+
+00:15.900 --> 00:18.540
+Now the reason that is said,
+
+00:18.540 --> 00:22.350
+provisioner is something else that Terraform cannot manage.
+
+00:22.350 --> 00:23.610
+It can execute it for you,
+
+00:23.610 --> 00:26.520
+but its state cannot be managed by Terraform.
+
+00:26.520 --> 00:28.890
+For example, you want to execute a script
+
+00:28.890 --> 00:30.570
+when the instance comes up.
+
+00:30.570 --> 00:34.290
+So Terraform has File Provisioner which can push the script
+
+00:34.290 --> 00:36.330
+and then remote-exec provisioner
+
+00:36.330 --> 00:38.370
+that can execute the script.
+
+00:38.370 --> 00:41.070
+But after that, what happens when the script executes,
+
+00:41.070 --> 00:43.050
+whether it passes, whether it fails,
+
+00:43.050 --> 00:45.030
+that Terraform cannot detect.
+
+00:45.030 --> 00:46.410
+I mean, pass and fail is fine,
+
+00:46.410 --> 00:49.620
+at least that you know the the code execution will fail,
+
+00:49.620 --> 00:52.920
+but its output and then its state cannot be maintained
+
+00:52.920 --> 00:56.610
+by Terraform, that you have to keep in mind.
+
+00:56.610 --> 01:00.123
+Ideally also, the best way is to create an image,
+
+01:01.230 --> 01:02.063
+an AMI.
+
+01:02.063 --> 01:04.530
+And we are talking about AWS, right,
+
+01:04.530 --> 01:06.300
+we create an AMI, keep it ready,
+
+01:06.300 --> 01:09.630
+and whenever we want, we can launch it by using Terraform.
+
+01:09.630 --> 01:13.740
+You can also create images by using tools like Packer
+
+01:13.740 --> 01:16.050
+that very well integrates with Terraform.
+
+01:16.050 --> 01:18.270
+So if you click on this link over here,
+
+01:18.270 --> 01:20.940
+Provision infrastructure with Packer,
+
+01:20.940 --> 01:22.290
+here there are all the steps
+
+01:22.290 --> 01:25.590
+of how to create an image with Packer.
+
+01:25.590 --> 01:29.130
+You can mention your script that needs to be executed.
+
+01:29.130 --> 01:32.760
+Right, in the Terraform code you can mention all the details
+
+01:32.760 --> 01:34.563
+and build your Packer image.
+
+01:35.550 --> 01:37.080
+Once you have your image ready,
+
+01:37.080 --> 01:41.010
+then you can mention the AMI ID in your code, right?
+
+01:41.010 --> 01:44.370
+But nevertheless, we really want to see the provisioner,
+
+01:44.370 --> 01:45.900
+because when it comes to real time
+
+01:45.900 --> 01:47.880
+there will be many time when you need
+
+01:47.880 --> 01:50.310
+to execute something on the instances
+
+01:50.310 --> 01:51.180
+when you're creating it.
+
+01:51.180 --> 01:54.240
+So we want to execute a script.
+
+01:54.240 --> 01:57.630
+First, let's create the directory Exercise4,
+
+01:57.630 --> 01:59.280
+and create our script.
+
+01:59.280 --> 02:01.710
+So, Exercise3 I'm just going to copy
+
+02:01.710 --> 02:04.320
+and then paste it here itself.
+
+02:04.320 --> 02:05.373
+Then rename it.
+
+02:08.970 --> 02:11.130
+Then right-click on this in New File,
+
+02:11.130 --> 02:14.343
+and I'm going to name the file as web.sh.
+
+02:16.113 --> 02:19.050
+(indistinct) you can get this from the lecture resource,
+
+02:19.050 --> 02:20.790
+and this we did several times in the course.
+
+02:20.790 --> 02:22.140
+We are installing apache2,
+
+02:22.140 --> 02:24.270
+downloading template from tooplate.com,
+
+02:24.270 --> 02:28.893
+extracted it, copy to var/www/html and restart apache2.
+
+02:29.910 --> 02:32.640
+Nothing new, we did this several times.
+
+02:32.640 --> 02:34.320
+Save this file.
+
+02:34.320 --> 02:37.410
+Now we need to push this file to the instance
+
+02:37.410 --> 02:39.810
+that gets created and then executed.
+
+02:39.810 --> 02:40.950
+So it'll be two step.
+
+02:40.950 --> 02:44.460
+First, push the script; second, execute the script.
+
+02:44.460 --> 02:47.070
+So execution will happen on the remote machine
+
+02:47.070 --> 02:49.410
+on the instance that gets created.
+
+02:49.410 --> 02:53.160
+So let's take a look at the provisioners in Terraform.
+
+02:53.160 --> 02:55.320
+So if you click on file provision over here,
+
+02:55.320 --> 02:57.690
+you can see this is how you can copy
+
+02:57.690 --> 02:58.800
+the file to the instance.
+
+02:58.800 --> 03:01.020
+And this is an argument
+
+03:01.020 --> 03:05.040
+in the aws_instance resource provisioner.
+
+03:05.040 --> 03:07.350
+So it's not a separate resource.
+
+03:07.350 --> 03:08.970
+Provisioner name, file;
+
+03:08.970 --> 03:11.310
+source and destination.
+
+03:11.310 --> 03:12.693
+So let's copy this.
+
+03:13.800 --> 03:15.540
+Open instance.tf file.
+
+03:15.540 --> 03:19.740
+And just after the tag block ends here,
+
+03:19.740 --> 03:20.883
+you can mention that.
+
+03:22.860 --> 03:26.160
+Keep in mind this is an argument in the resource,
+
+03:26.160 --> 03:28.410
+aws_instance, it's not a separate resource.
+
+03:28.410 --> 03:33.240
+So it should be under this, under this aws_instance block.
+
+03:33.240 --> 03:37.440
+So let's give the name of our script, which is web.sh,
+
+03:37.440 --> 03:40.050
+and the destination we want to push it to,
+
+03:40.050 --> 03:41.640
+let's say temp folder,
+
+03:41.640 --> 03:45.543
+say tmp/web.sh with the same name.
+
+03:46.470 --> 03:49.200
+Okay, now comes the execution part.
+
+03:49.200 --> 03:51.333
+So go over here, remote-exec.
+
+03:52.290 --> 03:54.720
+So you need to mention the connection information
+
+03:54.720 --> 03:57.030
+because it is going to do a login.
+
+03:57.030 --> 03:58.860
+And this is of type ssh.
+
+03:58.860 --> 04:02.790
+So it's going to do ssh to your instance, which is created.
+
+04:02.790 --> 04:05.310
+And for ssh you need to mention the username,
+
+04:05.310 --> 04:09.000
+and not the password, we are going to mention the key.
+
+04:09.000 --> 04:10.950
+We have the login key in the source code itself.
+
+04:10.950 --> 04:12.750
+So we can mention the login key path
+
+04:13.650 --> 04:15.300
+and we also need the public IP.
+
+04:15.300 --> 04:16.980
+That's how you can get the public IP
+
+04:16.980 --> 04:21.390
+self.public_ip will give the public IP of this instance.
+
+04:21.390 --> 04:24.420
+So it's going to do an ssh, and then you can, in line,
+
+04:24.420 --> 04:27.420
+you can mention the commands that you want to run.
+
+04:27.420 --> 04:29.370
+Well, we can just mention the shell command
+
+04:29.370 --> 04:30.600
+to execute the script.
+
+04:30.600 --> 04:33.363
+That's all. So let's mention the connection.
+
+04:34.200 --> 04:35.910
+So I'm saying type ssh.
+
+04:35.910 --> 04:38.580
+User, I'm giving a variable that I'm going to define
+
+04:38.580 --> 04:40.680
+in the vars.tf file.
+
+04:40.680 --> 04:42.390
+Let me save this first.
+
+04:42.390 --> 04:45.450
+Let's go to vars.tf file,
+
+04:45.450 --> 04:47.433
+and let's create another variable here.
+
+04:48.540 --> 04:51.030
+Make sure you're editing the vars.tf file
+
+04:51.030 --> 04:52.953
+for Exercise4 folder.
+
+04:54.300 --> 04:55.980
+So I've given the variable name webuser,
+
+04:55.980 --> 04:59.340
+same I have defined in this file, and the value is ubuntu.
+
+04:59.340 --> 05:02.700
+'Cause we are launching an instance with AMI ID
+
+05:02.700 --> 05:06.150
+that is of ubuntu and by default the user ubuntu,
+
+05:06.150 --> 05:07.620
+we know that.
+
+05:07.620 --> 05:09.270
+Okay, next in instance.tf file,
+
+05:09.270 --> 05:11.401
+we mentioned private_key
+
+05:11.401 --> 05:13.710
+and the key private key, right?
+
+05:13.710 --> 05:15.303
+That is the private key.
+
+05:17.070 --> 05:19.440
+So we need to mention here the content
+
+05:19.440 --> 05:21.120
+of the private key, right?
+
+05:21.120 --> 05:24.960
+Which is this one, but that will be too weird.
+
+05:24.960 --> 05:26.910
+So we are using a file function
+
+05:26.910 --> 05:28.713
+where we can mention the file path.
+
+05:29.700 --> 05:33.390
+So this file function is basically going to read the content
+
+05:33.390 --> 05:35.670
+of the file and give the output over there.
+
+05:35.670 --> 05:40.143
+So this will be replaced by this.
+
+05:41.610 --> 05:45.060
+Host, self.public_ip, that is going to get the public IP
+
+05:45.060 --> 05:47.373
+of the instance that gets created.
+
+05:48.420 --> 05:50.850
+So one more thing, make sure in the security group,
+
+05:50.850 --> 05:52.620
+22 is allowed from anywhere
+
+05:52.620 --> 05:55.620
+or update your public IP over there.
+
+05:55.620 --> 05:57.090
+If you don't want to give it anywhere,
+
+05:57.090 --> 05:59.850
+make sure you give the current public IP.
+
+05:59.850 --> 06:01.860
+Just Google what is my IPv4
+
+06:01.860 --> 06:05.190
+and give your IPv4 over there, slash 32,
+
+06:05.190 --> 06:07.683
+otherwise you can just keep it from anywhere.
+
+06:09.570 --> 06:11.613
+Okay, now final part, executing.
+
+06:12.480 --> 06:15.240
+So, provisioner remote-exec.
+
+06:15.240 --> 06:18.060
+In the block, you have to give inline,
+
+06:18.060 --> 06:21.090
+and in this square bracket you can mention
+
+06:21.090 --> 06:24.060
+the commands one-by-one separated by comma.
+
+06:24.060 --> 06:26.730
+It will make sure all your commands are in double codes
+
+06:26.730 --> 06:28.950
+and they're separated by comma.
+
+06:28.950 --> 06:31.590
+This is a list, same like Python list.
+
+06:31.590 --> 06:35.010
+So the first command that I mentioned is chmod +x.
+
+06:35.010 --> 06:37.496
+That is to give the execute permission to this.
+
+06:37.496 --> 06:38.760
+And the next one is sudo,
+
+06:38.760 --> 06:42.780
+and the path of the script which will execute the script,
+
+06:42.780 --> 06:46.770
+that's how we have seen it in the Bash scripting lectures.
+
+06:46.770 --> 06:48.210
+So how you can execute the script.
+
+06:48.210 --> 06:50.520
+So let me save this file.
+
+06:50.520 --> 06:53.250
+So make sure all the files are saved instance.tf,
+
+06:53.250 --> 06:56.373
+web.sh, vars.tf.
+
+06:57.210 --> 06:59.700
+Once again, we created web.sh file.
+
+06:59.700 --> 07:02.580
+We mentioned our executable commands over there.
+
+07:02.580 --> 07:07.050
+Make sure you have -y where you have the apt install command
+
+07:07.050 --> 07:08.520
+because the script should execute.
+
+07:08.520 --> 07:11.520
+This should not stop, otherwise the execution will fail.
+
+07:11.520 --> 07:13.920
+All right, so we mentioned the provisioner file,
+
+07:13.920 --> 07:15.420
+source and destination.
+
+07:15.420 --> 07:16.920
+We pushed the script,
+
+07:16.920 --> 07:20.310
+we give the connection information how to do ssh,
+
+07:20.310 --> 07:24.120
+and the remote-exec which will execute our script.
+
+07:24.120 --> 07:25.710
+Time to test it.
+
+07:25.710 --> 07:28.500
+So I open my Git Bash, you can open your terminal
+
+07:28.500 --> 07:31.710
+or you can do it from VS Code if you want.
+
+07:31.710 --> 07:33.303
+Go to Exercise4.
+
+07:36.510 --> 07:38.160
+And the first command we are going to run
+
+07:38.160 --> 07:40.283
+is going to be the terraform init.
+
+07:42.960 --> 07:43.860
+So it completed quickly
+
+07:43.860 --> 07:46.110
+because we copied everything from Exercise3.
+
+07:46.110 --> 07:48.030
+So it has everything.
+
+07:48.030 --> 07:50.133
+Let's do terraform format.
+
+07:51.450 --> 07:54.333
+Everything good. Let's do terraform validate.
+
+07:56.760 --> 07:57.660
+It's a success.
+
+07:57.660 --> 07:59.580
+If you have variable names different,
+
+07:59.580 --> 08:02.010
+then it will throw you the error.
+
+08:02.010 --> 08:03.933
+Finally, terraform plan.
+
+08:05.010 --> 08:07.470
+So, we can apply next.
+
+08:07.470 --> 08:10.050
+It's a completely new setup.
+
+08:10.050 --> 08:12.000
+We destroyed everything in the previous lecture,
+
+08:12.000 --> 08:14.100
+so it's completely new thing.
+
+08:14.100 --> 08:15.663
+Now, terraform apply.
+
+08:22.770 --> 08:26.013
+Okay, if you see the remote-exec is executing the script,
+
+08:27.510 --> 08:29.403
+and we can see the output also.
+
+08:35.250 --> 08:38.010
+And it says, "Apply complete!"
+
+08:38.010 --> 08:39.300
+Now we should have an instance
+
+08:39.300 --> 08:41.460
+with the website running on it.
+
+08:41.460 --> 08:42.780
+So I go to the region,
+
+08:42.780 --> 08:44.310
+North Virginia in my case.
+
+08:44.310 --> 08:46.770
+Instance, there is is instance running.
+
+08:46.770 --> 08:47.940
+Alright, the instance is running.
+
+08:47.940 --> 08:50.880
+If we check the security group rules,
+
+08:50.880 --> 08:53.940
+inbound rule HTTP 80 is allowed from anywhere.
+
+08:53.940 --> 08:56.103
+22 is also allowed from anywhere.
+
+08:57.090 --> 09:00.750
+Instance public IP, let's put it on the browser
+
+09:00.750 --> 09:03.993
+and if everything went fine we should see the website.
+
+09:06.090 --> 09:07.290
+Alright there.
+
+09:07.290 --> 09:09.810
+Now if you're not seeing it, it might take some time
+
+09:09.810 --> 09:11.370
+for the complete, you know,
+
+09:11.370 --> 09:14.040
+instant state to come up in the running state.
+
+09:14.040 --> 09:15.150
+So give like a few minutes,
+
+09:15.150 --> 09:17.310
+two, three minutes and it will be up.
+
+09:17.310 --> 09:19.920
+So you see the provisioner works, it works well,
+
+09:19.920 --> 09:22.407
+but you have to be very careful because now
+
+09:22.407 --> 09:25.230
+the Terraform cannot maintain the state of your website.
+
+09:25.230 --> 09:27.000
+For that, you need to use a separate tool
+
+09:27.000 --> 09:30.150
+or you need to be sure that you're deploying it from an AMI
+
+09:30.150 --> 09:32.040
+where everything works fine.
+
+09:32.040 --> 09:33.120
+If you're good with everything
+
+09:33.120 --> 09:34.980
+then you can say terraform destroy
+
+09:34.980 --> 09:36.783
+and delete your infrastructure.
+
+09:39.150 --> 09:40.650
+That would be all in this lecture.
+
+09:40.650 --> 09:42.200
+I will see you in the next one.

@@ -1,0 +1,901 @@
+WEBVTT
+
+1
+00:00:01.330 --> 00:00:03.226
+Hello and welcome in this lecture.
+
+2
+00:00:03.298 --> 00:00:06.354
+We will take this docker compose file and from this
+
+3
+00:00:06.392 --> 00:00:10.580
+file we will build and run our microservices together.
+
+4
+00:00:12.710 --> 00:00:14.722
+For this one, I am going to launch an EC2
+
+5
+00:00:14.746 --> 00:00:17.420
+ instance and run the build process on it.
+
+6
+00:00:18.770 --> 00:00:22.340
+You can do the same on the vagrant VM also.
+
+7
+00:00:23.450 --> 00:00:24.994
+And I will attach the Vagrant
+
+8
+00:00:25.042 --> 00:00:26.254
+file in the resource section.
+
+9
+00:00:26.302 --> 00:00:28.866
+You can use that Vagrant file to build your
+
+10
+00:00:28.928 --> 00:00:31.820
+VM and run the same process over there.
+
+11
+00:00:32.270 --> 00:00:35.982
+But since it is very slow on our local
+
+12
+00:00:36.056 --> 00:00:38.900
+VM, I'm using ec2 instance over here.
+
+13
+00:00:39.290 --> 00:00:42.034
+Now there will be multiple containers there's, DB containers
+
+14
+00:00:42.082 --> 00:00:44.686
+and all the app containers and the API gateway.
+
+15
+00:00:44.758 --> 00:00:45.462
+Everything.
+
+16
+00:00:45.656 --> 00:00:47.998
+So this instance cannot be t two micro.
+
+17
+00:00:48.034 --> 00:00:50.250
+It needs to be t3.medium.
+
+18
+00:00:51.050 --> 00:00:54.534
+And yes, there will be some charges and you
+
+19
+00:00:54.572 --> 00:00:56.540
+just need it for less than an hour.
+
+20
+00:00:57.410 --> 00:00:59.626
+So the charges will be very minute.
+
+21
+00:00:59.818 --> 00:01:03.798
+So I will launch the instance, I
+
+22
+00:01:03.824 --> 00:01:06.920
+will name it as Docker engine.
+
+23
+00:01:08.210 --> 00:01:11.974
+And I need Ubuntu AMI, Ubuntu server.
+
+24
+00:01:12.022 --> 00:01:13.340
+20 will be fine.
+
+25
+00:01:14.810 --> 00:01:18.186
+As I said, T two micro won't help here.
+
+26
+00:01:18.248 --> 00:01:24.010
+We need t3.medium, t3.medium, four GB Ram.
+
+27
+00:01:24.070 --> 00:01:26.038
+We need two CPU and Internet speed
+
+28
+00:01:26.074 --> 00:01:27.920
+will be also better on this one.
+
+29
+00:01:28.850 --> 00:01:33.018
+Key pair, I will create a key pair type
+
+30
+00:01:33.104 --> 00:01:37.400
+pem and I will name it as docker key.
+
+31
+00:01:38.330 --> 00:01:40.230
+I'll say create key pair.
+
+32
+00:01:42.470 --> 00:01:44.240
+Let me save the key pair.
+
+33
+00:01:44.810 --> 00:01:46.410
+That key pair is selected.
+
+34
+00:01:48.110 --> 00:01:49.018
+Allow SSH.
+
+35
+00:01:49.114 --> 00:01:52.770
+I will just say allow it from my IP.
+
+36
+00:01:53.450 --> 00:01:55.830
+We'll also need Http rule.
+
+37
+00:01:57.830 --> 00:02:00.318
+That is because we will access our
+
+38
+00:02:00.464 --> 00:02:02.910
+Nginx container which is the API gateway.
+
+39
+00:02:03.770 --> 00:02:06.510
+So I'll just say allow Http from the Internet.
+
+40
+00:02:08.270 --> 00:02:11.038
+Size volume size needs to be bigger
+
+41
+00:02:11.074 --> 00:02:13.266
+here at GB will not work.
+
+42
+00:02:13.328 --> 00:02:16.078
+We will need minimum 15 GB.
+
+43
+00:02:16.174 --> 00:02:17.518
+Or you can go with 20 GB
+
+44
+00:02:17.554 --> 00:02:19.460
+also, but 15 GB should be fine.
+
+45
+00:02:20.270 --> 00:02:25.558
+Just for a safe side, I'll give 20 GB type GP.
+
+46
+00:02:25.594 --> 00:02:26.622
+Two is fine.
+
+47
+00:02:26.816 --> 00:02:27.762
+Advanced detail.
+
+48
+00:02:27.836 --> 00:02:29.874
+Now we will need here docker engine
+
+49
+00:02:29.972 --> 00:02:31.770
+and we will need docker compose.
+
+50
+00:02:32.090 --> 00:02:34.926
+And we need to add Ubuntu user in the docker group.
+
+51
+00:02:34.988 --> 00:02:41.994
+So I'm going to put this script it
+
+52
+00:02:42.032 --> 00:02:45.610
+installs docker engine, installs docker-compose add's
+
+53
+00:02:45.670 --> 00:02:47.658
+ubuntu user into the docker group.
+
+54
+00:02:47.804 --> 00:02:48.766
+Three steps.
+
+55
+00:02:48.898 --> 00:02:50.082
+So copy all this.
+
+56
+00:02:50.156 --> 00:02:51.930
+This will be in the resource section.
+
+57
+00:02:53.270 --> 00:02:55.590
+So copy this and put it in user data.
+
+58
+00:02:55.760 --> 00:02:57.570
+For some reason, if this does not work.
+
+59
+00:02:57.620 --> 00:03:00.450
+You login to this EC2 instance and
+
+60
+00:03:00.560 --> 00:03:03.838
+execute the steps to install docker engine and docker
+
+61
+00:03:03.874 --> 00:03:07.218
+compose and add Ubuntu user into docker group.
+
+62
+00:03:07.244 --> 00:03:08.730
+You can do this manually. Also.
+
+63
+00:03:08.780 --> 00:03:11.454
+After the launch, let's launch this
+
+64
+00:03:11.492 --> 00:03:15.546
+instance and we will wait.
+
+65
+00:03:15.608 --> 00:03:16.906
+It's going to launch.
+
+66
+00:03:17.098 --> 00:03:19.438
+Come in and running state and then execute our script.
+
+67
+00:03:19.474 --> 00:03:22.100
+So wait like five to ten minutes and then log in.
+
+68
+00:03:25.470 --> 00:03:27.622
+Okay, I waited for a few minutes and
+
+69
+00:03:27.756 --> 00:03:29.580
+now I'm going to log into this.
+
+70
+00:03:33.730 --> 00:03:44.750
+ssh -i downloads, docker key, ubuntu and the IP
+
+71
+00:03:48.170 --> 00:03:49.520
+Okay, I am in.
+
+72
+00:03:50.390 --> 00:03:51.318
+And.....
+
+73
+00:03:51.344 --> 00:03:54.210
+Let me run first ID command which would verify, yes,
+
+74
+00:03:54.260 --> 00:03:57.682
+the user is in the docker group and the docker
+
+75
+00:03:57.706 --> 00:04:00.250
+group will only come if you have Docker installed.
+
+76
+00:04:00.370 --> 00:04:07.678
+And you should also have Docker Compose, right?
+
+77
+00:04:07.824 --> 00:04:09.202
+Compose is also there.
+
+78
+00:04:09.336 --> 00:04:11.510
+So all we need to do is it's pretty straightforward.
+
+79
+00:04:11.570 --> 00:04:14.698
+We just need to fetch the source code and use
+
+80
+00:04:14.724 --> 00:04:18.362
+the Docker Compose file to build and on our container.
+
+81
+00:04:18.505 --> 00:04:24.130
+So we'll say git clone, get the URL.
+
+82
+00:04:30.190 --> 00:04:32.800
+You should have the repository clone here.
+
+83
+00:04:33.430 --> 00:04:37.790
+And this is what we saw in the last lecture in Vs code.
+
+84
+00:04:37.960 --> 00:04:41.162
+So Docker compose file has build step
+
+85
+00:04:41.236 --> 00:04:43.166
+and how to run the container option.
+
+86
+00:04:43.228 --> 00:04:49.420
+Also we are going to say Docker Compose Build.
+
+87
+00:04:51.130 --> 00:04:53.114
+First we will build, and then after
+
+88
+00:04:53.152 --> 00:04:54.378
+that we will run the container.
+
+89
+00:04:54.414 --> 00:04:56.546
+Because build takes a very long time.
+
+90
+00:04:56.608 --> 00:04:59.450
+We have multiple microservices.
+
+91
+00:05:01.030 --> 00:05:02.742
+So let's click on Docker.
+
+92
+00:05:02.826 --> 00:05:05.042
+Let's hit Docker Compose build.
+
+93
+00:05:05.116 --> 00:05:06.674
+And this will take a very long time.
+
+94
+00:05:06.712 --> 00:05:11.140
+So once you hit build, take your time.
+
+95
+00:05:12.370 --> 00:05:14.474
+Or maybe if you want to take a break, take a break.
+
+96
+00:05:14.512 --> 00:05:15.818
+If you want to look at all
+
+97
+00:05:15.844 --> 00:05:18.722
+that output, you're free to watch.
+
+98
+00:05:18.796 --> 00:05:20.198
+I'm going to pause this video
+
+99
+00:05:20.284 --> 00:05:24.230
+and start when this build completes.
+
+100
+00:05:26.290 --> 00:05:28.434
+All right, so the build process completed.
+
+101
+00:05:28.482 --> 00:05:34.950
+And now we should have images.
+
+102
+00:05:36.110 --> 00:05:39.666
+So we have three images client, which is
+
+103
+00:05:39.728 --> 00:05:43.350
+our angular app hosted in NGINX container.
+
+104
+00:05:44.510 --> 00:05:51.694
+Web API, which is Java hosted in JDK container. emart
+
+105
+00:05:51.742 --> 00:05:57.870
+API, which is NodeJS running on a node JS container.
+
+106
+00:05:58.790 --> 00:06:02.310
+And you see some other containers over there,
+
+107
+00:06:02.420 --> 00:06:05.622
+sorry, images which does not have any name.
+
+108
+00:06:05.696 --> 00:06:08.250
+These are the build images.
+
+109
+00:06:08.870 --> 00:06:10.710
+So when you do multi stage,
+
+110
+00:06:11.270 --> 00:06:13.530
+you'll also see your build images.
+
+111
+00:06:14.150 --> 00:06:16.746
+Now all we need to do is to run them together.
+
+112
+00:06:16.868 --> 00:06:23.938
+Docker Compose up, D to run it in the background.
+
+113
+00:06:23.974 --> 00:06:24.762
+If you want to run it in
+
+114
+00:06:24.776 --> 00:06:28.230
+the foreground, don't use Hyphen D option.
+
+115
+00:06:28.280 --> 00:06:31.042
+So you can see all the output of all the containers.
+
+116
+00:06:31.126 --> 00:06:34.410
+And all means these three images.
+
+117
+00:06:35.030 --> 00:06:37.066
+From these three images will have three containers.
+
+118
+00:06:37.138 --> 00:06:39.378
+Then we have NGINX container, we have a
+
+119
+00:06:39.404 --> 00:06:42.330
+Mongo container and we have a MySQL container,
+
+120
+00:06:44.030 --> 00:06:46.520
+as we have explained in the previous video.
+
+121
+00:06:47.870 --> 00:06:50.478
+If you have doubt in this, once again, take a look
+
+122
+00:06:50.504 --> 00:06:54.440
+at the Docker Compose file and then do Docker Compose up.
+
+123
+00:06:57.630 --> 00:07:02.630
+So it's pulling the Mongo images, mongo, MySQL and NGINX
+
+124
+00:07:02.690 --> 00:07:06.154
+it will pull and it will run the containers from
+
+125
+00:07:06.192 --> 00:07:09.130
+that and plus the three images that are already built,
+
+126
+00:07:09.180 --> 00:07:11.640
+which is going to directly run containers from them.
+
+127
+00:07:14.290 --> 00:07:16.466
+And I have not used Hyphen D option.
+
+128
+00:07:16.528 --> 00:07:18.998
+So everything you will see on the foreground, you
+
+129
+00:07:19.024 --> 00:07:22.686
+will see Web API, that is Java EMart DB,
+
+130
+00:07:22.758 --> 00:07:25.406
+Web API, all the containers you see coming up
+
+131
+00:07:25.468 --> 00:07:27.520
+and their logs are coming on the screen.
+
+132
+00:07:31.930 --> 00:07:33.640
+Okay, I think it's up.
+
+133
+00:07:34.210 --> 00:07:37.458
+And now we will access the API
+
+134
+00:07:37.494 --> 00:07:40.130
+gateway, which is the NGINX container.
+
+135
+00:07:40.870 --> 00:07:47.610
+And we already did port mapping nginx container port
+
+136
+00:07:47.660 --> 00:07:49.702
+80, map with port 80 of the container.
+
+137
+00:07:49.726 --> 00:07:52.902
+So we just need to access our docker engine, which
+
+138
+00:07:52.916 --> 00:07:55.782
+is the ec2 instance on port 80, and we
+
+139
+00:07:55.796 --> 00:07:58.098
+should see the front end, and then we can log
+
+140
+00:07:58.124 --> 00:08:00.200
+in and see the back end services as well.
+
+141
+00:08:01.250 --> 00:08:04.340
+Okay, so I'm taking the IP address of my docker engine.
+
+142
+00:08:05.030 --> 00:08:08.778
+I put it in the browser and just hit Enter.
+
+143
+00:08:08.864 --> 00:08:17.150
+So basically it's going to do Http and colon
+
+144
+00:08:17.210 --> 00:08:19.250
+port 80, which I don't even need to specify
+
+145
+00:08:19.310 --> 00:08:21.914
+because that's the default port for Http.
+
+146
+00:08:22.082 --> 00:08:27.250
+But let's hit Enter and we see it's loading.
+
+147
+00:08:27.930 --> 00:08:29.242
+Okay, it's up and running.
+
+148
+00:08:29.316 --> 00:08:33.070
+You can click on Register, give your details,
+
+149
+00:08:34.409 --> 00:08:37.154
+any fake email address and a password.
+
+150
+00:08:37.322 --> 00:08:40.500
+It will ask some other information like ID number.
+
+151
+00:08:41.610 --> 00:08:46.066
+So fill in this information, say Register and
+
+152
+00:08:46.128 --> 00:08:49.920
+I then log in and I'm in.
+
+153
+00:08:51.450 --> 00:08:53.606
+And there is the book smart.
+
+154
+00:08:53.678 --> 00:08:54.850
+Try Book smart.
+
+155
+00:08:56.610 --> 00:08:57.540
+Go back.
+
+156
+00:09:01.150 --> 00:09:03.678
+Now, this is a sample application, so it's not fully
+
+157
+00:09:03.714 --> 00:09:07.794
+functional, but we see all the services are connected.
+
+158
+00:09:07.842 --> 00:09:09.470
+That's the books API.
+
+159
+00:09:10.030 --> 00:09:11.870
+And what you see in front of your
+
+160
+00:09:11.920 --> 00:09:13.898
+screen right now, these pages are coming from
+
+161
+00:09:13.924 --> 00:09:17.814
+the Nginx angular content and the login.
+
+162
+00:09:17.862 --> 00:09:20.942
+All that intelligent work coming
+
+163
+00:09:21.016 --> 00:09:22.866
+through the API of node.
+
+164
+00:09:22.998 --> 00:09:25.000
+So all the services are working together.
+
+165
+00:09:25.330 --> 00:09:26.560
+Let's go back.
+
+166
+00:09:27.550 --> 00:09:29.066
+Now, I'm going to do here control
+
+167
+00:09:29.128 --> 00:09:31.670
+C, which will stop all our containers.
+
+168
+00:09:35.450 --> 00:09:37.374
+And now the right way to run
+
+169
+00:09:37.472 --> 00:09:39.774
+it will be using Hyphen D option.
+
+170
+00:09:39.872 --> 00:09:41.922
+So it starts all the container again
+
+171
+00:09:41.996 --> 00:09:45.678
+and runs them in the background there.
+
+172
+00:09:45.824 --> 00:09:48.450
+And then you can say docker PS,
+
+173
+00:09:49.070 --> 00:09:51.080
+see all your containers running there.
+
+174
+00:09:51.770 --> 00:09:53.394
+If you want, you can check logs of
+
+175
+00:09:53.432 --> 00:09:56.598
+individual container, docker logs and the container name.
+
+176
+00:09:56.684 --> 00:10:00.126
+You can see the logs, take some time, play with it.
+
+177
+00:10:00.188 --> 00:10:02.614
+docker-compose ps, docker-compose top
+
+178
+00:10:02.662 --> 00:10:04.590
+top, use all those commands.
+
+179
+00:10:05.210 --> 00:10:09.798
+Once you're good, then you can do the clean up process.
+
+180
+00:10:09.884 --> 00:10:12.198
+You're going to say docker compose down, which
+
+181
+00:10:12.224 --> 00:10:15.090
+will stop and remove all the containers.
+
+182
+00:10:17.390 --> 00:10:19.590
+Stopped and removed all the containers.
+
+183
+00:10:20.570 --> 00:10:22.830
+If you want, you can remove the docker images.
+
+184
+00:10:24.050 --> 00:10:27.642
+Now I know docker compose build.
+
+185
+00:10:27.716 --> 00:10:29.742
+The build step took long time.
+
+186
+00:10:29.876 --> 00:10:31.758
+And if you're thinking if it takes that much
+
+187
+00:10:31.784 --> 00:10:34.774
+longer every time, no, we already have the images.
+
+188
+00:10:34.822 --> 00:10:36.270
+Now, whenever developer makes a code
+
+189
+00:10:36.320 --> 00:10:38.060
+change, we pull the changes.
+
+190
+00:10:40.470 --> 00:10:43.342
+Right now there are no changes, but if
+
+191
+00:10:43.356 --> 00:10:45.346
+there are any changes, we pull the changes
+
+192
+00:10:45.528 --> 00:10:50.100
+and we do docker-compose build.
+
+193
+00:10:51.330 --> 00:10:53.054
+Now, it's not going to build from the scratch.
+
+194
+00:10:53.102 --> 00:10:56.258
+There's already image layers which are already cached,
+
+195
+00:10:56.414 --> 00:10:58.620
+so only the changes will be built.
+
+196
+00:10:59.550 --> 00:11:00.842
+You see, that was faster.
+
+197
+00:11:00.866 --> 00:11:02.314
+I mean, we did not make any change,
+
+198
+00:11:02.352 --> 00:11:04.162
+but even though any changes are there, it
+
+199
+00:11:04.176 --> 00:11:05.686
+will be small changes, simple changes.
+
+200
+00:11:05.748 --> 00:11:08.282
+And in micro services, it's always encouraged
+
+201
+00:11:08.306 --> 00:11:10.966
+to make small, small changes multiple times,
+
+202
+00:11:11.028 --> 00:11:13.560
+rather than making big and huge changes.
+
+203
+00:11:14.490 --> 00:11:16.858
+So any small change, you build the image once
+
+204
+00:11:16.884 --> 00:11:19.680
+again and you run the container and test it.
+
+205
+00:11:20.010 --> 00:11:22.810
+And this all part can be automated
+
+206
+00:11:23.130 --> 00:11:25.210
+by using a CI CD pipeline.
+
+207
+00:11:26.670 --> 00:11:27.922
+Okay, so as I said in the
+
+208
+00:11:27.936 --> 00:11:30.442
+previous lecture, also take your time.
+
+209
+00:11:30.576 --> 00:11:34.454
+Go through the code again, stop the container,
+
+210
+00:11:34.502 --> 00:11:36.526
+remove images, run the build process again.
+
+211
+00:11:36.588 --> 00:11:37.500
+Test it.
+
+212
+00:11:38.610 --> 00:11:41.170
+Get comfortable with all these processes.
+
+213
+00:11:42.570 --> 00:11:44.674
+Once you're done, make sure you
+
+214
+00:11:44.712 --> 00:11:46.390
+stop and remove your docker engine.
+
+215
+00:11:46.440 --> 00:11:48.070
+Because it's T three medium.
+
+216
+00:11:49.470 --> 00:11:51.360
+T three medium we have here.
+
+217
+00:11:53.370 --> 00:11:55.320
+So just stop it.
+
+218
+00:11:56.310 --> 00:11:57.982
+If you want to terminate it, you can terminate it.
+
+219
+00:11:57.996 --> 00:12:00.360
+But if you just stop it, that is also fine.
+
+220
+00:12:01.170 --> 00:12:02.746
+If it's in a stop state,
+
+221
+00:12:02.868 --> 00:12:04.430
+there won't be any extra bills.
+
+222
+00:12:04.490 --> 00:12:07.570
+Only when you run it that time, you will see charges.
+
+223
+00:12:08.190 --> 00:12:10.380
+So I'm just going to stop it?
+
+224
+00:12:14.890 --> 00:12:17.646
+Alright then, that is all in this lecture.
+
+225
+00:12:17.718 --> 00:12:19.040
+I will see you in the next one.

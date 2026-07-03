@@ -1,0 +1,1711 @@
+WEBVTT
+
+00:00.450 --> 00:03.663
+Instructor: Hello and welcome to Ansible Roles session.
+
+00:04.620 --> 00:07.530
+Before we get and create Ansible roles
+
+00:07.530 --> 00:09.960
+let's understand why do we do it
+
+00:09.960 --> 00:12.330
+and how does it really work?
+
+00:12.330 --> 00:15.930
+Ansible rules is to simplify your playbook content.
+
+00:15.930 --> 00:18.420
+Now we have a playbook that has so many things.
+
+00:18.420 --> 00:22.020
+We have the global declaration where we can mention options
+
+00:22.020 --> 00:24.720
+like become, or even variables.
+
+00:24.720 --> 00:26.670
+We have lot of variables.
+
+00:26.670 --> 00:30.150
+We can have them inside the playbook or the outside,
+
+00:30.150 --> 00:33.420
+like in group vars or the host vars file.
+
+00:33.420 --> 00:37.053
+We have a lot of tasks, files that we are pushing,
+
+00:37.890 --> 00:40.590
+templates, handlers,
+
+00:40.590 --> 00:42.240
+and you could have many more things.
+
+00:42.240 --> 00:45.030
+We have seen now already playbook
+
+00:45.030 --> 00:46.980
+where we are provisioning a service, NTP,
+
+00:46.980 --> 00:49.080
+which is also very simple service
+
+00:49.080 --> 00:51.660
+but already there's too much of data in our playbook
+
+00:51.660 --> 00:53.760
+which is becoming difficult to manage now.
+
+00:54.690 --> 00:56.280
+Already our directory structure
+
+00:56.280 --> 00:57.690
+is looking something like this.
+
+00:57.690 --> 01:00.150
+We have configuration file, we have files directory.
+
+01:00.150 --> 01:01.770
+We can push some files.
+
+01:01.770 --> 01:04.893
+We have inventory, templates, playbooks,
+
+01:07.380 --> 01:10.320
+and so many thing in our playbooks, right?
+
+01:10.320 --> 01:11.930
+Like we can have variables,
+
+01:11.930 --> 01:16.500
+we have a lot of tasks, handlers, templates, copy module.
+
+01:16.500 --> 01:21.500
+To make this code more manageable we can use Ansible roles,
+
+01:21.960 --> 01:26.070
+which really simplifies or segregate all the content
+
+01:26.070 --> 01:27.213
+from our playbook.
+
+01:28.710 --> 01:31.530
+But first we need to identify this role
+
+01:31.530 --> 01:34.140
+of servers that are in in our infrastructure.
+
+01:34.140 --> 01:37.260
+So you may have some computers that are playing
+
+01:37.260 --> 01:41.040
+different kinds of roles, some MySQL, some Tomcat
+
+01:41.040 --> 01:43.680
+some Build Server, some Apache
+
+01:43.680 --> 01:45.780
+and common setup like what we did.
+
+01:45.780 --> 01:48.810
+NTP could be common across all your servers,
+
+01:48.810 --> 01:51.840
+or a monitoring agent, or a logging agent.
+
+01:51.840 --> 01:55.050
+So some server may play a very common role on every server,
+
+01:55.050 --> 01:56.730
+You'll have NTP monitoring agents,
+
+01:56.730 --> 02:00.090
+some configuration as per your organization standard.
+
+02:00.090 --> 02:03.330
+Some will be playing very specific role like database MySQL
+
+02:03.330 --> 02:07.410
+or database Oracle or application server like Tomcat.
+
+02:07.410 --> 02:08.760
+So if you identify the roles
+
+02:08.760 --> 02:12.753
+then you can create a roles directory structure.
+
+02:14.010 --> 02:15.660
+So you create a directory called roles.
+
+02:15.660 --> 02:17.070
+Inside that you create a directory
+
+02:17.070 --> 02:19.500
+with the role name.
+
+02:19.500 --> 02:22.950
+That will have sub directories where you can distribute
+
+02:22.950 --> 02:24.300
+the content of your playbook.
+
+02:24.300 --> 02:27.570
+Like tasks, you have main.yml file,
+
+02:27.570 --> 02:29.490
+which will have only the task.
+
+02:29.490 --> 02:31.620
+Templates will only have the template.
+
+02:31.620 --> 02:36.480
+Vars will only have the variables in main.yml file.
+
+02:36.480 --> 02:38.490
+Files will have only the files
+
+02:38.490 --> 02:40.350
+that you're pushing through copy module.
+
+02:40.350 --> 02:44.130
+Handlers will have only the handlers in main.yml file.
+
+02:44.130 --> 02:47.400
+Now here we are distributing our playbook content
+
+02:47.400 --> 02:49.320
+into different directories.
+
+02:49.320 --> 02:54.210
+Benefits? Well it's easy to access and make changes.
+
+02:54.210 --> 02:57.810
+It gives modular structure to your Ansible playbook,
+
+02:57.810 --> 02:59.640
+or your Ansible code.
+
+02:59.640 --> 03:03.930
+And this we very specifically use for reusability.
+
+03:03.930 --> 03:07.440
+If you want to reuse this code, like for let's say
+
+03:07.440 --> 03:10.290
+for most of your project in your organization
+
+03:10.290 --> 03:13.200
+you have Tomcat server.
+
+03:13.200 --> 03:15.870
+So we'll create a role for Tomcat setup
+
+03:15.870 --> 03:17.850
+that can be used in different different projects.
+
+03:17.850 --> 03:21.810
+So role is really at the organization level we create
+
+03:21.810 --> 03:24.570
+so we can reuse it into different different projects
+
+03:24.570 --> 03:26.910
+or even different different environments.
+
+03:26.910 --> 03:29.490
+If you are not doing reusability
+
+03:29.490 --> 03:32.670
+then there is no use of creating roles.
+
+03:32.670 --> 03:35.340
+So let's see how we can create roles
+
+03:35.340 --> 03:37.683
+for our playbook we have created so far.
+
+03:40.770 --> 03:42.930
+Okay, so for this one I'm going to create
+
+03:42.930 --> 03:47.610
+exercise13 to exercise14.
+
+03:47.610 --> 03:49.773
+Let's get into exercise14.
+
+03:53.640 --> 03:56.040
+And I'm going to add a few more tasks in the playbook
+
+03:56.040 --> 04:00.000
+and variable also, that is just to complicate our playbook
+
+04:00.000 --> 04:03.240
+so we can simplify it by using roles.
+
+04:03.240 --> 04:05.313
+So let's open the playbook.
+
+04:07.710 --> 04:10.833
+I'm going to use a copy module and copy a file.
+
+04:12.810 --> 04:17.810
+I simply say Dump file.
+
+04:18.273 --> 04:20.220
+Then I use copy module,
+
+04:20.220 --> 04:25.220
+and I'm going to say files: files/myfile.txt.
+
+04:30.510 --> 04:35.510
+And dest /tmp/myfile.txt, right?
+
+04:43.110 --> 04:44.950
+The source does not exist
+
+04:46.320 --> 04:48.360
+but we'll create that in a moment.
+
+04:48.360 --> 04:50.133
+Let's add one more thing.
+
+04:52.410 --> 04:54.840
+For this task, which creates a folder,
+
+04:54.840 --> 04:58.203
+I'm going to give here instead of this variable.
+
+05:02.307 --> 05:05.460
+I'll say mydir, and this variable
+
+05:05.460 --> 05:07.260
+I'm going to define in the playbook.
+
+05:11.220 --> 05:13.050
+Now generally we don't do it,
+
+05:13.050 --> 05:16.080
+it's better we define out of the playbook.
+
+05:16.080 --> 05:19.683
+but this is just, I'm complicating the playbook.
+
+05:21.810 --> 05:24.273
+No, this is vars, not var.
+
+05:26.370 --> 05:28.563
+I will give the variable name as dir.
+
+05:30.630 --> 05:31.830
+I'll say dir1:
+
+05:38.385 --> 05:43.320
+/opt/dir22, anything you can give
+
+05:43.320 --> 05:46.260
+is simply going to create that directory
+
+05:46.260 --> 05:49.440
+by using the file module, okay?
+
+05:49.440 --> 05:54.440
+And there's an extra space here, let me remove that.
+
+05:55.380 --> 05:57.063
+Okay, let's save and quit.
+
+05:58.110 --> 06:00.453
+So anything, add some variable.
+
+06:01.590 --> 06:04.840
+Yeah, use it anywhere in your playbook if you want, okay?
+
+06:04.840 --> 06:07.110
+And we have to create the files folder.
+
+06:07.110 --> 06:08.880
+For me, the files folder exists,
+
+06:08.880 --> 06:11.730
+if it's not there for you, create the files folder,
+
+06:11.730 --> 06:16.260
+and inside that, let's create the file, myfile.txt,
+
+06:16.260 --> 06:17.870
+going to say myfile.txt,
+
+06:20.580 --> 06:22.467
+and put whatever content you want.
+
+06:22.467 --> 06:23.520
+I'm just going to put
+
+06:23.520 --> 06:26.943
+some special characters here, nothing else.
+
+06:28.530 --> 06:29.940
+Save and quit,
+
+06:29.940 --> 06:32.073
+and let's test the playbook.
+
+06:39.060 --> 06:41.130
+So in our playbook we have variables,
+
+06:41.130 --> 06:43.830
+in our playbook we have files,
+
+06:43.830 --> 06:47.700
+we have templates, we have tasks, we have handlers.
+
+06:47.700 --> 06:49.890
+So understand, right, why we're putting all this,
+
+06:49.890 --> 06:53.853
+because we are going to simplify this in two roles.
+
+06:55.230 --> 06:56.730
+Okay, got an error.
+
+06:56.730 --> 06:59.340
+Undefined variable, mydir is undefined.
+
+06:59.340 --> 07:03.363
+Let's see, I think I gave the wrong variable name.
+
+07:05.070 --> 07:09.120
+The variable was supposed to be mydir, sorry, my bad.
+
+07:09.120 --> 07:10.260
+But you know what happens
+
+07:10.260 --> 07:12.257
+when you give wrong variable name right?
+
+07:12.257 --> 07:14.580
+In the task I have given variable is mydir,
+
+07:14.580 --> 07:16.050
+I have not defined that variable.
+
+07:16.050 --> 07:17.820
+I give different name.
+
+07:17.820 --> 07:19.803
+So obviously it will not work.
+
+07:23.970 --> 07:27.300
+Okay, another error, yes, SRC,
+
+07:27.300 --> 07:29.940
+or content I need to give in the copy module
+
+07:29.940 --> 07:33.333
+I gave, what's wrong with me, files here.
+
+07:34.740 --> 07:39.430
+I have to give here SRC.
+
+07:39.430 --> 07:41.910
+Okay, now instead of rerecording, I thought, you know,
+
+07:41.910 --> 07:43.740
+I'll keep this one, these two errors.
+
+07:43.740 --> 07:47.550
+So you'll also see if this kinds of error happens, you know
+
+07:47.550 --> 07:49.170
+what does that mean, right?
+
+07:49.170 --> 07:53.640
+This task was expecting, the copy module was expecting,
+
+07:53.640 --> 07:56.820
+source or content but we have not defined anything,
+
+07:56.820 --> 07:58.920
+neither source nor content.
+
+07:58.920 --> 08:03.210
+And that's a mandatory option for the copy module.
+
+08:03.210 --> 08:04.353
+So now we gave it,
+
+08:08.400 --> 08:09.840
+okay, fine, right?
+
+08:09.840 --> 08:11.907
+The playbook worked, okay?
+
+08:11.907 --> 08:14.580
+And we have enough material in our repository,
+
+08:14.580 --> 08:16.020
+says 14 is our repository.
+
+08:16.020 --> 08:21.020
+Let's install a tree in optional package, aot install tree.
+
+08:22.950 --> 08:24.783
+So we can see it in a tree format.
+
+08:25.710 --> 08:30.583
+Alright, let's do cd .., and we'll see tree exercise 14.
+
+08:33.630 --> 08:35.850
+Okay, so we have Ansible configuration file,
+
+08:35.850 --> 08:38.136
+we have files folder, we have group vars,
+
+08:38.136 --> 08:39.630
+we have host_vars, we have templates
+
+08:39.630 --> 08:41.610
+we have the playbook, right?
+
+08:41.610 --> 08:44.070
+Most of these things will get simplified
+
+08:44.070 --> 08:47.170
+and it's very easy to write a role
+
+08:48.630 --> 08:51.210
+after you have written the playbook,
+
+08:51.210 --> 08:53.400
+for a working playbook I mean to say.
+
+08:53.400 --> 08:56.040
+Writing roles from scratch,
+
+08:56.040 --> 08:59.160
+some task, we need to do a lot of things,
+
+08:59.160 --> 09:01.230
+but if you have existing working repository
+
+09:01.230 --> 09:04.530
+of Ansible playbook, converting it into roles is very easy.
+
+09:04.530 --> 09:07.803
+All you need to do is create a folder named roles,
+
+09:09.960 --> 09:11.913
+get into that roles folder,
+
+09:13.500 --> 09:17.310
+and you have to run the command ansible-galaxy init,
+
+09:19.350 --> 09:20.400
+and the role name.
+
+09:20.400 --> 09:25.400
+So we will say post-install, right, as the role name.
+
+09:27.060 --> 09:28.320
+You can give role name anything,
+
+09:28.320 --> 09:30.450
+you have to just mention then the same role name
+
+09:30.450 --> 09:32.403
+in the playbook which you're executing.
+
+09:34.770 --> 09:36.480
+Okay, so we have the tree command.
+
+09:36.480 --> 09:39.123
+Let's run the tree command here, tree, hit Enter.
+
+09:40.350 --> 09:43.170
+You see it created all that folder structure for us.
+
+09:43.170 --> 09:45.690
+Now we are going to simply copy things.
+
+09:45.690 --> 09:47.490
+So starting with vars,
+
+09:47.490 --> 09:51.170
+we have vars folder, in that we have main.yml.
+
+09:51.170 --> 09:53.913
+So we have roles in group vars.
+
+09:55.500 --> 09:58.363
+Wait, not here, I need to go one level up cd ...
+
+10:00.060 --> 10:02.520
+All right, so cat group-vars/all file.
+
+10:02.520 --> 10:03.570
+We have variables here.
+
+10:03.570 --> 10:06.330
+Let's copy all these variables,
+
+10:06.330 --> 10:11.330
+and let's open roles/post-install/vars/main.yml.
+
+10:13.710 --> 10:18.710
+And in here we are going to just paste this, okay?
+
+10:20.040 --> 10:22.893
+We have also variable in the playbook,
+
+10:23.850 --> 10:26.223
+cat provisioning.yml.
+
+10:27.480 --> 10:29.730
+I shouldn't have done cat, we could have done
+
+10:30.630 --> 10:34.170
+this variable, right?
+
+10:34.170 --> 10:38.253
+And put that again in the variable file.
+
+10:42.810 --> 10:45.000
+Okay, so we moved our variables.
+
+10:45.000 --> 10:47.490
+I'm going to remove group_vars file.
+
+10:47.490 --> 10:49.443
+I'm going to remove host_vars also.
+
+10:51.960 --> 10:53.880
+Okay, I'm trying to make things more cleaner.
+
+10:53.880 --> 10:55.710
+I copied the variables.
+
+10:55.710 --> 10:59.090
+Okay, now we have files.
+
+10:59.090 --> 11:03.653
+So I'm going to copy all the files to roles,
+
+11:06.300 --> 11:09.153
+the role name, files.
+
+11:11.130 --> 11:13.710
+I'm going to copy all the templates
+
+11:13.710 --> 11:18.473
+to roles/post-install/templates, okay?
+
+11:23.790 --> 11:25.800
+Now we have the playbook itself
+
+11:25.800 --> 11:27.450
+that contains so many things.
+
+11:27.450 --> 11:31.143
+We are going to do cat to the playbook.
+
+11:32.910 --> 11:34.500
+And first let's start with the handle.
+
+11:34.500 --> 11:37.863
+Let's take this handlers, copy all this,
+
+11:38.880 --> 11:43.880
+and let's open roles/post-install/handlers/main.yml file.
+
+11:45.870 --> 11:47.343
+Okay? The text goes there.
+
+11:50.660 --> 11:52.830
+And that's paste the handlers over there.
+
+11:52.830 --> 11:57.030
+Now see this is in YAML format, right?
+
+11:57.030 --> 11:58.440
+This is list of handlers.
+
+11:58.440 --> 12:00.500
+So there should not be all this space here
+
+12:00.500 --> 12:01.860
+in the beginning, right?
+
+12:01.860 --> 12:04.110
+How many space we have, let me count it with.
+
+12:05.070 --> 12:09.240
+So one, two, three, four, four space.
+
+12:09.240 --> 12:11.400
+I'm going replace all those spaces
+
+12:11.400 --> 12:13.980
+from the beginning with nothing.
+
+12:13.980 --> 12:15.960
+And I'm going to do it in Vim editor.
+
+12:15.960 --> 12:20.960
+So :%s/, and do a caret.
+
+12:26.190 --> 12:29.130
+One, two, three, four,
+
+12:29.130 --> 12:33.333
+replace it with nothing and hit Enter.
+
+12:34.320 --> 12:36.120
+See that, all the four lines
+
+12:36.120 --> 12:37.710
+from the beginning is replaced with nothing.
+
+12:37.710 --> 12:40.083
+So basically removed the beginning four lines.
+
+12:41.730 --> 12:45.600
+Now let's take the task, all the task, a lot of task.
+
+12:45.600 --> 12:48.213
+So let's copy all the task.
+
+12:52.710 --> 12:54.660
+Okay, exactly to here.
+
+12:54.660 --> 12:59.660
+And then let's open the task folder, main.yml file.
+
+13:00.623 --> 13:02.700
+This is the most important one actually.
+
+13:02.700 --> 13:07.170
+When we execute the role, this file gets executed task,
+
+13:07.170 --> 13:09.630
+and when the task needs all those handlers
+
+13:09.630 --> 13:12.600
+and variable those things will be called, right?
+
+13:12.600 --> 13:14.163
+So paste the content,
+
+13:16.230 --> 13:21.230
+and then same thing, :%s/ caret, one, two, three, four,
+
+13:26.220 --> 13:30.180
+four, forward slash, and a forward slash, right?
+
+13:30.180 --> 13:31.740
+In between those forward slash, nothing,
+
+13:31.740 --> 13:33.123
+so replace it with nothing.
+
+13:34.530 --> 13:36.813
+Okay, done, 63 lines at once.
+
+13:39.120 --> 13:40.110
+All right, that was interesting.
+
+13:40.110 --> 13:43.863
+Now let's open the playbook and let's go the beginning.
+
+13:45.090 --> 13:47.370
+So variables we have removed, right?
+
+13:47.370 --> 13:48.570
+So we have moved.
+
+13:48.570 --> 13:51.540
+So now we can remove these variables from here.
+
+13:51.540 --> 13:53.400
+Task we have removed.
+
+13:53.400 --> 13:58.263
+So I'm going to remove all the task and even the handlers.
+
+13:59.970 --> 14:03.630
+Okay, glad I stopped at the right place.
+
+14:03.630 --> 14:06.207
+And now we have to say here, roles:,
+
+14:07.650 --> 14:08.843
+and you have to give the list of roles.
+
+14:08.843 --> 14:11.160
+You can give as many as roles we want.
+
+14:11.160 --> 14:12.210
+We have just one role,
+
+14:12.210 --> 14:15.513
+we're going to say - post-install.
+
+14:16.440 --> 14:17.460
+It's in a list format.
+
+14:17.460 --> 14:20.070
+So you have multiple roles, you can keep doing that,
+
+14:20.070 --> 14:23.160
+hyphen and the role name in the same format.
+
+14:23.160 --> 14:25.353
+And let's save and quit this.
+
+14:29.077 --> 14:31.200
+Okay? Now look at the our playbook, right?
+
+14:31.200 --> 14:34.560
+It's now so simple, right?
+
+14:34.560 --> 14:37.200
+And the directory structure is also looking good now.
+
+14:37.200 --> 14:39.930
+Okay, we don't need this files
+
+14:39.930 --> 14:44.190
+and we don't need this templates, okay.
+
+14:44.190 --> 14:45.750
+We are not going to execute the playbook now,
+
+14:45.750 --> 14:47.610
+we have one more thing to do.
+
+14:47.610 --> 14:49.293
+Let's open the playbook.
+
+14:50.700 --> 14:52.410
+Oh, sorry, not the playbook.
+
+14:52.410 --> 14:57.410
+We have to open the task roles, role name tasks/main.yml.
+
+15:03.870 --> 15:07.440
+Okay now template and copy module are smart enough
+
+15:07.440 --> 15:09.360
+to know where to look for templates
+
+15:09.360 --> 15:10.620
+and where to look for files
+
+15:10.620 --> 15:13.650
+so we don't need to give here templates, slash,
+
+15:13.650 --> 15:15.120
+the file name, okay?
+
+15:15.120 --> 15:16.350
+It knows the structure,
+
+15:16.350 --> 15:19.380
+so we have to just give the template name.
+
+15:19.380 --> 15:21.030
+It is going to, by default,
+
+15:21.030 --> 15:24.090
+look for templates folder in the roles.
+
+15:24.090 --> 15:25.260
+In the roles structure
+
+15:25.260 --> 15:27.420
+it will find the templates folder.
+
+15:27.420 --> 15:29.870
+In that, we look for the template with this name.
+
+15:30.810 --> 15:32.880
+Okay, one more thing we have to do, actually,
+
+15:32.880 --> 15:35.733
+the template should end with .j2.
+
+15:36.750 --> 15:40.440
+That's not mandatory, but a standard.
+
+15:40.440 --> 15:45.123
+So we have to replace that with .j2, here also.
+
+15:46.320 --> 15:49.980
+And remove this template in the beginning.
+
+15:49.980 --> 15:51.360
+And the file name also,
+
+15:51.360 --> 15:53.110
+obviously we have to rename it .j2.
+
+15:55.200 --> 15:56.880
+Okay? Save and quit this.
+
+15:56.880 --> 15:59.940
+Oh, in the files also we have copy module, right?
+
+15:59.940 --> 16:01.800
+Yeah, there.
+
+16:01.800 --> 16:04.353
+So we're just going to remove these files.
+
+16:06.600 --> 16:09.630
+So anyways, the copy module will look into the files folder
+
+16:09.630 --> 16:12.363
+of templates, sorry, files folder of the roles.
+
+16:14.790 --> 16:16.413
+Okay, save and quit this.
+
+16:17.340 --> 16:21.213
+And we have to rename, let me get into roles,
+
+16:22.350 --> 16:27.350
+templates, wait, sorry, roles, template name,
+
+16:28.830 --> 16:30.933
+and then inside that we have templates.
+
+16:34.170 --> 16:36.637
+Okay, let's rename this to .j2,
+
+16:43.374 --> 16:48.374
+.j2, okay, same for this one, ubuntu.
+
+16:58.877 --> 17:01.470
+All right, because in the task we have given
+
+17:01.470 --> 17:04.200
+the template name as .j2, right?
+
+17:04.200 --> 17:06.780
+And it will not find if the file
+
+17:06.780 --> 17:08.070
+with that name does not exist,
+
+17:08.070 --> 17:10.530
+so that's why we have to rename this one also.
+
+17:10.530 --> 17:14.673
+Now let's come back to exercise14 folder.
+
+17:16.200 --> 17:18.469
+And now let's test the playbook.
+
+17:18.469 --> 17:22.800
+Ansible-playbook provisioning.yaml.
+
+17:25.713 --> 17:27.090
+Okay, let's look at the output.
+
+17:27.090 --> 17:29.550
+It's slightly different, you see that?
+
+17:29.550 --> 17:32.880
+TASK post-Install, it's giving the name of the role
+
+17:32.880 --> 17:36.423
+and in that this task is there, which it is executing.
+
+17:40.530 --> 17:42.843
+Okay, that worked, obviously.
+
+17:43.830 --> 17:47.010
+Now in this playbook we have just given the role,
+
+17:47.010 --> 17:49.050
+it's so simple playbook.
+
+17:49.050 --> 17:50.970
+If you want to add more task,
+
+17:50.970 --> 17:55.020
+you want to add more handlers, yes you can give here also
+
+17:55.020 --> 17:57.270
+you can see a task, and you can give the task.
+
+17:57.270 --> 17:59.520
+But now we have the role separate
+
+17:59.520 --> 18:02.730
+for that particular server for the list of those servers.
+
+18:02.730 --> 18:04.260
+So if we need to add more tasks
+
+18:04.260 --> 18:06.600
+we goes into the task main.yml.
+
+18:06.600 --> 18:10.260
+If you want to add handlers, we go to handlers main.yml.
+
+18:10.260 --> 18:13.140
+If you want to add variables, we can go to the vars.
+
+18:13.140 --> 18:17.903
+Well talking about variables, tree roles.
+
+18:19.800 --> 18:23.610
+So variables we can put in this file where vars main.yml.
+
+18:23.610 --> 18:26.520
+We can also put it in defaults main.yml.
+
+18:26.520 --> 18:29.700
+The difference is this one will have low priority.
+
+18:29.700 --> 18:31.987
+Defaults main.yml will have low priority,
+
+18:31.987 --> 18:34.530
+vars will have higher priority.
+
+18:34.530 --> 18:37.380
+So in general, it's a general practice to define variables
+
+18:37.380 --> 18:41.010
+into the defaults main.yml, right?
+
+18:41.010 --> 18:44.670
+But in order to make you aware about all the structure
+
+18:44.670 --> 18:47.250
+I, by default, gave it in the vars folder.
+
+18:47.250 --> 18:51.813
+But in general, we put it in defaults main.yml file.
+
+18:53.250 --> 18:55.620
+And roles are created for the organization,
+
+18:55.620 --> 18:57.405
+so the entire organization
+
+18:57.405 --> 18:59.613
+will have different, different projects.
+
+19:00.840 --> 19:02.160
+They can use the same roles.
+
+19:02.160 --> 19:04.320
+It creates a standard,
+
+19:04.320 --> 19:06.450
+but then the values might be different,
+
+19:06.450 --> 19:09.090
+so we handle it through the variables.
+
+19:09.090 --> 19:10.890
+So we can override the variables,
+
+19:10.890 --> 19:12.480
+not by directly editing the files,
+
+19:12.480 --> 19:14.640
+we can do it through the playbook also.
+
+19:14.640 --> 19:17.490
+We know playbook variables have higher priority.
+
+19:17.490 --> 19:20.283
+So let's look at the roles, roles, documentation.
+
+19:21.300 --> 19:24.693
+So Ansible roles, let's go to this first link, roles.
+
+19:26.970 --> 19:29.040
+So the roles structure, right?
+
+19:29.040 --> 19:32.490
+We know this well, we read this, it has the information
+
+19:32.490 --> 19:33.993
+about each and every file.
+
+19:37.290 --> 19:38.730
+Okay, so let's come here.
+
+19:38.730 --> 19:41.250
+So roles, you can say - role,
+
+19:41.250 --> 19:42.810
+and you can mention the path also.
+
+19:42.810 --> 19:45.453
+If your roles are located in a different folder,
+
+19:46.410 --> 19:49.530
+by default, the roles folder it is going to look for.
+
+19:49.530 --> 19:52.740
+But if your roles are in some other path, other directory,
+
+19:52.740 --> 19:55.650
+then you can specify the path also, right?
+
+19:55.650 --> 19:56.973
+We did it like this.
+
+20:00.900 --> 20:02.640
+Now about variables I was talking about, right?
+
+20:02.640 --> 20:05.400
+If you want, you can overwrite the value of the variables
+
+20:05.400 --> 20:06.600
+you have to give,
+
+20:06.600 --> 20:10.590
+vars, variable name and its value, right?
+
+20:10.590 --> 20:11.940
+So let's say we want to change
+
+20:11.940 --> 20:13.860
+the NTP server values right?
+
+20:13.860 --> 20:18.030
+Let's say this is for a different region,
+
+20:18.030 --> 20:22.740
+let's say for some India region, Mumbai or Hyperabad, right?
+
+20:22.740 --> 20:23.820
+And these are the values.
+
+20:23.820 --> 20:25.323
+So let's take this.
+
+20:26.790 --> 20:28.320
+Right, now let's say these rules are used
+
+20:28.320 --> 20:32.430
+by some other data center to configure the NTP, right?
+
+20:32.430 --> 20:34.830
+So you know what?
+
+20:34.830 --> 20:37.650
+Let's create a different exercise for this one.
+
+20:37.650 --> 20:42.650
+CP -r exercise14 to exercise15.
+
+20:43.350 --> 20:45.363
+Let's get into exercise15.
+
+20:50.010 --> 20:52.770
+Okay, first we will move our variables
+
+20:52.770 --> 20:54.723
+from vars to defaults.
+
+20:55.560 --> 21:00.560
+So roles role name, vars/main.yml.
+
+21:02.160 --> 21:04.770
+Let's take those variables
+
+21:04.770 --> 21:09.770
+and copy it into roles/post-install/defaults/main.yml.
+
+21:17.220 --> 21:19.377
+And then we'll remove from vars,
+
+21:21.480 --> 21:23.430
+because vars has higher priority,
+
+21:23.430 --> 21:25.383
+so by default it will use that one.
+
+21:33.390 --> 21:35.640
+Okay, so if we execute the playbook now
+
+21:35.640 --> 21:37.830
+it is going to work without any problem.
+
+21:37.830 --> 21:39.930
+It's going to find the variables in the defaults.
+
+21:39.930 --> 21:41.253
+Let's test that first.
+
+21:45.300 --> 21:47.190
+Okay, it's working.
+
+21:47.190 --> 21:50.160
+Now about overriding the variable's value.
+
+21:50.160 --> 21:51.630
+So in order to define roles
+
+21:51.630 --> 21:54.693
+first we have to change here, - role,
+
+21:55.530 --> 21:59.223
+what's going on here, - role:
+
+22:00.390 --> 22:01.830
+and the role name,
+
+22:01.830 --> 22:04.353
+which has changed, yeah.
+
+22:05.820 --> 22:09.857
+And then we have to give here vars, right?
+
+22:12.570 --> 22:15.540
+So our same variable we can give override one
+
+22:15.540 --> 22:19.380
+or many variables will override all the variables.
+
+22:19.380 --> 22:20.493
+So NTP zero.
+
+22:21.360 --> 22:24.030
+So you can take NTP server value from anywhere
+
+22:24.030 --> 22:25.590
+whatever you want.
+
+22:25.590 --> 22:27.963
+I'm taking India's NTP server.
+
+22:30.540 --> 22:35.540
+Simply going to copy paste this thing and change the values.
+
+22:36.330 --> 22:41.330
+The other variable was ntp2, sorry, was ntp1,
+
+22:41.490 --> 22:44.880
+Well we can give a different order also, no problem,
+
+22:44.880 --> 22:45.980
+but this looks better.
+
+22:48.780 --> 22:51.540
+And here, change the names.
+
+22:51.540 --> 22:55.353
+This was one, this was two, and this was three.
+
+22:56.220 --> 23:00.060
+Okay, so roles, - rule and the role name,
+
+23:00.060 --> 23:03.633
+and just below that vars and you can override the variables.
+
+23:06.090 --> 23:09.303
+So we know playbook variable has higher priority.
+
+23:10.320 --> 23:12.630
+So it is going to use the variable values
+
+23:12.630 --> 23:16.503
+from the playbook rather than checking from there.
+
+23:22.950 --> 23:26.220
+Okay, so the configuration files are changing
+
+23:26.220 --> 23:28.290
+the NTP configuration file.
+
+23:28.290 --> 23:33.290
+So template module found the variable values are different.
+
+23:33.450 --> 23:35.160
+Basically the source file is different.
+
+23:35.160 --> 23:37.140
+So it push new source file,
+
+23:37.140 --> 23:39.390
+and then the handlers are called
+
+23:39.390 --> 23:41.703
+which are in a different folder, right?
+
+23:42.540 --> 23:44.340
+So like this, we have tested everything.
+
+23:44.340 --> 23:47.823
+We have tested task, variables, handlers.
+
+23:48.720 --> 23:50.880
+So now you know how to write roles.
+
+23:50.880 --> 23:52.830
+It's better or easier method
+
+23:52.830 --> 23:54.180
+is first to write the playbook
+
+23:54.180 --> 23:55.800
+and then convert that into roles,
+
+23:55.800 --> 23:58.980
+that's the easier method, right?
+
+23:58.980 --> 24:01.743
+But there are also ready-made roles available.
+
+24:03.840 --> 24:05.253
+Ansible Galaxy,
+
+24:09.030 --> 24:10.800
+galaxy.ansible.com.
+
+24:10.800 --> 24:15.060
+So here we have roles created by the community.
+
+24:15.060 --> 24:16.830
+We have variables for, sorry,
+
+24:16.830 --> 24:19.170
+roles for system, for monitoring, packaging.
+
+24:19.170 --> 24:22.440
+So instead of writing your entire roles from the scratch
+
+24:22.440 --> 24:26.643
+you can use these roles and override the values if you want.
+
+24:27.960 --> 24:31.200
+So let's check for System section.
+
+24:31.200 --> 24:32.700
+These are into different section.
+
+24:32.700 --> 24:35.130
+And let's say I want to install Java, you know,
+
+24:35.130 --> 24:36.167
+based on the operating system, right?
+
+24:36.167 --> 24:38.640
+I have to make the conditions and all those things.
+
+24:38.640 --> 24:41.220
+Instead of that, I'm just searching for the role
+
+24:41.220 --> 24:46.220
+in with Java, geerlingguy, very popular author, Java, right?
+
+24:47.580 --> 24:49.080
+It has the ratings and scores.
+
+24:49.080 --> 24:51.030
+Also, quality score is five by five.
+
+24:51.030 --> 24:53.130
+Community score is 4.3 by five.
+
+24:53.130 --> 24:54.300
+It's very good.
+
+24:54.300 --> 24:57.000
+So what you can do is you can just download this role
+
+24:57.000 --> 24:57.833
+by using this command,
+
+24:57.833 --> 25:00.690
+Ansible Galaxy install and the role name.
+
+25:00.690 --> 25:03.843
+And then you should also have examples here, Read Me.
+
+25:05.070 --> 25:07.080
+Now you have the variables that you can override,
+
+25:07.080 --> 25:09.330
+how to use this role, right?
+
+25:09.330 --> 25:10.410
+We know how to use the role
+
+25:10.410 --> 25:12.270
+but this is the name of the role.
+
+25:12.270 --> 25:13.800
+And you can make conditions
+
+25:13.800 --> 25:16.560
+and you can add other task also in the roles.
+
+25:16.560 --> 25:18.900
+So this is a very simple example.
+
+25:18.900 --> 25:22.923
+Let's just execute this command and download the role first.
+
+25:23.790 --> 25:26.010
+So downloads from github.com
+
+25:26.010 --> 25:29.010
+and stores at this location, right?
+
+25:29.010 --> 25:30.720
+All you can do is once you have a role,
+
+25:30.720 --> 25:33.060
+if you just want to use it just like that,
+
+25:33.060 --> 25:34.113
+you can give here.
+
+25:35.190 --> 25:37.563
+So I will give it here just before this one.
+
+25:38.575 --> 25:41.425
+I'll just say hyphen, and I'll give the role name, right?
+
+25:42.810 --> 25:45.513
+So this is the role name, geerlingguy.java.
+
+25:46.440 --> 25:48.390
+So this role will get executed first
+
+25:48.390 --> 25:51.693
+and then our role, let's test it.
+
+26:00.390 --> 26:03.390
+So this role has all that same structure
+
+26:03.390 --> 26:06.900
+and it has task based on the operating system.
+
+26:06.900 --> 26:09.390
+I will get into this role directory structure
+
+26:09.390 --> 26:11.130
+and we'll see how the task
+
+26:11.130 --> 26:13.350
+and other things are given, right?
+
+26:13.350 --> 26:16.500
+But you know, let's see, let's test it, right,
+
+26:16.500 --> 26:17.880
+whether this works for us.
+
+26:17.880 --> 26:19.500
+Now based on the operating system,
+
+26:19.500 --> 26:22.830
+it is going to install the right version of Java for you.
+
+26:22.830 --> 26:25.110
+So you don't need to go through writing the entire playbook
+
+26:25.110 --> 26:28.590
+for installing some packages or even setting services.
+
+26:28.590 --> 26:31.800
+We have roles for setting up database services,
+
+26:31.800 --> 26:34.800
+and monitoring services, and even NTP, Chrony,
+
+26:34.800 --> 26:38.670
+all those roles we have ready made available, right?
+
+26:38.670 --> 26:39.503
+So we have that.
+
+26:39.503 --> 26:41.940
+But if you ask me in my personal experience
+
+26:41.940 --> 26:45.570
+I use Ansible Galaxy roles very less.
+
+26:45.570 --> 26:47.343
+And the reason is pretty simple.
+
+26:48.780 --> 26:51.330
+If I have to make changes, right,
+
+26:51.330 --> 26:53.940
+not the variables, changing variables are pretty easy,
+
+26:53.940 --> 26:54.773
+we have seen that.
+
+26:54.773 --> 26:57.960
+But if I have other configuration, other things to change
+
+26:57.960 --> 27:00.780
+then changing these existing roles,
+
+27:00.780 --> 27:02.130
+which was written by somebody else,
+
+27:02.130 --> 27:03.510
+we need to do reverse engineering.
+
+27:03.510 --> 27:06.540
+We need to look at the code, all the task and handlers.
+
+27:06.540 --> 27:09.120
+We need to make changes many places.
+
+27:09.120 --> 27:12.330
+And Ansible playbook itself is very easy to write.
+
+27:12.330 --> 27:15.990
+We have documentation, we have ChatGPT.
+
+27:15.990 --> 27:18.780
+So one time work, we write it from the scratch, right?
+
+27:18.780 --> 27:21.690
+But we can reuse our code, we can make changes,
+
+27:21.690 --> 27:24.960
+we can convert it into roles, we can do many things, right?
+
+27:24.960 --> 27:29.960
+Let's look at the role which was created
+
+27:30.510 --> 27:32.310
+by the linga for Java.
+
+27:32.310 --> 27:34.470
+So in in your home directory
+
+27:34.470 --> 27:36.270
+there is a .ansible folder,
+
+27:36.270 --> 27:41.270
+inside that you should have roles in that you should have
+
+27:41.430 --> 27:44.163
+the role name folder, right?
+
+27:46.230 --> 27:48.750
+So take a look, similar structure.
+
+27:48.750 --> 27:50.553
+I'm going to run three command here.
+
+27:52.140 --> 27:54.450
+You see there are many variables file,
+
+27:54.450 --> 27:57.630
+there are many task files, right?
+
+27:57.630 --> 27:58.830
+So it's just for the package.
+
+27:58.830 --> 28:01.980
+So we just have, you know, one simple template
+
+28:01.980 --> 28:04.200
+and different task and different variables.
+
+28:04.200 --> 28:08.850
+Now here the main.yml file is the default file.
+
+28:08.850 --> 28:10.740
+Whenever you run the playbook, sorry,
+
+28:10.740 --> 28:14.880
+whenever you run the role, this file task get executed.
+
+28:14.880 --> 28:18.300
+But you can have file with different names also.
+
+28:18.300 --> 28:20.790
+And let's see how it is defined.
+
+28:20.790 --> 28:22.833
+So tasks/main.yml.
+
+28:26.100 --> 28:27.900
+Okay, see, this is what I was talking about,
+
+28:27.900 --> 28:29.510
+reverse engineering, okay?
+
+28:29.510 --> 28:31.560
+So it says include variables.
+
+28:31.560 --> 28:35.190
+This is a module that can include variables file.
+
+28:35.190 --> 28:37.290
+So that's a variable.
+
+28:37.290 --> 28:38.400
+Actually this is a file name.
+
+28:38.400 --> 28:40.140
+This will be changed into the,
+
+28:40.140 --> 28:41.640
+this is a fact variable, right?
+
+28:41.640 --> 28:43.380
+So based on the operating system
+
+28:43.380 --> 28:45.600
+if it's sent to us, it is going to load.
+
+28:45.600 --> 28:47.520
+Send us .yml file.
+
+28:47.520 --> 28:48.990
+Now for it to run here's the condition.
+
+28:48.990 --> 28:51.420
+Ansible_distribution, if it's FreeBSD,
+
+28:51.420 --> 28:55.740
+or Fedora, then load this file as variable, right?
+
+28:55.740 --> 28:58.770
+And then for RedHat, again, you have conditions here.
+
+28:58.770 --> 29:00.813
+This is just for importing variables.
+
+29:02.070 --> 29:05.550
+Then task, run this task if the ansible_os_family
+
+29:05.550 --> 29:06.510
+value is RedHat.
+
+29:06.510 --> 29:09.600
+So all the RedHat task is defined into a different file.
+
+29:09.600 --> 29:12.930
+All the Debian task is defined into a different file.
+
+29:12.930 --> 29:15.870
+So you can do that also, instead of mentioning the task
+
+29:15.870 --> 29:19.530
+and the condition, you can create a playbook
+
+29:19.530 --> 29:22.530
+for RedHat separately for Debian, FreeBSD separately.
+
+29:22.530 --> 29:25.563
+And then you can execute that by using include_tasks module.
+
+29:27.750 --> 29:30.270
+This is going to simply import this task
+
+29:30.270 --> 29:33.750
+and run it if this condition matches, right?
+
+29:33.750 --> 29:37.440
+I use these roles to study them and see how they're writing.
+
+29:37.440 --> 29:39.150
+These are the industry experts
+
+29:39.150 --> 29:42.330
+in writing the Ansible playbooks or roles.
+
+29:42.330 --> 29:44.670
+And we can learn from them, right,
+
+29:44.670 --> 29:46.800
+in writing our own playbook.
+
+29:46.800 --> 29:50.530
+So that's how I use the roles from Ansible Galaxy
+
+29:51.390 --> 29:52.860
+Because documentation is huge,
+
+29:52.860 --> 29:55.170
+you can use ChatGPT and other stuff, right?
+
+29:55.170 --> 29:57.780
+But all that intelligence was already used
+
+29:57.780 --> 29:58.920
+to create such roles,
+
+29:58.920 --> 30:02.100
+and we can harness their intelligence, right?
+
+30:02.100 --> 30:04.740
+We can learn from them, right?
+
+30:04.740 --> 30:09.740
+So there are many other roles to download,
+
+30:10.050 --> 30:12.600
+and read, and understand from.
+
+30:12.600 --> 30:14.883
+From here on, I leave it up to you.
+
+30:16.320 --> 30:18.280
+This requires more creativity
+
+30:19.410 --> 30:20.910
+and there's many, many many things
+
+30:20.910 --> 30:22.590
+that you can use in Ansible playbook.
+
+30:22.590 --> 30:25.590
+Whenever the requirement comes, look for it, search for it.
+
+30:25.590 --> 30:28.171
+You have documentation, you have ChatGPT,
+
+30:28.171 --> 30:30.420
+you have Ansible Galaxy rules to read from,
+
+30:30.420 --> 30:34.500
+and you have to use your own creative mind to go from here.
+
+30:34.500 --> 30:37.080
+This is all in the roles lecture.
+
+30:37.080 --> 30:38.820
+In the next lecture we are going to talk about
+
+30:38.820 --> 30:42.360
+how we can use Ansible for cloud automation, right?
+
+30:42.360 --> 30:45.780
+So take some time, go through these playbooks.
+
+30:45.780 --> 30:47.130
+I'm not telling you to memorize them,
+
+30:47.130 --> 30:48.300
+just go through them, right?
+
+30:48.300 --> 30:50.430
+So you know, there are many more things
+
+30:50.430 --> 30:55.020
+to explore, you have many more options in Ansible, right?
+
+30:55.020 --> 30:57.813
+So wrap this up and then join me in the next lecture.

@@ -1,0 +1,621 @@
+WEBVTT
+
+1
+00:00:00.730 --> 00:00:01.880
+Hello and welcome.
+
+2
+00:00:02.750 --> 00:00:06.690
+In this lecture, we will talk about docker logs.
+
+3
+00:00:07.130 --> 00:00:10.378
+To be specific, logs of your container.
+
+4
+00:00:10.474 --> 00:00:11.698
+Docker container.
+
+5
+00:00:11.854 --> 00:00:14.182
+Now, there is a simple command, docker logs.
+
+6
+00:00:14.206 --> 00:00:17.862
+And you give just the container name or its ID,
+
+7
+00:00:17.936 --> 00:00:20.554
+and you can see the logs of that container.
+
+8
+00:00:20.722 --> 00:00:24.330
+But you really need to understand what are these logs.
+
+9
+00:00:24.710 --> 00:00:27.822
+So before we run that command, let me
+
+10
+00:00:27.836 --> 00:00:33.810
+run a command docker run capital P NGINX.
+
+11
+00:00:34.850 --> 00:00:38.050
+Even before I run this, I'm going to fetch this image.
+
+12
+00:00:38.110 --> 00:00:40.354
+Docker pull NGINX.
+
+13
+00:00:40.522 --> 00:00:41.586
+I have cleaned everything.
+
+14
+00:00:41.648 --> 00:00:43.318
+I don't have an image, any container.
+
+15
+00:00:43.354 --> 00:00:45.750
+So I'm pulling a fresh image.
+
+16
+00:00:46.670 --> 00:00:50.834
+Okay, we have the image.
+
+17
+00:00:50.882 --> 00:00:53.158
+Now we can see detailed information about an
+
+18
+00:00:53.184 --> 00:00:56.050
+image by using a command called docker inspect.
+
+19
+00:00:59.650 --> 00:01:01.550
+Now, this is not logs, this is
+
+20
+00:01:01.660 --> 00:01:07.110
+metadata of the image in JSON format.
+
+21
+00:01:07.290 --> 00:01:08.500
+Let's run this.
+
+22
+00:01:10.330 --> 00:01:11.918
+There's a lot of information about this.
+
+23
+00:01:11.944 --> 00:01:13.626
+We're going to see this in coming lecture.
+
+24
+00:01:13.698 --> 00:01:15.518
+But I want to just show you one
+
+25
+00:01:15.544 --> 00:01:20.740
+thing here, two things, CMD and entry point.
+
+26
+00:01:21.130 --> 00:01:23.918
+So when you say docker run and you give the
+
+27
+00:01:23.944 --> 00:01:27.902
+image name, it basically runs first this script, which is
+
+28
+00:01:27.916 --> 00:01:30.230
+an entry point, and then it is going to run
+
+29
+00:01:30.280 --> 00:01:32.270
+the command which is in the CMD.
+
+30
+00:01:33.430 --> 00:01:36.038
+Whenever we execute any command, most of the
+
+31
+00:01:36.064 --> 00:01:39.530
+command that we run returns an output.
+
+32
+00:01:40.330 --> 00:01:45.110
+This docker entry point sh and this NGINX g daemon off
+
+33
+00:01:45.730 --> 00:01:49.398
+both this command will return output and we really don't
+
+34
+00:01:49.434 --> 00:01:51.870
+see them when we run them in the background.
+
+35
+00:01:52.050 --> 00:01:56.618
+Here it is, docker run -d that
+
+36
+00:01:56.644 --> 00:01:59.570
+is running in the background, detached mode.
+
+37
+00:02:00.010 --> 00:02:00.940
+I ay
+
+38
+00:02:03.410 --> 00:02:05.338
+Capital P is for the port mapping.
+
+39
+00:02:05.374 --> 00:02:07.482
+So automatically it will pick up the host port.
+
+40
+00:02:07.556 --> 00:02:10.400
+I don't need to mention host and container port. Both.
+
+41
+00:02:10.789 --> 00:02:14.022
+Anyway, let's run this. Okay.
+
+42
+00:02:14.156 --> 00:02:17.360
+Docker PS and the container is running.
+
+43
+00:02:17.750 --> 00:02:20.758
+The container name is this and it has automatically
+
+44
+00:02:20.794 --> 00:02:23.878
+done the port mapping and it executed the commands,
+
+45
+00:02:23.914 --> 00:02:25.654
+which is an entry point and CMD.
+
+46
+00:02:25.702 --> 00:02:27.346
+But we don't see its output.
+
+47
+00:02:27.418 --> 00:02:29.122
+Well, we can see its output
+
+48
+00:02:29.146 --> 00:02:31.414
+by running the command docker logs.
+
+49
+00:02:31.582 --> 00:02:32.722
+I see docker logs.
+
+50
+00:02:32.746 --> 00:02:34.410
+I can give the container name or
+
+51
+00:02:34.460 --> 00:02:37.710
+ID and it shows the output.
+
+52
+00:02:39.050 --> 00:02:41.206
+You see that it ran that script
+
+53
+00:02:41.278 --> 00:02:43.878
+and that script returns some output till here.
+
+54
+00:02:44.024 --> 00:02:45.306
+Then here it is running another
+
+55
+00:02:45.368 --> 00:02:47.346
+command, NGINX G daemon off.
+
+56
+00:02:47.408 --> 00:02:49.666
+And that's the output of the second command.
+
+57
+00:02:49.858 --> 00:02:52.686
+So that is logs the output of
+
+58
+00:02:52.748 --> 00:02:55.530
+the command executed in the container.
+
+59
+00:02:55.850 --> 00:02:57.958
+Now, if I do not give Hyphen
+
+60
+00:02:57.994 --> 00:03:04.862
+D option, this is another container.
+
+61
+00:03:04.886 --> 00:03:06.360
+Next container I'm running.
+
+62
+00:03:06.810 --> 00:03:09.358
+If I don't run it in the background, then obviously
+
+63
+00:03:09.444 --> 00:03:11.278
+it is going to run in the foreground and you
+
+64
+00:03:11.304 --> 00:03:13.440
+see all the output right on your screen.
+
+65
+00:03:14.310 --> 00:03:15.838
+But then this is a
+
+66
+00:03:15.864 --> 00:03:18.682
+continuously running process, nginx process.
+
+67
+00:03:18.816 --> 00:03:22.162
+And it's just taken my shell, right?
+
+68
+00:03:22.236 --> 00:03:26.100
+So if I want my shell back, I'm going to do control C.
+
+69
+00:03:26.730 --> 00:03:29.998
+When I do control C, it will also kill that process.
+
+70
+00:03:30.084 --> 00:03:32.054
+So container will be also dead.
+
+71
+00:03:32.222 --> 00:03:37.262
+Docker PS and you see that
+
+72
+00:03:37.336 --> 00:03:39.230
+exited container 8 seconds ago.
+
+73
+00:03:39.280 --> 00:03:40.326
+This is our container.
+
+74
+00:03:40.398 --> 00:03:41.738
+We did control C.
+
+75
+00:03:41.884 --> 00:03:43.240
+It killed the process.
+
+76
+00:03:43.870 --> 00:03:46.600
+Okay, but why I'm really showing you all this?
+
+77
+00:03:47.470 --> 00:03:48.830
+What's the purpose?
+
+78
+00:03:49.390 --> 00:03:52.238
+Well the purpose is troubleshooting, when you build
+
+79
+00:03:52.264 --> 00:03:54.700
+your own images, which we will be doing.
+
+80
+00:03:55.150 --> 00:03:56.918
+And when you run containers from your
+
+81
+00:03:56.944 --> 00:04:01.094
+own custom built images, you might make
+
+82
+00:04:01.132 --> 00:04:03.700
+some mistake and your container won't start.
+
+83
+00:04:04.870 --> 00:04:07.322
+How do you figure out what is the problem
+
+84
+00:04:07.516 --> 00:04:10.418
+by looking at the output of the process and
+
+85
+00:04:10.444 --> 00:04:12.966
+that you can do it through docker logs command.
+
+86
+00:04:13.158 --> 00:04:15.040
+I will show you an example here.
+
+87
+00:04:16.390 --> 00:04:21.269
+I'm going to run one container in the background
+
+88
+00:04:21.329 --> 00:04:27.530
+and this is going to be MySQL five seven.
+
+89
+00:04:27.580 --> 00:04:28.840
+That's the tag name.
+
+90
+00:04:29.170 --> 00:04:32.046
+So this image does not exist.
+
+91
+00:04:32.118 --> 00:04:34.026
+First it is going to pull the image
+
+92
+00:04:34.098 --> 00:04:36.350
+and run the container in the background.
+
+93
+00:04:36.790 --> 00:04:38.260
+So let's run this.
+
+94
+00:04:40.910 --> 00:04:45.490
+So it's fetching the image and
+
+95
+00:04:45.540 --> 00:04:46.838
+it has run the container.
+
+96
+00:04:46.874 --> 00:04:48.190
+That's the container ID.
+
+97
+00:04:48.300 --> 00:04:50.638
+We do docker PS and we should
+
+98
+00:04:50.664 --> 00:04:55.486
+be seeing a MySQL container, do we?
+
+99
+00:04:55.668 --> 00:04:58.390
+No, we don't see it.
+
+100
+00:04:58.500 --> 00:05:05.898
+We do docker ps -a and see, that is our container.
+
+101
+00:05:05.934 --> 00:05:07.094
+It has given this name.
+
+102
+00:05:07.132 --> 00:05:08.810
+It was running from the image.
+
+103
+00:05:09.730 --> 00:05:11.260
+That's the container ID.
+
+104
+00:05:11.650 --> 00:05:16.130
+Check that and it is in status exited.
+
+105
+00:05:16.510 --> 00:05:22.120
+Why it did not start well, how do we find out? Simple.
+
+106
+00:05:22.690 --> 00:05:24.170
+Docker logs.
+
+107
+00:05:25.030 --> 00:05:28.790
+And we see the logs of this container.
+
+108
+00:05:31.610 --> 00:05:34.902
+So you see it says error entry point.
+
+109
+00:05:34.976 --> 00:05:36.822
+It was running something in the entry point.
+
+110
+00:05:36.896 --> 00:05:40.102
+And it says database is uninitialized
+
+111
+00:05:40.186 --> 00:05:43.126
+and password option is not specified.
+
+112
+00:05:43.318 --> 00:05:46.230
+You need to specify one of the following.
+
+113
+00:05:46.850 --> 00:05:48.682
+This is variables.
+
+114
+00:05:48.826 --> 00:05:51.190
+You need to export a variable,
+
+115
+00:05:51.310 --> 00:05:53.682
+either this or this or this.
+
+116
+00:05:53.816 --> 00:05:55.254
+Then only it will run.
+
+117
+00:05:55.412 --> 00:05:57.498
+Now, we'll see detail about this in the
+
+118
+00:05:57.524 --> 00:06:00.070
+next lecture, in the docker volumes lecture.
+
+119
+00:06:00.130 --> 00:06:04.206
+But I will show you how to really run this one.
+
+120
+00:06:04.388 --> 00:06:06.798
+Let's go back to our docker run command and we need
+
+121
+00:06:06.824 --> 00:06:08.838
+to export a variable that we can do it with.
+
+122
+00:06:08.864 --> 00:06:09.906
+-e.
+
+123
+00:06:10.088 --> 00:06:17.900
+MySQL underscore root password is equal to My.
+
+124
+00:06:20.870 --> 00:06:23.382
+So the logs told us that you
+
+125
+00:06:23.396 --> 00:06:24.898
+need to set one of these variables.
+
+126
+00:06:24.934 --> 00:06:26.562
+To set a variable in a container, we need
+
+127
+00:06:26.576 --> 00:06:29.420
+to give an E variable and its value.
+
+128
+00:06:35.430 --> 00:06:37.690
+And there you see it's running now.
+
+129
+00:06:37.740 --> 00:06:41.158
+Now I need to specify this password and all of
+
+130
+00:06:41.184 --> 00:06:43.514
+that that will be seen in the next lecture.
+
+131
+00:06:43.682 --> 00:06:47.858
+In this lecture, I want you to have understanding
+
+132
+00:06:47.894 --> 00:06:50.950
+on what basically logs means in a container.
+
+133
+00:06:51.270 --> 00:06:58.234
+The process that starts the process output is the log.
+
+134
+00:06:58.392 --> 00:07:00.058
+So if something goes wrong while the
+
+135
+00:07:00.084 --> 00:07:02.594
+process starts, you can check docker logs
+
+136
+00:07:02.642 --> 00:07:04.260
+and you can find out the problem.
+
+137
+00:07:05.070 --> 00:07:07.498
+So in the upcoming lectures, when we'll be building our
+
+138
+00:07:07.524 --> 00:07:10.162
+image, where we'll be containerizing our project, we'll be doing
+
+139
+00:07:10.176 --> 00:07:12.910
+a lot of things and things might go wrong.
+
+140
+00:07:13.080 --> 00:07:17.878
+And you will need docker logs command. One last thing.
+
+141
+00:07:17.904 --> 00:07:21.670
+Let's run docker logs command to a running container.
+
+142
+00:07:26.170 --> 00:07:29.450
+All right, so it's all good is anyways? Running.
+
+143
+00:07:29.500 --> 00:07:30.858
+But that's all the output
+
+144
+00:07:30.894 --> 00:07:33.494
+when the MySQL process started.
+
+145
+00:07:33.592 --> 00:07:35.680
+A lot of things right?
+
+146
+00:07:36.130 --> 00:07:39.950
+So fetch different images of your choice.
+
+147
+00:07:40.450 --> 00:07:42.098
+Run docker logs before you run
+
+148
+00:07:42.124 --> 00:07:43.794
+docker logs, run docker inspect.
+
+149
+00:07:43.902 --> 00:07:45.782
+See what command it will be running.
+
+150
+00:07:45.916 --> 00:07:47.462
+And with docker logs, you can
+
+151
+00:07:47.476 --> 00:07:49.550
+see output of those commands.
+
+152
+00:07:50.230 --> 00:07:51.434
+Before you move to the next
+
+153
+00:07:51.472 --> 00:07:53.462
+lecture, do the cleanup process.
+
+154
+00:07:53.656 --> 00:07:56.538
+Remove all the containers, remove all the images,
+
+155
+00:07:56.694 --> 00:07:58.050
+and join me in the next lecture.

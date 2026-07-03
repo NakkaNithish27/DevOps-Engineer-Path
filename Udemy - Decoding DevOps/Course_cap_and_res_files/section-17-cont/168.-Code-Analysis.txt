@@ -1,0 +1,626 @@
+WEBVTT
+
+1
+00:00:00.360 --> 00:00:01.193
+<v Instructor>Welcome.</v>
+
+2
+00:00:01.193 --> 00:00:04.650
+In this lecture we are going to talk about code analysis.
+
+3
+00:00:04.650 --> 00:00:08.430
+Now you have already enjoyed writing pipeline as a code
+
+4
+00:00:08.430 --> 00:00:10.500
+where we fetch the code from GitHub,
+
+5
+00:00:10.500 --> 00:00:14.940
+build it by using Maven, and execute unit test cases.
+
+6
+00:00:14.940 --> 00:00:17.880
+The next step is to do code analysis.
+
+7
+00:00:17.880 --> 00:00:21.390
+But let's understand first, what is code analysis.
+
+8
+00:00:21.390 --> 00:00:23.821
+Code analysis is a test that helps you
+
+9
+00:00:23.821 --> 00:00:27.123
+follow the best practices while writing the code.
+
+10
+00:00:28.170 --> 00:00:30.270
+It's a process of examining the source code
+
+11
+00:00:30.270 --> 00:00:32.730
+to identify any potential issues
+
+12
+00:00:32.730 --> 00:00:35.430
+and improve your code quality.
+
+13
+00:00:35.430 --> 00:00:38.820
+Let's understand why we do code analysis.
+
+14
+00:00:38.820 --> 00:00:42.240
+As I already said, it is to improve the code quality
+
+15
+00:00:42.240 --> 00:00:46.350
+and also to detect security vulnerabilities.
+
+16
+00:00:46.350 --> 00:00:49.170
+If developers do not follow best practices
+
+17
+00:00:49.170 --> 00:00:50.700
+while writing the code,
+
+18
+00:00:50.700 --> 00:00:52.980
+they might develop security vulnerabilities
+
+19
+00:00:52.980 --> 00:00:55.632
+in the code that will be used by hackers
+
+20
+00:00:55.632 --> 00:00:59.370
+to exploit the code, the application.
+
+21
+00:00:59.370 --> 00:01:01.560
+So, code analysis in a very early stage
+
+22
+00:01:01.560 --> 00:01:05.460
+detects these vulnerabilities and make suggestions.
+
+23
+00:01:05.460 --> 00:01:07.320
+While writing the code,
+
+24
+00:01:07.320 --> 00:01:10.410
+developers will be chasing deadlines.
+
+25
+00:01:10.410 --> 00:01:13.440
+Developers will take shortcut while writing the code,
+
+26
+00:01:13.440 --> 00:01:15.600
+which will later create issues.
+
+27
+00:01:15.600 --> 00:01:17.460
+So, code analysis will help catch this
+
+28
+00:01:17.460 --> 00:01:19.440
+in the very early stage,
+
+29
+00:01:19.440 --> 00:01:21.360
+and it definitely helps the team
+
+30
+00:01:21.360 --> 00:01:24.750
+follow the best practices and the best coding standards,
+
+31
+00:01:24.750 --> 00:01:26.790
+consistent across the code.
+
+32
+00:01:26.790 --> 00:01:28.470
+Most importantly, it saves time
+
+33
+00:01:28.470 --> 00:01:30.510
+by catching these issues earlier
+
+34
+00:01:30.510 --> 00:01:32.700
+before it goes to production.
+
+35
+00:01:32.700 --> 00:01:34.650
+And since it's automated testing,
+
+36
+00:01:34.650 --> 00:01:38.730
+it helps in our DevOps workflow and our CI/CD pipeline.
+
+37
+00:01:38.730 --> 00:01:40.530
+There are many code analysis tools
+
+38
+00:01:40.530 --> 00:01:42.420
+available out there in the market.
+
+39
+00:01:42.420 --> 00:01:45.390
+Some of the name I'm giving over here, the popular choices.
+
+40
+00:01:45.390 --> 00:01:49.590
+One is SonarQube that we'll be using in this lecture.
+
+41
+00:01:49.590 --> 00:01:52.380
+ESLint for JavaScript or TypeScript.
+
+42
+00:01:52.380 --> 00:01:54.000
+Checkstyle for Java coding.
+
+43
+00:01:54.000 --> 00:01:56.463
+We'll be also using Checkstyle in this lecture.
+
+44
+00:01:57.390 --> 00:02:00.420
+PMD detects common coding flaws.
+
+45
+00:02:00.420 --> 00:02:04.260
+And FindBugs or SpotBugs find the potential bugs in Java.
+
+46
+00:02:04.260 --> 00:02:06.390
+But there are many more tools.
+
+47
+00:02:06.390 --> 00:02:08.850
+And some of them are enterprise grade.
+
+48
+00:02:08.850 --> 00:02:09.870
+In this section of the course,
+
+49
+00:02:09.870 --> 00:02:12.930
+we will be using SonarQube and Checkstyle.
+
+50
+00:02:12.930 --> 00:02:14.100
+So, let's see that.
+
+51
+00:02:14.100 --> 00:02:16.595
+So after Maven execute unit testing,
+
+52
+00:02:16.595 --> 00:02:20.130
+we will have another stage in our pipeline
+
+53
+00:02:20.130 --> 00:02:24.063
+that will do code analysis by using SonarQube Scanner Tool.
+
+54
+00:02:24.900 --> 00:02:27.060
+Same like we have Maven tool and Maven plugin,
+
+55
+00:02:27.060 --> 00:02:30.136
+we will need to have here SonarQube CLI plugin
+
+56
+00:02:30.136 --> 00:02:34.170
+and SonarQube CLI Tool in the Jenkins.
+
+57
+00:02:34.170 --> 00:02:36.265
+Then we will have a SonarQube server
+
+58
+00:02:36.265 --> 00:02:39.000
+where Jenkins will send all this result
+
+59
+00:02:39.000 --> 00:02:41.460
+to the SonarQube server dashboard.
+
+60
+00:02:41.460 --> 00:02:44.280
+And SonarQube server will detect issues
+
+61
+00:02:44.280 --> 00:02:45.571
+based on the quality gates.
+
+62
+00:02:45.571 --> 00:02:48.183
+We'll see what are all those things.
+
+63
+00:02:49.140 --> 00:02:52.800
+We need to first integrate Jenkins with SonarQube server.
+
+64
+00:02:52.800 --> 00:02:54.450
+So, that's what we'll do in this lecture.
+
+65
+00:02:54.450 --> 00:02:57.330
+In the next lecture we'll write the pipeline code.
+
+66
+00:02:57.330 --> 00:02:59.820
+So, we are doing two things in this lecture.
+
+67
+00:02:59.820 --> 00:03:04.230
+One, adding the SonarQube Scanner Tool in Jenkins.
+
+68
+00:03:04.230 --> 00:03:09.030
+And second, integrating SonarQube Server with Jenkins.
+
+69
+00:03:09.030 --> 00:03:10.980
+So, let's go to Tools first.
+
+70
+00:03:10.980 --> 00:03:14.700
+Click on Manage Jenkins, Tools.
+
+71
+00:03:14.700 --> 00:03:19.320
+Scroll down where you see SonarQube Scanner Installations.
+
+72
+00:03:19.320 --> 00:03:21.180
+Not MS Build, this one.
+
+73
+00:03:21.180 --> 00:03:23.760
+Click on Add and you need to stick
+
+74
+00:03:23.760 --> 00:03:28.760
+to this version 8.0.1.6346 because this is tested.
+
+75
+00:03:30.210 --> 00:03:34.650
+Give tool a name, sonar8.0.
+
+76
+00:03:34.650 --> 00:03:36.930
+Make sure it's the same name as I'm giving
+
+77
+00:03:36.930 --> 00:03:40.260
+because same we are going to mention in the pipeline code.
+
+78
+00:03:40.260 --> 00:03:41.400
+If you give a different name,
+
+79
+00:03:41.400 --> 00:03:43.329
+then make sure you add that name in the pipeline code
+
+80
+00:03:43.329 --> 00:03:45.360
+when we write it.
+
+81
+00:03:45.360 --> 00:03:47.463
+After doing this, click on Save.
+
+82
+00:03:48.330 --> 00:03:49.920
+Now, the second thing.
+
+83
+00:03:49.920 --> 00:03:54.855
+Go to system and find SonarQube servers here.
+
+84
+00:03:54.855 --> 00:03:57.090
+SonarQube servers for a check mark
+
+85
+00:03:57.090 --> 00:03:59.640
+over here in Environmental Variables
+
+86
+00:03:59.640 --> 00:04:01.920
+and click on Add SonarQube.
+
+87
+00:04:01.920 --> 00:04:05.370
+Give a name, sonarserver I'm giving.
+
+88
+00:04:05.370 --> 00:04:07.380
+Stick to the same name for now.
+
+89
+00:04:07.380 --> 00:04:08.954
+Here you need to give sonar url.
+
+90
+00:04:08.954 --> 00:04:13.954
+So, it will be http:// the private IP of SonarQube server.
+
+91
+00:04:15.180 --> 00:04:17.490
+So, make sure we select on a Sonar server
+
+92
+00:04:17.490 --> 00:04:19.293
+and get its private IP,
+
+93
+00:04:20.670 --> 00:04:22.203
+and then enter it over here.
+
+94
+00:04:22.203 --> 00:04:25.320
+Now, SonarQube server listens on port9000,
+
+95
+00:04:25.320 --> 00:04:27.420
+but we also have NGINX as a front end,
+
+96
+00:04:27.420 --> 00:04:29.760
+which works on port80.
+
+97
+00:04:29.760 --> 00:04:31.710
+So, you can give :port80
+
+98
+00:04:31.710 --> 00:04:35.070
+or even if you don't give by default, it's port80.
+
+99
+00:04:35.070 --> 00:04:36.630
+Now, next is authentication.
+
+100
+00:04:36.630 --> 00:04:37.640
+So, we are going to add
+
+101
+00:04:37.640 --> 00:04:40.530
+a token over here for authentication.
+
+102
+00:04:40.530 --> 00:04:42.360
+So, first we need to generate the token.
+
+103
+00:04:42.360 --> 00:04:45.300
+So, go to SonarQube server dashboard.
+
+104
+00:04:45.300 --> 00:04:46.920
+Click over here in the top right corner
+
+105
+00:04:46.920 --> 00:04:48.600
+where you see Account.
+
+106
+00:04:48.600 --> 00:04:52.920
+Go to My Account, click on Security.
+
+107
+00:04:52.920 --> 00:04:55.230
+And here you should see the token.
+
+108
+00:04:55.230 --> 00:04:57.510
+Give the token name as Jenkins.
+
+109
+00:04:57.510 --> 00:05:00.390
+In the Type, select User Token.
+
+110
+00:05:00.390 --> 00:05:03.403
+Expires, now if you want to use it for more than 30 days,
+
+111
+00:05:03.403 --> 00:05:06.660
+then just go to no expiration.
+
+112
+00:05:06.660 --> 00:05:08.820
+You can stick to 30 days also.
+
+113
+00:05:08.820 --> 00:05:11.910
+So, I'm going to stick to 30 days and say Generate.
+
+114
+00:05:11.910 --> 00:05:16.410
+Just keep in mind, after 30 days, this token will expire
+
+115
+00:05:16.410 --> 00:05:19.650
+and you need to generate a new token and save it again.
+
+116
+00:05:19.650 --> 00:05:21.603
+So for now, just copy this.
+
+117
+00:05:22.770 --> 00:05:25.680
+Go to Systems in Jenkins.
+
+118
+00:05:25.680 --> 00:05:29.280
+Over here click on Add, Global.
+
+119
+00:05:29.280 --> 00:05:31.533
+And here select Secret text.
+
+120
+00:05:32.820 --> 00:05:34.320
+Next.
+
+121
+00:05:34.320 --> 00:05:37.320
+Paste the token over here where you see secret.
+
+122
+00:05:37.320 --> 00:05:39.030
+And here give the ID.
+
+123
+00:05:39.030 --> 00:05:41.610
+So, I'm going to say sonar token.
+
+124
+00:05:41.610 --> 00:05:45.930
+See I'm giving in the description, and say Create.
+
+125
+00:05:45.930 --> 00:05:47.760
+And make sure to select that token.
+
+126
+00:05:47.760 --> 00:05:50.940
+It will not be selected by default, so select the token.
+
+127
+00:05:50.940 --> 00:05:53.790
+Once you're done, you can save this.
+
+128
+00:05:53.790 --> 00:05:55.020
+Now, one last thing to verify
+
+129
+00:05:55.020 --> 00:05:58.020
+is the security group of a SonarQube server.
+
+130
+00:05:58.020 --> 00:06:01.380
+It should accept the connection from port80.
+
+131
+00:06:01.380 --> 00:06:04.530
+So, go to SonarQube Server Security,
+
+132
+00:06:04.530 --> 00:06:08.220
+Security Groups, Edit inbound rules.
+
+133
+00:06:08.220 --> 00:06:11.253
+Now, you see I have over here port80 from anywhere.
+
+134
+00:06:12.450 --> 00:06:13.740
+But that is not a good rule.
+
+135
+00:06:13.740 --> 00:06:15.090
+You should see port80
+
+136
+00:06:15.090 --> 00:06:17.973
+allowed from the Jenkins Security Group.
+
+137
+00:06:19.200 --> 00:06:22.233
+And port80, another one from my IP.
+
+138
+00:06:23.220 --> 00:06:27.150
+So, when Jenkins uploads the result to SonarQube server,
+
+139
+00:06:27.150 --> 00:06:28.770
+that is going to happen on port80.
+
+140
+00:06:28.770 --> 00:06:31.200
+So, Sonar Security Group should allow connection
+
+141
+00:06:31.200 --> 00:06:34.710
+from Jenkins Security Group on port80,
+
+142
+00:06:34.710 --> 00:06:37.890
+save the rules, and also check Jenkins Security Group.
+
+143
+00:06:37.890 --> 00:06:42.243
+Go to Jenkins, Security, Security Group, Edit inbound rule.
+
+144
+00:06:43.470 --> 00:06:45.483
+Now, later we are going to set up webhooks.
+
+145
+00:06:45.483 --> 00:06:49.864
+So, SonarQube will send the status to Jenkins.
+
+146
+00:06:49.864 --> 00:06:53.640
+And for that, Sonar will contact Jenkins on port80.
+
+147
+00:06:53.640 --> 00:06:55.710
+So, port8080 should be allowed
+
+148
+00:06:55.710 --> 00:06:58.053
+from the Sonar Security Group.
+
+149
+00:06:59.010 --> 00:07:00.960
+Check once again, this is Jenkins Security Group.
+
+150
+00:07:00.960 --> 00:07:04.500
+I'm allowing port8080 from Sonar Security Group.
+
+151
+00:07:04.500 --> 00:07:06.870
+Once you do that, save rules.
+
+152
+00:07:06.870 --> 00:07:07.703
+In the next lecture,
+
+153
+00:07:07.703 --> 00:07:10.440
+we are going to write the pipeline code,
+
+154
+00:07:10.440 --> 00:07:11.910
+which will generate the code analysis,
+
+155
+00:07:11.910 --> 00:07:14.820
+upload the result to SonarQube server.
+
+156
+00:07:14.820 --> 00:07:17.470
+That is all in this lecture. Join me in the next one.
+

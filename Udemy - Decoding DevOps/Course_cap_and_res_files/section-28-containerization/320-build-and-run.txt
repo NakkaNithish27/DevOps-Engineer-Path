@@ -1,0 +1,733 @@
+WEBVTT
+
+00:00.450 --> 00:02.030
+Instructor: Okay, so we have everything ready now.
+
+00:02.030 --> 00:04.530
+We have the Docker Compose file
+
+00:04.530 --> 00:07.170
+where the Docker files path are mentioned
+
+00:07.170 --> 00:10.380
+and how to run the container from that image
+
+00:10.380 --> 00:11.400
+that is also mentioned.
+
+00:11.400 --> 00:13.140
+So we have all these three Docker files
+
+00:13.140 --> 00:14.310
+and the Docker Compose file.
+
+00:14.310 --> 00:17.310
+Now it is time to build these images
+
+00:17.310 --> 00:20.280
+and run the containers together from this
+
+00:20.280 --> 00:21.813
+by using Docker Compose.
+
+00:22.650 --> 00:24.090
+So you need to come to the folder
+
+00:24.090 --> 00:28.770
+where we have created the VM and installed Docker Engine.
+
+00:28.770 --> 00:30.873
+So mine is in F drive.
+
+00:33.570 --> 00:35.500
+So open Git Bash or terminal
+
+00:36.540 --> 00:37.710
+and come to the folder
+
+00:37.710 --> 00:40.860
+where we had created previously the Vagrant VM
+
+00:40.860 --> 00:42.750
+and installed Docker Engine.
+
+00:42.750 --> 00:44.100
+Mine is in this location,
+
+00:44.100 --> 00:49.100
+f/containerization/vprofile-project/vagrant Windows folder.
+
+00:49.470 --> 00:51.150
+So I did power off the VM.
+
+00:51.150 --> 00:52.950
+I'm going to power on this VM now.
+
+00:52.950 --> 00:54.420
+Vagrant up.
+
+00:54.420 --> 00:56.340
+Or you can first check the status also.
+
+00:56.340 --> 00:58.803
+If you see this running, you do vagrant reload.
+
+00:59.640 --> 01:00.990
+So my VM is powered off.
+
+01:00.990 --> 01:03.153
+I'm going to power it on vagrant up.
+
+01:04.260 --> 01:05.610
+Okay, my VM is up.
+
+01:05.610 --> 01:08.610
+I log into this, vagrant ssh.
+
+01:08.610 --> 01:10.560
+Okay, let me clear the screen
+
+01:10.560 --> 01:12.390
+and I'm going to switch to root user.
+
+01:12.390 --> 01:13.500
+It's not necessary.
+
+01:13.500 --> 01:16.500
+We can run Docker command with vagrant user also.
+
+01:16.500 --> 01:20.970
+We add vagrant user in the Docker group, cd/vagrant.
+
+01:22.770 --> 01:25.023
+You go to this folder so you can see.
+
+01:26.220 --> 01:28.350
+So we have the Vagrant file in this folder.
+
+01:28.350 --> 01:31.245
+We need the Docker Compose file in all the Docker files
+
+01:31.245 --> 01:32.940
+in this location.
+
+01:32.940 --> 01:35.590
+So what we are going to do is we come to the VS code,
+
+01:36.510 --> 01:39.390
+right click on the Docker files folder, see copy
+
+01:39.390 --> 01:41.490
+and get into the vagrant folder.
+
+01:41.490 --> 01:45.000
+And make sure you go to the folder based on your OS,
+
+01:45.000 --> 01:47.820
+the folder that you selected to create Vagrant file.
+
+01:47.820 --> 01:51.510
+Mine was in this location and paste it over here.
+
+01:51.510 --> 01:54.480
+And also I'm going to take the Docker Compose file.
+
+01:54.480 --> 01:57.810
+I'm going to paste it over there, this location.
+
+01:57.810 --> 01:59.040
+So we need the Docker files
+
+01:59.040 --> 02:01.710
+and Docker Compose file in the same location.
+
+02:01.710 --> 02:04.830
+Now if you're on ls, you should see this over here.
+
+02:04.830 --> 02:06.030
+Now generally the Vagrant file
+
+02:06.030 --> 02:08.880
+should be in the root directory here itself.
+
+02:08.880 --> 02:11.820
+But since we have people who use different computers,
+
+02:11.820 --> 02:13.020
+different operating systems,
+
+02:13.020 --> 02:16.440
+so we had to create this folder structure for Vagrant.
+
+02:16.440 --> 02:18.570
+So if you have Vagrant file in the same location,
+
+02:18.570 --> 02:20.220
+you brought up the VM in this location.
+
+02:20.220 --> 02:24.570
+So you should automatically see all this in your Vagrant VM.
+
+02:24.570 --> 02:26.610
+Okay, so here we see the Docker Compose file.
+
+02:26.610 --> 02:30.660
+We need to run the command Docker Compose build.
+
+02:30.660 --> 02:33.660
+This command is going to read your Docker Compose file,
+
+02:33.660 --> 02:35.940
+find all the images that requires the build,
+
+02:35.940 --> 02:37.920
+and going to run the Docker build command
+
+02:37.920 --> 02:39.900
+to build the images.
+
+02:39.900 --> 02:41.340
+And this is going to take some time.
+
+02:41.340 --> 02:43.230
+So I'm going to pause the recording
+
+02:43.230 --> 02:44.973
+and resume when this is completed.
+
+02:46.110 --> 02:47.640
+Okay, so the build is completed.
+
+02:47.640 --> 02:49.500
+It took some time, but it got completed.
+
+02:49.500 --> 02:51.840
+Now we should see the Docker images.
+
+02:51.840 --> 02:54.300
+So if you run the command Docker images,
+
+02:54.300 --> 02:56.550
+we should see these three images.
+
+02:56.550 --> 02:59.250
+Right, so we have app image, we have DB image,
+
+02:59.250 --> 03:01.080
+we have the web image.
+
+03:01.080 --> 03:03.810
+You can see its size also.
+
+03:03.810 --> 03:05.730
+So we have not mentioned any tag.
+
+03:05.730 --> 03:09.090
+So it is giving the tag as latest.
+
+03:09.090 --> 03:10.860
+Now in the Compose file we have also written
+
+03:10.860 --> 03:12.240
+how to run this container.
+
+03:12.240 --> 03:14.040
+So we have to run this command now
+
+03:14.040 --> 03:15.990
+to check whether it works or not.
+
+03:15.990 --> 03:19.960
+So docker compose up -d
+
+03:21.090 --> 03:23.580
+Now first it will check these images are available or not.
+
+03:23.580 --> 03:26.010
+If these images are not available, then it is going
+
+03:26.010 --> 03:28.530
+to run Docker Compose build.
+
+03:28.530 --> 03:32.190
+We already ran build command, so we already have the images.
+
+03:32.190 --> 03:34.230
+Now it is going to see the information
+
+03:34.230 --> 03:36.690
+on how to run the containers together
+
+03:36.690 --> 03:38.370
+from Docker Compose file.
+
+03:38.370 --> 03:39.990
+So when we hit Enter,
+
+03:39.990 --> 03:41.460
+it's going to start running the container.
+
+03:41.460 --> 03:46.460
+It will also pull two images for memcache and RabbitMQ.
+
+03:46.710 --> 03:48.510
+Now memcache and RabbitMQ image.
+
+03:48.510 --> 03:50.370
+Those are official images that we are taking.
+
+03:50.370 --> 03:51.203
+We're not building it.
+
+03:51.203 --> 03:53.550
+So it's going to pull those images.
+
+03:53.550 --> 03:54.900
+When it created a network,
+
+03:54.900 --> 03:57.120
+it created these two volumes that we mentioned.
+
+03:57.120 --> 04:01.230
+The Compose file and then it created all our containers.
+
+04:01.230 --> 04:04.743
+And notice the name also vprodb, vproapp, vproweb.
+
+04:06.270 --> 04:08.790
+And these two containers, I have a different name,
+
+04:08.790 --> 04:09.900
+I need to make sure
+
+04:09.900 --> 04:14.250
+it has this name vprocache01 and vpromq01.
+
+04:14.250 --> 04:16.503
+So I'm going to edit the Docker Compose file.
+
+04:19.290 --> 04:22.260
+So here we have given the name to vprodb container
+
+04:22.260 --> 04:25.740
+by using container_name instruction.
+
+04:25.740 --> 04:27.690
+Here also, we can use the same.
+
+04:27.690 --> 04:29.297
+I'm going to paste this over here,
+
+04:29.297 --> 04:32.523
+container_name: vpromq01.
+
+04:34.380 --> 04:37.353
+And also for caching.
+
+04:38.190 --> 04:39.033
+Yeah, there.
+
+04:40.080 --> 04:41.763
+Vprocache01.
+
+04:44.010 --> 04:45.423
+Vprocache01.
+
+04:46.500 --> 04:51.210
+Okay, save and quit the file and we'll delete everything.
+
+04:51.210 --> 04:53.182
+I mean just the container, not the images.
+
+04:53.182 --> 04:55.593
+We're going to see Docker Compose down.
+
+04:57.060 --> 05:00.060
+That will stop the container and also remove the container.
+
+05:00.060 --> 05:03.820
+Then we will again run docker compose up -d
+
+05:06.450 --> 05:08.160
+and that's the correct name.
+
+05:08.160 --> 05:10.620
+Now let's access this, our application, right?
+
+05:10.620 --> 05:14.130
+We need to access the Nginx, the web image,
+
+05:14.130 --> 05:16.020
+the web, sorry, the container, web container.
+
+05:16.020 --> 05:17.610
+We need to access that.
+
+05:17.610 --> 05:20.190
+So if you run a docker ps,
+
+05:20.190 --> 05:22.740
+we should see here the web container.
+
+05:22.740 --> 05:25.720
+Okay, so the container port is 80 and the host port is 80.
+
+05:25.720 --> 05:29.700
+So if we access host this VM on port 80, then it is going
+
+05:29.700 --> 05:32.730
+to route the request to this container on port 80.
+
+05:32.730 --> 05:33.780
+And then that is Nginx.
+
+05:33.780 --> 05:35.460
+We already have a configuration in that,
+
+05:35.460 --> 05:38.640
+that then route the request to the Tomcat.
+
+05:38.640 --> 05:41.160
+The vproapp and vpro app is going
+
+05:41.160 --> 05:42.900
+to access the backend services
+
+05:42.900 --> 05:45.570
+with the application properties file information
+
+05:45.570 --> 05:48.103
+where it has information of vprodb,
+
+05:48.103 --> 05:52.410
+vprocache01 and vpromq01.
+
+05:52.410 --> 05:54.540
+Alright, and this application.properties file,
+
+05:54.540 --> 05:55.953
+you have the information.
+
+05:57.390 --> 05:59.310
+So let's get the IP address of this VM.
+
+05:59.310 --> 06:01.833
+So run the command ip addr show.
+
+06:02.880 --> 06:07.880
+Okay, 192.168.56.16-enp0s8.
+
+06:08.460 --> 06:10.650
+That's the IP we have given in the Vagrant file.
+
+06:10.650 --> 06:12.513
+So this is the IP, let's copy that.
+
+06:13.470 --> 06:14.760
+Okay, so in the browser we are going
+
+06:14.760 --> 06:19.760
+to say http://192.168.56.16:80.
+
+06:20.370 --> 06:23.460
+Now, even if we don't give port 80, that is a default port
+
+06:23.460 --> 06:26.970
+for http, but I just wanted to make a point over here
+
+06:26.970 --> 06:31.560
+that when you access the host machine on port 80 there,
+
+06:31.560 --> 06:32.940
+when you run Docker PS command,
+
+06:32.940 --> 06:36.060
+you can see the container port
+
+06:36.060 --> 06:38.790
+of Nginx is port 80 and the host port is 80.
+
+06:38.790 --> 06:41.340
+So when you access the host on port 80, it is going
+
+06:41.340 --> 06:43.860
+to route the request to container,
+
+06:43.860 --> 06:46.230
+the Nginx container on port 80.
+
+06:46.230 --> 06:48.990
+And Nginx container has the configuration
+
+06:48.990 --> 06:51.570
+that routes the request to the Tomcat container.
+
+06:51.570 --> 06:52.593
+So let's see that.
+
+06:53.790 --> 06:55.470
+We just hit Enter.
+
+06:55.470 --> 06:56.850
+We should see the webpage.
+
+06:56.850 --> 06:58.710
+This is coming from Tomcat.
+
+06:58.710 --> 07:03.357
+Now when we log in, admin_vp, password, admin_vp.
+
+07:04.290 --> 07:06.030
+This information is stored in the database.
+
+07:06.030 --> 07:08.490
+If you're able to log in, then it is able to also connect
+
+07:08.490 --> 07:10.173
+to the DB container in it.
+
+07:11.010 --> 07:12.663
+Thus it's able to log in.
+
+07:14.970 --> 07:16.320
+Alright, so we can check RabbitMQ.
+
+07:16.320 --> 07:17.760
+Click on RabbitMQ.
+
+07:17.760 --> 07:19.623
+You see RabbitMQ initiated,
+
+07:20.460 --> 07:23.530
+and we can check memcache by clicking on all users
+
+07:24.870 --> 07:26.463
+and pick up any user.
+
+07:29.160 --> 07:31.920
+Data is from DB and data is inserted in cache.
+
+07:31.920 --> 07:33.450
+So memcache is also working
+
+07:33.450 --> 07:36.000
+if you click on that user once again.
+
+07:36.000 --> 07:38.940
+You should see the data is coming from the cache.
+
+07:38.940 --> 07:41.520
+So all our services are verified.
+
+07:41.520 --> 07:45.090
+Now it's time to host our images in our Docker hub account.
+
+07:45.090 --> 07:47.340
+So let's clear the screen.
+
+07:47.340 --> 07:49.083
+Docker images.
+
+07:50.220 --> 07:53.490
+So you should have given the name of your image.
+
+07:53.490 --> 07:55.410
+Like this first should be your account name
+
+07:55.410 --> 07:57.510
+and then the image name.
+
+07:57.510 --> 07:59.193
+So mine is vpro containers.
+
+08:00.030 --> 08:02.070
+So in order to upload those images
+
+08:02.070 --> 08:03.570
+to our Docker hub account,
+
+08:03.570 --> 08:05.100
+first we need to log into Docker hub.
+
+08:05.100 --> 08:07.383
+So we have to say Docker login,
+
+08:08.370 --> 08:10.593
+and it is going to ask the credentials.
+
+08:11.550 --> 08:13.920
+Okay, when you execute the command docker login,
+
+08:13.920 --> 08:15.330
+you should get this.
+
+08:15.330 --> 08:18.180
+To get this URL, you can do a browser based login.
+
+08:18.180 --> 08:22.140
+You can just copy this URL, go to your browser,
+
+08:22.140 --> 08:24.660
+and then it is going to ask you a confirmation code.
+
+08:24.660 --> 08:26.340
+And this will be the confirmation code
+
+08:26.340 --> 08:27.750
+that you have to enter.
+
+08:27.750 --> 08:29.490
+So let's go.
+
+08:29.490 --> 08:30.930
+So enter one time code.
+
+08:30.930 --> 08:32.733
+So that is my one time code.
+
+08:38.910 --> 08:39.813
+Confirm.
+
+08:41.760 --> 08:43.960
+Okay, now let's check from the command line.
+
+08:44.850 --> 08:46.740
+Says waiting for authentication in browser
+
+08:46.740 --> 08:48.510
+and says login succeeded now.
+
+08:48.510 --> 08:51.540
+Okay, now all you need to do is you have to say docker push,
+
+08:51.540 --> 08:54.150
+and you give the image name one by one.
+
+08:54.150 --> 08:55.923
+So I'll first upload this one.
+
+08:57.870 --> 08:59.490
+First vprofile app.
+
+08:59.490 --> 09:02.703
+So like that one by one, upload all the three images.
+
+09:03.870 --> 09:05.640
+Okay, so I've pushed all the three images.
+
+09:05.640 --> 09:06.870
+You also do the same thing.
+
+09:06.870 --> 09:10.290
+You can use these images later in the later lectures
+
+09:10.290 --> 09:12.693
+and Kubernetes we're going to use these images.
+
+09:13.530 --> 09:15.030
+And once you are done with that,
+
+09:15.030 --> 09:19.113
+you can do the cleanup starting with the Docker containers.
+
+09:20.010 --> 09:21.210
+So let's go to the folder
+
+09:21.210 --> 09:24.900
+where we created the container with Compose.
+
+09:24.900 --> 09:27.840
+So /vagrant, now you get Compose file.
+
+09:27.840 --> 09:31.323
+So Docker Compose down.
+
+09:32.610 --> 09:34.470
+This command should stop the containers
+
+09:34.470 --> 09:37.110
+and remove the container all at once.
+
+09:37.110 --> 09:38.250
+And you should also have
+
+09:38.250 --> 09:42.090
+the volume docker, volume ls if you do.
+
+09:42.090 --> 09:44.310
+You should see these volumes.
+
+09:44.310 --> 09:47.553
+So let's remove the volume docker volume rm.
+
+09:49.830 --> 09:51.453
+Give both the volume names.
+
+09:52.500 --> 09:57.090
+You can also run the command docker volume prune
+
+09:57.090 --> 10:01.713
+to remove any unused volume, there is one unused volume.
+
+10:03.600 --> 10:05.340
+Okay, that is done.
+
+10:05.340 --> 10:07.260
+Or if you want to run every, if you want
+
+10:07.260 --> 10:08.790
+to remove everything altogether,
+
+10:08.790 --> 10:12.523
+you can say docker system prune -a.
+
+10:17.520 --> 10:18.353
+Yes.
+
+10:18.353 --> 10:21.570
+So this will stop the container, remove them,
+
+10:21.570 --> 10:23.670
+remove the images and all the other cache.
+
+10:25.560 --> 10:26.670
+That's a cleanup.
+
+10:26.670 --> 10:28.497
+Now, as long as we have the Docker Compose file
+
+10:28.497 --> 10:30.870
+and all the Docker files, we can anytime build
+
+10:30.870 --> 10:32.253
+and run these containers.
+
+10:33.120 --> 10:35.430
+And if you're done with this, you can really exit
+
+10:35.430 --> 10:39.300
+and stop this VM or even destroy this VM
+
+10:39.300 --> 10:40.770
+because we have everything in the code.
+
+10:40.770 --> 10:43.020
+We have the Vagrant file, we can bring up the VM,
+
+10:43.020 --> 10:46.860
+then we can run the Docker Compose file to build the images
+
+10:46.860 --> 10:48.510
+and run the containers.
+
+10:48.510 --> 10:51.030
+So everything we have as a code.
+
+10:51.030 --> 10:53.763
+So complete the cleanup and bring down the VM.
+
+10:54.690 --> 10:55.923
+Vagrant halt.
+
+10:58.590 --> 11:00.440
+And then join me in the next lecture.

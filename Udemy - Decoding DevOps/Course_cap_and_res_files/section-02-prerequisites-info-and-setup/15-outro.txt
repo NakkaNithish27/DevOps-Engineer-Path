@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00.280 --> 00:02.120
+All right, you're all set.
+
+00:02.160 --> 00:04.440
+You have packed your luggage for the journey ahead.
+
+00:04.840 --> 00:09.400
+Some of the tools you have installed will be used immediately in next section.
+
+00:09.440 --> 00:10.560
+Our VM setup.
+
+00:11.160 --> 00:15.600
+And as we move forward, you will gradually unpack everything else you prepared.
+
+00:15.800 --> 00:17.240
+One step at a time.
+
+00:17.800 --> 00:21.880
+Before you continue, make sure you have completed all the prerequisites.
+
+00:22.200 --> 00:27.680
+A strong foundation now will make your entire learning journey smoother and more enjoyable.
+
+00:28.200 --> 00:30.080
+Your journey officially begins now.
+
+00:30.280 --> 00:31.040
+All the best.
+
+00:31.040 --> 00:31.960
+Let's get started.

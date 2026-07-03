@@ -1,0 +1,988 @@
+WEBVTT
+
+00:00.240 --> 00:01.640
+Hello and welcome.
+
+00:01.640 --> 00:05.520
+In this lecture we are going to set up Elastic Beanstalk instance.
+
+00:05.920 --> 00:07.240
+Our environment.
+
+00:08.280 --> 00:15.640
+Before we do this, I want you to recall the previous project where we set up Tomcat on an EC2 instance.
+
+00:16.600 --> 00:18.560
+We did so many things we created.
+
+00:18.560 --> 00:20.640
+First the security group key pair.
+
+00:21.160 --> 00:24.600
+We launched the instance and we installed Tomcat.
+
+00:24.640 --> 00:28.560
+On that we created target group Load balancer.
+
+00:29.200 --> 00:35.640
+And when everything was good, we created an Ami launch template and created an auto scaling group.
+
+00:36.320 --> 00:37.800
+So so many things we did.
+
+00:38.480 --> 00:40.880
+And then we want to deploy the artifact.
+
+00:40.920 --> 00:47.680
+We built the artifact locally on our system and through S3 bucket we deployed it on Tomcat.
+
+00:48.560 --> 00:51.680
+Beanstalk gives you all this as a single suit.
+
+00:51.680 --> 00:54.880
+So when you create a beanstalk environment, you select Tomcat.
+
+00:55.160 --> 00:56.520
+It gives you everything.
+
+00:57.000 --> 01:05.480
+Auto scaling group ami S3 bucket for artifact, CloudWatch, monitoring logs, many other things, and
+
+01:05.520 --> 01:11.120
+it's very easy to tweak its settings whenever we need and super easy to do the deployment.
+
+01:11.840 --> 01:18.080
+As it says, it's an easy to use service for deploying and scaling web applications and services deployed
+
+01:18.080 --> 01:26.200
+with Java DotNet, PHP, Node.js, Python, Ruby, go, and Docker in later project.
+
+01:26.200 --> 01:33.720
+When we do Docker images, when we transform, when we transform our profile application into Docker
+
+01:34.320 --> 01:36.800
+that time, this Docker concept will make sense to you.
+
+01:36.800 --> 01:39.640
+You can also run your Docker images on Beanstalk.
+
+01:40.160 --> 01:43.800
+And the best part is there is no additional charge for Elastic Beanstalk.
+
+01:44.400 --> 01:49.960
+It charges you only or you have to pay only for the service that Beanstalk gives you.
+
+01:50.000 --> 01:51.920
+Like EC2 volumes, whatever.
+
+01:52.120 --> 01:55.560
+But as a whole automation suit, it doesn't charge you for anything.
+
+01:56.440 --> 02:01.960
+So we'll create this Beanstalk environment now, but before that we are going to create some IAM roles
+
+02:01.960 --> 02:03.040
+for Beanstalk.
+
+02:04.120 --> 02:08.120
+So search for IAM, go to roles.
+
+02:10.840 --> 02:12.560
+So Beanstalk creates a role.
+
+02:12.560 --> 02:15.160
+You can select an option or you can select an existing role.
+
+02:15.160 --> 02:20.240
+But that role lacks some permission which will be a problem for our project.
+
+02:20.240 --> 02:24.120
+So we don't want to use that role, or we don't want Beanstalk to create a role.
+
+02:24.120 --> 02:32.280
+We will create a role and select when we create Beanstalk instance, create role AWS service.
+
+02:32.280 --> 02:37.400
+You can use select the use case as EC2 and go next.
+
+02:38.240 --> 02:45.960
+Now in the permission search for the word bean, you need to select these four policies.
+
+02:46.680 --> 02:55.000
+Administrator access AWS Elastic Beanstalk AWS Elastic Beanstalk Custom Role platform for EC2 role.
+
+02:57.360 --> 02:58.960
+AWS Elastic Beanstalk role.
+
+02:59.000 --> 03:04.600
+SNS for notifications AWS Elastic Beanstalk web tier.
+
+03:04.960 --> 03:07.280
+So these four roles you need to.
+
+03:07.440 --> 03:10.040
+Sorry four policies you need to select.
+
+03:11.160 --> 03:12.840
+And then you can go next.
+
+03:13.800 --> 03:16.960
+Let's give it a name V profile Rearch been role.
+
+03:17.560 --> 03:22.320
+Keep same in the description and say create role.
+
+03:23.440 --> 03:27.400
+Remember the name of the role because we need to select it in the beanstalk.
+
+03:27.720 --> 03:32.640
+So now come to Amazon Elastic Beanstalk and say create application.
+
+03:34.200 --> 03:37.000
+So environment here web server environment.
+
+03:37.000 --> 03:39.120
+We will be using Tomcat.
+
+03:39.720 --> 03:44.400
+Our application will be running on that definitely a web environment or a website.
+
+03:45.080 --> 03:46.680
+Give application a name.
+
+03:47.680 --> 03:49.920
+Come down environment name.
+
+03:50.560 --> 03:57.090
+So in Beanstalk when we say environment that actually means the different kind of environment a project
+
+03:57.090 --> 04:01.570
+can have like dev test, staging, production like that.
+
+04:01.570 --> 04:06.890
+And this environment basically consists of all these services auto scaling group, EC2 instance, S3
+
+04:06.930 --> 04:07.650
+bucket, everything.
+
+04:07.650 --> 04:13.970
+So in one Beanstalk application you can have multiple environments dev, staging, production like that.
+
+04:14.690 --> 04:14.850
+Okay.
+
+04:14.890 --> 04:18.410
+Next the domain it will give you a URL to access your application.
+
+04:18.410 --> 04:24.010
+So let me give a name here I'll say Pro re arch.
+
+04:25.130 --> 04:26.690
+You cannot give the same name.
+
+04:26.690 --> 04:29.410
+You have to give a different name because this needs to be unique.
+
+04:30.450 --> 04:31.490
+Check availability.
+
+04:31.530 --> 04:33.010
+It says this is available.
+
+04:33.210 --> 04:36.450
+So make sure whatever name you give you check availability.
+
+04:36.450 --> 04:40.370
+Then that will be the URL to access your application okay.
+
+04:40.410 --> 04:41.970
+Platform platform.
+
+04:41.970 --> 04:43.730
+Definitely we need Tomcat.
+
+04:44.450 --> 04:48.410
+So select Tomcat there and platform branch.
+
+04:48.810 --> 04:59.330
+So we will be using Tomcat ten and Corretto 1721 Also works for Project Keep 21, so corridor 21 means
+
+04:59.330 --> 05:03.090
+Java 21 with Tomcat ten on top of it.
+
+05:03.490 --> 05:04.290
+Platform version.
+
+05:04.290 --> 05:06.050
+You can keep the recommended over here.
+
+05:06.330 --> 05:08.930
+Application code first, sample application later.
+
+05:08.930 --> 05:14.490
+We're going to upload our app, our artifact over there, then presets the configuration.
+
+05:14.490 --> 05:17.210
+So we'll go for custom and we'll make the changes.
+
+05:17.650 --> 05:21.610
+You can have single instance but definitely we will not be using single instance.
+
+05:21.610 --> 05:24.050
+We'll have auto scaling group load balancer everything.
+
+05:24.050 --> 05:27.130
+So we'll go for custom configuration go next.
+
+05:29.330 --> 05:31.010
+Configure service access.
+
+05:31.010 --> 05:35.930
+Here we need to select the role the service role and the instance profile role that we have created.
+
+05:36.290 --> 05:43.290
+If you do not see here the AWS Elastic Beanstalk service role, then you can create it with this button.
+
+05:43.290 --> 05:44.810
+I'm going to show you how to do that.
+
+05:44.810 --> 05:46.730
+First let me delete this service role.
+
+05:46.890 --> 05:48.690
+So I go to IAM roles and I'm deleting.
+
+05:48.690 --> 05:50.730
+You don't need to do this if you already have the role.
+
+05:50.730 --> 05:54.170
+I'm just showing you if the role is missing, how can you create it?
+
+05:54.650 --> 05:59.010
+So I'm deleting this role and I'm going to click on here refresh.
+
+05:59.570 --> 06:01.610
+You see I do not see any role over here.
+
+06:02.170 --> 06:03.530
+The drop down is not there.
+
+06:03.530 --> 06:06.010
+So I'm going to click on Create Role here.
+
+06:06.890 --> 06:09.850
+Go next next.
+
+06:10.450 --> 06:15.250
+So it has selected the policies automatically and it has given the name as well.
+
+06:15.290 --> 06:16.810
+Just click on Create Role.
+
+06:17.570 --> 06:21.450
+And then when you come back refresh this and you should see your role.
+
+06:21.490 --> 06:24.370
+Service role created over here in instance profile.
+
+06:24.370 --> 06:29.730
+Select the role that we have created previously and in EC2 key pair select your key pair.
+
+06:30.170 --> 06:34.530
+Make sure you select all these options and then go next VPC.
+
+06:34.570 --> 06:36.650
+We just have one default VPC.
+
+06:36.690 --> 06:39.490
+We are going to select that one instance setting.
+
+06:39.530 --> 06:43.050
+Make sure you select here public IP address activated.
+
+06:43.650 --> 06:48.970
+So the EC2 instance that gets created in Beanstalk will have a public IP instance.
+
+06:48.970 --> 06:49.730
+Subnets.
+
+06:49.730 --> 06:54.370
+You can select all of it, and this might give me error when I go next.
+
+06:54.370 --> 06:55.890
+Let's see if we get that error.
+
+06:56.330 --> 06:59.090
+That's some zone is not available or something like that.
+
+06:59.090 --> 07:00.530
+We can uncheck that zone.
+
+07:00.890 --> 07:04.970
+But for now let's just select all the zones database.
+
+07:05.410 --> 07:08.610
+So we already created our RDS database instance.
+
+07:09.130 --> 07:10.770
+Beanstalk also gives you that option.
+
+07:10.770 --> 07:15.250
+When you create Beanstalk you can create RDS instance with that.
+
+07:15.250 --> 07:16.450
+But that will be coupled.
+
+07:16.490 --> 07:23.650
+I mean you can decouple it in previous time as in not very previous very recently means that gives you
+
+07:23.650 --> 07:25.890
+option to decouple the RDS instance.
+
+07:26.090 --> 07:29.930
+But from the beginning what we did, we created RDS instance separately.
+
+07:29.930 --> 07:31.770
+So it's decoupled with Beanstalk.
+
+07:32.010 --> 07:33.850
+So we can manage both separately.
+
+07:34.410 --> 07:36.090
+So not select anything for the database.
+
+07:36.090 --> 07:37.730
+In Beanstalk you already have it.
+
+07:38.130 --> 07:41.210
+Let's just scroll down and let's go next.
+
+07:41.250 --> 07:43.370
+Oh wait uh add new tag.
+
+07:44.730 --> 07:47.090
+We'll just say project is view profile.
+
+07:47.130 --> 07:47.330
+Go.
+
+07:47.370 --> 07:55.130
+Next we will change the root volume from container default to general purpose three GP3.
+
+07:55.690 --> 07:57.810
+There are some recent issues with Beanstack.
+
+07:57.850 --> 08:04.410
+It is trying to use launch configuration which is outdated, and you will get an error that Beanstack
+
+08:04.450 --> 08:06.050
+should be using launch template.
+
+08:06.050 --> 08:09.330
+So if you use GP3 it will use launch template.
+
+08:09.330 --> 08:14.570
+But if you select here container default it will use launch configuration which is outdated.
+
+08:14.570 --> 08:16.930
+So make sure you select GP3 over here.
+
+08:17.650 --> 08:23.090
+Scroll down CloudWatch monitoring interval five minutes is fine.
+
+08:23.530 --> 08:27.250
+You can also have every minute monitoring but that will be not free.
+
+08:28.130 --> 08:29.410
+Scroll down okay.
+
+08:29.450 --> 08:30.250
+Security group.
+
+08:30.250 --> 08:34.010
+Now we want Beanstack to create its own security group.
+
+08:34.010 --> 08:36.130
+And then we can edit its rules.
+
+08:36.610 --> 08:38.130
+So keep that as it is.
+
+08:38.490 --> 08:39.810
+Capacity now here.
+
+08:40.370 --> 08:43.810
+So we want multiple instances load balanced.
+
+08:44.330 --> 08:45.250
+And we select that.
+
+08:45.250 --> 08:48.170
+It will create a load balancer application load balancer.
+
+08:48.450 --> 08:51.850
+And we need minimum two instances and maximum four.
+
+08:52.370 --> 08:54.170
+Again I'm just giving a random number.
+
+08:54.610 --> 08:56.810
+You need to select this based on your project requirement.
+
+08:56.810 --> 08:59.330
+And remember you can anytime change these things.
+
+08:59.330 --> 09:01.170
+Maximum number minimum number.
+
+09:01.170 --> 09:02.530
+You can anytime change.
+
+09:02.930 --> 09:06.330
+So starting with minimum two because load balance we need minimum two.
+
+09:06.610 --> 09:12.050
+And I want to show you how the deployment happens when I upload the artifact, how it's like one at
+
+09:12.050 --> 09:12.370
+a time.
+
+09:12.370 --> 09:14.050
+Or we can select those options.
+
+09:14.610 --> 09:17.770
+So for that reason I'm keeping minimum two instances over here.
+
+09:18.930 --> 09:19.130
+Okay.
+
+09:19.170 --> 09:19.970
+Coming down.
+
+09:20.170 --> 09:20.370
+Okay.
+
+09:20.410 --> 09:21.930
+Instance type T2 small.
+
+09:21.930 --> 09:23.010
+So that won't be free right.
+
+09:23.010 --> 09:26.330
+So we're going to select here T2 micro okay.
+
+09:26.330 --> 09:30.570
+So from the list find T2 micro or T3 micro also is fine.
+
+09:30.610 --> 09:32.010
+Just go with T2 micro.
+
+09:34.130 --> 09:35.010
+Scaling triggers.
+
+09:35.010 --> 09:37.170
+This is for the auto scaling group.
+
+09:38.010 --> 09:38.930
+And let's see the metrics.
+
+09:38.930 --> 09:41.210
+So your CPU utilization you have network out.
+
+09:41.210 --> 09:46.460
+These two are the most used one CPU utilization and network out for web application I'm saying Thing
+
+09:46.980 --> 09:47.300
+you know.
+
+09:47.340 --> 09:51.060
+Network out simply means, you know, it's serving the pages out.
+
+09:51.100 --> 09:55.660
+You know, when more users, that means more network out will be there.
+
+09:55.660 --> 09:57.260
+You know, server will respond more.
+
+09:57.900 --> 10:02.540
+So it's a very good trigger to scale out or scale in, right?
+
+10:02.580 --> 10:07.460
+Whenever the network out is increasing, that means more users are coming.
+
+10:07.460 --> 10:10.420
+You can see the auto scaling group can add more instances.
+
+10:10.420 --> 10:15.300
+When it's reducing network out is reducing, then it is going to delete the instances.
+
+10:15.300 --> 10:22.420
+So it's a very, very much apt trigger, you know, to scale out or scale in for web application.
+
+10:23.700 --> 10:27.500
+Let's come down load balancer visibility public.
+
+10:27.500 --> 10:28.220
+Definitely.
+
+10:28.220 --> 10:30.380
+We are hosting it for the internet for the public.
+
+10:30.380 --> 10:34.220
+So we'll keep the visibility as public and all the zones are selected over here.
+
+10:34.660 --> 10:37.460
+Load balancer type application load balancer.
+
+10:37.460 --> 10:40.940
+We need network load balancer is high performing.
+
+10:41.260 --> 10:42.540
+It gives you static IP.
+
+10:42.580 --> 10:45.260
+It's really amazing but it's expensive.
+
+10:45.260 --> 10:47.620
+So we'll keep application load balancer.
+
+10:47.660 --> 10:52.180
+It's apt for HTTP and https traffic listeners.
+
+10:52.780 --> 10:58.380
+So from previous project we remember Tomcat runs on port 8080 but not in Beanstalk.
+
+10:58.420 --> 11:00.700
+Beanstalk it runs on port 80.
+
+11:00.900 --> 11:02.700
+Load balancer port is also 80.
+
+11:02.700 --> 11:03.660
+So it takes the request.
+
+11:03.660 --> 11:11.020
+This is the load balancer port listener port so it listens on port 80 and routes the back request to
+
+11:11.060 --> 11:18.940
+port 80 only on EC2 instance and we'll keep it as it is later we're going to change it to Https connection,
+
+11:18.980 --> 11:21.820
+but for now let's keep it 80 okay.
+
+11:21.860 --> 11:25.180
+For processes, um, you have to make one change over here.
+
+11:25.180 --> 11:26.300
+This is the health check.
+
+11:27.100 --> 11:30.220
+Select that action edit.
+
+11:30.900 --> 11:35.420
+And you see here sessions in this enable stickiness.
+
+11:36.180 --> 11:41.020
+In previous project you remember we created a target group where we add the instance.
+
+11:41.020 --> 11:43.460
+The target group will conduct the health check all those things.
+
+11:43.460 --> 11:44.980
+This is the same settings.
+
+11:45.740 --> 11:47.860
+And there I talked about the stickiness.
+
+11:48.780 --> 11:51.580
+Our view profile application needs stickiness.
+
+11:51.620 --> 11:56.980
+If the user connects from load balancer to a particular instance, that user needs to be connected to
+
+11:57.020 --> 12:03.980
+that instance only if the load balancer throws the user to another instance, the user needs to again
+
+12:03.980 --> 12:04.580
+login.
+
+12:05.300 --> 12:10.140
+Now that's the problem with our view profile application, but also in many other applications.
+
+12:10.180 --> 12:13.260
+If you're working in some project, that may be the case.
+
+12:13.740 --> 12:16.780
+So if you want that you enable stickiness.
+
+12:17.020 --> 12:20.060
+So user is connected to that particular instance.
+
+12:20.740 --> 12:24.580
+Now otherwise you log in you refresh the page again it will log you out.
+
+12:24.580 --> 12:26.020
+Then again you need to log in.
+
+12:26.020 --> 12:28.020
+So keep stickiness for our project.
+
+12:28.020 --> 12:29.180
+It is important.
+
+12:29.540 --> 12:30.340
+And save it.
+
+12:31.180 --> 12:31.420
+Okay.
+
+12:31.460 --> 12:37.780
+Other things you can keep default and just go next monitoring health reporting.
+
+12:37.780 --> 12:39.340
+We need to keep here enhanced.
+
+12:39.340 --> 12:41.740
+This is very useful when we do deployments.
+
+12:42.020 --> 12:44.260
+And we have multiple instances in the auto scaling group.
+
+12:44.260 --> 12:45.700
+It will check the health of the instance.
+
+12:45.700 --> 12:48.940
+If it is good, it is going to do the deployment on the next instance.
+
+12:49.460 --> 12:52.940
+So in such cases these metrics will come handy for the deployment purpose.
+
+12:52.940 --> 12:55.940
+So keep it enhanced and come down.
+
+12:57.420 --> 12:58.060
+Update.
+
+12:58.060 --> 13:00.940
+Let's keep it as it is minor and patch.
+
+13:00.980 --> 13:01.780
+Again it depends.
+
+13:01.780 --> 13:06.140
+For your project you want to do automatic updates or not.
+
+13:06.180 --> 13:09.060
+These are minor patch update like tomcat new version.
+
+13:09.060 --> 13:11.380
+Something changed those kind of updates.
+
+13:12.060 --> 13:14.420
+Email notification you can give an email address.
+
+13:14.420 --> 13:20.780
+So in an event of some changes happening on your environment on your application it will send you notifications.
+
+13:21.980 --> 13:25.260
+Okay, now rolling update and deployment is the best part in Beanstalk.
+
+13:26.060 --> 13:30.820
+And very interesting topic for DevOps engineers or even architects.
+
+13:31.420 --> 13:32.660
+So we have the environment.
+
+13:32.700 --> 13:39.100
+How do we do deployment when we deploy our artifact a new application code, then do we bring down the
+
+13:39.100 --> 13:45.620
+entire application stack or we want user to be connected and do a rolling deployment.
+
+13:45.660 --> 13:45.860
+Right.
+
+13:45.900 --> 13:49.260
+Like one instance get upgraded, then the other instance, then the other instance.
+
+13:49.260 --> 13:51.820
+So you can select all these amazing options over here.
+
+13:52.380 --> 13:54.020
+So by default it says all at once.
+
+13:54.020 --> 13:56.260
+So let's say you have ten instances.
+
+13:56.260 --> 13:58.140
+You're uploading your new artifact.
+
+13:58.180 --> 14:03.420
+It's going to bring down all the ten instances, update it and then bring it back to the load balancer.
+
+14:03.780 --> 14:05.340
+That is definite downtime.
+
+14:05.540 --> 14:08.300
+This is the fastest one cheapest one.
+
+14:08.300 --> 14:09.700
+But there is a downtime.
+
+14:10.020 --> 14:15.860
+So let's look at the other policies rolling in rolling you can mention the percentage and you can or
+
+14:15.860 --> 14:18.660
+you can mention the fixed number of instances.
+
+14:18.660 --> 14:20.580
+Let's say you have ten instances.
+
+14:20.580 --> 14:24.940
+You will see one instance at a time or two instance at a time, three instances at a time.
+
+14:25.140 --> 14:26.380
+Or you can give a percentage.
+
+14:26.420 --> 14:31.100
+You say, you know, you have ten instances and you say, you know, I give you like, you know, 20%,
+
+14:31.420 --> 14:31.820
+right?
+
+14:32.220 --> 14:32.620
+Right.
+
+14:32.660 --> 14:33.060
+Yeah.
+
+14:33.380 --> 14:35.700
+Down 20%.
+
+14:35.740 --> 14:35.940
+Right.
+
+14:35.940 --> 14:36.660
+So what does that mean?
+
+14:36.660 --> 14:41.420
+Two instances at a time like that, you cannot afford to give 50%.
+
+14:41.420 --> 14:45.740
+Reducing your application capacity to 50% is very bad.
+
+14:46.060 --> 14:51.100
+User will feel that lag and your application may even hang halt, right?
+
+14:51.140 --> 14:54.380
+So 10% 20% is, you know, fair enough.
+
+14:55.020 --> 14:59.820
+But what if you really don't want any kind of lag for the user, right.
+
+15:00.020 --> 15:03.620
+Then you can select rolling with additional batch size.
+
+15:03.940 --> 15:07.180
+What this will do is let's say you have ten instances.
+
+15:07.180 --> 15:09.420
+You selected percentage capacity 20.
+
+15:09.660 --> 15:13.020
+So it's going to add two new instances upgraded.
+
+15:13.020 --> 15:16.140
+Then remove the two old instances right.
+
+15:16.140 --> 15:19.700
+So at the time of the upgrade you will have more instances not less.
+
+15:20.100 --> 15:24.060
+When the upgrade is finished, then it will be back to the same amount of instances.
+
+15:24.060 --> 15:24.820
+That is ten.
+
+15:24.860 --> 15:32.220
+If you selected that yeah I would say this is really good and safe but comes with additional cost.
+
+15:32.900 --> 15:36.260
+But what if something goes wrong at the time of upgrade, right.
+
+15:36.820 --> 15:41.310
+If you don't want any kind of issue, then you can go with immutable.
+
+15:42.150 --> 15:44.070
+The safest one, but also expensive.
+
+15:44.070 --> 15:44.910
+What it will do.
+
+15:45.710 --> 15:47.550
+So let's say you have again ten instances.
+
+15:47.550 --> 15:51.350
+So it's going to create ten new instances upgraded.
+
+15:51.670 --> 15:57.070
+When everything is good it is going to route the traffic to ten new instances and then delete the old
+
+15:57.110 --> 15:58.190
+ten instances.
+
+15:58.510 --> 16:00.430
+Safest one but expensive.
+
+16:01.350 --> 16:03.830
+Okay, so the next one is traffic splitting.
+
+16:03.830 --> 16:05.470
+And I want you to read this one.
+
+16:06.470 --> 16:06.670
+Okay.
+
+16:06.710 --> 16:09.390
+In Beanstack that's the last policy traffic splitting.
+
+16:10.350 --> 16:15.400
+And you can mention how much of the traffic will be split like in the percentage, let's say 10% or
+
+16:15.400 --> 16:16.550
+20% like that.
+
+16:16.670 --> 16:17.870
+So what does that mean?
+
+16:19.430 --> 16:21.590
+This is also called as canary testing.
+
+16:22.990 --> 16:24.710
+It's also one of the interview question.
+
+16:25.230 --> 16:27.470
+So when you select that and you select, you know 10%.
+
+16:27.470 --> 16:29.430
+So what happens in that case Beanstack.
+
+16:29.470 --> 16:30.710
+Let's say your ten instance again.
+
+16:30.750 --> 16:30.990
+Okay.
+
+16:31.030 --> 16:32.270
+You say 10%.
+
+16:32.270 --> 16:38.350
+So it's going to launch one new instance and redirect 10% of your traffic to the new instance.
+
+16:38.830 --> 16:43.870
+And that's why it says you direct some incoming client traffic to your new application version to verify
+
+16:43.870 --> 16:45.350
+applications health.
+
+16:45.590 --> 16:50.790
+You need to be sure whether it's the new version is working or not as per the user need.
+
+16:51.310 --> 16:51.590
+Right?
+
+16:51.630 --> 16:58.270
+If everything is good, it's going to again do 10% at a time or whatever percentage you have mentioned.
+
+16:58.310 --> 17:00.670
+Now I want you to read this documentation.
+
+17:00.790 --> 17:06.750
+You can just search Beanstack deployment policy on Google and you can come to this documentation.
+
+17:06.750 --> 17:07.430
+Read this.
+
+17:07.470 --> 17:08.990
+This is very useful for you.
+
+17:09.390 --> 17:13.670
+And you want to really make decision in the project deployment and also for the interview purpose.
+
+17:14.510 --> 17:14.790
+Okay.
+
+17:14.830 --> 17:17.470
+Coming back now we are not going to do this one.
+
+17:17.470 --> 17:24.070
+We will be just doing rolling and we'll mention the batch size as 50%.
+
+17:24.790 --> 17:26.630
+So we have two instance minimum.
+
+17:26.910 --> 17:31.150
+So one instance at a time if it scales out we'll have maximum for instance.
+
+17:31.350 --> 17:33.670
+So 50% means two instance at a time.
+
+17:34.070 --> 17:34.230
+Okay.
+
+17:34.270 --> 17:38.110
+To test the other policies you need to have more number of instances.
+
+17:38.710 --> 17:40.230
+Okay then scroll down.
+
+17:41.350 --> 17:44.110
+Come till the end is one option over here.
+
+17:44.110 --> 17:46.950
+Might be interested or useful for any project.
+
+17:46.950 --> 17:53.430
+Some project require you to set some variables like database variable name, port number or any configuration
+
+17:53.430 --> 17:53.790
+like that.
+
+17:53.790 --> 17:55.790
+Need to set you variables.
+
+17:55.790 --> 17:56.630
+How do you do that?
+
+17:56.630 --> 17:58.670
+You can do it through environment properties.
+
+17:59.230 --> 18:02.950
+You don't need anything in our project so we'll just go next okay.
+
+18:02.990 --> 18:03.830
+Review it.
+
+18:04.310 --> 18:11.510
+Make sure whatever we discussed you selected everything properly instance profile roll network security
+
+18:11.550 --> 18:17.510
+group right number of instances review everything and if you're good then click on submit.
+
+18:18.750 --> 18:18.950
+Okay.
+
+18:18.990 --> 18:22.510
+It's going to take some time to launch this Beanstalk environment.
+
+18:22.510 --> 18:25.150
+After this is ready we'll take a look at it.
+
+18:25.630 --> 18:31.430
+If everything is good then we can build the artifact and upload it to this beanstalk environment.
+
+18:31.430 --> 18:33.110
+All that we'll see in the next lecture.
+
+18:33.110 --> 18:35.350
+So wrap this up and join me in the next one.

@@ -1,0 +1,469 @@
+WEBVTT
+
+00:00.240 --> 00:00.920
+Welcome.
+
+00:00.920 --> 00:05.240
+In this lecture we are going to see AWS CloudFront service.
+
+00:05.920 --> 00:07.800
+What is it and why do we need it?
+
+00:08.360 --> 00:13.360
+So currently we have our website hosted on North Virginia which is in United States.
+
+00:13.920 --> 00:18.080
+So our users in United States will have quick access to our website.
+
+00:18.280 --> 00:25.520
+But users on the other part of the world Asia, Europe, Africa, different part of the world, they
+
+00:25.520 --> 00:29.320
+won't have as fast access as the people in United States.
+
+00:29.480 --> 00:30.280
+So what do we do?
+
+00:30.480 --> 00:32.880
+Do we create our website around the world?
+
+00:33.360 --> 00:34.560
+No, we don't need to do that.
+
+00:34.560 --> 00:37.680
+There is a concept called content delivery network.
+
+00:38.320 --> 00:43.360
+So AWS has a service called CloudFront that will have edge locations.
+
+00:45.040 --> 00:51.520
+So currently AWS there are more than 30 regions, more than 100 availability zones.
+
+00:51.800 --> 00:55.160
+And then it has more than 600 CloudFront locations.
+
+00:55.400 --> 00:56.840
+So regions and zones.
+
+00:56.840 --> 00:59.080
+These are the places where we create the service.
+
+00:59.560 --> 01:04.820
+We can distribute our content around the world through CloudFront locations.
+
+01:05.180 --> 01:10.380
+So CloudFront locations will cache our website content and serve the audience near to it.
+
+01:11.340 --> 01:17.860
+Currently, when we access our URL, it points to the load balancer, the Beanstalk endpoint.
+
+01:18.100 --> 01:19.460
+But we're going to remove that entry.
+
+01:19.500 --> 01:22.660
+We're going to create a CloudFront distribution.
+
+01:23.660 --> 01:27.420
+And then our URL will point to this CloudFront distribution.
+
+01:28.060 --> 01:29.740
+So first let me go to GoDaddy.
+
+01:29.940 --> 01:35.300
+You can go to your GoDaddy account or your domain registrar and remove that entry that we created.
+
+01:38.380 --> 01:42.700
+From from our AWS Management Console we'll find the service CloudFront.
+
+01:45.100 --> 01:49.260
+And we'll create a CloudFront distribution that points to our load balancer.
+
+01:49.860 --> 01:55.420
+So Amazon CloudFront securely deliver content with low latency and high transfer speeds.
+
+01:56.300 --> 02:02.270
+Now if there is a project that actually are using CloudFront or any kind of content delivery network.
+
+02:02.270 --> 02:06.790
+There should be a separate team, or there will be a separate team that will be managing these things.
+
+02:07.350 --> 02:12.870
+But even as a DevOps engineer, you should be aware about this concept and may be able to, you know,
+
+02:13.230 --> 02:15.790
+make changes or automate these kind of stuff.
+
+02:15.790 --> 02:20.750
+So from a DevOps point of view, you should know what is a content delivery network, how it works.
+
+02:21.190 --> 02:25.950
+So you can very well interact with the network team and make the right decision in the automation.
+
+02:26.590 --> 02:32.190
+So I recommend you read more about Content Delivery Network and then read about CloudFront.
+
+02:32.910 --> 02:35.830
+That is a content delivery service from AWS.
+
+02:36.670 --> 02:39.470
+So we'll create a CloudFront distribution.
+
+02:40.030 --> 02:40.310
+Okay.
+
+02:40.350 --> 02:42.990
+So first giving the name of the distribution.
+
+02:42.990 --> 02:44.710
+So we can give this one anything.
+
+02:44.950 --> 02:47.230
+One that makes sense based on our project.
+
+02:47.750 --> 02:51.870
+So I'm giving V profile hyphen some description I'll give.
+
+02:51.910 --> 02:52.390
+Same.
+
+02:52.990 --> 02:55.710
+Now we're doing it for a single website or app.
+
+02:56.190 --> 02:58.350
+So we'll keep this option distribution type.
+
+02:59.170 --> 03:00.650
+And let's scroll down here.
+
+03:00.650 --> 03:02.850
+You can give the domain name that we have.
+
+03:02.850 --> 03:06.330
+So we have V Pro dot your domain name.
+
+03:06.330 --> 03:07.130
+You can give that.
+
+03:07.130 --> 03:10.330
+But this is the setting that we're going to do later.
+
+03:10.330 --> 03:14.250
+So even if you go next first it's going to check the domain.
+
+03:14.810 --> 03:17.810
+And we can just do skip domain setup.
+
+03:17.850 --> 03:19.290
+We're going to do this one later.
+
+03:19.690 --> 03:24.810
+Now origin traffic the traffic coming from that will be or the traffic that is taking the hit.
+
+03:24.850 --> 03:27.410
+You know that is the load balancer offer bean stack.
+
+03:27.410 --> 03:32.050
+So if you select Elastic Load Balancer you have to give here load balancer endpoint.
+
+03:32.050 --> 03:34.130
+So you can say browse load balancer.
+
+03:34.370 --> 03:36.210
+You should see your load balancer over here.
+
+03:36.210 --> 03:40.490
+Make sure the region is correct that you have selected ELB version.
+
+03:40.490 --> 03:43.130
+We have the application load balancer with the Beanstalk.
+
+03:43.130 --> 03:47.010
+So we're going to select that and say choose Origin Path.
+
+03:47.050 --> 03:48.690
+We don't need to give anything over here.
+
+03:48.690 --> 03:53.890
+But let's say if your URL is something like you know you have the URL slash, let's say something like
+
+03:53.890 --> 03:57.050
+this, you know, like slash CloudFront or slash login.
+
+03:57.450 --> 03:59.510
+And that is what you're serving it to the user.
+
+03:59.510 --> 04:05.030
+So you have to give like that the path so you don't have anything directly the load balancer user access.
+
+04:05.030 --> 04:06.390
+And it shows the website.
+
+04:06.390 --> 04:07.950
+So we can keep this blank.
+
+04:09.150 --> 04:12.630
+In the origin settings use Customize Origin settings.
+
+04:12.910 --> 04:18.750
+Let's scroll down now based on what kind of traffic you want to serve, which protocol HTTP or Https
+
+04:18.790 --> 04:21.390
+or you want to do both based on the viewer.
+
+04:21.790 --> 04:25.030
+So you're going to say we're going to do here Match viewer.
+
+04:25.390 --> 04:29.670
+And the default port for HTTP is 80 and Https is for 43.
+
+04:29.670 --> 04:31.230
+And mostly people will be using that.
+
+04:31.230 --> 04:35.750
+But for some security reason or other reason, if you're changing the port, then you make sure you
+
+04:35.750 --> 04:36.990
+change the port over here.
+
+04:37.190 --> 04:40.990
+For our project, we're using the default ports so we can keep this as it is.
+
+04:41.030 --> 04:42.510
+You can scroll down here.
+
+04:42.510 --> 04:44.270
+You have some timeout settings.
+
+04:44.270 --> 04:47.590
+We're going to keep this default cache setting.
+
+04:47.590 --> 04:52.710
+Now C CDN is basically for caching the regularly visited pages.
+
+04:52.710 --> 04:55.990
+And you know you might need to change the settings.
+
+04:56.310 --> 04:58.760
+Most of the time default works, but let's take a look.
+
+04:58.800 --> 05:00.280
+Customize cache settings.
+
+05:01.160 --> 05:07.720
+So if you want to use http and https both, which is not recommended, mostly Https is recommended,
+
+05:07.720 --> 05:09.640
+but for some reason you're using both.
+
+05:09.960 --> 05:11.000
+You can use this one.
+
+05:11.480 --> 05:15.840
+Or if user is trying to access on HTTP, you still want to redirect to Https.
+
+05:15.880 --> 05:16.840
+You can do this.
+
+05:17.080 --> 05:19.840
+Or if it's Https only then you can select that one.
+
+05:19.840 --> 05:22.560
+I'm going to say http and https both.
+
+05:22.920 --> 05:24.800
+And so these are the API requests.
+
+05:25.160 --> 05:28.760
+So get head options put post patch delete.
+
+05:28.960 --> 05:32.880
+So we're keeping it all all the all these HTTP methods are allowed.
+
+05:33.160 --> 05:39.240
+And they're seriously many many more settings the CloudFront or any other CDN provides.
+
+05:39.520 --> 05:44.200
+And if someone is managing CloudFront distribution mostly from the network team they would be aware
+
+05:44.200 --> 05:47.920
+of, they should be aware about these settings and should be able to tweak them.
+
+05:48.120 --> 05:49.760
+But we are good for here.
+
+05:49.960 --> 05:50.840
+Good over here.
+
+05:50.960 --> 05:52.240
+Um let's go next.
+
+05:53.240 --> 05:55.520
+Now WAF enable security.
+
+05:55.560 --> 05:57.320
+You know, web application firewall.
+
+05:57.420 --> 06:03.540
+Now, this is not the firewall that you think the firewall so far we are talking about was the network
+
+06:03.540 --> 06:03.820
+level.
+
+06:03.820 --> 06:04.820
+The port level.
+
+06:05.420 --> 06:07.820
+This is the application level firewall.
+
+06:08.140 --> 06:10.340
+It blocks the common vulnerabilities.
+
+06:10.340 --> 06:12.500
+The common you know, common attack.
+
+06:12.540 --> 06:15.980
+You know, SQL injection, DDoS attacks.
+
+06:16.340 --> 06:20.260
+A publicly hosted website should definitely have a web application firewall.
+
+06:20.340 --> 06:21.940
+AWS provided upfront.
+
+06:21.940 --> 06:23.860
+You can use it and you can even configure it.
+
+06:23.900 --> 06:25.100
+Make changes to those.
+
+06:25.300 --> 06:29.540
+And these are not free, but just wanted to share this information with you.
+
+06:29.660 --> 06:33.780
+Make sure you do little research on web application firewall.
+
+06:34.100 --> 06:38.980
+Now, so far I've seen AWS WAF as one of the most convenient web application firewall.
+
+06:39.340 --> 06:40.940
+So you know, do some research.
+
+06:40.980 --> 06:46.340
+It's really good to know when you deal with the security team, you should be able to access or provide
+
+06:46.340 --> 06:47.860
+information about this.
+
+06:47.900 --> 06:49.700
+Anyways, we're not enabling this one.
+
+06:49.700 --> 06:50.500
+So go next.
+
+06:51.020 --> 06:55.860
+Make sure you take a look at all the settings, what you have selected and then say create distribution
+
+06:56.380 --> 06:59.040
+okay so it's saying deploying this is going to take some time.
+
+06:59.040 --> 07:01.400
+Let's let's add our domain now.
+
+07:01.400 --> 07:04.840
+So you see this option over here in the general add domain.
+
+07:04.840 --> 07:09.560
+Click on that and give the domain name that you would be using.
+
+07:09.600 --> 07:13.480
+We are doing or I'm going with infotech.xyz.
+
+07:13.920 --> 07:20.320
+So give the host name dot your domain name and the same entry for this host name the CNAME record we
+
+07:20.320 --> 07:22.000
+will be adding in GoDaddy.
+
+07:22.000 --> 07:23.160
+So give this entry.
+
+07:23.520 --> 07:26.480
+Make sure you give your own domain over here and go next.
+
+07:26.840 --> 07:31.840
+It should show you your certificate in the ACM that we created earlier in prerequisites.
+
+07:32.320 --> 07:37.360
+Just make sure your domain is the same one that you have given for the certificate.
+
+07:37.360 --> 07:39.040
+Otherwise it is not going to work.
+
+07:39.440 --> 07:41.800
+Go next and say add domain.
+
+07:42.400 --> 07:49.280
+You see that it's that easy and you get access to AWS Global Edge locations around the world.
+
+07:49.400 --> 07:51.680
+Imagine doing that all by yourself.
+
+07:52.480 --> 07:54.840
+The amount of money time it will take.
+
+07:55.400 --> 08:00.250
+Okay, so we created it's going to take some time for the distribution to be available.
+
+08:00.250 --> 08:04.530
+Currently it's in deploying state, so it will take easily ten minutes of time.
+
+08:05.370 --> 08:09.530
+Uh now what we need to do is we need to take this URL over here.
+
+08:09.570 --> 08:09.730
+Okay.
+
+08:09.770 --> 08:11.610
+This is the distribution domain name.
+
+08:11.930 --> 08:15.810
+Now our domain or URL should point to this one.
+
+08:16.130 --> 08:17.490
+So let's create an entry.
+
+08:18.010 --> 08:20.410
+So I'll go to GoDaddy I'll say add new record.
+
+08:20.570 --> 08:24.890
+And this will be CNAME name to name mapping Wipro Raj.
+
+08:24.930 --> 08:27.850
+This should be the same what we have given in the alternate domain name.
+
+08:28.730 --> 08:32.290
+And the value should be the CloudFront distribution.
+
+08:32.290 --> 08:38.010
+Make sure you remove this https colon slash slash just this much and say save.
+
+08:38.890 --> 08:40.330
+Okay, so the entry is created.
+
+08:40.330 --> 08:43.810
+But this will take some time to become available.
+
+08:43.810 --> 08:44.450
+It's enabled.
+
+08:44.450 --> 08:46.170
+But you see the status is still deploying.
+
+08:46.170 --> 08:50.050
+So if you need a break you can take now 5 to 10 minutes easily.
+
+08:50.050 --> 08:52.730
+It will take to, you know, become completely available.
+
+08:53.610 --> 08:56.650
+So I'm going to pause my recording and resume when this is completed.

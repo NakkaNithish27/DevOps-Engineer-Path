@@ -1,0 +1,793 @@
+WEBVTT
+
+00:02.700 --> 00:03.533
+Lecturer: Welcome.
+
+00:03.533 --> 00:06.180
+In this lecture, you are going to learn about plugins,
+
+00:06.180 --> 00:08.550
+versioning, and few more things.
+
+00:08.550 --> 00:11.280
+Basically the idea is to train you on plugins
+
+00:11.280 --> 00:13.320
+and how to use them and when.
+
+00:13.320 --> 00:15.960
+And also we are going to talk about the concept of
+
+00:15.960 --> 00:17.880
+variables in Jenkins job.
+
+00:17.880 --> 00:21.480
+Now, all this information we can use later in pipeline code.
+
+00:21.480 --> 00:24.060
+So first, let me take you to the plugins section
+
+00:24.060 --> 00:26.970
+in the Jenkins, you click on Manage Jenkins.
+
+00:26.970 --> 00:30.510
+And over here you should see Plugins, click on that.
+
+00:30.510 --> 00:31.920
+So your four sections over here,
+
+00:31.920 --> 00:34.620
+Updates, the plugins that needs to be updated.
+
+00:34.620 --> 00:36.930
+Then you have Available Plugins,
+
+00:36.930 --> 00:40.110
+from where you can search the plugin name and install it.
+
+00:40.110 --> 00:43.620
+For example, you want to upload the artifacts to S3 bucket.
+
+00:43.620 --> 00:46.800
+So you can search for a plugin with S3 name,
+
+00:46.800 --> 00:49.050
+and there is S3 publisher,
+
+00:49.050 --> 00:51.030
+and there'll be few other with the name S3,
+
+00:51.030 --> 00:52.800
+depends on what is your use case,
+
+00:52.800 --> 00:55.500
+you can install that plugin and use it.
+
+00:55.500 --> 00:57.840
+So all you need to do is find your right plugin,
+
+00:57.840 --> 01:00.453
+put check mark and you click on Install.
+
+01:02.250 --> 01:03.870
+The plugin should be installed,
+
+01:03.870 --> 01:07.860
+and now you should see the S3 options in your jobs.
+
+01:07.860 --> 01:08.730
+Okay, we'll come to that.
+
+01:08.730 --> 01:11.133
+Let's go to, once again, Installed plugins.
+
+01:12.060 --> 01:14.220
+Okay, yeah, now, we're in Available Plugins, right?
+
+01:14.220 --> 01:16.560
+So you can find a list of plugins,
+
+01:16.560 --> 01:19.560
+you can search and install and then start using it.
+
+01:19.560 --> 01:21.090
+Installed plugins will show you
+
+01:21.090 --> 01:23.550
+the plugins that are installed.
+
+01:23.550 --> 01:24.930
+You can disable some plugin.
+
+01:24.930 --> 01:28.110
+For example, you can disable the Ant Plugin.
+
+01:28.110 --> 01:30.720
+But if you see, not all the plugins you can disable,
+
+01:30.720 --> 01:32.670
+because some plugins depends on other plugin.
+
+01:32.670 --> 01:35.730
+For example, Amazon Web Service SDK::Minimal,
+
+01:35.730 --> 01:38.100
+this plugin we did not install.
+
+01:38.100 --> 01:41.340
+When we installed S3 plugin, it installed this plugin.
+
+01:41.340 --> 01:44.850
+So first we need to disable the S3 plugin,
+
+01:44.850 --> 01:48.480
+and then only you can disable this plugin.
+
+01:48.480 --> 01:50.043
+This Advanced Settings.
+
+01:51.030 --> 01:53.370
+From here you can add new plugin
+
+01:53.370 --> 01:56.550
+as in plugin was developed separately.
+
+01:56.550 --> 01:58.050
+You developed it,
+
+01:58.050 --> 01:59.700
+or you got it from some third-party
+
+01:59.700 --> 02:00.930
+some developers developed it,
+
+02:00.930 --> 02:02.160
+you can deploy that plugin.
+
+02:02.160 --> 02:05.010
+You can say choose file and upload the plugin.
+
+02:05.010 --> 02:07.530
+Okay, now let's go back to our job,
+
+02:07.530 --> 02:08.883
+Vprofile Build job.
+
+02:09.810 --> 02:10.863
+Workspace.
+
+02:11.760 --> 02:13.620
+Well, we have the target,
+
+02:13.620 --> 02:18.570
+and here we have the artifact, vprofile-v2.war.
+
+02:18.570 --> 02:20.970
+Now, let's say I want to create more versions of it.
+
+02:20.970 --> 02:23.130
+Now every time the job runs,
+
+02:23.130 --> 02:25.950
+it gives me a new version of artifact.
+
+02:25.950 --> 02:28.320
+If I keep running this job again and again
+
+02:28.320 --> 02:29.670
+to overwrite this artifact,
+
+02:29.670 --> 02:32.610
+if we have a newer version every time we run,
+
+02:32.610 --> 02:35.730
+and that won't be replaced by the previous version, right?
+
+02:35.730 --> 02:37.440
+So how do we version?
+
+02:37.440 --> 02:39.843
+Let's create a new job, let's click on New Item.
+
+02:40.740 --> 02:43.380
+I'll give the name buildartifact, Freestyle
+
+02:43.380 --> 02:45.890
+and I'll say copy from the build job.
+
+02:45.890 --> 02:49.470
+So Vprofile Build job, I'll copy it from.
+
+02:49.470 --> 02:52.863
+Let's come at the end and remove this Archive the Artifact.
+
+02:53.730 --> 02:56.370
+So and we install that is going to build the artifact.
+
+02:56.370 --> 02:58.230
+After that, we are going to add one more step.
+
+02:58.230 --> 03:00.420
+We'll say execute shell
+
+03:00.420 --> 03:04.350
+and we will say that create a folder first of all,
+
+03:04.350 --> 03:08.790
+named versions mkdir will give -p option.
+
+03:08.790 --> 03:10.470
+So if the folder exists,
+
+03:10.470 --> 03:12.300
+-: p option is not going to throw any error.
+
+03:12.300 --> 03:14.940
+But if you don't have -p, then it's going to throw an error
+
+03:14.940 --> 03:16.890
+that folder already exists.
+
+03:16.890 --> 03:18.720
+Use -p option.
+
+03:18.720 --> 03:21.090
+Then we'll give the command cp,
+
+03:21.090 --> 03:25.703
+the target directory slash vprofile-v2.war
+
+03:29.040 --> 03:34.040
+copy to the versions folder with the name v.
+
+03:34.170 --> 03:35.003
+Now what do we do?
+
+03:35.003 --> 03:35.836
+Give the version, right?
+
+03:35.836 --> 03:38.910
+If we give a static name every time we run the job,
+
+03:38.910 --> 03:41.370
+it'll have the same version.
+
+03:41.370 --> 03:43.830
+So this needs to be dynamic.
+
+03:43.830 --> 03:45.690
+A variable we need to give that changes
+
+03:45.690 --> 03:47.313
+every time we run the job.
+
+03:49.290 --> 03:51.360
+Okay. So come to jenkins.io
+
+03:51.360 --> 03:56.280
+and let's search for variables using environment variables.
+
+03:56.280 --> 04:00.000
+Let's find that last pipeline code we are going to see that
+
+04:00.000 --> 04:01.260
+in few lectures,
+
+04:01.260 --> 04:03.240
+in next lectures in fact.
+
+04:03.240 --> 04:06.870
+So over here you see using environment variables.
+
+04:06.870 --> 04:08.700
+So Jenkins has built-in variables.
+
+04:08.700 --> 04:10.500
+When you run the job, you have Build_ID
+
+04:10.500 --> 04:14.560
+that gives you the Build ID number, Build_URL, Java_Home,
+
+04:14.560 --> 04:18.420
+Jenkins_URL, Job_Name and a few others.
+
+04:18.420 --> 04:20.010
+Now these are very basic things.
+
+04:20.010 --> 04:22.980
+We'll be seeing proper version mechanism later in the course
+
+04:22.980 --> 04:25.140
+when we use Nexus repository.
+
+04:25.140 --> 04:28.710
+Just an exercise to make you aware about variables
+
+04:28.710 --> 04:29.970
+in the Jenkins.
+
+04:29.970 --> 04:33.487
+So let's come back and let's give here $BUILD_ID.war,
+
+04:38.250 --> 04:41.500
+we'll say here maybe vpro.
+
+04:41.500 --> 04:46.293
+Okay, now let's save this and let's run this job few times.
+
+04:47.790 --> 04:49.770
+Okay, I executed this job three times.
+
+04:49.770 --> 04:51.900
+Let me show you the console output.
+
+04:51.900 --> 04:55.770
+There, if you see vpro3.war has (indistinct).
+
+04:55.770 --> 04:57.963
+If you go to the Workspace,
+
+04:59.730 --> 05:02.130
+versions folder is there.
+
+05:02.130 --> 05:03.720
+Right, so three time executed the job.
+
+05:03.720 --> 05:07.050
+Every time I get a new version of my artifact.
+
+05:07.050 --> 05:09.540
+What if I need to pass a version, right?
+
+05:09.540 --> 05:12.030
+I need to mention specific version.
+
+05:12.030 --> 05:16.080
+In that case, you need to have a job that is parameterized,
+
+05:16.080 --> 05:19.080
+which takes information from you.
+
+05:19.080 --> 05:21.150
+So configure the job and click,
+
+05:21.150 --> 05:24.570
+put a check mark where this project is parameterized,
+
+05:24.570 --> 05:26.040
+Add Parameter
+
+05:26.040 --> 05:29.523
+and you need to get the string parameter.
+
+05:31.140 --> 05:33.387
+Give the name of the variable version I have given
+
+05:33.387 --> 05:37.080
+and default value, you can mention if nothing is passed,
+
+05:37.080 --> 05:38.970
+what will be the default value,
+
+05:38.970 --> 05:40.920
+that also you can mention.
+
+05:40.920 --> 05:42.780
+Oh, you can mention some description.
+
+05:42.780 --> 05:45.570
+Now let's save this and let's see where, wait,
+
+05:45.570 --> 05:48.120
+we need to configure it once again.
+
+05:48.120 --> 05:49.290
+Okay, come back.
+
+05:49.290 --> 05:50.370
+Okay, so this is the variable.
+
+05:50.370 --> 05:52.940
+We need to mention this while we are versioning.
+
+05:52.940 --> 05:54.345
+So let's copy that variable.
+
+05:54.345 --> 05:57.120
+Let's come down, scroll down,
+
+05:57.120 --> 05:59.160
+okay, there instead of BUILD_ID,
+
+05:59.160 --> 06:03.873
+we can just put over here $VERSION.
+
+06:05.070 --> 06:06.900
+I just created another line.
+
+06:06.900 --> 06:10.290
+This line I put a hash mark so that's commented.
+
+06:10.290 --> 06:11.610
+So we put a $VERSION,
+
+06:11.610 --> 06:13.680
+so this variable does not have any value.
+
+06:13.680 --> 06:16.830
+We need to pass a value when we run the job.
+
+06:16.830 --> 06:21.120
+So make sure you give this and save this job.
+
+06:21.120 --> 06:22.380
+Now if you see here,
+
+06:22.380 --> 06:25.050
+gets the option of Build with Parameters.
+
+06:25.050 --> 06:26.460
+We don't get Build Now.
+
+06:26.460 --> 06:27.660
+So if you click on that,
+
+06:28.800 --> 06:30.300
+now version, we need to enter the value.
+
+06:30.300 --> 06:31.830
+Now I'm going to give semantic versioning.
+
+06:31.830 --> 06:36.830
+Let's say 2.3.6,
+
+06:37.920 --> 06:38.753
+Build.
+
+06:40.860 --> 06:41.940
+Okay, that's done.
+
+06:41.940 --> 06:45.243
+Let's go to the Workspace and let's check in the versions.
+
+06:46.391 --> 06:48.474
+There, the vpro2.3.6.war.
+
+06:49.650 --> 06:52.410
+We should have given a underscore, a hyphen there,
+
+06:52.410 --> 06:55.410
+so we can make a change at that level.
+
+06:55.410 --> 06:58.473
+Okay now, what if I need timestamp?
+
+06:59.370 --> 07:03.480
+Some artifacts should be stored with the timestamp.
+
+07:03.480 --> 07:06.180
+In that case, you need to have a variable
+
+07:06.180 --> 07:08.910
+that generates the timestamp automatically.
+
+07:08.910 --> 07:11.370
+Now there is a plugin for that.
+
+07:11.370 --> 07:13.410
+Let's go to Dashboard.
+
+07:13.410 --> 07:15.780
+Let's go to Manage Jenkins
+
+07:15.780 --> 07:17.260
+and let's go to Plugins
+
+07:18.150 --> 07:22.053
+and let's say Installed, sorry, Available Plugins.
+
+07:23.520 --> 07:25.530
+Now if you really don't know the plugin name,
+
+07:25.530 --> 07:26.400
+no problem, right?
+
+07:26.400 --> 07:27.960
+Just open the browser,
+
+07:27.960 --> 07:32.670
+Google whatever search engine you want and search,
+
+07:32.670 --> 07:35.280
+for example, timestamp plugin in Jenkins
+
+07:35.280 --> 07:37.320
+or this in Jenkins or that in Jenkins,
+
+07:37.320 --> 07:39.270
+you will very quickly get the plugin,
+
+07:39.270 --> 07:42.690
+that you plugin name that you need to install, right?
+
+07:42.690 --> 07:45.090
+So there's one plugin, Build Timestamp,
+
+07:45.090 --> 07:47.493
+let me search it, build timestamp.
+
+07:48.514 --> 07:49.530
+There.
+
+07:49.530 --> 07:51.630
+One more thing, the search is not so good,
+
+07:51.630 --> 07:54.660
+so you need to give proper names.
+
+07:54.660 --> 07:57.330
+Like I can build space timestamp.
+
+07:57.330 --> 07:59.070
+Anyways, so we get Build Timestamp, right?
+
+07:59.070 --> 08:01.276
+So this plugin adds BUILD_TIMESTAMP
+
+08:01.276 --> 08:03.720
+to Jenkins variable and system properties.
+
+08:03.720 --> 08:06.330
+So we have BUILD_ID, right?
+
+08:06.330 --> 08:08.923
+Now this plugin will add one more variable in that,
+
+08:08.923 --> 08:10.490
+BUILD_TIMESTAMP.
+
+08:10.490 --> 08:13.053
+So let's put a check mark and let's install it,
+
+08:13.950 --> 08:15.720
+along with that installing few other thing
+
+08:15.720 --> 08:18.180
+like SSH server stuff.
+
+08:18.180 --> 08:20.730
+Anyways, let's go back. Let's go to Dashboard.
+
+08:20.730 --> 08:24.870
+And we need to set the value of Build Timestamp, the format.
+
+08:24.870 --> 08:27.600
+So go to Manage Jenkins
+
+08:27.600 --> 08:30.270
+and all the global settings are here in System,
+
+08:30.270 --> 08:32.940
+Configure global settings, click on that.
+
+08:32.940 --> 08:35.160
+After installing Build Timestamp plugin,
+
+08:35.160 --> 08:38.340
+you should get this option over here,
+
+08:38.340 --> 08:39.900
+Enable Build_Timestamp.
+
+08:39.900 --> 08:43.353
+There is a Timezone and here is the pattern.
+
+08:44.340 --> 08:48.450
+That's year, month, date, hour, minute, seconds.
+
+08:48.450 --> 08:50.220
+Now I don't want this format.
+
+08:50.220 --> 08:51.873
+I want to use my own format.
+
+08:52.830 --> 08:57.180
+That one, date, month and year,
+
+08:57.180 --> 08:58.830
+just the last two number of the year,
+
+08:58.830 --> 09:03.830
+underscore hour and minute, and let's save this.
+
+09:06.150 --> 09:08.850
+There is no hard and fast rule in this.
+
+09:08.850 --> 09:11.580
+Use your own format if you wish,
+
+09:11.580 --> 09:13.410
+configure because we are just learning.
+
+09:13.410 --> 09:16.503
+So you know, whatever works for you.
+
+09:17.880 --> 09:20.970
+Okay, let's put a hash there, let's comment that
+
+09:20.970 --> 09:23.193
+and let's add another line.
+
+09:25.080 --> 09:26.760
+Now we give the variable over here,
+
+09:26.760 --> 09:30.933
+we put $BUILD_TIMESTAMP, all in caps.
+
+09:32.280 --> 09:34.803
+Okay, that's done. Let's save this.
+
+09:36.420 --> 09:40.200
+Okay, if you also need to uncheck this, build parameters.
+
+09:40.200 --> 09:42.660
+Otherwise you'll always ask us the parameter.
+
+09:42.660 --> 09:43.833
+Let's configure,
+
+09:45.420 --> 09:46.893
+and let's uncheck that.
+
+09:47.730 --> 09:49.680
+Or you can give a default value.
+
+09:49.680 --> 09:52.380
+So even if you don't pass, you can run the job.
+
+09:52.380 --> 09:55.380
+Let's just uncheck it for now, save it.
+
+09:55.380 --> 09:57.810
+Okay, now run this job like three times
+
+09:57.810 --> 10:00.000
+in an interval of one or two minutes.
+
+10:00.000 --> 10:03.150
+Make sure there is a minimum interval of one minute.
+
+10:03.150 --> 10:05.763
+So we get new artifacts every minute.
+
+10:07.770 --> 10:09.600
+Okay, I executed this job two times.
+
+10:09.600 --> 10:13.170
+Let's go in Workspace, Versions.
+
+10:13.170 --> 10:16.050
+And you see there, the versions?
+
+10:16.050 --> 10:20.760
+Right. Now, this is not a storage, we not going to store
+
+10:20.760 --> 10:22.650
+different versions of artifact in Jenkins.
+
+10:22.650 --> 10:25.620
+After that, next step should be to move this artifact
+
+10:25.620 --> 10:29.700
+out of Jenkins to some storage like S3 or Nexus
+
+10:29.700 --> 10:31.470
+that we'll see later, right?
+
+10:31.470 --> 10:33.690
+So if you go to the configure job, we,
+
+10:33.690 --> 10:35.760
+if you remember we installed the S3 plugin.
+
+10:35.760 --> 10:38.100
+So we can go to Post-build Action
+
+10:38.100 --> 10:42.180
+and you should see here Publish artifact to S3 bucket.
+
+10:42.180 --> 10:43.013
+Right?
+
+10:43.013 --> 10:43.846
+You don't need to do this,
+
+10:43.846 --> 10:46.770
+I mean if you want as an exercise, do it.
+
+10:46.770 --> 10:48.900
+We'll be doing this later.
+
+10:48.900 --> 10:50.550
+This also needs credential
+
+10:50.550 --> 10:55.113
+or you can just simply add S3 role to the Jenkins instance.
+
+10:56.220 --> 10:58.470
+Create a role that has S3 full access.
+
+10:58.470 --> 11:00.420
+Add that role to Jenkins
+
+11:00.420 --> 11:02.490
+and then you can mention files to upload,
+
+11:02.490 --> 11:05.670
+source, destination S3 bucket,
+
+11:05.670 --> 11:09.630
+all the information and then you can push this artifact
+
+11:09.630 --> 11:11.640
+to the S3 bucket.
+
+11:11.640 --> 11:14.700
+Just showing you over here, we'll do these things later.
+
+11:14.700 --> 11:16.170
+Great. So in this lecture,
+
+11:16.170 --> 11:19.920
+you have learned about variables in Jenkins.
+
+11:19.920 --> 11:21.360
+Jenkins has own variable
+
+11:21.360 --> 11:24.330
+and you can inject more variables into it by using plugins.
+
+11:24.330 --> 11:27.030
+You're seen plugins, how to install, how to list,
+
+11:27.030 --> 11:29.010
+how to enable, disable.
+
+11:29.010 --> 11:31.200
+We'll be using so many plugins in this course.
+
+11:31.200 --> 11:32.880
+We'll see that later.
+
+11:32.880 --> 11:35.160
+So don't worry about that part.
+
+11:35.160 --> 11:38.433
+We also talked about versioning in very, very basic ways.
+
+11:39.270 --> 11:40.590
+So do some hands-on.
+
+11:40.590 --> 11:44.100
+Just try your own methods of versioning.
+
+11:44.100 --> 11:45.780
+Make sure you're comfortable with all this
+
+11:45.780 --> 11:49.830
+because now we will be starting with Jenkins pipeline code.
+
+11:49.830 --> 11:53.340
+Things will get very serious from coming lectures.
+
+11:53.340 --> 11:55.920
+So make sure you are very well-versed with whatever
+
+11:55.920 --> 11:58.203
+we have covered so far in Jenkins.
+
+11:59.130 --> 12:01.860
+And then join me from the next lecture.
+
+12:01.860 --> 12:02.693
+See you.

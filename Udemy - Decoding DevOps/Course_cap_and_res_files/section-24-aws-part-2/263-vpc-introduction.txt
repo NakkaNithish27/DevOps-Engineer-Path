@@ -1,0 +1,1853 @@
+WEBVTT
+
+1
+00:00:00.430 --> 00:00:01.580
+Hello and welcome.
+
+2
+00:00:02.330 --> 00:00:04.890
+Now in some series of video we will be learning
+
+3
+00:00:04.940 --> 00:00:09.238
+what is VPC, Virtual Private Cloud and a disclaimer.
+
+4
+00:00:09.274 --> 00:00:10.774
+There will be lot of networking.
+
+5
+00:00:10.942 --> 00:00:15.058
+So if you have not done basics of networking session
+
+6
+00:00:15.214 --> 00:00:19.158
+previously, then check the video again and go through it.
+
+7
+00:00:19.184 --> 00:00:20.694
+We're going to revise some concepts from
+
+8
+00:00:20.732 --> 00:00:22.746
+there and we'll be also learning about
+
+9
+00:00:22.808 --> 00:00:25.650
+subnetting before we start VPC.
+
+10
+00:00:25.970 --> 00:00:30.774
+So to understand VPC, we'll go back little in time when
+
+11
+00:00:30.812 --> 00:00:35.470
+there was just cloud computing started, AWS came up with SQS
+
+12
+00:00:35.530 --> 00:00:38.602
+S3, EC2 service classic EC2 Classic.
+
+13
+00:00:38.746 --> 00:00:42.922
+So we had data centers and we still have data centers.
+
+14
+00:00:43.066 --> 00:00:44.790
+So in the data center network there are
+
+15
+00:00:44.840 --> 00:00:47.418
+so many components, networking components, there will be
+
+16
+00:00:47.444 --> 00:00:51.454
+switches, routers, firewalls, there'll be many networks.
+
+17
+00:00:51.502 --> 00:00:54.738
+In those networks there'll be smaller subnets subnets the
+
+18
+00:00:54.764 --> 00:00:58.518
+part of network is the subnet and subnet could
+
+19
+00:00:58.544 --> 00:01:03.174
+be dedicated to probably a project or front end
+
+20
+00:01:03.212 --> 00:01:07.326
+services running in that project or another subnet for
+
+21
+00:01:07.448 --> 00:01:09.726
+running back end services for the project.
+
+22
+00:01:09.908 --> 00:01:12.510
+Some have too much security, some
+
+23
+00:01:12.560 --> 00:01:14.062
+are open to the internet.
+
+24
+00:01:14.206 --> 00:01:17.674
+There could be network access control list to decide
+
+25
+00:01:17.722 --> 00:01:22.030
+what traffic comes in, goes out, deciding the network
+
+26
+00:01:22.150 --> 00:01:24.274
+scheme, what will be the IP addresses.
+
+27
+00:01:24.322 --> 00:01:28.858
+Everything is in the control of networking team who's
+
+28
+00:01:28.894 --> 00:01:33.114
+designing and managing networks in corporate data centers, in
+
+29
+00:01:33.152 --> 00:01:36.082
+huge data centers, or even in small data centers.
+
+30
+00:01:36.226 --> 00:01:38.682
+Now, when AWS came with its
+
+31
+00:01:38.816 --> 00:01:41.262
+EC2 service, that was amazing.
+
+32
+00:01:41.336 --> 00:01:46.374
+We were able to launch virtual machines on AWS or
+
+33
+00:01:46.412 --> 00:01:50.314
+Amazon Data Center and we can use it for computing.
+
+34
+00:01:50.482 --> 00:01:54.286
+But then people wanted more on the networking,
+
+35
+00:01:54.358 --> 00:01:56.602
+they wanted to decide their own networking scheme.
+
+36
+00:01:56.626 --> 00:01:59.974
+They need to control what traffic
+
+37
+00:02:00.022 --> 00:02:01.794
+comes in, what traffic goes out.
+
+38
+00:02:01.892 --> 00:02:03.822
+So these things were not available
+
+39
+00:02:03.956 --> 00:02:06.740
+in initial versions of EC2.
+
+40
+00:02:07.310 --> 00:02:11.045
+So AWS came with VPC Virtual Private Cloud.
+
+41
+00:02:11.108 --> 00:02:13.614
+You can build your own network in your
+
+42
+00:02:13.652 --> 00:02:15.742
+account in the region that you selected.
+
+43
+00:02:15.766 --> 00:02:18.342
+You can decide the IP addressing schemes, you can
+
+44
+00:02:18.356 --> 00:02:22.318
+decide on public networks, private networks, you can distribute
+
+45
+00:02:22.414 --> 00:02:25.854
+your subnets into multiple availability zones to achieve high
+
+46
+00:02:25.892 --> 00:02:28.774
+availability and all those amazing concepts.
+
+47
+00:02:28.882 --> 00:02:31.146
+So what really is VPC today?
+
+48
+00:02:31.268 --> 00:02:33.118
+Well, it's long form is Virtual Private
+
+49
+00:02:33.154 --> 00:02:34.854
+Cloud and it acts like that.
+
+50
+00:02:35.012 --> 00:02:39.742
+You can create your own logical data center in a region
+
+51
+00:02:39.886 --> 00:02:43.806
+and you'll have complete control on that VPC think of this
+
+52
+00:02:43.868 --> 00:02:46.594
+as a local area network that you are designing.
+
+53
+00:02:46.702 --> 00:02:48.738
+So whatever you need in that, the
+
+54
+00:02:48.764 --> 00:02:51.862
+IP scheme, the securities, the firewall, you'll
+
+55
+00:02:51.886 --> 00:02:53.154
+have complete control on that.
+
+56
+00:02:53.192 --> 00:02:54.822
+Like that when you create a VPC in a
+
+57
+00:02:54.836 --> 00:02:57.570
+region your own, you have complete control on that.
+
+58
+00:02:57.620 --> 00:02:59.514
+Once you have the VPC laid out,
+
+59
+00:02:59.612 --> 00:03:02.578
+then you can start launching instances.
+
+60
+00:03:02.614 --> 00:03:06.186
+In that idea, there are so many majority of
+
+61
+00:03:06.188 --> 00:03:08.638
+the service in AWS that depends on VPC.
+
+62
+00:03:08.794 --> 00:03:10.894
+Every region will have a default VPC.
+
+63
+00:03:10.942 --> 00:03:13.258
+So far we are using default VPC.
+
+64
+00:03:13.414 --> 00:03:15.118
+But when you create your own VPC,
+
+65
+00:03:15.154 --> 00:03:16.950
+you get more control over it.
+
+66
+00:03:17.120 --> 00:03:19.638
+So on a public cloud platform, you are
+
+67
+00:03:19.664 --> 00:03:22.950
+creating a private network, your own private network,
+
+68
+00:03:24.170 --> 00:03:26.298
+and you will have complete control over it.
+
+69
+00:03:26.324 --> 00:03:28.330
+You can select the IP range subnets,
+
+70
+00:03:28.450 --> 00:03:30.450
+you can set up routing tables.
+
+71
+00:03:31.730 --> 00:03:32.778
+That sounds interesting.
+
+72
+00:03:32.864 --> 00:03:36.018
+And that's actually the first thing when you get
+
+73
+00:03:36.044 --> 00:03:38.670
+an AWS account before you create your infrastructure, you
+
+74
+00:03:38.720 --> 00:03:40.882
+do the network layout, you do the network designing
+
+75
+00:03:40.906 --> 00:03:43.818
+and then layout, and then you start using it.
+
+76
+00:03:43.844 --> 00:03:45.706
+Then you create your instances,
+
+77
+00:03:45.778 --> 00:03:47.230
+your databases, your storage.
+
+78
+00:03:47.290 --> 00:03:50.694
+In that we'll get into that, we'll do all that.
+
+79
+00:03:50.732 --> 00:03:53.994
+But first, for people who do not have
+
+80
+00:03:54.032 --> 00:03:57.102
+basic knowledge in networking, as I recommended, go
+
+81
+00:03:57.116 --> 00:03:59.802
+through the basics of networking video once again
+
+82
+00:03:59.996 --> 00:04:02.780
+and then come back and join this video.
+
+83
+00:04:03.290 --> 00:04:06.330
+I will take some basic concepts of networking first
+
+84
+00:04:06.500 --> 00:04:09.620
+and then we'll start creating our VPC design.
+
+85
+00:04:10.370 --> 00:04:12.694
+So, revising from basic networking.
+
+86
+00:04:12.742 --> 00:04:15.330
+IPV4, we're talking about IPV4.
+
+87
+00:04:15.380 --> 00:04:17.478
+Now we'll understand IPV4
+
+88
+00:04:17.564 --> 00:04:19.990
+subnetting and CIDR notation.
+
+89
+00:04:20.110 --> 00:04:22.100
+So what's an IPV4 address?
+
+90
+00:04:22.550 --> 00:04:26.278
+What we see IP address by running IP configure
+
+91
+00:04:26.314 --> 00:04:29.130
+ifconfig command, we see the IPV4 address.
+
+92
+00:04:29.180 --> 00:04:31.218
+That's actually the decimal number or
+
+93
+00:04:31.244 --> 00:04:33.620
+decimal representation of binary number.
+
+94
+00:04:33.950 --> 00:04:36.930
+IP address is 32 bit binary number
+
+95
+00:04:36.980 --> 00:04:40.158
+divided into eight octate octate because there
+
+96
+00:04:40.184 --> 00:04:42.598
+are eight binary numbers in every octate.
+
+97
+00:04:42.754 --> 00:04:45.138
+So eight plus eight plus eight plus eight.
+
+98
+00:04:45.164 --> 00:04:48.654
+So 192 binary is eleven, and then six
+
+99
+00:04:48.692 --> 00:04:52.374
+zeros, then 168 binary number, 100 binary number.
+
+100
+00:04:52.472 --> 00:04:54.838
+So whatever number you see in the decimal,
+
+101
+00:04:54.994 --> 00:04:57.020
+it is derived from the binary number.
+
+102
+00:04:57.350 --> 00:05:01.110
+This total 32 bit, we have four octate, first
+
+103
+00:05:01.160 --> 00:05:04.726
+octate, second octate, third octate, and the fourth octate.
+
+104
+00:05:04.918 --> 00:05:09.070
+So when I'm referring to an octate,
+
+105
+00:05:09.130 --> 00:05:10.702
+I'm saying third octate, fourth octate.
+
+106
+00:05:10.726 --> 00:05:13.220
+You should know what I'm really referring to.
+
+107
+00:05:16.470 --> 00:05:20.974
+The entire IPV4 range starts from
+
+108
+00:05:21.012 --> 00:05:27.490
+zero zero and end set 252-52-5255.
+
+109
+00:05:27.660 --> 00:05:29.400
+I guess I said it four times.
+
+110
+00:05:30.390 --> 00:05:33.000
+Okay, so you pick up any IPV4 and
+
+111
+00:05:33.450 --> 00:05:35.858
+you will see that it belongs to this range.
+
+112
+00:05:36.014 --> 00:05:39.082
+Now it ends at two five five, because that's a
+
+113
+00:05:39.096 --> 00:05:46.320
+binary number starts at binary conversion is this 80 eight.
+
+114
+00:05:48.550 --> 00:05:52.010
+So zero zero is the decimal representation.
+
+115
+00:05:52.330 --> 00:05:55.660
+Now the last number in every octate is all one.
+
+116
+00:05:56.110 --> 00:05:59.558
+So you have 818-1818 one.
+
+117
+00:05:59.584 --> 00:06:02.582
+That's the last number in
+
+118
+00:06:02.596 --> 00:06:04.214
+the octate, last binary number.
+
+119
+00:06:04.312 --> 00:06:07.790
+And if you convert that to decimal, you get 255.
+
+120
+00:06:07.960 --> 00:06:10.574
+That's why every octate you will see ending at
+
+121
+00:06:10.612 --> 00:06:13.526
+two five five and not at, let's say, 999.
+
+122
+00:06:13.588 --> 00:06:15.614
+You will not see any IP address like that.
+
+123
+00:06:15.772 --> 00:06:18.582
+Now this whole IP range is divided into two parts.
+
+124
+00:06:18.606 --> 00:06:20.646
+You have public IP and private IP.
+
+125
+00:06:20.778 --> 00:06:22.554
+Public IP is for the Internet.
+
+126
+00:06:22.662 --> 00:06:25.898
+Every computer on the Internet will have a
+
+127
+00:06:25.924 --> 00:06:28.422
+public IP and that IP will be unique.
+
+128
+00:06:28.566 --> 00:06:31.358
+So from that whole range, one part is
+
+129
+00:06:31.384 --> 00:06:33.726
+given for the public IP for the Internet.
+
+130
+00:06:33.858 --> 00:06:37.134
+The other part is for private IPS.
+
+131
+00:06:37.242 --> 00:06:40.422
+So you can create your own network, like Internet
+
+132
+00:06:40.446 --> 00:06:42.654
+is a network, you can create your own network.
+
+133
+00:06:42.702 --> 00:06:45.006
+And for that we have private IP ranges.
+
+134
+00:06:45.198 --> 00:06:47.634
+So we're going to talk about private IP ranges.
+
+135
+00:06:47.802 --> 00:06:52.478
+So you have class A range starts at
+
+136
+00:06:52.504 --> 00:06:58.730
+100, zero, ends at ten, 252-5525, five.
+
+137
+00:06:58.900 --> 00:07:08.920
+So if I take an IP address, ten, let's say 16, 251, 20.
+
+138
+00:07:09.910 --> 00:07:13.190
+Okay, this IP is a class AIP.
+
+139
+00:07:13.690 --> 00:07:15.410
+It comes in that range.
+
+140
+00:07:16.390 --> 00:07:24.074
+Likewise, class B, 170, 2160, starts there and
+
+141
+00:07:24.112 --> 00:07:28.586
+set 172 dot 31 dot 25525, five.
+
+142
+00:07:28.768 --> 00:07:34.694
+So, taking another example, let's say 172, 1625, ten.
+
+143
+00:07:34.852 --> 00:07:36.090
+This is a class B IP.
+
+144
+00:07:36.150 --> 00:07:37.074
+Some other examples.
+
+145
+00:07:37.122 --> 00:07:43.600
+172 dot, 20 dot four, dot twelve.
+
+146
+00:07:45.370 --> 00:07:46.766
+So that's class B. Okay?
+
+147
+00:07:46.828 --> 00:07:50.090
+So first octate is going to be same.
+
+148
+00:07:50.140 --> 00:07:54.914
+Second octate can be from 16 to 31. Okay?
+
+149
+00:07:55.012 --> 00:07:57.134
+Then third and fourth octate can start from
+
+150
+00:07:57.172 --> 00:07:59.320
+zero and go to two, five five.
+
+151
+00:08:01.190 --> 00:08:04.074
+So that's class B, private class B.
+
+152
+00:08:04.172 --> 00:08:09.762
+Now, if I say 107, 232-2565, that
+
+153
+00:08:09.896 --> 00:08:12.010
+is not in the private IP range.
+
+154
+00:08:12.070 --> 00:08:15.690
+This is a public IP. Okay? Let's see.
+
+155
+00:08:15.740 --> 00:08:20.766
+Class C, the famous 1192 1680
+
+156
+00:08:20.948 --> 00:08:26.778
+starts there and set 109, 216-825-5255.
+
+157
+00:08:26.924 --> 00:08:30.080
+So first two octate will be same.
+
+158
+00:08:30.770 --> 00:08:33.438
+Third and fourth octate can be from zero to two.
+
+159
+00:08:33.464 --> 00:08:34.254
+Five five.
+
+160
+00:08:34.412 --> 00:08:38.658
+Okay, so these are three private IP ranges, which
+
+161
+00:08:38.683 --> 00:08:40.554
+you can use this class D and E.
+
+162
+00:08:40.592 --> 00:08:44.058
+Also for research and multicasting, we don't use them.
+
+163
+00:08:44.203 --> 00:08:46.218
+So when you create a network layout, you're going
+
+164
+00:08:46.244 --> 00:08:48.860
+to select class A, B or C, and then
+
+165
+00:08:49.370 --> 00:08:51.634
+whatever class you select based on your requirement.
+
+166
+00:08:51.742 --> 00:08:54.618
+And then you can divide it much more further. Okay?
+
+167
+00:08:54.704 --> 00:08:58.050
+The way we divide is by using subnet masks.
+
+168
+00:08:58.790 --> 00:09:01.470
+So I'm going to talk about classful subnetmask
+
+169
+00:09:01.910 --> 00:09:13.520
+2550 and 255250, and 255-25-5255 dot zero.
+
+170
+00:09:13.850 --> 00:09:16.798
+Now, what really is subnet mask like IP
+
+171
+00:09:16.834 --> 00:09:20.242
+address is the address of that network interface.
+
+172
+00:09:20.386 --> 00:09:24.246
+Subnetmask will decide on the network that an IP address
+
+173
+00:09:24.428 --> 00:09:27.970
+range starts at what IP, ends at what IP.
+
+174
+00:09:28.150 --> 00:09:31.126
+How many IP address do you get from the range?
+
+175
+00:09:31.318 --> 00:09:32.802
+What will be the network address?
+
+176
+00:09:32.876 --> 00:09:34.458
+What will be the broadcast address?
+
+177
+00:09:34.544 --> 00:09:38.026
+All these things are decided based on the subnet mask.
+
+178
+00:09:38.158 --> 00:09:39.282
+So, let's take an example.
+
+179
+00:09:39.356 --> 00:09:41.326
+I take my own computer IP.
+
+180
+00:09:41.518 --> 00:09:45.690
+So I'll open command prompt and I'll run IP config.
+
+181
+00:09:50.130 --> 00:09:50.458
+Okay?
+
+182
+00:09:50.484 --> 00:09:53.878
+I see IP address 192, 161,
+
+183
+00:09:53.904 --> 00:09:59.422
+74, and subnet mask is 255-255-2550.
+
+184
+00:09:59.616 --> 00:10:00.994
+Okay, let's take this example.
+
+185
+00:10:01.092 --> 00:10:03.902
+So, let me open my notepad so that's
+
+186
+00:10:03.926 --> 00:10:09.130
+my IP and my subnet mask is 252-5250.
+
+187
+00:10:09.240 --> 00:10:14.446
+Now, this is class C, private IP that
+
+188
+00:10:14.508 --> 00:10:17.326
+you should have been understood by now.
+
+189
+00:10:17.508 --> 00:10:20.482
+So this IP is assigned to me by
+
+190
+00:10:20.556 --> 00:10:23.266
+my WiFi router, which has a DACP service.
+
+191
+00:10:23.328 --> 00:10:26.270
+It's alerting IP addresses and from the range
+
+192
+00:10:26.330 --> 00:10:28.680
+it has given this particular IP address.
+
+193
+00:10:29.370 --> 00:10:31.318
+So the DHCP server is given this
+
+194
+00:10:31.344 --> 00:10:33.490
+subnet mask and the network range.
+
+195
+00:10:44.770 --> 00:10:47.030
+Now, this is given to the DHCP server.
+
+196
+00:10:47.770 --> 00:10:50.702
+So DHCP server has this range, and it is
+
+197
+00:10:50.716 --> 00:10:52.818
+going to alert IP address from this range.
+
+198
+00:10:52.974 --> 00:10:54.530
+Now, how is it a range?
+
+199
+00:10:55.270 --> 00:10:57.640
+Well, the subnet mask decides that
+
+200
+00:10:58.510 --> 00:11:02.210
+first three octate is full.
+
+201
+00:11:02.380 --> 00:11:05.174
+So this is your network address, network part.
+
+202
+00:11:05.332 --> 00:11:07.830
+Okay, this cannot be changed.
+
+203
+00:11:07.890 --> 00:11:10.034
+192 1680.
+
+204
+00:11:10.192 --> 00:11:12.570
+This is your network address or network
+
+205
+00:11:12.630 --> 00:11:15.062
+part, the one that is zero.
+
+206
+00:11:15.136 --> 00:11:16.442
+The last doctor is zero.
+
+207
+00:11:16.516 --> 00:11:18.474
+That is your host range.
+
+208
+00:11:18.582 --> 00:11:21.918
+So you can allot IPS from this range.
+
+209
+00:11:22.014 --> 00:11:25.574
+Think of this as the street address and
+
+210
+00:11:25.612 --> 00:11:29.210
+this as the house address in the street.
+
+211
+00:11:29.830 --> 00:11:32.558
+The street address will remain same, but
+
+212
+00:11:32.584 --> 00:11:36.578
+the house you have house from 02255.
+
+213
+00:11:36.724 --> 00:11:39.530
+You can have 256 houses in that street.
+
+214
+00:11:40.150 --> 00:11:45.074
+So the first house address will be 192-16810.
+
+215
+00:11:45.232 --> 00:11:48.050
+Okay, that's going to be the network IP.
+
+216
+00:11:48.970 --> 00:11:51.890
+The first address can be assigned to the house zero,
+
+217
+00:11:51.940 --> 00:11:59.506
+dot, one, like that, 192, 168, dot zero, zero, dot
+
+218
+00:11:59.578 --> 00:12:02.158
+two, right, like that, so on and so forth.
+
+219
+00:12:02.194 --> 00:12:04.686
+It can go till 192, 168, 0254.
+
+220
+00:12:04.688 --> 00:12:14.910
+And then the last, 1192.
+
+221
+00:12:15.080 --> 00:12:16.590
+That's it. It ends.
+
+222
+00:12:17.510 --> 00:12:19.710
+Okay, that's the first IP, and this
+
+223
+00:12:19.760 --> 00:12:21.930
+will be reserved for the network.
+
+224
+00:12:23.390 --> 00:12:24.762
+You cannot assign that IP to
+
+225
+00:12:24.776 --> 00:12:26.518
+any network interface in this range.
+
+226
+00:12:26.614 --> 00:12:28.530
+This is going to be the network IP.
+
+227
+00:12:29.570 --> 00:12:31.738
+Also, the last IP will be reserved.
+
+228
+00:12:31.834 --> 00:12:33.870
+This is for broadcast.
+
+229
+00:12:38.250 --> 00:12:40.018
+And all these other IPS that
+
+230
+00:12:40.044 --> 00:12:42.134
+we see this range is usable.
+
+231
+00:12:42.182 --> 00:12:43.162
+You can assign it to the
+
+232
+00:12:43.176 --> 00:12:45.530
+system, to the network interface.
+
+233
+00:12:45.650 --> 00:12:50.590
+So you can say this is the first usable IP.
+
+234
+00:12:51.690 --> 00:12:52.126
+Okay?
+
+235
+00:12:52.188 --> 00:12:53.522
+That is the first usable IP.
+
+236
+00:12:53.546 --> 00:12:55.274
+You can assign it to a network interface,
+
+237
+00:12:55.382 --> 00:13:00.430
+and this is the last usable IP.
+
+238
+00:13:02.610 --> 00:13:04.366
+Now, how did we know all that?
+
+239
+00:13:04.488 --> 00:13:07.046
+Well, we know because of the subnet mask.
+
+240
+00:13:07.178 --> 00:13:08.938
+Based on subnet mask, we got to
+
+241
+00:13:08.964 --> 00:13:12.550
+this conclusion since Three Octates are full
+
+242
+00:13:12.600 --> 00:13:14.446
+for Second and Third Octate is full.
+
+243
+00:13:14.508 --> 00:13:16.582
+So this part is not going to change.
+
+244
+00:13:16.716 --> 00:13:19.922
+This is the network address the last octate.
+
+245
+00:13:19.946 --> 00:13:22.354
+The fourth octate is going to change. Okay?
+
+246
+00:13:22.392 --> 00:13:25.380
+It will start from zero and go till two five. Five.
+
+247
+00:13:25.830 --> 00:13:29.230
+So that's what subnet mask does to a network range.
+
+248
+00:13:29.910 --> 00:13:32.830
+So if we say total, how many IPS we get?
+
+249
+00:13:33.000 --> 00:13:38.590
+If you use that subnet mark, total IP we get is 2.56.
+
+250
+00:13:38.640 --> 00:13:40.582
+It starts at zero. Okay?
+
+251
+00:13:40.716 --> 00:13:44.290
+But total usable IP that you can assign.
+
+252
+00:13:45.450 --> 00:13:47.760
+So minus that with two, right?
+
+253
+00:13:49.830 --> 00:13:51.120
+254.
+
+254
+00:13:52.050 --> 00:13:55.418
+Because the first IP, IP and the last IP is reserved.
+
+255
+00:13:55.574 --> 00:13:57.658
+First one is for the network, the
+
+256
+00:13:57.684 --> 00:13:59.410
+last one is for the broadcast.
+
+257
+00:13:59.970 --> 00:14:02.002
+So if any broadcasting needs to be done on
+
+258
+00:14:02.016 --> 00:14:04.118
+this network, it will be sent on this IP
+
+259
+00:14:04.154 --> 00:14:06.802
+address, and it will be heard by all the
+
+260
+00:14:06.816 --> 00:14:10.942
+network interfaces in this network that's broadcast like you
+
+261
+00:14:10.956 --> 00:14:14.506
+have, like TV broadcast or radio broadcast where everyone
+
+262
+00:14:14.568 --> 00:14:18.180
+having the same devices gets the same data.
+
+263
+00:14:19.890 --> 00:14:21.900
+Okay, that's good.
+
+264
+00:14:22.530 --> 00:14:24.082
+Okay, now, let's take another example.
+
+265
+00:14:24.156 --> 00:14:26.198
+I will take a class B IP.
+
+266
+00:14:26.234 --> 00:14:35.762
+Now 36, okay?
+
+267
+00:14:35.836 --> 00:14:40.010
+Taking this IP address, some random IPO, and it doesn't matter
+
+268
+00:14:40.060 --> 00:14:42.938
+whether I take class B or class A or class C.
+
+269
+00:14:43.024 --> 00:14:44.114
+That doesn't matter.
+
+270
+00:14:44.272 --> 00:14:46.550
+The important thing is the subnet mask.
+
+271
+00:14:51.350 --> 00:14:51.678
+Okay?
+
+272
+00:14:51.704 --> 00:14:53.538
+Now, based on our previous experience, we
+
+273
+00:14:53.564 --> 00:14:56.214
+can say the first two octate, first
+
+274
+00:14:56.252 --> 00:14:58.078
+and second update is for the network.
+
+275
+00:14:58.174 --> 00:15:01.230
+So 170, 216 is for the network.
+
+276
+00:15:01.610 --> 00:15:04.566
+And the last part you're seeing 1236.
+
+277
+00:15:04.628 --> 00:15:05.878
+That is for the host.
+
+278
+00:15:05.974 --> 00:15:07.974
+So that is your host address.
+
+279
+00:15:08.132 --> 00:15:10.460
+And this is your network address.
+
+280
+00:15:14.430 --> 00:15:15.862
+So where does this start?
+
+281
+00:15:15.996 --> 00:15:21.730
+172, 160, that is the first IP.
+
+282
+00:15:22.230 --> 00:15:25.570
+170, 216, 255.
+
+283
+00:15:25.680 --> 00:15:28.450
+255 is the last IP.
+
+284
+00:15:29.070 --> 00:15:31.558
+And we know first and last IP is for
+
+285
+00:15:31.704 --> 00:15:34.198
+first one is for the network reserved, and the
+
+286
+00:15:34.224 --> 00:15:39.250
+last one is for the reserve for broadcast.
+
+287
+00:15:40.410 --> 00:15:44.770
+All right, so firstusable IP, 170, 2160.
+
+288
+00:15:44.880 --> 00:15:48.202
+One is the first usable IP. All right?
+
+289
+00:15:48.276 --> 00:15:50.318
+And then the last usable IP
+
+290
+00:15:50.354 --> 00:15:55.380
+will be 172, 16, 25525, four.
+
+291
+00:15:56.610 --> 00:15:58.080
+Okay, check there.
+
+292
+00:15:58.410 --> 00:16:00.662
+All right, this is the last number in the octate.
+
+293
+00:16:00.686 --> 00:16:03.154
+So third octate starts from zero,
+
+294
+00:16:03.252 --> 00:16:04.798
+goes till two five five.
+
+295
+00:16:04.944 --> 00:16:07.200
+And the fourth octate is going to be
+
+296
+00:16:08.070 --> 00:16:09.754
+cycling from zero to two five five.
+
+297
+00:16:09.792 --> 00:16:11.602
+Then again, it goes from zero to two five.
+
+298
+00:16:11.676 --> 00:16:14.160
+Again, from zero to two five. Like that.
+
+299
+00:16:15.930 --> 00:16:21.010
+So this is the last usable IP.
+
+300
+00:16:28.210 --> 00:16:28.646
+Okay.
+
+301
+00:16:28.708 --> 00:16:31.862
+Now, if you still did not get it, okay, let
+
+302
+00:16:31.876 --> 00:16:35.318
+me give you a few more IP addresses here.
+
+303
+00:16:35.344 --> 00:16:41.390
+Okay, so 170, 2160, two, that's the second IP.
+
+304
+00:16:47.630 --> 00:16:50.970
+Sorry, that's the fourth IP or third usable IP.
+
+305
+00:16:52.070 --> 00:16:54.738
+Like that, it is going to go on and on till one.
+
+306
+00:16:54.764 --> 00:16:59.120
+7216, 0255.
+
+307
+00:16:59.570 --> 00:17:01.506
+Now, does it end over here?
+
+308
+00:17:01.688 --> 00:17:05.465
+No, the third octate also changes.
+
+309
+00:17:05.647 --> 00:17:11.960
+So 170, 216, 10, sorry, 10.
+
+310
+00:17:12.410 --> 00:17:16.339
+And then 170, 216, 20.
+
+311
+00:17:16.790 --> 00:17:18.634
+Right, like that, so on and so forth.
+
+312
+00:17:18.682 --> 00:17:23.670
+That also ends 170, 216, 2255.
+
+313
+00:17:23.839 --> 00:17:25.157
+Does it end now?
+
+314
+00:17:25.184 --> 00:17:27.417
+It continues now 170, 216.
+
+315
+00:17:27.454 --> 00:17:30.018
+So as long as the third octate is not
+
+316
+00:17:30.044 --> 00:17:32.286
+two five five, it will keep going on.
+
+317
+00:17:32.348 --> 00:17:35.360
+Okay, the meter keeps going on.
+
+318
+00:17:35.870 --> 00:17:44.374
+So I can say 30, right?
+
+319
+00:17:44.412 --> 00:17:50.294
+So that's why I said zero t025-5255.
+
+320
+00:17:50.332 --> 00:17:56.920
+Then again, it starts 10 till 123-1255.
+
+321
+00:18:11.510 --> 00:18:13.194
+So like this, it goes on and on.
+
+322
+00:18:13.232 --> 00:18:18.090
+So total, how many IP we get from this total IPS?
+
+323
+00:18:18.530 --> 00:18:19.870
+So we can do multiplication.
+
+324
+00:18:19.930 --> 00:18:26.658
+256 multiplied by 256, that is somewhere around 65,000.
+
+325
+00:18:26.744 --> 00:18:28.530
+Wait, let me do the math.
+
+326
+00:18:29.090 --> 00:18:34.080
+65536.
+
+327
+00:18:34.470 --> 00:18:35.918
+No, that did not come instantly.
+
+328
+00:18:35.954 --> 00:18:37.570
+I use the calculator.
+
+329
+00:18:37.890 --> 00:18:40.882
+Okay, so that many IP addresses we get, if we
+
+330
+00:18:40.896 --> 00:18:46.346
+are using this subnet mask, that's a big network.
+
+331
+00:18:46.538 --> 00:18:48.910
+We don't use it like the whole at once.
+
+332
+00:18:49.020 --> 00:18:51.110
+We divide it into smaller subnets.
+
+333
+00:18:51.230 --> 00:18:54.298
+So we can say no, zero dot, zero is
+
+334
+00:18:54.324 --> 00:18:56.582
+one subnet, then one dot, zero is another subnet,
+
+335
+00:18:56.606 --> 00:18:58.118
+then two dot, zero is another subnet.
+
+336
+00:18:58.154 --> 00:19:02.242
+Like that, I can have 256 subnets. Okay?
+
+337
+00:19:02.316 --> 00:19:05.230
+So let me just write that down. Subnets.
+
+338
+00:19:08.830 --> 00:19:12.986
+Okay, so if I take each subnet of size 256 IPS, right?
+
+339
+00:19:13.048 --> 00:19:16.010
+So then I can have 256 subnets.
+
+340
+00:19:16.450 --> 00:19:18.038
+That could be a first subnet, that
+
+341
+00:19:18.064 --> 00:19:19.622
+could be my second subnet, that could
+
+342
+00:19:19.636 --> 00:19:21.798
+be the third subnet and fourth subnet.
+
+343
+00:19:21.834 --> 00:19:24.846
+Like that, I can have 255 subnets.
+
+344
+00:19:25.038 --> 00:19:26.678
+But I'm specifying the size here.
+
+345
+00:19:26.704 --> 00:19:33.220
+I'm saying each subnet is of this size 255-255-2550.
+
+346
+00:19:33.610 --> 00:19:35.666
+Okay, so you know what that does, right?
+
+347
+00:19:35.728 --> 00:19:38.978
+First three octate is full, and then last octate change.
+
+348
+00:19:39.064 --> 00:19:42.234
+So every subnet gives me 256 IP
+
+349
+00:19:42.282 --> 00:19:46.170
+address, minus that by 254 usable IP.
+
+350
+00:19:46.350 --> 00:19:50.258
+So like that, I can have 256 subnets if
+
+351
+00:19:50.284 --> 00:19:53.680
+I have this as my main network address.
+
+352
+00:19:55.030 --> 00:19:56.574
+Okay, so it's a huge network,
+
+353
+00:19:56.622 --> 00:19:58.254
+but we have one more classful.
+
+354
+00:19:58.362 --> 00:20:04.300
+Let's take example ten, dot, 23 dot, twelve dot, 56
+
+355
+00:20:04.870 --> 00:20:09.980
+subnetmask, two five, five dot zero, dot zero, dot zero.
+
+356
+00:20:10.910 --> 00:20:12.294
+So we know now only the
+
+357
+00:20:12.332 --> 00:20:15.106
+first octate is for the network.
+
+358
+00:20:15.298 --> 00:20:17.382
+The other three octate that we
+
+359
+00:20:17.396 --> 00:20:19.410
+are seeing is of the host.
+
+360
+00:20:21.690 --> 00:20:26.460
+So first IP will be ten, last IP will be ten.
+
+361
+00:20:36.670 --> 00:20:46.130
+First usable IP, 1054 is the last usable IP.
+
+362
+00:20:47.410 --> 00:21:03.210
+All right, so total IP, you can do the math.
+
+363
+00:21:04.190 --> 00:21:07.294
+Okay, so that's total number of IP
+
+364
+00:21:07.342 --> 00:21:11.790
+address if we use this subnet mask.
+
+365
+00:21:13.190 --> 00:21:15.858
+So based on your need, you are going to
+
+366
+00:21:15.884 --> 00:21:19.770
+select a subnet mask and the class of IP.
+
+367
+00:21:20.150 --> 00:21:22.126
+If you want, you can divide it much further.
+
+368
+00:21:22.198 --> 00:21:24.318
+So I will take one example now, I will
+
+369
+00:21:24.344 --> 00:21:40.322
+take the class B IP, and that I'm going
+
+370
+00:21:40.336 --> 00:21:43.180
+to divide it into smaller subnet 172.
+
+371
+00:21:49.070 --> 00:21:50.514
+I'll start with one dot zero.
+
+372
+00:21:50.552 --> 00:21:58.278
+Okay, one dot zero, 172 dot 20 dot, two dot zero,
+
+373
+00:21:58.424 --> 00:22:07.220
+and each of the subnet will be size of zero.
+
+374
+00:22:09.050 --> 00:22:09.414
+Okay.
+
+375
+00:22:09.452 --> 00:22:11.542
+Now since we are here, let's
+
+376
+00:22:11.566 --> 00:22:13.102
+talk about the CIDR notation.
+
+377
+00:22:13.246 --> 00:22:16.458
+Okay, let me clear this and
+
+378
+00:22:16.484 --> 00:22:17.926
+let's talk about CIDR notation.
+
+379
+00:22:17.998 --> 00:22:21.358
+First CIDR classless internet domain
+
+380
+00:22:21.394 --> 00:22:23.298
+routing, what it is.
+
+381
+00:22:23.444 --> 00:22:25.678
+Well, we know two five, five dot,
+
+382
+00:22:25.774 --> 00:22:28.422
+two v, two v, dot zero.
+
+383
+00:22:28.556 --> 00:22:30.834
+If we convert it into binary, what do we get?
+
+384
+00:22:30.932 --> 00:22:33.380
+123-4567, eight.
+
+385
+00:22:35.150 --> 00:22:36.680
+Let me just copy that.
+
+386
+00:22:44.070 --> 00:22:45.794
+Okay, so that's the binary
+
+387
+00:22:45.842 --> 00:22:48.130
+representation of this subnet mask.
+
+388
+00:22:48.810 --> 00:22:50.640
+Let's write all of that.
+
+389
+00:22:53.470 --> 00:22:56.440
+The other two subnets also I'll write 250.
+
+390
+00:23:30.450 --> 00:23:33.490
+So that's decimal, this is binary.
+
+391
+00:23:33.810 --> 00:23:35.558
+For all these three subnet masks,
+
+392
+00:23:35.594 --> 00:23:37.390
+we have decimals and binaries.
+
+393
+00:23:38.070 --> 00:23:41.590
+Now, if you count the number of one, how many
+
+394
+00:23:41.640 --> 00:23:46.500
+ones we have here in this subnet mask, that's eight.
+
+395
+00:23:47.370 --> 00:23:48.274
+Okay, eight.
+
+396
+00:23:48.372 --> 00:23:55.034
+So your CIDR notation will be eight there
+
+397
+00:23:55.132 --> 00:23:57.014
+over here, how many ones we have eight
+
+398
+00:23:57.052 --> 00:24:04.940
+plus 816 here how many ones we have?
+
+399
+00:24:06.650 --> 00:24:08.960
+Eight plus eight plus eight.
+
+400
+00:24:09.770 --> 00:24:13.122
+So that is 24.
+
+401
+00:24:13.316 --> 00:24:16.520
+Now, a subnet mask can be represented like this.
+
+402
+00:24:17.330 --> 00:24:18.586
+In the operating system, you'll
+
+403
+00:24:18.598 --> 00:24:20.300
+see subnet mask like this.
+
+404
+00:24:20.870 --> 00:24:22.506
+In binaries, you'll see like this.
+
+405
+00:24:22.568 --> 00:24:25.066
+But now in cloud computing virtualization,
+
+406
+00:24:25.198 --> 00:24:27.574
+we give inside a notation format.
+
+407
+00:24:27.622 --> 00:24:29.778
+So when I say slash 24, you
+
+408
+00:24:29.804 --> 00:24:32.370
+should understand this means that subnet mask.
+
+409
+00:24:32.690 --> 00:24:37.974
+When I say 16, that means this subnet mask, right?
+
+410
+00:24:38.012 --> 00:24:40.098
+So based on this, let's decide the
+
+411
+00:24:40.124 --> 00:24:46.946
+IP addressing scheme 172 20 00:16.
+
+412
+00:24:47.018 --> 00:24:48.286
+What does that mean?
+
+413
+00:24:48.468 --> 00:24:51.658
+That means first two octates are for network, the
+
+414
+00:24:51.684 --> 00:24:54.310
+last two octates are for the host, right?
+
+415
+00:24:54.360 --> 00:24:56.534
+And we can understand where does the first IP
+
+416
+00:24:56.582 --> 00:25:00.900
+starts and last IP, all of that, right?
+
+417
+00:25:01.290 --> 00:25:02.582
+Okay, now I'm going to divide
+
+418
+00:25:02.606 --> 00:25:04.046
+it into further smaller networks.
+
+419
+00:25:04.058 --> 00:25:12.838
+So 172 20, I'll say zero 00:24, that could be
+
+420
+00:25:12.864 --> 00:25:23.620
+my first subnet, that could be my second subnet, right?
+
+421
+00:25:35.370 --> 00:25:39.478
+So you know now how many subnets of 24 size I
+
+422
+00:25:39.504 --> 00:25:45.660
+can create from this network total 256 subnets I can create.
+
+423
+00:25:46.650 --> 00:25:51.430
+Okay, so I will give this as network range.
+
+424
+00:25:53.250 --> 00:25:54.910
+These are subnets.
+
+425
+00:25:56.010 --> 00:26:00.710
+Okay, so by looking at an IP address and the range,
+
+426
+00:26:00.770 --> 00:26:03.550
+you should be able to tell what will be the first
+
+427
+00:26:03.600 --> 00:26:07.858
+IP, last IP, how many total IP addresses does it give?
+
+428
+00:26:08.004 --> 00:26:09.190
+What is the network part?
+
+429
+00:26:09.240 --> 00:26:10.426
+What is the host part?
+
+430
+00:26:10.548 --> 00:26:11.938
+These are some questions you should
+
+431
+00:26:11.964 --> 00:26:13.440
+be able to answer to yourself.
+
+432
+00:26:13.950 --> 00:26:16.186
+If you still have doubt or you see
+
+433
+00:26:16.248 --> 00:26:19.534
+a classless CIDR notation like you know, not
+
+434
+00:26:19.572 --> 00:26:22.822
+1624, maybe 2018 if you see like that.
+
+435
+00:26:22.896 --> 00:26:24.538
+Or if you're still not confident on this one.
+
+436
+00:26:24.564 --> 00:26:27.370
+Also, there are online subnet calculators.
+
+437
+00:26:27.750 --> 00:26:30.730
+You can just google online subnet calculator.
+
+438
+00:26:31.650 --> 00:26:32.926
+Let's pick up some.
+
+439
+00:26:33.048 --> 00:26:34.380
+Let's take this one.
+
+440
+00:26:35.850 --> 00:26:37.450
+Okay, so you can give the IP address
+
+441
+00:26:37.500 --> 00:26:39.410
+and you can give the CIDR notation.
+
+442
+00:26:39.470 --> 00:26:41.220
+It will tell you what is what.
+
+443
+00:26:41.730 --> 00:26:47.998
+So let's take example 172 20 1654.
+
+444
+00:26:48.024 --> 00:26:51.674
+This is some IP from this network 16.
+
+445
+00:26:51.842 --> 00:26:53.650
+Okay, let's calculate.
+
+446
+00:26:55.110 --> 00:26:57.350
+Okay, so that's our IP net mask.
+
+447
+00:26:57.410 --> 00:26:59.894
+This is the subnet mask. Wildcard.
+
+448
+00:26:59.942 --> 00:27:02.750
+Wildcard is the opposite of subnet mask.
+
+449
+00:27:02.810 --> 00:27:04.994
+Okay, wildcard will tell you about the host
+
+450
+00:27:05.042 --> 00:27:14.454
+addresses, network address, broadcast address, IP, first usable
+
+451
+00:27:14.502 --> 00:27:17.450
+IP, last usable IP, total IPS.
+
+452
+00:27:18.490 --> 00:27:21.590
+It is even telling you that this is class B IP.
+
+453
+00:27:23.230 --> 00:27:25.430
+If you don't like this site, you can try others.
+
+454
+00:27:25.600 --> 00:27:26.702
+Just an example, there are
+
+455
+00:27:26.716 --> 00:27:28.910
+many online subnet calculator.
+
+456
+00:27:31.210 --> 00:27:34.254
+So get all these things what I've explained straight.
+
+457
+00:27:34.302 --> 00:27:37.250
+If you don't get it, watch the video once again.
+
+458
+00:27:37.300 --> 00:27:38.702
+It's very important for you you to
+
+459
+00:27:38.716 --> 00:27:41.262
+understand the IP addressing and subnet schemes.
+
+460
+00:27:41.406 --> 00:27:43.502
+If you know this, then VPC is going
+
+461
+00:27:43.516 --> 00:27:45.422
+to be very easy to set up.
+
+462
+00:27:45.616 --> 00:27:48.602
+So wrap this up, revise it, and
+
+463
+00:27:48.676 --> 00:27:49.580
+join me in the next video.

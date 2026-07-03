@@ -1,0 +1,673 @@
+WEBVTT
+
+0
+00:13.420 --> 00:15.130
+Welcome to the project.
+
+1
+00:15.280 --> 00:18.760
+In this project, we are going to set up a web application stack.
+
+2
+00:20.250 --> 00:25.910
+The name of the project is V Profile Project set up local.
+
+3
+00:26.610 --> 00:28.440
+Let's understand about this project.
+
+4
+00:34.320 --> 00:38.610
+In this project, we will be setting a multi-tier web application stack.
+
+5
+00:38.940 --> 00:43.830
+The set up will be locally on your laptop or on your desktop.
+
+6
+00:44.310 --> 00:47.160
+There are two reasons why we are doing this project.
+
+7
+00:47.190 --> 00:53.820
+The first reason is this project is going to set up a baseline for our upcoming projects.
+
+8
+00:54.360 --> 00:58.840
+We are going to do a lot of projects like we're going to deploy a stack on a.
+
+9
+00:59.580 --> 01:01.070
+We're going to refactor it.
+
+10
+01:01.080 --> 01:03.690
+We're going to containerized our applications.
+
+11
+01:03.690 --> 01:08.820
+We're going to deploy the projects on Kubernetes cluster and many more things to do.
+
+12
+01:08.820 --> 01:14.460
+All the upcoming projects you need to understand, v profile project first, and for that we are doing
+
+13
+01:14.460 --> 01:17.130
+a setup on your on our local machine.
+
+14
+01:17.610 --> 01:24.240
+The second reason of doing this project is so you can set up your own lab locally.
+
+15
+01:24.270 --> 01:30.570
+If you have any project you're working in, any project, you can set up that entire stack locally and
+
+16
+01:30.570 --> 01:32.280
+do all your R&amp;D.
+
+17
+01:37.130 --> 01:40.190
+Let's take a scenario from your real time experience.
+
+18
+01:40.580 --> 01:46.640
+Let's say you're working in a project and in your project you have varieties of services that you deal
+
+19
+01:46.640 --> 01:47.180
+with.
+
+20
+01:47.690 --> 01:56.510
+You may be having services like database services, MySQL, PostgreSQL Web services, Apache Engine
+
+21
+01:56.510 --> 01:59.870
+X application services, maybe like Tomcat.
+
+22
+01:59.880 --> 02:01.070
+Jboss, glassfish
+
+23
+02:01.070 --> 02:01.790
+.
+
+24
+02:02.650 --> 02:04.240
+Or any other stack like that.
+
+25
+02:05.920 --> 02:12.700
+And you may also have a Runbook or a set up document to set up your project stack.
+
+26
+02:16.980 --> 02:18.810
+Let's talk about some problems.
+
+27
+02:19.840 --> 02:24.070
+You may not be comfortable in making changes in the real servers.
+
+28
+02:24.310 --> 02:26.920
+You have the setup document, you have the run book.
+
+29
+02:26.920 --> 02:32.050
+But still we lack in confidence in making changes in the real systems.
+
+30
+02:32.920 --> 02:36.610
+So you would like to set up a local stack.
+
+31
+02:36.700 --> 02:42.340
+You would like to set up all that stack on your local machine probably by using virtual machines.
+
+32
+02:42.910 --> 02:43.810
+So you can do that.
+
+33
+02:43.810 --> 02:46.450
+But the local setup is complex.
+
+34
+02:46.600 --> 02:50.890
+It's time consuming and it's not a repeatable.
+
+35
+02:53.630 --> 03:01.820
+So we would love to set up stack locally by using virtual machines so we can do R&amp;D and gain some confidence
+
+36
+03:01.820 --> 03:02.950
+on our project.
+
+37
+03:02.960 --> 03:10.670
+But since the setup of multiple services is complex, it's time consuming and moreover, we can do it
+
+38
+03:10.670 --> 03:11.420
+again and again.
+
+39
+03:11.420 --> 03:15.890
+It's not repeatable if you do it manually, so we avoid this setup.
+
+40
+03:20.930 --> 03:23.360
+So solutions to our problem.
+
+41
+03:24.120 --> 03:27.300
+What we can do is we can have a local set up.
+
+42
+03:27.430 --> 03:31.710
+Yes, but it would be automated.
+
+43
+03:32.930 --> 03:38.990
+It would be repeatable because we're going to have infrastructure as a code.
+
+44
+03:39.700 --> 03:46.000
+So if we have a code to set up the entire stack locally, we can do it as many as time.
+
+45
+03:46.000 --> 03:47.620
+It's going to be repeatable.
+
+46
+03:47.650 --> 03:49.930
+It's completely automated process.
+
+47
+03:49.930 --> 03:54.730
+So you can do as much as R&amp;D you want on your local machine.
+
+48
+03:55.770 --> 04:00.930
+All right, Now let's see what all the tools that we need to set up this stack.
+
+49
+04:02.180 --> 04:10.700
+So starting with, we will need a hypervisor Oracle VM virtual box we are going to use on which we are
+
+50
+04:10.700 --> 04:12.140
+going to set up a virtual machine.
+
+51
+04:12.140 --> 04:18.380
+But since this is going to be automated, so for automation we are going to use Vagrant.
+
+52
+04:19.170 --> 04:24.340
+And we need to execute some commands, not some many commands.
+
+53
+04:24.360 --> 04:31.680
+So we'll be using a command line tool git bash, which will be multipurpose for executing commands and
+
+54
+04:31.680 --> 04:33.150
+also for version control.
+
+55
+04:33.480 --> 04:42.540
+We can also use an IDE so you can use sublime text or if you are any preference of using Notepad Plus
+
+56
+04:42.540 --> 04:46.680
+plus Visual Studio or anything else that also you can use.
+
+57
+04:47.670 --> 04:53.100
+You must have installed all these tools already from the prerequisites video.
+
+58
+04:56.160 --> 04:59.250
+Let's understand the objective of this once again.
+
+59
+05:00.350 --> 05:03.140
+We're going to learn VN automation locally.
+
+60
+05:05.510 --> 05:09.620
+This project is going to set up a baseline for upcoming projects.
+
+61
+05:10.360 --> 05:17.920
+And we will also learn how to set up many real world projects on our local machine automatically.
+
+62
+05:19.370 --> 05:22.910
+So we can do as much as R&amp;D we want.
+
+63
+05:27.590 --> 05:33.350
+Now we'll see the architectural design of various services in our project.
+
+64
+05:33.350 --> 05:39.860
+We have Nginx, Tomcat, RabbitMQ, Memcached and MySQL service, so we'll see
+
+65
+05:39.860 --> 05:43.880
+the architectural design. We will also see one more architectural design.
+
+66
+05:46.590 --> 05:55.530
+Of our automated setup, we will have a vagrant, virtual box, git bash and also some scripts and commands.
+
+67
+05:56.800 --> 05:57.100
+Okay.
+
+68
+05:57.130 --> 06:01.480
+Long story short, we will be setting up a website, a web application.
+
+69
+06:01.870 --> 06:09.700
+And this web app is a social networking site written by developers in Java language.
+
+70
+06:10.120 --> 06:14.230
+Now, we will understand the flow of this entire stack.
+
+71
+06:16.780 --> 06:23.230
+The word stack is used for collection of servicesworking together to create an experience.
+
+72
+06:23.500 --> 06:25.210
+In this case, a web.
+
+73
+06:26.130 --> 06:29.160
+App or a social networking app.
+
+74
+06:29.550 --> 06:37.380
+So we need to set up all these services in our virtual machines and configure together so users get
+
+75
+06:37.380 --> 06:39.630
+that experience of a web application.
+
+76
+06:40.730 --> 06:44.570
+Okay, so the user opens the browser or the app.
+
+77
+06:45.340 --> 06:48.100
+In the browser, the user will enter the URL.
+
+78
+06:48.490 --> 06:50.970
+But in this project we don't have a URL.
+
+79
+06:50.980 --> 06:52.750
+We have an IP address.
+
+80
+06:52.780 --> 06:55.780
+In the next project, we'll see how to set up a URL.
+
+81
+06:56.380 --> 07:00.160
+But now we will open a browser or the user will open the browser.
+
+82
+07:00.160 --> 07:01.570
+Enter the IP address.
+
+83
+07:01.570 --> 07:04.240
+This is the IP address of a load balancer.
+
+84
+07:04.860 --> 07:09.690
+And we are going to use Engine X service to create the load balancing experience.
+
+85
+07:10.060 --> 07:17.940
+Engine X is a web service just like Apache http D, and it's very commonly used to create the load balancing
+
+86
+07:17.940 --> 07:18.870
+experience.
+
+87
+07:19.230 --> 07:24.450
+So in one of our VM we will be having engine service and we'll configure it in a way as soon as the
+
+88
+07:24.450 --> 07:29.430
+request comes, it is going to route the request to the Tomcat server.
+
+89
+07:30.540 --> 07:32.940
+Our Apache Tomcat service.
+
+90
+07:33.780 --> 07:38.760
+Apache Tomcat is a Java Web application service.
+
+91
+07:39.820 --> 07:43.690
+Once again, Java Web Application Service.
+
+92
+07:44.790 --> 07:47.130
+Watch the video and let that sink in.
+
+93
+07:48.530 --> 07:54.920
+So if you have a web application written in Java, Tomcat is a very famous service to host it.
+
+94
+07:55.780 --> 08:01.360
+So the application, which is written by the developer, will be sitting here.
+
+95
+08:02.330 --> 08:08.630
+And if your application needs an external storage, you can use NFS servers.
+
+96
+08:09.260 --> 08:13.850
+If you have never heard of NFS, I recommend you do a little research.
+
+97
+08:13.850 --> 08:19.940
+We will be talking about this again in a ways, but understand what is a shared storage for now.
+
+98
+08:20.270 --> 08:26.000
+If you have cluster of servers and if you need a centralized storage, you can store it in NFS very
+
+99
+08:26.000 --> 08:28.940
+commonly used coming back to our application.
+
+100
+08:28.940 --> 08:30.530
+So our application will be living here.
+
+101
+08:30.530 --> 08:37.340
+The user will get a web page, the user will log in, the login details will be stored in my SQL database
+
+102
+08:37.340 --> 08:39.560
+service and will come to that.
+
+103
+08:40.500 --> 08:45.150
+Now here, there is also one more service called Rabbit MQ connected to Tomcat.
+
+104
+08:45.980 --> 08:46.970
+And your project.
+
+105
+08:46.970 --> 08:48.350
+This is really dummy.
+
+106
+08:48.590 --> 08:50.120
+It's not functional.
+
+107
+08:50.720 --> 08:56.660
+The reason I included this is to create little more complexity so you can practice more.
+
+108
+08:57.110 --> 09:01.390
+In future we may be adding a few more services like this, which may be functional.
+
+109
+09:01.400 --> 09:10.870
+Maybe Dummy Rabbit MQ is a message broker or also called a Queuing agent to connect to applications together,
+
+110
+09:10.880 --> 09:12.950
+you can stream the data from this.
+
+111
+09:13.220 --> 09:18.290
+You don't need to dig in much about this as a DevOps engineer, but you should know there is such service
+
+112
+09:18.620 --> 09:25.100
+message broker or message queue or queuing agent coming back to our application once again.
+
+113
+09:25.190 --> 09:34.130
+So our application which is running in tomcat, accessed by the users and the user will log in with
+
+114
+09:34.130 --> 09:35.990
+username and password.
+
+115
+09:36.410 --> 09:44.480
+When that happens, our application will run an SQL query to access the user information stored in 
+
+116
+09:44.480 --> 09:45.800
+MySQL database.
+
+117
+09:46.010 --> 09:52.100
+But before it goes to the my SQL database, the request will go to mem cache service.
+
+118
+09:52.490 --> 09:54.770
+Mem cache is a database caching.
+
+119
+09:54.770 --> 09:58.400
+It will be connected with the my SQL Server.
+
+120
+09:59.830 --> 10:06.640
+My SQL Server will store the user information when the first time the request comes to the database,
+
+121
+10:06.640 --> 10:13.570
+my SQL, it will be sent from the My SQL Server to the Tomcat and then it will be cache to the cache
+
+122
+10:13.570 --> 10:14.110
+server.
+
+123
+10:14.110 --> 10:16.990
+So next time a request comes, the same request comes.
+
+124
+10:16.990 --> 10:23.950
+It will be accessing the data which is cached in cash service just like you have browser cache.
+
+125
+10:23.980 --> 10:26.200
+We also have database caching.
+
+126
+10:26.200 --> 10:30.370
+Mem cache is a very famous database caching servers.
+
+127
+10:33.860 --> 10:36.320
+Okay, so here's the entire stack.
+
+128
+10:37.350 --> 10:38.460
+By your screen.
+
+129
+10:38.490 --> 10:39.070
+Take a look.
+
+130
+10:39.090 --> 10:41.390
+Once again, rewind the video.
+
+131
+10:41.400 --> 10:45.990
+If you need to understand all these services, also do your own research.
+
+132
+10:45.990 --> 10:51.330
+It is very important for a DevOps engineer to understand the flow of the stack.
+
+133
+10:51.480 --> 10:56.340
+So whenever any issue comes, we can understand where it is originating from.
+
+134
+10:56.580 --> 11:02.340
+Like if the user is not able to log in, the web page is coming, user is not able to log in, probably
+
+135
+11:02.340 --> 11:08.400
+it is the database service not connected to the application or if the web page is not showing properly,
+
+136
+11:08.400 --> 11:09.600
+it's the Tomcat.
+
+137
+11:10.640 --> 11:17.390
+Now we cannot dig into each and every service and understand it in detail because as a DevOps.
+
+138
+11:18.210 --> 11:22.530
+We are more involved into the implementation rather than the functionality.
+
+139
+11:22.530 --> 11:25.410
+And but yes, you should know the functionality.
+
+140
+11:25.560 --> 11:31.070
+So if you feel you need to know more about a service, you can do your own research.
+
+141
+11:31.080 --> 11:37.320
+But we will be using this service as many times in the course in a as in Docker, in Kubernetes, in
+
+142
+11:37.320 --> 11:39.030
+Jenkins Ansible.
+
+143
+11:39.060 --> 11:42.900
+So by the end of the course, you'll have a very good hand on all these services.
+
+144
+11:43.200 --> 11:44.100
+Let's look at it.
+
+145
+11:44.100 --> 11:47.310
+One more architecture of how to implement it.
+
+146
+11:48.870 --> 11:53.160
+Another design we have is for our automation stack.
+
+147
+11:53.190 --> 11:59.360
+We will be using a vagrant to automate automatically set up our virtual machine.
+
+148
+11:59.370 --> 12:06.450
+So Vagrant is going to communicate with Oracle VM Virtual Box, which is the hypervisor and create automatically
+
+149
+12:06.450 --> 12:08.040
+virtual machines on that.
+
+150
+12:08.610 --> 12:14.790
+Then we'll be using some batch scripts or batch commands to set up our services.
+
+151
+12:14.940 --> 12:15.740
+Engine x.
+
+152
+12:15.750 --> 12:16.830
+Apache Tomcat.
+
+153
+12:16.900 --> 12:19.680
+Mem Rabbit mq MySQL.
+
+154
+12:21.820 --> 12:28.870
+So we will automatically create virtual machines from Vagrant Virtual Machine for Engine X, Apache
+
+155
+12:28.870 --> 12:32.830
+Tomcat, Mem Cache, Rabbit, MQ and MySQL.
+
+156
+12:34.380 --> 12:38.010
+Okay, Finally, let's understand the flow of execution.
+
+157
+12:38.630 --> 12:43.360
+First, we're going to set up all our tools from the prerequisite videos.
+
+158
+12:43.370 --> 12:50.810
+If you have all this setup already, then you can clone the source code, which will be seen in the
+
+159
+12:50.810 --> 12:51.620
+project.
+
+160
+12:52.780 --> 12:56.200
+We're going to seed into a vagrant directory in the source code.
+
+161
+12:57.130 --> 12:58.450
+There will be a Vagrantfile.
+
+162
+12:58.450 --> 13:05.680
+We'll bring up our VMs automatically from that background file, we'll validate all our virtual machines
+
+163
+13:05.680 --> 13:11.440
+If they're up and running and able to interact with each other, then we're going to start setting up
+
+164
+13:11.440 --> 13:21.160
+all our services one by one, first my SQL, then Mem cache D, then Rabbit MQ, then Tomcat and finally
+
+165
+13:21.160 --> 13:22.210
+Nginx.
+
+166
+13:23.060 --> 13:27.650
+And of course, we're going to build our application or Java application and deploy it.
+
+167
+13:28.280 --> 13:32.090
+Then we're going to finally verify all this from our browser.

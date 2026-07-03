@@ -1,0 +1,233 @@
+WEBVTT
+
+0
+00:01.020 --> 00:04.410
+Continuous integration is an automated process in DevOps.
+
+1
+00:10.950 --> 00:15.750
+Which generates software and its features quickly and efficiently.
+
+2
+00:20.810 --> 00:22.280
+Hi, my name is Imran.
+
+3
+00:22.730 --> 00:29.570
+Watch this video at the end to have a solid understanding on this process, in theory and in practice,
+
+4
+00:29.750 --> 00:30.170
+both.
+
+5
+00:36.280 --> 00:39.910
+Developers write several lines of code while creating a software
+
+6
+00:44.050 --> 00:45.170
+working in a team.
+
+7
+00:45.190 --> 00:49.930
+It's an ideal practice to store all this code at a centralized place.
+
+8
+00:51.010 --> 00:56.620
+This centralized repository is called a version control system like GitHub.
+
+9
+00:58.640 --> 01:04.160
+Everyday developers will pull and push code such repositories several times in a day.
+
+10
+01:04.910 --> 01:08.750
+So code changes or code commit happens continuously.
+
+11
+01:10.700 --> 01:15.980
+This code will be moved to build server on build server.
+
+12
+01:16.010 --> 01:24.100
+This code will be build, tested and evaluated, which generates the software, or we call it artifact
+
+13
+01:24.110 --> 01:25.070
+at this stage.
+
+14
+01:25.880 --> 01:30.950
+This artifact or software will be stored in a software repository.
+
+15
+01:33.020 --> 01:40.880
+Artifact or software is really an archive of files generated from the build process based on the programming
+
+16
+01:40.880 --> 01:41.450
+language.
+
+17
+01:42.110 --> 01:45.050
+This artifact will be packaged in a specific format.
+
+18
+01:45.680 --> 01:58.220
+Artifact packaging format could be war or jar in Java. DLL/EXE/MSI in Windows or even ZIP/Tar ball
+
+19
+01:58.230 --> 01:59.150
+From repository
+
+20
+01:59.150 --> 02:02.030
+It will be shipped to servers for further testing.
+
+21
+02:04.610 --> 02:10.910
+After deploying this artifact on the servers, software testers can conduct further testing, and once
+
+22
+02:10.910 --> 02:13.820
+they approve, it can be shipped to production servers.
+
+23
+02:16.770 --> 02:19.680
+So that's how it works or does it?
+
+24
+02:20.490 --> 02:21.930
+Let's dig in and find out.
+
+25
+02:28.050 --> 02:33.210
+These developers are creating a software model and have worked for three weeks straight.
+
+26
+02:33.810 --> 02:35.460
+That's a lot of code, really.
+
+27
+02:37.740 --> 02:39.450
+Oh sure, you can take some break.
+
+28
+02:39.660 --> 02:40.920
+Your job's done for now.
+
+29
+02:45.920 --> 02:54.570
+And as per the process, all this code will be fetched by the Build server, and this code is build tested.
+
+30
+02:54.640 --> 03:01.400
+and oh boy, lots of errors, bugs, conflicts, build failures.
+
+31
+03:05.870 --> 03:11.420
+Now Developers have to fix all these defects, have to rewrite the code at several places.
+
+32
+03:11.940 --> 03:13.520
+Lot of rework, really.
+
+33
+03:16.010 --> 03:22.100
+This could have been much easier if the problem was detected very early in the process, but then code
+
+34
+03:22.100 --> 03:24.380
+was collected with defects for three weeks.
+
+35
+03:25.010 --> 03:27.200
+And now, yeah, you have to fix all that.
+
+36
+03:29.730 --> 03:34.830
+So the code is getting merged into the repository, but not really getting integrated.
+
+37
+03:41.010 --> 03:48.630
+The solution to this is a very simple and a continuous process after every single commit from the developers,
+
+38
+03:48.960 --> 03:57.000
+the code should be built and tested, so no waiting and collecting all these codes with bugs, but then
+
+39
+03:57.000 --> 04:03.510
+developer commits several times in a day, so it's not humanly possible to do a build & release several
+
+40
+04:03.510 --> 04:04.230
+times in a day.
+
+41
+04:04.680 --> 04:10.410
+I mean, the manual process so that's simple, just automated.
+
+42
+04:13.200 --> 04:20.010
+So when the developer commits any code and automated process, will fetch the code, build it tested
+
+43
+04:20.310 --> 04:23.160
+and send a notification if there is any failure.
+
+44
+04:33.740 --> 04:39.860
+As soon as the developers receives a failed notification, he or she will fix the code and commit it
+
+45
+04:39.860 --> 04:40.310
+again.
+
+46
+04:43.050 --> 04:49.590
+So again, build and test new changes, if it's good, then it can be versioned and stored in a software
+
+47
+04:49.590 --> 04:50.400
+repository.
+
+48
+04:50.880 --> 04:54.190
+And it's all automated.  Like this.
+
+49
+04:54.210 --> 04:57.750
+Any defects can be caught as soon as it's merged with the code.
+
+50
+05:02.700 --> 05:04.790
+Let's see it in a cyclic view.
+
+51
+05:20.560 --> 05:26.740
+This automated process is called continuous integration, or CI in short.
+
+52
+05:35.930 --> 05:42.320
+The goal of CI  is to detect defects at a very early stage, so it does not multiply.
+
+53
+06:08.040 --> 06:13.220
+IDE is used by developers for coding.
+
+54
+06:19.020 --> 06:26.010
+These IDE will be integrated with version control system to store and version the good.
+
+55
+06:33.590 --> 06:36.350
+Build tools based on the programming language.
+
+56
+06:47.620 --> 06:50.380
+Software repositories to store artifacts.
+
+57
+06:57.780 --> 07:01.620
+Continuous integration tools that integrate everything.

@@ -1,0 +1,205 @@
+WEBVTT
+
+00:00.680 --> 00:05.920
+Okay, so Grafana can send notification by using alerting and how that works.
+
+00:05.920 --> 00:06.600
+We'll see that.
+
+00:06.600 --> 00:13.400
+First in this lecture we are going to connect our slack account or slack channels to Grafana.
+
+00:14.000 --> 00:17.800
+So then later in the next lectures we can send notifications from Grafana.
+
+00:17.800 --> 00:21.200
+So all you need to do is login to your slack account.
+
+00:21.200 --> 00:25.280
+If you do not have a slack account created, you can use it.
+
+00:25.520 --> 00:29.400
+You can create it by using a sign up with your Google account.
+
+00:29.720 --> 00:32.360
+So just search for sign in or sign up slack.
+
+00:32.400 --> 00:36.280
+Come to this link and I'm using a Google account.
+
+00:36.280 --> 00:37.600
+So I'm going to click on Google.
+
+00:38.400 --> 00:42.760
+So once you sign in or sign up you will be asked to create a workspace.
+
+00:43.240 --> 00:46.240
+So I'm going to click here on create a New workspace.
+
+00:46.600 --> 00:47.960
+So first giving you a name.
+
+00:47.960 --> 00:49.120
+So I've just given my name.
+
+00:49.120 --> 00:55.840
+You can give any name go next workspace name I'm going to give Titan monitoring because the project
+
+00:55.880 --> 00:58.720
+name or the application name we are working on is Titan.
+
+00:58.720 --> 01:02.770
+So that's why I've given name as Titan hyphen monitoring go next.
+
+01:03.290 --> 01:06.970
+When you want to invite your team, you can mention their email addresses over here.
+
+01:07.330 --> 01:12.010
+I'm going to skip the step, skip step start with limited free version.
+
+01:13.530 --> 01:17.210
+So these are the channels we are going to receive notification on the channel.
+
+01:17.210 --> 01:18.610
+You can create a new channel.
+
+01:19.650 --> 01:22.090
+I'm going to click on these three dots over here.
+
+01:22.130 --> 01:26.930
+Create a new channel I'm just giving here as Titan Alerts.
+
+01:27.450 --> 01:29.730
+Now that is the name of the workspace.
+
+01:29.730 --> 01:31.050
+Anyways that will be confusing.
+
+01:31.050 --> 01:33.890
+So I'm going to say here alerts prod.
+
+01:33.890 --> 01:36.850
+So this is the alerts for the prod environment.
+
+01:36.930 --> 01:39.330
+Go next public.
+
+01:39.330 --> 01:43.250
+That means anyone in the Titan monitoring workspace will be receiving this.
+
+01:43.610 --> 01:46.730
+You want to add any people I'm just going to skip for now okay.
+
+01:46.770 --> 01:50.210
+So we created a workspace in slack and we created a channel.
+
+01:50.770 --> 01:54.890
+Now we need to add this into the Prometheus sorry into Grafana.
+
+01:55.330 --> 01:58.530
+And for that we need to add an app.
+
+01:58.530 --> 02:01.770
+We get a webhook URL that URL we can use in Grafana.
+
+02:01.890 --> 02:09.220
+So in the same browser open another tab and access this url api.com sorry api dot slash dot com slash
+
+02:09.260 --> 02:11.860
+apps and click on create an app.
+
+02:12.380 --> 02:15.660
+Click on from scratch app name.
+
+02:15.660 --> 02:19.300
+I'm giving as Grafana alerts and pick up a workspace.
+
+02:19.700 --> 02:23.540
+The workspace that we created Titan monitoring and say create app.
+
+02:25.020 --> 02:32.820
+In this page, find incoming webhooks, toggle it on, scroll down at the end and here you get a button
+
+02:32.820 --> 02:33.820
+add new Webhook.
+
+02:33.820 --> 02:34.700
+Click on that.
+
+02:35.140 --> 02:41.100
+So select your Workspace Titan Monitoring and select the channel selecting Get Alerts prod.
+
+02:41.460 --> 02:46.540
+So whatever channel you selected over here for this channel you will get the notifications.
+
+02:46.540 --> 02:50.260
+So click on Install Grafana Alerts okay that's a success.
+
+02:50.260 --> 02:53.460
+If you scroll down you should see a URL over here a webhook URL.
+
+02:53.460 --> 02:56.300
+You can copy this and go to Grafana.
+
+02:56.900 --> 02:59.340
+You will see a section here on the left side alerting.
+
+02:59.580 --> 03:02.020
+Over here you find here contact points.
+
+03:02.020 --> 03:08.790
+Click on that and we'll see here one contact point email that is just a dummy one click on create contact
+
+03:08.790 --> 03:09.350
+point.
+
+03:09.790 --> 03:10.430
+Give it a name.
+
+03:10.430 --> 03:15.350
+I'm giving Slack Titan alerts integration with slack.
+
+03:16.110 --> 03:16.510
+See here.
+
+03:16.510 --> 03:20.390
+Slack mentioned the webhook URL over here.
+
+03:20.430 --> 03:24.030
+Paste it and click on test.
+
+03:24.510 --> 03:28.390
+Now this should send a test notification in your channel.
+
+03:28.870 --> 03:30.230
+This channel we selected right.
+
+03:30.230 --> 03:34.390
+So here we should see a test A test notification.
+
+03:34.390 --> 03:37.350
+So let's send test notification.
+
+03:37.830 --> 03:41.990
+If everything is good you should get a test notification.
+
+03:42.550 --> 03:44.830
+And this should tell you that this was a success.
+
+03:46.110 --> 03:48.790
+Then you can say save contact point okay.
+
+03:48.830 --> 03:52.190
+So in previous lecture we set the integration with Prometheus.
+
+03:52.190 --> 03:54.470
+We connected the Prometheus data source.
+
+03:54.710 --> 03:59.270
+And this lecture we connected the slack channel to receive notification.
+
+03:59.790 --> 04:04.990
+Now from next lecture we are going to start creating panels alerts and notifications.
+
+04:05.390 --> 04:07.550
+So complete the setup and join me in the next lecture.

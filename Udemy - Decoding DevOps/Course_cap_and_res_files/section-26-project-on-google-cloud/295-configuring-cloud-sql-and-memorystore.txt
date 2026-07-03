@@ -1,0 +1,535 @@
+WEBVTT
+
+00:00.320 --> 00:05.400
+In previous lecture, we completed the setup of VPC Bastion Roast roast host.
+
+00:05.960 --> 00:08.920
+Now I'm not roasting you slip of tongue.
+
+00:09.200 --> 00:10.520
+So bastion host.
+
+00:10.520 --> 00:15.720
+And now we are going to create the backend service Cloudsql Memorystore.
+
+00:15.720 --> 00:19.360
+And do the VPC peering with the VPC that we have created.
+
+00:19.920 --> 00:21.040
+So let's get into it.
+
+00:21.320 --> 00:23.000
+Okay so let me go through the flow first.
+
+00:23.000 --> 00:27.680
+So we are going to create PSC which means private service access.
+
+00:27.680 --> 00:30.480
+It's basically range of IP address.
+
+00:31.160 --> 00:36.240
+As you see the command says gcloud compute addresses create the name of the range.
+
+00:36.640 --> 00:37.480
+It's global.
+
+00:37.880 --> 00:39.400
+The purpose is VPC peering.
+
+00:39.840 --> 00:41.200
+And it is for this VPC.
+
+00:41.720 --> 00:44.960
+Now backend service will take the IP address from this range.
+
+00:45.920 --> 00:51.120
+Then the VPC peering that is going to connect our VPC to Google services.
+
+00:51.120 --> 00:53.840
+In our case the Cloudsql and Memorystore.
+
+00:54.400 --> 00:56.720
+So gcloud services VPC peering.
+
+00:56.720 --> 01:06.440
+Connect this VPC or VPC with the Google networking services and choose the IP address from this range
+
+01:06.440 --> 01:07.960
+that we have created earlier.
+
+01:08.520 --> 01:12.320
+Then create the MySQL on cloud SQL service.
+
+01:12.320 --> 01:15.520
+So gcloud SQL instances create this.
+
+01:15.520 --> 01:17.440
+Like in AWS we create RDS.
+
+01:17.840 --> 01:19.800
+So we give the MySQL version.
+
+01:19.840 --> 01:25.000
+We give the instance type db f1 micro very small region.
+
+01:25.480 --> 01:31.560
+And we say no assign IP, do not assign any IP address because the IP address will be given from this
+
+01:31.560 --> 01:33.840
+range that we have created earlier.
+
+01:34.120 --> 01:36.200
+Now this is the range that Google will allocate.
+
+01:36.200 --> 01:41.600
+And from that range IP address for this MySQL instance will be selected.
+
+01:42.040 --> 01:43.360
+Network or VPC.
+
+01:43.400 --> 01:45.440
+Now yes we can give this dollar VPC.
+
+01:45.480 --> 01:51.920
+And this is another way projects slash your project ID global networks dollar VPC.
+
+01:51.960 --> 01:53.880
+That's the VPC name basically.
+
+01:54.440 --> 01:58.400
+So this creates the cloud SQL with MySQL eight engine.
+
+01:59.160 --> 02:06.480
+And then we are going to create the accounts database in that that is required for our project V profile
+
+02:06.480 --> 02:06.920
+project.
+
+02:06.920 --> 02:07.840
+We have seen this earlier.
+
+02:07.840 --> 02:14.200
+Many times we set the root user's password for the MySQL instance.
+
+02:14.800 --> 02:17.640
+And then we are going to launch the Memorystore memcache.
+
+02:18.480 --> 02:24.880
+And once we are done with this, we have to log in to the bastion host and initialize our database that
+
+02:24.880 --> 02:25.600
+we'll see now.
+
+02:26.440 --> 02:32.440
+So let's get started first with allocating the IP address gcloud compute address create.
+
+02:32.480 --> 02:34.880
+Create a range for this VPC.
+
+02:37.280 --> 02:38.560
+Okay that got created.
+
+02:39.080 --> 02:40.960
+Next command we do VPC peering.
+
+02:41.600 --> 02:48.080
+So gcloud services VPC peering connect or VPC with the Google backend services and select the IP from
+
+02:48.080 --> 02:48.840
+this range.
+
+02:51.120 --> 02:53.280
+Okay this is going to take some time okay.
+
+02:53.280 --> 02:55.440
+It says operation finished successfully.
+
+02:56.080 --> 02:58.410
+Let's go to VPC network.
+
+02:58.450 --> 03:04.170
+VPC networks go to VPC Network Peering and you should see the peering over here.
+
+03:05.250 --> 03:06.330
+Or you can check it from here.
+
+03:06.330 --> 03:08.210
+Also you can go to VPC networks.
+
+03:08.530 --> 03:12.690
+You can select your VPC you see here tab VPC network peering.
+
+03:12.690 --> 03:13.650
+You can see it.
+
+03:13.770 --> 03:17.130
+And you can also see here the private service access range.
+
+03:18.370 --> 03:20.610
+So that's the range that Google has given us.
+
+03:21.250 --> 03:23.050
+So that's the name that we have given.
+
+03:23.050 --> 03:26.770
+That's the range service producer VPC peering names.
+
+03:27.330 --> 03:30.730
+Now let's launch the cloud SQL instance and select this range.
+
+03:31.770 --> 03:35.290
+So gcloud SQL instances create dollar db.
+
+03:35.330 --> 03:41.650
+That will be the name of our instance db instance database version MySQL underscore eight underscore
+
+03:41.690 --> 03:44.810
+zero tier db f1 micro.
+
+03:44.850 --> 03:48.290
+Very small instance region US central one.
+
+03:48.730 --> 03:54.730
+Do not assign any IP address because we are selecting IP from the Google PSA range that we have created
+
+03:55.330 --> 04:02.330
+right from this range network, you give the VPC name or you can just do VPC also here.
+
+04:04.730 --> 04:06.490
+Now this one is going to take a lot of time.
+
+04:07.170 --> 04:10.130
+So take a break ten minutes and then come back.
+
+04:10.970 --> 04:11.290
+Okay.
+
+04:11.330 --> 04:12.450
+The instance is ready.
+
+04:12.890 --> 04:13.450
+In console.
+
+04:13.450 --> 04:21.330
+Just search for cloud SQL and you should see the instance ID, the type and the IP address which will
+
+04:21.330 --> 04:23.090
+be from the Google PSA range.
+
+04:24.050 --> 04:25.450
+Now we need to connect to it.
+
+04:25.490 --> 04:30.410
+Create a database called accounts and set the password for the root user.
+
+04:31.530 --> 04:38.090
+So our V profile application will be using this file Application.properties to connect to backend.
+
+04:38.330 --> 04:44.170
+Here we have the name which will later create map it to its IP address in cloud DNS.
+
+04:44.170 --> 04:46.610
+And we need to have the username as root.
+
+04:46.610 --> 04:49.250
+And this is the password that is already set there.
+
+04:49.610 --> 04:52.490
+If you wish to change the password you can do that.
+
+04:52.490 --> 04:53.850
+But then you have to make sure.
+
+04:53.850 --> 04:57.290
+Then you set change the password in application.properties file also.
+
+04:57.930 --> 04:59.330
+But for now, keep it same.
+
+04:59.330 --> 05:02.690
+Let's create the database named accounts.
+
+05:03.330 --> 05:08.170
+So gcloud SQL databases create the name of the database accounts.
+
+05:08.170 --> 05:11.730
+And for this instance db which is our v profile db instance.
+
+05:12.370 --> 05:12.930
+This one.
+
+05:14.330 --> 05:16.690
+This will create the database named accounts.
+
+05:18.970 --> 05:22.010
+Next we're going to set the password for the root user.
+
+05:22.650 --> 05:30.650
+So gcloud SQL users set password for the user root space backward slash and give these options hyphen
+
+05:30.650 --> 05:32.610
+hyphen host equal to percent.
+
+05:32.610 --> 05:34.770
+That means allow from remote.
+
+05:34.770 --> 05:37.970
+So this root user can access remotely this database.
+
+05:37.970 --> 05:43.450
+So because our V profile application will be in the VM instance, from there it is going to access the
+
+05:43.450 --> 05:43.890
+database.
+
+05:43.890 --> 05:46.330
+So that is a remote access instance.
+
+05:46.330 --> 05:51.490
+The DB name which is v profile db and the password that we already have set in the variable.
+
+05:51.970 --> 05:52.930
+Let's hit enter.
+
+05:54.330 --> 05:55.250
+Okay, this is done.
+
+05:55.250 --> 05:58.130
+Now let's create the memory store memcache.
+
+05:58.970 --> 06:02.210
+So the command to create memcache is gcloud.
+
+06:02.210 --> 06:04.370
+Memcache instances create.
+
+06:04.370 --> 06:10.290
+And the name of our memcache instance that will be v profile hyphen memcache space backward slash.
+
+06:10.290 --> 06:12.010
+And we have to use few options.
+
+06:12.850 --> 06:21.370
+Region will be the US central one a hyphen hyphen node hyphen count equal to one because we want to
+
+06:21.370 --> 06:29.090
+keep it minimum space backward slash now minimum we need to give two CPU and two GB Ram for memcache
+
+06:29.130 --> 06:30.130
+to get created.
+
+06:30.730 --> 06:36.890
+So hyphen hyphen node hyphen CPU equal to two and hyphen hyphen node hyphen memory equal to two GB.
+
+06:37.170 --> 06:39.130
+So two GB Ram and two CPU.
+
+06:39.570 --> 06:41.570
+And we need to give the VPC of course.
+
+06:41.570 --> 06:47.570
+So space backward slash hyphen hyphen authorized hyphen network equal to.
+
+06:47.610 --> 06:48.290
+In double quotes.
+
+06:48.290 --> 06:52.050
+You need to give the complete path of your VPC like this.
+
+06:52.410 --> 07:01.290
+So projects forward, slash the project ID slash global slash networks and in that your VPC name.
+
+07:01.850 --> 07:04.010
+And with that information let's hit enter.
+
+07:05.410 --> 07:05.570
+Okay.
+
+07:05.610 --> 07:10.450
+This one will also take a lot of time to get created by the time we have some work.
+
+07:10.810 --> 07:14.930
+So we need to create schema in src main resources.
+
+07:14.930 --> 07:17.210
+We have Dbbackup dot SQL file.
+
+07:17.530 --> 07:22.610
+We need to run this against this SQL queries against our cloud SQL instance.
+
+07:23.410 --> 07:26.410
+So for that we are going to SSH to the bastion host.
+
+07:26.410 --> 07:31.010
+From bastion host we are going to access the cloud SQL which is in the private network.
+
+07:31.570 --> 07:39.130
+So get your bastion host IP go to VM instances bastion host public IP okay not private IP.
+
+07:39.570 --> 07:42.370
+Go to the folder where you have already created the key.
+
+07:42.730 --> 07:43.810
+Such hyphen I.
+
+07:44.330 --> 07:53.690
+The key name user is DevOps at the rate and the public IP of our bastion host switch to root user.
+
+07:53.690 --> 08:02.890
+We need to install MySQL client so need to run the command apt install mysql client hyphen y to install
+
+08:02.890 --> 08:04.050
+mysql client.
+
+08:04.850 --> 08:06.650
+Then we get the MySQL command.
+
+08:06.650 --> 08:09.770
+By using that we're going to connect to our cloud SQL instance.
+
+08:10.330 --> 08:11.970
+Okay let's clear the screen.
+
+08:12.170 --> 08:17.450
+So MySQL hyphen H the IP address of your cloud SQL instance.
+
+08:17.770 --> 08:20.090
+So search for cloud SQL here.
+
+08:23.450 --> 08:25.090
+And that's the private IP.
+
+08:25.130 --> 08:27.010
+Now we did VPC peering.
+
+08:27.010 --> 08:32.370
+If we are able to connect to our MySQL instance VPC peering will also be validated.
+
+08:32.770 --> 08:35.130
+So the IP address space hyphen u.
+
+08:35.170 --> 08:36.650
+The username is root.
+
+08:36.890 --> 08:39.130
+And we did set a password hyphen p.
+
+08:39.530 --> 08:42.290
+And we set the password for the root user.
+
+08:42.690 --> 08:45.290
+And the password value is in the variable.
+
+08:45.290 --> 08:46.450
+You can find it there.
+
+08:47.050 --> 08:48.010
+So copy that.
+
+08:48.370 --> 08:51.340
+Now exposing like this DB password is very wrong.
+
+08:51.780 --> 08:57.580
+So instead of giving the password like this in the command line, just say hyphen p space and give the
+
+08:57.580 --> 09:00.820
+database name accounts that we have created, hit enter.
+
+09:00.820 --> 09:02.100
+It will ask you the password.
+
+09:02.540 --> 09:05.220
+Then you can paste your password here shift insert.
+
+09:06.180 --> 09:09.420
+So we are able to log in and connect to the accounts database.
+
+09:09.740 --> 09:13.420
+Exit from here in backend.sh script.
+
+09:13.420 --> 09:22.380
+At the end you have this wget command and the link the GitHub link to download the db backup SQL file.
+
+09:22.700 --> 09:23.580
+Now this is nothing new.
+
+09:23.620 --> 09:24.900
+This is what we did previously.
+
+09:24.900 --> 09:26.260
+Also we initialize the database.
+
+09:26.260 --> 09:29.780
+So it's the same link except here the branch is GCP.
+
+09:31.220 --> 09:32.140
+So download it.
+
+09:32.500 --> 09:39.020
+Use the up arrow to go back to the command input redirection path of Dbbackup SQL file.
+
+09:39.620 --> 09:40.460
+Hit enter.
+
+09:41.260 --> 09:42.780
+Enter the db password.
+
+09:45.300 --> 09:47.060
+Okay now let's log in once again.
+
+09:52.460 --> 09:54.580
+And you can say show tables.
+
+09:54.580 --> 09:55.380
+Semicolon.
+
+09:56.060 --> 09:59.580
+And you should be able to see the table in accounts database.
+
+09:59.580 --> 10:00.940
+So DB is initialized.
+
+10:00.940 --> 10:01.900
+We're done here.
+
+10:03.060 --> 10:04.820
+Let's take a look at the memory store.
+
+10:04.860 --> 10:08.820
+Now this might get created or might not because it takes time as I told you.
+
+10:09.140 --> 10:12.100
+But for me it got created in the search.
+
+10:12.100 --> 10:21.100
+Over here you can search for memcache and find memory store for memcached and you should see your memcache
+
+10:21.100 --> 10:21.780
+instance.
+
+10:22.180 --> 10:23.340
+That's the IP address.
+
+10:23.340 --> 10:30.660
+You see the port number one node, two GB Ram, two CPU, and in the zone the region US central one.
+
+10:31.220 --> 10:33.460
+So our backend is already and all set.
+
+10:33.820 --> 10:38.820
+We configured the VPC peering from our VPC to the Google backend services.
+
+10:39.060 --> 10:40.380
+We created cloud SQL.
+
+10:40.380 --> 10:41.580
+Initialize the database.
+
+10:41.580 --> 10:42.820
+We created Memorystore.
+
+10:43.340 --> 10:46.580
+From the next lecture onwards we are going to work on the front end part.
+
+10:47.220 --> 10:49.180
+So wrap this up and join me in the next one.

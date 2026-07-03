@@ -1,0 +1,667 @@
+WEBVTT
+
+00:00.300 --> 00:02.130
+-: Hello and welcome.
+
+00:02.130 --> 00:03.570
+After this we'll have some series
+
+00:03.570 --> 00:06.780
+of exercises where we'll be provisioning server,
+
+00:06.780 --> 00:09.600
+and while we are doing that, we'll be also learning
+
+00:09.600 --> 00:12.240
+amazing features of Ansible playbooks.
+
+00:12.240 --> 00:15.300
+We are going to take example of NTP service.
+
+00:15.300 --> 00:17.730
+We'll set up this service on multiple operating systems
+
+00:17.730 --> 00:19.263
+sent to us and Ubuntu.
+
+00:20.250 --> 00:23.220
+We'll be setting some users and groups,
+
+00:23.220 --> 00:25.140
+and we'll be changing some configuration files
+
+00:25.140 --> 00:25.983
+on the server.
+
+00:27.480 --> 00:29.850
+While we are doing that, we'll be learning decision making
+
+00:29.850 --> 00:32.403
+in our playbook, we'll see loops,
+
+00:33.750 --> 00:35.591
+templates for configurations
+
+00:35.591 --> 00:37.863
+or dynamic configurations.
+
+00:38.970 --> 00:41.100
+We'll see handlers
+
+00:41.100 --> 00:43.830
+and then we'll see Ansible rules.
+
+00:43.830 --> 00:47.100
+Now while we are doing this we will be learning new features
+
+00:47.100 --> 00:49.080
+and also implementing all the features
+
+00:49.080 --> 00:51.210
+that we have learned so far.
+
+00:51.210 --> 00:53.010
+Now here we are not really focusing
+
+00:53.010 --> 00:54.840
+on the NTP service specifically
+
+00:54.840 --> 00:57.720
+but any service provisioning that you have to do
+
+00:57.720 --> 00:59.910
+any server provisioning you have to do,
+
+00:59.910 --> 01:02.220
+how would you do it in general?
+
+01:02.220 --> 01:05.130
+And then once you have everything in your playbooks
+
+01:05.130 --> 01:09.570
+then we'll see what are our roles and how to best use them.
+
+01:09.570 --> 01:11.343
+So, let's get started.
+
+01:12.300 --> 01:14.130
+Okay, I'm in my exercise folder
+
+01:14.130 --> 01:19.130
+and I'm going to copy exercise nine to exercise 10.
+
+01:19.350 --> 01:21.573
+And let's get into exercise 10.
+
+01:24.390 --> 01:26.580
+We will remove these two playbooks from here,
+
+01:26.580 --> 01:27.843
+we don't need it here.
+
+01:31.230 --> 01:32.220
+Let's make a test,
+
+01:32.220 --> 01:34.983
+Ansible, hyphen m, ping all.
+
+01:39.179 --> 01:42.093
+Okay, so all the instances are connected.
+
+01:43.290 --> 01:46.713
+Let's name the playbook as provisioning,
+
+01:47.610 --> 01:51.858
+dot yaml.
+
+01:51.858 --> 01:53.193
+Okay, apostrophe, hyphen.
+
+01:54.930 --> 01:56.283
+Hyphen, name.
+
+01:58.350 --> 02:02.763
+We'll call it Provisioning servers.
+
+02:04.470 --> 02:08.763
+Host, we are going to execute on all the hosts,
+
+02:09.810 --> 02:11.590
+we will need become
+
+02:12.480 --> 02:14.490
+as yes,
+
+02:14.490 --> 02:16.293
+and then the tasks.
+
+02:17.760 --> 02:20.340
+So tasks are pretty simple to start with,
+
+02:20.340 --> 02:24.070
+we have to install NTP agent
+
+02:25.170 --> 02:28.023
+on centos first,
+
+02:29.040 --> 02:30.843
+so the module we know yum.
+
+02:34.290 --> 02:37.920
+Name, the package name is chrony,
+
+02:37.920 --> 02:41.970
+and the state will be present.
+
+02:41.970 --> 02:45.363
+So that's the package name in latest center, center is nine.
+
+02:46.380 --> 02:49.620
+Now if we run this task, we run this playbook,
+
+02:49.620 --> 02:54.150
+then it is going to use the Yum module on all the instances
+
+02:54.150 --> 02:56.070
+all including the Ubuntu.
+
+02:56.070 --> 03:00.150
+In Ubuntu the module name is different, it's apt.
+
+03:00.150 --> 03:03.610
+So we have to create one more task for apt
+
+03:04.590 --> 03:07.080
+and there is a problem with that also, we'll solve that,
+
+03:07.080 --> 03:09.210
+that's what we are doing in this lecture.
+
+03:09.210 --> 03:11.610
+To say install NTP
+
+03:11.610 --> 03:13.953
+agent on Ubuntu,
+
+03:15.570 --> 03:16.833
+module apt.
+
+03:17.700 --> 03:22.083
+Name of the package is NTP here, status present.
+
+03:24.690 --> 03:25.680
+So the problem is this.
+
+03:25.680 --> 03:27.840
+This will get executed on all the hosts
+
+03:27.840 --> 03:30.440
+and this will be also getting executed on all the hosts.
+
+03:30.440 --> 03:31.770
+So this is going to fail.
+
+03:31.770 --> 03:34.080
+The first Yum task will fail
+
+03:34.080 --> 03:36.060
+for the zero three, which is Ubuntu,
+
+03:36.060 --> 03:38.520
+and this is going to fail for
+
+03:38.520 --> 03:41.190
+all the other instances except for Ubuntu.
+
+03:41.190 --> 03:43.470
+So we have to put a condition
+
+03:43.470 --> 03:45.660
+that if the operating system is sent to us,
+
+03:45.660 --> 03:48.270
+then execute the Yum task.
+
+03:48.270 --> 03:52.983
+If the OS is Ubuntu, then execute this task. So,
+
+03:54.120 --> 03:57.000
+in Bash and Python scripting we have seen we use
+
+03:57.000 --> 04:01.530
+if condition, here instead of if, you have of when.
+
+04:01.530 --> 04:05.640
+You have to give it in the same column as the module name,
+
+04:05.640 --> 04:08.430
+and you have to give a condition like we have seen
+
+04:08.430 --> 04:11.553
+the variable Ansible underscore distribution.
+
+04:12.492 --> 04:14.883
+We have to say if it's equal to,
+
+04:15.750 --> 04:19.593
+CentOS. Cent, C capital and OS capital.
+
+04:20.850 --> 04:21.683
+Same way,
+
+04:23.010 --> 04:25.653
+we have to give condition for Ubuntu,
+
+04:26.751 --> 04:29.010
+if the Ansible distribution is Ubuntu, U capital.
+
+04:29.010 --> 04:31.503
+Now this is the fact variable.
+
+04:33.540 --> 04:35.553
+We have seen this in previous lectures.
+
+04:36.960 --> 04:40.320
+And we'll look at the documentation also
+
+04:40.320 --> 04:42.030
+after we write two more task,
+
+04:42.030 --> 04:44.163
+which is to start the service.
+
+04:49.722 --> 04:51.780
+Okay, so start service on center.
+
+04:51.780 --> 04:55.233
+So center is service name is chronyd.
+
+04:57.960 --> 05:00.663
+State started and enabled,
+
+05:01.680 --> 05:03.003
+I'll say yes.
+
+05:04.140 --> 05:06.243
+Now here also the conditions will apply,
+
+05:08.130 --> 05:11.100
+right? And similar, we have to do it for the Ubuntu,
+
+05:11.100 --> 05:13.473
+so I'm going to copy this, all these lines.
+
+05:14.670 --> 05:16.650
+So start service on Ubuntu
+
+05:16.650 --> 05:19.300
+and here the service name is just NTP
+
+05:20.310 --> 05:22.530
+and we have to change the condition here,
+
+05:22.530 --> 05:25.203
+Ansible distribution, Ubuntu,
+
+05:26.160 --> 05:27.093
+U capital.
+
+05:29.610 --> 05:34.263
+So take a look at the entire playbook before you execute it.
+
+05:36.930 --> 05:39.960
+And we will save and quit.
+
+05:39.960 --> 05:43.920
+And first we'll do a dry run. Ansible hyphen playbook.
+
+05:43.920 --> 05:46.503
+The playbook name, hyphen capital C.
+
+05:50.250 --> 05:54.630
+Okay, I have an error obviously you'll also get this error.
+
+05:54.630 --> 05:56.693
+Thing is I have given single equal to
+
+05:56.693 --> 06:00.020
+whereas we need to give here a double equal to,
+
+06:00.020 --> 06:02.220
+to check the condition.
+
+06:02.220 --> 06:05.343
+So I'm going to change single equal to to a double equal to.
+
+06:10.290 --> 06:12.450
+I changed at the four places.
+
+06:12.450 --> 06:16.447
+Those four places. Let's execute the playbook or dry run.
+
+06:20.940 --> 06:24.430
+Okay, see you see it's saying skipping for web zero three
+
+06:25.380 --> 06:27.430
+because the conditions don't match there.
+
+06:29.280 --> 06:32.580
+Okay, and we caught one more problem while we are executing
+
+06:32.580 --> 06:36.180
+for web zero three, it is saying no package matching NTP.
+
+06:36.180 --> 06:38.220
+Actually the package is available,
+
+06:38.220 --> 06:40.290
+but thing is the Ubuntu machine,
+
+06:40.290 --> 06:43.792
+we need to run apt update before we install the package.
+
+06:43.792 --> 06:46.660
+So what we have to do is, we have to put here
+
+06:48.390 --> 06:52.230
+update underscore cache, colon yes.
+
+06:52.230 --> 06:53.970
+Now this is an option in the apt module,
+
+06:53.970 --> 06:56.580
+if you put this to yes, then it is going to
+
+06:56.580 --> 07:00.330
+run first apt update and then apt install.
+
+07:00.330 --> 07:03.393
+Let's save and code this and let's test it.
+
+07:09.300 --> 07:11.460
+Okay, still it is saying no package name because
+
+07:11.460 --> 07:14.250
+obviously it did not execute the apt update.
+
+07:14.250 --> 07:18.060
+So we are going to now remove the hyen C and execute it.
+
+07:18.060 --> 07:20.370
+So it is going to run now actually apt update,
+
+07:20.370 --> 07:22.143
+and then it'll find the package.
+
+07:24.060 --> 07:26.340
+Okay, and let's look at the output.
+
+07:26.340 --> 07:29.310
+So, only one changed, which is installing NTP
+
+07:29.310 --> 07:31.380
+which was not present in Ubuntu.
+
+07:31.380 --> 07:34.230
+In CentOS, chrony was already installed
+
+07:34.230 --> 07:38.220
+and chrony service was already started and enabled.
+
+07:38.220 --> 07:42.030
+In Ubuntu, the NTP service,
+
+07:42.030 --> 07:43.800
+any service, when you install in Ubuntu,
+
+07:43.800 --> 07:45.810
+it is going to automatically start and enable,
+
+07:45.810 --> 07:47.343
+so that said, okay.
+
+07:48.840 --> 07:50.550
+Now we have written all this from the scratch.
+
+07:50.550 --> 07:54.150
+We can get this entire thing from chat gpt,
+
+07:54.150 --> 07:56.820
+and also by looking at the documentation we can understand
+
+07:56.820 --> 07:58.140
+about the conditions.
+
+07:58.140 --> 08:00.120
+So first let's go to the documentation,
+
+08:00.120 --> 08:04.623
+let's look at the conditions, Ansible when condition
+
+08:10.200 --> 08:12.500
+Conditional, let's look at this documentation.
+
+08:13.350 --> 08:15.180
+Okay, let's come down.
+
+08:15.180 --> 08:16.830
+So the basic condition, right?
+
+08:16.830 --> 08:17.910
+That's what we have given.
+
+08:17.910 --> 08:21.300
+When some variable value is equal to so and so,
+
+08:21.300 --> 08:24.240
+then only execute the task. Otherwise skip it.
+
+08:24.240 --> 08:27.090
+So you will get in the status skipped.
+
+08:27.090 --> 08:29.190
+Right? This is based on the fact variable.
+
+08:29.190 --> 08:30.330
+This is a fact variable
+
+08:30.330 --> 08:32.880
+Ansible underscore selinux dot status, equal two enabled.
+
+08:32.880 --> 08:35.313
+This is a fact variable.
+
+08:36.390 --> 08:37.800
+Now, that was a simple condition,
+
+08:37.800 --> 08:39.930
+you can give much more complicated condition.
+
+08:39.930 --> 08:41.523
+Let's take a look at this one.
+
+08:43.920 --> 08:44.753
+And first thing here
+
+08:44.753 --> 08:48.330
+Ansible underscore facts in square backer distribution.
+
+08:48.330 --> 08:49.163
+So this will also,
+
+08:49.163 --> 08:51.000
+you can give because Ansible underscore facts
+
+08:51.000 --> 08:56.000
+is a dictionary, in that you have a key called distribution.
+
+08:56.070 --> 08:58.380
+Its value is equal to CentOS.
+
+08:58.380 --> 09:00.780
+And is the ending operation what we learn
+
+09:00.780 --> 09:03.900
+in B scripting also, with two amperes,
+
+09:03.900 --> 09:06.330
+like if this condition and if this condition,
+
+09:06.330 --> 09:08.010
+if both the conditions are true
+
+09:08.010 --> 09:10.920
+then this entire thing will become true.
+
+09:10.920 --> 09:14.550
+If any of the condition is false, this is going to be false.
+
+09:14.550 --> 09:16.590
+Or if both are false, then only it'll be,
+
+09:16.590 --> 09:19.770
+then also it'll be false, so both needs to be true,
+
+09:19.770 --> 09:21.210
+then only it'll be true.
+
+09:21.210 --> 09:23.280
+So it is saying CentOS is the distribution
+
+09:23.280 --> 09:25.320
+and the version is six.
+
+09:25.320 --> 09:29.700
+If that is true, or there is an OR operator now,
+
+09:29.700 --> 09:31.770
+and a similar condition here.
+
+09:31.770 --> 09:35.550
+So either this about condition or this condition,
+
+09:35.550 --> 09:39.270
+any of the condition is true, then it'll execute the task.
+
+09:39.270 --> 09:41.280
+And here the task is to simply shut down
+
+09:41.280 --> 09:42.903
+the operating system.
+
+09:44.370 --> 09:46.624
+And there's also one more cleaner way of giving
+
+09:46.624 --> 09:50.130
+the condition and this is an ending operation.
+
+09:50.130 --> 09:53.670
+So if this and this both are true,
+
+09:53.670 --> 09:57.330
+so it's in a list format you see that? YAML list format.
+
+09:57.330 --> 10:01.876
+So if both are true, then only this task will get executed.
+
+10:01.876 --> 10:05.040
+Right? Also we have a condition
+
+10:05.040 --> 10:07.578
+to give greater than or equal to.
+
+10:07.578 --> 10:10.950
+Right? So there are many more examples over here.
+
+10:10.950 --> 10:13.290
+Mostly the conditions will be simpler, but you,
+
+10:13.290 --> 10:15.210
+if you need much more complicated,
+
+10:15.210 --> 10:17.918
+you can get it from the documentation, also.
+
+10:17.918 --> 10:21.060
+Right? Now let's look at the chat gpt, also.
+
+10:21.060 --> 10:22.920
+We could have generated the entire thing through
+
+10:22.920 --> 10:26.040
+chat gpt as well. Let's take a look on that also.
+
+10:26.040 --> 10:31.040
+Okay, so I'm going to say Ansible playbook to install
+
+10:34.260 --> 10:37.200
+chrony on centos
+
+10:37.200 --> 10:38.620
+and NTP
+
+10:40.770 --> 10:41.943
+on Ubuntu.
+
+10:42.930 --> 10:46.690
+Also start and enable
+
+10:47.610 --> 10:50.883
+chrony and NTP service.
+
+10:51.810 --> 10:52.643
+Let's check.
+
+10:55.380 --> 10:58.373
+Okay, so here you see the same playbook that we
+
+10:58.373 --> 11:00.513
+have written is giving to us.
+
+11:02.070 --> 11:04.674
+So if you write the proper text, right?
+
+11:04.674 --> 11:06.960
+That means you know what you have to do,
+
+11:06.960 --> 11:11.960
+then you get very close code, very close playbook here
+
+11:12.570 --> 11:15.240
+or else you can keep chatting and get the
+
+11:15.240 --> 11:16.620
+exact playbook that you want.
+
+11:16.620 --> 11:19.140
+You can copy the code and then you can make changes
+
+11:19.140 --> 11:21.450
+like you need to make changes here.
+
+11:21.450 --> 11:24.916
+I don't think here we need to make any change, is all good.
+
+11:24.916 --> 11:29.310
+Okay? So now instead of spending time too much on chat gpt,
+
+11:29.310 --> 11:31.410
+I recommend you better check the documentation,
+
+11:31.410 --> 11:33.420
+read the documentation, look at the condition
+
+11:33.420 --> 11:35.610
+different ways of giving condition.
+
+11:35.610 --> 11:38.490
+Those are very common use cases that we will need
+
+11:38.490 --> 11:39.903
+as a DevOps engineer.
+
+11:40.770 --> 11:43.230
+So take a look at that and
+
+11:43.230 --> 11:46.593
+join me in the next lecture where we are going to see loops.

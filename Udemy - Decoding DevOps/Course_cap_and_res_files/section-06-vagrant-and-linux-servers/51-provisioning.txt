@@ -1,0 +1,418 @@
+WEBVTT
+
+00:00.270 --> 00:01.200
+Instructor: Hello and welcome.
+
+00:01.200 --> 00:04.620
+In this lecture we are going to talk about provisioning.
+
+00:04.620 --> 00:09.030
+In short, this means executing commands when the OS comes up
+
+00:09.030 --> 00:11.250
+or after the boot.
+
+00:11.250 --> 00:14.640
+Mostly it's the first time boot when the first time the VM
+
+00:14.640 --> 00:16.830
+or the operating system comes up
+
+00:16.830 --> 00:19.710
+for the first time executing commands on it.
+
+00:19.710 --> 00:22.260
+This is also called us bootstrapping in general.
+
+00:22.260 --> 00:25.290
+In vagrant it is called US vagrant provisioning.
+
+00:25.290 --> 00:27.900
+So make sure all the VMs are powered off or deleted.
+
+00:27.900 --> 00:32.010
+Go to CentOS folder, Vagrant file and scroll at the end.
+
+00:32.010 --> 00:34.170
+And before I go there, okay,
+
+00:34.170 --> 00:36.930
+just make sure you have some private IP,
+
+00:36.930 --> 00:39.150
+private network IP given over here.
+
+00:39.150 --> 00:42.180
+Also uncommand the public network setting
+
+00:42.180 --> 00:43.930
+and scroll till the end
+
+00:44.820 --> 00:46.233
+where you see this setting.
+
+00:47.340 --> 00:49.740
+Just uncommand these all these lines,
+
+00:49.740 --> 00:54.740
+line number 75, 76, 77, 78.
+
+00:54.750 --> 00:57.060
+So config dot VM dot provision.
+
+00:57.060 --> 00:58.620
+And in double codes you'll see shell.
+
+00:58.620 --> 01:01.410
+That means provision on the shell.
+
+01:01.410 --> 01:03.030
+So here the provisionary is shell,
+
+01:03.030 --> 01:06.600
+there are some other provisioner also in vagrant,
+
+01:06.600 --> 01:07.710
+comma inline.
+
+01:07.710 --> 01:10.230
+And you see two input redirection over here.
+
+01:10.230 --> 01:12.390
+This is append input redirection,
+
+01:12.390 --> 01:14.970
+the opposite of output redirection.
+
+01:14.970 --> 01:18.000
+And in between this minus shell and shell,
+
+01:18.000 --> 01:19.800
+you will see commands.
+
+01:19.800 --> 01:21.270
+So these commands will come
+
+01:21.270 --> 01:24.390
+as an input redirection on the shell.
+
+01:24.390 --> 01:27.480
+So in short, if you want VM to execute commands,
+
+01:27.480 --> 01:29.850
+you can just mention all the commands over here
+
+01:29.850 --> 01:32.370
+in between this minus shell and shell.
+
+01:32.370 --> 01:34.380
+We can also ask co-pilot about this.
+
+01:34.380 --> 01:35.883
+So just select this setting,
+
+01:37.140 --> 01:38.970
+command I or control I
+
+01:38.970 --> 01:41.850
+and say slash explain.
+
+01:41.850 --> 01:44.913
+Slash explain command can explain the settings.
+
+01:45.870 --> 01:48.910
+Okay, I'm just going to click here, view in chat.
+
+01:48.910 --> 01:52.530
+So it just appears over there. You can read it easily.
+
+01:52.530 --> 01:54.690
+So I'm not going to read it line by line.
+
+01:54.690 --> 01:57.330
+You can just read it and try to understand like that.
+
+01:57.330 --> 02:00.150
+Any setting that you don't understand in any kind of code,
+
+02:00.150 --> 02:01.740
+you know, Python, Bash,
+
+02:01.740 --> 02:03.270
+anything that you write, Yammer later,
+
+02:03.270 --> 02:05.370
+you're going to write a lot of different kinds of code,
+
+02:05.370 --> 02:07.170
+Terraform, Ansible.
+
+02:07.170 --> 02:08.520
+So you can just select it like this
+
+02:08.520 --> 02:12.090
+and say, slash explain, and it'll explain it to you.
+
+02:12.090 --> 02:13.680
+So in short here it says, you know,
+
+02:13.680 --> 02:16.080
+the selected code defines a shell provisioner
+
+02:16.080 --> 02:18.750
+for the VM specifically, it tells vagrant
+
+02:18.750 --> 02:22.770
+to run a shell script When the VM is created or provisioned.
+
+02:22.770 --> 02:24.870
+It's only the first time when the VM is created.
+
+02:24.870 --> 02:28.350
+If you want to again repeatedly ask to execute provisioner,
+
+02:28.350 --> 02:30.660
+you have to mention vagrant provision.
+
+02:30.660 --> 02:31.493
+We'll see about that.
+
+02:31.493 --> 02:34.200
+First, let's just make sure we give the right command.
+
+02:34.200 --> 02:35.970
+These are open to commands.
+
+02:35.970 --> 02:38.070
+We are in the center is vagrant file.
+
+02:38.070 --> 02:39.670
+So I'm going to give equivalent.
+
+02:40.530 --> 02:42.000
+Okay, I've mentioned some commands,
+
+02:42.000 --> 02:45.060
+installing some packages, creating a folder,
+
+02:45.060 --> 02:46.770
+and running free hyphen M command
+
+02:46.770 --> 02:49.830
+and putting its output into this file.
+
+02:49.830 --> 02:53.370
+Running df hyphen h, that shows the disinformation
+
+02:53.370 --> 02:54.780
+of the Linux operating system
+
+02:54.780 --> 02:56.550
+and putting dis information in this file.
+
+02:56.550 --> 02:57.653
+Basically just some shell commands
+
+02:57.653 --> 03:00.060
+you can just mention over there.
+
+03:00.060 --> 03:02.190
+And let's save this,
+
+03:02.190 --> 03:06.750
+and let's open the terminal, new terminal.
+
+03:06.750 --> 03:09.060
+Make sure you are in that folder.
+
+03:09.060 --> 03:11.220
+In this case, the centos folder.
+
+03:11.220 --> 03:13.293
+Check the vagrant status.
+
+03:14.490 --> 03:15.930
+Okay, it says not created.
+
+03:15.930 --> 03:17.460
+So this should be in this state,
+
+03:17.460 --> 03:19.800
+because we need to create it for the first time.
+
+03:19.800 --> 03:22.680
+So vagrant up is going to create this VM now
+
+03:22.680 --> 03:25.140
+and execute the shell commands.
+
+03:25.140 --> 03:26.370
+Okay, so the VM is up,
+
+03:26.370 --> 03:30.330
+and you see it executed the commands that we have mentioned
+
+03:30.330 --> 03:32.370
+in provisioning, right?
+
+03:32.370 --> 03:33.420
+So it installed the package
+
+03:33.420 --> 03:35.070
+and these commands also executed,
+
+03:35.070 --> 03:38.160
+but we have sent the output to a file.
+
+03:38.160 --> 03:38.993
+So if you log in,
+
+03:38.993 --> 03:42.660
+you can see the output in these files as well.
+
+03:42.660 --> 03:44.280
+Now provisioning is once
+
+03:44.280 --> 03:46.530
+for the first time when the VM is coming up.
+
+03:46.530 --> 03:48.600
+That's by default nature.
+
+03:48.600 --> 03:52.410
+If I add here more commands, like I'm going to start
+
+03:52.410 --> 03:54.975
+httpd service, you see it already trying to complete,
+
+03:54.975 --> 03:56.760
+and I'm going to hit tab to complete it.
+
+03:56.760 --> 03:58.830
+That's copilot in action.
+
+03:58.830 --> 04:03.830
+And then next line wait, system ctl enable httpd again tab.
+
+04:04.980 --> 04:05.820
+And that is all.
+
+04:05.820 --> 04:07.920
+I'm going to save this one,
+
+04:07.920 --> 04:10.233
+and then I'm going to reboot this.
+
+04:12.450 --> 04:14.163
+Vagrant reload.
+
+04:15.150 --> 04:18.030
+So what do you think? Will it execute all this commands?
+
+04:18.030 --> 04:19.830
+Remember the VM is already up.
+
+04:19.830 --> 04:22.920
+Provisioning is for the first time. Let's test it.
+
+04:22.920 --> 04:25.410
+I'm doing a reload to an existing VM.
+
+04:25.410 --> 04:26.820
+Now let's see whether it executes
+
+04:26.820 --> 04:29.130
+the provisioning commands or not.
+
+04:29.130 --> 04:33.450
+So the VM is up and you see it did not execute the commands
+
+04:33.450 --> 04:35.550
+because provisioning is only for the first time.
+
+04:35.550 --> 04:38.610
+But if you want to execute provisioning again,
+
+04:38.610 --> 04:40.740
+you can run vagrant provision
+
+04:40.740 --> 04:44.160
+or use hyphen f and provision option
+
+04:44.160 --> 04:45.960
+with vagrant up or vagrant reload.
+
+04:45.960 --> 04:48.930
+You can say vagrant reload, hyphen f and provision.
+
+04:48.930 --> 04:51.330
+Or if you just want to execute the scripts,
+
+04:51.330 --> 04:53.580
+you can just run vagrant provision.
+
+04:53.580 --> 04:55.570
+So I'm going to run vagrant provision
+
+04:57.390 --> 05:01.020
+and you see it is executing the scripts that are mentioned
+
+05:01.020 --> 05:03.000
+or that is mentioned.
+
+05:03.000 --> 05:04.740
+I'm going to add a few more commands over here.
+
+05:04.740 --> 05:07.590
+System ctl stop firewall d
+
+05:07.590 --> 05:11.100
+and system ctl disable firewall d.
+
+05:11.100 --> 05:13.290
+And then I'm going to save this file
+
+05:13.290 --> 05:16.113
+and execute vagrant provision once again.
+
+05:17.160 --> 05:21.630
+Now let's get the IP address of this VM.
+
+05:21.630 --> 05:23.580
+So my IP is over here,
+
+05:23.580 --> 05:26.850
+168 56 15.
+
+05:26.850 --> 05:28.440
+Let's open the browser.
+
+05:28.440 --> 05:32.010
+So let's do http colon slash slash put the IP address.
+
+05:32.010 --> 05:35.850
+Hit enter and you should see the default Santos webpage
+
+05:35.850 --> 05:37.800
+coming from H 2D PD,
+
+05:37.800 --> 05:41.010
+Apache H2 DP service is running well and good.
+
+05:41.010 --> 05:42.510
+So now in the next lecture,
+
+05:42.510 --> 05:47.430
+we are going to set up our own website on this VM,
+
+05:47.430 --> 05:50.490
+or we'll create another VM and set up a website on that.
+
+05:50.490 --> 05:53.160
+We are going to use the provisioning also.
+
+05:53.160 --> 05:55.380
+So once you're done over here, delete the VM,
+
+05:55.380 --> 05:58.773
+delete all the VMs, and then join me in the next lecture.

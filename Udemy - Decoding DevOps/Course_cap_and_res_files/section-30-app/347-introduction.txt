@@ -1,0 +1,353 @@
+WEBVTT
+
+1
+00:00:10.870 --> 00:00:12.140
+Welcome to the project.
+
+2
+00:00:12.650 --> 00:00:14.338
+This project is about deploying
+
+3
+00:00:14.374 --> 00:00:17.370
+web application on Kubernetes Cluster.
+
+4
+00:00:21.270 --> 00:00:22.798
+So let's understand our situation.
+
+5
+00:00:22.884 --> 00:00:25.774
+First, we have a multitier your web
+
+6
+00:00:25.812 --> 00:00:29.590
+application stack which is already containerized.
+
+7
+00:00:30.690 --> 00:00:32.438
+And we are going to use the vprofile
+
+8
+00:00:32.473 --> 00:00:35.810
+web application which we containerized in our previous projects.
+
+9
+00:00:35.990 --> 00:00:38.006
+So your web application is containerized
+
+10
+00:00:38.078 --> 00:00:40.366
+and you have also tested it.
+
+11
+00:00:40.548 --> 00:00:43.450
+Now it's time to host it for production.
+
+12
+00:00:45.030 --> 00:00:47.230
+Running containers for production
+
+13
+00:00:48.330 --> 00:00:49.620
+is a little different.
+
+14
+00:00:52.030 --> 00:00:54.038
+The requirement could be you need high
+
+15
+00:00:54.064 --> 00:00:57.326
+availability so your containers don't go down
+
+16
+00:00:57.388 --> 00:01:00.138
+and also high availability on your Compute
+
+17
+00:01:00.174 --> 00:01:05.874
+node requirement is also for fault tolerance.
+
+18
+00:01:06.042 --> 00:01:08.786
+If something happens to the containers and they
+
+19
+00:01:08.788 --> 00:01:12.410
+are not responding, they should also auto heal.
+
+20
+00:01:14.690 --> 00:01:17.242
+It should be also convenient to scale
+
+21
+00:01:17.326 --> 00:01:20.658
+containers and also the compute resource on
+
+22
+00:01:20.684 --> 00:01:24.898
+which your containers are running platform independent
+
+23
+00:01:25.054 --> 00:01:28.894
+and also portable, flexible, agile.
+
+24
+00:01:29.062 --> 00:01:31.030
+So we should be able to run our containers
+
+25
+00:01:31.090 --> 00:01:35.622
+on local cloud, virtual machines, physical machines and should
+
+26
+00:01:35.636 --> 00:01:38.014
+be able to run on dev QA production.
+
+27
+00:01:38.062 --> 00:01:41.850
+Different environment, easily and conveniently.
+
+28
+00:01:44.910 --> 00:01:48.370
+We can use Container Orchestration Tool Kubernetes.
+
+29
+00:01:48.930 --> 00:01:51.182
+Kubernetes is today the best container
+
+30
+00:01:51.206 --> 00:01:53.134
+orchestration tool in the market.
+
+31
+00:01:53.292 --> 00:01:56.474
+It's very mature and a rock solid
+
+32
+00:01:56.522 --> 00:01:59.650
+platform to run your containers for production.
+
+33
+00:02:00.210 --> 00:02:13.322
+Let's also check some statistics in today's time.
+
+34
+00:02:13.516 --> 00:02:15.650
+Kubernetes is one of the most used
+
+35
+00:02:15.700 --> 00:02:18.338
+tools in the containerized platform and these
+
+36
+00:02:18.364 --> 00:02:20.306
+statistics are here to prove them.
+
+37
+00:02:20.488 --> 00:02:24.810
+77% of containers today run on Kubernetes.
+
+38
+00:02:24.990 --> 00:02:27.698
+If we include Redshift and Rancher which are
+
+39
+00:02:27.724 --> 00:02:31.180
+already built on Kubernetes, then it's 89%.
+
+40
+00:02:31.750 --> 00:02:35.678
+56% of the organizations have reported that they're going
+
+41
+00:02:35.704 --> 00:02:38.234
+to increase the usage of Kubernetes in next twelve
+
+42
+00:02:38.272 --> 00:02:41.462
+months and that should be by end of 2020.
+
+43
+00:02:41.656 --> 00:02:47.494
+From 2019% to 2028%, growth in usage
+
+44
+00:02:47.542 --> 00:02:50.190
+of Kubernetes Cluster for production containers.
+
+45
+00:02:50.570 --> 00:02:52.194
+This is a huge number.
+
+46
+00:02:52.352 --> 00:02:54.738
+So we can understand kubernetes has taken the
+
+47
+00:02:54.764 --> 00:02:58.830
+Container Orchestration or Container World by a strome.
+
+48
+00:03:00.050 --> 00:03:04.446
+So on this project we are going to use our
+
+49
+00:03:04.508 --> 00:03:08.722
+Java vprofile application which we have Containerized and we're
+
+50
+00:03:08.746 --> 00:03:13.110
+going to run it on Kubernetes Cluster for production.
+
+51
+00:03:14.090 --> 00:03:16.040
+Let's see how we are going to do it.
+
+52
+00:03:19.770 --> 00:03:22.260
+So we need a Kubernetes cluster already.
+
+53
+00:03:23.250 --> 00:03:25.382
+And I'm going to use Cops
+
+54
+00:03:25.526 --> 00:03:27.650
+to launch my Kubernetes cluster.
+
+55
+00:03:27.830 --> 00:03:30.818
+You can check the project of Kubernetes setup
+
+56
+00:03:30.854 --> 00:03:32.482
+where I've explained how you can use kops
+
+57
+00:03:32.496 --> 00:03:35.650
+ to set up production grade Kubernetes cluster.
+
+58
+00:03:36.630 --> 00:03:38.770
+We also need Containerized application.
+
+59
+00:03:38.880 --> 00:03:40.870
+We are going to use a vprofile.
+
+60
+00:03:41.250 --> 00:03:43.030
+We have already done a project
+
+61
+00:03:43.200 --> 00:03:45.780
+on containerizing our vprofile application.
+
+62
+00:03:46.110 --> 00:03:47.714
+So these are two main requirements.
+
+63
+00:03:47.762 --> 00:03:49.094
+We need a Kubernetes cluster
+
+64
+00:03:49.142 --> 00:03:50.940
+and we need Containerized application.
+
+65
+00:03:51.330 --> 00:03:53.580
+And we are using a vprofile application.
+
+66
+00:03:53.970 --> 00:03:55.942
+So you know, in vprofile application we have
+
+67
+00:03:55.956 --> 00:04:00.214
+a MySQL container that needs volume to store its
+
+68
+00:04:00.252 --> 00:04:02.314
+data so we can have persistent data.
+
+69
+00:04:02.472 --> 00:04:03.874
+So for that, we are going to create
+
+70
+00:04:03.912 --> 00:04:08.230
+an EBS volume to run our DB Pod.
+
+71
+00:04:11.590 --> 00:04:14.982
+Then we're going to label node with zone names.
+
+72
+00:04:15.126 --> 00:04:18.302
+We're going to create EBS volume in a zone and we
+
+73
+00:04:18.315 --> 00:04:21.685
+need our pod to be running on the same node or
+
+74
+00:04:21.748 --> 00:04:25.370
+on the same zone where we created the EBS volume.
+
+75
+00:04:25.690 --> 00:04:26.858
+So for this, we're going to
+
+76
+00:04:26.884 --> 00:04:28.782
+label our nodes with zone names.
+
+77
+00:04:28.806 --> 00:04:30.234
+So when we run our DB pod,
+
+78
+00:04:30.282 --> 00:04:32.750
+we'll select node based on the zones.
+
+79
+00:04:33.190 --> 00:04:38.274
+Once we are ready with all the steps, then
+
+80
+00:04:38.312 --> 00:04:43.254
+we are going to write Kubernetes definition files to
+
+81
+00:04:43.292 --> 00:04:46.482
+create our objects on kubernetes cluster, we're going to
+
+82
+00:04:46.496 --> 00:04:50.790
+use deployment service secret and volume.
+
+83
+00:04:52.850 --> 00:04:54.920
+So let's make it happen.
+
+84
+00:04:55.970 --> 00:04:57.594
+The only thing I want you to do
+
+85
+00:04:57.632 --> 00:05:00.402
+now is have a Kubernetes cluster created with
+
+86
+00:05:00.476 --> 00:05:04.258
+cops and also take note of your images
+
+87
+00:05:04.414 --> 00:05:08.060
+which you have created in the containerisation project.
+
+88
+00:05:08.750 --> 00:05:10.020
+Alright? So let's make it happen.

@@ -1,0 +1,498 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:02.400
+<v Instructor>Okay, let's initialize the source code first.</v>
+
+2
+00:00:02.400 --> 00:00:07.400
+So let's Open Folder in VS Code and select vprofile-app.
+
+3
+00:00:09.447 --> 00:00:12.180
+(notification chiming)
+
+4
+00:00:12.180 --> 00:00:13.050
+In previous lectures,
+
+5
+00:00:13.050 --> 00:00:17.070
+we downloaded vprofile-project-kubeapp branch.
+
+6
+00:00:17.070 --> 00:00:22.070
+From here, you need to copy src, pom, Docker-file.
+
+7
+00:00:24.240 --> 00:00:25.830
+Copy this,
+
+8
+00:00:25.830 --> 00:00:30.097
+And my location is in Desktop, gitops, vprofile-app,
+
+9
+00:00:32.040 --> 00:00:33.483
+and paste it over here.
+
+10
+00:00:35.790 --> 00:00:38.310
+In VS Code, you should see these files.
+
+11
+00:00:38.310 --> 00:00:39.600
+Don't need to commit anything now.
+
+12
+00:00:39.600 --> 00:00:41.520
+We're going to do it later.
+
+13
+00:00:41.520 --> 00:00:44.310
+Let's launch an EC2 instance for a SonarQube server.
+
+14
+00:00:44.310 --> 00:00:47.587
+So go to your AWS console and go to EC2.
+
+15
+00:00:49.740 --> 00:00:53.830
+Also, in a similar tab, open our hkhcoder repository
+
+16
+00:00:55.080 --> 00:00:58.083
+and switch to branch electron.
+
+17
+00:00:59.610 --> 00:01:01.770
+This one, we used in the Jenkins lectures,
+
+18
+00:01:01.770 --> 00:01:03.580
+and this, you have userdata.
+
+19
+00:01:03.580 --> 00:01:07.260
+Here, you have sonar-setup.sh.
+
+20
+00:01:07.260 --> 00:01:10.560
+Just keep it handy over here. We're going to copy this one.
+
+21
+00:01:10.560 --> 00:01:14.280
+Go back to your EC2, say Launch Instance,
+
+22
+00:01:14.280 --> 00:01:17.130
+Launch without a walkthrough.
+
+23
+00:01:17.130 --> 00:01:19.350
+Give a name. SonarServer, I'm giving.
+
+24
+00:01:19.350 --> 00:01:23.310
+Select Ubuntu. Keep open to 26.
+
+25
+00:01:23.310 --> 00:01:28.260
+Open to Server 26 (HVM), SSD Volume Type, scroll down.
+
+26
+00:01:28.260 --> 00:01:32.460
+Instance type will be bigger, t2.medium.
+
+27
+00:01:32.460 --> 00:01:35.490
+Needs at least four GB of RAM.
+
+28
+00:01:35.490 --> 00:01:37.050
+Create a new key pair.
+
+29
+00:01:37.050 --> 00:01:39.150
+It will mostly not be required
+
+30
+00:01:39.150 --> 00:01:41.310
+to log in SSH to the sonar server.
+
+31
+00:01:41.310 --> 00:01:43.380
+But anyways, let's just create it.
+
+32
+00:01:43.380 --> 00:01:46.893
+I'm giving name as SonarKey pom. Create key pair.
+
+33
+00:01:49.170 --> 00:01:50.643
+Network settings, Edit,
+
+34
+00:01:52.980 --> 00:01:54.180
+and Create security group.
+
+35
+00:01:54.180 --> 00:01:58.620
+Let's give security group a name, sonar-sg.
+
+36
+00:01:58.620 --> 00:02:00.960
+Let's give same in the description.
+
+37
+00:02:00.960 --> 00:02:05.490
+And in the rules, you need to add 22 from your IP
+
+38
+00:02:05.490 --> 00:02:10.490
+and port 80 from anywhere.
+
+39
+00:02:13.560 --> 00:02:16.950
+GitHub Action, which is having the pipeline,
+
+40
+00:02:16.950 --> 00:02:20.280
+is going to upload the result to the SonarQube server.
+
+41
+00:02:20.280 --> 00:02:22.080
+SonarQube server, we have engineers
+
+42
+00:02:22.080 --> 00:02:24.300
+that is listening on port 80.
+
+43
+00:02:24.300 --> 00:02:26.580
+And the request is coming from the internet,
+
+44
+00:02:26.580 --> 00:02:28.500
+so we need to allow it from anywhere.
+
+45
+00:02:28.500 --> 00:02:30.840
+Don't worry, we have the authentication
+
+46
+00:02:30.840 --> 00:02:33.360
+for SonarQube server with the token.
+
+47
+00:02:33.360 --> 00:02:36.660
+So it's not going to be like anonymous login.
+
+48
+00:02:36.660 --> 00:02:39.090
+It will be with authentication.
+
+49
+00:02:39.090 --> 00:02:42.330
+Now, in Advanced details, scroll down.
+
+50
+00:02:42.330 --> 00:02:47.310
+In User data, you need to copy this and paste it over here.
+
+51
+00:02:49.800 --> 00:02:52.440
+Script will execute and set up the SonarQube server,
+
+52
+00:02:52.440 --> 00:02:55.410
+same thing what we did in CI/CD.
+
+53
+00:02:55.410 --> 00:02:56.523
+Launch Instance.
+
+54
+00:02:57.720 --> 00:02:58.830
+This is going to take some time.
+
+55
+00:02:58.830 --> 00:03:01.410
+You need to wait, like five minutes or so.
+
+56
+00:03:01.410 --> 00:03:03.630
+Once the SonarQube server is up and running,
+
+57
+00:03:03.630 --> 00:03:05.670
+we are going to log in, create a token,
+
+58
+00:03:05.670 --> 00:03:07.650
+and then, in later lecture,
+
+59
+00:03:07.650 --> 00:03:11.790
+we're going to store these tokens as secret in GitHub.
+
+60
+00:03:11.790 --> 00:03:12.930
+So I'm going to pause the recording
+
+61
+00:03:12.930 --> 00:03:15.810
+and resume when this is completely set up.
+
+62
+00:03:15.810 --> 00:03:17.550
+Okay, I'm resuming after 10 minutes.
+
+63
+00:03:17.550 --> 00:03:21.180
+Let's copy the public IP of SonarQube server
+
+64
+00:03:21.180 --> 00:03:22.563
+and open it in the browser.
+
+65
+00:03:23.580 --> 00:03:26.880
+So the default username is admin
+
+66
+00:03:26.880 --> 00:03:30.330
+and default password is also admin.
+
+67
+00:03:30.330 --> 00:03:32.340
+Now, I need to reset the password.
+
+68
+00:03:32.340 --> 00:03:36.363
+Give the old password, admin, and give a new password.
+
+69
+00:03:39.390 --> 00:03:40.263
+And Update.
+
+70
+00:03:41.400 --> 00:03:45.510
+Okay, now, open sticky note or any text editor, text pad,
+
+71
+00:03:45.510 --> 00:03:47.340
+where we're going to store a few details,
+
+72
+00:03:47.340 --> 00:03:49.080
+like, first, we're going to store the token.
+
+73
+00:03:49.080 --> 00:03:49.913
+In the next lecture,
+
+74
+00:03:49.913 --> 00:03:52.100
+we're going to store the keys and other thing.
+
+75
+00:03:52.950 --> 00:03:54.060
+All this information,
+
+76
+00:03:54.060 --> 00:03:56.820
+we're going to store in GitHub Secrets later.
+
+77
+00:03:56.820 --> 00:04:01.820
+So here, go to Account, go to My account, click on Security.
+
+78
+00:04:03.690 --> 00:04:05.070
+And in the token, give a name.
+
+79
+00:04:05.070 --> 00:04:07.560
+I'm going to call it as actions.
+
+80
+00:04:07.560 --> 00:04:12.300
+And select token type as User Token, expires in 30 days.
+
+81
+00:04:12.300 --> 00:04:13.800
+Say Generate.
+
+82
+00:04:13.800 --> 00:04:18.030
+You'll get a new token, copy it, and store it somewhere,
+
+83
+00:04:18.030 --> 00:04:20.133
+or do not close this tab.
+
+84
+00:04:21.120 --> 00:04:23.970
+I'm just keeping it in the sticky notes.
+
+85
+00:04:23.970 --> 00:04:26.190
+Now, open your VS Code.
+
+86
+00:04:26.190 --> 00:04:28.410
+And over here, create a new file
+
+87
+00:04:28.410 --> 00:04:32.640
+in this top level location of the folder.
+
+88
+00:04:32.640 --> 00:04:36.603
+File name will be sonar-project.properties.
+
+89
+00:04:38.070 --> 00:04:40.110
+And the content will be this.
+
+90
+00:04:40.110 --> 00:04:42.453
+I'll put this in the lecture resource.
+
+91
+00:04:43.890 --> 00:04:45.150
+So you can simply copy, paste.
+
+92
+00:04:45.150 --> 00:04:46.770
+Now, in previous lectures,
+
+93
+00:04:46.770 --> 00:04:49.740
+we have put all this information in the pipeline itself.
+
+94
+00:04:49.740 --> 00:04:51.540
+This time, we are separating it.
+
+95
+00:04:51.540 --> 00:04:55.860
+The sonar.projectKey, so vprofile-app,
+
+96
+00:04:55.860 --> 00:04:57.060
+that's the name I'm giving.
+
+97
+00:04:57.060 --> 00:04:59.700
+ProjectName, also vprofile-app.
+
+98
+00:04:59.700 --> 00:05:01.800
+Sonar.projectVersion, 1.
+
+99
+00:05:01.800 --> 00:05:04.680
+The source code to scan is the src folder.
+
+100
+00:05:04.680 --> 00:05:07.560
+Binaries is located in target/classes folder.
+
+101
+00:05:07.560 --> 00:05:10.110
+Once we build it with Maven, we'll get this folder.
+
+102
+00:05:10.110 --> 00:05:11.790
+It's the same thing what we did previously,
+
+103
+00:05:11.790 --> 00:05:15.340
+the surefire-reports path, jacoco path, checkstyle path.
+
+104
+00:05:16.860 --> 00:05:18.780
+And here, we are going to put,
+
+105
+00:05:18.780 --> 00:05:22.230
+oh, no, we're not going to put this, just remove this.
+
+106
+00:05:22.230 --> 00:05:25.620
+Only this much is enough. Save this file.
+
+107
+00:05:25.620 --> 00:05:27.690
+And let's commit all this in the main branch,
+
+108
+00:05:27.690 --> 00:05:29.370
+then we're going to continue to the next lecture.
+
+109
+00:05:29.370 --> 00:05:32.310
+So I'm going to do it through Git Bash or Terminal.
+
+110
+00:05:32.310 --> 00:05:35.340
+Okay, so make sure you are in this folder
+
+111
+00:05:35.340 --> 00:05:38.493
+and switch to vprofile-app folder.
+
+112
+00:05:39.900 --> 00:05:41.787
+and say git add .
+
+113
+00:05:44.160 --> 00:05:46.947
+Git commit -m "init".
+
+114
+00:05:50.250 --> 00:05:52.440
+So initial commit like that.
+
+115
+00:05:52.440 --> 00:05:56.853
+And then, git push origin main.
+
+116
+00:05:59.370 --> 00:06:00.360
+And that should be it.
+
+117
+00:06:00.360 --> 00:06:03.750
+We have everything that we need for the sonar.
+
+118
+00:06:03.750 --> 00:06:05.250
+We have the source code here.
+
+119
+00:06:05.250 --> 00:06:08.430
+We have pom.xml file to build it with Maven.
+
+120
+00:06:08.430 --> 00:06:10.170
+We have sonar properties file.
+
+121
+00:06:10.170 --> 00:06:11.703
+We have the sonar token.
+
+122
+00:06:12.570 --> 00:06:15.750
+In next lecture, we are going to create the ECR repository
+
+123
+00:06:15.750 --> 00:06:19.620
+and set up authentication for that by using access keys.
+
+124
+00:06:19.620 --> 00:06:22.020
+So wrap this up and join me in the next lecture.
+

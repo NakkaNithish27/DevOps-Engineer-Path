@@ -1,0 +1,1137 @@
+WEBVTT
+
+1
+00:00:00.610 --> 00:00:02.370
+Welcome to Python Functions.
+
+2
+00:00:02.690 --> 00:00:04.698
+In this video we will be seeing
+
+3
+00:00:04.784 --> 00:00:06.800
+how to write our own function.
+
+4
+00:00:07.310 --> 00:00:11.082
+So far we are using existing functions or methods in
+
+5
+00:00:11.096 --> 00:00:15.046
+Python, but now we'll start writing our own functions.
+
+6
+00:00:15.238 --> 00:00:17.146
+Why should you write functions?
+
+7
+00:00:17.338 --> 00:00:18.790
+Well, it's just reusability.
+
+8
+00:00:18.910 --> 00:00:22.040
+You want to use a code many, many times.
+
+9
+00:00:22.430 --> 00:00:23.754
+So instead of writing it again
+
+10
+00:00:23.792 --> 00:00:25.146
+and again, you write a function.
+
+11
+00:00:25.208 --> 00:00:26.658
+You put your code in that and then
+
+12
+00:00:26.684 --> 00:00:29.000
+you call that functions whenever you want.
+
+13
+00:00:29.450 --> 00:00:33.318
+Imagine you'd have written a capitalized function yourself or
+
+14
+00:00:33.344 --> 00:00:35.720
+the code to capitalize the string by yourself.
+
+15
+00:00:36.230 --> 00:00:37.858
+And you need to capitalize the string
+
+16
+00:00:37.894 --> 00:00:39.270
+many many times in your program.
+
+17
+00:00:39.380 --> 00:00:41.154
+So instead of writing that code again
+
+18
+00:00:41.192 --> 00:00:43.786
+and again, you create a function capitalize.
+
+19
+00:00:43.858 --> 00:00:45.522
+And whenever you want to capitalize the
+
+20
+00:00:45.536 --> 00:00:48.510
+string, you simply call it reusability.
+
+21
+00:00:49.070 --> 00:00:51.560
+So let's see how we can write our own function.
+
+22
+00:00:58.290 --> 00:01:00.406
+Let's learn the syntax defining a function.
+
+23
+00:01:00.468 --> 00:01:02.400
+So we write a very simple function.
+
+24
+00:01:07.870 --> 00:01:09.950
+Okay, so you have to say def
+
+25
+00:01:10.990 --> 00:01:12.674
+space and give the function name.
+
+26
+00:01:12.712 --> 00:01:14.198
+Let's say I want to give 
+
+27
+00:01:14.224 --> 00:01:18.246
+function name add and parenthesis colon.
+
+28
+00:01:18.378 --> 00:01:21.014
+And then in parenthesis you mention the
+
+29
+00:01:21.052 --> 00:01:23.598
+arguments that user will be passing.
+
+30
+00:01:23.754 --> 00:01:25.780
+Let's say argument one.
+
+31
+00:01:26.350 --> 00:01:28.874
+Argument two, that's just some variable name.
+
+32
+00:01:28.912 --> 00:01:31.766
+Okay, so when you call this function,
+
+33
+00:01:31.828 --> 00:01:33.294
+you have to pass two arguments.
+
+34
+00:01:33.342 --> 00:01:34.610
+That's necessary.
+
+35
+00:01:35.830 --> 00:01:37.082
+So let's say I'm going to just do
+
+36
+00:01:37.096 --> 00:01:41.680
+a total of arg one plus arg two.
+
+37
+00:01:43.330 --> 00:01:45.722
+And then I have to return the value so I
+
+38
+00:01:45.736 --> 00:01:49.240
+can use a return and I'll say return total.
+
+39
+00:01:50.650 --> 00:01:51.760
+That's a function.
+
+40
+00:01:52.330 --> 00:01:55.374
+You have def function name in parentheses.
+
+41
+00:01:55.422 --> 00:01:56.954
+You give the arguments, you write your
+
+42
+00:01:56.992 --> 00:01:58.970
+code and then you return a value.
+
+43
+00:01:59.080 --> 00:02:00.834
+Now return is also not mandatory.
+
+44
+00:02:00.882 --> 00:02:02.258
+Sometimes you maybe want to just
+
+45
+00:02:02.284 --> 00:02:03.940
+print it from the function itself.
+
+46
+00:02:05.170 --> 00:02:06.558
+If you don't give return statement,
+
+47
+00:02:06.594 --> 00:02:08.259
+it will return none value.
+
+48
+00:02:08.650 --> 00:02:10.900
+So that's a general syntax of function.
+
+49
+00:02:11.410 --> 00:02:12.698
+Let's call this function.
+
+50
+00:02:12.784 --> 00:02:15.280
+So you give the function name
+
+51
+00:02:17.110 --> 00:02:18.702
+and then it needs two arguments, so
+
+52
+00:02:18.726 --> 00:02:19.938
+We're going to pass two arguments.
+
+53
+00:02:19.974 --> 00:02:21.590
+Let's say two comma three.
+
+54
+00:02:21.640 --> 00:02:26.034
+So we're passing two integers and let's store its output
+
+55
+00:02:26.082 --> 00:02:31.070
+to a variable and then we'll print that variable.
+
+56
+00:02:36.110 --> 00:02:37.940
+Okay, so let's run it.
+
+57
+00:02:39.470 --> 00:02:42.054
+Run functions. Do you see there?
+
+58
+00:02:42.092 --> 00:02:43.340
+It returned five.
+
+59
+00:02:43.970 --> 00:02:46.220
+We can just print the function itself.
+
+60
+00:02:47.450 --> 00:02:53.902
+We can say print, give the function past two values.
+
+61
+00:02:53.926 --> 00:03:03.670
+I'll say ten, comma 30 oh, sorry, my bad.
+
+62
+00:03:03.720 --> 00:03:04.942
+The wrong function name.
+
+63
+00:03:05.076 --> 00:03:06.754
+Function name is add, not out
+
+64
+00:03:06.852 --> 00:03:08.520
+is the variable that we used.
+
+65
+00:03:08.970 --> 00:03:10.140
+Let's run it.
+
+66
+00:03:13.090 --> 00:03:15.302
+Okay, now let's check some stuff with return.
+
+67
+00:03:15.376 --> 00:03:19.226
+Okay, so I do the same function
+
+68
+00:03:19.408 --> 00:03:21.950
+and I'll give name as adder.
+
+69
+00:03:24.410 --> 00:03:26.240
+Let's keep it here itself.
+
+70
+00:03:29.250 --> 00:03:32.590
+Okay, so in this, what is that format?
+
+71
+00:03:33.810 --> 00:03:35.890
+Okay, here we are calling
+
+72
+00:03:35.940 --> 00:03:37.454
+the function storing its output.
+
+73
+00:03:37.502 --> 00:03:39.970
+When you call a function, it is returning total.
+
+74
+00:03:40.080 --> 00:03:42.998
+It's returning an integer that we are storing
+
+75
+00:03:43.034 --> 00:03:44.866
+it and then we are printing it.
+
+76
+00:03:45.048 --> 00:03:46.882
+Another function. Exactly.
+
+77
+00:03:46.956 --> 00:03:49.320
+Same function just with a different name.
+
+78
+00:03:50.490 --> 00:03:52.620
+But here I'm not going to return anything.
+
+79
+00:03:54.510 --> 00:03:54.982
+Okay?
+
+80
+00:03:55.056 --> 00:03:57.960
+What I will do is I will print it from here.
+
+81
+00:03:58.350 --> 00:04:00.600
+Print total.
+
+82
+00:04:02.950 --> 00:04:08.360
+First I'll just call the function 50.
+
+83
+00:04:11.970 --> 00:04:14.086
+Now I can call the functions like this
+
+84
+00:04:14.268 --> 00:04:17.760
+because this is printing a value, printing something.
+
+85
+00:04:18.390 --> 00:04:21.180
+Oh, wait, wrong.
+
+86
+00:04:29.770 --> 00:04:31.694
+But if it does not print anything, then
+
+87
+00:04:31.732 --> 00:04:33.762
+adder is not going to return me, it's
+
+88
+00:04:33.786 --> 00:04:35.320
+just going to execute the program.
+
+89
+00:04:36.190 --> 00:04:38.498
+If the program is printing, then it's fine.
+
+90
+00:04:38.524 --> 00:04:40.480
+If it's not printing, we won't see anything.
+
+91
+00:04:41.110 --> 00:04:43.250
+And what if you print the print?
+
+92
+00:04:47.810 --> 00:04:51.260
+Okay, I will just comment this.
+
+93
+00:04:53.610 --> 00:04:55.630
+You can see the proper output.
+
+94
+00:05:00.550 --> 00:05:02.980
+Okay, it's only one function now added. Okay.
+
+95
+00:05:04.750 --> 00:05:07.658
+All right, this is where it returned 60, right?
+
+96
+00:05:07.684 --> 00:05:08.942
+It printed 60.
+
+97
+00:05:09.136 --> 00:05:15.690
+Give the same value here once again.
+
+98
+00:05:15.860 --> 00:05:17.900
+And now I will comment this.
+
+99
+00:05:21.690 --> 00:05:24.070
+So I'm saying print.
+
+100
+00:05:24.810 --> 00:05:27.574
+So it executes the function first.
+
+101
+00:05:27.672 --> 00:05:29.770
+That function is printing something and
+
+102
+00:05:29.820 --> 00:05:32.570
+function also returns what it returns.
+
+103
+00:05:32.630 --> 00:05:33.986
+It returns none.
+
+104
+00:05:34.118 --> 00:05:36.010
+Even though you have not given the return
+
+105
+00:05:36.060 --> 00:05:40.174
+statement, there is an invisible return none like
+
+106
+00:05:40.212 --> 00:05:43.954
+this over here, which returns the value, and
+
+107
+00:05:43.992 --> 00:05:45.960
+we are simply printing that value.
+
+108
+00:05:47.310 --> 00:05:51.242
+When we say print, we're printing what adder
+
+109
+00:05:51.266 --> 00:05:53.650
+function is returning, which is basically none.
+
+110
+00:05:55.110 --> 00:05:56.880
+Okay, so uncomment that.
+
+111
+00:05:57.270 --> 00:05:59.002
+Okay, let's write one more example
+
+112
+00:05:59.076 --> 00:06:11.570
+of function and expecting one argument.
+
+113
+00:06:12.910 --> 00:06:15.350
+Okay, so this is a function that's going to
+
+114
+00:06:15.520 --> 00:06:17.538
+do some of all the values that you passed.
+
+115
+00:06:17.574 --> 00:06:20.058
+All the values could be in a list or a tuple format.
+
+116
+00:06:20.094 --> 00:06:22.058
+So I have to pass a list or
+
+117
+00:06:22.084 --> 00:06:25.070
+a tuple of integer to this function. Okay?
+
+118
+00:06:25.180 --> 00:06:28.682
+So I'm going to do x equal to zero and
+
+119
+00:06:28.696 --> 00:06:33.686
+then I'm going to iterate for I in arg
+
+120
+00:06:33.748 --> 00:06:36.950
+So arg again will be a list or a tuple
+
+121
+00:06:37.330 --> 00:06:42.100
+and then simply do x equal to x plus i.
+
+122
+00:06:42.430 --> 00:06:43.718
+So value of x will be
+
+123
+00:06:43.744 --> 00:06:47.622
+first zero plus whatever have passed.
+
+124
+00:06:47.766 --> 00:06:49.538
+It's going to keep adding all the
+
+125
+00:06:49.564 --> 00:06:54.086
+values and then we'll say return x.
+
+126
+00:06:54.148 --> 00:06:56.500
+Okay, I have to make sure I return it.
+
+127
+00:06:56.950 --> 00:06:59.714
+The return should not be in the for loop, okay?
+
+128
+00:06:59.752 --> 00:07:02.042
+Otherwise it's going to just hit return in
+
+129
+00:07:02.056 --> 00:07:04.420
+the first iteration itself, the function will break.
+
+130
+00:07:06.370 --> 00:07:09.066
+Okay, let's call it now let's take a variable
+
+131
+00:07:09.138 --> 00:07:14.174
+out and let's call this sum and let me
+
+132
+00:07:14.212 --> 00:07:20.202
+pass one, two , three, passing simple values.
+
+133
+00:07:20.226 --> 00:07:22.000
+So you can also do the math yourself.
+
+134
+00:07:27.470 --> 00:07:30.738
+Okay, so I call this sum function and
+
+135
+00:07:30.764 --> 00:07:32.670
+it's going to add all these values, return
+
+136
+00:07:32.720 --> 00:07:36.090
+the output, and that output will print.
+
+137
+00:07:40.290 --> 00:07:40.654
+Okay?
+
+138
+00:07:40.692 --> 00:07:43.354
+So one plus two plus three, that's six.
+
+139
+00:07:43.452 --> 00:07:46.918
+So it should return six. Let's see. Nice.
+
+140
+00:07:47.004 --> 00:07:52.560
+Okay, let's do ten plus 20 plus 30.
+
+141
+00:07:53.430 --> 00:07:55.126
+That should be returning 60.
+
+142
+00:07:55.308 --> 00:07:58.690
+So, three values, ten values.
+
+143
+00:07:59.670 --> 00:08:01.882
+Pass any number of value, pass any
+
+144
+00:08:01.956 --> 00:08:03.974
+integers and make sure it's integer.
+
+145
+00:08:04.082 --> 00:08:06.420
+If you try to pass a string, it's going to break.
+
+146
+00:08:07.410 --> 00:08:10.090
+Okay, now let's talk about the arguments.
+
+147
+00:08:10.410 --> 00:08:13.198
+So my function takes one argument, and
+
+148
+00:08:13.224 --> 00:08:15.542
+I have to pass exactly one argument.
+
+149
+00:08:15.686 --> 00:08:19.954
+What if I don't pass any argument, right?
+
+150
+00:08:19.992 --> 00:08:21.780
+So let's try to call this
+
+151
+00:08:22.770 --> 00:08:25.630
+function and let's not pass anything. Okay?
+
+152
+00:08:25.740 --> 00:08:27.060
+Let me just run it.
+
+153
+00:08:27.930 --> 00:08:29.002
+So it's going to throw me
+
+154
+00:08:29.016 --> 00:08:31.930
+an error, some one missing argument.
+
+155
+00:08:33.270 --> 00:08:35.640
+Okay, let me just comment this.
+
+156
+00:08:37.470 --> 00:08:38.700
+Let's run it again.
+
+157
+00:08:40.830 --> 00:08:45.590
+So my function needs one argument
+
+158
+00:08:45.770 --> 00:08:47.350
+and I'm not passing anything.
+
+159
+00:08:47.460 --> 00:08:49.018
+What if I pass multiples, right?
+
+160
+00:08:49.044 --> 00:08:52.174
+I pass let's say ten comma 20.
+
+161
+00:08:52.272 --> 00:08:58.140
+And then I pass one more 30 comma 50.
+
+162
+00:08:58.470 --> 00:09:00.403
+So I'm passing out two arguments, two  list.
+
+163
+00:09:03.030 --> 00:09:05.870
+Well, it says it takes one argument,
+
+164
+00:09:05.990 --> 00:09:08.486
+but I have given two arguments.
+
+165
+00:09:08.678 --> 00:09:10.478
+So it's asking me one argument.
+
+166
+00:09:10.514 --> 00:09:13.534
+So I have to pass one argument. Okay.
+
+167
+00:09:13.632 --> 00:09:14.846
+But this can be flexible.
+
+168
+00:09:14.918 --> 00:09:16.090
+We have some options.
+
+169
+00:09:16.260 --> 00:09:18.982
+We will be seeing how we can pass any number of
+
+170
+00:09:18.996 --> 00:09:22.574
+argument or how we can pass or not pass any argument.
+
+171
+00:09:22.622 --> 00:09:23.590
+But still it works.
+
+172
+00:09:23.640 --> 00:09:25.800
+Okay, so working on the same.
+
+173
+00:09:28.450 --> 00:09:31.610
+So we'll talk about first the default argument.
+
+174
+00:09:35.090 --> 00:09:36.210
+Write a simple function.
+
+175
+00:09:36.260 --> 00:09:37.938
+The functions are going to be very simple.
+
+176
+00:09:38.024 --> 00:09:41.758
+I just want you to look at the arguments.
+
+177
+00:09:41.794 --> 00:09:44.710
+Okay, so function called greetings.
+
+178
+00:09:44.890 --> 00:09:47.360
+Greetings. Yes.
+
+179
+00:09:49.430 --> 00:09:50.180
+Okay.
+
+180
+00:09:51.290 --> 00:09:54.800
+And an argument MSG message.
+
+181
+00:09:56.090 --> 00:09:59.600
+And then simply print that.
+
+182
+00:10:02.910 --> 00:10:07.680
+I'll say, good message.
+
+183
+00:10:24.310 --> 00:10:26.474
+Okay, now we know if I'm calling this
+
+184
+00:10:26.512 --> 00:10:31.346
+function greetings, I have to pass an argument. Okay?
+
+185
+00:10:31.408 --> 00:10:32.380
+Let's say morning.
+
+186
+00:10:34.570 --> 00:10:35.774
+I don't need to store its
+
+187
+00:10:35.812 --> 00:10:40.122
+output anywhere because it's really printing.
+
+188
+00:10:40.146 --> 00:10:41.262
+The function is really printing.
+
+189
+00:10:41.286 --> 00:10:43.202
+So I don't need to store and print it back.
+
+190
+00:10:43.336 --> 00:10:44.500
+Let's run it.
+
+191
+00:10:46.390 --> 00:10:49.658
+If I don't pass anything, we
+
+192
+00:10:49.684 --> 00:10:50.450
+know what's going to happen.
+
+193
+00:10:50.500 --> 00:10:52.010
+It's going to throw us an error.
+
+194
+00:10:53.230 --> 00:10:54.760
+Right? Okay.
+
+195
+00:10:55.630 --> 00:10:57.314
+I want to have a function that should
+
+196
+00:10:57.352 --> 00:10:59.178
+have a default value for my argument.
+
+197
+00:10:59.214 --> 00:11:02.754
+If I don't pass, it should take some default argument.
+
+198
+00:11:02.802 --> 00:11:03.014
+Okay?
+
+199
+00:11:03.052 --> 00:11:04.982
+And for that it's pretty simple.
+
+200
+00:11:05.176 --> 00:11:06.842
+Wherever you have the argument, you just
+
+201
+00:11:06.856 --> 00:11:09.014
+say equal to and give a value. Okay?
+
+202
+00:11:09.052 --> 00:11:10.300
+So I'll say morning.
+
+203
+00:11:12.070 --> 00:11:13.900
+Let's call this function now.
+
+204
+00:11:15.250 --> 00:11:15.758
+Okay?
+
+205
+00:11:15.844 --> 00:11:16.766
+Good morning.
+
+206
+00:11:16.948 --> 00:11:19.430
+So message value is default value is morning.
+
+207
+00:11:19.480 --> 00:11:21.460
+But I can overwrite that.
+
+208
+00:11:22.030 --> 00:11:25.130
+I will say evening.
+
+209
+00:11:27.530 --> 00:11:29.218
+So when I pass evening, evening
+
+210
+00:11:29.254 --> 00:11:31.734
+will be stored into MSG. Okay?
+
+211
+00:11:31.892 --> 00:11:36.810
+And then it's going to write morning to evening.
+
+212
+00:11:40.170 --> 00:11:40.882
+You see that?
+
+213
+00:11:40.956 --> 00:11:41.890
+Good evening.
+
+214
+00:11:42.750 --> 00:11:44.830
+This is called default argument.
+
+215
+00:11:45.330 --> 00:11:48.478
+Now, the order of arguments are
+
+216
+00:11:48.504 --> 00:11:50.194
+also important sometimes in function.
+
+217
+00:11:50.292 --> 00:11:55.006
+So let's write a function that gives feedback to us.
+
+218
+00:11:55.128 --> 00:11:58.394
+Just a print statement based on the vaccine efficacy.
+
+219
+00:11:58.562 --> 00:12:00.074
+So we'll pass two arguments,
+
+220
+00:12:00.122 --> 00:12:02.162
+vaccine name and its efficacy.
+
+221
+00:12:02.306 --> 00:12:04.750
+And it will just return some print statement.
+
+222
+00:12:05.190 --> 00:12:13.074
+So I'll name it as vac_feedback and I'll take two arguments.
+
+223
+00:12:13.122 --> 00:12:15.030
+One will be the name of the vaccine.
+
+224
+00:12:15.150 --> 00:12:20.690
+So I'll take the argument name as vac and efficacy.
+
+225
+00:12:22.450 --> 00:12:24.474
+I hope that's how it's pronounced.
+
+226
+00:12:24.642 --> 00:12:26.898
+Okay, so vac is going to be a string
+
+227
+00:12:26.934 --> 00:12:29.150
+and efficacy is going to be an integer.
+
+228
+00:12:29.530 --> 00:12:50.820
+So print a message vaccine given a percent there.
+
+229
+00:12:58.210 --> 00:12:59.810
+And then we'll compare the value.
+
+230
+00:12:59.860 --> 00:13:01.180
+We'll check the difference.
+
+231
+00:13:01.570 --> 00:13:04.562
+I will compare between two integers. Okay.
+
+232
+00:13:04.696 --> 00:13:10.180
+We'll say efficacy is greater than, let's say
+
+233
+00:13:10.630 --> 00:13:24.394
+50 and it is less than 75, less
+
+234
+00:13:24.432 --> 00:13:26.580
+than or let's say less than equal to.
+
+235
+00:13:28.990 --> 00:13:30.640
+Then I'll print a message.
+
+236
+00:13:34.670 --> 00:13:40.030
+Seems not so effective.
+
+237
+00:13:40.210 --> 00:13:41.542
+Well, let me give a disclaimer.
+
+238
+00:13:41.566 --> 00:13:44.082
+I don't understand anything about vaccines, so I
+
+239
+00:13:44.096 --> 00:13:45.894
+don't know that will be effective or not.
+
+240
+00:13:46.052 --> 00:13:47.660
+But I'm just printing a message.
+
+241
+00:13:49.190 --> 00:13:56.558
+It needs more trial and I'll
+
+242
+00:13:56.594 --> 00:13:58.618
+compare with some more values. I'll see.
+
+243
+00:13:58.644 --> 00:14:02.434
+If it's greater than 75, less than
+
+244
+00:14:02.472 --> 00:14:12.250
+90, well, can consider that vaccine.
+
+245
+00:14:15.550 --> 00:14:16.960
+Let's give one more.
+
+246
+00:14:18.490 --> 00:14:24.218
+If efficacy is greater than, greater than or
+
+247
+00:14:24.244 --> 00:14:36.150
+equal to 90, sure will take the shot.
+
+248
+00:14:39.150 --> 00:14:44.014
+And else should be no less than 50, right?
+
+249
+00:14:44.052 --> 00:14:53.110
+If it's less than 50, then needs many more trials.
+
+250
+00:14:57.070 --> 00:14:59.934
+Okay, so our function name is vac underscore
+
+251
+00:14:59.982 --> 00:15:02.774
+feedback and we have to pass well, first
+
+252
+00:15:02.812 --> 00:15:08.786
+I'll pass the name pfizer and the integer. Okay?
+
+253
+00:15:08.848 --> 00:15:13.074
+So I think it's 95 and let's execute
+
+254
+00:15:13.122 --> 00:15:20.670
+this and let's pass a few more values.
+
+255
+00:15:21.050 --> 00:15:27.670
+Let's pass something else unknown
+
+256
+00:15:35.530 --> 00:15:37.802
+that seems dangerous, right?
+
+257
+00:15:37.936 --> 00:15:39.294
+And needs more trials.
+
+258
+00:15:39.342 --> 00:15:41.210
+Okay, good message passing.
+
+259
+00:15:41.530 --> 00:15:45.038
+But what I want to show you here is I
+
+260
+00:15:45.064 --> 00:15:47.426
+need to pass the argument in the right order.
+
+261
+00:15:47.548 --> 00:15:50.440
+What if I pass efficacy first and then the name?
+
+262
+00:15:51.310 --> 00:15:52.540
+Let's try that.
+
+263
+00:16:06.110 --> 00:16:07.650
+Okay, I got an error.
+
+264
+00:16:08.030 --> 00:16:12.980
+Okay, let's comment this to run again.
+
+265
+00:16:14.390 --> 00:16:18.498
+Now, the problem here is 35 will be stored in a
+
+266
+00:16:18.524 --> 00:16:24.474
+vac and it's going to compare efficacy, which is the name.
+
+267
+00:16:24.512 --> 00:16:28.510
+Now, so it's comparing a string with an integer.
+
+268
+00:16:28.630 --> 00:16:30.474
+And that's why we're getting an error not
+
+269
+00:16:30.512 --> 00:16:33.622
+supported between instance of string and integer.
+
+270
+00:16:33.766 --> 00:16:35.540
+So order is very important.
+
+271
+00:16:36.170 --> 00:16:38.730
+But I'm showing you keyword argument where
+
+272
+00:16:38.780 --> 00:16:40.410
+we can pass the order ourselves.
+
+273
+00:16:40.460 --> 00:16:45.330
+We can give the names, keywords arguments.
+
+274
+00:16:51.510 --> 00:16:52.678
+Now, here what I'll do.
+
+275
+00:16:52.704 --> 00:16:56.878
+I'll say this is the efficacy and
+
+276
+00:16:57.024 --> 00:16:58.990
+this is the name of the vaccine.
+
+277
+00:17:03.670 --> 00:17:07.420
+When I do that, then order is not important.
+
+278
+00:17:07.750 --> 00:17:09.174
+If I know the name of the argument,
+
+279
+00:17:09.222 --> 00:17:11.006
+I can pass them in any order.
+
+280
+00:17:11.188 --> 00:17:13.998
+I have to just make sure I give the argument name equal
+
+281
+00:17:14.034 --> 00:17:17.406
+to the value and the same way then it will be passed.
+
+282
+00:17:17.478 --> 00:17:19.362
+So efficacy will be stored in efficacy
+
+283
+00:17:19.445 --> 00:17:21.520
+and vac will be stored in vac.
+
+284
+00:17:21.910 --> 00:17:23.730
+This is called as keywords argument.

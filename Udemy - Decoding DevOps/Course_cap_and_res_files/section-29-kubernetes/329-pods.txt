@@ -1,0 +1,679 @@
+WEBVTT
+
+00:01.110 --> 00:01.943
+Instructor: Pods.
+
+00:01.943 --> 00:04.800
+Now we'll understand what exactly is pods,
+
+00:04.800 --> 00:08.013
+how to run it and how to use it.
+
+00:10.920 --> 00:14.700
+So as discussed previously about pods, the container runs
+
+00:14.700 --> 00:19.350
+inside the pod and pod is the most basic unit in Kubernetes.
+
+00:19.350 --> 00:21.360
+It's the most smallest unit.
+
+00:21.360 --> 00:25.083
+It just represents a process running in your cluster.
+
+00:26.370 --> 00:28.860
+And as I said previously,
+
+00:28.860 --> 00:33.030
+the most common use case is running one container per pod.
+
+00:33.030 --> 00:35.490
+If you are going to go with multi container,
+
+00:35.490 --> 00:39.480
+then the other containers will be helper containers.
+
+00:39.480 --> 00:44.343
+So pod is a wrapper, a boundary around your containers.
+
+00:45.180 --> 00:47.458
+So Kubernetes manages pods
+
+00:47.458 --> 00:49.830
+rather than managing containers directly.
+
+00:49.830 --> 00:51.510
+So we have the abstractions.
+
+00:51.510 --> 00:53.160
+We're going to give commands
+
+00:53.160 --> 00:57.330
+or execution for the pod, not for the container directly.
+
+00:57.330 --> 00:59.720
+When we are going with multi-container pod,
+
+00:59.720 --> 01:02.160
+we have to keep in mind these containers will be coupled
+
+01:02.160 --> 01:04.470
+with each other in a pod
+
+01:04.470 --> 01:06.330
+and they will be sharing same resource
+
+01:06.330 --> 01:09.990
+that is provided by the pod, one main container
+
+01:09.990 --> 01:13.110
+and the other helper containers, sidecar
+
+01:13.110 --> 01:14.943
+or init container or both.
+
+01:16.200 --> 01:19.560
+So if you're running Tomcat, you'll create one pod for it.
+
+01:19.560 --> 01:21.840
+If you're running MySQL, another pod.
+
+01:21.840 --> 01:24.033
+If you're running RabbitMQ, another pod.
+
+01:25.710 --> 01:29.580
+And if you want high availability,
+
+01:29.580 --> 01:34.110
+so you need to have multiple pods horizontally scaled,
+
+01:34.110 --> 01:37.980
+not multiple container in a pod, but multiple pods.
+
+01:37.980 --> 01:39.690
+So multiple Tomcat pods
+
+01:39.690 --> 01:43.110
+or multiple NGINX pod horizontally scaled.
+
+01:43.110 --> 01:45.393
+We can manage that very easily in Kubernetes.
+
+01:49.140 --> 01:52.290
+Now, as we have been running containers
+
+01:52.290 --> 01:54.030
+with docker run command
+
+01:54.030 --> 01:55.680
+and then we have seen Docker Compose,
+
+01:55.680 --> 01:58.860
+which was much more better way to manage
+
+01:58.860 --> 02:00.630
+or run your containers.
+
+02:00.630 --> 02:03.480
+Similar way you can run direct pod workload
+
+02:03.480 --> 02:05.610
+on the Kubernetes cluster
+
+02:05.610 --> 02:08.250
+or you can do it through definition file.
+
+02:08.250 --> 02:11.040
+Definition file is the most suitable way
+
+02:11.040 --> 02:14.370
+because then you will have infrastructure as code.
+
+02:14.370 --> 02:17.280
+So you don't need to run long, long commands on your shell.
+
+02:17.280 --> 02:19.680
+You put everything in the definition file
+
+02:19.680 --> 02:21.330
+and you run the definition file.
+
+02:21.330 --> 02:23.970
+A definition file will have these entries, apiVersion,
+
+02:23.970 --> 02:25.170
+metadata and spec.
+
+02:25.170 --> 02:28.380
+Most of the definition file will have these four entries
+
+02:28.380 --> 02:32.160
+and if you're taking example of a pod definition file,
+
+02:32.160 --> 02:33.450
+then the kind will be pod.
+
+02:33.450 --> 02:35.940
+The object is pod
+
+02:35.940 --> 02:39.453
+and it has a apiVversion: v1, which is the stable version.
+
+02:40.920 --> 02:44.830
+But you have other objects like service, deployment, ingress
+
+02:45.780 --> 02:47.550
+and you can check in the documentation
+
+02:47.550 --> 02:49.440
+what is their latest version.
+
+02:49.440 --> 02:51.060
+Like for service, it's v1.
+
+02:51.060 --> 02:54.180
+If you're using deployment, it's apps/v1.
+
+02:54.180 --> 02:56.460
+Some new object comes in, it'll have beta version.
+
+02:56.460 --> 02:59.880
+Then slowly you'll get v1 stable releases.
+
+02:59.880 --> 03:01.890
+So apiVersion and kind.
+
+03:01.890 --> 03:02.760
+Then metadata.
+
+03:02.760 --> 03:05.370
+Metadata has information about the pod,
+
+03:05.370 --> 03:08.460
+data about the data, like name of the pod
+
+03:08.460 --> 03:09.930
+or you can give labels,
+
+03:09.930 --> 03:12.243
+key-value pairs like we have tags on AWS.
+
+03:13.980 --> 03:15.273
+Now the technical part.
+
+03:16.650 --> 03:17.550
+Inspect.
+
+03:17.550 --> 03:20.553
+But before that, let's understand that's a YAML file.
+
+03:21.720 --> 03:25.266
+We already covered these concepts in Python and YAML
+
+03:25.266 --> 03:27.360
+and Python and Ansible.
+
+03:27.360 --> 03:29.580
+String dictionaries.
+
+03:29.580 --> 03:32.250
+So apiVersion value is a string, v1.
+
+03:32.250 --> 03:34.770
+Kind value is a string: pod.
+
+03:34.770 --> 03:37.080
+Metadata value is a dictionary.
+
+03:37.080 --> 03:38.760
+Key-value pairs.
+
+03:38.760 --> 03:41.410
+Then again, key and then value is another dictionary.
+
+03:42.660 --> 03:45.570
+In spec, we have the technical details.
+
+03:45.570 --> 03:47.340
+Containers, it's a pod definition file,
+
+03:47.340 --> 03:49.350
+so we'll have containers inside that.
+
+03:49.350 --> 03:51.843
+It's a dictionary and its value is a list.
+
+03:52.710 --> 03:54.750
+So you can have multiple containers,
+
+03:54.750 --> 03:58.980
+that's why the value is in a list format like - name,
+
+03:58.980 --> 04:01.833
+name of the container, image, the image.
+
+04:02.820 --> 04:05.580
+Along with the image, you can provide other information
+
+04:05.580 --> 04:07.890
+that you have, like the port numbers, right?
+
+04:07.890 --> 04:10.620
+So ports, you can specify, its value's also list.
+
+04:10.620 --> 04:14.070
+So name of a port and then container port
+
+04:14.070 --> 04:16.650
+and the port number.
+
+04:16.650 --> 04:18.720
+So this is a very simple pod definition file.
+
+04:18.720 --> 04:21.570
+If we execute it, this is going to run a pod.
+
+04:21.570 --> 04:25.230
+We'll have this container created from httpd image,
+
+04:25.230 --> 04:26.823
+running on port number 80.
+
+04:28.380 --> 04:29.700
+Okay, how do we create it?
+
+04:29.700 --> 04:33.990
+Well, we say kubectl create -f
+
+04:33.990 --> 04:37.590
+and the definition file, you can say kubectl get pod
+
+04:37.590 --> 04:39.690
+to get its information.
+
+04:39.690 --> 04:42.240
+You can see its status will be changing
+
+04:42.240 --> 04:45.210
+as it is coming to the running state.
+
+04:45.210 --> 04:46.650
+So once you have a pod running
+
+04:46.650 --> 04:48.480
+or any objects running for that matter,
+
+04:48.480 --> 04:51.180
+you can get more detailed information about it
+
+04:51.180 --> 04:53.580
+by using kubectl describe.
+
+04:53.580 --> 04:55.440
+Like we have inspect in Docker,
+
+04:55.440 --> 04:57.000
+here we have describe.
+
+04:57.000 --> 05:00.150
+Kubectl describe pod and the name of the pod.
+
+05:00.150 --> 05:02.580
+It's gonna give you detailed information about the pod.
+
+05:02.580 --> 05:04.350
+At the end, you will see events,
+
+05:04.350 --> 05:06.630
+which is very good for troubleshooting.
+
+05:06.630 --> 05:08.910
+You will see what's happening, scheduled a pod.
+
+05:08.910 --> 05:11.520
+So default-scheduler is scheduling pod.
+
+05:11.520 --> 05:15.510
+then kubelet is pulling it, okay?
+
+05:15.510 --> 05:17.220
+You can also edit a pod,
+
+05:17.220 --> 05:19.320
+but not everything in the pod is editable.
+
+05:19.320 --> 05:21.393
+Most of the things are non-editable,
+
+05:22.440 --> 05:23.850
+but there are other ways to edit it.
+
+05:23.850 --> 05:25.050
+You have deployment object.
+
+05:25.050 --> 05:27.333
+So you can say kubectl get pod,
+
+05:28.560 --> 05:30.180
+name of the pod, -o yaml.
+
+05:30.180 --> 05:32.430
+It's gonna give you much detail information
+
+05:32.430 --> 05:34.803
+of the pod in a YAML format.
+
+05:35.790 --> 05:38.520
+You can even output that content
+
+05:38.520 --> 05:39.603
+to some other file.
+
+05:40.440 --> 05:45.030
+To edit a pod, you have kubectl edit pod and pod name
+
+05:45.030 --> 05:46.683
+and you can edit few things.
+
+05:47.640 --> 05:51.480
+Okay, now, let's see all this in real time.
+
+05:51.480 --> 05:53.790
+Now, we're going to see about pod, how to run a pod.
+
+05:53.790 --> 05:56.040
+So through the definition file we said.
+
+05:56.040 --> 05:58.230
+So let me create a directory over here.
+
+05:58.230 --> 06:01.473
+I will call it just definitions.
+
+06:02.820 --> 06:04.023
+Let's get into that.
+
+06:08.880 --> 06:11.340
+So let's create our pod definition file first.
+
+06:11.340 --> 06:15.423
+So I'm just gonna say pod and I get into that.
+
+06:18.120 --> 06:20.523
+So I'll run my Tomcat pod first.
+
+06:22.170 --> 06:23.790
+Okay, from the vProfile project,
+
+06:23.790 --> 06:25.530
+the one that we have containerized,
+
+06:25.530 --> 06:27.660
+if you have already stored it in your Docker Hub,
+
+06:27.660 --> 06:29.490
+you can use that image.
+
+06:29.490 --> 06:31.817
+So I will call it a vproapppod.yaml.
+
+06:36.048 --> 06:39.930
+Okay, YAML file, three hyphens and let's get started.
+
+06:39.930 --> 06:42.630
+Okay, so kind: Pod, P capital there,
+
+06:42.630 --> 06:46.680
+apiVersion, there V capital, v1, metadata.
+
+06:46.680 --> 06:49.080
+Name, let's give name.
+
+06:49.080 --> 06:50.493
+I will say vproapp.
+
+06:52.320 --> 06:53.220
+Labels.
+
+06:53.220 --> 06:55.113
+So I'm gonna give the same label.
+
+06:56.070 --> 07:00.003
+Okay, then spec, specification, technical details.
+
+07:03.180 --> 07:08.130
+Okay, containers and its value is in a list format.
+
+07:08.130 --> 07:13.130
+So a hyphen, name, name of the container,
+
+07:13.140 --> 07:14.590
+I will say just appcontainer.
+
+07:17.610 --> 07:18.840
+Image.
+
+07:18.840 --> 07:21.030
+Let's mention the image.
+
+07:21.030 --> 07:26.030
+So I have this image imranvisualpath Docker Hub account.
+
+07:26.940 --> 07:29.010
+That's fresh Tomcat app.
+
+07:29.010 --> 07:32.430
+Looks like fresh tomato, and the tag V7.
+
+07:32.430 --> 07:34.950
+Anyways, so that's my image.
+
+07:34.950 --> 07:36.780
+You mentioned your own image
+
+07:36.780 --> 07:38.980
+that you have built in the containerization.
+
+07:39.990 --> 07:42.663
+Ports, so name of the port.
+
+07:43.680 --> 07:46.950
+I will say vproapp-port,
+
+07:46.950 --> 07:51.950
+and then containerPort, P capital,
+
+07:52.020 --> 07:54.120
+colon, and the port number 8080.
+
+07:55.277 --> 07:57.360
+Okay, this is not port mapping, this is the port number
+
+07:57.360 --> 07:59.760
+of the container that is exposed, okay?
+
+07:59.760 --> 08:01.230
+We say expose and the port number
+
+08:01.230 --> 08:03.630
+in the Dockerfile, that port.
+
+08:03.630 --> 08:06.600
+Port mapping is done very different.
+
+08:06.600 --> 08:08.940
+We are going to see that next after pod.
+
+08:08.940 --> 08:11.610
+It's done through service. We'll be seeing that next.
+
+08:11.610 --> 08:13.260
+So this is my pod definition file
+
+08:13.260 --> 08:15.960
+and that's all I really need for now.
+
+08:15.960 --> 08:17.610
+Let's save and quit.
+
+08:17.610 --> 08:19.200
+The only thing you need to worry about here
+
+08:19.200 --> 08:20.340
+is the indentation.
+
+08:20.340 --> 08:24.390
+Otherwise, in the documentation, all the settings are given.
+
+08:24.390 --> 08:26.433
+You really don't need to by hard this.
+
+08:27.780 --> 08:28.950
+Okay, time to run my pod.
+
+08:28.950 --> 08:32.050
+So I'm gonna say kubectl create -f
+
+08:33.827 --> 08:38.020
+vproapppod.yaml.
+
+08:38.020 --> 08:39.300
+Okay, it says created.
+
+08:39.300 --> 08:41.643
+Kubectl get pod.
+
+08:42.840 --> 08:45.480
+Okay, it's saying it's getting created, container creating.
+
+08:45.480 --> 08:48.600
+Let's say kubectl describe pod
+
+08:48.600 --> 08:51.240
+and let's see what's really happening.
+
+08:51.240 --> 08:52.713
+Okay, you can see the events.
+
+08:54.240 --> 08:56.163
+Okay, at the end you see the events.
+
+08:57.480 --> 09:00.450
+So from default-scheduler, scheduler is doing something.
+
+09:00.450 --> 09:03.030
+It's saying successfully I have assigned
+
+09:03.030 --> 09:04.533
+this particular node.
+
+09:05.550 --> 09:08.970
+So you can really see your pod is running on which node.
+
+09:08.970 --> 09:09.810
+So we have two node.
+
+09:09.810 --> 09:12.060
+Out of it, it's running on this node
+
+09:12.060 --> 09:13.590
+and then that gives the control
+
+09:13.590 --> 09:16.080
+to kubelet in that worker node
+
+09:16.080 --> 09:18.333
+and kubelet is saying it's pulling the image.
+
+09:19.650 --> 09:20.910
+Okay, it's not auto refresh,
+
+09:20.910 --> 09:22.800
+so we have to run it once again.
+
+09:22.800 --> 09:25.950
+Let's see. Okay, that worked.
+
+09:25.950 --> 09:27.810
+It says I have started the container.
+
+09:27.810 --> 09:28.683
+Nice.
+
+09:30.330 --> 09:32.703
+Kubectl get pod.
+
+09:33.570 --> 09:36.810
+Okay, so you see the name of the pod?
+
+09:36.810 --> 09:38.160
+It says 1/1 ready.
+
+09:38.160 --> 09:42.060
+1/1 means how many containers you have specified,
+
+09:42.060 --> 09:44.130
+out of that, how many are running?
+
+09:44.130 --> 09:47.250
+So we just have one container and that's running.
+
+09:47.250 --> 09:48.870
+Okay, this is so cool.
+
+09:48.870 --> 09:53.220
+Kubectl delete pod
+
+09:53.220 --> 09:54.450
+to delete your pod.
+
+09:54.450 --> 09:55.440
+Okay, before we did it,
+
+09:55.440 --> 09:58.140
+few information we'll see about the pod.
+
+09:58.140 --> 10:00.300
+So when you run the describe command,
+
+10:00.300 --> 10:03.033
+you can see this pod will have an IP address.
+
+10:04.170 --> 10:06.770
+Okay, you can see the container running inside that.
+
+10:08.070 --> 10:11.823
+That's the container ID, on what port it's running.
+
+10:13.320 --> 10:15.540
+Okay, and you can, in the event section,
+
+10:15.540 --> 10:18.150
+see if there's something wrong, container is not running,
+
+10:18.150 --> 10:20.283
+you can see what is the problem.
+
+10:21.180 --> 10:23.687
+Okay, that's all really about the pod for now.
+
+10:23.687 --> 10:26.520
+We are going to see next what is service
+
+10:26.520 --> 10:30.810
+and we then going to do the port mapping kind
+
+10:30.810 --> 10:33.540
+of stuff through service and even load balancer.
+
+10:33.540 --> 10:35.490
+And then we should be able to access it
+
+10:35.490 --> 10:37.140
+from the outside world.
+
+10:37.140 --> 10:38.493
+Okay, that's all in the pod for now.
+
+10:38.493 --> 10:40.043
+I'll see you in the next video.

@@ -1,0 +1,415 @@
+WEBVTT
+
+00:00.720 --> 00:01.160
+All right.
+
+00:01.160 --> 00:03.960
+So we have the back end services ready.
+
+00:04.440 --> 00:11.520
+And our app server which is in the private subnet will connect to these backend services V profile application.
+
+00:11.520 --> 00:12.680
+It's not yet deployed.
+
+00:13.240 --> 00:21.320
+But if we check the configuration of V profile application which is in src main resources application.properties
+
+00:21.320 --> 00:27.240
+file, we have an endpoint of MySQL and we have an endpoint for memcached service.
+
+00:27.760 --> 00:36.920
+Now this should resolve to the IP address or private IP address of Cloudsql and Memorystore service.
+
+00:37.360 --> 00:39.560
+Now this is internal resolution.
+
+00:40.080 --> 00:43.040
+So for this purpose we need to create a DNS entry.
+
+00:43.040 --> 00:45.640
+We need to create a private hosted zone.
+
+00:45.640 --> 00:49.160
+With this domain we profile dot internal.
+
+00:49.560 --> 00:57.360
+And in that we are going to add entry for DB host resolves to the IP address of cloud SQL instance and
+
+00:57.360 --> 01:01.800
+Wipro MC to the private IP address of Memorystore.
+
+01:02.280 --> 01:08.100
+So in this lecture first we are going to create a hosted zone private hosted zone with this domain.
+
+01:08.620 --> 01:13.060
+And in that domain we are going to add these two entries, the Pro DB and Vipro MC.
+
+01:13.820 --> 01:14.060
+Okay.
+
+01:14.100 --> 01:16.740
+So we have these two variables private DNS.
+
+01:17.100 --> 01:20.460
+Its value is V profile, dot internal and private zone.
+
+01:20.460 --> 01:22.660
+Its value is V profile hyphen private.
+
+01:22.820 --> 01:24.620
+So this will be the name of the hosted zone.
+
+01:24.620 --> 01:29.220
+But the domain is this v profile dot internal under this VPC.
+
+01:29.460 --> 01:33.340
+So let's create a private hosted zone in cloud DNS servers.
+
+01:34.020 --> 01:42.260
+So the command is gcloud DNS managed zones create and the name of the zone which is V profile private.
+
+01:42.260 --> 01:46.260
+This is just the name but the domain name will be v profile dot internal.
+
+01:46.260 --> 01:48.660
+So we're going to give here space backward slash.
+
+01:48.700 --> 01:51.060
+Hit enter and enter this option.
+
+01:51.500 --> 01:56.340
+Hyphen hyphen hyphen name equal to private DNS space backward slash.
+
+01:56.380 --> 01:57.020
+Hit enter.
+
+01:57.700 --> 02:03.420
+Mention the VPC network hyphen f and networks equal to VPC space backward slash.
+
+02:04.420 --> 02:06.460
+So domain can be private and public.
+
+02:06.460 --> 02:08.220
+We just need it for internal resolution.
+
+02:08.220 --> 02:09.770
+So we just need to prove it.
+
+02:09.770 --> 02:11.290
+So we need to give this option here.
+
+02:11.490 --> 02:11.930
+Hyphen.
+
+02:11.930 --> 02:12.250
+Hyphen.
+
+02:12.250 --> 02:12.890
+Visibility.
+
+02:12.930 --> 02:15.130
+Equal to private space.
+
+02:15.130 --> 02:15.970
+Backward slash.
+
+02:16.530 --> 02:18.250
+And let's give some description.
+
+02:18.570 --> 02:22.250
+Hyphen hyphen description equal to private DNS for v profile.
+
+02:22.530 --> 02:23.770
+And let's hit enter.
+
+02:25.010 --> 02:25.890
+Got created.
+
+02:26.370 --> 02:35.010
+Now if you go to cloud DNS service in cloud DNS service you should see a zone V profile private and
+
+02:35.010 --> 02:37.210
+the DNS name is V profile dot internal.
+
+02:37.890 --> 02:40.090
+And here we can create the record again.
+
+02:40.090 --> 02:41.690
+We're going to do it through command line.
+
+02:41.970 --> 02:45.730
+So let me run you through the flow of how we're going to create the record through command line.
+
+02:46.170 --> 02:49.730
+First we need the IP address of database and memcache.
+
+02:49.770 --> 02:50.650
+Now this is the command.
+
+02:50.650 --> 02:53.450
+Or you can just go to the console and get the IP address.
+
+02:53.930 --> 02:58.330
+So gcloud SQL instances describe the name of a DB format.
+
+02:59.050 --> 03:01.330
+Now this returns the output in JSON format.
+
+03:01.330 --> 03:04.250
+And from that we are extracting IP address.
+
+03:04.730 --> 03:07.530
+I'll just run this command and show you the output first.
+
+03:08.050 --> 03:14.070
+So when you describe any service like SQL instances describe and the name of our database, we run this
+
+03:14.590 --> 03:19.910
+and we get a huge output by default showing in YAML format.
+
+03:20.350 --> 03:22.870
+So from this we need to extract this one.
+
+03:23.470 --> 03:24.910
+This IP we need to extract.
+
+03:24.910 --> 03:26.230
+So it is in IP address.
+
+03:26.230 --> 03:27.270
+It's in the top level.
+
+03:27.270 --> 03:28.790
+Inside that there is a list.
+
+03:29.190 --> 03:30.510
+It's the first element in the list.
+
+03:30.510 --> 03:34.070
+So zeroth element and its value we're going to extract.
+
+03:34.790 --> 03:35.230
+So like this.
+
+03:35.230 --> 03:39.990
+If we want to extract any specific value you have to do hyphen hyphen format equal to.
+
+03:40.030 --> 03:45.990
+In double quotes we say value value of IP addresses zeroth element from that.
+
+03:45.990 --> 03:49.230
+And in that you have a key called IP address.
+
+03:49.990 --> 03:54.550
+So when we run this you get the private IP address of database.
+
+03:55.270 --> 04:00.910
+So if you know JSON and YAML or any one of it, you should be able to easily extract the values from
+
+04:00.910 --> 04:03.390
+the output of describe.
+
+04:04.030 --> 04:04.270
+Okay.
+
+04:04.310 --> 04:09.350
+So let's store the IP address of memcache and database into these variables.
+
+04:12.550 --> 04:16.430
+So we run this command in command substitution and stores this into this variable.
+
+04:16.430 --> 04:19.610
+So if you do echo dollar DB underscore IP.
+
+04:19.650 --> 04:21.250
+We should see the database IP.
+
+04:21.650 --> 04:26.970
+And if we do MC underscore IP we should see the memcache IP.
+
+04:27.730 --> 04:27.970
+Okay.
+
+04:28.010 --> 04:29.010
+So once we have the IP.
+
+04:29.010 --> 04:29.930
+So this is the flow.
+
+04:30.330 --> 04:33.250
+First we need to start a transaction.
+
+04:33.690 --> 04:37.170
+And this command creates a YAML file in your current working directory.
+
+04:37.650 --> 04:41.010
+And then we run the command to add the record in that transaction.
+
+04:41.010 --> 04:47.570
+So we say add this IP in this with this host name in this zone.
+
+04:48.050 --> 04:49.330
+And of course the project ID.
+
+04:49.810 --> 04:52.850
+So we start transaction, we add the entry.
+
+04:53.370 --> 04:55.730
+Then we execute the transaction.
+
+04:55.890 --> 04:58.730
+So starting transaction it creates a YAML file.
+
+04:58.730 --> 05:00.650
+And we add the entry into that YAML file.
+
+05:00.650 --> 05:03.530
+And it simply uploads that YAML file into the records.
+
+05:04.450 --> 05:06.570
+And then we list it over here same.
+
+05:06.570 --> 05:08.090
+We are going to do it with memcache.
+
+05:08.250 --> 05:14.930
+Start the transaction, add the entry, execute the transaction, and then list it.
+
+05:15.250 --> 05:16.610
+So let's do it one by one.
+
+05:17.170 --> 05:20.610
+So gcloud DNS record sets transaction start.
+
+05:20.770 --> 05:25.630
+For this zone We provide private and the project ID hit enter.
+
+05:26.590 --> 05:28.590
+You see transaction dot YAML file.
+
+05:28.910 --> 05:31.430
+You should see a YAML file in your current directory.
+
+05:32.070 --> 05:32.310
+Okay.
+
+05:32.350 --> 05:34.230
+Next we add the entry into that file.
+
+05:34.230 --> 05:43.550
+So gcloud DNS record sets transaction add db ip which is this with this name with db dot private DNS
+
+05:43.790 --> 05:47.630
+which is v profile dot internal and it's name to IP mapping.
+
+05:47.630 --> 05:51.670
+So the record type is a a record in the zone private zone.
+
+05:51.670 --> 05:54.390
+This one V profile private and the project ID.
+
+05:55.670 --> 05:57.390
+So nothing changed on Google Cloud.
+
+05:57.390 --> 05:59.750
+Just updated the transaction dot YAML file.
+
+06:00.230 --> 06:03.950
+Next is we execute the transaction which will add this entry.
+
+06:04.430 --> 06:06.670
+So gcloud DNS record sets transaction.
+
+06:06.670 --> 06:09.510
+Execute the zone name and the project ID.
+
+06:11.670 --> 06:12.230
+And it's done.
+
+06:12.230 --> 06:14.110
+It says the status is pending.
+
+06:14.110 --> 06:14.830
+Let's check.
+
+06:14.830 --> 06:15.750
+Let's list it.
+
+06:17.150 --> 06:21.470
+So gcloud DNS record sets list zone private zone.
+
+06:22.670 --> 06:25.710
+So you should see all the entries the previous entries also.
+
+06:25.710 --> 06:29.500
+And you see V we pro DB and it's private IP address.
+
+06:30.700 --> 06:30.940
+Okay.
+
+06:30.980 --> 06:34.380
+So once you understand this you can add any entries.
+
+06:34.860 --> 06:38.100
+Let's start the transaction once again and add the memcache entry.
+
+06:38.660 --> 06:41.300
+So same command start the DNS transaction.
+
+06:42.220 --> 06:43.140
+Add the record.
+
+06:43.540 --> 06:45.940
+So same command we change here the MC IP.
+
+06:45.940 --> 06:47.940
+And here we just give the MC.
+
+06:48.500 --> 06:50.900
+So you can just do up arrow and change these values.
+
+06:52.380 --> 06:54.900
+And then simply execute the transaction.
+
+06:55.300 --> 06:56.940
+Same command as the previous one.
+
+06:59.420 --> 06:59.780
+It's done.
+
+06:59.780 --> 07:00.660
+It's in pending state.
+
+07:00.700 --> 07:02.220
+Now let's list it.
+
+07:05.420 --> 07:06.460
+So you see the entry.
+
+07:08.100 --> 07:09.700
+So both the records are added.
+
+07:09.860 --> 07:11.980
+You can see it from the GUI also.
+
+07:12.900 --> 07:14.300
+Let's refresh the page.
+
+07:14.780 --> 07:15.060
+All right.
+
+07:15.060 --> 07:20.780
+So in cloud DNS in your private zone you should see both the entry with DB and with MC.
+
+07:21.020 --> 07:24.700
+And it's a record because the name maps to the IP address.
+
+07:25.660 --> 07:26.820
+And that is all in this lecture.
+
+07:26.820 --> 07:29.820
+In the next lecture we are going to start working on the app server.
+
+07:30.420 --> 07:31.740
+So join me in the next one.

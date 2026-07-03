@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00.840 --> 00:06.120
+Back in my college days, when I started learning Linux, I had to build my own lab.
+
+00:06.480 --> 00:12.240
+I couldn't afford multiple computers, so I began collecting used computer parts.
+
+00:12.600 --> 00:18.160
+CPU, Ram, hard disk monitor, whatever I could find piece by piece.
+
+00:18.520 --> 00:25.200
+I assembled them, installed Linux, connected them with an Ethernet cable, and started practicing
+
+00:25.240 --> 00:27.680
+Linux server and client.
+
+00:28.680 --> 00:35.080
+If you tried building five, 10 or 15 Machine Lab today, it could cost a fortune.
+
+00:35.600 --> 00:38.840
+Back then, I didn't even know virtual machines existed.
+
+00:39.240 --> 00:46.480
+But today, you can create your entire lab inside your computer quickly, easily, and without spending
+
+00:46.480 --> 00:47.200
+any money.
+
+00:47.880 --> 00:51.520
+Virtual machine is simply a computer inside your computer.
+
+00:51.960 --> 00:58.840
+You can create multiple VMs, install operating system, connect them together and practice just like
+
+00:58.840 --> 01:00.840
+real multi node environment.
+
+01:01.320 --> 01:04.080
+And that's exactly what we'll do in this section.
+
+01:04.400 --> 01:10.080
+First we'll create virtual machines manually and then we'll automate the whole process.
+
+01:10.600 --> 01:14.680
+This setup is essential as we move into Linux section of the course.

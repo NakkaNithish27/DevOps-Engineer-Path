@@ -1,0 +1,104 @@
+stages:
+  - build
+  - test
+
+# --------------------
+# Global variables
+# --------------------
+variables:
+  PROJECT_NAME: "Vprofile-App"
+  TEST_REPORT_DIR: "target/surefire-reports"
+  JAVA_OPTS: "-Xms512m -Xmx1024m"                        # useful JVM options
+
+# --------------------
+# Build Job
+# --------------------
+build-job:
+  stage: build
+  image: maven:3.9.9-eclipse-temurin-17
+  rules:stages:
+  - build
+  - test
+
+variables:
+  PROJECT_NAME: vprofile
+  JAVA_OPTS: ${JAVA_OPTIONS}
+
+# Build stage
+build-job: 
+  stage: build
+  image: maven:3.9.9-eclipse-temurin-17
+  rules:
+    # Trigger on pushes to main or develop
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"'
+    # Trigger on merge requests
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    # Trigger when started manually
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    # Trigger on scheduled pipelines
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    # Otherwise never run
+    - when: never
+  script:
+    - echo "Building the project ${PROJECT_NAME}-test."
+    - mvn install
+
+# Test stage
+test-job: 
+  stage: test
+  image: maven:3.9.9-eclipse-temurin-17
+  rules:
+    # Trigger on pushes to main or develop
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"'
+    # Trigger on merge requests
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    # Trigger when started manually
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    # Trigger on scheduled pipelines
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    # Otherwise never run
+    - when: never
+  script:
+    - echo "Running Unit Tests in the ${PROJECT_NAME}-test."
+    - mvn test
+    - mvn checkstyle:checkstyle
+    # Trigger on pushes to main or develop
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"'
+    # Trigger on merge requests
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    # Trigger when started manually
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    # Trigger on scheduled pipelines
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    # Otherwise never run
+    - when: never
+  script:
+    - pwd
+    - ls -la
+    - echo "Building project => ${PROJECT_NAME}"
+    - mvn clean package -DskipTests
+
+# --------------------
+# Test Job
+# --------------------
+test-job:
+  stage: test
+  image: maven:3.9.9-eclipse-temurin-17
+  needs: [build-job]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - when: never
+  script:
+    - pwd
+    - ls -la
+    - echo "Running tests for ${PROJECT_NAME} with Java options => ${JAVA_OPTS}"
+    - mvn test
+    - mvn checkstyle:checkstyle
+    - echo "Saving test reports in $TEST_REPORT_DIR"
+  artifacts:
+    paths:
+      - $TEST_REPORT_DIR
+    when: always

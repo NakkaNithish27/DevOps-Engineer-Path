@@ -1,0 +1,304 @@
+WEBVTT
+
+00:01.020 --> 00:01.860
+Instructor: Okay, in this lecture,
+
+00:01.860 --> 00:05.400
+we are going to write RabbitMQ definition file,
+
+00:05.400 --> 00:07.200
+and the service for that.
+
+00:07.200 --> 00:10.770
+So let's click on this rabbitmqdeploy.yaml,
+
+00:10.770 --> 00:14.910
+and let's copy everything from dbdeploy.yaml
+
+00:14.910 --> 00:16.800
+except we'll remove the volume part.
+
+00:16.800 --> 00:18.213
+The rest we will need.
+
+00:20.520 --> 00:23.703
+So, we don't need any initContainers and volumes.
+
+00:26.310 --> 00:28.080
+Secret, we'll need.
+
+00:28.080 --> 00:30.363
+We don't need to mount the volume anywhere.
+
+00:32.280 --> 00:35.103
+Okay, now let's change the name from vprodb to RMQ.
+
+00:37.191 --> 00:40.923
+Here, here, here,
+
+00:41.820 --> 00:43.863
+here, and here.
+
+00:44.960 --> 00:46.770
+Now I'll remove this 01.
+
+00:46.770 --> 00:48.633
+It's not really required.
+
+00:49.679 --> 00:52.020
+VPRORMQ.
+
+00:52.020 --> 00:54.200
+Okay, that's the name I'm going to give.
+
+00:54.200 --> 00:55.859
+VPRORMQ.
+
+00:55.859 --> 01:00.450
+Vprormq, vprormq and here also.
+
+01:01.650 --> 01:05.070
+Now this name is not referred anywhere outside
+
+01:05.070 --> 01:06.180
+except in the service.
+
+01:06.180 --> 01:07.920
+But application properties file,
+
+01:07.920 --> 01:08.760
+the name that is given,
+
+01:08.760 --> 01:10.650
+that is of the service name.
+
+01:10.650 --> 01:12.270
+So, service name really matters
+
+01:12.270 --> 01:14.760
+based on our application properties file.
+
+01:14.760 --> 01:16.470
+But the pod does not matter.
+
+01:16.470 --> 01:18.840
+We can give same everywhere here.
+
+01:18.840 --> 01:21.270
+Okay, now image will be RabbitMQ official image,
+
+01:21.270 --> 01:23.770
+and official RabbitMQ image name is just RabbitMQ.
+
+01:25.170 --> 01:28.380
+Port number is 5672.
+
+01:28.380 --> 01:30.480
+And let's give a name.
+
+01:30.480 --> 01:32.943
+Vprormq-port.
+
+01:33.870 --> 01:36.720
+Okay, though now we have variable,
+
+01:36.720 --> 01:38.460
+we need to set two variables.
+
+01:38.460 --> 01:40.410
+If you remember the Docker Compose file,
+
+01:40.410 --> 01:42.243
+just open the Docker compose file.
+
+01:43.200 --> 01:44.790
+For RabbitMQ, we need to set this
+
+01:44.790 --> 01:49.080
+to user RabbitMQ default user and RabbitMQ default pass.
+
+01:49.080 --> 01:51.720
+So password, we have stored it in the secret,
+
+01:51.720 --> 01:55.080
+we can use that one, but this variable we have to set.
+
+01:55.080 --> 01:59.910
+So environment name of the variable RabbitMQ default pass.
+
+01:59.910 --> 02:02.790
+Value from secret key reference, this is the same secret,
+
+02:02.790 --> 02:05.040
+but the key in that secret.
+
+02:05.040 --> 02:06.060
+Let's check that.
+
+02:06.060 --> 02:07.743
+It's rmq-pass.
+
+02:09.690 --> 02:12.030
+Rmq-pass over here.
+
+02:12.030 --> 02:15.450
+We need to set one more variable, RabbitMQ default user,
+
+02:15.450 --> 02:17.700
+and that we can just give it.
+
+02:17.700 --> 02:19.623
+Yes, it's value directly over here.
+
+02:21.300 --> 02:26.130
+So just hyphen name, the variable name, value, guest,
+
+02:26.130 --> 02:29.100
+but here the value is coming from the secret.
+
+02:29.100 --> 02:30.780
+Okay, that is all.
+
+02:30.780 --> 02:31.983
+Let's just save it.
+
+02:33.240 --> 02:35.250
+Okay, now let's create a service for this one.
+
+02:35.250 --> 02:40.050
+So MC RMQ service, let's open this file.
+
+02:40.050 --> 02:42.630
+And I will open this MC service file
+
+02:42.630 --> 02:45.630
+because I'm going to copy everything from here.
+
+02:45.630 --> 02:48.930
+And I'll go to RMQ service file and paste it
+
+02:48.930 --> 02:50.523
+and let's make changes.
+
+02:51.480 --> 02:53.520
+First the target port name,
+
+02:53.520 --> 02:58.520
+let me get some RMQ deploy file,
+
+02:58.830 --> 03:02.250
+the container port name is with prormq-port.
+
+03:02.250 --> 03:06.063
+Let's copy that and give it over here.
+
+03:08.130 --> 03:10.020
+Make sure you're copying things in the right files.
+
+03:10.020 --> 03:11.790
+Rmqservice.yaml file.
+
+03:11.790 --> 03:13.890
+This is what we are editing.
+
+03:13.890 --> 03:16.503
+Front end port will be 5672.
+
+03:18.390 --> 03:20.490
+And the service name
+
+03:20.490 --> 03:24.300
+depends on what's in the application properties file.
+
+03:24.300 --> 03:28.380
+So the service name here is or the RabbitMQ address
+
+03:28.380 --> 03:33.380
+is with vpromq01 and port is 5672.
+
+03:33.390 --> 03:36.360
+Let's go to rmqservice.yaml file.
+
+03:36.360 --> 03:39.690
+And we have to make sure the service name is same
+
+03:39.690 --> 03:42.060
+what is in application properties file
+
+03:42.060 --> 03:45.360
+and port number 5672 that you already given.
+
+03:45.360 --> 03:46.320
+Okay, selector.
+
+03:46.320 --> 03:49.260
+So let's go to RabbitMQ deploy file.
+
+03:49.260 --> 03:51.240
+Let's get the label of the pod.
+
+03:51.240 --> 03:52.743
+That's the label of the pod.
+
+03:53.790 --> 03:56.850
+Now let's make sure that is the label we give over here.
+
+03:56.850 --> 03:58.773
+There's the selector.
+
+04:02.730 --> 04:04.440
+Once again, remember in the service,
+
+04:04.440 --> 04:08.010
+the service name should match with the configuration file,
+
+04:08.010 --> 04:11.280
+its front end port should match with the configuration file.
+
+04:11.280 --> 04:15.810
+Back end information should match with the pod information.
+
+04:15.810 --> 04:20.430
+Right, like the selector, the back end port number,
+
+04:20.430 --> 04:23.160
+which will be the container port of the pod.
+
+04:23.160 --> 04:24.630
+And type is again cluster IP
+
+04:24.630 --> 04:27.393
+because this is for internal communication only.
+
+04:28.320 --> 04:30.360
+Save this once again, match it
+
+04:30.360 --> 04:34.650
+with the code in the Kube app branch, make sure it's same
+
+04:34.650 --> 04:36.600
+and make sure you did not make any change
+
+04:36.600 --> 04:40.530
+in the memcache service file or any other file.
+
+04:40.530 --> 04:43.740
+If I made such changes then revert it back.
+
+04:43.740 --> 04:47.028
+This lecture we're just editing rmqservice.yaml
+
+04:47.028 --> 04:48.850
+and rmqdeploy.yaml.
+
+04:48.850 --> 04:50.610
+Okay, so validate all those things,
+
+04:50.610 --> 04:54.240
+naming convention, port number, everything checked properly.
+
+04:54.240 --> 04:55.110
+If everything is good,
+
+04:55.110 --> 04:57.393
+save it and then join me in the next lecture.

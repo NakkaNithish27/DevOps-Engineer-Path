@@ -1,0 +1,709 @@
+WEBVTT
+
+00:01.380 --> 00:02.213
+Instructor: Welcome.
+
+00:02.213 --> 00:07.213
+In this lecture, we will see some amazing S3 bucket features
+
+00:07.350 --> 00:10.770
+that will help us save costs in long run
+
+00:10.770 --> 00:13.860
+and follow disaster recovery compliance
+
+00:13.860 --> 00:15.363
+and few other things.
+
+00:17.100 --> 00:21.030
+I know this is getting more in depth, but this will be short
+
+00:21.030 --> 00:23.070
+and very essential for you to know
+
+00:23.070 --> 00:26.430
+as a DevOps engineer or architect.
+
+00:26.430 --> 00:30.060
+So on your S3 bucket, go to management tab
+
+00:30.060 --> 00:32.883
+and you will see here lifecycle rules.
+
+00:33.930 --> 00:38.220
+So these rules define the transition of objects
+
+00:38.220 --> 00:42.183
+from one storage class to other based on its age.
+
+00:43.320 --> 00:45.930
+We can understand this by doing it.
+
+00:45.930 --> 00:48.093
+Click on create lifecycle rule.
+
+00:49.200 --> 00:52.080
+So before we get into this, why do you really need
+
+00:52.080 --> 00:55.230
+to transition object storage class
+
+00:55.230 --> 00:57.603
+from one class to another?
+
+00:58.620 --> 01:01.470
+This is to save costs.
+
+01:01.470 --> 01:04.930
+By default, we have stored it in standard Storage class
+
+01:06.570 --> 01:08.250
+when it is accessed frequently,
+
+01:08.250 --> 01:10.590
+but if it's not accessed frequently,
+
+01:10.590 --> 01:12.693
+why to unnecessary pay for it?
+
+01:13.650 --> 01:16.230
+So we will give the name of the rule
+
+01:16.230 --> 01:21.230
+as CostEffectiveTransitions, it's really just a name.
+
+01:22.230 --> 01:26.370
+Now, you can apply that on all the objects
+
+01:26.370 --> 01:30.150
+or you can limit by giving a prefix, right?
+
+01:30.150 --> 01:32.250
+So any file that starts with the name image
+
+01:32.250 --> 01:35.700
+or whatever, those files only will be transitioned.
+
+01:35.700 --> 01:37.680
+We'll say just apply all object.
+
+01:37.680 --> 01:40.233
+Again, this is based on your use case.
+
+01:41.520 --> 01:43.743
+Now, keep in mind, this bucket is versioned.
+
+01:44.880 --> 01:47.580
+So you should define rules for the current object
+
+01:47.580 --> 01:51.930
+and the non-current version object also
+
+01:51.930 --> 01:54.450
+if you want to save the cost.
+
+01:54.450 --> 01:55.590
+Otherwise, there's no point
+
+01:55.590 --> 01:57.900
+in just transitioning the current version object
+
+01:57.900 --> 01:59.737
+because the old version still exists over there
+
+01:59.737 --> 02:03.720
+and it'll be still occupying the space.
+
+02:03.720 --> 02:07.230
+So move current version object between storage class,
+
+02:07.230 --> 02:09.480
+move non-current version also.
+
+02:09.480 --> 02:11.793
+You can also expire object.
+
+02:12.690 --> 02:15.390
+In a non-versioned bucket, expire means delete.
+
+02:15.390 --> 02:19.590
+In a versioned bucket, that means place a delete marker.
+
+02:19.590 --> 02:22.980
+So you also need to permanently delete non-current versions
+
+02:22.980 --> 02:24.210
+of the objects.
+
+02:24.210 --> 02:27.243
+Again, this is based on age that we are going to define now.
+
+02:28.950 --> 02:32.400
+If there is an incomplete upload,
+
+02:32.400 --> 02:35.370
+you can also delete those objects.
+
+02:35.370 --> 02:38.550
+So transition from, you know, current storage class,
+
+02:38.550 --> 02:39.660
+which is Standard
+
+02:39.660 --> 02:44.660
+to Standard Infrequent Access in how many days?
+
+02:45.720 --> 02:48.390
+Let's say 30 days. I'm just throwing some numbers over here.
+
+02:48.390 --> 02:52.410
+These numbers will be based on your use cases.
+
+02:52.410 --> 02:54.660
+And from Standard Infrequent Access
+
+02:54.660 --> 02:57.060
+to let's say One Zone Infrequent Access,
+
+02:57.060 --> 02:58.560
+which is much cheaper than that.
+
+02:58.560 --> 03:03.450
+So let's say after 60 days, 60 days age of the object
+
+03:03.450 --> 03:07.050
+and then Glacier Flexible Retrieval.
+
+03:07.050 --> 03:09.910
+This is formerly called as Glacier
+
+03:10.890 --> 03:13.473
+and I will say 90 days, again, it's cheaper.
+
+03:13.473 --> 03:15.480
+Then you have Glacier Deep Archive,
+
+03:15.480 --> 03:17.070
+which is the cheapest one,
+
+03:17.070 --> 03:19.740
+but if you want to transition to Glacier Deep Archive,
+
+03:19.740 --> 03:23.310
+it should be 90 days more than this time.
+
+03:23.310 --> 03:27.573
+So 90 plus 90, 180 I can give. 180 or more.
+
+03:29.190 --> 03:31.740
+Okay, now this is for current version.
+
+03:31.740 --> 03:34.800
+I acknowledge this, but the previous versions also,
+
+03:34.800 --> 03:35.943
+I will do the same.
+
+03:37.320 --> 03:39.810
+So non-current version, I'll say move to Standard Infrequent
+
+03:39.810 --> 03:43.950
+after 35 days and One Zone Infrequent Access
+
+03:43.950 --> 03:47.070
+after 65 days.
+
+03:47.070 --> 03:49.860
+Glacier, I'll say 95 days.
+
+03:49.860 --> 03:54.860
+And Glacier Deep Archive, I will say 185 days.
+
+03:54.960 --> 03:56.520
+Okay, there should be 90 days difference
+
+03:56.520 --> 03:57.663
+in between this both.
+
+04:00.090 --> 04:01.080
+And I acknowledge.
+
+04:01.080 --> 04:03.753
+So version and non-version both.
+
+04:05.490 --> 04:07.860
+Then I want to expire the object,
+
+04:07.860 --> 04:11.910
+let's say after 45 days, sorry, 450 days.
+
+04:11.910 --> 04:14.850
+I don't need that. Again, just a number.
+
+04:14.850 --> 04:16.230
+You need to decide what's right
+
+04:16.230 --> 04:18.480
+for you based on your project.
+
+04:18.480 --> 04:20.610
+And then permanently delete non-current version
+
+04:20.610 --> 04:23.010
+because this is going to again, place a delete marker
+
+04:23.010 --> 04:24.840
+because it's a versioned bucket.
+
+04:24.840 --> 04:28.290
+So I will say 455 days, delete.
+
+04:28.290 --> 04:31.350
+So permanently all the objects will be deleted
+
+04:31.350 --> 04:33.600
+after 455 days.
+
+04:33.600 --> 04:36.870
+And in between these times, it'll be transitioning
+
+04:36.870 --> 04:40.260
+from one storage class to another one, the cheapest
+
+04:40.260 --> 04:42.660
+or cheaper, cheaper till it expires
+
+04:42.660 --> 04:45.570
+after 455 days everything.
+
+04:45.570 --> 04:48.540
+Incomplete upload, I want to delete that also.
+
+04:48.540 --> 04:51.753
+Let's say after maybe just 15 days.
+
+04:54.000 --> 04:56.190
+Okay, if everything is good, if your rules are good,
+
+04:56.190 --> 04:58.140
+if you click on create rule, it will get created.
+
+04:58.140 --> 05:00.180
+Otherwise, it'll throw some error that you need
+
+05:00.180 --> 05:02.130
+to make this or that changes.
+
+05:02.130 --> 05:03.903
+So let's click on create rule,
+
+05:05.550 --> 05:06.873
+and the rule is created.
+
+05:10.020 --> 05:11.940
+So you can edit the rules also later.
+
+05:11.940 --> 05:12.960
+You can check its detail
+
+05:12.960 --> 05:15.483
+or you can delete the lifecycle rule as well.
+
+05:18.300 --> 05:22.230
+So this is good for cost cutting,
+
+05:22.230 --> 05:23.940
+but then you have one more.
+
+05:23.940 --> 05:25.640
+Okay, let's go back to management.
+
+05:26.490 --> 05:29.130
+One more very common requirement or you need to follow it
+
+05:29.130 --> 05:31.800
+because of the compliance also.
+
+05:31.800 --> 05:32.970
+That is disaster recovery.
+
+05:32.970 --> 05:37.290
+What happens if everything is gone from the S3 bucket due
+
+05:37.290 --> 05:38.430
+to some disaster?
+
+05:38.430 --> 05:43.380
+Now, this is rare because we discussed about the zones.
+
+05:43.380 --> 05:47.250
+They are in different places in one region
+
+05:47.250 --> 05:50.070
+and we have our data in multiple zones,
+
+05:50.070 --> 05:54.660
+but a disaster is a disaster, and compliance is compliance.
+
+05:54.660 --> 05:57.060
+So for disaster recovery, one very common thing
+
+05:57.060 --> 06:01.860
+is to have the data replicated to another region,
+
+06:01.860 --> 06:04.380
+the other part of the world,
+
+06:04.380 --> 06:06.530
+a different country, a different continent.
+
+06:07.440 --> 06:10.890
+So first, we'll do this, we'll go to a different region.
+
+06:10.890 --> 06:13.270
+Let's say I will select here Oregon
+
+06:15.360 --> 06:18.453
+and I will create a bucket in another region.
+
+06:19.920 --> 06:22.620
+I just named it as barista908dr
+
+06:22.620 --> 06:26.463
+and I'll simply create the bucket.
+
+06:27.960 --> 06:30.420
+Okay, let's go back to our original bucket
+
+06:30.420 --> 06:34.320
+and we'll set a replication rule, create replication rule.
+
+06:34.320 --> 06:37.290
+It's pretty simple and just give our replication rule,
+
+06:37.290 --> 06:41.730
+I'll say DisasterRecoveryBarista908.
+
+06:41.730 --> 06:43.170
+Status: enabled.
+
+06:43.170 --> 06:44.910
+And now you can do it
+
+06:44.910 --> 06:47.430
+for replicate all the objects,
+
+06:47.430 --> 06:48.870
+again based on your requirement
+
+06:48.870 --> 06:51.303
+or you can limit the scope by giving a filter.
+
+06:52.260 --> 06:54.180
+Choose the destination bucket.
+
+06:54.180 --> 06:57.450
+Now, you can select a bucket in another account also.
+
+06:57.450 --> 06:59.550
+If you select that, you need to give the account ID
+
+06:59.550 --> 07:01.170
+and the bucket path.
+
+07:01.170 --> 07:03.690
+We'll just do it in the same account.
+
+07:03.690 --> 07:06.250
+I will say browse, and we'll select
+
+07:07.800 --> 07:09.780
+and we'll select the destination bucket.
+
+07:09.780 --> 07:12.000
+It's in different region you see there.
+
+07:12.000 --> 07:15.000
+If you don't see your bucket in a different region,
+
+07:15.000 --> 07:17.520
+if you don't see the name of the bucket,
+
+07:17.520 --> 07:19.440
+then just refresh the page.
+
+07:19.440 --> 07:21.630
+Sometimes it takes a little while.
+
+07:21.630 --> 07:22.463
+Choose path.
+
+07:24.180 --> 07:26.220
+Now, the versioning needs to be enabled
+
+07:26.220 --> 07:27.360
+in the destination bucket.
+
+07:27.360 --> 07:29.160
+So you can do it from here also,
+
+07:29.160 --> 07:31.810
+or you can go to the S3 bucket and enable versioning.
+
+07:33.240 --> 07:36.420
+IAM role, we'll talk about IAM role later.
+
+07:36.420 --> 07:38.430
+Just click on create new IAM role.
+
+07:38.430 --> 07:42.000
+This creates a permission on the destination bucket
+
+07:42.000 --> 07:45.240
+that source bucket can copy data in it.
+
+07:45.240 --> 07:46.920
+Encryption, by default, there is encryption,
+
+07:46.920 --> 07:49.560
+but if you want to do encryption with KMS,
+
+07:49.560 --> 07:51.300
+then you can do that.
+
+07:51.300 --> 07:52.590
+Destination storage class.
+
+07:52.590 --> 07:54.600
+Now, you don't want the disaster recovery,
+
+07:54.600 --> 07:56.670
+the destination bucket in the disaster recovery
+
+07:56.670 --> 07:58.230
+to be standard storage.
+
+07:58.230 --> 08:00.330
+It won't be accessed frequently.
+
+08:00.330 --> 08:03.510
+So you can change the storage class of it.
+
+08:03.510 --> 08:06.390
+Now, like One Zone Infrequent Access
+
+08:06.390 --> 08:10.830
+or Standard Infrequent Access based again on your use case.
+
+08:10.830 --> 08:13.710
+So I will select that and there are a few other options.
+
+08:13.710 --> 08:17.340
+You can make the replication faster by paying extra,
+
+08:17.340 --> 08:20.910
+but for disaster recovery, really we don't do that.
+
+08:20.910 --> 08:22.530
+But if the use case is different,
+
+08:22.530 --> 08:23.940
+you need to replicate faster
+
+08:23.940 --> 08:26.700
+than you can use replication time control.
+
+08:26.700 --> 08:29.610
+So within 15 minutes, 99.99%
+
+08:29.610 --> 08:31.200
+of the object will be replicated.
+
+08:31.200 --> 08:33.030
+Otherwise it takes time.
+
+08:33.030 --> 08:35.100
+You need to copy the delete marker.
+
+08:35.100 --> 08:36.960
+You can do that also.
+
+08:36.960 --> 08:38.760
+You can generate the replication metrics.
+
+08:38.760 --> 08:41.460
+Again, all this will cost you extra.
+
+08:41.460 --> 08:44.643
+I will just keep all this option as it is and say save.
+
+08:48.060 --> 08:49.500
+Okay, now, when you try to save,
+
+08:49.500 --> 08:51.210
+now, previously, it was like that,
+
+08:51.210 --> 08:53.340
+the replication will start for the new object.
+
+08:53.340 --> 08:55.980
+The existing object, you need to do replication yourself,
+
+08:55.980 --> 08:58.110
+but now you have an option.
+
+08:58.110 --> 09:01.770
+You can replicate the existing object.
+
+09:01.770 --> 09:05.070
+Don't do that. There will be charges for it.
+
+09:05.070 --> 09:07.830
+So again, if you have the use case
+
+09:07.830 --> 09:10.740
+to replicate it, then do that.
+
+09:10.740 --> 09:12.750
+But for now, for practice, just keep it.
+
+09:12.750 --> 09:15.453
+Do not replicate existing object and say submit.
+
+09:16.980 --> 09:20.610
+So in this case, existing object won't get replicated.
+
+09:20.610 --> 09:23.433
+The new objects that you upload will get replicated.
+
+09:25.170 --> 09:28.650
+Okay, so those are too many things I know on the S3,
+
+09:28.650 --> 09:30.930
+but since S3 is so popularly used
+
+09:30.930 --> 09:34.020
+and it's so much used as a DevOps
+
+09:34.020 --> 09:36.630
+or for the project, you'll always see this
+
+09:36.630 --> 09:39.300
+or any other storage service that you use, object storage,
+
+09:39.300 --> 09:40.500
+you'll have similar options.
+
+09:40.500 --> 09:43.140
+So as a DevOps, it's essential for you to know these kinds
+
+09:43.140 --> 09:45.240
+of option, go through different tabs.
+
+09:45.240 --> 09:47.640
+Again, go through different options.
+
+09:47.640 --> 09:51.060
+Just read them, have it in the back of your mind.
+
+09:51.060 --> 09:53.940
+You don't need to know all the options of S3 bucket
+
+09:53.940 --> 09:58.710
+as a DevOps, but these are pretty commonly used options.
+
+09:58.710 --> 10:00.870
+Go through metrics also you cannot see.
+
+10:00.870 --> 10:03.420
+You can generate metrics, replication metrics,
+
+10:03.420 --> 10:05.640
+storage class analysis, all those things.
+
+10:05.640 --> 10:09.090
+It's out of the scope of DevOps but go through it.
+
+10:09.090 --> 10:11.130
+It'll be helpful for you in the interview
+
+10:11.130 --> 10:13.110
+and making decisions.
+
+10:13.110 --> 10:16.110
+Access points, this you will understand
+
+10:16.110 --> 10:18.300
+when we do VPC in AWS part two.
+
+10:18.300 --> 10:20.970
+You can have a private access to your S3 bucket
+
+10:20.970 --> 10:23.040
+within the VPC itself.
+
+10:23.040 --> 10:24.750
+This won't make any sense when I'm saying this,
+
+10:24.750 --> 10:28.470
+but when you learn VPC, then you will understand this point.
+
+10:28.470 --> 10:30.573
+That in AWS part two we'll see.
+
+10:31.470 --> 10:33.810
+Okay, after this, just clean everything.
+
+10:33.810 --> 10:36.570
+Remove all the rules, delete all the buckets.
+
+10:36.570 --> 10:38.160
+I will show you how you can clean buckets.
+
+10:38.160 --> 10:39.860
+First, let me remove these things.
+
+10:40.830 --> 10:45.393
+So delete lifecycle rule, replication rule.
+
+10:47.490 --> 10:50.250
+Okay, so first, you need to clean the bucket
+
+10:50.250 --> 10:52.740
+and then you can remove the bucket
+
+10:52.740 --> 10:54.000
+or you can do it like this also.
+
+10:54.000 --> 10:56.200
+Select the bucket and say delete the bucket.
+
+10:57.090 --> 10:58.500
+First, you need to empty the bucket,
+
+10:58.500 --> 11:00.213
+so you can click empty the bucket.
+
+11:02.190 --> 11:03.453
+Permanently delete.
+
+11:05.220 --> 11:07.950
+Exist, the bucket still exists. The bucket is empty.
+
+11:07.950 --> 11:09.963
+Just now you can delete the bucket.
+
+11:12.330 --> 11:14.480
+Give the name of the bucket, delete bucket.
+
+11:15.990 --> 11:18.243
+Okay, like this, delete all the buckets.
+
+11:19.110 --> 11:22.500
+And then that's it for this service.
+
+11:22.500 --> 11:25.080
+We've learned quite a lot in S3.
+
+11:25.080 --> 11:27.633
+So complete this and join me in the next lecture.

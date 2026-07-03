@@ -1,0 +1,1294 @@
+WEBVTT
+
+00:00.160 --> 00:01.200
+Hello and welcome.
+
+00:01.200 --> 00:07.320
+In this lecture we are going to do some hands on on Maven build tool and also on NodeJS.
+
+00:07.840 --> 00:15.320
+So first open your browser and come to this link github.com slash coder slash profile hyphen project.
+
+00:15.760 --> 00:18.600
+This is the source code of our V profile project.
+
+00:18.600 --> 00:22.840
+And when you look at the content you will see one file here Pom.xml.
+
+00:22.880 --> 00:26.400
+That should tell you that this is a maven project.
+
+00:26.960 --> 00:32.720
+So this is the Java code in src you will have all your Java code written by the developers.
+
+00:33.240 --> 00:37.480
+The Pom.xml file is for the maven to get the information.
+
+00:37.800 --> 00:43.640
+So when we execute any Maven command it reads information from this XML file Pom.xml.
+
+00:44.560 --> 00:48.040
+So open this file Pom.xml.
+
+00:48.040 --> 00:54.680
+When the developer creates the code, they will initialize the Maven project that will generate this
+
+00:54.680 --> 00:59.660
+file, and then they will later keep making changes to this and push it into the repository.
+
+01:00.180 --> 01:02.900
+So XML really is the information file.
+
+01:02.900 --> 01:07.940
+If you look here closely you will see here for example you see here version.
+
+01:09.220 --> 01:11.580
+So you need to understand this syntax at least.
+
+01:11.580 --> 01:17.460
+So you see version in this symbol and you see a text v2.
+
+01:17.500 --> 01:18.980
+So this is the opening.
+
+01:19.140 --> 01:21.020
+And then this is the closing.
+
+01:21.340 --> 01:28.020
+You see a forward slash that is the closing of Maven wants to read a text or information version.
+
+01:28.020 --> 01:31.700
+It is going to check the file and look at the information and sees here.
+
+01:31.700 --> 01:34.300
+That's v2 for URL.
+
+01:34.300 --> 01:36.940
+You see here the URL for the maven.
+
+01:37.380 --> 01:39.580
+And then you have cascading information like here.
+
+01:39.580 --> 01:42.100
+Property starts over here, ends over there.
+
+01:42.100 --> 01:45.580
+And in between this you have a lot of information.
+
+01:45.580 --> 01:47.020
+These are basically variables.
+
+01:47.020 --> 01:55.460
+For example spring version is a variable and its value is 6.0.1 MySQL connector version.
+
+01:55.460 --> 01:58.330
+Its value is 8.0.33.
+
+01:58.370 --> 02:02.890
+Just focus on the opening and closing, and in between that you have your data.
+
+02:03.570 --> 02:03.850
+Okay.
+
+02:03.890 --> 02:05.770
+So these are some information.
+
+02:05.770 --> 02:07.930
+These are variables in the properties.
+
+02:07.930 --> 02:11.370
+And then you have your dependencies and dependencies.
+
+02:11.370 --> 02:12.810
+You have every dependency.
+
+02:12.810 --> 02:14.530
+You see this is one dependency.
+
+02:14.970 --> 02:18.930
+Opening and closing in between you have information about this dependency.
+
+02:19.330 --> 02:20.490
+So group ID.
+
+02:20.930 --> 02:24.010
+Artifact ID and the version.
+
+02:24.050 --> 02:28.130
+Now version is another variable you see here dollar spring dot version.
+
+02:28.130 --> 02:29.970
+Its value will be defined here.
+
+02:30.450 --> 02:31.570
+Spring dot version.
+
+02:32.010 --> 02:36.850
+So you don't need to fully understand this, but you should be able to make changes if required.
+
+02:36.850 --> 02:39.890
+But most of the time it will be the developers who write the code.
+
+02:39.890 --> 02:44.450
+They make the changes, but you should have basic idea of the syntax.
+
+02:44.850 --> 02:47.450
+So you see, you have a lot of dependencies over here.
+
+02:48.890 --> 02:53.890
+So when you run your maven command it's going to look for dependencies, its version and download it
+
+02:53.890 --> 02:55.790
+from the Maven repository.
+
+02:56.310 --> 02:57.950
+We'll see all this in action.
+
+02:57.950 --> 03:00.230
+We need one Linux machine.
+
+03:00.230 --> 03:04.430
+So we are going to launch an EC2 instance with ubuntu operating system.
+
+03:04.870 --> 03:08.790
+So I'm on my AWS Management console in EC2 I'm going to say launch instance.
+
+03:09.270 --> 03:10.870
+I'm going to name it as builder.
+
+03:11.510 --> 03:13.230
+For now I'm selecting ubuntu.
+
+03:13.270 --> 03:13.550
+Later.
+
+03:13.550 --> 03:16.630
+We're going to also work on Amazon Linux 2023.
+
+03:16.910 --> 03:18.870
+So base OS can be anything.
+
+03:18.870 --> 03:24.510
+But you need to have right version of your tools and then the dependencies will get installed on them.
+
+03:24.910 --> 03:27.790
+So for this one we are going with ubuntu 2024.
+
+03:28.710 --> 03:30.630
+T2 micro will be sufficient.
+
+03:30.630 --> 03:36.190
+Let's create a key pair and name it as build key PEM format create key pair.
+
+03:36.870 --> 03:38.230
+Private key is downloaded.
+
+03:38.230 --> 03:40.350
+Let me create a new security group.
+
+03:40.350 --> 03:44.270
+So I'm going to say edit and name it as build SG.
+
+03:46.630 --> 03:49.590
+Same in description 22 from my IP.
+
+03:49.590 --> 03:50.030
+That's all.
+
+03:50.030 --> 03:54.460
+We just need to SSH to it and let's say launch instance.
+
+03:55.420 --> 03:57.500
+Okay, so I have my instance up and running.
+
+03:57.500 --> 03:58.860
+We're going to log in to this.
+
+03:58.860 --> 04:04.020
+And we are going to clone this source code and then build it with Maven.
+
+04:04.020 --> 04:06.180
+We're going to install the proper dependencies.
+
+04:06.180 --> 04:09.260
+And I'm going to show some options tips and tricks okay.
+
+04:09.300 --> 04:11.460
+So let's copy the public IP.
+
+04:11.660 --> 04:17.740
+Open your git bash or terminal ssh hyphen I downloads.
+
+04:17.740 --> 04:23.780
+My key name is build key and username is ubuntu at the rate the IP.
+
+04:24.660 --> 04:27.140
+Yes okay I'm in.
+
+04:27.180 --> 04:32.340
+Let me switch to root user and clear the screen okay.
+
+04:32.340 --> 04:34.020
+So we're going to clone the source code.
+
+04:34.020 --> 04:37.420
+We know the source code can be built by Maven.
+
+04:37.420 --> 04:42.660
+So we need to install Maven and Maven needs JDK Java Development Kit.
+
+04:42.660 --> 04:44.700
+So first we need to install JDK.
+
+04:45.300 --> 04:46.260
+So this is ubuntu.
+
+04:46.300 --> 04:48.180
+First let me run the APT update command.
+
+04:48.180 --> 04:50.620
+And then we're going to search for JDK.
+
+04:50.660 --> 04:53.480
+We can go with JDK 17 and 21.
+
+04:53.480 --> 04:54.320
+Both works.
+
+04:54.840 --> 04:59.120
+So in Java you will see these two names JRE and JDK.
+
+04:59.320 --> 05:05.200
+JRE is Java Runtime Environment and JDK is Java Development Kit.
+
+05:05.480 --> 05:08.080
+So to build the project you need JDK.
+
+05:08.600 --> 05:15.760
+So let's search for apt search JDK that will give you a huge list.
+
+05:15.760 --> 05:16.840
+Let's filter it.
+
+05:16.880 --> 05:24.960
+Pipe grep and let's say 17 okay so you see here open JDK 17 JDK.
+
+05:25.000 --> 05:26.600
+That's what we need to install.
+
+05:26.840 --> 05:28.920
+You see there is same one with JRE.
+
+05:29.000 --> 05:33.680
+That's Java runtime environment that is just to run the Java application.
+
+05:33.920 --> 05:37.960
+But in order to do some development work like we are doing you need JDK.
+
+05:38.600 --> 05:40.720
+So there's also JDK 21.
+
+05:40.720 --> 05:43.080
+And this also works for project.
+
+05:43.440 --> 05:46.320
+And as a matter of fact we are going to install both the JDK.
+
+05:46.320 --> 05:50.190
+And I'm also going to show you how you can switch from one version to another version.
+
+05:50.630 --> 05:53.750
+First, let's start with JDK 21.
+
+05:54.350 --> 05:55.990
+Okay, so run this command apt.
+
+05:55.990 --> 05:58.110
+Install open JDK hyphen 21.
+
+05:58.150 --> 05:59.870
+Hyphen jdk hyphen y.
+
+06:00.310 --> 06:02.190
+This should install JDK 21.
+
+06:04.390 --> 06:04.630
+Okay.
+
+06:04.670 --> 06:05.230
+It's installed.
+
+06:05.230 --> 06:07.710
+Let's check the version Java hyphen version.
+
+06:07.710 --> 06:13.190
+That's the command to check the version it says JDK 21.
+
+06:13.670 --> 06:18.870
+Now we are going to install Maven so the command will be apt.
+
+06:19.070 --> 06:22.230
+Install apt install Maven.
+
+06:22.230 --> 06:24.550
+Now again you can search apt search Maven.
+
+06:24.550 --> 06:26.550
+It's already there in ubuntu 24.
+
+06:28.030 --> 06:30.310
+Now Maven version also matters.
+
+06:30.310 --> 06:33.470
+Our project runs on various versions of Maven.
+
+06:33.670 --> 06:36.550
+Let me clear the screen and show you the Maven version.
+
+06:36.550 --> 06:41.470
+So you run the command Mvn hyphen version and you should see the Maven version.
+
+06:41.470 --> 06:47.450
+So it's 3.8.7 and it's using the default Java version, which is 21.
+
+06:47.770 --> 06:55.970
+Now our project works on various versions of Maven and JDK 21 and 17, but that won't be the case for
+
+06:55.970 --> 06:58.210
+every project as it develops.
+
+06:58.210 --> 07:04.370
+It's your duty to get information from the developer on what version of the software or the tools are
+
+07:04.370 --> 07:05.290
+required.
+
+07:05.290 --> 07:06.890
+You need to get this list.
+
+07:07.570 --> 07:12.930
+If it's Java, get the Java version, Maven version if it's node, get the node version.
+
+07:13.410 --> 07:17.810
+Likewise, any code, any build tool, you get information from the developers.
+
+07:17.850 --> 07:21.130
+Of course, they will be having this because they do it on their machine.
+
+07:21.490 --> 07:25.770
+And based on that, you're going to install that version of that particular tool.
+
+07:25.930 --> 07:29.930
+Over here we are using 3.8 and Java 21.
+
+07:30.370 --> 07:34.970
+And I'm going to I'm going to also show you how to switch between these different versions.
+
+07:34.970 --> 07:37.890
+You can have multiple versions of the same tool okay.
+
+07:37.890 --> 07:39.210
+Now let's clone the source code.
+
+07:39.210 --> 07:42.810
+So you're going to say git clone space and get the source code link.
+
+07:43.290 --> 07:44.290
+So go to the browser.
+
+07:44.330 --> 07:49.880
+Go to this link github.com slash coder slash profile hyphen project.
+
+07:50.160 --> 07:53.840
+And over here on the code click on drop down select https.
+
+07:54.440 --> 07:55.920
+Make sure you select https.
+
+07:56.480 --> 08:00.760
+Copy this and say git clone and this URL hit enter.
+
+08:01.800 --> 08:03.080
+That should clone the source code.
+
+08:03.080 --> 08:05.920
+This is a public repository so anybody can clone it.
+
+08:07.280 --> 08:08.400
+Okay it's done.
+
+08:08.440 --> 08:12.760
+And let's and let's now silently get into this folder.
+
+08:13.560 --> 08:13.880
+Okay.
+
+08:13.880 --> 08:18.280
+Let me clear the screen PWD LZ check.
+
+08:18.320 --> 08:20.200
+You should be in this folder.
+
+08:20.720 --> 08:26.320
+You run the command git status and you should be in the branch local or any other branch.
+
+08:26.720 --> 08:27.360
+All the branch.
+
+08:27.400 --> 08:28.120
+Most of the branch.
+
+08:28.120 --> 08:29.240
+We have the same source code.
+
+08:29.240 --> 08:32.920
+But check you have pom.xml you have this src folder.
+
+08:33.520 --> 08:34.320
+That's important.
+
+08:34.320 --> 08:36.520
+You can be on local branch.
+
+08:36.560 --> 08:36.720
+Okay.
+
+08:36.760 --> 08:43.980
+If you see you're in a different branch you can just do git branch hyphen a list all the branches and
+
+08:43.980 --> 08:46.220
+you can then switch to the branch that you need.
+
+08:46.260 --> 08:48.180
+Git checkout and the branch name.
+
+08:48.660 --> 08:51.180
+So we're already in local branch and that is fine.
+
+08:53.220 --> 08:56.620
+Now let's run our first Maven command Maven validate.
+
+08:56.620 --> 08:58.780
+That validates the directory structure.
+
+08:59.980 --> 09:01.300
+Now that's a mistake.
+
+09:01.340 --> 09:02.180
+That's a mistake.
+
+09:02.180 --> 09:04.020
+Validate spelling.
+
+09:04.300 --> 09:04.580
+Yeah.
+
+09:04.580 --> 09:09.700
+You see there it says unknown lifecycle phase Y date I don't know what to spell it.
+
+09:10.100 --> 09:10.620
+Okay.
+
+09:10.660 --> 09:11.940
+Mvn validate.
+
+09:13.380 --> 09:13.620
+Okay.
+
+09:13.660 --> 09:15.500
+It should give you a build success.
+
+09:16.180 --> 09:18.660
+Now let's run mvn test.
+
+09:18.780 --> 09:23.580
+Now any maven command is going to read it from the Pom.xml file the information.
+
+09:23.940 --> 09:28.060
+So Mvn test and it's going to get to the source code.
+
+09:28.700 --> 09:33.940
+Execute the test cases, the unit test cases written by the developers.
+
+09:34.460 --> 09:38.460
+And once this completes it's going to generate a report in the target folder.
+
+09:39.300 --> 09:44.360
+So build tools will have the capacity to run the test cases written by the developer.
+
+09:44.400 --> 09:45.920
+These are called as unit tests.
+
+09:46.680 --> 09:50.200
+So for this Java code we have this JUnit test cases.
+
+09:50.480 --> 09:53.480
+And we can execute them by running Mvn test command.
+
+09:54.440 --> 09:54.760
+Okay.
+
+09:54.800 --> 09:59.480
+When this is completed you run the LS command and you should see a target folder.
+
+09:59.840 --> 10:02.080
+This folder will have the reports.
+
+10:02.080 --> 10:02.680
+The output.
+
+10:02.680 --> 10:06.800
+Basically target folder in Maven will have the output of your Maven command.
+
+10:07.120 --> 10:09.720
+So right now we just executed Mvn test.
+
+10:09.720 --> 10:11.920
+So you should see the reports in this.
+
+10:12.160 --> 10:18.760
+We're going to talk about this in detail in Jenkins lecture where we do more analysis on this unit tests.
+
+10:19.400 --> 10:22.560
+Now we are going to run the command Mvn install.
+
+10:22.760 --> 10:24.080
+This command is going to fail.
+
+10:24.080 --> 10:25.760
+We are going to see one error.
+
+10:25.800 --> 10:28.920
+We'll find the root cause of it and then we will fix it.
+
+10:30.400 --> 10:32.560
+So I'm just going through the different phases of Maven.
+
+10:32.560 --> 10:34.480
+Now you know we discussed about this.
+
+10:34.520 --> 10:38.240
+If we run the install phase it's going to execute all the previous phases.
+
+10:38.240 --> 10:44.110
+And when we install this maven command, it's going to read the pom.xml file and also download dependencies.
+
+10:44.270 --> 10:51.310
+So if we run Mvn install or any maven command that needs dependencies, you see it is downloading dependencies.
+
+10:51.350 --> 10:52.670
+You see that downloaded.
+
+10:53.390 --> 10:57.950
+So a dependency mentioned in Pom.xml will have many more dependencies.
+
+10:58.390 --> 11:02.310
+So you will see huge list of files getting downloaded.
+
+11:02.310 --> 11:04.230
+And you see this URL over here.
+
+11:05.670 --> 11:11.510
+So this is the Global Maven repository from where by default Maven downloads its dependencies.
+
+11:11.950 --> 11:17.630
+You can have your own developed Maven repository or any other build repository.
+
+11:17.870 --> 11:23.830
+I have shown this in DevOps projects course how you can build your own repository because that is requirement.
+
+11:23.830 --> 11:28.950
+In some projects you can have your own proxy repository for your build tools.
+
+11:29.470 --> 11:31.990
+So these dependencies will be stored.
+
+11:32.030 --> 11:34.230
+Let me scroll down okay.
+
+11:34.350 --> 11:34.710
+So.
+
+11:39.410 --> 11:41.810
+So we'll come back to this error in a moment.
+
+11:41.810 --> 11:45.810
+But let's talk about first the dependencies where it is stored and the output.
+
+11:46.130 --> 11:53.970
+So when it downloads the dependencies by default it gets stored in this folder in your home directory
+
+11:53.970 --> 11:55.410
+you have dot m2.
+
+11:56.210 --> 11:58.610
+And this you should have a repository folder.
+
+11:59.010 --> 12:01.930
+And over here you should see this dependencies downloaded.
+
+12:01.930 --> 12:03.410
+You can anytime remove them.
+
+12:03.410 --> 12:04.850
+Sometimes you need to remove them.
+
+12:04.850 --> 12:09.570
+Actually if you're changing the Maven version or if you're changing some dependencies, it's better
+
+12:09.570 --> 12:10.370
+to remove them.
+
+12:10.370 --> 12:11.170
+You can do that.
+
+12:11.170 --> 12:14.490
+So I'm going to clear the screen and show you.
+
+12:14.530 --> 12:16.650
+So I'm going to say rm hyphen rf tilde.
+
+12:16.650 --> 12:22.530
+That means your home directory slash dot m2 m2 repository.
+
+12:23.050 --> 12:24.010
+And in that star.
+
+12:24.010 --> 12:28.610
+So remove all the folder from the repository folder, remove all the dependency.
+
+12:28.850 --> 12:32.130
+And when you run the command mvn install it's going to again download it.
+
+12:32.130 --> 12:35.400
+Or we can also remove the target folder.
+
+12:35.960 --> 12:37.040
+Remove the target folder.
+
+12:37.040 --> 12:39.360
+That's the output, right?
+
+12:39.400 --> 12:40.800
+So we do not have any output.
+
+12:40.800 --> 12:42.720
+We do not have any dependencies yet.
+
+12:42.840 --> 12:45.320
+So when we run the install it's going to be clean.
+
+12:45.600 --> 12:46.800
+Or there is another command.
+
+12:46.800 --> 12:48.840
+You can say mvn clean install.
+
+12:48.840 --> 12:53.040
+But clean is just going to remove the target folder not the dependencies.
+
+12:53.280 --> 12:55.320
+So you can do mvn clean install.
+
+12:55.320 --> 12:56.560
+That is also one way.
+
+12:57.280 --> 13:03.200
+So you see now you will see huge list of dependencies that are getting downloaded will go on and on
+
+13:03.200 --> 13:05.720
+because the dependencies will have many other dependencies.
+
+13:06.840 --> 13:07.200
+Okay.
+
+13:07.240 --> 13:09.760
+And now let's look at the build failure.
+
+13:12.320 --> 13:14.120
+So you have the target folder.
+
+13:14.120 --> 13:17.600
+You should have now art M2.
+
+13:23.560 --> 13:23.880
+Okay.
+
+13:23.880 --> 13:29.000
+So before we get forward into this let's quickly reiterate what all we did so far.
+
+13:29.000 --> 13:30.960
+So we just launched an EC2 instance.
+
+13:31.240 --> 13:33.620
+We cloned the source code Scored, right?
+
+13:33.660 --> 13:35.180
+We are in the source code folder.
+
+13:35.740 --> 13:40.780
+We then installed JDK, JDK 21 and we installed Maven.
+
+13:42.260 --> 13:48.660
+Okay, so we have now Maven version 3.8 and JDK 21.
+
+13:48.660 --> 13:50.860
+We are in the source code folder.
+
+13:50.900 --> 13:51.980
+We have the source code.
+
+13:52.260 --> 13:54.260
+We execute the command Mvn install.
+
+13:54.260 --> 14:02.420
+It creates the target folder and keeps the dependency in this folder in your home directory dot m2 repository.
+
+14:02.860 --> 14:05.660
+Okay, so now once again let's run Mvn install command.
+
+14:05.660 --> 14:06.820
+We look at the error.
+
+14:06.820 --> 14:08.980
+Then we'll fix it okay.
+
+14:09.020 --> 14:15.740
+So build failure error assembling var problem creating var so var file.
+
+14:16.100 --> 14:20.940
+So in the target folder you see the artifact.
+
+14:21.980 --> 14:23.460
+So this is the folder.
+
+14:23.460 --> 14:25.900
+And it's going to create a var file out of it.
+
+14:25.900 --> 14:31.690
+The zipped format of this folder actually I should say archive of this folder.
+
+14:31.690 --> 14:34.010
+So it is saying there is a problem doing that.
+
+14:34.010 --> 14:34.530
+And that's.
+
+14:34.570 --> 14:38.930
+Java heap space Java will create a virtual machine JVM.
+
+14:38.930 --> 14:39.610
+It is called.
+
+14:39.890 --> 14:43.810
+And that will be doing all these things inside this operating system.
+
+14:43.810 --> 14:46.730
+Java heap space basically means there is low resource.
+
+14:46.730 --> 14:54.770
+So we have an EC2 instance is just have 572 579 available now it's like one GB memory.
+
+14:55.610 --> 14:58.610
+Now we can allocate more space to Maven.
+
+14:58.610 --> 15:03.210
+So it assumes it has more GB and then it will complete its task.
+
+15:03.810 --> 15:04.810
+You can also do this.
+
+15:04.850 --> 15:09.370
+We can take this error and put it into ChatGPT and see what it says.
+
+15:09.730 --> 15:10.890
+Let's copy this error.
+
+15:11.130 --> 15:12.970
+I can just simply paste the error.
+
+15:13.010 --> 15:16.090
+You know it will tell you why you are seeing this.
+
+15:16.090 --> 15:18.610
+You can give the source code also if you wish to.
+
+15:19.250 --> 15:26.770
+So it is saying for Linux or Mac, Mac OS sorry export export command to export this variable, set
+
+15:26.770 --> 15:27.650
+this variable.
+
+15:27.650 --> 15:30.630
+This says Tzm 1024M.
+
+15:30.670 --> 15:36.710
+That means, you know, allocate one GB 1024 MB of memory for the Maven option.
+
+15:37.030 --> 15:41.230
+So let's copy this command and run this and see what happens.
+
+15:42.710 --> 15:45.950
+So this variable will be exported that will be used by Maven.
+
+15:45.950 --> 15:51.910
+Maven will think that it has one GB of memory which it does not have clearly but it gets full.
+
+15:51.950 --> 15:52.750
+Check this out.
+
+15:53.470 --> 15:54.830
+Run install command.
+
+15:57.030 --> 15:57.350
+All right.
+
+15:57.350 --> 15:59.270
+You see that build success right?
+
+15:59.310 --> 16:02.950
+We clearly do not have one GB of free memory.
+
+16:02.950 --> 16:05.470
+But it worked and that's fine.
+
+16:05.950 --> 16:06.350
+Don't worry.
+
+16:06.350 --> 16:07.990
+It's not going to cause any other harm.
+
+16:07.990 --> 16:09.750
+We just focus on the build.
+
+16:10.270 --> 16:14.750
+So if we do ls on the target folder you should see v profile v2 dot var.
+
+16:15.510 --> 16:17.350
+Now like that there might be other errors.
+
+16:17.350 --> 16:19.070
+This is definitely not the build error.
+
+16:19.110 --> 16:21.030
+This is resource issue.
+
+16:21.310 --> 16:24.670
+But you can have build error like wrong dependency mentioned.
+
+16:25.150 --> 16:28.570
+And due to that the build fails Fields that also can be fixed.
+
+16:28.970 --> 16:30.010
+Let's try something.
+
+16:30.210 --> 16:31.530
+So this is going to be interesting.
+
+16:31.530 --> 16:34.050
+Clear the screen and remove the target folder.
+
+16:35.770 --> 16:37.330
+And then remove the.
+
+16:38.090 --> 16:41.530
+So you know we'll just do a clean setup kind of.
+
+16:41.570 --> 16:51.090
+So remove this M2 repository folder and let's open the pom.xml file pom.xml vim or VI.
+
+16:51.090 --> 16:54.770
+You can do open this and search for Jacoco.
+
+16:56.290 --> 17:02.650
+And here I'm going to downgrade its version to 8.8.8 okay.
+
+17:02.690 --> 17:03.610
+Save and quit.
+
+17:05.890 --> 17:08.570
+And then we're going to run the Mvn install command.
+
+17:09.250 --> 17:12.290
+And let's see now what happens okay.
+
+17:12.330 --> 17:13.850
+New dependencies are getting downloaded.
+
+17:13.850 --> 17:17.890
+I'm not sure whether it's going to work or fail, but I'm going to make sure it fails.
+
+17:18.050 --> 17:19.890
+We'll do take some more steps.
+
+17:21.370 --> 17:21.730
+Okay.
+
+17:21.770 --> 17:22.970
+Started witnessing failure.
+
+17:22.970 --> 17:27.000
+And there's really a lot of And what will be the final output.
+
+17:27.000 --> 17:29.120
+But I definitely saw some failures.
+
+17:30.200 --> 17:34.000
+Okay, the build is success, but there are a few failures that I saw previously.
+
+17:34.480 --> 17:34.800
+Okay.
+
+17:34.880 --> 17:35.360
+Here.
+
+17:38.800 --> 17:41.080
+You see error while instrumenting.
+
+17:41.120 --> 17:42.040
+Blah blah blah.
+
+17:42.080 --> 17:44.080
+Jacoco 8.8.8.
+
+17:44.440 --> 17:49.600
+So let's take this and let's give it to ChatGPT with some more information.
+
+17:49.600 --> 17:50.120
+Really.
+
+17:50.920 --> 17:52.480
+So I'm going to copy this.
+
+17:54.160 --> 18:00.000
+I'm going to paste it this but not going to send it I also want to send it the Maven Java version.
+
+18:00.000 --> 18:02.200
+So I'm going to say Maven hyphen version.
+
+18:02.440 --> 18:06.560
+You know so it has more clarity on what's really happening, what tools we have.
+
+18:07.360 --> 18:10.560
+And also I'm going to give it Pom.xml file.
+
+18:14.480 --> 18:14.640
+Okay.
+
+18:14.680 --> 18:19.280
+And I'm going to say below is Pom dot XML.
+
+18:19.280 --> 18:20.280
+Let me get that.
+
+18:20.640 --> 18:26.660
+So you can just do cat pom.xml or you can just get the pom.xml from the GitHub repository.
+
+18:28.940 --> 18:33.860
+Okay, so give as much information you can to ChatGPT or any other tool like that.
+
+18:33.860 --> 18:36.780
+So it has proper context on what it needs to do.
+
+18:37.340 --> 18:37.660
+Okay.
+
+18:37.660 --> 18:42.700
+So it says this is a compatibility issue between Jacoco 8.8 and Java 21.
+
+18:42.860 --> 18:48.540
+Jacoco version prior to 811 do not fully support Java 21.
+
+18:48.740 --> 18:56.380
+Okay, so the solution it is saying to upgrade the Jacoco to 8.11 right in Pom.xml file.
+
+18:56.380 --> 18:58.660
+So let's do that now.
+
+18:58.660 --> 19:00.020
+We already know this, right?
+
+19:00.020 --> 19:04.260
+So I'm showing you how you can find the problem and then fix it.
+
+19:04.580 --> 19:10.140
+If you don't even know Java or any other build tool, you can give information to the AI tools.
+
+19:10.380 --> 19:12.380
+You have Amazon Q as well.
+
+19:12.420 --> 19:18.220
+Amazon Q developer in VS code, you can clone the source code, build it, and give the information.
+
+19:18.500 --> 19:21.890
+We'll be seeing that in future further lectures as well.
+
+19:22.370 --> 19:28.210
+So let's fix this and let's run Mvn clean install this time.
+
+19:28.250 --> 19:29.530
+And we can clean install.
+
+19:33.890 --> 19:35.690
+Okay, that is a success.
+
+19:36.130 --> 19:36.450
+Okay.
+
+19:36.450 --> 19:41.530
+Now let me quickly tell you how to use different version of JDK Maven different tool and switch between
+
+19:41.530 --> 19:41.930
+them.
+
+19:42.490 --> 19:47.530
+So I'm installing open JDK hyphen 17 JDK basically JDK 17.
+
+19:50.730 --> 19:52.930
+So we installed 17 right.
+
+19:52.930 --> 19:56.330
+But if I run Java version it shows 21.
+
+19:56.330 --> 19:59.090
+So how do I switch between these version in Java.
+
+19:59.810 --> 20:04.890
+So there is a command and you can use till ChatGPT or any other AI tool.
+
+20:04.890 --> 20:06.170
+So just put a question.
+
+20:06.570 --> 20:09.490
+I have installed JDK 17 and 21in ubuntu.
+
+20:09.530 --> 20:11.090
+How do I switch between them.
+
+20:12.290 --> 20:16.810
+Okay, so this command you don't even need to remember the command, but if it's a regular thing you
+
+20:16.810 --> 20:17.690
+will remember.
+
+20:17.890 --> 20:21.030
+But anyways, you have the option of AI tools.
+
+20:21.310 --> 20:23.510
+So I'm going to copy this command and run it.
+
+20:23.550 --> 20:26.790
+It's going to give me a prompt where I can choose from.
+
+20:27.230 --> 20:30.110
+So you see you have Java 21.
+
+20:30.110 --> 20:31.150
+You have 17.
+
+20:31.190 --> 20:33.270
+And then you have one more 21.
+
+20:33.510 --> 20:33.750
+Okay.
+
+20:33.750 --> 20:36.070
+So you need to select which one zero 1 or 2.
+
+20:36.110 --> 20:39.590
+So I'm going to say just type one and hit enter.
+
+20:40.510 --> 20:40.670
+Okay.
+
+20:40.710 --> 20:44.390
+Now let's clear the screen and let's run the Java hyphen version command.
+
+20:45.470 --> 20:48.830
+Now I have Java 17 okay.
+
+20:48.870 --> 20:50.790
+Test whether our code works with that or not.
+
+20:50.830 --> 20:52.190
+Mvn clean install.
+
+20:53.430 --> 20:55.830
+Now make sure you're in V Profile project folder.
+
+20:56.430 --> 20:59.190
+Okay so default Java is now 17.
+
+20:59.390 --> 21:02.030
+As I told you the code works with 17 and 21.
+
+21:02.030 --> 21:03.910
+Both okay.
+
+21:03.950 --> 21:06.310
+So it builds the artifact.
+
+21:07.270 --> 21:09.830
+So v profile hyphen v two dot var.
+
+21:09.870 --> 21:13.070
+Again this name is also coming from pom.xml file.
+
+21:13.110 --> 21:15.070
+Maven reads this from pom.xml.
+
+21:15.070 --> 21:15.790
+What is the name?
+
+21:15.790 --> 21:16.630
+What is the version?
+
+21:16.630 --> 21:17.780
+What is the packaging?
+
+21:18.220 --> 21:20.460
+Take a look once again at palm dot XML file.
+
+21:20.500 --> 21:24.340
+Go through it slowly and you will find all the information over there.
+
+21:24.580 --> 21:28.540
+Now we need to also talk about different build tool version.
+
+21:28.540 --> 21:29.660
+Different maven version.
+
+21:29.660 --> 21:31.940
+It's not so straightforward as Java.
+
+21:32.380 --> 21:38.340
+So if I want a different version of Maven I need to download the binary, unzip it and use it.
+
+21:38.660 --> 21:41.580
+Download Maven three from archive.
+
+21:41.620 --> 21:46.220
+Just google this and if you find this link Apache archive distribution directory.
+
+21:46.580 --> 21:48.980
+Here you see different version of Maven.
+
+21:48.980 --> 21:52.340
+So we need Maven 3.9.9.
+
+21:52.900 --> 21:56.060
+Let's click on that and go to binaries.
+
+21:56.620 --> 22:05.820
+And here you should see Apache Maven 3.9.9. bin dot tar dot JS okay right click on this one copy link
+
+22:05.860 --> 22:08.260
+address okay let's go to temp folder.
+
+22:08.260 --> 22:10.700
+I just don't want to download it anywhere else.
+
+22:10.740 --> 22:12.380
+Just in the temporary folder.
+
+22:16.600 --> 22:18.400
+So wget and the link.
+
+22:18.400 --> 22:19.960
+So it will start the download.
+
+22:20.840 --> 22:21.080
+Okay.
+
+22:21.080 --> 22:21.880
+It's downloaded.
+
+22:21.880 --> 22:24.720
+If you see a folder over here you can unzip it.
+
+22:24.760 --> 22:29.000
+Tar Xvf Apache maven.
+
+22:32.520 --> 22:34.200
+You will see a folder here.
+
+22:34.960 --> 22:38.920
+Now I'm going to copy this folder or.
+
+22:39.640 --> 22:40.000
+Yeah.
+
+22:40.360 --> 22:47.960
+Okay I'm going to copy it to us, our local bin with the name Maven 3.9.
+
+22:51.120 --> 22:51.440
+Okay.
+
+22:51.440 --> 22:52.360
+So that's the folder.
+
+22:52.360 --> 22:59.440
+Now let me clear the screen LS and in this you have a bin folder.
+
+23:00.520 --> 23:02.920
+And in that you have the maven command.
+
+23:02.960 --> 23:07.480
+So if you run the maven command now I need to remove this ls from here.
+
+23:09.800 --> 23:12.800
+So like we give the maven command Mvn command.
+
+23:12.800 --> 23:17.390
+It takes the default one, but if you want a non-default one, you need to give its complete path and
+
+23:17.390 --> 23:21.670
+then you can give the option so hyphen version to show the version.
+
+23:21.830 --> 23:25.910
+Let's go to our source code folder.
+
+23:25.910 --> 23:28.230
+So go to V Profile Project.
+
+23:28.230 --> 23:30.390
+And in that you can run the command.
+
+23:31.710 --> 23:37.510
+The complete path of this new Maven clean install or whatever face you want.
+
+23:38.230 --> 23:41.910
+And because this is not straightforward as you know you download it from apt or yum.
+
+23:41.910 --> 23:44.230
+And then you switch between different version.
+
+23:44.470 --> 23:46.110
+You need to give the complete path.
+
+23:46.150 --> 23:50.070
+I mean you can set it as a default also, but it's really not required.
+
+23:50.430 --> 23:51.390
+Why it's not required.
+
+23:51.390 --> 23:53.030
+That will learn in Jenkins.
+
+23:53.270 --> 23:54.550
+Now execute this command.
+
+23:54.550 --> 23:59.350
+And then if you're good, you can go through the lecture once again and then terminate the instance.
+
+23:59.350 --> 24:03.110
+In the next lecture we are going to see AWS Cloud Shell.
+
+24:03.150 --> 24:05.390
+We're going to do the same on AWS Cloud Shell.
+
+24:05.590 --> 24:10.390
+Also we're going to take a NodeJS source code and build that as well.
+
+24:10.790 --> 24:12.510
+So wrap this up and join me in the next one.

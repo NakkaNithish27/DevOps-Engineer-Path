@@ -1,0 +1,1489 @@
+WEBVTT
+
+1
+00:00:00.790 --> 00:00:01.340
+Service.
+
+2
+00:00:02.090 --> 00:00:05.802
+If you want to expose your pod, the application running in
+
+3
+00:00:05.816 --> 00:00:10.426
+the pod as a network service like you want to host
+
+4
+00:00:10.498 --> 00:00:14.214
+NGINX or Tomcat, any frontend or even for the back
+
+5
+00:00:14.252 --> 00:00:17.338
+end, you need to use service with your pod.
+
+6
+00:00:17.374 --> 00:00:20.670
+Then service is similar to load balancers like
+
+7
+00:00:20.720 --> 00:00:25.506
+what load balancers does ELB in AWS, same
+
+8
+00:00:25.568 --> 00:00:27.574
+service will be doing for the Pod.
+
+9
+00:00:27.742 --> 00:00:29.154
+So for the starters, it's really
+
+10
+00:00:29.192 --> 00:00:30.474
+not so difficult to understand.
+
+11
+00:00:30.572 --> 00:00:32.658
+Just like a load balancer and you want
+
+12
+00:00:32.683 --> 00:00:35.670
+to expose your pod communicating with each other,
+
+13
+00:00:35.780 --> 00:00:39.390
+you need service in front of your pod.
+
+14
+00:00:40.070 --> 00:00:42.178
+So why was really service created?
+
+15
+00:00:42.214 --> 00:00:44.326
+Why not just simple pod mapping?
+
+16
+00:00:44.458 --> 00:00:47.610
+Well, we know pods are disposable
+
+17
+00:00:48.170 --> 00:00:49.954
+I said containers are disposable.
+
+18
+00:00:50.002 --> 00:00:51.682
+But yes, same is with the pod.
+
+19
+00:00:51.826 --> 00:00:53.480
+So you want to make any change,
+
+20
+00:00:54.290 --> 00:00:57.200
+we give a different container image name.
+
+21
+00:00:57.710 --> 00:00:59.814
+We need to create a different pod for that, right?
+
+22
+00:00:59.852 --> 00:01:01.462
+When we are making change, we upgrade
+
+23
+00:01:01.486 --> 00:01:03.646
+the image and we replace the pod.
+
+24
+00:01:03.838 --> 00:01:07.302
+So pods are mortal and they have IP address?
+
+25
+00:01:07.376 --> 00:01:10.830
+Yes, and since they are mortal, their IP is not static.
+
+26
+00:01:11.270 --> 00:01:14.670
+So you need something static like an endpoint
+
+27
+00:01:15.650 --> 00:01:17.706
+behind the endpoint you can change things.
+
+28
+00:01:17.828 --> 00:01:21.238
+So service gives that endpoint like what ELB
+
+29
+00:01:21.274 --> 00:01:23.502
+does elastic load balancer does to EC2
+
+30
+00:01:23.516 --> 00:01:25.602
+instances it gives us static endpoints so we
+
+31
+00:01:25.616 --> 00:01:28.254
+can access elastic load balancer behind the change.
+
+32
+00:01:28.292 --> 00:01:30.238
+You can keep deleting and creating your EC
+
+33
+00:01:30.274 --> 00:01:33.054
+two instances similar way service does it.
+
+34
+00:01:33.152 --> 00:01:37.554
+In Kubernetes, you have three types of service.
+
+35
+00:01:37.712 --> 00:01:40.918
+One is node port which is similar to port mapping.
+
+36
+00:01:40.954 --> 00:01:43.998
+We have seen in docker a host port you pick
+
+37
+00:01:44.024 --> 00:01:46.014
+up and you map it with the container port.
+
+38
+00:01:46.112 --> 00:01:47.790
+It's exactly the same way.
+
+39
+00:01:47.900 --> 00:01:51.442
+And mostly it's for nonprod purpose, not for production,
+
+40
+00:01:51.586 --> 00:01:54.694
+not for exposing the frontend to the production.
+
+41
+00:01:54.862 --> 00:01:57.514
+And only this is to expose
+
+42
+00:01:57.682 --> 00:01:59.926
+your pod to the outside network.
+
+43
+00:01:59.998 --> 00:02:02.780
+That's why you can use node port.
+
+44
+00:02:03.770 --> 00:02:08.478
+The other one is cluster IP if you
+
+45
+00:02:08.503 --> 00:02:11.206
+don't want to expose it to outside network
+
+46
+00:02:11.278 --> 00:02:15.034
+but internal like Tomcat connecting to MySQL.
+
+47
+00:02:15.082 --> 00:02:18.678
+So for MySQL you need a static endpoint so
+
+48
+00:02:18.704 --> 00:02:21.478
+you can create a service of type cluster IP.
+
+49
+00:02:21.574 --> 00:02:23.850
+Cluster IP for internal communication.
+
+50
+00:02:24.170 --> 00:02:27.222
+So here there will be no port
+
+51
+00:02:27.416 --> 00:02:31.006
+mapped to your node internal communication.
+
+52
+00:02:31.138 --> 00:02:34.410
+Third one you have is load balancer.
+
+53
+00:02:34.730 --> 00:02:36.762
+This is again to expose to the
+
+54
+00:02:36.776 --> 00:02:39.550
+outside network for production use cases.
+
+55
+00:02:39.730 --> 00:02:41.658
+We are running a Tomcat pod and I
+
+56
+00:02:41.684 --> 00:02:44.910
+want users from the internet to access that.
+
+57
+00:02:44.960 --> 00:02:47.662
+I will create the service of type load balancer
+
+58
+00:02:47.806 --> 00:02:50.598
+and on AWS, it's going to create actually an
+
+59
+00:02:50.624 --> 00:02:54.680
+elastic load balancer and map my Pod to it.
+
+60
+00:02:56.630 --> 00:03:00.174
+So every pod or a cluster of pod that are running,
+
+61
+00:03:00.332 --> 00:03:03.178
+you need service in front of that if it's a network,
+
+62
+00:03:03.334 --> 00:03:06.714
+if it's providing a network service, okay, like a frontend,
+
+63
+00:03:06.812 --> 00:03:11.602
+we will have a service for back end RabbitMQ ElastiCache you'll
+
+64
+00:03:11.626 --> 00:03:13.566
+have again service in front of it.
+
+65
+00:03:13.688 --> 00:03:16.062
+MySQL, you'll have a service in front of it.
+
+66
+00:03:16.076 --> 00:03:18.610
+That's how the communication happens between pods
+
+67
+00:03:18.670 --> 00:03:20.610
+and between user to the pods.
+
+68
+00:03:22.310 --> 00:03:25.542
+First, we'll understand service of type node port.
+
+69
+00:03:25.676 --> 00:03:26.660
+Node port.
+
+70
+00:03:27.110 --> 00:03:31.186
+So let's say you have two pods running in a node.
+
+71
+00:03:31.258 --> 00:03:33.198
+So that blue color square or
+
+72
+00:03:33.224 --> 00:03:36.538
+rectangle is your node worker node.
+
+73
+00:03:36.634 --> 00:03:38.780
+And you have two pods running over here.
+
+74
+00:03:39.230 --> 00:03:42.402
+Pod will have label and Pod will have IP address.
+
+75
+00:03:42.536 --> 00:03:44.634
+And of course, the container running inside that.
+
+76
+00:03:44.672 --> 00:03:47.970
+So the nginx container is running on both the pods,
+
+77
+00:03:48.290 --> 00:03:52.798
+one container per Pod and it's exposed on port 80.
+
+78
+00:03:52.954 --> 00:03:55.230
+Okay, pod has an IP address and a port
+
+79
+00:03:55.280 --> 00:03:57.850
+number to access and it has a label.
+
+80
+00:03:58.030 --> 00:03:59.938
+Now, service will be like a load balancer.
+
+81
+00:03:59.974 --> 00:04:01.554
+As I said in front of it.
+
+82
+00:04:01.712 --> 00:04:04.638
+Service will have a static IP address, which will
+
+83
+00:04:04.664 --> 00:04:07.040
+not change until unless you don't delete it.
+
+84
+00:04:07.550 --> 00:04:09.438
+It will have a frontend port like
+
+85
+00:04:09.464 --> 00:04:11.370
+a load balancer has a frontend port.
+
+86
+00:04:11.480 --> 00:04:13.266
+This is internal frontend port.
+
+87
+00:04:13.388 --> 00:04:15.190
+It's for internal communication.
+
+88
+00:04:15.370 --> 00:04:17.082
+And it has back in port.
+
+89
+00:04:17.216 --> 00:04:18.678
+And the back end port will be
+
+90
+00:04:18.704 --> 00:04:20.839
+the port number of the container, obviously.
+
+91
+00:04:21.230 --> 00:04:23.442
+Okay, so Service, like a load balancer, has a
+
+92
+00:04:23.456 --> 00:04:25.014
+frontend port and a back end port.
+
+93
+00:04:25.112 --> 00:04:27.538
+But how does it know which Pod
+
+94
+00:04:27.574 --> 00:04:29.238
+it has to route the request to?
+
+95
+00:04:29.324 --> 00:04:31.842
+There could be hundreds of pods running like this.
+
+96
+00:04:32.036 --> 00:04:34.666
+Well, it is going to match the label selector.
+
+97
+00:04:34.798 --> 00:04:37.042
+When we create a service, we give label selector.
+
+98
+00:04:37.066 --> 00:04:38.480
+We give a label name.
+
+99
+00:04:38.810 --> 00:04:45.562
+Any Pod that has this label app frontend, any Pod, it's
+
+100
+00:04:45.586 --> 00:04:48.690
+going to forward the request to that Pod on port 80.
+
+101
+00:04:49.010 --> 00:04:49.950
+So I have two part.
+
+102
+00:04:50.000 --> 00:04:53.130
+If I run exactly third part, exactly same
+
+103
+00:04:53.180 --> 00:04:56.718
+with same label, my third part will be
+
+104
+00:04:56.744 --> 00:05:01.230
+automatically included under the Service auto discovery.
+
+105
+00:05:01.550 --> 00:05:03.130
+Okay, this is internal.
+
+106
+00:05:03.250 --> 00:05:04.722
+When you say node port, you have
+
+107
+00:05:04.736 --> 00:05:06.270
+to mention a node port number.
+
+108
+00:05:06.380 --> 00:05:08.300
+So let's say 30,001.
+
+109
+00:05:08.690 --> 00:05:10.938
+So a node port or host port
+
+110
+00:05:11.024 --> 00:05:13.880
+30,001 will be mapped to your service.
+
+111
+00:05:14.390 --> 00:05:16.674
+When you access the node by giving its
+
+112
+00:05:16.712 --> 00:05:19.294
+IP address and the node port, the request
+
+113
+00:05:19.342 --> 00:05:21.006
+will be forwarded to the Service.
+
+114
+00:05:21.188 --> 00:05:25.098
+The Service is going to forward the request to the
+
+115
+00:05:25.124 --> 00:05:27.730
+Pod and Pod will send it to the container.
+
+116
+00:05:27.850 --> 00:05:30.442
+And the same way it comes back observe.
+
+117
+00:05:30.466 --> 00:05:32.874
+There are multiple port over here.
+
+118
+00:05:32.972 --> 00:05:34.878
+30,001 is the node port for
+
+119
+00:05:34.904 --> 00:05:37.410
+the outside communication outside network.
+
+120
+00:05:37.850 --> 00:05:39.102
+It sends it to the Service.
+
+121
+00:05:39.176 --> 00:05:42.550
+Service has an internal frontend port 80.
+
+122
+00:05:42.730 --> 00:05:44.898
+It's going to send the request on the back
+
+123
+00:05:44.924 --> 00:05:47.600
+end port 80, which is the container port.
+
+124
+00:05:47.930 --> 00:05:52.818
+Okay, so your node port and your service internal front
+
+125
+00:05:52.844 --> 00:05:54.966
+end port can be same or can be different.
+
+126
+00:05:55.148 --> 00:05:56.998
+Back end port and the container
+
+127
+00:05:57.034 --> 00:05:58.760
+port should be exactly same.
+
+128
+00:05:59.090 --> 00:06:01.182
+And label selector should match with
+
+129
+00:06:01.196 --> 00:06:02.518
+the label of the Pod.
+
+130
+00:06:02.674 --> 00:06:03.966
+So when you're creating a service,
+
+131
+00:06:04.028 --> 00:06:05.480
+two things are very important.
+
+132
+00:06:05.870 --> 00:06:09.140
+Matching the label selector and the back end port.
+
+133
+00:06:09.590 --> 00:06:12.560
+That is the service of type node port.
+
+134
+00:06:13.550 --> 00:06:15.478
+And this is a sample definition file
+
+135
+00:06:15.514 --> 00:06:18.358
+kind service API version V one metadata
+
+136
+00:06:18.394 --> 00:06:21.066
+name spec you give the port information.
+
+137
+00:06:21.188 --> 00:06:22.714
+So type Nodeport.
+
+138
+00:06:22.822 --> 00:06:24.678
+You are specifically saying that I want to
+
+139
+00:06:24.704 --> 00:06:26.850
+create a service of type node port.
+
+140
+00:06:27.020 --> 00:06:29.314
+And then you give the port number target
+
+141
+00:06:29.362 --> 00:06:32.650
+port that is the back end port 80.
+
+142
+00:06:32.830 --> 00:06:35.358
+Port 80 means it's a frontend
+
+143
+00:06:35.384 --> 00:06:36.954
+port, but internal frontend port.
+
+144
+00:06:36.992 --> 00:06:39.510
+You cannot access it from the outside network.
+
+145
+00:06:39.890 --> 00:06:43.102
+Node port is for the outside network.
+
+146
+00:06:43.246 --> 00:06:46.986
+So if I access this node on port 30,005, it's going
+
+147
+00:06:46.988 --> 00:06:51.826
+to forward the request to any Pod that has this label.
+
+148
+00:06:51.958 --> 00:06:55.474
+Okay, app frontend on port 80.
+
+149
+00:06:55.642 --> 00:06:57.882
+So if you know your Pod, you know
+
+150
+00:06:57.896 --> 00:07:01.422
+its label, you know sorry, it's container port.
+
+151
+00:07:01.556 --> 00:07:02.614
+Then you can very easily
+
+152
+00:07:02.662 --> 00:07:04.470
+write a service definition file.
+
+153
+00:07:05.270 --> 00:07:07.918
+Again, same thing to create kubectl.
+
+154
+00:07:07.954 --> 00:07:10.282
+Create the definition file.
+
+155
+00:07:10.426 --> 00:07:13.458
+Get SVC to get information about the service.
+
+156
+00:07:13.604 --> 00:07:17.022
+Describe SVC detailed information about the service.
+
+157
+00:07:17.216 --> 00:07:19.842
+Okay, so first, we are going with the node port. Okay.
+
+158
+00:07:19.916 --> 00:07:22.890
+I have a Tomcat part running one single.
+
+159
+00:07:23.000 --> 00:07:24.222
+I'm going to create a service
+
+160
+00:07:24.296 --> 00:07:26.158
+in front of it with Nodeport
+
+161
+00:07:26.314 --> 00:07:27.680
+So let's do that.
+
+162
+00:07:29.150 --> 00:07:32.694
+Okay, so I have this definition file and
+
+163
+00:07:32.732 --> 00:07:34.650
+from that I have created the Pod.
+
+164
+00:07:36.950 --> 00:07:38.130
+Well, you can do the same.
+
+165
+00:07:38.180 --> 00:07:40.266
+Exact same man.
+
+166
+00:07:40.328 --> 00:07:42.500
+I'm going to go one level up.
+
+167
+00:07:43.130 --> 00:07:47.420
+Let me rename this Pod to app.
+
+168
+00:07:49.850 --> 00:07:51.630
+Let's get into app directory.
+
+169
+00:07:52.190 --> 00:07:53.326
+On the same directory, we'll
+
+170
+00:07:53.338 --> 00:07:55.170
+have the service definition file.
+
+171
+00:07:57.050 --> 00:07:58.110
+Let's print this.
+
+172
+00:07:58.220 --> 00:07:59.838
+Two important things we have to get from
+
+173
+00:07:59.864 --> 00:08:02.970
+this definition file or the Pod information is
+
+174
+00:08:03.020 --> 00:08:05.600
+the label and the port number.
+
+175
+00:08:07.070 --> 00:08:09.082
+Now let's write our service definition file.
+
+176
+00:08:09.106 --> 00:08:17.950
+So we're going to say vproapp-nodeport.yaml.
+
+177
+00:08:21.130 --> 00:08:23.774
+Okay, so the usual kind service as
+
+178
+00:08:23.812 --> 00:08:26.860
+capital API version V one metadata name
+
+179
+00:08:28.690 --> 00:08:33.025
+spec spec contains all the port information.
+
+180
+00:08:33.148 --> 00:08:34.850
+So I'm going to say ports.
+
+181
+00:08:36.370 --> 00:08:39.049
+And its value is a list.
+
+182
+00:08:39.159 --> 00:08:43.106
+So Hyphen, I'll give the internal port first.
+
+183
+00:08:43.168 --> 00:08:53.120
+I'll say port and I will say just 80 90 node port.
+
+184
+00:08:53.570 --> 00:08:57.380
+This is external frontend port.
+
+185
+00:08:57.950 --> 00:09:00.980
+Node port value starts from 300.
+
+186
+00:09:01.850 --> 00:09:06.162
+So I'm going to say 30,001. Okay.
+
+187
+00:09:06.236 --> 00:09:12.318
+Now target port p capital I can
+
+188
+00:09:12.344 --> 00:09:14.470
+give the port number 80 80 directly.
+
+189
+00:09:14.650 --> 00:09:17.242
+That's my container port running in the Pod.
+
+190
+00:09:17.386 --> 00:09:20.526
+But I also have an option to give the port
+
+191
+00:09:20.588 --> 00:09:22.954
+name which I have defined in the definition file.
+
+192
+00:09:23.062 --> 00:09:24.560
+Let's go with this first.
+
+193
+00:09:25.190 --> 00:09:31.622
+Protocol TCP and the selector.
+
+194
+00:09:31.646 --> 00:09:33.600
+Now selector is going to start over here.
+
+195
+00:09:41.510 --> 00:09:43.174
+So we have created the selector
+
+196
+00:09:43.222 --> 00:09:47.346
+app pro app for the Pod. Okay.
+
+197
+00:09:47.468 --> 00:09:51.990
+And type of course node Pod.
+
+198
+00:09:55.590 --> 00:09:57.262
+Okay, let's once again match it
+
+199
+00:09:57.276 --> 00:09:59.050
+with our Pod definition file.
+
+200
+00:10:09.010 --> 00:10:09.410
+Okay.
+
+201
+00:10:09.460 --> 00:10:13.118
+Label selector app vproapp. And that's right.
+
+202
+00:10:13.144 --> 00:10:15.230
+That's the label for Pod.
+
+203
+00:10:16.630 --> 00:10:19.514
+Target port at target port at.
+
+204
+00:10:19.612 --> 00:10:21.134
+I also have the name for the
+
+205
+00:10:21.172 --> 00:10:23.342
+port, so I can give the name.
+
+206
+00:10:23.536 --> 00:10:25.000
+I will edit that.
+
+207
+00:10:30.050 --> 00:10:32.250
+Instead of 8080, I will give the name.
+
+208
+00:10:32.360 --> 00:10:33.680
+There's too many numbers.
+
+209
+00:10:34.070 --> 00:10:36.080
+Name should be better here now.
+
+210
+00:10:38.330 --> 00:10:41.610
+Okay, vproapp-port really means the port utility.
+
+211
+00:10:45.450 --> 00:10:46.558
+Okay, time to create it.
+
+212
+00:10:46.584 --> 00:10:55.630
+kubectl create -f, the definition file vproapp-nodeport
+
+213
+00:10:58.030 --> 00:10:59.562
+Okay, there is a syntax error.
+
+214
+00:10:59.646 --> 00:11:01.060
+Let's fix that first.
+
+215
+00:11:03.410 --> 00:11:04.940
+This is line number ten.
+
+216
+00:11:47.370 --> 00:11:50.160
+Oh, actually, it's a very serious problem.
+
+217
+00:11:50.670 --> 00:11:53.050
+Selector is at the same level as
+
+218
+00:11:53.160 --> 00:11:56.460
+the ports and as the type.
+
+219
+00:11:58.870 --> 00:12:00.098
+Let me take this one.
+
+220
+00:12:00.124 --> 00:12:17.180
+Also at the same level.
+
+221
+00:12:21.510 --> 00:12:23.350
+Okay, that worked. Let's check.
+
+222
+00:12:23.400 --> 00:12:26.050
+kubectl get SVC.
+
+223
+00:12:27.510 --> 00:12:29.686
+Okay, you are seeing two is service.
+
+224
+00:12:29.868 --> 00:12:32.246
+One is for the Kubernetes.
+
+225
+00:12:32.378 --> 00:12:34.080
+You can ignore that for now.
+
+226
+00:12:38.290 --> 00:12:39.362
+And that's our service.
+
+227
+00:12:39.436 --> 00:12:43.490
+Okay, that's the name type node port cluster IP.
+
+228
+00:12:44.590 --> 00:12:47.234
+And these are the two frontend port.
+
+229
+00:12:47.272 --> 00:12:50.534
+Okay, this is the internal frontend port.
+
+230
+00:12:50.572 --> 00:12:52.540
+This is external frontend port.
+
+231
+00:12:53.230 --> 00:13:01.460
+Okay, you can check the name of your service.
+
+232
+00:13:04.350 --> 00:13:07.822
+Okay, so you see the IP static IP of your service.
+
+233
+00:13:07.956 --> 00:13:09.910
+What I want to show you is endpoint.
+
+234
+00:13:10.770 --> 00:13:12.926
+That's the IP address of your Pod.
+
+235
+00:13:13.058 --> 00:13:14.940
+It has automatically mapped it.
+
+236
+00:13:19.270 --> 00:13:25.898
+Okay, I'm going to say kubectl describe Pod and I'm going
+
+237
+00:13:25.924 --> 00:13:31.930
+to grep from that IP, you see that's the pod IP.
+
+238
+00:13:32.050 --> 00:13:34.822
+You see that at end point, automatically
+
+239
+00:13:34.846 --> 00:13:37.558
+it has mapped with port 8080.
+
+240
+00:13:37.714 --> 00:13:39.318
+We did not mention we
+
+241
+00:13:39.344 --> 00:13:41.578
+just mentioned the label selector.
+
+242
+00:13:41.734 --> 00:13:44.250
+So automatically it's discovered and mapped.
+
+243
+00:13:44.690 --> 00:13:45.774
+Okay, this is so cool.
+
+244
+00:13:45.812 --> 00:13:47.574
+Now let's access it from the outside.
+
+245
+00:13:47.732 --> 00:13:48.714
+30,001.
+
+246
+00:13:48.752 --> 00:13:50.046
+That's our port number.
+
+247
+00:13:50.228 --> 00:13:51.260
+Let's go.
+
+248
+00:13:52.190 --> 00:13:54.330
+Okay, I should have all my
+
+249
+00:13:54.380 --> 00:13:56.360
+worker node and master node here.
+
+250
+00:13:58.050 --> 00:14:00.482
+Okay, so the worker node master node.
+
+251
+00:14:00.566 --> 00:14:02.700
+I just need to change the security group.
+
+252
+00:14:04.530 --> 00:14:06.420
+That's the im role. Bad, bad.
+
+253
+00:14:07.110 --> 00:14:08.040
+Go back.
+
+254
+00:14:11.890 --> 00:14:14.380
+So, worker node security group.
+
+255
+00:14:15.550 --> 00:14:25.194
+I'm going to say all traffic, all
+
+256
+00:14:25.232 --> 00:14:29.118
+traffic from my IP because I will
+
+257
+00:14:29.144 --> 00:14:31.160
+be accessing it on different different port.
+
+258
+00:14:33.230 --> 00:14:34.626
+Okay, now it really doesn't matter
+
+259
+00:14:34.688 --> 00:14:36.534
+which node our Pod is running.
+
+260
+00:14:36.692 --> 00:14:38.430
+We are going to access the service.
+
+261
+00:14:38.600 --> 00:14:40.618
+And service is across all the node.
+
+262
+00:14:40.654 --> 00:14:41.986
+Even at the master node.
+
+263
+00:14:42.058 --> 00:14:44.394
+You can even access the master node also.
+
+264
+00:14:44.552 --> 00:14:48.582
+So let's get its IP and
+
+265
+00:14:48.596 --> 00:14:57.900
+let's give the port number 30,001.
+
+266
+00:15:02.350 --> 00:15:03.530
+And voila.
+
+267
+00:15:04.390 --> 00:15:06.438
+Our Tomcat application of vprofile
+
+268
+00:15:06.474 --> 00:15:08.570
+is running on Kubernetes cluster.
+
+269
+00:15:09.610 --> 00:15:12.042
+Okay, but through node port, we'll see now load
+
+270
+00:15:12.066 --> 00:15:16.130
+balancer, which is much more convenient for productions.
+
+271
+00:15:16.990 --> 00:15:18.914
+Okay, now I'm going to delete the service
+
+272
+00:15:18.952 --> 00:15:23.500
+kubectl, delete SVC and the service name.
+
+273
+00:15:27.350 --> 00:15:29.262
+Okay, the reason I deleted because I'm going to
+
+274
+00:15:29.276 --> 00:15:31.760
+create a service of type load balancer now.
+
+275
+00:15:35.730 --> 00:15:38.220
+So I'm going to copy everything from
+
+276
+00:15:39.510 --> 00:15:47.870
+the node port definition to balancer.
+
+277
+00:15:48.850 --> 00:15:51.098
+Now, when I say here load balancer, actually I
+
+278
+00:15:51.124 --> 00:15:53.990
+mean a load balancer, an elastic load balancer.
+
+279
+00:15:54.370 --> 00:15:56.320
+Okay, so let's change things.
+
+280
+00:15:59.450 --> 00:15:59.850
+Okay?
+
+281
+00:15:59.900 --> 00:16:04.110
+First, the type is not going to be node port.
+
+282
+00:16:04.160 --> 00:16:07.050
+It is going to be of type load balancer.
+
+283
+00:16:10.530 --> 00:16:12.886
+Okay, if you're not going to have node port,
+
+284
+00:16:13.068 --> 00:16:15.850
+but node port will be still created automatically.
+
+285
+00:16:16.410 --> 00:16:18.154
+And this port, this is going to be
+
+286
+00:16:18.192 --> 00:16:19.862
+the port number of your load balancer.
+
+287
+00:16:19.886 --> 00:16:21.278
+So I'll just keep it 80.
+
+288
+00:16:21.434 --> 00:16:23.062
+So once the load balancer created, you
+
+289
+00:16:23.076 --> 00:16:24.398
+can access it on port 80.
+
+290
+00:16:24.434 --> 00:16:27.430
+It should route the request to your parts.
+
+291
+00:16:29.190 --> 00:16:34.914
+Okay, let's save this kubectl.
+
+292
+00:16:34.962 --> 00:16:48.302
+Create pro app, load balancer, get SVC and you
+
+293
+00:16:48.316 --> 00:16:50.930
+should see the endpoint of the load balancer.
+
+294
+00:16:51.310 --> 00:16:57.770
+If you go to AWS console load balancer,
+
+295
+00:16:58.750 --> 00:17:00.690
+you should even see that load balancer.
+
+296
+00:17:00.750 --> 00:17:02.370
+Yeah, that's a load balancer.
+
+297
+00:17:02.490 --> 00:17:04.430
+Okay, let's see the instances.
+
+298
+00:17:04.750 --> 00:17:07.730
+So it has two worker node, okay.
+
+299
+00:17:07.780 --> 00:17:10.180
+But they will be mapped on a port number.
+
+300
+00:17:12.250 --> 00:17:14.642
+So frontend port is 80, as we mentioned the
+
+301
+00:17:14.656 --> 00:17:19.180
+definition file and 32654, that is the node port.
+
+302
+00:17:19.690 --> 00:17:21.854
+You'll be saying, hey, you said there is no node port.
+
+303
+00:17:21.892 --> 00:17:23.150
+Of course there is a node port,
+
+304
+00:17:23.260 --> 00:17:25.538
+but we have not mentioned it. Okay?
+
+305
+00:17:25.564 --> 00:17:28.394
+So that is going to become healthy in few minutes.
+
+306
+00:17:28.492 --> 00:17:30.950
+By the time let's understand how this works.
+
+307
+00:17:31.000 --> 00:17:34.130
+This service of type load balancer.
+
+308
+00:17:34.750 --> 00:17:37.706
+So if you understood node port, same as
+
+309
+00:17:37.768 --> 00:17:40.562
+the node port previous story, on top of
+
+310
+00:17:40.576 --> 00:17:42.806
+that there'll be a load balancer. Okay?
+
+311
+00:17:42.868 --> 00:17:44.322
+So you access the load balancer.
+
+312
+00:17:44.346 --> 00:17:46.514
+It's going to route the request to any of the
+
+313
+00:17:46.552 --> 00:17:51.314
+worker node on the port number on the node port. Okay?
+
+314
+00:17:51.352 --> 00:17:53.054
+And we did not specify the node port.
+
+315
+00:17:53.092 --> 00:17:55.442
+So it's going to pick up a random node port.
+
+316
+00:17:55.516 --> 00:17:56.586
+It has a range.
+
+317
+00:17:56.718 --> 00:17:58.454
+It's going to pick up from that random port
+
+318
+00:17:58.492 --> 00:18:01.430
+number and assign it to the worker node.
+
+319
+00:18:03.490 --> 00:18:04.034
+Okay?
+
+320
+00:18:04.132 --> 00:18:08.442
+Like that load balancer, we access it throughout
+
+321
+00:18:08.466 --> 00:18:10.662
+the request to the internal service and that's
+
+322
+00:18:10.686 --> 00:18:12.582
+going to forward the request to your Pod.
+
+323
+00:18:12.726 --> 00:18:15.258
+Now, service is across your cluster.
+
+324
+00:18:15.294 --> 00:18:16.542
+It's not on a worker node.
+
+325
+00:18:16.566 --> 00:18:18.750
+It's not a Pod, it's not a container.
+
+326
+00:18:18.870 --> 00:18:23.090
+It is rule or some rules, proxy rules.
+
+327
+00:18:23.530 --> 00:18:28.286
+So it gets created across all your nodes. Okay?
+
+328
+00:18:28.348 --> 00:18:30.482
+All the worker node, even the master node will have
+
+329
+00:18:30.496 --> 00:18:33.134
+the rules that if the request comes on, this port
+
+330
+00:18:33.172 --> 00:18:35.450
+is going to route it to the right Pod.
+
+331
+00:18:36.910 --> 00:18:39.266
+Okay, so instance are in service.
+
+332
+00:18:39.388 --> 00:18:44.430
+Now we can access the load balancer, right?
+
+333
+00:18:44.480 --> 00:18:46.280
+And I don't need to mention any port.
+
+334
+00:18:48.410 --> 00:18:49.580
+And there you go.
+
+335
+00:18:50.570 --> 00:18:53.374
+So this is the service of type load balancer.
+
+336
+00:18:53.422 --> 00:18:56.646
+And this was service of type node port.
+
+337
+00:18:56.828 --> 00:18:58.642
+The third one is cluster IP.
+
+338
+00:18:58.786 --> 00:19:00.234
+We will be seeing that in a project.
+
+339
+00:19:00.332 --> 00:19:04.698
+But cluster IP is really without any external port.
+
+340
+00:19:04.784 --> 00:19:06.500
+No node port will be there.
+
+341
+00:19:07.610 --> 00:19:07.938
+Okay?
+
+342
+00:19:07.964 --> 00:19:09.978
+It will be mostly for the frontend
+
+343
+00:19:10.004 --> 00:19:11.682
+service to refer to the back end service
+
+344
+00:19:11.756 --> 00:19:14.060
+or back end service interacting with each other,
+
+345
+00:19:14.510 --> 00:19:17.794
+they will need service of type cluster IP.
+
+346
+00:19:17.842 --> 00:19:21.258
+So for nginx referring back to the Tomcat Pod, you
+
+347
+00:19:21.284 --> 00:19:25.194
+need to create a service of type cluster IP. All right?
+
+348
+00:19:25.232 --> 00:19:27.370
+So you just mentioned type cluster IP.
+
+349
+00:19:27.490 --> 00:19:30.738
+Instead of node port or load balancer, just cluster IP and
+
+350
+00:19:30.764 --> 00:19:33.174
+you give the target port and the frontend port.
+
+351
+00:19:33.212 --> 00:19:33.906
+That's all.
+
+352
+00:19:34.028 --> 00:19:36.442
+No node port, no load balancer.
+
+353
+00:19:36.586 --> 00:19:40.482
+Now internally, if any other Pod wants to
+
+354
+00:19:40.496 --> 00:19:42.918
+interact with your Tomcat Pod, it's going to
+
+355
+00:19:42.944 --> 00:19:46.962
+access the service on port 8080. Okay?
+
+356
+00:19:47.036 --> 00:19:49.806
+So on the frontend, you can have type of
+
+357
+00:19:49.868 --> 00:19:53.790
+node port or load balancer in the back end services
+
+358
+00:19:53.900 --> 00:19:58.810
+you'll have service of type cluster IP and load balancer
+
+359
+00:19:58.990 --> 00:20:03.138
+for production use cases well that's all in service for
+
+360
+00:20:03.164 --> 00:20:07.042
+now you can clean your resources delete your pod delete
+
+361
+00:20:07.066 --> 00:20:13.258
+your service keep CTL get pod or if you really
+
+362
+00:20:13.284 --> 00:20:16.620
+want to see if everything you can say kubectl get
+
+363
+00:20:18.090 --> 00:20:24.262
+all everything running in the current name space we'll see
+
+364
+00:20:24.276 --> 00:20:28.930
+what is namespace later so I'm going to delete kubectl
+
+365
+00:20:29.910 --> 00:20:36.830
+delete pod yes, like that also you can give pod
+
+366
+00:20:36.890 --> 00:20:40.702
+slash and the pod name same for the service you
+
+367
+00:20:40.716 --> 00:20:45.862
+can give service slash and the service name now when
+
+368
+00:20:45.876 --> 00:20:48.578
+you're deleting that service it's going to delete your load
+
+369
+00:20:48.614 --> 00:20:54.682
+balancer also okay let's run it all once again we
+
+370
+00:20:54.696 --> 00:20:58.006
+are good all right that's all in the next video
+
+371
+00:20:58.068 --> 00:21:00.850
+we'll be talking about replication controller how we can have
+
+372
+00:21:00.900 --> 00:21:04.130
+replica of our pods for high availability.

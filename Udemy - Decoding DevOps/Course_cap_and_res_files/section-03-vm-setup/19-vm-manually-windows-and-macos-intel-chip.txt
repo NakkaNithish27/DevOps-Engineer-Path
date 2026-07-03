@@ -1,0 +1,1618 @@
+WEBVTT
+
+00:00.360 --> 00:02.040
+Instructor: Hello and welcome.
+
+00:02.040 --> 00:06.210
+In this lecture we will set up virtual machine manually.
+
+00:06.210 --> 00:09.840
+Before we start this, we need to do some prerequisites.
+
+00:09.840 --> 00:11.190
+This is only for Windows.
+
+00:11.190 --> 00:14.820
+If you're using MacOS, you won't find this option
+
+00:14.820 --> 00:15.870
+in your MacOS,
+
+00:15.870 --> 00:17.190
+but if you're a Windows user,
+
+00:17.190 --> 00:20.160
+you need to do these two things.
+
+00:20.160 --> 00:24.573
+First is, you enable virtualization in the BIOS.
+
+00:25.590 --> 00:27.990
+So this is not an operating system setting,
+
+00:27.990 --> 00:32.460
+you need to get into the BIOS setting of your computer
+
+00:32.460 --> 00:36.783
+based on what kind of computer you're using, HP, Lenovo.
+
+00:38.251 --> 00:42.390
+You need to find it the boot time what is the button
+
+00:42.390 --> 00:44.850
+on your keyboard to get into the BIOS,
+
+00:44.850 --> 00:47.850
+and you need to enable virtualization.
+
+00:47.850 --> 00:50.190
+So while you are booting your computer
+
+00:50.190 --> 00:53.540
+or rebooting your computer, you may need to hit F2
+
+00:54.504 --> 00:57.810
+or F12, or Delete, or Escape
+
+00:57.810 --> 01:00.240
+based on the computer model that you're using,
+
+01:00.240 --> 01:02.730
+there may be different button to get into the BIOS.
+
+01:02.730 --> 01:06.480
+Once you get into the BIOS, then you enable this setting.
+
+01:06.480 --> 01:11.480
+Now this setting may be with different names like VTx,
+
+01:11.490 --> 01:14.460
+secure virtual machine or virtualization.
+
+01:14.460 --> 01:16.920
+You need to find the right name, something that has to do
+
+01:16.920 --> 01:20.430
+with virtualization and you need to enable that.
+
+01:20.430 --> 01:22.350
+Once you enable, you need to save and quit
+
+01:22.350 --> 01:24.153
+and then boot your computer.
+
+01:26.250 --> 01:28.080
+Now this is one example,
+
+01:28.080 --> 01:30.240
+an image that I have pulled from Google Images
+
+01:30.240 --> 01:33.510
+because I cannot share my screen in the BIOS.
+
+01:33.510 --> 01:36.510
+So it'll be something like this virtualization technology,
+
+01:36.510 --> 01:38.490
+you need to enable that.
+
+01:38.490 --> 01:41.710
+Or maybe like this Intel Virtualization Technology
+
+01:42.840 --> 01:47.550
+or just virtualization, or VTx.
+
+01:47.550 --> 01:51.570
+Some new computers have secure virtual machine option.
+
+01:51.570 --> 01:52.770
+You need to enable that.
+
+01:54.540 --> 01:58.773
+The other setting or settings that you need to disable,
+
+02:01.050 --> 02:03.780
+this is in Windows features.
+
+02:03.780 --> 02:07.050
+You can search for Windows features in your start menu,
+
+02:07.050 --> 02:09.210
+I will show you how to do that.
+
+02:09.210 --> 02:13.190
+On the start menu, just search for Windows features on
+
+02:15.330 --> 02:18.360
+and off, turn Windows feature on and off.
+
+02:18.360 --> 02:19.193
+Click on that.
+
+02:21.810 --> 02:23.670
+And in this, there are some settings
+
+02:23.670 --> 02:25.113
+that you need to disable.
+
+02:29.760 --> 02:33.570
+Microsoft Hyper-V or Windows Hypervisor platform,
+
+02:33.570 --> 02:36.720
+something with Hypervisor or Hyper-V,
+
+02:36.720 --> 02:38.550
+or if you have both, disable that.
+
+02:38.550 --> 02:42.180
+Windows subsystem for Linux, you need to disable that.
+
+02:42.180 --> 02:45.333
+Docker Desktop, Virtual Machine platform.
+
+02:47.760 --> 02:49.710
+So this is not anyone.
+
+02:49.710 --> 02:51.390
+All these settings you need to disable,
+
+02:51.390 --> 02:55.290
+for example, virtual machine platform, uncheck that.
+
+02:55.290 --> 02:57.993
+Windows subsystem for Linux, uncheck that.
+
+02:59.220 --> 03:04.220
+Microsoft Hyper-V or Windows Hypervisor platform.
+
+03:08.130 --> 03:10.920
+There, Windows Hypervisor platform.
+
+03:10.920 --> 03:13.170
+So you need to uncheck these options
+
+03:13.170 --> 03:15.810
+that I'm sharing on the screen on the left side,
+
+03:15.810 --> 03:18.840
+that bullet points you see, you need to uncheck them.
+
+03:18.840 --> 03:21.483
+Say okay and reboot your computer.
+
+03:24.750 --> 03:29.750
+Okay, so in short, enable VTx and disable all these options.
+
+03:29.880 --> 03:32.580
+Once you are done, then only continue in this video.
+
+03:32.580 --> 03:34.803
+Otherwise, you'll face a lot of errors.
+
+03:35.640 --> 03:39.630
+Okay, speaking about errors, there's also one more problem
+
+03:39.630 --> 03:41.850
+that many people reported,
+
+03:41.850 --> 03:45.450
+the VM was not getting IP address.
+
+03:45.450 --> 03:47.940
+And this happens because of your router.
+
+03:47.940 --> 03:49.890
+The solution is simple.
+
+03:49.890 --> 03:52.320
+And before we get into that problem,
+
+03:52.320 --> 03:55.680
+let's do these steps as precautionary measures.
+
+03:55.680 --> 04:00.000
+You need to power off your computer, reboot your router,
+
+04:00.000 --> 04:02.160
+and then power on your computer.
+
+04:02.160 --> 04:05.100
+This is not mandatory, but it's a precaution.
+
+04:05.100 --> 04:07.350
+Okay, then let's get started with the setup.
+
+04:07.350 --> 04:10.350
+You need to first open VirtualBox.
+
+04:10.350 --> 04:12.870
+So search for Oracle VirtualBox.
+
+04:12.870 --> 04:15.543
+You already installed this in prerequisite lecture.
+
+04:16.710 --> 04:20.460
+You can check its version, click on help about VirtualBox,
+
+04:20.460 --> 04:21.303
+mine is 7.1.4.
+
+04:24.360 --> 04:25.740
+To create a new virtual machine,
+
+04:25.740 --> 04:27.993
+you need to click on this gear symbol, new.
+
+04:29.640 --> 04:31.320
+First the name of the VM,
+
+04:31.320 --> 04:35.250
+so I'm going to give centosvm, not mandatory.
+
+04:35.250 --> 04:37.320
+You can give any name you want.
+
+04:37.320 --> 04:38.400
+This will be the location
+
+04:38.400 --> 04:41.010
+where the virtual machine will be stored.
+
+04:41.010 --> 04:43.710
+Make sure you select the type as a Linux,
+
+04:43.710 --> 04:47.910
+subtype as Red Hat and version Red Hat 64 bit.
+
+04:47.910 --> 04:50.220
+For some reason, if you don't see 64 bit,
+
+04:50.220 --> 04:51.510
+you only see 32 bit,
+
+04:51.510 --> 04:55.890
+that means VT is not enabled in your BIOS setting.
+
+04:55.890 --> 04:59.400
+So power off your computer, go to the BIOS setting
+
+04:59.400 --> 05:03.000
+and enable VT, virtualization technology.
+
+05:03.000 --> 05:05.760
+And then you should be able to see here, 64 bit.
+
+05:05.760 --> 05:07.607
+Now we are creating a CentOS VM,
+
+05:07.607 --> 05:10.680
+CentOS is a Red Hat operating system.
+
+05:10.680 --> 05:12.870
+That's why we selected here, subtype Red Hat
+
+05:12.870 --> 05:14.820
+and Red Hat 64 bit.
+
+05:14.820 --> 05:17.100
+Click on hardware, if you don't see this window,
+
+05:17.100 --> 05:18.720
+if you see next, just click on next,
+
+05:18.720 --> 05:21.090
+you should see here the hardware selection
+
+05:21.090 --> 05:25.320
+where you can select the memory, base memory, RAM.
+
+05:25.320 --> 05:30.320
+So I'm going to go with 2048 MB, that will be 2 GB.
+
+05:30.540 --> 05:32.550
+If you have low resource on your computer,
+
+05:32.550 --> 05:34.230
+you can go to 1 GB.
+
+05:34.230 --> 05:36.963
+You can give here 1024 MB,
+
+05:38.340 --> 05:42.213
+but I will be with 2048, that is 2 GB.
+
+05:43.110 --> 05:45.483
+CPU, I'm switching to two CPUs.
+
+05:46.320 --> 05:50.400
+You can also switch to two CPU and let's go in hard disk.
+
+05:50.400 --> 05:54.360
+In hard disk you need to select the size of the hard disk.
+
+05:54.360 --> 05:56.530
+So this is going to create this file
+
+05:57.810 --> 06:01.410
+and by default is not going to reserve 20 GB
+
+06:01.410 --> 06:02.370
+from your hard disk.
+
+06:02.370 --> 06:05.010
+If you select this option, pre-allocate full size,
+
+06:05.010 --> 06:07.233
+then only it'll reserve 20 GB.
+
+06:08.580 --> 06:10.563
+So make sure this is not checked.
+
+06:11.400 --> 06:12.870
+Then it'll dynamically allocate
+
+06:12.870 --> 06:14.733
+and the maximum will be 20 GB.
+
+06:16.140 --> 06:18.630
+Once you're done, click on finish.
+
+06:18.630 --> 06:20.550
+There, we created first virtual machine.
+
+06:20.550 --> 06:22.050
+It's just the hardware we need
+
+06:22.050 --> 06:24.900
+to install operating system on this.
+
+06:24.900 --> 06:27.240
+But before that, let's create one more virtual machine,
+
+06:27.240 --> 06:30.210
+which we'll use for installing Ubuntu operating system.
+
+06:30.210 --> 06:34.350
+So again, click on new and give similar details.
+
+06:34.350 --> 06:37.200
+I'm giving name as ubuntuvm, type Linux,
+
+06:37.200 --> 06:41.250
+subtype Ubuntu and Ubuntu 64 bit.
+
+06:41.250 --> 06:45.450
+Go to hardware and I'm going with two CPU and 2 GB.
+
+06:45.450 --> 06:49.140
+Make sure you switch this to two CPU and again,
+
+06:49.140 --> 06:51.090
+if you have less memory on your computer,
+
+06:51.090 --> 06:55.080
+you can go to 1 GB also, but I'm keeping it as 2 GB.
+
+06:55.080 --> 06:56.670
+Hard disk, we'll not do anything.
+
+06:56.670 --> 06:59.400
+You see by default it has taken 25 GB.
+
+06:59.400 --> 07:02.070
+So there are some defaults that it takes based on
+
+07:02.070 --> 07:03.510
+the operating system you select.
+
+07:03.510 --> 07:06.960
+So for Ubuntu it takes default 25 GB.
+
+07:06.960 --> 07:09.330
+And we are good with this, let's click on finish.
+
+07:09.330 --> 07:12.270
+So now we have two virtual machines, CentOS and Ubuntu,
+
+07:12.270 --> 07:14.040
+they do not have any operating system
+
+07:14.040 --> 07:16.680
+so we need to install OS on them.
+
+07:16.680 --> 07:20.730
+So first, we need the CentOS installation file.
+
+07:20.730 --> 07:25.170
+So open Google and search for CentOS Stream 9 ISO download.
+
+07:25.170 --> 07:29.880
+So ISO will be an image file which will attach to our VM
+
+07:29.880 --> 07:31.500
+and will power on our VM,
+
+07:31.500 --> 07:35.250
+and our VM will start installation from this image file.
+
+07:35.250 --> 07:36.400
+So let's search for it.
+
+07:37.860 --> 07:41.220
+So go to this first link index, stream nine base OS,
+
+07:41.220 --> 07:42.153
+click on this.
+
+07:43.440 --> 07:46.530
+So you go with the one that says boot.iso at the end,
+
+07:46.530 --> 07:49.170
+it'll be around 1 GB of size, click on that
+
+07:49.170 --> 07:50.793
+and it will start the download.
+
+07:52.650 --> 07:54.813
+Save this ISO file on your computer.
+
+07:55.860 --> 07:57.750
+Okay, once the download is completed,
+
+07:57.750 --> 07:59.520
+go back to your virtual machine.
+
+07:59.520 --> 08:02.340
+You need to go to its settings.
+
+08:02.340 --> 08:04.440
+So you can select the VM and click on settings
+
+08:04.440 --> 08:06.963
+or you can just right click and go to settings.
+
+08:08.070 --> 08:11.880
+Okay, so go to storage and if you don't see many options
+
+08:11.880 --> 08:14.610
+or here, make sure you switch to expert.
+
+08:14.610 --> 08:19.080
+So go to storage, controller ID, click on this empty
+
+08:19.080 --> 08:20.910
+and click over here in the dropdown
+
+08:20.910 --> 08:23.103
+and say choose a disc file.
+
+08:24.450 --> 08:28.380
+So find your ISO file and click on that and say open
+
+08:28.380 --> 08:30.240
+and make sure you put a check mark over here
+
+08:30.240 --> 08:32.763
+which says live CD or DVD.
+
+08:33.600 --> 08:36.090
+So here basically we're attaching this ISO file.
+
+08:36.090 --> 08:37.650
+So when you power on this VM,
+
+08:37.650 --> 08:41.913
+it starts the booting from this image and just say, okay.
+
+08:43.020 --> 08:44.430
+Okay, next setting I'm going to show you,
+
+08:44.430 --> 08:46.110
+but before that, I need to talk about
+
+08:46.110 --> 08:48.663
+a concept in networking.
+
+08:49.650 --> 08:52.140
+Okay, so on any computer, if you want to connect it
+
+08:52.140 --> 08:54.990
+to a network, it needs to have a device
+
+08:54.990 --> 08:57.240
+called as Network Adapter.
+
+08:57.240 --> 09:00.150
+Seem like our laptop or computer,
+
+09:00.150 --> 09:03.270
+we have a wireless adapter, we have ethernet adapter.
+
+09:03.270 --> 09:06.750
+Nowadays, laptop does not come with ethernet adapters.
+
+09:06.750 --> 09:08.940
+In ethernet adapter, you need to plug in
+
+09:08.940 --> 09:10.960
+the physical ethernet cable
+
+09:12.330 --> 09:14.040
+and the other end of this cable
+
+09:14.040 --> 09:15.753
+will be connected to a router.
+
+09:16.680 --> 09:19.410
+So in general nowadays, we have the wireless adapter
+
+09:19.410 --> 09:21.390
+and this wireless adapter will be connected
+
+09:21.390 --> 09:25.320
+to a WiFi router or wireless router, we can say.
+
+09:25.320 --> 09:29.190
+This wireless router will have an IP address.
+
+09:29.190 --> 09:30.750
+IP address in a network is used
+
+09:30.750 --> 09:33.390
+to identify a network device,
+
+09:33.390 --> 09:36.330
+same as you have a network adapter on your computer
+
+09:36.330 --> 09:40.050
+and that will also receive an IP address from the router.
+
+09:40.050 --> 09:43.740
+So in our case, we have a WiFi router, wireless router.
+
+09:43.740 --> 09:46.050
+This router will allocate an IP address.
+
+09:46.050 --> 09:49.920
+It has a feature called DSCP that will allocate IP addresses
+
+09:49.920 --> 09:51.990
+to the network adapters.
+
+09:51.990 --> 09:55.110
+So the IP is allocated to the network adapter,
+
+09:55.110 --> 09:57.000
+not to a computer.
+
+09:57.000 --> 09:59.280
+Your computer can have multiple network adapters
+
+09:59.280 --> 10:02.100
+and each can have its own IP address.
+
+10:02.100 --> 10:05.880
+So same like our network adapter of our computer,
+
+10:05.880 --> 10:09.690
+virtual machine will also have a network adapter.
+
+10:09.690 --> 10:11.580
+So in our computer we have virtual machine.
+
+10:11.580 --> 10:14.463
+The virtual machines will have the network adapter.
+
+10:15.930 --> 10:19.230
+And in order to connect this VM on the network,
+
+10:19.230 --> 10:21.993
+we need to have IP address on this network adapter.
+
+10:24.000 --> 10:26.550
+So virtual machine has a virtual adapter
+
+10:26.550 --> 10:29.760
+and in order to connect it to the physical wireless router,
+
+10:29.760 --> 10:32.700
+we need to use a concept called as bridging.
+
+10:32.700 --> 10:35.460
+So your VM network adapter will be connected
+
+10:35.460 --> 10:37.590
+to your computer's network adapter,
+
+10:37.590 --> 10:41.100
+which in turn will be connected to the WiFi router.
+
+10:41.100 --> 10:43.380
+So in bridge networking concept,
+
+10:43.380 --> 10:46.680
+the VM network adapter will connect to the WiFi router
+
+10:46.680 --> 10:48.420
+or any router available
+
+10:48.420 --> 10:51.110
+through a physical network adapter on your computer.
+
+10:51.110 --> 10:54.330
+It will use this network adapter as a bridge
+
+10:54.330 --> 10:56.550
+to connect to the router.
+
+10:56.550 --> 10:58.680
+And then router will give an IP address
+
+10:58.680 --> 11:01.080
+to this VM network adapter,
+
+11:01.080 --> 11:04.980
+assuming that it's just any other normal network adapter.
+
+11:04.980 --> 11:07.050
+You can check your computer's network adapter
+
+11:07.050 --> 11:08.700
+and its IP address.
+
+11:08.700 --> 11:12.300
+You have to open command prompt, CMD if you have Windows,
+
+11:12.300 --> 11:14.403
+if your MacOS, open your Terminal.
+
+11:15.480 --> 11:18.540
+Here you can enter a command called ipconfig,
+
+11:18.540 --> 11:21.513
+for MacOS, the command will be ifconfig.
+
+11:22.350 --> 11:25.020
+For Windows, it's ipconfig, hit enter.
+
+11:25.020 --> 11:27.543
+For Macs, it's ifconfig.
+
+11:28.470 --> 11:30.870
+So you should see all the network adapter of your computer.
+
+11:30.870 --> 11:34.260
+So here you see wireless LAN adapter, WiFi
+
+11:34.260 --> 11:38.220
+and you see IP address 192.168.1.10
+
+11:38.220 --> 11:41.460
+and you see default gateway 192.168.1.1,
+
+11:41.460 --> 11:44.190
+that's the IP address of my router.
+
+11:44.190 --> 11:47.160
+And if you see the first three placeholders
+
+11:47.160 --> 11:49.830
+are same, 192.168.1.
+
+11:49.830 --> 11:51.210
+Don't worry too much about networking,
+
+11:51.210 --> 11:54.180
+we're going to cover it in detail in networking section,
+
+11:54.180 --> 11:56.970
+is just a primer so we can understand
+
+11:56.970 --> 11:59.130
+the bridge networking concept.
+
+11:59.130 --> 12:01.620
+So check your IP address of your computer and take a note
+
+12:01.620 --> 12:03.150
+because when we create the virtual machine,
+
+12:03.150 --> 12:05.220
+when we start the installation,
+
+12:05.220 --> 12:07.440
+we will see IP address receiving to our VM,
+
+12:07.440 --> 12:10.380
+which will be in similar range, 192.168.1
+
+12:10.380 --> 12:12.580
+or whatever range you have on your computer.
+
+12:13.440 --> 12:15.810
+Okay, now go back to your VM setting once again,
+
+12:15.810 --> 12:19.800
+centosvm, right click, settings and go to network.
+
+12:19.800 --> 12:23.280
+Make sure you have selected here expert instead of basic.
+
+12:23.280 --> 12:25.200
+And you see here, adapter one, adapter two,
+
+12:25.200 --> 12:27.180
+adapter three, adapter four.
+
+12:27.180 --> 12:28.830
+So this VM can have four adapter.
+
+12:28.830 --> 12:31.980
+First adapter is NAT adapter and keep it as it is.
+
+12:31.980 --> 12:34.020
+It's default in VirtualBox.
+
+12:34.020 --> 12:35.403
+Go to adapter two,
+
+12:36.330 --> 12:38.490
+enable network adapter, put a check mark there
+
+12:38.490 --> 12:41.460
+and see attached to bridged adapter.
+
+12:41.460 --> 12:42.870
+So now in the dropdown,
+
+12:42.870 --> 12:45.990
+you have to select the computer's network adapter
+
+12:45.990 --> 12:47.220
+to bridge two.
+
+12:47.220 --> 12:49.140
+So if you're using WiFi,
+
+12:49.140 --> 12:51.810
+you will be using wireless network adapter of your computer,
+
+12:51.810 --> 12:54.420
+you have to select here the wireless adapter.
+
+12:54.420 --> 12:55.770
+If you're using ethernet cable,
+
+12:55.770 --> 12:58.290
+you need to select the ethernet network adapters.
+
+12:58.290 --> 13:01.200
+Now how do you know which is which?
+
+13:01.200 --> 13:03.300
+So you can go to the computer's network setting.
+
+13:03.300 --> 13:07.440
+Open control panel, view network status and tasks.
+
+13:07.440 --> 13:09.750
+Go to change adapter settings.
+
+13:09.750 --> 13:11.790
+You should see all the available network adapter
+
+13:11.790 --> 13:12.690
+of your computer.
+
+13:12.690 --> 13:14.130
+This is the WiFi for me
+
+13:14.130 --> 13:16.410
+and this is the ethernet adapter that is not connected.
+
+13:16.410 --> 13:18.450
+The other ones are just the virtual adapter.
+
+13:18.450 --> 13:20.670
+You even see the Bluetooth one.
+
+13:20.670 --> 13:24.750
+You see the name there, Intel WiFi's, blah blah blah.
+
+13:24.750 --> 13:27.360
+So that's the name of my WiFi adapter
+
+13:27.360 --> 13:30.603
+and that's what I'm going to select here from this list.
+
+13:32.040 --> 13:34.800
+Make sure this check mark is selected over here.
+
+13:34.800 --> 13:37.140
+Cable connected and say, okay.
+
+13:37.140 --> 13:40.290
+Now the benefit of this is our VM will receive an IP address
+
+13:40.290 --> 13:42.780
+from our router and our VM will act
+
+13:42.780 --> 13:45.240
+like any other computer in the network,
+
+13:45.240 --> 13:46.680
+which will be very essential later
+
+13:46.680 --> 13:49.080
+moving on in the course and understanding
+
+13:49.080 --> 13:52.080
+the other concepts like Docker networking,
+
+13:52.080 --> 13:54.210
+Kubernetes networking, Cloud networking.
+
+13:54.210 --> 13:56.700
+All this will be helpful for you.
+
+13:56.700 --> 13:59.220
+And please don't worry too much about networking for now,
+
+13:59.220 --> 14:01.170
+we are going to cover networking in detail
+
+14:01.170 --> 14:03.810
+and we have amazing networking concepts
+
+14:03.810 --> 14:06.300
+and set up on the cloud as well.
+
+14:06.300 --> 14:08.070
+This is very basic.
+
+14:08.070 --> 14:09.480
+Okay, now one last setting.
+
+14:09.480 --> 14:13.860
+Once again, go to the settings of this VM and go to system.
+
+14:13.860 --> 14:17.070
+Go to motherboard, make sure it's motherboard selected.
+
+14:17.070 --> 14:20.010
+Pointing device, from here, select USB tablet.
+
+14:20.010 --> 14:23.460
+If you see that in the list, select USB tablet.
+
+14:23.460 --> 14:25.650
+Now this will be helpful when you want to use
+
+14:25.650 --> 14:27.437
+your mouse cursor in the VM,
+
+14:27.437 --> 14:30.663
+you'll get to know in some time, just say okay.
+
+14:31.590 --> 14:33.000
+Okay, so three things we did.
+
+14:33.000 --> 14:36.000
+We have attached the ISO,
+
+14:36.000 --> 14:40.350
+we enabled bridged adapter and we changed the mouse setting.
+
+14:40.350 --> 14:42.420
+Now let's power on this VM.
+
+14:42.420 --> 14:45.423
+So make sure this VM is selected and click on start.
+
+14:46.350 --> 14:48.453
+You'll see a window pops up here.
+
+14:49.440 --> 14:50.580
+Okay, it's not opening for me,
+
+14:50.580 --> 14:52.050
+so I'm going to double click on this one.
+
+14:52.050 --> 14:53.820
+Yeah, now I see it.
+
+14:53.820 --> 14:55.710
+Okay, lemme close this one.
+
+14:55.710 --> 14:58.530
+Okay, now click on this black screen
+
+14:58.530 --> 15:01.140
+and it's going to capture your mouse cursor,
+
+15:01.140 --> 15:04.470
+say capture and then use the arrow keys
+
+15:04.470 --> 15:07.530
+to select install CentOS Stream 9.
+
+15:07.530 --> 15:09.060
+Make sure install CentOS Stream 9
+
+15:09.060 --> 15:10.503
+is selected and hit enter.
+
+15:11.460 --> 15:13.440
+Now your mouse cursor is captured into this.
+
+15:13.440 --> 15:14.430
+If you want to release it,
+
+15:14.430 --> 15:18.240
+you have to use right control button on your keyboard.
+
+15:18.240 --> 15:20.340
+When you use route right control button on your keyboard,
+
+15:20.340 --> 15:21.843
+your cursor will be released.
+
+15:22.710 --> 15:24.543
+Okay, now we do wait for some time.
+
+15:25.620 --> 15:26.970
+It's going to check all the hardwares
+
+15:26.970 --> 15:29.520
+and everything of this computer, this VM
+
+15:29.520 --> 15:31.420
+and then it'll start the installation.
+
+15:32.340 --> 15:34.560
+Okay, you should get this window in some time
+
+15:34.560 --> 15:37.290
+and once you get that, you need to select first language.
+
+15:37.290 --> 15:39.390
+So I'm going to go with English.
+
+15:39.390 --> 15:41.730
+So basically, the OS installation has started.
+
+15:41.730 --> 15:43.350
+We need to select all the settings,
+
+15:43.350 --> 15:45.690
+how we want to install the operating system.
+
+15:45.690 --> 15:48.810
+So first the language, I'm selecting here English
+
+15:48.810 --> 15:52.053
+and let me scroll this one or expand this.
+
+15:52.950 --> 15:54.330
+Okay, after selecting the language,
+
+15:54.330 --> 15:55.650
+I'm going to click on continue.
+
+15:55.650 --> 15:57.840
+Now this might take a little bit of time
+
+15:57.840 --> 16:00.270
+to go to the next screen, so please be patient.
+
+16:00.270 --> 16:01.383
+Okay, that happened.
+
+16:02.310 --> 16:03.540
+Because first, we need to select
+
+16:03.540 --> 16:05.100
+the installation destination,
+
+16:05.100 --> 16:07.380
+that will be the virtual hard disk of this VM.
+
+16:07.380 --> 16:09.540
+So click on this button here
+
+16:09.540 --> 16:13.260
+and select the virtual hard disk you see there, 20 GB
+
+16:13.260 --> 16:15.240
+and click on done.
+
+16:15.240 --> 16:17.460
+You need to select this one more time.
+
+16:17.460 --> 16:18.480
+Let's wait for a moment.
+
+16:18.480 --> 16:21.930
+Okay, you see this no disk selected, click on that.
+
+16:21.930 --> 16:23.460
+Select the hard disk
+
+16:23.460 --> 16:25.620
+and now it will select the partitioning scheme,
+
+16:25.620 --> 16:27.570
+we see automatic, so automatically do
+
+16:27.570 --> 16:29.520
+all the partitioning and all.
+
+16:29.520 --> 16:31.500
+And in Linux, we are going to talk about
+
+16:31.500 --> 16:34.290
+the partitioning of Linux, its file system structure.
+
+16:34.290 --> 16:36.990
+For now, just select automatic partitioning.
+
+16:36.990 --> 16:38.730
+Next, click on network and hosting.
+
+16:38.730 --> 16:41.340
+Click on this, you should see here two network adapter.
+
+16:41.340 --> 16:42.960
+The first one is the NAT adapter,
+
+16:42.960 --> 16:44.820
+the second one is the bridged adapter.
+
+16:44.820 --> 16:47.130
+How do I know? Well, look at its IP address.
+
+16:47.130 --> 16:49.860
+First one you will see 10.0.2.15,
+
+16:49.860 --> 16:53.010
+that's the default NAT adapter IP.
+
+16:53.010 --> 16:54.240
+If you go to the second adapter,
+
+16:54.240 --> 16:57.933
+you will see 192.168.1 dot something, right?
+
+16:58.800 --> 17:00.630
+It's basically the same range of the IP
+
+17:00.630 --> 17:02.940
+that you have on your computer.
+
+17:02.940 --> 17:04.560
+In Linux, it'll be named differently.
+
+17:04.560 --> 17:09.560
+You see that name enp0s8 and enp0s3.
+
+17:10.110 --> 17:12.540
+So this is the one this adapter, this IP will be using
+
+17:12.540 --> 17:14.790
+to connect to this machine.
+
+17:14.790 --> 17:16.530
+Okay, let's give the host name.
+
+17:16.530 --> 17:18.060
+So I'm going to give the same name
+
+17:18.060 --> 17:22.770
+as the VM name, can give different, centosvm.
+
+17:22.770 --> 17:27.630
+Yeah, centosvm, I will say apply and I'll say done.
+
+17:27.630 --> 17:30.990
+Okay, last thing is we need to set the root password.
+
+17:30.990 --> 17:32.430
+So what's a root password?
+
+17:32.430 --> 17:35.010
+Well, root is the admin user in Linux
+
+17:35.010 --> 17:36.930
+and we're going to talk about in very detail
+
+17:36.930 --> 17:38.460
+in Linux section.
+
+17:38.460 --> 17:40.320
+For now, I'm going to give a password
+
+17:40.320 --> 17:44.193
+that will be a little bit longer and slightly complicated.
+
+17:48.300 --> 17:49.980
+If you gave a weak password,
+
+17:49.980 --> 17:51.690
+then you need to click on done two times.
+
+17:51.690 --> 17:53.160
+If you have given a strong password,
+
+17:53.160 --> 17:57.000
+you can just click done one times and that will be done.
+
+17:57.000 --> 17:58.560
+If you want, you can create extra user.
+
+17:58.560 --> 18:00.210
+We don't need this now, again,
+
+18:00.210 --> 18:03.540
+we're going to talk about this later in Linux.
+
+18:03.540 --> 18:04.590
+So only three things.
+
+18:04.590 --> 18:07.110
+Select the hard disk, give the host name
+
+18:07.110 --> 18:10.323
+and set the root password and say begin installation.
+
+18:11.220 --> 18:13.110
+So this is going to take some time, long time
+
+18:13.110 --> 18:15.120
+to complete the installation process.
+
+18:15.120 --> 18:16.800
+I'm going to pause my recording
+
+18:16.800 --> 18:19.053
+and resume when this is completed.
+
+18:20.040 --> 18:22.290
+Okay, after like 10 to 15 minutes,
+
+18:22.290 --> 18:23.520
+the installation is completed
+
+18:23.520 --> 18:25.920
+and I got this option to reboot system.
+
+18:25.920 --> 18:28.023
+I'm not going to click on reboot system,
+
+18:28.890 --> 18:32.760
+open VirtualBox and we are going to power it off,
+
+18:32.760 --> 18:35.280
+shut it down, stop.
+
+18:35.280 --> 18:39.903
+And ACPI shut down, ACPI shut down.
+
+18:41.940 --> 18:43.983
+Okay, so let it shut down.
+
+18:47.520 --> 18:50.823
+Okay, once it's completely powered off, go to the settings,
+
+18:52.080 --> 18:56.490
+go to storage and click on this ISO.
+
+18:56.490 --> 19:00.600
+And we have to remove disk from virtual drive.
+
+19:00.600 --> 19:03.030
+So it's like removing a CD from the CDROM.
+
+19:03.030 --> 19:07.050
+You have to do this so it does not boot again with the ISO.
+
+19:07.050 --> 19:10.050
+If it boots again with the ISO,
+
+19:10.050 --> 19:11.760
+the installation will start again.
+
+19:11.760 --> 19:12.690
+We don't want that
+
+19:12.690 --> 19:14.990
+because we have already done the installation.
+
+19:15.930 --> 19:19.110
+Okay, click on okay and then say start,
+
+19:19.110 --> 19:20.403
+just normal power off.
+
+19:24.600 --> 19:27.510
+Okay, so after the VM is completely up,
+
+19:27.510 --> 19:28.800
+you should get this option.
+
+19:28.800 --> 19:33.800
+Click on start setup and I'm going to just say next
+
+19:35.040 --> 19:37.140
+and skip everything.
+
+19:37.140 --> 19:41.653
+Okay, full name, so I'm going to say centosuser and go next.
+
+19:47.160 --> 19:49.203
+Some password, I'm going to set.
+
+19:54.990 --> 19:59.703
+And go next, start using CentOS Stream.
+
+20:00.750 --> 20:03.510
+Okay, this is very small, stay with me.
+
+20:03.510 --> 20:07.203
+Click on this TV symbol, which is called as Terminal.
+
+20:10.350 --> 20:11.850
+And it should open a terminal,
+
+20:11.850 --> 20:14.340
+this is a command prompt of the Linux.
+
+20:14.340 --> 20:18.253
+Type the command here, ip addr show, hit enter.
+
+20:22.140 --> 20:24.270
+And you should see the IP address.
+
+20:24.270 --> 20:28.705
+192.168.1.10, this IP, not the 10.0 IP.
+
+20:28.705 --> 20:30.690
+Okay, take a note of whatever IP you are seeing
+
+20:30.690 --> 20:32.343
+in the bridged adapter.
+
+20:33.300 --> 20:36.990
+Now this Linux VM is on our computer so we can open it up,
+
+20:36.990 --> 20:40.080
+but most of the time, we will be connecting Linux machine
+
+20:40.080 --> 20:43.320
+remotely by using SSH.
+
+20:43.320 --> 20:45.603
+I will show you how we are going to do that.
+
+20:50.220 --> 20:51.540
+Okay, once again, take a note
+
+20:51.540 --> 20:54.840
+of the bridged adapter IP address and the username.
+
+20:54.840 --> 20:58.560
+My username is centosuser and that's the IP address
+
+20:58.560 --> 21:00.393
+and I'm going to open gitbash.
+
+21:01.530 --> 21:03.580
+This is what we install in prerequisites.
+
+21:04.530 --> 21:08.193
+So I'm going to say ssh and the username, centosuser,
+
+21:09.510 --> 21:14.303
+enter it and my VMs IP address is 192.168.1.10, hit enter.
+
+21:19.320 --> 21:23.160
+And say yes here, enter the password
+
+21:23.160 --> 21:28.160
+that you have set for this user and you will be logged in.
+
+21:28.380 --> 21:31.710
+You can run the command, ip addr show to check.
+
+21:31.710 --> 21:35.310
+Once again, you can run one more command host name.
+
+21:35.310 --> 21:39.490
+This should give you the host name of this VM
+
+21:40.680 --> 21:45.213
+and that is all, type exit and come out of this.
+
+21:46.530 --> 21:48.720
+Once you are done with this exercise,
+
+21:48.720 --> 21:50.870
+you should shut down this VM.
+
+21:50.870 --> 21:55.590
+So select the VM, right click, stop.
+
+21:55.590 --> 21:58.350
+ACPI shut down or you can do power off also,
+
+21:58.350 --> 22:02.583
+it'll just directly power off the VM, that's all.
+
+22:04.020 --> 22:06.960
+Next we will go with Ubuntu VM installation.
+
+22:06.960 --> 22:11.960
+So same process, find the ISO, Ubuntu 22 server ISO,
+
+22:12.660 --> 22:16.710
+Ubuntu 22 and server ISO, make sure you type this.
+
+22:16.710 --> 22:19.383
+So Ubuntu 22 LTS, Jammy Jellyfish,
+
+22:20.670 --> 22:23.280
+not desktop, server install image.
+
+22:23.280 --> 22:27.750
+Click on that and save.
+
+22:27.750 --> 22:29.370
+It's gonna take a moment to download.
+
+22:29.370 --> 22:30.910
+I'm going to pause my screen
+
+22:32.130 --> 22:34.413
+and resume when the download is completed.
+
+22:36.270 --> 22:38.130
+Okay, ISO is downloaded.
+
+22:38.130 --> 22:40.500
+And now once again, similar process.
+
+22:40.500 --> 22:43.380
+Attach the ISO, change the network interface
+
+22:43.380 --> 22:44.820
+and start the installation.
+
+22:44.820 --> 22:48.513
+So select your Ubuntu VM, go to settings,
+
+22:49.350 --> 22:53.100
+storage, click on that CD,
+
+22:53.100 --> 22:58.100
+drop down and choose a disc file, Ubuntu 22,
+
+23:00.120 --> 23:04.560
+put a check mark there and then go to network.
+
+23:04.560 --> 23:08.040
+Once again, adapter two, enable.
+
+23:08.040 --> 23:12.180
+Select bridged adapter and select the network adapter
+
+23:12.180 --> 23:14.010
+that is connected to your router,
+
+23:14.010 --> 23:16.830
+mostly it'll be the WiFi or wireless router,
+
+23:16.830 --> 23:17.943
+wireless adapter.
+
+23:19.080 --> 23:22.803
+Say okay and start the VM.
+
+23:23.940 --> 23:26.190
+Now Ubuntu installation will give lot of options,
+
+23:26.190 --> 23:27.960
+but all will be default.
+
+23:27.960 --> 23:29.790
+So it'll be just next, next, next,
+
+23:29.790 --> 23:31.980
+and we start the installation.
+
+23:31.980 --> 23:36.150
+Okay, so the language English, hit enter.
+
+23:36.150 --> 23:38.403
+Continue without updating, hit enter.
+
+23:39.330 --> 23:40.683
+Done, hit enter.
+
+23:42.270 --> 23:45.783
+And here also, you just need to hit done.
+
+23:49.560 --> 23:51.720
+Okay, it shows both the network adapter.
+
+23:51.720 --> 23:53.220
+You see the second network adapter,
+
+23:53.220 --> 23:56.550
+the IP address over there? This is good.
+
+23:56.550 --> 24:01.550
+Hit done, hit done, done here as well.
+
+24:02.850 --> 24:05.790
+And here, it is asking for the partition.
+
+24:05.790 --> 24:10.790
+So use your tab and go to done, and hit enter.
+
+24:12.450 --> 24:14.740
+And once again, hit enter on the done
+
+24:16.200 --> 24:21.200
+and go to continue, we can use the down arrow and hit enter.
+
+24:22.710 --> 24:26.343
+Okay, now your name, so I'm just going to say my name.
+
+24:27.600 --> 24:32.600
+Server name, we will say Ubuntuvm, pick a username,
+
+24:34.080 --> 24:39.080
+we will say DevOps or whatever username you want,
+
+24:39.840 --> 24:41.910
+you can give that and give a password.
+
+24:41.910 --> 24:43.413
+Make sure you remember this.
+
+24:46.860 --> 24:49.023
+Tab, and hit done.
+
+24:50.610 --> 24:55.170
+Okay, hit enter on continue, this one, wait,
+
+24:55.170 --> 24:58.110
+you have to select this one, install Open SSH Server.
+
+24:58.110 --> 24:59.730
+Make sure you select that.
+
+24:59.730 --> 25:02.670
+And you can do that by using space bar.
+
+25:02.670 --> 25:05.250
+There should be a check mark like that, cross
+
+25:05.250 --> 25:09.990
+and then use tab to go to done, and hit enter.
+
+25:09.990 --> 25:11.550
+Now, if you do not select this option,
+
+25:11.550 --> 25:13.593
+you will not be able to do SSH.
+
+25:16.410 --> 25:19.590
+Do not select anything over here, use tab and go to done
+
+25:19.590 --> 25:20.613
+and hit enter.
+
+25:21.780 --> 25:23.190
+And the installation will start.
+
+25:23.190 --> 25:24.720
+It will take some time.
+
+25:24.720 --> 25:28.890
+So wait some time, like 10 minutes, 15 minutes it may take.
+
+25:28.890 --> 25:33.510
+And then you will get this option to reboot the VM.
+
+25:33.510 --> 25:34.560
+We are not going to reboot,
+
+25:34.560 --> 25:37.353
+we are going to just power off this VM,
+
+25:38.250 --> 25:40.170
+once the installation is completed, okay?
+
+25:40.170 --> 25:41.850
+After the installation is completed,
+
+25:41.850 --> 25:45.303
+then power off, ACPI shut down.
+
+25:48.270 --> 25:51.543
+Go to the VM settings, storage.
+
+25:53.940 --> 25:57.330
+And in the dropdown remove disk from virtual drive
+
+25:57.330 --> 25:58.233
+and say okay.
+
+25:59.610 --> 26:02.763
+Right click once again, stop and power off.
+
+26:05.010 --> 26:07.680
+Okay, when the VM is powered off completely,
+
+26:07.680 --> 26:09.513
+click on start once again.
+
+26:18.510 --> 26:21.330
+Okay, it might take some time for the VM to come up.
+
+26:21.330 --> 26:26.330
+Once it is up, click on it and type the username
+
+26:26.550 --> 26:29.103
+and the password that you have set.
+
+26:33.000 --> 26:36.363
+Once again, same command, ip addr show.
+
+26:37.650 --> 26:42.650
+Note down the IP address, 192.168.1.11 for me
+
+26:43.650 --> 26:45.333
+and open gitbash.
+
+26:47.820 --> 26:50.190
+You can type clear command to clear the screen
+
+26:50.190 --> 26:55.170
+or you can open a new gitbash, SSH username
+
+26:55.170 --> 26:57.333
+at the rate, IP address.
+
+27:00.609 --> 27:04.620
+Hit enter, say yes, enter the password
+
+27:04.620 --> 27:09.620
+for the user and you should be in ip addr show, host name.
+
+27:14.790 --> 27:15.960
+Okay, that is all.
+
+27:15.960 --> 27:20.960
+You can exit from this VM and power off the VM.
+
+27:32.010 --> 27:34.110
+So this is all we wanted to do in this lecture.
+
+27:34.110 --> 27:37.680
+We wanted to set up two virtual machine, one with CentOS,
+
+27:37.680 --> 27:39.150
+the other one with Ubuntu.
+
+27:39.150 --> 27:40.710
+We did it successfully.
+
+27:40.710 --> 27:42.330
+In the next lectures, we are going to see
+
+27:42.330 --> 27:46.500
+how to do this entire process automatically very quickly.
+
+27:46.500 --> 27:49.443
+So wrap this up and join me in the next lecture.

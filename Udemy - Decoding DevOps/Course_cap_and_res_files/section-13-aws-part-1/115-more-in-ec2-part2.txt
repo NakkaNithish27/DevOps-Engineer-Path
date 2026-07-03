@@ -1,0 +1,655 @@
+WEBVTT
+
+00:00.240 --> 00:04.360
+Okay if you have few more things remaining that I need to show you about the EC2 instance.
+
+00:05.080 --> 00:09.840
+And after we see these things, we're going to jump into the next service on AWS.
+
+00:10.360 --> 00:12.600
+So in the last lecture we created this instance.
+
+00:12.600 --> 00:15.120
+And it has a public IP and a private IP.
+
+00:15.160 --> 00:18.920
+Now once you create the instance the private IP is static.
+
+00:19.160 --> 00:24.600
+That means until and unless you do not delete this instance, this private IP is reserved for your instance.
+
+00:24.600 --> 00:26.840
+But that is not the case with the public IP.
+
+00:27.320 --> 00:29.040
+This public IP is dynamic.
+
+00:29.040 --> 00:33.720
+If you shut down this instance, this IP will be released back and when you power on the instance,
+
+00:33.720 --> 00:35.640
+you will get a new public IP.
+
+00:35.760 --> 00:36.360
+Take a look.
+
+00:36.680 --> 00:38.240
+I'm going to power off this instance.
+
+00:38.240 --> 00:40.920
+So I'm going to say instance date stop.
+
+00:41.320 --> 00:42.280
+Stop instance.
+
+00:43.120 --> 00:48.080
+If you refresh after a few seconds you will see the static IP is there but the public IP is gone.
+
+00:48.280 --> 00:52.480
+Now when you power on instance I'll say action start instance.
+
+00:53.120 --> 00:57.840
+In few seconds you're going to get a new public IP different than the old one.
+
+00:58.160 --> 01:03.910
+Now majority of the cases this is not a big problem because we will have load balancer and other services
+
+01:04.230 --> 01:05.310
+that access the instance.
+
+01:05.310 --> 01:12.630
+But if you need a static public IP for your EC2 instance, then you need to get into the elastic IP.
+
+01:13.270 --> 01:16.030
+So network and security you see here elastic IPS.
+
+01:16.030 --> 01:20.670
+If you click on this here you can allocate an elastic IP for yourself.
+
+01:20.670 --> 01:25.470
+Now this is a unique IP address in the world that will be reserved for you.
+
+01:25.470 --> 01:26.470
+So there is a limit.
+
+01:26.790 --> 01:29.070
+AWS gives you five elastic IP.
+
+01:29.430 --> 01:32.550
+If you need more then you need to talk to the support.
+
+01:32.950 --> 01:35.350
+And also elastic IPS are not free.
+
+01:35.870 --> 01:37.070
+There will be some charges.
+
+01:37.070 --> 01:40.350
+So you can skip this practice and you can just watch it.
+
+01:40.350 --> 01:43.110
+It's pretty simple, but if you still want to do it, you can do it.
+
+01:43.110 --> 01:44.790
+The charges are really negligible.
+
+01:45.310 --> 01:49.390
+So once again elastic IP is a static public IP.
+
+01:49.470 --> 01:50.430
+You have five.
+
+01:50.830 --> 01:55.990
+So I'm going to ask for my first elastic IP allocate elastic IP address.
+
+01:55.990 --> 01:58.110
+You select the region you're going to keep it same.
+
+01:58.110 --> 01:59.070
+Just say allocate.
+
+01:59.830 --> 02:01.470
+So you got a public IP over here.
+
+02:01.510 --> 02:01.990
+Oh sorry.
+
+02:02.030 --> 02:04.030
+An elastic IP over here which is public.
+
+02:04.350 --> 02:09.460
+And select that and say see action and see Associate Elastic IP address.
+
+02:09.460 --> 02:10.260
+Click on this.
+
+02:10.860 --> 02:13.980
+Now here you get two options instance and network interface.
+
+02:14.500 --> 02:17.820
+So every instance will by default have a network interface.
+
+02:17.820 --> 02:20.220
+But you can have multiple network interface.
+
+02:20.220 --> 02:23.820
+And every network interface can have different elastic IP.
+
+02:23.860 --> 02:24.780
+If you want.
+
+02:25.380 --> 02:28.260
+So let me cancel this and show the network interface to you.
+
+02:28.380 --> 02:30.220
+So we have this EC2 instance.
+
+02:30.580 --> 02:32.420
+Select the instance you go to networking.
+
+02:32.420 --> 02:36.740
+If you scroll down till the end here you will see interface.
+
+02:36.740 --> 02:37.980
+This is the interface.
+
+02:38.300 --> 02:41.180
+Now the IP is allocated to the network interface.
+
+02:41.180 --> 02:44.020
+So you have the private IP attached to this network interface.
+
+02:44.020 --> 02:46.780
+And the public IP is also for this network interface.
+
+02:47.260 --> 02:49.820
+This is the default network interface of your instance.
+
+02:49.820 --> 02:52.340
+You can have more network interfaces as well.
+
+02:52.500 --> 02:57.020
+If you go into network and security network interfaces, you will see your network interface, your
+
+02:57.020 --> 02:57.660
+instance name.
+
+02:57.660 --> 03:02.020
+And you can see here you can create more network interface and attach it to your instance.
+
+03:02.260 --> 03:04.860
+And as I said, you don't need to really do all this in this lecture.
+
+03:04.860 --> 03:06.020
+You can just watch it.
+
+03:06.300 --> 03:07.740
+If you need to understand these options.
+
+03:07.740 --> 03:13.250
+The instance can have multiple network network interface, and each network interface can have different
+
+03:13.290 --> 03:15.490
+IP, private and public both.
+
+03:16.010 --> 03:18.130
+So let's go back to the elastic IPS.
+
+03:18.730 --> 03:19.890
+That's our elastic IP.
+
+03:19.930 --> 03:24.690
+Let's select it and say action associate elastic IP address.
+
+03:25.330 --> 03:28.370
+And now you see you can select instance or network interface.
+
+03:28.410 --> 03:30.570
+Now you know what network interface means.
+
+03:31.010 --> 03:34.490
+But anyways we'll select the instance and we'll select the instance name.
+
+03:34.850 --> 03:37.810
+Now this instance has just one network interface.
+
+03:37.810 --> 03:42.410
+And this IP will be attached to that default network interface of the instance.
+
+03:42.650 --> 03:44.530
+And then you can say associate.
+
+03:45.410 --> 03:52.930
+Now if you go back to your instance go to Details Refresh and you will see the elastic IP associated
+
+03:52.930 --> 03:53.730
+to this instance.
+
+03:53.730 --> 03:54.970
+And this is static.
+
+03:54.970 --> 03:59.210
+So if I power off this instance and I power on this IP will remain same.
+
+03:59.210 --> 04:00.570
+And I'm going to show that to you.
+
+04:01.010 --> 04:05.050
+So instance state stop instance stop okay.
+
+04:05.050 --> 04:07.490
+You see the instance is in stopped state.
+
+04:07.490 --> 04:10.210
+It's powered off but the IP is still there.
+
+04:11.010 --> 04:15.360
+So as I said in most of the cases you will not need elastic IP to your instance.
+
+04:15.360 --> 04:17.600
+You will realize after completing this course.
+
+04:17.920 --> 04:23.200
+But in case if you need a static public IP to your instance, this is how you can get it.
+
+04:23.640 --> 04:26.040
+Okay, now I'm going to power this on okay.
+
+04:26.080 --> 04:26.640
+One more thing.
+
+04:26.680 --> 04:31.880
+The security group that we have seen security Group is also on the network interface.
+
+04:32.240 --> 04:38.840
+So the private IP, public IP and security group is attached to the network interface of the instance.
+
+04:39.160 --> 04:39.400
+Right.
+
+04:39.400 --> 04:40.480
+You go to the networking tab.
+
+04:40.480 --> 04:42.520
+If you scroll down you will see the network interface.
+
+04:42.520 --> 04:45.240
+So all this is on the network interface.
+
+04:46.360 --> 04:51.240
+So anything that is related to the networking of the instance is attached to the network interface.
+
+04:51.240 --> 04:54.080
+And you can have one or multiple network interface.
+
+04:54.320 --> 05:00.440
+Each can have their own IPS security groups and elastic IP also.
+
+05:01.240 --> 05:01.480
+Okay.
+
+05:01.480 --> 05:04.960
+Now next thing so instance will also have a volume.
+
+05:05.520 --> 05:07.960
+When we launch the instance we select the army.
+
+05:07.960 --> 05:11.320
+And the Army gives you a volume the storage.
+
+05:11.480 --> 05:16.950
+If you go to the storage of the instance you should see here a volume ID you can go to the volumes section.
+
+05:16.950 --> 05:21.270
+Also here in the left side, if you click on volumes you can see the volume ID, you can see the instance
+
+05:21.270 --> 05:21.670
+name.
+
+05:21.950 --> 05:23.430
+Sorry, that's not the instance name.
+
+05:23.430 --> 05:28.910
+That is the tag that we have given to the instance in the attachment.
+
+05:28.910 --> 05:33.990
+Here you can see the volume, uh, sorry, the instance ID of the volume.
+
+05:34.270 --> 05:36.950
+So we're going to have a dedicated lecture on volumes.
+
+05:36.950 --> 05:38.430
+We're going to get into detail about that.
+
+05:38.430 --> 05:42.350
+But I just wanted to show you these default things about the instance.
+
+05:42.350 --> 05:45.310
+So the instance when you launch comes with a default volume.
+
+05:45.310 --> 05:46.510
+So this is eight GB.
+
+05:46.710 --> 05:51.910
+Some am I might might give you 20 GB, some might give you 30, some might give you 120.
+
+05:52.190 --> 05:53.470
+Really depends on the army.
+
+05:53.510 --> 05:57.030
+Most of the default Linux Amis comes with eight GB.
+
+05:57.710 --> 06:02.870
+So if you go to dashboard and if you do refresh, you will see here one instance.
+
+06:03.310 --> 06:09.030
+And you'll see in the running we have one instance, one key pair, two security group, one elastic
+
+06:09.030 --> 06:10.950
+IP and one volume.
+
+06:11.310 --> 06:13.510
+Always keep track of your EC2 dashboard.
+
+06:13.510 --> 06:17.510
+So if you have any, you know, extra volumes or elastic IP, anything.
+
+06:17.510 --> 06:20.870
+You can find it from here and then you can go there and delete it if you don't need it.
+
+06:21.190 --> 06:21.430
+Okay.
+
+06:21.430 --> 06:23.110
+Now let's go to the running instance.
+
+06:23.990 --> 06:26.190
+Now take some time and explore all these tabs.
+
+06:26.190 --> 06:29.710
+Look at the different options and settings of the EC2 instance.
+
+06:29.870 --> 06:33.070
+Keep in mind you're not just learning EC2 service here.
+
+06:33.590 --> 06:37.630
+You're learning many basic concepts of cloud computing through EC2.
+
+06:38.110 --> 06:43.950
+All this knowledge will be applied in further lectures, in the projects, and even in real time.
+
+06:44.390 --> 06:47.630
+So make sure you spend quite good amount of time on EC2.
+
+06:47.670 --> 06:49.070
+Please do not rush here.
+
+06:49.670 --> 06:52.510
+Let's take a look at the actions.
+
+06:52.510 --> 06:53.110
+What we can do.
+
+06:53.150 --> 06:54.190
+Changes to this instance.
+
+06:54.190 --> 06:56.110
+So click on actions here.
+
+06:56.110 --> 06:59.310
+In the instance settings you have many settings that you can change.
+
+06:59.310 --> 07:02.270
+One of them is change instance type and it's grayed out.
+
+07:02.590 --> 07:07.270
+So right now we have T2 micro T3 micro for instance we can expand it.
+
+07:07.270 --> 07:10.310
+We can have a bigger instance type or a smaller instance type.
+
+07:10.310 --> 07:13.470
+Because you know cloud computing is elastic in nature.
+
+07:13.830 --> 07:17.110
+But since it's grayed out we need to power off this instance.
+
+07:17.150 --> 07:19.870
+We're going to change the instance type and then we power on.
+
+07:19.980 --> 07:25.900
+You don't need to do this because when we change to a bigger instance type, there will be charges on
+
+07:25.900 --> 07:27.060
+hourly basis.
+
+07:27.380 --> 07:31.740
+We're going to wrap it up in a few minutes, but still you need to do it.
+
+07:31.740 --> 07:32.940
+It's pretty simple exercise.
+
+07:32.940 --> 07:34.820
+I'm just going to show you just watch.
+
+07:35.460 --> 07:38.940
+So first thing I'm going to power off this instance stop instance.
+
+07:41.020 --> 07:41.300
+Okay.
+
+07:41.340 --> 07:43.820
+Remove this filter running because there's no running instance.
+
+07:43.820 --> 07:46.460
+Now we have a stopped instance.
+
+07:46.620 --> 07:48.460
+Now I'm going to change instance type.
+
+07:48.460 --> 07:49.660
+Once again you don't need to do this.
+
+07:49.660 --> 07:50.420
+Just watch.
+
+07:50.900 --> 07:54.700
+So go to actions instance setting change instance type.
+
+07:55.140 --> 08:04.500
+So right now it's T2 micro and I am going to change it I'm going to change it to T2 dot small one step
+
+08:04.500 --> 08:04.940
+bigger.
+
+08:05.300 --> 08:06.940
+Here you can see the comparison.
+
+08:07.140 --> 08:13.780
+So T2 micro has one GB T2 small has two GB one core CPU, one core CPU that remains same.
+
+08:14.180 --> 08:19.180
+So whenever you change the instance type you get like this a nice comparison, even the costing.
+
+08:19.500 --> 08:22.340
+And that really helps you decide should you go it?
+
+08:22.650 --> 08:23.970
+Should you go for it or not?
+
+08:23.970 --> 08:25.930
+But for now, I'm just going to go for it.
+
+08:25.930 --> 08:27.970
+I'm going to change it to T2 small.
+
+08:28.530 --> 08:33.450
+The instance type is changed and now I'm going to power it on instance state start instance.
+
+08:33.890 --> 08:35.170
+And that simple it is.
+
+08:35.490 --> 08:37.890
+Okay, now I have a bigger instance type.
+
+08:37.930 --> 08:39.410
+Let's take a look at other settings.
+
+08:39.410 --> 08:44.650
+So you have change termination protection where you can enable a protection.
+
+08:44.650 --> 08:47.530
+Click on this I'm going to enable it.
+
+08:47.530 --> 08:50.210
+So now this helps in accidental deletion.
+
+08:50.210 --> 08:54.010
+Some people you know accidentally delete the instance is going to not allow that.
+
+08:54.010 --> 08:55.930
+You need to disable this protection.
+
+08:56.250 --> 09:00.690
+Then only you can delete the instance which we'll see once we delete this instance.
+
+09:01.010 --> 09:01.210
+Okay.
+
+09:01.210 --> 09:02.170
+Like that there are many settings.
+
+09:02.170 --> 09:05.930
+Now if we go to networking you see we can attach network interface.
+
+09:05.930 --> 09:09.530
+We can detach network interface RDS will come to this later.
+
+09:09.730 --> 09:11.930
+We can disassociate our elastic IP.
+
+09:11.970 --> 09:13.850
+We can manage IP addresses.
+
+09:14.250 --> 09:17.290
+Let's take a look at the security change security groups.
+
+09:17.290 --> 09:20.970
+You can change the security group or you can add multiple security group also.
+
+09:21.450 --> 09:28.480
+So like I can select a security group over here I say add security group or I can remove the security
+
+09:28.480 --> 09:28.800
+group.
+
+09:29.120 --> 09:30.280
+So I just added the default.
+
+09:30.280 --> 09:33.520
+Then I removed the default again I just wanted to keep the same security group.
+
+09:33.560 --> 09:35.400
+Save the other setting.
+
+09:35.400 --> 09:38.200
+You have modify IAM role which we are going to see later.
+
+09:38.680 --> 09:44.400
+These are basically permission on which servers can access this instance or from this instance what
+
+09:44.400 --> 09:45.400
+you can access.
+
+09:45.440 --> 09:47.040
+We'll take a look at it later.
+
+09:47.480 --> 09:48.760
+Image and templates.
+
+09:48.800 --> 09:50.880
+We're going to see this in few lectures.
+
+09:51.000 --> 09:55.760
+We can create an Ami from this instance that will see monitor and troubleshoot.
+
+09:56.360 --> 09:58.080
+So sometimes this happens.
+
+09:58.080 --> 09:59.960
+We make some changes at the OS level.
+
+09:59.960 --> 10:01.920
+And the instance does not come up.
+
+10:02.080 --> 10:04.360
+And then you can look at the system log.
+
+10:05.080 --> 10:07.120
+So it's not like live system log.
+
+10:07.120 --> 10:08.320
+It takes time to load.
+
+10:08.640 --> 10:13.360
+It's like the monitor the computer monitor to your EC2 instance.
+
+10:13.360 --> 10:14.720
+But this is not live.
+
+10:14.720 --> 10:16.680
+You can just download log and take a look.
+
+10:16.920 --> 10:19.200
+Basically helps with the booting log.
+
+10:20.080 --> 10:20.280
+Okay.
+
+10:20.320 --> 10:23.720
+So like that there are many more settings and information about the EC2 instance.
+
+10:23.720 --> 10:29.750
+As I told you, you're not just learning EC2 servers and its settings, You are learning many cloud
+
+10:29.750 --> 10:35.630
+computing concepts through EC2 servers, so take your time, explore this, create delete instances,
+
+10:35.630 --> 10:36.630
+play with it.
+
+10:36.630 --> 10:42.190
+Just make sure you keep it at T2 micro, T3 micro in the free tier limit and just play with it.
+
+10:42.230 --> 10:43.790
+I'm going to now terminate this instance.
+
+10:43.790 --> 10:51.070
+I'm going to say instance terminate delete and I say terminate and I'm going to get an error.
+
+10:51.070 --> 10:54.190
+That is because I have enabled termination protection.
+
+10:54.190 --> 10:55.990
+So I'm going to disable that first.
+
+10:56.230 --> 11:03.430
+So I go to action instance setting change termination protection uncheck this and save.
+
+11:03.910 --> 11:10.790
+And now I can terminate the instance terminate terminate come to the elastic IPS section.
+
+11:10.790 --> 11:11.590
+Refresh it.
+
+11:12.430 --> 11:20.550
+Select the elastic IP that you have say action and say release elastic IP address release elastic IPS
+
+11:20.550 --> 11:27.070
+are not free, so make sure you release it back to the AWS pool if you find any elastic IP.
+
+11:28.030 --> 11:30.270
+And that should be all in this lecture.
+
+11:30.270 --> 11:31.750
+I will see you in the next one.

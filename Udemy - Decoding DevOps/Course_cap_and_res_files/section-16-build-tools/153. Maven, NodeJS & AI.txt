@@ -1,0 +1,622 @@
+WEBVTT
+
+00:00.560 --> 00:00.960
+Okay.
+
+00:00.960 --> 00:02.600
+So I'm going to terminate this instance.
+
+00:02.600 --> 00:03.560
+We don't need it.
+
+00:03.560 --> 00:10.680
+That was just to show you how you can do it on a bare metal or no, or on an operating system from scratch.
+
+00:10.720 --> 00:13.400
+Once you understand this, you can do it really anywhere.
+
+00:13.440 --> 00:16.120
+Like for example, AWS Cloud Shell.
+
+00:16.120 --> 00:21.600
+So if you click on this AWS Cloud Shell over here, it's going to open a shell for you.
+
+00:21.600 --> 00:24.360
+That will be of Amazon Linux 2023.
+
+00:24.400 --> 00:25.400
+You can expand it.
+
+00:25.400 --> 00:26.720
+You can open it in a new tab.
+
+00:26.760 --> 00:28.280
+I'm going to click on this button.
+
+00:28.720 --> 00:30.280
+It opens up in a new tab.
+
+00:32.640 --> 00:32.880
+Okay.
+
+00:32.880 --> 00:34.920
+Preparing the terminal okay.
+
+00:34.920 --> 00:35.640
+It's ready.
+
+00:35.640 --> 00:38.000
+So run the command cat etc..
+
+00:38.160 --> 00:40.040
+OS hyphen release.
+
+00:41.080 --> 00:42.640
+Let me increase the font here.
+
+00:45.440 --> 00:48.400
+Large confirm okay.
+
+00:48.400 --> 00:51.360
+You see that that's Amazon Linux 2023.
+
+00:51.800 --> 00:53.720
+Now this is based on RPM.
+
+00:53.720 --> 00:56.400
+So you can use yum or DNF command.
+
+00:56.880 --> 01:00.000
+So we'll do the same work what we did in the previous lecture.
+
+01:00.400 --> 01:08.070
+So if you just search well, you need to use sudo command sudo DNF search for Java, not JDK.
+
+01:08.110 --> 01:10.430
+Here the package name starts with Java.
+
+01:10.510 --> 01:13.510
+I'm going to filter it and say grep 21.
+
+01:14.790 --> 01:16.110
+So I don't think it's there.
+
+01:16.110 --> 01:21.150
+Let me check with ChatGPT how to install JDK 21 in Amazon Linux or what.
+
+01:21.190 --> 01:21.830
+It's there.
+
+01:22.470 --> 01:22.870
+Yeah.
+
+01:24.230 --> 01:27.310
+So the package name is Java hyphen 21 Amazon Corretto.
+
+01:27.350 --> 01:30.630
+When you see Corretto, keep in mind this is from AWS.
+
+01:30.990 --> 01:36.350
+So let's install this sudo dnf install and the package name hyphen y.
+
+01:38.110 --> 01:39.110
+Okay, that was quick.
+
+01:39.110 --> 01:43.070
+Let's also install like this Maven Suming.
+
+01:43.070 --> 01:47.070
+Maven is there in the repository of Amazon Linux.
+
+01:47.110 --> 01:51.430
+It is there DNF install maven hyphen y.
+
+01:52.630 --> 01:57.870
+Okay, let's run the command Mvn hyphen version 3.8.4.
+
+01:57.870 --> 02:02.260
+Now in the previous lecture you have already seen how you can switch between different version of JDK
+
+02:02.300 --> 02:03.140
+and Maven.
+
+02:03.780 --> 02:05.500
+You really don't need to do this again.
+
+02:05.980 --> 02:08.980
+It works with Maven 3.8 and JDK 21.
+
+02:09.580 --> 02:10.980
+But you know what to do, right?
+
+02:11.020 --> 02:12.740
+First, let's clone the source code.
+
+02:19.540 --> 02:21.260
+Okay, this is much faster.
+
+02:21.420 --> 02:29.820
+Let's get into the folder or repository and run the command Mvn install.
+
+02:30.500 --> 02:34.300
+So basically we're doing the same thing what we did in ubuntu EC2 instance.
+
+02:34.580 --> 02:36.980
+Now you're going to do the same thing on Jenkins.
+
+02:36.980 --> 02:39.780
+But this will be that will be from the Jenkins UI.
+
+02:40.300 --> 02:47.100
+So my point here is be it any operating system, VM, container, Docker, anything you should know
+
+02:47.100 --> 02:51.740
+the dependency, the tool versions and how to install those tools.
+
+02:51.780 --> 02:58.980
+Now you have help of ChatGPT grok, Amazon Q many generative AI you can use to ask the right question
+
+02:58.980 --> 03:03.370
+and get the commands you do not need to memorize commands, you just need to know the information and
+
+03:03.370 --> 03:04.530
+how to execute it.
+
+03:05.410 --> 03:09.570
+Okay, that's a build success less target you should see.
+
+03:09.810 --> 03:10.290
+Oops.
+
+03:12.370 --> 03:13.810
+Should see the artifact.
+
+03:13.810 --> 03:18.210
+That's the output, the package and the reports and stuff.
+
+03:18.650 --> 03:22.930
+Now what to do with this output that we're going to see in the Jenkins lecture.
+
+03:22.930 --> 03:27.930
+How to deploy it, how to do CI, CD and stuff that in later lecture.
+
+03:27.970 --> 03:32.130
+Now I'm going to show you one more source code that is of NodeJS.
+
+03:32.970 --> 03:40.650
+Let me clear the screen so you can access this URL github.com slash coder slash node.
+
+03:41.170 --> 03:46.890
+This is one of the service from our microservice application E-mart microservice application.
+
+03:46.890 --> 03:49.650
+We have from that this is one service.
+
+03:49.970 --> 03:51.890
+It's written in node NodeJS.
+
+03:52.170 --> 03:54.850
+And let's see you do not know what to do, how to build it.
+
+03:54.850 --> 03:57.690
+You have no idea of no maven.
+
+03:57.730 --> 03:59.210
+You know the build tool and stuff.
+
+03:59.570 --> 04:01.560
+And now you are working in a new project.
+
+04:01.600 --> 04:02.440
+Okay, Node.js.
+
+04:02.440 --> 04:03.080
+You have never seen it.
+
+04:03.120 --> 04:03.600
+What to do?
+
+04:04.080 --> 04:07.200
+Well, let's take the help of generative AI again.
+
+04:07.560 --> 04:09.200
+So let's copy this URL.
+
+04:09.200 --> 04:09.800
+Or you know what?
+
+04:09.840 --> 04:14.480
+Better copy this URL which the generative AI can scan.
+
+04:14.480 --> 04:17.920
+Now I'm using ChatGPT for this one in real time.
+
+04:17.920 --> 04:22.280
+This will be private repositories and you can use in VS code.
+
+04:22.280 --> 04:29.240
+You can use your GitHub copilot Amazon Q developer, any inbuilt code assistant.
+
+04:29.280 --> 04:32.480
+You can clone your source code on that and you can ask questions.
+
+04:33.040 --> 04:35.320
+Same as what I'm going to do now with ChatGPT.
+
+04:36.440 --> 04:37.560
+Let's go to ChatGPT.
+
+04:38.600 --> 04:38.760
+Okay.
+
+04:38.760 --> 04:42.720
+I'm going to say here is my source code.
+
+04:44.440 --> 04:52.280
+Tell me more about how to build it or like that.
+
+04:52.280 --> 04:53.960
+You can ask any question.
+
+04:56.520 --> 04:56.720
+Right.
+
+04:56.720 --> 05:00.150
+So it's obviously going to go through it and you know get the information.
+
+05:00.150 --> 05:04.430
+So saying saying clone this, go into this folder and run npm install.
+
+05:05.110 --> 05:07.750
+Okay now you can see what is npm install.
+
+05:07.790 --> 05:17.030
+Really I know what is npm install, but let's see what is npm npm and how to install it.
+
+05:17.910 --> 05:22.390
+Install it on Amazon Linux 20.
+
+05:22.550 --> 05:24.270
+Because I'm going to use the cloud shell.
+
+05:24.270 --> 05:26.070
+You can like that ask any question.
+
+05:27.590 --> 05:30.670
+You can ask what version of npm should I install?
+
+05:31.510 --> 05:35.710
+So it says Amazon Linux 2023 does not include NodeJS npm.
+
+05:35.750 --> 05:36.630
+How can I install.
+
+05:36.630 --> 05:38.830
+So it has given the command right?
+
+05:38.830 --> 05:41.270
+So it is saying some NodeJS 18.
+
+05:41.310 --> 05:45.670
+I guess you can keep asking further question like if you already know what version of node to install,
+
+05:45.670 --> 05:49.310
+you can ask how to install the node 20, whatever.
+
+05:49.630 --> 05:52.510
+Yeah, I'm going to just copy this and run it on the cloud shell.
+
+05:55.310 --> 05:55.550
+Okay.
+
+05:55.550 --> 05:57.870
+Now before we move move forward let me tell you.
+
+05:58.110 --> 05:59.530
+So Node.
+
+05:59.730 --> 06:04.010
+Think of this like we have Java, JDK and npm.
+
+06:04.050 --> 06:06.370
+Think of it like Maven mvn.
+
+06:06.850 --> 06:10.290
+So I copied and literally copied all the command at once.
+
+06:10.330 --> 06:12.570
+Now I'm just going to do it one by one node v.
+
+06:12.570 --> 06:15.650
+So it says it gives me node JS 20.
+
+06:16.130 --> 06:21.250
+And let's check npm hyphen v like we check mvn version like that.
+
+06:21.410 --> 06:22.730
+Here that's npm.
+
+06:23.210 --> 06:25.970
+Okay so I'm asking another question that I have now npm node.
+
+06:26.010 --> 06:28.570
+Now how do I build this source code.
+
+06:28.650 --> 06:34.370
+Now please do not worry, all developers will tell you what version to install and how to build it.
+
+06:34.370 --> 06:39.450
+All those information you need to get from the developer who developed the application, how to install
+
+06:39.450 --> 06:42.650
+a specific version, and all these kind of questions you can definitely ask.
+
+06:43.090 --> 06:45.450
+So saying npm install run this command.
+
+06:45.450 --> 06:49.930
+So like we have maven install with am I in the source code.
+
+06:50.810 --> 06:52.530
+Oh I didn't even clone it right.
+
+06:53.370 --> 07:00.320
+Okay, so let me clone the source code git clone and let's clone this Us clone it.
+
+07:04.400 --> 07:06.920
+Okay let's go to import node folder.
+
+07:07.320 --> 07:10.360
+And in that we're going to run npm install.
+
+07:13.040 --> 07:13.280
+Okay.
+
+07:13.280 --> 07:20.360
+So like we have pom.xml in Java in node you will see this file package dot JSON.
+
+07:20.720 --> 07:21.560
+Click on this.
+
+07:22.240 --> 07:26.560
+So like we have view profile v2 dot where know what version and stuff like that.
+
+07:26.560 --> 07:28.120
+Here we have the name.
+
+07:28.120 --> 07:31.880
+We have version description the main file scripts.
+
+07:31.880 --> 07:36.640
+This basically tells the different phases like in Maven we have different phases.
+
+07:36.680 --> 07:37.760
+Validate test.
+
+07:38.000 --> 07:39.520
+Here we can define the phases.
+
+07:39.560 --> 07:45.480
+Write test means what start means, what dev means what and like we have dependencies in Maven.
+
+07:45.480 --> 07:48.800
+Here also you see dependencies and their different versions.
+
+07:50.440 --> 07:51.400
+Now there's not much.
+
+07:51.400 --> 07:55.880
+We have this entire microservice application where we have multiple apps.
+
+07:56.040 --> 07:59.590
+This is just one of it, very small part of it, but just.
+
+07:59.590 --> 08:02.510
+I wanted to give you a taste of other build tools.
+
+08:03.270 --> 08:08.790
+Okay, so when we run this npm install, it's giving some information, some old lock file.
+
+08:09.070 --> 08:09.310
+Okay.
+
+08:09.350 --> 08:10.950
+So this is the lock file.
+
+08:11.670 --> 08:14.590
+See it's already there in the source code the lock file.
+
+08:15.230 --> 08:17.910
+So this will get created when you run the npm install command.
+
+08:17.910 --> 08:22.750
+And this was already uploaded into the GitHub repository.
+
+08:23.110 --> 08:25.790
+So it's saying it's just clearing the old lock file.
+
+08:25.830 --> 08:29.310
+Seven packages npm fund nine vulnerabilities.
+
+08:29.310 --> 08:33.830
+You can fix the vulnerability by running this command npm audit fix.
+
+08:36.070 --> 08:36.710
+Paste it.
+
+08:38.630 --> 08:39.550
+Okay it's fixed.
+
+08:39.550 --> 08:44.510
+Let's just run npm audit now to check if there is any vulnerability.
+
+08:44.510 --> 08:45.230
+It's there.
+
+08:45.630 --> 08:46.430
+It's not there.
+
+08:46.470 --> 08:51.470
+Okay, so run the LS command and you should see these node modules like we have dependencies in Maven
+
+08:51.470 --> 08:53.870
+that gets downloaded into dot m2 folder.
+
+08:53.870 --> 08:56.070
+Here you have the node modules folder.
+
+08:56.390 --> 09:00.060
+You see once you know one build tool it's very easy to relate with others.
+
+09:00.060 --> 09:03.580
+And of course there will be differences in other build tools like in Maven.
+
+09:03.580 --> 09:07.140
+We have the artifact that we are going to deploy over here.
+
+09:07.140 --> 09:12.380
+This everything is the artifact except this node modules and package lock files.
+
+09:12.620 --> 09:15.580
+You can run the application from here itself npm run.
+
+09:15.740 --> 09:21.620
+You have different modes dev mode, production mode, and there is no sharp learning curve in that you
+
+09:21.620 --> 09:26.820
+can very easily learn any other build tool, and if you work with developer, it will be much easier
+
+09:26.820 --> 09:27.380
+for you.
+
+09:28.140 --> 09:33.220
+Okay, now if you check the ChatGPT it says after running npm install you can say touch dot env.
+
+09:33.260 --> 09:38.940
+Create an environment file, mention port number, mongodb url, some secret file.
+
+09:38.980 --> 09:43.940
+Because it needs the MongoDB backend, we do not have it because we just going through the build tool.
+
+09:44.300 --> 09:50.220
+So it's showing you know how you can run this application, mention the MongoDB information and then
+
+09:50.220 --> 09:52.300
+just say node app dot js.
+
+09:53.140 --> 09:54.340
+That's one common way.
+
+09:54.340 --> 09:55.660
+The other way is auto reload.
+
+09:55.660 --> 09:58.730
+One npm install g Node one.
+
+09:58.930 --> 10:00.850
+Now node one is very interesting.
+
+10:00.930 --> 10:07.250
+You run the application with Nodemon instead of node and it will going to automatically reload your
+
+10:07.250 --> 10:07.770
+application.
+
+10:07.770 --> 10:12.970
+If you make any changes to the source code in the runtime, and you don't need to build it again and
+
+10:12.970 --> 10:14.530
+deploy it in the runtime.
+
+10:14.570 --> 10:16.130
+Now this is for testing purpose.
+
+10:16.450 --> 10:19.890
+When the developer build their application that time, they use this.
+
+10:19.890 --> 10:23.250
+So they make the changes and then they directly see how it performs.
+
+10:23.570 --> 10:23.730
+Right.
+
+10:23.770 --> 10:27.130
+But as I said, we are not getting into this in this lecture.
+
+10:27.570 --> 10:28.410
+One last thing.
+
+10:28.450 --> 10:29.250
+It it do.
+
+10:29.450 --> 10:32.570
+It does have the cache hyphen A.
+
+10:35.410 --> 10:39.730
+In your home directory hyphen A you will see npm cache.
+
+10:40.290 --> 10:40.530
+Okay.
+
+10:40.530 --> 10:44.610
+You can just look into that folder and you will see some cache and some logs.
+
+10:44.810 --> 10:48.010
+And so there's really more to node than this much.
+
+10:48.010 --> 10:54.050
+But you must have got an idea now how you can now learn other build tools, or at least start learning
+
+10:54.090 --> 10:55.930
+other build tools and start using it.
+
+10:56.450 --> 11:03.000
+Actual use cases we are going to see in the CI, CD in Jenkins and other CI CD projects.
+
+11:03.400 --> 11:10.080
+For now you should understand about build tool, what it is, how to install it, how to run it, how
+
+11:10.080 --> 11:11.760
+to check different versions of it.
+
+11:12.120 --> 11:17.080
+And please do not worry, you will get all the information from the developers and you can use generative
+
+11:17.120 --> 11:18.920
+AI to get more information.
+
+11:18.960 --> 11:24.400
+Do your own experiment with the source code before you actually do CI, CD, or before you deploy it
+
+11:24.400 --> 11:25.200
+on servers.
+
+11:25.840 --> 11:31.000
+So these lectures were actually prerequisites to continuous integration, continuous delivery sections
+
+11:31.000 --> 11:33.000
+and CI CD projects.
+
+11:33.560 --> 11:38.120
+So go through them once again make sure you understand these basic concepts.
+
+11:38.120 --> 11:43.040
+And once you're done make sure you terminate the instance and delete or close this cloud shell.
+
+11:43.040 --> 11:47.840
+Also I'm going to say action delete and type delete.
+
+11:49.600 --> 11:50.800
+Delete the cloud shell.
+
+11:50.840 --> 11:51.800
+Terminate the instance.
+
+11:51.800 --> 11:52.480
+You don't need it.
+
+11:52.480 --> 11:56.880
+Now this was just temporary and that was all in this section.
+
+11:56.880 --> 11:58.400
+I will see you in the next one.

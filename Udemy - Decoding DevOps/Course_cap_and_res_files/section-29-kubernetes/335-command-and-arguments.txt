@@ -1,0 +1,581 @@
+WEBVTT
+
+1
+00:00:00.850 --> 00:00:01.830
+Hello and welcome.
+
+2
+00:00:01.940 --> 00:00:03.114
+In this lecture, we will
+
+3
+00:00:03.152 --> 00:00:05.610
+talk about commands and arguments.
+
+4
+00:00:06.590 --> 00:00:09.346
+How can you pass commands and arguments
+
+5
+00:00:09.418 --> 00:00:11.670
+to a container in a pod?
+
+6
+00:00:12.890 --> 00:00:14.958
+So keep in mind, pod does
+
+7
+00:00:14.984 --> 00:00:16.294
+does not execute your command.
+
+8
+00:00:16.341 --> 00:00:17.490
+The container does.
+
+9
+00:00:17.540 --> 00:00:19.158
+The container which is inside the
+
+10
+00:00:19.184 --> 00:00:20.970
+pod will run the commands.
+
+11
+00:00:21.890 --> 00:00:23.358
+Okay, so you are seeing right
+
+12
+00:00:23.384 --> 00:00:27.270
+now docker file reference documentation.
+
+13
+00:00:28.190 --> 00:00:30.654
+While we are building an image, we
+
+14
+00:00:30.692 --> 00:00:35.394
+specify what command the container will run.
+
+15
+00:00:35.552 --> 00:00:37.698
+When we say docker run, it will run
+
+16
+00:00:37.724 --> 00:00:40.230
+that command which is mentioned in the CMD.
+
+17
+00:00:40.730 --> 00:00:43.158
+So I see some example here.
+
+18
+00:00:43.184 --> 00:00:46.798
+So we're building an image from Ubuntu, and in CMD,
+
+19
+00:00:46.834 --> 00:00:51.394
+it's mentioned echo and some path, sorry, some string.
+
+20
+00:00:51.502 --> 00:00:55.554
+So that is the command that your container will run.
+
+21
+00:00:55.592 --> 00:00:57.142
+When you run the container from this image,
+
+22
+00:00:57.166 --> 00:00:58.750
+it is going to run this command.
+
+23
+00:00:58.930 --> 00:01:00.860
+You see one more example there.
+
+24
+00:01:02.270 --> 00:01:03.622
+So these will be the commands
+
+25
+00:01:03.646 --> 00:01:06.140
+that usually starts the container process.
+
+26
+00:01:06.890 --> 00:01:09.558
+Not usually, actually, this is the
+
+27
+00:01:09.584 --> 00:01:11.478
+command that starts the container process.
+
+28
+00:01:11.624 --> 00:01:13.280
+There's also ENTRYPOINT.
+
+29
+00:01:15.110 --> 00:01:17.202
+So ENTRYPOINT also does the same thing.
+
+30
+00:01:17.216 --> 00:01:19.210
+But ENTRYPOINT has higher priority.
+
+31
+00:01:19.330 --> 00:01:22.798
+If you have CMD and ENTRYPOINT both in a docker file.
+
+32
+00:01:22.894 --> 00:01:24.630
+When you run the container, it's going to run
+
+33
+00:01:24.680 --> 00:01:27.954
+first the command mention in the ENTRYPOINT, and
+
+34
+00:01:27.992 --> 00:01:31.050
+then it will run the command mentioned in CMD.
+
+35
+00:01:31.550 --> 00:01:34.758
+Or if they are used together, usually ENTRYPOINT will
+
+36
+00:01:34.784 --> 00:01:37.710
+be the command and CMD will be the argument.
+
+37
+00:01:38.030 --> 00:01:40.614
+I will make this point understand, or
+
+38
+00:01:40.652 --> 00:01:42.500
+I'll help you understand this point.
+
+39
+00:01:44.270 --> 00:01:47.110
+Okay, so let's say in the docker file we have CMD.
+
+40
+00:01:47.170 --> 00:01:48.726
+In CMD, we have echi hi.
+
+41
+00:01:48.788 --> 00:01:51.138
+So when we say docker run and the
+
+42
+00:01:51.164 --> 00:01:53.110
+image name I have given here as printer.
+
+43
+00:01:53.230 --> 00:01:55.258
+So I built an image from the docker file,
+
+44
+00:01:55.294 --> 00:01:57.642
+and when I say docker run printer, it's going
+
+45
+00:01:57.656 --> 00:02:02.550
+to execute echi hi that's CMD in ENTRYPOINT.
+
+46
+00:02:02.600 --> 00:02:04.326
+The second example you see, in ENTRYPOINT,
+
+47
+00:02:04.388 --> 00:02:08.009
+I have mentioned echo and not the argument.
+
+48
+00:02:08.449 --> 00:02:10.654
+Now, when I say docker run printer,
+
+49
+00:02:10.702 --> 00:02:12.862
+I have to pass the argument.
+
+50
+00:02:13.006 --> 00:02:14.386
+If I don't pass the argument,
+
+51
+00:02:14.458 --> 00:02:16.520
+well, echo will not do anything.
+
+52
+00:02:17.270 --> 00:02:19.558
+And if there is some command that necessarily
+
+53
+00:02:19.654 --> 00:02:22.018
+needs argument, the container itself will fail.
+
+54
+00:02:22.054 --> 00:02:23.674
+If you do not pass the argument
+
+55
+00:02:23.782 --> 00:02:25.866
+here, we pass the argument hi.
+
+56
+00:02:26.048 --> 00:02:29.814
+So it will run echi hi, the last
+
+57
+00:02:29.852 --> 00:02:32.058
+one together, ENTRYPOINT and CMD together.
+
+58
+00:02:32.144 --> 00:02:35.362
+So when I build image with this docker
+
+59
+00:02:35.386 --> 00:02:37.638
+file and I say docker run printer, the
+
+60
+00:02:37.664 --> 00:02:39.906
+image name, it will say echi hi.
+
+61
+00:02:40.088 --> 00:02:42.718
+But now I can also overwrite the argument.
+
+62
+00:02:42.754 --> 00:02:45.054
+I can say docker run printer. Hello.
+
+63
+00:02:45.212 --> 00:02:47.814
+So hello will be the argument. Hi.
+
+64
+00:02:47.852 --> 00:02:50.802
+Argument will not be used. Hello.
+
+65
+00:02:50.876 --> 00:02:53.370
+Argument will be superseding this argument.
+
+66
+00:02:53.690 --> 00:02:56.540
+So the container will run the command echo hello.
+
+67
+00:02:57.290 --> 00:02:59.818
+So that's how command and entry
+
+68
+00:02:59.854 --> 00:03:03.418
+point work together in a container.
+
+69
+00:03:03.514 --> 00:03:06.730
+In Kubernetes, we run container inside the pod.
+
+70
+00:03:06.790 --> 00:03:11.034
+If we want to execute commands or override arguments from
+
+71
+00:03:11.072 --> 00:03:13.506
+the pod definition file, how do we do that?
+
+72
+00:03:13.568 --> 00:03:14.840
+We'll see that next.
+
+73
+00:03:16.490 --> 00:03:19.402
+So I'm in Kubernetes documentation commands
+
+74
+00:03:19.426 --> 00:03:21.658
+an argument for a container.
+
+75
+00:03:21.694 --> 00:03:24.934
+You see that said container, not Pod.
+
+76
+00:03:25.102 --> 00:03:26.458
+As I told you at the beginning
+
+77
+00:03:26.494 --> 00:03:29.866
+of this lecture, container runs your command
+
+78
+00:03:29.998 --> 00:03:33.166
+pod or container is inside the pod.
+
+79
+00:03:33.238 --> 00:03:35.350
+But we use Pod in Kubernetes
+
+80
+00:03:35.410 --> 00:03:37.894
+directly, we do not use container.
+
+81
+00:03:38.002 --> 00:03:40.714
+So we have to mention commands and argument
+
+82
+00:03:40.762 --> 00:03:43.402
+at the pod level in the pod definition.
+
+83
+00:03:43.486 --> 00:03:45.138
+So this is one example
+
+84
+00:03:45.224 --> 00:03:47.950
+here, normal pod definition file.
+
+85
+00:03:48.010 --> 00:03:51.526
+And we have the image debian command.
+
+86
+00:03:51.598 --> 00:03:52.818
+That's how you can mention the
+
+87
+00:03:52.844 --> 00:03:55.282
+command in square bracket, double quotes.
+
+88
+00:03:55.306 --> 00:03:57.402
+You have given the command here print env,
+
+89
+00:03:57.476 --> 00:04:02.154
+which is Linux command which prints variable and
+
+90
+00:04:02.252 --> 00:04:05.050
+args that is going to pass the argument.
+
+91
+00:04:05.110 --> 00:04:06.690
+So it's going to be print env,
+
+92
+00:04:06.860 --> 00:04:09.966
+host name and Kubernetes underscore port.
+
+93
+00:04:10.088 --> 00:04:12.270
+These are two variables it's going to print.
+
+94
+00:04:13.190 --> 00:04:14.730
+So let's test that.
+
+95
+00:04:14.840 --> 00:04:16.040
+Let's copy this.
+
+96
+00:04:18.750 --> 00:04:20.366
+OK, I'm in the kops VM.
+
+97
+00:04:20.438 --> 00:04:22.214
+I am going to create a file,
+
+98
+00:04:22.322 --> 00:04:27.480
+I'll call it as com.yaml, that's all.
+
+99
+00:04:29.010 --> 00:04:31.582
+And I'll just print a paste here
+
+100
+00:04:31.656 --> 00:04:34.810
+all those things and save and quit.
+
+101
+00:04:36.870 --> 00:04:40.440
+And let's apply that kubectl apply.
+
+102
+00:04:43.870 --> 00:04:47.630
+Okay, executed that kubectl get pod.
+
+103
+00:04:49.270 --> 00:04:50.418
+Okay, continue creating.
+
+104
+00:04:50.454 --> 00:04:51.782
+Let's wait for a moment.
+
+105
+00:04:51.976 --> 00:04:56.200
+Okay, now it says completed not running.
+
+106
+00:04:56.950 --> 00:04:58.974
+Well, if the process is continuously
+
+107
+00:04:59.022 --> 00:05:00.302
+running, it will say running.
+
+108
+00:05:00.376 --> 00:05:04.358
+But our command was print env, which is just
+
+109
+00:05:04.384 --> 00:05:06.870
+a command it executes and then it's dead.
+
+110
+00:05:07.050 --> 00:05:08.870
+So container is dead.
+
+111
+00:05:10.030 --> 00:05:16.730
+kubectl logs and I will give the name of the pod.
+
+112
+00:05:18.970 --> 00:05:20.438
+And there we can see.
+
+113
+00:05:20.584 --> 00:05:23.320
+So this is what it has printed, right?
+
+114
+00:05:25.150 --> 00:05:27.594
+Host name of the container which is command
+
+115
+00:05:27.642 --> 00:05:31.120
+demo and that is the Kubernetes port.
+
+116
+00:05:33.250 --> 00:05:35.762
+Keep in mind completed status you will get when
+
+117
+00:05:35.776 --> 00:05:38.690
+the container has completed the execution of the command.
+
+118
+00:05:39.310 --> 00:05:41.394
+And these kinds of containers are helpful
+
+119
+00:05:41.442 --> 00:05:44.778
+when you want to run some processing.
+
+120
+00:05:44.814 --> 00:05:47.966
+Maybe you want to run some scripts that does some work
+
+121
+00:05:48.028 --> 00:05:50.990
+for a specified period of time that will be completed.
+
+122
+00:05:51.550 --> 00:05:54.234
+This won't be the container like MySQL
+
+123
+00:05:54.282 --> 00:05:57.530
+or Tomcat or nginx that continuously runs.
+
+124
+00:05:58.750 --> 00:06:02.774
+So these kinds of commands and argument is helpful when
+
+125
+00:06:02.812 --> 00:06:06.160
+you have use cases, when you want to run something
+
+126
+00:06:07.210 --> 00:06:09.578
+which returns some output and that's it, your work is
+
+127
+00:06:09.604 --> 00:06:12.470
+done, that time, commands and argument will be helpful.
+
+128
+00:06:12.970 --> 00:06:15.314
+So I want you to do some experiment with this.
+
+129
+00:06:15.412 --> 00:06:17.654
+Instead of printenv, use echo and put
+
+130
+00:06:17.692 --> 00:06:20.838
+some variables there, or just some strings.
+
+131
+00:06:20.994 --> 00:06:22.034
+I will show you one more
+
+132
+00:06:22.072 --> 00:06:26.998
+example back here in the documentation.
+
+133
+00:06:27.094 --> 00:06:29.190
+Here we have env
+
+134
+00:06:30.170 --> 00:06:33.010
+This is env, used to specify a variable.
+
+135
+00:06:33.070 --> 00:06:34.902
+So variable name is message and
+
+136
+00:06:34.916 --> 00:06:36.546
+its value is hello world.
+
+137
+00:06:36.728 --> 00:06:40.074
+So now command is echo and in
+
+138
+00:06:40.112 --> 00:06:41.590
+arguments we have given a variable.
+
+139
+00:06:41.650 --> 00:06:44.442
+That's how you can give that variable dollar message.
+
+140
+00:06:44.636 --> 00:06:47.094
+So its value will be basically hello world.
+
+141
+00:06:47.252 --> 00:06:48.510
+So test it yourself.
+
+142
+00:06:48.620 --> 00:06:51.714
+Try this, create another product file, give your
+
+143
+00:06:51.752 --> 00:06:54.020
+name, test this, see how it works.
+
+144
+00:06:54.650 --> 00:06:56.914
+And that is all in this lecture.
+
+145
+00:06:56.962 --> 00:06:58.080
+I will see you in the next one.

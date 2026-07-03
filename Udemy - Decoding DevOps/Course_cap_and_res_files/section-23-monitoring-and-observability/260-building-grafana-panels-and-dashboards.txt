@@ -1,0 +1,940 @@
+WEBVTT
+
+00:00.280 --> 00:00.720
+Okay.
+
+00:00.760 --> 00:03.160
+Finally, the moment which you've been waiting for.
+
+00:03.800 --> 00:04.520
+Panels.
+
+00:05.520 --> 00:07.120
+So keep this one handy.
+
+00:07.160 --> 00:09.360
+This sheet we're going to use these queries.
+
+00:09.840 --> 00:13.400
+Just make sure you have the right label names over here.
+
+00:13.840 --> 00:16.840
+Compare and check from your Prometheus what name you have given.
+
+00:16.840 --> 00:18.240
+Make sure you have that label.
+
+00:18.640 --> 00:20.160
+So that's how we create panel.
+
+00:20.200 --> 00:21.560
+Let's go to dashboard.
+
+00:21.880 --> 00:24.160
+And dashboard we created folders.
+
+00:24.560 --> 00:26.240
+Folder name is Titan monitoring.
+
+00:26.240 --> 00:28.440
+In this we have Titan prod.
+
+00:28.480 --> 00:29.680
+That's the dashboard name.
+
+00:29.680 --> 00:32.120
+So this belongs to all the production systems.
+
+00:32.600 --> 00:35.640
+In this we have two rows application and system.
+
+00:35.640 --> 00:40.600
+So we are going to create first panels for system like CPU utilization.
+
+00:41.240 --> 00:50.520
+Also make sure on your web server node right on this one SSH to this check if load.sh script is running
+
+00:50.520 --> 00:50.920
+or not.
+
+00:50.920 --> 00:52.640
+If it's not running, you need to run it.
+
+00:53.720 --> 00:58.480
+So I see my web server node siphon f grep load.sh.
+
+00:58.520 --> 01:00.230
+I see it's running in the background.
+
+01:00.430 --> 01:03.030
+If you don't see it running, you need to run it.
+
+01:03.030 --> 01:05.190
+This is the path where the script will be copied.
+
+01:05.190 --> 01:06.150
+So no hub.
+
+01:07.110 --> 01:07.910
+No hub.
+
+01:08.710 --> 01:09.190
+Enter.
+
+01:09.230 --> 01:11.790
+Enter the name and back.
+
+01:12.630 --> 01:12.950
+Sorry.
+
+01:12.990 --> 01:14.830
+Ampersand to run it in the background.
+
+01:15.190 --> 01:19.550
+Because if you rebooted this machine then this will not be running.
+
+01:19.550 --> 01:23.150
+So run this command only if you don't see the process running.
+
+01:23.150 --> 01:28.950
+Run this command and wait for a minimum ten minutes before you continue in this lecture.
+
+01:29.350 --> 01:30.590
+Okay, so mine is already running.
+
+01:30.590 --> 01:31.670
+So I'm going to go back.
+
+01:31.670 --> 01:36.230
+And here I'm going to say now add visualization.
+
+01:36.230 --> 01:37.950
+Click on that okay.
+
+01:37.950 --> 01:41.150
+So here you have visualization type time series.
+
+01:41.150 --> 01:48.350
+Most of the monitoring panels you will see related to our softwares DevOps application.
+
+01:48.350 --> 01:49.710
+You will see mostly time series.
+
+01:49.710 --> 01:52.350
+But then we have bar chart also which will be helpful.
+
+01:52.350 --> 01:56.510
+Gauge different kinds of pie chart that is also useful.
+
+01:56.910 --> 01:59.470
+So first we're going to start with time series only.
+
+02:00.110 --> 02:02.910
+The panel that we are creating will be for CPU utilization.
+
+02:02.910 --> 02:04.110
+So let's give it a title.
+
+02:04.510 --> 02:09.110
+So I have given CPU utilization and here I have given percentage because the query that we are going
+
+02:09.110 --> 02:11.070
+to run is going to return it in percentage.
+
+02:11.990 --> 02:13.390
+And let's get the query.
+
+02:14.110 --> 02:17.150
+So over here if you scroll down it's not coming down.
+
+02:17.630 --> 02:18.310
+Okay here.
+
+02:18.310 --> 02:20.230
+So data source should be here.
+
+02:20.230 --> 02:21.550
+Prometheus selected.
+
+02:22.550 --> 02:24.070
+This is the first query we are running.
+
+02:24.070 --> 02:25.590
+It's just named as a.
+
+02:25.910 --> 02:27.390
+You can change if you want.
+
+02:27.590 --> 02:29.470
+We can run like that multiple queries.
+
+02:29.470 --> 02:31.030
+We'll see that example also.
+
+02:31.430 --> 02:34.470
+But over here you might have selected here builder.
+
+02:34.470 --> 02:40.350
+So instead of that select code and paste your query here and say run query.
+
+02:42.910 --> 02:43.270
+Okay.
+
+02:43.270 --> 02:46.310
+So that is for last six hours is selected.
+
+02:46.310 --> 02:49.990
+Click on drop down I'm going to click last five minutes okay.
+
+02:49.990 --> 02:51.390
+So this is last five minutes.
+
+02:51.430 --> 02:55.430
+You know every 15 seconds the Prometheus is going to fetch the metric.
+
+02:55.870 --> 03:00.420
+So if you look at this point, you see here 2119, 15 seconds.
+
+03:00.420 --> 03:02.860
+If you see here, this is going to be 2119.
+
+03:03.740 --> 03:05.500
+Now here you see these names.
+
+03:05.500 --> 03:06.860
+These are called as legends.
+
+03:06.860 --> 03:08.140
+And you can change that.
+
+03:08.140 --> 03:14.860
+So if you click here on the Options Legend Auto instead of that you can select custom and you can give
+
+03:14.860 --> 03:16.220
+your own label also.
+
+03:17.020 --> 03:21.460
+So I'm giving here this is the variable in curly braces I've given instance.
+
+03:21.460 --> 03:26.540
+So that returns the value of instance instances a label its value is returned.
+
+03:26.540 --> 03:28.540
+That's the IP address and the port number.
+
+03:28.740 --> 03:30.540
+And I've just given hyphen CPU usage.
+
+03:30.540 --> 03:31.540
+That's just a string.
+
+03:32.060 --> 03:34.620
+So you can customize based on your requirement.
+
+03:34.980 --> 03:38.780
+And if you scroll down here there are many options you can tweak.
+
+03:39.220 --> 03:45.940
+Like for example here in the graph styles in lines I can select this kind of smooth kind of lines or
+
+03:45.980 --> 03:48.020
+this pattern or this pattern.
+
+03:49.660 --> 03:51.140
+Let me keep this one default.
+
+03:51.580 --> 03:54.780
+And so we'll see more options in this in other metrics.
+
+03:54.860 --> 03:56.890
+Right now we're just going to save this one.
+
+03:56.890 --> 04:00.530
+So say save dashboard say save okay.
+
+04:00.530 --> 04:07.050
+Now if you go back to our dashboards go here to your dashboard see here metric.
+
+04:07.090 --> 04:11.530
+Let's pull this one and drop it in system.
+
+04:12.210 --> 04:14.570
+Now that's going to only work if you are in the edit.
+
+04:15.010 --> 04:16.290
+If you're not in the edit.
+
+04:17.090 --> 04:19.490
+Let me save this and go back to Exit edit.
+
+04:20.330 --> 04:22.610
+You know now I cannot drag and drop this.
+
+04:22.610 --> 04:24.610
+That will only work if you are in the edit.
+
+04:24.610 --> 04:28.530
+So if you go enter edit mode then only you should be able to drag and drop this.
+
+04:29.050 --> 04:31.010
+Okay, let me save the dashboard once again.
+
+04:31.850 --> 04:32.970
+Okay, nothing to see.
+
+04:33.010 --> 04:35.010
+I'll just say update default time range.
+
+04:35.610 --> 04:36.730
+Okay, so that's one panel.
+
+04:36.730 --> 04:38.210
+You understood how to create a panel.
+
+04:38.210 --> 04:40.930
+Now follow me and create all the panels.
+
+04:40.930 --> 04:44.610
+Then we're going to work on other stuff like notifications okay.
+
+04:44.610 --> 04:47.530
+Next we're going to create for the available memory.
+
+04:47.530 --> 04:55.520
+So copy this metric say add visualization in the query a go to the code.
+
+04:55.760 --> 04:57.000
+Paste that query over here.
+
+04:57.000 --> 05:01.680
+Run query in the legends shows the all the labels.
+
+05:01.680 --> 05:06.960
+So I'm just going to go to here options legend Custom.
+
+05:07.440 --> 05:13.440
+And I'm going to say you know what here I'll just say app instead of instance.
+
+05:16.520 --> 05:16.720
+Okay.
+
+05:16.760 --> 05:20.320
+So the value of app which is web zero one system and memory available.
+
+05:20.600 --> 05:24.360
+So panel name memory available in MB.
+
+05:24.400 --> 05:27.560
+I usually give this unit which is very essential.
+
+05:28.000 --> 05:30.440
+So this is visualization is in time series.
+
+05:30.480 --> 05:33.080
+If we go to gauge.
+
+05:34.400 --> 05:38.280
+So that shows in the gauge format like we have the speedometer.
+
+05:38.520 --> 05:41.320
+And this might not make much sense for now.
+
+05:41.320 --> 05:47.680
+But if we use percentage wise and we can set different thresholds with different colors.
+
+05:48.360 --> 05:50.680
+So let's tweak the query a little bit.
+
+05:51.200 --> 05:54.440
+So the second query returns it in percentage.
+
+05:54.920 --> 06:02.040
+Now you can do this with the same query also, but percentage will make more sense when you are visualizing
+
+06:02.040 --> 06:02.400
+it.
+
+06:04.080 --> 06:07.160
+And here I'm going to call it here also percentage.
+
+06:07.600 --> 06:11.080
+Now you can create the second panel also with the MB also.
+
+06:11.080 --> 06:12.040
+No problem.
+
+06:12.920 --> 06:17.560
+I'm going to click here on Transparent Background and let me scroll down here.
+
+06:20.160 --> 06:26.720
+Or in the standard option you can find you can search for percentage 0 to 100.
+
+06:27.520 --> 06:27.760
+Yeah.
+
+06:27.800 --> 06:29.440
+Started making some sense okay.
+
+06:29.480 --> 06:31.560
+Once again if you scroll down.
+
+06:31.960 --> 06:33.440
+So here we have the threshold.
+
+06:33.440 --> 06:34.360
+Let's add the threshold.
+
+06:34.360 --> 06:35.280
+So different colors.
+
+06:35.280 --> 06:38.040
+And then you can see it is at what color.
+
+06:38.040 --> 06:40.240
+So this is the available memory.
+
+06:40.480 --> 06:42.200
+And let me add some threshold.
+
+06:42.960 --> 06:45.560
+So I will say 20 for red color.
+
+06:45.560 --> 06:47.560
+You can change the color from here.
+
+06:48.320 --> 06:51.830
+And if the available is He's maybe 40.
+
+06:51.870 --> 06:53.030
+Then it is orange.
+
+06:53.430 --> 06:56.990
+You know what 5050 is orange.
+
+06:56.990 --> 06:58.630
+Let me select the orange.
+
+06:58.830 --> 07:00.030
+Hopefully this is orange.
+
+07:00.710 --> 07:04.990
+And then more than that let's go here like 70.
+
+07:06.230 --> 07:10.430
+That will call it as green okay.
+
+07:10.430 --> 07:13.030
+So like this you can play around with the threshold.
+
+07:13.470 --> 07:14.950
+Not so good at this.
+
+07:14.990 --> 07:17.350
+This takes me some time to set this.
+
+07:17.670 --> 07:20.710
+But this is the total available memory in percentage.
+
+07:20.710 --> 07:22.190
+You can keep refreshing this.
+
+07:22.710 --> 07:27.310
+So I just want to say you know, that this is uh, if it's more than 70% it's green.
+
+07:27.310 --> 07:27.910
+You see that?
+
+07:27.910 --> 07:29.470
+If it's less than that, it's orange.
+
+07:29.470 --> 07:30.950
+If it's less than that, it's green.
+
+07:31.510 --> 07:32.550
+And the base color.
+
+07:32.550 --> 07:34.550
+Also I'm changing it to dark red.
+
+07:35.870 --> 07:37.790
+This one is slightly red.
+
+07:38.630 --> 07:44.470
+So if it's below 20 then it's extremely dangerous like that okay let's save this dashboard.
+
+07:45.070 --> 07:46.670
+Save okay.
+
+07:46.670 --> 07:48.550
+Let me go back to dashboards.
+
+07:48.550 --> 07:51.300
+And again I had not selected.
+
+07:51.300 --> 07:53.300
+I need to drag and drop in the system.
+
+07:53.340 --> 07:58.140
+Okay, so now I have two panels in the system and I can bring them together also here.
+
+07:58.660 --> 07:59.620
+Yeah like that.
+
+08:00.100 --> 08:02.260
+And I'll say save dashboard.
+
+08:04.940 --> 08:05.260
+Okay.
+
+08:05.300 --> 08:09.660
+Next panel I'm going to create for application the HTTP request.
+
+08:10.460 --> 08:17.620
+So this one traffics and request I'm going to copy this one and visualization.
+
+08:17.940 --> 08:20.140
+Now let me run this and then talk about it.
+
+08:20.140 --> 08:22.900
+So just in the code run query.
+
+08:23.860 --> 08:29.780
+Yeah sorry there run query okay so we have seen this previously HTTP request total total request of
+
+08:29.780 --> 08:31.980
+HTTP coming to our web server.
+
+08:31.980 --> 08:38.020
+And we have our two scripts running one for root and one for payment running in the background.
+
+08:38.300 --> 08:45.540
+If it's not running for you, then switch to Prometheus server, switch to root user and check in the
+
+08:45.540 --> 08:47.820
+process if you have these scripts running or not.
+
+08:47.820 --> 08:50.100
+Because if you rebooted, it will not run.
+
+08:51.580 --> 08:56.740
+So these two scripts that we downloaded over here from our GitHub repository.
+
+08:56.780 --> 08:58.620
+Now I'm running it from Prometheus.
+
+08:58.620 --> 09:01.220
+You can run it from Grafana also or from anywhere.
+
+09:01.220 --> 09:03.580
+We just need to access those URLs.
+
+09:04.060 --> 09:06.020
+So you can download this script from anywhere.
+
+09:06.020 --> 09:12.980
+Just make sure you give the right IP address of web server in this script and then just run it.
+
+09:12.980 --> 09:19.460
+No hub dot slash script, path and ampersand do it.
+
+09:19.460 --> 09:23.060
+Same for both the script for main and payment.
+
+09:23.060 --> 09:29.340
+So you get the metrics collected in Prometheus, and you can see that here in the Grafana dashboard.
+
+09:29.700 --> 09:31.500
+So this is for last five minutes.
+
+09:31.500 --> 09:36.140
+I'm going to check for last three hours because I have it running for a long time.
+
+09:36.140 --> 09:37.820
+So that's why I'm seeing it for three hours.
+
+09:37.820 --> 09:39.540
+You might not see this for long.
+
+09:40.100 --> 09:43.300
+Now I need to separate these two with proper name.
+
+09:43.300 --> 09:47.690
+So this green one is for the slash endpoint.
+
+09:47.690 --> 09:49.610
+And this one is for slash payment.
+
+09:50.010 --> 09:59.970
+So in Options Legends custom I'm going to give here as endpoint endpoint I'll just say minus or hyphen.
+
+09:59.970 --> 10:01.850
+And in again curly braces.
+
+10:01.850 --> 10:03.530
+Here I'm going to say app.
+
+10:04.050 --> 10:05.770
+So this should return the endpoint.
+
+10:06.410 --> 10:07.450
+Yeah like that.
+
+10:07.970 --> 10:09.690
+So last 15 minutes.
+
+10:10.210 --> 10:16.530
+Keep it time series I'll give the title panel name HTTP request rate and requests per second.
+
+10:16.570 --> 10:23.850
+We are using the rate function over here lines I'll keep this one.
+
+10:24.570 --> 10:25.530
+Okay this is good.
+
+10:25.530 --> 10:29.250
+And now let me save this okay.
+
+10:29.290 --> 10:30.730
+Again I need to move it.
+
+10:31.610 --> 10:35.050
+And this one goes in application okay.
+
+10:35.050 --> 10:36.890
+Let's see few more things quickly.
+
+10:37.610 --> 10:39.410
+So so far we're just running one query.
+
+10:39.410 --> 10:46.560
+But we can use multiple queries like for example if you want to see one one of this line that shows
+
+10:46.560 --> 10:54.360
+the current timestamp and one that shows probably last five minutes one so we can quickly make a comparison
+
+10:54.360 --> 10:55.240
+from the graph.
+
+10:55.600 --> 10:56.280
+It's pretty easy.
+
+10:56.280 --> 11:00.600
+Just add another visualization in the document.
+
+11:00.600 --> 11:01.120
+Find this.
+
+11:01.160 --> 11:02.640
+We have two queries over here.
+
+11:02.640 --> 11:03.480
+The last one.
+
+11:04.200 --> 11:04.960
+So copy this.
+
+11:04.960 --> 11:06.120
+Read HTTP request.
+
+11:06.120 --> 11:13.920
+Total curly brace was missing anyways okay so this is for the root endpoint the main website.
+
+11:14.760 --> 11:15.680
+So put this here.
+
+11:15.680 --> 11:17.760
+This is going to be the query a.
+
+11:18.040 --> 11:20.320
+Once again you can rename this if you want.
+
+11:20.360 --> 11:21.920
+But I'm going to keep it as it is.
+
+11:22.160 --> 11:22.800
+Run this.
+
+11:23.480 --> 11:26.360
+So this is for the current one.
+
+11:26.400 --> 11:30.080
+Now I want to see the last five minutes or maybe last day.
+
+11:30.080 --> 11:31.200
+Yesterday is also.
+
+11:31.640 --> 11:34.480
+So I'm going to add here one more query add query.
+
+11:34.520 --> 11:35.760
+Now this query be.
+
+11:36.520 --> 11:38.800
+Now in this I'm going to just mention the same query.
+
+11:38.800 --> 11:41.760
+But I'm going to offset it by five minutes.
+
+11:42.280 --> 11:45.440
+So here itself in the document you have the second query.
+
+11:46.800 --> 11:48.200
+So it's just the same query.
+
+11:48.200 --> 11:52.240
+But we have given just offset by five minute.
+
+11:52.240 --> 11:53.640
+I'm going to run this query.
+
+11:54.480 --> 11:57.800
+So both the metrics are same for the same endpoint.
+
+11:57.800 --> 11:59.680
+Just one is the older one.
+
+12:00.360 --> 12:03.560
+So in the legend also make sure you mention that.
+
+12:04.400 --> 12:06.720
+So now I need to understand which one is which.
+
+12:06.720 --> 12:08.760
+The query b I'm going to hide.
+
+12:09.600 --> 12:13.080
+So the yellow one was the query B which was offset.
+
+12:13.560 --> 12:18.200
+So green one legend I'm going to customize endpoint and app.
+
+12:18.200 --> 12:20.560
+And I'm just going to say this is current.
+
+12:23.960 --> 12:27.920
+Now let me just copy this and scroll down here.
+
+12:28.880 --> 12:31.000
+Go to legend.
+
+12:31.000 --> 12:32.000
+So this is for the query.
+
+12:32.040 --> 12:35.960
+Be custom to paste it here.
+
+12:35.960 --> 12:47.550
+And this one I'm going to say five minutes Older ups five minutes older or whatever.
+
+12:47.550 --> 12:50.270
+Your query is about 5 minutes or 1 hour or one day.
+
+12:50.310 --> 12:50.990
+Two days.
+
+12:53.350 --> 12:56.270
+And I'm gonna say show response here and hide this.
+
+12:56.750 --> 12:56.990
+All right.
+
+12:56.990 --> 12:58.110
+This makes more sense.
+
+12:58.110 --> 12:59.350
+Give a name to the panel.
+
+12:59.830 --> 13:02.350
+This is given endpoint request now and older.
+
+13:02.390 --> 13:04.950
+Now this could be better I know that okay.
+
+13:04.950 --> 13:08.550
+But the idea was to just to show you how you can use two different queries.
+
+13:08.550 --> 13:09.950
+And this is not only for offset.
+
+13:09.950 --> 13:15.030
+You can use it for other like one query you can have for slash, the other one can have for slash endpoint
+
+13:15.310 --> 13:16.990
+sorry slash payment.
+
+13:17.470 --> 13:19.990
+So this is both for the slash.
+
+13:20.030 --> 13:23.150
+You can add here more queries for slash payment.
+
+13:23.510 --> 13:27.630
+So you can have query a, b C, d for in one graph.
+
+13:27.990 --> 13:29.190
+So play with it.
+
+13:29.190 --> 13:31.070
+And once you're done save the dashboard.
+
+13:32.670 --> 13:34.190
+Let's go back to the dashboards.
+
+13:35.390 --> 13:40.820
+Once again moving this to the applications and bringing both together Other.
+
+13:41.980 --> 13:43.140
+Okay, this looks good.
+
+13:44.020 --> 13:45.060
+Okay, one last one.
+
+13:45.060 --> 13:48.460
+Then we're going to move on to the next lecture for notifications.
+
+13:48.780 --> 13:51.980
+I want to show the variables which is quite useful.
+
+13:52.500 --> 13:55.500
+So from the dashboard here itself click on settings.
+
+13:56.140 --> 14:01.300
+Now I want to have a graph that can show me both the endpoint slash and slash payment.
+
+14:01.300 --> 14:03.540
+But I should be able to select between them.
+
+14:04.260 --> 14:11.580
+So I need to have a variable a dynamic variable that shows me the endpoint or not just endpoint.
+
+14:11.580 --> 14:12.380
+You can have anything.
+
+14:12.380 --> 14:15.020
+Just take a look first how to add the dynamic variables.
+
+14:15.020 --> 14:18.060
+So just go to Settings Variables add variable.
+
+14:18.660 --> 14:22.820
+So name of the variable I'm going to say this is going to be endpoint.
+
+14:23.660 --> 14:28.260
+And label this endpoint as E capital have given okay.
+
+14:28.300 --> 14:32.500
+This variable is going to query from Prometheus and select the query.
+
+14:32.820 --> 14:34.900
+So the query will be executed.
+
+14:34.900 --> 14:36.060
+The output will be returned.
+
+14:36.060 --> 14:38.740
+And that output is the variables value.
+
+14:39.060 --> 14:42.690
+So that is dynamic variable it generates in the runtime.
+
+14:43.170 --> 14:47.290
+So I'm going to say classic query execute the query and get the output.
+
+14:47.890 --> 14:49.490
+So that's my query label.
+
+14:49.490 --> 14:51.730
+Underscore values is the metric.
+
+14:51.730 --> 14:54.930
+And it returns me HTTP request total and endpoint.
+
+14:55.490 --> 14:59.610
+Now when you do this and if you scroll down you should already see the value over here.
+
+15:00.010 --> 15:02.650
+Or you can say run query and you can see the value.
+
+15:02.930 --> 15:09.050
+So the value of this variable, this variable end point will be this dynamically.
+
+15:09.250 --> 15:12.530
+So and you can select which value do you want in the panel.
+
+15:12.730 --> 15:14.210
+So save dashboard here.
+
+15:15.250 --> 15:15.490
+Okay.
+
+15:15.490 --> 15:16.930
+Now let's create a panel.
+
+15:17.410 --> 15:20.610
+Same for HTTP request with a slightly different query.
+
+15:21.210 --> 15:23.650
+So I'm just going to say add visualization.
+
+15:24.130 --> 15:26.770
+So get this query dynamic variable panel query.
+
+15:27.170 --> 15:28.130
+Copy this query.
+
+15:29.130 --> 15:34.370
+So this is the same query by the way little tweaked HTTP request total.
+
+15:34.370 --> 15:38.290
+And we're given here the label and endpoint.
+
+15:39.450 --> 15:42.170
+equal to dollar endpoint.
+
+15:42.170 --> 15:43.450
+That's the variable name.
+
+15:43.930 --> 15:45.050
+So run query.
+
+15:45.610 --> 15:52.610
+So now when you do this you see here you can select the endpoint either payment or route.
+
+15:52.930 --> 15:57.650
+So this endpoint variable that we have created that this was the label name we have given.
+
+15:57.650 --> 16:03.330
+The variable name was this endpoint and label is this endpoint.
+
+16:03.650 --> 16:05.330
+And now in the graph you can select.
+
+16:05.330 --> 16:09.690
+So like that you can have multiple variables or multiple value to a variable.
+
+16:09.690 --> 16:10.930
+And you can select that.
+
+16:11.370 --> 16:14.810
+I'm just going to simply name this panel as dynamic variable panel.
+
+16:14.810 --> 16:16.890
+It is just for learning dynamic variable.
+
+16:16.890 --> 16:23.210
+This name doesn't make sense actually in the monitoring it should be HTTP total request count like that.
+
+16:25.010 --> 16:27.930
+But just for learning purpose we're giving that name.
+
+16:28.290 --> 16:28.450
+Okay.
+
+16:28.490 --> 16:32.650
+So go back to your dashboard and put that into application row.
+
+16:33.330 --> 16:35.410
+And that should be all in this lecture.
+
+16:35.410 --> 16:37.770
+In the next lecture we're going to talk about notification.

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+while true; do
+    # Pick a random session duration (minimum 60s, up to 5 minutes here)
+    session_duration=$((60 + RANDOM % 241))  
+    echo "Starting stress session for $session_duration seconds..."
+    session_end=$((SECONDS + session_duration))
+
+    while [ $SECONDS -lt $session_end ]; do
+        echo "Running stress at $(date)"
+        stress -c 4 -t 5
+
+        # Pick a random interval before next run (5–20s here)
+        sleep_time=$((5 + RANDOM % 16))
+        echo "Sleeping $sleep_time seconds before next stress..."
+        sleep $sleep_time
+    done
+
+    # Optional: random cooldown before next session
+    cooldown=$((30 + RANDOM % 61))
+    echo "Session ended. Cooling down for $cooldown seconds..."
+    sleep $cooldown
+done

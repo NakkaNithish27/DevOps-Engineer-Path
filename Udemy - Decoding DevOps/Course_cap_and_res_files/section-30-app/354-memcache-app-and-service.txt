@@ -1,0 +1,262 @@
+WEBVTT
+
+00:00.600 --> 00:01.590
+Instructor: Okay, so in this lecture,
+
+00:01.590 --> 00:04.290
+we are going to set up Memcached pod
+
+00:04.290 --> 00:06.630
+and also the service for it together.
+
+00:06.630 --> 00:08.610
+Because Memcached is pretty easy,
+
+00:08.610 --> 00:11.760
+we just need to fetch an official Docker image
+
+00:11.760 --> 00:13.770
+for Memcached D and run it in the pod.
+
+00:13.770 --> 00:15.720
+So you can just copy the basic structure
+
+00:15.720 --> 00:18.270
+of Kubernetes deployment YAML file,
+
+00:18.270 --> 00:21.783
+go to your Memcached deployment YAML file and paste it.
+
+00:22.650 --> 00:26.100
+Just give the name, the image name, Memcached D
+
+00:26.100 --> 00:29.313
+from Docker hub and port 1 1 2 1 1.
+
+00:30.330 --> 00:32.670
+Okay, so let's change the name here
+
+00:32.670 --> 00:35.043
+and the label in the metadata.
+
+00:36.390 --> 00:40.050
+Okay, so given name as vpromc, like Memcached.
+
+00:40.050 --> 00:41.730
+Replica will be just having one,
+
+00:41.730 --> 00:43.260
+we don't need extra.
+
+00:43.260 --> 00:44.973
+Match label, same here.
+
+00:45.990 --> 00:48.120
+Vpromc and here also vpromc.
+
+00:48.120 --> 00:51.330
+This label and this label should definitely match.
+
+00:51.330 --> 00:53.204
+Then only this part will be the part
+
+00:53.204 --> 00:56.580
+of this deployment vpromc deployment.
+
+00:56.580 --> 00:59.100
+Here you can have different name if you wish to,
+
+00:59.100 --> 01:02.070
+but this and this should definitely match.
+
+01:02.070 --> 01:05.370
+Then only this pod will be part of this deployment.
+
+01:05.370 --> 01:07.500
+Okay, now container specification, very easy,
+
+01:07.500 --> 01:08.820
+just image and port number,
+
+01:08.820 --> 01:10.770
+that's what matters.
+
+01:10.770 --> 01:13.590
+Okay, so the name of the container, vpromc.
+
+01:13.590 --> 01:15.960
+Image Memcached D is the official Docker image.
+
+01:15.960 --> 01:18.630
+It's going to fetch it from the Docker hub.
+
+01:18.630 --> 01:20.790
+Port container, port 1 1 2 1 1.
+
+01:20.790 --> 01:23.850
+That's the port number for Memcached D service running here.
+
+01:23.850 --> 01:25.980
+And we've given the name to this port
+
+01:25.980 --> 01:29.430
+that will give it in the service definition of this file.
+
+01:29.430 --> 01:31.519
+So for service definition
+
+01:31.519 --> 01:33.600
+for this port,
+
+01:33.600 --> 01:35.640
+we need the port name
+
+01:35.640 --> 01:38.220
+and we need the label for the selector.
+
+01:38.220 --> 01:40.860
+Okay, let's take the dbservice file.
+
+01:40.860 --> 01:42.060
+Let's copy all the content
+
+01:42.060 --> 01:45.720
+and go to mcservice and paste it here.
+
+01:45.720 --> 01:49.203
+And let's change the names, port numbers, and labels.
+
+01:50.220 --> 01:52.890
+So name of the service depends on the name.
+
+01:52.890 --> 01:55.620
+What is there in the application properties file.
+
+01:55.620 --> 01:58.230
+I'll keep this application properties file open over here.
+
+01:58.230 --> 02:02.160
+So Memcached, the name is vprochace01.
+
+02:02.160 --> 02:03.420
+The same name we have to give
+
+02:03.420 --> 02:05.643
+to the service so it can find it.
+
+02:07.950 --> 02:09.990
+This is mcservice YAML file.
+
+02:09.990 --> 02:12.570
+I just copy every content from the dbservice file.
+
+02:12.570 --> 02:14.760
+So that's why you see DBDB here. Okay?
+
+02:14.760 --> 02:17.010
+Make sure you don't edit the dbservice file.
+
+02:17.010 --> 02:19.800
+This is the mcservice file you need to edit.
+
+02:19.800 --> 02:22.110
+Okay, port number, we know 1 1 2 1 1.
+
+02:22.110 --> 02:24.630
+That's the front end port of the service.
+
+02:24.630 --> 02:26.760
+So it's going to look for a service
+
+02:26.760 --> 02:28.830
+with this name on port 1 1 2 1 1.
+
+02:28.830 --> 02:30.630
+So this should be all the front end
+
+02:30.630 --> 02:32.880
+information of this service.
+
+02:32.880 --> 02:35.550
+It's the front end port and the service name.
+
+02:35.550 --> 02:37.440
+Now the target port.
+
+02:37.440 --> 02:40.140
+So in mcdeployment definition file,
+
+02:40.140 --> 02:43.143
+we have the target port name as this vpromc port.
+
+02:44.460 --> 02:46.660
+So that's where it should route the request.
+
+02:48.000 --> 02:48.993
+Selector.
+
+02:49.920 --> 02:51.393
+Selector will be this.
+
+02:58.470 --> 03:00.210
+Alright, so you see if you know how
+
+03:00.210 --> 03:02.790
+to set one service in Kubernetes,
+
+03:02.790 --> 03:04.410
+I'm talking about the whole service part,
+
+03:04.410 --> 03:09.093
+like the database, the pod deployment service,
+
+03:09.093 --> 03:10.290
+everything volumes.
+
+03:10.290 --> 03:13.890
+If you know to do set up one complete service,
+
+03:13.890 --> 03:15.330
+then other service is similar.
+
+03:15.330 --> 03:17.223
+Just copy, paste, make the changes.
+
+03:18.330 --> 03:19.770
+The information matters
+
+03:19.770 --> 03:22.413
+what is available in the configuration files.
+
+03:24.030 --> 03:27.754
+Okay, so see if this file control S, control S.
+
+03:27.754 --> 03:28.587
+Right?
+
+03:28.587 --> 03:30.120
+Take a look. Once again, make sure if you
+
+03:30.120 --> 03:31.290
+know this should be same.
+
+03:31.290 --> 03:34.020
+If you make made some mistake, correct it,
+
+03:34.020 --> 03:39.000
+you can anytime check the Cube app branch to see the code
+
+03:39.000 --> 03:40.400
+and match it with your code.
+
+03:41.520 --> 03:42.990
+Okay, in next lecture we are going
+
+03:42.990 --> 03:45.120
+to set up Rabbitmq, which will be similar.
+
+03:45.120 --> 03:48.960
+Rabbitmq deployment will set and then we'll set its servers.
+
+03:48.960 --> 03:50.560
+So I'll see you in the next one.

@@ -1,0 +1,376 @@
+WEBVTT
+
+00:00.420 --> 00:01.770
+Instructor: Okay, so far so good.
+
+00:01.770 --> 00:03.420
+Let's go to the next script.
+
+00:03.420 --> 00:05.400
+So vars_websetup.sh.
+
+00:05.400 --> 00:09.420
+This is where we learn how to assign the value to variable,
+
+00:09.420 --> 00:11.120
+and then use the variables, right?
+
+00:12.030 --> 00:15.450
+So also this highlights some issues like, for example,
+
+00:15.450 --> 00:17.670
+this one, yum install $PACKAGE.
+
+00:17.670 --> 00:18.503
+What does it say?
+
+00:18.503 --> 00:21.180
+It says, you know, "Use double quote
+
+00:21.180 --> 00:24.090
+to prevent globbing and word splitting."
+
+00:24.090 --> 00:26.550
+Also, it gives you a suggestion about this article,
+
+00:26.550 --> 00:28.710
+go and visit this and read about this,
+
+00:28.710 --> 00:31.200
+what the problem is and how you can fix it.
+
+00:31.200 --> 00:32.820
+So, yes, we can give double quotes.
+
+00:32.820 --> 00:35.310
+You know, let's try Quick Fix.
+
+00:35.310 --> 00:39.363
+It's saying "Apply fix for this SC2086" issue.
+
+00:40.350 --> 00:41.730
+And there, it solved the problem, right?
+
+00:41.730 --> 00:43.200
+Like that, we can do it for others.
+
+00:43.200 --> 00:46.800
+Let's see this issue, cd $TEMP directory.
+
+00:46.800 --> 00:48.960
+Now, this is very important.
+
+00:48.960 --> 00:51.120
+Now, if you don't do CD to a particular directory
+
+00:51.120 --> 00:53.460
+where you're executing commands, you know, if this fails,
+
+00:53.460 --> 00:56.490
+you know, let's say there is no value to this variable
+
+00:56.490 --> 00:58.590
+or if this is from user input,
+
+00:58.590 --> 01:00.510
+this should fail then,
+
+01:00.510 --> 01:02.730
+because you don't want your code or your commands
+
+01:02.730 --> 01:04.980
+to execute in the wrong folder.
+
+01:04.980 --> 01:06.780
+So it is saying that, you know, instead of,
+
+01:06.780 --> 01:10.530
+you know, just mentioning it like this, use this method.
+
+01:10.530 --> 01:11.730
+Now, cd into this.
+
+01:11.730 --> 01:14.193
+Or, if this fails, then exit.
+
+01:15.150 --> 01:20.040
+I'll say fix, wait, hold on, "Fix using Copilot."
+
+01:20.040 --> 01:22.890
+So it's running that /fix.
+
+01:22.890 --> 01:24.903
+And we say Accept this.
+
+01:26.610 --> 01:27.990
+So now, this is one way,
+
+01:27.990 --> 01:30.450
+or, you know, if you think that there is some problem,
+
+01:30.450 --> 01:32.400
+you can also, you know, just select,
+
+01:32.400 --> 01:34.350
+let me just do Control + Z to it.
+
+01:34.350 --> 01:39.150
+Select and open the chat, and we'll say /fix,
+
+01:39.150 --> 01:42.933
+can use the slash functions, so /fix.
+
+01:44.820 --> 01:47.700
+Okay, but this is when you find that there is a problem.
+
+01:47.700 --> 01:49.710
+Anyways, it is already suggesting you
+
+01:49.710 --> 01:51.270
+that there is a problem,
+
+01:51.270 --> 01:54.210
+and I always recommend you use the extensions
+
+01:54.210 --> 01:56.070
+along with the GitHub Copilot extension
+
+01:56.070 --> 01:58.500
+like we have installed batch ID.
+
+01:58.500 --> 02:00.900
+There are more extensions, so now together,
+
+02:00.900 --> 02:04.590
+if you use these extensions with the AI,
+
+02:04.590 --> 02:07.050
+in this case Copilot, if you use all of them together,
+
+02:07.050 --> 02:09.420
+you will get the best results.
+
+02:09.420 --> 02:11.670
+And, once again, you can just select the entire code
+
+02:11.670 --> 02:13.140
+and you can say, "Improve this code."
+
+02:13.140 --> 02:16.290
+It is going to add functions and many other things
+
+02:16.290 --> 02:17.880
+as we have seen in the previous script.
+
+02:17.880 --> 02:18.930
+Let's take a look at,
+
+02:18.930 --> 02:20.190
+wait, let me save this first,
+
+02:20.190 --> 02:22.080
+let's take a look at other scripts.
+
+02:22.080 --> 02:24.390
+So these in all, we just used to learn the concept.
+
+02:24.390 --> 02:26.310
+So, you know, if you want, you can ignore this
+
+02:26.310 --> 02:28.013
+or you can improve this, command_subs.sh.
+
+02:29.280 --> 02:30.630
+Okay, there, if you see, it says,
+
+02:30.630 --> 02:32.370
+you know, "This is not a recommended method.
+
+02:32.370 --> 02:35.850
+We have used backticks for command substitution."
+
+02:35.850 --> 02:39.330
+It is saying, "Use the $(...) quick fix."
+
+02:39.330 --> 02:41.070
+Apply fix.
+
+02:41.070 --> 02:41.970
+Right, we talked about this,
+
+02:41.970 --> 02:44.120
+there's backticks and then there is $(...).
+
+02:45.000 --> 02:47.670
+So, you know, you the existing written code,
+
+02:47.670 --> 02:49.620
+you can use these extensions together
+
+02:49.620 --> 02:51.300
+and it is going to give you suggestions,
+
+02:51.300 --> 02:53.070
+you better apply them,
+
+02:53.070 --> 02:57.660
+and then also test them if it works as per your expectation.
+
+02:57.660 --> 03:00.240
+Okay, let's go to the next one, userInput.sh.
+
+03:00.240 --> 03:01.717
+So here it is making suggestion,
+
+03:01.717 --> 03:05.670
+"Read without -r will mangle backslashes."
+
+03:05.670 --> 03:07.140
+Now, this time, let's take a look
+
+03:07.140 --> 03:08.610
+at this shellcheck article.
+
+03:08.610 --> 03:10.860
+Let's open this in the browser.
+
+03:10.860 --> 03:12.930
+Okay, so this is the code, problematic code,
+
+03:12.930 --> 03:15.630
+and this is the correct code, use -r.
+
+03:15.630 --> 03:17.557
+And the reason it has given,
+
+03:17.557 --> 03:19.830
+"That read will interpret backslashes
+
+03:19.830 --> 03:21.960
+before spaces and line feeds."
+
+03:21.960 --> 03:25.380
+Right, so if you're using backslashes in your input,
+
+03:25.380 --> 03:28.680
+which is rare, even says it is rare,
+
+03:28.680 --> 03:30.030
+then this will be a problem.
+
+03:30.030 --> 03:32.280
+So better use -r.
+
+03:32.280 --> 03:33.300
+So if you use -r,
+
+03:33.300 --> 03:37.050
+it's going to strip those white spaces
+
+03:37.050 --> 03:38.670
+and backward slashes, right?
+
+03:38.670 --> 03:39.750
+Which you don't intend to,
+
+03:39.750 --> 03:42.150
+you don't want to backslashes in your input
+
+03:42.150 --> 03:44.340
+if you don't want.
+
+03:44.340 --> 03:46.980
+Okay, so you can just select the entire code,
+
+03:46.980 --> 03:49.530
+you know, use the inline chat and improve this code.
+
+03:49.530 --> 03:50.643
+Try yourself.
+
+03:51.930 --> 03:54.120
+Let's go to monit.sh now.
+
+03:54.120 --> 03:59.100
+And here we have used the $? to check the exit code.
+
+03:59.100 --> 04:01.560
+And, again, it is making a suggestion over there.
+
+04:01.560 --> 04:05.640
+And let's just apply this, right, this is saying show.
+
+04:05.640 --> 04:07.920
+Right, I'm going to select the entire code,
+
+04:07.920 --> 04:09.967
+control + I or Command + I.
+
+04:09.967 --> 04:12.360
+"Improve the code as per developmental standards,"
+
+04:12.360 --> 04:13.743
+or best practices.
+
+04:14.700 --> 04:16.410
+Okay, so again, a better suggestion, it is saying,
+
+04:16.410 --> 04:19.680
+you know, "Take this variables tool it into the PID_FILE,
+
+04:19.680 --> 04:20.820
+the FILE part basically,
+
+04:20.820 --> 04:22.860
+and then check with -f option
+
+04:22.860 --> 04:24.777
+whether this file exists or not,"
+
+04:24.777 --> 04:28.560
+-: f is going to check if the file exists or not.
+
+04:28.560 --> 04:31.473
+Again, it has mentioned this set -euo pipefail.
+
+04:32.910 --> 04:34.650
+So if anything fails in your script,
+
+04:34.650 --> 04:36.273
+the entire script fails.
+
+04:37.560 --> 04:39.660
+All right, so the point here of this lecture
+
+04:39.660 --> 04:41.940
+is look for the suggestions,
+
+04:41.940 --> 04:44.370
+which, you know, for your existing code.
+
+04:44.370 --> 04:46.743
+Also just do not blindly apply them.
+
+04:47.700 --> 04:48.750
+Make the changes,
+
+04:48.750 --> 04:52.020
+test it in your test machines, like your VMs,
+
+04:52.020 --> 04:54.270
+and then roll out the changes.
+
+04:54.270 --> 04:55.770
+Because it might give you suggestions
+
+04:55.770 --> 04:57.870
+sometimes which does not work
+
+04:57.870 --> 05:01.170
+or does not give you the desired result.
+
+05:01.170 --> 05:02.910
+We'll take a look at a few more scripts
+
+05:02.910 --> 05:03.910
+in the next lecture.

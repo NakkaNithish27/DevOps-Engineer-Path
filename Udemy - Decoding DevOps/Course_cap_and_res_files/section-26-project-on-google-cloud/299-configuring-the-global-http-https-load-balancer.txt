@@ -1,0 +1,616 @@
+WEBVTT
+
+00:00.360 --> 00:00.800
+Okay.
+
+00:00.840 --> 00:06.720
+So we have the managed instance group that can scale out and scale in instance.
+
+00:06.720 --> 00:11.120
+And they are creating in private subnet of our secure VPC.
+
+00:11.680 --> 00:13.560
+Now we're going to set this part.
+
+00:14.200 --> 00:17.320
+So let's work on the load balancer backend first.
+
+00:17.840 --> 00:24.760
+If you remember in AWS we have target group where we set the port number the backend services where
+
+00:24.760 --> 00:26.200
+the request should be routed.
+
+00:26.560 --> 00:31.640
+Similar to that we're going to work on load balancer backend part in this lecture.
+
+00:32.320 --> 00:38.880
+So we are going to set the port number for the managed instance group which will be eight of our Tomcat.
+
+00:38.920 --> 00:40.600
+We're going to set a health check.
+
+00:41.360 --> 00:43.560
+And we need to create a backend service.
+
+00:43.560 --> 00:49.840
+That's simply a name that this managed instance group is the backend that works on port 8080.
+
+00:49.880 --> 00:51.560
+And this is the health check like that.
+
+00:51.760 --> 00:57.680
+And all this information, backend information of backend service will be given in the URL map.
+
+00:57.960 --> 01:01.160
+And if the request comes on this then this is the backend.
+
+01:01.800 --> 01:06.280
+Little confusing compared to AWS, but doable.
+
+01:07.040 --> 01:08.160
+So these are the steps.
+
+01:08.160 --> 01:13.960
+First, we are going to set ports for our managed instance group port 8080.
+
+01:14.040 --> 01:20.120
+This will tell the load balancer that for this MiG this is the port number and protocol is HTTP.
+
+01:20.640 --> 01:24.560
+We are going to set a health check like in AWS target group.
+
+01:24.560 --> 01:25.680
+We create a health check.
+
+01:25.920 --> 01:28.280
+So Tomcat servers will be running on port 8080.
+
+01:28.280 --> 01:30.320
+So health check will be for port 8080.
+
+01:30.320 --> 01:34.160
+And path is just root directory no subfolder.
+
+01:34.880 --> 01:36.840
+So set the port number for MiG.
+
+01:37.000 --> 01:38.160
+Set a health check.
+
+01:39.160 --> 01:41.040
+Create a backend service.
+
+01:41.040 --> 01:42.440
+There's nothing in this here.
+
+01:42.440 --> 01:48.040
+We just create the name of the service backend service and mention the health check and ports.
+
+01:48.520 --> 01:52.520
+In next command we attach our MiG to the backend service.
+
+01:52.920 --> 01:55.800
+So at this part our backend is configured.
+
+01:56.160 --> 01:59.600
+Now we need something that routes the request to the backend.
+
+01:59.600 --> 02:01.480
+And that will be the URL map.
+
+02:01.990 --> 02:03.510
+and we'll come to that part later.
+
+02:03.510 --> 02:06.270
+Let's start creating the port first.
+
+02:06.910 --> 02:12.750
+So gcloud compute instance group managed set named ports for this MiG.
+
+02:13.430 --> 02:19.790
+And for this zone the port will be HTTP protocol sorry protocol HTTP and port 8080.
+
+02:20.790 --> 02:23.590
+Their synonym okay port number is set.
+
+02:23.630 --> 02:26.110
+Next let's set the health check.
+
+02:26.910 --> 02:34.110
+So this is the command gcloud compute health checks create HTTP the name of the health check.
+
+02:34.510 --> 02:37.270
+It's going to be a global health check for port 8080.
+
+02:37.470 --> 02:39.190
+And path is root directory.
+
+02:39.430 --> 02:40.710
+So no subfolders.
+
+02:41.110 --> 02:42.950
+Now here health check is just configured.
+
+02:43.230 --> 02:44.670
+There's nothing attached to it.
+
+02:44.710 --> 02:47.790
+It's just a configuration that we're going to attach later.
+
+02:48.550 --> 02:50.710
+So let's hit enter okay.
+
+02:50.710 --> 02:54.070
+So the health check is created in Compute Engine.
+
+02:54.070 --> 02:55.790
+You can go to instance groups.
+
+02:55.790 --> 02:57.830
+You can see health check refresh this.
+
+02:57.830 --> 03:01.470
+You should see a health check got created with the name V profile hyphen HC.
+
+03:02.110 --> 03:04.750
+Now we need to connect this health check to a backend.
+
+03:05.310 --> 03:07.470
+That backend service will be for the load balancer.
+
+03:07.470 --> 03:09.190
+Like in AWS.
+
+03:09.230 --> 03:10.590
+We have target group like that.
+
+03:10.590 --> 03:12.150
+Here we have backend service.
+
+03:12.830 --> 03:16.830
+So we'll create a backend service with the name of backend.
+
+03:16.830 --> 03:19.350
+We are going to attach this health check to that backend.
+
+03:19.510 --> 03:25.990
+And this is the command gcloud compute backend hyphen services create the name of the backend hyphen
+
+03:26.310 --> 03:29.790
+global protocol http port name http.
+
+03:30.150 --> 03:31.510
+Now this is the same port.
+
+03:31.710 --> 03:33.710
+This is the port for our image.
+
+03:33.750 --> 03:35.070
+For MiG we created.
+
+03:35.230 --> 03:36.830
+That is the name we are giving over here.
+
+03:37.430 --> 03:39.990
+And this is the health check that we have just created.
+
+03:40.430 --> 03:42.230
+Now this is empty backend service.
+
+03:42.230 --> 03:43.270
+There's nothing attached to it.
+
+03:43.270 --> 03:45.030
+We are going to attach it to the backend.
+
+03:45.470 --> 03:49.590
+Sorry to the MiG, but let's just create first this backend service.
+
+03:50.110 --> 03:54.630
+And I know this might get a little confusing, but everything will make sense once all those things
+
+03:54.630 --> 03:55.510
+are connected.
+
+03:56.190 --> 03:57.830
+So a backend got created.
+
+03:57.830 --> 04:00.470
+Here we go back to our health check refresh.
+
+04:00.470 --> 04:05.420
+This you should see in use by v profile hyphen back end if you click on this.
+
+04:05.980 --> 04:10.100
+So this takes us to the load balancing like in AWS load balancer.
+
+04:10.100 --> 04:11.620
+We have target group like that.
+
+04:11.620 --> 04:11.900
+Here.
+
+04:11.900 --> 04:16.140
+In the load balancing we have backend service as the target group.
+
+04:16.580 --> 04:18.420
+Now this is an empty backend.
+
+04:18.580 --> 04:19.860
+There is nothing attached to it.
+
+04:19.860 --> 04:23.540
+We are going to attach it to our managed instance group.
+
+04:24.100 --> 04:27.100
+So we have backend with this name V profile hyphen backend.
+
+04:27.100 --> 04:33.020
+And we have a managed instance group with this name V profile hyphen mig which create instances in this
+
+04:33.020 --> 04:34.540
+zone us Central1 a.
+
+04:34.580 --> 04:40.940
+We are going to combine all these things together back in and mig so gcloud compute backend hyphen services
+
+04:41.060 --> 04:43.300
+add backend the name of the backend.
+
+04:43.780 --> 04:50.780
+So with this add backend option we are going to add this instance group this managed instance group
+
+04:50.780 --> 04:52.780
+into the backend in this zone.
+
+04:53.380 --> 04:56.940
+Let's hit enter okay so our backend is updated.
+
+04:58.580 --> 04:59.820
+Let's refresh this.
+
+05:00.660 --> 05:03.340
+So now you should see V profile Hyphen.
+
+05:03.340 --> 05:03.700
+Meg.
+
+05:04.220 --> 05:06.820
+It has total four of four.
+
+05:07.500 --> 05:10.180
+We just mentioned two, so I'm going to check later.
+
+05:10.180 --> 05:10.780
+What happened.
+
+05:10.780 --> 05:12.100
+Why did it scale to four.
+
+05:12.100 --> 05:13.820
+But let's complete the setup first.
+
+05:14.260 --> 05:17.380
+So you see it says 4 or 4 are healthy and healthy.
+
+05:17.420 --> 05:18.860
+How it got to know healthy.
+
+05:18.860 --> 05:21.460
+That is because of the health check okay.
+
+05:21.500 --> 05:24.460
+So that was all the back end of the load balancer.
+
+05:24.460 --> 05:27.100
+Now let's work on the front end of the load balancer.
+
+05:27.540 --> 05:29.500
+So we have managed instance group.
+
+05:29.540 --> 05:34.780
+We have the health check probes that are running and the backend service that has all these things.
+
+05:36.020 --> 05:37.700
+That is the load balancer backend.
+
+05:37.740 --> 05:39.260
+Now load balancer front end.
+
+05:39.300 --> 05:45.660
+Now there should be some information that should forward the request to this load balancer backend like
+
+05:45.700 --> 05:46.980
+a mapping kind of thing.
+
+05:47.220 --> 05:53.380
+Which should say that if the request come on https 443, then route the request to this backend, or
+
+05:53.420 --> 05:58.740
+if the request comes on http port 80 route the request to this load balancer backend.
+
+05:59.100 --> 06:01.740
+And that's what exactly is URL map.
+
+06:02.460 --> 06:06.370
+It creates basically a table and it's matched the following.
+
+06:06.970 --> 06:08.770
+So let's create the URL map now.
+
+06:09.570 --> 06:16.650
+So we are going to create URL map with the name view profile URL map and attach it to the back end.
+
+06:16.970 --> 06:20.010
+As in not attach it to the backend, map it to the backend.
+
+06:20.690 --> 06:24.130
+This is the command gcloud compute url hyphen maps.
+
+06:24.130 --> 06:29.450
+Create name of the URL map and the default service that is our backend.
+
+06:30.010 --> 06:32.970
+So by default it is going to send the request to this backend.
+
+06:35.930 --> 06:36.210
+Okay.
+
+06:36.210 --> 06:37.130
+So that is created.
+
+06:37.130 --> 06:40.210
+Now we need to create an HTTP proxy for this.
+
+06:40.210 --> 06:42.050
+This is what we need to do it in GCP.
+
+06:42.370 --> 06:45.330
+We don't need to do this in the AWS load balancer.
+
+06:45.330 --> 06:52.410
+It's come and it comes in built HTTP proxy is basically a front facing of the load balancer.
+
+06:52.730 --> 06:56.690
+So we need to create one for HTTP request and one for Https.
+
+06:56.970 --> 06:59.410
+This one we are doing for HTTP now.
+
+06:59.970 --> 07:01.370
+So let's create this.
+
+07:03.810 --> 07:08.490
+So gcloud compute target hyphen http hyphen proxies create.
+
+07:08.770 --> 07:13.770
+With this name we profile http proxy and map it to this URL map.
+
+07:15.650 --> 07:22.770
+Okay, now we should already have a load balancer with this http proxy URL map and backend.
+
+07:22.810 --> 07:23.930
+Let's take a look at it.
+
+07:24.770 --> 07:26.810
+So just search for load balancing.
+
+07:28.970 --> 07:34.210
+So you see the load balancer and it says application load balancer type in.
+
+07:34.250 --> 07:37.850
+Right now you just see the name as V profile hyphen URL map.
+
+07:38.770 --> 07:42.770
+But once the setup is completed we will see the actual and proper names and everything.
+
+07:43.330 --> 07:47.890
+Right now we need to reserve a static public IP for the load balancer.
+
+07:48.690 --> 07:53.570
+And the reason why we will be reserving a static IP address for the load balancer is because we are
+
+07:53.570 --> 07:56.130
+going to create an entry in domain registrar.
+
+07:56.130 --> 07:57.570
+So I'll be doing it on GoDaddy.
+
+07:58.050 --> 08:02.170
+I will say GCP is equal to the load balancer IP.
+
+08:02.170 --> 08:03.730
+And that IP needs to be static.
+
+08:04.480 --> 08:08.440
+So I need to create an IP static IP for the load balancer.
+
+08:09.920 --> 08:10.160
+Okay.
+
+08:10.160 --> 08:14.680
+So let's run this command gcloud compute addresses create ELB underscore IP.
+
+08:14.680 --> 08:18.120
+That is going to be the name that's going to be global.
+
+08:20.040 --> 08:20.320
+Okay.
+
+08:20.320 --> 08:21.600
+So that got created.
+
+08:24.600 --> 08:25.960
+And now we just do describe.
+
+08:25.960 --> 08:28.320
+You can see the IP address gcloud compute addresses.
+
+08:28.320 --> 08:30.480
+Describe the name hyphen hyphen global.
+
+08:31.520 --> 08:35.240
+So that's going to be the static public IP of the load balancer.
+
+08:36.120 --> 08:36.360
+Okay.
+
+08:36.400 --> 08:37.280
+Now one last thing.
+
+08:37.280 --> 08:40.640
+And we will have a functional load balancer and the entire setup.
+
+08:40.640 --> 08:44.200
+Except we won't be having the Https and proper URL.
+
+08:44.560 --> 08:49.000
+So if you do not have a domain if you are not purchased the domain, the command that I'm going to run
+
+08:49.000 --> 08:50.120
+now will be the last command.
+
+08:50.120 --> 08:51.440
+And that would be it for you.
+
+08:51.800 --> 08:53.360
+So let me show you the command.
+
+08:53.880 --> 08:57.040
+GCloud compute forwarding hyphen rules.
+
+08:57.040 --> 09:00.920
+Create the name of the forwarding rule http underscore elb.
+
+09:00.960 --> 09:01.880
+That's variable.
+
+09:01.880 --> 09:04.840
+This is the name V profile hyphen http hyphen elb.
+
+09:05.240 --> 09:07.200
+Now this will be the name of our load balancer.
+
+09:07.240 --> 09:09.600
+Now it's going to be global Load balancer.
+
+09:09.600 --> 09:14.320
+And the target HTTP proxy is this HTTP proxy that we just created.
+
+09:14.760 --> 09:18.960
+That will be the target ports 80.
+
+09:19.120 --> 09:21.120
+We are doing it for HTTP port 80.
+
+09:21.560 --> 09:24.080
+And the address is the load balancer IP.
+
+09:24.480 --> 09:27.760
+Now this variable is going to return the name of the load balancer IP.
+
+09:27.960 --> 09:31.280
+And that is attached to the IP of the load balancer.
+
+09:31.640 --> 09:34.640
+Now let's just create and wait for it to complete.
+
+09:34.640 --> 09:37.920
+Then I'm going to show you the entire flow will understand this.
+
+09:39.000 --> 09:39.280
+Okay.
+
+09:39.320 --> 09:40.560
+This got created.
+
+09:40.920 --> 09:42.120
+Let's go to the load balancer.
+
+09:42.120 --> 09:43.520
+Let's refresh this page.
+
+09:45.080 --> 09:45.400
+Okay.
+
+09:45.400 --> 09:48.600
+So that's the IP address of our load balancer and port 80.
+
+09:48.760 --> 09:50.720
+Now if we exit through the browser.
+
+09:51.440 --> 09:55.720
+So you should be able to see the login page of your profile application.
+
+09:56.120 --> 09:57.360
+And it will take some time.
+
+09:57.360 --> 10:00.400
+So if you don't see this wait for some time.
+
+10:00.680 --> 10:03.840
+Make sure you check the health status of your instance group.
+
+10:03.840 --> 10:05.870
+So your instance should be healthy anyways.
+
+10:05.910 --> 10:09.350
+And let's log in and check the database also.
+
+10:10.270 --> 10:14.350
+So username admin underscore vp same password admin underscore VP.
+
+10:14.870 --> 10:18.550
+If we are able to log in then it is able to connect to the cloud SQL service.
+
+10:18.550 --> 10:23.670
+And yes we're able to connect to the cloud SQL service from our V profile application.
+
+10:24.590 --> 10:29.110
+So we have not configured RabbitMQ Elastic Cache but we have configured memcache.
+
+10:29.630 --> 10:31.510
+So let's click on all users.
+
+10:31.790 --> 10:33.430
+So it should show you the user list.
+
+10:33.430 --> 10:39.470
+Let's click on one of the users ID and we see here data is from db and data is inserted in cache.
+
+10:39.470 --> 10:41.430
+So caching is also working.
+
+10:42.070 --> 10:43.430
+Click the user once again.
+
+10:43.470 --> 10:45.790
+Then you should see the data is from cache.
+
+10:46.550 --> 10:47.470
+So this is awesome.
+
+10:47.470 --> 10:48.710
+Everything is verified.
+
+10:49.230 --> 10:49.790
+If you have.
+
+10:49.790 --> 10:54.990
+If you do not have the domain then you can just watch the next lectures and later you can check the
+
+10:54.990 --> 10:57.590
+cleanup lecture to see how you can clean up everything.
+
+10:57.710 --> 11:00.110
+And if you have a domain, then join me.
+
+11:00.110 --> 11:00.750
+In the next lecture.
+
+11:00.750 --> 11:05.430
+We're going to set up an Https connection with a proper URL in the next lecture.
+
+11:05.710 --> 11:06.470
+So see you there.

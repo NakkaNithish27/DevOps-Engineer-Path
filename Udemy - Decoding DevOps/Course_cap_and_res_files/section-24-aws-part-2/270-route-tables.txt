@@ -1,0 +1,277 @@
+WEBVTT
+
+00:01.860 --> 00:03.810
+Instructor: So we have a VPC,
+
+00:03.810 --> 00:06.360
+we have our two public subnet
+
+00:06.360 --> 00:07.770
+and we have internet gateway.
+
+00:07.770 --> 00:10.770
+Now we are going to connect this internet gateway
+
+00:10.770 --> 00:12.780
+to the subnet through route tables.
+
+00:12.780 --> 00:14.793
+So click on Route Tables.
+
+00:16.590 --> 00:18.030
+Okay. You should see two route table.
+
+00:18.030 --> 00:20.430
+One is for the DEFAULT VPC,
+
+00:20.430 --> 00:22.830
+another one is for vprofile-VPC.
+
+00:22.830 --> 00:24.930
+No, I did not create this route table.
+
+00:24.930 --> 00:28.830
+It got created automatically when we created the VPC.
+
+00:28.830 --> 00:31.230
+So let's change its,
+
+00:31.230 --> 00:35.423
+now give its name Default-PubRT.
+
+00:36.330 --> 00:39.360
+That's for default VPC is public route table.
+
+00:39.360 --> 00:42.500
+And this one for of vprofile-default-RT.
+
+00:50.970 --> 00:52.620
+We are not going to use this one.
+
+00:52.620 --> 00:55.770
+We are just giving the name so it's easy to identify.
+
+00:55.770 --> 00:58.050
+So this is default VPC's public route table.
+
+00:58.050 --> 01:01.500
+If you look at its routes or routes
+
+01:01.500 --> 01:05.640
+you will see here entry 0.0.0.0/0
+
+01:05.640 --> 01:06.930
+goes to the internet gateway.
+
+01:06.930 --> 01:09.990
+This is the default VPC's internet gateway.
+
+01:09.990 --> 01:12.180
+Same way, we are going to create a route table
+
+01:12.180 --> 01:15.060
+and route the traffic to our internet gateway.
+
+01:15.060 --> 01:17.103
+So let's click on Create Route Table.
+
+01:18.720 --> 01:21.633
+I will name it as vpro-public-RT.
+
+01:22.590 --> 01:23.880
+So to identify that,
+
+01:23.880 --> 01:27.240
+this is the route table for public subnet
+
+01:27.240 --> 01:29.370
+and for vprofile-VPC
+
+01:29.370 --> 01:33.210
+select our VPC here, vprofile-VPC, right?
+
+01:33.210 --> 01:34.830
+And let's create it.
+
+01:34.830 --> 01:37.713
+And after that we have to add the rules and subnets.
+
+01:39.150 --> 01:42.780
+So first we will connect this VPC, sorry,
+
+01:42.780 --> 01:45.300
+this route table to the subnets.
+
+01:45.300 --> 01:47.460
+So click on Subnet Association.
+
+01:47.460 --> 01:50.190
+Say Edit Subnet Associations
+
+01:50.190 --> 01:53.730
+and select your two public subnet.
+
+01:53.730 --> 01:55.500
+See, easy to identify because you,
+
+01:55.500 --> 02:00.233
+because we named it properly, Save Association, okay?
+
+02:01.590 --> 02:03.120
+So now the final thing.
+
+02:03.120 --> 02:04.140
+We have the route table,
+
+02:04.140 --> 02:06.720
+we have associated to our two public subnet
+
+02:06.720 --> 02:08.400
+but still there is nothing public
+
+02:08.400 --> 02:11.190
+about these subnets or this route table.
+
+02:11.190 --> 02:14.940
+This one single entry will make this route table
+
+02:14.940 --> 02:17.160
+and the subnets public.
+
+02:17.160 --> 02:18.753
+Click on Edit Routes.
+
+02:20.010 --> 02:24.720
+Add route 0.0.0.0/0
+
+02:24.720 --> 02:27.810
+goes to the internet gateway.
+
+02:27.810 --> 02:28.643
+Wait a second.
+
+02:28.643 --> 02:31.083
+Yeah, find the internet gateway.
+
+02:32.610 --> 02:35.670
+And that's our vprofile internet gateway.
+
+02:35.670 --> 02:40.670
+This single entry will make the subnets public subnet.
+
+02:40.800 --> 02:42.033
+Save changes.
+
+02:43.350 --> 02:46.440
+Okay, so now we have a fully functional public subnet.
+
+02:46.440 --> 02:48.210
+You can launch instances in that,
+
+02:48.210 --> 02:52.364
+you should be able to access internet from that instance,
+
+02:52.364 --> 02:54.213
+which are in this public subnet.
+
+02:59.610 --> 03:00.443
+Okay, yeah.
+
+03:00.443 --> 03:04.230
+So I was saying you have a fully functional public subnet.
+
+03:04.230 --> 03:06.450
+The instance can access the internet
+
+03:06.450 --> 03:08.370
+but you cannot access the instance
+
+03:08.370 --> 03:11.850
+because the instance will not have the public IP.
+
+03:11.850 --> 03:13.770
+So far we have seen, we launch the instance,
+
+03:13.770 --> 03:15.000
+we get the public IP
+
+03:15.000 --> 03:17.970
+and we then we SSHH or exit from the browser
+
+03:17.970 --> 03:19.470
+from the internet, right?
+
+03:19.470 --> 03:21.840
+Because it has the public IP.
+
+03:21.840 --> 03:25.260
+But subnets by default will not allocate any public IP.
+
+03:25.260 --> 03:26.820
+You need to enable that setting.
+
+03:26.820 --> 03:28.560
+So you need to go to Subnets,
+
+03:28.560 --> 03:30.900
+find your public subnet.
+
+03:30.900 --> 03:33.750
+That's our public subnet one.
+
+03:33.750 --> 03:34.800
+Select the check mark.
+
+03:34.800 --> 03:36.510
+Public subnet only, okay?
+
+03:36.510 --> 03:39.390
+Public subnet action.
+
+03:39.390 --> 03:41.193
+Edit subnet settings.
+
+03:42.750 --> 03:45.390
+And you see here an option Auto Assign IP Setting.
+
+03:45.390 --> 03:47.100
+You have to enable this.
+
+03:47.100 --> 03:49.530
+Now, when you launch instance in this public subnet
+
+03:49.530 --> 03:52.680
+it'll automatically get a public IP.
+
+03:52.680 --> 03:53.793
+Let's save this.
+
+03:55.230 --> 03:58.320
+Let's go to another public subnet.
+
+03:58.320 --> 03:59.280
+Do the same thing.
+
+03:59.280 --> 04:04.043
+Action, Edit Subnet Settings, Enable, Save.
+
+04:08.430 --> 04:11.700
+Okay, we are done here with the public subnets
+
+04:11.700 --> 04:13.741
+but not with the private subnets.
+
+04:13.741 --> 04:16.590
+We are going to launch NAT Gateway
+
+04:16.590 --> 04:19.650
+create route table associate it with the subnets.
+
+04:19.650 --> 04:21.750
+Same thing, what we did for the public subnet
+
+04:21.750 --> 04:25.800
+except now we will have a NAT gateway for private subnet.
+
+04:25.800 --> 04:28.263
+So wrap this up and join me in the next lecture.

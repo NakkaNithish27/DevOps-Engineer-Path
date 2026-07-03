@@ -1,0 +1,331 @@
+WEBVTT
+
+00:00.480 --> 00:02.160
+Instructor: Okay, printing out the information
+
+00:02.160 --> 00:07.050
+and also we can store information from our Terraform state.
+
+00:07.050 --> 00:10.890
+So when we execute Terraform apply,
+
+00:10.890 --> 00:12.180
+it returns a lot of output
+
+00:12.180 --> 00:15.370
+and that is getting stored into Terraform TF state file
+
+00:16.230 --> 00:17.520
+and we can access information
+
+00:17.520 --> 00:19.470
+from that file itself directly.
+
+00:19.470 --> 00:21.150
+We can say, you know, we can go through
+
+00:21.150 --> 00:24.487
+the aws_instance resource, the resource name,
+
+00:24.487 --> 00:27.333
+.public_ip, and we can find the public IP.
+
+00:28.290 --> 00:31.323
+We can use an output block to print this also.
+
+00:33.120 --> 00:35.130
+So output resources to print content,
+
+00:35.130 --> 00:38.700
+and we can print our attributes that are already saved.
+
+00:38.700 --> 00:40.260
+We can also use local-exec
+
+00:40.260 --> 00:43.050
+to save such information into another file.
+
+00:43.050 --> 00:46.170
+You want to save IP addresses or IDs.
+
+00:46.170 --> 00:47.913
+We can store it into a text file.
+
+00:50.640 --> 00:53.670
+Okay, so output instance,
+
+00:53.670 --> 00:56.130
+also you can give the name of your resource,
+
+00:56.130 --> 00:57.390
+what do you want,
+
+00:57.390 --> 01:02.250
+and value, you can give the path of the attribute
+
+01:02.250 --> 01:03.083
+that you're looking for.
+
+01:03.083 --> 01:08.040
+So resourceType dot resource name dot the attribute name.
+
+01:08.040 --> 01:08.873
+Okay?
+
+01:08.873 --> 01:10.110
+The element is this:
+
+01:10.110 --> 01:13.737
+aws_instance.server.public_ip.
+
+01:16.251 --> 01:19.680
+It might say aws_instance is the resource type.
+
+01:19.680 --> 01:21.060
+Resource name is the server,
+
+01:21.060 --> 01:23.010
+so as we give any resource name, right?
+
+01:23.010 --> 01:26.220
+So like that is just an example server.
+
+01:26.220 --> 01:29.043
+And attribute name inside that, public_ip.
+
+01:30.090 --> 01:31.290
+If you know how to access that,
+
+01:31.290 --> 01:34.110
+then you can store that information to a text file also
+
+01:34.110 --> 01:36.150
+by using a local-exec provisioner.
+
+01:36.150 --> 01:39.210
+We have seen remote-exec in the previous section.
+
+01:39.210 --> 01:41.430
+Local-execute will execute command locally.
+
+01:41.430 --> 01:44.523
+So we say for example, command = echo.
+
+01:45.390 --> 01:46.680
+Echo is for printing, right?
+
+01:46.680 --> 01:49.200
+So you can say print all this content,
+
+01:49.200 --> 01:51.750
+redirect the output to this text file.
+
+01:51.750 --> 01:53.373
+Okay, so let's then try that.
+
+01:54.210 --> 01:56.370
+Okay, for this again we are going to
+
+01:56.370 --> 01:59.610
+create another exercise, exercise five.
+
+01:59.610 --> 02:04.350
+Copy exercise four, paste it, change its name.
+
+02:04.350 --> 02:06.000
+Exercise five.
+
+02:06.000 --> 02:10.050
+We will open instance.tf file, scroll down
+
+02:10.050 --> 02:12.870
+and at the end we'll give the output.
+
+02:12.870 --> 02:17.550
+We already used output in instance_id.
+
+02:17.550 --> 02:18.843
+There, output.
+
+02:20.220 --> 02:22.740
+Name of the output, description and its value.
+
+02:22.740 --> 02:24.243
+So let's copy the same thing.
+
+02:25.730 --> 02:28.800
+Go to instance.tf file and let's paste it there.
+
+02:28.800 --> 02:32.640
+So let's say I want to print the public IP of the instance.
+
+02:32.640 --> 02:37.500
+I will say webPublicIP, and in the value,
+
+02:37.500 --> 02:38.880
+I'm going to mention similar thing
+
+02:38.880 --> 02:41.760
+but instant of the AMI and the AMI ID,
+
+02:41.760 --> 02:44.520
+I'm going to get the public IP of the instance.
+
+02:44.520 --> 02:49.440
+So our resource, aws_instance.web, let's write that first.
+
+02:49.440 --> 02:53.523
+We give web dot and we can see the list all here.
+
+02:55.140 --> 02:58.260
+So I want to print the public IP.
+
+02:58.260 --> 02:59.130
+All right, that's print, right?
+
+02:59.130 --> 03:01.590
+Output is going to print like that.
+
+03:01.590 --> 03:03.810
+Let's print the private IP also.
+
+03:03.810 --> 03:06.090
+So simply copy paste this output
+
+03:06.090 --> 03:08.530
+and here let's make some change, webPrivateIP
+
+03:09.660 --> 03:12.540
+and let's remove this public_ip.
+
+03:12.540 --> 03:17.540
+We'll say .private_ip, that one.
+
+03:17.730 --> 03:20.460
+Now what if I want to store this information
+
+03:20.460 --> 03:22.350
+into a text file?
+
+03:22.350 --> 03:26.640
+Right, for that you can use the local-exec,
+
+03:26.640 --> 03:29.610
+the provision at local-exec and execute your command.
+
+03:29.610 --> 03:31.710
+You can see now echo and you can just print it
+
+03:31.710 --> 03:33.573
+and redirect it to a file.
+
+03:34.410 --> 03:35.670
+Well, that way.
+
+03:35.670 --> 03:39.420
+Make sure this is in the aws.instance resource
+
+03:39.420 --> 03:42.450
+just after a remote-exec in the same line,
+
+03:42.450 --> 03:45.510
+provisioner local-exec and command equal to,
+
+03:45.510 --> 03:48.780
+I'm seeing echo, and the variable.
+
+03:48.780 --> 03:51.720
+This you can get through self.private_ip also
+
+03:51.720 --> 03:56.720
+or you can use, like this, the resources
+
+03:56.790 --> 03:59.400
+and redirect it to a text file.
+
+03:59.400 --> 04:02.760
+Let's save this and execute this.
+
+04:02.760 --> 04:04.080
+So I open my Git Bash,
+
+04:04.080 --> 04:06.870
+you can open your terminal or from VS code.
+
+04:06.870 --> 04:11.370
+Switch to exercise five, Terraform init first.
+
+04:11.370 --> 04:13.293
+Terraform format, FMT.
+
+04:14.190 --> 04:15.753
+Terraform validate.
+
+04:16.860 --> 04:18.183
+Terraform plan.
+
+04:20.280 --> 04:22.653
+If you're good, you can do Terraform apply.
+
+04:29.610 --> 04:31.500
+Okay, so this completed successfully
+
+04:31.500 --> 04:34.890
+and you should see the outputs over here.
+
+04:34.890 --> 04:36.030
+Alright, so these are the names
+
+04:36.030 --> 04:39.693
+that we have used in the resource, the output, basically.
+
+04:40.710 --> 04:42.540
+It should have also created the file
+
+04:42.540 --> 04:44.640
+where it has the private IP.
+
+04:44.640 --> 04:45.513
+Let's check that.
+
+04:46.350 --> 04:48.600
+There, private_ips.txt.
+
+04:48.600 --> 04:50.200
+Let's check it from the VS code.
+
+04:51.660 --> 04:53.190
+There.
+
+04:53.190 --> 04:54.540
+Right, so there are chances
+
+04:54.540 --> 04:56.370
+that there will be tasks like that
+
+04:56.370 --> 04:59.580
+where you need to use that information for something else.
+
+04:59.580 --> 05:01.800
+So you can, runtime, you can get the information
+
+05:01.800 --> 05:03.180
+and then you can store it into a file.
+
+05:03.180 --> 05:06.900
+You can, you know, queue as per your own format,
+
+05:06.900 --> 05:10.230
+like list of IPS or a AMI IDs, stuff like that.
+
+05:10.230 --> 05:11.400
+Okay, so that was output.
+
+05:11.400 --> 05:12.810
+Pretty simple.
+
+05:12.810 --> 05:14.560
+Let's once again destroy everything
+
+05:15.510 --> 05:18.010
+and once you're done, join me in the next lecture.

@@ -1,0 +1,625 @@
+﻿WEBVTT
+
+00:00.140 --> 00:01.220
+Welcome.
+
+00:01.220 --> 00:07.280
+In this lecture we will see how to use Terraform to maintain our VPC on AWS.
+
+00:07.670 --> 00:12.650
+Now you already know how to manually set up a VPC from the AWS console.
+
+00:12.920 --> 00:17.000
+We have already learned about Terraform in the Terraform section.
+
+00:17.540 --> 00:18.650
+There are two ways.
+
+00:18.650 --> 00:21.530
+The first method is to go to the service provider's documents.
+
+00:21.530 --> 00:23.660
+You get the names of the resources.
+
+00:23.840 --> 00:25.550
+Therefore, we know how to create a VPC.
+
+00:25.580 --> 00:26.900
+Now we create a VPC.
+
+00:26.930 --> 00:28.010
+We are creating subnets.
+
+00:28.010 --> 00:30.410
+In doing so, we create an internet portal.
+
+00:30.800 --> 00:33.530
+First, we create the routing table for the public subnet.
+
+00:33.530 --> 00:37.250
+Then we link the routing table to the internet gateway.
+
+00:37.250 --> 00:41.120
+Therefore, the public subnet is a subnet and an Internet gateway network.
+
+00:41.120 --> 00:44.060
+Using the routing table, we create a NAT gateway.
+
+00:44.060 --> 00:46.160
+The same thing we do for the Nat gateway.
+
+00:46.160 --> 00:48.740
+We create a routing table for the private subnet.
+
+00:48.740 --> 00:50.900
+And then we connect them together.
+
+00:51.110 --> 00:57.860
+After that, you might want to add some other things, such as creating a flexible IPS security suite and a VPC endpoint, etc.
+
+00:57.890 --> 00:59.150
+Furthermore, etc.
+
+00:59.490 --> 01:06.060
+But we know the flow and in the same way we can search for all the resources and put them into our texts.
+
+01:06.510 --> 01:08.940
+Therefore, I already have the written code for this.
+
+01:08.940 --> 01:11.670
+No, and I don't recommend you write this code.
+
+01:11.700 --> 01:17.160
+You can download it from the source and test it, because we really don't want to do it this way.
+
+01:17.190 --> 01:22.140
+We will be using modules, but first I want to show you the code so that you can understand it.
+
+01:22.140 --> 01:28.980
+Things get complicated when we're writing this type of resource, multiple resources together, and how or to what extent
+
+01:28.980 --> 01:31.530
+The benefit of using the unit.
+
+01:31.710 --> 01:35.730
+So we don't need to bear all these public expenses, do we?
+
+01:35.760 --> 01:39.750
+So generally speaking, if you just want to write it from scratch, we say browse the service providers.
+
+01:39.750 --> 01:42.900
+Let's move on to the AWS documentation.
+
+01:44.010 --> 01:47.820
+So we have this whole section of VPC resources, right?
+
+01:47.850 --> 01:50.100
+So here we have AWS underscore VPC.
+
+01:50.130 --> 01:51.660
+We have the example.
+
+01:51.960 --> 01:55.560
+Therefore, the resource type is the resource name and Cidr block.
+
+01:56.070 --> 01:59.630
+Okay, you can download this resource from this lecture resource.
+
+01:59.660 --> 02:03.710
+All scripts and you can open a VPC.tv.
+
+02:04.040 --> 02:04.340
+Okay.
+
+02:04.370 --> 02:10.880
+Therefore, the first resource where we create a VPC is where we mentioned default DNS support for the cluster.
+
+02:10.880 --> 02:13.490
+Cidr true DNS hostname true.
+
+02:13.670 --> 02:17.960
+Therefore, the instance gets a DNS name when we create it in this VPC.
+
+02:18.260 --> 02:20.720
+Then we want to create the subnet.
+
+02:21.170 --> 02:24.830
+Therefore, AWS underlines subnet resources by subnet name.
+
+02:24.920 --> 02:31.070
+Therefore, we are creating three public subnets and three private subnets here, and I haven't mentioned any gateway information.
+
+02:31.070 --> 02:34.280
+Nat, because we know that the Nat portal is not free.
+
+02:34.280 --> 02:39.350
+But in the module I will show you how to use this resource as well to create a Nat gateway.
+
+02:39.350 --> 02:44.540
+Because I don't want you to try Nat gateways here just to save money.
+
+02:45.050 --> 02:50.090
+So, the name of the public subnet and the VPC ID we want to create in it.
+
+02:50.090 --> 02:58.740
+This is the AWS underscore VPC and VPC name. The Cidr ID is displayed if you see it belongs to this domain.
+
+02:58.770 --> 03:03.330
+Ten. 0. 0. 0 Slanted 16 is VPC Cidr.
+
+03:03.390 --> 03:09.600
+So we have the subnet 10.0.1.0 slash 24 right 256 IP.
+
+03:09.600 --> 03:14.700
+Of those VPCs we mention here, we assign a public IP address at launch.
+
+03:14.730 --> 03:15.090
+TRUE.
+
+03:15.090 --> 03:21.600
+Therefore, when we launch the instance in this subnet, the instance will get a public IP availability area.
+
+03:21.600 --> 03:24.090
+I have mentioned a variable here.
+
+03:24.450 --> 03:29.850
+So there is a broad point of the file here; I have mentioned the first variable area.
+
+03:29.880 --> 03:30.510
+The second region.
+
+03:30.540 --> 03:31.470
+The third region.
+
+03:31.470 --> 03:39.030
+She sees it as the Eastern United States 2A, the Eastern United States 2B, the Eastern United States 2C, and the region has also changed to the United States
+
+03:39.060 --> 03:40.050
+Eastern Province 2.
+
+03:40.530 --> 03:42.360
+So these are just the variables.
+
+03:42.360 --> 03:44.880
+We have already seen this in the Terraform lectures.
+
+03:45.390 --> 03:51.360
+Therefore, I create a public subnet here, another one there, and a third one over there.
+
+03:52.620 --> 03:57.590
+Then in a similar way we have three private subnets: one, two, three.
+
+03:58.700 --> 04:00.860
+Yes, the next gateway is the Internet gateway.
+
+04:00.860 --> 04:09.380
+Therefore, we have given this resource the AWS Internet Gateway name, VPC ID, and tags.
+
+04:09.380 --> 04:10.160
+only.
+
+04:10.250 --> 04:12.050
+This leads to the creation of an internet gateway.
+
+04:12.080 --> 04:14.270
+We also saw from the control unit that it is simple.
+
+04:14.270 --> 04:16.730
+We simply say create a portal and it is created.
+
+04:17.000 --> 04:20.810
+Then we create the routing table for the public subnet.
+
+04:21.020 --> 04:25.910
+Therefore, the AWS Underscore Path Table is the VPC ID name.
+
+04:26.870 --> 04:28.970
+We have the way of argument.
+
+04:28.970 --> 04:31.610
+Its value is dictionary.
+
+04:31.610 --> 04:33.110
+Therefore, Cidr block.
+
+04:33.380 --> 04:35.000
+We have created the route schedule correctly.
+
+04:35.000 --> 04:39.080
+We know what we must do if we want to send all traffic to the internet gateway.
+
+04:39.080 --> 04:43.490
+We mentioned this in the Cedar and we mentioned the Internet portal.
+
+04:44.030 --> 04:49.760
+Therefore, the gateway identifier is this resource that refers to the name, then the period, then the identifier.
+
+04:50.480 --> 04:57.840
+So, we create an internet gateway and a routing table, but now we need to connect it to our subnet.
+
+04:57.840 --> 04:58.740
+The general public.
+
+04:58.740 --> 05:00.330
+So another source.
+
+05:00.600 --> 05:05.460
+The argument is that we have mentioned the subnet ID and the routing table ID.
+
+05:05.460 --> 05:10.320
+This will link our subnet to this routing table.
+
+05:10.320 --> 05:12.870
+The routing table is connected to the internet gateway.
+
+05:12.870 --> 05:15.300
+Therefore, our data traffic can go out onto the internet.
+
+05:15.870 --> 05:21.690
+So there are three rules, sorry, there are three connections there because we have three public subnets.
+
+05:21.720 --> 05:24.690
+As I told you, we do not deal with the Nat gateway.
+
+05:24.690 --> 05:29.910
+Therefore, we did not create a NAT gateway route table and bind the table to it.
+
+05:29.970 --> 05:32.460
+We did that simply to save on costs.
+
+05:32.880 --> 05:35.670
+But again, if you want to do that, the steps will be similar.
+
+05:36.120 --> 05:41.130
+Now this is the VPC information and subnet information that we need to provide to our instance.
+
+05:41.130 --> 05:48.120
+So, if you go to the example, in the TF file we have the Underscore subnet ID, and we've already mentioned the subnet ID.
+
+05:49.280 --> 05:52.820
+Underscore subnet. dev hyphen pub 1. ID card.
+
+05:53.000 --> 05:55.370
+This is coming from here.
+
+05:55.730 --> 05:57.950
+This is one subnet of AWS.
+
+05:57.980 --> 06:01.820
+Development point: Pub Police 1. Identification card.
+
+06:02.030 --> 06:06.860
+Therefore, at runtime, the identifier will be obtained and associated with this state.
+
+06:06.860 --> 06:09.830
+Therefore, the instance will be created in this subnet.
+
+06:09.830 --> 06:12.170
+This means it will be in that VPC.
+
+06:13.010 --> 06:15.440
+And then, of course, the security team as well.
+
+06:15.920 --> 06:17.780
+The rest of the steps are the same.
+
+06:17.780 --> 06:20.870
+What we did in previous Terraform sections.
+
+06:21.410 --> 06:24.170
+It's a working code that you can test.
+
+06:24.620 --> 06:29.180
+So download the lecture. Download the source of this lecture.
+
+06:29.180 --> 06:30.860
+You should see this guide.
+
+06:30.860 --> 06:35.060
+You can copy it to any other folder of your choice and then move it there.
+
+06:37.160 --> 06:39.890
+You need to go to this VPC folder.
+
+06:42.170 --> 06:43.790
+Let me scan the screen.
+
+06:44.930 --> 06:49.920
+So let's check out Terraform init first, run it.
+
+06:50.400 --> 06:52.320
+Terraform formula.
+
+06:54.120 --> 06:54.600
+Everything is fine.
+
+06:54.630 --> 06:56.190
+Let's do Terraform.
+
+06:56.190 --> 06:57.300
+Validation.
+
+06:59.340 --> 07:02.400
+I'm going there and we're going to do the Terraform plan.
+
+07:02.430 --> 07:05.850
+We really don't want to implement this, okay?
+
+07:05.850 --> 07:09.240
+But as you can see, there are 21 things that need to be added.
+
+07:09.420 --> 07:15.900
+Therefore, this VPC is an Internet gateway route table for subnets and a link route table.
+
+07:15.900 --> 07:19.560
+Then we have a pair of instance security set keys for all of these things.
+
+07:20.100 --> 07:21.750
+You can check all of this.
+
+07:22.770 --> 07:25.770
+If you wish to submit your application, you can do so.
+
+07:42.120 --> 07:44.880
+As you can see, everything has been created.
+
+07:45.450 --> 07:46.380
+You know that's a long distance.
+
+07:46.380 --> 07:50.510
+There is actually a very concise way to create a VPC using modules.
+
+07:50.510 --> 07:55.460
+That's why I rushed to show you all this source code, because I really don't want you
+
+07:55.460 --> 07:56.300
+To write it.
+
+07:56.300 --> 07:57.830
+Just understand that.
+
+07:58.190 --> 08:00.770
+Before we go there, let's destroy everything.
+
+08:04.760 --> 08:06.530
+Yes, destruction.
+
+08:07.430 --> 08:09.560
+Okay, so go back to the Terraform log, shall we?
+
+08:09.560 --> 08:11.720
+We have come a long way in creating a VPC.
+
+08:11.750 --> 08:12.830
+This is a short method.
+
+08:12.860 --> 08:14.330
+Go to the modules.
+
+08:14.900 --> 08:16.730
+Here you can choose AWS.
+
+08:16.730 --> 08:22.610
+So you see all the AWS modules and their VPCs, click OK on them.
+
+08:22.610 --> 08:24.770
+So it is basically pre-written code.
+
+08:24.980 --> 08:25.970
+Scroll down.
+
+08:26.210 --> 08:28.700
+You should see the correct example.
+
+08:28.700 --> 08:32.120
+Therefore, a VPC unit is a good thing and not a resource.
+
+08:32.120 --> 08:33.440
+It's a VPC module.
+
+08:33.650 --> 08:37.850
+You have mentioned the source from which you want to get the module's source code.
+
+08:37.850 --> 08:40.880
+If you wish, there is also a link here on GitHub.
+
+08:40.880 --> 08:43.430
+You can go and see the entire code.
+
+08:43.760 --> 08:47.010
+This is also another good way to learn Terraform.
+
+08:47.010 --> 08:51.270
+I read the available resource and then clicked on it.
+
+08:51.450 --> 08:52.470
+Let's open it.
+
+08:53.490 --> 08:54.510
+Wait, not this.
+
+08:54.540 --> 09:01.110
+Okay, just click on this drop-down menu and choose any option, such as completing this option.
+
+09:01.590 --> 09:01.920
+Yes.
+
+09:01.950 --> 09:04.290
+Here is an example of the code.
+
+09:05.790 --> 09:06.000
+Okay.
+
+09:06.030 --> 09:08.520
+Let's take a look at the main TF file.
+
+09:08.700 --> 09:14.760
+You can see there the AWS region provider for Cidr AZS data availability regions.
+
+09:14.790 --> 09:21.780
+There is a slice function there to automatically get availability zone names based on the region.
+
+09:22.680 --> 09:29.700
+And so there's a loop here for iteration at your local level. (Az.)
+
+09:29.700 --> 09:35.220
+Therefore, this local point AZS will be duplicated and automatically obtained from subnets.
+
+09:37.530 --> 09:37.920
+Okay.
+
+09:37.950 --> 09:39.690
+You don't actually need to do this.
+
+09:39.690 --> 09:45.260
+This is just the actual unit code that you can research and learn new things from.
+
+09:45.770 --> 09:50.330
+In fact, all you have to do is this.
+
+09:50.930 --> 09:53.450
+Therefore, I mentioned the VPC name that you mentioned.
+
+09:53.480 --> 09:58.640
+Cidr is essentially a type of variable availability zone allocation.
+
+09:58.640 --> 10:04.040
+Here you can mention the names of the regions individually or you can mention the variants that exist there.
+
+10:04.220 --> 10:08.210
+Or you can also use this chip function as well.
+
+10:08.210 --> 10:12.650
+But that will remain for a separate lecture in Kubernetes that will do that.
+
+10:13.130 --> 10:15.830
+Therefore, the list of private subnets is the list of public subnets.
+
+10:15.860 --> 10:17.270
+Do you want a Nat gateway?
+
+10:17.270 --> 10:17.930
+yes or no.
+
+10:17.960 --> 10:18.680
+TRUE.
+
+10:19.070 --> 10:24.440
+This is all you need to create a NAT gateway route table, link the route table and everything else.
+
+10:24.470 --> 10:27.050
+If you want a VPN, you can simply enable it.
+
+10:27.590 --> 10:30.980
+You can specify the tags and a VPC will be created.
+
+10:31.580 --> 10:32.660
+So let's test it.
+
+10:32.660 --> 10:33.800
+Let's copy this.
+
+10:34.190 --> 10:36.800
+Create a new folder here in the VPC module.
+
+10:37.280 --> 10:39.470
+Let me close all these files.
+
+10:41.880 --> 10:47.100
+Here I will create a file called simply vpc.tf.
+
+10:47.550 --> 10:49.470
+Now copy and paste the content.
+
+10:49.470 --> 10:52.170
+You can make changes such as the VPC name.
+
+10:52.200 --> 10:53.400
+Let's change that.
+
+10:55.260 --> 11:03.240
+I also changed the regions to US East 1, US East 1b, and US East 1c. I am keeping the private subnet.
+
+11:03.240 --> 11:06.390
+The public Cidr subnet remains as is.
+
+11:06.420 --> 11:08.010
+If you wish, you can change that.
+
+11:08.040 --> 11:11.490
+But just make sure it's part of this Cidr block.
+
+11:11.940 --> 11:13.170
+Let's test it.
+
+11:13.200 --> 11:14.190
+Let me save it.
+
+11:14.220 --> 11:21.240
+It's all under control, I'll move on to the VPC module folder where I created this VPC file.
+
+11:21.270 --> 11:31.230
+Let's run the Terraform init here, okay, it's done, I'll simply say that the Terraform plan is good.
+
+11:31.230 --> 11:36.690
+You see that 32 things need to be added to a few lines of code correctly.
+
+11:36.720 --> 11:38.370
+This is the power of unity, isn't it?
+
+11:38.400 --> 11:40.010
+You can run Terraform.
+
+11:40.010 --> 11:41.000
+He is advancing.
+
+11:41.120 --> 11:42.380
+It is not mandatory.
+
+11:42.410 --> 11:47.540
+Remember that there is a NAT gateway, so there will be a fee when creating a NAT gateway.
+
+11:47.660 --> 11:50.360
+So, you can skip this part if you want.
+
+11:50.960 --> 11:52.550
+Or you could just say Terraform.
+
+11:52.580 --> 11:56.510
+Apply and make the full setup.
+
+11:57.410 --> 11:58.430
+Yes.
+
+12:02.870 --> 12:03.230
+right.
+
+12:03.230 --> 12:05.570
+If you create something, make sure you destroy it.
+
+12:05.570 --> 12:06.500
+also.
+
+12:06.650 --> 12:09.170
+We will see more about Terraform in the upcoming lectures.
+
+12:09.170 --> 12:15.740
+We will also see this VPC module in Kubernetes where we create a Kubernetes cluster on AWS.
+
+12:15.770 --> 12:17.150
+We will need a VPC.
+
+12:17.750 --> 12:21.650
+In addition, we will also see some new features in Terraform.
+
+12:22.310 --> 12:23.930
+But for the time being.
+
+12:29.780 --> 12:32.090
+But that will be all for this lecture.
+
+12:32.090 --> 12:33.590
+Make sure it is destroyed.
+
+12:33.590 --> 12:37.880
+If you have created it, complete it, and then join me for the next lecture.

@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.320 --> 00:01.960
+Hello and welcome.
+
+00:02.000 --> 00:07.280
+Before we begin this course, think of yourself as someone about to start an exciting journey.
+
+00:07.760 --> 00:10.640
+Just like any journey, you need to pack your bags.
+
+00:10.920 --> 00:17.520
+You may not know exactly why you need each item yet, but trust me, as your guide, everything will
+
+00:17.520 --> 00:17.960
+prepare.
+
+00:18.000 --> 00:19.440
+Now will be essential.
+
+00:19.440 --> 00:19.960
+Later.
+
+00:20.640 --> 00:26.640
+In this section, we will set up prerequisites you need and we'll do it in three simple parts.
+
+00:27.280 --> 00:31.080
+First, you will install the required tools on your computer.
+
+00:31.320 --> 00:33.640
+Don't worry, I'll guide you step by step.
+
+00:34.120 --> 00:40.680
+Second, you will create few online accounts and sign up on some platforms that will use throughout
+
+00:40.680 --> 00:41.400
+the course.
+
+00:42.040 --> 00:50.600
+Third, we'll be using AWS as our primary cloud provider to use it safely, securely and without any
+
+00:50.600 --> 00:51.920
+unnecessary cost.
+
+00:52.160 --> 00:55.040
+Will configure everything properly in this section.
+
+00:55.520 --> 01:00.000
+Some commands or steps may look unfamiliar right now, and that's perfectly fine.
+
+01:00.400 --> 01:02.760
+You're supposed to fully understand them later.
+
+01:03.560 --> 01:07.760
+As we go deeper in the course, everything will start making sense.
+
+01:08.240 --> 01:13.570
+But before we pack the prerequisites, let's first take a look at the GitHub repository.
+
+01:13.570 --> 01:19.730
+This is where all your source code scripts configuration file will be available throughout the course.
+
+01:19.770 --> 01:20.650
+Let's explore that.
+
+01:20.650 --> 01:28.690
+First, open your browser and access this URL github.com slash coder slash v profile hyphen project.
+
+01:29.850 --> 01:36.410
+This is the source code of our V profile project that we'll be using throughout the course, and this
+
+01:36.410 --> 01:38.210
+source code is hosted on GitHub.
+
+01:38.210 --> 01:41.890
+Com any git repository will have multiple branches.
+
+01:42.370 --> 01:46.730
+So based on the section of the course and the project that you're working on, you are going to select
+
+01:46.730 --> 01:49.890
+that particular branch which I'll guide you in the lecture.
+
+01:50.370 --> 01:50.890
+For now.
+
+01:50.930 --> 01:52.090
+Bookmark this link.
+
+01:52.450 --> 01:54.530
+You'll understand later how to use it.
+
+01:54.530 --> 01:57.250
+So in this section we are going to install tools.
+
+01:57.810 --> 02:02.890
+We're going to do some sign ups and set up an AWS free tier account.
+
+02:03.330 --> 02:04.730
+Let's talk about the tools first.
+
+02:05.130 --> 02:07.250
+Throughout the course we're going to install many tools.
+
+02:07.250 --> 02:10.970
+And we are going to install them through command line by using package managers.
+
+02:11.330 --> 02:12.970
+Yes we're going to do it like a pro.
+
+02:13.250 --> 02:15.850
+So for windows we're going to install chocolatey.
+
+02:16.170 --> 02:19.050
+And for macOS we're going to install homebrew.
+
+02:19.530 --> 02:25.310
+These are the package managers command line tools, which you'll use to install all the necessary tools
+
+02:25.310 --> 02:26.990
+and software on your computer.
+
+02:27.390 --> 02:32.310
+Mac OS the older one has Intel chips and the latest one has ARM chips.
+
+02:32.710 --> 02:34.750
+So for both you're going to set up homebrew.
+
+02:34.790 --> 02:35.550
+I'll guide you.
+
+02:36.510 --> 02:43.070
+Oracle VM VirtualBox is a tool or software of virtualization also called as hypervisor.
+
+02:44.070 --> 02:51.030
+And this we are going to install for windows and MacBook with Intel chips for MacBook with ARM chips.
+
+02:51.030 --> 02:54.070
+The latest one we are going to use VMware fusion.
+
+02:54.430 --> 02:59.750
+So VMware fusion and VirtualBox both are hypervisor or virtualization tools.
+
+03:00.270 --> 03:03.190
+Latest MacBook air ARM does not support VirtualBox.
+
+03:03.190 --> 03:05.510
+That's why VMware fusion for ARM.
+
+03:06.150 --> 03:07.950
+Okay then we're going to install Git bash.
+
+03:08.470 --> 03:09.670
+This is only for windows.
+
+03:09.670 --> 03:11.670
+It is a terminal to execute commands.
+
+03:11.670 --> 03:15.750
+And it's much more convenient than your command prompt.
+
+03:16.070 --> 03:19.230
+Basically gives you Linux command line on windows.
+
+03:19.670 --> 03:23.910
+And then we're going to install a vagrant which is a VM automation tool.
+
+03:23.910 --> 03:27.230
+And that will be installed for all the OS irrespective of what you're using.
+
+03:27.590 --> 03:30.430
+All this will be using in the next section VM setup.
+
+03:30.430 --> 03:37.890
+But throughout the course we'll be using many other tools like we are going to use JDK, Maven VSCode,
+
+03:37.890 --> 03:44.090
+which is a code editor that we'll be using throughout this course, and also Sublime Text Editor, AWS,
+
+03:44.090 --> 03:46.650
+CLI, and Terraform that we'll see later.
+
+03:47.250 --> 03:48.690
+So that was about all the tools.
+
+03:48.730 --> 03:50.730
+Now some accounts that you need to sign up.
+
+03:50.730 --> 03:51.850
+One is the GitHub.
+
+03:51.850 --> 03:54.290
+You need to create an account on GitHub.
+
+03:54.930 --> 03:55.930
+Purchasing a domain.
+
+03:55.930 --> 03:56.730
+This is optional.
+
+03:56.730 --> 03:59.290
+If you're not comfortable you can skip that.
+
+03:59.290 --> 04:05.450
+We have some production use cases for which we will need a purchased domain, but if you're not okay
+
+04:05.490 --> 04:07.450
+spending extra bucks, then it's fine.
+
+04:07.450 --> 04:08.450
+You can skip that.
+
+04:08.770 --> 04:12.890
+Also, I'll guide you how to purchase a very low cost domain.
+
+04:13.490 --> 04:19.050
+Then we're going to create an account on Docker Hub to host our Docker images, and a Sonarcloud account
+
+04:19.050 --> 04:20.250
+that we'll see later.
+
+04:20.810 --> 04:24.090
+Finally, we are going to create an AWS free tier account.
+
+04:24.330 --> 04:32.370
+Create a user on that with multi-factor authentication to secure it, set up a billing alarm and request
+
+04:32.410 --> 04:34.970
+SSL certificate for Https connection.
+
+04:35.330 --> 04:37.770
+This lecture is going to be longer, but real fun.
+
+04:38.290 --> 04:42.370
+Okay, so let's get started with installing the tools first, starting with Chocolatey and Brew.
+
+04:42.370 --> 04:43.730
+So join me in the next lecture.

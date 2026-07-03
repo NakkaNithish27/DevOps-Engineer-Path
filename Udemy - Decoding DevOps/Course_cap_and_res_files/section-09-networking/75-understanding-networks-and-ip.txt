@@ -1,0 +1,773 @@
+WEBVTT
+
+0
+00:00.660 --> 00:07.440
+Classification of network based on the geography, actually based on the distance between network interfaces
+
+1
+00:07.440 --> 00:13.080
+that are communicating with each other, for example, laptop has a network interface and Google server
+
+2
+00:13.080 --> 00:18.420
+has a network interface. The distance in between them that defines the classification.
+
+3
+00:19.290 --> 00:22.260
+The first obvious name is LAN Local Area Network.
+
+4
+00:22.270 --> 00:28.740
+I'm sure everyone would have heard about it, a local area network where the network devices are very
+
+5
+00:28.740 --> 00:29.790
+close to each other.
+
+6
+00:30.090 --> 00:31.680
+Probably in a room.
+
+7
+00:31.680 --> 00:35.210
+You have few computers that are connected together through some devices or cables.
+
+8
+00:35.220 --> 00:36.930
+That's a local area network.
+
+9
+00:38.660 --> 00:46.810
+WAN, wide area network like Internet here, the network interface can be far, far away from each other.
+
+10
+00:47.030 --> 00:54.770
+As I've given you the first example. From my smartphone, I'm accessing a website that is hosted in somewhere
+
+11
+00:54.770 --> 01:00.530
+and European data centers, and I'm accessing that over the network or the Internet.
+
+12
+01:00.980 --> 01:04.010
+And the Internet is the biggest example of Wide area network.
+
+13
+01:05.270 --> 01:07.760
+MAN, metropolitan area network, like,
+
+14
+01:08.820 --> 01:11.100
+A metropolitan cities municipality.
+
+15
+01:12.740 --> 01:16.310
+Which has a computers  and they're all connected in a network.
+
+16
+01:17.240 --> 01:19.910
+Or Metro trains computer network system.
+
+17
+01:20.850 --> 01:29.160
+That's metropolitan area network. CAN, campus area network like office campus or a college campus where
+
+18
+01:29.160 --> 01:32.850
+you have computers connected together in few acres of land.
+
+19
+01:34.390 --> 01:38.990
+That kind of network is called CAN, Campus Area Network, like offices.
+
+20
+01:39.100 --> 01:40.810
+Some people call it as Intranet.
+
+21
+01:42.550 --> 01:49.840
+PAN, personal area network, your Bluetooth hotspot, your own personal network, which has a very small
+
+22
+01:49.840 --> 01:50.290
+range.
+
+23
+01:53.330 --> 01:55.670
+Now, let's talk about the devices. Two devices
+
+24
+01:55.700 --> 01:58.100
+We're going to talk. 1 is the switch.
+
+25
+01:59.260 --> 02:02.560
+And if you're setting up a local area network, you will need a switch.
+
+26
+02:03.900 --> 02:09.210
+Like, you want to connect multiple computers together and printers and some servers together in a small
+
+27
+02:10.170 --> 02:12.150
+room or a floor.
+
+28
+02:13.140 --> 02:19.890
+In this case, you need a switch like you have node1, a computer, one that wants to send some data
+
+29
+02:19.890 --> 02:20.590
+to node2.
+
+30
+02:21.630 --> 02:24.870
+So data from Node1 would be sent to the switch. Switch
+
+31
+02:24.870 --> 02:27.330
+Being an intelligent device knows Node2
+
+32
+02:27.330 --> 02:30.960
+is at the second network interface of the switch.
+
+33
+02:30.960 --> 02:35.960
+It sends the traffic over there and node2 receives the data and then vice versa.
+
+34
+02:37.330 --> 02:43.520
+Switch is one of the most common devices which everyone would have seen, if you're even using Internet
+
+35
+02:43.520 --> 02:46.190
+like your Wi-Fi Router, there's a switch inside that.
+
+36
+02:49.330 --> 02:54.580
+Or at bigger networks, you have big, big switch that has many, many network interfaces, you'll see
+
+37
+02:54.580 --> 02:59.680
+a lot of cables coming out from them and they are used to create the local area network.
+
+38
+03:01.240 --> 03:07.670
+Routers, as a switch connects multiple computers together, Router connects multiple network together.
+
+39
+03:08.530 --> 03:13.510
+So let's say in a CAN, Campus Area Network, you have one building where you have a switch and
+
+40
+03:13.510 --> 03:15.190
+some computer connect connected to it.
+
+41
+03:15.460 --> 03:20.410
+And then you have a second building where you have another switch and some computers connected to that switch.
+
+42
+03:21.570 --> 03:27.270
+If you want to enable communication between these switches or maybe computer from building,
+
+43
+03:27.270 --> 03:30.680
+one wants to communicate to the computer in building two.
+
+44
+03:30.840 --> 03:32.130
+So there's two different network.
+
+45
+03:32.140 --> 03:35.700
+You want to connect both the networks together, you need the router.
+
+46
+03:37.990 --> 03:43.090
+You have a router at your home that connects your local area network in your home with a wide area network,
+
+47
+03:43.090 --> 03:43.960
+which is Internet.
+
+48
+03:45.920 --> 03:50.180
+So talking about your home network, it's very essential for you to understand your home network, if
+
+49
+03:50.180 --> 03:53.530
+you understand that, then you can understand any other kind of network.
+
+50
+03:54.290 --> 03:58.400
+So to your home, you may be having a Wi-Fi router or wired router.
+
+51
+03:58.790 --> 04:02.060
+You would be connected to your wired or Wi-Fi router.
+
+52
+04:02.510 --> 04:08.960
+through your computer, your laptop or your smartphone. Your wifi router is not just a router.
+
+53
+04:09.110 --> 04:10.610
+There is a switch inside that.
+
+54
+04:10.730 --> 04:16.850
+And that's why in your home, in your local area network, all the devices can communicate with each
+
+55
+04:16.850 --> 04:19.100
+other and can also communicate with the switch.
+
+56
+04:20.270 --> 04:26.120
+And then there is a router, there is some routing. There's some NATing magic that happens that enables you to
+
+57
+04:26.120 --> 04:30.110
+connect to or that enables the Internet communication.
+
+58
+04:32.730 --> 04:38.430
+So from the Internet, from the Internet service provider, you get a network cable connected to your
+
+59
+04:38.430 --> 04:42.210
+modem from modem, you make a connection connection to your router.
+
+60
+04:42.960 --> 04:48.630
+So you're connecting Internet network to your router and then you will have a switch in this diagram.
+
+61
+04:48.630 --> 04:51.900
+The switch here you're seeing it out of the router.
+
+62
+04:53.340 --> 04:58.860
+A switch or an access point will allow all the computers in the network to connect to it, and then
+
+63
+04:59.490 --> 05:01.130
+it will have connection to the router.
+
+64
+05:01.470 --> 05:07.200
+So a traffic that is getting generated on your laptop goes to your switch from switch to your router,
+
+65
+05:07.380 --> 05:11.940
+from router to your modem Internet, and then it comes back.
+
+66
+05:12.390 --> 05:17.130
+Now, everywhere the data is traveling, every device has an IP address.
+
+67
+05:18.110 --> 05:25.370
+Your laptop has an IP address to its network interface switch will have an IP address router, your
+
+68
+05:25.370 --> 05:30.350
+Internet service provider and all the other computers and smartphone in your network will have an IP
+
+69
+05:30.350 --> 05:30.950
+address.
+
+70
+05:32.720 --> 05:38.260
+Similar to your home network, you have big corporate networks or data center network where you will
+
+71
+05:38.270 --> 05:43.550
+have many, many switches, you'll have many, many routers, and you'll have multiple Internet service
+
+72
+05:43.550 --> 05:44.140
+provider.
+
+73
+05:44.570 --> 05:46.540
+And this is for high availability.
+
+74
+05:46.550 --> 05:52.790
+You have many devices, multiple switches, and also for security you'll have more devices like firewalls.
+
+75
+05:53.270 --> 05:54.280
+So in the diagram.
+
+76
+05:54.350 --> 05:59.840
+You see there are many computers and phones that are connected to a switch and they're connected to
+
+77
+05:59.840 --> 06:00.470
+the other switch also.
+
+78
+06:00.470 --> 06:04.250
+That switch may be connected to one centralized switch or a router.
+
+79
+06:04.940 --> 06:08.240
+That router will be connected to the Internet service provider.
+
+80
+06:08.540 --> 06:12.000
+Same way you'll have connection from the other Internet service provider also.
+
+81
+06:12.770 --> 06:15.000
+So here multiple switches are for high availability.
+
+82
+06:15.000 --> 06:20.570
+If any switch breaks, the communication can be flowing from the other switch, multiple router because
+
+83
+06:20.570 --> 06:22.610
+there are multiple Internet service providers.
+
+84
+06:23.510 --> 06:29.640
+Or to make the connection between multiple networks in your data center or a bigger corporate network.
+
+85
+06:30.560 --> 06:32.360
+So same story as your home network.
+
+86
+06:32.360 --> 06:35.810
+Just many devices for high availability.
+
+87
+06:35.810 --> 06:39.350
+And you should have some security also through firewalls and other devices.
+
+88
+06:40.970 --> 06:46.580
+Like at your home, you have a single network, a single LAN. A bigger corporate datacenter will have 
+
+89
+06:46.580 --> 06:52.610
+multiple LANs, multiple subnets, you can call them. You have a bigger network in that allows smaller
+
+90
+06:52.760 --> 06:55.490
+subnets, part of the network = subnet.
+
+91
+06:56.820 --> 07:02.190
+Every subnet will have an IP addressing scheme, and they you know, you place some systems in that
+
+92
+07:02.190 --> 07:08.850
+subnet, like a subnet for database server, a subnet for web server, or probably subnet for a project,
+
+93
+07:09.240 --> 07:10.950
+other subnet for another project.
+
+94
+07:12.140 --> 07:14.410
+Don't get overwhelmed about all this.
+
+95
+07:14.460 --> 07:21.420
+We are going to set up all this through AWS VPC, we're to setup AWS VPC in AWS Part 2
+
+96
+07:21.440 --> 07:24.530
+You will need all this information there.
+
+97
+07:24.540 --> 07:27.290
+Now talking about IP address.
+
+98
+07:27.290 --> 07:32.720
+lets understand what is an IP address we are going to talk about IPv4 and not IPv6.
+
+99
+07:33.720 --> 07:38.400
+Because IPv4 is really easy to understand and based on that, you can then understand about IPv6 also
+
+100
+07:38.400 --> 07:39.070
+.
+
+101
+07:39.990 --> 07:42.450
+So what really is an IPV4 address?
+
+102
+07:42.450 --> 07:49.740
+IPV4 address is a 32 bit binary number, which we mostly see in decimal format, like this.
+
+103
+07:49.800 --> 07:51.630
+192.168.100.1
+
+104
+07:52.020 --> 07:55.920
+But it's actually a binary number and you can see the binary values of it.
+
+105
+07:57.060 --> 08:05.460
+I don't want count that because that's what computers will do, right? So we have four octet in an
+
+106
+08:05.460 --> 08:09.810
+IPv4 address. Octet it is called because there are eight bits.
+
+107
+08:11.200 --> 08:17.950
+Total eight binary numbers like one one and then the six zeros that's total 8, then a dot and the next
+
+108
+08:17.950 --> 08:21.190
+eight, then dot, the next 8, dot and next eight.
+
+109
+08:21.460 --> 08:24.800
+So total, 32 bit binary number.
+
+110
+08:25.630 --> 08:31.510
+So first octet you have, 192, there, second octet, you see 168, third octet, you see a hundred, fourth
+
+111
+08:31.510 --> 08:32.530
+octet, you see one.
+
+112
+08:33.250 --> 08:38.620
+And I'm literally spelling that all for you because I'm going to explain it you about different ranges
+
+113
+08:38.620 --> 08:42.970
+in IP address and you need to understand what is first, second, third and fourth.
+
+114
+08:43.450 --> 08:47.200
+So when I say third octet, or, when I a second octet, then you should be looking at the right
+
+115
+08:47.200 --> 08:47.620
+place.
+
+116
+08:47.620 --> 08:49.450
+And that's what, that's why I'm spelling it out.
+
+117
+08:52.100 --> 09:01.790
+OK, now IPV4 range, so entire IPV4, all the IPV4 address, it's in this range, starts from zero zero
+
+118
+09:02.060 --> 09:08.240
+zero zero and ends at 255.255.255.255
+
+119
+09:09.200 --> 09:11.690
+And that's the entire IPV4.
+
+120
+09:12.140 --> 09:16.900
+Every Octet will start from zero and goes all the way down 255.
+
+121
+09:17.610 --> 09:23.930
+So let's say the 4th octet starts from zero goes to 255, then it ends there, then the third
+
+122
+09:23.930 --> 09:30.890
+octet will start, then it will be 1.0, 1.1, 1.2, 1.3, like that.
+
+123
+09:30.890 --> 09:32.020
+So the entire range.
+
+124
+09:32.870 --> 09:39.080
+And if you're wondering why it ends at 255, why does not it ends at 999, then you have
+
+125
+09:39.080 --> 09:42.560
+to understand this is the decimal representation of binary number.
+
+126
+09:42.620 --> 09:43.760
+It's a binary number.
+
+127
+09:44.170 --> 09:44.390
+Right.
+
+128
+09:44.780 --> 09:52.490
+So the last number in the Octet, the last binary number in the octet is 11111111
+
+129
+09:52.490 --> 09:53.810
+eight 1s
+
+130
+09:54.140 --> 09:56.380
+And that's the last binary number in the octet.
+
+131
+09:57.170 --> 10:00.530
+And if you translate that to a decimal, you get 255.
+
+132
+10:01.480 --> 10:02.460
+Or vice versa.
+
+133
+10:02.470 --> 10:09.430
+If you're saying 255, if you convert into binary, you get eight 1s. That's why it ends at 255.
+
+134
+10:11.390 --> 10:17.540
+This entire range, which uses billions of IPs, are divided into two two parts, public IPs and private
+
+135
+10:17.540 --> 10:23.270
+IPs. Public IP is with the Internet service provider and also the cloud providers.
+
+136
+10:24.470 --> 10:28.340
+Private IP is for people like us to create our own network.
+
+137
+10:29.340 --> 10:31.000
+I want to create my own network.
+
+138
+10:31.520 --> 10:33.340
+I will use the private IP scheme.
+
+139
+10:33.710 --> 10:37.520
+But for the Internet devices, the public IPs are used.
+
+140
+10:37.520 --> 10:42.830
+When you purchase, when you subscribe for an Internet connection, an ISP will allot a public
+
+141
+10:42.830 --> 10:46.750
+IP to you and that is your ID on the Internet.
+
+142
+10:47.450 --> 10:49.090
+And mostly it's dynamic IP.
+
+143
+10:49.640 --> 10:52.640
+What we get at home, you can get a static IP also.
+
+144
+10:53.180 --> 10:55.110
+So your identity remains the same.
+
+145
+10:55.580 --> 11:00.160
+always if you get a static public IP. Public IP really means Internet IP.
+
+146
+11:01.040 --> 11:02.400
+So Internet is a network, right?
+
+147
+11:02.420 --> 11:06.050
+In a network, in the devices you have IP address and so on the Internet.
+
+148
+11:06.530 --> 11:09.350
+The IP addressing scheme is called public IPs.
+
+149
+11:10.480 --> 11:15.850
+Private IPs, when you want to set up a room full of computers, you're going to take a
+
+150
+11:15.850 --> 11:21.820
+private IP range and assign it to your computer devices or you to your network interfaces.
+
+151
+11:23.740 --> 11:30.520
+So you have five range in private IP, also in public. Private IP ranges, the three range that we use is class A
+
+152
+11:30.520 --> 11:32.050
+class B & class C.
+
+153
+11:33.940 --> 11:40.300
+You have class D & E, that is for research and multicasting, so we really don't use them, plus A, B and C are
+
+154
+11:40.300 --> 11:41.240
+the one that we use.
+
+155
+11:41.920 --> 11:51.640
+So starting from Class C, 192.168.0.0 starts there and ends at 192.168.255.255
+
+156
+11:52.450 --> 11:57.480
+So let's, I will write some IP addresses or examples of IP addresses.
+
+157
+11:57.490 --> 11:59.620
+That is from Class C.
+
+158
+12:00.310 --> 12:04.870
+OK, so for example, 192 dot 168, dot 10, dot 12.
+
+159
+12:05.530 --> 12:07.070
+This is a class C IP address.
+
+160
+12:07.090 --> 12:08.310
+How can I say that?
+
+161
+12:08.320 --> 12:16.420
+Well, the class C range is that, 192.168.0.0
+
+162
+12:18.380 --> 12:26.030
+190.168.255.255 and any IP in this range will be a class C private, Class C.
+
+163
+12:27.150 --> 12:32.820
+So like 192.168.10.12 that comes in the range of this, right?
+
+164
+12:32.850 --> 12:37.710
+Even my computer IP address, let me open command prompt and let me run  ipconfig.
+
+165
+12:41.160 --> 12:45.350
+So my laptop, IP 192.168.0.174.
+
+166
+12:45.510 --> 12:47.730
+This is a class C, private IP.
+
+167
+12:49.580 --> 12:58.290
+Class B 172.16.0.0 - 172.31.255.255
+
+168
+13:00.620 --> 13:09.830
+Let's again take an example, 172.16.12.30
+
+169
+13:10.220 --> 13:14.470
+That is class B, private IP, Private Class B IP.
+
+170
+13:14.720 --> 13:20.960
+And also a few more examples lets take, 172 dot twenty dot nineteen DOT 68.
+
+171
+13:22.400 --> 13:28.880
+Even the third octet, if you see third octet, it can start from zero and go till 31, Oh Sorry
+
+172
+13:28.880 --> 13:29.630
+the second octet, my bad.
+
+173
+13:30.600 --> 13:36.990
+Second octet, second octet we are saying 20, right, so the second octet starts from 16 and goes all
+
+174
+13:36.990 --> 13:44.760
+the way till 31, but the first octet will be 172, always in Class B and third and fourth doctor can
+
+175
+13:44.760 --> 13:46.330
+go from zero to 255.
+
+176
+13:46.350 --> 13:47.820
+So this perfectly fits.
+
+177
+13:49.600 --> 13:58.660
+But if you see 172 dot, 32 dot, 36 dot, eighty seven, now, that does not fit in this right, 32 the
+
+178
+13:58.660 --> 13:59.440
+second octet.
+
+179
+13:59.860 --> 14:01.960
+So that could be a public IP.
+
+180
+14:04.350 --> 14:12.660
+Similarly, class A IP address 10.0.0.0 to 10.255.255.255
+
+181
+14:13.760 --> 14:18.560
+Now, by looking at the IP, you should be able to see whether it's public or private and if it's private,
+
+182
+14:18.560 --> 14:20.390
+then it's from which range.
+
+183
+14:21.810 --> 14:27.270
+So in a network where you have multiple computers connected through a switch, LAN, you will have.
+
+184
+14:28.180 --> 14:34.070
+IP address to every computer, to the switch, it could be Class A, class B or class C
+
+185
+14:34.120 --> 14:35.350
+Any range.
+
+186
+14:36.630 --> 14:41.460
+Or a little bigger network here where multiple local area network connected through a router.
+
+187
+14:42.670 --> 14:48.910
+In such case a computer A can send the traffic to computer D based on the IP address again.
+
+188
+14:49.840 --> 14:54.220
+The IP could be from a range A, B or C.
+
+189
+14:55.770 --> 15:02.160
+Our large corporate network, where you will have multiple different network schemes connected together through
+
+190
+15:02.160 --> 15:03.390
+different routers.
+
+191
+15:05.210 --> 15:06.810
+So we talked about IP addresses.
+
+192
+15:06.830 --> 15:09.130
+Now we are going to talk about protocols.

@@ -1,0 +1,907 @@
+WEBVTT
+
+00:00.000 --> 00:01.950
+Instructor: Okay, let's execute the prerequisites
+
+00:01.950 --> 00:04.440
+and then let's execute the pipeline.
+
+00:04.440 --> 00:05.760
+I have added here a few more steps.
+
+00:05.760 --> 00:07.060
+One is installing AWS CLI.
+
+00:07.971 --> 00:09.600
+It is not required for this lecture,
+
+00:09.600 --> 00:11.760
+but in later lecture, we'll need it
+
+00:11.760 --> 00:15.870
+when we deploy our docker image to AWS ECS.
+
+00:15.870 --> 00:18.090
+We'll see that later, but since we are logging
+
+00:18.090 --> 00:20.550
+in the Jenkins, so let's install AWS CLI also,
+
+00:20.550 --> 00:22.500
+which we'll use in the later lecture.
+
+00:22.500 --> 00:24.690
+And one more plugin, AWS SDK.
+
+00:24.690 --> 00:27.870
+When you install ECR, it'll install AWS SDK,
+
+00:27.870 --> 00:30.300
+but if it doesn't, we are going to install this plugin also.
+
+00:30.300 --> 00:32.820
+This plugin help us save the credentials,
+
+00:32.820 --> 00:35.520
+access and secret key in the Jenkins.
+
+00:35.520 --> 00:38.610
+So first we'll start with Jenkins.
+
+00:38.610 --> 00:42.213
+We are going to install Docker Engine, install AWS CLI,
+
+00:42.213 --> 00:43.950
+and then we'll come back to AWS.
+
+00:43.950 --> 00:47.010
+So let's do an SSH to Jenkins.
+
+00:47.010 --> 00:48.960
+So SSH -i key path.
+
+00:48.960 --> 00:52.080
+Open to username, add the right the Jenkins public ip.
+
+00:52.080 --> 00:53.610
+Okay, so I'm in first I'm going
+
+00:53.610 --> 00:56.013
+to run the command sudo app update.
+
+00:57.480 --> 01:00.660
+Okay, next time I'm going to run the command sudo snap
+
+01:00.660 --> 01:05.660
+install aws-cli --classic.
+
+01:09.570 --> 01:12.453
+This should install AWS CLI.
+
+01:15.480 --> 01:19.980
+Okay, now let me switch to root user and clear the screen
+
+01:19.980 --> 01:21.510
+and let's install docker engine.
+
+01:21.510 --> 01:25.290
+We'll check all the steps in the docker documentation, okay,
+
+01:25.290 --> 01:27.990
+you can go to this URL, docs.docker.com,
+
+01:27.990 --> 01:30.960
+or you can just Google docker installation.
+
+01:30.960 --> 01:33.390
+If you come to this URL, you can go to manuals.
+
+01:33.390 --> 01:36.840
+When you come to manuals here, you have docker engine, okay?
+
+01:36.840 --> 01:39.740
+Not the Docker desktop. You have to install docker engine.
+
+01:40.590 --> 01:43.830
+So click on this dropdown and click on install.
+
+01:43.830 --> 01:45.723
+Let's go to Ubuntu.
+
+01:46.650 --> 01:48.840
+Now you'll also see here Docker desktop.
+
+01:48.840 --> 01:52.770
+Do not click to that. We are going to install docker engine.
+
+01:52.770 --> 01:55.803
+Click on Ubuntu and let's scroll down.
+
+01:58.110 --> 01:59.490
+Installation methods.
+
+01:59.490 --> 02:02.430
+Okay, so these are the commands to set the repository,
+
+02:02.430 --> 02:05.070
+and then this is the command to install Docker engine
+
+02:05.070 --> 02:08.610
+and Docker CLI, just need to copy this.
+
+02:08.610 --> 02:09.870
+There is a copy button over here.
+
+02:09.870 --> 02:12.930
+Click on that or select everything and copy.
+
+02:12.930 --> 02:15.813
+And let's just paste it in our terminal.
+
+02:17.190 --> 02:18.270
+Okay, that is done.
+
+02:18.270 --> 02:22.920
+Let's now go to the next command, that one, copy that
+
+02:22.920 --> 02:24.393
+and paste it in the terminal.
+
+02:25.740 --> 02:30.363
+Let's Q here -y so it doesn't ask us any question.
+
+02:33.150 --> 02:35.160
+Okay, it's installed. Let's check the service system.
+
+02:35.160 --> 02:37.143
+CTL status docker.
+
+02:38.280 --> 02:40.653
+Okay, active running, Q to quit.
+
+02:41.670 --> 02:43.290
+Okay, so the commands will be something like this.
+
+02:43.290 --> 02:46.560
+Like for example, I'm going to run Docker images, right?
+
+02:46.560 --> 02:48.389
+So it's going to list all the available images,
+
+02:48.389 --> 02:52.053
+but if I switch to Jenkins user,
+
+02:53.010 --> 02:54.510
+you've seen in the first job, right?
+
+02:54.510 --> 02:56.640
+We execute, who am I command? It says Jenkins.
+
+02:56.640 --> 03:00.330
+So Jenkins user executes everything in the Jenkins job.
+
+03:00.330 --> 03:03.543
+So switch to Jenkins user and let's try the docker command.
+
+03:05.330 --> 03:07.980
+And you see it says permission denied. Okay?
+
+03:07.980 --> 03:09.450
+So what we have to do now is we are going
+
+03:09.450 --> 03:13.260
+to add the Jenkins user in the Docker grou,p exit.
+
+03:13.260 --> 03:15.930
+Just be back and come to the root user.
+
+03:15.930 --> 03:18.090
+So when you install Docker engineer also
+
+03:18.090 --> 03:19.800
+creates a docker group.
+
+03:19.800 --> 03:22.830
+So you need to add Jenkins user in the Docker group
+
+03:22.830 --> 03:26.959
+by running this command, usermod -a,
+
+03:26.959 --> 03:31.959
+-: G, username, docker, and the group, Jenkins.
+
+03:32.370 --> 03:35.700
+So this is going to add the Docker user in the Jenkins, oh,
+
+03:35.700 --> 03:38.880
+sorry, Jenkins user in the Docker group.
+
+03:38.880 --> 03:41.790
+My bad. Okay, this is the Jenkins user.
+
+03:41.790 --> 03:46.020
+This will be added into the Docker group. Let's hit enter.
+
+03:46.020 --> 03:50.280
+And now if you run ID Jenkins, this command should show,
+
+03:50.280 --> 03:52.920
+it is in the Docker group now.
+
+03:52.920 --> 03:53.970
+Okay, but that's not it.
+
+03:53.970 --> 03:56.610
+Now we need to restart the Jenkins service
+
+03:56.610 --> 03:58.500
+so it loads all these things.
+
+03:58.500 --> 04:01.320
+Or the best way, what I do is we have a chance
+
+04:01.320 --> 04:02.670
+to reboot the Jenkins.
+
+04:02.670 --> 04:04.530
+So let's reboot Jenkins.
+
+04:04.530 --> 04:07.560
+When we do reboot, all the service will get restarted.
+
+04:07.560 --> 04:09.210
+All the configurations will be loaded.
+
+04:09.210 --> 04:12.510
+So let's reboot and wait for some time.
+
+04:12.510 --> 04:16.110
+Okay, by the time the Jenkins is rebooting, let's go ahead
+
+04:16.110 --> 04:19.470
+and execute the steps to create IAM user with access key
+
+04:19.470 --> 04:21.750
+and then we'll create ECR registry.
+
+04:21.750 --> 04:23.973
+So let's go to IAM service, IAM.
+
+04:25.950 --> 04:28.140
+Let's go to users, click on Create User.
+
+04:28.140 --> 04:30.210
+Let's give this user a name.
+
+04:30.210 --> 04:34.800
+I'm going to give it as Jenkins, go next, attach policies,
+
+04:34.800 --> 04:37.320
+directly select the policy.
+
+04:37.320 --> 04:39.990
+So this user needs access to two services.
+
+04:39.990 --> 04:44.990
+One is the ECR to upload the docker image to the registry.
+
+04:45.330 --> 04:47.850
+And in later lecture, we'll also need the permission
+
+04:47.850 --> 04:51.150
+to deploy it on Amazon ECS cluster.
+
+04:51.150 --> 04:54.000
+So we also need to give ECS permission.
+
+04:54.000 --> 04:56.163
+So let's search for the policy.
+
+04:57.600 --> 04:59.820
+So just search for container, Amazon EC2,
+
+04:59.820 --> 05:03.960
+container registry, full access, put a check mark on that.
+
+05:03.960 --> 05:07.020
+Next ECS, Amazon ECS, full access,
+
+05:07.020 --> 05:08.940
+put a check mark on that as well.
+
+05:08.940 --> 05:12.030
+These two policies and go next.
+
+05:12.030 --> 05:13.620
+Once again, take a look at the policy,
+
+05:13.620 --> 05:18.120
+take a look at the username and create user.
+
+05:18.120 --> 05:19.840
+So we need now the access key
+
+05:19.840 --> 05:21.240
+and security key for this user.
+
+05:21.240 --> 05:24.690
+So click on the user, go to security credentials,
+
+05:24.690 --> 05:28.890
+scroll down, access key, see create access key, CLI,
+
+05:30.900 --> 05:33.180
+scroll down, I understand
+
+05:33.180 --> 05:37.369
+and say next, create access key.
+
+05:37.369 --> 05:39.600
+Okay, make sure to download the CSV file
+
+05:39.600 --> 05:42.310
+and store it somewhere where we can use it later
+
+05:43.350 --> 05:44.520
+and click on done.
+
+05:44.520 --> 05:47.280
+So this file will have the access key and secret key.
+
+05:47.280 --> 05:50.910
+We're going to store this in Jenkins in some time,
+
+05:50.910 --> 05:54.663
+but let's complete the next step creating the ECR registry.
+
+05:56.610 --> 05:58.110
+Okay? So just search for ECR.
+
+05:58.110 --> 06:01.980
+You'll see here, elastic Container Registry. Click on that.
+
+06:01.980 --> 06:04.020
+Once again, Amazon ECR is a place
+
+06:04.020 --> 06:06.570
+where we can store docker images
+
+06:06.570 --> 06:08.610
+and the place where we store docker images
+
+06:08.610 --> 06:10.860
+are called as registry.
+
+06:10.860 --> 06:13.380
+Container registry or docker registry.
+
+06:13.380 --> 06:18.380
+So Amazon ECR is a container registry or a Docker registry.
+
+06:18.930 --> 06:23.370
+Let's click on create. Let's give repository a name.
+
+06:23.370 --> 06:25.070
+I'm giving name as vprofileappimg,
+
+06:26.910 --> 06:27.990
+and that is all you need to do.
+
+06:27.990 --> 06:31.800
+Just click on create, oh wait, before that just take a look,
+
+06:31.800 --> 06:32.790
+the repository name
+
+06:32.790 --> 06:35.910
+and this the account name slash the image name, alright,
+
+06:35.910 --> 06:37.230
+if you check our pipeline, right?
+
+06:37.230 --> 06:38.550
+That is it like that.
+
+06:38.550 --> 06:42.810
+So you have to replace your code with this one, okay?
+
+06:42.810 --> 06:44.940
+You in the code, you'll see like this, you're going
+
+06:44.940 --> 06:47.490
+to replace it with your own repository name
+
+06:47.490 --> 06:49.350
+and the image name.
+
+06:49.350 --> 06:52.350
+So first let's create, okay, so
+
+06:52.350 --> 06:53.700
+whenever you want, you can come here
+
+06:53.700 --> 06:57.750
+and copy the URI over here and put it in your pipeline.
+
+06:57.750 --> 07:00.600
+We'll do that later. Now let's go to Jenkins.
+
+07:00.600 --> 07:03.090
+Jenkins UI and let's install the plugins
+
+07:03.090 --> 07:04.440
+and store the credentials.
+
+07:04.440 --> 07:07.260
+So we need to do these things, store the credentials
+
+07:07.260 --> 07:10.260
+and install the plugins.
+
+07:10.260 --> 07:13.965
+So let me get the public IP of Jenkins, go
+
+07:13.965 --> 07:16.533
+on Port 8080, login.
+
+07:19.230 --> 07:22.500
+Okay? So manage Jenkins, reinstall the plugins, first.
+
+07:22.500 --> 07:25.773
+Plugins, go to available plugins.
+
+07:26.760 --> 07:28.800
+First search for AWS,
+
+07:28.800 --> 07:32.580
+and you should see here AWS, Amazon Web Services, SDK all.
+
+07:32.580 --> 07:34.560
+Put a check mark on that
+
+07:34.560 --> 07:39.180
+and search also for ECR, Amazon ECR.
+
+07:39.180 --> 07:43.590
+Search for a Docker plugin, docker. So you want this one?
+
+07:43.590 --> 07:45.540
+One is the Docker pipeline
+
+07:45.540 --> 07:48.120
+and this one CloudBees Docker Build and publish,
+
+07:48.120 --> 07:50.010
+put a check mark on that.
+
+07:50.010 --> 07:51.120
+So once again, take a look.
+
+07:51.120 --> 07:54.960
+Amazon web service SDK: All, Amazon ECR, Docker Pipeline
+
+07:54.960 --> 07:57.903
+and CloudBees Docker, build and publish.
+
+07:58.770 --> 08:00.330
+Now these are the plugins that we are using,
+
+08:00.330 --> 08:03.251
+but if you see Docker has so many other plugins, also.
+
+08:03.251 --> 08:05.998
+Based on your use case, you're going to use those plugins.
+
+08:05.998 --> 08:08.580
+For our exercises, we are using this plugin.
+
+08:08.580 --> 08:10.740
+But it's not limited to that.
+
+08:10.740 --> 08:12.600
+Anyways, once you selected all this plugins,
+
+08:12.600 --> 08:14.610
+just click on install.
+
+08:14.610 --> 08:15.690
+Okay, the plugins are installed.
+
+08:15.690 --> 08:17.400
+Now we need to do one last thing over here.
+
+08:17.400 --> 08:19.590
+We need to store the access can secret key
+
+08:19.590 --> 08:20.820
+in Jenkins credentials.
+
+08:20.820 --> 08:25.353
+So go back to dashboard, manage Jenkins, credentials,
+
+08:26.550 --> 08:30.840
+system, global credentials, okay, here,
+
+08:30.840 --> 08:34.050
+add credentials, click on add credentials,
+
+08:34.050 --> 08:36.960
+and in the kind you have to select AWS credentials.
+
+08:36.960 --> 08:38.010
+So this option you'll get
+
+08:38.010 --> 08:41.100
+after installing the AWS-SDK plugin.
+
+08:41.100 --> 08:45.093
+So select that and let's give a name and description.
+
+08:46.140 --> 08:48.240
+So I'm giving ID as awscreds
+
+08:48.240 --> 08:50.850
+and the same name I have given in the pipeline code.
+
+08:50.850 --> 08:52.140
+So if you're giving something different,
+
+08:52.140 --> 08:54.690
+make sure you update your pipeline code.
+
+08:54.690 --> 08:57.450
+Okay? I have given the same name, right?
+
+08:57.450 --> 09:00.030
+Okay, and let's store the access key and secret key.
+
+09:00.030 --> 09:02.880
+So open your CSE file, okay?
+
+09:02.880 --> 09:04.677
+It's extremely risky to show access key
+
+09:04.677 --> 09:06.090
+and secret key like this.
+
+09:06.090 --> 09:09.000
+But as soon as I'm done recording this lecture, I'm going
+
+09:09.000 --> 09:10.620
+to delete these keys.
+
+09:10.620 --> 09:12.633
+So copy the access key.
+
+09:14.760 --> 09:17.913
+Copy there, and let's get the secret key.
+
+09:22.260 --> 09:24.685
+Make sure these things are copied properly.
+
+09:24.685 --> 09:27.690
+Access key secret key will be separated by comma,
+
+09:27.690 --> 09:30.645
+so make sure you do not copy the comma.
+
+09:30.645 --> 09:33.033
+And let's click on create.
+
+09:34.002 --> 09:35.970
+Okay, so we got almost everything.
+
+09:35.970 --> 09:38.190
+Now it's time to update our pipeline code
+
+09:38.190 --> 09:41.223
+and then execute it in Jenkins and see what happens.
+
+09:42.060 --> 09:44.370
+Okay? Starting with the registry credential is here.
+
+09:44.370 --> 09:45.203
+That is correct.
+
+09:45.203 --> 09:49.920
+US East 2, mine is the region, US east 1, right?
+
+09:49.920 --> 09:51.960
+US east 1 in the same place
+
+09:51.960 --> 09:55.230
+where we created the registry, US East 1.
+
+09:55.230 --> 09:56.530
+So make sure you get that.
+
+09:59.700 --> 10:01.050
+Okay, I've kept US east 1,
+
+10:01.050 --> 10:03.150
+and this is the same name of the Jenkins credentials.
+
+10:03.150 --> 10:04.170
+If you're given different name,
+
+10:04.170 --> 10:06.390
+make sure you put that over there.
+
+10:06.390 --> 10:09.780
+Then the image name, let's go to ECR. Okay?
+
+10:09.780 --> 10:11.883
+So that's the URI. Let me copy that.
+
+10:12.810 --> 10:14.573
+Open the pipeline, okay?
+
+10:20.310 --> 10:22.350
+And same in the V profile registry.
+
+10:22.350 --> 10:25.830
+After HTTPS, you have to copy the part,
+
+10:25.830 --> 10:30.450
+just make sure there is no slash vprofile image, okay?
+
+10:30.450 --> 10:33.420
+Make sure this is in the same format.
+
+10:33.420 --> 10:34.740
+This is the image name,
+
+10:34.740 --> 10:37.173
+and this is the vprofile registry URL.
+
+10:38.310 --> 10:40.590
+Okay, then it's going to fetch the code, build the code,
+
+10:40.590 --> 10:44.850
+the unit test, check style, code analysis, quality gates.
+
+10:44.850 --> 10:46.860
+And over here, here it's going
+
+10:46.860 --> 10:49.260
+to build a docker image, right?
+
+10:49.260 --> 10:50.640
+So image name, the one
+
+10:50.640 --> 10:52.350
+that we just copied right now from ECR
+
+10:52.350 --> 10:53.430
+that will come over here.
+
+10:53.430 --> 10:55.890
+Plus there will be the build number
+
+10:55.890 --> 10:58.770
+that will be used as the docker tag
+
+10:58.770 --> 11:01.320
+and the path of the docker image.
+
+11:01.320 --> 11:04.320
+Here we have the docker file once again,
+
+11:04.320 --> 11:06.510
+right, in our repository in the docker branch,
+
+11:06.510 --> 11:09.120
+docker files app, multi-stage docker file, right?
+
+11:09.120 --> 11:10.140
+And this is the docker file.
+
+11:10.140 --> 11:13.440
+It's going to use to build the docker image
+
+11:13.440 --> 11:16.740
+and then upload it to Amazon ECR.
+
+11:16.740 --> 11:18.910
+So vprofile registry, that is URL
+
+11:21.810 --> 11:23.010
+and register credentials,
+
+11:23.010 --> 11:26.223
+that is the credential used to log into our AWS account.
+
+11:27.240 --> 11:28.620
+Okay? I think it's all well and good.
+
+11:28.620 --> 11:31.953
+I'm going to save this file and copy all the content.
+
+11:33.600 --> 11:36.450
+Okay? My Jenkins and SonarQube server is up and running.
+
+11:36.450 --> 11:39.183
+I'm going to go to Jenkins dashboard. New item.
+
+11:40.920 --> 11:43.350
+I'm going to name it as docker-ci-pipeline,
+
+11:43.350 --> 11:46.140
+select pipeline and say, okay,
+
+11:46.140 --> 11:48.540
+let's scroll down till the end, pipeline script.
+
+11:48.540 --> 11:53.540
+Let's paste our code over there, save it and test it.
+
+11:53.940 --> 11:57.183
+Let's click on build now. Let's look at the stages.
+
+12:05.310 --> 12:07.290
+Okay, the pipeline completed successfully.
+
+12:07.290 --> 12:09.003
+Let's look at the console output.
+
+12:11.250 --> 12:14.820
+I need to scroll till the end. Okay?
+
+12:14.820 --> 12:17.100
+This one is the last stage, push Docker login.
+
+12:17.100 --> 12:20.970
+It is doing a login to our registry, log in succeeded,
+
+12:20.970 --> 12:23.220
+and there it tags the image.
+
+12:23.220 --> 12:27.303
+You see the tag? That is the build ID, Docker push,
+
+12:28.410 --> 12:31.770
+it's pushing and it's completed.
+
+12:31.770 --> 12:36.011
+Okay, let's go to ECR. Let me refresh this page.
+
+12:36.011 --> 12:38.520
+Oh, there's a refresh button here as well.
+
+12:38.520 --> 12:40.260
+Okay, let's click on the image,
+
+12:40.260 --> 12:42.630
+and you should see here image tag.
+
+12:42.630 --> 12:45.270
+Okay, now try running the build few more times
+
+12:45.270 --> 12:46.890
+and you'll see different tags over here.
+
+12:46.890 --> 12:49.650
+1, 2, 3, based on the build ID.
+
+12:49.650 --> 12:51.900
+Now images are uploaded in the ECR,
+
+12:51.900 --> 12:53.370
+but there's also one more problem.
+
+12:53.370 --> 12:56.520
+The image is in the Jenkins as well.
+
+12:56.520 --> 12:59.730
+So we need to add a stage where we remove the image
+
+12:59.730 --> 13:02.250
+after this upload is completed.
+
+13:02.250 --> 13:04.590
+Okay? So I'm going to add a stage over here.
+
+13:04.590 --> 13:05.583
+Let me name it.
+
+13:08.160 --> 13:11.493
+Remove container images, steps,
+
+13:12.360 --> 13:15.090
+and I just need one shell command to execute
+
+13:15.090 --> 13:19.380
+as such in single code docker rmi -f to false.
+
+13:19.380 --> 13:21.840
+And then there is a command substitution.
+
+13:21.840 --> 13:23.610
+You've seen command substitution in Linux.
+
+13:23.610 --> 13:26.070
+So the command is docker images -a -q.
+
+13:26.070 --> 13:28.800
+It's going to list all the image ID.
+
+13:28.800 --> 13:30.300
+So this command substitution is going
+
+13:30.300 --> 13:32.190
+to list all the image IDs
+
+13:32.190 --> 13:34.230
+and present it to this command, which is going
+
+13:34.230 --> 13:36.990
+to remove the docker image forcefully.
+
+13:36.990 --> 13:39.990
+Let's save this file and copy all the content.
+
+13:39.990 --> 13:42.870
+Let's go to our job, configure, select,
+
+13:42.870 --> 13:47.013
+and delete the script, and add our new script and say save,
+
+13:48.570 --> 13:50.460
+and let's execute it.
+
+13:50.460 --> 13:52.010
+Let me go to the console output
+
+13:52.920 --> 13:54.933
+and wait until this is completed.
+
+13:56.460 --> 13:57.390
+Okay, this completed.
+
+13:57.390 --> 13:58.652
+You see at the end, it is going
+
+13:58.652 --> 14:01.170
+to delete all the images
+
+14:01.170 --> 14:05.040
+and like this, our desk space will be freed every time we
+
+14:05.040 --> 14:06.273
+build a docker image.
+
+14:07.560 --> 14:10.350
+Okay? So then that is the end of the continuous integration.
+
+14:10.350 --> 14:12.060
+We can add notifications also,
+
+14:12.060 --> 14:16.350
+but we have one more thing now to deliver this docker image
+
+14:16.350 --> 14:18.270
+or this artifact,
+
+14:18.270 --> 14:19.530
+and then that will trigger,
+
+14:19.530 --> 14:23.070
+that will start the continuous delivery process.
+
+14:23.070 --> 14:25.230
+So if you're going to continue to the next lecture,
+
+14:25.230 --> 14:26.340
+keep the instance running.
+
+14:26.340 --> 14:27.540
+If you're going to take a break,
+
+14:27.540 --> 14:29.490
+make sure you shut down your Jenkins
+
+14:29.490 --> 14:31.560
+and SonarQube instance.
+
+14:31.560 --> 14:33.143
+I'll see you in the next lecture.

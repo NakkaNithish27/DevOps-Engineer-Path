@@ -1,0 +1,1036 @@
+WEBVTT
+
+00:00.600 --> 00:01.080
+All right.
+
+00:01.080 --> 00:05.680
+So we're going to see one very simple exercise with CloudWatch monitoring.
+
+00:06.280 --> 00:10.760
+And we're going to conduct some tests or checks on the EC2 instance.
+
+00:10.760 --> 00:12.800
+So we need to have an EC2 instance.
+
+00:13.240 --> 00:14.880
+And we already have launch template.
+
+00:14.880 --> 00:16.560
+So we can quickly launch the instance.
+
+00:16.560 --> 00:18.800
+So I'm going to just go to launch template.
+
+00:18.800 --> 00:23.120
+Select the launch template and say Action and Launch instance from template.
+
+00:23.400 --> 00:27.440
+Just scroll down and change the instance key name.
+
+00:28.000 --> 00:34.560
+I'm going to name it as web zero 12 and give some distinct name, because we're going to get a list
+
+00:34.560 --> 00:36.000
+of even terminated instance.
+
+00:36.000 --> 00:37.920
+We need to find our instance from that.
+
+00:37.920 --> 00:42.600
+So give some unique name that you have not given already and just say launch instance.
+
+00:43.040 --> 00:44.360
+Let's take a look at the instance.
+
+00:44.840 --> 00:45.040
+Okay.
+
+00:45.080 --> 00:46.880
+Let me go back to the instances.
+
+00:48.160 --> 00:50.400
+Select that web 12 instance.
+
+00:50.600 --> 00:53.280
+And here you should see a monitoring tab.
+
+00:53.760 --> 00:56.480
+So we're going to take a look at the CloudWatch service in a moment.
+
+00:56.480 --> 00:57.640
+But let's take this.
+
+00:57.960 --> 01:01.650
+Let's check these graphs that are created by CloudWatch service.
+
+01:02.330 --> 01:06.410
+Every section over here represents a metric or a check.
+
+01:06.650 --> 01:08.970
+So like CPU utilization.
+
+01:09.130 --> 01:10.530
+So we just launched this instance.
+
+01:10.530 --> 01:13.210
+It's not going to be anything we need to wait for some time.
+
+01:13.490 --> 01:18.410
+By default it collects the data for every five minutes on EC2 instance.
+
+01:18.730 --> 01:23.970
+If you want, you can enable detailed monitoring which collects the data every minute.
+
+01:23.970 --> 01:25.170
+But that is not free.
+
+01:25.210 --> 01:27.250
+But in any case, I am going to enable that.
+
+01:27.250 --> 01:30.530
+You don't need to enable it, you just need to wait a little longer.
+
+01:30.890 --> 01:31.170
+Okay.
+
+01:31.210 --> 01:33.410
+So I'm going to enable detailed monitoring.
+
+01:33.410 --> 01:35.650
+So click on Manage Detailed monitoring.
+
+01:36.050 --> 01:38.130
+Sorry I'm going to click on detailed monitoring.
+
+01:38.130 --> 01:39.690
+You don't need to enable that.
+
+01:40.090 --> 01:42.090
+As I said you just need to wait a little longer.
+
+01:42.090 --> 01:44.370
+So I'm enabling detailed monitoring.
+
+01:44.530 --> 01:47.450
+Put a check mark over here on enable and say confirm.
+
+01:47.850 --> 01:53.290
+Now CloudWatch is going to check every minute every minute it's going to collect the information on
+
+01:53.330 --> 01:55.090
+these checks on these metrics.
+
+01:55.410 --> 02:00.340
+So by default on EC2 instance it collects CPU Utilization.
+
+02:00.340 --> 02:02.260
+Network in in bytes.
+
+02:02.300 --> 02:04.260
+Network out in bytes.
+
+02:04.300 --> 02:05.420
+Network packets in.
+
+02:05.460 --> 02:12.420
+That means how many network packets are coming in and network packets going out, CPU credit usage and
+
+02:12.420 --> 02:13.420
+CPU credit balance.
+
+02:13.420 --> 02:18.420
+So these are default monitoring done by CloudWatch on EC2 instance.
+
+02:18.580 --> 02:22.740
+And as we progress in the course, you're going to see many different services of AWS.
+
+02:23.340 --> 02:27.020
+Each service has its own default metrics that CloudWatch collects.
+
+02:27.500 --> 02:30.780
+If you get a little deeper into this you can add custom metrics.
+
+02:30.780 --> 02:37.300
+Also, you can create your own metric, but usually organization prefer using their own monitoring tool
+
+02:37.300 --> 02:38.780
+for custom metrics.
+
+02:40.100 --> 02:42.340
+Okay, now I recommend you take some break.
+
+02:42.820 --> 02:48.580
+Let this graph collect for a few minutes, 15 20 minutes or maybe more, and then you come back and
+
+02:48.580 --> 02:55.460
+then you can refresh the page and you should start getting seeing this graphs like this, the CPU utilization.
+
+02:56.740 --> 02:58.980
+And then we're going to install stress.
+
+02:59.060 --> 03:01.180
+and then you're going to take a break once again.
+
+03:01.860 --> 03:03.940
+But for now, let it collect some information.
+
+03:03.940 --> 03:07.580
+By the time I'm going to install a tool called stress, you can do it now.
+
+03:07.580 --> 03:09.420
+Or you can do it after the break.
+
+03:09.820 --> 03:11.940
+So I'm going to log in to this instance.
+
+03:11.940 --> 03:14.780
+So let me go to the security group of this instance.
+
+03:15.340 --> 03:20.220
+Edit Inbound rule 22 from my IP okay.
+
+03:20.260 --> 03:21.260
+It's unchanged for now.
+
+03:21.260 --> 03:22.580
+Let me go back to the instance.
+
+03:22.580 --> 03:24.300
+Let's get its public IP.
+
+03:25.700 --> 03:30.460
+And I'm going to do ssh ssh hyphen a key part EC2 hyphen user.
+
+03:30.460 --> 03:33.460
+Because this is Amazon Linux operating system.
+
+03:33.460 --> 03:37.180
+And the IP address okay I'm in.
+
+03:39.300 --> 03:42.620
+So let me show you the OS also carry EDC OS release.
+
+03:42.620 --> 03:46.460
+You check if you're using not this something else like ubuntu.
+
+03:46.500 --> 03:49.060
+Then the step of installation will be different.
+
+03:49.260 --> 03:54.580
+Over here I'm going to just say DNF install stress hyphen y.
+
+03:55.100 --> 03:59.830
+If you're using ubuntu, you can use APT update and then apt install stress.
+
+04:00.670 --> 04:08.870
+Now this tool stress is used to put different kinds of load on the computer like CPU, memory, disk,
+
+04:08.870 --> 04:09.230
+IO.
+
+04:09.950 --> 04:11.270
+Let me clear the screen.
+
+04:11.430 --> 04:12.910
+Let's just run the stress command.
+
+04:12.950 --> 04:13.710
+Hit enter.
+
+04:14.230 --> 04:18.350
+See, it says stress imposes certain types of compute stress on your system.
+
+04:18.350 --> 04:21.950
+This is used to test your operating system performance.
+
+04:22.510 --> 04:26.190
+We are using it so we can see the graph going up and down.
+
+04:26.190 --> 04:32.870
+And then we're going to set an alert in CloudWatch which should send notification when the CPU utilization
+
+04:32.870 --> 04:33.510
+is high.
+
+04:33.910 --> 04:39.830
+So if you want to spike the CPU you have to say stress hyphen C, hyphen, hyphen CPU.
+
+04:39.830 --> 04:43.750
+And n is the number of this process that it is going to run.
+
+04:44.070 --> 04:44.950
+So if I say.
+
+04:46.990 --> 04:54.390
+Stress hyphen c and I say four, it is going to start stressing our CPU.
+
+04:54.590 --> 05:00.160
+It's going to spawn four workers spinning on sqrt function.
+
+05:00.960 --> 05:01.200
+Okay.
+
+05:01.240 --> 05:03.360
+So I'm going to do control C.
+
+05:03.400 --> 05:04.200
+Cancel this.
+
+05:05.160 --> 05:08.080
+We want to run it for a certain period timeout.
+
+05:08.080 --> 05:09.320
+And then close it.
+
+05:09.320 --> 05:11.800
+And then run it again and then close it like that.
+
+05:12.240 --> 05:14.000
+So I'm going to write a script.
+
+05:15.640 --> 05:16.120
+Before that.
+
+05:16.120 --> 05:18.360
+Let me show you how we can run this with the timeout.
+
+05:18.360 --> 05:23.280
+So hyphen C4 and hyphen t timeout run for.
+
+05:23.320 --> 05:25.080
+Let's see five seconds.
+
+05:28.520 --> 05:28.840
+Okay.
+
+05:28.840 --> 05:29.760
+So that's all right.
+
+05:29.760 --> 05:32.000
+So we're going to run it like for 60s.
+
+05:32.000 --> 05:34.680
+And then close it and then run it for 60s like that.
+
+05:34.680 --> 05:36.800
+We're going to run it for some time okay.
+
+05:36.840 --> 05:44.640
+I have asked ChatGPT to give me a bash script to run this command for a random intervals for random
+
+05:44.640 --> 05:49.120
+amount of time, so it might run for one minute now, later it might run for two minutes.
+
+05:49.120 --> 05:53.000
+An interval will be also random and it has given us this bash script.
+
+05:53.000 --> 05:54.960
+It's a while loop inside a while loop.
+
+05:55.200 --> 06:04.050
+I'm simply going to copy and run this I will create a file with the name str ss.sh.
+
+06:05.210 --> 06:06.850
+And in this I'm going to paste this.
+
+06:08.050 --> 06:09.450
+Save and quit this.
+
+06:10.770 --> 06:16.210
+Make it executable chmod plus x.sh.
+
+06:16.210 --> 06:17.570
+And I'm going to run this.
+
+06:19.810 --> 06:21.850
+So let it run for a few minutes.
+
+06:21.850 --> 06:23.090
+Or you can do one more thing.
+
+06:23.090 --> 06:25.010
+You can put it into the background.
+
+06:25.010 --> 06:26.810
+So it just keep on running.
+
+06:27.490 --> 06:30.170
+So I'm going to close this one and put it in the background.
+
+06:30.170 --> 06:33.570
+I am also going to update the amount of CPU.
+
+06:33.610 --> 06:38.410
+I want more stress on this one or this we can do later also.
+
+06:38.410 --> 06:43.010
+But let me just change the number of CPU to something else.
+
+06:43.010 --> 06:45.690
+Let's say 11.
+
+06:47.130 --> 06:49.210
+That might that might put more load.
+
+06:49.490 --> 06:51.850
+And then I'm going to run it in the background completely.
+
+06:51.850 --> 06:57.020
+So you have to say no up run the command which is stress dot Start situate.
+
+06:59.780 --> 07:04.300
+Stress dot s h and the end ampersand.
+
+07:04.940 --> 07:10.380
+So ampersand puts it this command in the background and no hub will detach it from this shell.
+
+07:10.380 --> 07:13.140
+So even if you close this session it will be running it.
+
+07:15.220 --> 07:19.620
+Okay, so once I have this working script that works I'm going to put this in the lecture resource.
+
+07:19.620 --> 07:23.860
+Also, if you don't want to get it from ChatGPT, you can get it from the lecture resource and run it.
+
+07:24.140 --> 07:26.020
+Now let me run the top command.
+
+07:26.060 --> 07:29.780
+If I run the top command, I should see the load going up and down.
+
+07:29.820 --> 07:37.580
+The CPU utilization is 23.2% and now it's down and it's increasing the load.
+
+07:38.180 --> 07:43.900
+Okay, now it's 4090 CPU utilization and the load average you see going up.
+
+07:44.420 --> 07:47.900
+So like that let's keep it running for five ten minutes.
+
+07:47.900 --> 07:49.980
+And then we're going to take a look at the graph.
+
+07:50.460 --> 07:50.780
+Okay.
+
+07:50.780 --> 07:55.100
+So after waiting for some time I'm going to open the CPU utilization graph.
+
+07:55.140 --> 07:56.780
+I'm going to refresh this.
+
+07:57.300 --> 07:57.500
+Okay.
+
+07:57.500 --> 07:59.980
+Now you can start seeing the graph forming there.
+
+07:59.980 --> 08:05.500
+Now in real systems or servers the graphs usually will be something like this.
+
+08:05.540 --> 08:06.980
+The load going up and down.
+
+08:06.980 --> 08:08.180
+Mostly it's stable.
+
+08:08.180 --> 08:09.220
+And then going up.
+
+08:09.820 --> 08:11.820
+This is for every five minutes.
+
+08:11.860 --> 08:13.980
+Let's check for every minute okay.
+
+08:14.020 --> 08:14.540
+See the graph.
+
+08:14.540 --> 08:19.700
+Now ours is running randomly right on random interval of time and then breaking then again running.
+
+08:20.060 --> 08:25.060
+So CPU utilization here spiked at 32.5% like that.
+
+08:25.540 --> 08:29.500
+Now see the load going up and down is not a big deal.
+
+08:29.780 --> 08:32.540
+Now I'm specifically talking about CPU utilization.
+
+08:32.900 --> 08:36.300
+It's not a big deal that happens in real servers.
+
+08:36.820 --> 08:42.100
+The problem is when the load goes high and stays there for a long time, like your blood pressure,
+
+08:42.500 --> 08:49.180
+you know, you do some workout, you take some stress, you climb stairs, the blood pressure goes up.
+
+08:49.260 --> 08:51.740
+But then when you take rest, it goes down.
+
+08:51.780 --> 08:52.980
+So that's not a problem.
+
+08:52.980 --> 08:56.470
+The problem is when it goes up and stays there for a longer time.
+
+08:57.070 --> 09:01.830
+Similar way on the computers also for CPU utilization or memory or disk.
+
+09:02.390 --> 09:06.110
+The stress on that resource goes up and stays there for a long time.
+
+09:06.110 --> 09:07.990
+Indicate that there is a problem.
+
+09:08.230 --> 09:11.070
+And now you cannot manually monitor all the servers.
+
+09:11.070 --> 09:16.110
+So there should be notification system or something like that happens like CPU going high, staying
+
+09:16.110 --> 09:17.270
+there for a longer time.
+
+09:17.270 --> 09:21.910
+Let's say five minutes notification should go to the monitoring team, to the concerned team, and they
+
+09:21.910 --> 09:24.710
+should look into it and escalate it if it's required.
+
+09:25.470 --> 09:27.750
+So that's what we are going to do in this lecture.
+
+09:27.750 --> 09:33.230
+We are going to set an alert for CPU utilization that if it goes up, stays there for five minutes then
+
+09:33.230 --> 09:35.070
+it should send a notification.
+
+09:35.470 --> 09:39.390
+So now to do that let's go to the CloudWatch service directly.
+
+09:42.910 --> 09:46.110
+So once you come to CloudWatch service you need to go to all alarms.
+
+09:46.510 --> 09:48.190
+And you say create alarm.
+
+09:49.070 --> 09:50.670
+You need to first select the metric.
+
+09:50.670 --> 09:54.430
+So we are targeting CPU utilization of our own instance.
+
+09:54.430 --> 09:57.240
+So select that and find EC2.
+
+09:57.280 --> 09:59.560
+We are setting up for EC2.
+
+09:59.600 --> 10:01.000
+Now you see there are a few other options.
+
+10:01.000 --> 10:05.360
+You have EBS, you have S3, you have log application load balancer.
+
+10:05.400 --> 10:09.880
+Now these are the services that I have used in this account in this region.
+
+10:10.240 --> 10:18.200
+So when you use a service CloudWatch will some will set some default metrics for that service like EC2.
+
+10:18.240 --> 10:21.920
+We have seen we have CPU utilization and network packets for EBS.
+
+10:21.960 --> 10:23.680
+There will be something else for S3.
+
+10:24.040 --> 10:28.960
+So whichever service you use, you have different kinds of metrics for every service and you can set
+
+10:29.000 --> 10:29.840
+alarm for them.
+
+10:30.240 --> 10:31.840
+So we are going to do it for EC2.
+
+10:31.880 --> 10:36.120
+So select EC2 and we are going for per instance metrics.
+
+10:37.640 --> 10:39.520
+We should search it with the instance id.
+
+10:39.560 --> 10:47.720
+Let's go back to our instance and take its instance id from here instance id and let's search that.
+
+10:51.160 --> 10:51.960
+Okay there.
+
+10:51.960 --> 10:55.930
+And let's find CPU utilization there CPU utilization.
+
+10:56.210 --> 10:56.970
+Let's select that.
+
+10:57.490 --> 10:59.890
+So select CPU utilization of your instance.
+
+10:59.890 --> 11:03.570
+You can search it with the instance ID and we have selected the metrics.
+
+11:03.570 --> 11:05.050
+So click on select metric.
+
+11:05.450 --> 11:07.010
+You can see the graph over here.
+
+11:07.010 --> 11:09.010
+So the metric name is CPU utilization.
+
+11:09.010 --> 11:12.970
+You can rename it rename it if you want and you can change the instance ID.
+
+11:12.970 --> 11:17.570
+That means that once you set the alert you can change the instance ID you can select different instances
+
+11:17.570 --> 11:18.050
+also.
+
+11:18.610 --> 11:22.530
+So period five minutes you have lesser also over here.
+
+11:23.050 --> 11:26.250
+So you can keep it five minute I'm going to reduce it for to one minute.
+
+11:26.530 --> 11:33.490
+So I'm going to say for a period of one minute if it's greater than or equal to I'm going to say let's
+
+11:33.490 --> 11:37.010
+say 60, I'm just giving a random number.
+
+11:37.050 --> 11:42.530
+It really depends on what service you're running when your instance crash, if the CPU utilization is,
+
+11:42.570 --> 11:47.730
+let's say 90 for five minutes or more than five minutes, the instance crashes.
+
+11:47.970 --> 11:51.410
+Or if it's a danger to your service, your service can crash.
+
+11:51.930 --> 11:56.450
+So based on that, all that information you need information to decide the right value and comes with
+
+11:56.450 --> 11:57.010
+experience.
+
+11:57.010 --> 12:04.370
+It comes with time that you spend with your application, and a real monitoring team should be there.
+
+12:04.370 --> 12:06.970
+Who knows what, who know what they are doing.
+
+12:07.370 --> 12:10.810
+Your job as a DevOps is not to set monitoring.
+
+12:10.810 --> 12:14.490
+Yes, of course you can work with setting up, monitoring, automating the process.
+
+12:14.930 --> 12:22.970
+But there there should be 24 by seven monitoring team who are working supporting these activities for
+
+12:22.970 --> 12:23.770
+production.
+
+12:23.810 --> 12:24.290
+Okay.
+
+12:25.090 --> 12:25.330
+Okay.
+
+12:25.330 --> 12:26.090
+So that's what I said.
+
+12:26.090 --> 12:31.170
+Greater than or equal to 60% for a period of one minute I said go next.
+
+12:31.210 --> 12:37.170
+Now if those condition matches right, if it's more than one minute for know about 60 or equal to,
+
+12:37.450 --> 12:40.810
+then what is it then we are saying it is in alarm.
+
+12:40.930 --> 12:43.650
+You can decide it's okay or insufficient data.
+
+12:43.970 --> 12:45.010
+Now I want to set an alarm.
+
+12:45.010 --> 12:45.650
+So I'm saying yes.
+
+12:45.650 --> 12:49.330
+If it goes above 60 for more than one minute, it is an alarm.
+
+12:49.730 --> 12:51.330
+So this is for notification right.
+
+12:51.330 --> 12:53.860
+So now you have to send the notification.
+
+12:53.860 --> 13:00.580
+If you have set the billing alarm in the prerequisite lecture, you should see your SNS topic over here.
+
+13:00.580 --> 13:03.180
+Otherwise, if you don't see you can say create new topic.
+
+13:03.460 --> 13:06.820
+You can give topic a name and put your email address.
+
+13:07.300 --> 13:08.340
+So I'm creating a new one.
+
+13:08.340 --> 13:12.780
+I have given a name to the topic and I have given an email address and I say create topic.
+
+13:13.020 --> 13:17.900
+So when the condition matches, when it's in alarm state it is going to send notification to this topic
+
+13:17.900 --> 13:19.380
+which is the email address.
+
+13:20.100 --> 13:22.420
+Now there are other actions also you can use.
+
+13:22.420 --> 13:25.580
+You have an interesting one, easy to action.
+
+13:26.020 --> 13:27.340
+If it's an alarm, what do you do?
+
+13:27.380 --> 13:28.460
+Do you stop this instance?
+
+13:28.460 --> 13:31.260
+Do you terminate this instance or reboot this instance?
+
+13:31.700 --> 13:33.100
+I have personally used this.
+
+13:33.100 --> 13:37.460
+I have used lambda also, but see it depends on the use case.
+
+13:37.460 --> 13:40.700
+If it's a requirement, if the load is high, maybe reboot the instance.
+
+13:40.700 --> 13:46.700
+Maybe there is some bug that needs to be fixed, and the only solution for now is to just reboot the
+
+13:46.700 --> 13:47.220
+instance.
+
+13:47.220 --> 13:49.940
+So you know you can do that automatically through CloudWatch.
+
+13:49.940 --> 13:51.060
+That's automation.
+
+13:52.100 --> 13:53.990
+So I'm just going to remove this EC2 action.
+
+13:53.990 --> 13:54.990
+Not going to keep it.
+
+13:55.030 --> 13:56.630
+The systems manager action.
+
+13:57.070 --> 14:00.310
+And just keep in mind there are many other action not just sending notification.
+
+14:00.310 --> 14:01.350
+You can take some action.
+
+14:01.350 --> 14:06.190
+Also, you can have a lambda function, a Python script that will do something if the load is so and
+
+14:06.190 --> 14:06.550
+so.
+
+14:07.870 --> 14:09.750
+Okay, we're going to see that all those things later.
+
+14:09.750 --> 14:11.630
+For now we're just setting a notification.
+
+14:11.670 --> 14:13.190
+Go next alarm name.
+
+14:13.630 --> 14:15.870
+So I'm going to say it is a warning.
+
+14:15.870 --> 14:21.030
+So usually there are different thresholds based on or depends on your organization.
+
+14:21.230 --> 14:24.150
+Let's say 60 is warning and 80 is critical.
+
+14:24.510 --> 14:27.310
+Below 60 or 50 is okay.
+
+14:27.710 --> 14:32.030
+So we are saying 60 is warning you know take some action.
+
+14:32.710 --> 14:33.990
+I'm saying just warning.
+
+14:33.990 --> 14:37.630
+High load on inner peace web server high or high CPU utilization.
+
+14:37.630 --> 14:40.990
+You can put you can give some description over here.
+
+14:41.470 --> 14:43.030
+But I'm just keeping it empty.
+
+14:43.150 --> 14:44.550
+And I'm going to say next.
+
+14:44.950 --> 14:47.150
+So C bar is very high above 60.
+
+14:47.190 --> 14:49.710
+And our load is not spiking and not going over there.
+
+14:49.710 --> 14:51.430
+We need to stress our system more.
+
+14:51.960 --> 14:54.280
+So let's set the alarm and then we can do that.
+
+14:54.280 --> 14:55.560
+So I say create alarm.
+
+14:55.920 --> 15:02.040
+If you have set a new topic you'll get subscription confirmation email in your email account.
+
+15:02.080 --> 15:04.320
+Make sure you click on Confirm Subscription.
+
+15:05.000 --> 15:06.960
+So first you will see insufficient data.
+
+15:06.960 --> 15:09.360
+Then it will start collecting the data in a few minutes.
+
+15:09.720 --> 15:13.400
+So by the time it happens let's put some more stress.
+
+15:13.400 --> 15:20.440
+So I'm going to close that okay I find this siphon f pipe grip stress dot s is the name of the script
+
+15:20.440 --> 15:22.760
+that is the process ID.
+
+15:22.760 --> 15:23.800
+I'm going to kill it.
+
+15:24.640 --> 15:26.720
+Kill this process.
+
+15:30.840 --> 15:38.440
+Okay, it's terminated now I'm going to make the changes and add more CPU and more timeout over here.
+
+15:39.240 --> 15:41.040
+So I'm saying 45.
+
+15:41.280 --> 15:42.040
+That's too many right?
+
+15:42.080 --> 15:45.640
+45 just keep it say 35.
+
+15:45.920 --> 15:52.370
+And for 62 seconds I'm going to update the script and then run it once again.
+
+15:52.370 --> 15:53.210
+No hub.
+
+15:56.570 --> 15:58.850
+And ampersand running in the background.
+
+15:59.250 --> 16:04.130
+Now I'm going to let it run for a few minutes until I get the notification, until it's in the alarm
+
+16:04.130 --> 16:04.610
+state.
+
+16:05.130 --> 16:08.130
+So I'm going to pause the recording and resume when that happens.
+
+16:08.410 --> 16:11.810
+Okay, I was waiting for some time and now it's in alarm state.
+
+16:12.490 --> 16:13.650
+I should see the graph.
+
+16:13.850 --> 16:16.730
+Let's make it smaller hourly basis.
+
+16:17.050 --> 16:17.490
+You know what?
+
+16:17.490 --> 16:18.530
+Let's make it custom.
+
+16:18.530 --> 16:20.730
+Let's say every ten minutes.
+
+16:21.530 --> 16:21.730
+Okay.
+
+16:21.730 --> 16:22.210
+You see that?
+
+16:22.210 --> 16:25.410
+It crossed over here and then came down over here.
+
+16:25.770 --> 16:28.610
+That stayed there for around a few minutes.
+
+16:28.610 --> 16:29.330
+Anyways.
+
+16:29.330 --> 16:34.210
+So you see the graph is the CPU utilization is spiking and staying long.
+
+16:34.930 --> 16:36.770
+Now for me it's every minute.
+
+16:36.770 --> 16:39.690
+So I should have got the notification already.
+
+16:39.770 --> 16:44.050
+See that notification state change from okay to alarm.
+
+16:44.090 --> 16:51.370
+We see this warning high load on Inner Peace web server and you get the link also for that CloudWatch
+
+16:51.370 --> 16:51.930
+graph.
+
+16:53.210 --> 16:58.970
+Now this whole exercise comes under free tier because uh ten alarms you can create freely.
+
+16:59.490 --> 17:04.690
+Just make sure you keep default five minutes monitoring instead of detailed monitoring.
+
+17:04.690 --> 17:06.050
+Just need to wait a little longer.
+
+17:06.050 --> 17:06.650
+That's all.
+
+17:06.930 --> 17:11.850
+But this whole exercise should give you an idea of the notification system.
+
+17:11.850 --> 17:13.330
+Why do you need notification?
+
+17:13.730 --> 17:14.890
+What is an alarm?
+
+17:14.890 --> 17:16.730
+What is a metric or check?
+
+17:17.330 --> 17:19.050
+CloudWatch is an amazing service.
+
+17:19.090 --> 17:22.050
+This is just a very small glimpse of CloudWatch.
+
+17:22.130 --> 17:23.010
+You can do many things.
+
+17:23.010 --> 17:27.010
+You can do monitor logs which we're going to see in AWS part two.
+
+17:27.450 --> 17:29.650
+And now it comes with the AI operations.
+
+17:29.650 --> 17:32.690
+Also you can conduct investigation on Y.
+
+17:32.730 --> 17:35.050
+Know some metrics are going high or low.
+
+17:35.570 --> 17:40.610
+So we will be doing auto scaling group exercise in upcoming lectures.
+
+17:40.610 --> 17:46.650
+And there this information that we have collected in this lecture about metric CPU utilization all this
+
+17:46.650 --> 17:47.730
+will come in handy.
+
+17:48.330 --> 17:51.980
+So take your time, play around take a look at different different settings.
+
+17:52.500 --> 17:57.380
+Ten alarms are under free tier so you can feel free to create more alarm.
+
+17:57.380 --> 17:58.620
+You can make changes.
+
+17:58.620 --> 18:03.500
+You can say if the load goes down, this alarm is in okay state.
+
+18:03.500 --> 18:04.260
+You can change that.
+
+18:04.260 --> 18:05.180
+You can do a reverse.
+
+18:05.180 --> 18:06.660
+You can take it as an exercise.
+
+18:07.140 --> 18:09.220
+This is a warning going high.
+
+18:09.260 --> 18:10.380
+You get a notification.
+
+18:10.380 --> 18:12.980
+You can also get notification if it comes down.
+
+18:13.620 --> 18:15.420
+So take it as an extra exercise.
+
+18:15.420 --> 18:21.420
+If the load comes below 50 and stays there for five minutes, you should get a notification saying it's
+
+18:21.420 --> 18:23.660
+an okay state, not warning okay.
+
+18:24.180 --> 18:27.180
+And once you are done, you can delete the instance.
+
+18:27.220 --> 18:31.180
+You can delete the alarm even if you keep the alarms, no problem.
+
+18:31.460 --> 18:35.060
+But even after deleting the instance, the alarm will be there.
+
+18:35.100 --> 18:39.140
+There won't be any data coming from the instance, but alarm will be there so you can delete the alarm
+
+18:39.140 --> 18:40.540
+also if you're not using it.
+
+18:42.740 --> 18:46.020
+But just make sure you do clean up once you're done with this activity.
+
+18:46.060 --> 18:49.500
+Okay, so that would be all in this lecture I will see in the next one.

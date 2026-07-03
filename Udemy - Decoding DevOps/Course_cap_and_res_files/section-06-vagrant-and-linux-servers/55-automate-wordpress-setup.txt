@@ -1,0 +1,340 @@
+WEBVTT
+
+00:00.540 --> 00:01.650
+-: Hello and welcome.
+
+00:01.650 --> 00:06.120
+It's time to set up WordPress through Vagrant automatically.
+
+00:06.120 --> 00:10.500
+So I'm in the VS code, Vagrant VMs folder.
+
+00:10.500 --> 00:13.300
+I'm going to copy this WordPress folder
+
+00:15.540 --> 00:19.223
+and then simply right click and paste it
+
+00:20.127 --> 00:21.780
+and right click on this name,
+
+00:21.780 --> 00:25.567
+and let's rename it to WordPress IAC,
+
+00:28.620 --> 00:30.063
+Infrastructure as code.
+
+00:31.320 --> 00:34.443
+Okay, expand that and close this one,
+
+00:35.550 --> 00:40.290
+and remove the dot Vagrant folder from WordPress IAC,
+
+00:40.290 --> 00:42.453
+right click and delete.
+
+00:46.020 --> 00:47.250
+Let's open this Vagrant file.
+
+00:47.250 --> 00:49.410
+Make sure you open the correct Vagrant file.
+
+00:49.410 --> 00:51.783
+You can read it from here, which folder it is.
+
+00:53.070 --> 00:55.500
+And once again, we will look at the IP address.
+
+00:55.500 --> 00:57.400
+We will give it something different
+
+00:59.640 --> 01:03.000
+and get into the provisioning part.
+
+01:03.000 --> 01:05.580
+Now, if you are thinking this is going to be difficult,
+
+01:05.580 --> 01:07.320
+it is not, trust me,
+
+01:07.320 --> 01:09.660
+because we already have most of the command
+
+01:09.660 --> 01:11.640
+in our notepad previously,
+
+01:11.640 --> 01:14.943
+if you have still those commands with you,
+
+01:15.870 --> 01:18.453
+or you can copy from the documentation.
+
+01:19.800 --> 01:21.390
+So we are installing dependencies,
+
+01:21.390 --> 01:22.980
+we are downloading WordPress,
+
+01:22.980 --> 01:25.530
+and here we have to create a file, right?
+
+01:25.530 --> 01:29.580
+So, how do we create file automatically
+
+01:29.580 --> 01:31.320
+and place content into that, right?
+
+01:31.320 --> 01:33.060
+Open a file, put a content.
+
+01:33.060 --> 01:35.310
+Well, that, we can do it through cat command.
+
+01:36.210 --> 01:40.500
+So let's come back to the WordPress setup documentation.
+
+01:40.500 --> 01:44.193
+Make sure you have copied all these commands one by one.
+
+01:45.930 --> 01:48.180
+The fourth step, this is the one.
+
+01:48.180 --> 01:49.743
+So copy the path,
+
+01:52.710 --> 01:54.460
+copy the path of this file
+
+01:55.650 --> 01:57.003
+and all you have to do is,
+
+01:58.050 --> 02:01.770
+wait, let's put everything in the notepad first, okay,
+
+02:01.770 --> 02:03.660
+before this command.
+
+02:03.660 --> 02:08.400
+Cat, output redirection, paste the path
+
+02:08.400 --> 02:10.380
+and then to input redirection,
+
+02:10.380 --> 02:14.130
+and you say EOF or any text.
+
+02:14.130 --> 02:17.730
+And then come to the next line, say EOF, once again.
+
+02:17.730 --> 02:19.800
+And in between these two EOF,
+
+02:19.800 --> 02:22.650
+you're going to put the content of the file, right,
+
+02:22.650 --> 02:24.350
+which is this one. Let's copy this
+
+02:29.490 --> 02:31.023
+and paste it here.
+
+02:36.106 --> 02:40.140
+Okay, in the mySQL command it will be a little different,
+
+02:40.140 --> 02:41.100
+but very simple.
+
+02:41.100 --> 02:42.150
+All you need to do is
+
+02:45.300 --> 02:50.300
+give it like this, mySQL hyphen root hyphen e,
+
+02:51.600 --> 02:53.943
+and put this command in single quote.
+
+02:56.340 --> 02:59.823
+Okay, do the same for the other lines.
+
+03:04.980 --> 03:07.260
+For the second line, you put here single code,
+
+03:07.260 --> 03:09.090
+but with the, for the password,
+
+03:09.090 --> 03:11.070
+then you change it to double codes,
+
+03:11.070 --> 03:15.273
+otherwise it will confuse where the codes are ending.
+
+03:27.220 --> 03:31.050
+Okay, the below steps copies the configuration file
+
+03:31.050 --> 03:32.460
+and replaces the content,
+
+03:32.460 --> 03:36.921
+and at the end we will give commands to restart mySQL
+
+03:36.921 --> 03:39.513
+and Apache2 service just to be on the safer side.
+
+03:40.620 --> 03:43.563
+Okay, validate these commands carefully.
+
+03:44.790 --> 03:47.940
+Compare it from the documentation, all the steps.
+
+03:47.940 --> 03:49.260
+Make sure you don't miss any step
+
+03:49.260 --> 03:53.250
+and there are no typographical error and you have hyphen y
+
+03:53.250 --> 03:57.063
+and all the other required options and parameters.
+
+03:59.640 --> 04:03.060
+Okay, if you're good, copy that entire text,
+
+04:03.060 --> 04:07.113
+go to your VS code, and in the provisioning part,
+
+04:08.040 --> 04:11.223
+remove these two commands and paste your content.
+
+04:12.060 --> 04:13.740
+After you paste your content,
+
+04:13.740 --> 04:15.993
+you have to do one more thing here.
+
+04:17.730 --> 04:21.240
+This EOF starts over here and ends over there.
+
+04:21.240 --> 04:22.980
+This is called as here doc.
+
+04:22.980 --> 04:25.350
+The text can be anything, but it should not,
+
+04:25.350 --> 04:28.080
+the end text should not have any space
+
+04:28.080 --> 04:30.690
+in the beginning or at the end.
+
+04:30.690 --> 04:32.040
+So end we don't have,
+
+04:32.040 --> 04:33.660
+but in the beginning we have few space,
+
+04:33.660 --> 04:35.210
+so we are going to remove that.
+
+04:36.300 --> 04:38.430
+And also, let's do this.
+
+04:38.430 --> 04:40.980
+Let's remove space from here, as well.
+
+04:41.874 --> 04:43.374
+And here, as well.
+
+04:45.210 --> 04:48.180
+If you don't do this, you will get a here doc error
+
+04:48.180 --> 04:51.180
+and it's not going to continue after this,
+
+04:51.180 --> 04:52.170
+the provisioning will fail.
+
+04:52.170 --> 04:54.960
+So make sure no extra space in the beginning
+
+04:54.960 --> 04:57.903
+or at the end of EOF, no extra space.
+
+05:00.900 --> 05:02.460
+Check the content, once again.
+
+05:02.460 --> 05:06.090
+You copy pasted, if there are any changes.
+
+05:06.090 --> 05:10.770
+If everything is good, come to Git Bash,
+
+05:10.770 --> 05:14.857
+go into the folder Vagrant VMs, WordPress IAC,
+
+05:16.080 --> 05:18.153
+and do Vagrant up.
+
+05:19.410 --> 05:23.130
+Okay, the VM is up and the provisioning is completed.
+
+05:23.130 --> 05:25.323
+Let's get the IP address of the VM,
+
+05:27.900 --> 05:31.170
+or you can do Vagrant SSH and get the IP.
+
+05:31.170 --> 05:33.660
+Let's open the browser, paste the IP,
+
+05:33.660 --> 05:35.853
+and let's look at the content.
+
+05:36.750 --> 05:40.500
+Done. The WordPress site is set up.
+
+05:40.500 --> 05:42.210
+You can continue fill in the detail
+
+05:42.210 --> 05:44.343
+and look your look at your blog.
+
+05:57.600 --> 05:59.940
+Okay, if you have come 'til here,
+
+05:59.940 --> 06:03.000
+really, very, very good job.
+
+06:03.000 --> 06:05.643
+Your foundation has become strong now.
+
+06:06.480 --> 06:10.410
+We will be using these skills in AWS, docker,
+
+06:10.410 --> 06:13.710
+Kubernetes, Ansible, Terraform, et cetera.
+
+06:13.710 --> 06:16.443
+Let's delete the VM, do the cleanup,
+
+06:20.550 --> 06:22.140
+and I want you to take a break
+
+06:22.140 --> 06:26.370
+and just reiterate in your mind what all we did so far,
+
+06:26.370 --> 06:28.773
+from the beginning of the course till now.
+
+06:29.730 --> 06:34.170
+Remember how much you knew when you started this course
+
+06:34.170 --> 06:35.823
+and now how much you know.
+
+06:36.900 --> 06:38.970
+And this is just the tip of the iceberg.
+
+06:38.970 --> 06:42.183
+We are going to learn great many things in this course.
+
+06:43.260 --> 06:45.033
+So all the best and keep it up.

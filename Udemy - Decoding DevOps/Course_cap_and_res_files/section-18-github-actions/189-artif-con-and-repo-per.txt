@@ -1,0 +1,475 @@
+WEBVTT
+
+00:00.160 --> 00:01.320
+Hello and welcome.
+
+00:01.320 --> 00:06.960
+In this lecture we are going to see few more things in our workflow, starting with the code repository
+
+00:06.960 --> 00:07.640
+permission.
+
+00:08.040 --> 00:15.240
+So when our workflow gets executed, the workflow will get a token GitHub underscore token.
+
+00:15.920 --> 00:20.560
+This token by default has read and also write permission on the repository.
+
+00:20.880 --> 00:27.920
+So when we are running it on the main branch, we don't want, usually we don't want our workflow to
+
+00:27.960 --> 00:30.680
+have permission to write the GitHub repository.
+
+00:31.080 --> 00:39.240
+So to prevent accidental write in your GitHub repository in the branch, we need to change its permission
+
+00:39.240 --> 00:39.920
+to read.
+
+00:40.120 --> 00:47.400
+So we are going to use permission permissions key in our workflow to change the permission of GitHub
+
+00:47.440 --> 00:47.960
+token.
+
+00:48.520 --> 00:52.320
+So open your VS code right below the triggers.
+
+00:52.320 --> 00:56.640
+In the first column you need to give permissions colon space.
+
+00:56.640 --> 00:57.400
+Hit enter.
+
+01:00.480 --> 01:02.720
+And say contents colon read.
+
+01:03.560 --> 01:08.090
+Then this workflow will have permission only to read from our repository.
+
+01:08.530 --> 01:11.170
+And I'm going to save this control s.
+
+01:12.050 --> 01:12.410
+Okay.
+
+01:12.410 --> 01:13.290
+Let's scroll down.
+
+01:13.290 --> 01:14.570
+Let's look at the next thing.
+
+01:14.570 --> 01:16.410
+So we know mvn install.
+
+01:16.410 --> 01:18.930
+When we run it creates the artifact.
+
+01:19.410 --> 01:25.490
+So it creates a target folder in that this v profile hyphen v two dot var based on your project you
+
+01:25.490 --> 01:27.850
+might have var jar or anything else.
+
+01:27.850 --> 01:33.970
+Any other files that you want to consider saving it after the workflow completes because the workflow
+
+01:33.970 --> 01:36.770
+terminates, all the data with it will also be gone.
+
+01:37.530 --> 01:40.770
+So there is a ready made action that we can use for this one.
+
+01:41.130 --> 01:42.410
+Just say hyphen name colon.
+
+01:42.410 --> 01:44.250
+Give a name to your step.
+
+01:44.450 --> 01:52.890
+Uses this particular action upload hyphen artifact at v4 and we need to mention what artifact we need
+
+01:52.890 --> 01:53.490
+to save.
+
+01:54.050 --> 01:56.210
+So we have to pass some parameter.
+
+01:56.210 --> 01:57.250
+So we have to say width.
+
+01:57.250 --> 01:59.170
+And we pass some input parameters.
+
+02:00.130 --> 02:06.530
+The name of the artifact let's say V profile hyphen app and the path.
+
+02:06.530 --> 02:11.500
+So I'm going to say target slash star dot bar.
+
+02:11.540 --> 02:14.500
+So any bar file will be stored as an artifact.
+
+02:14.540 --> 02:16.820
+Now we get a link from where we can download.
+
+02:16.820 --> 02:18.180
+It's going to give us a zip file.
+
+02:18.180 --> 02:22.100
+That zip file will contain all the artifact that is mentioned in the path.
+
+02:22.420 --> 02:24.260
+And then you can save this file.
+
+02:25.500 --> 02:25.780
+Okay.
+
+02:25.780 --> 02:28.980
+Let's look at the last step of this lecture.
+
+02:29.460 --> 02:32.460
+And that is to show you the conditions if else conditions.
+
+02:32.980 --> 02:38.460
+Now based on the action of the previous step you need to decide something like you want to send a notification
+
+02:38.460 --> 02:43.260
+if the previous step failed or you want to do something else if the previous step failed.
+
+02:43.740 --> 02:45.340
+So I'm going to give a name to this step.
+
+02:45.340 --> 02:46.780
+Hyphen name colon notify.
+
+02:46.780 --> 02:51.340
+If the build fails, you're not going to send an actual notification, just print message.
+
+02:51.820 --> 02:54.460
+The idea is that you know how to use conditions.
+
+02:54.460 --> 02:55.660
+So it's pretty simple.
+
+02:55.660 --> 03:03.260
+You say if colon now its value should come either true or false based on what we want to do here, I
+
+03:03.260 --> 03:07.180
+want to send a notification if the previous step fails.
+
+03:07.380 --> 03:11.710
+So I'm going to say if and I'm going to use a predefined function in GitHub.
+
+03:11.710 --> 03:12.310
+Actions.
+
+03:12.790 --> 03:15.230
+Failure is a failure and you give the parenthesis.
+
+03:15.230 --> 03:17.070
+This is a function predefined function.
+
+03:17.430 --> 03:23.310
+So which means if the previous step failed or any of the previous step failed, its value will be true.
+
+03:23.710 --> 03:26.550
+And if that is true, then execute whatever is below.
+
+03:27.030 --> 03:29.190
+So here for now I'm just giving here.
+
+03:29.190 --> 03:29.630
+Run.
+
+03:29.870 --> 03:30.110
+Run.
+
+03:30.110 --> 03:33.070
+This command echo and the build job failed.
+
+03:33.070 --> 03:34.150
+Please check logs.
+
+03:34.550 --> 03:36.550
+So usually it will be a notification.
+
+03:36.550 --> 03:43.430
+In such cases you send a notification email notification or slack slack notification or even raise a
+
+03:43.430 --> 03:43.990
+ticket.
+
+03:44.630 --> 03:49.230
+But here the idea is to show you the condition if you can use functions like failure.
+
+03:49.470 --> 03:51.390
+There are other functions like success.
+
+03:51.750 --> 03:53.070
+There's also always.
+
+03:53.110 --> 03:53.870
+Always.
+
+03:54.150 --> 03:59.990
+That means even if the previous step fail, still continue the pipeline or continue the workflow.
+
+04:01.030 --> 04:04.310
+These are called as status status check functions.
+
+04:04.710 --> 04:06.510
+So by default it's success.
+
+04:06.510 --> 04:11.990
+So even if you don't give the success over there is also always like this.
+
+04:11.990 --> 04:16.510
+You can mention it and it causes the step to always execute and returns true.
+
+04:16.510 --> 04:19.350
+So no matter what happens, this is going to always return true.
+
+04:19.870 --> 04:21.710
+And then there is failure that we have used.
+
+04:21.710 --> 04:28.430
+If the job, if the previous job or previous step has failed, then report the failure and do some action
+
+04:28.470 --> 04:29.670
+like sending notification.
+
+04:30.070 --> 04:34.950
+We're going to add a few more conditions with the if not only the status check function, few other
+
+04:34.950 --> 04:39.270
+things in this workflow, but for now, save this and take a look.
+
+04:39.270 --> 04:45.550
+Once again, we have permissions content read that gives only read permission to the repository for
+
+04:45.550 --> 04:46.390
+this workflow.
+
+04:46.790 --> 04:50.910
+So you don't accidentally commit anything in this branch, which is the main branch here.
+
+04:51.310 --> 04:54.150
+Then we have seen how we can store artifact.
+
+04:54.190 --> 04:57.750
+After the workflow completes, we'll still have the artifact.
+
+04:57.990 --> 05:03.510
+And then we have seen condition, a very simple example of a condition to understand how conditions
+
+05:03.510 --> 05:03.990
+work.
+
+05:04.910 --> 05:07.670
+So save the file and then let's commit it.
+
+05:08.750 --> 05:10.230
+Commit and push.
+
+05:12.270 --> 05:13.590
+Give a commit message.
+
+05:14.270 --> 05:16.760
+Read permissions artifacts and conditions.
+
+05:16.760 --> 05:18.400
+That's the commit message I have given.
+
+05:18.400 --> 05:20.120
+I accept the commit message.
+
+05:21.800 --> 05:23.080
+Okay, let's look at the workflow.
+
+05:23.080 --> 05:23.440
+Now.
+
+05:23.760 --> 05:25.120
+Let's go to actions.
+
+05:25.720 --> 05:29.120
+The workflow got triggered by the time this is happening.
+
+05:29.120 --> 05:33.560
+Let's look few more conditions that we can add in our workflow.
+
+05:33.560 --> 05:35.040
+So let's open the VSCode.
+
+05:35.720 --> 05:39.800
+So we have the build job and we also have the testing job.
+
+05:40.080 --> 05:46.800
+Now I am deciding that I want to run this test Mvn test in the main branch only if the there is a main
+
+05:46.800 --> 05:47.800
+branch then only.
+
+05:47.800 --> 05:50.040
+I want to run this command.
+
+05:50.040 --> 05:50.680
+So it is.
+
+05:50.720 --> 05:54.240
+If there is the main branch I want to run this, then you know what to do.
+
+05:54.280 --> 05:55.960
+We have to use the if condition.
+
+05:56.280 --> 06:00.600
+So over here we are going to say if colon.
+
+06:01.840 --> 06:05.560
+Now I need a variable that holds the value of the main branch.
+
+06:05.560 --> 06:09.640
+And that is a GitHub context variable GitHub dot ref.
+
+06:09.680 --> 06:15.840
+This holds the value of the main branch or sorry, any branch on whichever branch this workflow is running,
+
+06:15.840 --> 06:16.920
+its value will be that.
+
+06:16.920 --> 06:18.120
+So it's running on the main branch.
+
+06:18.120 --> 06:19.490
+Its value will be mean.
+
+06:19.810 --> 06:24.730
+So if its value is equal to, you have to give double equal to and single quote, and you need to give
+
+06:24.730 --> 06:26.250
+the branch name in this format.
+
+06:26.570 --> 06:29.290
+Refs slash heads slash the branch name.
+
+06:29.850 --> 06:34.690
+So if this condition is true then only ambient test will run, otherwise it will skip it.
+
+06:35.130 --> 06:39.330
+Next, I also want to print a message that it has skipped the test.
+
+06:39.490 --> 06:42.130
+Also, let's put the condition here also for the checkstyle.
+
+06:43.370 --> 06:45.090
+So same thing I'm giving here.
+
+06:45.930 --> 06:49.250
+And when it skips this I want to print a message also.
+
+06:49.650 --> 06:53.050
+And this message should also print when this condition matches.
+
+06:56.410 --> 07:00.250
+So name of the step I'm going to say here GitHub dot ref.
+
+07:00.290 --> 07:05.690
+If it's not equal to main branch, that means whenever the workflow is running on the branch let's say
+
+07:05.730 --> 07:07.690
+bug fix, bug fix branch.
+
+07:07.690 --> 07:09.010
+This workflow is running.
+
+07:09.010 --> 07:13.810
+So it's going to skip this, skip this, but it's going to print this.
+
+07:14.090 --> 07:15.330
+That means execute this right.
+
+07:15.330 --> 07:16.610
+Because the condition will match here.
+
+07:16.610 --> 07:18.090
+If it's not equal to main branch.
+
+07:18.090 --> 07:18.570
+Right.
+
+07:18.650 --> 07:20.530
+And it's going to print this message.
+
+07:20.850 --> 07:22.540
+So any non main branch.
+
+07:22.540 --> 07:26.740
+You will see a message that I'm skipping unit test and code analysis.
+
+07:27.540 --> 07:31.420
+So once you're done save this file and say commit and push.
+
+07:34.500 --> 07:36.220
+I made a mistake in the workflow.
+
+07:36.260 --> 07:38.060
+I added one number by mistake.
+
+07:39.060 --> 07:41.060
+Okay let's commit it and let's see what happens.
+
+07:41.340 --> 07:43.380
+It's going to throw I think YAML error.
+
+07:43.380 --> 07:44.900
+It's not going to execute anything.
+
+07:45.420 --> 07:45.580
+Okay.
+
+07:45.580 --> 07:49.660
+Give a commit message say accept commit message save okay.
+
+07:49.660 --> 07:51.060
+We see this as a failure.
+
+07:51.060 --> 07:53.500
+And you will see here one message.
+
+07:53.700 --> 07:58.020
+You have an error in the YAML syntax on line 63 or not you will.
+
+07:58.060 --> 07:59.340
+I am getting this error.
+
+07:59.700 --> 08:02.580
+So line number 6663.
+
+08:02.620 --> 08:04.260
+Sorry there is a problem.
+
+08:04.300 --> 08:05.500
+So I'm going to remove that.
+
+08:05.540 --> 08:07.660
+Save this again and make commit and push.
+
+08:13.420 --> 08:15.780
+Now let me check the workflows once again.
+
+08:16.180 --> 08:18.340
+And now that is running okay.
+
+08:18.380 --> 08:19.340
+So the workflow is running.
+
+08:19.340 --> 08:20.180
+It will complete.
+
+08:20.180 --> 08:23.180
+Once this is completed you can join me in the next lecture.
+
+08:23.180 --> 08:25.620
+We are going to see a few more things in our workflow.

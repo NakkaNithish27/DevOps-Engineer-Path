@@ -1,0 +1,955 @@
+WEBVTT
+
+00:00.420 --> 00:01.800
+Instructor: Hello and welcome
+
+00:01.800 --> 00:03.690
+to the computer networking session.
+
+00:03.690 --> 00:06.840
+This is going to be the fundamentals of networking.
+
+00:06.840 --> 00:09.270
+Very, very basic things we are going to cover
+
+00:09.270 --> 00:13.530
+in this and it's very important to cover this topic
+
+00:13.530 --> 00:18.003
+before I start cloud computing or Docker or Kubernetes.
+
+00:18.930 --> 00:20.790
+So being a DevOps, you will be also
+
+00:20.790 --> 00:24.600
+in charge of managing cloud computing environments,
+
+00:24.600 --> 00:27.330
+connecting multiple systems together
+
+00:27.330 --> 00:29.430
+and these things I'm saying because you will be
+
+00:29.430 --> 00:33.046
+in charge in automating these things and as our golden rule,
+
+00:33.046 --> 00:35.758
+you should know how to do things manually
+
+00:35.758 --> 00:38.460
+so you can automate them.
+
+00:38.460 --> 00:40.320
+So let's see what we are going to cover
+
+00:40.320 --> 00:42.453
+in this networking session.
+
+00:46.590 --> 00:49.200
+So we'll talk about the networking components first,
+
+00:49.200 --> 00:51.120
+what the components responsible for networking.
+
+00:51.120 --> 00:53.050
+We'll be talking about OSI model
+
+00:54.210 --> 00:56.463
+and understand all the layers of OSI model.
+
+00:57.750 --> 00:59.700
+We'll talk about then classification
+
+00:59.700 --> 01:02.340
+of network based on the geography.
+
+01:02.340 --> 01:04.830
+We'll talk about networking devices.
+
+01:04.830 --> 01:06.603
+We'll understand our home network.
+
+01:07.980 --> 01:11.220
+Then we'll talk about IP addresses, what are IP addresses
+
+01:11.220 --> 01:15.390
+and how to understand different IP addresses range.
+
+01:15.390 --> 01:16.473
+Protocols.
+
+01:17.970 --> 01:22.380
+We'll understand how DNS or DSCP and DSCP servers work
+
+01:22.380 --> 01:25.353
+and we will be also seeing some networking commands.
+
+01:26.550 --> 01:30.210
+So this session is 90% theory
+
+01:30.210 --> 01:33.420
+and we have some commands at the end
+
+01:33.420 --> 01:36.660
+of the session which will be very helpful
+
+01:36.660 --> 01:38.700
+for you when you're doing some troubleshooting
+
+01:38.700 --> 01:39.960
+in the networking,
+
+01:39.960 --> 01:42.410
+when you're connecting multiple systems together.
+
+01:44.520 --> 01:46.953
+So what is a computer network?
+
+01:48.690 --> 01:50.670
+In today's time you see billions
+
+01:50.670 --> 01:54.660
+and billions of devices connected together on the internet.
+
+01:54.660 --> 01:56.790
+It's not just about now the computer.
+
+01:56.790 --> 01:58.410
+You have smartphone
+
+01:58.410 --> 02:02.220
+and internet enabled devices or network enabled devices.
+
+02:02.220 --> 02:05.040
+So what really is a computer network?
+
+02:05.040 --> 02:07.860
+Well, as I see, it's a communication between
+
+02:07.860 --> 02:10.980
+two or more network interfaces.
+
+02:10.980 --> 02:13.770
+Yes, every device you're using
+
+02:13.770 --> 02:17.430
+on the network will have an IP address assigned
+
+02:17.430 --> 02:19.620
+to its network interface.
+
+02:19.620 --> 02:24.620
+Like your laptop has ethernet adapter or wireless adapter.
+
+02:24.780 --> 02:27.360
+Your smartphone has a wireless adapter
+
+02:27.360 --> 02:29.343
+or a network interface we can call it.
+
+02:31.110 --> 02:33.540
+Network enabled devices
+
+02:33.540 --> 02:37.440
+as used in IoT will have network interfaces.
+
+02:37.440 --> 02:40.080
+Because of these network interfaces which are
+
+02:40.080 --> 02:44.190
+on our devices, we are able to create a communication
+
+02:44.190 --> 02:47.070
+or should I say communication network where
+
+02:47.070 --> 02:49.680
+these devices can exchange data.
+
+02:49.680 --> 02:52.350
+So in short, computer network is communication
+
+02:52.350 --> 02:55.233
+between two or more network interfaces.
+
+02:57.810 --> 03:00.360
+Let's see the components that are used to
+
+03:00.360 --> 03:02.130
+create a computer network.
+
+03:02.130 --> 03:05.490
+You need two or more computer or devices, your smartphone
+
+03:05.490 --> 03:10.490
+or any IOT device, you need cable or cables to
+
+03:10.680 --> 03:15.360
+link these computer or devices or the wireless network.
+
+03:15.360 --> 03:18.060
+So this cable or the wireless network will be connected
+
+03:18.060 --> 03:22.533
+to the network interface or NIC card on each device.
+
+03:23.880 --> 03:26.430
+And of course the device itself that knows what to do
+
+03:26.430 --> 03:27.360
+with the data.
+
+03:27.360 --> 03:30.540
+With the data that it is receiving over the network.
+
+03:30.540 --> 03:35.250
+Switches to connect multiple network interfaces together.
+
+03:35.250 --> 03:40.140
+Routers to connect multiple network together or software
+
+03:40.140 --> 03:42.240
+or simply to begin with operating system running
+
+03:42.240 --> 03:45.750
+on the device that can analyze the data that it received
+
+03:45.750 --> 03:48.333
+on the network and present it to the user.
+
+03:49.740 --> 03:53.070
+So these are the components generally used to
+
+03:53.070 --> 03:55.740
+create a network or computer network
+
+03:55.740 --> 03:58.170
+but how do they really communicate?
+
+03:58.170 --> 04:00.030
+We see millions and billions
+
+04:00.030 --> 04:03.300
+of devices and softwares and apps.
+
+04:03.300 --> 04:06.060
+How is that you go to the market, you get a smartphone,
+
+04:06.060 --> 04:08.940
+you use an app, take your picture, upload it.
+
+04:08.940 --> 04:12.000
+There's some random phone, you have used some random app
+
+04:12.000 --> 04:14.430
+and you are accessing some random website.
+
+04:14.430 --> 04:17.130
+Everyone understands every operating system,
+
+04:17.130 --> 04:21.360
+every network interface, network devices and websites
+
+04:21.360 --> 04:25.530
+and apps understand how to communicate the same way
+
+04:25.530 --> 04:27.300
+as all the other devices does.
+
+04:27.300 --> 04:28.803
+So how is that possible?
+
+04:30.090 --> 04:31.020
+What I'm saying is think
+
+04:31.020 --> 04:35.310
+about we have so many languages on our planet earth
+
+04:35.310 --> 04:38.250
+and if every country speaks only their language
+
+04:38.250 --> 04:40.770
+they will not be able to communicate with each other.
+
+04:40.770 --> 04:44.190
+Exchange ideas, share resources.
+
+04:44.190 --> 04:46.650
+There should be a common platform where everyone
+
+04:46.650 --> 04:48.720
+can communicate with each other.
+
+04:48.720 --> 04:52.500
+Likewise, in the network or computers or devices
+
+04:52.500 --> 04:54.720
+follow some set of standards.
+
+04:54.720 --> 04:58.380
+So the hardware vendor or the app developer or
+
+04:58.380 --> 05:01.920
+the website developer knows what standards to be followed.
+
+05:01.920 --> 05:04.653
+So it can be communicated across the world.
+
+05:05.565 --> 05:09.840
+OSI model has given that standard because your billions
+
+05:09.840 --> 05:12.180
+of people around the world using computer network
+
+05:12.180 --> 05:14.760
+and wants to communicate with each other.
+
+05:14.760 --> 05:17.370
+So for the worldwide data communication, there should be
+
+05:17.370 --> 05:20.340
+some standards and systems which are compatible
+
+05:20.340 --> 05:24.810
+across all the devices, apps, operating systems.
+
+05:24.810 --> 05:27.330
+There should be standard of communication methods
+
+05:27.330 --> 05:29.190
+and devices also, you know,
+
+05:29.190 --> 05:32.580
+you take a wifi router from Cisco
+
+05:32.580 --> 05:36.090
+or Juniper or Delink or anywhere.
+
+05:36.090 --> 05:38.700
+They provide you similar kind of communication.
+
+05:38.700 --> 05:42.180
+That's because of the standards that they're following.
+
+05:42.180 --> 05:45.870
+So ISO, international Organization of Standardization have
+
+05:45.870 --> 05:48.870
+has developed this standard and which everyone
+
+05:48.870 --> 05:49.773
+has to follow.
+
+05:52.830 --> 05:55.530
+So the communication model that they developed, or think
+
+05:55.530 --> 05:58.350
+of this like a a language that everybody
+
+05:58.350 --> 06:00.600
+on the earth speaks.
+
+06:00.600 --> 06:04.050
+I'm saying earth as if I'm an alien, but I want to
+
+06:04.050 --> 06:06.900
+get through, present this important point to you
+
+06:06.900 --> 06:10.770
+a common language that can be spoken by everyone.
+
+06:10.770 --> 06:14.820
+Like that, ISO has developed OSI,
+
+06:14.820 --> 06:16.710
+open system interconnection.
+
+06:16.710 --> 06:21.710
+So OSI has developed, sorry, ISO has developed OSI.
+
+06:21.720 --> 06:24.510
+Okay, sounds similar, right?
+
+06:24.510 --> 06:26.700
+So OSI is the model of communication,
+
+06:26.700 --> 06:29.283
+the standard developed by ISO.
+
+06:31.320 --> 06:34.620
+And together it's called a simply ISO-OSI model
+
+06:34.620 --> 06:36.300
+which is a seven layer architecture.
+
+06:36.300 --> 06:38.073
+It was developed in 1984.
+
+06:39.480 --> 06:41.790
+So you have these seven layers.
+
+06:41.790 --> 06:43.230
+If you are from a computer field
+
+06:43.230 --> 06:47.310
+you'd have already seen this in your school or college.
+
+06:47.310 --> 06:49.890
+I remember we used to buy hard this.
+
+06:49.890 --> 06:51.720
+So you have total seven layer
+
+06:51.720 --> 06:53.160
+in this first layer is physical
+
+06:53.160 --> 06:54.930
+then you have data link layer, second layer,
+
+06:54.930 --> 06:56.820
+third layer is network layer,
+
+06:56.820 --> 07:00.690
+fourth layer is transport layer, fifth layer is session,
+
+07:00.690 --> 07:04.500
+sixth layer is presentation, seventh layer is application.
+
+07:04.500 --> 07:07.353
+So to tell you in shot an application layer you have
+
+07:07.353 --> 07:12.030
+think of your browsers or your apps, okay?
+
+07:12.030 --> 07:16.050
+At that level, physical level layer like cables,
+
+07:16.050 --> 07:20.130
+the data traveling through the cable, the analog signals
+
+07:20.130 --> 07:21.780
+and there's so many things that happens in the middle.
+
+07:21.780 --> 07:23.073
+Let's talk about it.
+
+07:25.020 --> 07:27.180
+So the basic elements of the layered model
+
+07:27.180 --> 07:29.700
+of all the seven layered model is one services,
+
+07:29.700 --> 07:33.600
+second protocols, and third interfaces.
+
+07:33.600 --> 07:36.180
+Service is the set of action that you know
+
+07:36.180 --> 07:38.280
+one layer provides to the other layer.
+
+07:38.280 --> 07:40.800
+Like layer one is providing something to layer two
+
+07:40.800 --> 07:42.510
+that's a service that it is offering.
+
+07:42.510 --> 07:46.530
+That's service, protocol is the rule.
+
+07:46.530 --> 07:48.960
+So the offering of the service or the data
+
+07:48.960 --> 07:51.413
+which is traveling from different devices
+
+07:51.413 --> 07:53.550
+to your apps to your operating system,
+
+07:53.550 --> 07:56.880
+follows some set of rules that is called protocol.
+
+07:56.880 --> 07:59.250
+So standard protocols are defined in this OSI layer
+
+07:59.250 --> 08:01.320
+which we are going to talk about.
+
+08:01.320 --> 08:04.800
+An interface means communication between layers.
+
+08:04.800 --> 08:07.350
+So one layer can offer service to the other layer.
+
+08:07.350 --> 08:08.883
+We'll see how that works.
+
+08:11.910 --> 08:12.780
+You know, let's talk
+
+08:12.780 --> 08:16.050
+about like the sending and receiving letters instead
+
+08:16.050 --> 08:17.820
+of sending and receiving some data
+
+08:17.820 --> 08:21.123
+on the net or internet or computer network.
+
+08:23.010 --> 08:25.770
+So you have a sender and you have a receiver, okay?
+
+08:25.770 --> 08:29.083
+And sending a letter really who sends letter nowadays
+
+08:29.083 --> 08:32.820
+except, you know, banks and government offices.
+
+08:32.820 --> 08:35.160
+But yeah, let's take that example.
+
+08:35.160 --> 08:37.320
+So you have a sender who wants to send a letter
+
+08:37.320 --> 08:39.090
+and there is a receiver will be receiving the letter.
+
+08:39.090 --> 08:41.770
+So first the letter is written and the you've put
+
+08:41.770 --> 08:44.730
+into an envelope and drop it into the mailbox.
+
+08:44.730 --> 08:47.460
+This is at the higher level this is happening where
+
+08:47.460 --> 08:51.337
+sender understands what he or she's doing, okay
+
+08:51.337 --> 08:54.420
+knows how to write the letter, knows how to pack it
+
+08:54.420 --> 08:58.440
+into envelope and knows how to drop it into the mailbox.
+
+08:58.440 --> 09:00.480
+Now after this, the middle layer
+
+09:00.480 --> 09:03.420
+the letter is carried from the mailbox to the post office.
+
+09:03.420 --> 09:05.520
+The sender does not understand this concept
+
+09:05.520 --> 09:08.010
+maybe understand, but there is no part in it.
+
+09:08.010 --> 09:08.990
+That's the middle layer.
+
+09:08.990 --> 09:11.850
+So the lowest layer is the letter is delivered
+
+09:11.850 --> 09:13.380
+to the receiver, okay?
+
+09:13.380 --> 09:14.970
+By post office,
+
+09:14.970 --> 09:16.890
+all those things that happens in the post office.
+
+09:16.890 --> 09:19.320
+It's at the very lower layer really
+
+09:19.320 --> 09:21.930
+we don't even think about how that happens.
+
+09:21.930 --> 09:24.060
+And then towards the receiver,
+
+09:24.060 --> 09:28.140
+the letter is delivered to the receiver's post office.
+
+09:28.140 --> 09:31.080
+From there, the letter is carried and put
+
+09:31.080 --> 09:34.650
+into the mailbox and the receiver is going to pick
+
+09:34.650 --> 09:38.193
+up that letter, removes the envelope and reads it.
+
+09:39.390 --> 09:40.920
+Really the center and receiver is worried
+
+09:40.920 --> 09:42.420
+about just, you know, the center is worried
+
+09:42.420 --> 09:43.950
+about writing the letter and dropping it.
+
+09:43.950 --> 09:46.290
+Receiver is just worried about, you know, reading it.
+
+09:46.290 --> 09:47.580
+That's all.
+
+09:47.580 --> 09:49.530
+Those are the higher layers.
+
+09:49.530 --> 09:51.690
+So there's so many services that are provided
+
+09:51.690 --> 09:55.230
+in the middle layers and lower layer.
+
+09:55.230 --> 09:57.270
+Wow, that's a tongue twister.
+
+09:57.270 --> 10:00.250
+Similarly, if you're doing communication
+
+10:01.110 --> 10:04.770
+maybe sending an email or a photograph or a video,
+
+10:04.770 --> 10:06.270
+you're uploading some picture
+
+10:06.270 --> 10:08.970
+on let's say Instagram or Facebook, right?
+
+10:08.970 --> 10:12.360
+So you may be having a smartphone or a computer.
+
+10:12.360 --> 10:15.840
+You are the sender and the server that is going to post it
+
+10:15.840 --> 10:17.880
+on your Instagram is the receiver.
+
+10:17.880 --> 10:21.990
+Or you can think, take an example of mail also sending mail.
+
+10:21.990 --> 10:25.110
+So at the very higher level layer, you have your apps,
+
+10:25.110 --> 10:26.920
+your softwares, your operating system, okay,
+
+10:26.920 --> 10:30.480
+where you write the letter or you write the mail, right?
+
+10:30.480 --> 10:33.060
+And then you click on the send button
+
+10:33.060 --> 10:38.060
+and then all this layer, layer 6, 5, 4, 3, 2, 1
+
+10:39.180 --> 10:42.840
+and then 1, 2, 3, 4, 5, 6 will do all its work
+
+10:42.840 --> 10:43.830
+and the mail is received.
+
+10:43.830 --> 10:45.540
+We understand all this layers one by one
+
+10:45.540 --> 10:49.143
+but I just wanted to show you a high level view for now.
+
+10:53.130 --> 10:56.790
+Okay? Now let's understand all these layers one by one.
+
+10:56.790 --> 11:00.090
+First the physical layer, it's the lowest layer
+
+11:00.090 --> 11:02.190
+in our OSI reference model.
+
+11:02.190 --> 11:03.270
+And it is responsible
+
+11:03.270 --> 11:06.480
+for the actual physical connection between the devices
+
+11:06.480 --> 11:10.650
+like a cable between computer A to computer B.
+
+11:10.650 --> 11:11.970
+Think of like that.
+
+11:11.970 --> 11:16.140
+And here the information is in bits, ones and zeros.
+
+11:16.140 --> 11:18.090
+So when it receives the signal
+
+11:18.090 --> 11:21.660
+it is going to convert it into bits, ones, and zeros.
+
+11:21.660 --> 11:24.720
+And it is going to send this to the data link layer.
+
+11:24.720 --> 11:25.833
+The second layer.
+
+11:26.730 --> 11:28.980
+The main function of the data link layer is to
+
+11:28.980 --> 11:32.140
+make sure transfer is error free from one node
+
+11:32.140 --> 11:36.030
+to another or the physical layer of course.
+
+11:36.030 --> 11:39.570
+At this layer, the data is in frame, a physical layer,
+
+11:39.570 --> 11:41.670
+the data is in bits, ones and zero.
+
+11:41.670 --> 11:45.030
+At the data link layer, the data is in frame.
+
+11:45.030 --> 11:48.780
+And here the devices are like Mac, Mac address.
+
+11:48.780 --> 11:50.550
+The physical addressing works over here
+
+11:50.550 --> 11:53.549
+network interface card will have a physical address
+
+11:53.549 --> 11:56.313
+which we call it as Mac address.
+
+11:57.150 --> 12:00.870
+Then the data is presented to the network layer.
+
+12:00.870 --> 12:02.760
+Network layer works for the transmission
+
+12:02.760 --> 12:06.420
+of data from one node to other, which are located
+
+12:06.420 --> 12:10.200
+in different networks and it works on the IP address.
+
+12:10.200 --> 12:12.700
+So when the data is presented to the network layer
+
+12:13.710 --> 12:16.470
+it is assembled in packets and the senders
+
+12:16.470 --> 12:18.390
+and receivers IP address are placed
+
+12:18.390 --> 12:20.880
+in the header by the network layer.
+
+12:20.880 --> 12:25.880
+The header of the packet, so bits, frames, then packets
+
+12:26.880 --> 12:29.190
+then comes the transport layer.
+
+12:29.190 --> 12:30.120
+So it takes the service
+
+12:30.120 --> 12:33.270
+from the network layer and it really provides the service
+
+12:33.270 --> 12:35.370
+to the application layer.
+
+12:35.370 --> 12:36.660
+Here, the end-to-end connection
+
+12:36.660 --> 12:38.610
+and the reliability is checked.
+
+12:38.610 --> 12:39.450
+It is responsible
+
+12:39.450 --> 12:42.330
+for the end-to-end delivery of the complete message.
+
+12:42.330 --> 12:44.380
+It also provides the acknowledgement
+
+12:45.330 --> 12:47.010
+and if there is any failure
+
+12:47.010 --> 12:50.013
+or drop of data, it'll retransmit the data.
+
+12:51.270 --> 12:53.700
+Then it's the session layer.
+
+12:53.700 --> 12:56.760
+In TCP IP model, the application presentation
+
+12:56.760 --> 13:00.000
+and session layer are presented as one layer.
+
+13:00.000 --> 13:02.250
+They are responsible in the security,
+
+13:02.250 --> 13:05.940
+maintenance of the connection, encryption, decryption
+
+13:05.940 --> 13:07.980
+and then presenting the data to your apps
+
+13:07.980 --> 13:12.720
+or to your softwares like browsers or mobile apps.
+
+13:12.720 --> 13:15.090
+So if you are sending an email
+
+13:15.090 --> 13:18.750
+the application layer is going to produce the data
+
+13:18.750 --> 13:20.670
+which would be then transmitted,
+
+13:20.670 --> 13:22.680
+transferred over the network.
+
+13:22.680 --> 13:24.030
+And if it's receiving
+
+13:24.030 --> 13:27.360
+then it is going to assemble all the data together
+
+13:27.360 --> 13:29.060
+and present it to the application.
+
+13:30.060 --> 13:33.690
+Let's understand a few more things about this OSI model.
+
+13:33.690 --> 13:36.030
+We'll be talking about the protocols later
+
+13:36.030 --> 13:39.630
+but what I want to show you here is are the devices.
+
+13:39.630 --> 13:43.770
+So at layer one you have devices like hub, layer two,
+
+13:43.770 --> 13:46.950
+you have devices like switches or you can call
+
+13:46.950 --> 13:51.450
+like a switch is a layer two device router or firewall
+
+13:51.450 --> 13:54.990
+or a layer three switch is at the third layer.
+
+13:54.990 --> 13:56.250
+The network layer here
+
+13:56.250 --> 13:59.010
+the IP address, like router forwards
+
+13:59.010 --> 14:03.540
+the data based on the IP addresses, switch,
+
+14:03.540 --> 14:07.443
+layer two device that is based on Mac addresses.
+
+14:08.610 --> 14:10.630
+Layer four you have gateways
+
+14:11.610 --> 14:14.160
+and layer 5, 6, 7, you have devices
+
+14:14.160 --> 14:18.213
+or apps like web server, mail server, browser, your client.
+
+14:19.230 --> 14:21.300
+So what you really need to understand
+
+14:21.300 --> 14:25.020
+from all these OSI layers, one,
+
+14:25.020 --> 14:27.930
+name and purpose of every layer
+
+14:27.930 --> 14:31.890
+and the devices associated or used at that layer.
+
+14:31.890 --> 14:32.723
+And also protocol
+
+14:32.723 --> 14:35.000
+that we are going to talk later in the slides.
+
+14:36.240 --> 14:38.460
+Let's summarize all these layers.
+
+14:38.460 --> 14:41.790
+Physical layer, transmit bits over a medium to
+
+14:41.790 --> 14:45.630
+provide mechanical and electrical specification like cables
+
+14:45.630 --> 14:48.150
+that we lay around to connect multiple devices
+
+14:48.150 --> 14:50.730
+or even the wireless communication.
+
+14:50.730 --> 14:53.310
+Data link layer is going to organize bits into frame.
+
+14:53.310 --> 14:55.710
+Physical layer is going to give the data into bits.
+
+14:55.710 --> 14:59.793
+Data link layer is going to assemble it into frames.
+
+15:00.780 --> 15:03.270
+Network layer, we have packets.
+
+15:03.270 --> 15:06.270
+The packets travels from the source to the destination
+
+15:06.270 --> 15:08.570
+and that's what provides the internet working.
+
+15:09.570 --> 15:11.970
+Devices like routers
+
+15:11.970 --> 15:14.340
+transport layer provides reliable process to
+
+15:14.340 --> 15:17.460
+process message delivery and also error recovery.
+
+15:17.460 --> 15:21.693
+If something fails, it'll also retransmit the data.
+
+15:22.530 --> 15:24.930
+Session layer is to establish, manage
+
+15:24.930 --> 15:26.613
+and terminate sessions.
+
+15:27.450 --> 15:30.843
+Presentation layer to translate, encrypt, and compress data.
+
+15:31.890 --> 15:34.980
+Application layer allows your apps
+
+15:34.980 --> 15:38.850
+or your softwares to access the network resource.
+
+15:38.850 --> 15:41.880
+So understanding functionalities of all these layers
+
+15:41.880 --> 15:45.990
+and what device fits, what device or apps fits
+
+15:45.990 --> 15:48.783
+at what layer is all you need to know for now.

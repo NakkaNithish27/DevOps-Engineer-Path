@@ -1,0 +1,1177 @@
+WEBVTT
+
+00:00.030 --> 00:03.900
+Instructor: Okay, so what really is Pipeline as a code?
+
+00:03.900 --> 00:07.620
+It's Jenkins way of setting up Pipeline automatically
+
+00:07.620 --> 00:10.230
+by using a file called as Jenkinsfile.
+
+00:10.230 --> 00:11.880
+J capital there.
+
+00:11.880 --> 00:13.680
+So we can put this file in our source code
+
+00:13.680 --> 00:16.083
+or we can write it in the Jenkins job itself.
+
+00:17.130 --> 00:20.550
+Jenkinsfile really defines the stages in the CI/CD Pipeline.
+
+00:20.550 --> 00:22.920
+As we create jobs,
+
+00:22.920 --> 00:26.163
+there'll be different stages in the Jenkinsfile define.
+
+00:27.240 --> 00:29.130
+Jenkinsfile is a text file
+
+00:29.130 --> 00:32.670
+and it has its own domain specific language,
+
+00:32.670 --> 00:35.220
+but it's very close to groovy,
+
+00:35.220 --> 00:37.440
+but you really don't need to know groovy
+
+00:37.440 --> 00:39.283
+to write a Jenkinsfile.
+
+00:41.760 --> 00:44.970
+There are two syntax, one is scripted
+
+00:44.970 --> 00:47.250
+and the other one is declarative.
+
+00:47.250 --> 00:49.770
+Declarative is the way forward now
+
+00:49.770 --> 00:52.370
+and we are going to use declarative in this project.
+
+00:53.820 --> 00:55.803
+Okay, some concepts in the Pipeline.
+
+00:57.030 --> 00:58.170
+First of all, you have Pipeline
+
+00:58.170 --> 00:59.460
+that's gonna be in the main block
+
+00:59.460 --> 01:03.243
+and everything inside Pipeline will be executed by Jenkins.
+
+01:04.260 --> 01:06.873
+Nodes or agent, they're both settings.
+
+01:06.873 --> 01:09.600
+You can define where this Pipeline can get executed,
+
+01:09.600 --> 01:12.150
+on which node or on which agent.
+
+01:12.150 --> 01:15.900
+There are stages where the actual execution happen.
+
+01:15.900 --> 01:18.090
+In stages you have steps.
+
+01:18.090 --> 01:22.380
+The steps could be commands like Maven install, or Git pull,
+
+01:22.380 --> 01:24.930
+or upload artifact to Nexus,
+
+01:24.930 --> 01:27.000
+or any such step that you want to execute
+
+01:27.000 --> 01:28.740
+from your Pipeline.
+
+01:28.740 --> 01:30.333
+Let's understand the syntax.
+
+01:31.410 --> 01:33.090
+That's how it looks.
+
+01:33.090 --> 01:34.350
+So you have Pipeline block,
+
+01:34.350 --> 01:37.560
+and in inside that you have all the other settings.
+
+01:37.560 --> 01:39.810
+Let's understand all the settings one by one.
+
+01:41.910 --> 01:44.130
+Pipeline, that's the main block of code.
+
+01:44.130 --> 01:45.930
+So you say Pipeline two curly braces
+
+01:45.930 --> 01:48.280
+and everything comes inside your Pipeline code.
+
+01:49.470 --> 01:51.750
+In Pipeline you have things like agent,
+
+01:51.750 --> 01:54.240
+you can define where the job is going to run.
+
+01:54.240 --> 01:56.490
+Tools from your global tool configuration,
+
+01:56.490 --> 01:58.710
+if you have included some tools.
+
+01:58.710 --> 02:01.380
+Then you can mention the tools like Sonar, Scanner,
+
+02:01.380 --> 02:03.660
+or Maven, or JDK.
+
+02:03.660 --> 02:06.600
+Environment will be the environment variable,
+
+02:06.600 --> 02:08.760
+and stages will be the steps that we are going to execute
+
+02:08.760 --> 02:09.603
+in our job.
+
+02:12.660 --> 02:15.060
+So the agent block will look something like this.
+
+02:15.060 --> 02:18.480
+Agent, you'll give the name of the agent, the label,
+
+02:18.480 --> 02:20.400
+or you can just say agent any also.
+
+02:20.400 --> 02:23.729
+So it can run on any node, even master or slave.
+
+02:23.729 --> 02:26.970
+And tools you give the name and you mention the tool name
+
+02:26.970 --> 02:29.673
+that you have included in global tool configuration.
+
+02:31.470 --> 02:34.740
+Other things in Pipelines are environment variable.
+
+02:34.740 --> 02:36.660
+So setting variable of value
+
+02:36.660 --> 02:39.987
+so it can be used in your steps, in your stages.
+
+02:39.987 --> 02:43.650
+Like in this case you see some nexus variable,
+
+02:43.650 --> 02:46.203
+which we are going to use in our Pipeline.
+
+02:47.828 --> 02:52.828
+Stages, that's where the main execution goes.
+
+02:52.920 --> 02:56.613
+In stages you have stage, you can have multiple stage,
+
+02:58.132 --> 02:59.460
+like one stage that clones the source code,
+
+02:59.460 --> 03:02.250
+other stage that is going to run Maven build,
+
+03:02.250 --> 03:05.820
+another stage which can publish the artifact to Nexus,
+
+03:05.820 --> 03:09.030
+and like that you can have stages to deploy artifact,
+
+03:09.030 --> 03:12.303
+to do code analysis, you can have a number of stages there.
+
+03:16.110 --> 03:20.130
+In stage, so you have stages, inside that you have stage,
+
+03:20.130 --> 03:23.220
+you can have multiple stage, and in stage you have steps.
+
+03:23.220 --> 03:27.090
+This is where you put the actual command.
+
+03:27.090 --> 03:28.830
+And also post installation step,
+
+03:28.830 --> 03:30.810
+like probably you want to send email notification
+
+03:30.810 --> 03:32.463
+or want to archive the artifact.
+
+03:33.840 --> 03:35.043
+Something like this.
+
+03:36.480 --> 03:40.590
+Stage, in parenthesis you give the name of the stage.
+
+03:40.590 --> 03:44.220
+Then inside that you have steps, like Maven install,
+
+03:44.220 --> 03:45.780
+and you can have post installation step,
+
+03:45.780 --> 03:47.010
+like archiving artifact,
+
+03:47.010 --> 03:49.773
+or you can print some message also like echo.
+
+03:50.850 --> 03:53.190
+Okay, so in DevOps, everything needs automation.
+
+03:53.190 --> 03:57.780
+Even your Pipeline is automated with Jenkinsfile.
+
+03:57.780 --> 03:59.733
+So now let's do some hands-on.
+
+04:00.570 --> 04:03.990
+So we are going to write a very basic Jenkinsfile first.
+
+04:03.990 --> 04:05.880
+That simply means the Pipeline code.
+
+04:05.880 --> 04:10.170
+It's called as Jenkinsfile with J capital.
+
+04:10.170 --> 04:11.634
+So I'm using VSCode,
+
+04:11.634 --> 04:13.500
+again you can use any editor of your choice.
+
+04:13.500 --> 04:14.543
+If you're using VSCode,
+
+04:14.543 --> 04:16.890
+you can install some extension
+
+04:16.890 --> 04:20.670
+so it highlights and shows all the curly braces
+
+04:20.670 --> 04:21.930
+and all the colors properly.
+
+04:21.930 --> 04:24.640
+So you can go to extensions and search for Jenkinsfile
+
+04:25.680 --> 04:27.660
+and install this one,
+
+04:27.660 --> 04:31.020
+or Jenkinsfile Support, this one.
+
+04:31.020 --> 04:32.383
+Install it.
+
+04:32.383 --> 04:33.750
+So you just see the highlighting.
+
+04:33.750 --> 04:36.150
+Or you can even install Groovy.
+
+04:36.150 --> 04:40.980
+Once you install, just go to file, say new text file,
+
+04:40.980 --> 04:44.100
+and just save it, save it somewhere
+
+04:44.100 --> 04:47.070
+with the name Jenkinsfile, J capital.
+
+04:47.070 --> 04:50.043
+Jenkinsfile, J capital, save it.
+
+04:52.140 --> 04:53.160
+Okay, let's start writing.
+
+04:53.160 --> 04:54.660
+So the first thing that you're going to write
+
+04:54.660 --> 04:57.780
+in the Pipeline code is going to be the Pipeline itself.
+
+04:57.780 --> 05:01.353
+Pipeline and open curly brace and close it.
+
+05:02.250 --> 05:05.130
+Make sure cursor is in between the curly braces,
+
+05:05.130 --> 05:10.130
+hit enter, in between all this is your Pipeline code.
+
+05:10.500 --> 05:12.720
+Okay, first thing we write in the Pipeline code is,
+
+05:12.720 --> 05:14.430
+where do you want to run the Pipeline?
+
+05:14.430 --> 05:17.370
+We know we've been running it on Jenkins Server itself,
+
+05:17.370 --> 05:20.310
+but in Jenkins there's a concept of agents
+
+05:20.310 --> 05:21.510
+that we'll be seeing later.
+
+05:21.510 --> 05:23.220
+So you can select on which agent
+
+05:23.220 --> 05:24.780
+you want to run the Pipeline.
+
+05:24.780 --> 05:28.290
+From the Jenkins server, it'll select the agent.
+
+05:28.290 --> 05:29.460
+So we don't have any agent,
+
+05:29.460 --> 05:32.520
+so we are going to just say agent any, okay, like that.
+
+05:32.520 --> 05:33.930
+Agent any.
+
+05:33.930 --> 05:36.356
+And then we need to mention the tools.
+
+05:36.356 --> 05:37.800
+Now we are going to create a build Pipeline.
+
+05:37.800 --> 05:41.010
+So it's going to fetch the code, build the code,
+
+05:41.010 --> 05:43.580
+test the code, archive the artifact, stuff like that.
+
+05:43.580 --> 05:46.860
+So we need build tools Maven, and we need JDK.
+
+05:46.860 --> 05:48.870
+So we need to mention that first.
+
+05:48.870 --> 05:51.540
+So after agent, we'll just say tools.
+
+05:51.540 --> 05:52.373
+Tools.
+
+05:57.180 --> 05:59.250
+Okay, open and close curly brace,
+
+05:59.250 --> 06:03.240
+and in the middle of it you can mention the tool name.
+
+06:03.240 --> 06:05.190
+Maven is the tool name in Jenkins,
+
+06:05.190 --> 06:08.220
+but the tool name, the version that you have added
+
+06:08.220 --> 06:10.710
+in global tool configuration, that you have to mention
+
+06:10.710 --> 06:12.183
+over here in double quotes.
+
+06:13.170 --> 06:17.400
+So in Jenkins, tools, manage, Maven installations.
+
+06:17.400 --> 06:21.630
+We have given this Maven 3.9 all in caps.
+
+06:21.630 --> 06:23.610
+Let me copy that.
+
+06:23.610 --> 06:25.320
+In the double quote you mention that.
+
+06:25.320 --> 06:27.210
+Now we need JDK's correct version.
+
+06:27.210 --> 06:31.560
+So we are going to see JDK double quote and we need JDK 17.
+
+06:31.560 --> 06:33.780
+Well I think it's in caps.
+
+06:33.780 --> 06:34.613
+JDK 17.
+
+06:34.613 --> 06:36.093
+Let me confirm it once again.
+
+06:37.050 --> 06:40.320
+Yeah, it's JDK all in caps and 17.
+
+06:40.320 --> 06:41.770
+Good, so these are the tools.
+
+06:42.737 --> 06:44.160
+So the tools curly brace closes over here.
+
+06:44.160 --> 06:47.310
+After this I'll give some space.
+
+06:47.310 --> 06:49.803
+Okay, here we are going to write stages.
+
+06:50.850 --> 06:53.253
+Stages, open close curly brace.
+
+06:54.150 --> 06:58.320
+In the stages you have stage, and stage will have a name.
+
+06:58.320 --> 07:01.800
+So in parenthesis you have to give the name of the stage.
+
+07:01.800 --> 07:04.454
+So first I want to fetch the code.
+
+07:04.454 --> 07:07.260
+In the single quote I have given fetch code,
+
+07:07.260 --> 07:08.460
+that's the name.
+
+07:08.460 --> 07:11.043
+Then space, open close curly brace.
+
+07:15.900 --> 07:18.510
+Okay, now in between the stage curly braces,
+
+07:18.510 --> 07:20.493
+you need to mention steps.
+
+07:21.540 --> 07:26.540
+So mention steps, open close curly brace.
+
+07:27.780 --> 07:31.350
+And in the steps you're going to mention the plugins,
+
+07:31.350 --> 07:32.970
+all the steps that you want to execute.
+
+07:32.970 --> 07:34.710
+Maybe a shell command you want to execute,
+
+07:34.710 --> 07:35.640
+or maybe a plugin.
+
+07:35.640 --> 07:38.490
+Now you want to fetch the code and there is a Git plugin.
+
+07:38.490 --> 07:40.357
+If you go to Git plugin documentation,
+
+07:40.357 --> 07:45.357
+you will see how to write that plugin in the Pipeline code.
+
+07:46.170 --> 07:50.400
+First you need to write git the name of the plugin, space,
+
+07:50.400 --> 07:52.140
+and then you mention parameters.
+
+07:52.140 --> 07:54.543
+So parameter you give colon and its value.
+
+07:55.554 --> 07:56.730
+For example, we have to take branch, right?
+
+07:56.730 --> 08:00.030
+So branch is one parameter, colon, space,
+
+08:00.030 --> 08:00.930
+and you give the value.
+
+08:00.930 --> 08:02.790
+So I'm going to give single quote
+
+08:02.790 --> 08:07.410
+and the branch I'm to give, atom, then comma,
+
+08:07.410 --> 08:09.723
+separated by the next parameter, URL.
+
+08:13.590 --> 08:16.350
+So we have seen in freestyle project,
+
+08:16.350 --> 08:18.360
+when we create a build job,
+
+08:18.360 --> 08:19.470
+we have different options there,
+
+08:19.470 --> 08:21.303
+we have Git and then in Git we have,
+
+08:22.535 --> 08:23.368
+we mentioned branch, we mentioned,
+
+08:23.368 --> 08:25.055
+you know there is form filling.
+
+08:25.055 --> 08:26.003
+How do we do it here?
+
+08:26.885 --> 08:28.770
+So documentation we'll have, but mostly this is the syntax.
+
+08:28.770 --> 08:32.220
+You give the option name, branch, colon,
+
+08:32.220 --> 08:37.220
+and it's value, comma, and then you give the next one.
+
+08:37.500 --> 08:38.880
+How many ever you want to use it,
+
+08:38.880 --> 08:41.370
+that many you need to give comma separated.
+
+08:41.370 --> 08:42.203
+So next is URL.
+
+08:44.220 --> 08:48.180
+In single quote, mention the URL of your Git repository,
+
+08:48.180 --> 08:51.810
+the HKH coder VProfile Git repository.
+
+08:51.810 --> 08:54.690
+After this I'm going to add one next stage
+
+08:54.690 --> 08:56.460
+that will be to run unit tests
+
+08:56.460 --> 08:59.310
+so that I want to run the command MVN test.
+
+08:59.310 --> 09:00.210
+How do I do it?
+
+09:00.210 --> 09:01.890
+You know what I'll do?
+
+09:01.890 --> 09:02.903
+I'll simply copy the stage.
+
+09:04.050 --> 09:04.980
+Copy.
+
+09:04.980 --> 09:09.435
+And just below the stage make sure we have
+
+09:09.435 --> 09:11.435
+the curly brace end for the stage there,
+
+09:13.270 --> 09:15.450
+just below it I'm going to paste it
+
+09:15.450 --> 09:16.890
+and I'm going to make changes.
+
+09:16.890 --> 09:21.660
+Stage, name, unit test, steps.
+
+09:21.660 --> 09:23.850
+I just want to run MVN test command
+
+09:23.850 --> 09:26.670
+so I can use shell options.
+
+09:26.670 --> 09:29.463
+So in the steps I will simply say sh.
+
+09:30.330 --> 09:31.950
+If you want to run just the shell command,
+
+09:31.950 --> 09:33.360
+you can just say sh,
+
+09:33.360 --> 09:36.030
+and in single quote it can give the shell command.
+
+09:36.030 --> 09:39.000
+So I'll simply say MVN test.
+
+09:39.000 --> 09:40.335
+How about that?
+
+09:40.335 --> 09:41.356
+You see that?
+
+09:41.356 --> 09:43.440
+How easy was that to create the next stage?
+
+09:43.440 --> 09:45.190
+Just need to know what you're doing
+
+09:46.110 --> 09:48.610
+and be careful on opening and closing.
+
+09:48.610 --> 09:52.380
+Okay, now I want to use MVN install stage.
+
+09:52.380 --> 09:53.790
+I want to add one more stage.
+
+09:53.790 --> 09:55.394
+So what do I do?
+
+09:55.394 --> 09:57.859
+Well again, I'm going to copy this,
+
+09:57.859 --> 10:00.480
+and I'm going to just paste it here.
+
+10:01.680 --> 10:03.060
+And instead of unit test,
+
+10:03.060 --> 10:06.423
+I'm going to replace that with the text build.
+
+10:08.300 --> 10:09.133
+Build.
+
+10:09.133 --> 10:13.350
+And step, I'm going to give here MVN install.
+
+10:13.350 --> 10:16.110
+Now we already executed MVN test before this, right?
+
+10:16.110 --> 10:18.240
+So I want to skip the test,
+
+10:18.240 --> 10:19.860
+because if I run MVN install,
+
+10:19.860 --> 10:22.920
+install phase is going to execute all the previous phases
+
+10:22.920 --> 10:24.720
+including test.
+
+10:24.720 --> 10:25.553
+So I'll just skip that.
+
+10:25.553 --> 10:28.672
+So there is a maven option that we can use, hyphen D,
+
+10:28.672 --> 10:30.810
+any Maven option you want to pass,
+
+10:30.810 --> 10:32.670
+you have to use hyphen D.
+
+10:32.670 --> 10:35.490
+And then you just, without any space, you write that.
+
+10:35.490 --> 10:37.323
+So skip test.
+
+10:38.430 --> 10:40.680
+When you pass this to MVN commands
+
+10:40.680 --> 10:43.263
+it's going to skip the unit test.
+
+10:44.280 --> 10:46.470
+Okay, so steps are like build stage
+
+10:46.470 --> 10:49.140
+that we do it in Jenkins jobs.
+
+10:49.140 --> 10:52.020
+There's also post build action, if you remember.
+
+10:52.020 --> 10:54.960
+For that we have something called as post.
+
+10:54.960 --> 10:58.530
+So in the stage itself, this is the stage,
+
+10:58.530 --> 11:00.237
+from here till here, right here.
+
+11:00.237 --> 11:02.310
+And in the stage itself,
+
+11:02.310 --> 11:05.220
+just after the steps curly brace ends,
+
+11:05.220 --> 11:08.163
+you can give here post.
+
+11:12.090 --> 11:13.893
+Open and close the curly brace.
+
+11:15.570 --> 11:17.790
+Make some space in the middle.
+
+11:17.790 --> 11:19.590
+Success message I want to print
+
+11:19.590 --> 11:21.330
+if everything is successful, right?
+
+11:21.330 --> 11:24.063
+So success, open close curly brace.
+
+11:26.008 --> 11:27.090
+I'll just say archiving artifact.
+
+11:27.090 --> 11:30.150
+So if this completes successfully,
+
+11:30.150 --> 11:32.040
+then it'll execute this action,
+
+11:32.040 --> 11:35.220
+which is echo print archiving artifact.
+
+11:35.220 --> 11:38.913
+And then we are going to use the archive artifact plugin.
+
+11:40.170 --> 11:43.350
+So archive artifact is the name of the plugin
+
+11:43.350 --> 11:46.440
+in that we can pass the option artifacts
+
+11:46.440 --> 11:47.790
+and it's value as **/*.war.
+
+11:50.250 --> 11:52.410
+Okay, so we are done writing our Pipeline code.
+
+11:52.410 --> 11:56.490
+So once again, Pipeline open and close curly brace,
+
+11:56.490 --> 11:59.370
+and everything is in the Pipeline.
+
+11:59.370 --> 12:02.610
+And then you have agent, tools, stages.
+
+12:02.610 --> 12:04.260
+In the tools you have mentioned the tool names
+
+12:04.260 --> 12:06.030
+that we installed in Jenkins.
+
+12:06.030 --> 12:08.130
+In stages we have three stages,
+
+12:08.130 --> 12:11.820
+first stage is to fetch code, second to unit test,
+
+12:11.820 --> 12:13.350
+third build.
+
+12:13.350 --> 12:15.420
+In first stage, we have one step,
+
+12:15.420 --> 12:17.790
+in every stage we have one step,
+
+12:17.790 --> 12:22.790
+except in the third one we have one step and one post.
+
+12:22.950 --> 12:26.070
+So let's copy this entire Pipeline,
+
+12:26.070 --> 12:29.790
+come to Jenkins dashboard, click on new item.
+
+12:29.790 --> 12:32.370
+I will name it as VProfile Pipeline
+
+12:32.370 --> 12:34.740
+and select here as Pipeline,
+
+12:34.740 --> 12:39.740
+select item type as Pipeline, say okay, and scroll down.
+
+12:39.960 --> 12:42.990
+And over here you can paste to the Pipeline.
+
+12:42.990 --> 12:46.140
+Now there is an option here,
+
+12:46.140 --> 12:48.243
+Pipeline script from SCM.
+
+12:50.220 --> 12:52.590
+That means you fetch the source code
+
+12:52.590 --> 12:55.020
+and it is going to expect right here, yeah,
+
+12:55.020 --> 12:57.870
+it's a Pipeline script from SCM.
+
+12:57.870 --> 13:00.510
+So you mentioned the source code like Git,
+
+13:00.510 --> 13:03.360
+you mention all the details like repository, branch,
+
+13:03.360 --> 13:04.950
+credentials, everything.
+
+13:04.950 --> 13:07.020
+And then you mention the script path.
+
+13:07.020 --> 13:10.620
+This will be with this name, Jenkinsfile, not mandatory,
+
+13:10.620 --> 13:12.660
+but mostly it is with this name.
+
+13:12.660 --> 13:15.273
+And in this file you will have this entire content.
+
+13:17.070 --> 13:21.300
+But now we will just do this Pipeline script,
+
+13:21.300 --> 13:23.613
+paste your Pipeline, save it,
+
+13:24.930 --> 13:26.943
+and click on build now.
+
+13:27.960 --> 13:30.270
+Okay, let me refresh this page.
+
+13:30.270 --> 13:32.193
+Here you'll have the stages.
+
+13:35.430 --> 13:38.730
+Okay, so tool install is good, fetch code is done,
+
+13:38.730 --> 13:40.203
+now it's doing unit test.
+
+13:41.580 --> 13:43.030
+But where is the build stage?
+
+13:45.120 --> 13:48.573
+Oh yeah, I see it now, got executed, then it is showing.
+
+13:49.620 --> 13:51.123
+Okay, let's go back here.
+
+13:52.530 --> 13:54.993
+Okay, so this is the entire console output.
+
+13:56.130 --> 13:58.860
+All right, something goes wrong, not able to figure out,
+
+13:58.860 --> 14:00.030
+you're going to send this,
+
+14:00.030 --> 14:02.403
+not the screenshot of Pipeline failed.
+
+14:03.330 --> 14:07.200
+Okay, stages, there's nothing you can see over here
+
+14:07.200 --> 14:08.550
+except when you click on it.
+
+14:08.550 --> 14:11.162
+So when I click on this one, then it shows what's happening.
+
+14:11.162 --> 14:14.550
+And again, you have to click on this dropdown
+
+14:14.550 --> 14:16.383
+to see the entire console output.
+
+14:17.790 --> 14:19.830
+So every stage, separate console output
+
+14:19.830 --> 14:22.440
+we can very easily see from here.
+
+14:22.440 --> 14:25.020
+Okay, now let me take you to the source code repository.
+
+14:25.020 --> 14:28.350
+And here you can see a Jenkinsfile.
+
+14:28.350 --> 14:29.760
+Click on that.
+
+14:29.760 --> 14:31.410
+In the main branch, or some branches,
+
+14:31.410 --> 14:34.620
+and here you see one example of a Pipeline code
+
+14:34.620 --> 14:37.890
+which fetch the code, and you see something gibberish.
+
+14:37.890 --> 14:39.810
+Don't worry, we'll understand this.
+
+14:39.810 --> 14:41.400
+SonarCube code analysis
+
+14:41.400 --> 14:43.740
+and publish the artifact to SonarCube.
+
+14:43.740 --> 14:47.010
+And don't worry about looking at all this code.
+
+14:47.010 --> 14:49.320
+This is just copied from the documentation
+
+14:49.320 --> 14:51.090
+and we made the changes.
+
+14:51.090 --> 14:53.250
+Yeah, a few things we did right?
+
+14:53.250 --> 14:56.100
+But Pipeline code is just one time work for one project
+
+14:56.100 --> 14:57.510
+and then it's updating that.
+
+14:57.510 --> 15:00.098
+So you don't need to write it like on a daily basis.
+
+15:00.098 --> 15:03.510
+Even if you want to write it on daily basis, not a problem.
+
+15:03.510 --> 15:07.137
+We have good documentation, and Google, and ChatGPT,
+
+15:07.137 --> 15:09.390
+and everything to help us.
+
+15:09.390 --> 15:11.490
+And this problem will be just for the beginning.
+
+15:11.490 --> 15:13.920
+Once you get comfortable with Pipeline code,
+
+15:13.920 --> 15:15.033
+no turning back.
+
+15:16.050 --> 15:17.670
+Check the documentation,
+
+15:17.670 --> 15:20.190
+and documentation, you can say Pipeline,
+
+15:20.190 --> 15:21.813
+getting started with Pipeline.
+
+15:24.180 --> 15:25.260
+Yeah, there is a nice video
+
+15:25.260 --> 15:27.690
+of how to write a Pipeline script.
+
+15:27.690 --> 15:29.550
+You see everything is given step by step,
+
+15:29.550 --> 15:31.830
+select the Pipeline, go here, write the stage.
+
+15:31.830 --> 15:33.388
+You see that?
+
+15:33.388 --> 15:35.820
+Agent, any stages, stage, steps.
+
+15:35.820 --> 15:37.923
+So all the syntax is given over here.
+
+15:39.570 --> 15:41.120
+And you can just simply Google,
+
+15:42.290 --> 15:44.730
+I want to include the docker build in Jenkinsfile.
+
+15:44.730 --> 15:47.610
+You'll find so many blogs.
+
+15:47.610 --> 15:49.590
+Let's also try ChatGPT.
+
+15:49.590 --> 15:52.330
+So I'm just going to put here Jenkinsfile
+
+15:53.640 --> 15:56.520
+and gives all the detail different kinds of Pipeline,
+
+15:56.520 --> 15:59.910
+decorative Pipeline, scripted Pipeline, and example.
+
+15:59.910 --> 16:00.743
+Nice.
+
+16:01.830 --> 16:04.473
+Okay, it's going on and on and on and on.
+
+16:05.460 --> 16:07.980
+Okay, just for initial purpose, read this.
+
+16:07.980 --> 16:09.480
+Once you get comfortable with this,
+
+16:09.480 --> 16:11.310
+you don't need to come to even ChatGPT
+
+16:11.310 --> 16:13.083
+to write your Pipeline.
+
+16:13.083 --> 16:15.300
+You can just go to the documentation of that plugin
+
+16:15.300 --> 16:18.210
+and just copy and put it in your Pipeline.
+
+16:18.210 --> 16:20.970
+I'm just asking ChatGPT, "Write me a Jenkinsfile
+
+16:20.970 --> 16:23.550
+that will fetch the code from GitHub, build it with Maven,
+
+16:23.550 --> 16:26.067
+and upload the artifact to S3 bucket."
+
+16:30.390 --> 16:31.223
+It's writing everything.
+
+16:31.223 --> 16:33.600
+But you will understand all this
+
+16:33.600 --> 16:36.030
+only if you know the basic syntax of Jenkinsfile.
+
+16:36.030 --> 16:37.530
+You can write it by yourself,
+
+16:37.530 --> 16:40.800
+you know how to do it, then you can understand it.
+
+16:40.800 --> 16:42.180
+Because when you want to make the changes,
+
+16:42.180 --> 16:45.750
+like credentials and stuff, we'll see that later.
+
+16:45.750 --> 16:47.280
+S3 bucket variable.
+
+16:47.280 --> 16:49.890
+These are the environment variables that it has set,
+
+16:49.890 --> 16:52.440
+and then it'll be using those environment variables.
+
+16:52.440 --> 16:55.800
+So it's fetching the code, building the code,
+
+16:55.800 --> 16:58.530
+and uploading the artifact to the S3 bucket.
+
+16:58.530 --> 17:00.780
+So we can take this, make our own changes,
+
+17:00.780 --> 17:02.790
+put it in Jenkins and run it.
+
+17:02.790 --> 17:06.840
+So that's how you use ChatGPT to write your Pipeline code.
+
+17:06.840 --> 17:09.900
+Only if you're aware about Jenkins, and Pipeline code,
+
+17:09.900 --> 17:13.470
+and AWS, Maven, Git, all these things,
+
+17:13.470 --> 17:15.750
+then only it'll be useful.
+
+17:15.750 --> 17:18.480
+Not like any Tom, Dick and Harry can come to ChatGPT
+
+17:18.480 --> 17:22.170
+and become a DevOps or write a Pipeline code from scratch
+
+17:22.170 --> 17:23.430
+without even understanding anything.
+
+17:23.430 --> 17:25.410
+That's not going to happen.
+
+17:25.410 --> 17:27.480
+At least not now.
+
+17:27.480 --> 17:29.970
+Who knows about the future, right?
+
+17:29.970 --> 17:33.990
+But anyways, for now, or for years from now,
+
+17:33.990 --> 17:35.220
+this will be the work.
+
+17:35.220 --> 17:37.720
+You need to be aware about the basic concepts,
+
+17:37.720 --> 17:41.433
+then only it'll make sense to take the help of AI.
+
+17:42.510 --> 17:43.650
+All right, from the next lecture,
+
+17:43.650 --> 17:45.870
+we are going to do more serious stuff
+
+17:45.870 --> 17:46.950
+with the Pipeline code.
+
+17:46.950 --> 17:48.930
+We are going to do code analysis.
+
+17:48.930 --> 17:51.330
+We are going to run quality gates,
+
+17:51.330 --> 17:54.800
+we'll version the artifacts, store it in excess,
+
+17:54.800 --> 17:55.833
+all real time stuff.
+
+17:56.670 --> 17:58.200
+So if you are done with this,
+
+17:58.200 --> 18:00.250
+then you can join me in the next lecture.

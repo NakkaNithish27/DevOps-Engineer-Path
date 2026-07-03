@@ -1,0 +1,1138 @@
+WEBVTT
+
+00:00.450 --> 00:02.640
+Instructor: Software management
+
+00:02.640 --> 00:05.763
+or in Linux we call them as package management.
+
+00:07.290 --> 00:09.120
+In your life you must have installed
+
+00:09.120 --> 00:13.020
+or uninstalled many softwares on your computer,
+
+00:13.020 --> 00:14.250
+on your smartphone,
+
+00:14.250 --> 00:16.863
+or any other software based devices.
+
+00:17.910 --> 00:19.800
+In Linux there are many different ways
+
+00:19.800 --> 00:22.593
+of installing or setting up a package.
+
+00:23.790 --> 00:26.880
+So we are going to start from very basic
+
+00:26.880 --> 00:29.520
+of how to download and install a single package,
+
+00:29.520 --> 00:34.230
+and then we'll slowly move to package management tools
+
+00:34.230 --> 00:36.753
+like Yum, DNF, APT.
+
+00:37.710 --> 00:40.950
+In the very beginning we created two VMs,
+
+00:40.950 --> 00:43.770
+one CentOS, the other, Ubuntu.
+
+00:43.770 --> 00:47.760
+The major difference between these two operating system
+
+00:47.760 --> 00:49.743
+is the package management system.
+
+00:50.610 --> 00:53.193
+CentOS is RPM based OS,
+
+00:54.720 --> 00:57.330
+and Ubuntu is Debian based OS.
+
+00:57.330 --> 01:00.003
+We will understand its difference now.
+
+01:00.930 --> 01:04.173
+So log into your VM, the CentOS VM.
+
+01:05.400 --> 01:09.460
+If it's not up, bring it up and just do vagrant ssh.
+
+01:09.460 --> 01:12.060
+Okay, we are going to switch to root user.
+
+01:12.060 --> 01:13.563
+So do sudo -i,
+
+01:14.760 --> 01:18.180
+because managing package is root user task
+
+01:18.180 --> 01:21.390
+or you need to have root user privilege for that.
+
+01:21.390 --> 01:25.620
+Okay, let's first run this command cat /etc/os-release.
+
+01:25.620 --> 01:26.823
+Read this file.
+
+01:27.990 --> 01:32.213
+Here, you should see ID="centos", or ID_LIKE="rhel_fedora."
+
+01:32.213 --> 01:35.490
+CentOS, RHEL Fedora,
+
+01:35.490 --> 01:38.103
+these are all RPM based operating system.
+
+01:39.030 --> 01:41.280
+Also if your OS is RPM based,
+
+01:41.280 --> 01:44.610
+this command should work, rpm -qa.
+
+01:44.610 --> 01:47.490
+This should list all the RPM packages installed
+
+01:47.490 --> 01:48.603
+on your computer.
+
+01:50.130 --> 01:52.440
+And if Debian based, you should be able
+
+01:52.440 --> 01:54.390
+to run the command dpkg -l.
+
+01:54.390 --> 01:58.470
+But this command won't work, because this is RPM based OS.
+
+01:58.470 --> 02:00.750
+Anyways, we'll see this command in a moment.
+
+02:00.750 --> 02:02.640
+So let's clear the screen.
+
+02:02.640 --> 02:05.640
+Okay, so let's learn installing software by an example.
+
+02:05.640 --> 02:09.030
+So I'm going to run here a command called telnet.
+
+02:09.030 --> 02:11.100
+Now don't worry about what this command does.
+
+02:11.100 --> 02:14.370
+We're going to learn this in detail in networking lecture,
+
+02:14.370 --> 02:16.140
+but telnet is a very popular command.
+
+02:16.140 --> 02:18.210
+It is used for network troubleshooting,
+
+02:18.210 --> 02:19.770
+and if I run this command,
+
+02:19.770 --> 02:22.170
+I get an error, no such file or directory,
+
+02:22.170 --> 02:24.420
+or you might get an error, command not found.
+
+02:25.320 --> 02:30.320
+But telnet is definitely a command and it should work.
+
+02:30.480 --> 02:31.410
+If it's not working,
+
+02:31.410 --> 02:34.650
+that means its package is not installed.
+
+02:34.650 --> 02:37.560
+In CentOS we can simply call it as RPM.
+
+02:37.560 --> 02:41.343
+There is no Telnet RPM installed. So how do we install it?
+
+02:42.300 --> 02:45.360
+So we are going to search for Telnet RPM on the internet.
+
+02:45.360 --> 02:47.553
+We just say telnet rpm.
+
+02:49.350 --> 02:51.480
+And you should get many repositories.
+
+02:51.480 --> 02:55.200
+Repositories are the places where the packages are kept.
+
+02:55.200 --> 02:57.510
+So you have Rpmfind, very popular,
+
+02:57.510 --> 03:01.320
+you have centos.package.org, very popular,
+
+03:01.320 --> 03:04.380
+rpm.pbone.net, that is also very popular.
+
+03:04.380 --> 03:07.920
+We are going to use Rpmfind, because it's very clean.
+
+03:07.920 --> 03:09.933
+Just click on Rpmfind.net,
+
+03:10.860 --> 03:14.700
+or you can simply go to the URL Rpmfind.net, like that also.
+
+03:14.700 --> 03:19.290
+And you can put your RPM name, Telnet, and make a search.
+
+03:19.290 --> 03:22.920
+So it gives you the list and the link to download the RPM.
+
+03:22.920 --> 03:25.050
+But there are many. Which one do we choose?
+
+03:25.050 --> 03:27.900
+So one thing we know, we have CentOS operating system.
+
+03:27.900 --> 03:31.680
+CentOS 9, we can search for, and we see here CentOS 9.
+
+03:31.680 --> 03:35.622
+But again you have then different other architecture,
+
+03:35.622 --> 03:40.622
+aarch64, ppc, s390x, x86_64.
+
+03:42.870 --> 03:46.290
+Now to find the architecture of your operating system,
+
+03:46.290 --> 03:48.810
+you can run arch command.
+
+03:48.810 --> 03:52.050
+So let's go to the terminal and run the command arch,
+
+03:52.050 --> 03:53.520
+and you should see the architecture.
+
+03:53.520 --> 03:56.523
+There's another command, uname -m,
+
+03:57.660 --> 03:59.970
+that also gives you the architecture.
+
+03:59.970 --> 04:03.900
+Now architecture is of the CPU, and if you have 64-bit CPU,
+
+04:03.900 --> 04:05.880
+you're going to install 64-bit OS.
+
+04:05.880 --> 04:09.960
+And likewise you're going to install 64-bit packages.
+
+04:09.960 --> 04:13.887
+So we want to install Telnet RPM for CentOS Stream 9
+
+04:13.887 --> 04:18.887
+for x86_64, so right click, Copy link address.
+
+04:20.730 --> 04:24.060
+Now we want to download it in the Linux shell.
+
+04:24.060 --> 04:25.560
+If we click on this, it is just going
+
+04:25.560 --> 04:27.900
+to download in our local machine,
+
+04:27.900 --> 04:29.230
+but we want to download it
+
+04:30.330 --> 04:32.760
+in our Linux OS through the command line.
+
+04:32.760 --> 04:35.700
+So we are going to run a command called curl.
+
+04:35.700 --> 04:38.550
+Think of curl as the text based browser.
+
+04:38.550 --> 04:40.320
+So you say curl, paste the link,
+
+04:40.320 --> 04:44.670
+and then you have to say -o, output, store this output,
+
+04:44.670 --> 04:46.380
+and you need to give the output file name.
+
+04:46.380 --> 04:48.780
+So we're going to give the same name of the RPM
+
+04:48.780 --> 04:51.240
+as it is, copy and paste.
+
+04:51.240 --> 04:52.950
+So it's going to go to this link
+
+04:52.950 --> 04:55.293
+and store all the output in this file.
+
+04:57.270 --> 04:58.593
+Okay, let's hit Enter.
+
+05:01.320 --> 05:04.080
+If you do ls, you should see the RPM,
+
+05:04.080 --> 05:05.910
+and to command to install the RPM is
+
+05:05.910 --> 05:10.910
+rpm -i, is to install, v is for verbose, that means print,
+
+05:12.660 --> 05:14.490
+h is for human readable format.
+
+05:14.490 --> 05:16.230
+So it's going to install and print everything
+
+05:16.230 --> 05:17.970
+in human readable format.
+
+05:17.970 --> 05:21.120
+And you need to give the path of where your RPM is located.
+
+05:21.120 --> 05:22.230
+So it's in current directory.
+
+05:22.230 --> 05:24.633
+So simply give the name and hit Enter.
+
+05:25.770 --> 05:27.090
+Okay, so the RPM is installed.
+
+05:27.090 --> 05:31.590
+Now if we run the command telnet, we get the Telnet shell.
+
+05:31.590 --> 05:33.360
+Now as I said, what is Telnet and all?
+
+05:33.360 --> 05:35.820
+That we'll see in the networking lecture.
+
+05:35.820 --> 05:37.830
+You can simply quit from here.
+
+05:37.830 --> 05:40.923
+You can find from the list also, rpm -qa | grep,
+
+05:43.080 --> 05:45.243
+search for telnet.
+
+05:46.380 --> 05:47.790
+So if Telnet is installed or not,
+
+05:47.790 --> 05:50.610
+you can see like this with this command.
+
+05:50.610 --> 05:53.010
+And if you want to uninstall, remove this RPM,
+
+05:53.010 --> 05:56.250
+you have to give rpm -e is to erase,
+
+05:56.250 --> 05:57.840
+and you have to give this name,
+
+05:57.840 --> 06:01.890
+what you find through rpm -qa command, and then hit Enter.
+
+06:01.890 --> 06:03.450
+It should remove that RPM.
+
+06:03.450 --> 06:07.290
+And if you run telnet command, you'll again get the error.
+
+06:07.290 --> 06:10.020
+Now this is a very basic method of finding the RPM
+
+06:10.020 --> 06:12.360
+and installing it, but Linux
+
+06:12.360 --> 06:17.360
+gives much more better package management systems or tools.
+
+06:17.460 --> 06:20.760
+For example Yum, DNF, APT.
+
+06:20.760 --> 06:24.093
+And majority of the time, you will be using them.
+
+06:25.080 --> 06:26.820
+And how and when to use them?
+
+06:26.820 --> 06:29.370
+Let's understand that by example.
+
+06:29.370 --> 06:33.663
+So let's say now I want to install a package called httpd.
+
+06:34.950 --> 06:39.950
+Let me come here, Rpmfind, and let's search for httpd.
+
+06:40.320 --> 06:44.370
+It's one of the most popular web service,
+
+06:44.370 --> 06:45.960
+and we're going to learn this later.
+
+06:45.960 --> 06:48.540
+We have so many use cases for httpd,
+
+06:48.540 --> 06:49.860
+but since we're talking about packages,
+
+06:49.860 --> 06:51.750
+let's focus on that here first.
+
+06:51.750 --> 06:53.850
+So httpd RPM, I want to install,
+
+06:53.850 --> 06:58.487
+and we know now httpd for CentOS Stream 9 x86_64.
+
+06:59.580 --> 07:04.580
+Right click, Copy link address, go to your terminal.
+
+07:04.680 --> 07:07.380
+Okay, let me clear the screen. Now you've seen curl command.
+
+07:07.380 --> 07:09.843
+I'll show you one more command to download, wget.
+
+07:10.890 --> 07:13.893
+Wget, and just paste the URL, and hit Enter.
+
+07:15.060 --> 07:19.200
+So wget or curl can access a remote URL,
+
+07:19.200 --> 07:22.080
+but wget is most of the time used
+
+07:22.080 --> 07:25.500
+to download something from a remote URL.
+
+07:25.500 --> 07:28.320
+Curl has many other use cases.
+
+07:28.320 --> 07:30.750
+So you can use wget if you just want to download.
+
+07:30.750 --> 07:33.390
+So we have the httpd RPM and we know how to install it,
+
+07:33.390 --> 07:38.390
+rpm -ivh, sorry, -ivh, and give the package name.
+
+07:42.930 --> 07:45.183
+Okay, so this is the problem with RPM.
+
+07:46.020 --> 07:48.030
+It simply tries to install the software,
+
+07:48.030 --> 07:50.880
+but the software may have many dependencies.
+
+07:50.880 --> 07:51.930
+Here you just see two,
+
+07:51.930 --> 07:56.820
+but there could be 20, hundreds, of dependencies.
+
+07:56.820 --> 07:59.460
+In that case, you need to install those dependencies first
+
+07:59.460 --> 08:02.310
+and then you can install your package.
+
+08:02.310 --> 08:03.630
+And trust me, I did those things
+
+08:03.630 --> 08:06.270
+in my old system admin days.
+
+08:06.270 --> 08:08.910
+It's a very hectic process.
+
+08:08.910 --> 08:12.153
+So we have package management tools like Yum.
+
+08:13.470 --> 08:15.150
+Okay, let me clear the screen here.
+
+08:15.150 --> 08:20.150
+I'm going to go to the folder /etc/yum.repos.d/,
+
+08:20.850 --> 08:22.200
+and I do ls here.
+
+08:22.200 --> 08:23.760
+And you will see some files over here.
+
+08:23.760 --> 08:27.660
+You'll see two or maybe more files in your VM.
+
+08:27.660 --> 08:29.670
+These files, let's do a cat
+
+08:29.670 --> 08:31.530
+to one of the files, centos.repo,
+
+08:31.530 --> 08:34.800
+any of the files, you just do a cat, read that file.
+
+08:34.800 --> 08:39.063
+And here you will see repositories.
+
+08:40.230 --> 08:44.850
+So this is the URL of the repository, that's the name,
+
+08:44.850 --> 08:46.140
+and a few other information
+
+08:46.140 --> 08:48.270
+whether it's enabled or not, like that.
+
+08:48.270 --> 08:51.030
+This is one section, one repository, you can say.
+
+08:51.030 --> 08:54.150
+Second repository, like that, many repositories.
+
+08:54.150 --> 08:56.250
+So default repository access comes
+
+08:56.250 --> 08:58.050
+with the operating system when you install the OS.
+
+08:58.050 --> 09:01.050
+Some you can add to get access to more softwares.
+
+09:01.050 --> 09:05.010
+So the way it works is, let me once again clear the screen.
+
+09:05.010 --> 09:08.550
+I will say yum search httpd.
+
+09:08.550 --> 09:09.540
+And it is going to search
+
+09:09.540 --> 09:11.190
+through all the available repositories
+
+09:11.190 --> 09:13.650
+and give me the list of all the packages
+
+09:13.650 --> 09:15.420
+that has the name httpd.
+
+09:15.420 --> 09:19.920
+See here, so many packages that has the name httpd,
+
+09:19.920 --> 09:23.610
+httpd-devel, httpd-filesystem, httpd-manual.
+
+09:23.610 --> 09:26.010
+I'm just interested in installing this one.
+
+09:26.010 --> 09:30.420
+So I will say yum install httpd.
+
+09:30.420 --> 09:35.420
+And when I hit Enter, so it says architecture,
+
+09:35.430 --> 09:36.990
+you know, x86_64.
+
+09:36.990 --> 09:39.090
+That's the package it is installing,
+
+09:39.090 --> 09:40.820
+and it's installing dependencies.
+
+09:40.820 --> 09:44.550
+So all the dependencies and some of the weak dependencies.
+
+09:44.550 --> 09:46.680
+If you're okay with this, you can say yes.
+
+09:46.680 --> 09:49.650
+So total 11 packages will be installed.
+
+09:49.650 --> 09:52.233
+So y for yes, hit Enter.
+
+09:53.550 --> 09:56.460
+Just going to go through those repositories, download it
+
+09:56.460 --> 09:59.010
+and install it, and set it for you.
+
+09:59.010 --> 10:00.270
+Imagine downloading,
+
+10:00.270 --> 10:03.030
+installing all those RPMs one by one manually.
+
+10:03.030 --> 10:04.680
+It's going to take time.
+
+10:04.680 --> 10:08.780
+Now a new generation tool is DNF for RPM based OS.
+
+10:08.780 --> 10:12.690
+So you can also say dnf install httpd.
+
+10:12.690 --> 10:14.040
+That also you can do.
+
+10:14.040 --> 10:15.490
+Since everything is installed
+
+10:16.590 --> 10:18.600
+and dependencies are all resolved,
+
+10:18.600 --> 10:20.880
+there's no dependencies required,
+
+10:20.880 --> 10:22.380
+so it is saying nothing to do.
+
+10:23.790 --> 10:25.800
+So you can use Yum or DNF.
+
+10:25.800 --> 10:28.230
+Alternatively, most of the time try to use DNF.
+
+10:28.230 --> 10:29.780
+It's a new generation commands.
+
+10:31.500 --> 10:35.943
+You can remove it by saying dnf remove httpd, right?
+
+10:38.460 --> 10:41.220
+So it's also removing unused dependency.
+
+10:41.220 --> 10:44.040
+It's only going to remove the dependency if it's unused,
+
+10:44.040 --> 10:46.143
+if it's not used by any other package.
+
+10:47.070 --> 10:49.740
+And y, okay?
+
+10:49.740 --> 10:51.450
+You can also just say, yeah,
+
+10:51.450 --> 10:55.080
+dnf install -y if you're sure it's not even going
+
+10:55.080 --> 10:58.143
+to ask you a question, you can just say -y.
+
+10:59.580 --> 11:01.530
+And no yes or no question, simply download it
+
+11:01.530 --> 11:04.080
+and all the dependencies with it.
+
+11:04.080 --> 11:06.990
+Okay, there are many other amazing options available
+
+11:06.990 --> 11:08.790
+with the DNF or Yum.
+
+11:08.790 --> 11:12.873
+I just say dnf --help to see the available options.
+
+11:14.700 --> 11:19.200
+Like Yum, or dnf check-update, clean,
+
+11:19.200 --> 11:23.190
+there is install, list, reinstall.
+
+11:23.190 --> 11:26.190
+It's also useful sometimes while installing packages,
+
+11:26.190 --> 11:28.590
+for some reason it doesn't get installed properly,
+
+11:28.590 --> 11:30.690
+so you can say reinstall also to reinstall it.
+
+11:30.690 --> 11:32.550
+Remove, we have seen.
+
+11:32.550 --> 11:36.300
+Yum upgrade or dnf upgrade will upgrade a package
+
+11:36.300 --> 11:38.343
+or all the packages in your system.
+
+11:39.360 --> 11:42.573
+So let me show you that, yum upgrade if you do.
+
+11:44.790 --> 11:48.750
+So it is saying total 161 packages needs to be upgraded,
+
+11:48.750 --> 11:50.093
+six new packages will be installed.
+
+11:50.093 --> 11:52.350
+You can see all the list, right?
+
+11:52.350 --> 11:54.630
+It's like you update softwares
+
+11:54.630 --> 11:56.130
+on your phone or computer, right?
+
+11:56.130 --> 11:57.903
+Like that similar way, yum upgrade.
+
+11:58.770 --> 12:00.690
+So it's gonna take some time.
+
+12:00.690 --> 12:02.910
+We are not going to install it, just say no.
+
+12:02.910 --> 12:06.090
+But in real time when you set any new OS,
+
+12:06.090 --> 12:07.320
+when you start using it,
+
+12:07.320 --> 12:09.150
+before you start using it, you upgrade it.
+
+12:09.150 --> 12:11.490
+So you know, it patches all the vulnerabilities
+
+12:11.490 --> 12:15.030
+and you know, bug fixes, right?
+
+12:15.030 --> 12:18.750
+Okay, so we have seen how to install RPM, we have seen how
+
+12:18.750 --> 12:21.930
+to install it through Yum, DNF.
+
+12:21.930 --> 12:24.300
+Now let's say if we are trying to install a package
+
+12:24.300 --> 12:26.130
+and it's not available through Yum, also.
+
+12:26.130 --> 12:28.500
+I'll say yum install jenkins.
+
+12:28.500 --> 12:31.200
+We will be using Jenkins a lot in this course.
+
+12:31.200 --> 12:33.390
+It's a continuous integration tool.
+
+12:33.390 --> 12:34.680
+So let's say I'm trying to install that,
+
+12:34.680 --> 12:37.320
+yum install jenkins, and that's the package name.
+
+12:37.320 --> 12:40.770
+It says no match for argument, jenkins.
+
+12:40.770 --> 12:43.290
+That means this Jenkins package is not available
+
+12:43.290 --> 12:46.110
+in any of the repositories that it has access to.
+
+12:46.110 --> 12:50.837
+And that is from here, yum.repos.d, right?
+
+12:51.780 --> 12:53.430
+None of the file here has the access
+
+12:53.430 --> 12:55.980
+to a repository that has the package, jenkins.
+
+12:55.980 --> 12:59.400
+So it is simply giving you that error, unable to find.
+
+12:59.400 --> 13:02.160
+So then what do you do? Well, it's pretty simple.
+
+13:02.160 --> 13:04.470
+You open your browser, Google or any search engine,
+
+13:04.470 --> 13:07.773
+and you say install jenkins.
+
+13:09.000 --> 13:13.470
+So the vendor, right, Jenkins, is going to give you steps
+
+13:13.470 --> 13:15.480
+of how to install a particular package,
+
+13:15.480 --> 13:17.850
+if it's package, like installing Jenkins.
+
+13:17.850 --> 13:20.550
+You see? jenkins.io, that's the URL over there.
+
+13:20.550 --> 13:23.730
+Let's click on that, and we're installing it on Linux.
+
+13:23.730 --> 13:26.250
+So over here click on Linux.
+
+13:26.250 --> 13:29.460
+And in Linux, you have here Debian, Ubuntu flavor,
+
+13:29.460 --> 13:32.340
+Fedora, Red Hat, Alma, Rocky.
+
+13:32.340 --> 13:35.163
+So that's what we want. Let's click on that, right?
+
+13:37.080 --> 13:39.180
+All right, yeah, you can install Jenkins through Yum
+
+13:39.180 --> 13:42.570
+on Red Hat Linux, Alma Linux, Rocky Linux, Oracle Linux.
+
+13:42.570 --> 13:44.710
+Same goes for CentOS.
+
+13:44.710 --> 13:46.110
+Okay, so let's come down,
+
+13:46.110 --> 13:49.590
+and here, you should see the commands of installing Jenkins.
+
+13:49.590 --> 13:52.050
+Here you see the yum install command, Jenkins,
+
+13:52.050 --> 13:53.640
+but before that you have few other commands.
+
+13:53.640 --> 13:54.990
+Let's go through them.
+
+13:54.990 --> 13:59.990
+So wget -o, that means output into this file,
+
+14:01.410 --> 14:02.580
+and this is the URL.
+
+14:02.580 --> 14:05.940
+So it's going to basically go to this URL
+
+14:05.940 --> 14:08.220
+and all the output is going to store into this file.
+
+14:08.220 --> 14:12.180
+It is going to create a file, jenkins.repo,
+
+14:12.180 --> 14:13.980
+which will have the repository information.
+
+14:13.980 --> 14:16.620
+Then it is running a command rpm --import.
+
+14:16.620 --> 14:18.630
+And this is the path of a key.
+
+14:18.630 --> 14:22.320
+So some repositories need keys to access.
+
+14:22.320 --> 14:25.830
+So it is giving you the command to import the key,
+
+14:25.830 --> 14:29.310
+then yum upgrade to upgrade all the packages.
+
+14:29.310 --> 14:30.600
+And then some dependency.
+
+14:30.600 --> 14:35.600
+Now Jenkins depends on Java 17 and fontconfig.
+
+14:36.150 --> 14:37.623
+That's one dependency.
+
+14:38.762 --> 14:41.640
+Install that dependency and then install Jenkins.
+
+14:41.640 --> 14:42.810
+And don't worry about this command,
+
+14:42.810 --> 14:44.220
+we'll understand this later.
+
+14:44.220 --> 14:47.940
+So let's do this one by one. Let's copy this command.
+
+14:47.940 --> 14:52.200
+This is one command divided into two with a backward slash.
+
+14:52.200 --> 14:56.193
+Let me copy this, and let's paste it here.
+
+14:57.960 --> 15:00.690
+So if you want to give command in multiple lines,
+
+15:00.690 --> 15:04.503
+you can separate it by a backward slash, like that.
+
+15:07.050 --> 15:08.550
+Okay, so it created a file there.
+
+15:08.550 --> 15:10.443
+We can just do a cat to this file.
+
+15:13.110 --> 15:14.850
+See that? The package information is stored.
+
+15:14.850 --> 15:17.520
+Repository information is stored over here.
+
+15:17.520 --> 15:19.290
+And then we run this command
+
+15:19.290 --> 15:22.563
+to copy the key, the access key.
+
+15:25.530 --> 15:29.970
+Okay, that is done. And next is doing yum upgrade.
+
+15:29.970 --> 15:33.030
+Now that's optional, but you know what? Let's do this.
+
+15:33.030 --> 15:35.250
+Now this might take some time for some people,
+
+15:35.250 --> 15:36.783
+because of the internet.
+
+15:38.040 --> 15:40.413
+For me it will be super quick. I just say y.
+
+15:45.900 --> 15:46.800
+And it's done.
+
+15:46.800 --> 15:49.500
+I told you it's going to be super quick for me.
+
+15:49.500 --> 15:52.980
+You know why? Because I paused the recording.
+
+15:52.980 --> 15:55.920
+I know that's not an option for you, anyways.
+
+15:55.920 --> 15:58.440
+So you learn, you know, if you are not able
+
+15:58.440 --> 16:01.740
+to find a package in your repository from your OS,
+
+16:01.740 --> 16:03.810
+you can anyway search on the internet.
+
+16:03.810 --> 16:06.360
+The vendor who releases the package will also
+
+16:06.360 --> 16:08.460
+give you information of how to install it.
+
+16:08.460 --> 16:11.130
+So do not worry about installing packages.
+
+16:11.130 --> 16:13.500
+It's going to be always the easiest thing
+
+16:13.500 --> 16:15.510
+that you do in Linux.
+
+16:15.510 --> 16:18.810
+But you need to understand the mechanism behind it
+
+16:18.810 --> 16:21.570
+to find out the right package for you, for your OS,
+
+16:21.570 --> 16:22.923
+for your architecture.
+
+16:24.390 --> 16:26.490
+Okay, so for now, just go through the list
+
+16:26.490 --> 16:28.950
+of options available for DNF.
+
+16:28.950 --> 16:31.110
+There are some regularly used one, you don't need
+
+16:31.110 --> 16:33.000
+to mug up this, just know
+
+16:33.000 --> 16:35.520
+that you can anytime do dnf --help
+
+16:35.520 --> 16:37.410
+and find out all the option.
+
+16:37.410 --> 16:39.690
+So you've seen how to install a package.
+
+16:39.690 --> 16:42.330
+We have here, you know, where there is a reinstall option,
+
+16:42.330 --> 16:46.170
+remove, update, dnf grouplist.
+
+16:46.170 --> 16:47.580
+You have group packages also,
+
+16:47.580 --> 16:51.030
+like a developer's development tools group.
+
+16:51.030 --> 16:54.360
+And you can install group packages with group install.
+
+16:54.360 --> 16:58.290
+You have DNF repository list, dnf repolist.
+
+16:58.290 --> 17:01.440
+And you see the list of all the repositories.
+
+17:01.440 --> 17:04.470
+You see we have Jenkins repository also available.
+
+17:04.470 --> 17:07.110
+dnf clean all or yum clean all, is
+
+17:07.110 --> 17:09.150
+to clean the cache, clear the cache.
+
+17:09.150 --> 17:10.410
+Sometimes you need to do that,
+
+17:10.410 --> 17:13.800
+because let's say you have added the repository,
+
+17:13.800 --> 17:15.690
+but still not able to install sometimes
+
+17:15.690 --> 17:18.000
+due to the caching issue, you can do dnf clean all,
+
+17:18.000 --> 17:21.270
+and then again you can do yum install or dnf install.
+
+17:21.270 --> 17:23.343
+It will again scan the repository.
+
+17:24.240 --> 17:28.410
+One more popular package, and let me tell you, epel-release.
+
+17:28.410 --> 17:31.937
+Just do dnf install epel-release -y.
+
+17:31.937 --> 17:33.690
+If you install this package,
+
+17:33.690 --> 17:36.990
+it is going to give you access to more repositories.
+
+17:36.990 --> 17:38.340
+Okay, let me clear the screen.
+
+17:38.340 --> 17:40.170
+Let me show you that command once again.
+
+17:40.170 --> 17:41.420
+This is the package name.
+
+17:42.450 --> 17:46.380
+This is for RPM based, mostly CentOS, Alma Linux.
+
+17:46.380 --> 17:48.930
+These kinds of OS, epel-release.
+
+17:48.930 --> 17:52.743
+If you do dnf repolist, you get access to new repositories.
+
+17:53.610 --> 17:55.680
+And lastly, let me show you dnf history.
+
+17:55.680 --> 17:58.741
+That will show you what all we did with DNF
+
+17:58.741 --> 18:00.073
+or Yum command.
+
+18:00.073 --> 18:02.610
+So install httpd, we removed it,
+
+18:02.610 --> 18:05.430
+upgrade, epel-release install.
+
+18:05.430 --> 18:08.190
+All right? So there are many other available options.
+
+18:08.190 --> 18:09.660
+Use it when you need it.
+
+18:09.660 --> 18:12.150
+Don't try to mug up all those things.
+
+18:12.150 --> 18:14.760
+We will be using these commands a lot in this course.
+
+18:14.760 --> 18:17.190
+You don't even need to really, you know, mug up them.
+
+18:17.190 --> 18:20.040
+You can just, it will be always in the back of your head.
+
+18:20.910 --> 18:24.720
+Okay, so we will be doing more lectures on packages
+
+18:24.720 --> 18:28.560
+after we do services and processes.
+
+18:28.560 --> 18:30.330
+That would be all in this lecture.
+
+18:30.330 --> 18:31.920
+Make sure you run the history command
+
+18:31.920 --> 18:33.810
+and see the list of all the commands
+
+18:33.810 --> 18:36.330
+that we have executed in this lecture.
+
+18:36.330 --> 18:38.340
+Thank you so much for watching and practicing.
+
+18:38.340 --> 18:39.990
+I'll see you in the next lecture.

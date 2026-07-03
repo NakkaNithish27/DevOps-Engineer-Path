@@ -1,0 +1,811 @@
+WEBVTT
+
+00:00.240 --> 00:01.040
+Welcome.
+
+00:01.040 --> 00:07.240
+In this lecture we are going to set up Prometheus, Grafana, Loki and an application server.
+
+00:07.680 --> 00:12.440
+All these four will be on an AWS EC2 instances.
+
+00:13.040 --> 00:16.880
+All these tools comes as a binary based on your operating system.
+
+00:16.880 --> 00:22.040
+You can download and run them, but that is not the right way to run in real time.
+
+00:22.520 --> 00:25.640
+In real time, we should run as a service.
+
+00:25.800 --> 00:29.680
+So Prometheus as a service which we can manage through systemctl command.
+
+00:29.840 --> 00:33.320
+In Linux, we use systemctl to manage the service.
+
+00:33.320 --> 00:37.480
+Right now, if you have followed this course from the beginning, you know what I'm talking about.
+
+00:37.880 --> 00:42.880
+And Linux lectures in Vagrant and Linux server section we set up Tomcat service.
+
+00:42.880 --> 00:49.560
+Similarly we are going to set up here Prometheus, Grafana, Loki and also alloy and Node Exporter.
+
+00:49.720 --> 00:56.160
+On the application server our application will be running Python flask application which is going to
+
+00:56.160 --> 01:00.920
+generate metrics and logs that will be pushing to these servers.
+
+01:01.400 --> 01:03.360
+First we are we're going to set up Grafana.
+
+01:03.520 --> 01:04.080
+Second.
+
+01:04.080 --> 01:04.960
+Prometheus.
+
+01:05.280 --> 01:07.800
+Third the application server.
+
+01:07.800 --> 01:09.160
+Fourth Loki.
+
+01:09.720 --> 01:12.280
+Now, in real time, the sequence does not matter.
+
+01:12.280 --> 01:15.560
+We are going through this sequence because we are just learning.
+
+01:15.560 --> 01:20.440
+We need to make sure everything is accessible, but in real time you will have definitely first your
+
+01:20.440 --> 01:24.600
+applications, your systems which are exposing metrics and generating logs.
+
+01:24.960 --> 01:27.880
+And then you set up the monitoring stack, the logging stack.
+
+01:28.280 --> 01:30.480
+So the sequence really does not matter.
+
+01:30.480 --> 01:35.720
+But once again we're going to first set up Grafana Prometheus node and then Loki.
+
+01:36.080 --> 01:37.200
+So let's get started.
+
+01:37.680 --> 01:40.280
+So I have logged into my AWS account.
+
+01:40.480 --> 01:43.720
+I'm in North California region over here.
+
+01:43.720 --> 01:47.440
+I'm going to set up these EC2 instances for EC2 instances.
+
+01:47.440 --> 01:51.960
+For now we have bash scripts to set up these services.
+
+01:52.240 --> 02:00.360
+So go to github.com slash slash v profile hyphen project switch to monitoring branch.
+
+02:00.840 --> 02:03.800
+First let's take a look at the Grafana setup.
+
+02:04.080 --> 02:04.960
+SH script.
+
+02:05.600 --> 02:06.520
+Nothing fancy.
+
+02:06.520 --> 02:09.560
+In this script we are setting some variable Grafana version.
+
+02:09.840 --> 02:11.200
+The download URL.
+
+02:11.200 --> 02:17.200
+This is going to be a Debian package because we're going to set or run this on ubuntu machine.
+
+02:17.200 --> 02:19.560
+So ubuntu package, Debian package.
+
+02:19.760 --> 02:23.280
+That's the URL from where it's going to download Grafana.
+
+02:23.520 --> 02:28.840
+And that's the Grafana version that we have mentioned here, the Debian file name and the service name.
+
+02:29.320 --> 02:37.240
+So we run apt update, apt upgrade, install a few dependencies, download Grafana Debian package and
+
+02:37.240 --> 02:43.040
+install it with dpkg hyphen I command and then we enable and start the Grafana service.
+
+02:43.400 --> 02:47.520
+Once we have this installed, we can access it on port 3000.
+
+02:47.560 --> 02:53.360
+The default username and password is admin, so click on this raw button over here.
+
+02:54.480 --> 02:58.160
+Continue to this website and keep it like this.
+
+02:58.160 --> 02:59.800
+Let's launch an EC2 instance.
+
+03:00.600 --> 03:05.160
+So launch instance naming it as Grafana hyphen Server ubuntu.
+
+03:05.800 --> 03:07.000
+Ubuntu 24.
+
+03:07.040 --> 03:09.800
+We are going with the free version.
+
+03:10.200 --> 03:10.800
+Scroll down.
+
+03:10.840 --> 03:13.960
+Make sure the instance type is T2 micro.
+
+03:15.120 --> 03:16.440
+Let's create a key pair.
+
+03:16.480 --> 03:19.360
+Now we'll use one key for all our instances.
+
+03:19.360 --> 03:21.560
+This is definitely not production style.
+
+03:21.840 --> 03:28.160
+You should have different login keys, but for our entire monitoring stack we'll just use one key for
+
+03:28.680 --> 03:30.360
+convenience while we're learning.
+
+03:30.680 --> 03:32.000
+So create new key pair.
+
+03:32.600 --> 03:39.760
+I'm going to give it name as Monit stack key PEM format create key pair.
+
+03:40.240 --> 03:44.360
+Now should download the private key now network settings.
+
+03:44.360 --> 03:47.440
+Click on edit and Create security group.
+
+03:47.440 --> 03:51.600
+Name it as Grafana Hyphen SG.
+
+03:53.000 --> 03:58.000
+Make sure you give some meaningful name because we will need to add this security group information
+
+03:58.000 --> 03:58.880
+in Prometheus.
+
+03:58.880 --> 04:03.320
+Also 22 from my IP I'm doing if your IP.
+
+04:03.320 --> 04:06.000
+If your public IP is continuously changing.
+
+04:06.000 --> 04:08.480
+You can keep it anywhere or you can keep updating.
+
+04:08.480 --> 04:16.520
+This one rule that we need to add is for 3000 port so we can access it from the browser.
+
+04:16.520 --> 04:18.760
+So I'm going to say from my IP.
+
+04:19.480 --> 04:22.320
+Take a look at that port number diagram.
+
+04:22.320 --> 04:24.680
+Grafana is going to listen on port 3000.
+
+04:24.680 --> 04:26.440
+We're going to exit from the browser.
+
+04:26.760 --> 04:29.080
+So that is the reason 3000 from my IP.
+
+04:29.400 --> 04:30.520
+And just launch the instance.
+
+04:30.520 --> 04:32.480
+We're going to download the script and run it.
+
+04:33.160 --> 04:35.240
+Launch instance okay.
+
+04:35.280 --> 04:36.520
+My Grafana server is running.
+
+04:36.520 --> 04:37.920
+I'm going to do SSH to it.
+
+04:37.920 --> 04:44.280
+So I'm going to copy its public IP, open the terminal, switch to it, mention a hyphen I the path
+
+04:44.280 --> 04:45.080
+of the key.
+
+04:45.720 --> 04:47.640
+So mine is in downloads.
+
+04:47.640 --> 04:51.040
+So monitor stack key dot pem.
+
+04:51.040 --> 04:51.520
+That's the name.
+
+04:51.520 --> 04:56.320
+The username is ubuntu because we have used ubuntu Ami login.
+
+04:56.320 --> 05:02.160
+Yes okay I'm in I'm going to switch to root user clear the screen.
+
+05:02.600 --> 05:05.760
+And we are going to download the script from GitHub.
+
+05:06.120 --> 05:13.080
+So copy this raw link of Grafana Grafana setup script shift insert to paste it.
+
+05:14.560 --> 05:15.800
+Okay, this is downloaded.
+
+05:15.800 --> 05:23.080
+Let me give it executable permission and then let's just run it.
+
+05:27.680 --> 05:28.880
+Okay the setup completed.
+
+05:28.880 --> 05:30.520
+Let's access it from the browser.
+
+05:30.800 --> 05:36.800
+So take its public IP and access it on port 3000 okay.
+
+05:36.840 --> 05:41.440
+Initially it might take a little while for this page to load, and once it's loaded it's going to be
+
+05:41.440 --> 05:42.400
+pretty quick.
+
+05:42.800 --> 05:46.560
+So the username is admin and password is admin by default.
+
+05:47.480 --> 05:49.600
+And it's going to ask you to reset the password.
+
+05:49.600 --> 05:50.960
+So I'm going to give it a password.
+
+05:50.960 --> 05:53.080
+Make sure whatever you give you remember this.
+
+05:53.720 --> 05:56.560
+So keep it simple for now okay.
+
+05:56.600 --> 05:58.080
+So Grafana is set.
+
+05:58.120 --> 06:01.280
+Let's go to the next server that is Prometheus.
+
+06:01.280 --> 06:03.320
+Let's take a look at the Prometheus script.
+
+06:04.120 --> 06:06.440
+Also you can shut it down for now if you want.
+
+06:06.720 --> 06:07.080
+now.
+
+06:07.120 --> 06:10.200
+In fact, I'll also shut it down because we're going to use it in the next lecture.
+
+06:10.200 --> 06:12.320
+So just set it and just shut it down.
+
+06:12.960 --> 06:18.240
+Now make sure when you power on you use its new IP because this IP will be gone.
+
+06:18.720 --> 06:20.040
+You'll get a new public IP.
+
+06:20.040 --> 06:24.840
+So make sure you check the new public IP when you power on this IP won't work.
+
+06:25.240 --> 06:31.560
+Okay so let's go back to our monitoring branch and let's take a look at Prometheus setup script.
+
+06:32.080 --> 06:34.640
+I'll just copy that script into Sublime Text editor.
+
+06:34.640 --> 06:35.720
+Just looks better.
+
+06:36.000 --> 06:36.240
+Okay.
+
+06:36.280 --> 06:39.480
+So first thing is we set the hostname as Prometheus.
+
+06:40.000 --> 06:44.960
+Then few variables are defined like Prometheus version the download URL.
+
+06:45.000 --> 06:47.360
+Now this download is going to be the binary.
+
+06:47.680 --> 06:50.120
+It will not give us that systemctl command.
+
+06:50.560 --> 06:52.840
+It's just a binary we download and we have to run it.
+
+06:53.200 --> 06:58.320
+But we're going to run it as a service and it will be similar as we set up the Tomcat service.
+
+06:58.320 --> 07:04.120
+If you remember download the binary extracted, we set up the systemctl file and then we run it through
+
+07:04.160 --> 07:05.360
+systemctl command.
+
+07:05.640 --> 07:09.400
+So if you want to just find and download you can just search download Prometheus.
+
+07:09.800 --> 07:10.960
+It will take to this URL.
+
+07:11.000 --> 07:17.560
+Here you have not only Prometheus but other things like alert manager, black box exporter, node exporter.
+
+07:18.800 --> 07:24.480
+So currently I'm using this 13.5.0 Linux amd64.
+
+07:24.800 --> 07:25.920
+So there's windows package.
+
+07:25.920 --> 07:28.000
+Also there's Darwin package is Linux.
+
+07:28.040 --> 07:29.560
+We are using Amd64.
+
+07:29.960 --> 07:30.320
+Here.
+
+07:30.320 --> 07:35.680
+You have packages for alert manager black box exporter console graphite memcache.
+
+07:36.200 --> 07:41.160
+These are the exporters by the way like the agent memcache exporter MySQL exporter.
+
+07:41.400 --> 07:44.640
+If you're monitoring MySQL servers you can install these exporters.
+
+07:44.640 --> 07:48.120
+And it will expose the metrics which Prometheus can scrape.
+
+07:48.600 --> 07:49.440
+Node exporter.
+
+07:49.440 --> 07:52.000
+This is one we will be setting up on our web server.
+
+07:52.720 --> 07:52.960
+Okay.
+
+07:52.960 --> 07:54.200
+Let's go back to the script.
+
+07:54.640 --> 07:59.280
+So download URL is going to have the download URL that we have just seen.
+
+07:59.960 --> 08:04.200
+Tar file variable is just going to be the name of the package that will be downloaded.
+
+08:04.400 --> 08:05.800
+Extract folder.
+
+08:05.960 --> 08:11.190
+So when we extract it this will be the name of the folder Older working directory to store temporary
+
+08:11.230 --> 08:12.990
+files that we are going to download.
+
+08:13.270 --> 08:14.430
+Configuration directory.
+
+08:14.430 --> 08:17.990
+So this is the configuration path of Prometheus.
+
+08:18.190 --> 08:18.590
+Etc..
+
+08:18.630 --> 08:19.470
+Prometheus.
+
+08:19.870 --> 08:23.310
+This is where we store the configuration data directory.
+
+08:23.310 --> 08:29.750
+By default Prometheus is going to store its information over here var lib Prometheus binaries are going
+
+08:29.750 --> 08:35.870
+to be in the bin usr local bin directory, the Prometheus binary file, and the service file that we
+
+08:35.910 --> 08:40.830
+are going to create to manage Prometheus with systemctl command that will be this path.
+
+08:41.590 --> 08:42.670
+So again it's pretty simple.
+
+08:42.670 --> 08:44.150
+Then we create the folder.
+
+08:44.150 --> 08:47.270
+We go into that folder we download Prometheus.
+
+08:47.310 --> 08:48.350
+We extract it.
+
+08:48.870 --> 08:52.270
+Now to run it as a service we need the user and the group.
+
+08:52.670 --> 08:54.630
+So we create the Prometheus group.
+
+08:54.670 --> 08:58.230
+We create the Prometheus user and add it into Prometheus group.
+
+08:59.030 --> 09:03.510
+Then we create the data directory where Prometheus is going to store the data.
+
+09:03.510 --> 09:07.510
+We give this data directory the permission of Prometheus user and group.
+
+09:07.910 --> 09:08.990
+That's the ownership.
+
+09:08.990 --> 09:10.390
+And this is the permission.
+
+09:10.390 --> 09:13.390
+So full permission to user and full permission to group.
+
+09:14.070 --> 09:18.630
+Then these are some subdirectories that we need to create in the configuration folder in etc..
+
+09:18.630 --> 09:23.150
+Prometheus rules rules hyphen s files underscore SD.
+
+09:23.510 --> 09:27.590
+So once we download and extract Prometheus we go into that folder.
+
+09:27.790 --> 09:31.430
+In that folder you will have this file Prometheus and prompt tool.
+
+09:31.430 --> 09:32.550
+These are the binaries.
+
+09:32.870 --> 09:35.870
+This we are moving it into the usr local bin folder.
+
+09:36.350 --> 09:37.190
+That's the binary.
+
+09:37.230 --> 09:38.310
+That's where we move.
+
+09:39.030 --> 09:41.510
+You can then check Prometheus hyphen hyphen version.
+
+09:41.510 --> 09:43.270
+You should be able to see it's version.
+
+09:43.430 --> 09:44.990
+Prometheus dot yml.
+
+09:45.030 --> 09:46.870
+This will be the configuration file.
+
+09:46.870 --> 09:52.630
+This file we are going to edit and mention the information of the node that it needs to scrape.
+
+09:53.110 --> 09:56.310
+So in that tarball you'll have the configuration the default configuration.
+
+09:56.310 --> 10:01.190
+Also you need to move it to the configuration directory which is slash slash Prometheus.
+
+10:01.990 --> 10:06.750
+You can just download the tar file, extract it and see the content to understand it better.
+
+10:07.430 --> 10:13.270
+So this tarball I'm going to not download it here I'm going to copy this link and download it in the
+
+10:13.270 --> 10:15.910
+command line on one of the EC2 instance.
+
+10:18.070 --> 10:21.550
+Okay I downloaded this and now let's extract it.
+
+10:25.550 --> 10:27.230
+And let's get into this folder.
+
+10:29.710 --> 10:29.950
+Okay.
+
+10:29.990 --> 10:30.270
+Here.
+
+10:30.270 --> 10:33.990
+So these are the two binaries that we copied usr local bin.
+
+10:33.990 --> 10:39.630
+And this is the configuration file we put it in etc. Prometheus folder that we are creating.
+
+10:40.110 --> 10:41.790
+We'll take a look at it in detail.
+
+10:42.030 --> 10:43.910
+For now let's focus on the setup script.
+
+10:43.910 --> 10:50.550
+So once we have that tarball extracted we create the systemd file service file at this path.
+
+10:53.590 --> 10:55.470
+And we put all this content.
+
+10:56.190 --> 10:58.790
+So take a look over here at Execstart.
+
+10:58.830 --> 11:00.590
+This is the binary path we are mentioning.
+
+11:00.590 --> 11:01.070
+Here.
+
+11:01.350 --> 11:06.190
+We are setting the configuration path storage location var lib Prometheus.
+
+11:06.590 --> 11:08.670
+It's going to listen on port 9090.
+
+11:08.710 --> 11:10.590
+If you wish to change you can change it here.
+
+11:10.950 --> 11:12.590
+And one option over here.
+
+11:12.590 --> 11:13.230
+You see this?
+
+11:13.230 --> 11:18.030
+You should take a note off as from the beginning, I'm saying that Prometheus is going to scrape the
+
+11:18.030 --> 11:23.310
+matrix, but from alloy, you can also send the metrics to Prometheus.
+
+11:23.310 --> 11:30.190
+If you want that to happen, you need to enable this option when you start the binary web dot enable
+
+11:30.190 --> 11:31.790
+remote write receiver.
+
+11:32.310 --> 11:38.630
+So when we run systemctl start Prometheus it's going to execute this binary with this options okay.
+
+11:38.710 --> 11:40.670
+So we create the systemd file.
+
+11:40.670 --> 11:46.870
+And then we set the permission to the configuration directory to the data directory.
+
+11:47.510 --> 11:50.710
+Of course the configuration directory should have permission 775.
+
+11:51.350 --> 11:53.070
+All for Prometheus user.
+
+11:53.070 --> 12:00.630
+All for Prometheus group systemctl daemon reload enable Prometheus start and checking its status.
+
+12:01.190 --> 12:03.070
+Okay, now let's launch the EC2 instance.
+
+12:04.910 --> 12:08.990
+So launch instance name Prometheus or Prometheus server.
+
+12:08.990 --> 12:09.630
+Ubuntu.
+
+12:10.150 --> 12:15.630
+Ubuntu server 24 Ami Instance type T2 micro is fine.
+
+12:16.390 --> 12:19.470
+Key pair use the same key that we created earlier.
+
+12:20.350 --> 12:21.110
+Security group.
+
+12:21.150 --> 12:22.230
+Let's click on edit.
+
+12:22.270 --> 12:25.150
+Let's give security group name as Prometheus security group.
+
+12:25.990 --> 12:27.830
+Same in description I have given.
+
+12:28.110 --> 12:29.270
+We need to do ssh.
+
+12:29.270 --> 12:32.070
+So I'm going to say 22 from my IP.
+
+12:32.710 --> 12:37.590
+And Prometheus by default we have seen is going to listen on port 1990.
+
+12:37.950 --> 12:40.190
+So 1990 from my IP.
+
+12:40.190 --> 12:43.430
+So we can access it from browser and 1990 from Grafana.
+
+12:43.430 --> 12:47.270
+So Grafana can run the from shell and fetch the data.
+
+12:47.910 --> 12:57.950
+So add port 1990 from my IP and 1990 from Grafana security Group.
+
+12:57.950 --> 13:00.430
+So search for your Grafana security group name.
+
+13:00.790 --> 13:04.150
+Select that and make sure you mention the description.
+
+13:06.430 --> 13:12.070
+Allows Grafana to run query or just allows Grafana and say launch instance.
+
+13:12.390 --> 13:19.270
+So by the time it is launching Let's go to Prometheus, setup script on GitHub, click on raw, copy
+
+13:19.270 --> 13:20.310
+that endpoint.
+
+13:21.710 --> 13:24.750
+I should copy it later because I need to copy the public IP also.
+
+13:25.510 --> 13:26.910
+Okay, Prometheus is running.
+
+13:26.910 --> 13:29.550
+I'm going to copy this public IP as such.
+
+13:29.590 --> 13:33.990
+Hyphen a key path ubuntu at the rate the public IP of Prometheus.
+
+13:36.550 --> 13:38.390
+Switch to route user.
+
+13:39.150 --> 13:40.270
+Clear the screen.
+
+13:40.790 --> 13:41.950
+Let's download.
+
+13:44.270 --> 13:44.910
+Prometheus.
+
+13:44.910 --> 13:46.150
+Setup script from GitHub.
+
+13:46.550 --> 13:48.390
+So go to Prometheus setup script.
+
+13:48.390 --> 13:49.390
+Click on raw.
+
+13:49.430 --> 13:50.670
+Copy the endpoint.
+
+13:54.390 --> 13:55.830
+Make it executable.
+
+13:58.630 --> 14:00.150
+And let's run this.
+
+14:03.830 --> 14:10.510
+Okay Prometheus is running Q to quit this, I should update this hyphen F and no pager option so it
+
+14:10.510 --> 14:11.670
+doesn't stop here.
+
+14:11.790 --> 14:12.950
+I'm going to edit this file.
+
+14:12.950 --> 14:14.190
+You don't need to do anything.
+
+14:14.350 --> 14:15.790
+Systemctl status.
+
+14:15.790 --> 14:16.470
+Prometheus.
+
+14:16.470 --> 14:17.230
+Hyphen hyphen.
+
+14:17.230 --> 14:17.430
+No.
+
+14:17.470 --> 14:18.510
+Hyphen pager.
+
+14:18.510 --> 14:21.430
+So when you run this command with this option, it's not going to stop.
+
+14:21.790 --> 14:24.590
+It's going to simply print the information and go to the next command.
+
+14:24.590 --> 14:25.870
+So let me commit this.
+
+14:28.150 --> 14:28.470
+Okay.
+
+14:28.470 --> 14:29.830
+So Prometheus should be running.
+
+14:29.830 --> 14:34.990
+Now let's copy its public IP for in browser port 1990.
+
+14:35.710 --> 14:37.310
+So we have Prometheus running.
+
+14:37.310 --> 14:42.110
+If you go to status target health you see it's scraping its own metrics.
+
+14:42.390 --> 14:47.030
+Now here it has given the endpoint as localhost 1990 slash metrics.
+
+14:47.030 --> 14:53.190
+But here itself we can access it if you just type here metrics 1990 slash metrics.
+
+14:53.710 --> 14:54.910
+So these are the metrics.
+
+14:54.910 --> 14:57.510
+So Prometheus server is monitoring itself.
+
+14:57.630 --> 14:59.470
+And these are different metrics.
+
+15:00.270 --> 15:02.630
+We're going to take a look at this metrics later.
+
+15:02.670 --> 15:05.510
+But just wanted to show you that's monitoring itself.
+
+15:06.150 --> 15:08.750
+So we have Grafana and Prometheus setup.
+
+15:08.750 --> 15:10.270
+You can shut them down.
+
+15:10.710 --> 15:13.510
+In the next lecture we are going to set up the web server.
+
+15:13.950 --> 15:16.230
+So wrap this up and join me in the next lecture.

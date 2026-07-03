@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00.540 --> 00:02.460
+Instructor: Welcome, in this lecture I am going
+
+00:02.460 --> 00:05.760
+to talk about the disk space issue in Jenkins.
+
+00:05.760 --> 00:09.330
+Not just Jenkins in general but, this is the use case.
+
+00:09.330 --> 00:12.900
+In this course you might get this error, your job might fail
+
+00:12.900 --> 00:15.660
+if you look at the log console output.
+
+00:15.660 --> 00:19.920
+In the error you might see this no space left on device.
+
+00:19.920 --> 00:22.020
+So we'll be doing too many things in Jenkins,
+
+00:22.020 --> 00:24.150
+we'll be installing a lot of plugins.
+
+00:24.150 --> 00:27.480
+We'll have many jobs that will create data,
+
+00:27.480 --> 00:29.640
+so workspace size will increase.
+
+00:29.640 --> 00:32.280
+And Jenkins which we're using
+
+00:32.280 --> 00:35.160
+is an EC2 instance, by default it comes with 8GB
+
+00:35.160 --> 00:38.760
+of volume that won't be enough and it will go out of space.
+
+00:38.760 --> 00:40.200
+What do you do in that case?
+
+00:40.200 --> 00:42.420
+Well, we can increase the volume.
+
+00:42.420 --> 00:44.220
+So go the Jenkins.
+
+00:44.220 --> 00:45.930
+Go to storage.
+
+00:45.930 --> 00:48.690
+And you should see here this volume, this is 8GB size,
+
+00:48.690 --> 00:49.523
+by default.
+
+00:49.523 --> 00:51.363
+So let's click on that root volume.
+
+00:52.890 --> 00:55.560
+Change its name or let's give a name to it called
+
+00:55.560 --> 00:58.050
+JenkinsRootVolume I'm giving.
+
+00:58.050 --> 01:02.700
+Let's edit its size, so actions, modify volume.
+
+01:02.700 --> 01:05.850
+Will increase its size to 20GB.
+
+01:05.850 --> 01:07.650
+Now before I increase I want to show you this.
+
+01:07.650 --> 01:09.543
+You can access to the Jenkins.
+
+01:10.980 --> 01:12.450
+Switch to root user.
+
+01:12.450 --> 01:14.913
+Sudo hyphen I.
+
+01:15.810 --> 01:17.190
+Clear the screen.
+
+01:17.190 --> 01:19.350
+And if you run the command DF hyphen H
+
+01:19.350 --> 01:21.360
+you should see the disk space.
+
+01:21.360 --> 01:24.330
+So that is the partitions 6.8GB showing.
+
+01:24.330 --> 01:26.973
+If you run the command fdisk hyphen L.
+
+01:28.350 --> 01:33.330
+There's the disk xvda 8GB and it has this partition xvda1,
+
+01:33.330 --> 01:35.043
+see that around 7GB.
+
+01:36.000 --> 01:38.520
+So now let's increase the volume size to 20GB
+
+01:38.520 --> 01:41.043
+and say modify, modify.
+
+01:42.330 --> 01:45.090
+Once that is done let's reboot the Jenkins instance.
+
+01:45.090 --> 01:48.033
+Jenkins Server, instance state, reboot.
+
+01:50.190 --> 01:52.530
+Wait for a few minutes the Jenkins will come up,
+
+01:52.530 --> 01:54.990
+then we'll log in and check again.
+
+01:54.990 --> 01:56.550
+Okay, after around two to three minutes
+
+01:56.550 --> 01:58.353
+I'm doing access to Jenkins.
+
+01:59.250 --> 02:00.870
+Let me with to root user.
+
+02:00.870 --> 02:02.310
+Let's clear the screen.
+
+02:02.310 --> 02:04.230
+Let's run the command fdisk hyphen L
+
+02:04.230 --> 02:06.030
+that will show you the partition size.
+
+02:06.030 --> 02:08.610
+So the volume itself is 20GB.
+
+02:08.610 --> 02:10.980
+The partition has increased, do you see that?
+
+02:10.980 --> 02:15.980
+Now DF hyphen H command show 19GB size.
+
+02:16.020 --> 02:17.880
+So you can do this exercise right away
+
+02:17.880 --> 02:22.410
+or you can do after witnessing that error.
+
+02:22.410 --> 02:24.120
+In any case, for this section
+
+02:24.120 --> 02:27.603
+we will need 20 GB of size in Jenkins.
+
+02:28.650 --> 02:30.360
+So that will be all in this lecture
+
+02:30.360 --> 02:32.660
+you can continue with the Jenkins section now.

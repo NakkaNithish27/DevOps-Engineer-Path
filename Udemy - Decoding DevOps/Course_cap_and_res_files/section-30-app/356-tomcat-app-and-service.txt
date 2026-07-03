@@ -1,0 +1,490 @@
+WEBVTT
+
+00:00.390 --> 00:01.650
+Instructor: Okay, in this lecture, we are going
+
+00:01.650 --> 00:04.530
+to do our final service, Tomcat.
+
+00:04.530 --> 00:06.840
+Our VProfile application lives in Tomcat.
+
+00:06.840 --> 00:09.243
+We have a Docker image already for that.
+
+00:10.200 --> 00:12.090
+In Docker Hub, in the repository,
+
+00:12.090 --> 00:16.350
+we already created these images in containerization project.
+
+00:16.350 --> 00:17.820
+So this image, basically we just need
+
+00:17.820 --> 00:19.170
+to fetch it and run it.
+
+00:19.170 --> 00:22.470
+And we need to put a service in front of it.
+
+00:22.470 --> 00:24.390
+So this is going to be very simple.
+
+00:24.390 --> 00:25.770
+So for an example, I'm going
+
+00:25.770 --> 00:28.650
+to use Memcached deployment service
+
+00:28.650 --> 00:31.230
+and Memcached service.
+
+00:31.230 --> 00:32.520
+I'll copy this content
+
+00:32.520 --> 00:36.180
+to first, this content, that's copied.
+
+00:36.180 --> 00:39.360
+The deployment content, mcdep.yaml, content copy.
+
+00:39.360 --> 00:42.510
+Open appdeploy, and just paste it,
+
+00:42.510 --> 00:46.020
+and let's make changes, first, the names.
+
+00:46.020 --> 00:48.300
+So we have the name as vproapp.
+
+00:48.300 --> 00:50.373
+So let's make the changes there, vproapp.
+
+00:55.020 --> 00:59.220
+Also the port name, vproapp-port,
+
+00:59.220 --> 01:02.340
+and the port, containerPort is 8080.
+
+01:02.340 --> 01:05.850
+In containerization project, we have built that image,
+
+01:05.850 --> 01:07.260
+stored it on Docker Hub,
+
+01:07.260 --> 01:10.440
+and we know the service, Tomcat there, runs on port 8080.
+
+01:10.440 --> 01:12.720
+That's why the containerPort, 8080.
+
+01:12.720 --> 01:14.670
+Let's give the image name.
+
+01:14.670 --> 01:17.493
+Okay, so that is the image vprocontainers/vproapp.
+
+01:18.600 --> 01:19.773
+Let's copy that name.
+
+01:23.640 --> 01:25.353
+Right, and that is all really,
+
+01:26.310 --> 01:28.890
+but just to make it a little more interesting, I'm going
+
+01:28.890 --> 01:30.780
+to put here init containers.
+
+01:30.780 --> 01:31.950
+Reason?
+
+01:31.950 --> 01:36.630
+Well, I want the backend services to all up,
+
+01:36.630 --> 01:38.340
+DB, RabbitMQ, Memcached.
+
+01:38.340 --> 01:41.310
+All these services should be up before this pod comes,
+
+01:41.310 --> 01:43.920
+because we are going to run everything together.
+
+01:43.920 --> 01:46.500
+I don't want the Tomcat app
+
+01:46.500 --> 01:49.050
+to come before the backend service comes.
+
+01:49.050 --> 01:52.920
+So what do I do? Well, we can use init container.
+
+01:52.920 --> 01:54.960
+There are other ways from Kubernetes also.
+
+01:54.960 --> 01:57.090
+There are other ways to create a link like that,
+
+01:57.090 --> 01:59.940
+but I'm going to use here init containers.
+
+01:59.940 --> 02:02.340
+Init containers are the container that comes up first
+
+02:02.340 --> 02:04.890
+before the main containers, right?
+
+02:04.890 --> 02:07.170
+Init container, we'll use BusyBox image,
+
+02:07.170 --> 02:09.060
+and we'll say, you know, run a command that checks
+
+02:09.060 --> 02:11.340
+for the backend service if it's up or not.
+
+02:11.340 --> 02:14.940
+If it's up, then it will complete the command.
+
+02:14.940 --> 02:16.740
+The command will be completed,
+
+02:16.740 --> 02:19.410
+and then the container will be dead,
+
+02:19.410 --> 02:21.873
+and then this Tomcat container will start.
+
+02:23.160 --> 02:25.260
+Okay, so the init container, the command.
+
+02:25.260 --> 02:26.310
+It's very complicated,
+
+02:26.310 --> 02:28.380
+but you know I have taken all this directly
+
+02:28.380 --> 02:30.300
+from the Kubernetes documentation.
+
+02:30.300 --> 02:31.650
+I'll show you.
+
+02:31.650 --> 02:33.840
+Okay, so there is this example. You can just Google.
+
+02:33.840 --> 02:36.630
+You can just search Kubernetes init containers,
+
+02:36.630 --> 02:38.640
+and you can come to this documentation.
+
+02:38.640 --> 02:41.220
+Here, there's the example, right?
+
+02:41.220 --> 02:43.020
+So the concept of init container is,
+
+02:43.890 --> 02:46.680
+these containers that you mentioned in the init container,
+
+02:46.680 --> 02:48.933
+comes up before the main container.
+
+02:48.933 --> 02:50.820
+This is the main container.
+
+02:50.820 --> 02:52.860
+It comes up, it executes its task.
+
+02:52.860 --> 02:55.800
+When the task is completed, this container will be dead.
+
+02:55.800 --> 02:59.880
+And then the main container start, so BusyBox is the image.
+
+02:59.880 --> 03:02.100
+It runs a container from that and runs this command.
+
+03:02.100 --> 03:05.610
+This command is an until loop, Bash scripting.
+
+03:05.610 --> 03:08.040
+In Bash, we have for, while, and until loop.
+
+03:08.040 --> 03:10.650
+Until loop is going to run
+
+03:10.650 --> 03:14.160
+until the command that you have mentioned in that completes
+
+03:14.160 --> 03:17.370
+and gives you the right output, exit code.
+
+03:17.370 --> 03:18.990
+In Linux, we have seen the exit code.
+
+03:18.990 --> 03:22.770
+Zero is the success, and non-zero is a failure.
+
+03:22.770 --> 03:25.410
+So in until loop, it's running an command, nslookup,
+
+03:25.410 --> 03:29.310
+which is going to try to resolve the IP address
+
+03:29.310 --> 03:30.990
+of a given name that you have given.
+
+03:30.990 --> 03:34.650
+That's what nslookup does. We do nslookup to a URL.
+
+03:34.650 --> 03:37.410
+For example, we do nslookup kubernetes.io.
+
+03:37.410 --> 03:40.230
+This should resolve to an IP address,
+
+03:40.230 --> 03:43.170
+IP address, or any other name that it has.
+
+03:43.170 --> 03:46.920
+And when it resolves, in Linux, the exit code will be zero.
+
+03:46.920 --> 03:48.900
+Any command successfully completes in Linux,
+
+03:48.900 --> 03:50.283
+its exit code is zero.
+
+03:51.330 --> 03:54.390
+Command fails, it's exit code will be non-zero.
+
+03:54.390 --> 03:55.470
+So we'll do nslookup
+
+03:55.470 --> 03:58.740
+and the backend service name like vprodb, right?
+
+03:58.740 --> 04:01.740
+Literally the Kubernetes service name vprodb we have.
+
+04:01.740 --> 04:04.260
+And when it resolves to an IP address,
+
+04:04.260 --> 04:07.050
+it resolves to the backend pod IPs.
+
+04:07.050 --> 04:08.370
+Then it will return the exit code.
+
+04:08.370 --> 04:12.480
+Now what that will do is that when it resolves
+
+04:12.480 --> 04:15.340
+to an IP address, that means the backend service is up
+
+04:16.320 --> 04:18.060
+and this until loop will complete.
+
+04:18.060 --> 04:19.560
+The until loop will complete,
+
+04:19.560 --> 04:21.450
+it is going to complete this command
+
+04:21.450 --> 04:23.400
+and this container will be dead.
+
+04:23.400 --> 04:24.600
+So it's the same one.
+
+04:24.600 --> 04:26.640
+I've just made some little changes here.
+
+04:26.640 --> 04:29.850
+I've given the service name here, vprodb, dot.
+
+04:29.850 --> 04:31.530
+Now just the service name will not
+
+04:31.530 --> 04:34.650
+resolve to the complete name, we have to give vprodb.
+
+04:34.650 --> 04:37.530
+And this here is a command substitution.
+
+04:37.530 --> 04:39.900
+This is going to return the namespace where it is running.
+
+04:39.900 --> 04:43.207
+So it will be vprodb, dot, the namespace,
+
+04:43.207 --> 04:45.720
+.svc.cluster.local.
+
+04:45.720 --> 04:48.450
+So this will completely resolve to an IP address
+
+04:48.450 --> 04:50.490
+if the backend comes up.
+
+04:50.490 --> 04:52.230
+Until it completes, it's going
+
+04:52.230 --> 04:56.160
+to keep printing this message, waiting for mydb.
+
+04:56.160 --> 04:57.180
+Sleep two seconds.
+
+04:57.180 --> 04:59.880
+So every two seconds, it's going to run this loop, right?
+
+04:59.880 --> 05:02.550
+We keep giving a command there. Sleep two seconds.
+
+05:02.550 --> 05:05.550
+So it's going to execute that nslookup command,
+
+05:05.550 --> 05:09.780
+then execute sleep for two seconds, right?
+
+05:09.780 --> 05:11.220
+If it doesn't work, then it's going
+
+05:11.220 --> 05:13.050
+to run that command again, again and again,
+
+05:13.050 --> 05:16.470
+until this resolves to the IP address.
+
+05:16.470 --> 05:20.010
+So I kept it for vprodb and vprocache01.
+
+05:20.010 --> 05:21.780
+If you want, you can keep it for RabbitMQ.
+
+05:21.780 --> 05:24.720
+This is just an example, it's not really mandatory.
+
+05:24.720 --> 05:27.750
+Our application, VProfile application, will come up
+
+05:27.750 --> 05:31.470
+without any problem, but many application like that,
+
+05:31.470 --> 05:34.500
+depends on the backend service to come up first.
+
+05:34.500 --> 05:35.670
+Backend should be up.
+
+05:35.670 --> 05:38.250
+Then only the frontend service comes up.
+
+05:38.250 --> 05:42.390
+Let's also add the RabbitMQ also over here, oh wait.
+
+05:42.390 --> 05:44.910
+I need to give the RabbitMQ service name over here.
+
+05:44.910 --> 05:47.653
+My RabbitMQ service name is vpromq01.
+
+05:53.563 --> 05:55.313
+Vpromq01. We save it.
+
+05:57.090 --> 05:59.013
+Okay, and that's done. Save it.
+
+05:59.910 --> 06:01.230
+Yeah, and also make sure
+
+06:01.230 --> 06:03.870
+you have given the right name, right?
+
+06:03.870 --> 06:07.830
+Image name, port number, port name, map it once again
+
+06:07.830 --> 06:10.233
+with the kube app, branch and check.
+
+06:11.310 --> 06:12.180
+If everything is good,
+
+06:12.180 --> 06:15.390
+then we are going to set up the service.
+
+06:15.390 --> 06:17.040
+Once again, pretty simple.
+
+06:17.040 --> 06:19.050
+Let's go to appservice.yaml file,
+
+06:19.050 --> 06:21.640
+let's copy everything from mcservice file
+
+06:22.650 --> 06:23.943
+and put it over there.
+
+06:25.020 --> 06:26.730
+Change the name and the port number.
+
+06:26.730 --> 06:29.010
+So vproapp-service.
+
+06:29.010 --> 06:31.920
+Again here, the name really does not matter for now,
+
+06:31.920 --> 06:34.230
+because we're going to create an ingress controller.
+
+06:34.230 --> 06:35.730
+Ingress, sorry.
+
+06:35.730 --> 06:37.350
+There we're going to mention this name,
+
+06:37.350 --> 06:39.150
+vproapp-service is the service name,
+
+06:39.150 --> 06:40.660
+where it needs to route the request.
+
+06:40.660 --> 06:43.140
+Okay, frontend port, we are giving 8080,
+
+06:43.140 --> 06:45.600
+backend port, targetPort also, I'm giving 8080.
+
+06:45.600 --> 06:49.350
+Or I can give here the name of the container port, right?
+
+06:49.350 --> 06:51.390
+That we have given over here. We can give that also.
+
+06:51.390 --> 06:54.120
+But for this one, I'll keep it as 8080.
+
+06:54.120 --> 06:55.950
+Selector, app, vproapp.
+
+06:55.950 --> 06:59.913
+That will be the same label, which is mentioned over here.
+
+07:02.610 --> 07:06.000
+And type ClusterIP, of course, internal communication.
+
+07:06.000 --> 07:09.390
+Now this will be for ingress.
+
+07:09.390 --> 07:12.180
+In the next lecture, we're going to create ingress,
+
+07:12.180 --> 07:16.590
+that is going to connect the load balancer to this service.
+
+07:16.590 --> 07:21.243
+So save this, and join me the next lecture.

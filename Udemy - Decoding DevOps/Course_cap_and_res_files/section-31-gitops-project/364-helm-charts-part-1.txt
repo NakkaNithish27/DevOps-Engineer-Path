@@ -1,0 +1,310 @@
+WEBVTT
+
+1
+00:00:00.270 --> 00:00:01.140
+<v Instructor>Hello and welcome.</v>
+
+2
+00:00:01.140 --> 00:00:04.380
+In this lecture we are going to generate health charts
+
+3
+00:00:04.380 --> 00:00:06.900
+from our Kubernetes definition files
+
+4
+00:00:06.900 --> 00:00:09.570
+of our vPro profile application.
+
+5
+00:00:09.570 --> 00:00:11.070
+Now, we did this already.
+
+6
+00:00:11.070 --> 00:00:13.380
+We generated health charts previously
+
+7
+00:00:13.380 --> 00:00:16.530
+for our V profile project from Kubernetes definition file,
+
+8
+00:00:16.530 --> 00:00:17.880
+it will be same,
+
+9
+00:00:17.880 --> 00:00:20.130
+and let me clearly tell you this project
+
+10
+00:00:20.130 --> 00:00:23.040
+is not about writing every line of code,
+
+11
+00:00:23.040 --> 00:00:27.000
+this project is all about designing, architecting.
+
+12
+00:00:27.000 --> 00:00:30.960
+Once you understand the entire flow of GitHub's pipeline,
+
+13
+00:00:30.960 --> 00:00:33.990
+you can work on any GitHub's project.
+
+14
+00:00:33.990 --> 00:00:37.500
+So most of the time we will be using AI assistance
+
+15
+00:00:37.500 --> 00:00:40.080
+to generate our code,
+
+16
+00:00:40.080 --> 00:00:42.060
+which is health chart in this lecture
+
+17
+00:00:42.060 --> 00:00:44.130
+and moving forward, we will be also generating
+
+18
+00:00:44.130 --> 00:00:45.810
+Terraform source code.
+
+19
+00:00:45.810 --> 00:00:47.880
+There's also one more reason we are not writing
+
+20
+00:00:47.880 --> 00:00:49.800
+anything in this project,
+
+21
+00:00:49.800 --> 00:00:52.260
+that is because we have already done this manually
+
+22
+00:00:52.260 --> 00:00:55.110
+and through AI as well in previous lectures,
+
+23
+00:00:55.110 --> 00:00:55.950
+in previous section,
+
+24
+00:00:55.950 --> 00:01:00.210
+like we generated health charts in Kubernetes section.
+
+25
+00:01:00.210 --> 00:01:02.670
+So we already know how to do that.
+
+26
+00:01:02.670 --> 00:01:03.990
+So open your browser
+
+27
+00:01:03.990 --> 00:01:07.348
+and go to our hkh coder repository,
+
+28
+00:01:07.348 --> 00:01:12.210
+github.com/hkhcoder/vprofile-project,
+
+29
+00:01:12.210 --> 00:01:15.060
+search for the branch kube app.
+
+30
+00:01:15.060 --> 00:01:19.860
+Here we have our Kubernetes definition files in this folder
+
+31
+00:01:19.860 --> 00:01:21.720
+and let's download this entire branch.
+
+32
+00:01:21.720 --> 00:01:24.090
+So click on this dropdown, on code,
+
+33
+00:01:24.090 --> 00:01:25.443
+and say download zip.
+
+34
+00:01:26.550 --> 00:01:28.080
+Download it.
+
+35
+00:01:28.080 --> 00:01:30.270
+Go to your folder where you have this downloaded
+
+36
+00:01:30.270 --> 00:01:31.890
+and extract this.
+
+37
+00:01:31.890 --> 00:01:32.943
+Extract all.
+
+38
+00:01:36.420 --> 00:01:37.253
+Okay.
+
+39
+00:01:37.253 --> 00:01:40.890
+In this extract, you will see here kube devs folder.
+
+40
+00:01:40.890 --> 00:01:41.890
+Copy this
+
+41
+00:01:42.990 --> 00:01:45.810
+and keep it in your health repository.
+
+42
+00:01:45.810 --> 00:01:49.590
+So mine is in Desktop, GitHub's Project,
+
+43
+00:01:49.590 --> 00:01:50.730
+Health
+
+44
+00:01:50.730 --> 00:01:52.650
+and paste it over here.
+
+45
+00:01:52.650 --> 00:01:56.100
+Go back to your VS code and you should see this folder.
+
+46
+00:01:56.100 --> 00:01:58.320
+So we have the secret file,
+
+47
+00:01:58.320 --> 00:01:59.430
+which creates the secret,
+
+48
+00:01:59.430 --> 00:02:03.180
+we have the deployment file for our Tomcat application,
+
+49
+00:02:03.180 --> 00:02:07.260
+ingress information service,
+
+50
+00:02:07.260 --> 00:02:09.150
+same way DB deployment,
+
+51
+00:02:09.150 --> 00:02:11.520
+database PVC,
+
+52
+00:02:11.520 --> 00:02:13.290
+this will create an EBS of volume.
+
+53
+00:02:13.290 --> 00:02:15.990
+We'll see all this, how we are going to do that,
+
+54
+00:02:15.990 --> 00:02:19.230
+but instead of this plain Kubernetes definition file,
+
+55
+00:02:19.230 --> 00:02:21.570
+we are going to generate the health charts.
+
+56
+00:02:21.570 --> 00:02:24.090
+So same definition, same manifest.
+
+57
+00:02:24.090 --> 00:02:26.340
+Instead of the plain manifest,
+
+58
+00:02:26.340 --> 00:02:28.650
+we will be having health charts
+
+59
+00:02:28.650 --> 00:02:30.750
+and that health chart we are going to generate
+
+60
+00:02:30.750 --> 00:02:31.860
+with an AI assistant,
+
+61
+00:02:31.860 --> 00:02:33.690
+we can use GitHub Copilot.
+
+62
+00:02:33.690 --> 00:02:34.920
+So go to extension.
+
+63
+00:02:34.920 --> 00:02:36.690
+If you do not have Copilot,
+
+64
+00:02:36.690 --> 00:02:39.180
+search for GitHub Copilot
+
+65
+00:02:39.180 --> 00:02:43.020
+and say install if you do not have it installed,
+
+66
+00:02:43.020 --> 00:02:45.810
+if you have this already signed in, well and good.
+
+67
+00:02:45.810 --> 00:02:49.440
+If not, then go to this place over here,
+
+68
+00:02:49.440 --> 00:02:50.273
+the bottom right.
+
+69
+00:02:50.273 --> 00:02:51.720
+Here, if it is signed out,
+
+70
+00:02:51.720 --> 00:02:54.930
+click on sign in to use AI features
+
+71
+00:02:54.930 --> 00:02:56.872
+continue with GitHub.
+
+72
+00:02:56.872 --> 00:02:58.770
+Now this will open in default browser.
+
+73
+00:02:58.770 --> 00:03:01.290
+I'm just copying the link and going to a different browser
+
+74
+00:03:01.290 --> 00:03:03.880
+where I have already logged in with this account
+
+75
+00:03:05.400 --> 00:03:08.523
+and I'm going to see continue for devpps4sure account.
+
+76
+00:03:09.840 --> 00:03:11.970
+Open Visual Studio Code.
+
+77
+00:03:11.970 --> 00:03:14.870
+Once I'm just going to close this and start it once again.
+

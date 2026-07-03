@@ -1,0 +1,762 @@
+WEBVTT
+
+1
+00:00:00.330 --> 00:00:01.380
+<v Instructor>Welcome.</v>
+
+2
+00:00:01.380 --> 00:00:02.880
+In this lecture, we are going to run
+
+3
+00:00:02.880 --> 00:00:07.050
+through the entire flow of this project and do the cleanup.
+
+4
+00:00:07.050 --> 00:00:08.790
+Okay, so the high level flow.
+
+5
+00:00:08.790 --> 00:00:11.730
+First we completed the VPC setup,
+
+6
+00:00:11.730 --> 00:00:15.030
+then we worked on the backend services Cloud SQL
+
+7
+00:00:15.030 --> 00:00:18.450
+and memory store, connecting this with VPC pairing.
+
+8
+00:00:18.450 --> 00:00:22.080
+So instance in the private subnet of our VPC can connect
+
+9
+00:00:22.080 --> 00:00:25.200
+to the backend network of GCP.
+
+10
+00:00:25.200 --> 00:00:28.380
+In third part we worked on the managed instance group
+
+11
+00:00:28.380 --> 00:00:32.640
+that creates and manages our Tomcat vPro profile application
+
+12
+00:00:32.640 --> 00:00:34.200
+in the private subnet
+
+13
+00:00:34.200 --> 00:00:36.900
+with the load balancer in the front end.
+
+14
+00:00:36.900 --> 00:00:39.750
+Finally, we created HTTPS secure connection
+
+15
+00:00:39.750 --> 00:00:42.870
+from our load balancer, which forward the request
+
+16
+00:00:42.870 --> 00:00:46.440
+to the load balancer backend managed instance group.
+
+17
+00:00:46.440 --> 00:00:51.270
+So VPC backend with VPC pairing, managed instance group
+
+18
+00:00:51.270 --> 00:00:55.470
+with load balancer and HTTPS secure connection
+
+19
+00:00:55.470 --> 00:00:57.840
+for our load balancer front end.
+
+20
+00:00:57.840 --> 00:01:01.050
+And the fun part is we did all this through command line,
+
+21
+00:01:01.050 --> 00:01:03.630
+through Google Cloud Shell.
+
+22
+00:01:03.630 --> 00:01:06.750
+Now, we could have done this all through UI also,
+
+23
+00:01:06.750 --> 00:01:08.370
+but here's the benefit.
+
+24
+00:01:08.370 --> 00:01:10.770
+One, you learn the command lines.
+
+25
+00:01:10.770 --> 00:01:15.770
+You can know how to operate GCP through command line.
+
+26
+00:01:16.230 --> 00:01:18.930
+And once you have all the commands, it's very easy
+
+27
+00:01:18.930 --> 00:01:21.578
+to convert this to a Terraform script
+
+28
+00:01:21.578 --> 00:01:25.770
+by using any AI code assistance like GitHub, Copilot
+
+29
+00:01:25.770 --> 00:01:29.880
+or Amazon Q Developer or any other AI assistant tool.
+
+30
+00:01:29.880 --> 00:01:32.790
+And this is what I recommend all the time.
+
+31
+00:01:32.790 --> 00:01:36.180
+First, learn how to complete your entire project set up
+
+32
+00:01:36.180 --> 00:01:37.410
+through command line
+
+33
+00:01:37.410 --> 00:01:40.710
+or manually like we did through Google Cloud Shell
+
+34
+00:01:40.710 --> 00:01:41.910
+one command at a time.
+
+35
+00:01:41.910 --> 00:01:43.200
+This is manual.
+
+36
+00:01:43.200 --> 00:01:46.290
+Once you have mastered the entire flow of your project,
+
+37
+00:01:46.290 --> 00:01:49.890
+then use Terraform to manage
+
+38
+00:01:49.890 --> 00:01:52.200
+your entire cloud infrastructure,
+
+39
+00:01:52.200 --> 00:01:54.630
+which is infrastructure as a code.
+
+40
+00:01:54.630 --> 00:01:58.170
+Now, I want you to go through all the architecture diagrams
+
+41
+00:01:58.170 --> 00:02:01.350
+with all the commands that we have used in this project.
+
+42
+00:02:01.350 --> 00:02:04.560
+Go through this VPC script, then backend,
+
+43
+00:02:04.560 --> 00:02:08.070
+then frontend_1.sh, then frontend_2.sh.
+
+44
+00:02:08.070 --> 00:02:09.420
+Take your time, do not rush.
+
+45
+00:02:09.420 --> 00:02:12.720
+Once you are done, we can do the cleanup process.
+
+46
+00:02:12.720 --> 00:02:16.110
+Also go through the user interface of Google Cloud
+
+47
+00:02:16.110 --> 00:02:18.570
+and verify all the services, everything
+
+48
+00:02:18.570 --> 00:02:21.390
+that we have created or used,
+
+49
+00:02:21.390 --> 00:02:24.000
+and then we can do the cleanup process.
+
+50
+00:02:24.000 --> 00:02:26.250
+So pause this recording, go through everything,
+
+51
+00:02:26.250 --> 00:02:27.650
+and then resume the lecture.
+
+52
+00:02:28.560 --> 00:02:32.040
+Okay, so if you're done, we can do the rollback.
+
+53
+00:02:32.040 --> 00:02:35.430
+And for rollback, I have created the script that you can use
+
+54
+00:02:35.430 --> 00:02:37.260
+or you should use actually,
+
+55
+00:02:37.260 --> 00:02:40.920
+because I don't want you to have some services left over
+
+56
+00:02:40.920 --> 00:02:44.160
+or running that eats up your credits.
+
+57
+00:02:44.160 --> 00:02:47.035
+So the script sets some variable that we're going
+
+58
+00:02:47.035 --> 00:02:49.710
+to set in the in the Google Cloud Shell,
+
+59
+00:02:49.710 --> 00:02:51.450
+like your project ID,
+
+60
+00:02:51.450 --> 00:02:53.820
+region, subnet, names, router,
+
+61
+00:02:53.820 --> 00:02:57.000
+NAT gateway, bastion host and everything.
+
+62
+00:02:57.000 --> 00:03:01.110
+And once those variables are set up, we can start deleting.
+
+63
+00:03:01.110 --> 00:03:02.610
+So rollback will be reversed.
+
+64
+00:03:02.610 --> 00:03:04.710
+VPC will come last.
+
+65
+00:03:04.710 --> 00:03:07.680
+First we need to clean up the forwarding rules related
+
+66
+00:03:07.680 --> 00:03:11.940
+to HTTPS, walk on the load balancer clean up.
+
+67
+00:03:11.940 --> 00:03:13.560
+Then the managed instance group.
+
+68
+00:03:13.560 --> 00:03:15.690
+So if we delete managed instance group, it'll take care
+
+69
+00:03:15.690 --> 00:03:17.700
+of the instance deletion and everything.
+
+70
+00:03:17.700 --> 00:03:20.250
+Then we delete our golden instance.
+
+71
+00:03:20.250 --> 00:03:21.780
+Well, we already have deleted it,
+
+72
+00:03:21.780 --> 00:03:25.320
+so this command is just going to run and won't do anything.
+
+73
+00:03:25.320 --> 00:03:28.470
+Then we clean up the cloud DNS records
+
+74
+00:03:28.470 --> 00:03:30.390
+where we map the cloud SQL
+
+75
+00:03:30.390 --> 00:03:32.610
+and memory store IP to the name
+
+76
+00:03:32.610 --> 00:03:34.380
+that we're going to do the cleanup.
+
+77
+00:03:34.380 --> 00:03:37.500
+Then removing the backend services Cloud SQL and mem cache.
+
+78
+00:03:37.500 --> 00:03:39.360
+And this is going to take a very long time.
+
+79
+00:03:39.360 --> 00:03:40.650
+And there's some condition over there.
+
+80
+00:03:40.650 --> 00:03:42.990
+Once the instance is, the mem cache
+
+81
+00:03:42.990 --> 00:03:45.150
+and SQ is completely deleted, then only it's going
+
+82
+00:03:45.150 --> 00:03:48.360
+to move forward, delete the bastion host.
+
+83
+00:03:48.360 --> 00:03:51.360
+Then we come to the final phase of cleanup VPC
+
+84
+00:03:51.360 --> 00:03:53.490
+starting with firewall.
+
+85
+00:03:53.490 --> 00:03:57.510
+We remove all the firewall rules in the VPC.
+
+86
+00:03:57.510 --> 00:03:59.673
+Yes, firewall rules are part of VPC.
+
+87
+00:04:00.510 --> 00:04:03.630
+Then delete the NAT gateway and the router,
+
+88
+00:04:03.630 --> 00:04:07.530
+delete the subnets of the VPC, all four subnet,
+
+89
+00:04:07.530 --> 00:04:11.550
+and then delete the private service access range.
+
+90
+00:04:11.550 --> 00:04:15.960
+Now, we have created this range so we can allot IP from this
+
+91
+00:04:15.960 --> 00:04:19.260
+to our backend services Cloud SQL and memory store.
+
+92
+00:04:19.260 --> 00:04:21.810
+And this was for the VPC peering part.
+
+93
+00:04:21.810 --> 00:04:23.580
+And once you delete this, this is not going
+
+94
+00:04:23.580 --> 00:04:24.810
+to clean up instantly.
+
+95
+00:04:24.810 --> 00:04:26.100
+This will take some time.
+
+96
+00:04:26.100 --> 00:04:28.620
+Google will hold this range for some time,
+
+97
+00:04:28.620 --> 00:04:30.870
+and because of that you won't be able to delete
+
+98
+00:04:30.870 --> 00:04:33.060
+the VPC itself.
+
+99
+00:04:33.060 --> 00:04:35.460
+So we might need to delete the VPC manually
+
+100
+00:04:35.460 --> 00:04:38.790
+after we delete this, which I'll show you how to do.
+
+101
+00:04:38.790 --> 00:04:40.590
+So once we remove this range, we are going
+
+102
+00:04:40.590 --> 00:04:44.730
+to remove the certificate and SSL or DNS authorization.
+
+103
+00:04:44.730 --> 00:04:46.530
+We're going to do this cleanup.
+
+104
+00:04:46.530 --> 00:04:48.720
+And then after waiting for some time, we are going
+
+105
+00:04:48.720 --> 00:04:52.650
+to delete the VPC pairing and the VPC itself.
+
+106
+00:04:52.650 --> 00:04:54.420
+Now, as you see, I have commented this
+
+107
+00:04:54.420 --> 00:04:57.210
+because this won't work instantly,
+
+108
+00:04:57.210 --> 00:04:59.610
+and you can remove this later also after a few days also.
+
+109
+00:04:59.610 --> 00:05:03.060
+That's fine because this VPC is empty, just a range.
+
+110
+00:05:03.060 --> 00:05:06.150
+So no money will be deduct deducted from your credits.
+
+111
+00:05:06.150 --> 00:05:08.580
+You have $300 credit.
+
+112
+00:05:08.580 --> 00:05:12.420
+So let's open the Google Cloud Shell and fire the script.
+
+113
+00:05:12.420 --> 00:05:14.070
+Okay, I'm in my Google Cloud Shell.
+
+114
+00:05:14.070 --> 00:05:16.863
+I'm going to run gcloud auth login once again.
+
+115
+00:05:18.300 --> 00:05:20.596
+I'm already logged in, but I just wanted to make sure.
+
+116
+00:05:20.596 --> 00:05:22.290
+Okay, that's done.
+
+117
+00:05:22.290 --> 00:05:24.420
+Now I'm going to set my project.
+
+118
+00:05:24.420 --> 00:05:27.783
+So gcloud config set project and my project name.
+
+119
+00:05:28.920 --> 00:05:31.470
+Okay, run the command gcloud projects list
+
+120
+00:05:31.470 --> 00:05:33.600
+and get the project ID.
+
+121
+00:05:33.600 --> 00:05:34.920
+Now, that's my project ID,
+
+122
+00:05:34.920 --> 00:05:37.050
+same name as the name of the project.
+
+123
+00:05:37.050 --> 00:05:40.110
+And then let's work on the variables.
+
+124
+00:05:40.110 --> 00:05:42.360
+So open rollback.sh script,
+
+125
+00:05:42.360 --> 00:05:45.000
+make sure you put the right variables.
+
+126
+00:05:45.000 --> 00:05:46.560
+So that's my project ID.
+
+127
+00:05:46.560 --> 00:05:49.590
+Region, I have the same one, us-central1.
+
+128
+00:05:49.590 --> 00:05:52.413
+And the zone, it is setting as the same, -a.
+
+129
+00:05:53.610 --> 00:05:54.810
+That's my VPC name.
+
+130
+00:05:54.810 --> 00:05:57.780
+So check all your variables, compare with the variable
+
+131
+00:05:57.780 --> 00:06:00.780
+that we have set in the previous set of scripts.
+
+132
+00:06:00.780 --> 00:06:03.390
+If you have not made any changes to these variables,
+
+133
+00:06:03.390 --> 00:06:07.950
+all this will be same except your sub-domain and domain.
+
+134
+00:06:07.950 --> 00:06:10.050
+And mostly I think you would have say set
+
+135
+00:06:10.050 --> 00:06:13.200
+the same sub-domain, but just check your domain.
+
+136
+00:06:13.200 --> 00:06:15.270
+That would be definitely different.
+
+137
+00:06:15.270 --> 00:06:18.840
+So important things to check here is the domain, sub-domain
+
+138
+00:06:18.840 --> 00:06:21.780
+and your project ID.
+
+139
+00:06:21.780 --> 00:06:23.070
+If you think everything is correct,
+
+140
+00:06:23.070 --> 00:06:26.130
+then just copy this entire script.
+
+141
+00:06:26.130 --> 00:06:29.910
+Come to Google Cloud Shell, open up a file.
+
+142
+00:06:29.910 --> 00:06:34.020
+Let's name it as rollback.sh with Vim editor.
+
+143
+00:06:34.020 --> 00:06:37.770
+Get into insert mode and paste everything.
+
+144
+00:06:37.770 --> 00:06:42.770
+You can use Shift + Insert and see when click this file.
+
+145
+00:06:43.500 --> 00:06:45.213
+Escape column WQ.
+
+146
+00:06:46.890 --> 00:06:49.443
+Let's give it executable permission.
+
+147
+00:06:52.380 --> 00:06:55.380
+And let's start executing this script.
+
+148
+00:06:55.380 --> 00:06:56.640
+Now, this is going to take time, lot
+
+149
+00:06:56.640 --> 00:06:58.950
+of time, but don't take any break.
+
+150
+00:06:58.950 --> 00:07:01.920
+Just observe what all it is deleting.
+
+151
+00:07:01.920 --> 00:07:02.970
+So pause the lecture
+
+152
+00:07:02.970 --> 00:07:06.450
+and resume when your deletion is completed.
+
+153
+00:07:06.450 --> 00:07:09.330
+Okay, so the rollback completed successfully,
+
+154
+00:07:09.330 --> 00:07:11.310
+except I see one or two error
+
+155
+00:07:11.310 --> 00:07:15.480
+that is about this vprofile-golden.
+
+156
+00:07:15.480 --> 00:07:16.740
+This instance, as I already said,
+
+157
+00:07:16.740 --> 00:07:18.270
+we deleted this, so this is fine.
+
+158
+00:07:18.270 --> 00:07:21.690
+And the last one, this error was about, yeah,
+
+159
+00:07:21.690 --> 00:07:23.490
+that's the echo statement,
+
+160
+00:07:23.490 --> 00:07:25.380
+and that was not completed properly.
+
+161
+00:07:25.380 --> 00:07:26.520
+And so that is also fine.
+
+162
+00:07:26.520 --> 00:07:28.620
+So overall it's completed.
+
+163
+00:07:28.620 --> 00:07:30.900
+Let's check about the VPC and the VPC peering.
+
+164
+00:07:30.900 --> 00:07:33.090
+We need to delete that manually.
+
+165
+00:07:33.090 --> 00:07:36.300
+So let's go to VPC.
+
+166
+00:07:36.300 --> 00:07:38.043
+VPC networks,
+
+167
+00:07:39.935 --> 00:07:41.850
+vprofile-vpc.
+
+168
+00:07:41.850 --> 00:07:45.210
+And this we take a look here at VPC network peering.
+
+169
+00:07:45.210 --> 00:07:46.620
+Here, we should see this peering.
+
+170
+00:07:46.620 --> 00:07:48.270
+We have to remove this.
+
+171
+00:07:48.270 --> 00:07:49.521
+Delete.
+
+172
+00:07:49.521 --> 00:07:50.670
+Let's see if we can delete it.
+
+173
+00:07:50.670 --> 00:07:51.503
+Okay, nice.
+
+174
+00:07:51.503 --> 00:07:52.336
+This is deleted.
+
+175
+00:07:52.336 --> 00:07:54.390
+Now let's delete the VPC network itself.
+
+176
+00:07:54.390 --> 00:07:57.480
+Make sure you are deleting your vprofile-vpc.
+
+177
+00:07:57.480 --> 00:08:01.950
+Click on Delete VPC Network, give its name and say Delete.
+
+178
+00:08:01.950 --> 00:08:04.110
+And that is all.
+
+179
+00:08:04.110 --> 00:08:07.350
+Now, if you wish to anytime, revise this entire project,
+
+180
+00:08:07.350 --> 00:08:09.660
+you can go through the architecture diagrams
+
+181
+00:08:09.660 --> 00:08:11.190
+and go through all the commands
+
+182
+00:08:11.190 --> 00:08:12.900
+and you would be good.
+
+183
+00:08:12.900 --> 00:08:17.010
+Just to have good practice, just do the project once again,
+
+184
+00:08:17.010 --> 00:08:18.960
+but do not try to memorize any command.
+
+185
+00:08:18.960 --> 00:08:20.490
+It's not necessary.
+
+186
+00:08:20.490 --> 00:08:21.570
+Understanding the flow
+
+187
+00:08:21.570 --> 00:08:25.560
+and the commands will be more than enough.
+
+188
+00:08:25.560 --> 00:08:27.000
+That would be all in this project.
+
+189
+00:08:27.000 --> 00:08:28.260
+I hope you have enjoyed it.
+
+190
+00:08:28.260 --> 00:08:29.810
+I will see you in the next one.
+

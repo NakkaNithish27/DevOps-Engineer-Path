@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00.360 --> 00:01.650
+Instructor: Hello, and welcome
+
+00:01.650 --> 00:04.473
+to the AWS CI/CD project.
+
+00:06.180 --> 00:07.230
+In this project,
+
+00:07.230 --> 00:11.730
+we are going to use AWS services to fetch your code,
+
+00:11.730 --> 00:15.933
+build it, and deploy it on AWS Elastic Beanstalk.
+
+00:19.140 --> 00:24.140
+We have previously seen Jenkins CI/CD project
+
+00:24.240 --> 00:26.373
+or Jenkins CI/CD pipeline.
+
+00:27.780 --> 00:31.650
+Same way, we are going to create a CodePipeline,
+
+00:31.650 --> 00:35.253
+but we are going to use AWS services for that.
+
+00:37.050 --> 00:38.670
+So to complete this project,
+
+00:38.670 --> 00:40.950
+first, we are going to create
+
+00:40.950 --> 00:42.933
+AWS Elastic Beanstalk environment.
+
+00:44.460 --> 00:46.290
+So we are going to build the code
+
+00:46.290 --> 00:50.370
+and deploy it on Beanstalk environment.
+
+00:50.370 --> 00:53.493
+Then we will be creating AWS RDS.
+
+00:54.462 --> 00:56.400
+Because our Vprofile application
+
+00:56.400 --> 00:58.410
+needs database connectivity for that,
+
+00:58.410 --> 01:00.723
+we will be using AWS RDS.
+
+01:01.980 --> 01:02.910
+For the source code,
+
+01:02.910 --> 01:05.853
+we will be using Bitbucket repositories.
+
+01:06.990 --> 01:09.930
+We have previously used a GitHub repository.
+
+01:09.930 --> 01:12.930
+In this project, we will be using Bitbucket repository,
+
+01:12.930 --> 01:14.943
+and I will talk about this in a moment.
+
+01:16.200 --> 01:18.960
+So Vprofile source code lives on GitHub repository.
+
+01:18.960 --> 01:22.530
+We are going to migrate it from GitHub to Bitbucket.
+
+01:22.530 --> 01:25.350
+Then we are going to use AWS CodeBuild service,
+
+01:25.350 --> 01:27.960
+which is going to fetch the source code from Bitbucket
+
+01:27.960 --> 01:30.750
+and deploy it on Beanstalk,
+
+01:30.750 --> 01:33.003
+or course, after building the artifact.
+
+01:34.290 --> 01:37.800
+We are going to use AWS CodePipeline service
+
+01:37.800 --> 01:40.053
+to connect all these services together.
+
+01:40.890 --> 01:43.920
+And finally, we are going to test our CI/CD pipeline
+
+01:43.920 --> 01:45.300
+by doing a git commit
+
+01:45.300 --> 01:48.720
+and pushing the changes to our Bitbucket repository,
+
+01:48.720 --> 01:50.793
+which will trigger our pipeline.
+
+01:51.660 --> 01:52.740
+Now this is the first time
+
+01:52.740 --> 01:54.810
+we are using Bitbucket repository,
+
+01:54.810 --> 01:56.613
+so let me quickly talk about it.
+
+01:57.686 --> 01:59.910
+Bitbucket is from Atlassian,
+
+01:59.910 --> 02:03.326
+and it's a very popular name among developers
+
+02:03.326 --> 02:06.273
+and also among DevOps engineers.
+
+02:07.590 --> 02:09.210
+So Bitbucket is from Atlassian,
+
+02:09.210 --> 02:11.193
+and you can think Bitbucket as GitHub.
+
+02:12.180 --> 02:15.450
+So all kind of Git solution it provides.
+
+02:15.450 --> 02:19.620
+There are many organization that uses a Atlassian services.
+
+02:19.620 --> 02:21.900
+Along with that, they use Bitbucket repository.
+
+02:21.900 --> 02:24.550
+So there is a high chance when you work in real time,
+
+02:25.461 --> 02:28.230
+you will be using Bitbucket repositories
+
+02:28.230 --> 02:31.140
+or Git repositories on Bitbucket.
+
+02:31.140 --> 02:33.780
+Also, along with the Git repositories,
+
+02:33.780 --> 02:37.620
+it provides the complete CI/CD pipeline,
+
+02:37.620 --> 02:39.753
+various services in that pipeline.
+
+02:40.860 --> 02:42.000
+So before we begin,
+
+02:42.000 --> 02:44.553
+let's take a look at the architectural diagram.
+
+02:45.480 --> 02:47.550
+So our pipeline will be like this.
+
+02:47.550 --> 02:51.570
+We will have Git repositories on a Bitbucket,
+
+02:51.570 --> 02:54.603
+which we will migrate from GitHub to Bitbucket,
+
+02:56.678 --> 03:01.350
+AWS CodeBuild service, which will act like Jenkins build,
+
+03:01.350 --> 03:02.730
+which will fetch our source code
+
+03:02.730 --> 03:05.220
+from Bitbucket Git repositories,
+
+03:05.220 --> 03:07.923
+build our source code into an artifact,
+
+03:09.210 --> 03:11.220
+and then deploy it on Beanstalk.
+
+03:11.220 --> 03:14.220
+Now there's no default option to deploy it on Beanstalk.
+
+03:14.220 --> 03:16.830
+We will be using AWS CodePipeline service
+
+03:16.830 --> 03:19.650
+to connect all these pieces together.
+
+03:19.650 --> 03:23.190
+So CodePipeline will detect any new commit
+
+03:23.190 --> 03:25.020
+on our Bitbucket repository,
+
+03:25.020 --> 03:26.550
+fetch the source code,
+
+03:26.550 --> 03:28.740
+trigger the CodeBuild project,
+
+03:28.740 --> 03:32.430
+which will build the source code into an artifact,
+
+03:32.430 --> 03:36.180
+and then deploy it on AWS Elastic Beanstalk.
+
+03:36.180 --> 03:37.365
+Now, as you already know,
+
+03:37.365 --> 03:40.260
+our Vprofile application needs database connectivity,
+
+03:40.260 --> 03:44.040
+so we will be having Amazon RDS,
+
+03:44.040 --> 03:45.990
+which will have schemas, tables,
+
+03:45.990 --> 03:47.763
+for our Vprofile application.
+
+03:49.200 --> 03:51.990
+So take a moment, pause the lecture,
+
+03:51.990 --> 03:54.630
+watch this architectural diagram once again,
+
+03:54.630 --> 03:56.400
+and then join me in the next lecture,
+
+03:56.400 --> 04:00.363
+where we will create Beanstalk application first.

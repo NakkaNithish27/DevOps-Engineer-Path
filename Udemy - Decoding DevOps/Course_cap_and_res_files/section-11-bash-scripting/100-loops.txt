@@ -1,0 +1,285 @@
+WEBVTT
+
+0
+00:01.190 --> 00:07.760
+Loops, running something again and again and again, there are two kinds of loops in bash scripting.
+
+1
+00:07.760 --> 00:11.390
+for loop and while loop, there are few of other, but we are going to deal with that.
+
+2
+00:12.140 --> 00:16.220
+So for loops, runs for a definitive number of times.
+
+3
+00:16.700 --> 00:20.510
+It's basically going to run on a sequence, a list of something.
+
+4
+00:21.610 --> 00:25.570
+Let's say you want to add 10 users, and the command is useradd
+
+5
+00:25.990 --> 00:28.450
+The only thing that changes is the username.
+
+6
+00:28.450 --> 00:29.410
+So you are going to run.
+
+7
+00:30.040 --> 00:36.070
+You can either run, useradd command 10 times or you can write a for loop that runs, useradd command
+
+8
+00:36.070 --> 00:37.030
+10 times for you.
+
+9
+00:37.030 --> 00:40.840
+And every time something changes, username, basically.
+
+10
+00:41.860 --> 00:46.120
+Or maybe you have a list of servers where you want to log in and execute the commands so you can run
+
+11
+00:46.120 --> 00:51.100
+it on a for loop, to log in to these many servers and execute your task.
+
+12
+00:51.790 --> 00:54.100
+This really saves a lot of time.
+
+13
+00:54.460 --> 00:55.450
+Let's see how it works.
+
+14
+00:56.170 --> 00:57.460
+OK, let's write a script.
+
+15
+00:59.650 --> 01:02.260
+13_for.sh
+
+16
+01:04.820 --> 01:07.610
+OK, so this is how it works, this is the syntax.
+
+17
+01:08.000 --> 01:13.730
+And you give a variable name, let's say, I'm going to give VAR1 "in" and then you give the list
+
+18
+01:13.850 --> 01:15.440
+of the item or sequence.
+
+19
+01:15.740 --> 01:19.040
+So I'm going to see java just something.
+
+20
+01:19.040 --> 01:24.020
+OK, Java .net python ruby php
+
+21
+01:25.400 --> 01:27.440
+And then I'm going to say, do do what?
+
+22
+01:28.960 --> 01:36.520
+I run these few commands. Just sprinting, looping, and I'm going to say, value of VAR1 in $VAR1
+
+23
+01:36.520 --> 01:38.640
+Oh, we also have to close it.
+
+24
+01:38.650 --> 01:39.460
+Let me close it.
+
+25
+01:40.270 --> 01:42.460
+So we have to say done for the closing.
+
+26
+01:42.910 --> 01:48.310
+So like in "if" you have "if" and "fi" is for closing. Here, "for" begins and "done" is the closing.
+
+27
+01:48.670 --> 01:53.800
+And in the middle, whatever commands we give, it's going to run again and again until the sequence
+
+28
+01:53.800 --> 01:54.580
+is exhausted.
+
+29
+01:54.580 --> 01:55.240
+So first.
+
+30
+01:56.200 --> 01:59.080
+The value Java will be stored into the variable$ VAR1
+
+31
+01:59.080 --> 02:00.280
+It will execute the code.
+
+32
+02:00.550 --> 02:01.690
+And it's a loop.
+
+33
+02:01.720 --> 02:02.680
+It's going to come back.
+
+34
+02:03.040 --> 02:06.410
+It's going to store the next value into the variable, execute it.
+
+35
+02:06.430 --> 02:07.030
+Then next.
+
+36
+02:07.030 --> 02:10.120
+Then next, till it, exhaust the sequence.
+
+37
+02:10.720 --> 02:13.960
+And I would like to put a sleep there.
+
+38
+02:15.090 --> 02:19.440
+You know, so, it's because, it is going run really super fast, I'm just going to sleep one.
+
+39
+02:20.310 --> 02:21.540
+So it runs little slow.
+
+40
+02:22.950 --> 02:27.030
+So let's save this and let's make it executable.
+
+41
+02:29.850 --> 02:30.840
+And let's run it.
+
+42
+02:32.770 --> 02:33.400
+It's looping.
+
+43
+02:33.670 --> 02:34.030
+Yeah.
+
+44
+02:37.040 --> 02:37.640
+Nice.
+
+45
+02:39.060 --> 02:40.140
+All right, let's go back.
+
+46
+02:42.270 --> 02:46.110
+So this these set of commands are going to run at these many times.
+
+47
+02:46.140 --> 02:48.360
+One, two, three, four, five, five times.
+
+48
+02:48.840 --> 02:49.130
+All right.
+
+49
+02:49.140 --> 02:49.830
+And you know what?
+
+50
+02:49.830 --> 02:54.720
+I can put one more echo here so you can see it all separated.
+
+51
+02:55.500 --> 02:56.820
+OK, let's see one good example.
+
+52
+03:00.230 --> 03:01.850
+OK, 14_for.sh
+
+53
+03:04.570 --> 03:07.720
+OK, so let's see, I have a list of users.
+
+54
+03:08.290 --> 03:15.910
+All right, just give the proper name, my users and I will give here the user name, I will say, Alpha,
+
+55
+03:15.910 --> 03:17.890
+Beta, Gamma.
+
+56
+03:21.090 --> 03:24.420
+And that's all, let's write the loop
+
+57
+03:26.280 --> 03:28.740
+for usr in
+
+58
+03:29.940 --> 03:33.270
+Doller my users, do.
+
+59
+03:35.250 --> 03:36.810
+useradd.
+
+60
+03:38.310 --> 03:39.450
+$usr.
+
+61
+03:40.290 --> 03:44.110
+And then I will also run the common id $usr.
+
+62
+03:45.260 --> 03:46.670
+And then I'll simply say done.
+
+63
+03:48.020 --> 03:50.150
+Or I will also print some messages here.
+
+64
+03:52.410 --> 03:59.390
+echo adding user $usr
+
+65
+04:01.220 --> 04:03.860
+And also, as usual, let's give separator.
+
+66
+04:05.210 --> 04:05.600
+echo
+
+67
+04:07.350 --> 04:08.340
+Some hashas.
+
+68
+04:10.430 --> 04:14.420
+OK, so this loop is going to basically run three times, because we have three.
+
+69
+04:15.830 --> 04:17.180
+Item in this list.
+
+70
+04:18.410 --> 04:19.280
+Let's test it.

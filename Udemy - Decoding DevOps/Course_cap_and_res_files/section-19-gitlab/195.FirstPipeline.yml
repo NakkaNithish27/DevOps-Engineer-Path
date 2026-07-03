@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+
+variables:
+  PROJECT_NAME: "Vprofile-App"
+
+# Build Job
+build-job:
+  stage: build
+  image: maven:3.9.9-eclipse-temurin-17
+  only:
+    - main
+  script:
+    - echo "Building project => ${PROJECT_NAME}"
+    - mvn install
+
+# Testing Job
+test-job:
+  stage: test
+  image: maven:3.9.9-eclipse-temurin-17
+  only:
+    - main
+  needs:
+    - build-job   # equivalent to 'needs: Build' in GitHub Actions
+  script:
+    - echo "Running tests on main branch..."
+    - mvn test
+    - mvn checkstyle:checkstyle

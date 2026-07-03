@@ -1,0 +1,418 @@
+WEBVTT
+
+00:03.960 --> 00:06.690
+Instructor: Okay, I am in my AWS management console
+
+00:06.690 --> 00:10.323
+and I am in a North California region.
+
+00:12.150 --> 00:15.690
+So switch to North California region, US West 1
+
+00:15.690 --> 00:17.793
+because this we will be using.
+
+00:19.380 --> 00:21.420
+And reason for using this region
+
+00:21.420 --> 00:24.210
+is because it has just two zones.
+
+00:24.210 --> 00:29.103
+It's easy to study, learn, and practice VPC in this region.
+
+00:30.450 --> 00:32.730
+But all the knowledge that you gain
+
+00:32.730 --> 00:34.740
+in this lecture of setting VPC,
+
+00:34.740 --> 00:38.040
+you can apply to other regions also.
+
+00:38.040 --> 00:41.130
+But just to reduce the complexity of the setup
+
+00:41.130 --> 00:42.000
+while we are learning,
+
+00:42.000 --> 00:44.463
+we are going with North California region.
+
+00:45.690 --> 00:50.493
+Search for the service VPC and open it.
+
+00:52.050 --> 00:54.660
+So in this lecture, first, we are going to study
+
+00:54.660 --> 00:56.253
+the default VPC.
+
+00:57.720 --> 00:59.830
+And before I go ahead and explain you
+
+01:01.200 --> 01:02.610
+about a default VPC,
+
+01:02.610 --> 01:04.740
+I want you to pause this lecture
+
+01:04.740 --> 01:08.280
+and go through these different sections.
+
+01:08.280 --> 01:13.280
+Take some time and get comfortable with this user interface.
+
+01:15.090 --> 01:17.760
+Once you're good, come back, resume the lecture,
+
+01:17.760 --> 01:20.913
+and I'll explain you the different concepts of default VPC.
+
+01:22.260 --> 01:24.360
+Okay, so we have the VPC dashboard.
+
+01:24.360 --> 01:28.650
+Over here you can see different configurations
+
+01:28.650 --> 01:31.263
+of VPC, NAT Gateway, Subnet, et cetera.
+
+01:32.190 --> 01:34.140
+So as I told you first we are going to take a look at
+
+01:34.140 --> 01:36.993
+the default VPC, so click on Your VPCs.
+
+01:38.220 --> 01:41.910
+And you will see a VPC over here, it does not have a name.
+
+01:41.910 --> 01:46.833
+Scroll horizontally, and you will see here default VPC, Yes.
+
+01:48.420 --> 01:50.430
+Now, you cannot create a default VPC.
+
+01:50.430 --> 01:53.220
+You can create VPC, but you cannot make it default.
+
+01:53.220 --> 01:56.490
+If accidentally you happen to delete the default VPC,
+
+01:56.490 --> 01:58.860
+you have to contact AWS support
+
+01:58.860 --> 02:00.960
+and they will create it for you.
+
+02:00.960 --> 02:03.330
+Every region will have a default VPC.
+
+02:03.330 --> 02:06.870
+And to identify, I usually change the name here
+
+02:06.870 --> 02:11.763
+to DEFAULT VPC, all in caps,
+
+02:14.010 --> 02:16.290
+so it's easy to identify.
+
+02:16.290 --> 02:18.900
+Every region you go, you can go and check different region,
+
+02:18.900 --> 02:22.146
+you will see the VPC and it'll have this range.
+
+02:22.146 --> 02:25.950
+172.31.0.0/16.
+
+02:25.950 --> 02:29.650
+Now slash 16 gives us
+
+02:30.990 --> 02:33.333
+around 65,000 IP addresses.
+
+02:34.290 --> 02:36.390
+Go to Subnets, click on Subnets,
+
+02:36.390 --> 02:39.990
+and you should find here two subnets for this VPC.
+
+02:39.990 --> 02:41.670
+These two are public subnet.
+
+02:41.670 --> 02:43.350
+And how do I know it's public subnet
+
+02:43.350 --> 02:44.850
+and how you can find out?
+
+02:44.850 --> 02:46.020
+That I'll show you in a moment,
+
+02:46.020 --> 02:48.153
+but let's change the name here.
+
+02:49.110 --> 02:54.110
+Default-pubsub1 and Default-pubsub2.
+
+02:54.210 --> 02:57.633
+One and two is just for identification.
+
+03:04.210 --> 03:07.260
+Okay, so these two subnets belong to the VPC
+
+03:07.260 --> 03:09.930
+that I can know by looking at the VPC ID over here
+
+03:09.930 --> 03:11.820
+and compare it with the default VPC
+
+03:11.820 --> 03:13.830
+or whatever VPC it belongs to.
+
+03:13.830 --> 03:17.430
+You can see it has a range slash 20 slash 20.
+
+03:17.430 --> 03:21.630
+That will give around 4096 IP address actually,
+
+03:21.630 --> 03:26.220
+but AWS will reserve five IP addresses per subnet
+
+03:26.220 --> 03:27.870
+for internal use.
+
+03:27.870 --> 03:31.260
+Look at the range 16.0, so any IP address,
+
+03:31.260 --> 03:32.610
+to your instance, private instance,
+
+03:32.610 --> 03:36.060
+you can see 172.31.16 dot something,
+
+03:36.060 --> 03:37.833
+not 10, 20, whatever.
+
+03:39.120 --> 03:40.560
+So by looking at the IP address
+
+03:40.560 --> 03:42.450
+of your instances, private IP,
+
+03:42.450 --> 03:45.540
+you can also identify which subnet it belongs to.
+
+03:45.540 --> 03:48.360
+Also, definitely it'll have a subnet ID as well.
+
+03:48.360 --> 03:49.890
+And look at the zone,
+
+03:49.890 --> 03:51.903
+this is in 1b, this is in 1a.
+
+03:54.480 --> 03:57.000
+Now I told you these are two public subnet
+
+03:57.000 --> 03:58.440
+because I already knew that,
+
+03:58.440 --> 04:02.010
+but you can find out whether a subnet is public or private
+
+04:02.010 --> 04:04.350
+by looking at its route table entries.
+
+04:04.350 --> 04:06.720
+So click on a route table.
+
+04:06.720 --> 04:09.060
+Select any subnet, click on the Route table,
+
+04:09.060 --> 04:10.980
+and you should see a route over here.
+
+04:10.980 --> 04:13.800
+Destination, this is for the outgoing traffic.
+
+04:13.800 --> 04:17.100
+Traffic that is going out of the subnet.
+
+04:17.100 --> 04:19.350
+So if the IP address belongs to this range,
+
+04:19.350 --> 04:21.870
+which is the VPC range, then route the traffic locally,
+
+04:21.870 --> 04:25.950
+that means within VPC, but any other IP address.
+
+04:25.950 --> 04:27.540
+In this networking...
+
+04:27.540 --> 04:30.390
+In networking, this means all the IP address
+
+04:30.390 --> 04:35.390
+as 0.0.0.0/0 means all the IP.
+
+04:35.520 --> 04:39.690
+So any network packet that is going out of the subnet,
+
+04:39.690 --> 04:40.860
+where should it go?
+
+04:40.860 --> 04:42.330
+That's the question.
+
+04:42.330 --> 04:44.040
+So if the IP belongs to this range,
+
+04:44.040 --> 04:45.270
+then it'll be routed locally,
+
+04:45.270 --> 04:48.240
+but any other IP address will go to the internet gateway.
+
+04:48.240 --> 04:51.150
+This is the ID of the internet gateway.
+
+04:51.150 --> 04:52.620
+You can check this IP ID.
+
+04:52.620 --> 04:56.433
+You can click on it or you can go to the internet gateway,
+
+04:58.350 --> 04:59.730
+and you should see the internet gateway.
+
+04:59.730 --> 05:02.580
+You can see which VPC is attached to,
+
+05:02.580 --> 05:05.160
+but the route tables, if you go to the Route table,
+
+05:05.160 --> 05:07.680
+you should find one route table here.
+
+05:07.680 --> 05:11.850
+You can see the routes here, same thing.
+
+05:11.850 --> 05:15.750
+And subnet association, which subnet it is associated to,
+
+05:15.750 --> 05:18.180
+the two public subnets.
+
+05:18.180 --> 05:22.320
+So if the subnets are routing the traffic
+
+05:22.320 --> 05:25.440
+through the route table to internet gateway,
+
+05:25.440 --> 05:26.970
+then that is a public subnet.
+
+05:26.970 --> 05:30.870
+If the subnets are routing traffic to NAT gateway,
+
+05:30.870 --> 05:32.940
+that is a private subnet.
+
+05:32.940 --> 05:34.980
+Rewind it and listen it again.
+
+05:34.980 --> 05:36.753
+These are also interview questions.
+
+05:38.220 --> 05:39.600
+And if you're managing VPC,
+
+05:39.600 --> 05:42.690
+definitely you should know these basic concepts.
+
+05:42.690 --> 05:44.970
+Traffic going to internet gateway, public subnet.
+
+05:44.970 --> 05:48.150
+Traffic going to NAT gateway, private subnet.
+
+05:48.150 --> 05:50.010
+So we have seen a VPC here.
+
+05:50.010 --> 05:51.720
+We have seen two subnets in that.
+
+05:51.720 --> 05:53.490
+We have seen a route table for it,
+
+05:53.490 --> 05:55.350
+and we have seen that the traffic is routed
+
+05:55.350 --> 05:56.910
+to the internet gateway.
+
+05:56.910 --> 05:58.950
+Sure, there are other things.
+
+05:58.950 --> 06:00.180
+Many things you see over here.
+
+06:00.180 --> 06:03.000
+These are out of the scope of our course,
+
+06:03.000 --> 06:05.040
+like Egress-only internet gateway,
+
+06:05.040 --> 06:09.030
+DSCP Option Set, Endpoints, Endpoint Services.
+
+06:09.030 --> 06:11.340
+But we are going to take a look at NAT Gateways,
+
+06:11.340 --> 06:13.953
+Elastic IPs, Network ACLs.
+
+06:14.790 --> 06:16.380
+But there are many other things
+
+06:16.380 --> 06:18.750
+and you really need to be a network geek
+
+06:18.750 --> 06:21.603
+to understand the advanced concepts of VPC.
+
+06:22.740 --> 06:24.540
+So before we move on to the next lecture,
+
+06:24.540 --> 06:28.110
+keep in mind never delete the default VPC.
+
+06:28.110 --> 06:32.070
+Don't delete default internet gateways or route tables.
+
+06:32.070 --> 06:33.780
+By the end of all these lectures,
+
+06:33.780 --> 06:35.940
+you should be able to create internet gateway
+
+06:35.940 --> 06:38.640
+and route table and attach it to VPC.
+
+06:38.640 --> 06:41.430
+But remember, you cannot create a default VPC.
+
+06:41.430 --> 06:44.310
+You have to ask AWS support if you accidentally delete
+
+06:44.310 --> 06:45.513
+the default VPC.
+
+06:46.500 --> 06:48.840
+So let's look in the next lecture how to create VPC
+
+06:48.840 --> 06:50.583
+and add subnets in that.

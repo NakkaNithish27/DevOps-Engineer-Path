@@ -1,0 +1,529 @@
+WEBVTT
+
+1
+00:00:00.430 --> 00:00:02.178
+In this video we will see how to
+
+2
+00:00:02.204 --> 00:00:05.818
+set up Kubernetes cluster through Minikube and Cops.
+
+3
+00:00:05.974 --> 00:00:09.094
+First, let's understand how to do it through minikube.
+
+4
+00:00:09.202 --> 00:00:10.326
+It's pretty simple.
+
+5
+00:00:10.448 --> 00:00:14.062
+It's one node cluster for testing.
+
+6
+00:00:14.206 --> 00:00:15.402
+So you always open the
+
+7
+00:00:15.416 --> 00:00:18.478
+PowerShell as admin install chocolatey.
+
+8
+00:00:18.634 --> 00:00:20.938
+Once you have chocolatey, you can install minikube
+
+9
+00:00:20.974 --> 00:00:26.253
+through chocolatey by running simple command choco install minikube
+
+10
+00:00:26.253 --> 00:00:30.058
+kubernetes CLI kubernetes CLI that's the kubectl
+
+11
+00:00:30.214 --> 00:00:32.250
+so you can connect it to the cluster.
+
+12
+00:00:32.630 --> 00:00:35.934
+You open PowerShell again, close and run once
+
+13
+00:00:35.972 --> 00:00:38.540
+again and you see minikube start.
+
+14
+00:00:38.870 --> 00:00:41.058
+When you see minikube start, it is going to
+
+15
+00:00:41.084 --> 00:00:45.054
+launch one single VM on your Oracle VM virtual box.
+
+16
+00:00:45.212 --> 00:00:47.338
+So you should already have Oracle
+
+17
+00:00:47.374 --> 00:00:50.214
+VM virtual box on your system. That's it.
+
+18
+00:00:50.252 --> 00:00:51.618
+The cluster will be up and running.
+
+19
+00:00:51.704 --> 00:00:53.360
+We'll see how to use that.
+
+20
+00:00:54.170 --> 00:00:55.098
+Then we are going to set
+
+21
+00:00:55.124 --> 00:00:56.518
+up Kubernetes cluster with kops.
+
+22
+00:00:56.554 --> 00:00:58.458
+You need a few prerequisites for that.
+
+23
+00:00:58.544 --> 00:01:02.698
+You need to purchase a domain to maintain our Kubernetes
+
+24
+00:01:02.734 --> 00:01:07.290
+DNS records like I have groophy in from GoDaddy.
+
+25
+00:01:08.030 --> 00:01:11.238
+We're going to create one VM and set up few tools on
+
+26
+00:01:11.264 --> 00:01:16.722
+that kops kubectl SSH keys AWS CLI on AWS we are going
+
+27
+00:01:16.736 --> 00:01:19.098
+to do a few more setup like we're going to create s3
+
+28
+00:01:19.124 --> 00:01:24.106
+bucket, an IAM user for the CLI route, 53 hosted zones.
+
+29
+00:01:24.298 --> 00:01:26.934
+OK, let's see all the steps one by one.
+
+30
+00:01:26.972 --> 00:01:32.818
+First for minikube and then for kops you can
+
+31
+00:01:32.844 --> 00:01:37.500
+clone the source code vprofile project source code.
+
+32
+00:01:39.330 --> 00:01:41.218
+So I'm going to clone the source code.
+
+33
+00:01:41.364 --> 00:01:44.810
+If you have it already cloned, just get into the repository
+
+34
+00:01:44.870 --> 00:01:47.340
+and do get pull so you get the latest changes.
+
+35
+00:01:48.990 --> 00:01:51.322
+Let's see if you already have it, just do a
+
+36
+00:01:51.336 --> 00:01:54.238
+get pull inside that to get all the latest changes.
+
+37
+00:01:54.324 --> 00:01:56.460
+We are already up to date, we just cloned it.
+
+38
+00:01:56.790 --> 00:02:03.374
+We are going to use a branch Kubernetes set
+
+39
+00:02:03.412 --> 00:02:08.310
+up so you have different directories over here.
+
+40
+00:02:08.360 --> 00:02:09.681
+First we're going to do minikube.
+
+41
+00:02:09.705 --> 00:02:11.538
+So let's get into minikube and
+
+42
+00:02:11.564 --> 00:02:13.470
+there is a simple piece of document.
+
+43
+00:02:15.930 --> 00:02:17.182
+First you need to install
+
+44
+00:02:17.256 --> 00:02:19.870
+chocolatey from prerequisite video.
+
+45
+00:02:19.920 --> 00:02:21.706
+You should already have chocolatey on your system.
+
+46
+00:02:21.768 --> 00:02:23.314
+If you don't have run this
+
+47
+00:02:23.352 --> 00:02:25.190
+command and have chocolatey installed.
+
+48
+00:02:25.310 --> 00:02:27.746
+Once you have chocolatey installed from PowerShell,
+
+49
+00:02:27.878 --> 00:02:30.480
+close the PowerShell open up again.
+
+50
+00:02:37.150 --> 00:02:45.198
+Open PowerShell with administrator we'll copy this command to
+
+51
+00:02:45.224 --> 00:03:03.254
+set up chocolatey in case if you're getting error
+
+52
+00:03:03.302 --> 00:03:07.594
+over here like restricted or not allowed then turn
+
+53
+00:03:07.632 --> 00:03:10.154
+off your antivirus for a moment. On this command.
+
+54
+00:03:10.202 --> 00:03:11.678
+You should have the latest version
+
+55
+00:03:11.714 --> 00:03:13.342
+of chocolate tea on your system.
+
+56
+00:03:13.536 --> 00:03:16.750
+Once you have done this, close PowerShell
+
+57
+00:03:22.330 --> 00:03:25.430
+and start again with admin privilege.
+
+58
+00:03:35.210 --> 00:03:37.258
+Next we're going to run this command choko
+
+59
+00:03:37.294 --> 00:03:40.806
+install minikube which will install the minikube tool
+
+60
+00:03:40.988 --> 00:03:44.634
+and Kubernetes CLI which is the command line
+
+61
+00:03:44.672 --> 00:03:47.010
+tool to connect to the Kubernetes cluster.
+
+62
+00:04:13.290 --> 00:04:15.274
+Okay, now I have latest version of
+
+63
+00:04:15.312 --> 00:04:19.260
+minikube and Kubernetes CLI tool.
+
+64
+00:04:20.070 --> 00:04:22.798
+I can close this now and I can use
+
+65
+00:04:22.824 --> 00:04:25.810
+my git bash which is much more convenient.
+
+66
+00:04:27.750 --> 00:04:29.170
+Check minikube.
+
+67
+00:04:36.310 --> 00:04:38.334
+If you still don't see minikube command,
+
+68
+00:04:38.382 --> 00:04:40.780
+then close, get bash and start again.
+
+69
+00:04:42.310 --> 00:04:43.986
+So we are going to say minikube
+
+70
+00:04:44.058 --> 00:04:45.962
+start which is going to start a local
+
+71
+00:04:46.036 --> 00:04:49.190
+Kubernetes cluster and then we'll check its status.
+
+72
+00:04:49.750 --> 00:04:56.934
+So minikube start, it's going to take some time
+
+73
+00:04:56.972 --> 00:04:59.898
+because it's going to download an image and then bring
+
+74
+00:04:59.924 --> 00:05:02.720
+up a VM on Oracle VM virtual box.
+
+75
+00:05:13.890 --> 00:05:14.926
+Okay, it says done.
+
+76
+00:05:14.988 --> 00:05:17.026
+The Kubernetes cluster is up.
+
+77
+00:05:17.208 --> 00:05:18.670
+You can see a VM.
+
+78
+00:05:20.370 --> 00:05:28.054
+You can check minikube of sorry, kubectl get nodes and
+
+79
+00:05:28.092 --> 00:05:31.570
+you should see your one node which is master node.
+
+80
+00:05:32.010 --> 00:05:35.890
+So kubectl which we installed through chocolatey is
+
+81
+00:05:35.940 --> 00:05:40.454
+using a file which is in your home directory
+
+82
+00:05:40.562 --> 00:05:45.758
+kubeconfig at this path kubeconfig file, the kube
+
+83
+00:05:45.794 --> 00:05:48.346
+config file, you have the cluster detail over here.
+
+84
+00:05:48.408 --> 00:05:52.274
+kubeconfig file is used by the kubectl command.
+
+85
+00:05:52.442 --> 00:05:55.754
+So the server detail the name of the cluster.
+
+86
+00:05:55.802 --> 00:05:57.180
+This is the cluster detail.
+
+87
+00:05:58.590 --> 00:06:02.918
+Down here you have users minikube and client
+
+88
+00:06:02.954 --> 00:06:06.506
+certificate, client key for the user and then context.
+
+89
+00:06:06.578 --> 00:06:09.458
+Context marries the user with the cluster.
+
+90
+00:06:09.494 --> 00:06:11.842
+So you say in context cluster the name of
+
+91
+00:06:11.856 --> 00:06:17.410
+the cluster minikube which is this one user minikube.
+
+92
+00:06:18.210 --> 00:06:20.830
+So that's the minikube user
+
+93
+00:06:22.050 --> 00:06:24.310
+with the credentials to login.
+
+94
+00:06:24.810 --> 00:06:29.254
+So when I say kubectl get nodes, it is
+
+95
+00:06:29.292 --> 00:06:32.834
+using that kubeconfig file to access our cluster.
+
+96
+00:06:32.942 --> 00:06:34.930
+Now let's run a few more tests.
+
+97
+00:06:35.370 --> 00:06:44.330
+Let's go to Kubernetes documentation learning environment Minikube
+
+98
+00:06:45.850 --> 00:06:48.344
+all right, so we just did this minikube
+
+99
+00:06:48.344 --> 00:06:50.090
+cluster is up and now we can
+
+100
+00:06:50.140 --> 00:06:53.330
+test by running kubectl create deployment.
+
+101
+00:06:58.610 --> 00:06:59.958
+So this command created a
+
+102
+00:06:59.984 --> 00:07:02.122
+deployment named hello minikube.
+
+103
+00:07:02.206 --> 00:07:05.550
+It has fetched an image from Google container registry
+
+104
+00:07:07.370 --> 00:07:11.578
+kubectl get pod and you should see a pod
+
+105
+00:07:11.614 --> 00:07:15.510
+running from the deployment kubectl get deploy.
+
+106
+00:07:16.550 --> 00:07:19.530
+So this deploy is running this pod.
+
+107
+00:07:23.550 --> 00:07:25.462
+Okay, let's expose it.
+
+108
+00:07:25.596 --> 00:07:28.680
+So it creates a service which we can then access
+
+109
+00:07:29.310 --> 00:07:35.014
+kubectl expose deployment deployment name --type node port on
+
+110
+00:07:35.052 --> 00:07:39.610
+port 8080 OK, to check the URL of our
+
+111
+00:07:39.660 --> 00:07:44.578
+deployment of our service, run this command and you should
+
+112
+00:07:44.604 --> 00:07:50.014
+get a URL so we can access our application, this
+
+113
+00:07:50.052 --> 00:07:59.054
+URL and you should get this and that just test
+
+114
+00:07:59.212 --> 00:08:01.346
+that your minikube cluster is up and running.
+
+115
+00:08:01.408 --> 00:08:03.390
+You're able to create pod deployment
+
+116
+00:08:03.450 --> 00:08:05.630
+and expose service for it.
+
+117
+00:08:05.800 --> 00:08:07.538
+So in our next project, we are going
+
+118
+00:08:07.564 --> 00:08:10.490
+to host a Java application on Kubernetes cluster.
+
+119
+00:08:10.810 --> 00:08:12.218
+In this project we are just seeing
+
+120
+00:08:12.244 --> 00:08:14.634
+the setup by using different different tools.
+
+121
+00:08:14.742 --> 00:08:16.900
+So one minikube is done.
+
+122
+00:08:18.490 --> 00:08:20.320
+Now let's wrap it up.
+
+123
+00:08:23.510 --> 00:08:34.260
+kubectl get SVC will first delete our service.
+
+124
+00:08:39.669 --> 00:08:42.530
+kubectl delete deploy.
+
+125
+00:08:44.169 --> 00:08:45.191
+Hello minikube.
+
+126
+00:08:45.191 --> 00:08:47.606
+So delete the deployment and it's going 
+
+127
+00:08:47.608 --> 00:08:49.300
+to delete your pod as well.
+
+128
+00:08:51.010 --> 00:08:54.270
+Now let's stop the minikube cluster.
+
+129
+00:08:54.390 --> 00:09:01.894
+Minikube stop and then finally you can say minikube
+
+130
+00:09:02.002 --> 00:09:08.640
+delete and you should have now no VM over here.
+
+131
+00:09:09.750 --> 00:09:10.594
+So that's good.
+
+132
+00:09:10.632 --> 00:09:13.370
+Hands on on a kubernetes cluster.

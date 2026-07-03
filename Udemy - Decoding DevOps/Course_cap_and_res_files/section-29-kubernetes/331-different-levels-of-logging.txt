@@ -1,0 +1,605 @@
+WEBVTT
+
+1
+00:00:00.730 --> 00:00:02.021
+Hello and welcome.
+
+2
+00:00:02.216 --> 00:00:03.834
+In this lecture we will talk
+
+3
+00:00:03.872 --> 00:00:07.530
+about finding issues with your pods.
+
+4
+00:00:09.230 --> 00:00:11.682
+We try to create or manage
+
+5
+00:00:11.756 --> 00:00:16.520
+everything perfectly, but mistakes happen.
+
+6
+00:00:17.330 --> 00:00:20.718
+And when it does, first thing you have to do
+
+7
+00:00:20.744 --> 00:00:24.980
+is find out your mistake and second you fix it.
+
+8
+00:00:26.150 --> 00:00:30.586
+I will tell you myself to minimize mistakes
+
+9
+00:00:30.778 --> 00:00:34.362
+or mistakes, what I do is I run
+
+10
+00:00:34.436 --> 00:00:37.594
+first things in my local environment.
+
+11
+00:00:37.702 --> 00:00:39.798
+Whenever I'm working in any project, I
+
+12
+00:00:39.824 --> 00:00:42.260
+will have a local environment set up.
+
+13
+00:00:43.010 --> 00:00:45.834
+I test things in local environment, then
+
+14
+00:00:45.932 --> 00:00:48.918
+in the test or dev environment, and
+
+15
+00:00:48.944 --> 00:00:51.150
+then finally in production environment.
+
+16
+00:00:52.190 --> 00:00:56.634
+So if you are working on any project, I recommend
+
+17
+00:00:56.732 --> 00:01:00.620
+you set up a local test environment for yourself.
+
+18
+00:01:01.550 --> 00:01:03.438
+Just make sure it's allowed in your
+
+19
+00:01:03.464 --> 00:01:06.030
+project to do a local setup.
+
+20
+00:01:07.310 --> 00:01:08.934
+And you can do it on your
+
+21
+00:01:08.972 --> 00:01:12.186
+VMs instances or wherever you want.
+
+22
+00:01:12.248 --> 00:01:14.300
+But have a local set up for yourself.
+
+23
+00:01:14.870 --> 00:01:15.822
+Even though you took care
+
+24
+00:01:15.836 --> 00:01:17.562
+of everything, still mistakes happen.
+
+25
+00:01:17.636 --> 00:01:21.210
+So kubectl get pod.
+
+26
+00:01:22.070 --> 00:01:24.334
+I have three pods over here, NGINX
+
+27
+00:01:24.382 --> 00:01:26.660
+one, NGINX twelve and Web two.
+
+28
+00:01:27.890 --> 00:01:31.050
+NGINX one is in running state nginx twelve.
+
+29
+00:01:31.160 --> 00:01:32.686
+I see a status image.
+
+30
+00:01:32.758 --> 00:01:34.160
+Pull back off.
+
+31
+00:01:34.490 --> 00:01:37.160
+Web to crash loop. Back off.
+
+32
+00:01:38.390 --> 00:01:39.500
+How about this?
+
+33
+00:01:40.070 --> 00:01:41.802
+If you see this, this means
+
+34
+00:01:41.876 --> 00:01:44.480
+you have given wrong image name.
+
+35
+00:01:44.870 --> 00:01:45.906
+I will show this.
+
+36
+00:01:45.968 --> 00:01:50.010
+But let's see, we can say kubectl hyphen o
+
+37
+00:01:50.120 --> 00:01:53.394
+wide to see what is the image name out.
+
+38
+00:01:53.432 --> 00:01:55.760
+Let's try to find out the problem with this.
+
+39
+00:01:56.570 --> 00:01:58.640
+Okay, still we are not finding anything.
+
+40
+00:01:59.030 --> 00:02:09.753
+Let's say kubectl YAML, this is one
+
+41
+00:02:09.792 --> 00:02:11.640
+more way of finding more information.
+
+42
+00:02:15.070 --> 00:02:15.770
+Back off.
+
+43
+00:02:15.820 --> 00:02:17.718
+Pulling image ngnox
+
+44
+00:02:17.814 --> 00:02:20.080
+I have given the wrong name there.
+
+45
+00:02:20.470 --> 00:02:23.178
+So you see we caught up here by using Hypheno
+
+46
+00:02:23.214 --> 00:02:28.382
+YAML or Hypheno JSON, we can also describe this.
+
+47
+00:02:28.456 --> 00:02:34.490
+We can say kubectl describe pod.
+
+48
+00:02:37.310 --> 00:02:38.742
+And in the event as I told you
+
+49
+00:02:38.756 --> 00:02:41.374
+in the events you can find out mistakes.
+
+50
+00:02:41.482 --> 00:02:44.874
+Pulling this image failed to pull this image, this
+
+51
+00:02:44.912 --> 00:02:49.434
+thing failed to resolve blah blah blah full access
+
+52
+00:02:49.532 --> 00:02:54.790
+Denied repository does not exist or may require authorization.
+
+53
+00:02:54.910 --> 00:02:58.078
+And this is a public image pulling from docker hub.
+
+54
+00:02:58.114 --> 00:03:01.122
+But if it's in a private registry and if you
+
+55
+00:03:01.136 --> 00:03:05.900
+have not given your credentials, the same error may come.
+
+56
+00:03:06.470 --> 00:03:08.578
+We will talk about how you can supply
+
+57
+00:03:08.614 --> 00:03:12.330
+credentials for private registry in secrets lecture.
+
+58
+00:03:12.770 --> 00:03:14.134
+But we found our mistake.
+
+59
+00:03:14.182 --> 00:03:15.310
+It's ngnox.
+
+60
+00:03:15.430 --> 00:03:18.330
+I will show you how I created this mistake.
+
+61
+00:03:18.770 --> 00:03:23.610
+So we have here part two YAML.
+
+62
+00:03:24.050 --> 00:03:26.422
+And you see here I have given nginox
+
+63
+00:03:26.446 --> 00:03:29.106
+and I applied it and that's how you can
+
+64
+00:03:29.168 --> 00:03:32.274
+create the same mistake and you can find it. Okay?
+
+65
+00:03:32.312 --> 00:03:34.302
+So let's fix the problem with this one.
+
+66
+00:03:34.376 --> 00:03:36.150
+We will delete this pod.
+
+67
+00:03:41.010 --> 00:03:48.950
+We'll say kubectl delete pod
+
+68
+00:03:49.930 --> 00:03:52.430
+and we will fix the mistake.
+
+69
+00:03:54.010 --> 00:03:55.900
+We'll give the right image name
+
+70
+00:04:02.750 --> 00:04:04.566
+and let's apply it once again.
+
+71
+00:04:04.628 --> 00:04:10.402
+kubectl apply Pod two.
+
+72
+00:04:10.536 --> 00:04:18.786
+YAML, and let's see now kubectl get pod, that's fixed.
+
+73
+00:04:18.858 --> 00:04:20.774
+Second one now web two.
+
+74
+00:04:20.872 --> 00:04:23.210
+kubectl get pod.
+
+75
+00:04:24.190 --> 00:04:27.890
+Web two wide.
+
+76
+00:04:28.330 --> 00:04:30.530
+Let's see if we can find out this mistake.
+
+77
+00:04:32.470 --> 00:04:33.640
+Nothing here.
+
+78
+00:04:34.390 --> 00:04:40.686
+Let's say YAML, it says back
+
+79
+00:04:40.748 --> 00:04:43.614
+off some five minutes restarting field.
+
+80
+00:04:43.652 --> 00:04:46.362
+It's trying to restart the container whenever there
+
+81
+00:04:46.376 --> 00:04:50.274
+is some problem, specifically this kind of problem
+
+82
+00:04:50.372 --> 00:04:52.302
+which will find out what it is, it
+
+83
+00:04:52.316 --> 00:04:53.806
+will try to restart the pod.
+
+84
+00:04:53.938 --> 00:04:57.882
+You can see kubectl get pod and you
+
+85
+00:04:57.896 --> 00:04:59.994
+can say try to restart like five times.
+
+86
+00:05:00.032 --> 00:05:02.586
+You see restarts sorry, eight times.
+
+87
+00:05:02.648 --> 00:05:06.054
+It tried to restart eight times but it's not working.
+
+88
+00:05:06.152 --> 00:05:08.718
+Okay, YAML also did not give us anything.
+
+89
+00:05:08.804 --> 00:05:15.798
+Let's say kubectl describe I'm showing you how
+
+90
+00:05:15.824 --> 00:05:17.600
+you can drill down to the problem.
+
+91
+00:05:19.430 --> 00:05:23.660
+Okay, in the events we don't see anything.
+
+92
+00:05:24.590 --> 00:05:26.458
+Okay, pulling the image, correct image.
+
+93
+00:05:26.494 --> 00:05:28.362
+But here it's failing. Now what?
+
+94
+00:05:28.556 --> 00:05:32.854
+Okay, when you see this container is trying to restart,
+
+95
+00:05:32.962 --> 00:05:36.534
+everything is good in the events, the last resort, which
+
+96
+00:05:36.572 --> 00:05:39.390
+will mostly give you what kind of problem it is,
+
+97
+00:05:39.500 --> 00:05:45.034
+is to see the logs of the pod.
+
+98
+00:05:45.202 --> 00:05:47.982
+Logs, you don't even need to give pod, you just
+
+99
+00:05:47.996 --> 00:05:50.600
+need to say kubectl logs and the pod name.
+
+100
+00:05:51.170 --> 00:05:53.780
+Before I run this, let me tell you what this will do.
+
+101
+00:05:54.170 --> 00:05:55.882
+Pod is running a container
+
+102
+00:05:55.966 --> 00:05:58.054
+and container will execute commands.
+
+103
+00:05:58.102 --> 00:06:00.666
+Those commands could be a script, it could be
+
+104
+00:06:00.728 --> 00:06:04.460
+a command that runs the process, like NGINX process.
+
+105
+00:06:04.910 --> 00:06:07.290
+So whatever process runs in the container, the
+
+106
+00:06:07.340 --> 00:06:11.574
+output of that process, the output of that
+
+107
+00:06:11.612 --> 00:06:16.280
+process you can see by using logs there.
+
+108
+00:06:16.790 --> 00:06:18.682
+So it's running the script
+
+109
+00:06:18.766 --> 00:06:19.962
+which will start the process.
+
+110
+00:06:20.036 --> 00:06:21.274
+But it says exec.
+
+111
+00:06:21.322 --> 00:06:25.220
+Exec means executing command what test 47?
+
+112
+00:06:25.550 --> 00:06:26.600
+What is that?
+
+113
+00:06:27.530 --> 00:06:28.698
+I'll tell you what I did.
+
+114
+00:06:28.724 --> 00:06:34.318
+Actually, this is what I did.
+
+115
+00:06:34.464 --> 00:06:37.834
+So in my history, you see, I executed this
+
+116
+00:06:37.872 --> 00:06:41.422
+command kubectl run web2 --image nginx and
+
+117
+00:06:41.436 --> 00:06:43.666
+at the end I have given test 47.
+
+118
+00:06:43.848 --> 00:06:45.358
+When you give this at the end, that
+
+119
+00:06:45.384 --> 00:06:49.750
+means run this command on this container.
+
+120
+00:06:51.210 --> 00:06:53.882
+So we run the container, we're executing
+
+121
+00:06:53.906 --> 00:06:56.410
+this command and this is really wrong
+
+122
+00:06:56.460 --> 00:06:57.754
+command, it doesn't do anything.
+
+123
+00:06:57.792 --> 00:06:59.914
+So it's command not found like that.
+
+124
+00:07:00.072 --> 00:07:01.498
+So that's why this error and that
+
+125
+00:07:01.524 --> 00:07:03.240
+is why it is not starting.
+
+126
+00:07:03.930 --> 00:07:06.538
+So again we will delete and run the pod once
+
+127
+00:07:06.564 --> 00:07:13.442
+again, kubectl delete pod web too and I take the
+
+128
+00:07:13.456 --> 00:07:23.298
+command and I just run it kubectl get pod and
+
+129
+00:07:23.324 --> 00:07:25.398
+you see, now we have fixed both the problem.
+
+130
+00:07:25.484 --> 00:07:28.820
+So you see how I drilled down to the problem.
+
+131
+00:07:29.210 --> 00:07:33.154
+I first checked the status, there was an error.
+
+132
+00:07:33.322 --> 00:07:37.242
+I tried to do wide I describe, I can see it
+
+133
+00:07:37.256 --> 00:07:42.126
+in Hyphen YAML format and still we don't catch anything.
+
+134
+00:07:42.188 --> 00:07:45.642
+We look at the logs and trust me, most of
+
+135
+00:07:45.656 --> 00:07:48.440
+the time you will catch the problem somewhere here.
+
+136
+00:07:49.190 --> 00:07:52.614
+Once you catch the problem, next is fixing it.
+
+137
+00:07:52.772 --> 00:07:55.450
+Now you will say why don't we edit the pod?
+
+138
+00:07:55.570 --> 00:07:59.190
+Well, usually we don't edit a pod that will be
+
+139
+00:07:59.300 --> 00:08:02.694
+done through deployments or Daemonset or other things that
+
+140
+00:08:02.732 --> 00:08:06.078
+will be seen later and not editing the pod, but
+
+141
+00:08:06.104 --> 00:08:09.114
+we edit deployments or DaemonSet or replica set.
+
+142
+00:08:09.152 --> 00:08:11.674
+And that's how it fixes the pod.
+
+143
+00:08:11.782 --> 00:08:13.038
+Basically, it's going to delete and
+
+144
+00:08:13.064 --> 00:08:14.730
+recreate what we did manually.
+
+145
+00:08:15.350 --> 00:08:16.482
+We'll see all that.
+
+146
+00:08:16.616 --> 00:08:20.274
+I hope you have gained some experience or
+
+147
+00:08:20.312 --> 00:08:22.820
+expertise in finding the problem with your card.
+
+148
+00:08:23.270 --> 00:08:24.558
+So test it.
+
+149
+00:08:24.704 --> 00:08:26.598
+Run this command, break things,
+
+150
+00:08:26.684 --> 00:08:28.700
+break pause and fix them.
+
+151
+00:08:29.990 --> 00:08:33.299
+And after that, join me in the next lecture there.

@@ -1,0 +1,436 @@
+WEBVTT
+
+00:00.150 --> 00:02.970
+Instructor: Hello, and welcome to Terraform lectures.
+
+00:02.970 --> 00:06.270
+Terraform is a science fiction word
+
+00:06.270 --> 00:10.890
+which means to transform atmosphere of a planet
+
+00:10.890 --> 00:13.230
+and make it habitable,
+
+00:13.230 --> 00:15.120
+like what we want to do with Mars,
+
+00:15.120 --> 00:16.350
+we want to make it habitable
+
+00:16.350 --> 00:20.640
+so humans can live on planet Mars.
+
+00:20.640 --> 00:22.080
+Or in the "Superman" movie
+
+00:22.080 --> 00:23.610
+where you have seen the Kryptonites
+
+00:23.610 --> 00:26.640
+comes with big gigantic machines
+
+00:26.640 --> 00:29.580
+to transform Earth's atmosphere
+
+00:29.580 --> 00:34.233
+so Kryptonites can live on that or survive on that.
+
+00:35.130 --> 00:37.380
+So we will be also doing same thing,
+
+00:37.380 --> 00:38.610
+but not with the planet,
+
+00:38.610 --> 00:41.373
+but with the cloud computing accounts like AWS.
+
+00:42.540 --> 00:45.690
+We want to make AWS Cloud account more habitable
+
+00:45.690 --> 00:50.100
+for our application to live, we can use Terraform.
+
+00:50.100 --> 00:54.300
+It is a tool from HashiCorp and its primary purpose
+
+00:54.300 --> 00:58.230
+is to manage the infrastructure on the cloud.
+
+00:58.230 --> 01:02.220
+It's also called as infrastructure as a code.
+
+01:02.220 --> 01:04.860
+Terraform has become a default standard
+
+01:04.860 --> 01:06.810
+for cloud automation,
+
+01:06.810 --> 01:08.760
+and today's time it can manage
+
+01:08.760 --> 01:13.200
+almost all the cloud providers like AWS, Azure,
+
+01:13.200 --> 01:14.820
+Google Cloud, Oracle Cloud,
+
+01:14.820 --> 01:16.833
+even Docker, and even Kubernetes.
+
+01:18.060 --> 01:20.700
+So let's check the code, how does it look?
+
+01:20.700 --> 01:23.190
+Let's go to the Terraform style guide.
+
+01:23.190 --> 01:26.700
+So Terraform has its own language and it's pretty simple,
+
+01:26.700 --> 01:28.650
+it's just like JSON.
+
+01:28.650 --> 01:30.450
+And after writing the Terraform code,
+
+01:30.450 --> 01:33.900
+you can use commands like terraform fmt format
+
+01:33.900 --> 01:35.970
+or terraform validate
+
+01:35.970 --> 01:38.283
+to check the right format of your code.
+
+01:39.180 --> 01:42.390
+So, okay, here, this is how it looks.
+
+01:42.390 --> 01:43.830
+So you say resource
+
+01:43.830 --> 01:46.317
+and the name of the resource, aws_instance.
+
+01:46.317 --> 01:49.110
+Now Terraform knows what does that mean.
+
+01:49.110 --> 01:51.870
+Then you give the name of the resource,
+
+01:51.870 --> 01:54.780
+like web01 instance, for example.
+
+01:54.780 --> 01:57.390
+And then inside that you give the arguments,
+
+01:57.390 --> 02:00.390
+like how many instance count, ami ID,
+
+02:00.390 --> 02:04.020
+instance type, security group, et cetera, et cetera.
+
+02:04.020 --> 02:06.207
+So when you execute this code,
+
+02:06.207 --> 02:09.120
+the Terraform tool will run that for you.
+
+02:09.120 --> 02:12.873
+It will create the EC2 instance if it does not exist,
+
+02:13.920 --> 02:18.090
+and then it will put all this information into a state file.
+
+02:18.090 --> 02:20.100
+Yes, Terraform maintains the state
+
+02:20.100 --> 02:21.150
+of the infrastructure now.
+
+02:21.150 --> 02:25.200
+Terraform knows that it has created this so-and-so instance
+
+02:25.200 --> 02:28.020
+and its state is running right now.
+
+02:28.020 --> 02:30.690
+So let's say you shut down that instance
+
+02:30.690 --> 02:33.720
+and then you execute the Terraform code again.
+
+02:33.720 --> 02:36.300
+So Terraform will check its state file
+
+02:36.300 --> 02:37.890
+and compare it with the infrastructure.
+
+02:37.890 --> 02:39.690
+If there is a difference, it will apply it.
+
+02:39.690 --> 02:41.790
+So if the EC2 instance is powered off,
+
+02:41.790 --> 02:44.070
+it is going to power it on.
+
+02:44.070 --> 02:46.050
+Or if you have changed the name of the instance,
+
+02:46.050 --> 02:47.280
+it will correct it again.
+
+02:47.280 --> 02:50.580
+So it will always maintain the state of the infrastructure.
+
+02:50.580 --> 02:51.990
+So it's not just automation,
+
+02:51.990 --> 02:55.230
+it's maintaining your infrastructure.
+
+02:55.230 --> 02:59.970
+And in my opinion, this is why the Terraform has succeeded
+
+02:59.970 --> 03:01.500
+in cloud automation industries.
+
+03:01.500 --> 03:05.100
+There are other automation tools also, Terraform is simple,
+
+03:05.100 --> 03:06.630
+it comes with a lot of plugins,
+
+03:06.630 --> 03:09.840
+you can install plugins and you can add more functionality.
+
+03:09.840 --> 03:12.420
+So it's easy, it's extendable,
+
+03:12.420 --> 03:14.310
+and best part, it maintains the state
+
+03:14.310 --> 03:16.740
+of your infrastructure, which is very crucial.
+
+03:16.740 --> 03:18.840
+Okay, so let's install Terraform now
+
+03:18.840 --> 03:21.000
+and see how we can use it.
+
+03:21.000 --> 03:24.210
+We'll create a simple EC2 instance for Terraform,
+
+03:24.210 --> 03:26.820
+and we'll see if it maintains the state or not.
+
+03:26.820 --> 03:28.950
+So let's click on Install here.
+
+03:28.950 --> 03:30.810
+So macOS is pretty simple,
+
+03:30.810 --> 03:33.330
+you just say brew tap hashicorp/tap
+
+03:33.330 --> 03:37.470
+and brew install hashicorp/tap/terraform.
+
+03:37.470 --> 03:39.600
+Okay, so you can use the brew package manager
+
+03:39.600 --> 03:40.620
+to install Terraform.
+
+03:40.620 --> 03:43.113
+Just check the commands over here.
+
+03:43.980 --> 03:48.980
+For Windows user, well, we can use choco install terraform,
+
+03:49.200 --> 03:52.980
+and for Linux for if you're using Ubuntu or CentOS/RHEL
+
+03:52.980 --> 03:55.110
+you can execute these commands.
+
+03:55.110 --> 03:59.280
+Just simply come to this URL and get the installation steps.
+
+03:59.280 --> 04:01.890
+I'm going to install it on the Windows machine
+
+04:01.890 --> 04:03.210
+by using choco command,
+
+04:03.210 --> 04:07.053
+so I'm going to open PowerShell as administrator,
+
+04:08.160 --> 04:09.381
+Run as Administrator,
+
+04:09.381 --> 04:11.400
+(screen chiming)
+
+04:11.400 --> 04:14.250
+and I'm going to execute the command,
+
+04:14.250 --> 04:16.263
+choco install terraform.
+
+04:19.140 --> 04:21.060
+Okay, do you want to run the program?
+
+04:21.060 --> 04:22.110
+I'll just say A too
+
+04:22.110 --> 04:25.353
+so it accepts all the installation scripts.
+
+04:26.234 --> 04:28.980
+Okay, Terraform is installed, let me check its version,
+
+04:28.980 --> 04:33.033
+terraform --version.
+
+04:34.920 --> 04:38.940
+So mine is 1.10.2, yours might be different,
+
+04:38.940 --> 04:40.680
+Maybe some other latest version.
+
+04:40.680 --> 04:43.530
+So whatever it is, you can stick to that.
+
+04:43.530 --> 04:45.210
+Don't need to get to this version.
+
+04:45.210 --> 04:47.280
+Okay, after installing Terraform,
+
+04:47.280 --> 04:49.140
+we need to set up the access key,
+
+04:49.140 --> 04:52.710
+so we are going to automate AWS infrastructure.
+
+04:52.710 --> 04:56.670
+So we'll go to our AWS account, create an IAM user,
+
+04:56.670 --> 04:59.790
+and then save its access key in our laptop
+
+04:59.790 --> 05:00.810
+or in our computer.
+
+05:00.810 --> 05:02.910
+So let's log into AWS account.
+
+05:02.910 --> 05:05.580
+Okay, I'm on my AWS management console
+
+05:05.580 --> 05:07.860
+and I am in IAM service.
+
+05:07.860 --> 05:10.080
+So search for IAM, come to IAM,
+
+05:10.080 --> 05:13.170
+go to User and say Create user,
+
+05:13.170 --> 05:16.773
+give user a name, I'm going to give it as terraadmin,
+
+05:19.020 --> 05:20.523
+and I'll just say Next,
+
+05:21.690 --> 05:23.130
+Attach policies directly.
+
+05:23.130 --> 05:26.790
+So we are going to do a lot of administrative actions
+
+05:26.790 --> 05:27.870
+on AWS account,
+
+05:27.870 --> 05:31.020
+so I'm going to give it administrator access,
+
+05:31.020 --> 05:34.893
+and go Next, Create user.
+
+05:35.970 --> 05:38.490
+So user is created, let's create the access key.
+
+05:38.490 --> 05:41.850
+So just click on the username
+
+05:41.850 --> 05:44.973
+and click on Security credentials,
+
+05:45.810 --> 05:50.043
+scroll down, Create access key, click on that,
+
+05:50.880 --> 05:54.180
+CLI Command Line Interface, I understand,
+
+05:54.180 --> 05:57.273
+go Next, Create access key.
+
+05:58.800 --> 06:01.440
+Okay, now I'm going to open my Git Bash,
+
+06:01.440 --> 06:03.543
+macOS you can stick to your terminal.
+
+06:04.380 --> 06:06.390
+So I'm going to open the Git Bash
+
+06:06.390 --> 06:09.813
+and I'm going to run the command aws configure,
+
+06:13.110 --> 06:15.060
+and it's going to ask me the access key,
+
+06:15.060 --> 06:18.213
+so I'm going to copy the access key and paste it there.
+
+06:19.530 --> 06:21.030
+And then the secret key,
+
+06:21.030 --> 06:24.030
+I'm going to copy the secret key and paste it there.
+
+06:24.030 --> 06:25.890
+And I know you are seeing the secret key
+
+06:25.890 --> 06:26.880
+it is quite dangerous,
+
+06:26.880 --> 06:28.650
+but I'm going to remove this user
+
+06:28.650 --> 06:31.000
+as soon as this lecture recording is completed.
+
+06:32.130 --> 06:36.483
+Region name, I'll just keep the same us-east-1,
+
+06:37.743 --> 06:42.260
+or you can just type us-east-1, hit Enter.
+
+06:43.680 --> 06:46.240
+Output format json.
+
+06:46.240 --> 06:49.350
+Okay, now the authentication keys are stored,
+
+06:49.350 --> 06:51.390
+Now we can start using Terraform.
+
+06:51.390 --> 06:53.160
+So I'm going to open my VS Code
+
+06:53.160 --> 06:56.223
+and start writing some Terraform scripts.

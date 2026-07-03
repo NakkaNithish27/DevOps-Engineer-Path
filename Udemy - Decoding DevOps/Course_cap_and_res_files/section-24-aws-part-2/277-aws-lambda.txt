@@ -1,0 +1,988 @@
+WEBVTT
+
+00:00.200 --> 00:01.520
+Hello and welcome.
+
+00:01.960 --> 00:08.080
+In this lecture we are going to learn AWS Lambda Serverless Computing by AWS.
+
+00:08.680 --> 00:16.240
+So what is the most common compute service from AWS, EC2 where we launch the instance and we select
+
+00:16.240 --> 00:20.800
+the resources as in the instance type that defines CPU memory.
+
+00:20.800 --> 00:23.680
+Then we select the hard disk EBS volume.
+
+00:23.680 --> 00:26.080
+Once we have it ready, we log into it.
+
+00:26.640 --> 00:30.720
+And then we install and run our application or services or processes.
+
+00:31.120 --> 00:32.120
+But what if you.
+
+00:32.800 --> 00:37.480
+But what if you want to run something, get the result and you're done with it.
+
+00:37.960 --> 00:44.760
+So if you just need compute resource to run your code, get the result and then you are done with it.
+
+00:44.920 --> 00:47.000
+In such cases you can use lambda.
+
+00:47.760 --> 00:53.000
+So you can run your code without provisioning or managing any EC2 instances.
+
+00:53.240 --> 00:55.240
+And it's not just about the EC2 instances.
+
+00:55.240 --> 01:01.270
+Anything that you want to run on servers temporarily and get the result For such thing, you can use
+
+01:01.270 --> 01:01.790
+lambda.
+
+01:02.030 --> 01:04.070
+Now this is pay as you go model.
+
+01:04.430 --> 01:07.590
+So you pay only for the compute time that you have used.
+
+01:07.590 --> 01:11.430
+Let's say your code executes and takes two hours of time.
+
+01:11.430 --> 01:17.350
+So you will be charged only for the two hours, and you don't even need to worry about the compute resource.
+
+01:17.350 --> 01:20.750
+It is going to scale automatically based on your workload.
+
+01:20.990 --> 01:22.750
+Its working is pretty simple.
+
+01:23.310 --> 01:30.550
+You upload your code as a function and it supports Python, NodeJS, Java, dotnet and also it gives
+
+01:30.550 --> 01:33.710
+you Amazon Linux OS temporarily to run.
+
+01:33.710 --> 01:35.510
+So you can have any kind of code.
+
+01:35.990 --> 01:39.390
+You upload it as a function and then you define the trigger.
+
+01:39.390 --> 01:40.590
+How do you want to run it?
+
+01:41.110 --> 01:43.470
+Like for example an S3 event.
+
+01:44.110 --> 01:47.710
+So AWS activity or activities are full of events.
+
+01:47.710 --> 01:53.830
+You create a security group, you upload a file on S3 bucket, you power on your instance, you reboot
+
+01:53.830 --> 01:54.230
+it.
+
+01:54.270 --> 01:55.910
+All these activities are events.
+
+01:55.910 --> 01:57.990
+And let's say for a particular event End.
+
+01:58.630 --> 02:01.710
+You want to execute some code like an S3 bucket.
+
+02:01.710 --> 02:08.270
+You upload an object and then you want to check that object for compliance.
+
+02:08.270 --> 02:14.110
+So you can set a trigger, an event trigger which runs your Lambda function.
+
+02:14.390 --> 02:16.670
+There are also other ways you can use API gateway.
+
+02:16.670 --> 02:19.790
+You can just call your function from your code from the shell.
+
+02:20.110 --> 02:26.510
+You can also set rules from EventBridge, or even you can set schedule to run it at a particular time.
+
+02:26.990 --> 02:28.230
+So you have your function.
+
+02:28.230 --> 02:29.070
+You set the trigger.
+
+02:29.070 --> 02:34.870
+When the trigger executes, the lambda executes the code, and then you can decide what happens after
+
+02:34.870 --> 02:35.750
+the code execution.
+
+02:35.790 --> 02:41.670
+Maybe you want to upload some result to the S3 bucket, or you want to send a notification that you
+
+02:41.670 --> 02:47.150
+can integrate in your code, and you don't even need to worry about the compute resource.
+
+02:47.150 --> 02:49.830
+It scales automatically to handle your requests.
+
+02:50.710 --> 02:54.630
+So Lambda is an event driven execution.
+
+02:55.310 --> 02:57.460
+It supports multiple languages.
+
+02:57.460 --> 03:02.420
+Even the operating system commands you can run, it scales automatically and you don't need to worry
+
+03:02.420 --> 03:03.780
+about the availability.
+
+03:04.100 --> 03:05.860
+It's all managed by AWS.
+
+03:06.340 --> 03:14.100
+Also, it has integration with many AWS services and you can secure the execution by defining IAM permissions,
+
+03:14.140 --> 03:18.780
+the policies you can define, and of course it's paper request.
+
+03:19.380 --> 03:21.540
+And based on the compute time you use it.
+
+03:22.420 --> 03:25.940
+Some common use cases I have just listed a few.
+
+03:26.140 --> 03:27.340
+It could be anything.
+
+03:27.820 --> 03:30.580
+In DevOps we can do cleaning of the resources.
+
+03:30.580 --> 03:32.300
+We can enforce compliance.
+
+03:32.300 --> 03:34.060
+That's what the exercise we will be doing.
+
+03:34.060 --> 03:34.940
+In this lecture.
+
+03:35.420 --> 03:42.180
+We will be scanning all the security groups and will check which rules allow connection from anywhere.
+
+03:42.180 --> 03:44.020
+And then we can send notifications.
+
+03:44.020 --> 03:46.060
+So that's what the exercise we will be doing.
+
+03:46.540 --> 03:48.060
+But there are many more things you can do.
+
+03:48.100 --> 03:52.700
+Data processing developer uses it for the backend APIs.
+
+03:53.300 --> 03:58.130
+Any file processing resizing of the images that you upload on S3 bucket.
+
+03:58.730 --> 03:59.970
+Monitoring or security?
+
+03:59.970 --> 04:05.290
+You can send alerts with SNS or EventBridge and these are very few.
+
+04:05.330 --> 04:10.210
+There are many, many examples or use cases that you can think of based on your requirement.
+
+04:10.570 --> 04:13.410
+Now let's take a look at what you will be doing in this lecture.
+
+04:13.690 --> 04:18.610
+So let's talk first about the function that we will be creating in Lambda.
+
+04:19.170 --> 04:25.370
+It will be a Python code that is going to check all the security groups in all the regions, and find
+
+04:25.370 --> 04:32.010
+any inbound inbound rule that allows traffic from anywhere, for example, 22 allowed from anywhere.
+
+04:32.410 --> 04:39.970
+Once it finds that it is going to upload its result to the S3 bucket and also send an notification email
+
+04:39.970 --> 04:41.890
+notification by using SNS.
+
+04:42.410 --> 04:50.050
+And what triggers this Python function will be EventBridge schedule, which will be running every hour.
+
+04:50.050 --> 04:57.010
+So every hour it's going to invoke our lambda function that is going to execute our Python code to check
+
+04:57.010 --> 04:58.850
+for the security group compliance.
+
+04:59.770 --> 05:05.050
+And when it does that, it needs to have the IAM roles with the correct policies.
+
+05:05.370 --> 05:09.250
+So in order to check the security group we are going to define an IAM policy.
+
+05:09.250 --> 05:16.890
+The security group rules security group read permission basically, and also the policy rules to access
+
+05:16.890 --> 05:19.530
+our S3 bucket to upload the object.
+
+05:19.890 --> 05:29.050
+The object will be the report in JSON format and also SNS service rule to allow accessing the SNS service
+
+05:29.050 --> 05:30.890
+to send the email notification.
+
+05:31.210 --> 05:33.170
+So what do we need for this exercise?
+
+05:33.170 --> 05:34.570
+We need an S3 bucket.
+
+05:34.810 --> 05:36.690
+We need an SNS topic.
+
+05:37.130 --> 05:43.970
+We need IAM roles with the policy to access this S3 bucket and this SNS topic, and also the security
+
+05:43.970 --> 05:46.770
+group, the AWS Lambda function.
+
+05:46.770 --> 05:49.930
+We are going to create a function and upload our code in that.
+
+05:50.210 --> 05:54.440
+And then finally we are going to set EventBridge schedule.
+
+05:55.000 --> 05:56.480
+So let's get into the action now.
+
+05:56.880 --> 06:01.840
+First let's go to the S3 bucket say create bucket.
+
+06:02.120 --> 06:05.400
+I'm naming it as S3 compliance 9 to 1.
+
+06:05.440 --> 06:08.800
+The number you have to change or give a different name.
+
+06:08.960 --> 06:10.400
+Your bucket needs to be unique.
+
+06:10.440 --> 06:11.040
+You can give.
+
+06:11.080 --> 06:13.720
+You cannot give the same name that I have given.
+
+06:14.120 --> 06:18.560
+So give a unique bucket name general purpose and just say create bucket.
+
+06:19.840 --> 06:22.240
+Oh I cannot give it in the capitals.
+
+06:22.640 --> 06:26.560
+So SG Hyphen compliance 9 to 1 create bucket.
+
+06:27.200 --> 06:31.400
+Then let's go to IAM and create a policy and the role IAM role.
+
+06:31.800 --> 06:32.360
+Oh sorry.
+
+06:32.400 --> 06:37.480
+Before this SNS simple notification service to create a topic.
+
+06:37.480 --> 06:39.880
+If you already have a topic you can use that one.
+
+06:40.640 --> 06:41.720
+So give a name.
+
+06:41.760 --> 06:44.520
+Next step, keep it standard.
+
+06:44.560 --> 06:45.520
+Give the name.
+
+06:45.560 --> 06:50.320
+Give the display name as same and simply create the topic.
+
+06:51.160 --> 06:52.710
+Go to subscriptions.
+
+06:53.430 --> 06:53.750
+See.
+
+06:53.790 --> 06:54.070
+Create.
+
+06:54.070 --> 06:54.870
+Subscription.
+
+06:55.590 --> 07:02.190
+Select your topic that you have just created in topic and select the protocol as email.
+
+07:02.190 --> 07:08.070
+That's what we will be using and give your email address over here and say create subscription.
+
+07:08.750 --> 07:13.790
+Go to your inbox and confirm the subscription and then refresh the page.
+
+07:13.790 --> 07:15.910
+You should get here confirmed.
+
+07:15.950 --> 07:22.670
+After you have confirmed the subscription from your inbox, sometimes the mail goes to spam, so please
+
+07:22.670 --> 07:23.670
+do check that.
+
+07:24.950 --> 07:26.790
+Okay, next go to email service.
+
+07:26.830 --> 07:30.870
+We need to create an IAM role with our own custom policy.
+
+07:30.870 --> 07:32.390
+So first create the policy.
+
+07:32.430 --> 07:33.470
+Go to policies.
+
+07:33.670 --> 07:37.110
+Click on Create Policy and then click on JSON.
+
+07:37.830 --> 07:38.950
+Remove all this.
+
+07:39.910 --> 07:43.070
+Download the policy document from this lecture resource.
+
+07:43.790 --> 07:46.750
+Open a text editor and paste the policy.
+
+07:47.150 --> 07:50.990
+This policy allows EC2 actions to describe region.
+
+07:51.070 --> 07:55.830
+describe instance, describe security groups, and revoke security group ingress.
+
+07:56.310 --> 07:58.790
+The other action is for the SNS publish.
+
+07:59.270 --> 08:04.550
+It is going to use this Arn which is your SNS topic Arn.
+
+08:04.550 --> 08:09.750
+So you need to put your account ID over here and your topic name SNS topic name.
+
+08:10.550 --> 08:14.390
+So my SNS topic name is this SG compliance notification.
+
+08:14.390 --> 08:18.550
+You need to get your topic name and make sure you put it over here.
+
+08:18.550 --> 08:22.910
+Also, make sure you update this number with your AWS account ID.
+
+08:26.550 --> 08:28.990
+The next action is on the S3 bucket.
+
+08:28.990 --> 08:32.310
+Put object, get bucket location and list bucket.
+
+08:32.790 --> 08:36.190
+You need to give your bucket name over here at both places.
+
+08:36.710 --> 08:40.430
+So my S3 bucket name is this SG Hyphen Compliance 921.
+
+08:40.430 --> 08:41.510
+Get your bucket name.
+
+08:42.070 --> 08:43.390
+Mention your bucket name check.
+
+08:43.390 --> 08:45.910
+Once again, this is the region.
+
+08:45.950 --> 08:50.860
+This is your AWS account ID and this is the SNS his topic name over here.
+
+08:50.860 --> 08:52.940
+Your S3 bucket name at both places.
+
+08:53.500 --> 08:55.580
+Then copy all this.
+
+08:56.020 --> 09:00.860
+Go to the policy editor and paste all this over here and say next.
+
+09:02.300 --> 09:03.900
+Then give policy a name.
+
+09:03.900 --> 09:06.300
+I have given this S3 compliance policy.
+
+09:06.980 --> 09:12.580
+If you scroll down, you can see over here your three services that it is going to have access on.
+
+09:12.860 --> 09:22.180
+So EC2, S3, SNS and you see the access level EC2 for all resources, S3 for multiple and SNS for all
+
+09:22.220 --> 09:23.060
+the regions.
+
+09:23.220 --> 09:24.340
+No, sorry, my bad.
+
+09:24.460 --> 09:26.540
+SNS is for your topic name.
+
+09:27.260 --> 09:30.260
+So check all those things and go create policy.
+
+09:30.660 --> 09:32.020
+Okay so the policy is created.
+
+09:32.020 --> 09:34.940
+Now we need to create the role with this policy.
+
+09:34.940 --> 09:36.980
+So go to roles.
+
+09:37.220 --> 09:40.580
+Say create role keep AWS service.
+
+09:40.860 --> 09:46.860
+And in use case select Lambda because this rule will be for our Lambda function.
+
+09:46.860 --> 09:49.610
+So you need to select use case Lambda go.
+
+09:49.650 --> 09:51.410
+Next add permission.
+
+09:51.410 --> 09:53.050
+You need to find your policy.
+
+09:53.050 --> 09:57.850
+Over here you can search it with your name, the name that you have given I have given SG compliance
+
+09:57.850 --> 09:58.530
+policy.
+
+09:58.770 --> 09:59.930
+Select your policy.
+
+10:00.090 --> 10:00.290
+Go.
+
+10:00.330 --> 10:02.890
+Next, give rule a name.
+
+10:02.890 --> 10:08.370
+I have given SG compliance role and same in the description and then say create role.
+
+10:08.610 --> 10:15.370
+Okay, next open the code editor or any text editor and get the Lambda function code the Python code
+
+10:15.370 --> 10:18.410
+from this lecture resource and put it over here.
+
+10:18.850 --> 10:23.530
+Update your SNS topic account name and the topic name.
+
+10:23.850 --> 10:25.690
+And over here the S3 bucket.
+
+10:26.410 --> 10:30.810
+So this Python code is going to go over all the regions.
+
+10:30.810 --> 10:33.570
+This regions variable is going to collect all the region names.
+
+10:33.570 --> 10:40.130
+And it's going to iterate on a for loop over all the region and execute this function which goes through
+
+10:40.130 --> 10:41.530
+all the security groups.
+
+10:41.530 --> 10:42.970
+So a loop inside a loop.
+
+10:43.250 --> 10:50.800
+So in every region it's going to scan every security group and find if the Cidr IP allows from anywhere.
+
+10:51.160 --> 10:55.200
+If yes, then it is going to send email with this message.
+
+10:55.640 --> 10:58.000
+If not found, it is going to send this message.
+
+10:58.040 --> 10:58.280
+No.
+
+10:58.280 --> 10:59.880
+Open security group rules found.
+
+11:00.400 --> 11:05.400
+SNS publish publish function is going to send this message to the notification.
+
+11:05.440 --> 11:08.160
+Sorry to the SNS topic that we have defined.
+
+11:08.440 --> 11:16.680
+And also the S3 object is going to access our S3 bucket and dump the JSON data that we have created
+
+11:16.680 --> 11:17.120
+here.
+
+11:17.680 --> 11:22.400
+That will be the message and findings in JSON format.
+
+11:22.760 --> 11:23.880
+Now let me be clear.
+
+11:23.880 --> 11:25.960
+I have not written this Python code.
+
+11:26.240 --> 11:32.240
+I understand this very well, but I have asked ChatGPT to generate this code for me.
+
+11:32.560 --> 11:35.760
+I have just given the requirement and also the IAM policy.
+
+11:35.760 --> 11:38.000
+Also I have generated by using ChatGPT.
+
+11:38.680 --> 11:40.560
+Okay, now let's create the Lambda function.
+
+11:41.040 --> 11:45.200
+So find and open the Lambda service AWS Lambda.
+
+11:45.240 --> 11:49.160
+Let you run code without thinking about servers.
+
+11:49.160 --> 11:50.840
+And that's what basically it is.
+
+11:50.840 --> 11:54.160
+You can run your code without worrying about where to run.
+
+11:54.560 --> 11:58.960
+So you create a function, click on that author from scratch.
+
+11:59.520 --> 12:00.760
+Give function a name.
+
+12:00.760 --> 12:02.920
+I have given security group compliance checker.
+
+12:03.120 --> 12:04.080
+Select the runtime.
+
+12:04.080 --> 12:05.240
+We have Python code.
+
+12:05.240 --> 12:07.760
+So we are going to select Python 3.13.
+
+12:07.800 --> 12:10.240
+Our code is written on Python three.
+
+12:10.760 --> 12:12.560
+I already tested this on this version.
+
+12:12.560 --> 12:13.280
+It works.
+
+12:14.080 --> 12:14.560
+Select here.
+
+12:14.560 --> 12:21.520
+Change default execution role, use an existing role and select the role that we have created as the
+
+12:21.520 --> 12:24.320
+compliance role and say create function.
+
+12:27.760 --> 12:31.440
+Okay, wait for some time okay.
+
+12:31.480 --> 12:34.640
+First before we put the code go to configuration.
+
+12:34.840 --> 12:40.760
+So code execution takes time a lot of time here the timeout is three second which will be very less.
+
+12:40.760 --> 12:44.520
+So edit this and change timeout to 2 to 3 minutes.
+
+12:44.520 --> 12:46.270
+I'll just go with five minutes.
+
+12:46.310 --> 12:47.590
+It won't take five minutes.
+
+12:47.630 --> 12:47.950
+It will.
+
+12:47.950 --> 12:49.710
+It will take, I think, a minute or so.
+
+12:50.230 --> 12:53.430
+So give a timeout value over here like five minutes and say save.
+
+12:54.110 --> 12:55.950
+Scroll down click on code.
+
+12:58.510 --> 13:02.430
+And select this everything and just delete it and paste your code over here.
+
+13:07.230 --> 13:07.630
+Okay.
+
+13:07.670 --> 13:09.950
+After that deploy click on deploy.
+
+13:11.230 --> 13:12.510
+It takes few seconds.
+
+13:13.190 --> 13:14.990
+After that click on test.
+
+13:15.270 --> 13:16.550
+So there are no test event.
+
+13:16.590 --> 13:17.430
+We just want to run it.
+
+13:17.430 --> 13:19.670
+So we're going to create a new test event.
+
+13:20.510 --> 13:26.750
+Give event a name I've just given Test Lambda and just say save.
+
+13:27.230 --> 13:29.150
+We don't give so we can test it.
+
+13:29.190 --> 13:30.270
+We don't have any event.
+
+13:30.270 --> 13:32.550
+We're going to use event bridge schedule.
+
+13:32.550 --> 13:37.630
+But for now to test we need an event okay that already exists.
+
+13:37.830 --> 13:41.470
+Now click on test and the output should come over here.
+
+13:43.740 --> 13:44.980
+The execution started.
+
+13:44.980 --> 13:46.820
+This is going through all the regions.
+
+13:46.820 --> 13:48.180
+That's why it's taking time.
+
+13:51.220 --> 13:51.500
+Okay.
+
+13:51.500 --> 13:53.300
+The execution completed successfully.
+
+13:53.300 --> 13:55.340
+And you see it has some findings.
+
+13:55.820 --> 14:02.340
+And this regions there is a security group ID have port number 80 that is allowed from anywhere.
+
+14:02.380 --> 14:06.140
+Now I have that security group that has port 80 from anywhere.
+
+14:06.500 --> 14:12.140
+So you better create security group that allows ID from anywhere, 22 from anywhere, just the security
+
+14:12.180 --> 14:12.420
+group.
+
+14:12.460 --> 14:13.700
+You don't need to do anything else.
+
+14:13.700 --> 14:18.340
+So your security group will come in finding okay.
+
+14:18.380 --> 14:22.580
+So this execution would have also created a file in the S3 bucket.
+
+14:22.580 --> 14:24.060
+So go to your S3 bucket.
+
+14:24.860 --> 14:26.500
+Refresh it if you don't find it.
+
+14:26.780 --> 14:28.140
+And this is the JSON file.
+
+14:28.540 --> 14:29.620
+Let me open it.
+
+14:29.780 --> 14:31.020
+And that's the finding.
+
+14:31.700 --> 14:34.420
+Also it would have sent the email notification.
+
+14:34.740 --> 14:36.900
+Now definitely we're not going to run this manually.
+
+14:36.900 --> 14:41.500
+We are going to use EventBridge to schedule this lambda function.
+
+14:41.500 --> 14:43.620
+Let's say to run for every one hour.
+
+14:43.900 --> 14:46.420
+So let's go to EventBridge service.
+
+14:46.420 --> 14:51.820
+So find Amazon EventBridge and go to it over here.
+
+14:52.020 --> 14:53.780
+Just say create rule.
+
+14:54.300 --> 14:57.980
+Give rule a name I have given security group compliance schedule.
+
+14:58.380 --> 15:04.660
+Give some description runs lambda periodically to check open security groups and make sure you select
+
+15:04.700 --> 15:08.900
+schedule and then go continue.
+
+15:10.100 --> 15:10.380
+Okay.
+
+15:10.420 --> 15:13.740
+Scroll down and find recurring schedule.
+
+15:13.780 --> 15:16.460
+We want recurrent every one hour.
+
+15:16.500 --> 15:19.300
+Now you can select here rate base schedule.
+
+15:19.300 --> 15:22.940
+But cron cron based like the Linux cron job.
+
+15:23.380 --> 15:24.820
+That's the format we're using.
+
+15:24.820 --> 15:27.260
+So we want minute zero.
+
+15:27.260 --> 15:35.460
+That means the first minute hour every hour day of the month, every day month every month, day of
+
+15:35.460 --> 15:38.460
+the week can be anything and year every year.
+
+15:38.820 --> 15:42.570
+Now this cron job says run it for every hour.
+
+15:42.930 --> 15:44.930
+That's basically the first minute of the hour.
+
+15:45.130 --> 15:46.770
+When the hour starts.
+
+15:46.810 --> 15:47.290
+Right.
+
+15:47.650 --> 15:50.210
+So that's in the Linux cron job format.
+
+15:51.210 --> 15:53.850
+Now you see it shows next gen trigger dates.
+
+15:54.770 --> 15:56.810
+You see it's like every hour.
+
+15:59.850 --> 16:00.370
+Okay.
+
+16:00.410 --> 16:02.250
+Um flexible time window.
+
+16:02.250 --> 16:03.330
+Just say off.
+
+16:04.050 --> 16:07.610
+So we want it at a specific time, not the flexible window.
+
+16:08.090 --> 16:08.770
+And then.
+
+16:09.810 --> 16:11.290
+Yeah, just go next.
+
+16:11.690 --> 16:11.970
+Okay.
+
+16:11.970 --> 16:14.010
+Then select AWS Lambda.
+
+16:14.050 --> 16:15.570
+This is what should be invoked.
+
+16:15.570 --> 16:17.330
+And find your function.
+
+16:17.370 --> 16:19.210
+Your function should be listed over here.
+
+16:19.610 --> 16:23.170
+And then say go next action after completion.
+
+16:23.170 --> 16:24.490
+We don't want any action.
+
+16:24.490 --> 16:26.290
+So you can just say none over here.
+
+16:28.130 --> 16:30.610
+Create a new role for this schedule.
+
+16:30.650 --> 16:32.970
+I'll just make sure you add some numbers over here.
+
+16:33.010 --> 16:33.770
+Not too many.
+
+16:34.610 --> 16:37.090
+So a new role will be created with this name.
+
+16:37.330 --> 16:37.770
+This rule.
+
+16:37.810 --> 16:44.600
+This rule is for the Or the event bridge so it can access the AWS Lambda service that IAM role that
+
+16:44.600 --> 16:46.720
+we created that was for AWS Lambda.
+
+16:47.200 --> 16:48.720
+This is for EventBridge.
+
+16:49.280 --> 16:50.160
+So go next.
+
+16:50.720 --> 16:51.640
+Check everything.
+
+16:51.640 --> 16:54.520
+If everything is good click on Create schedule.
+
+16:55.240 --> 16:57.000
+So this is going to take time right.
+
+16:57.040 --> 17:00.080
+Every hour it is going to send the notification.
+
+17:00.520 --> 17:02.080
+So you can wait for few hours.
+
+17:02.080 --> 17:06.160
+And you will see the notification coming to you every minute.
+
+17:06.160 --> 17:10.920
+If you have configured the notification properly and in the finding, whenever you know in the middle,
+
+17:10.920 --> 17:17.840
+you can create security group rules, add anywhere, remove it and you see you know how the finding
+
+17:17.840 --> 17:21.320
+changes based on your rules that you have set.
+
+17:21.840 --> 17:23.680
+All right so let's define what we did.
+
+17:24.120 --> 17:25.760
+So we created an S3 bucket.
+
+17:25.800 --> 17:27.440
+We created SNS topic.
+
+17:27.520 --> 17:34.920
+We created IAM role with the policies to access the bucket and the topic and also the EC2 security groups.
+
+17:35.320 --> 17:40.240
+Then we created a Lambda function with the Python code, which checks for the compliance.
+
+17:40.240 --> 17:45.040
+And finally, we have set Amazon EventBridge scheduled to run every hour.
+
+17:45.560 --> 17:48.480
+Now this is not just some example, it is actually used.
+
+17:48.480 --> 17:53.280
+I have used it personally to make sure nobody opens port 22 from anywhere.
+
+17:53.720 --> 17:59.000
+Sure, there are other ways, but you know, some quick fixes or quick use cases.
+
+17:59.360 --> 18:00.720
+This comes very handy.
+
+18:01.240 --> 18:05.760
+Once you are done with this you can remove the EventBridge schedule.
+
+18:06.360 --> 18:07.640
+Now wait for a few hours.
+
+18:07.640 --> 18:10.160
+This is free so you don't need to worry about the cost.
+
+18:10.560 --> 18:15.680
+But if you don't want the notification to be coming every now and then, you can just remove the EventBridge
+
+18:15.680 --> 18:16.360
+schedule.
+
+18:16.960 --> 18:22.320
+So you can just go to the EventBridge schedules, find your schedule, and you can delete it so it doesn't
+
+18:22.320 --> 18:26.680
+invoke your lambda function every hour, but let it run for a few hours.
+
+18:26.720 --> 18:29.880
+Get the notification so you know that it worked.
+
+18:30.600 --> 18:32.360
+And that would be all in this lecture.
+
+18:32.360 --> 18:34.120
+I hope you have enjoyed and learned.
+
+18:34.600 --> 18:37.960
+Thank you very much for watching and all the best.

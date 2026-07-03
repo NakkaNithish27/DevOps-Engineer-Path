@@ -1,0 +1,858 @@
+WEBVTT
+
+1
+00:00:00.450 --> 00:00:01.470
+<v Instructor>Okay, so here we go.</v>
+
+2
+00:00:01.470 --> 00:00:03.960
+I'm not sure whether this is going to be working.
+
+3
+00:00:03.960 --> 00:00:06.630
+Most of things are correct as per my knowledge,
+
+4
+00:00:06.630 --> 00:00:08.100
+but things might go wrong.
+
+5
+00:00:08.100 --> 00:00:09.330
+We'll see how it works.
+
+6
+00:00:09.330 --> 00:00:11.220
+Anyways, you'll have this pipeline
+
+7
+00:00:11.220 --> 00:00:14.280
+in this lecturer resource, The Working Pipeline,
+
+8
+00:00:14.280 --> 00:00:16.470
+which you should use in your project.
+
+9
+00:00:16.470 --> 00:00:19.770
+So you can just download it from the lecture resource,
+
+10
+00:00:19.770 --> 00:00:24.153
+copy it in ci.yml and then you can follow me.
+
+11
+00:00:25.590 --> 00:00:30.590
+Okay, so from your vProfile-app repository,
+
+12
+00:00:31.020 --> 00:00:33.213
+you should be in the feature X branch.
+
+13
+00:00:34.410 --> 00:00:35.679
+Okay?
+
+14
+00:00:35.679 --> 00:00:37.560
+So as I'm in desktop GitHub's vProfile app,
+
+15
+00:00:37.560 --> 00:00:40.050
+make sure you are in your repository.
+
+16
+00:00:40.050 --> 00:00:41.427
+Say git add .
+
+17
+00:00:42.630 --> 00:00:46.130
+Git commit - m "Pipeline".
+
+18
+00:00:48.780 --> 00:00:49.613
+That's it.
+
+19
+00:00:50.520 --> 00:00:55.520
+Git push origin, and be careful, feature-x.
+
+20
+00:00:55.920 --> 00:00:59.160
+You need to commit this in the feature branch.
+
+21
+00:00:59.160 --> 00:01:00.427
+Okay?
+
+22
+00:01:00.427 --> 00:01:02.490
+Nothing should happen if you put it into feature branch.
+
+23
+00:01:02.490 --> 00:01:05.910
+The pipeline will only run if you raise a pull request.
+
+24
+00:01:05.910 --> 00:01:10.593
+So I'm going to now power on the SonarQube Server.
+
+25
+00:01:11.640 --> 00:01:15.780
+So power on the SonarQube Server, get its public IP,
+
+26
+00:01:15.780 --> 00:01:18.030
+and we are going to save this variable,
+
+27
+00:01:18.030 --> 00:01:21.780
+the public IP variable, into our app repository.
+
+28
+00:01:21.780 --> 00:01:26.583
+So go to your vProfile-app repository.
+
+29
+00:01:28.410 --> 00:01:32.493
+Go to the settings of this repository, settings.
+
+30
+00:01:35.460 --> 00:01:40.380
+Secrets and variables, actions, variables,
+
+31
+00:01:40.380 --> 00:01:42.513
+new repository variables.
+
+32
+00:01:43.350 --> 00:01:46.350
+Variable name, SONAR_HOST_URL.
+
+33
+00:01:46.350 --> 00:01:49.713
+Just check it once again in our pipeline code.
+
+34
+00:01:50.588 --> 00:01:52.473
+You see vars.SONAR_HOST_URL.
+
+35
+00:01:53.400 --> 00:01:55.050
+This variable is going to fetch from GitHub
+
+36
+00:01:55.050 --> 00:01:57.330
+and store it into this variable.
+
+37
+00:01:57.330 --> 00:01:58.413
+So it should be same.
+
+38
+00:01:59.441 --> 00:02:01.470
+So here, mention http://
+
+39
+00:02:01.470 --> 00:02:04.830
+and paste the public IP of your SonarCube server.
+
+40
+00:02:04.830 --> 00:02:07.080
+Now, SonarQube Server listen on port 80.
+
+41
+00:02:07.080 --> 00:02:11.190
+Actually, the Nginx server in SonarQube listens on port 80,
+
+42
+00:02:11.190 --> 00:02:13.890
+so colon 80, and it's not mandatory to give
+
+43
+00:02:13.890 --> 00:02:17.310
+the, because this is the default port of HTTP.
+
+44
+00:02:17.310 --> 00:02:19.470
+But if you have a different port number, you need
+
+45
+00:02:19.470 --> 00:02:20.670
+to mention the port number.
+
+46
+00:02:20.670 --> 00:02:24.240
+Remember, this is a URL, not just the IP address.
+
+47
+00:02:24.240 --> 00:02:25.773
+See update variable.
+
+48
+00:02:26.730 --> 00:02:28.980
+Now, if you're just powered on SonarCube server, it's going
+
+49
+00:02:28.980 --> 00:02:30.343
+to take some time, at least five minutes
+
+50
+00:02:30.343 --> 00:02:33.000
+to bring up all its services,
+
+51
+00:02:33.000 --> 00:02:36.423
+so make sure you check whether it's working or not.
+
+52
+00:02:37.290 --> 00:02:39.840
+If it's working, then we can create a pull request.
+
+53
+00:02:39.840 --> 00:02:42.120
+Now, let's go to the repository.
+
+54
+00:02:42.120 --> 00:02:45.960
+If you go to feature-x branch,
+
+55
+00:02:45.960 --> 00:02:49.860
+you should see here our new committed file
+
+56
+00:02:49.860 --> 00:02:52.890
+in this folder, ci.yml.
+
+57
+00:02:52.890 --> 00:02:55.410
+Now, pipeline does not run if we make any commit
+
+58
+00:02:55.410 --> 00:02:57.210
+in feature or any other branch.
+
+59
+00:02:57.210 --> 00:03:01.380
+It'll only work if it is a pull request on main or push.
+
+60
+00:03:01.380 --> 00:03:04.980
+So if you go to actions, you should not see any pipeline
+
+61
+00:03:04.980 --> 00:03:06.810
+that got triggered.
+
+62
+00:03:06.810 --> 00:03:07.830
+As long as you don't push it
+
+63
+00:03:07.830 --> 00:03:10.170
+to the main branch, nothing will happen.
+
+64
+00:03:10.170 --> 00:03:12.150
+Now, we'll raise a pull request.
+
+65
+00:03:12.150 --> 00:03:15.720
+This request is to merge our feature branch
+
+66
+00:03:15.720 --> 00:03:17.280
+into main branch.
+
+67
+00:03:17.280 --> 00:03:18.180
+So that is the request.
+
+68
+00:03:18.180 --> 00:03:20.493
+So we say new full request.
+
+69
+00:03:21.330 --> 00:03:25.200
+So we want to merge the feature X branch
+
+70
+00:03:25.200 --> 00:03:26.190
+into the main branch.
+
+71
+00:03:26.190 --> 00:03:27.570
+Look at the arrow.
+
+72
+00:03:27.570 --> 00:03:29.430
+This is the branch that will get merged.
+
+73
+00:03:29.430 --> 00:03:31.860
+And this is not a merge, this is a request.
+
+74
+00:03:31.860 --> 00:03:36.180
+So when developer makes any code change in feature branch
+
+75
+00:03:36.180 --> 00:03:39.330
+or buck fix branch, any other branch, nothing will happen.
+
+76
+00:03:39.330 --> 00:03:41.640
+They need to merge it to the main branch
+
+77
+00:03:41.640 --> 00:03:44.790
+and they cannot directly merge it to the main branch.
+
+78
+00:03:44.790 --> 00:03:46.230
+There'll be a request.
+
+79
+00:03:46.230 --> 00:03:50.280
+So pull request, or merge request, it's called.
+
+80
+00:03:50.280 --> 00:03:52.410
+And this is one of the principle of GitHub,
+
+81
+00:03:52.410 --> 00:03:55.590
+so even in general development,
+
+82
+00:03:55.590 --> 00:03:58.500
+main branch will always be protected.
+
+83
+00:03:58.500 --> 00:03:59.730
+If you want to make code change,
+
+84
+00:03:59.730 --> 00:04:02.850
+you create a different branch, make the changes
+
+85
+00:04:02.850 --> 00:04:05.580
+and raise a request to merging
+
+86
+00:04:05.580 --> 00:04:08.610
+to, for merging into the main branch.
+
+87
+00:04:08.610 --> 00:04:11.760
+So in DevOps, also in GitHubs, we follow the same principle.
+
+88
+00:04:11.760 --> 00:04:13.830
+We make changes into feature branches
+
+89
+00:04:13.830 --> 00:04:17.250
+and then we raise a pull request or merge request.
+
+90
+00:04:17.250 --> 00:04:20.490
+So here we are raising a pull request.
+
+91
+00:04:20.490 --> 00:04:23.850
+We are saying we want to merge this feature X branch changes
+
+92
+00:04:23.850 --> 00:04:28.170
+to the main branch and we say, create pull request.
+
+93
+00:04:28.170 --> 00:04:30.330
+Now, here we are raising the pull request,
+
+94
+00:04:30.330 --> 00:04:33.300
+we are approving it and we are only merging it.
+
+95
+00:04:33.300 --> 00:04:35.640
+But in real time, there will be different parties
+
+96
+00:04:35.640 --> 00:04:37.290
+that will be doing this.
+
+97
+00:04:37.290 --> 00:04:40.140
+So a pipeline says, whenever there is a merge request
+
+98
+00:04:40.140 --> 00:04:44.100
+or pull request, it should execute our pipeline,
+
+99
+00:04:44.100 --> 00:04:48.000
+which should execute the stage of checking the code quality.
+
+100
+00:04:48.000 --> 00:04:51.960
+So here it started the pipeline.
+
+101
+00:04:51.960 --> 00:04:54.480
+You can click on this and go to the pipeline, or you can go
+
+102
+00:04:54.480 --> 00:04:57.300
+to actions and you should see the pipeline.
+
+103
+00:04:57.300 --> 00:05:00.270
+So this is the commit message that we have given.
+
+104
+00:05:00.270 --> 00:05:02.400
+So this is a pulled request opened
+
+105
+00:05:02.400 --> 00:05:05.490
+by so and so person which triggered the pipeline.
+
+106
+00:05:05.490 --> 00:05:06.710
+So it is checking the code quality.
+
+107
+00:05:06.710 --> 00:05:08.850
+If the code quality is good,
+
+108
+00:05:08.850 --> 00:05:11.970
+then the authorized party will merge it to the main branch.
+
+109
+00:05:11.970 --> 00:05:14.040
+Otherwise, it won't.
+
+110
+00:05:14.040 --> 00:05:16.440
+And our pipeline says, build the code, test,
+
+111
+00:05:16.440 --> 00:05:19.860
+do the code analysis, do quality gates check
+
+112
+00:05:19.860 --> 00:05:21.870
+from SonarCube server.
+
+113
+00:05:21.870 --> 00:05:25.440
+If everything is good, then only we are allowed to merge.
+
+114
+00:05:25.440 --> 00:05:28.800
+You cannot merge this to the main branch
+
+115
+00:05:28.800 --> 00:05:33.450
+without this SonarCube quality gates checks out.
+
+116
+00:05:33.450 --> 00:05:35.850
+So once this completes, we are going to go
+
+117
+00:05:35.850 --> 00:05:38.730
+to SonarCube server and check the quality gates.
+
+118
+00:05:38.730 --> 00:05:41.010
+Okay, this got completed anyway successfully,
+
+119
+00:05:41.010 --> 00:05:44.280
+but we can still go to SonarQube Server.
+
+120
+00:05:44.280 --> 00:05:48.480
+So we should see our project, we profile app over here.
+
+121
+00:05:48.480 --> 00:05:52.140
+Now, we are using default quality gates.
+
+122
+00:05:52.140 --> 00:05:55.110
+If you see for some reason the quality gate is failed,
+
+123
+00:05:55.110 --> 00:05:56.160
+then you know how to do it.
+
+124
+00:05:56.160 --> 00:05:58.980
+You can create your own quality gates, attach it
+
+125
+00:05:58.980 --> 00:06:01.710
+to your project, set it as per your requirement
+
+126
+00:06:01.710 --> 00:06:05.310
+so it passes, because our idea is to complete this project.
+
+127
+00:06:05.310 --> 00:06:07.740
+In real time, there will be definitely rule set
+
+128
+00:06:07.740 --> 00:06:09.840
+and the quality gates, and if our code
+
+129
+00:06:09.840 --> 00:06:12.450
+is not as per the quality gates, it fails
+
+130
+00:06:12.450 --> 00:06:14.460
+and the developer needs to make the code changes
+
+131
+00:06:14.460 --> 00:06:17.283
+and make sure the quality of the code is good.
+
+132
+00:06:18.210 --> 00:06:20.790
+Okay then, in real time, the authorized party will see
+
+133
+00:06:20.790 --> 00:06:23.190
+the quality gate has checked out fine
+
+134
+00:06:23.190 --> 00:06:26.940
+and they are okay to merge it to the main branch.
+
+135
+00:06:26.940 --> 00:06:30.450
+So he or she will log into the GitHub account
+
+136
+00:06:30.450 --> 00:06:32.640
+or whatever platform they're using
+
+137
+00:06:32.640 --> 00:06:35.460
+and merge it to the main branch.
+
+138
+00:06:35.460 --> 00:06:39.060
+So assuming it's somebody who is authorized to do this, goes
+
+139
+00:06:39.060 --> 00:06:40.950
+to the pull request.
+
+140
+00:06:40.950 --> 00:06:43.530
+Okay, for some reason I'm not seeing this pull request,
+
+141
+00:06:43.530 --> 00:06:47.640
+but that's because I made few changes while I was,
+
+142
+00:06:47.640 --> 00:06:49.440
+while I have paused the lecture.
+
+143
+00:06:49.440 --> 00:06:51.570
+Anyways, let's make a new comment,
+
+144
+00:06:51.570 --> 00:06:55.230
+or better, let's generate the README.md file.
+
+145
+00:06:55.230 --> 00:06:58.440
+So go to the chat of GitHub Copilot
+
+146
+00:06:58.440 --> 00:07:00.660
+or any AI tool that you're using
+
+147
+00:07:00.660 --> 00:07:05.513
+and just ask it to generate README.md file.
+
+148
+00:07:05.513 --> 00:07:07.290
+README, generate.
+
+149
+00:07:07.290 --> 00:07:09.150
+Generate README file for this project.
+
+150
+00:07:09.150 --> 00:07:10.833
+So that will be new commit then.
+
+151
+00:07:11.760 --> 00:07:12.990
+Okay, so it got generated.
+
+152
+00:07:12.990 --> 00:07:13.823
+I'll say, keep.
+
+153
+00:07:14.671 --> 00:07:16.830
+I should see a new file,
+
+154
+00:07:16.830 --> 00:07:20.130
+and let's commit this changes to the feature X branch.
+
+155
+00:07:20.130 --> 00:07:25.130
+Okay, so here I am in vProfile app repository.
+
+156
+00:07:25.440 --> 00:07:27.057
+I'm going to say git add .
+
+157
+00:07:28.170 --> 00:07:30.573
+Git commit -m,
+
+158
+00:07:32.220 --> 00:07:35.010
+say Generated README file in the commit,
+
+159
+00:07:35.010 --> 00:07:36.180
+and I'll push the changes.
+
+160
+00:07:36.180 --> 00:07:40.653
+Git push origin feature-x.
+
+161
+00:07:41.610 --> 00:07:43.440
+Now, this should not trigger any pipeline.
+
+162
+00:07:43.440 --> 00:07:45.900
+We are going to raise a pull request
+
+163
+00:07:45.900 --> 00:07:47.463
+to merge it to the main branch.
+
+164
+00:07:48.300 --> 00:07:51.990
+Okay, so let's go to repository.
+
+165
+00:07:51.990 --> 00:07:55.803
+Let's go to pull request, new pull request.
+
+166
+00:07:56.910 --> 00:08:01.910
+Pull request to merge feature X branch with the main branch.
+
+167
+00:08:02.280 --> 00:08:04.863
+And let's say create pull request.
+
+168
+00:08:06.150 --> 00:08:07.950
+You can give or change the title
+
+169
+00:08:07.950 --> 00:08:12.573
+and give some more description and see, create pull request.
+
+170
+00:08:13.800 --> 00:08:16.893
+Let's wait until this pipeline completes successfully.
+
+171
+00:08:19.350 --> 00:08:21.480
+Okay, after one minute, 52 seconds,
+
+172
+00:08:21.480 --> 00:08:23.130
+this got completed successfully,
+
+173
+00:08:23.130 --> 00:08:24.843
+the quality gate checks out fine.
+
+174
+00:08:25.860 --> 00:08:30.003
+Now it's time to go to pull request and merge this change.
+
+175
+00:08:31.590 --> 00:08:34.080
+And in real time, the authorized party is going
+
+176
+00:08:34.080 --> 00:08:36.404
+to check the quality gate.
+
+177
+00:08:36.404 --> 00:08:39.690
+If everything is good, it is going to merge the changes
+
+178
+00:08:39.690 --> 00:08:41.250
+to the main branch.
+
+179
+00:08:41.250 --> 00:08:46.250
+So merge pull request and confirm merge.
+
+180
+00:08:46.350 --> 00:08:48.840
+Now, this merges the code from feature X branch
+
+181
+00:08:48.840 --> 00:08:50.460
+to main branch,
+
+182
+00:08:50.460 --> 00:08:53.583
+and with this, our pipeline should get triggered.
+
+183
+00:08:54.660 --> 00:08:56.463
+So let's go to actions.
+
+184
+00:08:58.500 --> 00:08:59.883
+I should see the pipeline.
+
+185
+00:09:00.780 --> 00:09:02.880
+So now it is building the docker image
+
+186
+00:09:02.880 --> 00:09:05.820
+and it's going to push to Amazon ECR,
+
+187
+00:09:05.820 --> 00:09:09.150
+and after that update the values.yaml file
+
+188
+00:09:09.150 --> 00:09:10.713
+in Helm Repository.
+
+189
+00:09:11.880 --> 00:09:13.290
+So this is going take some time.
+
+190
+00:09:13.290 --> 00:09:14.400
+I'm going to pause the recording
+
+191
+00:09:14.400 --> 00:09:16.800
+and resume when this is completed.
+
+192
+00:09:16.800 --> 00:09:19.530
+Okay, it has pushed the image to Amazon ECR.
+
+193
+00:09:19.530 --> 00:09:22.353
+Let's go and check to our registry.
+
+194
+00:09:24.360 --> 00:09:25.860
+The profile app image.
+
+195
+00:09:25.860 --> 00:09:29.970
+Here, we should see the image tag.
+
+196
+00:09:29.970 --> 00:09:33.123
+So this is the (indistinct) show commit ID,
+
+197
+00:09:33.960 --> 00:09:36.840
+and also it has given latest tag.
+
+198
+00:09:36.840 --> 00:09:41.310
+Let's check if it is updating the Helm files.
+
+199
+00:09:41.310 --> 00:09:42.933
+And that is also done.
+
+200
+00:09:43.950 --> 00:09:45.903
+So let's check the Helm Repository now.
+
+201
+00:09:46.740 --> 00:09:50.313
+Go to your repositories, vProfile Helm.
+
+202
+00:09:51.690 --> 00:09:53.400
+Let's open this.
+
+203
+00:09:53.400 --> 00:09:55.323
+Let's check values.yaml file.
+
+204
+00:09:56.356 --> 00:09:59.940
+And this is good, image and the tag.
+
+205
+00:09:59.940 --> 00:10:03.150
+Okay, so our continuous integration pipeline has updated
+
+206
+00:10:03.150 --> 00:10:05.310
+the latest image on Amazon ECR
+
+207
+00:10:05.310 --> 00:10:09.420
+and it has also made a commit to the Helm values.yaml file.
+
+208
+00:10:09.420 --> 00:10:10.253
+We done here.
+
+209
+00:10:10.253 --> 00:10:11.430
+From the next lecture, we are going
+
+210
+00:10:11.430 --> 00:10:15.600
+to set up the EKS Cluster Argo CD,
+
+211
+00:10:15.600 --> 00:10:17.490
+and at the end, we are going to set up the pipeline
+
+212
+00:10:17.490 --> 00:10:19.980
+for our Terraform code as well.
+
+213
+00:10:19.980 --> 00:10:21.360
+That would be all in this lecture.
+
+214
+00:10:21.360 --> 00:10:22.810
+I'll see you in the next one.
+

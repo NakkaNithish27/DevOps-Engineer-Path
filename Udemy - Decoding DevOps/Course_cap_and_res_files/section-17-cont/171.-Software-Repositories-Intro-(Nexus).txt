@@ -1,0 +1,346 @@
+WEBVTT
+
+00:00.120 --> 00:03.240
+Instructor: All right, so we can now build the software,
+
+00:03.240 --> 00:05.640
+test it, and analyze the code.
+
+00:05.640 --> 00:09.783
+The next step is to upload the artifact to Nexus Repository.
+
+00:11.310 --> 00:12.930
+So before we do that,
+
+00:12.930 --> 00:14.820
+we will understand
+
+00:14.820 --> 00:18.240
+what exactly is this Nexus Sonatype Repository
+
+00:18.240 --> 00:20.073
+and why do we really need it.
+
+00:21.000 --> 00:26.000
+So Nexus OSS Sonatype is a software repository.
+
+00:26.100 --> 00:26.970
+As the name says,
+
+00:26.970 --> 00:30.780
+it's a place to store and retrieve softwares.
+
+00:30.780 --> 00:33.190
+In this lecture, we will see how to store
+
+00:35.100 --> 00:38.220
+the artifact to the repository,
+
+00:38.220 --> 00:39.780
+but also, these repositories
+
+00:39.780 --> 00:42.360
+are used to download dependencies.
+
+00:42.360 --> 00:44.700
+Like when we run mvn install,
+
+00:44.700 --> 00:47.760
+it downloads dependencies from the internet.
+
+00:47.760 --> 00:49.140
+But you can point Maven
+
+00:49.140 --> 00:51.930
+to download dependency from your own repository,
+
+00:51.930 --> 00:53.613
+like Nexus Repository.
+
+00:55.170 --> 00:56.160
+But in this example,
+
+00:56.160 --> 01:00.720
+we will see how to store our artifact to the repository.
+
+01:00.720 --> 01:02.550
+The different kinds of repositories,
+
+01:02.550 --> 01:05.520
+like Maven to store Maven dependencies,
+
+01:05.520 --> 01:10.520
+apt to store Debian packages, or yum for RPMs.
+
+01:10.652 --> 01:14.670
+NuGet for .NET, Npm for JavaScript,
+
+01:14.670 --> 01:18.330
+Docker to store and retrieve Docker images.
+
+01:18.330 --> 01:19.980
+We'll see in next lectures
+
+01:19.980 --> 01:22.590
+how to do that for Docker as well.
+
+01:22.590 --> 01:23.850
+So these are some example.
+
+01:23.850 --> 01:26.040
+Based on what kind of project you work,
+
+01:26.040 --> 01:27.960
+you will have that kind of repositories
+
+01:27.960 --> 01:30.300
+that you will use to store
+
+01:30.300 --> 01:31.947
+or retrieve softwares.
+
+01:33.812 --> 01:34.980
+As already discussed,
+
+01:34.980 --> 01:37.950
+we will be using Nexus Sonatype Repository.
+
+01:37.950 --> 01:39.270
+It runs on Java.
+
+01:39.270 --> 01:41.580
+We have already set up the Nexus server,
+
+01:41.580 --> 01:43.950
+and we have done it through the script,
+
+01:43.950 --> 01:47.010
+which already have step two, install Java.
+
+01:47.010 --> 01:49.230
+We're going to use to store artifact,
+
+01:49.230 --> 01:50.880
+but as said previously,
+
+01:50.880 --> 01:54.123
+we can use it as a package manager for dependencies as well.
+
+01:56.370 --> 01:58.740
+And Nexus supports varieties of repositories,
+
+01:58.740 --> 02:02.913
+like apt, Docker, RubyGems, NuGet, apt, yum.
+
+02:06.300 --> 02:09.090
+So far, we did fetch the code, build the code,
+
+02:09.090 --> 02:10.290
+and do the analysis.
+
+02:10.290 --> 02:13.290
+Then now the next part is to upload our artifact
+
+02:13.290 --> 02:15.180
+to the Nexus Repository.
+
+02:15.180 --> 02:17.070
+We will be also using it to version,
+
+02:17.070 --> 02:20.580
+so we'll have multiple versions of our artifact.
+
+02:20.580 --> 02:23.880
+Once the artifact is stored in the repository,
+
+02:23.880 --> 02:28.880
+Upstream or an automation script can fetch that artifact
+
+02:28.950 --> 02:30.453
+and deploy it to the server.
+
+02:31.980 --> 02:35.160
+So first let's go and set up the Nexus Repository.
+
+02:35.160 --> 02:37.263
+Then we'll see how to do the integration.
+
+02:38.280 --> 02:40.770
+So I already have the Nexus server up and running
+
+02:40.770 --> 02:43.320
+from our previous lectures.
+
+02:43.320 --> 02:45.510
+So I'm going to take its public IP
+
+02:45.510 --> 02:48.573
+and access it on port 8081.
+
+02:50.190 --> 02:51.570
+We'll click on Sign In.
+
+02:51.570 --> 02:52.920
+Log in with the username
+
+02:52.920 --> 02:54.963
+and password that we set previously.
+
+02:56.250 --> 02:57.570
+We have two main sections here.
+
+02:57.570 --> 02:59.550
+This is to browse the repository,
+
+02:59.550 --> 03:01.500
+and this is for the settings.
+
+03:01.500 --> 03:02.643
+Let's click on this.
+
+03:04.230 --> 03:06.213
+Let's go to Repositories.
+
+03:07.320 --> 03:10.650
+And you can see existing repositories over here.
+
+03:10.650 --> 03:12.750
+We are going to create our own repository.
+
+03:12.750 --> 03:15.180
+So I say Create repository,
+
+03:15.180 --> 03:18.963
+and we will select maven hosted.
+
+03:20.100 --> 03:22.440
+So our use case is to store the artifact,
+
+03:22.440 --> 03:23.970
+so you have to use the hosted.
+
+03:23.970 --> 03:27.450
+If your use case is to download dependencies
+
+03:27.450 --> 03:28.440
+from the repository,
+
+03:28.440 --> 03:30.000
+then you set proxy.
+
+03:30.000 --> 03:32.970
+So this will act as a proxy repository,
+
+03:32.970 --> 03:36.540
+and group is to group both the repositories together.
+
+03:36.540 --> 03:38.880
+For this one, we have to select maven to host it.
+
+03:38.880 --> 03:42.240
+Let's click on that, and let's give repository a name.
+
+03:42.240 --> 03:44.853
+I'm going to say vprofile-repo,
+
+03:46.410 --> 03:49.593
+and I'll just go down and say Create repository.
+
+03:51.977 --> 03:54.660
+Now as far as the integration with Jenkins goes,
+
+03:54.660 --> 03:56.280
+it's pretty straightforward.
+
+03:56.280 --> 03:58.170
+We are going to use the pipeline as a code
+
+03:58.170 --> 04:00.960
+and store the artifact to this repository.
+
+04:00.960 --> 04:04.080
+But before that, we have to set the credentials.
+
+04:04.080 --> 04:06.270
+So come to Jenkins Dashboard,
+
+04:06.270 --> 04:08.490
+go to Manage Jenkins.
+
+04:08.490 --> 04:10.680
+Find Credentials.
+
+04:10.680 --> 04:12.063
+Okay, click on this one.
+
+04:13.110 --> 04:16.920
+Global credentials, and over here, you can add credentials.
+
+04:16.920 --> 04:18.660
+You see sonartoken credentials.
+
+04:18.660 --> 04:21.900
+That's the secret text that we used in previous lecture.
+
+04:21.900 --> 04:23.640
+We are going to add one more credential over here.
+
+04:23.640 --> 04:28.200
+That will be the Nexus login, Nexus username and password.
+
+04:28.200 --> 04:29.670
+While installing Nexus,
+
+04:29.670 --> 04:32.850
+we did set Nexus username and password.
+
+04:32.850 --> 04:36.003
+My user was Admin and password was admin123.
+
+04:37.440 --> 04:38.273
+And I'm telling you the password
+
+04:38.273 --> 04:40.800
+because anyways, I'm going to delete these instances
+
+04:40.800 --> 04:43.080
+once my work is done.
+
+04:43.080 --> 04:46.710
+But you never share username and password like that.
+
+04:46.710 --> 04:50.940
+Okay, anyways, so Kind will be Username with password
+
+04:50.940 --> 04:55.473
+and the username and then the password.
+
+04:56.340 --> 05:00.180
+I'll give the ID as nexuslogin all in small
+
+05:00.180 --> 05:03.300
+and in the description also, I'll give the same,
+
+05:03.300 --> 05:04.863
+and I will say Create.
+
+05:06.330 --> 05:09.120
+Do remember the name of this credential, nexuslogin.
+
+05:09.120 --> 05:10.620
+Otherwise, you can come here and check.
+
+05:10.620 --> 05:13.050
+We're going to put this in the pipeline code.
+
+05:13.050 --> 05:14.040
+So in the next lecture,
+
+05:14.040 --> 05:15.990
+we'll see how to write the pipeline code
+
+05:15.990 --> 05:19.890
+to upload our artifact to Nexus Repository.
+
+05:19.890 --> 05:21.490
+So I'll see you in the next one.

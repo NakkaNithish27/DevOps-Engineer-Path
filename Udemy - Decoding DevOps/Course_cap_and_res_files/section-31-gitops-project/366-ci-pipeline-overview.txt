@@ -1,0 +1,290 @@
+WEBVTT
+
+1
+00:00:00.720 --> 00:00:02.340
+<v Instructor>All right, so, so far</v>
+
+2
+00:00:02.340 --> 00:00:04.380
+till previous lecture we have set up
+
+3
+00:00:04.380 --> 00:00:07.680
+a GIT repository to store our helm charts in it.
+
+4
+00:00:07.680 --> 00:00:11.100
+Later we are also going to add Argo manifest in this.
+
+5
+00:00:11.100 --> 00:00:12.660
+That is for later.
+
+6
+00:00:12.660 --> 00:00:16.590
+Now we need to focus on V profile app repository
+
+7
+00:00:16.590 --> 00:00:19.290
+and the pipeline that we are going to set
+
+8
+00:00:19.290 --> 00:00:20.370
+for this repository.
+
+9
+00:00:20.370 --> 00:00:22.980
+The end of this pipeline will be updating
+
+10
+00:00:22.980 --> 00:00:25.410
+the latest image name and tag
+
+11
+00:00:25.410 --> 00:00:26.866
+in the helm charts
+
+12
+00:00:26.866 --> 00:00:29.790
+that we have created in the previous lecture.
+
+13
+00:00:29.790 --> 00:00:32.883
+So first we need the application source code.
+
+14
+00:00:33.960 --> 00:00:35.850
+So in this Git repository we are going
+
+15
+00:00:35.850 --> 00:00:40.850
+to copy the SRC folder palm XML file and the docker files.
+
+16
+00:00:41.010 --> 00:00:42.750
+Once we have that in our repository,
+
+17
+00:00:42.750 --> 00:00:43.950
+we're going to commit it
+
+18
+00:00:45.300 --> 00:00:46.470
+and in the pipeline we are going
+
+19
+00:00:46.470 --> 00:00:47.970
+to scan the source code
+
+20
+00:00:47.970 --> 00:00:50.280
+and upload all the result to SonarCube server.
+
+21
+00:00:50.280 --> 00:00:51.810
+So we need a SonarCube server
+
+22
+00:00:51.810 --> 00:00:53.520
+and we are going to launch it
+
+23
+00:00:53.520 --> 00:00:56.100
+by using AWS EC2, which will be simple.
+
+24
+00:00:56.100 --> 00:00:58.710
+Just use this user data, set up the SonarCube server.
+
+25
+00:00:58.710 --> 00:01:01.590
+Once we log in, we are going to generate a token
+
+26
+00:01:01.590 --> 00:01:02.640
+for the admin user
+
+27
+00:01:02.640 --> 00:01:05.370
+and store this in GitHub secrets.
+
+28
+00:01:05.370 --> 00:01:06.900
+That I'll show you later.
+
+29
+00:01:06.900 --> 00:01:08.250
+In this repository, we are also going
+
+30
+00:01:08.250 --> 00:01:12.210
+to create a separate sonar-project.properties file,
+
+31
+00:01:12.210 --> 00:01:14.610
+which will have information about the sonar.
+
+32
+00:01:14.610 --> 00:01:18.240
+The project to create on SonarCube server, the version,
+
+33
+00:01:18.240 --> 00:01:19.410
+the files to scan.
+
+34
+00:01:19.410 --> 00:01:21.633
+All that information will be in this file.
+
+35
+00:01:23.010 --> 00:01:26.220
+Then we are going to create an ECR repository
+
+36
+00:01:26.220 --> 00:01:27.900
+to store our docker images.
+
+37
+00:01:27.900 --> 00:01:30.570
+So this will be on AWS console.
+
+38
+00:01:30.570 --> 00:01:32.760
+And as this pipeline is going to push the image
+
+39
+00:01:32.760 --> 00:01:36.150
+to Amazon ECR, we need authentication.
+
+40
+00:01:36.150 --> 00:01:40.770
+So we are going to create an IM user, give it this policy
+
+41
+00:01:40.770 --> 00:01:44.940
+so it can store images in ECR.
+
+42
+00:01:44.940 --> 00:01:46.680
+And we're going to mention the access key
+
+43
+00:01:46.680 --> 00:01:49.500
+and secret key in GitHub Secrets.
+
+44
+00:01:49.500 --> 00:01:52.590
+We'll also set up a notification system by using Slack.
+
+45
+00:01:52.590 --> 00:01:56.790
+So we are going to create a Slack app, create a web hook,
+
+46
+00:01:56.790 --> 00:01:59.190
+and store the Slack web hook information
+
+47
+00:01:59.190 --> 00:02:01.740
+in GitHub Secrets once again.
+
+48
+00:02:01.740 --> 00:02:05.550
+So in GitHub Secrets, we will have a sonar token,
+
+49
+00:02:05.550 --> 00:02:07.500
+AWS Access key and secret key.
+
+50
+00:02:07.500 --> 00:02:12.333
+So our pipeline can talk to ECR Helm repository user.
+
+51
+00:02:13.230 --> 00:02:15.780
+This pipeline is going to commit the information
+
+52
+00:02:15.780 --> 00:02:17.400
+in Helm Repository.
+
+53
+00:02:17.400 --> 00:02:19.590
+So it needs to log into Helm repository,
+
+54
+00:02:19.590 --> 00:02:24.590
+so username and a token, and then Slack WebBook information.
+
+55
+00:02:25.170 --> 00:02:27.990
+We are also going to store three variables.
+
+56
+00:02:27.990 --> 00:02:30.660
+These are the secret which nobody can see.
+
+57
+00:02:30.660 --> 00:02:32.250
+These are variables.
+
+58
+00:02:32.250 --> 00:02:33.540
+So AWS region.
+
+59
+00:02:33.540 --> 00:02:35.790
+I'm using US East 1.
+
+60
+00:02:35.790 --> 00:02:39.480
+ECR repository name, and helm repository name,
+
+61
+00:02:39.480 --> 00:02:44.130
+which is V Profile-Helm for us.
+
+62
+00:02:44.130 --> 00:02:46.680
+So let's get started from the next lecture,
+
+63
+00:02:46.680 --> 00:02:49.470
+we are going to set up an Ec2 instance,
+
+64
+00:02:49.470 --> 00:02:51.990
+which will have SonarCube server running.
+
+65
+00:02:51.990 --> 00:02:55.440
+Then Amazon ECR repository will create.
+
+66
+00:02:55.440 --> 00:02:58.050
+For authentication from this repository to ECR,
+
+67
+00:02:58.050 --> 00:03:00.960
+we can to store access key and secret key,
+
+68
+00:03:00.960 --> 00:03:05.370
+and to store or to update the values.yamel file.
+
+69
+00:03:05.370 --> 00:03:08.640
+We need this GitHub username and token,
+
+70
+00:03:08.640 --> 00:03:10.410
+so this repository can authenticate
+
+71
+00:03:10.410 --> 00:03:13.050
+with this Helm repository.
+
+72
+00:03:13.050 --> 00:03:15.750
+So join me in the next lecture, let's start the setup.
+

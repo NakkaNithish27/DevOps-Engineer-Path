@@ -1,0 +1,88 @@
+WEBVTT
+
+00:00.400 --> 00:03.080
+Welcome to decoding DevOps course.
+
+00:03.120 --> 00:07.400
+My name is Imran and I'll be your instructor and guide in this journey.
+
+00:07.800 --> 00:11.760
+First of all, thank you for choosing this course and trusting me.
+
+00:11.960 --> 00:13.280
+I'm truly honored.
+
+00:14.280 --> 00:19.880
+This course covers all the foundational building blocks you need to learn and master DevOps.
+
+00:20.240 --> 00:23.320
+So stop overthinking and just dive in.
+
+00:23.760 --> 00:24.280
+Wait, wait.
+
+00:24.320 --> 00:24.960
+Hold on.
+
+00:25.280 --> 00:27.760
+Before you dive in, just a few quick points.
+
+00:28.560 --> 00:31.440
+Think of this course like building with Legos.
+
+00:31.960 --> 00:37.520
+You will connect multiple pieces together to form something strong and complete.
+
+00:38.080 --> 00:44.840
+At the start, you will learn the core skills like Linux, virtualization, networking, scripting.
+
+00:45.440 --> 00:49.080
+You can think of that structure as the chassis of a car.
+
+00:49.560 --> 00:53.680
+Once it's ready, you will start fitting the engine, the wheels, the body.
+
+00:54.040 --> 00:59.600
+In our world, that means AWS, Jenkins, GitHub, Terraform, and many other DevOps tools.
+
+01:00.320 --> 01:03.080
+Now can a car exist without its chassis?
+
+01:04.120 --> 01:04.800
+Exactly.
+
+01:05.600 --> 01:08.920
+Do not underestimate the power of basics, my friend.
+
+01:09.520 --> 01:15.000
+When your foundation is solid, you will have the confidence to get deep into DevOps.
+
+01:15.120 --> 01:17.240
+And that's the real key, my friend.
+
+01:17.920 --> 01:19.960
+So do not skip or jump ahead.
+
+01:20.200 --> 01:21.080
+Take your time.
+
+01:21.320 --> 01:22.160
+Don't rush.
+
+01:22.360 --> 01:24.160
+Build a rhythm with this course.
+
+01:24.640 --> 01:28.200
+Pause, rewind or slow down the video whenever you need.
+
+01:28.560 --> 01:33.760
+I promise you, the skills you will gain here will stay with you for a lifetime.
+
+01:34.640 --> 01:35.960
+So what are you waiting for?
+
+01:36.320 --> 01:36.960
+Buckle up.
+
+01:36.960 --> 01:39.440
+Get ready for the exciting journey of DevOps.

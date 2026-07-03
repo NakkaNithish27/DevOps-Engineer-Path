@@ -1,0 +1,1027 @@
+WEBVTT
+
+00:00.690 --> 00:02.310
+Narrator: Alright, so in this lecture
+
+00:02.310 --> 00:04.110
+we are gonna execute our code.
+
+00:04.110 --> 00:08.400
+We're gonna also check how to look at the plan
+
+00:08.400 --> 00:09.233
+and then apply.
+
+00:09.233 --> 00:12.810
+Also, we'll do some changes in our code
+
+00:12.810 --> 00:15.720
+and also on the target infrastructure
+
+00:15.720 --> 00:19.890
+and we'll see how Terraform reacts.
+
+00:19.890 --> 00:23.430
+So I'm going to open my Git Bash terminal separately.
+
+00:23.430 --> 00:25.860
+If you wish, you can open the terminal from here,
+
+00:25.860 --> 00:27.690
+but I'm going to open a separate terminal
+
+00:27.690 --> 00:31.710
+and switch to the folder where we have this exercise.
+
+00:31.710 --> 00:33.540
+macOS, you can open your terminal.
+
+00:33.540 --> 00:35.403
+So I'm going to switch to the folder.
+
+00:36.690 --> 00:39.363
+That's where I have Exercise2.
+
+00:42.030 --> 00:43.053
+Unless, okay.
+
+00:43.920 --> 00:48.920
+First I'm going to run a terraform init to initialize.
+
+00:48.960 --> 00:51.780
+So, it downloads all the necessary libraries
+
+00:51.780 --> 00:53.070
+from the registry.
+
+00:53.070 --> 00:58.070
+So you see it's downloading AWS provider libraries.
+
+00:58.170 --> 01:00.513
+Okay, that is done. Let me clear the screen.
+
+01:01.620 --> 01:04.623
+Next will be Terraform format, fmt.
+
+01:05.820 --> 01:10.017
+So it corrected the format of instance.tf and provider.tf.
+
+01:10.017 --> 01:14.013
+And let's check the syntax terraform validate.
+
+01:15.750 --> 01:18.930
+And we have two problems here. Let's read.
+
+01:18.930 --> 01:22.170
+It says, "Inappropriate value for attribute ipv4."
+
+01:22.170 --> 01:24.120
+It says, "string required."
+
+01:24.120 --> 01:28.800
+We have given it in the list format, so let's fix that.
+
+01:28.800 --> 01:32.700
+So I'm going to remove the square brackets from here
+
+01:32.700 --> 01:34.923
+and from here.
+
+01:38.280 --> 01:41.460
+And I'm going to save this, Control + S.
+
+01:41.460 --> 01:43.893
+And let's check once again, terraform validate.
+
+01:45.420 --> 01:49.470
+Okay, success, the configuration is valid. Good.
+
+01:49.470 --> 01:54.093
+So the next step is to execute the plan.
+
+01:56.100 --> 02:01.100
+Now what plan does, it'll match your terraform tf files
+
+02:02.160 --> 02:04.650
+with the target infrastructure.
+
+02:04.650 --> 02:06.150
+It'll show you the differences
+
+02:06.150 --> 02:09.570
+and what will happen when you execute it, right?
+
+02:09.570 --> 02:13.230
+It looks like an actual execution but it is not.
+
+02:13.230 --> 02:15.480
+Okay, it's important to read all this information
+
+02:15.480 --> 02:17.010
+before you apply the changes.
+
+02:17.010 --> 02:21.120
+So, plan: 7 to add, 0 to change, 0 to destroy.
+
+02:21.120 --> 02:23.160
+I always, always tell this,
+
+02:23.160 --> 02:25.620
+that always look for the destroy,
+
+02:25.620 --> 02:27.210
+what it is going to delete.
+
+02:27.210 --> 02:29.490
+'Cause you don't want your infrastructure
+
+02:29.490 --> 02:33.990
+to accidentally get deleted or some resource gets deleted.
+
+02:33.990 --> 02:37.560
+Then look at the change. What are the changes?
+
+02:37.560 --> 02:39.690
+The plus sign, you see those are the changes.
+
+02:39.690 --> 02:41.823
+Add, it's going to add those things.
+
+02:42.780 --> 02:46.590
+Right, so this is not change, this is creation adding.
+
+02:46.590 --> 02:47.430
+So, seven things.
+
+02:47.430 --> 02:50.130
+So seven resources, and we'll show you all the detail,
+
+02:51.570 --> 02:53.310
+and if you're good with all this
+
+02:53.310 --> 02:56.043
+then you can say terraform apply.
+
+03:02.610 --> 03:05.280
+Now, plan is not always right,
+
+03:05.280 --> 03:09.330
+and majority time it is right, but it does not guarantee
+
+03:09.330 --> 03:10.893
+that it's going to execute as it is.
+
+03:10.893 --> 03:12.780
+It's going to happen as it is.
+
+03:12.780 --> 03:15.870
+At the time of apply, also, you may get some issues,
+
+03:15.870 --> 03:17.220
+we'll talk about that in a moment.
+
+03:17.220 --> 03:19.983
+But first here, let's say yes to apply,
+
+03:21.660 --> 03:23.310
+and it's going to take some time.
+
+03:24.570 --> 03:26.220
+Okay, it says, "Apply completed,"
+
+03:26.220 --> 03:30.570
+and it should also now create the tf state file.
+
+03:30.570 --> 03:32.160
+Let's take a look at that.
+
+03:32.160 --> 03:34.020
+Right, so in the VS Code, Exercise2,
+
+03:34.020 --> 03:35.370
+there's the tf state file.
+
+03:35.370 --> 03:37.470
+This is where it maintains the state,
+
+03:37.470 --> 03:39.240
+and you should see all the information
+
+03:39.240 --> 03:42.000
+over here in the JSON format.
+
+03:42.000 --> 03:46.110
+What AMI ID it used and many other thing.
+
+03:46.110 --> 03:48.750
+I recommend you just go with this,
+
+03:48.750 --> 03:51.990
+scroll it and try to read as much as you can.
+
+03:51.990 --> 03:54.330
+This will be helpful for you later.
+
+03:54.330 --> 03:57.450
+You know when you want to fetch information
+
+03:57.450 --> 04:00.750
+and use it in the resources as an argument
+
+04:00.750 --> 04:03.720
+or you want to print some output,
+
+04:03.720 --> 04:06.060
+and this information will be helpful.
+
+04:06.060 --> 04:08.433
+Okay, let's go and check in the AWS Console.
+
+04:09.401 --> 04:10.920
+Okay, I'm in the EC2 Dashboard
+
+04:10.920 --> 04:15.030
+and us-east-1 region, where I've mentioned,
+
+04:15.030 --> 04:17.910
+this is the region that I mentioned in my tf state file.
+
+04:17.910 --> 04:19.590
+Instance, one running.
+
+04:19.590 --> 04:21.450
+And we see the instance there,
+
+04:21.450 --> 04:23.070
+and it should have the key attached.
+
+04:23.070 --> 04:24.330
+You see that key?
+
+04:24.330 --> 04:27.363
+The key also should be created here in the Key Pairs.
+
+04:29.070 --> 04:30.750
+Right, that's the key.
+
+04:30.750 --> 04:31.680
+In the security,
+
+04:31.680 --> 04:34.830
+we should also see the security group name.
+
+04:34.830 --> 04:36.240
+Click on that.
+
+04:36.240 --> 04:40.350
+See we have two rules here, 22 allowed from my IP
+
+04:40.350 --> 04:42.450
+and port 80 from anywhere.
+
+04:42.450 --> 04:47.450
+Outbound rule also one for IPv4, one for IPv6,
+
+04:48.300 --> 04:52.500
+and destination is any IPv6 and any IPv4.
+
+04:52.500 --> 04:55.680
+Okay, so it worked. Now let's go back.
+
+04:55.680 --> 04:57.423
+Now let me clear the screen.
+
+04:59.610 --> 05:03.480
+Now the state of our infrastructure is exactly a match,
+
+05:03.480 --> 05:05.460
+and if we execute terraform plan,
+
+05:05.460 --> 05:07.953
+we should see it's not going to do anything.
+
+05:09.030 --> 05:11.760
+So you see that? Refreshing the state.
+
+05:11.760 --> 05:14.400
+So it says, "No changes."
+
+05:14.400 --> 05:17.580
+Right, so even if we apply this, nothing is going to happen.
+
+05:17.580 --> 05:18.780
+But let's make some change.
+
+05:18.780 --> 05:21.390
+So come to the security_group.tf file,
+
+05:21.390 --> 05:25.020
+and instead of here my IP, let's change it,
+
+05:25.020 --> 05:29.460
+0.0.0.0/0.
+
+05:29.460 --> 05:30.900
+Or if you want to change the port number,
+
+05:30.900 --> 05:32.430
+that also you can do.
+
+05:32.430 --> 05:33.840
+Just make some simple change.
+
+05:33.840 --> 05:37.473
+Let's save this and let's check the plan now.
+
+05:39.450 --> 05:41.820
+Okay, you see there, it says, "1 to change."
+
+05:41.820 --> 05:45.030
+So if I apply this, one change will happen
+
+05:45.030 --> 05:47.400
+and you will see the change over here.
+
+05:47.400 --> 05:51.450
+So I'm going to apply this change, terraform apply.
+
+05:51.450 --> 05:53.400
+Again, it is printing what it is going to change.
+
+05:53.400 --> 05:57.780
+If you're good, you can say yes, and this will be quick.
+
+05:57.780 --> 06:00.720
+And just the update of the security group rule.
+
+06:00.720 --> 06:02.760
+You can go ahead and check in the AWS Console.
+
+06:02.760 --> 06:05.040
+The rule would have changed.
+
+06:05.040 --> 06:08.583
+Like that you can change the tags, you can change the name.
+
+06:09.420 --> 06:11.460
+These things you can change,
+
+06:11.460 --> 06:14.040
+but there are a few things that you cannot change.
+
+06:14.040 --> 06:18.540
+I mean, you can change but it'll destroy your resource
+
+06:18.540 --> 06:20.250
+and create again.
+
+06:20.250 --> 06:22.980
+For example, I want to change the AMI ID.
+
+06:22.980 --> 06:25.140
+What's going to happen then?
+
+06:25.140 --> 06:27.240
+Instance AMI ID cannot be changed, right?
+
+06:27.240 --> 06:30.333
+You need to delete the instance and recreate with a new AMI.
+
+06:31.320 --> 06:33.510
+Before that, let's try to change the key pair.
+
+06:33.510 --> 06:36.450
+Let's see what happens when we change the key pair, right?
+
+06:36.450 --> 06:38.670
+For that I'm just going to generate a new key here,
+
+06:38.670 --> 06:41.160
+ssh-keygen,
+
+06:41.160 --> 06:43.260
+and I will name it as testkey.
+
+06:44.858 --> 06:46.590
+Now it's created.
+
+06:46.590 --> 06:48.810
+That should be the test key over here.
+
+06:48.810 --> 06:51.090
+That should be the public key.
+
+06:51.090 --> 06:53.970
+Let's go to keypair, and I'm going to copy this
+
+06:53.970 --> 06:56.433
+and just add one more key over here.
+
+06:57.500 --> 06:59.520
+Let's change the name here to testkey
+
+06:59.520 --> 07:01.683
+and let's get the public key content,
+
+07:04.590 --> 07:06.390
+the key_pair file.
+
+07:06.390 --> 07:08.670
+Delete everything in between the double quotes
+
+07:08.670 --> 07:10.860
+and paste the new key.
+
+07:10.860 --> 07:13.953
+I just make sure the double quote ends properly.
+
+07:15.150 --> 07:19.290
+Make sure the syntax is correct. Let's save this.
+
+07:19.290 --> 07:22.950
+And in the instance we are going to change here
+
+07:22.950 --> 07:24.860
+from dove key to...
+
+07:24.860 --> 07:27.990
+wait, that's not the one.
+
+07:27.990 --> 07:30.600
+Go back. Yeah, here.
+
+07:30.600 --> 07:32.340
+I'll just mention here test-key,
+
+07:32.340 --> 07:33.753
+that's the name of the key.
+
+07:34.800 --> 07:38.040
+Save this file. Make sure you save both the files.
+
+07:38.040 --> 07:42.270
+The key here, this file, and also instance file.
+
+07:42.270 --> 07:43.830
+And once you save that,
+
+07:43.830 --> 07:46.863
+let's try to do the terraform plan now.
+
+07:48.623 --> 07:50.730
+Ah, now take a look.
+
+07:50.730 --> 07:53.910
+The reason why I tell everyone to look at the destroy first,
+
+07:53.910 --> 07:56.910
+you see it says, "1 to destroy."
+
+07:56.910 --> 07:58.800
+Some changes are immutable;
+
+07:58.800 --> 08:00.960
+changing the key pair, changing the AMI ID
+
+08:00.960 --> 08:02.970
+for the instance will delete the instance.
+
+08:02.970 --> 08:05.010
+Like that for other resources also.
+
+08:05.010 --> 08:06.810
+Let's say IDS instance, or VPC,
+
+08:06.810 --> 08:11.400
+or any other resource, few things are immutable.
+
+08:11.400 --> 08:13.770
+So, what exactly it is going to destroy.
+
+08:13.770 --> 08:15.690
+So you see, it says, "2 to add."
+
+08:15.690 --> 08:18.273
+So, one, we know a new key pair will get created.
+
+08:19.590 --> 08:20.840
+So if you look over here,
+
+08:21.780 --> 08:24.600
+instance must be replaced, right?
+
+08:24.600 --> 08:27.360
+You see there are a minus and a plus sign,
+
+08:27.360 --> 08:30.600
+destroy and then create replacement, right?
+
+08:30.600 --> 08:33.750
+And maybe that you don't want, right?
+
+08:33.750 --> 08:37.560
+So let's go back and remove the name
+
+08:37.560 --> 08:40.470
+and keep it back to dove-key.
+
+08:40.470 --> 08:44.013
+Save this file and then plan once again.
+
+08:45.390 --> 08:48.870
+Or maybe that's what you want to do, so you can apply it.
+
+08:48.870 --> 08:50.880
+I'm just trying to show you the worst-case scenario
+
+08:50.880 --> 08:52.890
+when you apply things, right?
+
+08:52.890 --> 08:55.320
+Nothing to destroy, nothing to change, 1 to add?
+
+08:55.320 --> 08:57.090
+That is the safest thing.
+
+08:57.090 --> 08:58.080
+Terraform is great,
+
+08:58.080 --> 09:00.843
+but at the same time it's also very terrifying.
+
+09:01.710 --> 09:04.860
+If you're not careful with the execution,
+
+09:04.860 --> 09:06.660
+you may end up destroying things.
+
+09:06.660 --> 09:11.130
+So be very, very careful. Okay, let's try one more thing.
+
+09:11.130 --> 09:13.950
+I'm going to give here a security group ID
+
+09:13.950 --> 09:17.040
+or security group resource name that does not exist, right?
+
+09:17.040 --> 09:19.440
+So, dove-sg does exist.
+
+09:19.440 --> 09:21.840
+Let me just change it with test-sg.
+
+09:21.840 --> 09:23.850
+So this security group resource does not exist.
+
+09:23.850 --> 09:25.950
+So let's save it and let's see what happens
+
+09:25.950 --> 09:27.003
+when we execute it.
+
+09:28.650 --> 09:30.843
+So we'll say terraform plan, right?
+
+09:34.200 --> 09:35.193
+Right, so it says,
+
+09:36.607 --> 09:38.902
+"A managed resource, 'aws_security_group,'"
+
+09:38.902 --> 09:40.140
+that's a managed resource.
+
+09:40.140 --> 09:42.527
+That means we are managing that, it's in our code.
+
+09:42.527 --> 09:47.527
+"'test-sg' has not been declared in the root module."
+
+09:47.880 --> 09:51.840
+It did not find that security group name anywhere.
+
+09:51.840 --> 09:54.120
+The resource name basically, right?
+
+09:54.120 --> 09:55.770
+So syntactically, it's all good.
+
+09:55.770 --> 09:58.080
+Now we run terraform validate,
+
+09:58.080 --> 09:59.280
+everything will come out good,
+
+09:59.280 --> 10:02.490
+but the plan got that.
+
+10:02.490 --> 10:04.050
+So let's go back and fix that.
+
+10:04.050 --> 10:06.363
+So we going to see dove-sg,
+
+10:09.090 --> 10:09.923
+save.
+
+10:10.890 --> 10:13.620
+Okay, now the next thing, so provider,
+
+10:13.620 --> 10:16.800
+we have the region us-east-1,
+
+10:16.800 --> 10:20.970
+and we have mentioned here zone us-east-1a.
+
+10:20.970 --> 10:23.393
+What if we mention here 2a?
+
+10:23.393 --> 10:26.340
+Now, 2a zone exist, right?
+
+10:26.340 --> 10:29.280
+Let me see this. Let's see what happens.
+
+10:29.280 --> 10:30.933
+Let's do terraform plan.
+
+10:32.790 --> 10:37.140
+Right, so it plans to destroy one thing,
+
+10:37.140 --> 10:39.660
+and plans to add two thing.
+
+10:39.660 --> 10:41.850
+One is the security group, I'm sorry,
+
+10:41.850 --> 10:44.130
+the key pair that we have included.
+
+10:44.130 --> 10:46.170
+What's the other thing and what it is destroying?
+
+10:46.170 --> 10:47.043
+Check again.
+
+10:51.930 --> 10:55.530
+So it is saying the instance will be replaced,
+
+10:55.530 --> 10:58.380
+and maybe that's what we want to do, right?
+
+10:58.380 --> 11:00.903
+So let's apply that.
+
+11:06.510 --> 11:09.093
+Okay, we're good with everything. I'll say yes.
+
+11:11.370 --> 11:13.503
+So it's destroying, deleting the instance,
+
+11:14.550 --> 11:16.620
+creating the test key.
+
+11:16.620 --> 11:19.260
+Okay, it's going to take some time to destroy the instance.
+
+11:19.260 --> 11:20.700
+I'm going to pause the recording
+
+11:20.700 --> 11:22.653
+and resume when this is completed.
+
+11:23.940 --> 11:27.270
+Okay, this is what I wanted to show you.
+
+11:27.270 --> 11:29.280
+So destruction completed, deleted the instance,
+
+11:29.280 --> 11:32.100
+it created the key pair, that's fine.
+
+11:32.100 --> 11:35.977
+But when it is trying to create the instance it says,
+
+11:35.977 --> 11:39.270
+"Invalid availability zone."
+
+11:39.270 --> 11:41.250
+So, we executed terraform plan, right?
+
+11:41.250 --> 11:42.660
+So what happened?
+
+11:42.660 --> 11:44.610
+Said everything was good,
+
+11:44.610 --> 11:47.940
+but in the execution things failed.
+
+11:47.940 --> 11:50.160
+That is why I tell everyone
+
+11:50.160 --> 11:52.920
+to not completely trust in the plan.
+
+11:52.920 --> 11:56.820
+Make sure you validate all the source code, you check it.
+
+11:56.820 --> 11:58.350
+Make sure everything
+
+11:58.350 --> 12:00.630
+or all the things are matching properly,
+
+12:00.630 --> 12:03.450
+the names, the zones, everything.
+
+12:03.450 --> 12:07.110
+Because if this happens real time, you will be sweating now.
+
+12:07.110 --> 12:09.090
+The instance is destroyed
+
+12:09.090 --> 12:10.990
+and you don't have any other instance.
+
+12:11.910 --> 12:13.860
+So I'm not trying to scare you, I'm just telling you
+
+12:13.860 --> 12:18.860
+that do not rely too much on this tools,
+
+12:18.897 --> 12:20.550
+the AI, artificial intelligence, you know,
+
+12:20.550 --> 12:23.040
+you can generate all the code through AI.
+
+12:23.040 --> 12:25.200
+Don't you need to write all this from the scratch?
+
+12:25.200 --> 12:28.327
+You can just tell, give the information to ChatGPT
+
+12:28.327 --> 12:30.780
+and it'll give you all the code.
+
+12:30.780 --> 12:33.213
+But you have to check everything.
+
+12:34.110 --> 12:37.053
+Also, let me show you this zone actually exist.
+
+12:38.250 --> 12:40.530
+Right, you switch to the region.
+
+12:40.530 --> 12:43.530
+Right, the region that you have mentioned us-east-2.
+
+12:43.530 --> 12:46.140
+You see there is us-east-2a, right?
+
+12:46.140 --> 12:48.570
+But does not match with the region
+
+12:48.570 --> 12:50.910
+that you have mentioned in the provider.
+
+12:50.910 --> 12:53.580
+In the provider we are dealing with US east one,
+
+12:53.580 --> 12:56.100
+but over here we have mentioned
+
+12:56.100 --> 12:57.720
+a zone from a different region.
+
+12:57.720 --> 13:00.270
+So that's why it failed. Right?
+
+13:00.270 --> 13:01.320
+So we can fix that easily.
+
+13:01.320 --> 13:03.840
+Maybe we mentioned the wrong region name or zone name,
+
+13:03.840 --> 13:06.480
+whatever we mentioned wrong we can fix this
+
+13:06.480 --> 13:08.070
+and then apply it.
+
+13:08.070 --> 13:10.140
+So let me revert it back to 1a,
+
+13:10.140 --> 13:12.993
+save this, do a plan again,
+
+13:13.860 --> 13:15.963
+and I'm going to say apply.
+
+13:18.366 --> 13:19.563
+We just say yes.
+
+13:20.670 --> 13:22.980
+Okay, so the one resource got added,
+
+13:22.980 --> 13:25.050
+which was our instance.
+
+13:25.050 --> 13:27.540
+So one last thing I want to show you.
+
+13:27.540 --> 13:30.330
+So my instance is there and it's in running state,
+
+13:30.330 --> 13:33.150
+and I'm going to stop it.
+
+13:33.150 --> 13:34.860
+Right? Power off.
+
+13:34.860 --> 13:39.150
+So now what will happen when I run the terraform apply?
+
+13:39.150 --> 13:41.100
+It'll start the instance or it won't?
+
+13:41.100 --> 13:43.023
+What do you think? Let's test it.
+
+13:44.130 --> 13:47.040
+Right, so I do not make any code change.
+
+13:47.040 --> 13:49.320
+I made the infrastructure change manually,
+
+13:49.320 --> 13:52.680
+which is not at all recommended.
+
+13:52.680 --> 13:54.600
+You know, if you're managing an infrastructure from code,
+
+13:54.600 --> 13:58.530
+you have to always manage it through the code.
+
+13:58.530 --> 14:00.900
+And why is that? I'll give you one simple example.
+
+14:00.900 --> 14:04.023
+So I run terraform plan, the instance is powered off, right?
+
+14:05.370 --> 14:08.370
+You see it says, "no changes," your infrastructure is good,
+
+14:08.370 --> 14:11.070
+but our infrastructure is not.
+
+14:11.070 --> 14:13.290
+Our instance is powered off.
+
+14:13.290 --> 14:15.633
+So why is that? Terraform does not know it?
+
+14:16.680 --> 14:19.170
+Well actually it really does not know
+
+14:19.170 --> 14:23.430
+because we did not mention the state of our infrastructure,
+
+14:23.430 --> 14:26.040
+state of our instance, whether it should be running,
+
+14:26.040 --> 14:29.340
+it should be stopped, what should be the state, right?
+
+14:29.340 --> 14:31.650
+Nowhere in the code, we have mentioned the state.
+
+14:31.650 --> 14:34.770
+Now, previously there was an instance_state option
+
+14:34.770 --> 14:37.740
+over here, argument over here where you can mention,
+
+14:37.740 --> 14:40.083
+but now there is a separate resource for that.
+
+14:41.910 --> 14:43.110
+Right, so the resource name
+
+14:43.110 --> 14:44.553
+is AWS_EC2_instance_state.
+
+14:48.210 --> 14:50.280
+Now, you know, you can just check it in the documentation,
+
+14:50.280 --> 14:52.800
+you can find out the argument and everything.
+
+14:52.800 --> 14:54.750
+So basically if you want to mention
+
+14:54.750 --> 14:58.260
+the state of EC2 instance we can use this resource,
+
+14:58.260 --> 14:59.490
+we can give the name,
+
+14:59.490 --> 15:01.680
+this name can be different from this one.
+
+15:01.680 --> 15:03.480
+It should actually be different.
+
+15:03.480 --> 15:08.220
+instance _id, again, AWS_instance there .web,
+
+15:08.220 --> 15:10.230
+there .id.
+
+15:10.230 --> 15:12.330
+State, running.
+
+15:12.330 --> 15:15.450
+So the values are stopped and fewer values are there.
+
+15:15.450 --> 15:19.800
+So let's save this. Let's execute the plan.
+
+15:19.800 --> 15:22.140
+See that? Now it knows.
+
+15:22.140 --> 15:23.610
+We are mentioning the state of the instance
+
+15:23.610 --> 15:26.220
+should be running, but it checks the infrastructure
+
+15:26.220 --> 15:30.423
+and the instance is stopped so you can apply the change.
+
+15:32.910 --> 15:34.350
+All right, these are simple, simple things,
+
+15:34.350 --> 15:36.600
+but extremely important things.
+
+15:36.600 --> 15:39.870
+And that's why I would like to teach like this by example,
+
+15:39.870 --> 15:44.130
+rather than showing you the slides, the PPD presentations.
+
+15:44.130 --> 15:47.790
+When you actually do it, then only you will know,
+
+15:47.790 --> 15:49.053
+or you'll realize.
+
+15:50.430 --> 15:53.490
+Okay, now it's time to delete everything, clean everything.
+
+15:53.490 --> 15:56.400
+So, I'm going to just run terraform destroy.
+
+15:56.400 --> 16:00.420
+That is going to delete every resource, right?
+
+16:00.420 --> 16:03.720
+It's complete destruction of every resource.
+
+16:03.720 --> 16:06.540
+Again, it is going to compare our code, state file,
+
+16:06.540 --> 16:08.460
+and the target infrastructure
+
+16:08.460 --> 16:11.430
+and destroy everything that's mentioned
+
+16:11.430 --> 16:13.023
+in that current directory.
+
+16:14.220 --> 16:18.090
+Okay? Yes, I want to destroy everything.
+
+16:18.090 --> 16:19.770
+And once you delete,
+
+16:19.770 --> 16:23.040
+you can take a look at the code once again.
+
+16:23.040 --> 16:25.170
+Don't try to memorize or by-heart anything.
+
+16:25.170 --> 16:27.240
+I have shown you everything from the documentation,
+
+16:27.240 --> 16:29.493
+you know you can get it from the docs easily.
+
+16:30.390 --> 16:32.280
+And that is all in this lecture.
+
+16:32.280 --> 16:33.730
+I'll see you in the next one.

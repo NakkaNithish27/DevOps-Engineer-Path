@@ -1,0 +1,787 @@
+WEBVTT
+
+00:00.450 --> 00:01.530
+Lecturer: All right, last piece.
+
+00:01.530 --> 00:03.450
+So we have tested bastion host.
+
+00:03.450 --> 00:04.380
+It's working fine.
+
+00:04.380 --> 00:07.080
+Now, it's time to launch an instance in the private subnet
+
+00:07.080 --> 00:09.720
+and not just launch, we are going to set up a website
+
+00:09.720 --> 00:13.293
+on that from tooplate or any website you can set up.
+
+00:14.160 --> 00:16.410
+We are then going to create a load balancer
+
+00:16.410 --> 00:19.500
+which will be in the public subnet and access the website
+
+00:19.500 --> 00:22.143
+from the load balancer from the internet.
+
+00:23.250 --> 00:25.770
+The load balancer should be able to route the traffic
+
+00:25.770 --> 00:29.523
+to the private subnet or instance in the private subnet.
+
+00:30.690 --> 00:33.030
+Okay, now in order to SSH to the instance launched
+
+00:33.030 --> 00:36.060
+in the private subnet, we will need the login key.
+
+00:36.060 --> 00:38.160
+And as we already discussed previously,
+
+00:38.160 --> 00:40.590
+we need to first SSH into the bastion host.
+
+00:40.590 --> 00:41.740
+From here, we are going
+
+00:42.611 --> 00:44.940
+to SSH to the instance in the private subnet.
+
+00:44.940 --> 00:48.630
+So we need to have the login key stored in the bastion host.
+
+00:48.630 --> 00:51.300
+So first, we'll create a key pair copied
+
+00:51.300 --> 00:53.580
+in the bastion host, which key
+
+00:53.580 --> 00:57.060
+or this key we are going to use to access our instance
+
+00:57.060 --> 00:58.350
+in the private subnet.
+
+00:58.350 --> 01:00.540
+So let's go to AWS console.
+
+01:00.540 --> 01:02.850
+Let's go to key pair.
+
+01:02.850 --> 01:07.800
+I'm going to create the key pair, give it name as web-key.
+
+01:07.800 --> 01:09.303
+I can give any name you want.
+
+01:10.200 --> 01:12.453
+Pem file. Create key pair.
+
+01:16.740 --> 01:18.990
+Okay, if you're in the bastion host, come out,
+
+01:18.990 --> 01:21.870
+and now we have to SCP,
+
+01:21.870 --> 01:24.960
+copy our login key to the bastion host.
+
+01:24.960 --> 01:28.740
+So the command will be scp -i.
+
+01:28.740 --> 01:33.740
+You give the path of the bastion instance login key
+
+01:34.320 --> 01:38.460
+and then you have to mention the file that you want to copy.
+
+01:38.460 --> 01:40.710
+So it's in the downloads, right?
+
+01:40.710 --> 01:42.720
+This is the file that we want to copy
+
+01:42.720 --> 01:45.180
+and the destination username at the rate the bastion
+
+01:45.180 --> 01:50.180
+host public IP, colon, slash, we'll give it temp for now.
+
+01:50.580 --> 01:54.903
+Oh, wait, let's give it home/ubuntu.
+
+01:55.800 --> 01:59.100
+So Ubuntu user will have permission on its home directory.
+
+01:59.100 --> 02:01.500
+So we can copy this file over there.
+
+02:01.500 --> 02:02.913
+Let's hit enter and see.
+
+02:05.220 --> 02:08.430
+Okay, so this file is copied to the bastion host.
+
+02:08.430 --> 02:10.803
+Let's do ssh to the bastion host.
+
+02:12.600 --> 02:15.930
+And if you do ls, we're in the home directory, right?
+
+02:15.930 --> 02:18.120
+So I should see the login key.
+
+02:18.120 --> 02:22.230
+Okay, let's stay here.
+
+02:22.230 --> 02:25.410
+Let's launch the instance in the private subnet now.
+
+02:25.410 --> 02:27.420
+Let's go to the instances.
+
+02:27.420 --> 02:28.890
+I'll create the security group
+
+02:28.890 --> 02:31.710
+while I'm creating the instance itself.
+
+02:31.710 --> 02:36.060
+Launch instance, I'll name it as web01-priv
+
+02:36.060 --> 02:37.683
+just for the identification.
+
+02:39.060 --> 02:43.130
+I will use, let's use Amazon Linux 2,
+
+02:44.975 --> 02:48.690
+but you can use anything you know how to set up a website.
+
+02:48.690 --> 02:51.330
+Amazon Linux is YUM install
+
+02:51.330 --> 02:52.860
+and download and set up the website.
+
+02:52.860 --> 02:54.690
+If you want to use Ubuntu, you can use that.
+
+02:54.690 --> 02:57.300
+But make sure you know the commands.
+
+02:57.300 --> 02:58.470
+T2.micro is fine.
+
+02:58.470 --> 03:00.930
+Key pair. That will be the web key.
+
+03:00.930 --> 03:02.680
+Make sure you select the right key.
+
+03:03.600 --> 03:05.850
+Network setting, Edit.
+
+03:05.850 --> 03:08.610
+Select our vprofile VPC
+
+03:08.610 --> 03:11.790
+and make sure this goes in the private subnet.
+
+03:11.790 --> 03:16.790
+So yeah, that one, private subnet 1 or 2, anything is fine.
+
+03:17.820 --> 03:20.460
+You see, it will not get any public IP
+
+03:20.460 --> 03:22.650
+and we have to create a security group for it.
+
+03:22.650 --> 03:27.650
+So we'll say web01-sg is the name and description here.
+
+03:29.820 --> 03:34.680
+Okay, now ssh from anywhere, definitely not from my IP.
+
+03:34.680 --> 03:37.110
+Also not possible because you cannot ssh
+
+03:37.110 --> 03:39.543
+from your IP to this private instance.
+
+03:40.530 --> 03:43.350
+You have to go to Custom
+
+03:43.350 --> 03:47.580
+and mention the bastion host security group here, okay?
+
+03:47.580 --> 03:49.533
+Bastion host security group.
+
+03:51.660 --> 03:53.460
+And we need to give one more rule here,
+
+03:53.460 --> 03:56.010
+port 80 allowed from the load balancer security group.
+
+03:56.010 --> 03:59.250
+But since we don't have a load balancer, we'll do it later.
+
+03:59.250 --> 04:00.723
+Let's launch this instance.
+
+04:02.730 --> 04:04.230
+Okay, so my instance is running
+
+04:04.230 --> 04:05.520
+you see there's no public IP.
+
+04:05.520 --> 04:08.370
+It has only private IP and the only way to access it
+
+04:08.370 --> 04:11.610
+through the bastion host, so ssh to the bastion host.
+
+04:11.610 --> 04:15.900
+I'm already in the bastion host and I already have the key.
+
+04:15.900 --> 04:18.690
+So I'm going to say ssh -i,
+
+04:18.690 --> 04:22.890
+the path of the key, username, ec2-user.
+
+04:22.890 --> 04:24.930
+Because I have used Amazon Linux 2,
+
+04:24.930 --> 04:26.760
+so that's the username for it.
+
+04:26.760 --> 04:30.000
+And let's get the private IP of the instance. Okay?
+
+04:30.000 --> 04:34.350
+Now, remember this resources within the VPC
+
+04:34.350 --> 04:36.510
+irrespective of which subnet they are
+
+04:36.510 --> 04:41.340
+in public or private, can access each other by default,
+
+04:41.340 --> 04:44.670
+provided the right security group rules are given.
+
+04:44.670 --> 04:47.010
+So web01 is in the private subnet,
+
+04:47.010 --> 04:49.860
+bastion is in the public subnet.
+
+04:49.860 --> 04:53.550
+The traffic will route because of the route table entries
+
+04:53.550 --> 04:54.930
+and because of the security group rule,
+
+04:54.930 --> 04:57.270
+we have given 22 allowed from bastion.
+
+04:57.270 --> 05:00.600
+So we can access it on port 22 also.
+
+05:00.600 --> 05:01.923
+Let's hit Enter.
+
+05:03.150 --> 05:07.590
+Yes, the response is coming back and we are, no, sorry.
+
+05:07.590 --> 05:12.393
+We have to give this file permission 400, my mistake.
+
+05:13.380 --> 05:15.990
+Unprotected prior key file because we copied it.
+
+05:15.990 --> 05:17.970
+So the file permission changed.
+
+05:17.970 --> 05:20.700
+We need to make sure it's 400 and then, yes,
+
+05:20.700 --> 05:23.520
+now we are in Amazon Linux 2 AMI.
+
+05:23.520 --> 05:25.920
+Okay, let's quickly set up the website.
+
+05:25.920 --> 05:28.170
+I'm going to install a few packages.
+
+05:28.170 --> 05:33.150
+Yum install httpd wget to download the website
+
+05:33.150 --> 05:37.740
+from tooplate and unzip to unzip the template,
+
+05:37.740 --> 05:39.513
+install these three packages.
+
+05:41.520 --> 05:46.493
+Let's go to tooplate.com, find whatever template you like.
+
+05:48.720 --> 05:50.403
+I'm going to go with this one.
+
+05:51.840 --> 05:56.840
+Let's hit F12 and let's click on download.
+
+05:59.910 --> 06:02.250
+Okay, not actually going to download,
+
+06:02.250 --> 06:03.753
+we just need to get the URL.
+
+06:05.340 --> 06:08.223
+Okay, that header, let's copy this URL.
+
+06:11.160 --> 06:16.160
+Okay, let's do wget, shift, insert to paste that URL, enter.
+
+06:20.790 --> 06:22.410
+Okay, does the file exists?
+
+06:22.410 --> 06:27.410
+Let's do unzip, ls, and let's copy everything to
+
+06:30.780 --> 06:35.563
+you know where, /var/www/html.
+
+06:38.730 --> 06:41.613
+Systemctl restart httpd.
+
+06:42.690 --> 06:45.183
+Let's make sure httpd is also enabled.
+
+06:49.860 --> 06:51.120
+Okay, so the website is set up.
+
+06:51.120 --> 06:54.360
+There is no way we can exit from internet.
+
+06:54.360 --> 06:55.500
+There is no public IP.
+
+06:55.500 --> 06:57.360
+Even if you assign a public IP,
+
+06:57.360 --> 07:00.543
+it won't be passing through the NAT gateway.
+
+07:01.410 --> 07:03.210
+So the only way to access the website
+
+07:03.210 --> 07:05.550
+in this is through the load balancer
+
+07:05.550 --> 07:07.890
+which we are going to place it in the public subnet.
+
+07:07.890 --> 07:11.200
+So let's go to EC2 console
+
+07:12.120 --> 07:14.340
+and let's create a load balancer.
+
+07:14.340 --> 07:17.010
+First, of course, we need to create the target group.
+
+07:17.010 --> 07:20.610
+So create target group for instances.
+
+07:20.610 --> 07:21.600
+Port 80 is fine.
+
+07:21.600 --> 07:25.560
+VPC, make sure you select vprofile-VPC.
+
+07:25.560 --> 07:29.943
+Everything is else is default. Go next.
+
+07:31.020 --> 07:34.770
+Yeah, of course the target group name web zero,
+
+07:34.770 --> 07:38.640
+or just I'll say web-tg, vprofile VPC.
+
+07:41.310 --> 07:43.803
+That's right. Let's go next.
+
+07:45.240 --> 07:46.710
+Yeah, you should see instance
+
+07:46.710 --> 07:49.350
+from the VPC, add web01 instance,
+
+07:49.350 --> 07:53.103
+include a spending below, create target group.
+
+07:55.260 --> 07:57.930
+Okay, now security group for the load balancer.
+
+07:57.930 --> 07:59.523
+So go to the Security Groups.
+
+08:00.420 --> 08:05.420
+Create security group, web-elb-sg.
+
+08:10.470 --> 08:11.303
+And once again,
+
+08:11.303 --> 08:15.630
+make sure you select your VPC, vprofile VPC.
+
+08:15.630 --> 08:18.030
+Everything we are creating in vprofile VPC,
+
+08:18.030 --> 08:20.820
+so whenever you see the VPC section,
+
+08:20.820 --> 08:23.730
+make sure you select our VPC.
+
+08:23.730 --> 08:27.420
+Okay? Now here of course, we can give port 80 from anywhere.
+
+08:27.420 --> 08:30.630
+This is going to be a publicly accessible website.
+
+08:30.630 --> 08:34.953
+So port 80 from IPv4 and port 80 from IPv6
+
+08:36.330 --> 08:38.163
+and create security group.
+
+08:39.780 --> 08:41.730
+Okay, final piece, load balancer.
+
+08:41.730 --> 08:43.680
+Go back to load balancers
+
+08:43.680 --> 08:46.320
+and click on Create load balancer,
+
+08:46.320 --> 08:48.033
+Application Load Balancer.
+
+08:49.080 --> 08:50.313
+Okay, give it a name.
+
+08:52.980 --> 08:56.710
+Network mapping, make sure you select vprofile VPC again
+
+08:57.690 --> 08:59.580
+and it should show you the zones.
+
+08:59.580 --> 09:01.440
+So select the zone
+
+09:01.440 --> 09:05.280
+and make sure this is going into the public subnet
+
+09:05.280 --> 09:09.750
+of our VPC, public subnet 1, another zone,
+
+09:09.750 --> 09:12.813
+you should see here, public subnet 2.
+
+09:14.190 --> 09:15.570
+This is extremely important.
+
+09:15.570 --> 09:17.400
+Otherwise the load balancer also goes
+
+09:17.400 --> 09:20.970
+into the private subnet, load balancer will be inaccessible
+
+09:20.970 --> 09:22.500
+from the internet.
+
+09:22.500 --> 09:23.823
+Okay, Security group.
+
+09:25.290 --> 09:28.833
+And you should see here web-elb security group,
+
+09:31.454 --> 09:36.454
+Port 80, Listener route to the target group that we created.
+
+09:36.570 --> 09:39.947
+And that is all create load balancer. Right?
+
+09:42.000 --> 09:45.333
+Now there is one more thing we need to do.
+
+09:46.650 --> 09:49.170
+Yes, security group if you got it right.
+
+09:49.170 --> 09:54.170
+So our instance web01 instance, has a security group.
+
+09:56.280 --> 09:59.370
+Let's go to that security group of that instance.
+
+09:59.370 --> 10:02.553
+And its rule says, let's go to edit inbound rule,
+
+10:03.540 --> 10:05.610
+22 allowed from the bastion host,
+
+10:05.610 --> 10:10.140
+but no rule is given to allow access on port 80
+
+10:10.140 --> 10:13.083
+from the load balancer security group.
+
+10:16.740 --> 10:20.340
+And make sure you give that rule port 80 allowed
+
+10:20.340 --> 10:22.200
+from the load balancer security group.
+
+10:22.200 --> 10:25.920
+Save rule and wait for five,
+
+10:25.920 --> 10:29.190
+10 minutes until the load balancer is in available state,
+
+10:29.190 --> 10:31.950
+the target group instance is in the healthy state.
+
+10:31.950 --> 10:33.930
+It's going to take some time.
+
+10:33.930 --> 10:36.830
+So I'm going to pause my video and resume in five minutes.
+
+10:37.920 --> 10:40.590
+Okay, the load balancer is active
+
+10:40.590 --> 10:42.520
+and I check the target group
+
+10:45.480 --> 10:47.580
+and I see the instance as healthy.
+
+10:47.580 --> 10:51.000
+If it showing unhealthy for you, wait for some time.
+
+10:51.000 --> 10:52.830
+Still showing unhealthy,
+
+10:52.830 --> 10:54.720
+check the security group rule of the instance.
+
+10:54.720 --> 10:56.100
+It should allow port 80
+
+10:56.100 --> 10:58.173
+from the load balancer security group.
+
+10:59.310 --> 11:01.110
+Okay, now let's go to the load balancers
+
+11:01.110 --> 11:05.100
+get the load balancer URL and access our website.
+
+11:05.100 --> 11:08.490
+Okay, so let's copy the DNS name of the load balancer.
+
+11:08.490 --> 11:11.283
+Open the tab, the URL.
+
+11:14.250 --> 11:15.993
+Okay, and it looks good.
+
+11:17.130 --> 11:20.610
+So we have configured the entire VPC
+
+11:20.610 --> 11:22.743
+and we are using it also.
+
+11:24.090 --> 11:26.823
+Public, private subnet, everything is working fine.
+
+11:27.780 --> 11:30.870
+Now, it's safe to delete the NAT gateway
+
+11:30.870 --> 11:32.700
+and release the elastic IP for now.
+
+11:32.700 --> 11:36.030
+In the next lecture we are going to do VPC peering
+
+11:36.030 --> 11:37.590
+and we are just going to see how to do peering.
+
+11:37.590 --> 11:40.950
+We don't need to perform the whole access
+
+11:40.950 --> 11:43.080
+and use case for that.
+
+11:43.080 --> 11:45.630
+Okay? So let's start deleting things one by one.
+
+11:45.630 --> 11:48.630
+Let's delete the load balancer first.
+
+11:48.630 --> 11:52.560
+Action, Delete load balancers. Confirm.
+
+11:52.560 --> 11:56.010
+So first, we need to delete the resources from it, right?
+
+11:56.010 --> 11:57.330
+Okay, load balancer is gone.
+
+11:57.330 --> 12:00.603
+Instances, let's wipe out all the instances.
+
+12:03.930 --> 12:05.973
+Instance state, terminate.
+
+12:08.670 --> 12:10.890
+Okay, wait until all the instance are terminated
+
+12:10.890 --> 12:13.773
+and then you have to come to the NAT gateways.
+
+12:15.420 --> 12:18.240
+The reason I am cleaning up everything
+
+12:18.240 --> 12:23.240
+or showing the cleanup is so you don't waste extra money
+
+12:23.790 --> 12:26.580
+through NAT gateway, elastic IP and stuff.
+
+12:26.580 --> 12:29.130
+So select your NAT gateway, action,
+
+12:29.130 --> 12:34.130
+delete NAT gateway, type delete to confirm and delete.
+
+12:35.970 --> 12:37.830
+Okay? This delete is going to take some time.
+
+12:37.830 --> 12:40.140
+Once it's completely deleted, then you can go
+
+12:40.140 --> 12:43.020
+to elastic IP and release the elastic IP.
+
+12:43.020 --> 12:47.850
+But wait for some time until it's all deleted. Okay?
+
+12:47.850 --> 12:49.290
+The State shows Deleted,
+
+12:49.290 --> 12:51.930
+but let's see if we can release the elastic IP.
+
+12:51.930 --> 12:53.970
+It takes time.
+
+12:53.970 --> 12:55.440
+Even if NAT gate was deleted,
+
+12:55.440 --> 12:57.540
+it takes time to release the elastic IP.
+
+12:57.540 --> 13:00.963
+So let's try release elastic IP, Release.
+
+13:02.790 --> 13:03.630
+Fine. That's good.
+
+13:03.630 --> 13:06.630
+Okay, elastic IP is also gone. Now, we are safe.
+
+13:06.630 --> 13:10.200
+Now, don't worry, if you want to, you redo this setup,
+
+13:10.200 --> 13:13.500
+you just need to create the NAT gateway
+
+13:13.500 --> 13:17.760
+and go to the route table, private route table
+
+13:17.760 --> 13:21.750
+go to the route, edit routes or route.
+
+13:21.750 --> 13:24.780
+You see the NAT Gateway shows black hole
+
+13:24.780 --> 13:27.060
+because this NAT gateway does not exist.
+
+13:27.060 --> 13:28.140
+So you deleted it.
+
+13:28.140 --> 13:30.450
+And whenever you want, you can create the NAT gateway
+
+13:30.450 --> 13:33.270
+and you can just give the NAT gateway
+
+13:33.270 --> 13:35.070
+that you have created, right?
+
+13:35.070 --> 13:37.140
+It's not going to show any NAT gateway.
+
+13:37.140 --> 13:40.410
+It does show, but really it does not exist, right?
+
+13:40.410 --> 13:42.960
+Like that, you can select the NAT gateway
+
+13:42.960 --> 13:44.313
+if you have recreated it.
+
+13:45.870 --> 13:47.760
+Other things you can keep, don't worry,
+
+13:47.760 --> 13:49.830
+no charges for other things, internet gateway,
+
+13:49.830 --> 13:52.080
+all those things are free of cost.
+
+13:52.080 --> 13:52.913
+In the next lecture,
+
+13:52.913 --> 13:56.280
+we'll see what is VPC peering and why it is required.
+
+13:56.280 --> 14:00.420
+So do not delete the VPC subnets, internet gateway,
+
+14:00.420 --> 14:01.253
+and route table.
+
+14:01.253 --> 14:04.770
+We will need this in the next lecture.
+
+14:04.770 --> 14:07.410
+Just delete the NAT gateway elastic IP
+
+14:07.410 --> 14:08.610
+and keep the rest of it.
+
+14:09.510 --> 14:10.910
+See you in the next lecture.

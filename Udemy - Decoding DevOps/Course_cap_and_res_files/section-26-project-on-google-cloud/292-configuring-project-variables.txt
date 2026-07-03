@@ -1,0 +1,388 @@
+WEBVTT
+
+00:00.320 --> 00:01.640
+All right, show time.
+
+00:02.280 --> 00:05.640
+In this lecture we are going to create a VPC with Google Cloud Shell.
+
+00:05.960 --> 00:07.400
+So these are the things we are going to create.
+
+00:07.400 --> 00:08.840
+First we create a VPC.
+
+00:08.920 --> 00:13.040
+Then we create four subnets two public two private.
+
+00:13.360 --> 00:15.840
+We create a cloud router and cloud Nat.
+
+00:15.880 --> 00:18.000
+Connect that to our private subnet.
+
+00:18.440 --> 00:22.040
+And two firewall rules one for the SSH to the bastion host.
+
+00:22.080 --> 00:27.640
+Other to allow SSH from bastion host to the instance in the private subnet.
+
+00:28.000 --> 00:29.560
+Let's open gcloud shell.
+
+00:29.880 --> 00:34.400
+So login to your Google Cloud account and click on Activate Cloud Shell.
+
+00:35.080 --> 00:37.600
+It's better we open it in a separate window.
+
+00:37.600 --> 00:39.040
+So let's click on this button.
+
+00:39.040 --> 00:46.600
+Open a new window, run the command GCloud projects list and select the project that we are going to
+
+00:46.640 --> 00:47.120
+use.
+
+00:48.080 --> 00:56.160
+Execute the command gcloud config set project and the project name that you want to set.
+
+00:58.800 --> 01:00.320
+Shift insert to paste.
+
+01:02.780 --> 01:03.060
+Okay.
+
+01:03.100 --> 01:04.340
+So the project is set.
+
+01:04.380 --> 01:06.900
+Now we are going to set variables.
+
+01:07.740 --> 01:12.660
+So open VPC dot file and copy all the variables.
+
+01:13.100 --> 01:16.460
+Now usually variables we set in scripts.
+
+01:17.260 --> 01:21.860
+But the reason we are setting the variable is so you and me can execute same command.
+
+01:21.860 --> 01:25.660
+For example we have set here project ID and we set the variable.
+
+01:26.140 --> 01:29.620
+And you might have a different project name I might have a different project name.
+
+01:29.980 --> 01:35.740
+When we run this command gcloud config set project and the project name instead of this.
+
+01:36.180 --> 01:38.780
+Then your command and my command will be different right.
+
+01:39.140 --> 01:43.540
+But we if but if we use the variables, you and me will be executing same command.
+
+01:43.540 --> 01:48.780
+This is just so in the project setup we are aligned and you don't make such mistakes.
+
+01:49.460 --> 01:56.940
+So copy all these variables from project ID till the end where you see the tag bastion tag app.
+
+01:57.460 --> 02:00.940
+Copy this and paste it into a text editor.
+
+02:00.980 --> 02:04.000
+Notepad is also fine, we just need to change these values.
+
+02:04.680 --> 02:07.360
+So project ID give your project ID here.
+
+02:07.640 --> 02:08.840
+So I'm going to remove this.
+
+02:09.840 --> 02:12.280
+Just keep the double quotes and put your project ID.
+
+02:12.800 --> 02:19.160
+So that's my project ID project hyphen V profile region I'm using us hyphen central one.
+
+02:19.200 --> 02:20.920
+It's better you stick to same one.
+
+02:21.200 --> 02:27.440
+Or even if you want to use different one you can use in US central one, there is a zone called a.
+
+02:27.600 --> 02:32.920
+So the zone name will be US central one a hyphen a app name.
+
+02:32.960 --> 02:34.320
+Keep it as V profile.
+
+02:34.360 --> 02:35.160
+Same domain name.
+
+02:35.160 --> 02:40.200
+You can give your domain name over here if you have purchased or you can just remove this variable altogether.
+
+02:40.680 --> 02:44.440
+So my domain is this infotech.xyz subdomain.
+
+02:44.440 --> 02:49.560
+You can keep the same my IP keep it the same one for now.
+
+02:49.560 --> 02:55.520
+Once we are able to do ssh, I will show you how you can change and give specific public IP your own
+
+02:55.520 --> 02:56.280
+public IP.
+
+02:57.160 --> 02:58.440
+Okay now SSH key.
+
+02:58.480 --> 03:02.600
+So we need to generate the keys public key and private key.
+
+03:02.640 --> 03:03.040
+Public key.
+
+03:03.080 --> 03:04.700
+We're going to take and put it over here.
+
+03:05.220 --> 03:06.780
+So open terminal git bash.
+
+03:06.780 --> 03:09.620
+Based on what computer operating system you're using.
+
+03:09.660 --> 03:10.660
+I'm using windows here.
+
+03:10.660 --> 03:11.940
+So I have open git bash.
+
+03:11.980 --> 03:14.220
+If you're using Mac OS open your terminal.
+
+03:14.620 --> 03:17.380
+And I'm going to go to downloads folder.
+
+03:17.620 --> 03:21.100
+And here I'm going to create a folder right.
+
+03:22.260 --> 03:25.340
+Yeah named as GCP keys.
+
+03:26.140 --> 03:27.980
+I'm going to get into that folder.
+
+03:29.460 --> 03:31.820
+And here I'm going to create the key.
+
+03:31.820 --> 03:35.860
+So I'm going to run the command SSH key gen ssh key gen.
+
+03:36.340 --> 03:39.580
+Run this command and just give the name of the key.
+
+03:39.940 --> 03:43.100
+So I'm going to simply call it as GCP key.
+
+03:43.300 --> 03:45.060
+Or you can say GCP key.
+
+03:45.860 --> 03:46.180
+Okay.
+
+03:46.220 --> 03:48.180
+That's the name I'm giving the GCP key.
+
+03:48.460 --> 03:50.540
+And just hit enter enter enter.
+
+03:51.100 --> 03:55.180
+Now if you do less you should see here a private key and a public key.
+
+03:55.580 --> 04:00.460
+So this private key we are going to use to login to our bastion host and our backend instance.
+
+04:01.260 --> 04:06.110
+This public key we need to inject when we launch the instance I'll show you how we can inject that.
+
+04:06.110 --> 04:10.110
+First, just copy the content of the public key, the public key content.
+
+04:10.110 --> 04:12.710
+Just do a cat and copy the content.
+
+04:12.710 --> 04:16.390
+Make sure you don't copy any extra space, just exactly the key content.
+
+04:17.230 --> 04:22.990
+And over here in between the double quotes, just paste the key okay.
+
+04:23.030 --> 04:24.990
+That's all you need to do these things.
+
+04:25.270 --> 04:28.630
+So set the project ID you can keep region and zone same.
+
+04:28.790 --> 04:34.030
+Set your domain, set your domain name and set the public key content.
+
+04:34.310 --> 04:35.790
+Everything else you can keep.
+
+04:35.790 --> 04:36.310
+Same.
+
+04:36.470 --> 04:38.110
+Now copy everything.
+
+04:38.830 --> 04:41.270
+Just make sure no other extra things are copied.
+
+04:41.310 --> 04:42.790
+Just copy all the variables.
+
+04:43.070 --> 04:51.950
+Go to your gcloud shell authorize and over here do vim tilde slash dot bash rc.
+
+04:52.550 --> 04:53.710
+Open this file.
+
+04:54.310 --> 04:57.510
+Go to the end of the file shift g you can use.
+
+04:59.230 --> 04:59.910
+At the last line.
+
+04:59.910 --> 05:06.070
+You can just hit O to get into insert mode and get into the next line and use shift Insert to paste
+
+05:06.070 --> 05:07.250
+all the variables.
+
+05:07.770 --> 05:10.250
+Just verify everything is correct or not.
+
+05:10.730 --> 05:12.370
+Okay, here you have this thing.
+
+05:12.410 --> 05:15.530
+Extra delete delete delete.
+
+05:15.530 --> 05:15.970
+Okay.
+
+05:15.970 --> 05:16.650
+It's a comment.
+
+05:16.650 --> 05:17.170
+It's in.
+
+05:17.210 --> 05:18.170
+It goes in the next line.
+
+05:18.170 --> 05:18.970
+So this is fine.
+
+05:19.290 --> 05:21.650
+We are just on the safer side I'm going to remove this one.
+
+05:25.370 --> 05:25.730
+Okay.
+
+05:25.770 --> 05:26.730
+Good okay.
+
+05:26.730 --> 05:28.770
+So all the variables are saved over here.
+
+05:28.810 --> 05:30.130
+Save and quit this file.
+
+05:30.370 --> 05:37.690
+And now do source tilde slash dot bash rc okay.
+
+05:37.690 --> 05:44.770
+Now run the command gcloud config set project and your project name there to set your project authorize
+
+05:45.610 --> 05:47.290
+okay let's test few variables.
+
+05:47.330 --> 05:51.810
+Echo dollar region okay I'm getting the region name.
+
+05:51.810 --> 05:52.490
+Like like that.
+
+05:52.490 --> 05:55.770
+You can trust or develop the trust that your variables are set.
+
+05:55.810 --> 05:59.810
+But before running the command, make sure you always do an echo to the variables that you're going
+
+05:59.810 --> 06:03.330
+to use in the command, just to be sure that you're doing the right thing.
+
+06:03.730 --> 06:11.550
+Okay, so in GCP when we consume a service we need to enable the APIs for those services or that particular
+
+06:11.550 --> 06:11.870
+service.
+
+06:11.870 --> 06:18.150
+For example, if you're going to use Compute Engine, including the VPC, you need to say gcloud services
+
+06:18.150 --> 06:20.550
+enable and the name of the API.
+
+06:20.590 --> 06:23.710
+So once it's enabled then you can start using that service.
+
+06:24.070 --> 06:26.990
+So here are the APIs that we are going to use in this project.
+
+06:26.990 --> 06:35.310
+Compute DNS, SQL admin psql hyphen component memcache certificate manager service networking.
+
+06:35.830 --> 06:42.150
+So you can run one command at a time like gcloud services enable compute Google APIs and then the same
+
+06:42.150 --> 06:43.230
+command for DNS.
+
+06:43.590 --> 06:45.790
+Or you can enable all of them at once.
+
+06:45.790 --> 06:47.470
+So let's copy this command.
+
+06:47.630 --> 06:52.830
+This one we need to copy because this is just one time use enable the API in your account and then you
+
+06:52.830 --> 06:54.350
+can start using that service.
+
+06:54.910 --> 06:57.790
+So shift insert to paste run this.
+
+06:58.470 --> 06:59.750
+This is going to take some time.
+
+07:00.750 --> 07:01.030
+Okay.
+
+07:01.070 --> 07:02.750
+So all those APIs got enabled.
+
+07:02.750 --> 07:05.430
+Now it took some time but it got completed successfully.
+
+07:06.030 --> 07:06.270
+Okay.
+
+07:06.270 --> 07:09.670
+Now let me clear the screen and create the VPC.

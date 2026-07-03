@@ -1,0 +1,313 @@
+WEBVTT
+
+0
+00:00.560 --> 00:04.370
+Welcome in this video, we will be talking about variables.
+
+1
+00:05.360 --> 00:08.930
+Variables are basically temporary storage in the memory.
+
+2
+00:09.890 --> 00:13.520
+As we know, processes runs in the memory in the ram.
+
+3
+00:15.820 --> 00:22.060
+And if the process is dead, all the data, along with that process, all that temporary data will be
+
+4
+00:22.060 --> 00:22.870
+also lost.
+
+5
+00:24.420 --> 00:30.870
+So as hard disk is a permanent storage of data, variables are temporary storage in the process, which
+
+6
+00:30.870 --> 00:31.920
+lives in the memory.
+
+7
+00:32.930 --> 00:38.540
+So let's see how we can store variables and can retrieve them from the bash shell, or should I say
+
+8
+00:38.540 --> 00:39.710
+bash process.
+
+9
+00:40.520 --> 00:43.100
+So I will take a variable called SKILL.
+
+10
+00:44.230 --> 00:52.210
+Equal to, so skill is the name of the variable, and in that I'm storing a value called as, DevOps
+
+11
+00:52.390 --> 00:52.990
+a text.
+
+12
+00:54.170 --> 00:54.860
+And that's it.
+
+13
+00:55.220 --> 01:01.340
+That's how we store the variable. To retrieve the variable, we have to use the dollar sign dollar and
+
+14
+01:01.340 --> 01:02.210
+the variable name.
+
+15
+01:03.440 --> 01:07.760
+Now, if we are trying to print a variable, we know the command to print, which is echo.
+
+16
+01:08.420 --> 01:12.350
+So I can say echo dollar SKILL which will access the value of the variable.
+
+17
+01:12.530 --> 01:13.640
+And you see there.
+
+18
+01:14.930 --> 01:18.830
+But here the dollar is important, if I don't give the dollar, then.
+
+19
+01:19.430 --> 01:20.900
+Skill is just another text.
+
+20
+01:21.680 --> 01:23.480
+Let's take another variable called as.
+
+21
+01:26.820 --> 01:35.010
+Package, if I can type, and I will give in double quotes as httpd wegt unzip.
+
+22
+01:35.850 --> 01:40.350
+So this is the text basically I'm storing in the variable PACKAGE, and I'll show you how I'm going
+
+23
+01:40.350 --> 01:40.860
+to use it.
+
+24
+01:40.860 --> 01:45.150
+I'm going to say yum install dollar PACKAGE.
+
+25
+01:46.800 --> 01:53.790
+-y, now that package variable will be interpolated with this value that we store,
+
+26
+01:53.790 --> 01:54.690
+httpd wget and unzip
+
+27
+01:57.710 --> 02:02.300
+And we see there. Since these packages are already installed, so we get the message already installed.
+
+28
+02:02.930 --> 02:04.850
+And yes, that's basically is a variable.
+
+29
+02:05.750 --> 02:11.120
+Now let's implement this knowledge in our Web setup script.
+
+30
+02:11.240 --> 02:12.620
+So I'll go to scripts directory.
+
+31
+02:12.650 --> 02:19.040
+Let me clear the screen and let's rename these scripts in a numeric number so we can easily identify
+
+32
+02:19.040 --> 02:19.200
+them.
+
+33
+02:19.200 --> 02:23.570
+So first script I'm going to say
+
+34
+02:25.820 --> 02:27.530
+1_firstscript.sh
+
+35
+02:30.210 --> 02:35.940
+Now I'm going to implement our variable's concept in the script, and I would like to copy the script
+
+36
+02:35.940 --> 02:40.290
+now with a different name, and I'm not going to make changes in this file.
+
+37
+02:40.920 --> 02:42.030
+But in the next file.
+
+38
+02:47.370 --> 02:50.760
+So let's open that 3_vars_website.sh.
+
+39
+02:52.280 --> 02:55.700
+OK, I'm going to first declare the variable on the top of the script.
+
+40
+02:59.590 --> 03:04.490
+All right, I have declared these variable,  package, svc
+
+41
+03:05.020 --> 03:11.230
+Service name, httpd, URL from where it will download the artifact, artifact name, which is the directory
+
+42
+03:11.440 --> 03:17.980
+name that will be when we extract it and temporary directory, a the place where we're going to hold a temporary
+
+43
+03:17.980 --> 03:18.490
+files.
+
+44
+03:19.240 --> 03:27.280
+Now, if you're wondering how did I select these things as variables, so use this logic. Things that
+
+45
+03:27.280 --> 03:37.270
+changes or varies based on different environment or project or use cases like, for example, if I happen
+
+46
+03:37.270 --> 03:43.270
+to change the website from this URL to something else, then I can just update it or here.
+
+47
+03:43.270 --> 03:45.310
+I don't need to make change in the script.
+
+48
+03:46.210 --> 03:49.410
+Also, some things that gets repeated multiple times in the script.
+
+49
+03:49.780 --> 03:54.490
+For example, the service name is repeated, is repeated multiple times, like when we are starting
+
+50
+03:54.490 --> 03:56.800
+it, when we are enabling it, when we restarted.
+
+51
+03:57.160 --> 04:02.110
+So if we declare that as variable, we don't need to change it at multiple places.
+
+52
+04:02.110 --> 04:03.910
+We can just change it at the variable level.
+
+53
+04:04.450 --> 04:05.680
+So I have declared the variable.
+
+54
+04:05.680 --> 04:06.910
+Now I'm going to use it.
+
+55
+04:07.390 --> 04:14.470
+So instead of this package names, I'm going to just give their dollar package.
+
+56
+04:16.710 --> 04:20.690
+SVC  for the service, temporary files.
+
+57
+04:25.440 --> 04:34.200
+URL & artifact name, OK, if you see, I have used this variable smartly with .zip extension
+
+58
+04:34.200 --> 04:40.080
+over here and here with just the name, so I can use the same variable at two different places for two
+
+59
+04:40.080 --> 04:41.190
+different use cases.
+
+60
+04:41.870 --> 04:43.800
+OK, then again, the service there.
+
+61
+04:44.610 --> 04:46.410
+And finally, the clean up directory.
+
+62
+04:48.370 --> 04:53.250
+All right, that is done, verify it once again, after declaring and using the variables, If the names
+
+63
+04:53.250 --> 04:54.960
+are matching once you are good.
+
+64
+04:55.440 --> 04:56.640
+Save & quit the file
+
+65
+04:58.700 --> 05:00.980
+You can check it once again by doing cat.
+
+66
+05:04.210 --> 05:06.850
+Now, before I execute this, I'm going to dismantle everything.
+
+67
+05:07.090 --> 05:11.410
+And for that, I'm going to write a script to remove it, actually remove the service and all the data
+
+68
+05:11.410 --> 05:13.330
+first, and then we'll execute the script.
+
+69
+05:20.900 --> 05:25.910
+OK, so that's a simple script, I'm going to stop a httpd service, httpd.
+
+70
+05:28.780 --> 05:31.390
+Remove the data and remove the packages.
+
+71
+05:33.230 --> 05:34.740
+That's really not necessary.
+
+72
+05:34.760 --> 05:41.510
+But I want you to show the execution properly, so I would like to remove everything first.
+
+73
+05:44.470 --> 05:45.220
+OK, there.
+
+74
+05:46.390 --> 05:51.580
+Now let's run our three 3_vars_websetup.sh, which uses variable.
+
+75
+05:54.790 --> 05:56.470
+Great, everything seems to be fine.
+
+76
+05:56.500 --> 05:59.140
+Let's check through the browser.
+
+77
+06:02.070 --> 06:03.300
+And that is working good.

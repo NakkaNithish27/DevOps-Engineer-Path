@@ -1,0 +1,442 @@
+WEBVTT
+
+1
+00:00:00.750 --> 00:00:02.520
+<v Instructor>Okay, so our V profile application</v>
+
+2
+00:00:02.520 --> 00:00:06.120
+also needs cache, Memcached,
+
+3
+00:00:06.120 --> 00:00:07.980
+which will cache DB query
+
+4
+00:00:07.980 --> 00:00:12.980
+and we are going to use Amazon ElastiCache service for that.
+
+5
+00:00:12.990 --> 00:00:15.810
+So let's go ahead and create Amazon ElastiCache.
+
+6
+00:00:15.810 --> 00:00:18.780
+So search for ElastiCache in AWS console.
+
+7
+00:00:18.780 --> 00:00:20.253
+Let's open it in a new tab.
+
+8
+00:00:21.270 --> 00:00:23.610
+So we are going to create Memcached.
+
+9
+00:00:23.610 --> 00:00:26.160
+There are two more engine here,
+
+10
+00:00:26.160 --> 00:00:28.200
+I mean caches, Valkey and Redis.
+
+11
+00:00:28.200 --> 00:00:30.480
+Also, we are going to create Memcached,
+
+12
+00:00:30.480 --> 00:00:32.640
+but before that, we are going to create parameter group
+
+13
+00:00:32.640 --> 00:00:34.560
+and subnet group same like RDS.
+
+14
+00:00:34.560 --> 00:00:36.510
+So click on Parameter group,
+
+15
+00:00:36.510 --> 00:00:38.340
+click on Create parameter group.
+
+16
+00:00:38.340 --> 00:00:40.890
+Let's give parameter group a name,
+
+17
+00:00:40.890 --> 00:00:43.350
+vprofile-rearch-cache-paragrp.
+
+18
+00:00:43.350 --> 00:00:45.100
+Same I'm giving in the description.
+
+19
+00:00:45.960 --> 00:00:48.030
+So give something like that a proper name
+
+20
+00:00:48.030 --> 00:00:50.070
+so you can identify it easily.
+
+21
+00:00:50.070 --> 00:00:54.526
+Family, you are going to select memcached1.6.
+
+22
+00:00:54.526 --> 00:00:55.359
+1.6.
+
+23
+00:00:56.910 --> 00:00:59.430
+Once you're done, click on Create.
+
+24
+00:00:59.430 --> 00:01:03.030
+You should see here your parameter group
+
+25
+00:01:03.030 --> 00:01:04.890
+and you should see many options over here,
+
+26
+00:01:04.890 --> 00:01:08.490
+which you can change as per the requirement comes.
+
+27
+00:01:08.490 --> 00:01:11.040
+Now let's also create a subnet group.
+
+28
+00:01:11.040 --> 00:01:15.630
+So go to Subnet groups, click on Create subnet group,
+
+29
+00:01:15.630 --> 00:01:17.253
+give subnet group a name.
+
+30
+00:01:18.090 --> 00:01:21.150
+So I'm giving vprofile-rearch-cache-subgrp.
+
+31
+00:01:21.150 --> 00:01:23.880
+Same I'm giving in the description.
+
+32
+00:01:23.880 --> 00:01:26.490
+As you know, we just have one VPC, the default VPC.
+
+33
+00:01:26.490 --> 00:01:28.650
+So make sure you select that one.
+
+34
+00:01:28.650 --> 00:01:31.890
+And you see here the subnets are already selected,
+
+35
+00:01:31.890 --> 00:01:34.320
+selected subnets, but if you want to unselect
+
+36
+00:01:34.320 --> 00:01:35.430
+or select something else,
+
+37
+00:01:35.430 --> 00:01:37.800
+you can click on Manage and do that.
+
+38
+00:01:37.800 --> 00:01:40.029
+Let's keep default because we have default VPC
+
+39
+00:01:40.029 --> 00:01:41.310
+and default subnet in that.
+
+40
+00:01:41.310 --> 00:01:43.050
+Let's keep it as it is.
+
+41
+00:01:43.050 --> 00:01:46.260
+Now let's go back to Memcached caches.
+
+42
+00:01:46.260 --> 00:01:48.990
+You can click here Memcached caches
+
+43
+00:01:48.990 --> 00:01:52.080
+and say Create Memcached cache.
+
+44
+00:01:52.080 --> 00:01:54.540
+Make sure Memcached is selected over here.
+
+45
+00:01:54.540 --> 00:01:56.370
+Deployment option, you have Serverless
+
+46
+00:01:56.370 --> 00:01:57.930
+where you just give the name.
+
+47
+00:01:57.930 --> 00:02:00.480
+And there are Default settings and it will just create,
+
+48
+00:02:00.480 --> 00:02:02.880
+that's it, as simple as it is.
+
+49
+00:02:02.880 --> 00:02:04.320
+But I want to show you more options,
+
+50
+00:02:04.320 --> 00:02:07.320
+so I'm going to click on Node-based cluster.
+
+51
+00:02:07.320 --> 00:02:10.380
+There's an option of Cluster cache, so select that.
+
+52
+00:02:10.380 --> 00:02:13.440
+Easy create will just select the default options,
+
+53
+00:02:13.440 --> 00:02:14.790
+the recommended best practices,
+
+54
+00:02:14.790 --> 00:02:18.360
+but click on Cluster cache so we can select all the options.
+
+55
+00:02:18.360 --> 00:02:20.370
+Location, AWS Cloud,
+
+56
+00:02:20.370 --> 00:02:23.020
+but you can manage an on-premise ElastiCache
+
+57
+00:02:24.048 --> 00:02:26.220
+or Memcached from here.
+
+58
+00:02:26.220 --> 00:02:27.960
+Keep it AWS Cloud.
+
+59
+00:02:27.960 --> 00:02:32.790
+Cluster name, so I'm giving vprofile-rearch-cache.
+
+60
+00:02:32.790 --> 00:02:37.290
+Engine version, you can keep here 1.6.22.
+
+61
+00:02:37.290 --> 00:02:41.370
+Anything 1.6 is fine, just keep it 1.6.22.
+
+62
+00:02:41.370 --> 00:02:43.890
+Port number, check here, 11211.
+
+63
+00:02:43.890 --> 00:02:46.110
+If you remember the application properties file
+
+64
+00:02:46.110 --> 00:02:48.090
+of our V profile application,
+
+65
+00:02:48.090 --> 00:02:51.570
+there we have the default port of Memcached,
+
+66
+00:02:51.570 --> 00:02:53.310
+which is 11211.
+
+67
+00:02:53.310 --> 00:02:54.930
+Let's take a look over there.
+
+68
+00:02:54.930 --> 00:02:57.630
+So I'm in the GitHub repository hkhcoder.
+
+69
+00:02:57.630 --> 00:03:01.590
+I'm in the branch awsrefactor, src,
+
+70
+00:03:01.590 --> 00:03:06.480
+main, resources, application.properties file.
+
+71
+00:03:06.480 --> 00:03:08.490
+Now this file or application will use to connect
+
+72
+00:03:08.490 --> 00:03:12.420
+to the backend services, MySQL here, and then Memcached.
+
+73
+00:03:12.420 --> 00:03:16.560
+Check here, the database port 3306, we kept default in RDS.
+
+74
+00:03:16.560 --> 00:03:19.140
+In Memcached, 11211.
+
+75
+00:03:19.140 --> 00:03:22.710
+For RabbitMQ, it's 5671 in this branch,
+
+76
+00:03:22.710 --> 00:03:25.590
+in refactor branch, 5671.
+
+77
+00:03:25.590 --> 00:03:28.530
+So for Memcached, we are keeping the port 11211,
+
+78
+00:03:28.530 --> 00:03:31.170
+which is same in the configuration file.
+
+79
+00:03:31.170 --> 00:03:34.080
+Parameter group, select your parameter group.
+
+80
+00:03:34.080 --> 00:03:36.780
+Node type, find the smallest one.
+
+81
+00:03:36.780 --> 00:03:39.930
+So just type t3 and you will find here t3.micro,
+
+82
+00:03:39.930 --> 00:03:42.780
+half a GB of RAM, which is fine.
+
+83
+00:03:42.780 --> 00:03:45.870
+Number of nodes, single node, one.
+
+84
+00:03:45.870 --> 00:03:49.080
+Connectivity, choose the existing subnet group.
+
+85
+00:03:49.080 --> 00:03:51.150
+So select your subnet group,
+
+86
+00:03:51.150 --> 00:03:53.913
+which is the collection of all these subnets.
+
+87
+00:03:55.260 --> 00:03:58.920
+Availability Zone placements, so say no preferences
+
+88
+00:03:58.920 --> 00:04:00.780
+'cause anyways, we just have single instance,
+
+89
+00:04:00.780 --> 00:04:02.520
+so it really doesn't matter.
+
+90
+00:04:02.520 --> 00:04:04.350
+Let's click on Next.
+
+91
+00:04:04.350 --> 00:04:05.183
+Now over here,
+
+92
+00:04:05.183 --> 00:04:08.430
+make sure you uncheck here Encryption in transit.
+
+93
+00:04:08.430 --> 00:04:12.030
+Our V profile application doesn't have encryption in transit
+
+94
+00:04:12.030 --> 00:04:14.250
+for Memcached by default.
+
+95
+00:04:14.250 --> 00:04:16.023
+So make sure you uncheck that.
+
+96
+00:04:16.860 --> 00:04:19.050
+Click here Manage in the security groups
+
+97
+00:04:19.050 --> 00:04:23.700
+and select vprofile-backend-sg, Choose.
+
+98
+00:04:23.700 --> 00:04:26.043
+Maintenance window, no preference is fine.
+
+99
+00:04:26.970 --> 00:04:29.490
+Click on Add new tag, let's give here name,
+
+100
+00:04:29.490 --> 00:04:34.110
+and give the same name vprofile-rearch-cache,
+
+101
+00:04:34.110 --> 00:04:36.480
+and click on Next.
+
+102
+00:04:36.480 --> 00:04:38.010
+Take a look at all the options.
+
+103
+00:04:38.010 --> 00:04:41.700
+The engine version 1.6.22, port number,
+
+104
+00:04:41.700 --> 00:04:46.260
+and more importantly, the node type, t3.micro.
+
+105
+00:04:46.260 --> 00:04:47.190
+If you made any mistake,
+
+106
+00:04:47.190 --> 00:04:49.863
+just click on Edit and revert the changes.
+
+107
+00:04:51.000 --> 00:04:53.850
+Once you're good, click on Create.
+
+108
+00:04:53.850 --> 00:04:56.220
+Now this is going to take some time to create.
+
+109
+00:04:56.220 --> 00:04:57.960
+By the time, let's go to the next lecture
+
+110
+00:04:57.960 --> 00:05:01.233
+and see how we can create RabbitMQ by using Amazon Q.
+

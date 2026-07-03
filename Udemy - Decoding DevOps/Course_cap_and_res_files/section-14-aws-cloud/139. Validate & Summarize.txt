@@ -1,0 +1,529 @@
+WEBVTT
+
+00:00.330 --> 00:04.140
+Instructor: Okay, so the final lecture of this project.
+
+00:04.140 --> 00:06.810
+By now, you should have one single instance
+
+00:06.810 --> 00:10.530
+in your target group managed by the Auto Scaling group.
+
+00:10.530 --> 00:12.840
+It should be in the Healthy state.
+
+00:12.840 --> 00:13.740
+In the instances,
+
+00:13.740 --> 00:16.230
+you should have these five instances.
+
+00:16.230 --> 00:18.540
+app01 should be terminated.
+
+00:18.540 --> 00:20.160
+The app instance should be managed
+
+00:20.160 --> 00:22.050
+by the Auto Scaling group.
+
+00:22.050 --> 00:24.750
+Make sure the stickiness is enabled
+
+00:24.750 --> 00:26.523
+if you have multiple instances.
+
+00:27.420 --> 00:28.440
+Okay, load balancer.
+
+00:28.440 --> 00:31.320
+If you do not have the domain,
+
+00:31.320 --> 00:32.610
+you don't have the CNAME record,
+
+00:32.610 --> 00:34.680
+you can just take the DNS name, copy it
+
+00:34.680 --> 00:37.530
+and put it in the browser and access the website.
+
+00:37.530 --> 00:40.080
+If you updated the DNS record on GoDaddy
+
+00:40.080 --> 00:41.460
+or your domain registrar,
+
+00:41.460 --> 00:46.460
+then you can use your URL https:// and the URL, hit Enter.
+
+00:48.480 --> 00:49.590
+Right, nice.
+
+00:49.590 --> 00:52.020
+And this is managed by Auto Scaling group.
+
+00:52.020 --> 00:53.850
+Okay, it is coming from the instance that is managed
+
+00:53.850 --> 00:55.350
+by the Auto Scaling group.
+
+00:55.350 --> 00:57.690
+So admin_vp, the username,
+
+00:57.690 --> 00:59.700
+and the password, admin_vp.
+
+00:59.700 --> 01:01.323
+Click on LOGIN,
+
+01:02.970 --> 01:04.260
+and you should be able to log in
+
+01:04.260 --> 01:08.880
+and perform the same checks, RabbitMQ, Memcached.
+
+01:08.880 --> 01:11.160
+If you click on LOGIN and just refresh the page
+
+01:11.160 --> 01:12.060
+and nothing happens,
+
+01:12.060 --> 01:14.160
+that means the stickiness is disabled.
+
+01:14.160 --> 01:18.120
+Make sure the stickiness is enabled in the target group.
+
+01:18.120 --> 01:21.030
+That's only if you have multiple instances.
+
+01:21.030 --> 01:24.150
+Okay, so overall, we did a really great job.
+
+01:24.150 --> 01:27.000
+We have migrated our application from local.
+
+01:27.000 --> 01:28.620
+We did it on local previously,
+
+01:28.620 --> 01:31.650
+and now we are running the same application on AWS
+
+01:31.650 --> 01:34.260
+by using AWS services.
+
+01:34.260 --> 01:35.580
+Okay, so this is lift and shift.
+
+01:35.580 --> 01:37.560
+We have not actually moved the data.
+
+01:37.560 --> 01:39.390
+Like you know, if you have database data,
+
+01:39.390 --> 01:41.550
+you can do DBSync,
+
+01:41.550 --> 01:44.010
+and you know, S3 data, you have file storage,
+
+01:44.010 --> 01:45.930
+You can do S3 sync.
+
+01:45.930 --> 01:47.550
+We don't have any kind of data,
+
+01:47.550 --> 01:49.830
+so we actually migrated the application itself,
+
+01:49.830 --> 01:51.870
+the same architecture.
+
+01:51.870 --> 01:53.733
+Infrastructure as a Code,
+
+01:55.050 --> 01:58.800
+sorry, my bad, Infrastructure as a Service,
+
+01:58.800 --> 02:00.690
+so we used instances.
+
+02:00.690 --> 02:01.920
+In the next project,
+
+02:01.920 --> 02:04.530
+we are going to migrate this application.
+
+02:04.530 --> 02:06.450
+We're going to re-architecture it.
+
+02:06.450 --> 02:08.820
+We are going to use more cloud services.
+
+02:08.820 --> 02:10.890
+Rather than launching these many instances
+
+02:10.890 --> 02:12.870
+and maintaining these many instances,
+
+02:12.870 --> 02:15.000
+we are better faced on the cloud.
+
+02:15.000 --> 02:17.640
+That, we are going to see in the next project.
+
+02:17.640 --> 02:19.410
+Okay, so now let's do the cleanup,
+
+02:19.410 --> 02:22.080
+and then let's revisit the architecture diagram
+
+02:22.080 --> 02:23.880
+and see what all we did.
+
+02:23.880 --> 02:24.870
+So from the cleaning part,
+
+02:24.870 --> 02:26.850
+you don't need to delete the instances like this.
+
+02:26.850 --> 02:30.150
+First of all, you need to remove the Auto Scaling group.
+
+02:30.150 --> 02:31.110
+If you don't do that,
+
+02:31.110 --> 02:33.810
+the instance will get launched again and again.
+
+02:33.810 --> 02:37.170
+So first thing is you delete the Auto Scaling group.
+
+02:37.170 --> 02:38.043
+So Delete.
+
+02:41.040 --> 02:43.170
+Delete Auto Scaling group.
+
+02:43.170 --> 02:45.990
+That, in turn, will delete the app01 instance,
+
+02:45.990 --> 02:49.890
+and then you can go to the instances, refresh,
+
+02:49.890 --> 02:52.650
+uncheck that app instance.
+
+02:52.650 --> 02:54.750
+Right, let me select everything,
+
+02:54.750 --> 02:58.353
+and then I'm going to uncheck app instances.
+
+02:59.940 --> 03:03.423
+Instance, Terminate, Delete.
+
+03:04.320 --> 03:06.270
+Okay, by the time this is terminating,
+
+03:06.270 --> 03:08.070
+let's go to the Load Balancers.
+
+03:08.070 --> 03:11.220
+Make sure the load balancer is also deleted.
+
+03:11.220 --> 03:13.413
+Delete load balancer, confirm.
+
+03:16.143 --> 03:18.930
+Okay, target group, there are no charges for target groups,
+
+03:18.930 --> 03:20.280
+so if you want to keep, you can keep.
+
+03:20.280 --> 03:21.960
+Otherwise, you know, just for the cleanup,
+
+03:21.960 --> 03:24.780
+you can delete the target group as well.
+
+03:24.780 --> 03:27.570
+Check in the Volumes you don't have any extra volumes.
+
+03:27.570 --> 03:30.180
+Now, these are the volumes that are of the instances.
+
+03:30.180 --> 03:33.633
+I think that it's going to take some time to delete this,
+
+03:35.580 --> 03:37.080
+and by the time, that is happening,
+
+03:37.080 --> 03:38.850
+let's go to Route 53
+
+03:38.850 --> 03:42.723
+and remove the private hosted zone entries.
+
+03:43.620 --> 03:46.260
+So hosted zones cannot be deleted directly.
+
+03:46.260 --> 03:48.480
+You need to remove the records first.
+
+03:48.480 --> 03:50.310
+So go to the hosted zone
+
+03:50.310 --> 03:53.523
+and remove all the records that you created earlier.
+
+03:54.420 --> 03:58.923
+Okay, just these records, Delete records, Delete.
+
+04:19.860 --> 04:22.770
+Okay, or you can just select one security group at a time,
+
+04:22.770 --> 04:24.270
+and you can remove that.
+
+04:24.270 --> 04:26.580
+Key pairs, if you want to remove the key pair,
+
+04:26.580 --> 04:28.230
+you can remove.
+
+04:28.230 --> 04:29.940
+So just for the clean-up purpose.
+
+04:29.940 --> 04:31.840
+It's not going to charge you anything.
+
+04:32.910 --> 04:33.843
+Just delete.
+
+04:37.200 --> 04:39.540
+Okay, let's go to EC2 dashboard once again,
+
+04:39.540 --> 04:42.180
+and let's refresh the page.
+
+04:42.180 --> 04:44.520
+Okay, we see one Snapshots over here, okay?
+
+04:44.520 --> 04:47.460
+This is from the AMI that we did create.
+
+04:47.460 --> 04:49.770
+So go to AMI,
+
+04:49.770 --> 04:54.770
+Images, AMI select your AMI, Action, and Deregister AMI.
+
+04:57.540 --> 04:59.160
+There's no option to delete an AMI
+
+04:59.160 --> 05:00.540
+because there's no such thing.
+
+05:00.540 --> 05:04.440
+AMI is actually the snapshot.
+
+05:04.440 --> 05:06.030
+So deregister the AMI,
+
+05:06.030 --> 05:09.570
+then you go to Snapshots, refresh it,
+
+05:09.570 --> 05:13.833
+and select the Snapshot, Action, and Delete snapshot.
+
+05:15.360 --> 05:16.860
+Once again, EC2 dashboard,
+
+05:16.860 --> 05:18.360
+refresh the screen.
+
+05:18.360 --> 05:19.193
+Everything is good.
+
+05:19.193 --> 05:20.130
+We see fine instances,
+
+05:20.130 --> 05:21.894
+but they are actually in the Terminated state,
+
+05:21.894 --> 05:24.690
+and that information will be also gone.
+
+05:24.690 --> 05:26.160
+Okay, these instance are gone.
+
+05:26.160 --> 05:27.810
+They're not coming back now,
+
+05:27.810 --> 05:30.990
+and this information will be also removed in some time.
+
+05:30.990 --> 05:32.670
+Okay, we have one S3 bucket.
+
+05:32.670 --> 05:35.910
+If you want, you can delete that S3 bucket as well.
+
+05:35.910 --> 05:38.220
+Again, the size of the S3 bucket is very small,
+
+05:38.220 --> 05:40.620
+so there wouldn't be any charge,
+
+05:40.620 --> 05:41.940
+but just for the clean-up purpose,
+
+05:41.940 --> 05:43.410
+if you want to remove it, just select it,
+
+05:43.410 --> 05:45.060
+and first, you have to say Empty.
+
+05:46.470 --> 05:49.413
+You have to type there permanently, delete, and Empty.
+
+05:50.550 --> 05:54.873
+That's it, and then you can delete the S3 bucket.
+
+05:57.810 --> 05:59.280
+Give the name of the S3 bucket.
+
+05:59.280 --> 06:00.123
+Delete bucket.
+
+06:01.500 --> 06:04.500
+Okay, so let's revisit the architecture diagram.
+
+06:04.500 --> 06:07.530
+We first created the security group and key pairs.
+
+06:07.530 --> 06:09.210
+We launched the instances
+
+06:09.210 --> 06:12.300
+and initialized them with the user data script.
+
+06:12.300 --> 06:13.620
+We then built the artifact
+
+06:13.620 --> 06:17.790
+and deployed on our instance through the S3 bucket.
+
+06:17.790 --> 06:22.320
+We created a load balancer with an HTTPS connection
+
+06:22.320 --> 06:24.960
+by using the ACM certificate.
+
+06:24.960 --> 06:27.900
+Then we placed those instance, or that instance,
+
+06:27.900 --> 06:32.900
+or AMI of the app01 instance in the Auto Scaling group.
+
+06:33.090 --> 06:35.700
+We also had the private DNS entries
+
+06:35.700 --> 06:38.640
+through Amazon Route 53 hosted zones.
+
+06:38.640 --> 06:42.150
+So instance can talk to each other with the names.
+
+06:42.150 --> 06:45.180
+If you've come this far, it's really great job.
+
+06:45.180 --> 06:47.250
+You should be proud.
+
+06:47.250 --> 06:49.770
+There are many things that I can say about this project,
+
+06:49.770 --> 06:51.540
+but I want you to go through
+
+06:51.540 --> 06:54.660
+the architecture diagram introductions.
+
+06:54.660 --> 06:57.870
+Prepare your own notes in your own language,
+
+06:57.870 --> 07:00.810
+as in, you know, your mindset.
+
+07:00.810 --> 07:03.120
+Write it down, so when the interview comes,
+
+07:03.120 --> 07:05.040
+or you know, when there's a client interview,
+
+07:05.040 --> 07:07.980
+or project meeting, you can talk about this.
+
+07:07.980 --> 07:11.283
+You don't need to remember the whole, you know, process,
+
+07:12.120 --> 07:12.953
+all the steps.
+
+07:12.953 --> 07:13.920
+You don't need to remember everything.
+
+07:13.920 --> 07:16.320
+You need to understand the flow, right?
+
+07:16.320 --> 07:18.123
+So if you have that written,
+
+07:19.110 --> 07:21.480
+it's easy for you to recall and talk about it.
+
+07:21.480 --> 07:22.977
+When you write it down, it's easier for you.
+
+07:22.977 --> 07:25.740
+You know, either with pen and paper or in a notepad,
+
+07:25.740 --> 07:28.410
+write it, all the steps you do.
+
+07:28.410 --> 07:31.781
+You know, summarize it in your own ways, in your own words.
+
+07:31.781 --> 07:34.230
+And then you can talk freely, confidently
+
+07:34.230 --> 07:37.440
+in the interview or in the project meetings.
+
+07:37.440 --> 07:40.053
+That is all in this project.
+
+07:41.070 --> 07:43.500
+I hope you have enjoyed and learned a lot.
+
+07:43.500 --> 07:44.940
+We have more projects coming in,
+
+07:44.940 --> 07:47.580
+where we are going to, again, re-architecture
+
+07:47.580 --> 07:49.950
+this whole Vprofile application.
+
+07:49.950 --> 07:51.390
+So thank you so much
+
+07:51.390 --> 07:53.970
+for watching this whole section of the project.
+
+07:53.970 --> 07:55.420
+I'll see you in the next one.

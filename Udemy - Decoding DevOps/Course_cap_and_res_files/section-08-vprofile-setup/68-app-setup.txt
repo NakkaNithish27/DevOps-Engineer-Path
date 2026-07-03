@@ -1,0 +1,838 @@
+WEBVTT
+
+00:00.690 --> 00:04.830
+Instructor: Okay, so the Tomcat setup is two step setup.
+
+00:04.830 --> 00:07.050
+First, we're going to set up the Tomcat service.
+
+00:07.050 --> 00:09.180
+Now this is same as what we did
+
+00:09.180 --> 00:11.760
+in the background and Linux section.
+
+00:11.760 --> 00:13.593
+We set up Tomcat service.
+
+00:14.850 --> 00:17.430
+In this lecture, Systemctl &amp; Tomcat 10.
+
+00:17.430 --> 00:20.670
+In this, I have explained the setup of Tomcat in detail.
+
+00:20.670 --> 00:23.310
+So if you have not gone through this,
+
+00:23.310 --> 00:25.050
+then check this lecture
+
+00:25.050 --> 00:28.440
+and then come back to the project, Tomcat Setup.
+
+00:28.440 --> 00:31.230
+Okay, so if we are going to run dnf update -y,
+
+00:31.230 --> 00:35.940
+install epel-release, install JDK 17,
+
+00:35.940 --> 00:40.940
+install git, wget, and download the Tomcat binary.
+
+00:41.280 --> 00:43.770
+We do not have a direct Tomcat installation,
+
+00:43.770 --> 00:45.960
+like dnf installed tomcat10.
+
+00:45.960 --> 00:48.420
+We're using Tomcat 10 here.
+
+00:48.420 --> 00:50.400
+So we download directly the binary file.
+
+00:50.400 --> 00:54.510
+We extract it, we add a user called tomcat
+
+00:54.510 --> 00:57.810
+with a home directory, /usr/local/tomcat,
+
+00:57.810 --> 01:00.300
+without any login shell.
+
+01:00.300 --> 01:04.290
+So this command is going to create a user called tomcat
+
+01:04.290 --> 01:06.633
+and also going to create this folder.
+
+01:08.160 --> 01:12.150
+Then we're going to copy the extracted Tomcat 10 binary
+
+01:12.150 --> 01:15.930
+into the folder that was created in the previous command.
+
+01:15.930 --> 01:18.393
+We give it, the tomcat, ownership.
+
+01:20.010 --> 01:22.410
+We create a Tomcat service file,
+
+01:22.410 --> 01:25.233
+and because of this, we can then manage Tomcat
+
+01:25.233 --> 01:27.330
+with systemctl command.
+
+01:27.330 --> 01:29.490
+Then we say systemctl daemon-reload,
+
+01:29.490 --> 01:31.980
+start and enable Tomcat service.
+
+01:31.980 --> 01:36.030
+So same thing what we did in that Tomcat setup lectures.
+
+01:36.030 --> 01:38.160
+So I'm just going to execute all this,
+
+01:38.160 --> 01:40.593
+all this command one by one over here.
+
+01:42.990 --> 01:46.967
+Install epel-release, install JDK 17,
+
+01:54.210 --> 01:56.313
+install git and wget.
+
+01:59.910 --> 02:04.173
+Move to Tomcat, sorry, move to temp folder.
+
+02:05.310 --> 02:06.270
+Let me clear the screen,
+
+02:06.270 --> 02:10.713
+and download the Tomcat 10 tarball.
+
+02:13.770 --> 02:16.080
+Okay, I'm mistaken. Copy paste.
+
+02:16.080 --> 02:18.213
+Could copy it again from here.
+
+02:19.950 --> 02:22.350
+Okay, that should be just one single URL.
+
+02:22.350 --> 02:24.500
+And in front of this, there should be wget.
+
+02:28.290 --> 02:30.213
+So wget and this URL.
+
+02:33.302 --> 02:36.030
+Okay, the tarball should be available over here.
+
+02:36.030 --> 02:37.110
+Let's extract it.
+
+02:37.110 --> 02:42.110
+So tar -xzvf apache-tomcat.
+
+02:42.840 --> 02:46.833
+Extract it. You should have the folder.
+
+02:47.940 --> 02:49.680
+Okay, next, with this command, we are going
+
+02:49.680 --> 02:51.840
+to create the tomcat user
+
+02:51.840 --> 02:55.110
+and that home directory for it, which will be the folder
+
+02:55.110 --> 02:57.873
+to live, or home directory of tomcat.
+
+02:59.160 --> 03:02.850
+Okay, next step, we are going to copy recursively everything
+
+03:02.850 --> 03:07.850
+from that folder to /usr/local/tomcat/.
+
+03:09.930 --> 03:14.430
+And in /usr/local/tomcat/, we should have all this content.
+
+03:14.430 --> 03:18.600
+If you do ls -l in this folder, or on this folder,
+
+03:18.600 --> 03:21.060
+then you should see everything is owned by root user.
+
+03:21.060 --> 03:24.510
+We have to make sure everything is owned by tomcat user.
+
+03:24.510 --> 03:26.254
+So tomcat user, tomcat group,
+
+03:26.254 --> 03:31.063
+recursively, give permission to /usr/local/tomcat/.
+
+03:32.010 --> 03:34.233
+Okay? Let's do ls -l once again.
+
+03:35.070 --> 03:36.843
+Everything is owned by tomcat now.
+
+03:37.680 --> 03:41.793
+Okay, then we are going to open or create this file,
+
+03:41.793 --> 03:44.253
+tomcat.service, this is a systemctl file.
+
+03:45.570 --> 03:49.893
+Insert mode, and we copy all this content from here,
+
+03:51.840 --> 03:54.603
+all this black section, just copy that,
+
+03:57.450 --> 03:58.713
+just paste it here.
+
+03:59.940 --> 04:02.400
+Okay, let's give some proper space over here,
+
+04:02.400 --> 04:03.633
+just to look better.
+
+04:05.790 --> 04:09.453
+Okay, this is good. And let's just save and quit it.
+
+04:11.160 --> 04:15.660
+Then systemctl daemon-reload.
+
+04:15.660 --> 04:18.330
+Whenever you make any change to systemctl files,
+
+04:18.330 --> 04:20.370
+you need to run this command.
+
+04:20.370 --> 04:23.280
+Then we are going to start the Tomcat service.
+
+04:23.280 --> 04:25.320
+That will be the name of the service, tomcat,
+
+04:25.320 --> 04:29.583
+because this file name is tomcat, tomcat.service.
+
+04:30.630 --> 04:32.643
+Okay, next, let's enable it.
+
+04:35.520 --> 04:37.743
+Okay, let's check its status.
+
+04:41.970 --> 04:46.350
+All right, Q to quit. Okay, so that was Tomcat setup.
+
+04:46.350 --> 04:48.000
+We did this already,
+
+04:48.000 --> 04:50.200
+and this is the second time we are doing it.
+
+04:51.600 --> 04:53.253
+Again, the firewall rules.
+
+04:54.870 --> 04:56.250
+So we don't start the firewall,
+
+04:56.250 --> 04:57.810
+anyways, there is no firewall rules.
+
+04:57.810 --> 05:00.300
+So you can run those commands or not run,
+
+05:00.300 --> 05:01.860
+does not matter for this project,
+
+05:01.860 --> 05:03.600
+as I said, we're going to cover that later.
+
+05:03.600 --> 05:05.760
+Okay, now this is the main stuff.
+
+05:05.760 --> 05:10.500
+So we have our source code, right, in branch local.
+
+05:10.500 --> 05:14.310
+That is the code, that does not run on the Tomcat service.
+
+05:14.310 --> 05:17.670
+You need to compile it, create a package,
+
+05:17.670 --> 05:20.100
+and then Tomcat understands that,
+
+05:20.100 --> 05:23.670
+that package, Tomcat can run or host.
+
+05:23.670 --> 05:26.310
+So in order to do that, in order to compile
+
+05:26.310 --> 05:29.520
+and build the package, you need a tool called Maven.
+
+05:29.520 --> 05:31.860
+We have a separate section for Maven,
+
+05:31.860 --> 05:33.330
+and there's lot of Maven
+
+05:33.330 --> 05:38.040
+and build tools in Jenkins lecture, lot of CICD.
+
+05:38.040 --> 05:40.650
+So all these things will be crystal clear later.
+
+05:40.650 --> 05:45.360
+For now, all you need to do is download and run Maven.
+
+05:45.360 --> 05:48.300
+Download the source code, build your source code
+
+05:48.300 --> 05:49.890
+with the Maven command,
+
+05:49.890 --> 05:51.600
+and then you need to deploy the artifact.
+
+05:51.600 --> 05:54.720
+You need to remove the default Tomcat application
+
+05:54.720 --> 05:57.610
+and copy your build artifact
+
+05:58.890 --> 06:02.940
+into Tomcat and start the Tomcat service.
+
+06:02.940 --> 06:04.650
+I know this will be too much for now,
+
+06:04.650 --> 06:07.020
+build and source code and stuff.
+
+06:07.020 --> 06:08.910
+Trust me, everything will be clear.
+
+06:08.910 --> 06:10.320
+It'll be more than clear.
+
+06:10.320 --> 06:12.900
+We are going to do a lot of CICD work later.
+
+06:12.900 --> 06:14.340
+For now, understand this much.
+
+06:14.340 --> 06:15.690
+We are going to pull the source code,
+
+06:15.690 --> 06:18.090
+build it with Maven, and deploy it on Tomcat,
+
+06:18.090 --> 06:19.650
+three steps, right?
+
+06:19.650 --> 06:20.820
+So in order to build with Maven,
+
+06:20.820 --> 06:22.290
+first we need to have Maven.
+
+06:22.290 --> 06:24.210
+So we're going to download Maven first.
+
+06:24.210 --> 06:26.253
+So this is the command.
+
+06:28.530 --> 06:29.700
+Okay, with wget command,
+
+06:29.700 --> 06:32.013
+I'm going to download the Maven binary.
+
+06:36.750 --> 06:37.770
+Okay, it's a zip file.
+
+06:37.770 --> 06:41.373
+So we're going to run unzip apache-maven.
+
+06:42.300 --> 06:44.280
+So Maven is also from Apache,
+
+06:44.280 --> 06:45.900
+and Tomcat is also from Apache,
+
+06:45.900 --> 06:48.873
+and also httpd is also from Apache.
+
+06:50.550 --> 06:53.310
+Okay, there we have the Maven folder.
+
+06:53.310 --> 06:57.900
+So we're going to copy this Maven folder into this location.
+
+06:57.900 --> 07:00.240
+Nothing specific, just we need a location.
+
+07:00.240 --> 07:01.340
+We're just copying it.
+
+07:02.610 --> 07:04.310
+So when we run this Maven command,
+
+07:04.310 --> 07:06.840
+it is going to fail, saying out of memory.
+
+07:06.840 --> 07:08.860
+So we're just giving this command
+
+07:09.720 --> 07:12.870
+that, you know, the Maven has 512 MB of memory,
+
+07:12.870 --> 07:16.440
+actually it does not have, we're just fooling it around.
+
+07:16.440 --> 07:19.770
+So there is low memory in this VM itself.
+
+07:19.770 --> 07:22.380
+So it cannot allocate 512 MB.
+
+07:22.380 --> 07:25.470
+So by running this export command,
+
+07:25.470 --> 07:26.520
+we are setting this variable
+
+07:26.520 --> 07:27.660
+and we are saying that you know,
+
+07:27.660 --> 07:29.580
+hey, you have 512 MB of memory.
+
+07:29.580 --> 07:32.103
+Well, it does not have, just fooling around,
+
+07:32.940 --> 07:36.090
+but if it needs it can go till 512 MB of memory.
+
+07:36.090 --> 07:38.160
+That's what we are seeing here.
+
+07:38.160 --> 07:39.390
+Okay, now the critical step.
+
+07:39.390 --> 07:42.570
+We are going to clone the source code, right?
+
+07:42.570 --> 07:46.590
+The branch is local, okay?
+
+07:46.590 --> 07:50.520
+We should have the source code here, vprofile-project.
+
+07:50.520 --> 07:55.203
+Let's get inside this. Let me clear the screen, do ls.
+
+07:56.070 --> 07:58.500
+Okay, so we have seen this src folder
+
+07:58.500 --> 08:00.030
+while we're setting up MySQL, right?
+
+08:00.030 --> 08:02.430
+So /src/main/resources/,
+
+08:02.430 --> 08:05.040
+over here, along with this SQL file,
+
+08:05.040 --> 08:08.910
+we have one very important file, application.properties.
+
+08:08.910 --> 08:11.970
+This is the file that our applications will use,
+
+08:11.970 --> 08:13.680
+or VProfile application will use
+
+08:13.680 --> 08:15.930
+to connect to backend services.
+
+08:15.930 --> 08:18.120
+Like how does it know where is database,
+
+08:18.120 --> 08:19.830
+what is the username, what is the password,
+
+08:19.830 --> 08:21.900
+where is RabbitMQ, what is the user?
+
+08:21.900 --> 08:24.840
+All that information will be in this file.
+
+08:24.840 --> 08:26.700
+So let's open this file. Okay?
+
+08:26.700 --> 08:31.700
+So to do vim src/main/resources/application.properties.
+
+08:35.910 --> 08:36.743
+Okay, make sure you are
+
+08:36.743 --> 08:39.150
+in this vprofile-project folder first
+
+08:39.150 --> 08:40.550
+before you run this command.
+
+08:42.810 --> 08:43.810
+Okay? So here it is.
+
+08:44.670 --> 08:45.813
+So jdbc.url,
+
+08:47.190 --> 08:52.190
+right here it says db01:3306, that's the port number.
+
+08:52.380 --> 08:56.007
+And it is connecting to the database with this name, db01.
+
+08:56.007 --> 08:58.800
+And this will be resolved to an IP address,
+
+08:58.800 --> 09:01.230
+because in the host file we have that entry.
+
+09:01.230 --> 09:04.980
+We've seen this in the beginning in the VM setup, right?
+
+09:04.980 --> 09:08.430
+So db01 will be resolved to an IP address.
+
+09:08.430 --> 09:10.440
+And this the database name, accounts.
+
+09:10.440 --> 09:13.560
+That's why we created a database named accounts.
+
+09:13.560 --> 09:17.220
+Username, admin. And password, admin123.
+
+09:17.220 --> 09:21.060
+That's why we had those admin user, admin123 password.
+
+09:21.060 --> 09:22.500
+If you change it over there, you have
+
+09:22.500 --> 09:25.830
+to make sure you change it here, right?
+
+09:25.830 --> 09:27.510
+It's not a hard and fast rule that you need
+
+09:27.510 --> 09:30.000
+to have this user, this password, this DB name.
+
+09:30.000 --> 09:32.250
+If you want different, you can create different,
+
+09:32.250 --> 09:35.850
+but make sure then, you update application.properties file.
+
+09:35.850 --> 09:38.790
+Same then, you have memcached, mc01,
+
+09:38.790 --> 09:41.580
+it's port number 11211.
+
+09:41.580 --> 09:44.190
+Then you have rabbitmq, rmw01,
+
+09:44.190 --> 09:49.020
+port number 5672, username, test, password, test.
+
+09:49.020 --> 09:51.900
+And this file, we will be changing later.
+
+09:51.900 --> 09:54.180
+In AWS, we'll have project
+
+09:54.180 --> 09:56.820
+to set up all this move, migrate to AWS,
+
+09:56.820 --> 09:58.320
+we'll be making changes.
+
+09:58.320 --> 10:01.950
+And then in Docker, in Kubernetes, various other project
+
+10:01.950 --> 10:03.180
+that we'll do in this course,
+
+10:03.180 --> 10:06.150
+we will be making changes to this file.
+
+10:06.150 --> 10:09.480
+So nothing over here, same thing what we did.
+
+10:09.480 --> 10:11.040
+So we don't need to make any change,
+
+10:11.040 --> 10:14.640
+but I want you to remember this path very, very well.
+
+10:14.640 --> 10:17.703
+In the source code at this location, we have this file.
+
+10:18.840 --> 10:22.260
+Also in real time you need to be sure
+
+10:22.260 --> 10:24.030
+about where is the configuration file,
+
+10:24.030 --> 10:25.500
+where this DB information,
+
+10:25.500 --> 10:27.690
+backend information mentioned, right?
+
+10:27.690 --> 10:30.600
+Because when you build the package, right,
+
+10:30.600 --> 10:32.910
+we're going to build it with Maven,
+
+10:32.910 --> 10:36.330
+this configuration file will be in that package,
+
+10:36.330 --> 10:39.360
+or sometimes they are set with the variables also.
+
+10:39.360 --> 10:40.800
+In any case, you should know
+
+10:40.800 --> 10:44.580
+where are the backend configurations.
+
+10:44.580 --> 10:46.110
+Okay, so nothing to update over here.
+
+10:46.110 --> 10:47.910
+We have all correct information.
+
+10:47.910 --> 10:50.640
+Now we are going to run this Maven command
+
+10:50.640 --> 10:52.593
+and build our source code.
+
+10:55.410 --> 10:59.128
+Okay, so this is the path of where the Maven binary is,
+
+10:59.128 --> 11:03.750
+/usr/local/maven3.9/bin/mvn,
+
+11:03.750 --> 11:06.540
+'cause this is where we copied the Maven binary,
+
+11:06.540 --> 11:08.340
+space, install.
+
+11:08.340 --> 11:11.490
+So this command is going to basically take our source code
+
+11:11.490 --> 11:13.560
+and build it into a package.
+
+11:13.560 --> 11:14.910
+Once this command completes,
+
+11:14.910 --> 11:18.573
+we'll have something called as artifact.
+
+11:19.770 --> 11:21.990
+So let's run this command.
+
+11:21.990 --> 11:25.440
+Once again, this will be much more clear when we do Maven,
+
+11:25.440 --> 11:28.287
+continuous integration, continuous delivery, okay?
+
+11:28.287 --> 11:29.880
+And this is going to take some time.
+
+11:29.880 --> 11:32.430
+So again, I'm going to pause my recording
+
+11:32.430 --> 11:34.503
+and resume once this is completed.
+
+11:35.790 --> 11:39.990
+Okay, it's completed. Let me clear my screen, do ls.
+
+11:39.990 --> 11:43.200
+And you should see here a new directory called target.
+
+11:43.200 --> 11:44.670
+If you do ls target/,
+
+11:44.670 --> 11:48.423
+you should see here artifact, vprofile-v2.war.
+
+11:49.800 --> 11:52.650
+Like we have tar.gz, like we have zip,
+
+11:52.650 --> 11:55.830
+war is an archive in Java.
+
+11:55.830 --> 11:57.540
+So this is the package.
+
+11:57.540 --> 11:58.950
+Now we need to copy this package
+
+11:58.950 --> 12:02.340
+into the Tomcat home directory at this location,
+
+12:02.340 --> 12:07.340
+ls /usr/local/tomcat/webapps/.
+
+12:07.400 --> 12:10.530
+In this, you have a folder called ROOT.
+
+12:10.530 --> 12:11.670
+We are going to remove this one.
+
+12:11.670 --> 12:13.410
+This is the default Tomcat application.
+
+12:13.410 --> 12:14.730
+We'll remove this one.
+
+12:14.730 --> 12:17.370
+Instead of that, we're going to copy our artifact.
+
+12:17.370 --> 12:19.500
+So let's remove, -rf.
+
+12:19.500 --> 12:21.390
+Make sure you are over here,
+
+12:21.390 --> 12:23.340
+or for this, you can be anywhere.
+
+12:23.340 --> 12:25.830
+We're giving absolute path.
+
+12:25.830 --> 12:30.830
+So rm -rf /usr/local/tomcat/webapps/ROOT.
+
+12:31.830 --> 12:34.260
+Okay, hit Enter, remove that.
+
+12:34.260 --> 12:35.940
+And then make sure you are
+
+12:35.940 --> 12:38.220
+at this location, vprofile-project.
+
+12:38.220 --> 12:43.220
+You have the target, cp target/vprofile-v2.war,
+
+12:45.507 --> 12:50.507
+copy to /usr/local/tomcat/webapps/ROOT.war,
+
+12:52.320 --> 12:53.853
+capital ROOT.war.
+
+12:55.620 --> 12:57.480
+So we copy the artifact with this name.
+
+12:57.480 --> 13:01.440
+So that becomes a default application, okay?
+
+13:01.440 --> 13:03.960
+After we do that, we are going to change the ownership,
+
+13:03.960 --> 13:05.670
+because once we extract this ROOT,
+
+13:05.670 --> 13:08.280
+it will have different user ownership.
+
+13:08.280 --> 13:10.683
+We're going to give it to the tomcat ownership.
+
+13:12.150 --> 13:14.070
+Okay, now let me show you something.
+
+13:14.070 --> 13:19.070
+You do ls /usr/local/tomcat/webapps/,
+
+13:20.458 --> 13:22.650
+and you copied it with this name ROOT.war,
+
+13:22.650 --> 13:24.480
+but you should see a folder called ROOT.
+
+13:24.480 --> 13:29.280
+So Tomcat extracted that into this ROOT folder, okay?
+
+13:29.280 --> 13:30.630
+And that is it. It is done.
+
+13:30.630 --> 13:33.090
+You can restart the Tomcat service if you want,
+
+13:33.090 --> 13:36.513
+systemctl restart tomcat.
+
+13:39.480 --> 13:41.610
+It's not mandatory,
+
+13:41.610 --> 13:44.670
+because Tomcat will, on the fly, extract the artifact,
+
+13:44.670 --> 13:46.773
+create the folder for your artifact.
+
+13:47.640 --> 13:50.010
+Okay, so the Tomcat service is restarted.
+
+13:50.010 --> 13:51.813
+Let's check its status.
+
+13:55.020 --> 13:58.203
+Okay, active running. You use Q to quit.
+
+13:59.130 --> 14:02.250
+Okay, so the Tomcat service is also up and running,
+
+14:02.250 --> 14:04.170
+and our application is running on that.
+
+14:04.170 --> 14:08.280
+We can validate that, but let's set the last service
+
+14:08.280 --> 14:09.990
+in our project, which is Nginx.
+
+14:09.990 --> 14:12.630
+So exit from here, complete this,
+
+14:12.630 --> 14:14.380
+and join me in the next lecture
+
+14:15.570 --> 14:18.573
+where we'll set up the last service, Nginx.

@@ -1,0 +1,370 @@
+WEBVTT
+
+00:02.160 --> 00:02.800
+Welcome.
+
+00:02.800 --> 00:07.560
+In this lecture, we are going to add one more new job in our workflow.
+
+00:07.600 --> 00:14.680
+The job will be to do security scan on our source code, and later you can also expand it to the Docker
+
+00:14.680 --> 00:16.920
+image that we will be building later.
+
+00:17.320 --> 00:18.760
+And the artifacts also.
+
+00:19.400 --> 00:24.440
+Now Aqua Security is a company that builds some tool open source tools.
+
+00:24.880 --> 00:26.280
+One of them is Trivy.
+
+00:27.200 --> 00:32.520
+So in the GitHub marketplace, if you search with the name of Aqua Security, the you will get this
+
+00:32.560 --> 00:33.240
+at the top.
+
+00:34.040 --> 00:40.320
+Like we conduct unit testing Mvn test or code analysis like Checkstyle like that.
+
+00:40.320 --> 00:45.600
+Security scanning is also very much used in DevSecOps pipelines.
+
+00:46.240 --> 00:51.240
+If there are any issues, it highlights the vulnerability, the vulnerabilities it is going to highlight,
+
+00:51.240 --> 00:55.960
+and then you can decide whether you want to promote that build or you want to stop it.
+
+00:56.400 --> 01:04.770
+So in this lecture we are just going to add a step sorry add a Stage, build stage which scans the source
+
+01:04.770 --> 01:06.690
+code and generates the result.
+
+01:06.690 --> 01:09.130
+And that result we're going to store as an artifact.
+
+01:09.530 --> 01:16.370
+So if you look at the usage of this action, this is the complete action name Aqua security slash Trivy
+
+01:16.410 --> 01:17.010
+action.
+
+01:17.370 --> 01:18.810
+And you pass some input with that.
+
+01:18.810 --> 01:26.010
+Like for example a Docker image in what format you need the output, what will be the exit code vulnerability
+
+01:26.050 --> 01:27.370
+types that you want to scan?
+
+01:27.410 --> 01:32.330
+Like these two are the most famous one OS and library, but there are a few other options.
+
+01:32.490 --> 01:34.610
+Now we are not going to scan docker image.
+
+01:34.610 --> 01:39.570
+Now we have not even generated docker image, but we are going to scan the source code and generate
+
+01:39.570 --> 01:40.330
+the result.
+
+01:40.730 --> 01:43.490
+So we are going to create a stage something like this.
+
+01:43.530 --> 01:49.730
+Oh sorry a build something like this where we clone the source code and then we run the scanning.
+
+01:50.450 --> 01:54.290
+So open VSCode, make sure you are in the main branch, no other branch.
+
+01:54.770 --> 02:00.970
+And in the same line where you have the build and testing in the same column, you are going to write
+
+02:01.010 --> 02:02.310
+a new build.
+
+02:02.630 --> 02:04.350
+I'm calling it a security scan.
+
+02:04.710 --> 02:06.430
+And then we need to clone the source code.
+
+02:06.430 --> 02:07.910
+So we need same things.
+
+02:07.910 --> 02:09.270
+It should run on ubuntu.
+
+02:10.110 --> 02:11.390
+I need to scan the source code.
+
+02:11.390 --> 02:15.510
+So I'm copying all this from the testing stage.
+
+02:16.510 --> 02:17.350
+Some space.
+
+02:19.830 --> 02:20.190
+Okay.
+
+02:20.230 --> 02:20.510
+Needs.
+
+02:20.510 --> 02:21.910
+Also I'm copying here.
+
+02:21.950 --> 02:22.750
+Needs build.
+
+02:22.750 --> 02:29.510
+So now what's going to happen is first build job is going to run and then testing job is going to run.
+
+02:30.030 --> 02:35.070
+Now testing job needs the build job and also security scan job needs the build job.
+
+02:35.350 --> 02:38.110
+That means these two jobs will run parallelly.
+
+02:38.750 --> 02:39.670
+And we'll see that.
+
+02:39.710 --> 02:43.110
+First let's add the security scan action.
+
+02:44.430 --> 02:49.990
+So let's add the next step over here to scan hyphen name I'm going to give the name.
+
+02:49.990 --> 02:58.430
+And then the action uses Aqua Security slash TV actions at 0.28.0.
+
+02:58.430 --> 03:01.110
+So this is the version when I'm seeing it.
+
+03:01.350 --> 03:04.560
+So you can keep the same version, or you can give a different version.
+
+03:04.560 --> 03:10.120
+If you see a newer version later, you can use that also now passing parameters with it.
+
+03:10.120 --> 03:17.960
+So with so we need to specify what to scan and the output and the vulnerability type.
+
+03:17.960 --> 03:19.840
+So I've just copied it from the documentation.
+
+03:19.840 --> 03:24.400
+So scan type file system fs scan reference I have given dot.
+
+03:24.440 --> 03:30.720
+That means the current working directory that includes our source code everything format of output I
+
+03:30.760 --> 03:33.160
+am saying JSON exit code zero.
+
+03:33.840 --> 03:37.000
+Now exit code zero means continue with the next step.
+
+03:37.000 --> 03:39.840
+Do not fail it even if the vulnerabilities are found.
+
+03:39.840 --> 03:45.720
+But if you set it to one, then if vulnerabilities are found, this is going to fail your workflow.
+
+03:45.880 --> 03:48.640
+So we're going to keep it zero because there are vulnerabilities.
+
+03:49.000 --> 03:49.960
+And we'll talk about it.
+
+03:50.000 --> 03:52.360
+What happens when there are vulnerabilities later.
+
+03:54.280 --> 03:59.600
+Next we want to store the output because once the workflow completes the output will be also gone.
+
+03:59.600 --> 04:07.250
+So you want to store the output as the artifact like we did over here in the build stage?
+
+04:07.930 --> 04:08.170
+Yeah.
+
+04:08.210 --> 04:08.610
+Like that.
+
+04:08.610 --> 04:10.850
+So I'm just going to copy this one and make the changes.
+
+04:13.770 --> 04:15.610
+So let me change the name first.
+
+04:17.210 --> 04:21.330
+Simply call it as upload preview scan results as artifact.
+
+04:21.650 --> 04:24.930
+And that action is good with name.
+
+04:24.930 --> 04:25.890
+Name of the artifact.
+
+04:25.890 --> 04:31.850
+Let's change the name of the artifact I'm calling it as TV scan results and path.
+
+04:32.850 --> 04:35.370
+So path is basically this same output.
+
+04:35.370 --> 04:38.050
+Here we are storing the output into this file.
+
+04:38.450 --> 04:40.450
+And we're saying this is as an artifact.
+
+04:40.450 --> 04:41.490
+We are uploading it.
+
+04:42.210 --> 04:44.490
+So let's save it and test it.
+
+04:44.530 --> 04:45.490
+See the artifact.
+
+04:45.770 --> 04:47.490
+So I saved the file control s.
+
+04:47.490 --> 04:49.450
+And now I'm going to commit and push.
+
+04:49.970 --> 04:50.410
+Yes.
+
+04:50.770 --> 04:54.970
+Give a commit message and say accept commit message.
+
+04:57.570 --> 04:59.050
+Let's take a look at the workflow.
+
+05:00.330 --> 05:00.730
+Okay.
+
+05:00.770 --> 05:02.130
+Triggered security scanning.
+
+05:02.130 --> 05:03.410
+That's the commit message.
+
+05:04.020 --> 05:04.340
+Okay.
+
+05:04.340 --> 05:09.180
+Now if you see you have build and after that these two jobs are going to run at the same time.
+
+05:09.180 --> 05:10.820
+Security scan and testing.
+
+05:10.860 --> 05:17.100
+The reason both this job runs together is because by default, all the jobs runs at the same time.
+
+05:17.140 --> 05:19.340
+Parallelism is there in GitHub actions.
+
+05:19.580 --> 05:24.500
+But if you define the order needs build for security scan.
+
+05:24.500 --> 05:27.020
+And here also we have given testing needs build.
+
+05:27.780 --> 05:34.020
+If you want to run security scan after testing, then we need to give security scan needs as testing
+
+05:34.660 --> 05:36.260
+and in the security scan in the needs.
+
+05:36.260 --> 05:44.180
+If you have given over here the name as testing, then first build job will run, then testing because
+
+05:44.180 --> 05:47.500
+that needs build and then it is going to run security scan.
+
+05:47.500 --> 05:49.740
+If we have given here testing.
+
+05:50.220 --> 05:51.100
+But that's okay.
+
+05:51.100 --> 05:53.020
+We can run both the jobs parallelly.
+
+05:53.020 --> 05:53.820
+There's no problem.
+
+05:53.820 --> 05:55.300
+So let's keep it as it is.
+
+05:55.740 --> 05:57.300
+Let's take a look at the artifact.
+
+05:57.500 --> 05:59.100
+So we are storing two artifact.
+
+05:59.100 --> 06:06.920
+If you scroll down over here you can see here as we profile app folder we downloaded that downloads
+
+06:06.960 --> 06:11.760
+a zip file that will contain the artifact, and then we have the scan result.
+
+06:11.760 --> 06:12.880
+Let's download that.
+
+06:13.560 --> 06:15.920
+So both are in zip format I'm going to open this one.
+
+06:16.360 --> 06:18.320
+So downloaded a file in JSON format.
+
+06:18.320 --> 06:19.040
+Let's open it.
+
+06:19.040 --> 06:21.120
+This should open in VSCode.
+
+06:21.240 --> 06:21.760
+Yes.
+
+06:22.440 --> 06:26.960
+Now the JSON output is useful when you want to upload it somewhere on the dashboard.
+
+06:26.960 --> 06:28.640
+You want to do analysis on this.
+
+06:28.880 --> 06:33.360
+The more human readable format is table or here.
+
+06:33.360 --> 06:38.760
+If you just mention table, that will be more human readable format, but mostly after generating the
+
+06:38.760 --> 06:42.080
+result, we do take some action with based on the result.
+
+06:42.480 --> 06:45.480
+So that's why usually you should see the JSON format.
+
+06:45.680 --> 06:52.760
+Anyways, the idea was to show how to do security scan on your source code by using a GitHub action.
+
+06:53.440 --> 06:55.000
+And that should be all in this lecture.
+
+06:55.000 --> 07:00.520
+In the next lecture we are going to see how to build a Docker image from our source code and upload
+
+07:00.520 --> 07:03.800
+it to Amazon ECR, the container registry.
+
+07:04.320 --> 07:05.640
+So join me in the next lecture.

@@ -1,0 +1,1114 @@
+WEBVTT
+
+00:00.330 --> 00:02.550
+Lecturer: Hello and welcome.
+
+00:02.550 --> 00:04.500
+In this section of the course we are going
+
+00:04.500 --> 00:07.327
+to learn little more detail about Vagrant.
+
+00:07.327 --> 00:09.360
+And it's not just about Vagrant.
+
+00:09.360 --> 00:12.930
+Through Vagrant, we are going to learn a lot of concepts
+
+00:12.930 --> 00:17.070
+that is very important for cloud computing, Docker,
+
+00:17.070 --> 00:19.770
+Kubernetes, and other technologies.
+
+00:19.770 --> 00:21.390
+In this section we are also going
+
+00:21.390 --> 00:24.508
+to leverage AI tool, GitHub Copilot,
+
+00:24.508 --> 00:27.750
+and see how we can use AI to write our code
+
+00:27.750 --> 00:29.880
+or even modify it.
+
+00:29.880 --> 00:33.030
+So we already know Vagrant through VM setup section.
+
+00:33.030 --> 00:35.970
+We have seen how we can use Vagrant Cloud
+
+00:35.970 --> 00:39.570
+to fetch VM images or VM boxes.
+
+00:39.570 --> 00:41.280
+We talked about Vagrantfile
+
+00:41.280 --> 00:44.010
+where we can mention virtual machine settings.
+
+00:44.010 --> 00:46.410
+And we have seen some simple Vagrant commands
+
+00:46.410 --> 00:50.100
+like Vagrant up, halt, destroy, et cetera.
+
+00:50.100 --> 00:51.540
+Now in this section we are going
+
+00:51.540 --> 00:53.670
+to get little more detail into Vagrant.
+
+00:53.670 --> 00:55.925
+We are going to cover networking concepts,
+
+00:55.925 --> 00:58.710
+we're going to talk about the resource RAM and CPU,
+
+00:58.710 --> 01:03.210
+we'll see how we can provision servers on VMs automatically.
+
+01:03.210 --> 01:06.720
+We are also going to see the multi VM concept.
+
+01:06.720 --> 01:10.710
+And along with all this, we are also going to leverage AI
+
+01:10.710 --> 01:15.060
+to write our Vagrantfile and fix it and make changes to it.
+
+01:15.060 --> 01:16.980
+So, let's get into it.
+
+01:16.980 --> 01:19.770
+Okay, first few thing before we get started.
+
+01:19.770 --> 01:23.700
+Open Terminal for macOS and Git Bash for Windows
+
+01:23.700 --> 01:27.003
+and execute the command Vagrant global status.
+
+01:28.140 --> 01:30.240
+This command should show you the status
+
+01:30.240 --> 01:33.120
+of all the available vagrant VMs.
+
+01:33.120 --> 01:34.380
+So, I have two VM.
+
+01:34.380 --> 01:36.420
+One is open, two other one is sent to us.
+
+01:36.420 --> 01:39.810
+And they're in running states, so I'm going to delete them.
+
+01:39.810 --> 01:40.890
+We are going to do cleanup
+
+01:40.890 --> 01:43.533
+and then we will start working on our Vagrantfile.
+
+01:44.430 --> 01:48.360
+So one way is you can do CD into these folders
+
+01:48.360 --> 01:51.690
+and delete the VM or you can just queue their ID,
+
+01:51.690 --> 01:53.070
+and also delete them.
+
+01:53.070 --> 01:54.120
+So, we'll do both.
+
+01:54.120 --> 01:57.090
+First, we're going to get into, so I'm going to get
+
+01:57.090 --> 02:01.080
+into F drive, vagrant_vms_ubuntu.
+
+02:01.080 --> 02:02.400
+So, I'm in this directory.
+
+02:02.400 --> 02:04.803
+I'm gonna run the command vagrant status.
+
+02:06.240 --> 02:10.590
+This shows the status of the VM in the current folder only.
+
+02:10.590 --> 02:13.720
+And I'm going to do Vagrant destroy --force.
+
+02:16.440 --> 02:19.620
+Now if you observe here it says the VM is powered off,
+
+02:19.620 --> 02:22.410
+but here it says in the global status it says running.
+
+02:22.410 --> 02:26.070
+So global status is not very dependent command.
+
+02:26.070 --> 02:28.890
+It can show you the stale information.
+
+02:28.890 --> 02:29.820
+And I'll show you in a moment
+
+02:29.820 --> 02:31.590
+how it can refresh that information.
+
+02:31.590 --> 02:34.440
+So first, let's delete this ubuntu VM.
+
+02:34.440 --> 02:35.430
+Okay, it's deleted.
+
+02:35.430 --> 02:38.760
+Now I'm going to run the global status command once again.
+
+02:38.760 --> 02:40.920
+Okay, now it shows the center's VM running.
+
+02:40.920 --> 02:44.433
+But I'm going to run now one option with it, --prune,
+
+02:45.570 --> 02:47.673
+which will remove the stale information.
+
+02:48.750 --> 02:51.930
+Okay, now I'm going to show you how to remove the VM.
+
+02:51.930 --> 02:54.780
+Without getting into the folder, you can do Vagrant destroy
+
+02:54.780 --> 02:57.693
+and you can mention the ID of the VM.
+
+02:59.280 --> 03:01.260
+Now this is also not so dependent command
+
+03:01.260 --> 03:03.780
+because we don't know whether that ID is real
+
+03:03.780 --> 03:06.780
+or it's the old IP which does not exist.
+
+03:06.780 --> 03:08.340
+ID I mean to say.
+
+03:08.340 --> 03:10.320
+So it's always better to get into the folder
+
+03:10.320 --> 03:13.320
+and delete the VMs or not take actions into the VM.
+
+03:13.320 --> 03:16.173
+Let's run global status prune command once again.
+
+03:17.363 --> 03:18.210
+So, we are all good.
+
+03:18.210 --> 03:20.460
+So in short, Vagrant global status.
+
+03:20.460 --> 03:21.900
+Check the VM, delete the VM,
+
+03:21.900 --> 03:23.820
+make sure everything is clean up.
+
+03:23.820 --> 03:25.530
+Okay, so in the VM setup lecture,
+
+03:25.530 --> 03:27.600
+I have created VM in this folder
+
+03:27.600 --> 03:30.600
+in my F drive in Vagrant VMs folder.
+
+03:30.600 --> 03:33.990
+If you have created anywhere else, just check the folder
+
+03:33.990 --> 03:35.550
+where you have created this ubuntu
+
+03:35.550 --> 03:40.550
+and sent to this folder or directory and then open VS Code.
+
+03:40.920 --> 03:44.370
+Yes, VS Code, Microsoft Visual Studio Code.
+
+03:44.370 --> 03:47.220
+We are going to use this code editor
+
+03:47.220 --> 03:51.330
+to manage our Vagrantfile and even Vagrant VM.
+
+03:51.330 --> 03:54.570
+First, we are going to set our default terminal
+
+03:54.570 --> 03:57.030
+into the VS Code.
+
+03:57.030 --> 04:01.590
+So Windows user use the command, Control + Shift + P,
+
+04:01.590 --> 04:06.590
+for macOS, use the command, Command + Shift + P
+
+04:06.690 --> 04:08.820
+and you should get this dialog box over here
+
+04:08.820 --> 04:12.840
+or here you have to type terminal colon,
+
+04:12.840 --> 04:15.390
+select default profile.
+
+04:15.390 --> 04:19.860
+When you find it, you can click on it or you can hit enter
+
+04:19.860 --> 04:22.470
+and select your default terminal.
+
+04:22.470 --> 04:25.590
+For Windows user please select Git Bash.
+
+04:25.590 --> 04:28.140
+Now macOS user, you don't need to select anything.
+
+04:28.140 --> 04:30.663
+Anyways, your default terminal is the terminal.
+
+04:31.530 --> 04:33.690
+So for Windows, just select Git Bash over there.
+
+04:33.690 --> 04:35.613
+So when we execute command from VS Code,
+
+04:35.613 --> 04:38.730
+it's going to execute on Git Bash terminal.
+
+04:38.730 --> 04:40.920
+As I said, we are going to manage our Vagrantfile
+
+04:40.920 --> 04:44.250
+from VS Code editor, so we need one extension.
+
+04:44.250 --> 04:47.070
+So click on the symbol, this is extensions.
+
+04:47.070 --> 04:49.833
+And over here search for a Vagrantfile.
+
+04:51.535 --> 04:53.250
+Okay, let's click on this.
+
+04:53.250 --> 04:55.170
+So it says, this provides syntax
+
+04:55.170 --> 04:57.240
+highlighting support for Vagrantfile.
+
+04:57.240 --> 04:59.940
+Useful if you use Vagrant.
+
+04:59.940 --> 05:01.623
+And let's install it.
+
+05:02.550 --> 05:04.653
+See trust publisher install.
+
+05:05.610 --> 05:06.600
+Okay, very good.
+
+05:06.600 --> 05:08.670
+Now we are going to open the folder
+
+05:08.670 --> 05:12.420
+where we have placed our Vagrantfile previously.
+
+05:12.420 --> 05:16.140
+So I'm going to click on file and say open folder.
+
+05:16.140 --> 05:19.200
+So I go to F drive, Vagrant VMs.
+
+05:19.200 --> 05:22.863
+Please select the right folder and say select folder.
+
+05:24.000 --> 05:26.340
+Okay, now you can see here open to folder
+
+05:26.340 --> 05:30.060
+and sent to this folder both has the Vagrantfile.
+
+05:30.060 --> 05:31.590
+Click on any of the Vagrantfile.
+
+05:31.590 --> 05:32.970
+You should see its content.
+
+05:32.970 --> 05:36.780
+Let's understand the syntax of this Vagrantfile,
+
+05:36.780 --> 05:38.700
+or any Vagrantfile for that matter.
+
+05:38.700 --> 05:40.020
+You have the syntax.
+
+05:40.020 --> 05:42.720
+First we are going to talk about the hash.
+
+05:42.720 --> 05:44.370
+Hash is a comment.
+
+05:44.370 --> 05:46.890
+Wherever you see hash, that means anything
+
+05:46.890 --> 05:49.470
+after that we'll be ignored.
+
+05:49.470 --> 05:51.810
+Now this is used for writing comment
+
+05:51.810 --> 05:54.510
+or even disabling any setting.
+
+05:54.510 --> 05:57.810
+The code is actually starting over here from line eight.
+
+05:57.810 --> 06:00.243
+You see this, click to collapse.
+
+06:01.380 --> 06:02.730
+Let's expand this.
+
+06:02.730 --> 06:06.600
+So, vagrant.configure, and then you see something called
+
+06:06.600 --> 06:09.570
+as config in between this two pipe symbol.
+
+06:09.570 --> 06:12.420
+And if I click on that, you see over here
+
+06:12.420 --> 06:14.640
+config is highlighted everywhere.
+
+06:14.640 --> 06:16.050
+And every setting you will see
+
+06:16.050 --> 06:18.720
+starts like this, config.vm.box.
+
+06:18.720 --> 06:20.460
+That's the box name.
+
+06:20.460 --> 06:23.670
+And you see some other things like config.vm.box
+
+06:23.670 --> 06:25.500
+check update equal to false.
+
+06:25.500 --> 06:28.320
+But this is disabled because there is a hash
+
+06:28.320 --> 06:30.510
+placed in front of it, right?
+
+06:30.510 --> 06:35.190
+All the settings will be like this until you reach,
+
+06:35.190 --> 06:38.250
+and this is where the code completes
+
+06:38.250 --> 06:40.143
+or the VM setting completes.
+
+06:41.640 --> 06:44.490
+Now this is just a text and whatever you write over here,
+
+06:44.490 --> 06:46.200
+all the settings should start like this.
+
+06:46.200 --> 06:50.070
+Like for example, if I write here, I say DevOps,
+
+06:50.070 --> 06:52.696
+then all my settings should start like this.
+
+06:52.696 --> 06:53.980
+DevOps.
+
+06:53.980 --> 06:57.240
+Okay, for programmers, this is a class object
+
+06:57.240 --> 07:00.360
+where we have many other methods and functions.
+
+07:00.360 --> 07:01.980
+For non-programmers, just remember
+
+07:01.980 --> 07:04.590
+whatever you have over here,
+
+07:04.590 --> 07:06.420
+whatever text you have over here,
+
+07:06.420 --> 07:08.250
+all the settings should start like that.
+
+07:08.250 --> 07:11.340
+So I'm going to do Control + Z and go back to config.
+
+07:11.340 --> 07:13.260
+Just keep it config.
+
+07:13.260 --> 07:17.940
+Okay, so let's say now I want to enable bridged adapter.
+
+07:17.940 --> 07:20.220
+You remember in the VM setup, in manual VM setup,
+
+07:20.220 --> 07:22.140
+we talked about bridged adapter.
+
+07:22.140 --> 07:25.140
+So your VM will have an extra network adapter
+
+07:25.140 --> 07:27.360
+that will get the IP address from the router.
+
+07:27.360 --> 07:29.970
+If you want to do same setting in Vagrant,
+
+07:29.970 --> 07:34.080
+you need to find this setting, config.vm.network.
+
+07:34.080 --> 07:37.050
+This one especially, config.vm.network
+
+07:37.050 --> 07:38.910
+in the double codes nets public network.
+
+07:38.910 --> 07:41.460
+So if you uncomment this one, right?
+
+07:41.460 --> 07:43.830
+So once we do that, we need to save the file
+
+07:43.830 --> 07:46.860
+and we need to do Vagrant restart.
+
+07:46.860 --> 07:48.390
+I mean to say Vagrant reload.
+
+07:48.390 --> 07:51.690
+Or if the VM is not started, we just do Vagrant up.
+
+07:51.690 --> 07:55.140
+So only at the boot time these settings will be applied.
+
+07:55.140 --> 07:57.660
+If you want to give your own IP address to your VM,
+
+07:57.660 --> 07:58.920
+there's another setting over here.
+
+07:58.920 --> 08:01.890
+You see config.vm.network, same thing.
+
+08:01.890 --> 08:04.740
+But with that you have here private network,
+
+08:04.740 --> 08:06.360
+IP and the IP address.
+
+08:06.360 --> 08:08.400
+And make sure the syntax is as it is.
+
+08:08.400 --> 08:09.900
+Here, you have comma.
+
+08:09.900 --> 08:11.730
+With IP, you have a colon.
+
+08:11.730 --> 08:13.860
+I don't try to understand too much about the code.
+
+08:13.860 --> 08:16.320
+We are just talking about the settings
+
+08:16.320 --> 08:20.340
+and how to achieve a particular simple things in the VMs.
+
+08:20.340 --> 08:22.650
+We are going to learn about scripting
+
+08:22.650 --> 08:24.570
+in Bash and Python in later lectures.
+
+08:24.570 --> 08:26.100
+For now, just understand the settings.
+
+08:26.100 --> 08:27.480
+That would be enough.
+
+08:27.480 --> 08:30.510
+Okay, so you can give your IP address over here.
+
+08:30.510 --> 08:33.270
+I mean the IP address of your VM,
+
+08:33.270 --> 08:35.460
+that will be a static IP address.
+
+08:35.460 --> 08:37.860
+With this your Wi-Fi router
+
+08:37.860 --> 08:39.900
+or whatever router you have in your network,
+
+08:39.900 --> 08:41.710
+we assign IP address to your VM.
+
+08:41.710 --> 08:43.710
+It'll be a random IP.
+
+08:43.710 --> 08:47.700
+So, this will get a random IP to your VM.
+
+08:47.700 --> 08:50.340
+And this is going to get the private static IP
+
+08:50.340 --> 08:51.390
+to your VM static.
+
+08:51.390 --> 08:55.350
+It'll remain until unless you don't change this.
+
+08:55.350 --> 08:57.570
+Okay, so that was about IP address allotment.
+
+08:57.570 --> 09:00.930
+And we have other settings like memory, RAM memory,
+
+09:00.930 --> 09:03.497
+but there's this section, config.vm.network
+
+09:03.497 --> 09:05.790
+if you uncomment this line.
+
+09:05.790 --> 09:08.970
+And this starts a new code block.
+
+09:08.970 --> 09:12.510
+So this is the main code block which starts over here
+
+09:12.510 --> 09:15.153
+and completes over here at the end.
+
+09:16.350 --> 09:20.070
+In that you have other code blocks like this one.
+
+09:20.070 --> 09:22.590
+So when you uncomment this, when you remove hash from it,
+
+09:22.590 --> 09:25.650
+make sure you you remove the hash from this also.
+
+09:25.650 --> 09:29.280
+And then vb.memory, remove hash from there.
+
+09:29.280 --> 09:32.190
+Now, check this out, config.vm.provider, virtual box,
+
+09:32.190 --> 09:34.680
+that's the name of the provider, do vb.
+
+09:34.680 --> 09:38.070
+Now the text inside that or the settings inside that
+
+09:38.070 --> 09:41.790
+will start like this, vb..memory = 1024.
+
+09:41.790 --> 09:46.773
+If you want to add extra CPU, you can say vb.cpus,
+
+09:49.200 --> 09:52.563
+vb.cpus = 2.
+
+09:54.270 --> 09:56.700
+Now as I do that, you see my code
+
+09:56.700 --> 09:58.680
+is automatically completing.
+
+09:58.680 --> 10:02.850
+And the reason behind that is GitHub Copilot, okay?
+
+10:02.850 --> 10:05.970
+So let's say I do not know what is the setting
+
+10:05.970 --> 10:07.890
+for the CPUs, right?
+
+10:07.890 --> 10:10.140
+So I just come to this line, vb.memory.
+
+10:10.140 --> 10:13.140
+I just hit enter over here and it automatically suggests me.
+
+10:13.140 --> 10:14.910
+You see that, vb.cpus.
+
+10:14.910 --> 10:17.670
+And you can use tab to complete this.
+
+10:17.670 --> 10:19.560
+Tab, complete this.
+
+10:19.560 --> 10:21.723
+And then make sure you remove the hash.
+
+10:23.730 --> 10:25.680
+Now let's say I do not understand
+
+10:25.680 --> 10:27.510
+what is this setting vb.cpu.
+
+10:27.510 --> 10:28.710
+What do I do?
+
+10:28.710 --> 10:30.670
+Well, I'm going to select this
+
+10:31.860 --> 10:35.040
+and I'm going to run the command, Control + I,
+
+10:35.040 --> 10:37.830
+or in macOS it's Command + I.
+
+10:37.830 --> 10:41.250
+Select the text force, then use Command + I or Control + I.
+
+10:41.250 --> 10:43.020
+And you should get this.
+
+10:43.020 --> 10:48.020
+Now here, type, /explain, and hit enter.
+
+10:49.800 --> 10:50.850
+Enter.
+
+10:50.850 --> 10:52.953
+And it'll start explaining you this line.
+
+10:53.790 --> 10:57.240
+So GitHub Copilot is telling us what this is about.
+
+10:57.240 --> 10:59.280
+Now I know this what this setting is,
+
+10:59.280 --> 11:02.460
+but I recommend you read it or any line of code
+
+11:02.460 --> 11:05.730
+if you don't understand like this, you can just select that
+
+11:05.730 --> 11:08.850
+and you can do again, Control + I or Command + I,
+
+11:08.850 --> 11:10.593
+and say /explain.
+
+11:13.650 --> 11:15.700
+And once you're good, you can close that.
+
+11:16.620 --> 11:17.490
+Okay, this is all good,
+
+11:17.490 --> 11:20.970
+but now we are going to do Control + S, save this file,
+
+11:20.970 --> 11:23.910
+and we are going to use GitHub Copilot
+
+11:23.910 --> 11:25.440
+to write entire Vagrantfile.
+
+11:25.440 --> 11:27.300
+We'll provide information to it
+
+11:27.300 --> 11:29.580
+and it'll write its own Vagrantfile.
+
+11:29.580 --> 11:32.820
+So for that we are going to click on this Vagrant VM folder
+
+11:32.820 --> 11:34.620
+and create a new folder.
+
+11:34.620 --> 11:37.061
+I'm going to name it as my VMs.
+
+11:37.061 --> 11:38.820
+You can name it anything you want.
+
+11:38.820 --> 11:41.070
+And in that we are going, wait.
+
+11:41.070 --> 11:42.540
+Just created in the wrong folder.
+
+11:42.540 --> 11:45.513
+I'm going to drag it and drop it at Vagrant VMs.
+
+11:47.550 --> 11:51.690
+Yeah, okay, yeah, just drag it and drop it over there.
+
+11:51.690 --> 11:54.363
+And in this I'm going to create a new Vagrantfile,
+
+11:54.363 --> 11:57.600
+so I click on this new file and see Vagrantfile.
+
+11:57.600 --> 12:02.600
+Make sure you give it capital Vagrantfile, V capital.
+
+12:04.260 --> 12:05.970
+Okay, clearly says there open chat
+
+12:05.970 --> 12:07.530
+through Control + I or Command + I.
+
+12:07.530 --> 12:09.390
+I'm going to hit, Command + I,
+
+12:09.390 --> 12:11.370
+and I'm going to write my own Vagrantfile
+
+12:11.370 --> 12:14.430
+with GitHub Copilot or GitHub Copilot
+
+12:14.430 --> 12:16.200
+is going to write it for me.
+
+12:16.200 --> 12:18.750
+So I'm going to get the open to box name,
+
+12:18.750 --> 12:20.820
+so I can get it from the Vagrantfile,
+
+12:20.820 --> 12:22.590
+which we already have used.
+
+12:22.590 --> 12:24.990
+So for Windows, it'll be something like this.
+
+12:24.990 --> 12:28.980
+For macOS M-series chip, it'll be box open to something.
+
+12:28.980 --> 12:30.840
+So just copy the box name,
+
+12:30.840 --> 12:33.120
+go to the new Vagrantfile that you have created.
+
+12:33.120 --> 12:35.850
+Use Control + I or Command + I.
+
+12:35.850 --> 12:38.400
+And write it with me.
+
+12:38.400 --> 12:43.353
+Write Vagrantfile with box name.
+
+12:48.810 --> 12:49.800
+What are your box image?
+
+12:49.800 --> 12:50.633
+Just paste it there.
+
+12:50.633 --> 12:54.960
+And I'm going to give comma use virtual box provider.
+
+12:54.960 --> 12:58.380
+This is for Windows virtual box provider.
+
+12:58.380 --> 13:03.123
+For macOS, you need to write use vmware_desktop.
+
+13:06.630 --> 13:08.730
+Okay, for macOS M-series chip,
+
+13:08.730 --> 13:10.623
+your provider is vmware_desktop.
+
+13:12.540 --> 13:15.240
+For Windows, it'll be virtual box.
+
+13:15.240 --> 13:16.893
+Virtual box.
+
+13:18.270 --> 13:23.270
+Then I also need some memory, like 1GB of RAM,
+
+13:23.760 --> 13:27.990
+two CPUs and I need IP address to my VM.
+
+13:27.990 --> 13:29.400
+So I'm going to write a few more things
+
+13:29.400 --> 13:33.390
+like first use virtual works provider
+
+13:33.390 --> 13:35.850
+or vmware_desktop provider based on
+
+13:35.850 --> 13:37.953
+your operating system of your computer.
+
+13:39.540 --> 13:44.130
+Memory 1GB, CPU 2, bridged adapter
+
+13:51.990 --> 13:56.637
+and static IP 192.168.56.17.
+
+13:59.580 --> 14:02.190
+Just make sure to keep 192 to 168.56.
+
+14:02.190 --> 14:04.680
+After that, you can give any number of your choice.
+
+14:04.680 --> 14:07.233
+Now let's hit enter and see what happens.
+
+14:09.510 --> 14:13.650
+Okay, so almost right, but except
+
+14:13.650 --> 14:15.840
+we needed a different public network.
+
+14:15.840 --> 14:19.260
+And for private network we need the static IP.
+
+14:19.260 --> 14:22.920
+So either we can accept it or we can modify this.
+
+14:22.920 --> 14:27.197
+I will say, static IP for private_network.
+
+14:30.720 --> 14:34.020
+For public_network, no static IP.
+
+14:41.340 --> 14:42.900
+Okay, nice.
+
+14:42.900 --> 14:44.130
+I think this looks good.
+
+14:44.130 --> 14:45.720
+I'll say accept.
+
+14:45.720 --> 14:46.660
+Now see this is AI, you know,
+
+14:46.660 --> 14:48.540
+it'll be learning and it'll be learning more.
+
+14:48.540 --> 14:50.280
+You may get a different result
+
+14:50.280 --> 14:53.220
+than what I'm getting right now, or same,
+
+14:53.220 --> 14:55.830
+but you need to interact to it or sorry,
+
+14:55.830 --> 15:00.830
+interact with it frequently so you understand its language.
+
+15:01.020 --> 15:02.490
+If you keep talking to it regularly,
+
+15:02.490 --> 15:03.840
+you know how to talk to it.
+
+15:03.840 --> 15:05.490
+You know, we are humans, we know how to talk.
+
+15:05.490 --> 15:07.740
+That's the best thing that we do.
+
+15:07.740 --> 15:08.573
+We communicate.
+
+15:08.573 --> 15:11.700
+So we just need to learn how to communicate properly
+
+15:11.700 --> 15:14.700
+with these AI tools, which is also called
+
+15:14.700 --> 15:15.933
+as prompt engineering.
+
+15:16.950 --> 15:19.560
+Okay, then now once we are good with all the settings.
+
+15:19.560 --> 15:22.380
+If we are okay, we can save this file, Control + S.
+
+15:22.380 --> 15:23.940
+I'm going to save this file.
+
+15:23.940 --> 15:25.560
+And then I'm going to open the terminal
+
+15:25.560 --> 15:27.450
+and run this Vagrant command
+
+15:27.450 --> 15:30.180
+to create VM with all the settings.
+
+15:30.180 --> 15:32.100
+So I'm going to go over here
+
+15:32.100 --> 15:35.040
+and click on terminal, new terminal.
+
+15:35.040 --> 15:37.770
+Now already have selected Git Bash as my terminal,
+
+15:37.770 --> 15:39.630
+but if you see a different terminal
+
+15:39.630 --> 15:42.780
+than what you don't want, then you can anytime click
+
+15:42.780 --> 15:45.633
+on this dropdown and select your right terminal.
+
+15:46.710 --> 15:48.930
+Okay, so from the terminal, if you do run PW,
+
+15:48.930 --> 15:50.220
+I'm in Vagrant VMs folder.
+
+15:50.220 --> 15:53.190
+I'm going to get into my VMs folder.
+
+15:53.190 --> 15:55.140
+Clear the screen.
+
+15:55.140 --> 15:57.480
+So my Vagrantfile is in my VMs folder.
+
+15:57.480 --> 16:00.153
+And from here I'm going to do Vagrant up.
+
+16:02.610 --> 16:05.340
+Now either you can create your own Vagrantfile like I did
+
+16:05.340 --> 16:07.740
+and bring up the VM or you can download the Vagrantfile
+
+16:07.740 --> 16:10.143
+from the resource section and then use it.
+
+16:11.040 --> 16:14.100
+Okay, open virtual box and double click on your VM
+
+16:14.100 --> 16:16.350
+if your VM is taking a very long time to pull
+
+16:16.350 --> 16:19.083
+and it's not coming up or if it's doing a timeout.
+
+16:21.060 --> 16:22.743
+That's one quick fix to it.
+
+16:28.620 --> 16:30.273
+Okay, you see now it's coming up.
+
+16:31.110 --> 16:32.070
+Okay, VM is up.
+
+16:32.070 --> 16:33.690
+Let's do Vagrant ssh.
+
+16:33.690 --> 16:36.690
+And let's check if everything is correct or not.
+
+16:36.690 --> 16:39.210
+So I'm in the VM, let me do sudo -i.
+
+16:39.210 --> 16:40.920
+Clear the screen.
+
+16:40.920 --> 16:44.583
+Let me check first the IP address, IP address show command.
+
+16:46.080 --> 16:48.420
+So VM got an IP that I have assigned.
+
+16:48.420 --> 16:51.390
+That is the static IP and the brief from the bridge adapter,
+
+16:51.390 --> 16:53.880
+that's the IP from the Wi-Fi router.
+
+16:53.880 --> 16:56.613
+Let's check the memory, free -m.
+
+16:58.050 --> 17:00.240
+So, around 1GB of RAM.
+
+17:00.240 --> 17:01.710
+That's what we wanted.
+
+17:01.710 --> 17:02.860
+And let's check CPU.
+
+17:02.860 --> 17:07.860
+So to do a cat to this file, cat/proc/cpuinfo.
+
+17:09.090 --> 17:12.870
+And here you should see CPU cores 2.
+
+17:12.870 --> 17:14.040
+Okay, this is all well and good.
+
+17:14.040 --> 17:16.560
+Now you can also apply all this setting
+
+17:16.560 --> 17:19.538
+to your existing Vagrantfile, like open to Vagrantfile
+
+17:19.538 --> 17:20.490
+and send Vagrantfile.
+
+17:20.490 --> 17:23.550
+Just do it for the practice and keep talking
+
+17:23.550 --> 17:27.270
+to the GitHub Copilot to generate your own Vagrantfile.
+
+17:27.270 --> 17:30.300
+Give different, different settings and you will be amazed
+
+17:30.300 --> 17:32.040
+what all it can do for you.
+
+17:32.040 --> 17:33.630
+Now, before you move to the next lecture,
+
+17:33.630 --> 17:36.960
+do Vagrant halt to this VM.
+
+17:36.960 --> 17:39.460
+Once this VM is off, then join me in the next one.

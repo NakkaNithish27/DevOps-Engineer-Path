@@ -1,0 +1,514 @@
+WEBVTT
+
+00:00.160 --> 00:01.280
+Hello and welcome.
+
+00:01.280 --> 00:08.520
+In this lecture we are going to talk about a service called AWS Systems Manager and also Cloud Shell.
+
+00:09.320 --> 00:12.880
+These are pretty easy services to use and comes very handy.
+
+00:13.240 --> 00:15.760
+AWS Systems Manager is very powerful.
+
+00:16.160 --> 00:22.320
+You can manage many nodes at scale when it comes to operations or system administration.
+
+00:22.760 --> 00:29.960
+One very simple use case is you can directly SSH or get a session to your EC2 instance from here without
+
+00:30.240 --> 00:31.560
+using any tools.
+
+00:32.080 --> 00:33.200
+That's what we are going to see.
+
+00:33.240 --> 00:34.320
+And one more thing.
+
+00:34.680 --> 00:40.000
+You can run your commands on a node or a group of nodes at one time.
+
+00:40.480 --> 00:45.800
+Imagine you are managing hundreds of EC2 instances, and you need to execute one command on your hundreds
+
+00:45.800 --> 00:49.960
+of instances, like restarting a service or running a patch.
+
+00:50.480 --> 00:53.200
+In that case, AWS Systems Manager comes very handy.
+
+00:53.240 --> 00:59.160
+You can use the run command feature of Systems Manager and execute commands on multiple machines at
+
+00:59.200 --> 00:59.920
+one time.
+
+01:00.440 --> 01:01.640
+So let's see some example.
+
+01:01.640 --> 01:06.690
+First we are going to launch an EC2 instance and see how we can access it through AWS Systems Manager.
+
+01:07.170 --> 01:09.890
+So go to EC2 instances and say Launch Instance.
+
+01:10.290 --> 01:12.010
+I will name it as server one.
+
+01:12.650 --> 01:15.170
+Selecting ubuntu Ami over here.
+
+01:15.650 --> 01:18.730
+Ubuntu server 24 free tier eligible.
+
+01:19.410 --> 01:25.170
+Let's see instance type T two micro will be good or T3 micro, whichever comes in the free tier.
+
+01:25.610 --> 01:26.370
+Keep your login.
+
+01:26.370 --> 01:29.210
+You can select the existing key or create a new key.
+
+01:29.250 --> 01:32.490
+It doesn't matter because we are not going to use key to login.
+
+01:32.530 --> 01:34.170
+We are going to do it through SSM.
+
+01:35.010 --> 01:36.610
+So I'm selecting an existing key.
+
+01:38.050 --> 01:38.690
+Security group.
+
+01:38.690 --> 01:41.650
+Also I'm creating or I'm selecting the existing security group.
+
+01:42.730 --> 01:45.130
+Scroll down and say launch instance.
+
+01:45.610 --> 01:45.810
+Okay.
+
+01:45.850 --> 01:52.850
+So when we want to connect EC2 instance from SSM, in that case actually EC2 instance connects to the
+
+01:52.850 --> 01:58.250
+SSM service and EC2 instance needs some permission to connect to SSM.
+
+01:58.690 --> 02:01.530
+And that permission can be managed by IAM.
+
+02:01.610 --> 02:03.330
+So let's go to IAM service.
+
+02:05.970 --> 02:10.590
+So we have already seen if we can create user and assign permission to the user.
+
+02:10.590 --> 02:14.150
+But what if one service wants to connect to another service?
+
+02:14.510 --> 02:16.390
+So EC2 wants to connect to SSM.
+
+02:16.430 --> 02:18.670
+In that case we use roles.
+
+02:18.670 --> 02:22.430
+So click on roles and say Create Role.
+
+02:22.870 --> 02:28.670
+Select for what you want to create this role I want to do it for AWS service, specifically EC2.
+
+02:28.710 --> 02:36.190
+So let's keep that AWS service use case is going to be the EC2 and then go next.
+
+02:36.750 --> 02:44.510
+Now here you select the policy the permission you need to look for this policy Amazon SSN managed instance
+
+02:44.510 --> 02:46.110
+core search.
+
+02:46.110 --> 02:48.630
+For this you can just say SSM managed instance.
+
+02:48.630 --> 02:51.830
+Also, you can find it the one that ends with core.
+
+02:52.310 --> 02:53.470
+Select that go.
+
+02:53.510 --> 02:55.550
+Next give role a name.
+
+02:55.550 --> 02:56.350
+You can give anything.
+
+02:56.350 --> 02:59.950
+I'm keeping it as SSM managed instance core and same.
+
+02:59.950 --> 03:01.710
+I'm going to give it in the description.
+
+03:03.750 --> 03:07.070
+And let's scroll down and go Create role.
+
+03:07.710 --> 03:08.910
+So the role is created.
+
+03:08.910 --> 03:11.920
+Now it's time to attach this role to our instance.
+
+03:11.920 --> 03:13.720
+So let's go back to our instance.
+
+03:14.080 --> 03:21.840
+You can select your instance or open it like this and say actions security modify IAM role and select
+
+03:21.840 --> 03:23.000
+your role from here.
+
+03:24.400 --> 03:27.560
+Once you select your role click on update IAM role.
+
+03:28.120 --> 03:28.360
+Okay.
+
+03:28.360 --> 03:31.280
+Now let's see how we can access it from the SSM.
+
+03:32.280 --> 03:35.000
+So come to AWS Systems Manager service.
+
+03:35.000 --> 03:38.880
+You can search it over here and go to Session Manager.
+
+03:39.520 --> 03:41.960
+Click on start session.
+
+03:42.600 --> 03:46.000
+Now it might take some time for the instance to show up over here.
+
+03:46.000 --> 03:49.320
+So if it doesn't show your instance cancel it.
+
+03:49.320 --> 03:50.400
+Wait for some time.
+
+03:50.680 --> 03:55.320
+Also check if your IAM role is correctly attached and then you can try again.
+
+03:56.320 --> 03:58.360
+You can give some reason over here.
+
+03:58.360 --> 03:59.800
+I have given shell access.
+
+03:59.800 --> 04:04.880
+Select your instance and then say next over here.
+
+04:04.960 --> 04:08.120
+Say again next and then say start session.
+
+04:08.440 --> 04:13.320
+Once you click on start session, it should open a new tab and you will get a session.
+
+04:13.930 --> 04:18.650
+And once you get it, you can execute your commands like sudo hyphen I switch to root user.
+
+04:18.650 --> 04:23.890
+You can check your OS and do all the activity that you want.
+
+04:25.010 --> 04:27.850
+So this way you don't need to manually connect or do SSH.
+
+04:27.890 --> 04:28.690
+You don't need keys.
+
+04:28.690 --> 04:30.650
+You don't need to work on the security groups.
+
+04:31.090 --> 04:36.330
+And for this I'm talking about for the SSH session that we do from git bash or the terminal.
+
+04:36.810 --> 04:39.930
+So you can have an IAM role ready as soon as you launch the instance.
+
+04:39.930 --> 04:43.370
+You make sure you attach that IAM role and then you can connect it like this.
+
+04:44.010 --> 04:45.530
+Okay I'm closing the session now.
+
+04:46.010 --> 04:48.330
+And let's go back to AWS Systems Manager.
+
+04:48.850 --> 04:55.690
+Now that we've got the shell access, now if you want to run a command on one or many node you can go
+
+04:55.690 --> 04:57.250
+to this option run command.
+
+04:57.810 --> 04:59.410
+Click on run command.
+
+04:59.690 --> 05:01.450
+Now you will see this list.
+
+05:01.490 --> 05:02.810
+These are the commands.
+
+05:02.810 --> 05:06.570
+Or here it's called as the command document that you want to execute.
+
+05:07.090 --> 05:09.410
+Most of them won't make any sense for now.
+
+05:09.450 --> 05:09.850
+Later.
+
+05:09.850 --> 05:13.170
+Once you learn Ansible you can understand Ansible playbook.
+
+05:13.410 --> 05:18.390
+When you learn CloudWatch and Docker and other services, then these things can start making sense.
+
+05:18.390 --> 05:20.310
+Right now we just want to run a command.
+
+05:20.590 --> 05:24.270
+And for that the document name is run shell script.
+
+05:24.270 --> 05:30.350
+So search with that name run shell script and you can select that document AWS run shell script.
+
+05:30.790 --> 05:31.790
+Scroll down.
+
+05:31.950 --> 05:33.590
+And here you can mention your command.
+
+05:33.590 --> 05:42.310
+So I'm going to say do ls hyphen l en slash var slash log three hyphen m apt update output sudo apt
+
+05:42.310 --> 05:46.790
+update just the list of command that you want to execute, or your entire shell script over here.
+
+05:47.190 --> 05:48.590
+And then you can scroll down.
+
+05:48.590 --> 05:54.110
+You can mention the working directory where you want to run this, and you can execute on the group.
+
+05:54.150 --> 05:55.670
+You can give the tag.
+
+05:55.670 --> 05:59.390
+Let's say you want to execute something on project DevOps.
+
+05:59.390 --> 06:03.910
+You need to make sure that all the instances are tagged like that properly with this tag, and then
+
+06:03.910 --> 06:08.750
+you can give the tag and its value and it will execute it on the instances that has this tag.
+
+06:08.950 --> 06:10.230
+It could be one or many.
+
+06:10.670 --> 06:15.230
+If you have created a resource group, then you can select from the group which will be the group of
+
+06:15.230 --> 06:18.470
+instances, or you can just execute it manually.
+
+06:18.470 --> 06:20.480
+You can select your instances from here.
+
+06:20.480 --> 06:21.720
+So we just have one instance.
+
+06:21.720 --> 06:24.000
+So I'm going to say take this instance.
+
+06:24.280 --> 06:26.640
+Or if you have the list you can select from the list.
+
+06:27.760 --> 06:30.760
+There are a few other options like storing it into an S3 bucket.
+
+06:30.760 --> 06:35.600
+Once you learn S3 you will understand that and also storing the output into CloudWatch logs.
+
+06:35.920 --> 06:37.920
+Once again, this we are going to cover later.
+
+06:38.160 --> 06:41.280
+Once you learn these services, you'll understand these options as well.
+
+06:42.080 --> 06:44.320
+So once you select your instance, mention your command.
+
+06:44.320 --> 06:45.280
+You can say run.
+
+06:45.560 --> 06:46.800
+Now here you see the status.
+
+06:46.800 --> 06:47.720
+It's in progress.
+
+06:47.720 --> 06:48.960
+You see the instance ID.
+
+06:49.320 --> 06:51.400
+Let me refresh this okay.
+
+06:51.440 --> 06:52.120
+It's a success.
+
+06:52.120 --> 06:53.040
+It's already done.
+
+06:53.360 --> 06:57.400
+So you can select your instance and see the output view output.
+
+06:57.640 --> 07:00.440
+So the output will come in the output section.
+
+07:00.520 --> 07:01.440
+See the output.
+
+07:01.880 --> 07:05.080
+And any error that comes will be coming into the error section.
+
+07:05.520 --> 07:08.440
+So like that you can manage also group of instances.
+
+07:08.440 --> 07:12.840
+Many instances you can have complete control or a centralized control.
+
+07:12.840 --> 07:15.880
+From here there are many other options that comes with SSM.
+
+07:15.920 --> 07:19.680
+You have compliance also in this you can do change management.
+
+07:19.720 --> 07:22.160
+You know very essential for system administrators.
+
+07:22.720 --> 07:25.570
+You can store variables over here like parameter store.
+
+07:25.570 --> 07:28.090
+We're going to do that in some project later.
+
+07:28.090 --> 07:29.490
+We're going to use the service.
+
+07:29.850 --> 07:31.010
+You have CloudWatch.
+
+07:31.010 --> 07:34.330
+You have operations center, incident management many other things.
+
+07:34.330 --> 07:41.490
+So basically this is an amazing tool for system administrator or operations to manage the entire operation
+
+07:41.490 --> 07:43.490
+of your fleet of servers.
+
+07:43.970 --> 07:48.050
+One other thing I want to show you over here is AWS Cloud Shell.
+
+07:48.850 --> 07:56.850
+We have seen in AWS CLI, if you want to execute AWS commands, first we need to install aws cli, and
+
+07:56.850 --> 07:58.650
+then we need to set up the access key.
+
+07:58.650 --> 08:01.130
+And then we can execute the command with Cloud shell.
+
+08:01.130 --> 08:02.530
+You can do it all from here.
+
+08:02.530 --> 08:05.450
+You will be logged in with your user account permission.
+
+08:05.690 --> 08:07.410
+So I've logged in with the root account.
+
+08:08.050 --> 08:13.050
+And I'm going to show you I can run commands over here like AWS EC2 describe instances.
+
+08:15.490 --> 08:17.330
+So we have not set any access key.
+
+08:17.370 --> 08:17.890
+Nothing.
+
+08:17.930 --> 08:19.330
+We are not install aws cli.
+
+08:19.370 --> 08:21.730
+That comes everything by default with the cloud shell.
+
+08:22.010 --> 08:23.210
+So you see the output.
+
+08:23.250 --> 08:30.990
+I can scroll down, see the output in the JSON format like that AWS S3 ls, which is to list your S3
+
+08:30.990 --> 08:31.630
+buckets.
+
+08:31.630 --> 08:33.310
+You're going to learn S3 in some time.
+
+08:33.830 --> 08:34.350
+And totally.
+
+08:34.350 --> 08:40.670
+You can manage your entire AWS account from the cloud shell, and if you need access to any commands
+
+08:40.670 --> 08:47.710
+you don't know, then anytime you can open the Amazon Q Developer Chat, you can ask the question over
+
+08:47.710 --> 08:47.950
+here.
+
+08:47.950 --> 08:51.030
+You get the command and you can execute it on the cloud shell.
+
+08:51.030 --> 08:55.830
+So everything at one place you can open the cloud shell into a new tab, separate tab also.
+
+08:56.350 --> 08:56.550
+Right.
+
+08:56.550 --> 09:03.950
+So in one AWS cloud login you get here Cloud Shell Systems Manager Amazon Q developer as an AI assistant.
+
+09:03.950 --> 09:05.990
+So you can manage everything from the browser.
+
+09:06.190 --> 09:09.030
+Now which to use when totally depends on your requirement.
+
+09:09.030 --> 09:13.270
+I have used all of them for different different requirement and use cases.
+
+09:13.270 --> 09:19.110
+The point is, as a DevOps, you should know about these tools so you can use them whenever it's required.
+
+09:19.710 --> 09:21.070
+So feel free to explore.
+
+09:21.070 --> 09:23.790
+Once you are done, then delete your EC2 instance.
+
+09:27.990 --> 09:30.470
+Wrap this up and then join me in the next session.

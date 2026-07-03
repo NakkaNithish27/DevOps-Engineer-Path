@@ -1,0 +1,1708 @@
+WEBVTT
+
+00:00.480 --> 00:01.313
+Instructor: Welcome to the
+
+00:01.313 --> 00:03.873
+RDS session, Relational DataBase Service from AWS.
+
+00:05.160 --> 00:07.320
+This service really solves your database problem
+
+00:07.320 --> 00:10.560
+or database administration problem, should I say.
+
+00:10.560 --> 00:11.500
+So there are a lot of things that goes
+
+00:11.500 --> 00:14.130
+into database administration.
+
+00:14.130 --> 00:16.920
+First, setting up the database itself.
+
+00:16.920 --> 00:21.780
+Then regular patchings, monitoring, continuous monitoring
+
+00:21.780 --> 00:24.963
+of your DB servers, performance tuning,
+
+00:27.060 --> 00:29.520
+backups, regular backups we need to take.
+
+00:29.520 --> 00:31.890
+So in an event of failure we can roll back,
+
+00:31.890 --> 00:35.070
+which is very, very important for databases
+
+00:35.070 --> 00:36.270
+because if you lose the data,
+
+00:36.270 --> 00:37.800
+if you lose the client customer data,
+
+00:37.800 --> 00:39.630
+it is extremely bad for the business.
+
+00:39.630 --> 00:41.853
+So regular backups needs to be done.
+
+00:43.320 --> 00:46.680
+We need to be also scaling based on the requirement.
+
+00:46.680 --> 00:50.940
+If business growing, we add more databases, servers,
+
+00:50.940 --> 00:51.810
+more database servers.
+
+00:51.810 --> 00:55.413
+So scaling out, which is really difficult in SQL databases.
+
+00:56.520 --> 00:59.700
+Security, we need to make sure it's always secure.
+
+00:59.700 --> 01:03.060
+Otherwise you hear a lot of stories every now and then
+
+01:03.060 --> 01:06.993
+and some website data was put on the Black Market.
+
+01:08.700 --> 01:11.700
+Also, not to mention the hardware upgrades needs to be done.
+
+01:13.110 --> 01:14.760
+Regular storage management, you need to
+
+01:14.760 --> 01:18.273
+also scale the storage as well based on the requirement.
+
+01:19.170 --> 01:20.580
+So the lot of things that did
+
+01:20.580 --> 01:23.192
+in database administration you need to do.
+
+01:23.192 --> 01:28.192
+AWS RDS service will do most of it for you, automatically.
+
+01:28.800 --> 01:31.800
+So RDS or Amazon Relational DataBase service
+
+01:31.800 --> 01:34.953
+is a distributed Relational Database service.
+
+01:35.910 --> 01:37.770
+You can have high availability
+
+01:37.770 --> 01:40.500
+in multiple availability zones.
+
+01:40.500 --> 01:42.480
+So while you're creating an RDS instance,
+
+01:42.480 --> 01:44.740
+you can decide you want Multi-AZ
+
+01:45.780 --> 01:47.850
+and that will give you a primary database
+
+01:47.850 --> 01:49.320
+and a secondary database.
+
+01:49.320 --> 01:52.770
+If primary fails, the secondary will take its place.
+
+01:52.770 --> 01:54.903
+That's Multi-AZ in RDS.
+
+01:55.830 --> 01:57.750
+Very easy to scale.
+
+01:57.750 --> 02:00.690
+There are read replicas to improve the performance.
+
+02:00.690 --> 02:02.970
+So Multi-AZ is for high availability,
+
+02:02.970 --> 02:04.860
+but read replica is for performance.
+
+02:04.860 --> 02:07.170
+Read replica will be also again the replica.
+
+02:07.170 --> 02:09.963
+Like in Multi-AZ you have primary and secondary,
+
+02:11.310 --> 02:14.340
+and when the secondary becomes primary, it will start
+
+02:14.340 --> 02:16.770
+also taking the WriteRequest.
+
+02:16.770 --> 02:19.980
+But read replica will be the replica of your primary
+
+02:19.980 --> 02:22.680
+and the data will be continuously syncing.
+
+02:22.680 --> 02:25.980
+You get an endpoint and developer can mention in their code
+
+02:25.980 --> 02:29.490
+that the read request goes to the read replica instead
+
+02:29.490 --> 02:32.940
+of going to the main primary database.
+
+02:32.940 --> 02:34.740
+Which improves the performance drastically
+
+02:34.740 --> 02:37.200
+because most of the request
+
+02:37.200 --> 02:40.143
+on the DB will be read most of the application.
+
+02:41.910 --> 02:43.525
+A very common use cases in
+
+02:43.525 --> 02:48.525
+within your VPC, within your AWS network, you create RDS,
+
+02:48.780 --> 02:51.360
+you can see a privately accessible RDS
+
+02:51.360 --> 02:53.310
+and that can be only accessed
+
+02:53.310 --> 02:55.653
+by any to instance in the same VPC.
+
+02:56.730 --> 02:59.700
+And let's say that web EC2 instance is running a web service
+
+02:59.700 --> 03:01.470
+which can be accessed from the internet.
+
+03:01.470 --> 03:04.830
+So user accessing the website from the internet
+
+03:04.830 --> 03:07.830
+and the EC2 instance will be accessing RDS privately.
+
+03:07.830 --> 03:11.100
+This is one very common use case of RDS.
+
+03:11.100 --> 03:13.440
+It's really very easy to get started with RDS.
+
+03:13.440 --> 03:15.510
+So let's get started.
+
+03:15.510 --> 03:19.830
+Okay, so come to AWS console and search for RDS.
+
+03:19.830 --> 03:23.733
+Just type RDS over there and click on RDS Service.
+
+03:24.840 --> 03:27.420
+Okay, so this is the dashboard we need
+
+03:27.420 --> 03:30.150
+to first create the RDS instance.
+
+03:30.150 --> 03:32.310
+So we can click over here on the Databases
+
+03:32.310 --> 03:35.550
+or we can click over here at the DB Instances.
+
+03:35.550 --> 03:38.280
+So click on the button which says Create Database.
+
+03:38.280 --> 03:39.113
+Click on that.
+
+03:40.410 --> 03:42.840
+Okay, so we have a standard create option
+
+03:42.840 --> 03:44.190
+over here and easy create.
+
+03:44.190 --> 03:46.680
+If you quickly want to create RDS instance, you can click
+
+03:46.680 --> 03:49.500
+on easy create, but I'll keep it as standard create
+
+03:49.500 --> 03:53.010
+so we can see all the option that RDS provides us.
+
+03:53.010 --> 03:55.170
+Okay, first comes the engine options.
+
+03:55.170 --> 03:58.620
+So we have different types of engines.
+
+03:58.620 --> 04:03.600
+So like we have MySQL, PostgreSQL, MariaDB
+
+04:03.600 --> 04:06.120
+or Oracle Database, Microsoft SQ Server
+
+04:06.120 --> 04:08.850
+and IBM Db2, that's the new one.
+
+04:08.850 --> 04:11.790
+So based on your requirement, your project demands, you need
+
+04:11.790 --> 04:13.680
+to select that particular engine.
+
+04:13.680 --> 04:15.330
+So we'll be going with MySQL,
+
+04:15.330 --> 04:18.835
+but I want to also show you or talk about Aurora.
+
+04:18.835 --> 04:20.640
+Aurora, you have two option.
+
+04:20.640 --> 04:23.390
+You can create MySQL Aurora or PostgreSQL style Aurora.
+
+04:27.120 --> 04:29.747
+So if you already know MySQL and or PostgreSQL
+
+04:29.747 --> 04:32.655
+and if you want to, let's say you want to create MySQL
+
+04:32.655 --> 04:34.380
+or PostgreSQL, you can go with Aurora.
+
+04:34.380 --> 04:37.860
+The benefit that you get is Aurora is faster
+
+04:37.860 --> 04:40.890
+and cheaper compared to MySQL and PostgreSQL option
+
+04:40.890 --> 04:42.540
+that you select over here.
+
+04:42.540 --> 04:45.116
+Now this is created by AWS, this particular service,
+
+04:45.116 --> 04:49.320
+it's separate service, you'll find it only on AWS.
+
+04:49.320 --> 04:51.120
+So if you check documentation
+
+04:51.120 --> 04:54.990
+of Aurora, you see it claims a 1/10th of the cost
+
+04:54.990 --> 04:59.790
+of commercial databases and Aurora has five times more
+
+04:59.790 --> 05:04.320
+throughput of MySQL and three times more of PostgreSQL
+
+05:04.320 --> 05:05.730
+because you don't need to worry about licensing
+
+05:05.730 --> 05:06.563
+and all those things.
+
+05:06.563 --> 05:09.510
+It'll be cheaper compared to you know, you buy it yourself.
+
+05:09.510 --> 05:10.590
+And it's also faster.
+
+05:10.590 --> 05:14.181
+Also scaling databases or SQL databases is a big challenge
+
+05:14.181 --> 05:18.510
+and that Aurora does it very slowly.
+
+05:18.510 --> 05:23.430
+You know, it has a concept of Amazon Aurora Serverless also.
+
+05:23.430 --> 05:26.350
+Okay, so back to our creation of the RDS instance.
+
+05:26.350 --> 05:31.350
+We'll go with MySQL where you have here free tier MySQL
+
+05:32.023 --> 05:35.190
+and MariaDB here in you don't have any free tier options.
+
+05:35.190 --> 05:38.550
+So if you're going to create it, that's going to be of some
+
+05:38.550 --> 05:40.980
+charge, you know, some charger will be there.
+
+05:40.980 --> 05:44.340
+So let's go with MySQL just for learning purpose
+
+05:44.340 --> 05:45.660
+and let's come down.
+
+05:45.660 --> 05:49.140
+So next we have show version. So we selected MySQL.
+
+05:49.140 --> 05:52.500
+So which version of MySQL do you want?
+
+05:52.500 --> 05:55.620
+So it has the eight until the 5.7
+
+05:55.620 --> 05:58.590
+because 5.7 is also very used still.
+
+05:58.590 --> 06:03.363
+So we'll keep it the default one 8.0.3.9.
+
+06:04.410 --> 06:05.790
+Okay? Then we have the templates.
+
+06:05.790 --> 06:06.955
+Now templates basically just depends
+
+06:06.955 --> 06:09.030
+on what settings you're going to select.
+
+06:09.030 --> 06:12.420
+So you have production, dev/test and free tier.
+
+06:12.420 --> 06:14.640
+Now for first time and just
+
+06:14.640 --> 06:17.250
+to be sure, make sure you select free tier.
+
+06:17.250 --> 06:19.740
+I'm going to keep it at Dev/Test
+
+06:19.740 --> 06:22.830
+because I need to show you a lot of options
+
+06:22.830 --> 06:23.663
+because accidentally
+
+06:23.663 --> 06:26.970
+if you select any other expensive service
+
+06:26.970 --> 06:29.395
+of RDS then it should be a problem, right?
+
+06:29.395 --> 06:31.325
+So let's keep free tier for you.
+
+06:31.325 --> 06:33.810
+I'm going to select Dev/Test.
+
+06:33.810 --> 06:35.370
+Now difference between production
+
+06:35.370 --> 06:38.670
+and Dev/Test is this productions gives you multi zones.
+
+06:38.670 --> 06:40.277
+You'll have multiple RDS instance
+
+06:40.277 --> 06:44.940
+like we discussed previously, distributed in multiple zones
+
+06:44.940 --> 06:46.884
+and the storage will be also faster
+
+06:46.884 --> 06:50.400
+throughput optimized, you know, high IOPS.
+
+06:50.400 --> 06:52.110
+So you know, this will not be free.
+
+06:52.110 --> 06:54.330
+Production will definitely be not free.
+
+06:54.330 --> 06:57.090
+Dev/Test, we can select free option from this.
+
+06:57.090 --> 06:58.830
+So we can select, you know, Single Instance
+
+06:58.830 --> 07:03.180
+and normal storage, general purpose, gp2, gp3, like that.
+
+07:03.180 --> 07:05.463
+So I'm going to keep Dev/Test.
+
+07:07.110 --> 07:09.150
+So in availability and durability
+
+07:09.150 --> 07:11.910
+you have first Multi AZ DB Cluster.
+
+07:11.910 --> 07:15.030
+Now in the cluster you have a primary instance
+
+07:15.030 --> 07:18.360
+and two readable standby DB instance.
+
+07:18.360 --> 07:20.640
+So there will be two standby instance,
+
+07:20.640 --> 07:22.740
+but there will be no readable instance.
+
+07:22.740 --> 07:27.360
+So the read queries will go to the standby instances also.
+
+07:27.360 --> 07:28.740
+So it's a cluster.
+
+07:28.740 --> 07:31.020
+The second option, Multi AZ DB instance
+
+07:31.020 --> 07:33.780
+where you have one primary and one standby, okay?
+
+07:33.780 --> 07:36.060
+Both in different availability zones.
+
+07:36.060 --> 07:37.740
+So if the primary goes down,
+
+07:37.740 --> 07:39.960
+then only the standby will come in.
+
+07:39.960 --> 07:41.807
+But in the cluster the standby will be
+
+07:41.807 --> 07:44.220
+also doing the reading.
+
+07:44.220 --> 07:45.990
+And then you have the Single DB instance.
+
+07:45.990 --> 07:49.901
+Make sure you keep it to single DB instance. Okay?
+
+07:49.901 --> 07:52.980
+Now next comes the settings. The DB instance identifier.
+
+07:52.980 --> 07:55.110
+That will be just the name of your RDS instance.
+
+07:55.110 --> 07:56.553
+So let's give it something.
+
+07:57.720 --> 08:00.183
+I will name it as vprofileMySQLServer.
+
+08:01.320 --> 08:05.010
+That is just the name of the instance, RDS instance.
+
+08:05.010 --> 08:06.900
+Okay, login details, credential settings.
+
+08:06.900 --> 08:08.779
+So username admin by default.
+
+08:08.779 --> 08:10.318
+If you wish, you can change this one.
+
+08:10.318 --> 08:13.590
+I'm going to keep it as admin. And then the password.
+
+08:13.590 --> 08:15.570
+How do you want to manage the password?
+
+08:15.570 --> 08:19.350
+One option is to keep it in the secrets manager more secure.
+
+08:19.350 --> 08:21.240
+But this is not free.
+
+08:21.240 --> 08:22.950
+Okay, so the password will be kept
+
+08:22.950 --> 08:26.460
+with AWS Secret Manager Service
+
+08:26.460 --> 08:28.200
+and nobody can get access to it as long
+
+08:28.200 --> 08:30.120
+as they don't have the authentication.
+
+08:30.120 --> 08:31.830
+And you have the self-managed
+
+08:31.830 --> 08:33.960
+where you can mention your own password
+
+08:33.960 --> 08:35.940
+or you can see auto generate password.
+
+08:35.940 --> 08:38.730
+I'm gonna keep it as auto generate password.
+
+08:38.730 --> 08:39.810
+Okay, let's scroll down.
+
+08:39.810 --> 08:43.080
+Now comes the instance compute settings.
+
+08:43.080 --> 08:44.520
+What type of instance you need.
+
+08:44.520 --> 08:48.210
+It's just like selecting an EC2 instance instance type.
+
+08:48.210 --> 08:50.520
+So you have three sections over here, standard classes,
+
+08:50.520 --> 08:52.890
+memory optimized and burstable classes.
+
+08:52.890 --> 08:55.680
+And for a high performing database you should go
+
+08:55.680 --> 08:59.670
+with memory optimized classes, this r and x series.
+
+08:59.670 --> 09:02.280
+But we'll be going with burstable classes
+
+09:02.280 --> 09:04.110
+because we want to keep it under free tier.
+
+09:04.110 --> 09:07.113
+So we'll go with db.t3 micro.
+
+09:08.970 --> 09:11.100
+If you selected the template as free tier, it's going
+
+09:11.100 --> 09:13.620
+to automatically select the free type instance.
+
+09:13.620 --> 09:15.510
+So you don't need to worry about this.
+
+09:15.510 --> 09:16.890
+But if you select a dev/test,
+
+09:16.890 --> 09:20.040
+make sure you select your db.t3 micro.
+
+09:20.040 --> 09:21.180
+Next comes the storage.
+
+09:21.180 --> 09:24.290
+Now storage type, we'll go with gp3.
+
+09:24.290 --> 09:28.170
+We can go with gp2 also, but iOPS, provisioned iOPS SSD.
+
+09:28.170 --> 09:30.630
+This is not going to be free,
+
+09:30.630 --> 09:32.130
+but it's going to be high performing
+
+09:32.130 --> 09:36.180
+for realtime production databases, very much required.
+
+09:36.180 --> 09:37.528
+Here option also of magnetic,
+
+09:37.528 --> 09:39.570
+but that will be only, you know, when you want
+
+09:39.570 --> 09:42.480
+to keep your instances, you know, standby, you don't want
+
+09:42.480 --> 09:45.990
+to use it in real time, then you can go with magnetic.
+
+09:45.990 --> 09:48.569
+It's not for real time use case for anything just
+
+09:48.569 --> 09:50.613
+to you know, keep it in standby mode.
+
+09:51.480 --> 09:56.480
+So we'll keep gp3 and we'll select the storage as 20 GB only
+
+09:57.000 --> 09:58.850
+because that's the minimum we can do.
+
+10:00.180 --> 10:03.510
+Okay, additional storage configuration.
+
+10:03.510 --> 10:06.330
+If you want to enable auto scaling, you can go with this,
+
+10:06.330 --> 10:08.760
+but really we are not going to scale our database
+
+10:08.760 --> 10:11.640
+'cause there's no load coming, but there is an option
+
+10:11.640 --> 10:14.700
+of automatically scaling the storage.
+
+10:14.700 --> 10:16.650
+So you can keep this on or off does not matter
+
+10:16.650 --> 10:18.510
+because anyways, we are not going to hit any load
+
+10:18.510 --> 10:19.620
+on this one
+
+10:19.620 --> 10:21.750
+and you can select the maximum threshold maximum,
+
+10:21.750 --> 10:23.103
+how much it can go.
+
+10:24.090 --> 10:26.100
+Okay, next comes the option of connectivity.
+
+10:26.100 --> 10:28.740
+Now this is for people who do not understand security group
+
+10:28.740 --> 10:30.690
+and you know EC2 instances
+
+10:30.690 --> 10:32.340
+and stuff in details for developer.
+
+10:32.340 --> 10:34.890
+If you want to connect this instance
+
+10:34.890 --> 10:37.170
+through an EC2 instance.
+
+10:37.170 --> 10:39.060
+So you select this option, this, basically
+
+10:39.060 --> 10:41.130
+what it does is you select an EC2 instance.
+
+10:41.130 --> 10:43.996
+So already it's going to take RDS security group
+
+10:43.996 --> 10:45.300
+and put it into the RDS security group.
+
+10:45.300 --> 10:48.450
+There will be an entry created in the RDS security group
+
+10:48.450 --> 10:50.970
+that allow connection from this instance.
+
+10:50.970 --> 10:53.970
+We'll do it ourself manually. So we don't need to do this.
+
+10:53.970 --> 10:56.783
+We'll create an instance and we'll see how we can access it.
+
+10:57.690 --> 10:59.550
+Okay? Then you have the DB subnet group.
+
+10:59.550 --> 11:01.770
+This option you will only understand
+
+11:01.770 --> 11:03.420
+if you know the VPC, which we'll do
+
+11:03.420 --> 11:06.060
+in AWS part two when we understand VPC.
+
+11:06.060 --> 11:07.260
+We'll understand the subnet
+
+11:07.260 --> 11:10.860
+and we'll talk about how you group the subnets together
+
+11:10.860 --> 11:14.430
+for now, just keep it as default and public accessibility.
+
+11:14.430 --> 11:16.610
+We are going to select it as no maximum cases.
+
+11:16.610 --> 11:18.870
+There will be no, you don't want your database
+
+11:18.870 --> 11:20.850
+to be accessible publicly.
+
+11:20.850 --> 11:23.130
+You know, most of the time you will have an EC2 instance
+
+11:23.130 --> 11:27.750
+or any other service that access the RDS database privately.
+
+11:27.750 --> 11:28.590
+So we'll keep it that
+
+11:28.590 --> 11:30.630
+and we'll see how we can access it privately
+
+11:30.630 --> 11:33.060
+also, after we create this.
+
+11:33.060 --> 11:35.250
+Security group, you can select an existing security group
+
+11:35.250 --> 11:37.380
+or you can say create a new security group for me.
+
+11:37.380 --> 11:39.810
+So we'll say create our own security group.
+
+11:39.810 --> 11:44.730
+We'll give it a name, I will name it as vproMySQLRDS-sg.
+
+11:44.730 --> 11:46.920
+Availability zone. Which availability zone you want.
+
+11:46.920 --> 11:49.260
+We'll just say no, no preference
+
+11:49.260 --> 11:52.060
+Because anyways, we are creating just a single instance.
+
+11:53.370 --> 11:55.230
+Okay, additional configuration.
+
+11:55.230 --> 11:57.420
+Here you have the port number, default port
+
+11:57.420 --> 11:59.162
+of MySQL is 3306.
+
+11:59.162 --> 12:00.540
+We'll keep it as it is.
+
+12:00.540 --> 12:04.170
+If you have a requirement of changing the default port
+
+12:04.170 --> 12:07.170
+of MySQL, then you better change it here.
+
+12:07.170 --> 12:09.670
+Otherwise, most of the time it is kept as default.
+
+12:10.620 --> 12:12.000
+Okay, database authentication.
+
+12:12.000 --> 12:14.550
+How do you want to authenticate to the database?
+
+12:14.550 --> 12:15.383
+You know, we'll see.
+
+12:15.383 --> 12:17.760
+We'll use the command line, MySQL command line
+
+12:17.760 --> 12:20.460
+to access it and that will be through password base.
+
+12:20.460 --> 12:22.510
+So let's keep it password authentication.
+
+12:23.370 --> 12:26.100
+Monitoring, enable enhanced monitoring
+
+12:26.100 --> 12:27.163
+for real time use cases.
+
+12:27.163 --> 12:30.900
+Yes. You know, granularity is like almost one second.
+
+12:30.900 --> 12:34.560
+So every second also you can monitor your database
+
+12:34.560 --> 12:36.900
+and mind you, this will not be free every second
+
+12:36.900 --> 12:38.880
+the database will be checked.
+
+12:38.880 --> 12:41.070
+So that is as low as the granularity
+
+12:41.070 --> 12:44.553
+of this monitoring goes but now let's not check this.
+
+12:45.420 --> 12:48.990
+Additional configuration. So initial database name.
+
+12:48.990 --> 12:50.910
+So you know you need to have a database name
+
+12:50.910 --> 12:53.940
+to store the, you know, table schemas and all.
+
+12:53.940 --> 12:55.800
+We'll see that when we do the project.
+
+12:55.800 --> 12:58.530
+So we'll give the pro the database name
+
+12:58.530 --> 13:02.520
+as accounts and let's keep it as it is.
+
+13:02.520 --> 13:04.380
+You have something called a DB parameter group
+
+13:04.380 --> 13:05.213
+and options group.
+
+13:05.213 --> 13:07.080
+We'll see that once we create it.
+
+13:07.080 --> 13:10.530
+So basically advanced level of settings
+
+13:10.530 --> 13:12.960
+of the MySQL service.
+
+13:12.960 --> 13:16.320
+Okay, now backup. Do you want to have automatic backup?
+
+13:16.320 --> 13:17.160
+This in real time,
+
+13:17.160 --> 13:19.440
+you should definitely put a check mark on.
+
+13:19.440 --> 13:21.180
+So you mentioned the period and for
+
+13:21.180 --> 13:24.120
+that much time it's going to keep taking the database
+
+13:24.120 --> 13:27.900
+and how long do you want to keep the backup?
+
+13:27.900 --> 13:29.610
+Like you want to keep it for seven days
+
+13:29.610 --> 13:31.290
+or you want to keep it, you know, higher.
+
+13:31.290 --> 13:32.983
+Highest option here is 35 days.
+
+13:32.983 --> 13:35.100
+So you can keep the backup of ideas
+
+13:35.100 --> 13:37.083
+as long as you know, 35 days old.
+
+13:38.010 --> 13:39.270
+So retention is basically here.
+
+13:39.270 --> 13:41.910
+If you select seven days or seven days, I know any backup
+
+13:41.910 --> 13:44.100
+that is older than seven days will be deleted.
+
+13:44.100 --> 13:47.370
+That's what it means. And you can select the backup window.
+
+13:47.370 --> 13:49.593
+Also, when do you want to take the backups?
+
+13:50.490 --> 13:52.293
+Now we'll just uncheck this one.
+
+13:53.280 --> 13:57.003
+Encryption, do you want your data to be encrypted?
+
+13:58.080 --> 13:59.790
+This is called as encryption at rest.
+
+13:59.790 --> 14:02.040
+The data that is stored in the database, do you want
+
+14:02.040 --> 14:04.440
+to keep it encrypted or not?
+
+14:04.440 --> 14:05.460
+And so you have
+
+14:05.460 --> 14:08.340
+to also select the encryption decryption key also.
+
+14:08.340 --> 14:11.490
+So by default gives the option of KMS.
+
+14:11.490 --> 14:13.860
+Make sure you don't select this option.
+
+14:13.860 --> 14:15.120
+I mean in real time you select,
+
+14:15.120 --> 14:19.320
+but not now because you cannot delete the KMS keys also.
+
+14:19.320 --> 14:21.270
+You have to disable the key for, you know,
+
+14:21.270 --> 14:24.780
+it takes seven days to actually disable the key.
+
+14:24.780 --> 14:26.660
+So it's quite a hassle if you want
+
+14:26.660 --> 14:28.830
+to keep everything in free tier.
+
+14:28.830 --> 14:30.810
+So make sure you uncheck this option.
+
+14:30.810 --> 14:33.570
+In real time, you can go with this.
+
+14:33.570 --> 14:35.760
+Logs, now there is no option to log
+
+14:35.760 --> 14:38.910
+into any operating system and check the logs, right?
+
+14:38.910 --> 14:42.060
+Here, the RDS instances a platform as a service.
+
+14:42.060 --> 14:44.940
+So what about the logs that the MySQL service generates?
+
+14:44.940 --> 14:46.830
+You can stream that logs
+
+14:46.830 --> 14:50.640
+to CloudWatch servers, Amazon CloudWatch logs servers.
+
+14:50.640 --> 14:53.550
+So four types of logs that you want, you can stream
+
+14:53.550 --> 14:55.920
+to CloudWatch, you can put a check mark over there
+
+14:55.920 --> 14:58.050
+and the logs this gets generated will
+
+14:58.050 --> 15:01.923
+be automatically stored to AWS CloudWatch logs service.
+
+15:02.940 --> 15:03.900
+Okay, maintenance.
+
+15:03.900 --> 15:06.870
+Now there is an option of automatically, you know, patching
+
+15:06.870 --> 15:09.300
+the minor versions, not the major versions,
+
+15:09.300 --> 15:10.860
+the minor versions.
+
+15:10.860 --> 15:12.510
+So if you are okay with that,
+
+15:12.510 --> 15:14.370
+you can put this check mark on.
+
+15:14.370 --> 15:15.990
+Many people are not okay with this.
+
+15:15.990 --> 15:17.100
+They don't want automatically
+
+15:17.100 --> 15:21.930
+to pack get the database patched automatically
+
+15:21.930 --> 15:23.940
+and that really depends on the use cases.
+
+15:23.940 --> 15:27.030
+Okay, so let's uncheck this one.
+
+15:27.030 --> 15:28.320
+We don't want our database
+
+15:28.320 --> 15:31.500
+to be automatically, you know what, let's put a check mark
+
+15:31.500 --> 15:34.080
+because you'll just create and delete it.
+
+15:34.080 --> 15:35.430
+I don't think there will be any upgrade
+
+15:35.430 --> 15:37.500
+that will come over here.
+
+15:37.500 --> 15:40.020
+You can also select the maintenance window.
+
+15:40.020 --> 15:42.270
+When do you want this to be upgraded?
+
+15:42.270 --> 15:43.710
+You can select a window.
+
+15:43.710 --> 15:45.630
+Now this gives you also one more option
+
+15:45.630 --> 15:48.120
+if you make any change to your RDS instance.
+
+15:48.120 --> 15:50.460
+A setting change you're making, you can select, do you want
+
+15:50.460 --> 15:53.310
+to do it on a maintenance window or apply it immediately?
+
+15:55.650 --> 15:57.990
+So this window is not just for the upgrade
+
+15:57.990 --> 15:59.100
+but also for yourself
+
+15:59.100 --> 16:01.140
+and you manually want to change some settings.
+
+16:01.140 --> 16:05.400
+You can select at this time apply this particular setting.
+
+16:05.400 --> 16:07.560
+You can select that option also.
+
+16:07.560 --> 16:10.980
+Let's keep it no preference for now. Delete protection.
+
+16:10.980 --> 16:12.570
+So just this is just to prevent
+
+16:12.570 --> 16:15.090
+that if someone you know don't accidentally delete
+
+16:15.090 --> 16:19.680
+your RDS instance just for accidental deletion, right?
+
+16:19.680 --> 16:23.070
+And then over here it shows the cost, the total monthly cost
+
+16:23.070 --> 16:25.350
+that you're going to bear if you selected all these things,
+
+16:25.350 --> 16:27.390
+don't worry, we are just going to create it
+
+16:27.390 --> 16:28.800
+and delete it in some time.
+
+16:28.800 --> 16:30.870
+There won't be any charges as long
+
+16:30.870 --> 16:32.460
+as you know you delete it.
+
+16:32.460 --> 16:35.220
+But if you just keep this RDS instance running for a month.
+
+16:35.220 --> 16:37.380
+For a month, this will be the charge
+
+16:37.380 --> 16:39.900
+and it is not calculating the free tier
+
+16:39.900 --> 16:41.580
+because we have a free tier account.
+
+16:41.580 --> 16:43.350
+So it's not calculating that also.
+
+16:43.350 --> 16:45.570
+So definitely it's not going to be this much also
+
+16:45.570 --> 16:47.850
+if you keep it running, but make sure
+
+16:47.850 --> 16:50.463
+after this lecture you delete this instance.
+
+16:51.780 --> 16:54.210
+Okay, so let's click on Create Database
+
+16:54.210 --> 16:56.760
+and this is going to take some time to create the database
+
+16:56.760 --> 17:00.090
+by the time we need to have an EC2 instance.
+
+17:00.090 --> 17:01.680
+So we can log into that instance
+
+17:01.680 --> 17:03.270
+and from there we are going to connect
+
+17:03.270 --> 17:05.933
+to this MySQL database, okay?
+
+17:08.850 --> 17:10.710
+As soon as you get this popup.
+
+17:10.710 --> 17:12.990
+Now creating the database view credential details.
+
+17:12.990 --> 17:16.410
+So click on this option and make sure you save this username
+
+17:16.410 --> 17:17.243
+and password.
+
+17:17.243 --> 17:20.250
+We'll use it when we log in from the EC2 instance.
+
+17:20.250 --> 17:21.450
+So keep it somewhere safe
+
+17:21.450 --> 17:23.490
+because once this is gone you cannot recover it.
+
+17:23.490 --> 17:25.983
+You have to reset then the password.
+
+17:26.850 --> 17:29.000
+So I'm going to keep it in my sticky notes.
+
+17:31.290 --> 17:33.903
+Okay, once you are done then you can close this one.
+
+17:36.810 --> 17:40.020
+Okay, by the time we are going to create an EC2 instance
+
+17:40.020 --> 17:43.113
+so we can connect to this RDS.
+
+17:44.470 --> 17:47.210
+So just go to instances, AWS EC2 instances
+
+17:47.210 --> 17:51.183
+and say launch instances, we'll launch an Ubuntu.
+
+17:52.350 --> 17:56.250
+We'll just name it as MySQL client Ubuntu will select
+
+17:56.250 --> 17:59.370
+or any other operating system is fine.
+
+17:59.370 --> 18:02.070
+You just need to install MySQL client over there.
+
+18:02.070 --> 18:04.020
+So let's select Ubuntu.t2.micro.
+
+18:04.020 --> 18:05.670
+Let's create a key pair.
+
+18:05.670 --> 18:10.670
+Let's name it as rdssqlclient format. Create Key Pair.
+
+18:12.240 --> 18:14.340
+Okay, network setting we'll say edit
+
+18:14.340 --> 18:17.283
+and we'll create our own security group.
+
+18:18.210 --> 18:20.640
+I'll just name it as rdssqlclient.
+
+18:20.640 --> 18:24.750
+And the rule is we need to just do the SSH to this instance.
+
+18:24.750 --> 18:28.260
+So 22 allowed from my IP and that is it.
+
+18:28.260 --> 18:29.643
+Just launch the instance.
+
+18:30.990 --> 18:35.990
+Okay now if we go to our RDS instance, you can look
+
+18:36.990 --> 18:38.160
+at all the settings.
+
+18:38.160 --> 18:40.825
+So please take some time off yours, pause the lecture and go
+
+18:40.825 --> 18:43.500
+through all these options and check all the settings.
+
+18:43.500 --> 18:46.140
+Many settings you can change and modify.
+
+18:46.140 --> 18:48.240
+This will be the RDS endpoint.
+
+18:48.240 --> 18:50.520
+You know, once it is created, available state,
+
+18:50.520 --> 18:52.350
+you can see the RDS endpoint.
+
+18:52.350 --> 18:55.920
+You can see the security group. This is the security group.
+
+18:55.920 --> 18:57.930
+So if I'm going to just open it
+
+18:57.930 --> 19:01.713
+in a different tab, let's click on this.
+
+19:02.790 --> 19:06.510
+So that's the security group that we created.
+
+19:06.510 --> 19:09.750
+We've given the name right to the security group
+
+19:09.750 --> 19:11.796
+and by default has a rule 3306.
+
+19:11.796 --> 19:13.983
+Let's edit the inbound rule.
+
+19:15.150 --> 19:17.940
+It says 3306 allowed from my IP.
+
+19:17.940 --> 19:21.630
+Now this is of no use because this is a private instance.
+
+19:21.630 --> 19:24.720
+We cannot access it from the internet.
+
+19:24.720 --> 19:27.150
+So we are going to give here another rule.
+
+19:27.150 --> 19:28.650
+I'm going to add rule.
+
+19:28.650 --> 19:32.584
+I will say like you can search for...
+
+19:32.584 --> 19:37.380
+Wait, MySQL Aurora, my bad search for MySQL Aurora.
+
+19:37.380 --> 19:39.810
+Or you can just type here 3306.
+
+19:39.810 --> 19:41.220
+And we have to allow it
+
+19:41.220 --> 19:46.140
+from the RDS client security group.
+
+19:46.140 --> 19:49.740
+So our instance, our instance can access this RDS
+
+19:49.740 --> 19:52.680
+on port 3306, right?
+
+19:52.680 --> 19:53.940
+That's the security group idea
+
+19:53.940 --> 19:57.780
+of the RDS client instance security group.
+
+19:57.780 --> 20:00.060
+So when we SSH to this instance, right,
+
+20:00.060 --> 20:02.790
+that we just launched, when we SSH
+
+20:02.790 --> 20:04.740
+to this instance from here, we need to connect
+
+20:04.740 --> 20:06.810
+to this RDS instance.
+
+20:06.810 --> 20:08.820
+So it's RDS has the security group.
+
+20:08.820 --> 20:11.670
+The security group rule will be checked 3306 allowed
+
+20:11.670 --> 20:13.320
+from the instant security group.
+
+20:13.320 --> 20:15.540
+If it says yes, then we can access it.
+
+20:15.540 --> 20:20.280
+So let's save this rule and let's SSH to this instance.
+
+20:20.280 --> 20:23.584
+Let's get it public IP, I'm going
+
+20:23.584 --> 20:25.298
+to open my GIT Bash or macros.
+
+20:25.298 --> 20:30.150
+You can just open your terminal, ssh -i the key path.
+
+20:30.150 --> 20:33.510
+So that's the key path. Username is ubuntu@3.
+
+20:33.510 --> 20:38.103
+The public IP. Yes, that's SSH.
+
+20:39.390 --> 20:42.450
+Okay, in order to access this RDS instance
+
+20:42.450 --> 20:45.120
+from here we need to have the MySQL client
+
+20:45.120 --> 20:47.490
+because our engine type is MySQL.
+
+20:47.490 --> 20:51.040
+So we're going to run this command apt update first
+
+20:55.350 --> 20:58.140
+and then we will install the MySQL client.
+
+20:58.140 --> 21:02.760
+So to say apt install, the package name is mysql-client.
+
+21:02.760 --> 21:04.080
+Based on different OS
+
+21:04.080 --> 21:05.550
+and different version, you have different name
+
+21:05.550 --> 21:07.830
+of the MySQL client package.
+
+21:07.830 --> 21:10.950
+This basically gives us the MySQL command line.
+
+21:10.950 --> 21:14.580
+By using that we can access the RDS instance.
+
+21:14.580 --> 21:16.980
+So once it is installed, remember the package name
+
+21:16.980 --> 21:19.413
+is mysql-client in Ubuntu.
+
+21:20.670 --> 21:22.860
+Okay, so all you have to do is then you have
+
+21:22.860 --> 21:27.860
+to say mysql-h and the endpoint, h means the host.
+
+21:28.020 --> 21:31.260
+So go to RDS, get the endpoint, copy this
+
+21:31.260 --> 21:33.600
+and just paste it over here.
+
+21:33.600 --> 21:34.590
+So that's the endpoint.
+
+21:34.590 --> 21:35.423
+And then you need
+
+21:35.423 --> 21:40.423
+to give username -u admin is the username -p.
+
+21:40.590 --> 21:43.353
+Now I saved the password over here in the command line,
+
+21:44.220 --> 21:47.040
+sorry in the sticky note, but I'm giving it here
+
+21:47.040 --> 21:48.360
+in the command line -p
+
+21:48.360 --> 21:50.940
+without any space, I give the password.
+
+21:50.940 --> 21:52.620
+Now this is just for showing purpose
+
+21:52.620 --> 21:55.170
+in real time, you should not give password like this.
+
+21:55.170 --> 21:58.800
+In the command line. You just type -p and hit Enter.
+
+21:58.800 --> 22:00.633
+It is going to ask you the password.
+
+22:02.340 --> 22:03.788
+Okay, we are in, now I'm going
+
+22:03.788 --> 22:08.788
+to say show databases, show databases.
+
+22:08.970 --> 22:12.310
+And you should see a database named accounts over here
+
+22:13.380 --> 22:16.620
+that we created while we are launching the RDS instance.
+
+22:16.620 --> 22:17.453
+Now, if you're not able
+
+22:17.453 --> 22:19.350
+to log in, check your username and password.
+
+22:19.350 --> 22:21.180
+If it's an authentication error,
+
+22:21.180 --> 22:23.250
+username and password, you need to check.
+
+22:23.250 --> 22:24.660
+But if it's timing out,
+
+22:24.660 --> 22:26.190
+then it's the security group problem.
+
+22:26.190 --> 22:30.000
+You need to allow the RDS security group inbound rule
+
+22:30.000 --> 22:34.260
+on port 3306 from the instance security group.
+
+22:34.260 --> 22:35.940
+Okay now how to use it and all
+
+22:35.940 --> 22:37.890
+and what to do with this RDS instance
+
+22:37.890 --> 22:40.140
+that we'll see in the projects?
+
+22:40.140 --> 22:42.990
+And there are many other options with this RDS instance.
+
+22:42.990 --> 22:45.840
+Before you delete, I recommend again you pause the lecture
+
+22:45.840 --> 22:47.274
+and go through all the settings.
+
+22:47.274 --> 22:49.230
+There are many settings that you can change
+
+22:49.230 --> 22:50.490
+and there's a modify option
+
+22:50.490 --> 22:53.730
+over here where you can change the engine version.
+
+22:53.730 --> 22:55.590
+You can change the name, you can change
+
+22:55.590 --> 22:58.470
+the credential method, you can reset the password,
+
+22:58.470 --> 23:00.210
+you can change the instance type.
+
+23:00.210 --> 23:02.145
+You can change the storage, right?
+
+23:02.145 --> 23:03.690
+So many other option it gives,
+
+23:03.690 --> 23:06.990
+you can change it to Multi-AZ also.
+
+23:06.990 --> 23:08.520
+If you're a single instance, you can switch it
+
+23:08.520 --> 23:09.873
+to Multi-AZ also.
+
+23:10.920 --> 23:12.960
+Okay security group and various other things
+
+23:12.960 --> 23:15.933
+that you can change if you wish.
+
+23:17.910 --> 23:20.790
+There are a few other settings like you know,
+
+23:20.790 --> 23:24.450
+you have parameter groups, subnet groups, these settings,
+
+23:24.450 --> 23:25.620
+some advanced level of settings.
+
+23:25.620 --> 23:27.540
+We're going to talk about them in the project
+
+23:27.540 --> 23:29.763
+when we set up the V profile project on AWS.
+
+23:31.380 --> 23:33.420
+When we do rearchitecting of this project.
+
+23:33.420 --> 23:35.610
+There's many time in this course we will be using
+
+23:35.610 --> 23:37.380
+the RDS instance.
+
+23:37.380 --> 23:39.300
+So you'll have enough practice.
+
+23:39.300 --> 23:42.540
+So once you're done with your practice over here logging,
+
+23:42.540 --> 23:44.460
+you know everything is good, you check all the options.
+
+23:44.460 --> 23:47.070
+If you're good, then I recommend you delete it.
+
+23:47.070 --> 23:49.870
+ASAP, you know, you can just say Action
+
+23:50.970 --> 23:52.440
+and you can go to Delete button.
+
+23:52.440 --> 23:54.780
+There are other options you know, you see here, convert
+
+23:54.780 --> 23:58.500
+to Multi-AZ or stop temporarily, you can reboot it.
+
+23:58.500 --> 24:02.220
+Reboot is usually done when you upgrade or do any patch
+
+24:02.220 --> 24:04.320
+and you have option of taking a snapshot.
+
+24:04.320 --> 24:05.850
+This is basically the backup.
+
+24:05.850 --> 24:09.390
+You can see all the backups over here in the snapshots.
+
+24:09.390 --> 24:13.770
+One that was manually taken, then system taken snapshots.
+
+24:13.770 --> 24:15.090
+So you won't see anything
+
+24:15.090 --> 24:17.760
+because we have disabled the automated backup.
+
+24:17.760 --> 24:20.253
+Otherwise you can see the here, the backup.
+
+24:21.840 --> 24:25.650
+Let's go back to a DB instance and see Action
+
+24:25.650 --> 24:29.340
+and see delete, delete the option, okay?
+
+24:29.340 --> 24:30.570
+Don't make any changes.
+
+24:30.570 --> 24:32.160
+As I told you in the projects, we are going
+
+24:32.160 --> 24:34.830
+to see many different settings of this RDS.
+
+24:34.830 --> 24:37.800
+It will ask you no, you should take a final snapshot
+
+24:37.800 --> 24:39.060
+before you delete just in order
+
+24:39.060 --> 24:40.890
+to preserve your data, right?
+
+24:40.890 --> 24:41.820
+We don't need to do that
+
+24:41.820 --> 24:45.030
+because really not any production data we have over here.
+
+24:45.030 --> 24:49.740
+So make sure you uncheck this and say, I acknowledge
+
+24:49.740 --> 24:54.740
+and you had to type here, delete me and say delete.
+
+24:56.070 --> 24:58.200
+Okay so this is gonna take some time to delete by the time,
+
+24:58.200 --> 25:01.140
+also delete your instance that we created.
+
+25:01.140 --> 25:02.790
+It's of no use for now.
+
+25:02.790 --> 25:05.793
+So terminate, delete your instance.
+
+25:06.930 --> 25:10.290
+Okay make sure all this is deleted and clean.
+
+25:10.290 --> 25:12.734
+Also later check in the snapshots in different sections.
+
+25:12.734 --> 25:15.960
+If you accidentally selected automated backup, you have
+
+25:15.960 --> 25:18.750
+to remove those backups also, right?
+
+25:18.750 --> 25:20.280
+It's a pretty simple service
+
+25:20.280 --> 25:23.190
+and actually database is really complicated, very,
+
+25:23.190 --> 25:24.750
+you know, responsible work.
+
+25:24.750 --> 25:26.343
+But AWS has solved it.
+
+25:27.180 --> 25:29.940
+We can create the databases and manage them very easily.
+
+25:29.940 --> 25:31.215
+We are going to see more settings
+
+25:31.215 --> 25:33.690
+and how to really actually use it in the application
+
+25:33.690 --> 25:37.050
+of project and when we set up our own project.
+
+25:37.050 --> 25:39.060
+So that will be all in this lecture.
+
+25:39.060 --> 25:40.960
+I will see in the next one. Thank you.

@@ -1,0 +1,958 @@
+WEBVTT
+
+1
+00:00:00.390 --> 00:00:02.130
+<v Instructor>Okay, so before you start this lecture,</v>
+
+2
+00:00:02.130 --> 00:00:03.390
+I want you to do one thing.
+
+3
+00:00:03.390 --> 00:00:08.390
+Go to your cluster in EKS, go to access, click on manage.
+
+4
+00:00:09.360 --> 00:00:11.550
+And if you see here only ConfigMap,
+
+5
+00:00:11.550 --> 00:00:14.760
+then change it to EKS API and ConfigMap
+
+6
+00:00:14.760 --> 00:00:17.130
+and click on save changes.
+
+7
+00:00:17.130 --> 00:00:18.630
+And then wait for five minutes
+
+8
+00:00:18.630 --> 00:00:21.600
+and then start and continue this lecture.
+
+9
+00:00:21.600 --> 00:00:23.403
+Okay, so we are almost there.
+
+10
+00:00:24.240 --> 00:00:26.280
+We need to set up the ArgoCD controller,
+
+11
+00:00:26.280 --> 00:00:28.260
+which is going to fetch the Helm charts
+
+12
+00:00:28.260 --> 00:00:30.960
+and deploy it in the EKS cluster.
+
+13
+00:00:30.960 --> 00:00:32.490
+And that's what we are going to do in this lecture.
+
+14
+00:00:32.490 --> 00:00:35.520
+We are going to set up the ArgoCD controller.
+
+15
+00:00:35.520 --> 00:00:36.353
+But with that,
+
+16
+00:00:36.353 --> 00:00:39.420
+we are also going to set up Load Balancer Controller,
+
+17
+00:00:39.420 --> 00:00:41.130
+so users from the internet,
+
+18
+00:00:41.130 --> 00:00:43.770
+can access our vProfile application
+
+19
+00:00:43.770 --> 00:00:46.500
+and we can also access our ArgoCD controller
+
+20
+00:00:46.500 --> 00:00:50.010
+to maintain our vProfile application.
+
+21
+00:00:50.010 --> 00:00:50.843
+First, we are going
+
+22
+00:00:50.843 --> 00:00:55.200
+to set up the AWS Load Balancer Ingress Controller.
+
+23
+00:00:55.200 --> 00:00:57.420
+We need to create an IAM service account
+
+24
+00:00:57.420 --> 00:01:00.240
+for load balancer with a policy.
+
+25
+00:01:00.240 --> 00:01:04.800
+So, we are going to download a policy, create that policy,
+
+26
+00:01:04.800 --> 00:01:07.290
+then create IAM service account,
+
+27
+00:01:07.290 --> 00:01:09.720
+so our cluster can use this policy,
+
+28
+00:01:09.720 --> 00:01:12.090
+this service account with the policy.
+
+29
+00:01:12.090 --> 00:01:15.000
+Then we are going to install a certificate manager.
+
+30
+00:01:15.000 --> 00:01:17.910
+This is a kubectl command if you see.
+
+31
+00:01:17.910 --> 00:01:20.820
+So, we also need to fetch the kubeconfig file.
+
+32
+00:01:20.820 --> 00:01:22.170
+To fetch the kubeconfig file,
+
+33
+00:01:22.170 --> 00:01:23.830
+we're going to run an AWS command,
+
+34
+00:01:23.830 --> 00:01:26.400
+aws eks update-kubeconfig, name of the cluster
+
+35
+00:01:26.400 --> 00:01:27.960
+and name of the region.
+
+36
+00:01:27.960 --> 00:01:29.310
+So, it's going to go to the cluster,
+
+37
+00:01:29.310 --> 00:01:32.610
+fetch the kubeconfig file and store it in our local machine.
+
+38
+00:01:32.610 --> 00:01:33.990
+Then with kubectl command,
+
+39
+00:01:33.990 --> 00:01:35.850
+we are going to install certificate manager
+
+40
+00:01:35.850 --> 00:01:37.383
+in the Kubernetes cluster.
+
+41
+00:01:38.550 --> 00:01:41.520
+Once the certificate manager is ready,
+
+42
+00:01:41.520 --> 00:01:42.353
+then we are going
+
+43
+00:01:42.353 --> 00:01:47.040
+to install the AWS Load Balancer Controller with Helm.
+
+44
+00:01:47.040 --> 00:01:49.350
+So, we are going to add this charts
+
+45
+00:01:49.350 --> 00:01:52.080
+and install load balancer controller.
+
+46
+00:01:52.080 --> 00:01:54.570
+Once we have our load balancer control ready,
+
+47
+00:01:54.570 --> 00:01:56.280
+then we are going to install ArgoCD.
+
+48
+00:01:56.280 --> 00:01:58.350
+First, let's complete till here.
+
+49
+00:01:58.350 --> 00:02:00.990
+I'm going to put all this command in this lecture resource.
+
+50
+00:02:00.990 --> 00:02:03.510
+You need to make few changes like I'm going
+
+51
+00:02:03.510 --> 00:02:05.640
+to keep this section empty.
+
+52
+00:02:05.640 --> 00:02:07.710
+Here, you need to give your account name.
+
+53
+00:02:07.710 --> 00:02:10.950
+And you need to also mention the Kubernetes cluster name.
+
+54
+00:02:10.950 --> 00:02:13.080
+I'm assuming that you're using the same cluster name,
+
+55
+00:02:13.080 --> 00:02:16.080
+but make sure wherever you see the account information,
+
+56
+00:02:16.080 --> 00:02:17.400
+you need to add that.
+
+57
+00:02:17.400 --> 00:02:21.660
+Also you need to give here your VPC ID, your own VPC ID.
+
+58
+00:02:21.660 --> 00:02:24.723
+So, this section also we need to fetch the VPC ID.
+
+59
+00:02:27.690 --> 00:02:28.800
+So, let's start one by one.
+
+60
+00:02:28.800 --> 00:02:33.450
+Let's download the JSON policy first for our EKS cluster.
+
+61
+00:02:33.450 --> 00:02:35.310
+You can be in your home directory.
+
+62
+00:02:35.310 --> 00:02:37.530
+So, I'm gonna just type cd, hit Enter.
+
+63
+00:02:37.530 --> 00:02:38.490
+Use this curl command,
+
+64
+00:02:38.490 --> 00:02:41.040
+this is going to download the JSON policy.
+
+65
+00:02:41.040 --> 00:02:44.460
+Then create IAM Policy with this.
+
+66
+00:02:44.460 --> 00:02:47.340
+So, aws iam create-policy, the policy name
+
+67
+00:02:47.340 --> 00:02:49.640
+and the document that we have just downloaded.
+
+68
+00:02:50.520 --> 00:02:52.680
+So, I already have policy with this name,
+
+69
+00:02:52.680 --> 00:02:55.440
+so it's not going to create it once again.
+
+70
+00:02:55.440 --> 00:02:57.240
+The next command to create the service account,
+
+71
+00:02:57.240 --> 00:02:58.950
+just make sure you replace this section
+
+72
+00:02:58.950 --> 00:03:01.080
+with your account ID.
+
+73
+00:03:01.080 --> 00:03:02.610
+Make sure your cluster name is correct
+
+74
+00:03:02.610 --> 00:03:04.053
+and the region is correct.
+
+75
+00:03:05.010 --> 00:03:08.403
+So, I'm going to copy this and run this command.
+
+76
+00:03:09.360 --> 00:03:10.980
+This takes some time.
+
+77
+00:03:10.980 --> 00:03:12.093
+Okay, this is done.
+
+78
+00:03:12.960 --> 00:03:16.020
+Next, we need to fetch the kubeconfig file.
+
+79
+00:03:16.020 --> 00:03:18.693
+So, run this command aws eks update-config.
+
+80
+00:03:21.360 --> 00:03:22.350
+So, check the location.
+
+81
+00:03:22.350 --> 00:03:23.190
+In your home directory,
+
+82
+00:03:23.190 --> 00:03:26.430
+there should be .kube and config file that got created
+
+83
+00:03:26.430 --> 00:03:28.563
+and the command kubectl get pod.
+
+84
+00:03:29.670 --> 00:03:31.560
+It should start working now.
+
+85
+00:03:31.560 --> 00:03:33.570
+Now, let's install the certificate manager
+
+86
+00:03:33.570 --> 00:03:35.760
+with kubectl command, kubectl apply.
+
+87
+00:03:35.760 --> 00:03:37.233
+The URL is already here.
+
+88
+00:03:42.750 --> 00:03:44.970
+Okay, this creates so many resources,
+
+89
+00:03:44.970 --> 00:03:49.860
+like rollback, services, multiple pods in a namespace.
+
+90
+00:03:49.860 --> 00:03:54.353
+We can say kubectl get all -n cert-manager
+
+91
+00:03:56.550 --> 00:03:57.693
+in this namespace.
+
+92
+00:03:58.680 --> 00:04:00.120
+So, you should see these pods,
+
+93
+00:04:00.120 --> 00:04:02.610
+services, deployment, replicaset.
+
+94
+00:04:02.610 --> 00:04:05.340
+And these pods should be in the running status.
+
+95
+00:04:05.340 --> 00:04:06.173
+Okay, now it's time
+
+96
+00:04:06.173 --> 00:04:08.670
+to install the AWS Load Balancer Controller.
+
+97
+00:04:08.670 --> 00:04:10.560
+And after I execute all this command,
+
+98
+00:04:10.560 --> 00:04:13.080
+you will see a load balancer also.
+
+99
+00:04:13.080 --> 00:04:15.900
+In this command, make sure you set the cluster name correct,
+
+100
+00:04:15.900 --> 00:04:18.990
+your region name, VPC ID.
+
+101
+00:04:18.990 --> 00:04:20.880
+So, you can go to VPC.
+
+102
+00:04:20.880 --> 00:04:22.350
+From AWS Console,
+
+103
+00:04:22.350 --> 00:04:25.230
+we have created a VPC with our Terraform code.
+
+104
+00:04:25.230 --> 00:04:27.810
+Inside that, you have your EKS cluster,
+
+105
+00:04:27.810 --> 00:04:30.990
+or from here also, from vprofile-eks-cluster
+
+106
+00:04:30.990 --> 00:04:35.010
+in the networking, you can find the VPC ID.
+
+107
+00:04:35.010 --> 00:04:36.600
+Okay, so that's my VPC ID.
+
+108
+00:04:36.600 --> 00:04:40.323
+I'm going to copy this and make sure I put this VPC ID here.
+
+109
+00:04:41.670 --> 00:04:44.910
+My region, us-east-1.
+
+110
+00:04:44.910 --> 00:04:47.160
+And the cluster name is right.
+
+111
+00:04:47.160 --> 00:04:49.923
+Okay, first let's run this helm repo update command.
+
+112
+00:04:54.480 --> 00:04:57.540
+So, it's going to add this chart repository, EKS chart
+
+113
+00:04:57.540 --> 00:04:58.950
+into your local machine.
+
+114
+00:04:58.950 --> 00:05:01.150
+Then you need to run helm repo update
+
+115
+00:05:02.340 --> 00:05:03.780
+and then copy and run this command.
+
+116
+00:05:03.780 --> 00:05:05.490
+Make sure you make all the right entries,
+
+117
+00:05:05.490 --> 00:05:07.020
+VPC ID, region, everything.
+
+118
+00:05:07.020 --> 00:05:07.853
+This is going
+
+119
+00:05:07.853 --> 00:05:11.703
+to install AWS Load Balancer Controller charts.
+
+120
+00:05:14.490 --> 00:05:16.620
+After this command completes successfully,
+
+121
+00:05:16.620 --> 00:05:19.050
+you should see a load balancer.
+
+122
+00:05:19.050 --> 00:05:20.370
+And this is going to take some time.
+
+123
+00:05:20.370 --> 00:05:21.570
+So, I'm going to pause the recording
+
+124
+00:05:21.570 --> 00:05:24.030
+and resume when this is completed.
+
+125
+00:05:24.030 --> 00:05:25.320
+Okay, after some time,
+
+126
+00:05:25.320 --> 00:05:29.460
+you can run the command kubectl get pods -n kube-system
+
+127
+00:05:29.460 --> 00:05:32.100
+and grep the load balancer, aws-load-balancer.
+
+128
+00:05:32.100 --> 00:05:34.113
+And you should see two pods running.
+
+129
+00:05:38.220 --> 00:05:41.070
+So, two load balancer pod will be running,
+
+130
+00:05:41.070 --> 00:05:43.983
+kubectl get endpoints and this command.
+
+131
+00:05:45.570 --> 00:05:47.760
+You should see the name of the endpoint
+
+132
+00:05:47.760 --> 00:05:50.130
+and you should see the endpoint's IP addresses.
+
+133
+00:05:50.130 --> 00:05:51.420
+Okay, so we are all set.
+
+134
+00:05:51.420 --> 00:05:54.030
+Now, it's time to install ArgoCD
+
+135
+00:05:54.030 --> 00:05:56.700
+and then we are going to use this AWS load balancer
+
+136
+00:05:56.700 --> 00:05:58.080
+to access it.
+
+137
+00:05:58.080 --> 00:06:03.080
+So, add ArgoCD repository, helm repo add argo and this URL.
+
+138
+00:06:05.250 --> 00:06:06.843
+Then helm repo update.
+
+139
+00:06:09.720 --> 00:06:12.510
+And then use this command to install ArgoCD,
+
+140
+00:06:12.510 --> 00:06:15.660
+helm upgrade argocd argo/argo-cd
+
+141
+00:06:15.660 --> 00:06:19.860
+and this version 9.5.2 that we are using now.
+
+142
+00:06:19.860 --> 00:06:24.273
+It's going to create a namespace, named argocd.
+
+143
+00:06:25.500 --> 00:06:26.460
+This will take some time.
+
+144
+00:06:26.460 --> 00:06:29.940
+Once this is completed, I'm going to resume the recording.
+
+145
+00:06:29.940 --> 00:06:34.143
+Okay, this is done, kubectl get all -n argocd.
+
+146
+00:06:35.700 --> 00:06:38.970
+This will list all the resources in this namespace.
+
+147
+00:06:38.970 --> 00:06:42.363
+So, we have the pod, the controller,
+
+148
+00:06:43.290 --> 00:06:45.330
+repo-server, the argocd-server,
+
+149
+00:06:45.330 --> 00:06:47.490
+which we need to access from the browser.
+
+150
+00:06:47.490 --> 00:06:50.910
+So, you should also see a service, ArgoCD service
+
+151
+00:06:50.910 --> 00:06:52.800
+that points to this pod.
+
+152
+00:06:52.800 --> 00:06:56.700
+So, we need to create an ingress of type load balancer
+
+153
+00:06:56.700 --> 00:06:58.140
+that points to this service.
+
+154
+00:06:58.140 --> 00:07:00.270
+From that ingress, from that load balancer,
+
+155
+00:07:00.270 --> 00:07:03.900
+we are going to access this ArgoCD service.
+
+156
+00:07:03.900 --> 00:07:08.900
+So, open VS Code, create a file, argocd-ingress.yaml.
+
+157
+00:07:11.250 --> 00:07:16.063
+Copy the content from here till here, paste it over there.
+
+158
+00:07:18.390 --> 00:07:20.520
+Okay, so kind ingress,
+
+159
+00:07:20.520 --> 00:07:23.400
+the name, we are going to say argocd-ingress
+
+160
+00:07:23.400 --> 00:07:25.410
+in the namespace argocd.
+
+161
+00:07:25.410 --> 00:07:28.230
+And these are the annotations that you need to give.
+
+162
+00:07:28.230 --> 00:07:30.180
+The ingress class alb,
+
+163
+00:07:30.180 --> 00:07:34.380
+this is going to select our ALB Ingress controller.
+
+164
+00:07:34.380 --> 00:07:39.030
+In certificate-arn, you need to get the certificate ARN
+
+165
+00:07:39.030 --> 00:07:41.760
+and change it with yours.
+
+166
+00:07:41.760 --> 00:07:44.700
+So, if you go to Certificate Manager,
+
+167
+00:07:44.700 --> 00:07:47.640
+you have a certificate for your domain.
+
+168
+00:07:47.640 --> 00:07:49.947
+You can copy this ARN
+
+169
+00:07:49.947 --> 00:07:52.593
+and change it with your ARN over here.
+
+170
+00:07:55.290 --> 00:07:59.250
+Listen port 80 and 443 both, but ssl-redirect 443,
+
+171
+00:07:59.250 --> 00:08:02.040
+so this is going to use HTTPS secure connection.
+
+172
+00:08:02.040 --> 00:08:03.450
+Because we also have the certificate
+
+173
+00:08:03.450 --> 00:08:05.790
+to verify the HTTPS connection.
+
+174
+00:08:05.790 --> 00:08:08.340
+In the rules, argocd-dot,
+
+175
+00:08:08.340 --> 00:08:10.260
+this is my domain, so you need to change it
+
+176
+00:08:10.260 --> 00:08:11.880
+with your domain here.
+
+177
+00:08:11.880 --> 00:08:15.870
+So, from the browser, when we see https:// and this URL,
+
+178
+00:08:15.870 --> 00:08:18.783
+we should be able to access the ArgoCD.
+
+179
+00:08:19.650 --> 00:08:20.730
+Save this file.
+
+180
+00:08:21.780 --> 00:08:23.520
+And I've created in my repository.
+
+181
+00:08:23.520 --> 00:08:25.110
+So, I'm going to go to my repository,
+
+182
+00:08:25.110 --> 00:08:30.110
+which is in desktop/gitops/vprofile-infra,
+
+183
+00:08:32.700 --> 00:08:33.533
+there.
+
+184
+00:08:34.920 --> 00:08:38.460
+Kubectl apply -f and your file name.
+
+185
+00:08:38.460 --> 00:08:40.650
+So, it creates the ingress.
+
+186
+00:08:40.650 --> 00:08:44.160
+Kubectl get ingress -n argocd.
+
+187
+00:08:44.160 --> 00:08:45.420
+You should see the ingress
+
+188
+00:08:45.420 --> 00:08:47.760
+and you should see the load balancer endpoint.
+
+189
+00:08:47.760 --> 00:08:50.220
+Now, we cannot directly access from the endpoint.
+
+190
+00:08:50.220 --> 00:08:52.380
+We need to access it from the URL.
+
+191
+00:08:52.380 --> 00:08:55.290
+So, copy the load balancer endpoint,
+
+192
+00:08:55.290 --> 00:08:56.670
+go to your domain registrar.
+
+193
+00:08:56.670 --> 00:08:57.990
+Mine is GoDaddy.
+
+194
+00:08:57.990 --> 00:09:00.453
+So, I'm going to GoDaddy.
+
+195
+00:09:02.332 --> 00:09:04.290
+In your domain, find the DNS setting.
+
+196
+00:09:04.290 --> 00:09:08.340
+Go to the DNS records, see add new record.
+
+197
+00:09:08.340 --> 00:09:12.407
+Choose the type as CNAME, mention argocd.
+
+198
+00:09:16.434 --> 00:09:17.520
+Yeah, that's right, argocd.
+
+199
+00:09:17.520 --> 00:09:21.360
+This should match with what we have given in our ingress.
+
+200
+00:09:21.360 --> 00:09:23.730
+That one, exactly that, argocd.
+
+201
+00:09:23.730 --> 00:09:28.023
+And here mention the DNS endpoint of your load balancer.
+
+202
+00:09:28.890 --> 00:09:30.753
+You can grab that from here also.
+
+203
+00:09:33.720 --> 00:09:36.210
+Paste it over here and see, save.
+
+204
+00:09:36.210 --> 00:09:37.680
+You need to wait for a few minutes,
+
+205
+00:09:37.680 --> 00:09:39.300
+until this record is published.
+
+206
+00:09:39.300 --> 00:09:41.910
+Then we can exit from the browser.
+
+207
+00:09:41.910 --> 00:09:43.500
+So, I'm going to pause the recording now
+
+208
+00:09:43.500 --> 00:09:45.990
+and grab my coffee and then come back.
+
+209
+00:09:45.990 --> 00:09:48.480
+All right, I'm back and without a coffee.
+
+210
+00:09:48.480 --> 00:09:50.100
+Because I don't drink coffee,
+
+211
+00:09:50.100 --> 00:09:52.440
+at least I don't drink it anymore.
+
+212
+00:09:52.440 --> 00:09:56.970
+So, without any caffeine power with all my brute strength,
+
+213
+00:09:56.970 --> 00:09:59.657
+I'm going to access ArgoCD.
+
+214
+00:09:59.657 --> 00:10:04.657
+So, https://argocd-dot, my domain, hit Enter.
+
+215
+00:10:06.000 --> 00:10:07.110
+And voila!
+
+216
+00:10:07.110 --> 00:10:09.510
+Welcome to ArgoCD.
+
+217
+00:10:09.510 --> 00:10:12.090
+Okay, so, we need the username and password.
+
+218
+00:10:12.090 --> 00:10:13.320
+So, the username is admin
+
+219
+00:10:13.320 --> 00:10:17.400
+and you need to run this command to get the admin password.
+
+220
+00:10:17.400 --> 00:10:22.400
+So, for your, sorry, from your Git Bash or Terminal,
+
+221
+00:10:22.470 --> 00:10:24.930
+execute this kubectl command to get a secret,
+
+222
+00:10:24.930 --> 00:10:28.650
+which is stored initial ArgoCD password.
+
+223
+00:10:28.650 --> 00:10:29.790
+Okay, that is mine.
+
+224
+00:10:29.790 --> 00:10:31.290
+Yours will be different.
+
+225
+00:10:31.290 --> 00:10:32.133
+I don't know.
+
+226
+00:10:33.150 --> 00:10:36.450
+Let's give the username, which is admin and wait
+
+227
+00:10:36.450 --> 00:10:40.380
+and password, the new one, sign in.
+
+228
+00:10:40.380 --> 00:10:41.213
+And we are in.
+
+229
+00:10:41.213 --> 00:10:43.800
+You can reset the password.
+
+230
+00:10:43.800 --> 00:10:47.280
+Oh, here, user info, update password,
+
+231
+00:10:47.280 --> 00:10:50.230
+paste your current password, add a new password
+
+232
+00:10:51.270 --> 00:10:53.220
+and save new password.
+
+233
+00:10:53.220 --> 00:10:54.053
+That should be it.
+
+234
+00:10:54.053 --> 00:10:54.886
+In the next lecture,
+
+235
+00:10:54.886 --> 00:10:57.660
+we are going to fetch our Helm charts
+
+236
+00:10:57.660 --> 00:11:00.000
+from the repository,
+
+237
+00:11:00.000 --> 00:11:01.770
+not we, ArgoCD will do that
+
+238
+00:11:01.770 --> 00:11:04.590
+and run the application over here.
+
+239
+00:11:04.590 --> 00:11:07.090
+So, let's see how that's done in the next lecture.
+

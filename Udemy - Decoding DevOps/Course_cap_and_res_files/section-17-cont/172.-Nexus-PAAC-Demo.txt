@@ -1,0 +1,698 @@
+WEBVTT
+
+1
+00:00:00.480 --> 00:00:02.010
+<v Instructor>Okay, this is the pipeline code</v>
+
+2
+00:00:02.010 --> 00:00:03.750
+from the previous lecture.
+
+3
+00:00:03.750 --> 00:00:06.240
+We are going to add one more stage over here
+
+4
+00:00:06.240 --> 00:00:09.150
+that is going to take our artifact from Jenkins
+
+5
+00:00:09.150 --> 00:00:12.210
+and upload it to Nexus repository.
+
+6
+00:00:12.210 --> 00:00:16.560
+So if you go to core analysis job, go to any build ID,
+
+7
+00:00:16.560 --> 00:00:18.600
+go to workspaces.
+
+8
+00:00:18.600 --> 00:00:22.470
+In workspaces, you should have a folder called Target.
+
+9
+00:00:22.470 --> 00:00:26.460
+In that we have a vprofile-v2.war.
+
+10
+00:00:26.460 --> 00:00:29.370
+Now this is the artifact, we need to version this artifact
+
+11
+00:00:29.370 --> 00:00:34.370
+and upload it to Nexus repository named vprofile-repo.
+
+12
+00:00:34.380 --> 00:00:35.850
+If you remember, we installed a plugin,
+
+13
+00:00:35.850 --> 00:00:38.400
+nexus artifact uploader plugin.
+
+14
+00:00:38.400 --> 00:00:42.210
+Let's check how we can put that in our pipeline.
+
+15
+00:00:42.210 --> 00:00:45.600
+Nexus artifact Uploader, you should see the documentation.
+
+16
+00:00:45.600 --> 00:00:48.390
+You should see many other examples on GitHub also
+
+17
+00:00:48.390 --> 00:00:51.060
+or you can go to the AI mode and check.
+
+18
+00:00:51.060 --> 00:00:53.790
+So the documentation, you have a Jenkins pipeline example,
+
+19
+00:00:53.790 --> 00:00:55.980
+the plugin name and some options
+
+20
+00:00:55.980 --> 00:00:58.680
+that are passed through this plugin.
+
+21
+00:00:58.680 --> 00:01:00.333
+Let's go to the AI mode.
+
+22
+00:01:02.220 --> 00:01:06.240
+So this is plugin specifically designed to upload artifact
+
+23
+00:01:06.240 --> 00:01:10.440
+jar, war to Sonatype Nexus repository.
+
+24
+00:01:10.440 --> 00:01:12.450
+Let's see the example.
+
+25
+00:01:12.450 --> 00:01:15.120
+So stage, stage name, steps, plugin name,
+
+26
+00:01:15.120 --> 00:01:17.790
+and the options passed with it.
+
+27
+00:01:17.790 --> 00:01:20.670
+So let's copy this and put it in our pipeline
+
+28
+00:01:20.670 --> 00:01:22.203
+and make changes.
+
+29
+00:01:23.400 --> 00:01:27.330
+So check where this stage quality gate ends over here.
+
+30
+00:01:27.330 --> 00:01:30.090
+Give some new line and paste it over here.
+
+31
+00:01:30.090 --> 00:01:35.090
+Fix the indentation, make sure it's properly indented
+
+32
+00:01:35.190 --> 00:01:36.120
+so it looks good.
+
+33
+00:01:36.120 --> 00:01:39.540
+So I'm going to fix this, artifacts.
+
+34
+00:01:39.540 --> 00:01:42.180
+That's the artifact information.
+
+35
+00:01:42.180 --> 00:01:43.490
+So I'm going to make this vertical
+
+36
+00:01:43.490 --> 00:01:44.913
+so it looks a little better.
+
+37
+00:01:47.610 --> 00:01:51.330
+Okay, artifact ID, the classifier, then the file
+
+38
+00:01:51.330 --> 00:01:52.863
+and then the type war.
+
+39
+00:01:53.785 --> 00:01:55.770
+There is another square bracket.
+
+40
+00:01:55.770 --> 00:01:59.283
+This I'm going to make sure it's just below this artifacts.
+
+41
+00:02:01.350 --> 00:02:02.490
+Then this parenthesis,
+
+42
+00:02:02.490 --> 00:02:05.640
+this is for the plugin where it starts.
+
+43
+00:02:05.640 --> 00:02:06.573
+So, bring it here.
+
+44
+00:02:07.440 --> 00:02:10.260
+That curly brace is for this steps.
+
+45
+00:02:10.260 --> 00:02:11.910
+I am going to give it a new line.
+
+46
+00:02:13.920 --> 00:02:14.887
+Okay, this is good.
+
+47
+00:02:14.887 --> 00:02:18.900
+Once again a new line and then this one in the stage.
+
+48
+00:02:18.900 --> 00:02:20.043
+Okay, this looks good.
+
+49
+00:02:20.880 --> 00:02:22.410
+Now let's add the correct details.
+
+50
+00:02:22.410 --> 00:02:25.800
+So Nexus 3, that's the version that is correct.
+
+51
+00:02:25.800 --> 00:02:28.170
+Protocol, http, that is also correct.
+
+52
+00:02:28.170 --> 00:02:31.950
+NexusURL, here we need to put the private IP of Nexus.
+
+53
+00:02:31.950 --> 00:02:33.003
+So let's get it.
+
+54
+00:02:34.740 --> 00:02:39.270
+So make sure you select Nexus server and take its private IP
+
+55
+00:02:39.270 --> 00:02:41.343
+and just paste it over here.
+
+56
+00:02:42.510 --> 00:02:44.400
+This is good. Don't give HTTP or anything else.
+
+57
+00:02:44.400 --> 00:02:46.920
+The protocol is already mentioned here.
+
+58
+00:02:46.920 --> 00:02:49.350
+Group ID, I'm just going to remove this
+
+59
+00:02:49.350 --> 00:02:50.703
+and just say here, QA.
+
+60
+00:02:52.200 --> 00:02:54.510
+Version, now version needs to be dynamic.
+
+61
+00:02:54.510 --> 00:02:57.990
+It should change every time we run the build job.
+
+62
+00:02:57.990 --> 00:03:00.780
+So there is this build ID environment that we can use,
+
+63
+00:03:00.780 --> 00:03:04.170
+which gives us the build ID, 1, 2, 3, it's incremental.
+
+64
+00:03:04.170 --> 00:03:07.380
+And we can also use the build timestamp variable.
+
+65
+00:03:07.380 --> 00:03:09.510
+We install the build timestamp plugin,
+
+66
+00:03:09.510 --> 00:03:11.640
+so we can use that variable as well.
+
+67
+00:03:11.640 --> 00:03:15.900
+Together, it'll give us a unique version of our artifact.
+
+68
+00:03:15.900 --> 00:03:19.983
+So remove it and just put the double codes.
+
+69
+00:03:20.880 --> 00:03:22.590
+To access this environment variable,
+
+70
+00:03:22.590 --> 00:03:25.890
+you need to give here the curly brace.
+
+71
+00:03:25.890 --> 00:03:29.850
+So it'll be like this dollar, open-close curly brace,
+
+72
+00:03:29.850 --> 00:03:32.460
+say ENV, and mention the environment variable.
+
+73
+00:03:32.460 --> 00:03:37.460
+So this one is BUILD_ID-,
+
+74
+00:03:37.530 --> 00:03:40.330
+and I'm going to give another variable, build timestamp,
+
+75
+00:03:41.727 --> 00:03:43.920
+BUILD_TIMESTAMP.
+
+76
+00:03:43.920 --> 00:03:45.000
+Exactly same name
+
+77
+00:03:45.000 --> 00:03:47.670
+because this variable we need to set in Jenkins.
+
+78
+00:03:47.670 --> 00:03:50.520
+The BUILD_TIMESTAMP plugin gives exactly this variable
+
+79
+00:03:50.520 --> 00:03:52.710
+and its value we need to set.
+
+80
+00:03:52.710 --> 00:03:57.710
+So let's go to Jenkins, manage Jenkins system.
+
+81
+00:04:00.630 --> 00:04:04.620
+Search for BUILT_TIMESTAMP. It's here at the end.
+
+82
+00:04:04.620 --> 00:04:07.770
+So this one, so this yy four times,
+
+83
+00:04:07.770 --> 00:04:09.570
+I'm just going to say two yy.
+
+84
+00:04:09.570 --> 00:04:13.320
+That will be like '26, the year.
+
+85
+00:04:13.320 --> 00:04:15.030
+Month is fine, date is fine.
+
+86
+00:04:15.030 --> 00:04:19.650
+And this one I'm going to give here underscore,
+
+87
+00:04:19.650 --> 00:04:21.903
+hour hour-minute.
+
+88
+00:04:23.250 --> 00:04:25.050
+I'm gonna give a hyphen here.
+
+89
+00:04:25.050 --> 00:04:27.300
+I'm going to remove this seconds.
+
+90
+00:04:27.300 --> 00:04:32.300
+So it's yy-MM-dd_HH-mm so hour and minutes.
+
+91
+00:04:36.660 --> 00:04:39.210
+So that's the format that I'm giving.
+
+92
+00:04:39.210 --> 00:04:43.050
+See you can give other old format also if you wish to.
+
+93
+00:04:43.050 --> 00:04:43.920
+Okay, this is good.
+
+94
+00:04:43.920 --> 00:04:47.640
+Now, repository name is vprofile-repo.
+
+95
+00:04:47.640 --> 00:04:51.400
+That is the one that we created in Nexus.
+
+96
+00:04:51.400 --> 00:04:53.790
+Vprofile-repo, this one.
+
+97
+00:04:53.790 --> 00:04:56.700
+Credentials-id, we created the Nexus credential,
+
+98
+00:04:56.700 --> 00:04:59.520
+and its name is just Nexus login.
+
+99
+00:04:59.520 --> 00:05:01.500
+So it's going to use that username and password
+
+100
+00:05:01.500 --> 00:05:03.690
+that we mentioned in this credential.
+
+101
+00:05:03.690 --> 00:05:07.450
+Artifact ID, I'm just going to give the name as vproapp.
+
+102
+00:05:08.730 --> 00:05:09.960
+And in the file,
+
+103
+00:05:09.960 --> 00:05:14.960
+the path of the file is target/vprofile-v2.war.
+
+104
+00:05:17.040 --> 00:05:19.080
+This is what we have seen in the workspace.
+
+105
+00:05:19.080 --> 00:05:22.063
+This is the path and it's type is war.
+
+106
+00:05:22.063 --> 00:05:25.320
+So this is all good, except you need to once again check
+
+107
+00:05:25.320 --> 00:05:28.860
+whether Nexus allows in the security group
+
+108
+00:05:28.860 --> 00:05:30.900
+port 8081 from Jenkins.
+
+109
+00:05:30.900 --> 00:05:35.310
+So let's check that before we do any more changes.
+
+110
+00:05:35.310 --> 00:05:40.263
+So let's go to Nexus. Security groups of Nexus.
+
+111
+00:05:41.310 --> 00:05:43.200
+Edit inbound rule.
+
+112
+00:05:43.200 --> 00:05:46.020
+Well, currently it says 8081 from anywhere.
+
+113
+00:05:46.020 --> 00:05:48.480
+I'm going to change it to my IP
+
+114
+00:05:48.480 --> 00:05:52.800
+and then add one more rule, which is 8081
+
+115
+00:05:52.800 --> 00:05:56.343
+from the Jenkins Security group.
+
+116
+00:05:58.560 --> 00:06:01.920
+Save the rules. Okay, time to test this one.
+
+117
+00:06:01.920 --> 00:06:06.060
+So let's copy this. Let's create a new pipeline.
+
+118
+00:06:06.060 --> 00:06:10.987
+Go to new item, say vprofile-ci-pipeline we'll say,
+
+119
+00:06:12.281 --> 00:06:15.513
+vprofile-ci-pipeline.
+
+120
+00:06:16.470 --> 00:06:18.243
+Select pipeline. Say okay.
+
+121
+00:06:19.290 --> 00:06:23.460
+Scroll down and paste your new pipeline script.
+
+122
+00:06:23.460 --> 00:06:28.460
+Save it and say build now. Let's check the stages.
+
+123
+00:06:30.510 --> 00:06:31.710
+So I'm going to pause the recording
+
+124
+00:06:31.710 --> 00:06:34.560
+and resume when this pipeline is completed.
+
+125
+00:06:34.560 --> 00:06:35.730
+Okay, it got completed.
+
+126
+00:06:35.730 --> 00:06:36.900
+Now I had few hiccups.
+
+127
+00:06:36.900 --> 00:06:40.560
+That was because the Jenkins ran out of this space.
+
+128
+00:06:40.560 --> 00:06:41.490
+Should not happen with you
+
+129
+00:06:41.490 --> 00:06:46.050
+because you already have 20 gigs of EBS Volume 1 Jenkins.
+
+130
+00:06:46.050 --> 00:06:47.430
+Anyways, this got completed.
+
+131
+00:06:47.430 --> 00:06:51.330
+Let's check the output of publish to Nexus stage.
+
+132
+00:06:51.330 --> 00:06:54.273
+So it says uploading artifact, and you see a URL over here.
+
+133
+00:06:54.273 --> 00:06:57.300
+This is with the prior IP so you won't be able to access it.
+
+134
+00:06:57.300 --> 00:06:58.950
+You need to change the public IP.
+
+135
+00:07:00.000 --> 00:07:01.710
+So it uploaded successfully.
+
+136
+00:07:01.710 --> 00:07:04.860
+If you go to Nexus, go to browse,
+
+137
+00:07:04.860 --> 00:07:09.330
+make sure you select it here, browse, vprofile-repo.
+
+138
+00:07:09.330 --> 00:07:12.330
+So you should start seeing the artifact over here.
+
+139
+00:07:12.330 --> 00:07:15.630
+If you look at the name of the artifacts vproapp,
+
+140
+00:07:15.630 --> 00:07:18.450
+that's the name we have given artifact ID 2.
+
+141
+00:07:18.450 --> 00:07:22.080
+That's the BUILD ID. And then this is the BUILD_TIMESTAMP.
+
+142
+00:07:22.080 --> 00:07:24.000
+At the end, .war.
+
+143
+00:07:24.000 --> 00:07:25.710
+You also get a download link.
+
+144
+00:07:25.710 --> 00:07:28.560
+If you click on it, we'll start downloading the artifact.
+
+145
+00:07:30.000 --> 00:07:32.220
+So run this pipeline a few more times
+
+146
+00:07:32.220 --> 00:07:34.860
+in an interval of at least one minute.
+
+147
+00:07:34.860 --> 00:07:38.373
+So you get different build IDs for different timestamp.
+
+148
+00:07:39.240 --> 00:07:42.540
+So every time you run this pipeline, the pipeline completes.
+
+149
+00:07:42.540 --> 00:07:46.890
+You should see a new artifact with a new version.
+
+150
+00:07:46.890 --> 00:07:48.093
+Maybe first this.
+
+151
+00:07:49.680 --> 00:07:53.400
+So this is a complete continuous integration pipeline,
+
+152
+00:07:53.400 --> 00:07:54.780
+or is it?
+
+153
+00:07:54.780 --> 00:07:57.330
+Well, you see everything, but you don't see the start,
+
+154
+00:07:57.330 --> 00:07:59.280
+you don't see the end, right?
+
+155
+00:07:59.280 --> 00:08:01.680
+So start, we're going to talk about
+
+156
+00:08:01.680 --> 00:08:03.660
+the build triggers later, but in the next lecture,
+
+157
+00:08:03.660 --> 00:08:05.820
+we are gonna talk about notifications.
+
+158
+00:08:05.820 --> 00:08:07.950
+What happens if something fails?
+
+159
+00:08:07.950 --> 00:08:09.480
+You should get notification.
+
+160
+00:08:09.480 --> 00:08:13.770
+DevOps developers should get notification what failed where,
+
+161
+00:08:13.770 --> 00:08:17.940
+and then you or developer can check what went wrong, fix it,
+
+162
+00:08:17.940 --> 00:08:20.340
+and trigger the pipeline once again.
+
+163
+00:08:20.340 --> 00:08:23.040
+So the trigger and the notification that is pending,
+
+164
+00:08:23.040 --> 00:08:25.860
+we are going to see the notification in the next lecture.
+
+165
+00:08:25.860 --> 00:08:28.110
+So if you are done here,
+
+166
+00:08:28.110 --> 00:08:30.510
+and if you're not going to continue to the next lecture,
+
+167
+00:08:30.510 --> 00:08:32.850
+you can shut down all your instance.
+
+168
+00:08:32.850 --> 00:08:35.070
+In the next lecture, we don't need Jenkins and nexus,
+
+169
+00:08:35.070 --> 00:08:36.810
+sorry, we don't need nexus and sonar
+
+170
+00:08:36.810 --> 00:08:39.540
+so you can just shut it down.
+
+171
+00:08:39.540 --> 00:08:41.370
+If you are continuing to the next lecture,
+
+172
+00:08:41.370 --> 00:08:42.900
+just keep at least Jenkins running.
+
+173
+00:08:42.900 --> 00:08:44.940
+Otherwise, shut everything down.
+
+174
+00:08:44.940 --> 00:08:47.590
+For now, that is all. I will see you in the next one.
+

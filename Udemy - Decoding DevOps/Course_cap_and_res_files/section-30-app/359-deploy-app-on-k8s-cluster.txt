@@ -1,0 +1,775 @@
+WEBVTT
+
+00:01.560 --> 00:04.740
+Instructor: Now before we go to a repository
+
+00:04.740 --> 00:06.780
+and execute all the definition files,
+
+00:06.780 --> 00:11.250
+create our manifest, we need ingress controller.
+
+00:11.250 --> 00:12.630
+This ingress controller is going
+
+00:12.630 --> 00:14.640
+to create a load balancer for us.
+
+00:14.640 --> 00:17.010
+So we need that first. Okay?
+
+00:17.010 --> 00:18.960
+So from the lecture resource, copy the command
+
+00:18.960 --> 00:21.060
+to create the ingress controller.
+
+00:21.060 --> 00:23.850
+So Kube CTL apply HNF, and this is the URL.
+
+00:23.850 --> 00:25.980
+This deploy file is going to
+
+00:25.980 --> 00:29.463
+create an nginx ingress controller for us for AWS,
+
+00:30.349 --> 00:32.160
+and this ingress controller is going
+
+00:32.160 --> 00:34.440
+to manage the load balancer for us.
+
+00:34.440 --> 00:38.213
+So just copy and paste this command, hit enter. Okay?
+
+00:39.088 --> 00:43.893
+This will create a namespace Kube CTL get Ns.
+
+00:44.940 --> 00:47.160
+There is a ingress nginx namespace.
+
+00:47.160 --> 00:48.570
+We need to make sure all the pods,
+
+00:48.570 --> 00:50.070
+everything is running in this.
+
+00:51.000 --> 00:52.807
+Okay, so let me check all the pods in this
+
+00:52.807 --> 00:54.483
+namespace is running or not.
+
+00:56.160 --> 00:59.070
+Okay, these are completed and this is running.
+
+00:59.070 --> 01:00.963
+Let's go and check in AWS console.
+
+01:03.150 --> 01:07.170
+So should have our control plane and worker node.
+
+01:07.170 --> 01:10.860
+And now we should have in the load balancer section,
+
+01:10.860 --> 01:12.690
+we should have an application load balancer.
+
+01:12.690 --> 01:14.820
+There, you see that, it's provisioning.
+
+01:14.820 --> 01:16.770
+It's not yet completed.
+
+01:16.770 --> 01:20.700
+So that is created by the ingress controller
+
+01:20.700 --> 01:21.990
+that we just created.
+
+01:21.990 --> 01:25.500
+So we need to wait for some time until it becomes ready.
+
+01:25.500 --> 01:29.790
+Once this is ready, we can start creating our objects.
+
+01:29.790 --> 01:34.790
+Deploy ingress, our PVC, right? So let's go.
+
+01:35.820 --> 01:40.620
+Okay, let's do Kube CTL get nodes, right?
+
+01:40.620 --> 01:42.780
+So everything is working Kube CTL command is working.
+
+01:42.780 --> 01:45.660
+Now let's go to our repository. We cloned it.
+
+01:45.660 --> 01:47.010
+Let's go into that.
+
+01:47.010 --> 01:50.790
+In that we have Kube defs, go into this folder
+
+01:50.790 --> 01:53.673
+and here we have a PVC,
+
+01:54.810 --> 01:56.553
+CAT db PVC.
+
+01:57.960 --> 02:00.877
+So if I execute this on Kube CTL,
+
+02:00.877 --> 02:04.710
+this should create a three GB of EBS volume for me.
+
+02:04.710 --> 02:08.520
+Let me do that. Kube CTL
+
+02:08.520 --> 02:12.693
+create -F db PVC.
+
+02:16.740 --> 02:19.623
+Okay. Now let's go to the EC2 console.
+
+02:21.030 --> 02:23.133
+Volumes. Where is volume? Volumes.
+
+02:26.490 --> 02:29.700
+Okay, you see this volume and just create it.
+
+02:29.700 --> 02:33.840
+See the name, you see the PVC there, some ID there.
+
+02:33.840 --> 02:37.800
+Three GB and created time should be recent.
+
+02:37.800 --> 02:39.060
+You should see this created time.
+
+02:39.060 --> 02:40.830
+Recent status will be available.
+
+02:40.830 --> 02:43.590
+It is available, it will be connected.
+
+02:43.590 --> 02:46.106
+When we claim this, I mean when we
+
+02:46.106 --> 02:48.660
+put this claim in the pod definition,
+
+02:48.660 --> 02:50.880
+when we run the pod definition file's going to connect
+
+02:50.880 --> 02:53.301
+that this EBS volume to our pod.
+
+02:53.301 --> 02:55.653
+Okay, let's check the load balancer.
+
+02:58.860 --> 03:01.620
+Okay? It's in active status, it's time
+
+03:01.620 --> 03:05.282
+to create everything together now.
+
+03:05.282 --> 03:06.783
+Let me clear the screen.
+
+03:08.550 --> 03:09.780
+Make sure you're in this folder.
+
+03:09.780 --> 03:12.837
+You do Kube CTL create - f..
+
+03:14.310 --> 03:16.800
+Now PVC is already created, so it's going to simply ignore
+
+03:16.800 --> 03:19.353
+that PVC and create the rest of it.
+
+03:20.490 --> 03:23.860
+Enter, enter. You see we got an error there.
+
+03:23.860 --> 03:26.400
+DBPVC already exists
+
+03:26.400 --> 03:28.080
+and we are going to wait for some time
+
+03:28.080 --> 03:30.570
+until all this becomes ready and available.
+
+03:30.570 --> 03:33.300
+Then we'll start validating everything.
+
+03:33.300 --> 03:36.570
+So I'm going to pause my lecture and resume in 10 minutes.
+
+03:36.570 --> 03:39.930
+Okay, so here I am back. Let's check everything.
+
+03:39.930 --> 03:42.870
+Let me clear the screen.
+
+03:42.870 --> 03:46.780
+So let's check the pod, first Kube CTL, get pods
+
+03:47.850 --> 03:50.250
+and all the four pods are running.
+
+03:50.250 --> 03:55.247
+That was created by the deployment Kube CTL Get deploy,
+
+03:57.720 --> 04:01.593
+again, we should also have the service Kube CTL get SVC.
+
+04:03.000 --> 04:06.330
+Okay, these are the four services that we created, okay?
+
+04:06.330 --> 04:08.309
+If you find error anywhere,
+
+04:08.309 --> 04:11.940
+especially in the pod side, do Kube CTL describe,
+
+04:11.940 --> 04:15.160
+for example like this Kube CTL, describe
+
+04:17.880 --> 04:22.260
+pod and the webpro DB pod, complete name copy, hit enter.
+
+04:22.260 --> 04:24.990
+And at the end you should see all the events.
+
+04:24.990 --> 04:26.250
+So if you made some mistakes,
+
+04:26.250 --> 04:28.680
+like if you mentioned the wrong image name
+
+04:28.680 --> 04:31.680
+or anything else, you should see it in the messages.
+
+04:31.680 --> 04:33.353
+And when you fix your code
+
+04:33.353 --> 04:36.300
+and you found there was some mistake, you fix the code.
+
+04:36.300 --> 04:39.060
+After that, you should delete that part.
+
+04:39.060 --> 04:40.350
+You cannot delete directly.
+
+04:40.350 --> 04:42.450
+You have deployments, you need to delete the deploy
+
+04:42.450 --> 04:47.400
+or better, you can just go in the source code, right?
+
+04:47.400 --> 04:52.170
+You can just say Kube CTL, delete - F
+
+04:52.170 --> 04:54.090
+and queue the file name
+
+04:54.090 --> 04:57.090
+and it'll delete the resource that's mentioned in the file.
+
+04:57.090 --> 04:59.220
+Like maybe I want to delete this one. DB deploy.
+
+04:59.220 --> 05:00.270
+All right, so I'll do like this
+
+05:00.270 --> 05:02.070
+and we'll delete the DB deploy,
+
+05:02.070 --> 05:05.550
+and then I fix the changes I make no, correct my mistakes.
+
+05:05.550 --> 05:07.440
+And then I again say Kube CTL, create
+
+05:07.440 --> 05:10.140
+or apply - F and the file path.
+
+05:10.140 --> 05:12.873
+Okay? Once again, let's do Kube CTL, get pod.
+
+05:14.220 --> 05:17.580
+Now also, let's see how to match the service if the service
+
+05:17.580 --> 05:20.940
+is connected to the pod or not for that.
+
+05:20.940 --> 05:23.316
+We need to get the IP address of the pod.
+
+05:23.316 --> 05:26.550
+So we'll say Kube CTL will describe pod,
+
+05:26.550 --> 05:28.920
+and let's say app pod.
+
+05:28.920 --> 05:33.840
+Let's describe this and let's look. Scroll up.
+
+05:33.840 --> 05:35.520
+Okay, over there, the top right here,
+
+05:35.520 --> 05:37.360
+you have the IP address of the pod
+
+05:38.280 --> 05:40.985
+and the container port is 80.
+
+05:40.985 --> 05:42.990
+Okay, there it's mentioned.
+
+05:42.990 --> 05:44.790
+Okay, now let's check the server.
+
+05:44.790 --> 05:46.023
+Let me clear the screen.
+
+05:50.880 --> 05:52.710
+Right, so this was the IP address.
+
+05:52.710 --> 05:55.593
+So I'll say Kube CTL, get SVC.
+
+05:56.790 --> 05:59.563
+Now I'll say Kube CTL, describe SVC
+
+06:01.980 --> 06:03.810
+and service name.
+
+06:03.810 --> 06:07.353
+So in this case we are pro app - service.
+
+06:08.250 --> 06:10.680
+Now, if this is a functional SER service,
+
+06:10.680 --> 06:13.050
+that means redirecting the output properly.
+
+06:13.050 --> 06:14.997
+So you should see the IP address in the endpoint.
+
+06:14.997 --> 06:17.910
+You should see the IP address of the pod. See that?
+
+06:17.910 --> 06:19.800
+And the container port 8080.
+
+06:19.800 --> 06:21.090
+If you don't see this endpoint,
+
+06:21.090 --> 06:22.440
+then definitely there is some mistake.
+
+06:22.440 --> 06:26.460
+The mistake could be in the label selector in the selector.
+
+06:26.460 --> 06:29.040
+Most of the time it's the selector problem
+
+06:29.040 --> 06:31.590
+that you have given the wrong label name.
+
+06:31.590 --> 06:34.620
+So once again, if you understood what is the problem,
+
+06:34.620 --> 06:38.040
+you fix it in your definition file, then you delete that
+
+06:38.040 --> 06:39.120
+service in this case
+
+06:39.120 --> 06:42.183
+and create the service once again with the changes.
+
+06:43.380 --> 06:46.831
+Okay, so for the DB pod, we have created the PVC, right?
+
+06:46.831 --> 06:49.860
+It should say Kube CTL, get PVC.
+
+06:49.860 --> 06:54.060
+We should see here the PVC name.
+
+06:54.060 --> 06:55.350
+You should see some ID there.
+
+06:55.350 --> 06:57.690
+And this should match with the EBS tag
+
+06:57.690 --> 07:00.360
+that you see in the EC2 console.
+
+07:00.360 --> 07:02.160
+Okay? 3 GB of size.
+
+07:02.160 --> 07:05.610
+Now, PVC is a claim, it just doesn't, it cannot directly go
+
+07:05.610 --> 07:06.837
+and cannot create the EBSO.
+
+07:06.837 --> 07:09.480
+And that is created by the storage class.
+
+07:09.480 --> 07:13.387
+So if you do Kube CTL, get SC, storage class,
+
+07:13.387 --> 07:15.600
+I should see a storage class here.
+
+07:15.600 --> 07:16.860
+The name is default here.
+
+07:16.860 --> 07:18.070
+That's the actual name
+
+07:19.110 --> 07:22.580
+and is ebs.csi.aws.com, the provisioner.
+
+07:22.580 --> 07:24.300
+So this is kind of a driver, right?
+
+07:24.300 --> 07:26.820
+It uses that behind the scene mechanism
+
+07:26.820 --> 07:28.950
+to create the EBS volume.
+
+07:28.950 --> 07:32.550
+So in the PVC, when we see the storage class is default,
+
+07:32.550 --> 07:34.087
+this is what it means, right?
+
+07:34.087 --> 07:35.730
+In the DB PVC,
+
+07:35.730 --> 07:38.280
+we have given storage class name default, right?
+
+07:38.280 --> 07:41.010
+Instead of default. You can also give this name over here,
+
+07:41.010 --> 07:43.230
+this one, but should not, you know,
+
+07:43.230 --> 07:45.990
+this might change at the time you create the Kubernetes
+
+07:45.990 --> 07:48.690
+cluster with Kops, this might be a different name.
+
+07:48.690 --> 07:53.250
+So there will be one default storage class in the cluster.
+
+07:53.250 --> 07:56.130
+When we create Kubernetes cluster with Kops,
+
+07:56.130 --> 07:59.613
+the default storage class will be this one EBS.
+
+08:00.450 --> 08:02.880
+Okay? Again, this should not be a big concern for us.
+
+08:02.880 --> 08:04.346
+This should be definitely managed
+
+08:04.346 --> 08:06.630
+by the storage administrator
+
+08:06.630 --> 08:09.360
+or the administrator of the Kubernetes.
+
+08:09.360 --> 08:11.605
+So we should know the storage class name.
+
+08:11.605 --> 08:15.930
+That's what is the most important part for us. Okay?
+
+08:15.930 --> 08:18.700
+Now last thing, Kube CTL get ingress
+
+08:19.680 --> 08:21.270
+to see whether this is working or not.
+
+08:21.270 --> 08:24.240
+If you do not see this information over here,
+
+08:24.240 --> 08:26.970
+that means your ingress is not working.
+
+08:26.970 --> 08:29.310
+Okay? So we created the ingress controller previously.
+
+08:29.310 --> 08:32.469
+Let ingress controller created the load balancer. Right?
+
+08:32.469 --> 08:36.683
+Now, when we created the ingress, the ingress job is to map
+
+08:36.683 --> 08:41.040
+that load balancer to the endpoint, right?
+
+08:41.040 --> 08:42.300
+And connect it to the server.
+
+08:42.300 --> 08:43.983
+So we described this ingress,
+
+08:47.670 --> 08:50.250
+you should see here the address.
+
+08:50.250 --> 08:52.996
+And in the backends you should see the service name
+
+08:52.996 --> 08:55.410
+and the service number, and that's the IP address
+
+08:55.410 --> 08:56.910
+of your servers.
+
+08:56.910 --> 08:59.880
+A service will also have the IP address. Okay?
+
+08:59.880 --> 09:01.830
+Now, in order to access it from the browser,
+
+09:01.830 --> 09:03.150
+we need to give this URL,
+
+09:03.150 --> 09:06.120
+but this URL does not match us with the load balancer.
+
+09:06.120 --> 09:09.180
+I mean in the world we need to give in the domain registrar,
+
+09:09.180 --> 09:12.930
+we need to mention that this name means this endpoint.
+
+09:12.930 --> 09:16.260
+I'm going to copy this endpoint, log into your GoDaddy
+
+09:16.260 --> 09:19.383
+account or wherever the domain registrar that you have used.
+
+09:20.220 --> 09:23.190
+So I'm going to go to the DNS setting of my domain, right?
+
+09:23.190 --> 09:24.023
+That's the domain.
+
+09:24.023 --> 09:26.200
+That's why I've given that in the ingress rule.
+
+09:27.090 --> 09:29.040
+And here I'm going to create a record.
+
+09:29.040 --> 09:33.570
+I'm going to say C name V profile
+
+09:33.570 --> 09:35.280
+matches to this endpoint.
+
+09:35.280 --> 09:38.340
+This is the load balancer of the, sorry,
+
+09:38.340 --> 09:40.230
+this is the endpoint of the load balancer
+
+09:40.230 --> 09:41.430
+application load balancer.
+
+09:41.430 --> 09:44.190
+You can check, it can compare it from here also.
+
+09:44.190 --> 09:48.043
+Okay, that one. Okay, let's create the record.
+
+09:48.043 --> 09:49.563
+Let's save it.
+
+09:51.600 --> 09:55.583
+So this record is created, if I say vprofile.HKHinfoteck.xyz
+
+09:56.973 --> 10:00.210
+this should resolve to this endpoint, right?
+
+10:00.210 --> 10:01.710
+And just this is not enough.
+
+10:01.710 --> 10:05.124
+There should be an ingress rule as we created.
+
+10:05.124 --> 10:08.340
+So when the request is coming to this ingress
+
+10:08.340 --> 10:12.540
+and the UR your requesting is the host name is this,
+
+10:12.540 --> 10:16.530
+then only it is going to route the request to this service.
+
+10:16.530 --> 10:17.790
+If you just access it directly
+
+10:17.790 --> 10:19.860
+with this endpoint, it's not going to work.
+
+10:19.860 --> 10:22.770
+The ingress is going to just stop the request there itself,
+
+10:22.770 --> 10:23.910
+'cause there is no rule
+
+10:23.910 --> 10:27.420
+that says this endpoint should match with anything.
+
+10:27.420 --> 10:29.430
+The rule is the host name is this
+
+10:29.430 --> 10:32.820
+and part is slash then forward the request over here, right?
+
+10:32.820 --> 10:33.653
+You can try that.
+
+10:33.653 --> 10:35.880
+You just enter that load balancer endpoint.
+
+10:35.880 --> 10:37.023
+You should get this.
+
+10:38.160 --> 10:43.160
+But if you enter the proper host name and path, right?
+
+10:43.230 --> 10:44.490
+This is the host name and path.
+
+10:44.490 --> 10:47.183
+If you enter this, then it'll work. Okay?
+
+10:48.235 --> 10:51.630
+So http :// and the host name that you're given in the
+
+10:51.630 --> 10:52.950
+ingress, right?
+
+10:52.950 --> 10:57.950
+Enter, there you go.
+
+10:58.500 --> 11:01.020
+Right? That is going to forward, the request to the service.
+
+11:01.020 --> 11:04.170
+Service is going to forward to the Tomcat pod
+
+11:04.170 --> 11:05.880
+and this is where it's coming from, right?
+
+11:05.880 --> 11:08.760
+Let's log in and test admin vp.
+
+11:08.760 --> 11:12.520
+Now this should validate the DB service and the DB pod
+
+11:13.410 --> 11:18.090
+and also the PVC that is connect, okay?
+
+11:18.090 --> 11:21.090
+Through and through. Very verified everything you can say
+
+11:21.090 --> 11:22.470
+except Rabbit MQ and m cache.
+
+11:22.470 --> 11:24.480
+But you know, from start till end,
+
+11:24.480 --> 11:28.170
+from the user request, till the storage EBS still there.
+
+11:28.170 --> 11:31.230
+We are verified by just logging in here.
+
+11:31.230 --> 11:33.930
+Yeah, let's check RabbitMQ. Let's click on that.
+
+11:33.930 --> 11:36.210
+You should see Rabbit MQ initiated.
+
+11:36.210 --> 11:38.580
+Let's check the all users for M cache.
+
+11:38.580 --> 11:40.620
+And you should see the user list.
+
+11:40.620 --> 11:44.670
+Let's click on a user, should see data is inserted in cache.
+
+11:44.670 --> 11:46.590
+If you click that user, once again,
+
+11:46.590 --> 11:48.450
+you know what's going to happen.
+
+11:48.450 --> 11:50.592
+The data is coming from the cache, right?
+
+11:50.592 --> 11:53.760
+So this is a whole application setup
+
+11:53.760 --> 11:55.470
+running on the Kubernetes cluster.
+
+11:55.470 --> 11:59.250
+We have ingress, we have storage in the middle,
+
+11:59.250 --> 12:01.680
+we have all our objects running, the pods,
+
+12:01.680 --> 12:03.300
+the service, everything.
+
+12:03.300 --> 12:05.550
+Okay? So in real world, comparing it
+
+12:05.550 --> 12:07.290
+with the real world first, you should be able
+
+12:07.290 --> 12:09.000
+to containerize your application.
+
+12:09.000 --> 12:10.500
+Once you containerize, you should be able
+
+12:10.500 --> 12:12.480
+to write the manifests, right?
+
+12:12.480 --> 12:15.664
+The Kubernetes definition files for your application.
+
+12:15.664 --> 12:18.900
+Once that is done, there are other things like helm
+
+12:18.900 --> 12:21.540
+and CICD, and more things.
+
+12:21.540 --> 12:23.190
+Okay? But that should be it. In the next lecture,
+
+12:23.190 --> 12:25.230
+we'll be talking about cleanup.
+
+12:25.230 --> 12:27.963
+So wrap this up and join me in the next lecture.

@@ -1,0 +1,2335 @@
+WEBVTT
+
+00:00.330 --> 00:01.320
+Instructor: Hello, and welcome.
+
+00:01.320 --> 00:02.153
+In this lecture,
+
+00:02.153 --> 00:04.440
+we are going to see Fabric,
+
+00:04.440 --> 00:06.420
+a Python library.
+
+00:06.420 --> 00:08.940
+Now let's say you have hundreds of servers
+
+00:08.940 --> 00:09.810
+that you manage
+
+00:09.810 --> 00:13.830
+and you want to execute commands on them remotely, right?
+
+00:13.830 --> 00:15.630
+From your machine, from your laptop,
+
+00:15.630 --> 00:16.650
+or from any other computer.
+
+00:16.650 --> 00:19.980
+You want to execute commands on them by using Python.
+
+00:19.980 --> 00:20.880
+How do you do that?
+
+00:20.880 --> 00:22.203
+By using Fabric.
+
+00:23.130 --> 00:26.071
+Now there's not by default Fabric installed in Python.
+
+00:26.071 --> 00:27.810
+You need to install it.
+
+00:27.810 --> 00:30.254
+And if you want to install any library in Python,
+
+00:30.254 --> 00:31.980
+you have to use pip.
+
+00:31.980 --> 00:34.590
+Okay, pip is a package installer
+
+00:34.590 --> 00:36.890
+from Python or for Python.
+
+00:36.890 --> 00:41.220
+You can say it's the apt or yum of Python.
+
+00:41.220 --> 00:43.230
+You can install any library,
+
+00:43.230 --> 00:44.850
+like you want to install Fabric in Python,
+
+00:44.850 --> 00:47.010
+you can say pip install fabric.
+
+00:47.010 --> 00:48.873
+So first let's install pip.
+
+00:49.770 --> 00:50.970
+You know, you can install pip
+
+00:50.970 --> 00:53.103
+by using apt install in Ubuntu,
+
+00:54.000 --> 00:57.000
+and then you can install Fabric by using pip, right?
+
+00:57.000 --> 01:00.150
+Finally, we have to do pip install fabric.
+
+01:00.150 --> 01:01.710
+So this is one script.
+
+01:01.710 --> 01:03.300
+You know, come to this URL
+
+01:03.300 --> 01:08.143
+bootstrap.pypa.io/get-pip.py.
+
+01:09.420 --> 01:12.330
+So if you run this script on your machine,
+
+01:12.330 --> 01:14.430
+it is going to install the right version of pip
+
+01:14.430 --> 01:16.590
+based on your Python version
+
+01:16.590 --> 01:18.840
+and based on your operating system, okay?
+
+01:18.840 --> 01:20.850
+Because you know, the operating system version changes,
+
+01:20.850 --> 01:22.320
+the Python version changes,
+
+01:22.320 --> 01:24.720
+the command to install pip also changes with it.
+
+01:24.720 --> 01:26.190
+But with the script,
+
+01:26.190 --> 01:28.530
+you can install the correct version of pip for you.
+
+01:28.530 --> 01:30.810
+So get this URL,
+
+01:30.810 --> 01:33.950
+go to your Python, go to the script box, basically.
+
+01:33.950 --> 01:36.060
+You can see wget,
+
+01:36.060 --> 01:38.850
+Shift + insert to paste in Git Bash.
+
+01:38.850 --> 01:41.583
+Okay, put this URL and it should download pip.
+
+01:42.660 --> 01:44.160
+That's the script.
+
+01:44.160 --> 01:45.330
+Sorry, it doesn't download the pip.
+
+01:45.330 --> 01:48.480
+It downloads the script to install pip, okay?
+
+01:48.480 --> 01:50.250
+Once the script is downloaded,
+
+01:50.250 --> 01:51.630
+you have to execute the script.
+
+01:51.630 --> 01:53.670
+So you have to say python3
+
+01:53.670 --> 01:57.000
+and the script path, hit Enter,
+
+01:57.000 --> 02:00.300
+and this should start installing pip for you.
+
+02:00.300 --> 02:01.650
+Okay, so pip is installed.
+
+02:01.650 --> 02:05.040
+Now we are going to install Fabric by using pip.
+
+02:05.040 --> 02:05.873
+Not only Fabric,
+
+02:05.873 --> 02:09.780
+you can install anything by using pip for Python.
+
+02:09.780 --> 02:13.700
+pip install, in single code you give fabric&lt;2.0.
+
+02:16.133 --> 02:17.310
+Okay, give this command,
+
+02:17.310 --> 02:19.740
+this should install Fabric for you.
+
+02:19.740 --> 02:21.960
+Okay, so the Fabric is installed.
+
+02:21.960 --> 02:24.000
+Now we'll see in a moment how to use Fabric,
+
+02:24.000 --> 02:27.480
+but before that I want to show you a few more libraries
+
+02:27.480 --> 02:30.930
+that will be helpful for you if in case you need them.
+
+02:30.930 --> 02:33.090
+Like for example, if you want to manage Jenkins
+
+02:33.090 --> 02:35.190
+with Python, how do you do that?
+
+02:35.190 --> 02:37.800
+If you want to manage AWS or Azure
+
+02:37.800 --> 02:40.260
+or Google Cloud, anything by Python.
+
+02:40.260 --> 02:42.930
+So you can install those libraries by using pip.
+
+02:42.930 --> 02:44.760
+Okay, now since you have pip installed,
+
+02:44.760 --> 02:46.980
+you can install any library by using pip,
+
+02:46.980 --> 02:49.440
+any Python library and use it, right?
+
+02:49.440 --> 02:52.950
+Let's say for example, you want to manage Jenkins
+
+02:52.950 --> 02:54.150
+by using Python, right?
+
+02:54.150 --> 02:56.220
+So just search Google.
+
+02:56.220 --> 02:58.530
+Let's Google python jenkins library.
+
+02:58.530 --> 03:01.113
+I see this python-jenkins over here.
+
+03:02.280 --> 03:04.443
+Let's look at the documentation.
+
+03:05.700 --> 03:06.810
+Yeah, there.
+
+03:06.810 --> 03:09.570
+So you know, what all you can do with this library,
+
+03:09.570 --> 03:10.583
+with this Python Jenkins library,
+
+03:10.583 --> 03:12.930
+you can create jobs, you can copy jobs,
+
+03:12.930 --> 03:14.730
+you can delete jobs, update jobs,
+
+03:14.730 --> 03:17.010
+get bill information, et cetera, et cetera, right?
+
+03:17.010 --> 03:19.888
+The whole list is here, let me scroll down.
+
+03:19.888 --> 03:21.240
+Let's see some examples.
+
+03:21.240 --> 03:22.230
+There should be examples.
+
+03:22.230 --> 03:24.690
+Okay, so Get versions of Jenkins.
+
+03:24.690 --> 03:25.560
+Let's click on that.
+
+03:25.560 --> 03:27.210
+And that's example one.
+
+03:27.210 --> 03:30.570
+So first, you have to install this Jenkins library.
+
+03:30.570 --> 03:32.400
+Let me go back.
+
+03:32.400 --> 03:33.900
+Okay, so that's how you install it.
+
+03:33.900 --> 03:36.390
+pip install python-jenkins.
+
+03:36.390 --> 03:37.980
+First, that's the step.
+
+03:37.980 --> 03:40.560
+And then let's go look at the first example.
+
+03:40.560 --> 03:42.450
+So then you can say import jenkins.
+
+03:42.450 --> 03:43.763
+You have installed Jenkins library,
+
+03:43.763 --> 03:46.800
+now you can import it in your script.
+
+03:46.800 --> 03:49.683
+And then, here you see the first step is to login.
+
+03:50.520 --> 03:52.710
+So in a variable, we are storing Jenkins.
+
+03:52.710 --> 03:55.740
+That's the library, .Jenkins.
+
+03:55.740 --> 03:57.000
+And that's the function, right?
+
+03:57.000 --> 03:58.080
+That's the method.
+
+03:58.080 --> 04:00.600
+Parenthesis, and you give URL, username, password
+
+04:00.600 --> 04:02.520
+that will login into Jenkins.
+
+04:02.520 --> 04:05.040
+And then you can do stuff like this.
+
+04:05.040 --> 04:07.020
+So once you have the login stored in this variable,
+
+04:07.020 --> 04:10.920
+then you can just server.get_whoami or get_version.
+
+04:10.920 --> 04:12.390
+That is stored in these variables
+
+04:12.390 --> 04:14.280
+and then it's simply printing.
+
+04:14.280 --> 04:16.290
+Let's see a few more examples.
+
+04:16.290 --> 04:19.360
+At server, server.job_counts.
+
+04:19.360 --> 04:20.910
+Okay, this is the variable
+
+04:20.910 --> 04:22.770
+which stores the login details, right?
+
+04:22.770 --> 04:25.980
+It takes a method and store it over here, right?
+
+04:25.980 --> 04:27.510
+Then in that, you have a lot of functions
+
+04:27.510 --> 04:28.950
+that you can use, right?
+
+04:28.950 --> 04:30.360
+So count the number of jobs.
+
+04:30.360 --> 04:32.130
+Working with Jenkins job.
+
+04:32.130 --> 04:33.240
+At creating a job,
+
+04:33.240 --> 04:36.000
+so the job should be in the XML format.
+
+04:36.000 --> 04:38.280
+Okay, so like this, there are many examples.
+
+04:38.280 --> 04:40.860
+First, you have to do some R&amp;D.
+
+04:40.860 --> 04:44.444
+And slowly, slowly you can get the script that you want.
+
+04:44.444 --> 04:46.378
+Likewise, let's see how we can manage
+
+04:46.378 --> 04:47.800
+AWS by using Python.
+
+04:47.800 --> 04:51.900
+So there is a very popular library called Boto.
+
+04:51.900 --> 04:54.000
+So just search for boto3 python.
+
+04:54.000 --> 04:56.913
+So Boto3 is like, you know, works with Python 3 like that.
+
+04:57.930 --> 05:00.630
+Okay, so let's take a look at the quickstart guide first.
+
+05:00.630 --> 05:02.013
+Click on Quickstart.
+
+05:02.850 --> 05:04.890
+So here it is, pip install boto3.
+
+05:04.890 --> 05:06.060
+That's how you can install Boto3,
+
+05:06.060 --> 05:08.550
+and you can also mention different versions
+
+05:08.550 --> 05:10.740
+of Boto3 if you want.
+
+05:10.740 --> 05:13.770
+Now configuration, you have to run aws configure
+
+05:13.770 --> 05:16.530
+and you store the access key and secret key.
+
+05:16.530 --> 05:18.469
+'Cause Boto is going to contact AWS,
+
+05:18.469 --> 05:20.670
+it's going to use AWS APIs.
+
+05:20.670 --> 05:22.110
+And for authentication,
+
+05:22.110 --> 05:24.630
+you can use the access key and secret key.
+
+05:24.630 --> 05:26.010
+That you can set in the command line
+
+05:26.010 --> 05:27.780
+by using aws configure.
+
+05:27.780 --> 05:28.650
+Now let me tell you
+
+05:28.650 --> 05:31.530
+one very, very important thing over here.
+
+05:31.530 --> 05:33.990
+There are ways to store access key and secret key
+
+05:33.990 --> 05:36.030
+in the source code in the Python code itself,
+
+05:36.030 --> 05:37.080
+but never do that.
+
+05:37.080 --> 05:38.910
+It's very dangerous.
+
+05:38.910 --> 05:40.560
+Your access key and secret key
+
+05:40.560 --> 05:42.510
+should be not in the same place
+
+05:42.510 --> 05:44.760
+where you have your Python code.
+
+05:44.760 --> 05:45.593
+Like in this case,
+
+05:45.593 --> 05:47.160
+we are storing it through command line,
+
+05:47.160 --> 05:51.150
+which it'll be stored into the home directory, right?
+
+05:51.150 --> 05:54.000
+With AWS folder credentials.
+
+05:54.000 --> 05:56.280
+And your Python code will be in some different directory.
+
+05:56.280 --> 05:57.960
+So that is fine.
+
+05:57.960 --> 05:59.820
+But storing it in the Python code,
+
+05:59.820 --> 06:02.910
+you will store it then in the repositories like GitHub
+
+06:02.910 --> 06:06.330
+and there is a chance of accidentally exposing your keys.
+
+06:06.330 --> 06:08.610
+So be very careful with this.
+
+06:08.610 --> 06:10.140
+Okay, so how do we use Boto?
+
+06:10.140 --> 06:12.390
+Well, as an example of S3,
+
+06:12.390 --> 06:14.700
+we have to first say import boto3.
+
+06:14.700 --> 06:16.830
+And a variable is taken here, s3.
+
+06:16.830 --> 06:18.210
+That's just the name of the variable.
+
+06:18.210 --> 06:19.350
+You can give anything.
+
+06:19.350 --> 06:21.786
+But this is the way, boto3.resources.
+
+06:21.786 --> 06:24.570
+In the parenthesis, there is s3.
+
+06:24.570 --> 06:26.520
+So it's going to store the S3 class object
+
+06:26.520 --> 06:27.353
+into this variable.
+
+06:27.353 --> 06:29.099
+Now you can use this s3, right?
+
+06:29.099 --> 06:31.230
+So if you want to print all the bucket names,
+
+06:31.230 --> 06:35.040
+you can say for bucket in s3.buckets.all.
+
+06:35.040 --> 06:37.500
+So here S3 gets, you know, a class object.
+
+06:37.500 --> 06:39.870
+In that, you have the method buckets.all.
+
+06:39.870 --> 06:41.370
+It's run in a for loop
+
+06:41.370 --> 06:44.943
+and we'll be printing bucket.name, right?
+
+06:44.943 --> 06:46.050
+This variable.
+
+06:46.050 --> 06:48.878
+We will have a method called .name
+
+06:48.878 --> 06:51.240
+and that will have the name of the bucket.
+
+06:51.240 --> 06:53.010
+Here's how we can print all the bucket name, right?
+
+06:53.010 --> 06:54.755
+If you want to store a file, upload a file,
+
+06:54.755 --> 06:56.223
+that's how you can do it.
+
+06:57.060 --> 06:58.260
+By using with function,
+
+06:58.260 --> 07:01.710
+you say, you know, open a file as data
+
+07:01.710 --> 07:03.240
+and then with s3.bucket.
+
+07:03.240 --> 07:06.810
+The bucket method you can mention in parenthesis
+
+07:06.810 --> 07:09.570
+the name of the bucket, .put_object,
+
+07:09.570 --> 07:11.610
+which object you want to upload,
+
+07:11.610 --> 07:14.010
+Key equal to the file name, right?
+
+07:14.010 --> 07:16.230
+So that is how you can store a object
+
+07:16.230 --> 07:17.220
+in the S3 bucket.
+
+07:17.220 --> 07:19.309
+Like that, you can see many sample examples over here.
+
+07:19.309 --> 07:22.050
+For example, if you do here Code Examples,
+
+07:22.050 --> 07:24.180
+and let's go to CloudWatch:
+
+07:24.180 --> 07:26.220
+creating an alarm in Amazon CloudWatch.
+
+07:26.220 --> 07:27.630
+Let's click on that.
+
+07:27.630 --> 07:30.105
+So let's slowly come down.
+
+07:30.105 --> 07:32.429
+So list alarms of insufficient data
+
+07:32.429 --> 07:34.710
+through pagination interface.
+
+07:34.710 --> 07:36.840
+That's how you can do create an alarm here.
+
+07:36.840 --> 07:39.381
+So boto3.client;
+
+07:39.381 --> 07:43.170
+in parenthesis, you give the object name CloudWatch.
+
+07:43.170 --> 07:44.520
+And this is stored into this variable.
+
+07:44.520 --> 07:47.550
+Now you can use this like cloudwatch.put_metric.
+
+07:47.550 --> 07:51.420
+And this function is pretty long here.
+
+07:51.420 --> 07:52.688
+Basically we are passing the arguments,
+
+07:52.688 --> 07:53.820
+that's all we are doing.
+
+07:53.820 --> 07:54.653
+In this function,
+
+07:54.653 --> 07:56.490
+we are passing all these arguments, okay?
+
+07:56.490 --> 08:01.490
+Like AlarmName, EvaluationPeriod, MetricName, Statistic.
+
+08:02.430 --> 08:04.156
+So these are basically all the variables
+
+08:04.156 --> 08:06.960
+that we are passing as parameter
+
+08:06.960 --> 08:09.750
+to this function that will create the alarm.
+
+08:09.750 --> 08:11.370
+So like that, there are many examples.
+
+08:11.370 --> 08:12.780
+You know, we can go on and on on this,
+
+08:12.780 --> 08:14.100
+but the best way to learn
+
+08:14.100 --> 08:16.980
+is you actually start doing some experiments with this.
+
+08:16.980 --> 08:20.040
+But again, be careful with your access keys, right?
+
+08:20.040 --> 08:21.390
+I just wanted to show, you know,
+
+08:21.390 --> 08:23.640
+we are using Fabric in this lecture,
+
+08:23.640 --> 08:24.480
+but I just wanted to show you,
+
+08:24.480 --> 08:25.950
+you know, there are many other libraries
+
+08:25.950 --> 08:27.330
+that you can use in DevOps.
+
+08:27.330 --> 08:29.610
+These are just few examples.
+
+08:29.610 --> 08:32.760
+Okay, so let's get back to our script box.
+
+08:32.760 --> 08:35.670
+We'll see how we can start using Fabric for automation.
+
+08:35.670 --> 08:38.010
+So my VMs are powered off,
+
+08:38.010 --> 08:39.300
+I checked vagrant status.
+
+08:39.300 --> 08:40.133
+They're powered off.
+
+08:40.133 --> 08:41.343
+I'm just bringing them up.
+
+08:43.003 --> 08:45.603
+Okay, I'm going to login to script box.
+
+08:50.880 --> 08:53.042
+Switch to root user.
+
+08:53.042 --> 08:54.450
+Let me clear the screen.
+
+08:54.450 --> 08:58.920
+We have folder opt/pyscripts.
+
+08:58.920 --> 09:00.720
+If you don't have this, you can create this folder
+
+09:00.720 --> 09:03.480
+or you can create your script anywhere if you want.
+
+09:03.480 --> 09:06.453
+And this I'm going to create a folder called fabric.
+
+09:12.210 --> 09:13.890
+We'll see into that.
+
+09:13.890 --> 09:15.600
+Okay, now this is how Fabric works.
+
+09:15.600 --> 09:20.520
+You need to have a fabfile, fabfile.py.
+
+09:20.520 --> 09:24.300
+So I'm going to create a file, fabfile.py.
+
+09:24.300 --> 09:26.640
+And in this, you mentioned the fabric function
+
+09:26.640 --> 09:29.220
+and that you can execute through command line.
+
+09:29.220 --> 09:33.690
+Yes, Python functions you can execute through bash shell
+
+09:33.690 --> 09:34.890
+or from command line.
+
+09:34.890 --> 09:36.630
+This is very powerful.
+
+09:36.630 --> 09:38.460
+But before we actually execute something
+
+09:38.460 --> 09:40.020
+on remote machine, let's take a look,
+
+09:40.020 --> 09:42.240
+you know, how this works.
+
+09:42.240 --> 09:43.920
+Okay, so I'm going to INSERT mode,
+
+09:43.920 --> 09:48.920
+and I'm going to say here from fabric.api import *,
+
+09:51.960 --> 09:53.640
+that means import all the methods
+
+09:53.640 --> 09:58.230
+available in fabric.api method, okay?
+
+09:58.230 --> 10:01.411
+Now before we actually use Fabric methods,
+
+10:01.411 --> 10:04.200
+I want to write here one function,
+
+10:04.200 --> 10:05.370
+a normal Python function,
+
+10:05.370 --> 10:08.190
+and I'll show you how you can call it from command line.
+
+10:08.190 --> 10:09.750
+So how do we write function in Python?
+
+10:09.750 --> 10:11.400
+We say def and we give the function name.
+
+10:11.400 --> 10:12.450
+So let's say I'm going to give
+
+10:12.450 --> 10:14.790
+this function name as greetings.
+
+10:14.790 --> 10:17.223
+And I'll say this takes a variable,
+
+10:18.690 --> 10:20.547
+an argument called msg:,
+
+10:21.820 --> 10:24.900
+and simply print a message.
+
+10:24.900 --> 10:27.210
+print, parenthesis, in double quotes
+
+10:27.210 --> 10:31.530
+I will say first Hello, and a variable.
+
+10:31.530 --> 10:33.870
+So I'm gonna put the curly braces.
+
+10:33.870 --> 10:37.050
+Then I'm going to use the format function, .format
+
+10:37.050 --> 10:41.550
+and give the, oh, the argument msg,
+
+10:41.550 --> 10:43.164
+which will be the variable.
+
+10:43.164 --> 10:44.250
+You know what?
+
+10:44.250 --> 10:45.270
+Here instead of say Hello,
+
+10:45.270 --> 10:46.323
+I'll say here Good.
+
+10:48.780 --> 10:50.730
+Okay, so it's a normal Python function,
+
+10:50.730 --> 10:52.410
+nothing Fabric about this.
+
+10:52.410 --> 10:54.870
+Just wanted to show you how you can execute
+
+10:54.870 --> 10:57.960
+Python function from command line by using Fabric.
+
+10:57.960 --> 10:59.463
+So just save this.
+
+11:00.690 --> 11:04.050
+And now you need to be the same place
+
+11:04.050 --> 11:05.310
+where you have the fabfile.
+
+11:05.310 --> 11:07.560
+And here, you can run the command fab -l,
+
+11:07.560 --> 11:10.440
+which is going to print the available commands
+
+11:10.440 --> 11:12.770
+or available functions in the fabfile
+
+11:12.770 --> 11:14.550
+in the current working directory.
+
+11:14.550 --> 11:17.250
+You see it says available commands greetings.
+
+11:17.250 --> 11:18.810
+Okay, so I'm going to call this function,
+
+11:18.810 --> 11:20.850
+I'm gonna say fab,
+
+11:20.850 --> 11:24.540
+and you have to give the name of the command, okay?
+
+11:24.540 --> 11:25.830
+This is a Python function,
+
+11:25.830 --> 11:27.983
+but in Fabric, we call this as command.
+
+11:27.983 --> 11:30.900
+And to pass the argument, you have to say colon
+
+11:30.900 --> 11:32.430
+because greetings takes an argument.
+
+11:32.430 --> 11:33.263
+Call msg, right?
+
+11:33.263 --> 11:34.890
+And we have to pass its value.
+
+11:34.890 --> 11:36.903
+So I'm going to say Morning.
+
+11:39.330 --> 11:41.610
+If you have multiple values for that function,
+
+11:41.610 --> 11:43.953
+you can pass it comma separated.
+
+11:45.360 --> 11:46.193
+Okay, take a look.
+
+11:46.193 --> 11:49.170
+I executed this passed Morning into that, right?
+
+11:49.170 --> 11:51.030
+That morning argument was stored over there
+
+11:51.030 --> 11:53.910
+and then it simply printed it Good, right?
+
+11:53.910 --> 11:54.957
+You can see the output over here
+
+11:54.957 --> 11:57.175
+and the end you will see done.
+
+11:57.175 --> 12:00.240
+That means the function got completed successfully.
+
+12:00.240 --> 12:03.480
+Okay, now let's do something Fabric about this fabfile.
+
+12:03.480 --> 12:05.073
+We'll use some fabric function.
+
+12:05.970 --> 12:08.760
+So we need to write one more function
+
+12:08.760 --> 12:11.683
+and I will say this function name is a system_info.
+
+12:13.290 --> 12:15.015
+Just a name, anything you can give.
+
+12:15.015 --> 12:17.340
+Parenthesis, no arguments I'm taking.
+
+12:17.340 --> 12:20.730
+And I want to print the disk space of this machine,
+
+12:20.730 --> 12:22.230
+the script box.
+
+12:22.230 --> 12:23.930
+So first I'll give print function.
+
+12:26.775 --> 12:28.075
+I'll say print Disk Space,
+
+12:29.910 --> 12:31.833
+and ask you full stop.
+
+12:32.932 --> 12:36.630
+I'm going to use a function called local.
+
+12:36.630 --> 12:37.710
+local, parenthesis.
+
+12:37.710 --> 12:39.330
+And in this, you can give the commands,
+
+12:39.330 --> 12:41.430
+the Linux commands that you want.
+
+12:41.430 --> 12:43.200
+So df -h.
+
+12:43.200 --> 12:45.510
+So its local function is coming from here, right?
+
+12:45.510 --> 12:48.090
+From fabric.api import *.
+
+12:48.090 --> 12:50.130
+So it loads all the available method.
+
+12:50.130 --> 12:51.780
+This is one of the method that we are using.
+
+12:51.780 --> 12:53.610
+local method is used to execute command
+
+12:53.610 --> 12:55.500
+on the current machine, on the local machine,
+
+12:55.500 --> 12:57.390
+in this case, the script box.
+
+12:57.390 --> 12:59.493
+Like that, let's give few more commands.
+
+13:00.720 --> 13:02.490
+Okay, it's free -m and uptime
+
+13:02.490 --> 13:03.660
+with just a print message.
+
+13:03.660 --> 13:04.830
+That's all I've given.
+
+13:04.830 --> 13:06.510
+You can give any command of your choice.
+
+13:06.510 --> 13:07.860
+Make sure you know the command
+
+13:07.860 --> 13:09.000
+that you're giving just works.
+
+13:09.000 --> 13:11.100
+It's an actual command,
+
+13:11.100 --> 13:12.300
+because it's going to execute this
+
+13:12.300 --> 13:14.070
+command on the bash shell.
+
+13:14.070 --> 13:15.450
+If it's an actual bash command,
+
+13:15.450 --> 13:17.400
+it'll work and return the output.
+
+13:17.400 --> 13:20.700
+So let's save this and let's see what we can do.
+
+13:20.700 --> 13:21.780
+We clear the screen.
+
+13:21.780 --> 13:23.940
+Again, make sure you're present in the same place
+
+13:23.940 --> 13:25.140
+where you have the fabfile.
+
+13:25.140 --> 13:27.810
+You can again do fab -l.
+
+13:27.810 --> 13:29.280
+Now you see system_info there.
+
+13:29.280 --> 13:34.260
+So we can say fab system_info.
+
+13:34.260 --> 13:35.733
+That's the function name.
+
+13:37.271 --> 13:38.853
+Okay, let's execute this.
+
+13:39.872 --> 13:41.520
+Okay, now observe the output.
+
+13:41.520 --> 13:43.340
+That's the print message, localhost.
+
+13:43.340 --> 13:45.000
+It's saying that the command
+
+13:45.000 --> 13:47.700
+is executing on the local current machine
+
+13:47.700 --> 13:49.080
+and the command is df -h,
+
+13:49.080 --> 13:50.610
+and here's the output.
+
+13:50.610 --> 13:52.140
+Same with the memory info,
+
+13:52.140 --> 13:54.660
+same with the uptime command.
+
+13:54.660 --> 13:57.990
+Now you can make it more readable if you wish to.
+
+13:57.990 --> 13:59.040
+Not giving some space
+
+13:59.040 --> 14:01.260
+or maybe store this value into another variable.
+
+14:01.260 --> 14:03.150
+And from that, extract data.
+
+14:03.150 --> 14:05.430
+You know, all that you can do through Python, right?
+
+14:05.430 --> 14:07.526
+Like first after storing it into a variable,
+
+14:07.526 --> 14:08.617
+you can run it on a for loop,
+
+14:08.617 --> 14:11.550
+you know, and find the data that you're looking for,
+
+14:11.550 --> 14:12.840
+let's say available display
+
+14:12.840 --> 14:16.752
+on a particular partition, stuff like that.
+
+14:16.752 --> 14:19.020
+Okay, now this was executing command locally,
+
+14:19.020 --> 14:21.327
+but our main task was to find out
+
+14:21.327 --> 14:23.970
+how to execute command remotely.
+
+14:23.970 --> 14:25.680
+So there are other methods available,
+
+14:25.680 --> 14:27.159
+like you have local like that.
+
+14:27.159 --> 14:29.490
+There is run, there is sudo.
+
+14:29.490 --> 14:31.620
+But for that, let's prepare our remote machine.
+
+14:31.620 --> 14:33.720
+We need to have a user on the remote machine.
+
+14:33.720 --> 14:36.300
+So we have web01 and web02.
+
+14:36.300 --> 14:39.120
+So we'll create a user on that, on those machines
+
+14:39.120 --> 14:42.120
+and add that user into sudo's file.
+
+14:42.120 --> 14:43.290
+And that user information,
+
+14:43.290 --> 14:45.630
+we need to give it to the Fabric command.
+
+14:45.630 --> 14:46.983
+Okay, so let me exit.
+
+14:48.150 --> 14:51.540
+Make sure web01 and web02 are up and running.
+
+14:51.540 --> 14:53.913
+I'm just going to do vagrant status here.
+
+14:54.810 --> 14:55.643
+Okay, it's running.
+
+14:55.643 --> 14:58.390
+So first, I'll login to web01.
+
+14:58.390 --> 15:01.593
+Okay, my bad, vagrant ssh web01 I should have said.
+
+15:03.000 --> 15:06.560
+Okay, sudo -I.
+
+15:06.560 --> 15:08.802
+Okay, first we need to add a user.
+
+15:08.802 --> 15:12.120
+I'll say useradd, I'll give the name as devops.
+
+15:12.120 --> 15:15.030
+Let's give some password to this user.
+
+15:15.030 --> 15:16.710
+I'll keep the password very simple
+
+15:16.710 --> 15:18.873
+and even tell you, it's admin123.
+
+15:20.490 --> 15:22.350
+In real time, you have to make sure
+
+15:22.350 --> 15:24.183
+you give some complicated password.
+
+15:25.080 --> 15:29.183
+We will store this into sudo's file.
+
+15:29.183 --> 15:32.010
+We need to have this user sudo's privilege
+
+15:32.010 --> 15:33.330
+because we will be executing
+
+15:33.330 --> 15:36.360
+some root commands from this user.
+
+15:36.360 --> 15:39.197
+So we'll add it into the sudo's file, just do visudo.
+
+15:40.440 --> 15:43.020
+Okay, find out this line, root.
+
+15:43.020 --> 15:45.570
+I simply copy paste this line.
+
+15:45.570 --> 15:46.803
+Oops, not two times.
+
+15:52.800 --> 15:54.840
+Okay, so devops user is in the sudo's file
+
+15:54.840 --> 15:56.400
+and we are giving you NOPASSWD.
+
+15:56.400 --> 15:58.320
+That means when we do sudo
+
+15:58.320 --> 15:59.790
+and execute the commands,
+
+15:59.790 --> 16:01.564
+it'll not ask the sudo's password.
+
+16:01.564 --> 16:04.530
+Or we can simply add this user into the real group.
+
+16:04.530 --> 16:06.150
+That also we can do,
+
+16:06.150 --> 16:08.043
+but let's keep this much for now.
+
+16:10.020 --> 16:12.675
+Okay, now by default password login will be disabled.
+
+16:12.675 --> 16:14.310
+So we need to enable password login.
+
+16:14.310 --> 16:15.843
+So you need to open this file,
+
+16:17.015 --> 16:19.980
+/etc/ssh/sshd_config.
+
+16:19.980 --> 16:22.170
+This file, open this file.
+
+16:22.170 --> 16:26.220
+And find out a line that says PasswordAuthentication.
+
+16:26.220 --> 16:29.430
+That one, we found it.
+
+16:29.430 --> 16:30.900
+Password Authentication.
+
+16:30.900 --> 16:33.360
+Okay, remove the hash in front of it
+
+16:33.360 --> 16:34.410
+to make sure it's like this.
+
+16:34.410 --> 16:35.940
+PasswordAuthentication yes.
+
+16:35.940 --> 16:37.863
+So we can login with password.
+
+16:39.270 --> 16:40.173
+Save and quit.
+
+16:41.910 --> 16:42.780
+Now you have to make sure
+
+16:42.780 --> 16:45.513
+you restart the SSH service after that.
+
+16:48.087 --> 16:50.337
+So web01 is CentOS machine.
+
+16:51.180 --> 16:52.530
+It's RPM based.
+
+16:52.530 --> 16:56.410
+So the SSH service name is SSHD.
+
+16:56.410 --> 16:57.330
+Okay, this is done.
+
+16:57.330 --> 16:59.823
+We are going to do the same thing to web02.
+
+17:02.580 --> 17:03.963
+Login to web02.
+
+17:05.880 --> 17:07.140
+Let's switch to root user.
+
+17:07.140 --> 17:10.830
+Let's add the user, same username I'm keeping
+
+17:10.830 --> 17:13.800
+and we have to make sure we use the same password
+
+17:13.800 --> 17:14.973
+at least for now.
+
+17:18.690 --> 17:19.860
+Okay, start the password.
+
+17:19.860 --> 17:22.847
+I will add this user into the sudo's file,
+
+17:30.982 --> 17:33.450
+Okay, so make sure you add that line, devops user,
+
+17:33.450 --> 17:35.523
+and make sure you give here NOPASSWD.
+
+17:36.793 --> 17:38.253
+And save and quit.
+
+17:39.300 --> 17:41.640
+And let's also add this user.
+
+17:41.640 --> 17:44.880
+No, I mean enable the password login.
+
+17:44.880 --> 17:48.993
+Open this file, /etc/ssh/sshd_config,
+
+17:50.490 --> 17:52.780
+Find the PasswordAuthentication line
+
+17:53.700 --> 17:56.130
+and remove a hash in front of it.
+
+17:56.130 --> 17:59.130
+The line should say like this, PasswordAuthentication yes.
+
+17:59.130 --> 18:01.800
+Or if it's no, turn it to yes.
+
+18:01.800 --> 18:03.120
+And save the file
+
+18:03.120 --> 18:06.003
+and we have to restart the SSHD service.
+
+18:09.630 --> 18:12.060
+Okay, let's exit from here.
+
+18:12.060 --> 18:12.893
+We're done.
+
+18:15.938 --> 18:18.070
+Okay, let's go back to script box
+
+18:19.110 --> 18:21.813
+and let's switch to root user.
+
+18:23.700 --> 18:25.650
+Okay, now I'll do one more thing.
+
+18:25.650 --> 18:28.320
+It's not mandatory, but executing command,
+
+18:28.320 --> 18:29.880
+you can mention the IP address.
+
+18:29.880 --> 18:31.770
+But instead of that, using hostname
+
+18:31.770 --> 18:34.590
+looks much better and it's more manageable.
+
+18:34.590 --> 18:38.270
+So we'll add IP to host mapping in the etc/host file.
+
+18:38.270 --> 18:41.760
+So let's get the IP address of web01 and web02.
+
+18:41.760 --> 18:42.870
+So in the vagrant file,
+
+18:42.870 --> 18:44.350
+you can get the IP address
+
+18:45.270 --> 18:48.453
+and then just open etc/host file.
+
+18:49.650 --> 18:53.093
+We'll add here the IP address of first web01,
+
+18:56.610 --> 19:01.123
+and then web02 also will add in the same place, it's 38.
+
+19:03.120 --> 19:07.110
+Now check the IP address properly from the vagrant file.
+
+19:07.110 --> 19:09.329
+Okay, so that's the IP address of web01.
+
+19:09.329 --> 19:11.190
+This is the IP address of web02 for me.
+
+19:11.190 --> 19:12.440
+I've given the hostnames.
+
+19:14.100 --> 19:16.800
+Okay, let's try to ping it with the hostname.
+
+19:16.800 --> 19:20.500
+So I'll say ping web01 -c 4.
+
+19:20.500 --> 19:22.743
+So four counts of packet ping,
+
+19:23.730 --> 19:24.750
+and that's working.
+
+19:24.750 --> 19:25.980
+We are getting the reply back
+
+19:25.980 --> 19:28.020
+and we are also getting the IP address.
+
+19:28.020 --> 19:28.853
+Okay, good.
+
+19:28.853 --> 19:31.650
+So we have a user, we have the password for that user
+
+19:31.650 --> 19:33.060
+for web01 and web02.
+
+19:33.060 --> 19:35.460
+Now I'm going to share the access,
+
+19:35.460 --> 19:37.950
+sorry, the SSH keys, I mean.
+
+19:37.950 --> 19:41.403
+So I'll say ssh-keygen to generate the keys.
+
+19:42.870 --> 19:44.550
+So I want passwordless login.
+
+19:44.550 --> 19:46.290
+Key-based login basically.
+
+19:46.290 --> 19:47.700
+So I'll generate the SSH key,
+
+19:47.700 --> 19:50.070
+store in root users home directory.
+
+19:50.070 --> 19:53.520
+And then I'll say ssh-cop-id,
+
+19:53.520 --> 19:57.213
+the username, @ the hostname.
+
+19:59.672 --> 20:01.020
+Hit Enter, yes.
+
+20:03.076 --> 20:06.660
+Enter the password of the devops user.
+
+20:06.660 --> 20:08.730
+So key is copied.
+
+20:08.730 --> 20:11.343
+Now let's do the same for web02.
+
+20:16.260 --> 20:18.870
+Enter the password for devops user.
+
+20:18.870 --> 20:19.920
+The key is copied.
+
+20:19.920 --> 20:22.620
+Now we can login without password.
+
+20:22.620 --> 20:24.300
+That means we can use key-based login.
+
+20:24.300 --> 20:29.300
+We can see ssh -I ~/.ssh/id_rsa,
+
+20:33.600 --> 20:34.440
+that's the key,
+
+20:34.440 --> 20:38.693
+the username devops@web01.
+
+20:41.218 --> 20:42.657
+Okay, so we are in web01 now.
+
+20:44.520 --> 20:47.910
+Exit from web01 and you'll come back to script box.
+
+20:47.910 --> 20:50.220
+And you don't even need to mention this login key
+
+20:50.220 --> 20:53.493
+because by default is going to use that as the login key.
+
+20:54.390 --> 20:56.220
+It copied the public key.
+
+20:56.220 --> 20:58.440
+That's the private key that is going to use always
+
+20:58.440 --> 20:59.580
+to login by default.
+
+20:59.580 --> 21:02.700
+So without giving the key path also,
+
+21:02.700 --> 21:05.610
+it should be able to login there, right?
+
+21:05.610 --> 21:07.323
+We did all this in bash scripting.
+
+21:08.430 --> 21:10.380
+Okay, just a revision you can think of.
+
+21:11.550 --> 21:13.530
+Okay, we are all good, we are all set.
+
+21:13.530 --> 21:16.460
+It's time to come back to Python Fabric.
+
+21:16.460 --> 21:19.713
+So we'll go to fabric folder.
+
+21:21.030 --> 21:22.770
+Okay, so come to fabric folder now
+
+21:22.770 --> 21:27.180
+and let's open open the fabfile.py,
+
+21:27.180 --> 21:30.150
+and let's add some new functions over here.
+
+21:30.150 --> 21:33.613
+I will name this function as remote_exec.
+
+21:34.904 --> 21:37.704
+and just some name you can give anything of your choice.
+
+21:39.445 --> 21:43.170
+And colon, I'll directly give the function name,
+
+21:43.170 --> 21:44.970
+which is run.
+
+21:44.970 --> 21:47.238
+Okay, local executes command locally
+
+21:47.238 --> 21:48.990
+on the script box.
+
+21:48.990 --> 21:51.630
+run is going to execute command on the remote machine.
+
+21:51.630 --> 21:52.590
+So you mentioned the command.
+
+21:52.590 --> 21:54.810
+So I'll just say hostname.
+
+21:54.810 --> 21:56.310
+Normal command.
+
+21:56.310 --> 21:58.050
+With run, you can execute command
+
+21:58.050 --> 21:59.040
+for normal user.
+
+21:59.040 --> 22:00.540
+Root commands, you cannot mention,
+
+22:00.540 --> 22:03.450
+like you cannot do herey yum install something.
+
+22:03.450 --> 22:07.110
+Because yum needs sudo's privilege or root privilege.
+
+22:07.110 --> 22:08.220
+To execute such command,
+
+22:08.220 --> 22:11.640
+we'll have a different function that we'll see later.
+
+22:11.640 --> 22:13.920
+So you can give some series of commands over here,
+
+22:13.920 --> 22:17.310
+like I've given uptime, df -h, free -m.
+
+22:17.310 --> 22:19.470
+Now I'm using double quotes.
+
+22:19.470 --> 22:21.810
+Okay, once you've given some commands over here,
+
+22:21.810 --> 22:24.630
+then you can save and quit this file.
+
+22:24.630 --> 22:27.033
+Okay, then you can run fab -l.
+
+22:28.110 --> 22:30.120
+Okay, so we can execute the remote_exec,
+
+22:30.120 --> 22:32.757
+but we need to also supply the username,
+
+22:32.757 --> 22:33.900
+the remote machine,
+
+22:33.900 --> 22:36.750
+which is web01 and web02 we have to mention that.
+
+22:36.750 --> 22:40.320
+So we have to say fab -H,
+
+22:40.320 --> 22:42.240
+and I'll give the hostname web01,
+
+22:42.240 --> 22:44.730
+which trust it to the IP address, right?
+
+22:44.730 --> 22:46.833
+And then -u, the username,
+
+22:47.880 --> 22:49.530
+and then the function name.
+
+22:49.530 --> 22:52.410
+Now see if we want to pass the password,
+
+22:52.410 --> 22:54.150
+we can say -p and the password,
+
+22:54.150 --> 22:55.380
+but that password will be stored
+
+22:55.380 --> 22:56.640
+in the command line, right?
+
+22:56.640 --> 22:58.817
+So that is the reason we exchange the keys.
+
+22:58.817 --> 23:02.640
+We copied the public key to web01 and then web02.
+
+23:02.640 --> 23:04.920
+So we can login with the private key.
+
+23:04.920 --> 23:06.840
+So fab command will also, by default,
+
+23:06.840 --> 23:09.750
+use your root user's private key to login
+
+23:09.750 --> 23:13.027
+to this user on this machine, right?
+
+23:13.027 --> 23:15.210
+So we can just give -u, username,
+
+23:15.210 --> 23:17.253
+and the function name.
+
+23:18.870 --> 23:19.920
+You see that?
+
+23:19.920 --> 23:22.650
+We'll get the output Executing task,
+
+23:22.650 --> 23:25.320
+run on the hostname, web01.
+
+23:25.320 --> 23:26.700
+So you've seen the square bracket, right?
+
+23:26.700 --> 23:27.750
+web01 everywhere.
+
+23:27.750 --> 23:31.140
+That means this is happening on web01, not local, right?
+
+23:31.140 --> 23:32.580
+Command and the output,
+
+23:32.580 --> 23:34.287
+command and the output, right?
+
+23:34.287 --> 23:37.530
+Likewise, let's do it also on web02.
+
+23:37.530 --> 23:40.589
+Just need to change the hostname, right?
+
+23:40.589 --> 23:42.477
+You understand how powerful this is.
+
+23:42.477 --> 23:44.310
+You know, if you have hundreds of server,
+
+23:44.310 --> 23:47.100
+you can execute commands on all of them
+
+23:47.100 --> 23:48.420
+through command line, just like that.
+
+23:48.420 --> 23:50.940
+You just need to have the right function.
+
+23:50.940 --> 23:53.790
+You know, along with this, let's also add
+
+23:53.790 --> 23:57.480
+other commands like installing some packages.
+
+23:57.480 --> 24:01.433
+So now here we cannot use run method.
+
+24:01.433 --> 24:03.180
+We have to use sudo,
+
+24:03.180 --> 24:06.330
+because this is going to actually, wait, wait a second.
+
+24:06.330 --> 24:07.163
+Yeah, sudo.
+
+24:07.163 --> 24:11.490
+It's going to actually elevate the privilege, right?
+
+24:11.490 --> 24:13.980
+So what command we mentioned here, like for example,
+
+24:13.980 --> 24:18.370
+we'll say yum install, let's say, unzip zip
+
+24:19.729 --> 24:24.300
+wget -y, simple packages.
+
+24:24.300 --> 24:25.950
+So now with sudo function,
+
+24:25.950 --> 24:27.480
+it is going to run the command like this,
+
+24:27.480 --> 24:30.210
+sudo yum install, and the package names.
+
+24:30.210 --> 24:31.080
+Okay, let's try that.
+
+24:31.080 --> 24:32.127
+Let's save and quit.
+
+24:32.127 --> 24:33.720
+And let's try this.
+
+24:33.720 --> 24:34.890
+Clear the screen.
+
+24:34.890 --> 24:36.870
+Or you can write a totally different function
+
+24:36.870 --> 24:37.833
+if you wish to.
+
+24:39.390 --> 24:40.833
+Let's do it on web02.
+
+24:43.637 --> 24:44.470
+You see that?
+
+24:44.470 --> 24:45.870
+Disconnecting from web02.
+
+24:45.870 --> 24:47.850
+So completed, right?
+
+24:47.850 --> 24:49.443
+So it installed the packages.
+
+24:51.390 --> 24:53.607
+But here, you can see sudo yum install
+
+24:53.607 --> 24:55.683
+and the package names and the output.
+
+24:56.520 --> 24:58.782
+Okay, so now we will write a fabric function
+
+24:58.782 --> 25:01.230
+that can do these steps.
+
+25:01.230 --> 25:03.990
+We already did this many times in this course.
+
+25:03.990 --> 25:06.300
+In Linux, in the bash scripting, in AWS,
+
+25:06.300 --> 25:09.060
+we install the httpd package.
+
+25:09.060 --> 25:11.130
+We start and enable the service,
+
+25:11.130 --> 25:13.770
+we download the artifacts from tooplate.com,
+
+25:13.770 --> 25:18.180
+extract that artifact into /var/www/html,
+
+25:18.180 --> 25:19.980
+We restart the service,
+
+25:19.980 --> 25:22.260
+and then we see we can access the website
+
+25:22.260 --> 25:26.520
+from the VM's IP or EC2 instance IP address.
+
+25:26.520 --> 25:28.620
+So now we'll write a fabric function
+
+25:28.620 --> 25:30.000
+that can do all these steps
+
+25:30.000 --> 25:34.530
+and we'll execute it against web01 and web02.
+
+25:34.530 --> 25:37.890
+Okay, so open the fabfile.py
+
+25:37.890 --> 25:39.960
+and create a function.
+
+25:39.960 --> 25:40.820
+I will limit as web_setup.
+
+25:40.820 --> 25:43.650
+And this is going to take two argument.
+
+25:43.650 --> 25:44.673
+One will be the URL,
+
+25:45.510 --> 25:47.370
+this will be from tooplate.com.
+
+25:47.370 --> 25:50.070
+We'll pass the URL as an argument
+
+25:50.070 --> 25:52.590
+and also the direct free name.
+
+25:52.590 --> 25:55.440
+So when we download the artifact, we get a zip file.
+
+25:55.440 --> 25:57.540
+In that zip file, there will be a folder.
+
+25:57.540 --> 25:59.730
+We need to give the folder name over here.
+
+25:59.730 --> 26:02.040
+And the reason that I have given this
+
+26:02.040 --> 26:05.370
+is because the folder name sometimes is different.
+
+26:05.370 --> 26:07.680
+So we can manually download it, extract it,
+
+26:07.680 --> 26:09.000
+and see what's the folder name,
+
+26:09.000 --> 26:10.830
+and then we can mention the URL here
+
+26:10.830 --> 26:12.630
+and the folder name here.
+
+26:12.630 --> 26:15.773
+So the first step will be to install httpd package
+
+26:15.773 --> 26:18.150
+web01 and web02 are sent to us.
+
+26:18.150 --> 26:21.300
+So we are going to download the package named httpd.
+
+26:21.300 --> 26:23.700
+Start and enable the service.
+
+26:23.700 --> 26:25.200
+So first three print function
+
+26:25.200 --> 26:26.670
+is going to just print a message,
+
+26:26.670 --> 26:27.780
+installing dependencies.
+
+26:27.780 --> 26:29.818
+Then we have the sudo function
+
+26:29.818 --> 26:33.784
+where we install httpd, wget, and unzip.
+
+26:33.784 --> 26:36.120
+wgate will be used to download the URL
+
+26:36.120 --> 26:40.170
+and unzip to unzip the artifact that it downloads.
+
+26:40.170 --> 26:41.370
+Then print a message,
+
+26:41.370 --> 26:42.630
+Start &amp; enable service
+
+26:42.630 --> 26:44.700
+and Start &amp; enable httpd service.
+
+26:44.700 --> 26:46.480
+Again, we need to use sudo method over here,
+
+26:46.480 --> 26:49.290
+systemctl is a root command.
+
+26:49.290 --> 26:51.330
+Okay, next we are going to install
+
+26:51.330 --> 26:53.100
+zip and unzip with local.
+
+26:53.100 --> 26:55.530
+That means we are going to install it on the script box,
+
+26:55.530 --> 26:58.170
+because we are going to download the artifact
+
+26:58.170 --> 27:00.450
+in the script box extracted
+
+27:00.450 --> 27:04.623
+and then we are going to zip all the file inside that.
+
+27:05.610 --> 27:07.077
+And then later, we are going to push that zip file
+
+27:07.077 --> 27:10.320
+to web01 and web02.
+
+27:10.320 --> 27:11.943
+So printing a message,
+
+27:13.221 --> 27:16.083
+Downloading and pushing website to webservers.
+
+27:17.100 --> 27:19.410
+Then with local method,
+
+27:19.410 --> 27:20.730
+again, this is happening locally.
+
+27:20.730 --> 27:24.543
+So we say wget -o for output.
+
+27:24.543 --> 27:27.450
+So the output will be with this name.
+
+27:27.450 --> 27:28.980
+And here we have %s,
+
+27:28.980 --> 27:31.050
+that will be replaced by the WEBURL,
+
+27:31.050 --> 27:32.670
+which we get here.
+
+27:32.670 --> 27:34.800
+So download the artifact with this name.
+
+27:34.800 --> 27:36.210
+Then with unzip method,
+
+27:36.210 --> 27:37.920
+we are going to unzip
+
+27:37.920 --> 27:40.860
+the zip file that was downloaded in the previous step.
+
+27:40.860 --> 27:44.490
+Next, so when it is unzipped,
+
+27:44.490 --> 27:46.590
+you'll get the folder name.
+
+27:46.590 --> 27:49.110
+So we need to cd into that folder,
+
+27:49.110 --> 27:51.127
+zip all the content.
+
+27:51.127 --> 27:53.370
+That will be basically the HTML files,
+
+27:53.370 --> 27:55.440
+the images and CSS.
+
+27:55.440 --> 27:58.470
+And then we can push that zip file
+
+27:58.470 --> 28:01.473
+with all the content to /var/www/html.
+
+28:02.370 --> 28:05.760
+So Fabric provide as this one with lcd.
+
+28:05.760 --> 28:08.220
+lcd here means local cd.
+
+28:08.220 --> 28:10.950
+Into the local folder, it'll do cd.
+
+28:10.950 --> 28:13.205
+So when we unzip over here, we get the folder.
+
+28:13.205 --> 28:16.770
+And with this method, we cd into that folder.
+
+28:16.770 --> 28:19.200
+And with local, we are going to run zip command.
+
+28:19.200 --> 28:20.940
+That is going to zip everything
+
+28:20.940 --> 28:23.070
+with the name tooplate.zip.
+
+28:23.070 --> 28:26.820
+So this zip file will contain the HTML files, the CSS,
+
+28:26.820 --> 28:28.290
+the images, everything
+
+28:28.290 --> 28:31.110
+that will be contained in this zip file.
+
+28:31.110 --> 28:34.170
+When we use a put method, this uses SCP.
+
+28:34.170 --> 28:36.360
+It is taking three argument.
+
+28:36.360 --> 28:38.490
+The first is the source,
+
+28:38.490 --> 28:40.410
+which should be in the local machine.
+
+28:40.410 --> 28:42.360
+The second argument is the destination,
+
+28:42.360 --> 28:45.810
+which is on the remote machine, web01, web02.
+
+28:45.810 --> 28:48.930
+And this folder is owned by root user.
+
+28:48.930 --> 28:50.133
+This command, put command
+
+28:50.133 --> 28:52.080
+will execute with devops user.
+
+28:52.080 --> 28:53.820
+So we need to sudo.
+
+28:53.820 --> 28:57.090
+So that's why the third argument use_sudo=True.
+
+28:57.090 --> 28:58.795
+So it's going to push this zip file
+
+28:58.795 --> 29:02.220
+into this folder with root user privilege.
+
+29:02.220 --> 29:04.170
+The next step will be to login to the machine
+
+29:04.170 --> 29:06.570
+and extract this zip file.
+
+29:06.570 --> 29:08.130
+So with cd.
+
+29:08.130 --> 29:11.190
+cd here means SSH first to the remote machine
+
+29:11.190 --> 29:13.290
+and cd into this folder, right?
+
+29:13.290 --> 29:14.850
+lcd is local cd.
+
+29:14.850 --> 29:17.490
+Just cd is the remote cd.
+
+29:17.490 --> 29:18.720
+And then with sudo method,
+
+29:18.720 --> 29:21.030
+we are saying unzip tooplate.zip.
+
+29:21.030 --> 29:25.500
+So now /var/www/html will have all the content.
+
+29:25.500 --> 29:26.603
+Next, we restart the httpd service.
+
+29:28.262 --> 29:31.140
+So with sudo, systemctl restart httpd,
+
+29:31.140 --> 29:32.793
+and then just print a message.
+
+29:33.630 --> 29:35.919
+Right, so in this fabric function,
+
+29:35.919 --> 29:37.980
+we have seen new methods
+
+29:37.980 --> 29:41.403
+like with lcd, with cd, and put.
+
+29:42.360 --> 29:43.440
+Let's test it out.
+
+29:43.440 --> 29:45.543
+So I'm going to save and quit this.
+
+29:46.530 --> 29:49.057
+So to execute this fabric function,
+
+29:49.057 --> 29:50.640
+we need two arguments.
+
+29:50.640 --> 29:54.390
+One is the URL, which is from tooplate.com;
+
+29:54.390 --> 29:55.890
+and the other will be the folder
+
+29:55.890 --> 29:57.960
+that will be inside that.
+
+29:57.960 --> 29:58.960
+So let's check that.
+
+30:00.270 --> 30:01.785
+Okay, so from tooplate.com,
+
+30:01.785 --> 30:03.933
+I select one template.
+
+30:05.370 --> 30:06.690
+This one.
+
+30:06.690 --> 30:08.160
+Okay, hit F12 on your keyboard.
+
+30:08.160 --> 30:09.390
+I'm on the Brave browser.
+
+30:09.390 --> 30:11.190
+The F12 works over here.
+
+30:11.190 --> 30:14.283
+And go to Network, click on Download,
+
+30:15.660 --> 30:16.680
+cancel the download.
+
+30:16.680 --> 30:18.720
+I just need this link.
+
+30:18.720 --> 30:22.323
+So click on that zip, pack.zip,
+
+30:24.000 --> 30:24.833
+and copy this URL.
+
+30:24.833 --> 30:27.810
+This is the download URL, copy this.
+
+30:27.810 --> 30:29.250
+Okay, let's execute this function.
+
+30:29.250 --> 30:31.023
+First, let me list fab -l.
+
+30:32.310 --> 30:34.170
+So we need to pass the username.
+
+30:34.170 --> 30:39.170
+So fab -H web01 -u, the username devops,
+
+30:45.780 --> 30:47.790
+function name web_setup.
+
+30:47.790 --> 30:49.170
+And we need to pass two argument.
+
+30:49.170 --> 30:53.010
+One is the URL, which we need to get from here.
+
+30:53.010 --> 30:55.753
+So you have to say colon and the URL.
+
+30:55.753 --> 30:57.570
+And let me download this URL
+
+30:57.570 --> 31:00.420
+and see what is the folder name inside that.
+
+31:00.420 --> 31:02.460
+Let's click on Download.
+
+31:02.460 --> 31:03.663
+Let it download.
+
+31:07.170 --> 31:09.210
+Okay, so that is the folder name.
+
+31:09.210 --> 31:11.343
+So let me click here.
+
+31:15.160 --> 31:18.210
+Okay, so the folder name is same basically.
+
+31:18.210 --> 31:20.070
+Except there is no .zip,
+
+31:20.070 --> 31:22.050
+but sometimes the folder names are different.
+
+31:22.050 --> 31:23.580
+So make sure you extract it
+
+31:23.580 --> 31:26.010
+and see what is the folder name inside that.
+
+31:26.010 --> 31:27.453
+And then you can execute it.
+
+31:47.500 --> 31:51.090
+Okay, execute it on both the machine, web01 and web02.
+
+31:51.090 --> 31:53.970
+Check it by using its IP address from the browser,
+
+31:53.970 --> 31:55.383
+whether this works or not.
+
+31:56.400 --> 31:57.840
+Okay, completed successfully.
+
+31:57.840 --> 31:59.550
+Let me check from the browser now.
+
+31:59.550 --> 32:01.380
+Just keep in mind it'll take time
+
+32:01.380 --> 32:03.420
+to write automation scripts.
+
+32:03.420 --> 32:05.010
+It's not going to happen overnight.
+
+32:05.010 --> 32:06.150
+So take your time.
+
+32:06.150 --> 32:07.980
+And most of your time will go in R&amp;D.
+
+32:07.980 --> 32:10.230
+Very less time will go in actual, you know,
+
+32:10.230 --> 32:11.370
+writing the script.
+
+32:11.370 --> 32:12.720
+Most of your time you'll go in R&amp;D,
+
+32:12.720 --> 32:13.920
+understanding the functions,
+
+32:13.920 --> 32:15.780
+understanding the methods, you know,
+
+32:15.780 --> 32:19.320
+and getting the output that you looking for.
+
+32:19.320 --> 32:20.310
+And there's very less time
+
+32:20.310 --> 32:22.980
+that will go in final execution, right?
+
+32:22.980 --> 32:26.070
+So yes, then that will be all in this lecture.
+
+32:26.070 --> 32:28.170
+I will see you in the next one, thank you.

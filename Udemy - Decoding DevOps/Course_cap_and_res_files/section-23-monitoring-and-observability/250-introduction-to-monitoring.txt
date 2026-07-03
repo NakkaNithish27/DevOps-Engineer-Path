@@ -1,0 +1,673 @@
+WEBVTT
+
+00:00.200 --> 00:01.600
+Hello and welcome.
+
+00:02.080 --> 00:05.960
+In this section of the course we are going to learn monitoring and observability.
+
+00:06.320 --> 00:12.400
+First, theoretically we will understand the concepts and then we are going to actually do it by using
+
+00:12.440 --> 00:15.600
+tools like Prometheus, Grafana, Loki, etc..
+
+00:16.160 --> 00:19.160
+Now why is really monitoring necessary?
+
+00:19.840 --> 00:25.480
+I remember when I started my career we used to monitor systems to see the future.
+
+00:25.880 --> 00:27.760
+Actually the future problems.
+
+00:28.200 --> 00:35.240
+So let's say some servers gets a lot of requests for computing, so much so that at some point of time
+
+00:35.240 --> 00:36.200
+it crashes.
+
+00:36.560 --> 00:44.040
+Now if we have monitoring in place, we can see or we can get a notification before even the CPU reaches
+
+00:44.080 --> 00:45.000
+80%.
+
+00:45.400 --> 00:50.840
+And then we start looking at the problem and we can quickly scale out before this problem comes.
+
+00:50.880 --> 00:52.080
+So that's what I meant.
+
+00:52.520 --> 00:57.600
+We look into the future problems so we can detect issues before the users can find.
+
+00:57.840 --> 01:00.430
+This ensures reliability and uptime.
+
+01:00.910 --> 01:04.910
+User is happy, client is happy and bank account is also happy.
+
+01:05.550 --> 01:11.030
+But in today's time, monitoring is not just limited to this much, but collecting right amount of data.
+
+01:11.070 --> 01:16.990
+Doing proper data analysis, we can understand the trend of the market and make business decisions based
+
+01:16.990 --> 01:17.710
+on that.
+
+01:17.910 --> 01:19.510
+So why monitoring is important?
+
+01:19.510 --> 01:20.550
+You understood that.
+
+01:20.830 --> 01:22.550
+Why should a DevOps learn this?
+
+01:22.870 --> 01:24.990
+That will understand at the end of this lecture.
+
+01:25.350 --> 01:33.790
+Let's understand some core concepts in monitoring starting with metric or metrics, sometimes also called
+
+01:33.790 --> 01:40.750
+as checks like thermometer reading or the thermometer itself is a metric to check the temperature.
+
+01:41.110 --> 01:44.910
+So let's say we are measuring someone's temperature due to the fever.
+
+01:44.910 --> 01:50.630
+And usually it is a practice to note down the reading every few hours.
+
+01:50.950 --> 01:54.710
+Well, I have written there every minute, but that will be that will be too much paranoid.
+
+01:54.950 --> 02:00.180
+But let's say we are recording temperature of a person for, let's say, every two hours.
+
+02:00.540 --> 02:06.020
+Now we have a time series table, and we can understand when the temperature goes up, when it comes
+
+02:06.020 --> 02:09.980
+down and why there is that spike or it comes down.
+
+02:10.220 --> 02:17.820
+So that will be called as time series temperature recorded every hour time series exporter.
+
+02:18.260 --> 02:24.460
+Now let's say there is a display window outside of the patient's room that displays the temperature
+
+02:24.460 --> 02:27.420
+reading or all the recorded temperature readings.
+
+02:27.460 --> 02:34.060
+So temperature reading is exported out of the room so it can be watched or monitored continuously.
+
+02:34.420 --> 02:41.700
+So metric time series exporter monitoring is usually two different kinds pull model or push model.
+
+02:42.140 --> 02:47.100
+The system that is being monitored sends all its information to the monitoring server.
+
+02:47.100 --> 02:48.780
+That is the push model.
+
+02:48.780 --> 02:56.460
+But if the monitoring server connects to the monitored system and fetch the metric or fetch all the
+
+02:56.610 --> 03:04.690
+information that is full model, like a doctor visiting the patient versus the patient calling the doctor
+
+03:04.690 --> 03:06.050
+or going to the doctor.
+
+03:06.450 --> 03:09.090
+Now over here, metrics are also called as checks.
+
+03:09.490 --> 03:11.210
+Time series is anyways time series.
+
+03:11.210 --> 03:13.570
+Exporters are also called as agents.
+
+03:13.850 --> 03:17.170
+So these are some common words used in monitoring.
+
+03:17.450 --> 03:20.810
+Now let's understand different types of monitoring.
+
+03:20.810 --> 03:21.890
+What do we monitor.
+
+03:22.250 --> 03:27.810
+So usually there are these seven layers of monitoring starting from the browser frontend monitoring.
+
+03:28.010 --> 03:30.210
+Then application performance monitoring.
+
+03:30.490 --> 03:37.250
+Application here means the services like like MySQL, Node.js, application etc. etc..
+
+03:37.650 --> 03:44.530
+Infrastructure monitoring is the CPU hard disk memory, synthetic monitoring like if it's up or down
+
+03:44.530 --> 03:49.810
+the system then you have business or KPI monitoring the trends sales.
+
+03:49.810 --> 03:52.210
+So based on this you can make business decisions.
+
+03:52.450 --> 03:53.490
+Log monitoring.
+
+03:53.530 --> 03:57.730
+The server services systems generate lots of logs events.
+
+03:58.290 --> 04:00.450
+These can be also monitored or should be monitored.
+
+04:00.490 --> 04:04.610
+Then there is security monitoring to prevent any security vulnerability.
+
+04:04.890 --> 04:10.610
+Let's quickly take a look at all this and see little information about the metrics and different tools
+
+04:10.610 --> 04:11.570
+that can do this.
+
+04:12.130 --> 04:13.970
+So I have created this table.
+
+04:14.010 --> 04:19.290
+You can download it from this lecture resource that gives a restaurant analogy for the different kinds
+
+04:19.290 --> 04:19.890
+of monitoring.
+
+04:19.890 --> 04:24.130
+Based on that, you can compare the real monitoring and understand it much more easily.
+
+04:24.490 --> 04:27.050
+So first the browser or front end monitoring.
+
+04:27.530 --> 04:34.010
+So the customer comes at the table how quickly he or she gets the menu, how responsive the waiter is.
+
+04:34.330 --> 04:38.370
+That will be the front end the customer experience at the first visit.
+
+04:38.810 --> 04:44.130
+So measuring these parameters will be measuring the front end application performance monitoring or
+
+04:44.170 --> 04:51.210
+APM, the kitchen operations, how fast the chef can understand the order and cook it, the delays between
+
+04:51.210 --> 04:58.520
+the order and how quickly or late the order comes or served and what is causing the bottleneck.
+
+04:58.920 --> 05:05.160
+In software side this will be the server services like Tomcat, NodeJS, Apache, MySQL.
+
+05:06.040 --> 05:07.480
+Let's come back to this table.
+
+05:07.480 --> 05:11.240
+Let's take a look again at browser or front end monitoring.
+
+05:11.520 --> 05:18.480
+So browser or front end monitoring focuses on real user the true user actual user experience like the
+
+05:18.480 --> 05:24.480
+delay, the latency, how quickly the page loads for let's say India region compared to other regions.
+
+05:24.720 --> 05:29.960
+The users firsthand experience calculating that monitoring that will be the browser or front end monitoring.
+
+05:30.360 --> 05:33.760
+So there are some metric or checks that needs to be monitored.
+
+05:33.760 --> 05:36.080
+And there are some famous tools that can do that.
+
+05:36.400 --> 05:42.080
+So some common or key metrics are page load time or JavaScript errors, the front end language, any
+
+05:42.080 --> 05:47.320
+kind of errors where the user is clicking, how the user is navigating all those things.
+
+05:47.320 --> 05:49.600
+Now you don't need to memorize these things.
+
+05:49.600 --> 05:54.270
+This is just information so you understand different kinds of monitoring.
+
+05:54.590 --> 05:57.070
+I'll put all this information in this lecture resource.
+
+05:57.070 --> 05:58.750
+You can anytime go and check it.
+
+05:59.030 --> 06:01.070
+But please don't muck up any of this.
+
+06:01.350 --> 06:06.390
+These metrics, different monitoring tools all depends on different projects requirements.
+
+06:06.510 --> 06:11.470
+I have worked on several projects and I have seen many different monitoring and observability tools,
+
+06:11.830 --> 06:15.910
+different requirements, different use cases, different monitoring tool.
+
+06:16.350 --> 06:19.390
+Some uses open source, some uses enterprise versions.
+
+06:19.630 --> 06:22.470
+It's all based on requirement and also of course the budget.
+
+06:22.910 --> 06:29.630
+So some common tools that are used for browser or frontend monitoring Datadog, rum, New Relic Browser,
+
+06:29.670 --> 06:31.990
+sentry, Pingdom, etc..
+
+06:32.270 --> 06:35.630
+Let's take a look at APM Application Performance monitoring.
+
+06:36.950 --> 06:45.110
+So this is mostly about the application code that developers write like the APIs, the database query,
+
+06:45.150 --> 06:45.750
+all this.
+
+06:46.190 --> 06:47.870
+How does it perform in real time?
+
+06:47.870 --> 06:52.780
+The response time database query performance API latency.
+
+06:52.820 --> 06:56.060
+How quick or fast or slow the API response.
+
+06:56.420 --> 06:58.220
+Complete end to end tracing.
+
+06:58.660 --> 07:04.780
+So front end or browser is the user experience where the user clicks and all log in whatever the user
+
+07:04.820 --> 07:06.940
+see on the browser or on the app.
+
+07:07.180 --> 07:12.460
+But what happens behind the scene when user clicks or logins the API requests are sent?
+
+07:12.500 --> 07:13.820
+It goes to the database.
+
+07:13.860 --> 07:14.860
+There's queries.
+
+07:15.140 --> 07:16.220
+So how quick fast?
+
+07:16.220 --> 07:17.660
+How many queries are there?
+
+07:18.140 --> 07:22.660
+So monitoring all these things are called as APM Application Performance monitoring.
+
+07:23.420 --> 07:25.420
+So let's take a look at the key metrics.
+
+07:25.540 --> 07:30.020
+The response time throughput error rate database query performance.
+
+07:30.580 --> 07:37.340
+Now if these things are measured the user experience can be improved drastically in real time.
+
+07:37.340 --> 07:40.660
+You will know how your application is performing and what is the problem.
+
+07:40.660 --> 07:44.900
+Once you find that through monitoring you can fix that and user will be happy.
+
+07:45.380 --> 07:46.260
+Some common tools.
+
+07:46.300 --> 07:46.980
+Newrelic.
+
+07:47.220 --> 07:50.650
+Datadog APM Appdynamics I've seen this a lot.
+
+07:50.690 --> 07:56.330
+Dynatrace or Dynatrace in today's time is the best monitoring and observability tool, I would say.
+
+07:56.770 --> 07:58.890
+Again, it's debatable, but that is enterprise.
+
+07:58.930 --> 08:00.370
+Dynatrace is not free.
+
+08:00.410 --> 08:03.650
+We get a 15 day trial version if we can sign up right now.
+
+08:04.090 --> 08:04.410
+Right.
+
+08:04.410 --> 08:07.970
+Let's take a look at the other kind of monitoring, which is infrastructure monitoring.
+
+08:07.970 --> 08:13.810
+The most common one, the first one that we should set up monitoring servers, containers, cloud resources,
+
+08:14.130 --> 08:22.370
+basically monitoring the compute resources like CPU, memory, disk network throughput, system uptime,
+
+08:22.410 --> 08:23.050
+etc..
+
+08:23.810 --> 08:28.970
+Let's take a look at some common tools that are used for infrastructure monitoring.
+
+08:29.250 --> 08:30.890
+Now I started from Nagios.
+
+08:31.290 --> 08:37.690
+After that we used many different tools, but Nagios and Zabbix are the one that stayed for a very long
+
+08:37.690 --> 08:38.090
+time.
+
+08:38.450 --> 08:44.490
+Then you have Datadog Infra CloudWatch that we have already seen in this course, and Prometheus and
+
+08:44.490 --> 08:51.400
+Grafana that we will be seeing in this section now Prometheus and Grafana can monitor almost anything.
+
+08:51.440 --> 08:58.680
+Everything that we are seeing in this lecture, except few things, but that can be also monitored with
+
+08:58.720 --> 08:59.800
+Prometheus and Grafana.
+
+08:59.840 --> 09:04.040
+We're going to talk about it in detail and we'll understand why it is so popular now.
+
+09:04.320 --> 09:10.720
+So infrastructure monitoring CPU memory, disk node health uptime, pod containers, Kubernetes, any
+
+09:10.720 --> 09:12.480
+kind of compute resource.
+
+09:13.000 --> 09:15.680
+If you're monitoring that is called as infrastructure monitoring.
+
+09:17.160 --> 09:20.720
+Synthetic monitoring business or KPI monitoring.
+
+09:20.920 --> 09:24.280
+Now this will give you trends like how many signups are there per minute.
+
+09:24.440 --> 09:28.920
+I use this for my own business conversion rate.
+
+09:29.360 --> 09:32.320
+Like how many people visit and how many actually sign up.
+
+09:32.840 --> 09:38.000
+So these kinds of monitoring will help you understand the business and make business decisions.
+
+09:38.440 --> 09:44.840
+Some common tools are Mixpanel, Google Analytics, Datadog, Custom Metrics, and Application Developer
+
+09:44.840 --> 09:48.870
+develop their own tools also to monitor these kind of things.
+
+09:49.790 --> 09:51.590
+Then we have a log monitoring.
+
+09:51.790 --> 09:54.230
+So many things happening on your system.
+
+09:54.230 --> 09:58.030
+The user access API queries, MySQL queries.
+
+09:58.390 --> 09:59.670
+So many application events.
+
+09:59.670 --> 10:03.270
+All this information gets logged into a text file.
+
+10:03.670 --> 10:05.310
+These files are the log files.
+
+10:05.310 --> 10:08.190
+We have seen this like Apache access logs.
+
+10:08.230 --> 10:08.990
+We have seen.
+
+10:09.470 --> 10:16.390
+So monitoring these events these logs for errors for debugging the issues to find out the trends.
+
+10:16.870 --> 10:19.550
+These kind of monitoring are called as log monitoring.
+
+10:19.870 --> 10:22.710
+Common tools Elk stack Elasticsearch.
+
+10:23.190 --> 10:26.190
+We have Loki plus Grafana now Splunk.
+
+10:26.190 --> 10:29.870
+Very famous name in this category also CloudWatch logs.
+
+10:30.510 --> 10:31.830
+Take a look at the last one.
+
+10:31.830 --> 10:33.070
+Security monitoring.
+
+10:33.430 --> 10:39.070
+Now this will be done mostly by a separate security team or there will be a SOC team NOC team that will
+
+10:39.070 --> 10:41.190
+be dedicatedly working on this one.
+
+10:41.670 --> 10:47.300
+Like any suspicious IP or blocking some kind of IP from a particular location.
+
+10:47.580 --> 10:50.500
+Someone's privilege is getting escalated for some reason.
+
+10:50.500 --> 10:53.780
+So wanting that kind of events, vulnerability scanning.
+
+10:54.300 --> 10:56.540
+And there are many tools that can do this.
+
+10:56.940 --> 11:03.980
+But mostly cyber security team will have their own tools Pentesting tools that can do security monitoring.
+
+11:04.340 --> 11:04.580
+Okay.
+
+11:04.580 --> 11:08.620
+Now let's understand all these monitoring through an example.
+
+11:09.020 --> 11:13.580
+So we discussed about front end monitoring and application performance monitoring.
+
+11:13.820 --> 11:20.380
+Customer visits the restaurant how responsive the waiter is, how quickly it gets the menu APM the kitchen
+
+11:20.420 --> 11:22.940
+operations any delays.
+
+11:22.980 --> 11:24.620
+What's causing the bottleneck.
+
+11:24.980 --> 11:31.340
+So your chef your kitchen that is the what is happening in the kitchen is your application performance
+
+11:31.580 --> 11:38.460
+infrastructure will be the kitchens equipment and the staff health synthetic monitoring, a mystery
+
+11:38.500 --> 11:39.860
+diner or a test customer.
+
+11:39.860 --> 11:43.740
+If you have seen the movie Ratatouille, I don't know if I pronounce it correct or not.
+
+11:44.140 --> 11:49.580
+A periodic check to the restaurant to check the service quality, business or KPI monitoring.
+
+11:50.100 --> 11:53.140
+The restaurant manager should have all the information.
+
+11:53.180 --> 11:55.580
+How many total orders are given today?
+
+11:55.740 --> 11:56.820
+What's the revenue?
+
+11:57.140 --> 11:58.820
+Are there any repeated customers?
+
+11:59.220 --> 12:01.300
+How happy or sad the customer is.
+
+12:01.820 --> 12:06.420
+And recording all this information in a logbook that will be log monitoring.
+
+12:06.860 --> 12:09.780
+Now log logging will be just keeping the log.
+
+12:09.780 --> 12:15.020
+Monitoring those logs or looking at those logs and understanding stuff will be log monitoring.
+
+12:15.020 --> 12:17.900
+Security monitoring the security guard CCTV.
+
+12:18.500 --> 12:19.980
+That will be security monitoring.
+
+12:19.980 --> 12:24.420
+Now you can compare all this with the actual monitoring for our softwares.
+
+12:24.820 --> 12:27.620
+Download this table from this lecture resource and take a look.
+
+12:28.180 --> 12:31.380
+Okay lastly let's talk about the pillars of observability.
+
+12:31.820 --> 12:33.300
+And this is given by Google.
+
+12:33.780 --> 12:35.060
+So what should you look for.
+
+12:35.420 --> 12:37.380
+Actually when it came there were only three pillars.
+
+12:37.380 --> 12:39.060
+But the fourth one got added.
+
+12:39.060 --> 12:46.370
+So first one is the metric that tells you that if anything is wrong, like CPU, hard disk or user experience.
+
+12:46.370 --> 12:50.890
+Checking all the checks or metrics will tell you if there is anything wrong or not.
+
+12:51.250 --> 12:52.090
+Logs.
+
+12:52.130 --> 12:56.170
+If you look at the logs, you will understand why something went wrong.
+
+12:56.610 --> 12:58.290
+Some user request failed.
+
+12:58.290 --> 13:02.610
+Some query failed due to that a particular metric got spiked.
+
+13:03.050 --> 13:03.850
+Traces.
+
+13:03.890 --> 13:10.050
+When the user clicks or access something, the entire trace of the request or the query, where did
+
+13:10.050 --> 13:10.570
+it go wrong?
+
+13:10.570 --> 13:11.410
+That will tell you.
+
+13:11.850 --> 13:18.730
+The fourth one which recently got added is events or any changes in your application code or any infrastructure
+
+13:18.730 --> 13:19.690
+level change.
+
+13:19.970 --> 13:22.930
+If you're monitoring that, you will also know what changed.
+
+13:23.370 --> 13:25.610
+And due to that, all these things happened.
+
+13:26.370 --> 13:35.410
+And also the four golden signals to watch for given by Google SRE latency, traffic errors, saturation,
+
+13:36.010 --> 13:39.970
+latency, how long it takes for a user to get served.
+
+13:40.010 --> 13:42.880
+You know, user trying to make a payment.
+
+13:42.920 --> 13:46.280
+How long it is taking or how quickly it is happening if there is any failure.
+
+13:46.640 --> 13:52.960
+So looking at the latency, then the traffic, how many users or how many requests are coming on the
+
+13:52.960 --> 13:53.560
+system?
+
+13:53.880 --> 14:00.920
+A system under pressure or not under pressure then errors if anything failing either it could be something
+
+14:00.920 --> 14:08.400
+that the user is experiencing or some internal failures that you see in the logs and saturation how
+
+14:08.400 --> 14:09.960
+full or busy the system is.
+
+14:10.160 --> 14:15.000
+So you can find out the limit of the system like disk capacity, CPU utilizations.
+
+14:15.240 --> 14:22.120
+So these are the four golden signals for four key metrics used for monitoring the health of the systems.
+
+14:22.480 --> 14:25.000
+So we talked about many things in this lecture.
+
+14:25.400 --> 14:28.400
+And I know it could be overwhelming if you are learning this first time.
+
+14:28.600 --> 14:29.320
+But do not worry.
+
+14:29.320 --> 14:32.280
+When we actually do all this, all this, things will get clear.
+
+14:32.280 --> 14:37.680
+You can again watch or revisit this lecture after you complete this section and next lecture, we will
+
+14:37.680 --> 14:40.040
+understand why DevOps should learn.
+
+14:40.040 --> 14:41.720
+Monitoring and observability.

@@ -1,0 +1,718 @@
+WEBVTT
+
+00:01.080 --> 00:02.250
+Instructor: All right, in this lecture,
+
+00:02.250 --> 00:05.673
+we are going to host a website on the S3 bucket.
+
+00:07.560 --> 00:10.470
+And it is a very popular use case.
+
+00:10.470 --> 00:13.920
+There are many websites, static website, basically,
+
+00:13.920 --> 00:16.470
+that are running on S3 bucket.
+
+00:16.470 --> 00:18.750
+And not only that, many application, you know,
+
+00:18.750 --> 00:22.020
+the dynamic website where your user login
+
+00:22.020 --> 00:24.570
+and stuff like that, post,
+
+00:24.570 --> 00:27.390
+such kind of application or web application
+
+00:27.390 --> 00:31.260
+needs publicly available images, documents, videos.
+
+00:31.260 --> 00:33.750
+You can use S3 for that.
+
+00:33.750 --> 00:37.500
+So let's download any template from tooplate.com.
+
+00:37.500 --> 00:41.850
+So I will select the first one and scroll down.
+
+00:41.850 --> 00:43.863
+I'll click on download.
+
+00:45.750 --> 00:48.330
+It's downloaded in the downloads folder.
+
+00:48.330 --> 00:51.750
+I'm going to right click and extract it.
+
+00:51.750 --> 00:53.927
+So you get a folder, right?
+
+00:56.910 --> 00:58.770
+And in this folder,
+
+00:58.770 --> 01:01.260
+all this file will upload in the S3 bucket.
+
+01:01.260 --> 01:02.670
+We'll create a new S3 bucket.
+
+01:02.670 --> 01:05.400
+Actually we are going to create two S3 bucket,
+
+01:05.400 --> 01:07.140
+which I'll tell you why.
+
+01:07.140 --> 01:09.183
+So let's go to S3 service.
+
+01:11.340 --> 01:14.550
+First, let's create the bucket for hosting our website.
+
+01:14.550 --> 01:18.780
+We'll name it as, you know, I'll just name it as barista,
+
+01:18.780 --> 01:21.153
+and add some number just to make it unique.
+
+01:24.150 --> 01:27.090
+Okay, we'll also enable versioning on this,
+
+01:27.090 --> 01:31.920
+which I will talk about in detail later in the same lecture.
+
+01:31.920 --> 01:36.150
+So enable versioning and just say create bucket.
+
+01:36.150 --> 01:41.150
+Okay, open the bucket and I will say upload, add files.
+
+01:41.430 --> 01:42.630
+Now, what I can do is
+
+01:42.630 --> 01:45.903
+I can simply drag and drop all the files also.
+
+01:47.220 --> 01:51.540
+So I'll select all my files, I'll drag it and drop it there.
+
+01:51.540 --> 01:53.520
+Now, later in the course we will see
+
+01:53.520 --> 01:57.600
+how to upload it or sync it through command line.
+
+01:57.600 --> 01:59.790
+But for now we'll just do it through the UI.
+
+01:59.790 --> 02:01.890
+Just add all the files, or sorry,
+
+02:01.890 --> 02:05.283
+drag and drop all the files and say upload.
+
+02:07.230 --> 02:08.830
+Okay, this might take some time.
+
+02:10.170 --> 02:12.273
+Okay, all the files are uploaded.
+
+02:13.410 --> 02:15.390
+As I told you, we are going to create one more bucket,
+
+02:15.390 --> 02:19.980
+and that will be to store the access logs of our website.
+
+02:19.980 --> 02:22.590
+We'll talk about that again in some time.
+
+02:22.590 --> 02:24.810
+Just create a bucket with any name.
+
+02:24.810 --> 02:26.723
+I'll just name it as barista908AccessLogs,
+
+02:30.150 --> 02:32.793
+and simply just create bucket.
+
+02:36.840 --> 02:39.840
+Oh yeah, I cannot give upper cases.
+
+02:39.840 --> 02:41.430
+I forgot that.
+
+02:41.430 --> 02:45.063
+All lower cases and create bucket.
+
+02:46.530 --> 02:48.480
+Okay, now let's see everything step by step.
+
+02:48.480 --> 02:51.870
+We have already seen how to make an object public.
+
+02:51.870 --> 02:55.920
+So first thing will be to make everything public over here.
+
+02:55.920 --> 02:56.790
+So we know what to do.
+
+02:56.790 --> 03:00.000
+We'll go to permissions, we'll say edit,
+
+03:00.000 --> 03:03.420
+block public access, and we'll uncheck that,
+
+03:03.420 --> 03:06.783
+and we'll say save changes, confirm.
+
+03:07.800 --> 03:12.800
+Object ownership, will enable the ACLs, save changes.
+
+03:16.170 --> 03:20.790
+Okay, now let's go to all our objects, select all of them,
+
+03:20.790 --> 03:24.933
+action, and say make public using ACL.
+
+03:26.100 --> 03:28.860
+There is a warning that says that it'll be available
+
+03:28.860 --> 03:31.080
+for everybody on the internet.
+
+03:31.080 --> 03:31.913
+We're good with that.
+
+03:31.913 --> 03:36.330
+Make public because that's what we want, right?
+
+03:36.330 --> 03:38.520
+So all the objects are public, right?
+
+03:38.520 --> 03:40.050
+But the website is accessed
+
+03:40.050 --> 03:43.230
+through the main index page, right, the index.html,
+
+03:43.230 --> 03:44.580
+and that routes to other thing.
+
+03:44.580 --> 03:48.840
+Now, S3 gives you a direct option
+
+03:48.840 --> 03:50.790
+to host the static website.
+
+03:50.790 --> 03:54.120
+So go to properties, scroll all the way down,
+
+03:54.120 --> 03:57.600
+and there is an option static website hosting.
+
+03:57.600 --> 04:00.333
+Click on edit and say enable.
+
+04:01.560 --> 04:03.390
+Okay, to provide the index document,
+
+04:03.390 --> 04:06.810
+our index document is index.html
+
+04:06.810 --> 04:09.930
+and we don't have any error.html,
+
+04:09.930 --> 04:12.090
+but we have to give the name.
+
+04:12.090 --> 04:15.693
+So we'll give that error.html, and we'll say save changes.
+
+04:17.070 --> 04:18.723
+Okay, that's done.
+
+04:19.950 --> 04:21.060
+You get the URL.
+
+04:21.060 --> 04:24.120
+But when the user access, you should know, right,
+
+04:24.120 --> 04:27.240
+the access from where it is coming, who is accessing it,
+
+04:27.240 --> 04:29.250
+what browser they're using, regions.
+
+04:29.250 --> 04:31.860
+All this information gets stored in the access logs.
+
+04:31.860 --> 04:33.990
+We have seen this in the Apache.
+
+04:33.990 --> 04:37.590
+Later, also, we have lectures in AWS part two
+
+04:37.590 --> 04:40.350
+where we'll talk about the access logs.
+
+04:40.350 --> 04:44.403
+So in S3 there is an option to store all the access logs.
+
+04:45.510 --> 04:48.810
+There's the option, same in the property section.
+
+04:48.810 --> 04:51.150
+You have the option for server access log.
+
+04:51.150 --> 04:55.380
+You can say edit and enable access log.
+
+04:55.380 --> 04:59.310
+You can specify the bucket or you can just browse it.
+
+04:59.310 --> 05:03.720
+I'll say that's our bucket and choose destination.
+
+05:03.720 --> 05:05.040
+So it should be in this format,
+
+05:05.040 --> 05:07.683
+s3:// and the bucket name.
+
+05:08.670 --> 05:10.440
+Okay, it gives you the option also
+
+05:10.440 --> 05:11.820
+how do you want to store the logs
+
+05:11.820 --> 05:15.030
+and which format, year, month, date?
+
+05:15.030 --> 05:17.883
+We'll keep the default one, and we'll say save changes.
+
+05:19.980 --> 05:21.510
+Okay, now it's time to access.
+
+05:21.510 --> 05:24.363
+So go to static website hosting, copy the URL,
+
+05:25.560 --> 05:27.963
+put it in the browser, hit enter.
+
+05:31.740 --> 05:35.640
+Okay, so the website is hosted, you see that, right?
+
+05:35.640 --> 05:38.910
+So no more Apache HTTP service,
+
+05:38.910 --> 05:41.010
+no EC2 instances, no load balancer.
+
+05:41.010 --> 05:42.843
+So if you want to host a static website,
+
+05:42.843 --> 05:45.060
+this is pretty easy.
+
+05:45.060 --> 05:48.840
+You can use this URL and put it in your domain.
+
+05:48.840 --> 05:52.890
+We'll see in the projects how we use our domain providers,
+
+05:52.890 --> 05:55.830
+and we know we can have a proper URL, like, you know,
+
+05:55.830 --> 05:59.160
+like, barista.somethingsomething.com
+
+05:59.160 --> 06:00.360
+that points to this URL.
+
+06:02.220 --> 06:04.500
+So we'll see that later in the project
+
+06:04.500 --> 06:08.553
+how to enable those CNAME records in your domain.
+
+06:09.390 --> 06:12.273
+So come back to S3 barista908accesslogs.
+
+06:13.260 --> 06:16.170
+This is the bucket where access logs will be stored.
+
+06:16.170 --> 06:17.820
+Now it won't be immediately stored.
+
+06:17.820 --> 06:19.470
+It's going to take some time.
+
+06:19.470 --> 06:23.550
+You keep accessing your website on the S3
+
+06:23.550 --> 06:24.900
+and after some time you will see
+
+06:24.900 --> 06:26.610
+the access logs appearing over here.
+
+06:26.610 --> 06:28.530
+I want to show you here one thing, permissions.
+
+06:28.530 --> 06:32.370
+If you go, if you scroll down, bucket policy,
+
+06:32.370 --> 06:34.800
+this is adjacent policy,
+
+06:34.800 --> 06:37.980
+which is automatically created when we selected this
+
+06:37.980 --> 06:40.620
+as the destination bucket for access log.
+
+06:40.620 --> 06:43.530
+This allows the access logs
+
+06:43.530 --> 06:46.620
+to be stored in this S3 bucket.
+
+06:46.620 --> 06:50.220
+We'll see bucket policy later in the course.
+
+06:50.220 --> 06:53.520
+Now, come back to our main bucket
+
+06:53.520 --> 06:55.233
+where we have website hosted.
+
+06:56.070 --> 06:58.113
+Now, we'll talk about versioning.
+
+07:00.340 --> 07:03.390
+So we had enable versioning when we are creating the bucket,
+
+07:03.390 --> 07:05.820
+and you can see an option over here, show versions.
+
+07:05.820 --> 07:07.023
+If you click on that,
+
+07:08.040 --> 07:11.280
+you can see here version ID of the files, not the folder,
+
+07:11.280 --> 07:12.540
+but you get get into the folder.
+
+07:12.540 --> 07:15.540
+You can see version ID of the files inside that.
+
+07:15.540 --> 07:17.040
+So we just see single version
+
+07:17.040 --> 07:20.073
+because we have not overwritten or deleted any file.
+
+07:21.510 --> 07:23.913
+So let's see a few examples how this works.
+
+07:25.290 --> 07:27.810
+First, toggle this off,
+
+07:27.810 --> 07:30.540
+make sure you don't see any versions of the file.
+
+07:30.540 --> 07:34.473
+Let's take example of this file ABOUT THIS TEMPLATE.txt.
+
+07:35.310 --> 07:36.390
+Put a check mark on this.
+
+07:36.390 --> 07:38.100
+You can delete any file.
+
+07:38.100 --> 07:42.060
+Just put a check mark on this and say delete and come down.
+
+07:42.060 --> 07:43.980
+You will see an option here, delete,
+
+07:43.980 --> 07:46.023
+not permanent delete, just delete.
+
+07:46.860 --> 07:49.470
+If you delete a version of a file,
+
+07:49.470 --> 07:51.630
+that will be a permanent delete.
+
+07:51.630 --> 07:54.843
+Okay, just the file deleting, delete the object.
+
+07:56.460 --> 07:58.080
+Okay, so that file is gone, right?
+
+07:58.080 --> 08:02.220
+We don't see it, but yeah, when we do show versions,
+
+08:02.220 --> 08:05.190
+you will see delete marker.
+
+08:05.190 --> 08:08.430
+The file already exists over there,
+
+08:08.430 --> 08:12.060
+and there is a delete marker placed on top of it,
+
+08:12.060 --> 08:14.610
+so file did not go anywhere.
+
+08:14.610 --> 08:16.050
+You see, file has a size,
+
+08:16.050 --> 08:18.450
+delete marker has no size.
+
+08:18.450 --> 08:20.700
+Like that if you overwrite any object,
+
+08:20.700 --> 08:22.320
+you'll have multiple versions,
+
+08:22.320 --> 08:25.320
+as many as times you override the file,
+
+08:25.320 --> 08:28.290
+that many versions you will have.
+
+08:28.290 --> 08:31.830
+So when you're deleting a version, S3 bucket,
+
+08:31.830 --> 08:35.670
+deleting object in the S3 bucket that is already versioned,
+
+08:35.670 --> 08:37.230
+the data is not going anywhere.
+
+08:37.230 --> 08:39.780
+You are not saving any storage.
+
+08:39.780 --> 08:42.270
+If your idea was to, you know, delete the data
+
+08:42.270 --> 08:44.790
+so I need to pay less,
+
+08:44.790 --> 08:47.643
+then you need to delete the versions of it, not the file.
+
+08:50.070 --> 08:53.520
+Okay, now, if we remove this delete marker,
+
+08:53.520 --> 08:54.993
+select that and say delete.
+
+08:56.220 --> 08:58.970
+And now you get an option permanently delete over here.
+
+09:00.631 --> 09:03.331
+So just type permanently delete and say delete object.
+
+09:04.200 --> 09:07.260
+So we deleted the marker, right?
+
+09:07.260 --> 09:09.300
+Let's toggle this off.
+
+09:09.300 --> 09:10.803
+You see, file came back.
+
+09:11.850 --> 09:13.740
+Like that if you overwrite anything,
+
+09:13.740 --> 09:17.073
+so let's overwrite index.html file we need to create.
+
+09:18.360 --> 09:20.340
+So I just opened a Notepad.
+
+09:20.340 --> 09:24.660
+I'll say this is my website on S3,
+
+09:24.660 --> 09:29.660
+and I will save it with the name index.html on my desktop.
+
+09:30.360 --> 09:32.970
+Let me just index.html,
+
+09:37.440 --> 09:40.020
+and make sure save type as all files
+
+09:40.020 --> 09:43.170
+because otherwise it'll store it with .txt format.
+
+09:43.170 --> 09:46.653
+So that will be the complete name of the file, save it.
+
+09:48.270 --> 09:51.390
+And so we already have index.html file.
+
+09:51.390 --> 09:55.563
+Now, we are going to upload one more index.html, add file.
+
+09:56.430 --> 09:59.883
+So it's in my desktop there, index,
+
+10:00.867 --> 10:03.603
+just click on it and we say upload.
+
+10:08.310 --> 10:12.030
+Okay, so this is a new file.
+
+10:12.030 --> 10:13.893
+If you click on show versions,
+
+10:14.730 --> 10:17.013
+you will see the previous version also.
+
+10:17.970 --> 10:20.220
+Okay, now we'll access the website once again.
+
+10:20.220 --> 10:22.590
+Let me go to properties.
+
+10:22.590 --> 10:23.553
+Click on that URL.
+
+10:24.600 --> 10:25.680
+Okay, it says forbidden.
+
+10:25.680 --> 10:27.750
+I need to make that object again public.
+
+10:27.750 --> 10:29.040
+It's a new object.
+
+10:29.040 --> 10:30.780
+And, remember, by default,
+
+10:30.780 --> 10:34.260
+every object that you upload on S3 bucket is private.
+
+10:34.260 --> 10:37.380
+So it's a new object, so I need to make it public.
+
+10:37.380 --> 10:42.303
+Action, make public using ACL, make public.
+
+10:43.440 --> 10:45.363
+Okay, let's refresh this.
+
+10:49.704 --> 10:50.537
+Okay, you see that?
+
+10:50.537 --> 10:51.540
+How can we recover it?
+
+10:51.540 --> 10:52.443
+Pretty simple.
+
+10:55.680 --> 10:57.663
+Just go to show versions.
+
+10:59.190 --> 11:03.990
+Okay, toggle that switch and remove this latest version.
+
+11:03.990 --> 11:05.703
+Let's delete that latest version.
+
+11:06.630 --> 11:09.153
+And now you get permanently delete option there.
+
+11:09.990 --> 11:11.220
+Delete object.
+
+11:11.220 --> 11:14.343
+So the version, the latest version we have removed.
+
+11:16.950 --> 11:18.093
+Toggle that off.
+
+11:19.140 --> 11:20.280
+Okay, index.html.
+
+11:20.280 --> 11:22.323
+Let's refresh this.
+
+11:25.260 --> 11:28.593
+Oh, for some reason I need to go back to the URL again.
+
+11:33.930 --> 11:35.913
+Okay, see that, we are back online.
+
+11:37.860 --> 11:40.200
+So that's how the versioning works.
+
+11:40.200 --> 11:41.940
+But be careful with this.
+
+11:41.940 --> 11:43.920
+If you have S3 bucket
+
+11:43.920 --> 11:48.060
+where you continuously regularly overrides the object,
+
+11:48.060 --> 11:51.450
+it is going to very quickly increase the size,
+
+11:51.450 --> 11:52.710
+and you will end up paying more.
+
+11:52.710 --> 11:54.900
+So you have to enable versioning,
+
+11:54.900 --> 11:57.210
+if it's really, really required.
+
+11:57.210 --> 11:59.640
+Otherwise, you need to pay extra
+
+11:59.640 --> 12:02.430
+because when you override, nothing gets overwritten.
+
+12:02.430 --> 12:04.710
+It's just the newer version.
+
+12:04.710 --> 12:06.390
+So data does not go anywhere.
+
+12:06.390 --> 12:07.980
+If you really want to remove things,
+
+12:07.980 --> 12:09.570
+then you need to say show versions
+
+12:09.570 --> 12:12.750
+and remove all the versions of the file of the object,
+
+12:12.750 --> 12:15.270
+then only things will be removed.
+
+12:15.270 --> 12:16.950
+So that was hosting website,
+
+12:16.950 --> 12:20.130
+and you've seen some amazing option that S3 bucket provides.
+
+12:20.130 --> 12:20.963
+In the next lecture,
+
+12:20.963 --> 12:23.673
+we'll see some more advanced option in S3.
+
+12:24.570 --> 12:27.093
+So wrap this up and join me in the next one.

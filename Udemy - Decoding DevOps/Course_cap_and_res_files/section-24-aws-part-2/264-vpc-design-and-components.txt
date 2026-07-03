@@ -1,0 +1,709 @@
+WEBVTT
+
+1
+00:00:00.790 --> 00:00:01.206
+Welcome.
+
+2
+00:00:01.328 --> 00:00:04.210
+In this video we will be seeing VPC designs.
+
+3
+00:00:04.270 --> 00:00:06.990
+We'll understand different components in a VPC.
+
+4
+00:00:08.750 --> 00:00:11.226
+So this is a very basic VPC design.
+
+5
+00:00:11.408 --> 00:00:14.154
+So VPC is the main network and
+
+6
+00:00:14.192 --> 00:00:16.650
+then you divide it into smaller subnets.
+
+7
+00:00:17.390 --> 00:00:20.026
+There are two kinds of subnets in VPC.
+
+8
+00:00:20.158 --> 00:00:23.326
+You have public subnet and you have private subnet.
+
+9
+00:00:23.518 --> 00:00:26.058
+Public subnet is the one that can
+
+10
+00:00:26.084 --> 00:00:28.230
+be reached directly from the Internet.
+
+11
+00:00:28.670 --> 00:00:30.222
+So if you have EC2 instance in a
+
+12
+00:00:30.236 --> 00:00:33.454
+public subnet, it can go to the Internet.
+
+13
+00:00:33.562 --> 00:00:35.562
+And a traffic that can originate from the
+
+14
+00:00:35.576 --> 00:00:38.386
+internet can come to your EC2 instance.
+
+15
+00:00:38.518 --> 00:00:40.678
+Like you are doing SSH to an EC
+
+16
+00:00:40.714 --> 00:00:42.810
+two instance by using its public IP.
+
+17
+00:00:43.190 --> 00:00:45.750
+That instance will be in a public subnet.
+
+18
+00:00:46.490 --> 00:00:48.682
+What makes subnet public subnet
+
+19
+00:00:48.706 --> 00:00:49.810
+is the internet gateway.
+
+20
+00:00:49.870 --> 00:00:51.502
+There will be a device called as Internet
+
+21
+00:00:51.526 --> 00:00:53.878
+Gateway that is connected to your public subnet
+
+22
+00:00:53.974 --> 00:00:55.918
+and that will manage to and fro internet
+
+23
+00:00:55.954 --> 00:00:58.770
+connection to your public subnet.
+
+24
+00:00:59.090 --> 00:01:02.026
+You have other kind of subnet, private subnet,
+
+25
+00:01:02.218 --> 00:01:05.194
+where a traffic originating from the internet cannot
+
+26
+00:01:05.242 --> 00:01:06.910
+get directly into the private subnet.
+
+27
+00:01:06.970 --> 00:01:09.070
+You will not have any public IPS
+
+28
+00:01:09.250 --> 00:01:12.826
+to instances in the private subnet.
+
+29
+00:01:12.958 --> 00:01:14.866
+It will only have private IPS.
+
+30
+00:01:15.058 --> 00:01:17.682
+But if these instances wants to access the
+
+31
+00:01:17.696 --> 00:01:20.070
+internet, maybe you want to download a package.
+
+32
+00:01:20.390 --> 00:01:21.622
+You're setting up a database
+
+33
+00:01:21.646 --> 00:01:23.290
+server on the private subnet.
+
+34
+00:01:23.410 --> 00:01:26.134
+You connect to that and when you're trying to download
+
+35
+00:01:26.182 --> 00:01:29.646
+a package, then it is going to connect to the
+
+36
+00:01:29.708 --> 00:01:32.370
+Nat gateway which is in the public subnet.
+
+37
+00:01:32.690 --> 00:01:34.962
+Nat gateway will do the netting magic and
+
+38
+00:01:34.976 --> 00:01:37.470
+it will send the traffic to the Internet.
+
+39
+00:01:37.850 --> 00:01:41.310
+Now think of Nat gateway as your WiFi router.
+
+40
+00:01:42.350 --> 00:01:45.450
+The instances in the private subnet like your laptop.
+
+41
+00:01:45.830 --> 00:01:48.442
+So from your laptop you can connect the internet,
+
+42
+00:01:48.526 --> 00:01:51.510
+but from the Internet you cannot connect your laptop
+
+43
+00:01:52.370 --> 00:01:56.010
+in generally your laptops will have private IPS.
+
+44
+00:01:56.330 --> 00:02:00.118
+Like my laptop here has a private IP IP config.
+
+45
+00:02:00.154 --> 00:02:02.818
+If I run that has a private
+
+46
+00:02:02.854 --> 00:02:05.758
+IP address, it's not the Internet IP.
+
+47
+00:02:05.914 --> 00:02:07.638
+My WiFi router has a public
+
+48
+00:02:07.664 --> 00:02:09.850
+IP assigned by Internet service provider.
+
+49
+00:02:09.970 --> 00:02:12.114
+So if you just Google what is my
+
+50
+00:02:12.152 --> 00:02:16.038
+IP, you should get your public IP that
+
+51
+00:02:16.064 --> 00:02:19.854
+is assigned to your Internet service provider, to
+
+52
+00:02:19.892 --> 00:02:23.670
+you, or more specifically to your WiFi router.
+
+53
+00:02:23.990 --> 00:02:27.082
+Okay, so public subnet is connected to Internet
+
+54
+00:02:27.106 --> 00:02:30.630
+gateway, private subnet is connected to net gateway.
+
+55
+00:02:31.010 --> 00:02:33.682
+So we have seen four components public subnet,
+
+56
+00:02:33.706 --> 00:02:37.306
+private subnet, Internet gateway and Nat gateway.
+
+57
+00:02:37.438 --> 00:02:39.342
+If you see in the design, the Nat gateway will
+
+58
+00:02:39.356 --> 00:02:41.778
+be living in the public subnet because it has to
+
+59
+00:02:41.804 --> 00:02:44.554
+connect to the Internet gateway for Internet traffic.
+
+60
+00:02:44.722 --> 00:02:47.058
+But keep in mind, the traffic that originates from
+
+61
+00:02:47.084 --> 00:02:50.502
+your private subnet can go to the internet and
+
+62
+00:02:50.516 --> 00:02:52.290
+the same traffic will be coming back.
+
+63
+00:02:52.400 --> 00:02:54.498
+But a traffic that is originating on the
+
+64
+00:02:54.524 --> 00:02:57.870
+internet cannot get into your private subnet.
+
+65
+00:03:00.690 --> 00:03:04.342
+So you have Nat gateway that enable instance in a
+
+66
+00:03:04.356 --> 00:03:07.462
+private subnet to connect to the internet or even to
+
+67
+00:03:07.476 --> 00:03:11.950
+the other services in your AWS internet gateway.
+
+68
+00:03:12.510 --> 00:03:14.254
+Again, these are virtual devices, okay?
+
+69
+00:03:14.292 --> 00:03:15.682
+Internet gateway you create, it's going
+
+70
+00:03:15.696 --> 00:03:18.074
+to be totally managed by AWS.
+
+71
+00:03:18.242 --> 00:03:19.142
+You don't need to worry
+
+72
+00:03:19.166 --> 00:03:20.954
+about the high availability redundancy.
+
+73
+00:03:21.002 --> 00:03:22.454
+Everything is managed.
+
+74
+00:03:22.622 --> 00:03:25.810
+Internet gateway is component that allows connection between
+
+75
+00:03:25.860 --> 00:03:28.690
+your instances in your VPC and the internet.
+
+76
+00:03:31.150 --> 00:03:34.482
+So check the diagram once again, pause
+
+77
+00:03:34.506 --> 00:03:37.600
+the screen, check it and then continue.
+
+78
+00:03:43.970 --> 00:03:48.258
+Okay, few other components, same design, VPC, you
+
+79
+00:03:48.284 --> 00:03:50.842
+have the public subnet and the private subnet.
+
+80
+00:03:50.986 --> 00:03:53.742
+Now how does an ECT instance which is in a
+
+81
+00:03:53.756 --> 00:03:57.262
+subnet, knows that it has to go to the Internet
+
+82
+00:03:57.286 --> 00:03:59.610
+gateway or it has to go to the NAT gateway
+
+83
+00:04:00.470 --> 00:04:02.602
+That is decided by the route table.
+
+84
+00:04:02.746 --> 00:04:04.014
+There will be a route table which
+
+85
+00:04:04.052 --> 00:04:06.538
+you're going to attach to your subnet.
+
+86
+00:04:06.634 --> 00:04:09.318
+And the route table will tell EC2 instance that it
+
+87
+00:04:09.344 --> 00:04:14.334
+has to forward the traffic to the internet gateway or
+
+88
+00:04:14.372 --> 00:04:17.685
+a private subnet, it needs to go to the internet.
+
+89
+00:04:17.817 --> 00:04:19.458
+The route table will tell that it
+
+90
+00:04:19.483 --> 00:04:21.329
+has to go to the nat gateway.
+
+91
+00:04:21.829 --> 00:04:25.170
+So, Internet gateway and Nat gateway, both our routers.
+
+92
+00:04:25.610 --> 00:04:27.738
+But Internet gateway is for the
+
+93
+00:04:27.764 --> 00:04:29.542
+direct to and flow internet connection.
+
+94
+00:04:29.626 --> 00:04:33.630
+NAT gateway is for only traffic that goes to Internet.
+
+95
+00:04:34.310 --> 00:04:37.770
+If you want to connect to your private subnet directly
+
+96
+00:04:38.090 --> 00:04:41.982
+from your corporate data center, from your office, from your
+
+97
+00:04:41.996 --> 00:04:47.142
+organization, then you can have a NAT gateway when you
+
+98
+00:04:47.216 --> 00:04:50.134
+dial the VPN, then you can connect to your instances
+
+99
+00:04:50.182 --> 00:04:53.250
+with their private IPS from your own network.
+
+100
+00:04:54.770 --> 00:04:56.538
+Okay, so this is the design
+
+101
+00:04:56.624 --> 00:04:58.318
+of public and private subnet.
+
+102
+00:04:58.354 --> 00:05:00.860
+Private subnet gives you the security,
+
+103
+00:05:02.690 --> 00:05:05.250
+but we also need high availability.
+
+104
+00:05:06.230 --> 00:05:09.390
+When you create a subnet, you assign it to a zone.
+
+105
+00:05:10.250 --> 00:05:13.222
+Basically you create a subnet in a zone.
+
+106
+00:05:13.366 --> 00:05:18.330
+And as we know, we have multiple zones in a region.
+
+107
+00:05:18.710 --> 00:05:21.706
+Minimum two zones will be there in every region.
+
+108
+00:05:21.778 --> 00:05:23.718
+And then you have some regions, you have
+
+109
+00:05:23.744 --> 00:05:26.050
+three, some regions you have six zones.
+
+110
+00:05:26.230 --> 00:05:27.870
+Let's say you have two zones.
+
+111
+00:05:28.670 --> 00:05:31.402
+So you are going to create two public subnets.
+
+112
+00:05:31.546 --> 00:05:34.700
+One in zone one, the other one in zone two.
+
+113
+00:05:35.450 --> 00:05:36.294
+Now why is that?
+
+114
+00:05:36.332 --> 00:05:39.430
+Now, zones are clustered data centers.
+
+115
+00:05:39.610 --> 00:05:43.050
+And if a zone goes down or it's slow,
+
+116
+00:05:43.550 --> 00:05:46.938
+then the other zone and your subnet in the
+
+117
+00:05:46.964 --> 00:05:49.290
+other zone will be live up and running.
+
+118
+00:05:49.460 --> 00:05:51.814
+So if you design your infrastructure properly,
+
+119
+00:05:51.862 --> 00:05:54.874
+take example, you have four web server.
+
+120
+00:05:54.922 --> 00:05:57.318
+You can put two in public subnet and
+
+121
+00:05:57.344 --> 00:05:59.730
+the other two in the other public subnet.
+
+122
+00:06:00.170 --> 00:06:01.806
+So if your zone one goes down,
+
+123
+00:06:01.868 --> 00:06:04.038
+only half of your infrastructure is down.
+
+124
+00:06:04.184 --> 00:06:06.394
+But if you have more instances,
+
+125
+00:06:06.502 --> 00:06:08.526
+you can distribute it much better.
+
+126
+00:06:08.588 --> 00:06:11.982
+If you have more zones, if you're using as per
+
+127
+00:06:11.996 --> 00:06:15.570
+your requirement, you can distribute it as in different zones.
+
+128
+00:06:16.070 --> 00:06:17.902
+Now, same as for the private subnet,
+
+129
+00:06:17.926 --> 00:06:19.750
+you will have multiple private subnet.
+
+130
+00:06:19.810 --> 00:06:22.830
+One in zone one, the other one in the other zone.
+
+131
+00:06:23.150 --> 00:06:25.846
+Again, every subnet will have the route table.
+
+132
+00:06:26.038 --> 00:06:28.218
+Public subnet, route table will tell the
+
+133
+00:06:28.244 --> 00:06:30.030
+traffic to go to Internet gateway.
+
+134
+00:06:30.530 --> 00:06:32.958
+Private subnet route table will send
+
+135
+00:06:32.984 --> 00:06:34.830
+the traffic to Nat gateway.
+
+136
+00:06:35.510 --> 00:06:37.998
+Now, I told you that if you want to connect
+
+137
+00:06:38.024 --> 00:06:40.522
+to your private subnet, you need to dial VPN.
+
+138
+00:06:40.666 --> 00:06:43.374
+But that's not the only way you can
+
+139
+00:06:43.412 --> 00:06:46.470
+connect to your public subnet from the Internet.
+
+140
+00:06:46.790 --> 00:06:49.422
+So you can have an ec2 instance, you
+
+141
+00:06:49.436 --> 00:06:52.006
+can call it as jump server or bastion host.
+
+142
+00:06:52.198 --> 00:06:53.814
+From the Internet, you can connect to your
+
+143
+00:06:53.852 --> 00:06:56.302
+bastion host or to your jump server.
+
+144
+00:06:56.446 --> 00:06:59.046
+And then from there you can connect to
+
+145
+00:06:59.048 --> 00:07:01.410
+the instances which are in private subnet.
+
+146
+00:07:01.730 --> 00:07:07.210
+Because by default, all the subnets in a VPC,
+
+147
+00:07:07.330 --> 00:07:10.266
+public or private, can communicate with each other.
+
+148
+00:07:10.448 --> 00:07:13.242
+So instance in a public subnet can connect to
+
+149
+00:07:13.256 --> 00:07:17.094
+an instance in private subnet and vice versa. Okay?
+
+150
+00:07:17.132 --> 00:07:19.762
+So in this design, we have seen multiple
+
+151
+00:07:19.906 --> 00:07:25.234
+subnets, multiple public subnet, multiple private subnet.
+
+152
+00:07:25.402 --> 00:07:27.282
+We have seen bastion host how you
+
+153
+00:07:27.296 --> 00:07:29.238
+can connect to an instance in a
+
+154
+00:07:29.264 --> 00:07:32.146
+private subnet by connecting to bastion host.
+
+155
+00:07:32.218 --> 00:07:33.414
+So there'll be a jump, right?
+
+156
+00:07:33.452 --> 00:07:35.638
+You get into bastion host, then you jump
+
+157
+00:07:35.674 --> 00:07:38.350
+into your private subnet and Nat gateway.
+
+158
+00:07:38.470 --> 00:07:40.182
+If you need high availability on the
+
+159
+00:07:40.196 --> 00:07:42.462
+Nat gateway, then you need to create
+
+160
+00:07:42.536 --> 00:07:45.634
+Nat gateway in multiple public subnets.
+
+161
+00:07:45.802 --> 00:07:49.650
+So two public subnet, so you create two Nat gateway.
+
+162
+00:07:51.170 --> 00:07:53.706
+Now among all this, what design
+
+163
+00:07:53.768 --> 00:07:55.110
+that you're seeing on the screen?
+
+164
+00:07:55.280 --> 00:07:58.170
+Nat gateway is the only piece that is chargeable.
+
+165
+00:07:58.610 --> 00:08:01.350
+AWS is going to charge you on the NAT gateway.
+
+166
+00:08:02.150 --> 00:08:04.378
+The other things, you create subnets,
+
+167
+00:08:04.414 --> 00:08:06.478
+you create VPC subnets route table.
+
+168
+00:08:06.574 --> 00:08:07.738
+These things, internet gateway,
+
+169
+00:08:07.774 --> 00:08:09.030
+these are not chargeable.
+
+170
+00:08:09.470 --> 00:08:12.426
+So with this design, this minimum design, you
+
+171
+00:08:12.488 --> 00:08:15.654
+achieve high availability on your infrastructure and you
+
+172
+00:08:15.692 --> 00:08:19.170
+also achieve security by using private subnets.
+
+173
+00:08:19.490 --> 00:08:22.422
+So we're going to go with this design and in the
+
+174
+00:08:22.436 --> 00:08:25.062
+next video we will create this entire design and we
+
+175
+00:08:25.076 --> 00:08:28.174
+are going to launch our instances in public and private subnets
+
+176
+00:08:28.282 --> 00:08:30.606
+and we'll see how we're going to access them.
+
+177
+00:08:30.788 --> 00:08:33.360
+So wrap this up and join me in the next video.

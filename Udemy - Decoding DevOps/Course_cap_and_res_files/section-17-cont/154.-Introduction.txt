@@ -1,0 +1,538 @@
+WEBVTT
+
+1
+00:00:00.330 --> 00:00:02.370
+<v Narrator>Welcome to CI/CD.</v>
+
+2
+00:00:02.370 --> 00:00:05.790
+Continuous integration and continuous delivery.
+
+3
+00:00:05.790 --> 00:00:09.192
+CI/CD is an automation process that requires many tools
+
+4
+00:00:09.192 --> 00:00:12.930
+to deliver your software faster and safer.
+
+5
+00:00:12.930 --> 00:00:14.910
+So it's an automation process,
+
+6
+00:00:14.910 --> 00:00:17.653
+but first, you need to understand what does it automate
+
+7
+00:00:17.653 --> 00:00:20.940
+or what problem it solves.
+
+8
+00:00:20.940 --> 00:00:22.864
+Because being a DevOps engineer, most
+
+9
+00:00:22.864 --> 00:00:26.043
+of your time will be going in CI/CD.
+
+10
+00:00:26.043 --> 00:00:28.112
+That's a high chance.
+
+11
+00:00:28.112 --> 00:00:33.112
+So see, developers write code and they merge all this code
+
+12
+00:00:33.210 --> 00:00:36.213
+into a centralized repository like Git.
+
+13
+00:00:37.110 --> 00:00:39.198
+So there will be multiple developers
+
+14
+00:00:39.198 --> 00:00:42.660
+each merging their code on daily basis
+
+15
+00:00:42.660 --> 00:00:44.520
+multiple times in a day.
+
+16
+00:00:44.520 --> 00:00:47.580
+And this happens for weeks and months.
+
+17
+00:00:47.580 --> 00:00:50.280
+So code is getting merged, but
+
+18
+00:00:50.280 --> 00:00:53.222
+after, sometimes if we build it to test,
+
+19
+00:00:53.222 --> 00:00:55.680
+there will be many conflicts, bugs,
+
+20
+00:00:55.680 --> 00:00:58.156
+and issues that needs to be solved.
+
+21
+00:00:58.156 --> 00:01:00.900
+This is happening because the code is getting merged.
+
+22
+00:01:00.900 --> 00:01:04.830
+So a manual build and release cycle is this.
+
+23
+00:01:04.830 --> 00:01:06.840
+Forget about manual and automation for now.
+
+24
+00:01:06.840 --> 00:01:08.220
+This is the build and release cycle.
+
+25
+00:01:08.220 --> 00:01:11.610
+Developers get requirements, they write code.
+
+26
+00:01:11.610 --> 00:01:14.958
+The code is manually built, manually tested.
+
+27
+00:01:14.958 --> 00:01:17.488
+If there are any issues, it will be fixed.
+
+28
+00:01:17.488 --> 00:01:22.230
+The code will be packaged, deployed to staging
+
+29
+00:01:22.230 --> 00:01:23.250
+or test environment
+
+30
+00:01:23.250 --> 00:01:28.200
+and tested for its features, its issues, and bugs.
+
+31
+00:01:28.200 --> 00:01:30.000
+If everything is good, it is released.
+
+32
+00:01:30.000 --> 00:01:33.555
+Now imagine this process multiple times in a day
+
+33
+00:01:33.555 --> 00:01:36.750
+by multiple developers.
+
+34
+00:01:36.750 --> 00:01:39.690
+So developers, apart from just writing their code,
+
+35
+00:01:39.690 --> 00:01:42.878
+they also need to do build test, unit test, packaging,
+
+36
+00:01:42.878 --> 00:01:44.547
+deploying to servers.
+
+37
+00:01:44.547 --> 00:01:48.570
+I know too many words to chew in for now, but don't worry.
+
+38
+00:01:48.570 --> 00:01:51.300
+We'll learn all these steps manually
+
+39
+00:01:51.300 --> 00:01:53.100
+and automatically, both.
+
+40
+00:01:53.100 --> 00:01:55.197
+For now, just understand there are too many steps
+
+41
+00:01:55.197 --> 00:01:58.080
+that requires to build and release a software.
+
+42
+00:01:58.080 --> 00:02:01.680
+And if this is manual, it will create a lot of issues
+
+43
+00:02:01.680 --> 00:02:04.278
+and bottleneck plus a manual process
+
+44
+00:02:04.278 --> 00:02:07.140
+means there will be manual handoffs.
+
+45
+00:02:07.140 --> 00:02:09.450
+There'll be multiple team working in this entire build
+
+46
+00:02:09.450 --> 00:02:10.980
+and release cycle.
+
+47
+00:02:10.980 --> 00:02:12.420
+So I'm done writing the code now.
+
+48
+00:02:12.420 --> 00:02:13.680
+Can you test it?
+
+49
+00:02:13.680 --> 00:02:14.820
+I'm done testing the code.
+
+50
+00:02:14.820 --> 00:02:15.653
+This is the issue.
+
+51
+00:02:15.653 --> 00:02:16.650
+Can you fix it?
+
+52
+00:02:16.650 --> 00:02:19.290
+And like this, this process goes on and on.
+
+53
+00:02:19.290 --> 00:02:22.050
+So this repeated manual process will slow the team.
+
+54
+00:02:22.050 --> 00:02:24.600
+It will create bottlenecks, and if there are errors
+
+55
+00:02:24.600 --> 00:02:27.450
+and issues, it will take time to resolve.
+
+56
+00:02:27.450 --> 00:02:31.560
+And this is the exact problem CI/CD solves.
+
+57
+00:02:31.560 --> 00:02:35.730
+So continuous integration and continuous delivery.
+
+58
+00:02:35.730 --> 00:02:37.500
+Now listen carefully.
+
+59
+00:02:37.500 --> 00:02:38.610
+Developers write the code
+
+60
+00:02:38.610 --> 00:02:42.330
+and merge into shared repository like git.
+
+61
+00:02:42.330 --> 00:02:44.977
+Now, as soon as there is a commit
+
+62
+00:02:44.977 --> 00:02:48.240
+by the developer in the repository,
+
+63
+00:02:48.240 --> 00:02:51.056
+there should be automatic system that should detect that,
+
+64
+00:02:51.056 --> 00:02:53.370
+build the code and test it,
+
+65
+00:02:53.370 --> 00:02:56.250
+and catch the error right then and there.
+
+66
+00:02:56.250 --> 00:02:58.770
+So no more merging the code for some time.
+
+67
+00:02:58.770 --> 00:03:01.470
+And then after that, testing it, as soon
+
+68
+00:03:01.470 --> 00:03:02.730
+as there is a code change,
+
+69
+00:03:02.730 --> 00:03:04.830
+system will automatically build and test it.
+
+70
+00:03:04.830 --> 00:03:07.500
+This is called a continuous integration.
+
+71
+00:03:07.500 --> 00:03:10.080
+So this is still at the code level.
+
+72
+00:03:10.080 --> 00:03:14.160
+Now continuous delivery goes to the next step.
+
+73
+00:03:14.160 --> 00:03:16.620
+CD involves packaging this tested code
+
+74
+00:03:16.620 --> 00:03:19.080
+and deploying it to servers
+
+75
+00:03:19.080 --> 00:03:21.810
+or the systems where it'll be running and then testing it.
+
+76
+00:03:21.810 --> 00:03:25.170
+Again, this could be with or without manual approval
+
+77
+00:03:25.170 --> 00:03:27.638
+that depends on the project and the requirement.
+
+78
+00:03:27.638 --> 00:03:30.720
+So CI makes sure the code is ready,
+
+79
+00:03:30.720 --> 00:03:32.610
+CD makes sure the software
+
+80
+00:03:32.610 --> 00:03:36.220
+or the application is ready to be released.
+
+81
+00:03:36.220 --> 00:03:39.930
+So the goal is to quickly release the software
+
+82
+00:03:39.930 --> 00:03:41.348
+with less and less errors.
+
+83
+00:03:41.348 --> 00:03:46.348
+Flow is simple, plan, code, build, test, deploy, release.
+
+84
+00:03:46.980 --> 00:03:48.948
+And this is a cycle.
+
+85
+00:03:48.948 --> 00:03:51.570
+So you need automation tools
+
+86
+00:03:51.570 --> 00:03:55.230
+or multiple tools to do this entire CI/CD process.
+
+87
+00:03:55.230 --> 00:03:56.700
+As the developer comes the code,
+
+88
+00:03:56.700 --> 00:04:01.080
+there should be a tool like Jenkins or GitHub actions,
+
+89
+00:04:01.080 --> 00:04:05.640
+or GitLab or Argo CD, any such kind of CI/CD automation tool
+
+90
+00:04:05.640 --> 00:04:06.929
+that checks the code.
+
+91
+00:04:06.929 --> 00:04:09.959
+If there are any changes, it will build it, test it,
+
+92
+00:04:09.959 --> 00:04:13.290
+execute all the different kinds of tests like unit test,
+
+93
+00:04:13.290 --> 00:04:15.841
+integration test then packages the code
+
+94
+00:04:15.841 --> 00:04:18.031
+and delivers to the target environment
+
+95
+00:04:18.031 --> 00:04:20.100
+where it will be tested.
+
+96
+00:04:20.100 --> 00:04:22.020
+Furthermore, if everything is good,
+
+97
+00:04:22.020 --> 00:04:23.850
+it will be ready to release.
+
+98
+00:04:23.850 --> 00:04:26.807
+And for any kind of failure, a notification will be sent
+
+99
+00:04:26.807 --> 00:04:29.820
+to the developer or the required team.
+
+100
+00:04:29.820 --> 00:04:32.874
+If there is any failure, the process starts again.
+
+101
+00:04:32.874 --> 00:04:35.340
+Now, in this section of the course, we are going
+
+102
+00:04:35.340 --> 00:04:38.804
+to use Jenkins as the CI/CD tool, in later section,
+
+103
+00:04:38.804 --> 00:04:42.484
+we also have a GitHub actions and GitLab and Argo CD.
+
+104
+00:04:42.484 --> 00:04:45.955
+But there's a reason why I'm taking Jenkins first.
+
+105
+00:04:45.955 --> 00:04:48.060
+So Jenkins forces you
+
+106
+00:04:48.060 --> 00:04:52.320
+to understand CI/CD basics in the pipelines, build triggers,
+
+107
+00:04:52.320 --> 00:04:53.610
+agents, et cetera, et cetera.
+
+108
+00:04:53.610 --> 00:04:55.110
+There are many things
+
+109
+00:04:55.110 --> 00:04:56.516
+It's highly configurable,
+
+110
+00:04:56.516 --> 00:04:59.460
+so you manually see different, different things,
+
+111
+00:04:59.460 --> 00:05:00.329
+different settings.
+
+112
+00:05:00.329 --> 00:05:04.377
+You will see how CI/CD actually works under the hood.
+
+113
+00:05:04.377 --> 00:05:06.958
+And once you understand Jenkins, switching
+
+114
+00:05:06.958 --> 00:05:11.640
+to any other CI/CD tool becomes much easier.
+
+115
+00:05:11.640 --> 00:05:13.440
+Jenkins is widely used.
+
+116
+00:05:13.440 --> 00:05:16.796
+It's one of the most used CI/CD tool.
+
+117
+00:05:16.796 --> 00:05:18.847
+So Jenkins, you can understand
+
+118
+00:05:18.847 --> 00:05:20.820
+that we are learning the fundamentals
+
+119
+00:05:20.820 --> 00:05:23.160
+and also the complete CI/CD process.
+
+120
+00:05:23.160 --> 00:05:26.910
+Other modern CI/CD tools like GitHub actions, GitLab,
+
+121
+00:05:26.910 --> 00:05:30.836
+Argo CD, they're easier, modern, and they're more automated.
+
+122
+00:05:30.836 --> 00:05:34.667
+So Jenkins is a free open source automation server.
+
+123
+00:05:34.667 --> 00:05:36.510
+It's highly extensible.
+
+124
+00:05:36.510 --> 00:05:37.710
+There's so many plugins,
+
+125
+00:05:37.710 --> 00:05:39.398
+and you can integrate any number of tools
+
+126
+00:05:39.398 --> 00:05:43.246
+with Jenkins like Git, Docker, Kubernetes, Maven,
+
+127
+00:05:43.246 --> 00:05:46.200
+and it runs on Windows, Linux, MacOS,,
+
+128
+00:05:46.200 --> 00:05:47.836
+any kind of operating system.
+
+129
+00:05:47.836 --> 00:05:49.625
+And as I say, it's always better
+
+130
+00:05:49.625 --> 00:05:51.960
+to do it rather than just read it.
+
+131
+00:05:51.960 --> 00:05:53.160
+So let's get into it.
+
+132
+00:05:53.160 --> 00:05:55.084
+On the next lecture, we'll start setting up Jenkins
+
+133
+00:05:55.084 --> 00:05:56.580
+and start learning it.
+
+134
+00:05:56.580 --> 00:05:58.130
+So join me in the next lecture.
+

@@ -1,0 +1,1456 @@
+WEBVTT
+
+00:00.450 --> 00:03.780
+Instructor: Hello and welcome to the CodeBuild lecture.
+
+00:03.780 --> 00:07.110
+In this lecture we are going to use AWS CodeBuild service
+
+00:07.110 --> 00:10.860
+to fetch our source code and build it into an artifact.
+
+00:10.860 --> 00:14.673
+So search for CodeBuild and open CodeBuild.
+
+00:15.870 --> 00:18.450
+So I really don't need to explain you CodeBuild from the
+
+00:18.450 --> 00:20.991
+scratch because you already know Jenkins,
+
+00:20.991 --> 00:24.810
+it's the AWS cloud version of Jenkins.
+
+00:24.810 --> 00:27.270
+The difference, or the major difference I would say
+
+00:27.270 --> 00:29.940
+is Jenkins, we need to launch an instance
+
+00:29.940 --> 00:33.060
+or you need a virtual machine
+
+00:33.060 --> 00:35.010
+or a computer to run Jenkins service.
+
+00:35.010 --> 00:37.560
+CodeBuild is different than that.
+
+00:37.560 --> 00:40.440
+It's pay as you go service.
+
+00:40.440 --> 00:43.530
+So you create a CodeBuild project which is
+
+00:43.530 --> 00:47.580
+like a Jenkins job and when you run that project
+
+00:47.580 --> 00:49.800
+or when you run the build,
+
+00:49.800 --> 00:51.900
+the compute resource that it uses,
+
+00:51.900 --> 00:55.350
+the ram, memory, CPU, whatever it uses,
+
+00:55.350 --> 00:56.460
+only you pay for that,
+
+00:56.460 --> 00:58.170
+only for that much amount of time.
+
+00:58.170 --> 01:02.040
+Like as long as your build is running, you only pay
+
+01:02.040 --> 01:03.870
+for the build time.
+
+01:03.870 --> 01:05.700
+So you don't need to continuously be running an
+
+01:05.700 --> 01:07.380
+EC2 instance.
+
+01:07.380 --> 01:10.530
+If you see here it says AWS CodeBuild is fully managed
+
+01:10.530 --> 01:11.790
+continuous integration service
+
+01:11.790 --> 01:15.780
+that compiles source code run test produce software packages
+
+01:15.780 --> 01:20.100
+and says pay only for the build time you use
+
+01:20.100 --> 01:21.240
+and it's pretty simple.
+
+01:21.240 --> 01:24.840
+The main thing in CodeBuild is the build spec file.
+
+01:24.840 --> 01:28.138
+So all the build information you give in a yml format
+
+01:28.138 --> 01:31.860
+and select the other details like the source code and stuff.
+
+01:31.860 --> 01:33.750
+We'll see all those things.
+
+01:33.750 --> 01:36.000
+Now here also it shows source code.
+
+01:36.000 --> 01:38.850
+So this is an example of a build spec file.
+
+01:38.850 --> 01:40.050
+Pretty simple.
+
+01:40.050 --> 01:41.550
+We'll get into that, we'll see it from the
+
+01:41.550 --> 01:42.990
+documentation also.
+
+01:42.990 --> 01:45.420
+Now before we create this CodeBuild project,
+
+01:45.420 --> 01:47.040
+we need to create an S3 bucket
+
+01:47.040 --> 01:50.610
+because that's where we are going to store our artifacts.
+
+01:50.610 --> 01:55.173
+Just search for S3, open the S3 bucket service,
+
+01:56.370 --> 02:01.110
+create a bucket, make sure it's in the same region
+
+02:01.110 --> 02:02.640
+where you're using CodeBuild,
+
+02:02.640 --> 02:04.530
+give bucket a name and just create it.
+
+02:04.530 --> 02:06.030
+That's all.
+
+02:06.030 --> 02:08.790
+And just giving the name awscicdvproartifact.
+
+02:08.790 --> 02:09.690
+Give a different name.
+
+02:09.690 --> 02:11.160
+The bucket name needs to be unique.
+
+02:11.160 --> 02:13.710
+Add some numbers to make it unique.
+
+02:13.710 --> 02:15.390
+Give the bucket name and simply scroll
+
+02:15.390 --> 02:16.920
+down and create bucket.
+
+02:16.920 --> 02:17.753
+That is all.
+
+02:21.870 --> 02:24.210
+Okay, let's learn this service by doing it.
+
+02:24.210 --> 02:26.253
+So click on create project.
+
+02:28.350 --> 02:30.390
+Think of same like creating a Jenkins job
+
+02:30.390 --> 02:33.360
+or Jenkins pipeline, give project a name,
+
+02:33.360 --> 02:37.173
+I'm just saying vproappcicd, I'll just say vproappbuild.
+
+02:45.000 --> 02:45.990
+Source provider.
+
+02:45.990 --> 02:47.820
+We need to select the source provider
+
+02:47.820 --> 02:49.620
+from where the CodeBuild job
+
+02:49.620 --> 02:51.660
+is going to fetch the source code.
+
+02:51.660 --> 02:53.250
+We are using Bitbucket,
+
+02:53.250 --> 02:55.732
+so from the source provider we can select here,
+
+02:55.732 --> 02:59.070
+Bitbucket, we have here other options like GitHub
+
+02:59.070 --> 03:01.650
+and GitLab, as we are using Bitbucket,
+
+03:01.650 --> 03:03.810
+so we're going to select Bitbucket.
+
+03:03.810 --> 03:06.150
+Once you're connected to a Bitbucket account,
+
+03:06.150 --> 03:07.950
+you should see your repository over here
+
+03:07.950 --> 03:10.110
+and you can mention the branch name.
+
+03:10.110 --> 03:14.850
+But this job is not connected to any Bitbucket repository
+
+03:14.850 --> 03:17.820
+and you should see this red cross mark over here.
+
+03:17.820 --> 03:20.820
+We can click on manage account credentials to connect it
+
+03:20.820 --> 03:22.860
+to our Bitbucket repository.
+
+03:22.860 --> 03:26.400
+So click on this, this should open a new tab
+
+03:26.400 --> 03:30.210
+and you can see here different types of mechanism
+
+03:30.210 --> 03:33.060
+for credentials which you can use to connect
+
+03:33.060 --> 03:35.190
+to your Bitbucket repository.
+
+03:35.190 --> 03:37.410
+The first one is Bitbucket app.
+
+03:37.410 --> 03:38.850
+And the last one OAuth app.
+
+03:38.850 --> 03:40.470
+They work similarly
+
+03:40.470 --> 03:44.700
+and this is completely managed by AWS Bitbucket app.
+
+03:44.700 --> 03:46.620
+And then you have personal access token,
+
+03:46.620 --> 03:49.050
+which is a premium feature of Bitbucket.
+
+03:49.050 --> 03:50.940
+So we are not going to use that one,
+
+03:50.940 --> 03:53.220
+but this is the more recommended way.
+
+03:53.220 --> 03:56.880
+The next one is app password where you mention the username
+
+03:56.880 --> 03:59.130
+and password of your Bitbucket repository
+
+03:59.130 --> 04:02.400
+or your Bitbucket account, which is not recommended.
+
+04:02.400 --> 04:04.198
+No, passwords are generally avoided
+
+04:04.198 --> 04:07.800
+for security reasons, they can be exposed easily.
+
+04:07.800 --> 04:09.930
+But I'll show you how you can generate a username
+
+04:09.930 --> 04:11.880
+and password in Bitbucket account.
+
+04:11.880 --> 04:15.933
+So you can click, you can go to your Bitbucket account.
+
+04:16.860 --> 04:18.570
+So to get the username first,
+
+04:18.570 --> 04:21.000
+click on this gear symbol over here
+
+04:21.000 --> 04:24.543
+and go to personal Bitbucket settings.
+
+04:25.890 --> 04:27.870
+And here you can find the username,
+
+04:27.870 --> 04:29.580
+if you want you can change the username.
+
+04:29.580 --> 04:31.920
+Actually I did change the username
+
+04:31.920 --> 04:34.290
+because it was something different so I just changed it.
+
+04:34.290 --> 04:36.120
+You can do that as well.
+
+04:36.120 --> 04:38.880
+And then here you have the option of app passwords.
+
+04:38.880 --> 04:42.930
+You can go there and you can create the app password.
+
+04:42.930 --> 04:45.183
+Okay, so that is one way of connecting.
+
+04:49.950 --> 04:51.663
+Okay, so let's come back here.
+
+04:54.900 --> 04:57.480
+So as I said, we will be using Bitbucket app,
+
+04:57.480 --> 04:59.400
+but let's take a look at OAuth app also,
+
+04:59.400 --> 05:02.100
+it's almost similar, just click on this.
+
+05:02.100 --> 05:06.180
+The extra feature that it gives is you can store this fourth
+
+05:06.180 --> 05:07.860
+token in secret manager.
+
+05:07.860 --> 05:11.070
+Now, secrets manager is not a free service from AWS
+
+05:11.070 --> 05:12.330
+and it says it's recommended.
+
+05:12.330 --> 05:14.490
+You can also use CodeBuild service.
+
+05:14.490 --> 05:15.447
+So you can click on CodeBuild
+
+05:15.447 --> 05:18.030
+and you can click on connect to Bitbucket.
+
+05:18.030 --> 05:21.060
+If you're already logged in you can select your workspace
+
+05:21.060 --> 05:22.980
+and you can select your repository.
+
+05:22.980 --> 05:24.600
+If you're not, you can select the account
+
+05:24.600 --> 05:26.670
+and log in and then you can connect.
+
+05:26.670 --> 05:28.740
+As I said, we are going to use Bitbucket app.
+
+05:28.740 --> 05:31.650
+So let's click on this and you will get this.
+
+05:31.650 --> 05:34.890
+You can create a new Bitbucket connection over here.
+
+05:34.890 --> 05:38.400
+So click on that and you should get a new window.
+
+05:38.400 --> 05:40.161
+You can give connection a name.
+
+05:40.161 --> 05:43.440
+So I have given name here, bitbucketvproapp
+
+05:43.440 --> 05:46.598
+and I'm going to say connect to Bitbucket.
+
+05:46.598 --> 05:47.760
+Okay, so it automatically connected
+
+05:47.760 --> 05:49.680
+because I'm logged in from the same browser
+
+05:49.680 --> 05:51.060
+to my Bitbucket account.
+
+05:51.060 --> 05:54.360
+But if you're not logged in from the same browser,
+
+05:54.360 --> 05:56.430
+then you can click on install new app
+
+05:56.430 --> 05:59.370
+or it'll throw another window
+
+05:59.370 --> 06:00.780
+where you can select the login detail.
+
+06:00.780 --> 06:02.940
+Like we used a Gmail account,
+
+06:02.940 --> 06:06.326
+like I have used the Google account to log into Bitbucket.
+
+06:06.326 --> 06:08.130
+So you can select your Google account
+
+06:08.130 --> 06:10.050
+and you can sign in from here.
+
+06:10.050 --> 06:12.240
+But if you're already logged into Bitbucket account from the
+
+06:12.240 --> 06:15.030
+same browser, you should see or hear the new connection.
+
+06:15.030 --> 06:18.390
+You can select that and you can say connect.
+
+06:18.390 --> 06:21.360
+Now here you should get your connection name, select
+
+06:21.360 --> 06:22.893
+that and say save.
+
+06:24.120 --> 06:27.000
+Okay, once you do that, that tab should get closed.
+
+06:27.000 --> 06:28.590
+If not, just come back to your tab
+
+06:28.590 --> 06:30.750
+from where you're selecting the Bitbucket
+
+06:30.750 --> 06:33.300
+and here you can select the repository
+
+06:33.300 --> 06:36.090
+and you can give the branch name over here.
+
+06:36.090 --> 06:38.850
+So we are using awscicdbranch,
+
+06:38.850 --> 06:40.500
+so I'm going to give here aws-ci.
+
+06:41.580 --> 06:42.873
+So this should be enough.
+
+06:43.770 --> 06:44.853
+Then scroll down.
+
+06:45.930 --> 06:48.690
+So provisioning model on demand,
+
+06:48.690 --> 06:52.890
+like pay as you go model, not the result capacity
+
+06:52.890 --> 06:55.410
+and environment image.
+
+06:55.410 --> 06:57.630
+So we'll just say AWS managed image.
+
+06:57.630 --> 07:00.810
+You can create your own custom docker images also to build
+
+07:00.810 --> 07:02.850
+and you can specify that.
+
+07:02.850 --> 07:05.560
+And EC2 is fine here for the compute
+
+07:06.690 --> 07:11.460
+Lambda is much faster and cheaper option.
+
+07:11.460 --> 07:13.470
+But we are good with this for now.
+
+07:13.470 --> 07:14.400
+Operating system.
+
+07:14.400 --> 07:19.380
+Let's select here Ubuntu, and this is fine standard.
+
+07:19.380 --> 07:23.190
+You can select the image as 7.0.
+
+07:23.190 --> 07:28.190
+Now as you go, I'm recording this lecture in August, 2024.
+
+07:28.950 --> 07:31.890
+As you move forward, AWS will remain,
+
+07:31.890 --> 07:35.070
+will release different version of the images.
+
+07:35.070 --> 07:37.020
+7.0 works fine for us.
+
+07:37.020 --> 07:39.480
+This is the latest for now, for source code, it works.
+
+07:39.480 --> 07:42.360
+So you can select that, don't select any latest version,
+
+07:42.360 --> 07:43.620
+just go with 7.0
+
+07:43.620 --> 07:46.560
+If any new version comes, I will be making test.
+
+07:46.560 --> 07:48.375
+If everything is working fine then I'll release
+
+07:48.375 --> 07:49.530
+the new lecture.
+
+07:49.530 --> 07:53.170
+But as long as you see 7.0 over here, select that
+
+07:54.150 --> 07:56.280
+and let's come down.
+
+07:56.280 --> 07:59.853
+New service role, let's say now create a new service role,
+
+08:00.900 --> 08:04.410
+additional configuration, we don't need anything else.
+
+08:04.410 --> 08:07.260
+So you can select the compute resource,
+
+08:07.260 --> 08:08.430
+how much it should use.
+
+08:08.430 --> 08:11.010
+So 3GB memory, two CPUs the minimum.
+
+08:11.010 --> 08:14.850
+So we have to select that only, coming down.
+
+08:14.850 --> 08:16.977
+Now here you have to mention the build commands
+
+08:16.977 --> 08:18.540
+and the build spec.
+
+08:18.540 --> 08:20.400
+So if you know we just have one simple
+
+08:20.400 --> 08:21.870
+command which does everything,
+
+08:21.870 --> 08:24.450
+like for example if we install
+
+08:24.450 --> 08:26.190
+and you are good with that,
+
+08:26.190 --> 08:27.450
+so you can mention that command,
+
+08:27.450 --> 08:30.270
+but we need to, you know, feed more information.
+
+08:30.270 --> 08:35.270
+We have to specify the JDK version 17 or 21.
+
+08:35.580 --> 08:38.670
+We need to change the RDS detail in the application
+
+08:38.670 --> 08:40.320
+properties file, the database detail.
+
+08:40.320 --> 08:42.540
+So we need to run some commands also.
+
+08:42.540 --> 08:44.880
+So we need to use a build spec file for that.
+
+08:44.880 --> 08:46.740
+It's a file in the yml format.
+
+08:46.740 --> 08:51.240
+So use a build spec file, select that, oh wait, sorry,
+
+08:51.240 --> 08:53.820
+instead build command is fine, just switch to editor.
+
+08:53.820 --> 08:56.223
+And here itself we can the build spec file.
+
+08:57.090 --> 08:58.200
+Okay, the ideal way will be
+
+08:58.200 --> 09:00.900
+to in your source code itself you have a build spec file
+
+09:00.900 --> 09:03.633
+and you mentioned its path over there, right?
+
+09:05.010 --> 09:06.180
+Right in your source code.
+
+09:06.180 --> 09:08.220
+So from the source code you mentioned the path
+
+09:08.220 --> 09:10.200
+of the build spec file and it'll use that,
+
+09:10.200 --> 09:12.450
+that's the better way.
+
+09:12.450 --> 09:16.920
+But we are going to go with here switch to reader.
+
+09:16.920 --> 09:20.040
+So from the resource section you can download the build spec
+
+09:20.040 --> 09:21.840
+file and copy it over here.
+
+09:21.840 --> 09:23.370
+After making the changes, I'll show you
+
+09:23.370 --> 09:24.753
+what changes we need to do.
+
+09:25.770 --> 09:29.250
+I have also kept the build spec file in the repository.
+
+09:29.250 --> 09:30.810
+So you can go to HH code
+
+09:30.810 --> 09:33.660
+or you can go to your Bitbucket repository,
+
+09:33.660 --> 09:37.080
+but make sure you switch to branch AWS-CI
+
+09:37.080 --> 09:40.296
+and here you select AWS files
+
+09:40.296 --> 09:43.980
+and buildspec.yml file, this file, right?
+
+09:43.980 --> 09:45.600
+So this is the whole file.
+
+09:45.600 --> 09:47.400
+So let's copy this.
+
+09:47.400 --> 09:48.660
+We need to make some changes
+
+09:48.660 --> 09:51.153
+so you can use an editor for that.
+
+09:52.680 --> 09:56.100
+Okay, I'll just click over here and say open raw
+
+09:56.100 --> 09:58.300
+and I will copy all this content
+
+10:00.060 --> 10:03.000
+and I'm using the sublime text editor
+
+10:03.000 --> 10:05.313
+and I'm just using it to show you that's all.
+
+10:06.180 --> 10:08.250
+So you can use the editor of your choice.
+
+10:08.250 --> 10:12.190
+So build spec file, it's in yml format
+
+10:13.350 --> 10:14.790
+so no surprises for you.
+
+10:14.790 --> 10:16.980
+We already did it in Ansible
+
+10:16.980 --> 10:19.470
+and before that also we use yml file.
+
+10:19.470 --> 10:20.970
+So it's key and value.
+
+10:20.970 --> 10:22.410
+So version 0.2,
+
+10:22.410 --> 10:25.710
+that's the current one right now for this one.
+
+10:25.710 --> 10:27.660
+And you can mention environment variable.
+
+10:27.660 --> 10:29.880
+These are all commented, you see hash in front of them.
+
+10:29.880 --> 10:31.770
+But you can set environment variables.
+
+10:31.770 --> 10:35.370
+Also you have to say ENV variables, key and value.
+
+10:35.370 --> 10:37.050
+Key and value.
+
+10:37.050 --> 10:38.790
+Now also you have parameter store.
+
+10:38.790 --> 10:41.520
+Now there are many other things in the build spec file in
+
+10:41.520 --> 10:44.880
+DevOps project scores we have covered that in detail.
+
+10:44.880 --> 10:47.580
+Here we are keeping it simple, it is showing you,
+
+10:47.580 --> 10:51.180
+you can mention variables over here that will be exported.
+
+10:51.180 --> 10:53.070
+And then you have phases
+
+10:53.070 --> 10:55.110
+in that you have various kind of phases.
+
+10:55.110 --> 10:56.970
+One of the phases, install phase.
+
+10:56.970 --> 10:59.600
+And in install phase you can mention commands
+
+10:59.600 --> 11:02.640
+or you can also mention the softwares
+
+11:02.640 --> 11:03.690
+that you want to install.
+
+11:03.690 --> 11:05.520
+So runtime-versions.
+
+11:05.520 --> 11:08.280
+Now AWS CodeBuild service knows how to read this
+
+11:08.280 --> 11:09.900
+and execute this.
+
+11:09.900 --> 11:11.790
+So you mentioned Java and you mentioned
+
+11:11.790 --> 11:13.590
+the version coreccto17.
+
+11:13.590 --> 11:17.013
+That means JDK17, provided from AWS.
+
+11:17.970 --> 11:21.600
+So by using runtime versions it'll execute its own command
+
+11:21.600 --> 11:24.540
+and install coreccto17 for us like that.
+
+11:24.540 --> 11:26.590
+There are many other, there's a huge list.
+
+11:26.590 --> 11:29.730
+We'll see that in the documentation in a moment.
+
+11:29.730 --> 11:32.100
+But just quickly understand this
+
+11:32.100 --> 11:34.200
+build spec file for now.
+
+11:34.200 --> 11:35.820
+So in the phases, you have install phase
+
+11:35.820 --> 11:37.050
+any tool that you need.
+
+11:37.050 --> 11:41.400
+So we are mentioning that pre-built, pre-built commands,
+
+11:41.400 --> 11:44.010
+you know we can mention commands in that it is just
+
+11:44.010 --> 11:45.780
+before the build commands.
+
+11:45.780 --> 11:49.200
+So our main command is here, mvn_install.
+
+11:49.200 --> 11:52.170
+So we say build commands and mvn_install,
+
+11:52.170 --> 11:56.667
+but before that we want it to use maven 3.9
+
+11:57.930 --> 12:02.280
+and we want to change the database username, password
+
+12:02.280 --> 12:05.520
+and URL in application.properties file.
+
+12:05.520 --> 12:10.500
+In our source code we have this application.properties file.
+
+12:10.500 --> 12:13.686
+We want to search there the password username
+
+12:13.686 --> 12:16.290
+and the URL of database
+
+12:16.290 --> 12:21.210
+and change it to the RDS that we are using, right?
+
+12:21.210 --> 12:23.280
+So let's come once again from the beginning.
+
+12:23.280 --> 12:24.690
+So pre-built commands.
+
+12:24.690 --> 12:28.263
+So we see app-get update, JQ java query,
+
+12:29.430 --> 12:32.790
+we download maven double get command
+
+12:32.790 --> 12:34.530
+with maven with double get command,
+
+12:34.530 --> 12:38.190
+we download maven 3.9, tar extract command,
+
+12:38.190 --> 12:40.020
+we extract that tar ball
+
+12:40.020 --> 12:42.183
+and we create a link, ln-s,
+
+12:43.470 --> 12:46.710
+you know from this we change it to the name maven.
+
+12:46.710 --> 12:49.260
+So we will have a folder called maven.
+
+12:49.260 --> 12:51.480
+So when we done MVN command, it's going to look for
+
+12:51.480 --> 12:52.860
+that maven folder from that,
+
+12:52.860 --> 12:55.290
+it's going to use the maven binary, right?
+
+12:55.290 --> 12:56.650
+So maven is set over here
+
+12:57.570 --> 13:01.680
+and then we are using the sed command to search
+
+13:01.680 --> 13:04.350
+for jdbc.password.
+
+13:04.350 --> 13:07.850
+This text equal to admin 123.
+
+13:07.850 --> 13:09.000
+You know, we search for this text
+
+13:09.000 --> 13:11.550
+and replace it with jdbc.password
+
+13:11.550 --> 13:13.893
+is equal to the password of the RDS.
+
+13:15.120 --> 13:17.100
+So the RDS username password
+
+13:17.100 --> 13:18.960
+and the URL that you have saved,
+
+13:18.960 --> 13:20.910
+you need to change that over here.
+
+13:20.910 --> 13:23.190
+I will just do that in some time.
+
+13:23.190 --> 13:26.610
+Same way we search for jdbc.username equal to admin
+
+13:26.610 --> 13:29.850
+and change it to jdbc.username admin,
+
+13:29.850 --> 13:31.950
+okay it's the same thing.
+
+13:31.950 --> 13:36.950
+And then search for db01:3306 to the URL of the RDS there,
+
+13:41.317 --> 13:44.010
+:3306, right?
+
+13:44.010 --> 13:46.260
+So in application properties file, we search
+
+13:46.260 --> 13:48.930
+for these three things and we replace it, right?
+
+13:48.930 --> 13:50.250
+So let's go to the repository.
+
+13:50.250 --> 13:55.250
+Let's see, once again branchaws-main.
+
+13:55.320 --> 13:59.160
+So SRC, main resources,
+
+13:59.160 --> 14:01.440
+application.properties file, right?
+
+14:01.440 --> 14:03.810
+So it's going to search for this
+
+14:03.810 --> 14:06.240
+and replace it with the RDS endpoint.
+
+14:06.240 --> 14:11.240
+Search for this, replace it with the username of the RDS,
+
+14:11.760 --> 14:14.130
+search for jdbc.password
+
+14:14.130 --> 14:16.533
+and replace it with that database password.
+
+14:18.930 --> 14:21.780
+Okay, so we are going to change these details in a moment.
+
+14:21.780 --> 14:26.400
+Let's look at the other settings of buildspec.yml file.
+
+14:26.400 --> 14:28.800
+So install phase, pre-build phase
+
+14:28.800 --> 14:30.360
+and then you have build phase.
+
+14:30.360 --> 14:32.130
+Build phase, we just have a command.
+
+14:32.130 --> 14:35.400
+So we are saying commands and we say mvn install.
+
+14:35.400 --> 14:36.540
+So it's in a list format.
+
+14:36.540 --> 14:38.548
+You can give the list of commands just, you know,
+
+14:38.548 --> 14:41.700
+with a hyphen in the next line.
+
+14:41.700 --> 14:43.650
+But we just need one command, mvn install.
+
+14:43.650 --> 14:45.780
+And then you have post build
+
+14:45.780 --> 14:48.120
+and I have given here commands mvn package.
+
+14:48.120 --> 14:50.940
+Now this is really not necessary for this,
+
+14:50.940 --> 14:53.850
+mvn install is going to give us the artifact, we don't need
+
+14:53.850 --> 14:55.350
+to package it again,
+
+14:55.350 --> 14:59.550
+but this is just two extra steps just to show you.
+
+14:59.550 --> 15:01.560
+And then finally we have artifacts.
+
+15:01.560 --> 15:05.250
+So in phases, you have these phases.
+
+15:05.250 --> 15:09.330
+Install, pre-build, build, post-build, that's all we need.
+
+15:09.330 --> 15:10.740
+There are many other phases as well,
+
+15:10.740 --> 15:12.390
+but this is all we need.
+
+15:12.390 --> 15:16.680
+And then after this phase is completed, then artifacts.
+
+15:16.680 --> 15:17.670
+So what's the artifacts?
+
+15:17.670 --> 15:21.840
+So we're seeing files and we are seeing **/*.
+
+15:21.840 --> 15:24.510
+That means you know all the files.
+
+15:24.510 --> 15:26.850
+Base directory, this is going to be the base directory.
+
+15:26.850 --> 15:28.667
+So this is the artifact.
+
+15:28.667 --> 15:31.050
+We are not mentioning the.v,
+
+15:31.050 --> 15:32.940
+we are just mentioning the entire directory name,
+
+15:32.940 --> 15:36.060
+target/vprofile-v2.
+
+15:36.060 --> 15:40.800
+So that directory will be after the install completes,
+
+15:40.800 --> 15:43.260
+that directory is their final artifact.
+
+15:43.260 --> 15:46.140
+And if we mention a destination like an S3 bucket,
+
+15:46.140 --> 15:48.660
+it is going to copy this content to the S3 bucket.
+
+15:48.660 --> 15:50.940
+Or if you're saying deploy it somewhere else, it's going
+
+15:50.940 --> 15:53.880
+to deploy this entire folder over there.
+
+15:53.880 --> 15:55.800
+Of course it is going to archive this folder
+
+15:55.800 --> 15:58.470
+and then move it to the destination.
+
+15:58.470 --> 16:00.300
+Now I know there's too many things over here,
+
+16:00.300 --> 16:01.470
+but do not worry.
+
+16:01.470 --> 16:06.150
+There's proper documentation for everything from AWS.
+
+16:06.150 --> 16:07.680
+So let's go back
+
+16:07.680 --> 16:12.120
+and just Google CodeBuild build spec file documentation,
+
+16:12.120 --> 16:15.753
+search for it and over here build specification reference.
+
+16:17.160 --> 16:18.720
+So all the information is given.
+
+16:18.720 --> 16:21.900
+Do not panic, it's just when you need it, you use it.
+
+16:21.900 --> 16:24.360
+You don't need to read this entire thing, end to end
+
+16:24.360 --> 16:28.050
+and understand everything, just ask per your need.
+
+16:28.050 --> 16:29.823
+So let's scroll down.
+
+16:31.050 --> 16:33.060
+Build spec syntax, right?
+
+16:33.060 --> 16:34.320
+So that's the syntax, okay?
+
+16:34.320 --> 16:36.660
+So in this file everything is given
+
+16:36.660 --> 16:39.330
+and when you click on something, it's going to send
+
+16:39.330 --> 16:40.803
+to its documentation.
+
+16:41.640 --> 16:42.660
+So env.
+
+16:42.660 --> 16:44.550
+So you've seen that variable parameter,
+
+16:44.550 --> 16:46.839
+store exported, variable secret manager
+
+16:46.839 --> 16:51.030
+and DevOps project scores, we have covered many of them.
+
+16:51.030 --> 16:53.730
+Proxy, batch, phases, right?
+
+16:53.730 --> 16:55.220
+So install phase we have used.
+
+16:55.220 --> 16:58.290
+So you know, you can mention other things like run as
+
+16:58.290 --> 17:01.350
+what username, many other things, commands.
+
+17:01.350 --> 17:03.843
+Basically you'll need command most of the time.
+
+17:04.800 --> 17:07.110
+Pre-built, again, you have commands,
+
+17:07.110 --> 17:08.973
+build, again, you have commands.
+
+17:10.156 --> 17:11.670
+Post-build, again, you have commands.
+
+17:11.670 --> 17:13.080
+It's again a series of command,
+
+17:13.080 --> 17:15.030
+but it's just divided into different phases.
+
+17:15.030 --> 17:16.230
+You see, it's pretty simple.
+
+17:16.230 --> 17:17.520
+Just commands.
+
+17:17.520 --> 17:18.353
+Reports.
+
+17:18.353 --> 17:21.220
+So we do have reports, you know, we can also
+
+17:22.590 --> 17:26.310
+export our reports, unit test reports from this location
+
+17:26.310 --> 17:28.050
+to some other destination.
+
+17:28.050 --> 17:30.180
+So you can mention all the details over here.
+
+17:30.180 --> 17:32.280
+S3 bucket, where you want to send and all.
+
+17:33.390 --> 17:34.470
+Okay, artifacts.
+
+17:34.470 --> 17:37.530
+Now if you want to understand this, for example,
+
+17:37.530 --> 17:40.350
+I want to understand artifacts, I'll just click on that
+
+17:40.350 --> 17:42.960
+and tells me what is this all about.
+
+17:42.960 --> 17:45.600
+And you know, everything is mentioned over here,
+
+17:45.600 --> 17:47.790
+how you can, if you want to, you know,
+
+17:47.790 --> 17:51.120
+represent all the files, this is what we did.
+
+17:51.120 --> 17:53.730
+Or you can mention a subdirectory inside that,
+
+17:53.730 --> 17:55.380
+all the files.
+
+17:55.380 --> 17:56.760
+Artifacts name, if you want
+
+17:56.760 --> 17:58.680
+to change the name, override the name,
+
+17:58.680 --> 18:00.330
+default name from, you know,
+
+18:00.330 --> 18:03.450
+let's say from V profile, have V2 to something else.
+
+18:03.450 --> 18:07.320
+We can do that also as example given over here, okay?
+
+18:07.320 --> 18:09.918
+So as you need it in your project, you look
+
+18:09.918 --> 18:12.180
+for those option and then use it.
+
+18:12.180 --> 18:13.500
+Experiment with that.
+
+18:13.500 --> 18:17.628
+You don't need to know all this by heart, okay?
+
+18:17.628 --> 18:19.450
+You know, when you keep using it
+
+18:20.310 --> 18:21.960
+then you'll slowly become master of it.
+
+18:21.960 --> 18:25.650
+But don't need become a master of it for now,
+
+18:25.650 --> 18:27.930
+just go through it and just keep in your mind
+
+18:27.930 --> 18:30.870
+that you have all the necessary information.
+
+18:30.870 --> 18:32.010
+Okay, so now it's time
+
+18:32.010 --> 18:35.820
+to change our DB details into application.properties file.
+
+18:35.820 --> 18:38.940
+So we are going to mention all that in build spec file.
+
+18:38.940 --> 18:42.434
+So make sure you copy the RDS endpoint URL,
+
+18:42.434 --> 18:43.920
+the username and password.
+
+18:43.920 --> 18:45.540
+So I'm going to do it one by one.
+
+18:45.540 --> 18:48.420
+So let's let me copy the password first.
+
+18:48.420 --> 18:50.410
+I already saved it in the sticky notes
+
+18:51.600 --> 18:52.650
+as I told you previously
+
+18:52.650 --> 18:56.250
+to save it somewhere safe in the sticky notes or somewhere.
+
+18:56.250 --> 18:59.757
+So take a build spec file either from the resource section
+
+18:59.757 --> 19:02.610
+of the lecture or from the source code
+
+19:02.610 --> 19:06.600
+and just change the DB password carefully.
+
+19:06.600 --> 19:09.390
+Password equal to, and the database password,
+
+19:09.390 --> 19:11.610
+username, you don't need to change the same username,
+
+19:11.610 --> 19:15.510
+but if you did change username while creating IDS instance,
+
+19:15.510 --> 19:18.390
+then make sure you give the right username over here.
+
+19:18.390 --> 19:19.223
+Endpoint.
+
+19:20.850 --> 19:22.980
+So that's the endpoint.
+
+19:22.980 --> 19:24.510
+If you're not saving in sticky notes,
+
+19:24.510 --> 19:28.080
+copy it from the RDS page,
+
+19:28.080 --> 19:30.510
+carefully copy it, just the endpoint.
+
+19:30.510 --> 19:35.040
+Okay, from here, till .com, okay, paste it, okay,
+
+19:35.040 --> 19:36.540
+make sure it's like this.
+
+19:36.540 --> 19:41.355
+Okay / the endpoint, :3306/.
+
+19:41.355 --> 19:43.230
+Okay, save this.
+
+19:43.230 --> 19:44.250
+You don't even need to save this.
+
+19:44.250 --> 19:49.250
+Just select it, copy it, and go to your CodeBuild project.
+
+19:50.610 --> 19:53.253
+Okay here, select everything and paste it here.
+
+19:54.630 --> 19:56.071
+Make sure there's no error
+
+19:56.071 --> 19:58.590
+over here, no syntax error or anything.
+
+19:58.590 --> 20:00.600
+If you see, fix it now,
+
+20:00.600 --> 20:03.180
+just copy the build spec file once again, make the changes
+
+20:03.180 --> 20:06.420
+and then paste it over here and scroll down
+
+20:06.420 --> 20:08.520
+and select the artifact location.
+
+20:08.520 --> 20:11.280
+So we have to select Amazon S3.
+
+20:11.280 --> 20:13.740
+This is where we want to copy our S3 bucket.
+
+20:13.740 --> 20:16.140
+And from that, select your bucket name.
+
+20:16.140 --> 20:20.940
+So mine is this one, awscicdvproartifact.
+
+20:20.940 --> 20:22.050
+That's what I have created.
+
+20:22.050 --> 20:23.520
+Just give the bucket name, don't need
+
+20:23.520 --> 20:25.260
+to mention any folder name
+
+20:25.260 --> 20:29.760
+and then come down, no artifacts packaging
+
+20:29.760 --> 20:31.200
+is required for us.
+
+20:31.200 --> 20:34.680
+Scroll down, CloudWatch logs.
+
+20:34.680 --> 20:37.500
+We definitely need the logs when we build the job
+
+20:37.500 --> 20:40.290
+because it's not a Jenkins instance
+
+20:40.290 --> 20:43.230
+where we can see the console output all the time.
+
+20:43.230 --> 20:44.670
+You know it's pay as you go.
+
+20:44.670 --> 20:47.490
+So as the build runs that time,
+
+20:47.490 --> 20:50.130
+if we miss the information that said it's gone.
+
+20:50.130 --> 20:52.950
+So we definitely need to store the information somewhere.
+
+20:52.950 --> 20:55.230
+And that is CloudWatch logs.
+
+20:55.230 --> 20:56.730
+So you can mention the group name
+
+20:56.730 --> 20:58.770
+and then you can mention the stream name.
+
+20:58.770 --> 21:02.490
+Then you can later also check in the CloudWatch logs.
+
+21:02.490 --> 21:04.890
+So I've given group name as vprofileproject
+
+21:04.890 --> 21:06.663
+and stream name as vprobuild.
+
+21:07.680 --> 21:09.690
+So later also I can go to CloudWatch,
+
+21:09.690 --> 21:11.220
+look for this group name inside that,
+
+21:11.220 --> 21:14.250
+look for the stream name and read the logs.
+
+21:14.250 --> 21:17.553
+And then can take many action on the logs later also.
+
+21:19.080 --> 21:21.930
+Okay, so that is all in this CodeBuild project.
+
+21:21.930 --> 21:24.720
+Let's just create this build project.
+
+21:24.720 --> 21:28.200
+And once this is created, in the next lecture,
+
+21:28.200 --> 21:31.050
+we will execute this build job, test it,
+
+21:31.050 --> 21:34.020
+and also create a pipeline from that.
+
+21:34.020 --> 21:36.510
+So create the build project.
+
+21:36.510 --> 21:37.380
+Complete this one.
+
+21:37.380 --> 21:38.940
+You don't need to run this for now.
+
+21:38.940 --> 21:42.093
+Complete this and join me in the next lecture.

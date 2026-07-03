@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00.960 --> 00:01.980
+Instructor: Okay, so in today's time
+
+00:01.980 --> 00:05.193
+many people are using ChatGPT to generate the script,
+
+00:06.360 --> 00:09.240
+but it will be only helpful if you learn scripting.
+
+00:09.240 --> 00:11.160
+If you know scripting
+
+00:11.160 --> 00:14.670
+then ChatGPT is a very, very helpful tool.
+
+00:14.670 --> 00:16.320
+Otherwise you'll be struggling a lot,
+
+00:16.320 --> 00:18.810
+even if you use ChatGPT.
+
+00:18.810 --> 00:20.610
+So we have already done a very basic script
+
+00:20.610 --> 00:22.650
+and it is working fine.
+
+00:22.650 --> 00:27.450
+Let's see if ChatGPT can also generate a similar script
+
+00:27.450 --> 00:29.373
+if we give the proper information.
+
+00:30.810 --> 00:31.920
+Okay, so I have written this:
+
+00:31.920 --> 00:36.180
+Bash Script to install httpd package, start httpd service,
+
+00:36.180 --> 00:38.910
+download html template from tooplate.com
+
+00:38.910 --> 00:41.850
+and deploy to/var/www/html.
+
+00:41.850 --> 00:43.920
+At the end, restart the httpd service
+
+00:43.920 --> 00:47.100
+and check the status of httpd service.
+
+00:47.100 --> 00:48.603
+Let's see what it generates.
+
+00:51.750 --> 00:53.133
+Okay, let's take a look.
+
+00:54.290 --> 00:55.980
+Right. So really simple, right.
+
+00:55.980 --> 00:58.260
+Install httpd, start the service,
+
+00:58.260 --> 01:00.750
+download and then unzip
+
+01:00.750 --> 01:04.950
+and directly extract it into var/www/html, right.
+
+01:04.950 --> 01:07.200
+Now, maybe it does not know
+
+01:07.200 --> 01:10.920
+that the template contains a sub-level directory, right.
+
+01:10.920 --> 01:13.080
+So when we extract it into HTML folder
+
+01:13.080 --> 01:15.660
+it will create one more folder inside it,
+
+01:15.660 --> 01:17.430
+and we may not want it.
+
+01:17.430 --> 01:20.880
+So we test it, we see if it works
+
+01:20.880 --> 01:23.070
+and we can make changes, right.
+
+01:23.070 --> 01:25.050
+So in order to even use ChatGPT
+
+01:25.050 --> 01:28.740
+you should know how to do scripting, first of all.
+
+01:28.740 --> 01:30.690
+Right, it can generate very, very complex scripts.
+
+01:30.690 --> 01:33.240
+We will be doing some more complex scripts,
+
+01:33.240 --> 01:35.250
+like checking different OS,
+
+01:35.250 --> 01:39.810
+running commands on multiple Linux servers at a time
+
+01:39.810 --> 01:41.490
+from a single command or a single script.
+
+01:41.490 --> 01:43.320
+So we'll be doing many things
+
+01:43.320 --> 01:46.800
+and you can anytime come back and check with ChatGPT
+
+01:46.800 --> 01:49.740
+or you can even enhance your script.
+
+01:49.740 --> 01:54.740
+So I'll put over here, enhance my script
+
+01:55.020 --> 01:58.113
+and I'll give the script, paste the script down here.
+
+02:07.140 --> 02:09.600
+Yeah, first of all, it says "Your script looks good."
+
+02:09.600 --> 02:11.550
+Right? That's a compliment.
+
+02:11.550 --> 02:14.760
+But "I have made few enhancements to improve the readability
+
+02:14.760 --> 02:16.350
+and add error handling.
+
+02:16.350 --> 02:18.027
+Here's the updated version."
+
+02:20.490 --> 02:23.673
+Right, so it's almost same, right.
+
+02:24.510 --> 02:27.543
+But for the temp folder it used variable,
+
+02:29.130 --> 02:32.850
+right there, there, and there, right.
+
+02:32.850 --> 02:35.580
+So from ChatGPT, we are going in the right direction
+
+02:35.580 --> 02:37.590
+and we'll be using variables and conditions
+
+02:37.590 --> 02:39.390
+and many other thing you'll see now.
+
+02:40.260 --> 02:42.270
+Okay, so chat with ChatGPT,
+
+02:42.270 --> 02:44.370
+try to generate different kinds of scripts
+
+02:45.480 --> 02:47.330
+and then join me in the next lecture.

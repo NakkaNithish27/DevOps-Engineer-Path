@@ -1,0 +1,197 @@
+WEBVTT
+
+0
+00:00.700 --> 00:04.530
+Welcome to the auto scaling section of AWS.
+
+1
+00:05.710 --> 00:13.930
+This is really a very pretty easy service to understand if you know ec2, if you know cloud watch.
+
+2
+00:14.960 --> 00:19.850
+Then it would be very easy for you to understand, which we have already done in the previous sessions.
+
+3
+00:23.400 --> 00:30.690
+So auto scale groups service integrates with Cloud Watch and it will monitor your resources on a particular
+
+4
+00:30.690 --> 00:34.140
+metric that you have selected, like CPU utilization.
+
+5
+00:34.500 --> 00:40.740
+And if the CPU utilization, for example, is going high, crossing the threshold, it can adjust the
+
+6
+00:40.740 --> 00:41.370
+capacity.
+
+7
+00:41.370 --> 00:45.030
+It can add more instances in your auto scaling group.
+
+8
+00:45.810 --> 00:48.480
+And this is based on the cloud watch alarms.
+
+9
+00:49.200 --> 00:55.560
+So while we are creating auto scaling group, we also have to create cloud watch alarms to add the capacity
+
+10
+00:55.560 --> 01:04.020
+or also to remove the capacity, adding the capacity to maintain the performance and remove the capacity
+
+11
+01:04.500 --> 01:05.880
+to maintain our cost.
+
+12
+01:10.240 --> 01:16.630
+So auto scaling group is going to use launch configuration or launch template, yes the same launch
+
+13
+01:16.630 --> 01:20.320
+template we have seen in the ec2 tor the elb exercise.
+
+14
+01:20.890 --> 01:26.470
+It can use those launch template or launch configuration to launch your instances in the auto scaling
+
+15
+01:26.470 --> 01:26.770
+group.
+
+16
+01:27.580 --> 01:33.430
+So the instance launch information will be provided by launch configuration on launch template.
+
+17
+01:34.670 --> 01:37.490
+To adjust the capacity based on the alarm
+
+18
+01:37.640 --> 01:39.500
+It uses scaling policies.
+
+19
+01:40.690 --> 01:43.000
+Auto scaling group has its own policies.
+
+20
+01:43.030 --> 01:44.110
+Or you can set.
+
+21
+01:45.600 --> 01:48.510
+policies yourself, step scaling.
+
+22
+01:48.510 --> 01:53.670
+Like, for example, if the load is going let's say if the CPU is going high more than 60.
+
+23
+01:54.030 --> 01:59.760
+You can mention that launch, 2 instance, if it's going to 80, launch, 4 instance, or if it's coming
+
+24
+01:59.760 --> 02:04.530
+down, then remove 2, 3, 4 as per your requirement.
+
+25
+02:04.530 --> 02:08.010
+Or you can let auto setting group handle all that for you.
+
+26
+02:11.010 --> 02:15.690
+When you you're creating auto scaling group, you can mention the minimum size of your auto scaling
+
+27
+02:15.690 --> 02:15.990
+group.
+
+28
+02:16.350 --> 02:21.420
+So for example, you can say, one is the minimum instance that I need in the auto scaling group.
+
+29
+02:22.380 --> 02:24.270
+And you can mentioned the desired capacity.
+
+30
+02:25.170 --> 02:31.260
+So when you say desired capacity is two and minimum is one, it will create two instances in your auto
+
+31
+02:31.260 --> 02:31.890
+scaling group.
+
+32
+02:32.610 --> 02:38.730
+And if you're wondering what is minimum, then as the name says, you cannot remove that last instance
+
+33
+02:38.730 --> 02:39.930
+from your auto scaling group,
+
+34
+02:39.940 --> 02:46.110
+if you said 1. So auto scaling group based on its scaling policy will also terminate the instance,
+
+35
+02:46.110 --> 02:53.400
+but it cannot terminate the minimum size and desired capacity will be the usual running instances.
+
+36
+02:53.910 --> 02:58.010
+Then you can also mention the maximum size based on the scaling policy.
+
+37
+02:58.020 --> 03:04.770
+If it starts adding the instances, how much maximum instances it can add, if you said 4,
+
+38
+03:04.770 --> 03:08.340
+then it will not launch more than 4 instance, in an auto scaling group.
+
+39
+03:08.880 --> 03:10.740
+So to maintain your cost.
+
+40
+03:12.320 --> 03:13.340
+So let's see the design.
+
+41
+03:14.730 --> 03:20.100
+So we'll create an auto scaling group which will be powered by your launch configuration to launch instances.
+
+42
+03:20.520 --> 03:25.890
+So you see that rectangle in the auto scaling group that will be your launch configuration.
+
+43
+03:26.830 --> 03:33.430
+And based on the Load, let's say,  CPU utilization, you have said is the metric. Alarm will be triggered
+
+44
+03:33.640 --> 03:40.450
+if it crosses the threshold and scaling policies will trigger the launch of new instances in the auto
+
+45
+03:40.450 --> 03:46.210
+scaling group or can even reduce the instances based on your scaling policies.
+
+46
+03:47.540 --> 03:47.750
+Now.
+
+47
+03:47.750 --> 03:49.230
+Let's see how it can be done.
+
+48
+03:49.280 --> 03:50.420
+Let's get into action.

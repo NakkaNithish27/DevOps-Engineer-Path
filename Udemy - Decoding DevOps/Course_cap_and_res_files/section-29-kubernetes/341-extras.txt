@@ -1,0 +1,929 @@
+WEBVTT
+
+1
+00:00:00.670 --> 00:00:01.820
+Hello and welcome.
+
+2
+00:00:03.230 --> 00:00:06.402
+In this lecture, we will see few extra things which
+
+3
+00:00:06.476 --> 00:00:10.280
+you may or may not use in your real life,
+
+4
+00:00:10.790 --> 00:00:13.722
+depending on how you're working on a project.
+
+5
+00:00:13.856 --> 00:00:16.830
+But they are really very simple things
+
+6
+00:00:16.880 --> 00:00:19.098
+and I thought you should know them.
+
+7
+00:00:19.184 --> 00:00:23.214
+So I'm going to show few more amazing
+
+8
+00:00:23.312 --> 00:00:28.290
+features of Kubernetes, starting with Taints and Toleration.
+
+9
+00:00:29.210 --> 00:00:30.930
+I'll just search for Taints.
+
+10
+00:00:31.370 --> 00:00:34.170
+It should show me Taints and Toleration documentation.
+
+11
+00:00:36.230 --> 00:00:38.142
+So, Taint and Toleration, you
+
+12
+00:00:38.156 --> 00:00:39.620
+can understand it like this.
+
+13
+00:00:40.190 --> 00:00:45.394
+Think of it like paint a
+
+14
+00:00:45.432 --> 00:00:47.626
+node with something with some information.
+
+15
+00:00:47.748 --> 00:00:51.238
+And then Toleration means a Pod that can
+
+16
+00:00:51.264 --> 00:00:54.960
+tolerate that paint can only go inside.
+
+17
+00:00:55.350 --> 00:00:56.650
+Think of it like this.
+
+18
+00:00:56.760 --> 00:00:59.714
+So, for example, I taint a node.
+
+19
+00:00:59.762 --> 00:01:03.386
+Again, think of it like painting a node taint
+
+20
+00:01:03.458 --> 00:01:06.442
+node and the node name and key and a
+
+21
+00:01:06.456 --> 00:01:11.126
+value pair like a variable No Schedule.
+
+22
+00:01:11.318 --> 00:01:15.802
+What this means is the node will be painted with
+
+23
+00:01:15.996 --> 00:01:20.770
+this variable and the effect will be no schedule.
+
+24
+00:01:21.150 --> 00:01:22.270
+So read this.
+
+25
+00:01:22.320 --> 00:01:25.330
+This means that no Pod will be able to
+
+26
+00:01:25.380 --> 00:01:30.190
+schedule onto node one unless it has matching Toleration.
+
+27
+00:01:30.930 --> 00:01:32.722
+So if a Pod wants to run on
+
+28
+00:01:32.736 --> 00:01:35.854
+a node that has this information, then you
+
+29
+00:01:35.892 --> 00:01:39.310
+need to create the Pod with this Toleration.
+
+30
+00:01:40.590 --> 00:01:40.990
+Okay?
+
+31
+00:01:41.040 --> 00:01:42.058
+Together you can understand.
+
+32
+00:01:42.144 --> 00:01:43.966
+First is painting with this information.
+
+33
+00:01:44.088 --> 00:01:48.106
+Then no Pod can run on it if it has this information.
+
+34
+00:01:48.228 --> 00:01:50.558
+So how do you give information toleration?
+
+35
+00:01:50.654 --> 00:01:54.362
+So, in your Pod definition, you can say Toleration
+
+36
+00:01:54.506 --> 00:01:59.806
+key the key name operator equal to this.
+
+37
+00:01:59.868 --> 00:02:00.758
+It's like condition.
+
+38
+00:02:00.854 --> 00:02:03.322
+If this key value is this and the
+
+39
+00:02:03.336 --> 00:02:06.000
+effect is no schedule, then run on it.
+
+40
+00:02:07.230 --> 00:02:09.818
+If a Pod does not have this Toleration,
+
+41
+00:02:09.913 --> 00:02:12.362
+it will not run on that Node.
+
+42
+00:02:12.506 --> 00:02:14.630
+Okay, one example of a Pod definition.
+
+43
+00:02:14.690 --> 00:02:16.090
+Here there is a Toleration.
+
+44
+00:02:17.010 --> 00:02:21.154
+So it says if this key exists, not just equal even
+
+45
+00:02:21.192 --> 00:02:24.922
+if this key exists and the effect is no schedule, then
+
+46
+00:02:24.996 --> 00:02:27.910
+this part can be running on that Node, right?
+
+47
+00:02:27.960 --> 00:02:31.202
+The first step is paint, which is like painting.
+
+48
+00:02:31.346 --> 00:02:34.754
+And the second step is giving Toleration on your Pod.
+
+49
+00:02:34.922 --> 00:02:36.958
+Maybe you want to restrict a node to
+
+50
+00:02:36.984 --> 00:02:40.502
+run Pod that has this specific Toleration.
+
+51
+00:02:40.646 --> 00:02:42.178
+Only those Pod can run over
+
+52
+00:02:42.204 --> 00:02:44.580
+there, not other pods like that.
+
+53
+00:02:44.970 --> 00:02:47.870
+Okay, that's Taints and Toleration.
+
+54
+00:02:48.050 --> 00:02:50.410
+The next thing I want to show you is limits.
+
+55
+00:02:54.670 --> 00:02:55.780
+Link there.
+
+56
+00:02:56.530 --> 00:02:58.900
+Okay, so just scroll down here.
+
+57
+00:03:02.450 --> 00:03:04.698
+So if you want to run a Pod and you
+
+58
+00:03:04.724 --> 00:03:09.934
+want to reserve a specific amount of memory and CPU
+
+59
+00:03:09.982 --> 00:03:13.894
+to it, then you have to say Resources Request.
+
+60
+00:03:14.062 --> 00:03:16.470
+That means I'm requesting I need this
+
+61
+00:03:16.520 --> 00:03:19.306
+much memory and this much CPU.
+
+62
+00:03:19.498 --> 00:03:24.054
+Only then this Pod will run a node that
+
+63
+00:03:24.092 --> 00:03:26.610
+does not have this much memory and CPU.
+
+64
+00:03:27.350 --> 00:03:29.494
+Then the Pod will not run on that Node.
+
+65
+00:03:29.542 --> 00:03:33.774
+Or if no nodes exist with this much resource, then
+
+66
+00:03:33.812 --> 00:03:37.906
+this Pod will be in a pending state that's reserving.
+
+67
+00:03:38.098 --> 00:03:41.718
+But then there is limit how much maximum it can use.
+
+68
+00:03:41.864 --> 00:03:46.114
+If you do not mention this the Pod
+
+69
+00:03:46.162 --> 00:03:49.330
+may use unlimited or on the namespace.
+
+70
+00:03:49.390 --> 00:03:53.818
+Also, if the limit is set, it can go to that limit.
+
+71
+00:03:53.914 --> 00:03:56.274
+But you can restrict a Pod to run on
+
+72
+00:03:56.312 --> 00:04:00.030
+this much specific memory and this much specific CPU.
+
+73
+00:04:01.370 --> 00:04:07.950
+Okay, so request is reserving, limit is restricting.
+
+74
+00:04:09.350 --> 00:04:11.214
+Okay, next thing I want to show you
+
+75
+00:04:11.252 --> 00:04:13.230
+is a Job, which is very simple.
+
+76
+00:04:13.280 --> 00:04:18.601
+It's just another way of running Pod Jobs.
+
+77
+00:04:18.625 --> 00:04:19.934
+And then we'll see cron Jobs.
+
+78
+00:04:19.982 --> 00:04:26.918
+Jobs is basically a container that has a specific command
+
+79
+00:04:26.954 --> 00:04:30.600
+or script that runs and completed a specific time.
+
+80
+00:04:31.050 --> 00:04:32.880
+It's not a continuously running
+
+81
+00:04:33.210 --> 00:04:35.954
+container like nginx, MySQL.
+
+82
+00:04:36.062 --> 00:04:37.682
+These are continuously running container.
+
+83
+00:04:37.706 --> 00:04:41.338
+But if you want something that runs your work and then
+
+84
+00:04:41.364 --> 00:04:44.520
+returns the output, then you can use Job, Kind, Job.
+
+85
+00:04:45.150 --> 00:04:47.242
+And you mentioned the container information and
+
+86
+00:04:47.256 --> 00:04:48.670
+the command that it will be running.
+
+87
+00:04:48.720 --> 00:04:52.334
+It could be a script or it could be some command.
+
+88
+00:04:52.382 --> 00:04:54.660
+Maybe you're running batch processing or something
+
+89
+00:04:55.710 --> 00:04:58.138
+that works for a definite period of
+
+90
+00:04:58.164 --> 00:04:59.798
+time and returns the output.
+
+91
+00:04:59.834 --> 00:05:02.340
+Then you have to use Job for that.
+
+92
+00:05:03.210 --> 00:05:06.794
+This is similar to Pod, except Pod will run continuously
+
+93
+00:05:06.902 --> 00:05:09.780
+and Job will run for a specific period of time.
+
+94
+00:05:10.290 --> 00:05:12.250
+Then there is also Cron Job.
+
+95
+00:05:12.360 --> 00:05:15.430
+This is similar to Cron Job of Linux.
+
+96
+00:05:16.470 --> 00:05:20.410
+So scheduled tasks, you want to run something for
+
+97
+00:05:20.460 --> 00:05:24.298
+a particular time or like an alarm, right?
+
+98
+00:05:24.324 --> 00:05:26.614
+At this particular time, run this task like that.
+
+99
+00:05:26.652 --> 00:05:31.920
+So you say Kind, Cron, Job and schedule you give.
+
+100
+00:05:32.610 --> 00:05:33.958
+When do you want to run it?
+
+101
+00:05:34.044 --> 00:05:36.122
+Just like a Cron tab format.
+
+102
+00:05:36.266 --> 00:05:39.970
+So Star basically means run it every minute.
+
+103
+00:05:40.410 --> 00:05:45.598
+Every minute, every hour, every date, first to
+
+104
+00:05:45.624 --> 00:05:50.086
+31st, every month, January to December, and every
+
+105
+00:05:50.148 --> 00:05:52.450
+day of the week, Sunday to Saturday.
+
+106
+00:05:54.730 --> 00:05:56.634
+This simply means run it every minute.
+
+107
+00:05:56.682 --> 00:05:57.978
+What container?
+
+108
+00:05:58.014 --> 00:06:01.010
+You specify container, and this container is running
+
+109
+00:06:01.060 --> 00:06:04.850
+this command and it will run every minute.
+
+110
+00:06:05.170 --> 00:06:07.526
+It's going to start run it, then
+
+111
+00:06:07.588 --> 00:06:08.958
+the next minute and the next minute.
+
+112
+00:06:08.994 --> 00:06:10.142
+Or you can specify I want
+
+113
+00:06:10.156 --> 00:06:11.966
+to run at this particular time.
+
+114
+00:06:12.088 --> 00:06:16.540
+Scheduling for that, you have Cron Job.
+
+115
+00:06:17.470 --> 00:06:20.882
+The difference between Job and Cron Job just runs when
+
+116
+00:06:20.896 --> 00:06:24.160
+you run it and just completes returns the information.
+
+117
+00:06:24.490 --> 00:06:26.798
+Cron Job runs at a specific
+
+118
+00:06:26.944 --> 00:06:30.770
+interval, specific time, like an alarm.
+
+119
+00:06:31.570 --> 00:06:35.390
+Okay, one last thing we'll see is DaemonSet.
+
+120
+00:06:40.370 --> 00:06:43.710
+Now, DaemonSet may sound similar to deployment.
+
+121
+00:06:45.050 --> 00:06:47.730
+It runs a Pod, Pod runs a container.
+
+122
+00:06:48.470 --> 00:06:51.810
+But in deployment, we mentioned a Replica.
+
+123
+00:06:53.450 --> 00:06:55.890
+And DaemonSet will also have Replica, but
+
+124
+00:06:55.940 --> 00:07:00.510
+it is the number of worker nodes.
+
+125
+00:07:00.830 --> 00:07:02.482
+Or you can include the master node.
+
+126
+00:07:02.506 --> 00:07:04.702
+Also, let's say you have four worker nodes.
+
+127
+00:07:04.726 --> 00:07:06.238
+And if you run a Pod with DaemonSet,
+
+128
+00:07:06.274 --> 00:07:09.646
+you'll have four Pod on each worker node.
+
+129
+00:07:09.838 --> 00:07:12.738
+So it says a DaemonSet ensures that all
+
+130
+00:07:12.884 --> 00:07:16.582
+or some nodes run a copy of a Pod.
+
+131
+00:07:16.726 --> 00:07:18.198
+As nodes are added to the
+
+132
+00:07:18.224 --> 00:07:20.034
+cluster, pods are added to them.
+
+133
+00:07:20.072 --> 00:07:21.742
+So if you have four worker
+
+134
+00:07:21.766 --> 00:07:24.174
+node, you have four Pod running.
+
+135
+00:07:24.212 --> 00:07:26.878
+With DaemonSet, you add a fifth worker node.
+
+136
+00:07:26.914 --> 00:07:28.594
+You will have now one more fifth
+
+137
+00:07:28.642 --> 00:07:30.990
+Pod running on the fifth worker node.
+
+138
+00:07:31.310 --> 00:07:36.402
+And if you remove the nodes, the spot which is running
+
+139
+00:07:36.536 --> 00:07:38.960
+from DaemonSet on that node will be also gone.
+
+140
+00:07:39.950 --> 00:07:41.118
+So why do you need this?
+
+141
+00:07:41.144 --> 00:07:42.078
+As I said, these things
+
+142
+00:07:42.104 --> 00:07:43.650
+are mostly administration thing.
+
+143
+00:07:43.700 --> 00:07:44.670
+DaemonSet.
+
+144
+00:07:44.840 --> 00:07:48.850
+We use usually to collect logs or do monitoring
+
+145
+00:07:48.970 --> 00:07:51.634
+of your worker nodes or even master node.
+
+146
+00:07:51.802 --> 00:07:53.394
+And frankly, I have not seen any
+
+147
+00:07:53.432 --> 00:07:55.400
+other use case for DaemonSet.
+
+148
+00:07:56.870 --> 00:07:59.538
+Definitely there will be, but as far as my
+
+149
+00:07:59.564 --> 00:08:02.398
+experience goes, I have used DaemonSet for collecting
+
+150
+00:08:02.434 --> 00:08:07.030
+logs and monitoring nodes and that also not directly.
+
+151
+00:08:07.210 --> 00:08:09.978
+You will have some readymade solutions like
+
+152
+00:08:10.004 --> 00:08:12.618
+Prometheus, Grafana, these things fluentd
+
+153
+00:08:12.644 --> 00:08:16.470
+D, right, which collects logs and metrics.
+
+154
+00:08:16.850 --> 00:08:18.946
+So you will just have readymade manifest definition file.
+
+155
+00:08:18.958 --> 00:08:21.140
+You just run them, they run as a DaemonSet.
+
+156
+00:08:21.830 --> 00:08:23.070
+So let's see.
+
+157
+00:08:23.180 --> 00:08:25.700
+In our cluster, do we have any DaemonSet?
+
+158
+00:08:27.410 --> 00:08:30.330
+I'm going to say kubectl get ds, means
+
+159
+00:08:30.380 --> 00:08:36.010
+domain a means on all the namespaces.
+
+160
+00:08:37.409 --> 00:08:39.490
+Okay, we have two DaemonSet.
+
+161
+00:08:41.549 --> 00:08:43.357
+This is in the cube system namespace.
+
+162
+00:08:43.394 --> 00:08:47.542
+The DaemonSet name is EBS CSI node and it
+
+163
+00:08:47.556 --> 00:09:02.794
+has and this contains three because we have total three,
+
+164
+00:09:02.832 --> 00:09:05.282
+right, master and to work or not, but it depends
+
+165
+00:09:05.306 --> 00:09:08.038
+on how you created a DaemonSet.
+
+166
+00:09:08.184 --> 00:09:11.530
+So we'll see this example in the documentation.
+
+167
+00:09:12.930 --> 00:09:16.790
+For a DaemonSet, the name is fluentd-elasticsearch.
+
+168
+00:09:16.970 --> 00:09:19.070
+Fluentd is to collect logs.
+
+169
+00:09:19.130 --> 00:09:21.298
+As I told you Damon's, it is usually used
+
+170
+00:09:21.324 --> 00:09:26.258
+to collect logs and metrics and monitoring so selector,
+
+171
+00:09:26.354 --> 00:09:31.320
+it has template which contains your Pod information.
+
+172
+00:09:32.490 --> 00:09:36.434
+So label and inspect, inspect.
+
+173
+00:09:36.482 --> 00:09:38.410
+First thing you see is Tolerations.
+
+174
+00:09:39.510 --> 00:09:43.138
+This simply says that if a node has
+
+175
+00:09:43.164 --> 00:09:47.074
+this key, if this key exists, which is
+
+176
+00:09:47.112 --> 00:09:49.870
+this key will be for the master node.
+
+177
+00:09:50.550 --> 00:09:53.854
+Master node will be tainted with this key.
+
+178
+00:09:54.012 --> 00:09:56.722
+If it exists and the effect is no schedule, then
+
+179
+00:09:56.796 --> 00:10:02.014
+you can run this Pod on this master node or
+
+180
+00:10:02.052 --> 00:10:04.800
+a master node that contains this particular key.
+
+181
+00:10:05.250 --> 00:10:07.358
+So it is going to run on master node.
+
+182
+00:10:07.394 --> 00:10:10.418
+Also, if you do not give this, then the Pod
+
+183
+00:10:10.454 --> 00:10:13.622
+will not run on master node by default, master nodes
+
+184
+00:10:13.646 --> 00:10:18.142
+are tainted to not run any Pod on them.
+
+185
+00:10:18.276 --> 00:10:20.074
+If you have toleration, then only
+
+186
+00:10:20.112 --> 00:10:21.206
+it will run on MasterNode.
+
+187
+00:10:21.218 --> 00:10:22.930
+So that's a Toleration.
+
+188
+00:10:23.910 --> 00:10:26.450
+So container flu and D, that's the image.
+
+189
+00:10:26.510 --> 00:10:29.770
+And we are also giving here limits and request.
+
+190
+00:10:30.510 --> 00:10:33.118
+So when you run monitoring logging solution, you
+
+191
+00:10:33.144 --> 00:10:34.954
+don't want it to take up all your
+
+192
+00:10:34.992 --> 00:10:38.242
+resources because the other resources, other workload may
+
+193
+00:10:38.256 --> 00:10:40.006
+be critical, more critical than this.
+
+194
+00:10:40.068 --> 00:10:43.102
+So usually it's limited and it will also
+
+195
+00:10:43.116 --> 00:10:45.070
+have requests because it may need some amount
+
+196
+00:10:45.120 --> 00:10:48.610
+of resource to collect your logs or metrics.
+
+197
+00:10:49.170 --> 00:10:51.118
+So this is a sample DaemonSet.
+
+198
+00:10:51.144 --> 00:10:53.580
+You can just copy it and just simply run it.
+
+199
+00:10:54.330 --> 00:10:55.366
+So let's do that.
+
+200
+00:10:55.428 --> 00:11:06.530
+Let's copy all this, copy sampled
+
+201
+00:11:07.510 --> 00:11:14.070
+YAML and just save and quit.
+
+202
+00:11:15.590 --> 00:11:17.610
+Yeah, I'm not really making any change.
+
+203
+00:11:17.780 --> 00:11:19.520
+kubectl apply.
+
+204
+00:11:24.330 --> 00:11:26.762
+Okay, the DaemonSet got created.
+
+205
+00:11:26.786 --> 00:11:31.630
+Let's say kubectl get DSL.
+
+206
+00:11:32.250 --> 00:11:36.130
+I think it is running in Cube system.
+
+207
+00:11:36.240 --> 00:11:38.940
+And you see it's running three.
+
+208
+00:11:39.690 --> 00:11:42.638
+Two on worker nodes and one on master node.
+
+209
+00:11:42.674 --> 00:11:44.678
+And since we have given Toleration, that's
+
+210
+00:11:44.714 --> 00:11:46.742
+why it's also running on master node.
+
+211
+00:11:46.766 --> 00:11:48.758
+Otherwise, it won't run on master node.
+
+212
+00:11:48.854 --> 00:11:50.246
+If you do not put the Toleration,
+
+213
+00:11:50.318 --> 00:11:52.210
+it won't run on master node.
+
+214
+00:11:53.310 --> 00:12:00.540
+CTL get Pod and Cube System.
+
+215
+00:12:03.430 --> 00:12:03.974
+Okay.
+
+216
+00:12:04.072 --> 00:12:07.082
+You see Pod, there are three pods, but
+
+217
+00:12:07.156 --> 00:12:10.338
+they are running on all the three nodes
+
+218
+00:12:10.374 --> 00:12:13.122
+that they are running on one worker node.
+
+219
+00:12:13.206 --> 00:12:16.430
+DaemonSet will always distribute among the nodes.
+
+220
+00:12:16.870 --> 00:12:18.914
+And it works the same way as deployment here.
+
+221
+00:12:18.952 --> 00:12:21.174
+After, if you try to delete a Pod,
+
+222
+00:12:21.282 --> 00:12:23.526
+the DaemonSet will recreate on that node.
+
+223
+00:12:23.658 --> 00:12:26.920
+If the node is gone, then only the
+
+224
+00:12:27.490 --> 00:12:29.534
+Pod of that DaemonSet will be gone.
+
+225
+00:12:29.572 --> 00:12:31.418
+Otherwise, it will keep running as long as the
+
+226
+00:12:31.444 --> 00:12:34.430
+worker node is running or even master node.
+
+227
+00:12:35.350 --> 00:12:38.094
+So these were some extras. Mostly.
+
+228
+00:12:38.202 --> 00:12:40.986
+This is the administration part of Kubernetes.
+
+229
+00:12:41.058 --> 00:12:43.538
+But I thought you should know them
+
+230
+00:12:43.564 --> 00:12:47.426
+since they are very easy to know. Right. Okay.
+
+231
+00:12:47.488 --> 00:12:48.818
+That is all in this video.
+
+232
+00:12:48.904 --> 00:12:50.480
+I will see you in the next one.

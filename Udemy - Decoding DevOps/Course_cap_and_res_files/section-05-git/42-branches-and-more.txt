@@ -1,0 +1,501 @@
+WEBVTT
+
+0
+00:00.780 --> 00:08.460
+OK, now we are going to talk about branches in git. Branches are a concept where if you have a team
+
+1
+00:08.460 --> 00:13.080
+who are working on different different features, so let's say one developer working on a different
+
+2
+00:13.080 --> 00:16.500
+feature or second developer is working on the second feature.
+
+3
+00:16.980 --> 00:21.520
+And you don't want to disturb this stable copy of the code.
+
+4
+00:21.540 --> 00:24.590
+So let's say you have a branch called as Main.
+
+5
+00:24.720 --> 00:29.880
+Or Master, that is your main branch and that we will keep a stable copy over here.
+
+6
+00:30.240 --> 00:35.190
+If there is any new change that is going to be done by a developer or for a period of time. Like in
+
+7
+00:35.190 --> 00:41.970
+an agile environment, you will have sprints, different iteration, in iteration one or Sprint one.
+
+8
+00:42.510 --> 00:47.850
+You may be developing some set of features and then in sprint two, you'll be developing some other
+
+9
+00:47.850 --> 00:49.650
+features.
+
+10
+00:49.650 --> 00:54.990
+For that period of time, you can create a new branch which will be copy of this existing
+
+11
+00:54.990 --> 00:56.660
+branch, make the changes.
+
+12
+00:56.680 --> 01:00.620
+You can keep making regular changes in that branch, but the main copy will be intact.
+
+13
+01:01.350 --> 01:03.530
+So the main code will be have the stable copy.
+
+14
+01:04.110 --> 01:10.710
+And once all the changes are done or everything is stable on the other sprint branch, you can then
+
+15
+01:10.710 --> 01:12.690
+merge it with the main branch.
+
+16
+01:13.200 --> 01:14.250
+We'll see how that works.
+
+17
+01:14.610 --> 01:16.520
+So for that, we need to create some branches.
+
+18
+01:16.530 --> 01:19.830
+We can do it graphically from GitHub or we can do it locally also.
+
+19
+01:20.370 --> 01:23.520
+So I do it locally because you learn some extra commands.
+
+20
+01:23.820 --> 01:26.130
+So git branch -c.
+
+21
+01:26.130 --> 01:31.950
+Now I am in the main branch and from this I'm going to create a new branch get -c.
+
+22
+01:31.950 --> 01:34.470
+I will name it as Sprint one.
+
+23
+01:36.360 --> 01:41.110
+OK, get branch -a will list all the branches.
+
+24
+01:42.060 --> 01:43.950
+Now I'm going to switch to the other branch.
+
+25
+01:43.950 --> 01:46.260
+Now in Main Branch, I have this data.
+
+26
+01:46.800 --> 01:51.960
+If I switch  git checkout sprint1.
+
+27
+01:54.480 --> 01:58.060
+I will see exactly same data because it's the exact copy of the main branch.
+
+28
+01:58.080 --> 02:04.650
+Think of them as like, main was a folder you copied another folder named sprint one from that.
+
+29
+02:04.680 --> 02:06.240
+So it will have exactly same data.
+
+30
+02:06.570 --> 02:09.140
+But then in sprint one folder, you're going to make changes.
+
+31
+02:09.150 --> 02:12.120
+So in sprint one branch, I'm going to make changes.
+
+32
+02:12.690 --> 02:14.120
+So I'll make some drastic changes.
+
+33
+02:14.120 --> 02:16.960
+So it will be very easy for you to see, very visible.
+
+34
+02:17.580 --> 02:20.510
+So for that, I'm also going to show you a few new commands.
+
+35
+02:20.520 --> 02:23.080
+I'm going to remove some files or rename some files.
+
+36
+02:23.520 --> 02:25.770
+So if you want to remove files.
+
+37
+02:27.090 --> 02:31.920
+You can run your rm command, but that's not a good idea, you should run git rm, so it will
+
+38
+02:31.920 --> 02:32.800
+remove the file.
+
+39
+02:32.940 --> 02:37.500
+Plus, it will also remove it from the index, from the staging area.
+
+40
+02:37.500 --> 02:41.310
+So I will say git rm and I will say saturn3.py
+
+41
+02:41.610 --> 02:45.660
+not 3, lets take
+
+42
+02:47.260 --> 02:54.480
+6.py, 7.py, 8.py, 9.py
+
+43
+02:56.690 --> 02:58.260
+OK, good.
+
+44
+03:00.460 --> 03:01.870
+You can check the status.
+
+45
+03:04.790 --> 03:05.720
+It is telling us to commit.
+
+46
+03:05.920 --> 03:09.010
+That means it has already removed it from the index.
+
+47
+03:10.060 --> 03:18.280
+OK, renaming a file to rename a file, get mv., not just mv. command, get mv. 
+
+48
+03:18.580 --> 03:22.660
+saturn1.py to saturn11.py
+
+49
+03:24.010 --> 03:25.510
+.
+
+50
+03:29.210 --> 03:29.790
+OK.
+
+51
+03:32.930 --> 03:36.630
+I will remove some other files also
+
+52
+03:49.630 --> 03:54.130
+I made some really drastic change to the Sprint branch, so you can easily see the difference.
+
+53
+03:55.180 --> 03:57.550
+OK, now I'm going to say git add .
+
+54
+03:59.050 --> 04:00.670
+git comit
+
+55
+04:03.010 --> 04:06.430
+I will say Jupiter changes.
+
+56
+04:08.650 --> 04:14.200
+git push now the changes are done on the Sprint one branch, not on the main branch.
+
+57
+04:14.470 --> 04:20.260
+So the push is going to be on Origin Sprint1, and that's what Origin is.
+
+58
+04:20.800 --> 04:22.120
+You mention the branch.
+
+59
+04:27.720 --> 04:30.150
+OK, now there should be a new branch in GitHub.
+
+60
+04:35.840 --> 04:38.030
+You can see the Sprint one branch.
+
+61
+04:39.430 --> 04:45.250
+You can create a branch from here, also from Sprint, one may be able to create another branch sprint
+
+62
+04:45.340 --> 04:45.760
+2
+
+63
+04:51.870 --> 04:53.550
+Create sprint2 branch.
+
+64
+04:56.860 --> 04:59.860
+sprint2 is created from Sprint1.
+
+65
+05:01.300 --> 05:05.840
+So it will have exactly the same data as Sprint one for now, but then it will change.
+
+66
+05:05.920 --> 05:08.530
+Let's pull the changes.
+
+67
+05:10.330 --> 05:17.230
+OK, a new branch has pulled let's check out the new branch and git check out Sprint2.
+
+68
+05:20.460 --> 05:22.290
+I'll create some more file here.
+
+69
+05:34.730 --> 05:40.820
+And then again, git add ., git commit
+
+70
+05:46.630 --> 05:47.740
+and git push
+
+71
+05:51.260 --> 05:55.460
+Origin sprint2
+
+72
+05:57.750 --> 06:03.160
+OK, so main, sprint one and sprint2 all are having now different data.
+
+73
+06:04.140 --> 06:09.690
+OK, but everything was started from the main branch, then sprint one branch, then from that sprint
+
+74
+06:09.690 --> 06:13.560
+2 branch. If you want to merge the change back to the main branch.
+
+75
+06:14.200 --> 06:14.480
+Right.
+
+76
+06:14.880 --> 06:19.160
+So I will now, you can use to check out or  I can use.
+
+77
+06:19.160 --> 06:19.860
+Switch also.
+
+78
+06:19.860 --> 06:21.750
+Now switch.
+
+79
+06:21.750 --> 06:22.890
+Sprint one.
+
+80
+06:25.410 --> 06:27.450
+OK, so I'm in Sprint1 branch now.
+
+81
+06:30.480 --> 06:37.080
+And all the changes in Sprint1 I want to merge with the master branch, OK, so I will go
+
+82
+06:37.080 --> 06:38.250
+to the master branch.
+
+83
+06:41.130 --> 06:45.150
+Invalid reference, oh, not master, the name is different now Main.
+
+84
+06:52.340 --> 06:58.490
+Now, I'm in the main branch now if I want to merge, so currently this is the content and I'm going
+
+85
+06:58.490 --> 07:03.410
+to merge, say git merge Sprint1.
+
+86
+07:04.310 --> 07:08.180
+So all the changes from Sprint one branch will be merged into the main branch.
+
+87
+07:15.210 --> 07:18.030
+OK, I have this debug.log, I'm going to remove that.
+
+88
+07:27.210 --> 07:32.970
+OK, this file is really creating problems, I can't even remove it, I'm going to put it into .gitignore file
+
+89
+07:32.970 --> 07:34.260
+.
+
+90
+07:36.590 --> 07:44.200
+.gitignore file is the file where you can place path or extensions of the file that you want
+
+91
+07:44.710 --> 07:49.370
+to ignore, so I'll put their *.log.
+
+92
+07:49.370 --> 07:53.060
+Any file that ends with log should be ignored.
+
+93
+07:53.090 --> 07:55.180
+You can put all the files that you want to ignore.
+
+94
+08:01.850 --> 08:02.810
+git status.
+
+95
+08:05.790 --> 08:12.200
+OK, I'm going to commit and git ignore fileitself, git ignored.
+
+96
+08:22.010 --> 08:27.920
+OK, let me again switch to Sprint1.
+
+97
+08:33.960 --> 08:36.840
+OK, here also I will create the git ignore file.
+
+98
+09:18.690 --> 09:24.180
+OK, now let's switch back again to Main Branch.
+
+99
+09:32.880 --> 09:38.400
+And let's try to merge it now, git merge sprint1.
+
+100
+09:41.590 --> 09:47.350
+OK, really, my this file was opened in Google Chrome, and that's why I was not able to remove it
+
+101
+09:47.350 --> 09:50.230
+or do anything, but now I'm going to remove it.
+
+102
+09:51.910 --> 09:54.580
+Let me check the status, OK.
+
+103
+09:54.670 --> 09:57.450
+Everything is clean, so let's do merge once again.
+
+104
+10:05.150 --> 10:12.500
+OK, so while merging, it is asking us for the commit message or the merge message, sorry, and I'm
+
+105
+10:12.500 --> 10:17.840
+just going to save and quit this, it has created this, it has opened up in vim editor and put some
+
+106
+10:17.840 --> 10:18.770
+content if you want.
+
+107
+10:18.770 --> 10:22.070
+You can update that this is going to be our message for the merge.
+
+108
+10:24.800 --> 10:30.110
+OK, now you should see Main Branch will be as same as the Sprint1 branch.
+
+109
+10:32.420 --> 10:38.600
+All right, now let's check out or switch to Sprint1 branch.
+
+110
+10:41.240 --> 10:43.130
+OK, now both are exactly the same.
+
+111
+10:44.210 --> 10:48.800
+All right, now I am going to remove the entire repository.
+
+112
+10:52.420 --> 10:53.740
+Oh, before I do that.
+
+113
+10:54.920 --> 11:01.070
+Let's get into the repository and push everything, git push.
+
+114
+11:02.710 --> 11:06.370
+Hyphen all origin, so I'm saying push all the branches.
+
+115
+11:13.030 --> 11:20.740
+OK, next, I'm going to remove this repository titanwork it's there on GitHub, so I really don't
+
+116
+11:20.740 --> 11:21.110
+worry.
+
+117
+11:21.130 --> 11:26.200
+I want to show you actually now another command git clone.
+
+118
+11:28.330 --> 11:36.600
+I have now no repository, you're here, my repository is on GitHub, so I can just go to my repository.
+
+119
+11:36.610 --> 11:37.870
+I just need the URL.
+
+120
+11:40.980 --> 11:45.550
+OK, copy the URL, HTTPS URL and say git clone
+
+121
+11:46.830 --> 11:51.270
+Now, if it's a private repository, it may ask you authentication, but since we have already saved
+
+122
+11:51.270 --> 11:54.210
+authentication, so it's not asking again.
+
+123
+11:54.690 --> 11:58.100
+But if it's a public repository, it will not ask any authentication.
+
+124
+11:59.250 --> 12:00.870
+OK, so all the changes pulled.

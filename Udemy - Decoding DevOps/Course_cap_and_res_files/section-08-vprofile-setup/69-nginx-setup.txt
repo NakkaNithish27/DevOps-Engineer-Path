@@ -1,0 +1,400 @@
+WEBVTT
+
+00:00.000 --> 00:03.615
+-: All right, the last service in the stack nginx.
+
+00:03.615 --> 00:04.448
+Now this is pretty simple.
+
+00:04.448 --> 00:06.060
+This just acts like a load balancer.
+
+00:06.060 --> 00:08.040
+It takes the request and just forwards it
+
+00:08.040 --> 00:10.170
+to the Tomcat servers,
+
+00:10.170 --> 00:13.470
+and this will be, web01 will be open to machine.
+
+00:13.470 --> 00:15.390
+So all open to related command.
+
+00:15.390 --> 00:19.380
+So apt Update and apt Upgrade first.
+
+00:19.380 --> 00:23.070
+Update and Upgrade Command are different in Open2.
+
+00:23.070 --> 00:24.810
+Update means it is going to check
+
+00:24.810 --> 00:27.270
+for if there is any update, right?
+
+00:27.270 --> 00:30.600
+And Upgrade Command is going to apply those changes.
+
+00:30.600 --> 00:33.690
+You know, upgrade, actually do the update, right?
+
+00:33.690 --> 00:35.970
+Apt update is just to check.
+
+00:35.970 --> 00:39.907
+It's not going to make any change. Okay?
+
+00:39.907 --> 00:42.270
+And then we install nginx Service apt install nginx
+
+00:42.270 --> 00:46.073
+and we create a configuration file, okay?
+
+00:46.910 --> 00:50.700
+nginx configurations or nginx host can be created
+
+00:50.700 --> 00:53.891
+by creating a file into this location
+
+00:53.891 --> 00:57.270
+etc/nginx/sites-available
+
+00:57.270 --> 01:00.390
+in this location you have to create configuration
+
+01:00.390 --> 01:02.130
+for your host.
+
+01:02.130 --> 01:04.685
+So we just create a file with name vproapp,
+
+01:04.685 --> 01:08.280
+not mandatory, you can give it with any other name,
+
+01:08.280 --> 01:10.500
+but this content matter over here.
+
+01:10.500 --> 01:12.120
+Okay? There's two parts over here.
+
+01:12.120 --> 01:15.960
+This section is server, which says here,
+
+01:15.960 --> 01:20.055
+Listen on Port 80, location/ route.
+
+01:20.055 --> 01:22.620
+That means you know, just the host name.
+
+01:22.620 --> 01:27.300
+There is no, you know, slash any other extra URL after that.
+
+01:27.300 --> 01:29.283
+We'll learn about this in AWS also.
+
+01:30.655 --> 01:33.030
+So this simply means that if the request comes on port 80,
+
+01:33.030 --> 01:35.010
+if somebody's, you know, putting the IP address
+
+01:35.010 --> 01:37.985
+or the host name of this machine
+
+01:37.985 --> 01:42.635
+and access it on port 80, that is from the browser, right?
+
+01:42.635 --> 01:43.935
+HTTP, blah, blah, blah 80.
+
+01:45.545 --> 01:48.692
+Then it says that forward the request at this location.
+
+01:48.692 --> 01:52.090
+So proxy pass. So what is this location? http:vproapp.
+
+01:53.610 --> 01:56.160
+So here's the section we created for vproapp.
+
+01:56.160 --> 01:58.500
+upstream vproapp.
+
+01:58.500 --> 02:03.500
+So that will be the server app01:8080.
+
+02:04.187 --> 02:05.190
+That means it's going to forward the request
+
+02:05.190 --> 02:08.235
+to app zero one on port 8080.
+
+02:08.235 --> 02:10.320
+So this is the configuration.
+
+02:10.320 --> 02:13.050
+We're going to talk about the load balancer stuff in detail
+
+02:13.050 --> 02:15.766
+in AWS for now.
+
+02:15.766 --> 02:16.950
+Just understand this much
+
+02:17.955 --> 02:20.310
+that it takes the request on port 80 and forwards
+
+02:20.310 --> 02:22.929
+the request to app01 Port 8080.
+
+02:22.929 --> 02:26.370
+nginx has a default configuration file
+
+02:26.370 --> 02:28.748
+with this command is going to remove
+
+02:28.748 --> 02:30.120
+that default configuration
+
+02:30.120 --> 02:33.529
+and we are going to create a link, ln-s command.
+
+02:33.529 --> 02:34.979
+We are going to create a link
+
+02:36.870 --> 02:40.170
+of our configuration file at this location.
+
+02:40.170 --> 02:42.210
+Now, when you create this link
+
+02:42.210 --> 02:46.050
+and restart nginx service, your site will be enabled.
+
+02:46.050 --> 02:48.000
+So nginx is going to read everything
+
+02:48.000 --> 02:51.900
+from this sites-enabled folder and activate it.
+
+02:51.900 --> 02:55.560
+Basically activate this configuration and that is it.
+
+02:55.560 --> 02:59.406
+Let's go ahead and do the setup. Let's see.
+
+02:59.406 --> 03:01.233
+Vagrant ssh web01.
+
+03:02.550 --> 03:07.503
+Let's switch to root user, clear the screen apt update.
+
+03:08.970 --> 03:11.481
+I'm going to run both the command together.
+
+03:11.481 --> 03:15.810
+apt update &amp;&amp; apt upgrade.
+
+03:15.810 --> 03:19.200
+So once, right. Upgrade.
+
+03:19.200 --> 03:21.240
+So once the apt update completes
+
+03:21.240 --> 03:23.490
+it is going to then execute the next command,
+
+03:24.441 --> 03:25.654
+which is apt upgrade.
+
+03:25.654 --> 03:28.343
+I'm going to say -y. So it does not ask me any question.
+
+03:30.270 --> 03:33.450
+Okay, this is going to take some time. Alright?
+
+03:33.450 --> 03:36.930
+You might get this screen, just hit a space bar
+
+03:36.930 --> 03:40.170
+just to say, okay, and then we might get this again.
+
+03:40.170 --> 03:44.193
+So just use tab to go to okay and hit space bar.
+
+03:46.140 --> 03:47.670
+Okay, the upgrade is completed.
+
+03:47.670 --> 03:50.673
+It's time to install nginx now.
+
+03:51.600 --> 03:53.823
+apt install nginx -y.
+
+03:55.514 --> 03:58.740
+Okay, nginx is installed. Now let me show you one thing.
+
+03:58.740 --> 04:01.170
+ls/etc/nginx.
+
+04:01.170 --> 04:06.170
+Okay? In this right, you have sites available
+
+04:06.480 --> 04:08.640
+and sites enabled.
+
+04:08.640 --> 04:11.220
+In this, you're going to create the configuration file
+
+04:11.220 --> 04:14.140
+and in this location you're going to create a link
+
+04:15.143 --> 04:16.470
+of that configuration file.
+
+04:16.470 --> 04:17.303
+Okay? So,
+
+04:21.750 --> 04:24.000
+okay, so in sites-available,
+
+04:24.000 --> 04:27.930
+we create a file called vproapp insert mode,
+
+04:27.930 --> 04:30.663
+and then we just copy paste this content.
+
+04:36.450 --> 04:39.153
+Alright? I will make it look little better.
+
+04:40.588 --> 04:42.123
+I'll give some space here.
+
+04:48.900 --> 04:52.203
+Yeah, this looks much better. Let's save and quit.
+
+04:54.000 --> 04:56.559
+Then nginx has a default page.
+
+04:56.559 --> 05:00.240
+We're just going to remove that page. Okay?
+
+05:00.240 --> 05:02.190
+That's the default website of nginx.
+
+05:02.190 --> 05:05.580
+And then we are going to create a link. Alright?
+
+05:05.580 --> 05:07.950
+This is the file that we created.
+
+05:07.950 --> 05:12.783
+We're going to create its link in sites-enabled. Hit Enter.
+
+05:14.340 --> 05:17.193
+All right, and then we are going to restart nginx.
+
+05:18.189 --> 05:20.070
+If everything is good, nginx should restart.
+
+05:20.070 --> 05:22.380
+If there is any problem, you should get some error.
+
+05:22.380 --> 05:25.800
+Or when you check the status, you should see the error.
+
+05:25.800 --> 05:29.090
+Mostly the error will be the wrong configuration.
+
+05:29.090 --> 05:30.965
+Copy paste mistake.
+
+05:30.965 --> 05:33.505
+So if you get any error, make sure you open this file
+
+05:33.505 --> 05:36.744
+and fix those, you know,
+
+05:36.744 --> 05:38.850
+verify with the document if everything is correct,
+
+05:38.850 --> 05:40.764
+and fix those things.
+
+05:40.764 --> 05:42.764
+And then restart nginx servers should work.
+
+05:42.764 --> 05:45.480
+And with that one last command,
+
+05:45.480 --> 05:47.970
+the entire setup is completed.
+
+05:47.970 --> 05:51.060
+You see how quickly the time flew.
+
+05:51.060 --> 05:53.700
+Ah, maybe not so quickly for you,
+
+05:53.700 --> 05:56.460
+but we'll validate everything in the next lecture.
+
+05:56.460 --> 05:59.970
+We'll see our V profile application looks.
+
+05:59.970 --> 06:02.100
+If you have come till this far,
+
+06:02.100 --> 06:04.530
+you've done a really good job.
+
+06:04.530 --> 06:06.480
+You don't need to remember all these commands
+
+06:06.480 --> 06:08.153
+and all the steps.
+
+06:08.153 --> 06:09.360
+You're going to set up this project many times
+
+06:09.360 --> 06:11.910
+in the course and in real time also,
+
+06:11.910 --> 06:13.860
+you don't need to remember the commands,
+
+06:13.860 --> 06:18.420
+we have the documentation, we have Google, Chat GPT.
+
+06:18.420 --> 06:20.610
+You know, if you start remembering everything you know,
+
+06:20.610 --> 06:23.550
+you will overload yourself very quickly.
+
+06:23.550 --> 06:25.590
+So please don't try to memorize anything,
+
+06:25.590 --> 06:27.512
+just go with the flow.
+
+06:27.512 --> 06:28.345
+Just do the setup.
+
+06:28.345 --> 06:30.030
+Again, we are going to do many times in the course,
+
+06:30.030 --> 06:32.640
+so it'll be very easy later for you.
+
+06:32.640 --> 06:35.488
+All right? I know now you will be relaxed
+
+06:35.488 --> 06:36.330
+after hearing all this.
+
+06:36.330 --> 06:39.258
+All right, then join me in the next lecture.
+
+06:39.258 --> 06:40.313
+Let's validate this project.

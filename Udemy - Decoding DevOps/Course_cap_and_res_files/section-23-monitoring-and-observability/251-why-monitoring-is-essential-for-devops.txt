@@ -1,0 +1,112 @@
+WEBVTT
+
+00:00.200 --> 00:03.600
+So why should DevOps bother about monitoring?
+
+00:04.080 --> 00:07.400
+There will be separate monitoring team.
+
+00:07.480 --> 00:12.600
+SOC team or NOC team that will do 24 by seven monitoring.
+
+00:13.000 --> 00:17.720
+And so far, mostly the administration team is responsible in setting up monitoring.
+
+00:18.200 --> 00:20.480
+NOC team will do the monitoring.
+
+00:20.680 --> 00:24.520
+And based on the information NOC team can escalate the issue.
+
+00:25.040 --> 00:30.440
+But in today's time in modern applications, in SRE, they say you build it, you run it.
+
+00:31.080 --> 00:33.880
+Now DevOps own the deployment and reliability.
+
+00:34.240 --> 00:40.120
+So understanding these metrics and logs will help DevOps communicate better with the administration
+
+00:40.120 --> 00:41.960
+team with the NOC team SoC team.
+
+00:42.120 --> 00:44.920
+Automate these deployment process of monitoring.
+
+00:45.120 --> 00:48.120
+Monitoring agents needs to be set up.
+
+00:48.160 --> 00:52.200
+Or the exporters we call it in Prometheus needs to be set up.
+
+00:52.640 --> 00:57.720
+So due to that, it becomes essential for DevOps engineers to understand these concepts.
+
+00:58.360 --> 01:02.920
+The NOC teams watch with DevOps team will decide what is worth watching.
+
+01:03.120 --> 01:10.440
+And now we can automate the process of creating these dashboards, alerts, checks, metrics along with
+
+01:10.440 --> 01:11.720
+the infrastructure setup.
+
+01:11.720 --> 01:15.760
+So that's one more very good reason why DevOps should learn monitoring.
+
+01:16.120 --> 01:23.110
+If something goes wrong, usually the NOC team will escalate to the administration team and now the
+
+01:23.110 --> 01:23.950
+DevOps team.
+
+01:24.390 --> 01:31.070
+So DevOps or SRE can find out the root cause, which will speed up the recovery process with monitoring
+
+01:31.070 --> 01:31.790
+and observability.
+
+01:31.830 --> 01:37.430
+We can collect a lot of information and based on this data, we can decide about auto scaling, different
+
+01:37.430 --> 01:39.870
+kinds of rollout, CI, CD deployments.
+
+01:39.870 --> 01:42.510
+When we do, the feedback will come very quickly.
+
+01:42.830 --> 01:48.630
+So understanding these monitoring tools, observability tools will help DevOps make right decisions
+
+01:48.710 --> 01:52.670
+when to scale, when to scale down or scale out, etc..
+
+01:53.270 --> 01:58.590
+And last but not the least, DevOps is all about collaboration and continuous improvement.
+
+01:58.830 --> 02:04.830
+So this will connect dev team, ops team and NOC team together, which will lead to better performance
+
+02:04.830 --> 02:07.670
+of your application and of course the stability.
+
+02:08.070 --> 02:13.390
+So there are several good reasons for DevOps to learn monitoring and observability.
+
+02:13.870 --> 02:18.910
+But doing 24 by seven monitoring will be the job of NOC SoC team.
+
+02:18.990 --> 02:19.710
+Now finally there.
+
+02:19.710 --> 02:26.070
+Disclaimer this is not a full fledged monitoring and observability course, but as a DevOps engineer,
+
+02:26.070 --> 02:31.630
+you will be equipped with enough knowledge to work with monitoring NOC team and even developers.
+
+02:32.430 --> 02:36.710
+Now let's take a look at the tools that we will be using in this section.
+
+02:37.190 --> 02:38.870
+So wrap this up and join me in the next one.

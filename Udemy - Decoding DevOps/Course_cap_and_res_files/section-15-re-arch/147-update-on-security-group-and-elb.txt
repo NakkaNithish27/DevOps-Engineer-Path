@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00.600 --> 00:02.220
+Instructor: Okay, our Beanstalk environment
+
+00:02.220 --> 00:04.140
+is up and running.
+
+00:04.140 --> 00:05.700
+If you click on this URL,
+
+00:05.700 --> 00:09.003
+we should see the default application hosted by Beanstalk.
+
+00:09.960 --> 00:12.960
+That will be changed by our Vprofile application
+
+00:12.960 --> 00:13.983
+in the next lecture.
+
+00:15.060 --> 00:18.630
+Okay, so by now we have RDS, we have Amazon MQ,
+
+00:18.630 --> 00:20.220
+we have Memcached,
+
+00:20.220 --> 00:22.560
+and we have Beanstalk environment.
+
+00:22.560 --> 00:25.740
+A Vprofile application living in the Beanstalk environment
+
+00:25.740 --> 00:28.140
+needs to connect to backend services,
+
+00:28.140 --> 00:30.030
+and they are in a security group.
+
+00:30.030 --> 00:33.030
+Vprofile backend security group that we created.
+
+00:33.030 --> 00:35.940
+We need to make sure the backend security group rule
+
+00:35.940 --> 00:40.380
+allows connection from the Beanstalk security group.
+
+00:40.380 --> 00:41.763
+So do that in this lecture.
+
+00:42.900 --> 00:46.470
+Okay, so let's take a look in the instances section.
+
+00:46.470 --> 00:48.930
+Okay, so we should have two instances
+
+00:48.930 --> 00:50.640
+running from Beanstalk.
+
+00:50.640 --> 00:53.040
+We should have one auto-scaling group
+
+00:53.040 --> 00:54.660
+that created these instances.
+
+00:54.660 --> 00:56.580
+If we go to the instances,
+
+00:56.580 --> 01:00.183
+if we select any of the instances, Security,
+
+01:01.560 --> 01:03.450
+we see here the security group.
+
+01:03.450 --> 01:06.300
+Let's get the security group ID.
+
+01:06.300 --> 01:08.100
+Let's click on it,
+
+01:08.100 --> 01:11.130
+and copy the security group ID.
+
+01:11.130 --> 01:13.500
+Make sure this is not the load balancer security group.
+
+01:13.500 --> 01:15.480
+If you go to Security Groups,
+
+01:15.480 --> 01:17.340
+you should see here instance security group
+
+01:17.340 --> 01:19.080
+and a load balancer security group.
+
+01:19.080 --> 01:23.430
+So if we need the ID of the instance security group.
+
+01:23.430 --> 01:26.523
+We'll go to the backend security group.
+
+01:28.110 --> 01:29.580
+Select the backend security group,
+
+01:29.580 --> 01:31.470
+make sure it's written here, backend security group.
+
+01:31.470 --> 01:33.003
+Go to its inbound rule.
+
+01:33.870 --> 01:36.720
+Add rule, All traffic.
+
+01:36.720 --> 01:39.960
+Allowed from the Beanstalk security group.
+
+01:39.960 --> 01:41.760
+And Beanstalk instance security group,
+
+01:41.760 --> 01:43.533
+not load balancer security group.
+
+01:44.760 --> 01:45.787
+You can write some description,
+
+01:45.787 --> 01:48.210
+"Allow traffic from Bean instance security group,"
+
+01:48.210 --> 01:51.153
+so you can identify security group rule is for what.
+
+01:52.050 --> 01:54.600
+And say Save rules.
+
+01:54.600 --> 01:57.450
+Okay. I also want you to do one more thing.
+
+01:57.450 --> 02:01.950
+Go to every service, get its endpoint backend services,
+
+02:01.950 --> 02:05.670
+its endpoint, port number, username and password,
+
+02:05.670 --> 02:07.350
+and keep it into a file ready
+
+02:07.350 --> 02:09.270
+that we will need it in the next lecture
+
+02:09.270 --> 02:11.670
+where we'll build the artifact
+
+02:11.670 --> 02:14.280
+and deploy to Beanstalk environment.
+
+02:14.280 --> 02:15.923
+I'll see you in the next lecture.

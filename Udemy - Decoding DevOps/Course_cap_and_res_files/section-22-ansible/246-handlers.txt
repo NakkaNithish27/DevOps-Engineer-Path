@@ -1,0 +1,483 @@
+WEBVTT
+
+00:01.290 --> 00:04.170
+-: Okay. This exercise is about handlers.
+
+00:04.170 --> 00:06.873
+I'm copying exercise 13 to exercise 14.
+
+00:08.490 --> 00:10.080
+Ah, sorry, my bad.
+
+00:10.080 --> 00:13.023
+Exercise 12 to exercise 13.
+
+00:14.850 --> 00:16.713
+Okay, let's get into exercise 13.
+
+00:21.540 --> 00:23.100
+So we already know the problem.
+
+00:23.100 --> 00:24.750
+I am executing the playbook
+
+00:24.750 --> 00:27.843
+and every time it is restarting the service, right.
+
+00:29.490 --> 00:30.720
+Now, we don't want that.
+
+00:30.720 --> 00:34.110
+We want it to only restart the service
+
+00:34.110 --> 00:36.600
+whenever the configuration file is changed.
+
+00:36.600 --> 00:39.450
+Now you can also use 'when' condition for that
+
+00:39.450 --> 00:42.720
+but Ansible gives you a much more better way,
+
+00:42.720 --> 00:43.860
+which is handlers.
+
+00:43.860 --> 00:46.863
+First I'm going to delete this task,
+
+00:47.970 --> 00:52.263
+4dd, this file task, I'm going to bring it up somewhere.
+
+00:54.090 --> 00:56.643
+Yeah, somewhere here.
+Just below this banner.
+
+01:00.330 --> 01:02.550
+Okay. So the reason
+
+01:02.550 --> 01:05.640
+because I wanted to keep this restarted task at the end.
+
+01:05.640 --> 01:08.430
+Now, doing handlers are very, very simple.
+
+01:08.430 --> 01:10.600
+You have the task to restart the service
+
+01:11.670 --> 01:15.540
+and just in the same line, wherever you have tasks
+
+01:15.540 --> 01:18.813
+in the same column, sorry, you have to say handlers.
+
+01:19.980 --> 01:22.560
+Okay? Make sure the handlers are in the same column
+
+01:22.560 --> 01:24.153
+as of the task.
+
+01:25.530 --> 01:28.410
+Yeah. So handlers and task may look same
+
+01:28.410 --> 01:33.410
+but handlers will not get executed until they are notified.
+
+01:33.960 --> 01:35.250
+And how do we notify them?
+
+01:35.250 --> 01:39.810
+Well that will be from the task which wants to execute it.
+
+01:39.810 --> 01:41.580
+So for example,
+
+01:41.580 --> 01:44.340
+whenever the centers configuration file changes,
+
+01:44.340 --> 01:49.340
+then I would like to notify.
+
+01:49.800 --> 01:50.910
+This is what you have to do.
+
+01:50.910 --> 01:53.100
+You have to say notify colon.
+
+01:53.100 --> 01:54.990
+Again, notify should be in the same column
+
+01:54.990 --> 01:56.410
+as the module name
+
+01:57.900 --> 02:01.890
+and you have to give the name of the handler.
+
+02:01.890 --> 02:05.220
+So you have to say hyphen and you have to give the name.
+
+02:05.220 --> 02:06.560
+So this is for CentOS right?
+
+02:06.560 --> 02:08.733
+So let's give the exact same name,
+
+02:09.810 --> 02:12.540
+make sure there's no spelling mistake.
+
+02:12.540 --> 02:14.730
+Now it's in a list format, so you can give
+
+02:14.730 --> 02:17.340
+n number of handlers over here in the list
+
+02:17.340 --> 02:19.590
+but we just want to notify it for one handler
+
+02:19.590 --> 02:22.470
+and this one should be for the other handler, right?
+
+02:22.470 --> 02:24.427
+Let me just copy this one
+
+02:24.427 --> 02:29.427
+2yy and paste it here and change this CentOS to Ubuntu.
+
+02:37.140 --> 02:38.670
+Okay? Make sure the names are correct.
+
+02:38.670 --> 02:42.240
+This is for Ubuntu handler, should have exact same name
+
+02:42.240 --> 02:44.253
+otherwise it'll say handler not found.
+
+02:45.660 --> 02:49.140
+So once again, whenever there is a change in the task.
+
+02:49.140 --> 02:53.160
+Now this is not just about restarting the service, okay?
+
+02:53.160 --> 02:54.960
+It can be used for anything.
+
+02:54.960 --> 02:57.810
+Whenever there is a change in the task,
+
+02:57.810 --> 03:00.960
+you can notify to any handler.
+
+03:00.960 --> 03:03.390
+The handler will get executed only
+
+03:03.390 --> 03:05.190
+when there is a change in the task.
+
+03:05.190 --> 03:07.680
+If the task does not have any change
+
+03:07.680 --> 03:09.060
+you know there is json value, right?
+
+03:09.060 --> 03:11.310
+Changed true, changed false.
+
+03:11.310 --> 03:13.530
+So it's going to read that one.
+
+03:13.530 --> 03:15.810
+So whenever changed value is true
+
+03:15.810 --> 03:18.450
+then only it is going to notify the handler
+
+03:18.450 --> 03:20.550
+and handler will get executed.
+
+03:20.550 --> 03:22.260
+When the changed value is false
+
+03:22.260 --> 03:24.663
+it is not going to notify, simple.
+
+03:25.620 --> 03:27.120
+So let's test this.
+
+03:27.120 --> 03:30.120
+Now we have not made any change to the files.
+
+03:30.120 --> 03:31.380
+So what do you think?
+
+03:31.380 --> 03:34.260
+What's going to happen?
+Will the handler get executed?
+
+03:34.260 --> 03:35.463
+Let's check that.
+
+03:36.750 --> 03:40.410
+If your answer is yes, you're right.
+
+03:40.410 --> 03:42.420
+The handler will not be called
+
+03:42.420 --> 03:45.000
+because we have not made any change to the source
+
+03:45.000 --> 03:46.383
+or the destination file.
+
+03:49.050 --> 03:51.300
+Okay? You see deploy and ntp configuration file.
+
+03:51.300 --> 03:52.800
+So state is ok, ok, ok.
+
+03:52.800 --> 03:54.870
+So you see no handler was called.
+
+03:54.870 --> 03:57.030
+But let's make some change.
+
+03:57.030 --> 03:59.340
+Let's make change to any one file.
+
+03:59.340 --> 04:01.350
+Let's do it for CentOS.
+
+04:01.350 --> 04:03.090
+So only CentOS handler will be called.
+
+04:03.090 --> 04:04.440
+So we'll not make any actual change.
+
+04:04.440 --> 04:06.660
+We'll just put some hash, right,
+
+04:06.660 --> 04:10.350
+which anyways is comment or any space or anything, okay?
+
+04:10.350 --> 04:13.233
+Just don't change the actual configuration content.
+
+04:14.580 --> 04:18.480
+So make, you know, give some space or put some hash.
+
+04:18.480 --> 04:19.800
+Let's execute the playbook.
+
+04:19.800 --> 04:22.350
+So we may change only to CentOS configuration file.
+
+04:22.350 --> 04:23.183
+Let's see now.
+
+04:25.320 --> 04:28.350
+Okay, so the configuration is changed
+
+04:28.350 --> 04:29.970
+and the handler is executing.
+
+04:29.970 --> 04:31.920
+That is only for CentOS.
+
+04:31.920 --> 04:34.920
+You can test same for Ubuntu or both.
+
+04:34.920 --> 04:36.960
+You can change source or destination anything.
+
+04:36.960 --> 04:39.060
+Whenever there is a difference in both the files
+
+04:39.060 --> 04:40.230
+it is going to push the file
+
+04:40.230 --> 04:42.093
+and the handler will get executed.
+
+04:43.710 --> 04:45.690
+Now, from my own experience
+
+04:45.690 --> 04:47.580
+being a DevOps engineer from a long time,
+
+04:47.580 --> 04:49.440
+we use template module a lot
+
+04:49.440 --> 04:51.240
+and along with template we use handler.
+
+04:51.240 --> 04:54.750
+It's a very common or very general combination,
+
+04:54.750 --> 04:56.730
+templates and handler for configuration files,
+
+04:56.730 --> 04:57.810
+simple as that, right?
+
+04:57.810 --> 05:00.780
+By default, but obviously based on the requirement
+
+05:00.780 --> 05:03.810
+we can use different modules also instead of template.
+
+05:03.810 --> 05:07.530
+But in general for configuration, we use templates, module
+
+05:07.530 --> 05:10.440
+and then we obviously need to restart the service,
+
+05:10.440 --> 05:12.270
+so is handlers.
+
+05:12.270 --> 05:15.180
+Once again, handler is not only for restarting service
+
+05:15.180 --> 05:17.940
+you can give any task over there.
+
+05:17.940 --> 05:21.630
+Let's say you want to add a user when the user is created
+
+05:21.630 --> 05:23.370
+then you want to push some file content
+
+05:23.370 --> 05:25.920
+to the user's home directory, right?
+
+05:25.920 --> 05:30.480
+So you can give the task as user, which creates the user
+
+05:30.480 --> 05:33.570
+and the handler will be copied to copy some files
+
+05:33.570 --> 05:34.650
+or anything like that.
+
+05:34.650 --> 05:37.650
+Just giving you a random example, right?
+
+05:37.650 --> 05:39.390
+Because generally whenever people see this
+
+05:39.390 --> 05:41.850
+they think handler is to restart service.
+
+05:41.850 --> 05:43.950
+That's not the right answer.
+
+05:43.950 --> 05:47.640
+Handlers will be mostly in an dormant state, right?
+
+05:47.640 --> 05:51.660
+Whenever there is a work, like you see in Hollywood movies
+
+05:51.660 --> 05:53.040
+you know we have agents, right?
+
+05:53.040 --> 05:56.640
+They handlers CI handlers, NSA handlers, right?
+
+05:56.640 --> 05:58.560
+We've seen those in the movies.
+
+05:58.560 --> 06:00.150
+Right, so they will be in a dormant state
+
+06:00.150 --> 06:01.650
+whenever there is a requirement,
+
+06:01.650 --> 06:04.350
+they will be notified, right?
+
+06:04.350 --> 06:06.810
+If you've seen Jason Bond movies like that
+
+06:06.810 --> 06:08.040
+and they get notification
+
+06:08.040 --> 06:10.590
+and then they execute their task like that.
+
+06:10.590 --> 06:13.410
+Handlers here, we keep them dormant state.
+
+06:13.410 --> 06:16.983
+Whenever the notification is sent, they execute the task.
+
+06:18.340 --> 06:21.093
+Let's take a look at the documentation of handlers.
+
+06:22.080 --> 06:24.510
+Okay, the page has moved, anyways.
+
+06:24.510 --> 06:27.060
+Running operations on change.
+
+06:27.060 --> 06:29.010
+Let's click on that link.
+
+06:29.010 --> 06:30.360
+Okay, let's look at the example.
+
+06:30.360 --> 06:32.760
+So see that template module, right?
+
+06:32.760 --> 06:33.960
+Pushing some configuration,
+
+06:33.960 --> 06:36.630
+notify to this handler, restart Apache
+
+06:36.630 --> 06:38.880
+and here you have the handler.
+
+06:38.880 --> 06:41.490
+Okay? Example of calling multiple handlers.
+
+06:41.490 --> 06:44.970
+See that, you can call multiple handlers, right?
+
+06:44.970 --> 06:47.790
+Maybe for a configuration file you need to restart a service
+
+06:47.790 --> 06:52.080
+and that restart requires restart of another service also.
+
+06:52.080 --> 06:55.470
+Right? Like that. Okay?
+
+06:55.470 --> 06:58.380
+Naming handlers, we have to give proper names.
+
+06:58.380 --> 07:01.680
+Controlling handlers, using variables in handlers.
+
+07:01.680 --> 07:03.750
+Handlers in roles, roles, yes.
+
+07:03.750 --> 07:07.080
+That's what we will be looking in the next lecture,
+
+07:07.080 --> 07:08.550
+we'll be talking about roles.
+
+07:08.550 --> 07:12.390
+So most of the time it's same, the handlers
+
+07:12.390 --> 07:15.180
+if you use in roles or in normal playbook.
+
+07:15.180 --> 07:19.140
+Anyways, we'll be looking at roles in the next lecture.
+
+07:19.140 --> 07:21.270
+So test all those things.
+
+07:21.270 --> 07:24.480
+Wrap this up and join me in the next lecture
+
+07:24.480 --> 07:26.943
+and see for yourself what are roles.

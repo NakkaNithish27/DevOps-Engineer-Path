@@ -1,0 +1,601 @@
+WEBVTT
+
+00:00.125 --> 00:02.708
+(upbeat music)
+
+00:11.370 --> 00:13.710
+Imran: Welcome to the project.
+
+00:13.710 --> 00:16.859
+This project is about containerization.
+
+00:16.859 --> 00:18.030
+We're going to see in this project
+
+00:18.030 --> 00:21.183
+how we can containerize an existing application.
+
+00:22.590 --> 00:24.450
+But first I will talk about
+
+00:24.450 --> 00:26.880
+when you should really start containerizing
+
+00:26.880 --> 00:29.970
+or when you should use any container technology.
+
+00:29.970 --> 00:32.250
+What are the real use cases for that?
+
+00:32.250 --> 00:35.280
+And I'd also inspire you based on the statistics
+
+00:35.280 --> 00:37.053
+that we have in the current market.
+
+00:38.070 --> 00:40.020
+So let's understand the scenario first.
+
+00:42.300 --> 00:45.330
+So, let's say you have a multi-tier application stack
+
+00:45.330 --> 00:48.750
+or you have many, many services in an application stack
+
+00:48.750 --> 00:53.493
+that you manage as an operations team or as DevOps team.
+
+00:54.330 --> 00:57.570
+And these services are running on VM.
+
+00:57.570 --> 01:01.410
+It could be VMs of the VMware environment
+
+01:01.410 --> 01:03.960
+or it could be cloud environment,
+
+01:03.960 --> 01:06.750
+like EC2 instances on AWS cloud,
+
+01:06.750 --> 01:08.760
+or could be you're running on physical machines
+
+01:08.760 --> 01:10.260
+in your own data center.
+
+01:10.260 --> 01:12.843
+Point is you're running it on operating systems.
+
+01:14.220 --> 01:16.980
+And as today's trend Agile,
+
+01:16.980 --> 01:20.643
+we need to do continuous deployment for any changes,
+
+01:21.900 --> 01:24.930
+or not any changes, many changes.
+
+01:24.930 --> 01:27.630
+And there are continuous changes in today's time
+
+01:27.630 --> 01:29.280
+and we continuously do the,
+
+01:29.280 --> 01:32.103
+we continuously continuously need to do the deployments.
+
+01:33.150 --> 01:36.063
+Okay, let's see problems with this scenario.
+
+01:40.380 --> 01:43.650
+Okay, first is we have to spend a lot of money.
+
+01:43.650 --> 01:46.020
+We have to either procure the resource
+
+01:46.020 --> 01:48.840
+or even if you are doing it on cloud platform,
+
+01:48.840 --> 01:50.940
+this regular operational expenditure,
+
+01:50.940 --> 01:53.340
+you have regular bills you have,
+
+01:53.340 --> 01:55.830
+and it's not just about spending.
+
+01:55.830 --> 01:59.490
+Are we really re using all those resources or not?
+
+01:59.490 --> 02:00.323
+If you're running,
+
+02:00.323 --> 02:03.180
+let's say an application service or a web service
+
+02:03.180 --> 02:05.520
+and it is having 10 GB of RAM,
+
+02:05.520 --> 02:10.020
+is it really using 10 GB of RAM, like overall?
+
+02:10.020 --> 02:13.170
+Or if you take an average of an entire year,
+
+02:13.170 --> 02:16.200
+you'll find out how much resource wastage is there.
+
+02:16.200 --> 02:20.010
+And that resource wastage is very expensive.
+
+02:20.010 --> 02:21.840
+So we are spending a lot
+
+02:21.840 --> 02:25.320
+to set up our multi-tier application stack.
+
+02:25.320 --> 02:26.940
+Also, when we are doing deployments,
+
+02:26.940 --> 02:29.910
+there are always chance of making human errors.
+
+02:29.910 --> 02:33.240
+Automation can save that a lot, but then again,
+
+02:33.240 --> 02:35.340
+you would be having different kinds of environment,
+
+02:35.340 --> 02:36.990
+dev, QA staging, production,
+
+02:36.990 --> 02:39.210
+and they will be having different versions,
+
+02:39.210 --> 02:42.150
+different, they would not be in sync.
+
+02:42.150 --> 02:45.480
+And the time is today of microservice architecture.
+
+02:45.480 --> 02:48.030
+If you want to use microservice architecture
+
+02:48.030 --> 02:50.490
+and implement on OSS
+
+02:50.490 --> 02:51.990
+directly running on the virtual machine,
+
+02:51.990 --> 02:54.360
+then you will end up spending a lot of money
+
+02:54.360 --> 02:57.594
+because in microservice you have multiple substack
+
+02:57.594 --> 02:59.070
+in a stack.
+
+02:59.070 --> 03:02.250
+And the point is, we are not using all that resources.
+
+03:02.250 --> 03:04.383
+Mostly there'll be resource wastages.
+
+03:05.970 --> 03:09.090
+Also, our environments are not in sync
+
+03:09.090 --> 03:12.540
+and because of that reason our application is not portable.
+
+03:12.540 --> 03:13.920
+If it works on dev,
+
+03:13.920 --> 03:16.890
+there are chances it'll fail on QA environment.
+
+03:16.890 --> 03:19.380
+If it works on QA, there are chances it may fail
+
+03:19.380 --> 03:20.680
+on production environment.
+
+03:27.270 --> 03:30.900
+Containers are really the solution that we are looking for.
+
+03:30.900 --> 03:32.970
+If you can containerize an application,
+
+03:32.970 --> 03:34.710
+then you can save a lot of money
+
+03:34.710 --> 03:38.620
+because containers uses very less resource
+
+03:39.810 --> 03:42.690
+because there are no operating systems in that.
+
+03:42.690 --> 03:45.390
+And if you're using low resources, then you can,
+
+03:45.390 --> 03:48.693
+it's very much suitable for a microservice architecture.
+
+03:51.060 --> 03:53.223
+So we don't have to spend a lot of money.
+
+03:55.170 --> 03:59.553
+In containers, deployments are done via images.
+
+04:02.490 --> 04:04.410
+So if you package your images properly
+
+04:04.410 --> 04:06.570
+with all the dependencies, all the binaries,
+
+04:06.570 --> 04:08.520
+all the libraries necessary,
+
+04:08.520 --> 04:10.500
+then if it works on your laptop,
+
+04:10.500 --> 04:12.720
+it's going to work on a QA environment.
+
+04:12.720 --> 04:14.040
+The same thing is going to be working
+
+04:14.040 --> 04:15.960
+on production environment
+
+04:15.960 --> 04:18.090
+because we have same container image
+
+04:18.090 --> 04:20.193
+across all our environments.
+
+04:22.680 --> 04:26.580
+And that should also make our stack reusable.
+
+04:26.580 --> 04:29.310
+We can use the same stack across multiple environments.
+
+04:29.310 --> 04:30.143
+It's repeatable.
+
+04:30.143 --> 04:33.930
+We can very quickly imitate our stack from production
+
+04:33.930 --> 04:36.120
+to QV or QA to production.
+
+04:36.120 --> 04:38.220
+Okay, so that remains benefit that we get
+
+04:38.220 --> 04:40.920
+if you are containerizing your application.
+
+04:40.920 --> 04:42.530
+Let's see some statistics.
+
+04:51.060 --> 04:53.910
+Statistics over here are to inspire you really.
+
+04:53.910 --> 04:58.710
+The 50% of the IT organization have already made
+
+04:58.710 --> 05:01.890
+half of their application containers
+
+05:01.890 --> 05:04.530
+or they containerized half of their application,
+
+05:04.530 --> 05:05.940
+you can say.
+
+05:05.940 --> 05:08.340
+And 50% today is a huge number.
+
+05:08.340 --> 05:11.670
+And 29% out of them are running it,
+
+05:11.670 --> 05:13.840
+running containers for production.
+
+05:13.840 --> 05:17.070
+Okay? The production size, the production applications
+
+05:17.070 --> 05:19.350
+are powered by containers.
+
+05:19.350 --> 05:21.210
+If you're a heavy cloud user
+
+05:21.210 --> 05:24.180
+then you should know 78% of those people
+
+05:24.180 --> 05:27.003
+are using AWS platform to run their containers.
+
+05:28.533 --> 05:31.320
+If you are DevOps, then it's automatically assumed
+
+05:31.320 --> 05:34.110
+by 81% of the organization
+
+05:34.110 --> 05:37.080
+that you would be containerizing the application
+
+05:37.080 --> 05:39.450
+or managing the containers.
+
+05:39.450 --> 05:42.093
+So being DevOps, it directly affects us.
+
+05:43.800 --> 05:46.890
+So let's see the tools that we are going to use
+
+05:46.890 --> 05:49.473
+in this project to containerize our application.
+
+05:52.890 --> 05:55.050
+So we are going to use a Docker
+
+05:55.050 --> 05:58.650
+as our container runtime environment to build images.
+
+05:58.650 --> 06:00.063
+And we are going to containerize
+
+06:00.063 --> 06:02.313
+our VProfile application stack.
+
+06:03.150 --> 06:05.610
+In our very first projects,
+
+06:05.610 --> 06:07.800
+where we have seen how to set up this stack
+
+06:07.800 --> 06:08.910
+on virtual machines,
+
+06:08.910 --> 06:12.630
+then we have also seen how we can run it on AWS cloud
+
+06:12.630 --> 06:15.569
+by using lift and shift and rearchitecture.
+
+06:15.569 --> 06:17.970
+The same VProfile application stack,
+
+06:17.970 --> 06:20.070
+we have multiple services:
+
+06:20.070 --> 06:24.000
+nginx, TomCat, MySQL, MemCached, RabbitMQ.
+
+06:24.000 --> 06:25.740
+So this is the existing application.
+
+06:25.740 --> 06:27.630
+We are going to containerize this application
+
+06:27.630 --> 06:29.940
+and run on Docker containers.
+
+06:29.940 --> 06:31.590
+When I say Docker is a tool,
+
+06:31.590 --> 06:33.690
+we are not going to just use the Docker engine.
+
+06:33.690 --> 06:36.600
+There will be Docker Compose and Docker Hub as well
+
+06:36.600 --> 06:38.340
+to host our images.
+
+06:38.340 --> 06:40.640
+Let's see the steps that we are going to take.
+
+06:44.640 --> 06:47.370
+So you should be aware about the steps
+
+06:47.370 --> 06:50.160
+to set up our VProfile stack.
+
+06:50.160 --> 06:54.180
+And for that you can go and check again our first project
+
+06:54.180 --> 06:57.510
+where we are setting up VProfile application manually
+
+06:57.510 --> 06:59.850
+on virtual machines.
+
+06:59.850 --> 07:00.990
+Once we know that,
+
+07:00.990 --> 07:04.860
+then we'll find the right base images from Docker Hub
+
+07:04.860 --> 07:06.660
+for all the services that we using
+
+07:06.660 --> 07:10.230
+nginx, TomCat, MySQL, MemCached, and RabbitMQ.
+
+07:10.230 --> 07:12.000
+Once we find the right base image,
+
+07:12.000 --> 07:14.350
+then we are going to write a Docker file
+
+07:15.840 --> 07:18.150
+for the services that we need customization.
+
+07:18.150 --> 07:20.220
+Like, for example, TomCat,
+
+07:20.220 --> 07:22.290
+we're going to deploy our artifact inside that.
+
+07:22.290 --> 07:24.180
+So that needs customization.
+
+07:24.180 --> 07:27.240
+Nginx, we need some our own configuration changes.
+
+07:27.240 --> 07:30.480
+For MySQL we need to have our own data,
+
+07:30.480 --> 07:31.950
+our own table, our own schema.
+
+07:31.950 --> 07:36.030
+So we'll figure out which service will need customization
+
+07:36.030 --> 07:38.490
+and we are going to write Docker file for it.
+
+07:38.490 --> 07:41.460
+And with that we are going to build the image then.
+
+07:41.460 --> 07:43.410
+Once we have the image ready,
+
+07:43.410 --> 07:47.910
+we're going to use Docker to test all our containers.
+
+07:47.910 --> 07:49.800
+So we have a multi-container environment.
+
+07:49.800 --> 07:54.780
+We have nginx, TomCat, MemCached, RabbitMQ, MySQL.
+
+07:54.780 --> 07:57.450
+So we are going to write a Docker Compose file
+
+07:57.450 --> 07:59.790
+which will launch all these containers together
+
+07:59.790 --> 08:01.593
+from the image that we have built.
+
+08:03.030 --> 08:06.930
+Once we have that, we are going to test it.
+
+08:06.930 --> 08:08.370
+If everything checks out fine,
+
+08:08.370 --> 08:10.680
+then we are going to host our images on Docker Hub.
+
+08:10.680 --> 08:12.633
+So we'll push our images on Docker Hub.
+
+08:16.440 --> 08:18.690
+Okay then, let's get started.
+
+08:18.690 --> 08:22.140
+Let's do containerization using Docker.
+
+08:22.140 --> 08:25.140
+But before that, let's see the architectural design.
+
+08:25.140 --> 08:28.020
+So first we are going to fetch in our source code
+
+08:28.020 --> 08:29.620
+from our Git repository
+
+08:31.110 --> 08:35.280
+and we are going to do the entire Docker workflow.
+
+08:35.280 --> 08:37.110
+First we are going to write Dockerfile
+
+08:38.160 --> 08:40.770
+for the services that needs customization.
+
+08:40.770 --> 08:43.770
+So we have nginx, TomCat, and MySQL.
+
+08:43.770 --> 08:46.710
+So we have to write three Dockerfiles.
+
+08:46.710 --> 08:49.050
+Once we have written Dockerfile in our source code,
+
+08:49.050 --> 08:51.900
+then we are going to use a Docker Build command
+
+08:51.900 --> 08:54.780
+which will get executed on our Docker engine.
+
+08:54.780 --> 08:57.180
+In our Dockerfile, we should have mentioned the base image.
+
+08:57.180 --> 09:00.603
+This base images will be pulled from Docker Hub.
+
+09:01.800 --> 09:04.620
+So TomCat, nginx, and MySQL, these are three images
+
+09:04.620 --> 09:06.873
+that we're going to pull and customize them.
+
+09:09.570 --> 09:13.080
+So Docker Build command is going to read the Dockerfile,
+
+09:13.080 --> 09:14.790
+build our image.
+
+09:14.790 --> 09:16.470
+Once our images are ready,
+
+09:16.470 --> 09:19.230
+we're going to use a Docker Compose.
+
+09:19.230 --> 09:22.620
+We'll mention all the containers with the images
+
+09:22.620 --> 09:24.270
+and then we are going to test it.
+
+09:25.410 --> 09:27.360
+Once it checks out fine,
+
+09:27.360 --> 09:29.880
+then we are going to push our Docker images,
+
+09:29.880 --> 09:32.070
+the customized Docker images,
+
+09:32.070 --> 09:34.413
+to Docker Hub in our own account.
+
+09:35.513 --> 09:38.190
+So that's the entire Docker workflow
+
+09:38.190 --> 09:39.390
+that we are going to do.
+
+09:40.230 --> 09:42.210
+To do this, you should have basic understanding
+
+09:42.210 --> 09:46.290
+of what is a container, what is Docker, how it works,
+
+09:46.290 --> 09:50.070
+and you should have some hands-on experience with Docker,
+
+09:50.070 --> 09:52.890
+like how to run a Docker container
+
+09:52.890 --> 09:55.680
+and very, very basic things of Docker's.
+
+09:55.680 --> 09:58.893
+So if you're done here, join me in the exercise.

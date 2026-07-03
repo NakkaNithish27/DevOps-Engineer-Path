@@ -1,0 +1,437 @@
+WEBVTT
+
+1
+00:00:00.790 --> 00:00:01.830
+Hello and welcome.
+
+2
+00:00:01.940 --> 00:00:05.310
+In this lecture we will talk about namespaces,
+
+3
+00:00:05.930 --> 00:00:09.810
+how you can group or isolate your resources.
+
+4
+00:00:13.470 --> 00:00:17.222
+Kubernetes Cluster can have multiple namespaces.
+
+5
+00:00:17.366 --> 00:00:20.662
+These namespaces will be used to set
+
+6
+00:00:20.856 --> 00:00:26.530
+various kinds of securities, quotas and few
+
+7
+00:00:26.580 --> 00:00:29.230
+other things to your resources.
+
+8
+00:00:30.090 --> 00:00:33.946
+We have a namespace called Default and then
+
+9
+00:00:34.068 --> 00:00:36.254
+we can see few other namespaces like kube
+
+10
+00:00:36.302 --> 00:00:39.170
+System, kube Public when we create the cluster,
+
+11
+00:00:39.230 --> 00:00:42.070
+these namespaces gets created automatically.
+
+12
+00:00:42.450 --> 00:00:45.442
+But if you want we can add more namespaces and we
+
+13
+00:00:45.456 --> 00:00:49.740
+can select our resource gets created in which namespace.
+
+14
+00:00:50.070 --> 00:00:51.854
+So if you run the command kubectl
+
+15
+00:00:51.902 --> 00:00:57.298
+get namespaces, you can see existing namespace, but
+
+16
+00:00:57.324 --> 00:00:59.630
+if you wish you can create more namespace.
+
+17
+00:00:59.690 --> 00:01:02.146
+For example, for your development environment, you
+
+18
+00:01:02.148 --> 00:01:04.214
+can create a different namespace for production,
+
+19
+00:01:04.262 --> 00:01:06.958
+you can create a different namespace and
+
+20
+00:01:06.984 --> 00:01:09.538
+you can isolate your environments like this.
+
+21
+00:01:09.684 --> 00:01:10.990
+You can also create different
+
+22
+00:01:11.040 --> 00:01:13.270
+namespaces for different projects.
+
+23
+00:01:14.250 --> 00:01:16.562
+Let's see from the documentation
+
+24
+00:01:16.646 --> 00:01:19.680
+what does namespaces really mean?
+
+25
+00:01:21.390 --> 00:01:26.354
+Namespaces provides a mechanism for isolating groups
+
+26
+00:01:26.462 --> 00:01:29.350
+of resources within a single cluster.
+
+27
+00:01:30.450 --> 00:01:32.602
+Names of resources needs to
+
+28
+00:01:32.616 --> 00:01:34.910
+be unique within a namespace.
+
+29
+00:01:35.030 --> 00:01:39.178
+So let's say you have a pod named NGINX one, you
+
+30
+00:01:39.204 --> 00:01:43.234
+cannot have one more pod with the same name, but in
+
+31
+00:01:43.272 --> 00:01:46.920
+another namespace you can have pod with the same name.
+
+32
+00:01:48.150 --> 00:01:50.542
+So once again, names of the resource needs to
+
+33
+00:01:50.556 --> 00:01:54.370
+be unique within namespace, but not across namespaces.
+
+34
+00:01:54.990 --> 00:01:58.210
+And when should you really use multiple namespaces?
+
+35
+00:01:58.950 --> 00:02:00.650
+I have seen for small environments
+
+36
+00:02:00.710 --> 00:02:03.010
+people don't even care about namespaces.
+
+37
+00:02:04.590 --> 00:02:07.570
+They create most of the thing in default namespace.
+
+38
+00:02:08.070 --> 00:02:10.594
+But when you have many users and you have
+
+39
+00:02:10.692 --> 00:02:13.966
+multiple projects or multiple environments you want to manage
+
+40
+00:02:14.028 --> 00:02:17.590
+it's better to create namespaces and group your resources.
+
+41
+00:02:18.930 --> 00:02:20.578
+One quick thing I want to tell you from
+
+42
+00:02:20.604 --> 00:02:23.198
+my own experience, when you create your own namespace,
+
+43
+00:02:23.234 --> 00:02:25.718
+it's really easy to delete the entire namespace.
+
+44
+00:02:25.754 --> 00:02:27.502
+I mean all the resources you
+
+45
+00:02:27.516 --> 00:02:28.718
+can just delete the namespace.
+
+46
+00:02:28.754 --> 00:02:30.574
+It removes everything from that
+
+47
+00:02:30.612 --> 00:02:33.254
+namespace just in one command.
+
+48
+00:02:33.422 --> 00:02:35.890
+I know that's dangerous, but
+
+49
+00:02:35.940 --> 00:02:38.830
+it's also usable or useful.
+
+50
+00:02:40.410 --> 00:02:44.690
+Okay, let's check kubectl get NS.
+
+51
+00:02:44.750 --> 00:02:46.630
+That's the shot for namespace.
+
+52
+00:02:48.690 --> 00:02:51.758
+So I have a default node lease
+
+53
+00:02:51.854 --> 00:02:55.020
+kube system, kube public kube system.
+
+54
+00:02:55.830 --> 00:03:01.882
+If I say kubectl get all, it's going to
+
+55
+00:03:01.896 --> 00:03:05.834
+show me all the objects in my default namespace.
+
+56
+00:03:05.882 --> 00:03:08.530
+By default it uses default namespace.
+
+57
+00:03:09.150 --> 00:03:11.520
+So let's see, what do we have?
+
+58
+00:03:11.970 --> 00:03:14.542
+Okay, so I have one pod and one service.
+
+59
+00:03:14.616 --> 00:03:16.922
+Now this is the service I have not created.
+
+60
+00:03:17.006 --> 00:03:19.138
+It's already created but this was the
+
+61
+00:03:19.164 --> 00:03:21.310
+pod that we had created previously.
+
+62
+00:03:21.690 --> 00:03:31.166
+If I say kubectl get all namespaces, it's going
+
+63
+00:03:31.168 --> 00:03:34.026
+to show all the resources from all the namespaces
+
+64
+00:03:34.158 --> 00:03:35.860
+and that's going to be a lot of information.
+
+65
+00:03:36.970 --> 00:03:40.622
+Yeah, there you see, so we have in kube system
+
+66
+00:03:40.696 --> 00:03:46.418
+namespace, we have Replica Set deployment Daemon Set service.
+
+67
+00:03:46.504 --> 00:03:51.042
+This is in default and kube system, different pods.
+
+68
+00:03:51.126 --> 00:03:54.654
+So you see pods are really in default and kube
+
+69
+00:03:54.702 --> 00:03:59.582
+system namespace you see there at CD manager at city
+
+70
+00:03:59.656 --> 00:04:02.858
+that is also a pod you see cops controller that
+
+71
+00:04:02.884 --> 00:04:06.806
+is also pod proxy is also pod scheduler is also
+
+72
+00:04:06.868 --> 00:04:09.926
+pod so in kube system namespace you have all your
+
+73
+00:04:10.108 --> 00:04:14.630
+control plane resources and they run as a pod.
+
+74
+00:04:15.010 --> 00:04:18.218
+Let's clear the screen okay but if I want to
+
+75
+00:04:18.244 --> 00:04:20.618
+look it from a specific namespace I can say for
+
+76
+00:04:20.644 --> 00:04:27.338
+example if it's a kubectl get SVC services from the
+
+77
+00:04:27.364 --> 00:04:34.938
+namespace kube hyphen system that's only from kube system namespace
+
+78
+00:04:34.974 --> 00:04:37.866
+and when also I'm creating an object I can specify
+
+79
+00:04:37.938 --> 00:04:41.990
+namespace but I will create my own namespace now kubectl
+
+80
+00:04:42.610 --> 00:04:54.286
+create NS kubekart, thats the namespace name I'm giving and I'm
+
+81
+00:04:54.298 --> 00:04:59.382
+going to run a pod in that kubectl run I
+
+82
+00:04:59.396 --> 00:05:20.798
+will say nginx now I have the pod with the
+
+83
+00:05:20.824 --> 00:05:26.042
+same name but in different namespace it created but if
+
+84
+00:05:26.056 --> 00:05:31.190
+I try to do once again this see already exists
+
+85
+00:05:31.690 --> 00:05:37.880
+but if I specify different namespace then it will work.
+
+86
+00:05:39.770 --> 00:05:41.362
+Okay in the definition file
+
+87
+00:05:41.386 --> 00:05:43.350
+how do you specify namespace?
+
+88
+00:05:44.390 --> 00:05:48.238
+So I'm in my cops VM here I have created previously
+
+89
+00:05:48.274 --> 00:05:51.918
+this definition file let me open that and if I want
+
+90
+00:05:51.944 --> 00:05:55.698
+to specify the namespace in the metadata I can specify here
+
+91
+00:05:55.724 --> 00:06:02.230
+I can see namespace colon and the namespace name kube
+
+92
+00:06:02.410 --> 00:06:06.454
+cart and I will change here the name of the pod
+
+93
+00:06:06.502 --> 00:06:22.260
+I will say nginx12 just some name, kubectl apply -f .
+
+94
+00:06:22.260 --> 00:06:23.260
+kubectl get pod -n kubekart
+
+95
+00:06:29.010 --> 00:06:32.518
+see both two pods running in the kube card namespace now
+
+96
+00:06:32.664 --> 00:06:36.658
+kubectl delete this is what I was talking about you can
+
+97
+00:06:36.684 --> 00:06:39.158
+have many things in that but you can set kubectl delete
+
+98
+00:06:39.194 --> 00:06:43.010
+NS kube card this is very dangerous it's going to remove
+
+99
+00:06:43.070 --> 00:06:51.730
+everything from that namespace and the namespace. right gone, removed okay
+
+100
+00:06:51.780 --> 00:06:56.230
+once again take your time go through this documentation few things
+
+101
+00:06:56.340 --> 00:06:58.786
+how you can mention the namespace, how you can have a
+
+102
+00:06:58.788 --> 00:07:04.898
+namespace just we have seen in the context in the kube
+
+103
+00:07:04.934 --> 00:07:07.966
+config file you can set the current namespace that this is
+
+104
+00:07:08.088 --> 00:07:11.126
+by default it goes with default namespace but you can specify
+
+105
+00:07:11.198 --> 00:07:15.758
+namespace in kube config file then every time you use kubectl
+
+106
+00:07:15.794 --> 00:07:19.510
+command it's going to use that namespace if you do not
+
+107
+00:07:19.560 --> 00:07:24.550
+specify all right then that is all about namespace in this
+
+108
+00:07:24.660 --> 00:07:30.670
+video go through it, test the commands, go the documentation and
+
+109
+00:07:30.720 --> 00:07:31.910
+join me in the next lecture.

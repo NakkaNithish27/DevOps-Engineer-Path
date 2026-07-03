@@ -1,0 +1,472 @@
+WEBVTT
+
+00:00.390 --> 00:02.670
+Instructor: Hello, and welcome.
+
+00:02.670 --> 00:05.310
+Now, previous two lecture, we did the setup
+
+00:05.310 --> 00:08.550
+of a website on CentOS, and we set up
+
+00:08.550 --> 00:11.280
+the WordPress blog on Ubuntu.
+
+00:11.280 --> 00:13.050
+In this lecture we will be doing
+
+00:13.050 --> 00:16.470
+all this automatically, we will be writing
+
+00:16.470 --> 00:19.290
+a vagrant file that can provision
+
+00:19.290 --> 00:21.900
+website automatically, and then we will
+
+00:21.900 --> 00:25.440
+do the same for the WordPress template.
+
+00:25.440 --> 00:26.733
+So let's get into it.
+
+00:29.160 --> 00:31.140
+So for this lecture, I recommend
+
+00:31.140 --> 00:33.960
+you open a VS Code, VisualStudioCode.
+
+00:33.960 --> 00:37.560
+If you don't have it, download, install and open it.
+
+00:37.560 --> 00:41.430
+And then once you open it, click on file,
+
+00:41.430 --> 00:46.430
+open folder, go to the vagrant VMs folder
+
+00:46.920 --> 00:50.140
+where you have your vagrant VMs.
+
+00:50.140 --> 00:53.730
+Okay, mine is in F:\vagrant-vms,
+
+00:53.730 --> 00:55.443
+and I'll say select folder.
+
+00:56.820 --> 00:58.410
+Now first we will be automating
+
+00:58.410 --> 01:01.440
+this finance website, so I want you
+
+01:01.440 --> 01:05.280
+to right click on this and say copy.
+
+01:05.280 --> 01:09.453
+And again, right click over here and say paste.
+
+01:10.890 --> 01:14.580
+And then right click once again on this finance copy,
+
+01:14.580 --> 01:17.370
+rename it, instead of copy, rename it
+
+01:17.370 --> 01:22.370
+as IAAC, or just IAC infrastructure as code.
+
+01:23.280 --> 01:25.530
+Because we'll be putting everything in the vagrant file.
+
+01:25.530 --> 01:27.480
+Our entire infrastructure, the website
+
+01:27.480 --> 01:30.240
+will be in just one file, it will be code based.
+
+01:30.240 --> 01:32.850
+This is called a infrastructure as code.
+
+01:32.850 --> 01:35.070
+We'll be talking about this infrastructure code
+
+01:35.070 --> 01:37.143
+as coding in detail later.
+
+01:38.430 --> 01:42.300
+So expand this, if you have .vagrant folder
+
+01:42.300 --> 01:44.073
+over here, remove that,
+
+01:46.230 --> 01:48.060
+delete that .vagrant folder
+
+01:48.060 --> 01:53.060
+from finance IAC, and you have the vagrant file.
+
+01:53.250 --> 01:56.130
+This is from the previous lectures.
+
+01:56.130 --> 02:00.090
+First thing we'll look into this is the IP address.
+
+02:00.090 --> 02:01.920
+So I'm going to change the IP address.
+
+02:01.920 --> 02:04.410
+If you have this VM already running,
+
+02:04.410 --> 02:07.470
+or created, then the IP will collide.
+
+02:07.470 --> 02:09.480
+So I'm going to change it to 28.
+
+02:09.480 --> 02:11.040
+Anyways, I have deleted all the VM,
+
+02:11.040 --> 02:13.443
+but still, I give different IP.
+
+02:14.460 --> 02:18.480
+And then come down, and through provisioning
+
+02:18.480 --> 02:20.400
+we are going to enter all the commands
+
+02:20.400 --> 02:24.183
+that we use to set up the finance website.
+
+02:25.170 --> 02:28.110
+So uncomment this line, and this one,
+
+02:28.110 --> 02:30.093
+all the lines below it uncomment.
+
+02:31.320 --> 02:33.720
+Okay, let's write all the commands one by one.
+
+02:33.720 --> 02:36.180
+First was, not tum,
+
+02:36.180 --> 02:39.190
+yum install httpd
+
+02:40.500 --> 02:45.133
+wget unzip vim -y.
+
+02:47.400 --> 02:49.800
+Make sure you enter -y.
+
+02:49.800 --> 02:51.810
+In the provisioning, if it is asking
+
+02:51.810 --> 02:54.123
+you question, the provisioning will fails.
+
+02:55.500 --> 02:58.950
+What is the next step, to start the service,
+
+02:58.950 --> 03:01.756
+systemctl start httpd, and then,
+
+03:01.756 --> 03:04.833
+systemctl enabled httpd,
+
+03:06.450 --> 03:08.820
+and download the data from tooplate.com,
+
+03:08.820 --> 03:13.380
+but before that, we'll create a temporary folder.
+
+03:13.380 --> 03:15.333
+We'll call it whatever name you want,
+
+03:17.160 --> 03:22.160
+mkdir -p, -p if that folder already exists,
+
+03:22.380 --> 03:25.620
+it is not going to fail, but if the folder
+
+03:25.620 --> 03:27.600
+does not exist, it'll create it.
+
+03:27.600 --> 03:29.790
+That's why -p option.
+
+03:29.790 --> 03:34.620
+we do cd into that, /tmp/finance,
+
+03:34.620 --> 03:36.540
+and then here we'll give the command wget,
+
+03:36.540 --> 03:38.520
+and the link from tooplate.com.
+
+03:38.520 --> 03:41.430
+So let's go to a browser, right?
+
+03:41.430 --> 03:43.560
+So select the template, whatever you want,
+
+03:43.560 --> 03:48.560
+go to its page, click F12, go to network,
+
+03:49.020 --> 03:50.760
+and click on the download link.
+
+03:50.760 --> 03:52.110
+When you click on the download link,
+
+03:52.110 --> 03:55.200
+you should get the zip link over here.
+
+03:55.200 --> 03:57.720
+Go to the headers, and copy that link
+
+03:57.720 --> 03:59.823
+from the header, request URL.
+
+04:00.900 --> 04:03.573
+And then paste it, CTRL V,
+
+04:05.040 --> 04:07.170
+and then we are going to say unzip.
+
+04:07.170 --> 04:10.473
+And this will be the name of the zip file.
+
+04:12.870 --> 04:15.330
+Now, when you unzip, if there are files
+
+04:15.330 --> 04:19.200
+that already exist, and you want it to overwrite,
+
+04:19.200 --> 04:21.900
+you can use -o.
+
+04:21.900 --> 04:24.810
+Now first time, obviously this file won't exist,
+
+04:24.810 --> 04:27.000
+but if you're doing provisioning multiple times,
+
+04:27.000 --> 04:30.090
+there will be file that, those files may exist
+
+04:30.090 --> 04:32.460
+over there and it should not ask you questions.
+
+04:32.460 --> 04:35.493
+So -o to override if the file exist.
+
+04:36.720 --> 04:41.720
+Okay, then cp, and paste that zip file name,
+
+04:42.540 --> 04:44.940
+remove that .zip, /star.
+
+04:44.940 --> 04:46.920
+So when you unzip, it is going to create
+
+04:46.920 --> 04:49.590
+that folder /*.
+
+04:49.590 --> 04:52.050
+Make sure you remove that .zip from here, right?
+
+04:52.050 --> 04:55.050
+Also, we have to give -r.
+
+04:55.050 --> 04:56.580
+So recursively, copy everything
+
+04:56.580 --> 05:01.123
+to /var/www/html/,
+
+05:02.670 --> 05:05.283
+and then restart the service.
+
+05:09.870 --> 05:11.250
+And these are the only command
+
+05:11.250 --> 05:12.810
+that we need to run, right?
+
+05:12.810 --> 05:14.190
+Now, how do we know these commands?
+
+05:14.190 --> 05:15.540
+Because we did it manually.
+
+05:15.540 --> 05:17.370
+Remember the rule that I told you,
+
+05:17.370 --> 05:18.870
+if you want to automate something,
+
+05:18.870 --> 05:22.380
+you should know how to do it manually first.
+
+05:22.380 --> 05:25.083
+Verify all the steps, once again,
+
+05:25.950 --> 05:28.620
+look for any typographical mistake.
+
+05:28.620 --> 05:31.470
+And also we can give one more command to clean up.
+
+05:31.470 --> 05:34.650
+Now this folder would have created,
+
+05:34.650 --> 05:37.080
+and we really don't need it once it is created,
+
+05:37.080 --> 05:39.183
+so we are going to remove that.
+
+05:40.442 --> 05:41.970
+We are already in that folder,
+
+05:41.970 --> 05:45.480
+we did cd, so we'll hit the command cd/tmp
+
+05:45.480 --> 05:47.370
+to come out of that folder.
+
+05:47.370 --> 05:49.770
+Otherwise, we'll be cutting the same branch
+
+05:49.770 --> 05:51.540
+of the tree on which we are sitting.
+
+05:51.540 --> 05:55.770
+So come out of that and then cut it, delete it.
+
+05:55.770 --> 05:58.593
+Okay, I think this is good, let me save this.
+
+05:59.580 --> 06:03.960
+CTRL S I did, once again, file, save.
+
+06:03.960 --> 06:05.733
+Now let's go to Git Bash.
+
+06:08.220 --> 06:12.960
+Clear the screen cd /f/vagrant-vms/,
+
+06:12.960 --> 06:17.960
+and I should see their cd financeIAC, as code.
+
+06:19.440 --> 06:22.110
+There's a vagrant file, and it's showtime now.
+
+06:22.110 --> 06:23.943
+Let's run vigrant up.
+
+06:27.930 --> 06:29.830
+Okay, now the provisioning will start,
+
+06:32.520 --> 06:33.633
+in a moment.
+
+06:36.750 --> 06:37.863
+Okay, started.
+
+06:39.150 --> 06:42.333
+So if you make any syntax error, this will fail.
+
+06:43.170 --> 06:45.450
+If you make any logical mistakes,
+
+06:45.450 --> 06:47.970
+the provisioning will go, but you might
+
+06:47.970 --> 06:49.530
+not be able to access the website,
+
+06:49.530 --> 06:51.030
+or there will be some problem.
+
+06:57.880 --> 07:00.840
+Okay, at the end we see it's unzipping,
+
+07:00.840 --> 07:03.300
+and then the other command after that doesn't print
+
+07:03.300 --> 07:05.490
+any output, so we don't see any output,
+
+07:05.490 --> 07:07.860
+just till the unzip we see the output.
+
+07:07.860 --> 07:10.143
+Now let's get the IP address of this VM,
+
+07:12.150 --> 07:15.210
+or you can do vagrant, ssh, find the IP,
+
+07:15.210 --> 07:20.190
+the public IP, or this IP, and then let's go to the browser.
+
+07:20.190 --> 07:22.083
+Time to test it,
+
+07:23.280 --> 07:25.770
+and there we go.
+
+07:25.770 --> 07:27.450
+How was that, right?
+
+07:27.450 --> 07:29.880
+Now you do vagrant destroy, as long as you
+
+07:29.880 --> 07:32.790
+have that file, you can provision
+
+07:32.790 --> 07:34.860
+this website whenever you want.
+
+07:34.860 --> 07:37.980
+So infrastructure in code.
+
+07:37.980 --> 07:42.180
+Now destroy that VM, but keep the vagrant file,
+
+07:42.180 --> 07:43.920
+especially the provisioning command,
+
+07:43.920 --> 07:47.310
+we will be using that later also in AWS,
+
+07:47.310 --> 07:49.650
+while we are testing the same thing.
+
+07:49.650 --> 07:51.480
+So anytime you want to set up the website,
+
+07:51.480 --> 07:53.940
+you have the scripts with you,
+
+07:53.940 --> 07:57.600
+you can anywhere, anytime, set up this website.
+
+07:57.600 --> 07:59.490
+This is also called reusability,
+
+07:59.490 --> 08:02.850
+we can reuse the code, but this is pretty basic
+
+08:02.850 --> 08:05.220
+of what scripting and reusability is.
+
+08:05.220 --> 08:06.720
+We will be learning more in detail,
+
+08:06.720 --> 08:09.840
+in scripting, and other sections.
+
+08:09.840 --> 08:12.603
+Now let's do the same for WordPress.

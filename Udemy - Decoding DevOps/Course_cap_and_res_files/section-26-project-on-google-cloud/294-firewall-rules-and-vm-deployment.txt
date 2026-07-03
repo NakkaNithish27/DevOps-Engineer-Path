@@ -1,0 +1,820 @@
+WEBVTT
+
+00:00.320 --> 00:05.200
+So we created VPC and for subnet with Cloud router and cloud Nat.
+
+00:05.560 --> 00:10.840
+In this lecture we are going to create a firewall rule for the bastion host and then create the bastion
+
+00:10.840 --> 00:11.280
+host.
+
+00:11.920 --> 00:14.440
+This VM instance will be in the public subnet.
+
+00:14.800 --> 00:20.200
+And then one more firewall rule that will create for the instance which will be in the private subnet.
+
+00:20.520 --> 00:26.800
+The instance that you see in the private subnet will be our app server, where our view profile application
+
+00:26.800 --> 00:27.640
+will be living.
+
+00:28.040 --> 00:33.520
+And that app server will create in next lecture in this lecture firewall rules and bastion host.
+
+00:34.080 --> 00:37.160
+Now here GCP is very different from AWS.
+
+00:37.800 --> 00:40.080
+In AWS we create security group.
+
+00:40.080 --> 00:41.680
+And then we launch the instance.
+
+00:42.000 --> 00:44.120
+We just select the security group.
+
+00:44.480 --> 00:48.840
+In GCP we create firewall rule which is like the security group of AWS.
+
+00:49.320 --> 00:53.240
+And we give a source tag over here sorry target tag.
+
+00:53.280 --> 00:55.000
+Target tag we give a tag.
+
+00:55.480 --> 00:58.160
+And then we launch when we launch the instance.
+
+00:58.160 --> 01:00.600
+While launching the instance we mentioned that tag.
+
+01:01.170 --> 01:06.170
+So any firewall rule that has that tag will be attached to the instance.
+
+01:06.170 --> 01:08.250
+So there is no direct attaching.
+
+01:08.290 --> 01:10.970
+It will be attaching through the tags.
+
+01:11.490 --> 01:12.450
+So that's one difference.
+
+01:12.450 --> 01:15.450
+The other difference is in AWS we have key pair.
+
+01:15.450 --> 01:18.690
+When we launch the instance we select the key pair in GCP.
+
+01:18.730 --> 01:23.530
+That is not the case if you want key based login while launching the instance itself.
+
+01:23.530 --> 01:26.490
+We are going to execute some commands through userdata script.
+
+01:26.810 --> 01:28.810
+In GCP it's called as automation script.
+
+01:29.170 --> 01:31.330
+And this is the script we will execute.
+
+01:31.370 --> 01:35.330
+We are going to create a user and that user into Sudoers file.
+
+01:35.330 --> 01:42.810
+So we get sudo access and inject the key into that user's home directory in SSH authorized keys file.
+
+01:43.290 --> 01:44.890
+So we already created a key pair.
+
+01:44.890 --> 01:49.930
+So we're going to use the public key and insert it into this user's home directory.
+
+01:50.330 --> 01:54.650
+And we can use the private key to log into this instance with this user.
+
+01:55.290 --> 01:56.850
+So here's the username is DevOps.
+
+01:56.850 --> 01:57.930
+We can change this one.
+
+01:58.490 --> 02:00.970
+So let's get started first with the firewall rules.
+
+02:01.150 --> 02:02.910
+So open your gcloud shell.
+
+02:03.550 --> 02:08.630
+First, I'm going to list the variables that we will be using for the commands.
+
+02:09.270 --> 02:09.470
+Okay.
+
+02:09.510 --> 02:10.350
+So these are the variables.
+
+02:10.350 --> 02:15.190
+We will be using the SSH key that we have already stored my underscore IP.
+
+02:15.230 --> 02:16.790
+Now this is all IPv4.
+
+02:16.830 --> 02:18.270
+It's not really your IP.
+
+02:18.670 --> 02:21.230
+But later I'll show you how we will be changing this.
+
+02:21.790 --> 02:23.310
+Tag underscore bastion.
+
+02:23.310 --> 02:25.350
+That's the value tag underscore app.
+
+02:25.350 --> 02:28.310
+Now this tag is for the firewall.
+
+02:28.310 --> 02:32.070
+So we're going to create two firewall one for bastion one for our app server.
+
+02:32.550 --> 02:36.030
+And when we launch the bastion host we're going to make sure we give this tag.
+
+02:36.030 --> 02:39.830
+And when we launch App Server we'll make sure we give this tag app.
+
+02:40.470 --> 02:40.710
+Okay.
+
+02:40.750 --> 02:43.990
+First let's create the firewall rule for bastion host.
+
+02:44.710 --> 02:50.030
+So gcloud compute firewall rules create allow SSH internet.
+
+02:50.030 --> 02:52.310
+That's the name of the firewall rule.
+
+02:52.790 --> 02:53.630
+Backward slash.
+
+02:53.670 --> 02:54.190
+Hit enter.
+
+02:54.190 --> 02:55.910
+And let's give the information.
+
+02:56.070 --> 02:57.630
+So mention the network.
+
+02:57.830 --> 03:01.760
+So network will be the VPC equal to.
+
+03:01.800 --> 03:05.040
+Dollar VPC space.
+
+03:05.040 --> 03:05.480
+Backward.
+
+03:05.480 --> 03:05.840
+Slash.
+
+03:05.840 --> 03:06.040
+Hit.
+
+03:06.040 --> 03:06.480
+Enter.
+
+03:07.120 --> 03:07.600
+Hyphen.
+
+03:07.600 --> 03:08.080
+Hyphen.
+
+03:08.080 --> 03:08.600
+Allow.
+
+03:08.640 --> 03:08.960
+Allow.
+
+03:08.960 --> 03:09.680
+From where?
+
+03:10.200 --> 03:10.800
+So equal to.
+
+03:10.840 --> 03:13.880
+You have to give the protocol colon the port number.
+
+03:14.400 --> 03:16.520
+So allow 22 from my IP.
+
+03:16.840 --> 03:18.160
+So source you give like this.
+
+03:18.160 --> 03:25.560
+Hyphen hyphen source hyphen ranges equal to the variable dollar.
+
+03:25.600 --> 03:30.920
+My underscore IP space backward slash hit enter tag.
+
+03:30.920 --> 03:32.320
+So we're going to give this tag.
+
+03:32.320 --> 03:40.320
+And the tag we give through hyphen hyphen target tag option hyphen hyphen target hyphen tags equal to.
+
+03:40.960 --> 03:45.680
+In double quotes you give dollar tag underscore bastion.
+
+03:46.000 --> 03:47.760
+The value is here bastion.
+
+03:48.440 --> 03:50.240
+Now this is an inbound rule.
+
+03:51.080 --> 03:57.320
+So you have to say hyphen hyphen direction equal to ingress.
+
+03:57.320 --> 03:58.280
+All in caps.
+
+03:59.520 --> 04:00.680
+And let's hit enter.
+
+04:02.540 --> 04:04.420
+Now it says the project is not set.
+
+04:04.420 --> 04:06.140
+I forgot to set the project.
+
+04:06.700 --> 04:10.500
+So I'm going to say gcloud config set project in double quotes.
+
+04:10.500 --> 04:14.660
+I'm just going to say dollar project underscore id.
+
+04:18.780 --> 04:20.900
+Okay now let me run the command once again.
+
+04:24.500 --> 04:24.740
+Okay.
+
+04:24.740 --> 04:25.660
+So check the information.
+
+04:25.660 --> 04:26.740
+That's the name.
+
+04:26.820 --> 04:28.420
+And this is the VPC.
+
+04:29.020 --> 04:31.620
+This is ingress rule TCP 22.
+
+04:32.260 --> 04:33.660
+Let's also check from the UI.
+
+04:33.700 --> 04:36.580
+So go to VPC and go to firewalls.
+
+04:37.180 --> 04:39.060
+That's the rule allow SSH internet.
+
+04:39.620 --> 04:43.220
+So the tag is bastion and source is from all the IP.
+
+04:43.780 --> 04:49.220
+So if you want to restrict it only to your IP you can edit it here and mention.
+
+04:49.220 --> 04:51.700
+So you can remove this one and mention your IP.
+
+04:52.220 --> 04:54.020
+You can just google what is my IP address.
+
+04:54.020 --> 04:55.540
+Or you can go to this website.
+
+04:55.540 --> 04:57.300
+You will see your public IP.
+
+04:57.700 --> 05:03.390
+If you want to restrict only to your IP address you have to remove this ad, your IP address over here
+
+05:03.710 --> 05:05.350
+and you have to say slash 32.
+
+05:05.390 --> 05:08.870
+So restricted only to this IP address, not the entire range.
+
+05:09.190 --> 05:13.150
+And then you can save this, but your public IP will change.
+
+05:13.150 --> 05:17.110
+So whenever you're not able to do SSH to your bastion host you need to come back here.
+
+05:17.150 --> 05:20.350
+Edit the rule and make sure you add your latest IP address.
+
+05:20.870 --> 05:22.830
+And that should be the case in real time.
+
+05:22.830 --> 05:26.590
+Do not give 0.0.00.
+
+05:26.630 --> 05:29.390
+That allows all the IP address on port 22.
+
+05:29.990 --> 05:31.830
+Right now I'm just going to cancel this one.
+
+05:32.630 --> 05:37.990
+Now let's create the firewall for the private instance which is in the private subnet okay.
+
+05:38.030 --> 05:45.150
+Same command gcloud compute firewall rules create and the name of the firewall rule mention the VPC
+
+05:45.470 --> 05:46.630
+allowing 22.
+
+05:46.990 --> 05:49.470
+Now here there is a source tag and target tag.
+
+05:49.510 --> 05:51.630
+Target tag will be the tag for this firewall.
+
+05:51.630 --> 05:54.110
+And source is from the request will be coming.
+
+05:54.310 --> 05:55.310
+So we are given.
+
+05:55.350 --> 06:00.470
+We are giving here source as another firewall rule which is this firewall.
+
+06:01.310 --> 06:06.690
+So if you are in the bastion host, this firewall rule will be applied.
+
+06:06.890 --> 06:11.290
+So from this firewall rule you can SSH to this firewall.
+
+06:11.290 --> 06:12.410
+So this is source.
+
+06:12.450 --> 06:13.610
+This is target.
+
+06:14.290 --> 06:15.970
+So source can be a range.
+
+06:15.970 --> 06:21.490
+Source can be a specific IP address like my IP or source can be another firewall rule.
+
+06:21.810 --> 06:22.810
+And it's an inbound rule.
+
+06:22.810 --> 06:24.250
+So direction ingress.
+
+06:24.490 --> 06:25.450
+Let's create this.
+
+06:26.730 --> 06:26.930
+Okay.
+
+06:26.930 --> 06:28.450
+This one also got created.
+
+06:29.530 --> 06:31.650
+You can see here allow ssh bastion.
+
+06:32.250 --> 06:33.770
+You see here source filter.
+
+06:33.770 --> 06:34.730
+That's the bastion.
+
+06:34.730 --> 06:35.610
+Target is app.
+
+06:35.610 --> 06:40.410
+Now if you launch the instance and if you want to select this firewall rule then you need to give this
+
+06:40.410 --> 06:43.170
+tag which I'll show you just in a moment.
+
+06:43.650 --> 06:43.890
+Okay.
+
+06:43.930 --> 06:45.290
+So we created this firewall.
+
+06:45.290 --> 06:46.610
+We created this firewall.
+
+06:46.610 --> 06:48.530
+Now let's create one more firewall.
+
+06:48.530 --> 06:54.290
+Since we are already in the firewall section, this firewall will be for the app server to allow access
+
+06:54.290 --> 06:55.410
+from the load balancer.
+
+06:55.410 --> 07:01.730
+So when the request comes from load balancer, your app server should allow the connection on port 8080
+
+07:01.770 --> 07:07.100
+or a Tomcat servers will be running on port 8080 on this instance, so source in this case will be the
+
+07:07.100 --> 07:07.780
+load balancer.
+
+07:07.820 --> 07:09.940
+The target will be this app server.
+
+07:10.740 --> 07:10.980
+Okay.
+
+07:11.020 --> 07:12.020
+So the same command.
+
+07:12.060 --> 07:17.260
+Once again this firewall rule is for the app server to allow connection from the load balancer.
+
+07:17.380 --> 07:19.860
+So the name is allow ELB to app.
+
+07:20.500 --> 07:23.100
+Give the VPC allow on port 8080.
+
+07:23.140 --> 07:27.100
+Because Tomcat will be running on port 8080 source ranges.
+
+07:27.140 --> 07:33.660
+Now this is the public IP or public IP range for the load balancer for the GCP load balancer.
+
+07:33.700 --> 07:35.380
+This is the public IP range.
+
+07:35.860 --> 07:39.780
+Once we create our load balancer I'm going to show you the public IP for the load balancer.
+
+07:39.780 --> 07:41.220
+This will be from this range.
+
+07:41.940 --> 07:46.220
+That is the reason the source range we have given as this target tab.
+
+07:46.260 --> 07:49.620
+Target tag is the tag app app server.
+
+07:50.020 --> 07:53.780
+So when we launch our app server we are going to mention this tag.
+
+07:53.780 --> 07:56.700
+So this firewall rule is applied to our app server.
+
+07:57.180 --> 07:58.300
+And it's an inbound rule.
+
+07:58.300 --> 07:59.980
+So that direction ingress.
+
+08:00.220 --> 08:01.380
+Let's create this one.
+
+08:03.950 --> 08:04.190
+Okay.
+
+08:04.230 --> 08:05.950
+Another firewall rule got created.
+
+08:06.670 --> 08:07.910
+Allow ELB to app.
+
+08:08.550 --> 08:15.350
+Target tag is app and this is the IP ranges for the load balancer allowing it on port 8080.
+
+08:16.110 --> 08:21.270
+In AWS term, we have created a security group for the app server to allow connection from the load
+
+08:21.270 --> 08:23.390
+balancer in AWS.
+
+08:23.390 --> 08:27.350
+When we create a load balancer, we create a security group for the load balancer.
+
+08:27.790 --> 08:31.590
+And load balancer has an end point in GCP.
+
+08:31.630 --> 08:35.430
+When we create a load balancer, it will get a public IP and that will be dynamic.
+
+08:35.590 --> 08:39.310
+But we can allocate a public IP and assign it to the load balancer.
+
+08:39.310 --> 08:45.430
+So load balancer can have static public IP which will be from this range okay.
+
+08:45.470 --> 08:46.990
+That is too much information for now.
+
+08:46.990 --> 08:49.190
+Anyways we're going to do load balancer later.
+
+08:49.670 --> 08:51.830
+Now let's launch the bastion host quickly.
+
+08:52.430 --> 08:59.590
+So we are going to create this file bastion.sh with this content which is basically commands to create
+
+08:59.590 --> 09:01.310
+a user called DevOps.
+
+09:01.350 --> 09:05.210
+Add it into Sudoers file and push our SSH key into it.
+
+09:05.610 --> 09:10.570
+So just copy it from cat till EOF at the end and go to your gcloud shell.
+
+09:11.330 --> 09:14.810
+Just paste the content over here so that you can do like this.
+
+09:14.810 --> 09:18.810
+Or just create a file bastion.sh and put all this data over here.
+
+09:19.690 --> 09:22.490
+Let me just get to bastion dot S-h okay.
+
+09:22.530 --> 09:24.250
+So the username will be DevOps.
+
+09:24.250 --> 09:25.890
+And this is the public key.
+
+09:26.650 --> 09:29.170
+So earlier we created public key private key right.
+
+09:29.170 --> 09:31.930
+So content of this file will be injected in the instance.
+
+09:31.930 --> 09:36.010
+We are going to use this key to login to our bastion host okay.
+
+09:36.010 --> 09:38.050
+Now the command to launch the instance.
+
+09:38.890 --> 09:46.730
+So gcloud compute instances create the name of the instance that is the bastion hyphen f and zone.
+
+09:46.730 --> 09:50.090
+So we are going to launch it in us Central1 a.
+
+09:50.890 --> 09:52.970
+Yes, that's the zone name, not the region name.
+
+09:52.970 --> 09:55.010
+In one region you have multiple zones.
+
+09:55.010 --> 10:00.690
+So we are launching in one a machine type E to micro one gb Ram, one CPU.
+
+10:01.010 --> 10:03.100
+We want to launch it in the public subnet.
+
+10:03.740 --> 10:09.660
+So hyphen hyphen subnet we give the subnet name to select our firewall the bastion firewall.
+
+10:09.660 --> 10:11.740
+We're going to say here hyphen hyphen tags.
+
+10:12.060 --> 10:16.740
+And the tag that we have used for the firewall image family.
+
+10:16.740 --> 10:20.140
+So that is the ubuntu image that we are using.
+
+10:20.180 --> 10:22.740
+This is from the project ubuntu OS cloud.
+
+10:23.380 --> 10:27.220
+And the startup script will be the bastion.sh file.
+
+10:28.380 --> 10:28.980
+Let's run this.
+
+10:28.980 --> 10:31.380
+I'm also going to show you how to do it from the GUI.
+
+10:31.940 --> 10:33.180
+So just run this command.
+
+10:34.460 --> 10:35.660
+It's going to take some time.
+
+10:36.140 --> 10:42.500
+So by the time let me go to Google Cloud Console compute instance VM instances.
+
+10:43.260 --> 10:45.660
+You see already started launching the instance.
+
+10:45.860 --> 10:51.980
+So if you want to do it from the GUI, all you have to do is click on Create instances, give the name,
+
+10:52.380 --> 10:59.100
+select the region and the zone you can select to be specific us Central1 a you select the instance type.
+
+10:59.740 --> 11:03.000
+So in e2 we have here e2 medium.
+
+11:03.000 --> 11:09.720
+We can select here e2 micro or E2 small C one shared core one gb ram.
+
+11:09.720 --> 11:13.120
+That's what we have selected in the OS and storage.
+
+11:13.120 --> 11:15.440
+You can select here the image.
+
+11:15.440 --> 11:19.680
+So if I click on change here you can select here first the operating system.
+
+11:19.680 --> 11:25.680
+So let's say ubuntu and which version of Ubuntu or Ubuntu 24.
+
+11:26.160 --> 11:29.000
+Now check here you have AMD and you have ARM.
+
+11:29.200 --> 11:35.520
+So we're going to go with AMD with this 124 I'm not launching it through the GUI, I'm just showing
+
+11:35.520 --> 11:38.000
+you the options boot disk type.
+
+11:38.200 --> 11:39.960
+So you have few options over here.
+
+11:40.680 --> 11:46.880
+Now the balanced one is the most cheapest one SSD is the fastest one, and you can select the size.
+
+11:47.080 --> 11:48.440
+So I'm just going to say select.
+
+11:48.920 --> 11:51.120
+In data protection you have snapshot.
+
+11:51.120 --> 11:55.200
+So a default snapshot you can just say no backup if you don't want any snapshot.
+
+11:55.640 --> 11:57.520
+Or you can schedule snapshots.
+
+11:58.080 --> 12:01.640
+So be very careful when you are doing it through the GUI.
+
+12:01.680 --> 12:05.970
+You know you have snapshot schedules and if you don't delete the instances, it's going to keep taking
+
+12:05.970 --> 12:06.450
+snapshot.
+
+12:06.450 --> 12:11.290
+And the monthly estimate can go to $6 for ten GB disk.
+
+12:12.050 --> 12:18.610
+In networking you can select here the tags while launching the instance will look for firewall rule
+
+12:18.610 --> 12:21.050
+with the tag and attach that firewall rule.
+
+12:22.090 --> 12:22.330
+Okay.
+
+12:22.330 --> 12:22.490
+Yeah.
+
+12:22.490 --> 12:26.050
+But before that network interfaces I'm going to remove this one.
+
+12:26.290 --> 12:28.650
+And you can select here your VPC.
+
+12:29.370 --> 12:32.450
+And you can select the subnet in which you want to launch.
+
+12:33.530 --> 12:37.210
+You have network service tier premium will cost you something.
+
+12:37.690 --> 12:39.810
+Standard is good if you're just learning.
+
+12:40.570 --> 12:43.970
+And if you go to advanced you can see here automation script.
+
+12:43.970 --> 12:47.970
+Here you can mention the commands like the commands that we are going to run.
+
+12:47.970 --> 12:48.370
+Right.
+
+12:49.130 --> 12:53.690
+So once you save all this information you can click on create and the instance will be launched.
+
+12:54.210 --> 12:56.610
+But as I said I'm not going to launch it through the GUI.
+
+12:56.610 --> 13:01.290
+If you already have launched through the command line and the bastion host is ready, you see it has
+
+13:01.290 --> 13:02.690
+an external IP address.
+
+13:03.190 --> 13:04.870
+So copy the public IP.
+
+13:05.590 --> 13:09.190
+Go to the location where you have your key saved to SSH.
+
+13:09.230 --> 13:13.110
+Hyphen I hyphen I give the key name.
+
+13:13.110 --> 13:14.630
+So mine is GCP.
+
+13:15.350 --> 13:17.830
+And the username that we have used is DevOps.
+
+13:17.990 --> 13:19.550
+At the rate the public IP.
+
+13:19.830 --> 13:20.510
+Hit enter.
+
+13:21.510 --> 13:22.150
+Yes.
+
+13:23.350 --> 13:24.630
+And we are in.
+
+13:24.630 --> 13:27.710
+You can do sudo hyphen I switch to root users.
+
+13:27.710 --> 13:29.030
+You tested the user login.
+
+13:29.030 --> 13:31.350
+You can also test the internet apt update.
+
+13:31.750 --> 13:34.070
+Now this is not just the VM test.
+
+13:34.270 --> 13:35.550
+We are also testing the VPC.
+
+13:35.590 --> 13:36.670
+It's in the public subnet.
+
+13:36.670 --> 13:38.030
+It is getting the internet.
+
+13:38.030 --> 13:39.630
+We are able to switch to it.
+
+13:40.070 --> 13:41.150
+So VPC is public.
+
+13:41.150 --> 13:42.230
+Subnet is verified.
+
+13:42.230 --> 13:43.710
+Firewall rules are verified.
+
+13:43.750 --> 13:45.750
+The instance status is verified.
+
+13:46.350 --> 13:47.750
+So you can keep the login.
+
+13:47.750 --> 13:49.350
+Or you can log out and log in later.
+
+13:49.350 --> 13:50.230
+Keep the instance running.
+
+13:50.230 --> 13:55.030
+In the next lecture we are going to launch the back end services, the cloud SQL, where we need to
+
+13:55.070 --> 13:57.870
+initialize the database for the MySQL.
+
+13:58.230 --> 14:00.270
+So for that we will need the bastion host.
+
+14:00.750 --> 14:03.590
+So once you verified all these things then join me in the next lecture.

@@ -1,0 +1,550 @@
+WEBVTT
+
+00:00.160 --> 00:01.200
+Hello and welcome.
+
+00:01.200 --> 00:03.840
+In this lecture we are going to talk about variables.
+
+00:04.440 --> 00:08.480
+So first of all the variables can be defined in the pipeline itself.
+
+00:08.480 --> 00:10.320
+We have seen that in the previous lecture.
+
+00:10.320 --> 00:12.360
+We can just say variables colon.
+
+00:12.680 --> 00:15.320
+And we can give the list of variables that we want.
+
+00:16.000 --> 00:18.440
+Now these types of variables are simple.
+
+00:18.800 --> 00:22.160
+We just want to use a keyword multiple times in our pipeline.
+
+00:22.160 --> 00:23.840
+So we define it at this level.
+
+00:23.840 --> 00:28.640
+And we don't mind people in the project to see the value of these variables.
+
+00:28.640 --> 00:33.720
+But then you have variable that you can define in the GitLab UI in the project setting.
+
+00:35.440 --> 00:39.000
+So in the project settings you go to ci, CD, go to variables.
+
+00:39.000 --> 00:40.560
+You can say add variables.
+
+00:40.840 --> 00:43.760
+Now both the variables serves almost same purpose.
+
+00:44.280 --> 00:47.000
+Which one you choose is based on your requirement.
+
+00:47.280 --> 00:52.320
+The first one is plain and simple, but this one you have many options when you save these variables.
+
+00:52.320 --> 00:55.040
+These variables can used in different places.
+
+00:55.040 --> 01:00.680
+And there's also you can hide these variable value when you save it as a secret.
+
+01:00.920 --> 01:01.720
+So same variable.
+
+01:01.720 --> 01:08.390
+Or you can add another variable and you can mention that that this is masked and hidden variable.
+
+01:08.390 --> 01:09.910
+And that becomes a secret.
+
+01:10.430 --> 01:16.670
+Things like database password access keys on your AWS account tokens, or any other things that you
+
+01:16.670 --> 01:21.510
+do not want to reveal in the pipeline, or also even in the settings.
+
+01:21.550 --> 01:24.030
+The secret variables are not exposed.
+
+01:24.030 --> 01:25.350
+You cannot edit them.
+
+01:25.550 --> 01:26.070
+I'm sorry.
+
+01:26.070 --> 01:27.350
+You cannot see them.
+
+01:27.350 --> 01:31.590
+You can of course edit them and delete them, but you cannot see in the setting.
+
+01:31.590 --> 01:34.670
+Also, accessing these variables are pretty simple.
+
+01:34.670 --> 01:39.230
+In your pipeline you can mention dollar and you can give the variable name.
+
+01:39.670 --> 01:44.630
+The other way is you can say dollar, and in curly braces you mention the name, the differences.
+
+01:44.990 --> 01:51.710
+The dollar curly braces gives you some more options, like you can concatenate the variable with some
+
+01:51.710 --> 01:52.630
+other text.
+
+01:53.230 --> 01:57.230
+Also, you can set defaults for these variables and also error handling.
+
+01:57.550 --> 02:00.190
+So in this lecture we're just going to talk about variables.
+
+02:00.190 --> 02:02.750
+We're going to just store the variables and access them.
+
+02:02.750 --> 02:07.060
+In the next lecture we will be actually using this variable for more meaningful purpose.
+
+02:07.420 --> 02:09.660
+So first let's see the variables in action.
+
+02:09.860 --> 02:15.980
+So open your VSCode and you can see in your pipeline we have defined a variables called project name.
+
+02:16.220 --> 02:17.700
+And its value is V profile.
+
+02:17.700 --> 02:18.940
+We have not used it.
+
+02:19.380 --> 02:22.060
+We'll use it into this echo command.
+
+02:22.380 --> 02:29.140
+So building the project and let's say dollar in curly brace.
+
+02:29.180 --> 02:29.660
+Wait.
+
+02:30.260 --> 02:33.700
+My bad I had given the variables value first okay.
+
+02:33.780 --> 02:36.380
+So dollar and the variable name.
+
+02:36.660 --> 02:39.540
+And then you can concatenate with something if you wish to.
+
+02:39.580 --> 02:41.940
+Or if you don't want you can just keep it as it is.
+
+02:41.940 --> 02:44.260
+I'm going to say hyphen test.
+
+02:45.780 --> 02:49.700
+And also over here I'm going to give dollar project hyphen.
+
+02:53.900 --> 02:54.300
+Yeah.
+
+02:54.340 --> 02:55.820
+Here okay.
+
+02:55.820 --> 02:59.740
+So that is defining the variable in the pipeline and accessing it over here itself.
+
+02:59.740 --> 03:02.180
+Now let's see the variable in the GitLab UI.
+
+03:05.800 --> 03:12.240
+So you go to your project and you go to settings and here you can see CI, CD, click on that.
+
+03:12.600 --> 03:17.840
+Here you have all the settings related to CI CD like customizing your pipeline.
+
+03:17.840 --> 03:20.160
+You have auto DevOps runners.
+
+03:20.160 --> 03:22.720
+You can add remove select artifacts.
+
+03:23.000 --> 03:24.120
+You have variables.
+
+03:24.520 --> 03:25.480
+And this is what we want.
+
+03:25.520 --> 03:26.240
+Variables.
+
+03:26.240 --> 03:27.120
+Expand that.
+
+03:27.680 --> 03:31.080
+Scroll down and you should see here add variables.
+
+03:31.640 --> 03:33.600
+You click on add variable.
+
+03:34.040 --> 03:36.480
+You have here type variable that is by default.
+
+03:36.480 --> 03:38.120
+Or you can also create file.
+
+03:38.120 --> 03:41.280
+Let's keep it as variable default environment.
+
+03:42.080 --> 03:48.160
+If you have environment we're using in our pipeline like production test staging, then we can mention
+
+03:48.160 --> 03:51.880
+the scope of this variable for a particular environment.
+
+03:51.880 --> 03:55.320
+By default it's for everything for all the environment.
+
+03:55.640 --> 03:57.040
+Here you have visibility.
+
+03:57.080 --> 04:01.440
+Now if you keep it as visible it will be it can be seen even in the job logs.
+
+04:01.640 --> 04:03.040
+Of course you can see it here.
+
+04:03.040 --> 04:06.430
+The value and also in the job logs in mast.
+
+04:06.710 --> 04:09.270
+It will be mast in the job logs.
+
+04:09.270 --> 04:14.670
+You will not be able to see in the logs, but here you should be able to see the value.
+
+04:14.670 --> 04:18.470
+But if you select masked and hidden then this becomes a secret.
+
+04:18.790 --> 04:23.030
+Once you save this variable after that you cannot see it in the settings.
+
+04:23.030 --> 04:27.270
+Also, you have here a few flags protect protect variables.
+
+04:27.310 --> 04:32.350
+Now this is for protected branches like main branch where you don't want anybody to commit.
+
+04:32.350 --> 04:37.510
+You create a feature branch or a bug fix branch or any other branch you create, which is not the main
+
+04:37.510 --> 04:39.870
+branch which is not protected in that branch.
+
+04:39.870 --> 04:42.750
+This variable won't be accessible if you put a check mark.
+
+04:43.150 --> 04:48.870
+So if you save a variable that is protected and you are using some other branch which are not protected,
+
+04:48.870 --> 04:51.350
+you will not be able to access those variables.
+
+04:51.350 --> 04:54.990
+So first let's keep it as normal visibility the normal variable.
+
+04:55.150 --> 04:59.230
+Let's uncheck this protect variable option and give some description.
+
+04:59.790 --> 05:07.470
+Let's set a variable for a Java options which is used for Maven build and the key or the name of the
+
+05:07.580 --> 05:08.180
+variable.
+
+05:08.180 --> 05:11.940
+Let's keep it as Java underscore options.
+
+05:12.100 --> 05:17.660
+And I'm going to take this variable in the pipeline and store it into another variable that is meaningful
+
+05:17.660 --> 05:19.460
+for Maven its value.
+
+05:19.460 --> 05:21.700
+I'm giving it in the double quotes.
+
+05:21.740 --> 05:24.820
+Hyphen capital Zmz 512M.
+
+05:25.140 --> 05:30.700
+That is, minimum memory that Maven can use 512 MB and maximum 1024.
+
+05:31.060 --> 05:32.700
+And this is a normal variable.
+
+05:32.700 --> 05:35.140
+Let's click on Add variables okay.
+
+05:35.140 --> 05:35.900
+Let me close this.
+
+05:35.900 --> 05:37.700
+You see this variable is saved.
+
+05:37.740 --> 05:38.740
+It's expanded.
+
+05:39.060 --> 05:42.460
+You click on edit and you can see its value.
+
+05:43.060 --> 05:48.900
+Now let's add another variable I will say this will be masked and hidden on protected branch.
+
+05:48.900 --> 05:51.460
+Only some description.
+
+05:51.460 --> 06:06.460
+And here I'm going to name the variable as my hyphen secret and value I am ninja or I am the ninja.
+
+06:07.260 --> 06:10.050
+Now here I have given my underscore secret and the value.
+
+06:10.090 --> 06:10.290
+Okay.
+
+06:10.290 --> 06:10.570
+Let's see.
+
+06:10.610 --> 06:11.370
+Add variable.
+
+06:11.770 --> 06:12.730
+Let's close this.
+
+06:13.410 --> 06:16.250
+And you see it's protected masked hidden expanded.
+
+06:16.250 --> 06:18.970
+If you click on edit scroll down.
+
+06:19.010 --> 06:20.570
+You see you cannot see the value.
+
+06:20.610 --> 06:24.450
+You can either delete it or make some changes.
+
+06:26.090 --> 06:26.330
+Okay.
+
+06:26.330 --> 06:27.770
+Let's put them in the pipeline.
+
+06:28.130 --> 06:34.410
+Now in the variables here itself I'm going to give the actual variable Java underscore opts.
+
+06:34.690 --> 06:41.010
+And instead of giving its value I'm going to say dollar curly brace.
+
+06:41.010 --> 06:44.690
+In this curly brace I'm going to mention the actual variable okay.
+
+06:44.730 --> 06:47.570
+So this is the variable that I have defined in the GitLab UI.
+
+06:47.570 --> 06:50.930
+And this is its value will be stored into this variable.
+
+06:51.130 --> 06:54.810
+And this variable will be accessible by this stages.
+
+06:55.450 --> 06:59.610
+Let's also mention some echo command over here to see these variables.
+
+06:59.610 --> 07:02.930
+I'm going to say hyphen echo here in double quotes.
+
+07:05.410 --> 07:07.050
+Java options are dollar.
+
+07:07.050 --> 07:09.050
+Java opts this variable over here.
+
+07:09.570 --> 07:12.680
+And also, let's see the secret echo.
+
+07:14.360 --> 07:17.680
+My secret is that dollar and my secret.
+
+07:17.680 --> 07:19.160
+That's the secret variable.
+
+07:19.520 --> 07:21.240
+And let's save this now.
+
+07:21.280 --> 07:22.120
+One last thing.
+
+07:23.480 --> 07:26.880
+Predefined variables this will be using in our next lecture.
+
+07:27.320 --> 07:34.320
+So there predefined ci CD variables that you can use very very helpful in our pipeline to decide various
+
+07:34.320 --> 07:34.840
+things.
+
+07:34.840 --> 07:42.560
+So let's see the list of variables as many actually have ci ci commit branch the commit branch name.
+
+07:43.000 --> 07:47.400
+Now let's say if you want to decide if the commit branch is main I want to trigger the pipeline or the
+
+07:47.400 --> 07:48.880
+stage or don't want to run it.
+
+07:49.160 --> 07:51.960
+So you can use this variable in your pipeline.
+
+07:52.320 --> 07:55.840
+CI commit message if you want to see the commit message.
+
+07:56.200 --> 07:57.520
+CI commit QT.
+
+07:57.680 --> 08:05.320
+Very useful in tagging versioning your artifact like Docker images pipeline CI underscore pipeline underscore
+
+08:05.320 --> 08:05.920
+source.
+
+08:06.080 --> 08:08.240
+How the pipeline was triggered.
+
+08:08.760 --> 08:10.200
+Was it due to the commit?
+
+08:10.200 --> 08:14.380
+Was it due to the pull request, there was any schedule.
+
+08:14.380 --> 08:16.940
+So based on that also you can make decisions.
+
+08:16.940 --> 08:19.380
+We will be using this variable in the next lecture.
+
+08:19.380 --> 08:21.620
+In this lecture let's just print this variable.
+
+08:21.620 --> 08:24.820
+So I'm going to take this variable included.
+
+08:24.820 --> 08:26.740
+One more echo statement over here.
+
+08:26.740 --> 08:33.620
+The source of the pipeline trigger is dollar CI pipeline source for branch dollar CI underscore commit
+
+08:33.620 --> 08:34.660
+underscore branch.
+
+08:34.940 --> 08:37.900
+Now observe here I have used the dollar curly braces.
+
+08:37.900 --> 08:39.900
+And here I have used just the dollar.
+
+08:40.420 --> 08:41.300
+Both works.
+
+08:41.300 --> 08:44.500
+But as we have seen here we can do concatenation also.
+
+08:45.460 --> 08:46.380
+So let's test it.
+
+08:46.380 --> 08:47.660
+Let's save this file.
+
+08:47.660 --> 08:54.660
+And let's commit and push commit and push learning variables in the commit message.
+
+08:54.700 --> 08:55.580
+Accept it.
+
+08:56.140 --> 08:57.940
+And let's take a look at the pipeline.
+
+08:59.180 --> 09:03.180
+Let's go to build pipelines okay.
+
+09:03.180 --> 09:03.980
+It's running.
+
+09:04.220 --> 09:06.180
+Let's go to the job directory.
+
+09:06.900 --> 09:08.700
+Build job okay.
+
+09:08.740 --> 09:11.660
+Open full log jobs full log viewer.
+
+09:12.100 --> 09:13.010
+And let's take a look.
+
+09:13.010 --> 09:15.930
+So that's the command building project.
+
+09:15.930 --> 09:21.050
+And here is the output building the project V profile hyphen test.
+
+09:21.770 --> 09:25.530
+Then we have the Java options and we see the value.
+
+09:26.010 --> 09:29.650
+And here I'm saying my secret is that.
+
+09:29.650 --> 09:34.170
+And it says must yes Ninja is must right now jokes apart.
+
+09:34.170 --> 09:35.330
+But that's what it means right.
+
+09:35.370 --> 09:38.690
+It is not visible in the job logs if it's masked.
+
+09:39.490 --> 09:41.850
+So these are the variables that we have defined.
+
+09:41.890 --> 09:44.770
+Now these are the variables that are predefined.
+
+09:45.130 --> 09:48.690
+So the source of the pipeline trigger is push.
+
+09:48.690 --> 09:52.330
+So we made a push a commit for branch main.
+
+09:52.330 --> 09:56.890
+So that variable contains the value of the branch on which the commit was done.
+
+09:57.450 --> 10:00.090
+Or this pipeline is running for that is main.
+
+10:00.850 --> 10:05.450
+So in this lecture you have seen how to define the variable and how to access them and the difference
+
+10:05.450 --> 10:07.970
+between a normal variable and masked variable.
+
+10:08.250 --> 10:12.050
+In the next lecture we'll use these variables for some conditions.
+
+10:12.850 --> 10:15.010
+So wrap this up and join me in the next lecture.

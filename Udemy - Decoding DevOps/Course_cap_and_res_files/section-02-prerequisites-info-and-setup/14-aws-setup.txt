@@ -1,0 +1,1078 @@
+WEBVTT
+
+00:00.160 --> 00:01.240
+Hello and welcome.
+
+00:01.240 --> 00:04.040
+In this lecture we are going to do AWS setup.
+
+00:04.040 --> 00:05.280
+This is prerequisite.
+
+00:05.760 --> 00:09.440
+So we will be only working in the initial setup part.
+
+00:09.680 --> 00:13.280
+AWS section comes later after scripting.
+
+00:13.720 --> 00:20.000
+So you can either follow this lecture now and complete the AWS account setup, or you can do it later
+
+00:20.000 --> 00:23.080
+before the AWS part one section starts.
+
+00:23.840 --> 00:25.800
+So we need to do few things in this lecture.
+
+00:25.800 --> 00:27.600
+We need to setup the AWS account.
+
+00:27.600 --> 00:29.320
+That will be a sign up process.
+
+00:29.680 --> 00:36.120
+And then we're going to work on securing our login details with AWS account, which is very important
+
+00:36.120 --> 00:37.400
+and critical case here.
+
+00:37.720 --> 00:43.440
+And third will be setting up a billing alarm so we don't accidentally consume any paid service in AWS.
+
+00:43.920 --> 00:49.240
+In case if you make any such mistake, then you will get a billing alarm and you can clean your resource
+
+00:49.640 --> 00:50.440
+throughout this course.
+
+00:50.440 --> 00:56.320
+When we use AWS, I will be guiding you how to clean up the AWS resources that you're using and if you
+
+00:56.360 --> 00:59.920
+are going above free tier, then I'm going to alert you.
+
+01:00.930 --> 01:07.490
+So let's sign up on AWS account first so you can just search on the internet, set up AWS Free tier
+
+01:07.490 --> 01:13.250
+account, or you can access this URL AWS dot amazon.com slash console.
+
+01:13.850 --> 01:20.650
+The word console in AWS means the web interface, the one that you access from the browser, and you
+
+01:20.650 --> 01:23.290
+can manage all your AWS resources from that.
+
+01:24.010 --> 01:26.450
+So let's click on Create Account here.
+
+01:27.050 --> 01:29.050
+So you need to sign up with an email account.
+
+01:29.050 --> 01:31.330
+So I have given a Gmail account over here.
+
+01:31.650 --> 01:34.210
+And this login is called as a root user login.
+
+01:34.210 --> 01:38.330
+So this will be your root user that will have complete access.
+
+01:38.690 --> 01:41.690
+We will be also creating a one more user later.
+
+01:41.690 --> 01:48.370
+Once we create this account, give your account a name and click on Verify email address.
+
+01:48.770 --> 01:50.530
+You should get a verification code.
+
+01:52.010 --> 01:53.610
+After that, click on verify.
+
+01:54.250 --> 01:57.530
+Set your root user password, make sure it's longer.
+
+01:57.810 --> 02:03.730
+And of course you need to add here alphanumeric characters plus some symbols and then say continue.
+
+02:04.570 --> 02:06.410
+So you should see here two plants.
+
+02:06.410 --> 02:13.050
+One is three six months and the other one is paid in both the kind of accounts you receive a $200 credits.
+
+02:13.610 --> 02:19.130
+But the problem with the free account is that we cannot access all the AWS services in paid.
+
+02:19.130 --> 02:26.130
+You have access to all the free tier services, plus you can scale whenever you want, so go for paid
+
+02:26.130 --> 02:26.410
+account.
+
+02:26.410 --> 02:29.730
+We are not going to pay anything 99% of the time.
+
+02:29.730 --> 02:36.290
+We will be using the free tier services, but sometimes for production use cases we are going to switch
+
+02:36.290 --> 02:41.890
+to some paid services, which will be for a very limited amount of time and a negligible bill, which
+
+02:41.930 --> 02:43.970
+if you want, you can also skip later.
+
+02:44.490 --> 02:46.930
+So click on Choose Paid Plan.
+
+02:47.770 --> 02:49.330
+Click here on personal.
+
+02:49.850 --> 02:51.490
+Fill all these details over here.
+
+02:51.490 --> 02:55.810
+Your full name, address, city postal code and say agree and continue.
+
+02:56.850 --> 02:59.610
+Next you need to enter credit or debit card detail.
+
+02:59.650 --> 03:06.660
+Do not worry, we are using free services, but we need to put this detail in AWS account for verification.
+
+03:06.700 --> 03:13.460
+On top of that, you get $100 credit in your AWS account and $100 more when you complete a few steps.
+
+03:13.980 --> 03:18.660
+So you are pretty much covered throughout this course to use this AWS account freely.
+
+03:19.420 --> 03:22.620
+So fill in all this detail and click on verify and continue.
+
+03:22.740 --> 03:30.340
+It will temporarily deduct $1 or for me with an Indian card it deducted ₹2 which is for verification
+
+03:30.340 --> 03:31.620
+and will be refunded.
+
+03:32.100 --> 03:35.100
+Once that is done, you will be redirected to this page.
+
+03:35.420 --> 03:43.300
+So first select the primary purpose we can go with academic in ownership type select individual and
+
+03:43.300 --> 03:48.420
+then fill in all the other details to verify your identity and then say continue.
+
+03:49.620 --> 03:55.300
+Once you are done filling those details, you can confirm your identity through text message or voice
+
+03:55.300 --> 03:55.700
+call.
+
+03:56.140 --> 03:57.500
+So enter your phone number.
+
+03:57.980 --> 04:01.500
+I have used SMS so I'm entering the code that I have received.
+
+04:03.140 --> 04:04.340
+Select the support plan.
+
+04:04.340 --> 04:07.460
+We actually don't need any support except basic things.
+
+04:07.460 --> 04:11.620
+If you are not able to log in then we can contact the support.
+
+04:11.620 --> 04:13.780
+Otherwise we don't need any other kind of support.
+
+04:13.900 --> 04:18.700
+So just keep it to basic and you can click on complete sign up.
+
+04:18.900 --> 04:26.380
+The other support plans are for people who use production workloads and they need support from AWS Support
+
+04:26.420 --> 04:26.820
+Team.
+
+04:27.540 --> 04:28.220
+We don't need that.
+
+04:28.220 --> 04:29.900
+We are just using it for learning purpose.
+
+04:29.900 --> 04:32.820
+So we are going to go with basic support, free complete sign up.
+
+04:33.540 --> 04:34.980
+Okay, so the account is created.
+
+04:34.980 --> 04:38.340
+Now let's click on Sign in to console and log in with our details.
+
+04:39.460 --> 04:45.020
+Once you are logged in over here, click on this drop down and switch to North Virginia.
+
+04:45.620 --> 04:49.340
+AWS has many regions we are going to use North Virginia.
+
+04:49.380 --> 04:52.540
+Most of the time you don't need to use the location that is near to you.
+
+04:53.060 --> 04:56.660
+It's recommended to use this region for variety of purposes.
+
+04:56.900 --> 04:59.140
+It has the widest service availability.
+
+04:59.510 --> 05:02.590
+free tier eligibility and it's the cheapest one now.
+
+05:02.590 --> 05:07.510
+Anyways, we're using it for free, but I still recommend you keep it North Virginia.
+
+05:08.350 --> 05:11.030
+So the setup of AWS account is completed.
+
+05:11.030 --> 05:16.870
+You can click on any of the servers like EC2, click on EC2 service and check that you don't get any
+
+05:16.870 --> 05:17.230
+errors.
+
+05:17.230 --> 05:20.350
+Click on dashboard and it should be like this.
+
+05:20.350 --> 05:24.270
+It might take a little while, so you need to wait for few minutes until it shows like this.
+
+05:24.270 --> 05:28.870
+If it shows any error then contact the AWS support and check with them.
+
+05:28.870 --> 05:30.950
+Why your account is not yet active.
+
+05:31.590 --> 05:35.470
+You can click on this button, go to Support Center and you can chat with them.
+
+05:35.590 --> 05:38.630
+Or you can raise a ticket and it's usually very quick.
+
+05:38.670 --> 05:41.110
+You will get an answer why your account is not active.
+
+05:41.150 --> 05:45.990
+Maybe some verification did not go well, which you can complete and then activate the account account
+
+05:45.990 --> 05:46.430
+again.
+
+05:47.230 --> 05:52.950
+Our account will have an account ID and we have a URL that you can use to access our account.
+
+05:53.470 --> 05:56.510
+And by default, the URL will contain the account ID.
+
+05:56.550 --> 06:02.400
+In order to change that we can give a name, so we get a proper URL with alphabets.
+
+06:02.680 --> 06:05.880
+To change that over here search for IAM.
+
+06:05.920 --> 06:11.440
+Im is a service in AWS where you can control the users permissions and many other things.
+
+06:11.760 --> 06:16.040
+So search for IAM service, go to that and click here on account alias.
+
+06:16.040 --> 06:20.720
+Click on create and give a name that you prefer to be coming in the URL.
+
+06:21.200 --> 06:22.240
+Something like this.
+
+06:22.240 --> 06:24.960
+So you give a name, then this will be your URL.
+
+06:25.400 --> 06:26.800
+You can say create alias.
+
+06:27.040 --> 06:29.800
+Okay, now the next part of our lecture we created the account.
+
+06:29.800 --> 06:31.760
+It's time to secure our login.
+
+06:32.120 --> 06:34.560
+We have login with email address and password.
+
+06:35.000 --> 06:38.200
+On top of that we are going to add a multi-factor authentication.
+
+06:38.200 --> 06:41.360
+So we get a security code every time we log in.
+
+06:41.360 --> 06:47.280
+So even if someone gets the access to your password, you will be still safe as long as you have your
+
+06:47.280 --> 06:47.760
+phone.
+
+06:48.040 --> 06:52.920
+We will be setting a multi-factor authentication on the phone, a device called Google Authenticator.
+
+06:53.360 --> 06:57.640
+So right here in MFA, if you are in dashboard, you can click here on MFA.
+
+06:57.680 --> 07:00.920
+This is for your email address for your root account.
+
+07:00.920 --> 07:02.160
+So click on add MFA.
+
+07:02.800 --> 07:08.960
+Give a name like you know your phone name and over here select authenticator app.
+
+07:09.000 --> 07:10.920
+We will be using Google Authenticator.
+
+07:10.920 --> 07:16.280
+So if you do not have Google Authenticator app, install it from your app store or Play Store.
+
+07:16.880 --> 07:17.080
+Go.
+
+07:17.120 --> 07:19.640
+Next, click on show QR code.
+
+07:19.640 --> 07:20.840
+You will see the code.
+
+07:21.200 --> 07:24.160
+Now open Google Authenticator app on your phone.
+
+07:25.120 --> 07:26.880
+It will look something like this.
+
+07:26.880 --> 07:28.760
+You will get a plus symbol like this.
+
+07:28.760 --> 07:29.760
+Click on that.
+
+07:30.320 --> 07:31.440
+Scan the QR code.
+
+07:31.440 --> 07:33.680
+You will get a six digit number like this.
+
+07:33.720 --> 07:35.920
+Enter six digit code over here.
+
+07:36.360 --> 07:43.360
+Wait until it gets refreshed, then enter the next code over here and then click on add MFA.
+
+07:43.760 --> 07:48.840
+Okay, so now we created MFA for root account and it is secured and safe now.
+
+07:49.280 --> 07:55.080
+But in real time we really don't use the root user to use AWS resource.
+
+07:55.080 --> 07:56.720
+We create IAM user.
+
+07:56.760 --> 08:04.530
+Root user is mostly for billing support and all these high level activities for consuming AWS computing
+
+08:04.530 --> 08:05.250
+resource.
+
+08:05.890 --> 08:11.650
+It's always we recommend to use IAM user which you can control access on.
+
+08:11.650 --> 08:18.050
+So to create an IAM user, go to users click on Create user new user a name.
+
+08:18.690 --> 08:24.490
+So I'm giving here IT admin and I say provide user access to AWS Management Console.
+
+08:24.890 --> 08:27.170
+That means this browser based access.
+
+08:27.570 --> 08:29.610
+Let's keep auto generated password.
+
+08:29.610 --> 08:31.890
+Or you can write your own custom password.
+
+08:32.290 --> 08:34.610
+But it's better you say auto generated password.
+
+08:34.610 --> 08:39.090
+And when the user login, this IAM user logs in.
+
+08:39.250 --> 08:41.610
+It can create a new password for itself.
+
+08:41.890 --> 08:45.010
+So let's put a check mark on that and go next.
+
+08:45.410 --> 08:48.810
+Now you can have complete control on what this user can do.
+
+08:49.170 --> 08:51.090
+And that can be done by policies.
+
+08:51.130 --> 08:52.530
+These are the permissions.
+
+08:53.010 --> 08:56.330
+We're going to learn more about this in detail in AWS lectures.
+
+08:56.650 --> 09:01.010
+But for now we just need to create this user and we need full access to this user.
+
+09:01.010 --> 09:03.490
+So we are going to give administrator access.
+
+09:03.730 --> 09:08.130
+Now be very careful with this IAM user and also with the root user both user.
+
+09:08.530 --> 09:15.210
+It's your duty to make sure that this credentials are safe because root user has complete access and
+
+09:15.250 --> 09:17.210
+IT admin user that we are creating.
+
+09:17.210 --> 09:19.370
+Also we are giving administrator access.
+
+09:19.370 --> 09:21.330
+So be very careful with this user.
+
+09:21.610 --> 09:24.970
+Go next and then say create user.
+
+09:25.330 --> 09:29.690
+Now you should get the URL to login username and the password.
+
+09:29.970 --> 09:34.610
+And once we are done with this entire lecture you are going to log in with this credentials.
+
+09:34.890 --> 09:40.530
+And then you make sure you always use this user to conduct all the AWS activities that we are doing,
+
+09:40.530 --> 09:42.370
+except for billing and support.
+
+09:43.490 --> 09:49.010
+So anytime you can delete this user and add a new user, or you can change the details of this users,
+
+09:49.410 --> 09:52.050
+let's click on this user and let's set MFA.
+
+09:52.530 --> 09:53.970
+You see the permissions section.
+
+09:53.970 --> 09:57.610
+We have the policy for this user administrator access.
+
+09:57.610 --> 10:00.220
+And we can anytime remove this policy.
+
+10:00.260 --> 10:01.340
+Add a new policy.
+
+10:02.020 --> 10:03.980
+As I said, we're going to see this in detail later.
+
+10:03.980 --> 10:06.380
+So now go to security credentials.
+
+10:06.620 --> 10:08.300
+Now say MFA device.
+
+10:08.300 --> 10:10.220
+And you know what you have to do now.
+
+10:10.260 --> 10:12.940
+Give MFA device a name authenticator app.
+
+10:13.140 --> 10:15.220
+Set MFA for this user also.
+
+10:15.780 --> 10:18.580
+And once you do that log out with the root user.
+
+10:18.580 --> 10:20.340
+Log in with this IAM user.
+
+10:20.380 --> 10:21.700
+Reset your password.
+
+10:22.100 --> 10:27.660
+Once you reset the password and login, then log out again and log in with root user again.
+
+10:28.260 --> 10:32.420
+Because next we're going to set the billing alarm for this AWS account.
+
+10:32.420 --> 10:36.620
+So we accidentally don't consume any AWS paid services.
+
+10:37.220 --> 10:37.540
+Okay.
+
+10:37.580 --> 10:46.460
+So once you are ready with root user account, search for CloudWatch service CloudWatch CloudWatch is
+
+10:46.460 --> 10:48.660
+a monitoring service of AWS.
+
+10:49.060 --> 10:55.100
+It can monitor all your resources that you're using in your AWS account, and also it monitors your
+
+10:55.100 --> 11:01.900
+bill and you can set alarm on these metrics, you can see if certain metrics cross a certain limit,
+
+11:01.900 --> 11:05.380
+send you an email notification so you will be notified.
+
+11:05.540 --> 11:08.260
+So we'll set that billing alarm in a moment.
+
+11:08.620 --> 11:14.980
+But before that AWS also sends you notification for free tier if you're crossing free tier limits and
+
+11:14.980 --> 11:16.980
+also builds on PDF.
+
+11:16.980 --> 11:20.180
+So for that you need to access the billing section.
+
+11:20.380 --> 11:24.380
+So click on this drop down and go to Billing and Cost Management.
+
+11:24.380 --> 11:26.060
+You can open in a new tab.
+
+11:26.700 --> 11:31.660
+So you should see like this data unavailable for these things like forecast and all because this is
+
+11:31.660 --> 11:32.540
+a fresh account.
+
+11:32.780 --> 11:35.940
+If you really want to see your bills you can go to bills section.
+
+11:36.300 --> 11:42.740
+So let's say you are working in a project and you need to see how much it is costing you for the services
+
+11:42.740 --> 11:44.660
+that you're using for that particular month.
+
+11:44.660 --> 11:47.780
+You can see all those bills on monthly basis.
+
+11:47.780 --> 11:53.020
+You can see which region and which service exactly is costing how much.
+
+11:53.060 --> 11:58.910
+Very detailed information you can get in the bills you can see it monthly wise over here.
+
+11:59.430 --> 12:02.710
+So also for our course you can keep checking bills.
+
+12:02.990 --> 12:06.750
+Anyways we'll setting the will be setting the alerts and alarms.
+
+12:07.030 --> 12:11.190
+So if you accidentally cross a certain amount you can get the notification.
+
+12:11.590 --> 12:16.310
+Most of the time we will be using free tier will be using the free credits.
+
+12:16.670 --> 12:19.150
+And I also show how to clean up the resources.
+
+12:19.150 --> 12:24.310
+But if you don't clean up your resources and it just runs just like that and you want to see how much
+
+12:24.350 --> 12:26.710
+it costed you, you can come here and check the bills.
+
+12:27.070 --> 12:27.310
+Okay.
+
+12:27.350 --> 12:31.150
+Now let's scroll down over here and go to Billing Preferences.
+
+12:31.430 --> 12:34.910
+So we have free tier alert automatically enabled.
+
+12:35.430 --> 12:37.830
+We have this PDF invoices we need to enable this.
+
+12:37.830 --> 12:41.870
+Let's click on edit and see PDF invoices delivered by email.
+
+12:41.870 --> 12:42.670
+Update this.
+
+12:43.190 --> 12:48.430
+Click over here in Alert Preferences and give your email address over here.
+
+12:48.830 --> 12:52.150
+Put a checkmark on receive CloudWatch billing alerts.
+
+12:52.150 --> 12:54.390
+So we are going to set that in a moment.
+
+12:54.550 --> 12:55.710
+So give your email address.
+
+12:55.750 --> 12:57.960
+Put a check mark over here and click on update.
+
+12:58.960 --> 13:01.480
+Now let's come back to CloudWatch service.
+
+13:01.720 --> 13:03.080
+Refresh the page.
+
+13:03.760 --> 13:08.320
+Make sure you are in this region, not Virginia US East one.
+
+13:09.080 --> 13:14.320
+The billing alarm you can see only in North Virginia region, but it is for your entire account.
+
+13:14.360 --> 13:15.400
+AWS account.
+
+13:16.440 --> 13:18.240
+Now go to all alarms.
+
+13:18.680 --> 13:20.440
+Click on Create Alarm.
+
+13:20.760 --> 13:22.120
+Select a metric.
+
+13:22.920 --> 13:24.120
+Click on billing.
+
+13:24.520 --> 13:26.280
+Total estimated charge.
+
+13:26.720 --> 13:30.160
+Select the currency and hit select metric.
+
+13:30.440 --> 13:30.640
+Now.
+
+13:30.640 --> 13:32.680
+For now, you don't need to understand all this.
+
+13:32.720 --> 13:39.200
+We will have a separate lecture on CloudWatch where I'll explain you all these options in great detail.
+
+13:39.840 --> 13:47.440
+Just scroll down and select Greater or Equal to and give a threshold over here threshold for alarm.
+
+13:47.720 --> 13:50.720
+So let's say my bill crosses more than $5.
+
+13:51.080 --> 13:54.840
+Or you can give even less than that and see next.
+
+13:55.120 --> 14:00.840
+So I'm saying if my bill crosses more than $5, it is in alarm.
+
+14:01.160 --> 14:03.000
+So what do I do with this alarm?
+
+14:03.200 --> 14:05.320
+Well, I want to send an email notification.
+
+14:05.320 --> 14:08.000
+So I'm going to click on Create New topic.
+
+14:08.320 --> 14:13.480
+CloudWatch integrates with a service called SNS Simple Notification Service.
+
+14:13.840 --> 14:15.960
+In essence, you need to give a topic.
+
+14:16.680 --> 14:22.800
+I'm naming it as admin email and the subscriber of this topic will be an email address.
+
+14:22.800 --> 14:26.880
+So give an email address and click on Create Topic.
+
+14:27.320 --> 14:28.240
+Now this topic.
+
+14:28.240 --> 14:33.600
+Once you confirm the subscription will be always available in your account, you can always use this
+
+14:33.600 --> 14:37.760
+topic to do other kind of notification, which we'll see later.
+
+14:38.200 --> 14:42.600
+So add a topic, scroll down and say next give alarm a name.
+
+14:42.920 --> 14:44.720
+I have given a name billing alarm.
+
+14:44.720 --> 14:52.920
+You can add some extra description if you need and say next, scroll down and say Create Alarm.
+
+14:53.360 --> 14:59.010
+Now go to the inbox of the email address that you have given, and click on Confirm Subscription.
+
+14:59.010 --> 15:06.290
+On the email that you got, click on the billing alarm, find the actions tab and you should see over
+
+15:06.290 --> 15:07.650
+here notification.
+
+15:07.650 --> 15:12.810
+If you see pending action, just refresh or make sure you have clicked on Confirm subscription in your
+
+15:12.970 --> 15:13.570
+email.
+
+15:13.810 --> 15:19.010
+It might take a minute or so, and once you do that you should see the notification is enabled.
+
+15:19.250 --> 15:27.130
+Now with this we have safeguarded ourselves so we don't accidentally consume expensive AWS services.
+
+15:27.170 --> 15:33.570
+Now in case that happens, you can anytime go to bills and check which service you have consumed and
+
+15:33.570 --> 15:34.890
+you can clear those services.
+
+15:34.890 --> 15:37.730
+All that you will learn in AWS part one.
+
+15:38.130 --> 15:41.050
+When you use the services, you will know which service to clean up.
+
+15:41.450 --> 15:43.370
+All right, so by far we did good.
+
+15:43.930 --> 15:45.930
+We created AWS account.
+
+15:46.370 --> 15:49.210
+We secured login with MFA.
+
+15:49.290 --> 15:52.530
+We created IAM user for our AWS activities.
+
+15:53.010 --> 15:54.890
+And we have set up billing alarm.
+
+15:55.370 --> 15:57.610
+If you are a a beginner, you did a great job.
+
+15:58.090 --> 15:59.410
+Now the last part.
+
+16:00.010 --> 16:06.690
+We are going to create a public certificate for our domain that we purchased in previous lecture.
+
+16:06.930 --> 16:09.570
+Now if you have not purchased the domain it's fine.
+
+16:09.570 --> 16:10.530
+You can do it later.
+
+16:10.530 --> 16:15.530
+Or you can skip the part where we use this public certificate in the course.
+
+16:15.890 --> 16:18.730
+But if you did purchase the certificate, sorry.
+
+16:18.770 --> 16:20.450
+If you did purchase the domain.
+
+16:20.610 --> 16:23.050
+We need to create a public certificate for that.
+
+16:23.450 --> 16:27.930
+Now, if you're not aware about what is this certificate, I can give you a quick glimpse.
+
+16:28.330 --> 16:31.970
+So you see we are using this Amazon.com over here.
+
+16:32.330 --> 16:35.210
+And how do we know that this is really Amazon.com?
+
+16:35.210 --> 16:43.050
+Now who confirms that there should be some authority that gives a certificate that yes, you are the
+
+16:43.050 --> 16:45.570
+rightful owner of this domain.
+
+16:45.850 --> 16:50.810
+And you can check that certificate over here if you click on this or if you see a lock symbol over there,
+
+16:50.810 --> 16:51.690
+click on that.
+
+16:51.930 --> 16:56.180
+You see connection is secure Https secure connection.
+
+16:56.180 --> 16:57.420
+Encrypted connection.
+
+16:59.140 --> 17:02.020
+Now if I click on that connection is security seeing.
+
+17:02.060 --> 17:04.980
+And here you should see certificate is valid.
+
+17:05.260 --> 17:07.980
+If you click on that you should see the certificate.
+
+17:08.300 --> 17:12.300
+Now here you can see this certificate is issued to this domain.
+
+17:12.620 --> 17:15.060
+And this is issued by Amazon RSA.
+
+17:15.620 --> 17:21.180
+So there are authorities on the internet which are known to provide the certificate.
+
+17:21.180 --> 17:23.780
+Amazon is also one of them and there are many other.
+
+17:24.180 --> 17:28.620
+So these authorities will confirm that this domain belongs to you.
+
+17:28.900 --> 17:33.660
+You are the rightful owner of the domain and that happens through verification.
+
+17:34.100 --> 17:37.340
+So we are going to create a certificate for our domain.
+
+17:37.340 --> 17:42.180
+So let's go to this service certificate manager.
+
+17:42.180 --> 17:45.660
+Click on that service search and find the service certificate manager.
+
+17:45.660 --> 17:46.500
+Click on that.
+
+17:46.900 --> 17:49.180
+Now here you can request a certificate.
+
+17:49.180 --> 17:50.420
+That's what we are going to do.
+
+17:50.420 --> 17:55.510
+But you are also allowed to store your certificate that you created from somewhere else.
+
+17:55.870 --> 17:58.350
+So we're going to say request a certificate.
+
+17:58.750 --> 18:01.670
+So this is going to be a public certificate.
+
+18:02.110 --> 18:05.430
+And this is free private certificate will not be free.
+
+18:05.910 --> 18:09.070
+So make sure it's a public certificate and go next.
+
+18:09.110 --> 18:11.670
+Here I need to give fully qualified domain name.
+
+18:11.670 --> 18:16.950
+So I have here this domain HC infotech.xyz.
+
+18:17.110 --> 18:18.870
+So find your domain name.
+
+18:18.870 --> 18:21.070
+Login to your domain registrar like GoDaddy.
+
+18:21.110 --> 18:26.670
+Go to my products and you have to give here in this format you have to say star Dot.
+
+18:28.710 --> 18:29.710
+Your domain name.
+
+18:29.710 --> 18:31.390
+So you can use subdomains.
+
+18:31.390 --> 18:37.470
+Also with the certificate scroll down validation method DNS validation.
+
+18:37.470 --> 18:41.950
+We need to create a record in our domain registrar here in GoDaddy.
+
+18:42.630 --> 18:44.430
+And that's how we are going to confirm that.
+
+18:44.430 --> 18:47.150
+So click on DNS validation.
+
+18:47.150 --> 18:48.950
+Scroll down and say request.
+
+18:49.270 --> 18:51.910
+Now here you should see pending validation.
+
+18:52.710 --> 18:57.750
+So in order to validate we need to add a record in our domain.
+
+18:58.230 --> 19:03.150
+This is called as the CNAME record a name mapping to another name.
+
+19:03.590 --> 19:05.350
+Now this is just for validation.
+
+19:05.710 --> 19:07.790
+So for now you don't need to understand all this.
+
+19:07.790 --> 19:11.870
+I'm going to talk about all these in great detail in later lectures.
+
+19:12.150 --> 19:14.950
+For now all you need to do is go to your domain.
+
+19:15.030 --> 19:17.510
+You need to find a setting called DNS records.
+
+19:17.550 --> 19:21.990
+Now in GoDaddy it is here you go to domain go to DNS.
+
+19:22.350 --> 19:23.790
+Here you see the setting.
+
+19:23.830 --> 19:25.030
+Add new record.
+
+19:25.390 --> 19:27.710
+Now this might change a little bit based on the UI.
+
+19:27.750 --> 19:32.390
+All you need to do is find the add new record setting in DNS and click on that.
+
+19:32.670 --> 19:37.350
+You scroll down here in the type you need to select here see name.
+
+19:38.430 --> 19:40.910
+You need to give your name and here the value.
+
+19:40.910 --> 19:42.870
+So go back to your certificate.
+
+19:43.430 --> 19:48.670
+Copy the key name name you're going to enter CNAME name over here.
+
+19:48.870 --> 19:53.630
+So just make sure you remove your domain name from the end.
+
+19:56.280 --> 19:58.200
+Also the full stop at the end.
+
+19:58.920 --> 20:04.400
+Just confirm check the last characters if they are same or not in the value.
+
+20:04.440 --> 20:06.040
+We need to paste the whole thing.
+
+20:06.040 --> 20:11.040
+So copy C, name value, copy that and paste it over there.
+
+20:12.400 --> 20:17.200
+Make sure you remove the full stop at the end and then click on save.
+
+20:18.240 --> 20:20.840
+So after that you should see the record over here.
+
+20:20.880 --> 20:22.920
+Make sure you don't touch any other records.
+
+20:23.560 --> 20:25.240
+We need to wait for some time.
+
+20:26.280 --> 20:27.920
+You see, it's pending validation.
+
+20:27.960 --> 20:29.360
+Still, it takes some time.
+
+20:30.160 --> 20:33.320
+Now you don't need to wait until this is active and enabled.
+
+20:33.320 --> 20:35.080
+You can go to the next lecture now.
+
+20:35.480 --> 20:39.360
+Anyways, we are going to use it in AWS projects.
+
+20:39.360 --> 20:43.880
+So come back and check after few days because if you just purchase the domain, it is going to take
+
+20:43.880 --> 20:45.400
+like 48 hours or so.
+
+20:45.800 --> 20:50.720
+Now one last thing that I need to do is log in with IAM user.
+
+20:51.160 --> 20:54.320
+So I go to IAM service, go to users.
+
+20:54.720 --> 20:58.600
+That is my user security credentials and that is the link.
+
+20:59.520 --> 21:01.200
+I'm going to access that URL.
+
+21:01.720 --> 21:04.040
+So this is how will be the IAM user login.
+
+21:04.040 --> 21:06.920
+You need to enter the IAM username password over here.
+
+21:08.840 --> 21:13.040
+Now once you do this you will be automatically logged out with your root account.
+
+21:13.480 --> 21:16.760
+Give the old password and give you a new password to reset.
+
+21:19.600 --> 21:26.800
+You will be also asked to login with the MFA code, so check the MFA code for your IAM user and login.
+
+21:27.120 --> 21:29.640
+Make sure you switch to North Virginia.
+
+21:30.000 --> 21:35.800
+Now you will be using this IAM user to consume AWS services.
+
+21:36.320 --> 21:42.320
+Use root account only for a billing, managing IAM users and any support activity.
+
+21:42.520 --> 21:44.680
+All right, that would be all in this lecture.
+
+21:44.680 --> 21:47.160
+I know it's long and a lot of things you did.
+
+21:47.480 --> 21:48.720
+I'm really proud of you.
+
+21:49.320 --> 21:53.360
+Now you are all set to start practicing DevOps.
+
+21:53.800 --> 21:55.000
+I'll see you in the next lecture.

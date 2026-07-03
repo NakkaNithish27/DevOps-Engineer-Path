@@ -1,0 +1,568 @@
+WEBVTT
+
+00:00.330 --> 00:01.163
+Instructor: Alright,
+
+00:01.163 --> 00:06.000
+so we have gained very good knowledge on Variables,
+
+00:06.000 --> 00:09.330
+and different types of Python Data Structures.
+
+00:09.330 --> 00:12.903
+It's very basic, but let's end cache it in this lecture.
+
+00:15.660 --> 00:17.670
+So now we know what are Variables,
+
+00:17.670 --> 00:20.580
+how to retrieve them, Python Data Structure.
+
+00:20.580 --> 00:23.850
+And now from this, we are going to learn JSON, and YAML.
+
+00:27.370 --> 00:30.270
+Okay, let's again focus on the dictionary
+
+00:30.270 --> 00:33.240
+that we used in previous lecture.
+
+00:33.240 --> 00:35.940
+Open a new tab and copy that dictionary.
+
+00:35.940 --> 00:36.773
+Paste it over here.
+
+00:36.773 --> 00:37.770
+Just print it, right?
+
+00:37.770 --> 00:40.500
+By looking at it, we can understand very easily
+
+00:40.500 --> 00:43.410
+that it is a dictionary, because it is in curly braces.
+
+00:43.410 --> 00:47.040
+And there key and value separated by comma.
+
+00:47.040 --> 00:50.700
+Now we're going to work first on values here.
+
+00:50.700 --> 00:53.190
+We are going to have more complex value
+
+00:53.190 --> 00:55.170
+rather than just string and in integer.
+
+00:55.170 --> 00:58.647
+We'll write more complex values for Tech and GitOps.
+
+00:58.647 --> 01:01.410
+And from there, I'm going to show you JSON.
+
+01:01.410 --> 01:04.830
+So Tech, its value is an empty string.
+
+01:04.830 --> 01:05.700
+Let's remove that.
+
+01:05.700 --> 01:09.330
+And we are going to create here, dictionary.
+
+01:09.330 --> 01:14.250
+Yes, the value of Tech key is a dictionary now,
+
+01:14.250 --> 01:16.740
+and we know dictionary, key, and value.
+
+01:16.740 --> 01:18.420
+So I'm going to start with first key.
+
+01:18.420 --> 01:23.163
+I'm going to say Cloud colon in double quotes, AWS.
+
+01:25.170 --> 01:29.073
+Then comma, observe the Syntax, okay?
+
+01:30.180 --> 01:33.600
+Double quotes, then a comma, then a space,
+
+01:33.600 --> 01:37.860
+and then one more Containers.
+
+01:37.860 --> 01:40.710
+It's a value, another string.
+
+01:40.710 --> 01:45.710
+I'll give KBs comma, one more.
+
+01:46.710 --> 01:51.340
+CICD colon, it's value we are giving Jenkins.
+
+01:52.860 --> 01:54.513
+And now let's remove this GitOps.
+
+01:56.019 --> 01:57.827
+(instructor typing)
+
+01:57.827 --> 01:59.970
+(instructor typing continues)
+
+01:59.970 --> 02:02.670
+And remove that comma, okay?
+
+02:02.670 --> 02:04.353
+Observe what I have removed.
+
+02:05.640 --> 02:06.473
+So Tech is the key.
+
+02:06.473 --> 02:08.640
+It's value is a dictionary.
+
+02:08.640 --> 02:09.780
+Cloud is the key.
+
+02:09.780 --> 02:12.240
+Value AWS Containers key.
+
+02:12.240 --> 02:16.260
+Value KBs, CICD key, value Jenkins.
+
+02:16.260 --> 02:17.763
+Let's now run it.
+
+02:19.200 --> 02:20.033
+Okay?
+
+02:20.033 --> 02:24.480
+Now let's copy both the lines, and paste it again down here.
+
+02:24.480 --> 02:27.510
+And then, we are going to add one more key
+
+02:27.510 --> 02:29.580
+in this nested dictionary.
+
+02:29.580 --> 02:31.830
+Yeah, inside the Tech dictionary.
+
+02:31.830 --> 02:33.810
+One more key comma.
+
+02:33.810 --> 02:35.310
+And we are going to give here,
+
+02:35.310 --> 02:40.310
+GitOps colon after the double codes colon.
+
+02:41.520 --> 02:44.853
+And now, it's value will be a list.
+
+02:52.950 --> 02:57.950
+GitOps comma, sorry, not GitOps, something else.
+
+02:59.042 --> 03:00.125
+GitLab comma.
+
+03:04.200 --> 03:05.523
+ArgoCD.
+
+03:06.450 --> 03:07.283
+Just stay with me.
+
+03:07.283 --> 03:09.843
+This will be simplified in a moment.
+
+03:11.040 --> 03:13.923
+Comma Tekton.
+
+03:16.860 --> 03:18.123
+Let's run it.
+
+03:19.764 --> 03:20.597
+Okay, pause.
+
+03:20.597 --> 03:24.390
+Pause the lecture and look once again.
+
+03:24.390 --> 03:26.550
+Very carefully write it.
+
+03:26.550 --> 03:29.100
+You should not get any Syntax error.
+
+03:29.100 --> 03:31.170
+I'm going to repeat once again.
+
+03:31.170 --> 03:32.910
+Skill is a key value.
+
+03:32.910 --> 03:34.560
+Here is a string.
+
+03:34.560 --> 03:37.020
+Here value is an in integer.
+
+03:37.020 --> 03:40.410
+Here value is a dictionary.
+
+03:40.410 --> 03:43.200
+So again, key value, key value.
+
+03:43.200 --> 03:46.203
+And GitHub's key, its value is a list.
+
+03:47.940 --> 03:50.070
+Getting complicated right?
+
+03:50.070 --> 03:51.060
+I know.
+
+03:51.060 --> 03:52.770
+I am going to simplify this.
+
+03:52.770 --> 03:54.693
+I'm going to copy this whole.
+
+03:56.581 --> 03:59.520
+(instructor typing)
+
+03:59.520 --> 04:01.713
+And I'm going to paste it here.
+
+04:03.420 --> 04:06.150
+And now observe what I am doing.
+
+04:06.150 --> 04:07.053
+Just look.
+
+04:58.500 --> 05:00.123
+Much better, right?
+
+05:01.020 --> 05:04.110
+And observe the opening of Calibre and closing,
+
+05:04.110 --> 05:06.813
+and opening of square bracket and closing.
+
+05:07.680 --> 05:09.303
+Observe all the commas.
+
+05:14.010 --> 05:18.630
+Now open a JSON editor online, just Google.
+
+05:18.630 --> 05:20.403
+Any JSON editor is fine.
+
+05:24.990 --> 05:25.823
+Copy this from the Calibre,
+
+05:25.823 --> 05:29.583
+from the start Calibres til the end.
+
+05:31.680 --> 05:33.303
+And just paste it here.
+
+05:34.500 --> 05:37.893
+Yes, that's JSON data format.
+
+05:39.240 --> 05:41.613
+After you paste it over here, click on copy.
+
+05:42.840 --> 05:44.073
+And now observe.
+
+05:46.140 --> 05:50.370
+Close this, and this, and this.
+
+05:50.370 --> 05:52.380
+Okay, slowly open it.
+
+05:52.380 --> 05:54.000
+See key value.
+
+05:54.000 --> 05:56.583
+Key value, key here, value this.
+
+05:57.600 --> 05:58.800
+Another dictionary, right?
+
+05:58.800 --> 05:59.850
+Open it.
+
+05:59.850 --> 06:03.663
+Again key value, key value, key value, key.
+
+06:04.590 --> 06:05.550
+And there's more data.
+
+06:05.550 --> 06:06.513
+That's a list.
+
+06:08.910 --> 06:12.570
+Zero, one, two, the index numbers.
+
+06:12.570 --> 06:15.483
+And that my friend is JSON.
+
+06:16.740 --> 06:18.600
+Right and I know it was not possible
+
+06:18.600 --> 06:21.210
+to explain directly JSON.
+
+06:21.210 --> 06:23.220
+Without knowing the Variables,
+
+06:23.220 --> 06:25.740
+without knowing Python Data Structure.
+
+06:25.740 --> 06:28.020
+We learned Variables, Python Data Structure.
+
+06:28.020 --> 06:31.623
+And very easily now, we can read a JSON data.
+
+06:32.610 --> 06:34.680
+Now it's not just just about being vertical.
+
+06:34.680 --> 06:36.540
+JSON can be horizontal vertical,
+
+06:36.540 --> 06:39.540
+but mostly as a data format.
+
+06:39.540 --> 06:42.393
+We keep it vertical for visibility.
+
+06:43.440 --> 06:44.970
+That's JSON, interesting right?
+
+06:44.970 --> 06:46.773
+Let's now get into YAML.
+
+06:49.080 --> 06:53.133
+After this, let's search for a YAML editor online.
+
+06:54.900 --> 06:58.200
+Can go with the first one, YAML editor online.
+
+06:58.200 --> 07:01.020
+And we go back to the Python Compiler,
+
+07:01.020 --> 07:02.433
+copy this old data,
+
+07:05.040 --> 07:06.363
+and paste it here.
+
+07:07.200 --> 07:10.140
+That's not YAML, not even close.
+
+07:10.140 --> 07:13.053
+But once again now, observe what I am doing.
+
+07:14.280 --> 07:17.733
+Replacing that equal to with a colon.
+
+07:19.740 --> 07:22.473
+And removing all the curly braces and comma.
+
+07:50.373 --> 07:52.200
+Okay and now very carefully,
+
+07:52.200 --> 07:54.273
+we have to place here.
+
+07:55.350 --> 07:57.510
+Again give two space or three space.
+
+07:57.510 --> 08:02.510
+But whatever you give, stick to that hyphen space, okay?
+
+08:06.480 --> 08:11.133
+Hyphen and this should be exactly in the same column.
+
+08:17.760 --> 08:20.550
+Okay, all the hyphen should be in the same column.
+
+08:20.550 --> 08:25.020
+And you see all that element should be in the same column.
+
+08:25.020 --> 08:26.043
+And now.
+
+08:28.050 --> 08:29.130
+Skill is the key.
+
+08:29.130 --> 08:33.480
+And give us space after the colon here, and here as well.
+
+08:33.480 --> 08:35.763
+You can remove this new line,
+
+08:37.140 --> 08:42.140
+and give a space here, and here and here.
+
+08:43.170 --> 08:45.210
+Yeah observe something happened there, right?
+
+08:45.210 --> 08:46.043
+I will come back.
+
+08:46.043 --> 08:49.710
+But before that, let's do proper spacing, okay?
+
+08:49.710 --> 08:52.110
+I'm going to remove all the space from here,
+
+08:52.110 --> 08:54.690
+and I'll give one, two space.
+
+08:54.690 --> 08:57.590
+It can give two or three whatever you give, stick to that.
+
+09:02.948 --> 09:04.448
+And this one also.
+
+09:05.580 --> 09:08.190
+The spacing is very, very important.
+
+09:08.190 --> 09:10.203
+That's the main syntax here.
+
+09:29.670 --> 09:33.180
+And that my friend is YAML.
+
+09:33.180 --> 09:34.230
+Let's come over here.
+
+09:34.230 --> 09:38.430
+Let's close this, this, this, and this.
+
+09:38.430 --> 09:41.610
+So it says, there is one object that's expanded.
+
+09:41.610 --> 09:44.610
+The object name is DevOps expanded.
+
+09:44.610 --> 09:47.943
+It has three keys, skill, Year and Tech.
+
+09:49.170 --> 09:52.110
+Value value Tech has more four values.
+
+09:52.110 --> 09:53.133
+Let's expand it.
+
+09:54.000 --> 09:58.156
+So Tech has four keys, Cloud, Container, CICD, GitOps.
+
+09:58.156 --> 10:02.160
+GitOps value is a list.
+
+10:02.160 --> 10:05.130
+Actually, you can remove these double codes also.
+
+10:05.130 --> 10:06.480
+There won't be any problem.
+
+10:07.560 --> 10:10.800
+So I removed all the double codes.
+
+10:10.800 --> 10:11.793
+Everything is good.
+
+10:13.765 --> 10:15.540
+So you see this is much more cleaner.
+
+10:15.540 --> 10:19.680
+And that's why most of the tools and configuration nowadays
+
+10:19.680 --> 10:24.680
+uses YAML to write configurations, and to read data.
+
+10:26.010 --> 10:28.950
+Mostly you will see JSON is used.
+
+10:28.950 --> 10:31.563
+So as a DevOps engineer,
+
+10:31.563 --> 10:36.563
+you should be able to write YAML and read JSON.
+
+10:38.550 --> 10:40.920
+I mean you can write JSON also,
+
+10:40.920 --> 10:43.953
+but that's the bare minimum what I'm talking about here.
+
+10:45.390 --> 10:48.450
+Should be able to understand what is a list,
+
+10:48.450 --> 10:50.310
+what is a dictionary?
+
+10:50.310 --> 10:54.990
+DevOps is a dictionary, which has three keys.
+
+10:54.990 --> 10:58.470
+One of its key value is a dictionary.
+
+10:58.470 --> 11:00.390
+And inside that you have a key GitOps.
+
+11:00.390 --> 11:02.223
+Its value is a list.
+
+11:03.240 --> 11:06.030
+We will have a lot of practice in this course,
+
+11:06.030 --> 11:11.030
+on writing YAML in Ansible and in Tucker Kubernetes.
+
+11:12.750 --> 11:15.873
+Majorly our YAML practice will be in ya in Ansible.
+
+11:17.070 --> 11:18.270
+And do not worry too much
+
+11:18.270 --> 11:20.850
+about Python Data Structure for now.
+
+11:20.850 --> 11:23.970
+You should be able to just do what I just did right now.
+
+11:23.970 --> 11:25.080
+We'll get into Python,
+
+11:25.080 --> 11:27.660
+and we'll get into VS scripting as well.
+
+11:27.660 --> 11:30.183
+And we'll have a lot of practice in this course.
+
+11:31.020 --> 11:34.410
+So I hope you have enjoyed the session.
+
+11:34.410 --> 11:35.550
+You have learned Variable,
+
+11:35.550 --> 11:39.390
+some Python Data Structure, JSON and YAML.
+
+11:39.390 --> 11:40.800
+And later you'll understand,
+
+11:40.800 --> 11:44.370
+why it is so essential for a DevOps engineer
+
+11:44.370 --> 11:45.933
+to learn JSON and YAML.
+
+11:47.490 --> 11:52.490
+So watch these lectures again to have a good understanding.
+
+11:52.890 --> 11:55.263
+And then join me in the next sections.

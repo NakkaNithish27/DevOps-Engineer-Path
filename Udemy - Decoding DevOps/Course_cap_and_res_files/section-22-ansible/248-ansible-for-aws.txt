@@ -1,0 +1,1144 @@
+WEBVTT
+
+00:00.660 --> 00:02.310
+Instructor: Hello and welcome.
+
+00:03.961 --> 00:05.280
+In this lecture we are going to see how
+
+00:05.280 --> 00:10.280
+we can use Ansible to manage our AWS services.
+
+00:11.730 --> 00:16.560
+So it will be basically same thing what we have been doing.
+
+00:16.560 --> 00:18.360
+We find a module and we use it
+
+00:18.360 --> 00:19.890
+like we want to create a key pair.
+
+00:19.890 --> 00:21.000
+We can find a module.
+
+00:21.000 --> 00:22.830
+We want to launch ec2 instances.
+
+00:22.830 --> 00:24.840
+We can find module,
+
+00:24.840 --> 00:27.423
+but this is a different area.
+
+00:28.350 --> 00:30.112
+We need to do some prerequisites
+
+00:30.112 --> 00:33.630
+like when we want to create key pair
+
+00:33.630 --> 00:35.310
+or launch ec2 instance
+
+00:35.310 --> 00:39.240
+how does Ansible know what is our AWS account
+
+00:39.240 --> 00:41.490
+and how to log into it?
+
+00:41.490 --> 00:44.100
+Authentication, authorization.
+
+00:44.100 --> 00:46.313
+So authentication.
+
+00:46.313 --> 00:51.060
+So we have to export these two variables
+
+00:51.060 --> 00:53.640
+which will have the access key ID
+
+00:53.640 --> 00:55.890
+and secret access key.
+
+00:55.890 --> 00:59.310
+So when we create an I Am user in AWS,
+
+00:59.310 --> 01:03.150
+we have an option to create access keys.
+
+01:03.150 --> 01:05.640
+We create and we export these two variables
+
+01:05.640 --> 01:07.977
+with their values of access key and secret key.
+
+01:07.977 --> 01:11.657
+And then our Ansible can connect to our AWS account.
+
+01:11.657 --> 01:14.497
+And then it shows a sample here,
+
+01:14.497 --> 01:18.920
+host, local host.
+
+01:18.920 --> 01:21.480
+The task that we'll be running
+
+01:21.480 --> 01:24.280
+will be running locally on the control machine
+
+01:25.843 --> 01:28.203
+which will make API calls to our AWS account.
+
+01:29.100 --> 01:31.320
+And again, how does it know our AWS account?
+
+01:31.320 --> 01:34.020
+Through the access key and secret key.
+
+01:34.020 --> 01:36.588
+Gather facts, false
+
+01:36.588 --> 01:38.717
+because we don't want to collect information
+
+01:38.717 --> 01:40.230
+off the control machine itself
+
+01:40.230 --> 01:42.390
+and task, we can have list of tasks
+
+01:42.390 --> 01:45.000
+like adding key pair, launching instance,
+
+01:45.000 --> 01:46.890
+adding load balancer, adding instance
+
+01:46.890 --> 01:49.020
+under load balancer and all those things.
+
+01:49.020 --> 01:53.221
+We have modules, huge list of modules on AWS.
+
+01:53.221 --> 01:58.221
+But first we need to export the access key and secret key.
+
+01:58.500 --> 02:00.930
+So we'll create an I AM user first.
+
+02:00.930 --> 02:02.460
+So to create the I AM user
+
+02:02.460 --> 02:04.773
+I'm going to go to the I AM service,
+
+02:06.720 --> 02:08.763
+users, add user.
+
+02:09.900 --> 02:13.105
+I'm going to call this user Ansible admin and go next.
+
+02:13.105 --> 02:16.680
+Attach policies directly
+
+02:16.680 --> 02:19.350
+and I'm going to give it administrator access
+
+02:19.350 --> 02:21.450
+which is very dangerous.
+
+02:21.450 --> 02:22.620
+You have to be very careful
+
+02:22.620 --> 02:25.170
+with the access keys of this user.
+
+02:25.170 --> 02:27.330
+You should not expose it
+
+02:27.330 --> 02:30.150
+or keep it in git repositories.
+
+02:30.150 --> 02:31.353
+Create user.
+
+02:32.670 --> 02:34.770
+Let's click on the user.
+
+02:34.770 --> 02:36.723
+Let's go to security credentials.
+
+02:37.950 --> 02:42.750
+Access keys, click on create access key, CLI
+
+02:42.750 --> 02:46.683
+and say I understand and go next,
+
+02:47.910 --> 02:49.353
+create access key.
+
+02:50.460 --> 02:52.503
+Okay, so download the CSV file,
+
+02:55.710 --> 02:58.353
+save and let's click on done.
+
+02:59.875 --> 03:04.875
+Okay, so I need to export these two variables.
+
+03:06.570 --> 03:10.710
+Now obviously I'm going to put the values over here.
+
+03:10.710 --> 03:13.686
+Access key ID value, I'm going to get
+
+03:13.686 --> 03:15.136
+from the CSV file and put it.
+
+03:15.984 --> 03:18.517
+And same for the secret access key.
+
+03:18.517 --> 03:23.517
+So these are all fake values.
+
+03:23.520 --> 03:25.290
+I'm going to put the real values over here
+
+03:25.290 --> 03:26.970
+and run this command once again.
+
+03:26.970 --> 03:28.240
+But that I will do
+
+03:30.060 --> 03:31.690
+after I pause my screen
+
+03:32.760 --> 03:35.016
+and then I'm going to do it.
+
+03:35.016 --> 03:36.930
+But I'm not going to run this export command
+
+03:36.930 --> 03:39.180
+on the shell because what happens is
+
+03:39.180 --> 03:40.503
+when you exit,
+
+03:41.340 --> 03:42.930
+these variables will be destroyed.
+
+03:42.930 --> 03:44.040
+Will be gone.
+
+03:44.040 --> 03:45.870
+Then you need to again run the export command.
+
+03:45.870 --> 03:47.460
+So better I am going to put them
+
+03:47.460 --> 03:49.570
+into my Bash RC file
+
+03:50.820 --> 03:51.723
+at the end.
+
+03:53.973 --> 03:57.310
+I'm going to take this
+
+03:59.610 --> 04:02.172
+and I'm going to put the right value
+
+04:02.172 --> 04:04.013
+and then I'm going to run the source command.
+
+04:05.880 --> 04:09.280
+I'm going to say source Bash RC
+
+04:10.410 --> 04:12.300
+or you can just log out and log in.
+
+04:12.300 --> 04:15.090
+Whenever you log in, Bash RC file will execute
+
+04:15.090 --> 04:17.313
+and it is going to export your variables.
+
+04:18.960 --> 04:21.210
+So let me pause my screen, do this
+
+04:21.210 --> 04:23.613
+and then we'll continue.
+
+04:25.380 --> 04:27.090
+Okay, I paused the screen.
+
+04:27.090 --> 04:28.233
+I just did this.
+
+04:29.802 --> 04:31.401
+I just opened the Bash RC file again
+
+04:31.401 --> 04:33.539
+I put the right value from CSV file.
+
+04:33.539 --> 04:37.083
+I did source Bash RC and authentication is done.
+
+04:38.430 --> 04:40.567
+Now we will start with a very
+
+04:40.567 --> 04:41.610
+very basic playbook for AWS.
+
+04:41.610 --> 04:43.263
+We'll create a key pair first.
+
+04:44.460 --> 04:47.010
+So I will create a directory here, AWS
+
+04:47.010 --> 04:48.791
+I'll go into that directory
+
+04:48.791 --> 04:51.130
+AWS oops CD
+
+04:52.560 --> 04:55.410
+and I will create the Ansible playbook.
+
+04:55.410 --> 04:56.703
+I will call it as,
+
+04:58.200 --> 05:02.913
+or I will just say test hyphen AWS dot YML.
+
+05:10.670 --> 05:12.450
+Okay, hyphen host.
+
+05:12.450 --> 05:15.864
+And we are going to do it on local host obviously
+
+05:15.864 --> 05:20.864
+and gather underscore facts, false.
+
+05:24.900 --> 05:26.430
+And then tasks.
+
+05:26.430 --> 05:29.580
+So as I told you, first tasks will be to create a key pair.
+
+05:29.580 --> 05:31.980
+So I'm going to name the task name.
+
+05:31.980 --> 05:34.480
+I would say create key pair
+
+05:39.300 --> 05:41.110
+and let's find out the module name
+
+05:42.090 --> 05:43.293
+to create the key pair.
+
+05:46.309 --> 05:47.805
+Okay, Ansible module index.
+
+05:47.805 --> 05:50.297
+And let's go for cloud modules and Amazon.
+
+05:56.606 --> 05:57.439
+Okay, so you need to scroll down.
+
+05:57.439 --> 05:59.663
+There's ec2 key create or delete an ec2 key pair.
+
+06:03.862 --> 06:06.202
+And we will directly go to the example
+
+06:06.202 --> 06:07.035
+and that's the example to create a key pair.
+
+06:07.035 --> 06:10.533
+Let's just copy that and just put that in our playbook.
+
+06:13.138 --> 06:14.281
+I already have given the name
+
+06:14.281 --> 06:17.133
+I'll just copy the module name and the name of the key.
+
+06:19.183 --> 06:21.650
+Okay I will link the key as
+
+06:23.758 --> 06:24.908
+for this one as sample.
+
+06:27.711 --> 06:28.920
+And let's just save and run this
+
+06:28.920 --> 06:30.240
+and let's see what happens.
+
+06:30.240 --> 06:33.843
+Ansible hyphen playbook test AWS dot yaml.
+
+06:35.455 --> 06:37.555
+Okay, so I want you to look at this error.
+
+06:42.360 --> 06:44.940
+Now Ansible is written in Python
+
+06:44.940 --> 06:47.910
+and Python needs some libraries to access
+
+06:47.910 --> 06:51.423
+different resources like AWS for that.
+
+06:52.465 --> 06:55.380
+It has a module called as Boto or Boto three,
+
+06:55.380 --> 06:57.630
+which Ansible is not able to find
+
+06:57.630 --> 06:59.823
+and we need to install this module.
+
+07:02.220 --> 07:03.510
+As the Python module and we are going to
+
+07:03.510 --> 07:06.603
+use the command pip to install this module.
+
+07:07.830 --> 07:09.810
+And so the command will be basically
+
+07:09.810 --> 07:12.630
+a pip install boto three,
+
+07:12.630 --> 07:16.910
+but it's not going to work because we do not have pip.
+
+07:16.910 --> 07:19.083
+So first we have to install pip.
+
+07:21.088 --> 07:25.093
+So we have to say sudo apt install Python three
+
+07:26.370 --> 07:29.163
+hyphen pip hyphen Y.
+
+07:30.960 --> 07:32.553
+So install PIP first.
+
+07:36.960 --> 07:38.850
+Okay? And then we say
+
+07:38.850 --> 07:41.763
+pip tab two times, tab, tab,
+
+07:43.567 --> 07:44.567
+you see three dot 10
+
+07:46.733 --> 07:48.813
+and then install bottle three.
+
+07:56.446 --> 07:58.073
+And that has installed bottle three.
+
+07:59.940 --> 08:01.253
+Let's run the playbook once again.
+
+08:06.643 --> 08:07.613
+Okay, so that error is gone.
+
+08:09.242 --> 08:11.670
+Now we have another error.
+
+08:11.670 --> 08:13.512
+It says a region. You need to specify the region.
+
+08:13.512 --> 08:14.702
+Now there are two ways to specify region
+
+08:14.702 --> 08:16.170
+in every task you can specify the region.
+
+08:16.170 --> 08:19.780
+That is we just give here region
+
+08:20.910 --> 08:23.130
+and we'll give the region code,
+
+08:23.130 --> 08:27.693
+which is US east one for us.
+
+08:31.560 --> 08:34.047
+Or you can set a variable,
+
+08:34.047 --> 08:36.400
+AWS underscore region in caps
+
+08:38.564 --> 08:40.951
+just like I have set access key and secret key,
+
+08:40.951 --> 08:42.593
+same way you can set that variable.
+
+08:44.574 --> 08:45.930
+Okay? So in the module documentation
+
+08:45.930 --> 08:47.700
+you should find that variable there.
+
+08:47.700 --> 08:49.833
+AWS underscore region,
+
+08:51.150 --> 08:52.350
+we can set this variable
+
+08:52.350 --> 08:53.550
+so you don't need to set
+
+08:53.550 --> 08:55.530
+for each and every task
+
+08:55.530 --> 08:56.850
+that also you can do.
+
+08:56.850 --> 09:01.110
+But let's go with this for now.
+
+09:01.110 --> 09:04.533
+Let's save and quit and now let's create it.
+
+09:05.635 --> 09:09.150
+Okay, that worked.
+
+09:09.150 --> 09:13.290
+But the problem here is it did not return the private key.
+
+09:13.290 --> 09:17.128
+When we create a key, it's called a key pair,
+
+09:17.128 --> 09:19.680
+public key and private key.
+
+09:19.680 --> 09:23.703
+Public key will be there in our AWS account if we go
+
+09:23.703 --> 09:27.654
+so that's the public key in our AWS account,
+
+09:27.654 --> 09:30.870
+but we do not have the private key.
+
+09:30.870 --> 09:35.610
+That's because we did not save the output of this task.
+
+09:35.610 --> 09:38.495
+The output will be returned in adjacent format,
+
+09:38.495 --> 09:42.704
+but we need to store it by using a register
+
+09:42.704 --> 09:47.704
+and we'll say key out, that's the variable.
+
+09:48.120 --> 09:50.560
+And let's also print this variable
+
+09:54.273 --> 09:57.850
+name print key
+
+09:59.250 --> 10:00.940
+and we'll say debug
+
+10:04.529 --> 10:08.490
+and MSG or I'll just say var here,
+
+10:09.760 --> 10:14.340
+var, oh I'm giving a hyphen there that is wrong,
+
+10:14.340 --> 10:18.123
+var and we'll just give the variable key out.
+
+10:25.593 --> 10:27.340
+But this key is already created
+
+10:29.256 --> 10:31.500
+so it's not going to return the private key again
+
+10:33.217 --> 10:34.283
+it just returns only once.
+
+10:34.283 --> 10:35.640
+So first we need to delete the key
+
+10:39.160 --> 10:39.993
+we'll delete the sample key.
+
+10:45.810 --> 10:48.510
+Now if we run the playbook,
+
+10:48.510 --> 10:50.460
+it should return the private key there.
+
+10:54.422 --> 10:55.982
+Okay? So that's the private key
+
+10:55.982 --> 10:57.793
+and now we have to copy it
+
+10:57.793 --> 10:59.380
+and paste it into a file.
+
+10:59.380 --> 11:01.350
+But we can do that in the playbook itself.
+
+11:01.350 --> 11:05.490
+We can create a task to save this content into a file.
+
+11:05.490 --> 11:08.152
+Only thing is we have to put a condition there.
+
+11:08.152 --> 11:11.310
+If you see when you create the key,
+
+11:11.310 --> 11:13.740
+it is going to return this variable
+
+11:13.740 --> 11:15.570
+private underscore key.
+
+11:15.570 --> 11:17.703
+But if the key already exists,
+
+11:18.660 --> 11:21.184
+that variable doesn't
+
+11:21.184 --> 11:23.550
+doesn't exist, right?
+
+11:23.550 --> 11:25.440
+Private underscore key.
+
+11:25.440 --> 11:29.343
+So to access that key,
+
+11:31.953 --> 11:33.146
+we have to say key out
+
+11:33.146 --> 11:34.283
+dot key dot private underscore key.
+
+11:37.798 --> 11:40.020
+Okay? So let's open the playbook once again.
+
+11:40.020 --> 11:41.193
+And this time,
+
+11:42.910 --> 11:45.460
+like we are printing, we are going to use a module,
+
+11:47.370 --> 11:49.980
+copy module to save the content of that file.
+
+11:49.980 --> 11:52.950
+So we'll say save key,
+
+11:52.950 --> 11:55.000
+the task name will use the copy module
+
+11:56.520 --> 11:59.463
+and copy module has an option called as content.
+
+12:00.510 --> 12:02.580
+We can mention the content in double quotes,
+
+12:02.580 --> 12:04.960
+but this time the content will be a variable
+
+12:06.312 --> 12:09.513
+which is key out dot key.
+
+12:15.870 --> 12:19.083
+Dot private underscore key.
+
+12:21.499 --> 12:23.160
+And we are going to put a destination here,
+
+12:23.160 --> 12:26.915
+store it into a file in the current working directory
+
+12:26.915 --> 12:30.603
+with the name sample dot pem.
+
+12:35.418 --> 12:37.103
+But you have to put in a condition here, when.
+
+12:38.617 --> 12:43.157
+The condition will be, when key out dot changed
+
+12:44.490 --> 12:46.773
+is equal to true,
+
+12:48.300 --> 12:52.210
+that means if this creates the file
+
+12:53.160 --> 12:55.050
+if this creates the key,
+
+12:55.050 --> 12:57.522
+then the changed value will be true,
+
+12:57.522 --> 12:58.523
+otherwise it will be false.
+
+12:58.523 --> 13:01.680
+So if it's value changed, value is true
+
+13:01.680 --> 13:04.113
+then only you need to save the file.
+
+13:05.040 --> 13:06.660
+Otherwise just skip it.
+
+13:06.660 --> 13:09.030
+And you don't even need to say double equal
+
+13:09.030 --> 13:12.720
+to true because it's value will be anyways true or false.
+
+13:12.720 --> 13:14.463
+So if it's value is true,
+
+13:15.572 --> 13:16.991
+then it is going to save the file.
+
+13:16.991 --> 13:19.800
+If it's value is false, it will just skip this task.
+
+13:19.800 --> 13:21.363
+So let's run this.
+
+13:22.815 --> 13:27.815
+Okay, you see that doesn't exist private key.
+
+13:29.220 --> 13:31.350
+So it just simply skipped,
+
+13:31.350 --> 13:33.543
+but now let's delete that file again.
+
+13:36.425 --> 13:37.575
+So let's delete the key
+
+13:39.690 --> 13:42.330
+deleted and now when we run the playbook
+
+13:42.330 --> 13:45.000
+it will create the private key, return the output,
+
+13:45.000 --> 13:46.533
+and that we will store.
+
+13:47.768 --> 13:50.910
+Okay? So it says change there
+
+13:50.910 --> 13:53.670
+and you should see sample dot pem
+
+13:53.670 --> 13:55.263
+and if you check its content,
+
+13:56.250 --> 13:59.313
+that's the private key, okay?
+
+14:00.570 --> 14:04.833
+We also need to remove this debug options from here.
+
+14:05.700 --> 14:08.083
+You don't want to print your private key
+
+14:08.083 --> 14:11.681
+or I will just comment it.
+
+14:11.681 --> 14:12.514
+I'll just keep it here.
+
+14:12.514 --> 14:13.803
+I'll just put hash in front of it.
+
+14:20.100 --> 14:22.790
+Now we are going to add one more task
+
+14:22.790 --> 14:27.660
+and that will be to launch the ec2 instance.
+
+14:27.660 --> 14:31.923
+Let's search Ansible AWS modules.
+
+14:34.320 --> 14:35.770
+Let's look at this first link
+
+14:36.688 --> 14:39.393
+Amazon dot AWS modules from Amazon.
+
+14:42.840 --> 14:45.031
+Okay, let's search for ec2.
+
+14:45.031 --> 14:45.960
+Okay, here itself we have ec2.
+
+14:45.960 --> 14:49.500
+So create and manage ec2 instances
+
+14:49.500 --> 14:52.230
+ec2 underscore instance module.
+
+14:52.230 --> 14:53.373
+Let's click on that.
+
+14:56.520 --> 14:58.890
+So we have to run this command,
+
+14:58.890 --> 15:00.810
+which is going to install all the
+
+15:00.810 --> 15:03.990
+Amazon AWS modules in our control machine.
+
+15:03.990 --> 15:07.443
+So let's copy this command and let's hit enter.
+
+15:10.800 --> 15:11.633
+Okay, it's installed.
+
+15:11.633 --> 15:13.083
+Let's look at the example.
+
+15:17.850 --> 15:21.390
+Okay, start an instance with a public IP address.
+
+15:21.390 --> 15:22.893
+Let's copy this whole,
+
+15:24.840 --> 15:26.493
+let's open our playbook.
+
+15:32.037 --> 15:33.990
+I'm going to say shift insert to paste here
+
+15:35.384 --> 15:36.947
+and I'm going to fix everything first
+
+15:36.947 --> 15:37.780
+all the indentation, okay?
+
+15:38.730 --> 15:40.230
+And I'm going to change the names.
+
+15:40.230 --> 15:43.110
+Just start an instance with a public IP address.
+
+15:43.110 --> 15:46.470
+Well our ec2 instance anyways gets the public IP address
+
+15:46.470 --> 15:48.090
+so that's not a problem.
+
+15:48.090 --> 15:49.923
+Okay, let's go one by one, key name.
+
+15:51.070 --> 15:53.820
+So we have the key name as sample that we created.
+
+15:53.820 --> 15:56.554
+So either we can give directly here sample
+
+15:56.554 --> 15:59.950
+or we can give the variable key out dot key dot name
+
+16:01.338 --> 16:02.310
+that variable here
+
+16:02.310 --> 16:04.578
+VPC subnet ID.
+
+16:04.578 --> 16:05.910
+So we will not use this
+
+16:05.910 --> 16:08.064
+we will let it launch in its
+
+16:08.064 --> 16:11.280
+default subnet and VPC.
+
+16:11.280 --> 16:13.080
+So we just put a hash and keep there.
+
+16:13.080 --> 16:16.620
+Instance type here that you should change to
+
+16:16.620 --> 16:21.180
+t2 micro don't want such huge instance.
+
+16:21.180 --> 16:23.610
+Security group, we will keep default
+
+16:23.610 --> 16:26.380
+network assigned public IP.
+
+16:26.380 --> 16:28.930
+Now we really don't need to specifically mention
+
+16:30.421 --> 16:32.691
+that our instance anyways gets the public IP.
+
+16:32.691 --> 16:35.087
+So we'll put a hash there and we'll just keep
+
+16:35.087 --> 16:35.920
+it there itself.
+
+16:43.200 --> 16:46.140
+Image ID will get the image ID.
+
+16:46.140 --> 16:48.833
+Let's go to our ec2 console, okay?
+
+16:50.788 --> 16:53.037
+Just make sure you are in the right region.
+
+16:53.037 --> 16:54.150
+Whatever was mentioned in the playbook
+
+16:54.150 --> 16:59.150
+mine is now US hyphen West hyphen two
+
+17:01.260 --> 17:04.020
+and image ID is different for different regions.
+
+17:04.020 --> 17:06.210
+So let's click on launch instance here and let's
+
+17:06.210 --> 17:08.073
+find an image ID.
+
+17:09.300 --> 17:12.150
+Let's come down, we'll keep it default.
+
+17:12.150 --> 17:14.670
+Amazon Linux 23 and that's the AMI ID.
+
+17:14.670 --> 17:17.910
+So you can find which AMI you want and find
+
+17:17.910 --> 17:21.377
+its AMI ID make sure the region is correct.
+
+17:21.377 --> 17:24.690
+So I'm using now US West two.
+
+17:24.690 --> 17:27.450
+Okay, let me paste the image ID there.
+
+17:27.450 --> 17:30.053
+And I also need to mention the region here.
+
+17:30.053 --> 17:31.953
+Let's mention the region,
+
+17:32.813 --> 17:37.813
+region, US Hyphen West, hyphen two.
+
+17:41.254 --> 17:43.563
+And I made a mistake here, the image ID.
+
+17:46.140 --> 17:47.283
+Okay, that's right.
+
+17:48.690 --> 17:49.710
+So what else we need?
+
+17:49.710 --> 17:51.780
+We need actually one very important thing.
+
+17:51.780 --> 17:54.900
+We need this instance just once exact count
+
+17:54.900 --> 17:59.900
+there is an option, exact underscore count,
+
+18:01.140 --> 18:02.283
+colon one.
+
+18:03.930 --> 18:05.520
+Okay? So that one exact count.
+
+18:05.520 --> 18:06.430
+And integer value
+
+18:07.391 --> 18:09.450
+which indicates how many instance that match
+
+18:10.569 --> 18:11.753
+the filters parameters should be running.
+
+18:13.652 --> 18:14.854
+Now if we don't mention this
+
+18:14.854 --> 18:16.311
+and you run the playbook multiple times
+
+18:16.311 --> 18:17.640
+so that many times the instance will be launched,
+
+18:17.640 --> 18:19.260
+you'll have multiple instances.
+
+18:19.260 --> 18:24.222
+So make sure you mention this exact count in your playbook.
+
+18:24.222 --> 18:26.344
+Okay, I think this is fine.
+
+18:26.344 --> 18:29.520
+Let's save this
+
+18:29.520 --> 18:31.830
+and let's test it.
+
+18:31.830 --> 18:33.880
+Ansible hyphen playbook
+
+18:34.800 --> 18:37.080
+test AWS yaml,
+
+18:41.204 --> 18:42.938
+okay it's taking some time and.
+
+18:42.938 --> 18:44.233
+and it's already there.
+
+18:44.233 --> 18:45.066
+Done changed.
+
+18:45.066 --> 18:47.070
+So it returned the output very quickly.
+
+18:47.070 --> 18:49.140
+There is an option we can use actually
+
+18:49.140 --> 18:52.800
+wait yes till the instance state be-
+
+18:52.800 --> 18:55.210
+running state, not this one
+
+18:57.060 --> 18:58.140
+there wait,
+
+18:58.140 --> 19:01.140
+wait or not to wait for the desired state.
+
+19:01.140 --> 19:04.380
+So we can mention state as running
+
+19:04.380 --> 19:07.680
+and then we can mention wait as true.
+
+19:07.680 --> 19:10.350
+So then it will wait until the instance state
+
+19:10.350 --> 19:11.910
+comes to running.
+
+19:11.910 --> 19:14.160
+Otherwise it'll just return output like this.
+
+19:15.130 --> 19:16.482
+I mean this also works,
+
+19:16.482 --> 19:18.134
+but doesn't wait until the instance in a-
+
+19:18.134 --> 19:19.445
+is in a running state.
+
+19:19.445 --> 19:20.730
+So let's take a look.
+
+19:20.730 --> 19:23.340
+You see that the instance is launched
+
+19:23.340 --> 19:25.770
+and it is in running state, okay?
+
+19:25.770 --> 19:26.940
+You see how simple is that?
+
+19:26.940 --> 19:28.860
+Once you get hold of it,
+
+19:28.860 --> 19:30.660
+you can find your module to use,
+
+19:30.660 --> 19:32.316
+you can mention it in the playbook,
+
+19:32.316 --> 19:34.800
+make sure you mention the right parameters.
+
+19:34.800 --> 19:37.020
+You may face some error generally
+
+19:37.020 --> 19:40.920
+because of regions AMI ID, subnet ID's.
+
+19:40.920 --> 19:42.884
+So make sure those information are correct
+
+19:42.884 --> 19:47.884
+wherever you use any Amazon module, right?
+
+19:47.910 --> 19:51.053
+So there are many, many modules to try from,
+
+19:51.053 --> 19:53.730
+but I think this will be more than enough.
+
+19:53.730 --> 19:56.610
+We have much more better cloud management tool
+
+19:56.610 --> 19:59.700
+which is Terraform that we will be seeing.
+
+19:59.700 --> 20:01.800
+So once you're done with this, delete,
+
+20:01.800 --> 20:04.854
+terminate the instance, remove the key.
+
+20:04.854 --> 20:08.700
+So that is all in this section.
+
+20:08.700 --> 20:10.470
+I hope you have learned a lot
+
+20:10.470 --> 20:13.050
+and you have gathered the right skills,
+
+20:13.050 --> 20:15.607
+finding using the right module
+
+20:15.607 --> 20:20.100
+when you fail, look at the error, troubleshoot it
+
+20:20.100 --> 20:23.748
+and most importantly, use Ansible documentation.
+
+20:23.748 --> 20:25.710
+That was really a good one.
+
+20:25.710 --> 20:27.360
+I'll see you in the next section.

@@ -1,0 +1,619 @@
+WEBVTT
+
+00:04.260 --> 00:05.190
+Instructor: All right, so, so far,
+
+00:05.190 --> 00:07.470
+you have seen everything in the VPC
+
+00:07.470 --> 00:11.480
+and the purpose of creating VPC is, our own custom VPC
+
+00:11.480 --> 00:14.400
+is so we get security through private subnet
+
+00:14.400 --> 00:17.820
+and high availability through multiple zones.
+
+00:17.820 --> 00:19.770
+And we distribute our infrastructure
+
+00:19.770 --> 00:22.233
+in multiple zones through the subnets.
+
+00:23.370 --> 00:25.920
+But when you're working in a large-scale environment,
+
+00:25.920 --> 00:28.620
+you will not have just one single VPC.
+
+00:28.620 --> 00:31.800
+You may have one VPC for the web infrastructure,
+
+00:31.800 --> 00:34.770
+one maybe for API, one for the database.
+
+00:34.770 --> 00:37.950
+You may have multiple VPCs.
+
+00:37.950 --> 00:40.200
+And in order to connect your resource
+
+00:40.200 --> 00:42.420
+from one VPC to other VPC,
+
+00:42.420 --> 00:45.210
+you need to do VPC peering.
+
+00:45.210 --> 00:49.740
+It's very easy to do, but very much required.
+
+00:49.740 --> 00:54.740
+So we have the VPC and subnets from the previous lecture.
+
+00:55.320 --> 00:57.900
+We are going to create one more VPC here,
+
+00:57.900 --> 01:01.620
+not the whole VPC, just the CIDR block.
+
+01:01.620 --> 01:03.000
+And just for the sake of argument,
+
+01:03.000 --> 01:05.553
+we are going to create it in a different region.
+
+01:06.420 --> 01:10.050
+You know, you can create it in a different account also.
+
+01:10.050 --> 01:11.790
+So let's say I'm going to go to Oregon.
+
+01:11.790 --> 01:14.010
+You can go in any region of your choice.
+
+01:14.010 --> 01:17.550
+As I told you, we're not going to create the whole VPC.
+
+01:17.550 --> 01:20.430
+All right, so that's a default VPC in that Oregon region.
+
+01:20.430 --> 01:23.220
+I'm going to just give it a name, default,
+
+01:23.220 --> 01:26.130
+save it just for the identification.
+
+01:26.130 --> 01:30.093
+And I'm going to create a VPC, just the VPC.
+
+01:30.960 --> 01:33.913
+I will call it as, let's say, vpro-db.
+
+01:38.160 --> 01:39.270
+Okay, now the CIDR range,
+
+01:39.270 --> 01:42.270
+now CIDR range cannot overlap.
+
+01:42.270 --> 01:44.697
+So our VPC, which is in North California,
+
+01:44.697 --> 01:48.990
+the CIDR range is 172.20.
+
+01:48.990 --> 01:53.990
+So here we're going to give 172.21 or 22.
+
+01:54.450 --> 01:58.231
+Just make sure it doesn't overlap with our previous VPC.
+
+01:58.231 --> 01:59.340
+/16 range.
+
+01:59.340 --> 02:03.720
+You can give anything, /16, /24, your choice
+
+02:03.720 --> 02:05.553
+and let's just say create VPC.
+
+02:06.750 --> 02:08.310
+Okay, when you create a VPC,
+
+02:08.310 --> 02:11.520
+you will also see the route table that gets created
+
+02:11.520 --> 02:14.700
+for that VPC, vpro-db.
+
+02:14.700 --> 02:16.290
+That's the first one.
+
+02:16.290 --> 02:17.793
+So let's give it a name.
+
+02:19.230 --> 02:22.443
+We'll say vprodb-rt.
+
+02:25.985 --> 02:26.818
+Okay, this is important.
+
+02:26.818 --> 02:28.320
+I'll come back to it in a moment.
+
+02:29.190 --> 02:31.530
+Okay, so in the VPC, that's vpro-db VPC,
+
+02:31.530 --> 02:32.910
+which is in Oregon region.
+
+02:32.910 --> 02:35.820
+And then you have vprofile-VPC,
+
+02:35.820 --> 02:37.140
+which is in North California.
+
+02:37.140 --> 02:38.760
+We're going to connect these two VPCs.
+
+02:38.760 --> 02:40.470
+That is called as the peering.
+
+02:40.470 --> 02:42.753
+So go to the peering connections.
+
+02:44.160 --> 02:47.070
+So the requester will be our vprofile-VPC
+
+02:47.070 --> 02:48.600
+in the North California region.
+
+02:48.600 --> 02:51.150
+From here we're going to create a request.
+
+02:51.150 --> 02:53.790
+Click on create peering connection.
+
+02:53.790 --> 02:55.560
+I'm going to give it a name, vpro,
+
+02:55.560 --> 03:00.560
+and I'll just add the NC, like North California.
+
+03:02.610 --> 03:06.811
+And I'm going to select the requester VPC over here,
+
+03:06.811 --> 03:09.360
+the VPC that is requesting, which is vprofile-VPC
+
+03:09.360 --> 03:12.993
+in North California, and it has this CIDR range.
+
+03:14.070 --> 03:17.770
+Now you can pair with another AWS account VPC also.
+
+03:17.770 --> 03:19.230
+For that, you have to select another account
+
+03:19.230 --> 03:21.240
+and give the account ID
+
+03:21.240 --> 03:24.117
+but we have the VPC in the same account,
+
+03:24.117 --> 03:25.830
+but in a different region.
+
+03:25.830 --> 03:27.810
+So let's keep my account.
+
+03:27.810 --> 03:31.110
+And here in the region, we'll select another region
+
+03:31.110 --> 03:33.633
+and that is in Oregon.
+
+03:35.010 --> 03:38.460
+And here, you have to give the VPC ID of the acceptor,
+
+03:38.460 --> 03:40.290
+which is in Oregon, right?
+
+03:40.290 --> 03:42.783
+That's the VPC ID. Let's copy that.
+
+03:43.680 --> 03:45.750
+I think we can copy from here also VPC ID.
+
+03:45.750 --> 03:49.413
+Copy and let's paste it there.
+
+03:51.150 --> 03:53.703
+And let's say create peering connection.
+
+03:55.068 --> 03:58.140
+Okay, so the request we have initiated
+
+03:58.140 --> 04:01.110
+and you see it says pending acceptance.
+
+04:01.110 --> 04:03.960
+Now, go to the other region.
+
+04:03.960 --> 04:07.800
+So I'm in Oregon and go to the peering connection.
+
+04:07.800 --> 04:09.783
+And you should here see a request.
+
+04:10.620 --> 04:13.380
+There, pending acceptance.
+
+04:13.380 --> 04:16.950
+So you can just select this.
+
+04:16.950 --> 04:21.950
+Now, in real time, be careful who is the requester.
+
+04:22.350 --> 04:25.230
+Match the VPC ID.
+
+04:25.230 --> 04:27.933
+And you can also check the account ID also.
+
+04:29.250 --> 04:32.433
+We'll say action and we'll say Accept request.
+
+04:33.450 --> 04:34.593
+Accept request.
+
+04:39.060 --> 04:43.140
+Okay, so in a moment, it became active.
+
+04:43.140 --> 04:47.100
+So there is now a connection between these two VPCs
+
+04:47.100 --> 04:48.300
+but there's this connection.
+
+04:48.300 --> 04:49.590
+But the instance, if you launch,
+
+04:49.590 --> 04:52.233
+they don't know how to route the traffic.
+
+04:53.280 --> 04:57.330
+If the IP, let me come back to our VPC,
+
+04:57.330 --> 04:58.560
+North California VPC.
+
+04:58.560 --> 05:02.220
+Let's go to the route table, and let's take example of one
+
+05:02.220 --> 05:04.170
+of the route table, public route table.
+
+05:05.249 --> 05:07.230
+Or let's go with private route table.
+
+05:07.230 --> 05:11.163
+Let's click on the routes and let's click on edit routes.
+
+05:12.480 --> 05:17.110
+Okay, now, if the traffic wants to go to any IP
+
+05:17.110 --> 05:20.850
+in this range, it is going to route it locally, that's fine.
+
+05:20.850 --> 05:23.100
+Everything else is going to go to the NAT gateway
+
+05:23.100 --> 05:25.500
+or Internet Gateway, whatever rule you have given.
+
+05:25.500 --> 05:28.110
+But what about if the request is going
+
+05:28.110 --> 05:30.750
+to another VPC, right?
+
+05:30.750 --> 05:32.370
+That traffic also is going to route
+
+05:32.370 --> 05:35.160
+to the NAT gateway, Internet Gateway, right?
+
+05:35.160 --> 05:38.640
+So you need to add a rule here, and you need
+
+05:38.640 --> 05:43.020
+to give the CIDR range of the target VPC, right?
+
+05:43.020 --> 05:45.630
+Any traffic that wants to go in this network,
+
+05:45.630 --> 05:46.980
+the traffic should be routed
+
+05:46.980 --> 05:50.310
+to just type peer here, peering connection.
+
+05:50.310 --> 05:54.783
+And you should see your peering connection here, there.
+
+05:56.880 --> 06:00.780
+So the traffic can be routed to that particular VPC.
+
+06:00.780 --> 06:02.640
+And this goes both ways.
+
+06:02.640 --> 06:07.417
+You have to go to the other VPC's route table, route table.
+
+06:10.470 --> 06:11.400
+So you need to enable this
+
+06:11.400 --> 06:14.100
+for all the route table that needs the access.
+
+06:14.100 --> 06:19.100
+So vproddb route, table, routes, edit route, add route
+
+06:19.830 --> 06:24.453
+and let's give the range, which was 20.
+
+06:27.690 --> 06:29.910
+Again, pairing connection.
+
+06:29.910 --> 06:31.233
+Select pairing connection.
+
+06:35.940 --> 06:38.700
+Keep in mind, this goes both ways.
+
+06:38.700 --> 06:40.830
+And as many as route tables you have,
+
+06:40.830 --> 06:43.230
+you need to edit those route tables
+
+06:43.230 --> 06:44.970
+and make sure you forward the request
+
+06:44.970 --> 06:46.410
+to that peering connection,
+
+06:46.410 --> 06:48.810
+only if you want it to forward.
+
+06:48.810 --> 06:51.750
+If you don't want the public subnet to be routed
+
+06:51.750 --> 06:53.280
+to the peering connection,
+
+06:53.280 --> 06:54.210
+then don't give it.
+
+06:54.210 --> 06:55.560
+Only private subnet you want,
+
+06:55.560 --> 06:57.660
+only given the private subnet route table.
+
+06:59.130 --> 07:01.020
+Okay, so that will be functional routing
+
+07:01.020 --> 07:03.780
+but there is also security group now, right?
+
+07:03.780 --> 07:04.740
+In the security group,
+
+07:04.740 --> 07:08.160
+you cannot reference the security group ID,
+
+07:08.160 --> 07:11.850
+which is in another VPC, in the peering connection VPC.
+
+07:11.850 --> 07:15.060
+So the only way is you have to give the range,
+
+07:15.060 --> 07:16.140
+the network range.
+
+07:16.140 --> 07:18.210
+For example, let me go to a security group
+
+07:18.210 --> 07:22.320
+and I want to say allow 22 from a particular VPC
+
+07:22.320 --> 07:23.820
+or instance from that VPC.
+
+07:23.820 --> 07:28.610
+I have to give either that instance private IP /32
+
+07:28.610 --> 07:30.180
+or I can give the entire range.
+
+07:30.180 --> 07:35.160
+I can say like this, 22.0.0/16
+
+07:35.160 --> 07:37.920
+or if there is a specific instance in another VPC,
+
+07:37.920 --> 07:42.920
+let's say its IP is 10.12/32.
+
+07:45.990 --> 07:50.310
+Okay, if it's a specific IP, you have to give /32 remember.
+
+07:50.310 --> 07:53.250
+If it's a range, you need to make sure you give the range.
+
+07:53.250 --> 07:56.523
+Like if for the entire VPC, you can say 172.22.
+
+07:57.930 --> 07:58.763
+Sorry.
+
+07:58.763 --> 08:03.633
+0.0/16 or maybe a subnet like 2.0/24.
+
+08:05.850 --> 08:08.670
+Then only you'll be able to access, right?
+
+08:08.670 --> 08:13.670
+And with that final thought, let's close this.
+
+08:14.070 --> 08:18.240
+So we have already deleted the resources,
+
+08:18.240 --> 08:19.170
+which are not free.
+
+08:19.170 --> 08:21.150
+Now these resources, if you want, you can keep,
+
+08:21.150 --> 08:23.100
+if you want to delete, you can delete.
+
+08:23.100 --> 08:25.800
+So Oregon VPC, which is just the VPC,
+
+08:25.800 --> 08:27.363
+I'm going to delete that VPC.
+
+08:28.350 --> 08:29.610
+Okay, it says unable to delete
+
+08:29.610 --> 08:30.930
+because there's a peering connection.
+
+08:30.930 --> 08:34.290
+So first, you have to remove the peering connection.
+
+08:34.290 --> 08:37.713
+So action and delete peering connection.
+
+08:39.843 --> 08:41.610
+Okay, delete related route table entries.
+
+08:41.610 --> 08:42.693
+Sure, delete it.
+
+08:43.990 --> 08:45.930
+Okay, peering connection is deleted.
+
+08:45.930 --> 08:47.250
+Now let's delete the VPC.
+
+08:47.250 --> 08:48.083
+Be careful.
+
+08:48.083 --> 08:50.583
+Do not delete the default VPC.
+
+08:51.660 --> 08:55.803
+Delete VPC and delete.
+
+08:57.240 --> 08:59.940
+Let's go to North California.
+
+08:59.940 --> 09:01.840
+Let's see the peering connection here.
+
+09:03.390 --> 09:05.520
+Okay, that is also deleted.
+
+09:05.520 --> 09:07.590
+Now we already deleted the NAT gateway
+
+09:07.590 --> 09:08.940
+and released the elastic IP.
+
+09:08.940 --> 09:10.770
+Now we can delete the VPC.
+
+09:10.770 --> 09:12.030
+Now, when you delete the VPC,
+
+09:12.030 --> 09:14.610
+it's going to delete the entire thing, the rest of it,
+
+09:14.610 --> 09:18.243
+subnets, route table, internet gateway, all of that.
+
+09:23.650 --> 09:26.130
+Okay, that was the cleanup.
+
+09:26.130 --> 09:28.950
+Now I know there are many things that we have covered.
+
+09:28.950 --> 09:33.030
+It's not easy to grasp all of it at once.
+
+09:33.030 --> 09:36.840
+The only way to make sure all this thing is imprinted
+
+09:36.840 --> 09:38.790
+in your mind is with the practice.
+
+09:38.790 --> 09:41.640
+You have to repeat it again and again
+
+09:41.640 --> 09:45.150
+until unless you can do all this by yourself
+
+09:45.150 --> 09:46.653
+without any help.
+
+09:47.640 --> 09:50.100
+Generally speaking, it's not mandatory
+
+09:50.100 --> 09:52.680
+to learn the entire VPC setup for a DevOps,
+
+09:52.680 --> 09:55.620
+but take it from me, from my experience,
+
+09:55.620 --> 09:57.060
+I consider this knowledge
+
+09:57.060 --> 10:00.240
+as highly essential for a DevOps engineer.
+
+10:00.240 --> 10:04.410
+Irrespective of what cloud provider you're using
+
+10:04.410 --> 10:06.540
+or what you're doing in your work,
+
+10:06.540 --> 10:10.110
+you should know these entire VPC concept
+
+10:10.110 --> 10:12.150
+that I have covered.
+
+10:12.150 --> 10:15.330
+If you're interested more, there are courses
+
+10:15.330 --> 10:18.930
+or documentation to learn more into VPC
+
+10:18.930 --> 10:22.500
+and I encourage you to go and learn those things.
+
+10:22.500 --> 10:24.630
+It'll make you a better DevOps engineer,
+
+10:24.630 --> 10:26.283
+a better IT professional.
+
+10:27.420 --> 10:30.270
+With that note, let's close this session.
+
+10:30.270 --> 10:31.443
+Thank you very much.

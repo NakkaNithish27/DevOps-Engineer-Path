@@ -1,0 +1,789 @@
+WEBVTT
+
+1
+00:00:01.090 --> 00:00:03.474
+Okay, so far we have seen the number
+
+2
+00:00:03.512 --> 00:00:05.490
+of arguments are very important in a function.
+
+3
+00:00:05.540 --> 00:00:07.590
+When you're calling a function, if it needs
+
+4
+00:00:07.640 --> 00:00:09.630
+two arguments, you have to pass two.
+
+5
+00:00:09.800 --> 00:00:11.862
+But what if you want to pass three,
+
+6
+00:00:11.936 --> 00:00:15.200
+four, five, many, or maybe just one?
+
+7
+00:00:15.650 --> 00:00:17.178
+So we're looking for a function that
+
+8
+00:00:17.204 --> 00:00:19.158
+can expect any number of arguments and
+
+9
+00:00:19.184 --> 00:00:21.318
+then process it and return the value.
+
+10
+00:00:21.464 --> 00:00:23.958
+Okay, so let's write a function and one of my
+
+11
+00:00:23.984 --> 00:00:29.430
+favorite example, I will write the function name order food.
+
+12
+00:00:29.600 --> 00:00:32.274
+So ordering food online, you never
+
+13
+00:00:32.311 --> 00:00:34.086
+know how much you want.
+
+14
+00:00:34.268 --> 00:00:37.160
+So first I will take an argument minimum order.
+
+15
+00:00:38.450 --> 00:00:40.738
+Without that it cannot be processed.
+
+16
+00:00:40.894 --> 00:00:43.482
+So it takes an order, prints a message that it
+
+17
+00:00:43.496 --> 00:00:46.830
+will be delivered in 30 minutes and enjoy the party.
+
+18
+00:00:47.150 --> 00:00:51.322
+Let's call this function and let me pass salad.
+
+19
+00:00:51.466 --> 00:00:58.794
+I know not much of a party, let's execute this, right?
+
+20
+00:00:58.832 --> 00:01:00.862
+So that's expecting one argument.
+
+21
+00:01:00.886 --> 00:01:02.718
+I'm passing one argument, but what if
+
+22
+00:01:02.744 --> 00:01:04.697
+I want to pass many arguments, right?
+
+23
+00:01:04.784 --> 00:01:06.978
+So let's keep the one argument as it
+
+24
+00:01:07.004 --> 00:01:10.040
+is because minimum, let's say we need one
+
+25
+00:01:10.430 --> 00:01:13.558
+and then we'll give keyword argument.
+
+26
+00:01:13.594 --> 00:01:17.394
+It starts with Star and then you can give any name.
+
+27
+00:01:17.432 --> 00:01:18.920
+But Arc is a standard.
+
+28
+00:01:20.450 --> 00:01:23.502
+Okay, let's run it once again. Same thing, right?
+
+29
+00:01:23.576 --> 00:01:25.738
+But what if I pass many values?
+
+30
+00:01:25.834 --> 00:01:27.402
+Well, if you're passing many values, we
+
+31
+00:01:27.416 --> 00:01:29.420
+should be processing many values, right?
+
+32
+00:01:29.870 --> 00:01:37.890
+So I will say pizza and biryani
+
+33
+00:01:39.290 --> 00:01:41.840
+and some soup will be good.
+
+34
+00:01:43.950 --> 00:01:46.238
+Okay, so I'm passing four arguments.
+
+35
+00:01:46.274 --> 00:01:48.994
+Now I'm just processing one first argument. Okay?
+
+36
+00:01:49.032 --> 00:01:50.590
+So the rest of the other
+
+37
+00:01:50.640 --> 00:01:53.230
+arguments needs to be processed first.
+
+38
+00:01:53.280 --> 00:01:55.114
+I'll show you just printing it, right?
+
+39
+00:01:55.152 --> 00:01:57.430
+So let's print argues.
+
+40
+00:01:58.350 --> 00:02:01.534
+So the first one is getting stored in that and
+
+41
+00:02:01.572 --> 00:02:03.962
+all the other will be getting stored into ARGs.
+
+42
+00:02:03.986 --> 00:02:05.890
+Now, this ARGs is a tuple.
+
+43
+00:02:06.630 --> 00:02:10.550
+If you execute, you'll see that that's a Tuple.
+
+44
+00:02:10.669 --> 00:02:12.562
+When we have a Tuple, we can iterate over it.
+
+45
+00:02:12.576 --> 00:02:21.062
+I'll say for item in ARGs and I'll just print
+
+46
+00:02:21.086 --> 00:02:23.786
+a message that you have ordered this particular item.
+
+47
+00:02:23.798 --> 00:02:24.938
+So it's going to run it in a loop.
+
+48
+00:02:24.974 --> 00:02:28.426
+So this message will be printed as many as times
+
+49
+00:02:28.488 --> 00:02:32.242
+you have ordered or as many arguments you have in
+
+50
+00:02:32.256 --> 00:02:35.640
+the args and then it will print these message.
+
+51
+00:02:36.030 --> 00:02:37.200
+Let's run it.
+
+52
+00:02:38.490 --> 00:02:39.274
+Okay, there you go.
+
+53
+00:02:39.312 --> 00:02:41.258
+You have ordered salad that will be printed.
+
+54
+00:02:41.294 --> 00:02:42.502
+That's a minimum order.
+
+55
+00:02:42.636 --> 00:02:44.278
+And then you know what?
+
+56
+00:02:44.304 --> 00:02:45.720
+Let's comment this.
+
+57
+00:02:46.110 --> 00:02:49.330
+It's not looking good, let's execute.
+
+58
+00:02:50.010 --> 00:02:51.394
+Yeah, all right.
+
+59
+00:02:51.432 --> 00:02:53.710
+Similar print message, printing it in a loop because
+
+60
+00:02:53.760 --> 00:02:55.800
+that's a tuple, we can iterate over it.
+
+61
+00:02:56.250 --> 00:02:59.710
+And this is called variable length argument.
+
+62
+00:03:00.330 --> 00:03:02.282
+Now this tuple over there, that's
+
+63
+00:03:02.366 --> 00:03:03.922
+variable length argument and it's called
+
+64
+00:03:03.996 --> 00:03:06.290
+non keyword variable length argument.
+
+65
+00:03:06.470 --> 00:03:10.450
+Non keyword arguments.
+
+66
+00:03:11.910 --> 00:03:16.354
+Okay, this one Star args.
+
+67
+00:03:16.392 --> 00:03:19.114
+Now, instead of ARGs, you can give any name, but
+
+68
+00:03:19.152 --> 00:03:21.766
+that's the standard and we keep as it is.
+
+69
+00:03:21.948 --> 00:03:23.978
+Now, one more example on variable length
+
+70
+00:03:24.014 --> 00:03:26.474
+argument and this will be for keyword
+
+71
+00:03:26.522 --> 00:03:29.350
+arguments the dictionary key and value pairs.
+
+72
+00:03:30.090 --> 00:03:35.530
+So we have seen in this example that ARGs is a tuple.
+
+73
+00:03:36.450 --> 00:03:38.894
+We can have another type of keyword argument,
+
+74
+00:03:38.942 --> 00:03:41.726
+kwargs, which will be a dictionary.
+
+75
+00:03:41.858 --> 00:03:44.458
+So let's write a function that will
+
+76
+00:03:44.484 --> 00:03:47.400
+take args and kwargs both.
+
+77
+00:03:47.790 --> 00:03:49.354
+We'll give the function name
+
+78
+00:03:49.392 --> 00:03:51.850
+as time underscore activity.
+
+79
+00:03:53.850 --> 00:03:55.526
+This will be the function and I'm
+
+80
+00:03:55.538 --> 00:03:58.538
+going to pass minutes, okay, three values.
+
+81
+00:03:58.634 --> 00:04:01.980
+So I'll say ten minutes, 20 minutes and ten minutes.
+
+82
+00:04:02.850 --> 00:04:03.322
+Okay?
+
+83
+00:04:03.396 --> 00:04:05.818
+Or you can pass any numbers and first
+
+84
+00:04:05.844 --> 00:04:07.186
+I'm showing you calling of a function.
+
+85
+00:04:07.248 --> 00:04:09.362
+Then we'll write the function and then I'll
+
+86
+00:04:09.386 --> 00:04:11.918
+pass different activities, key and value pair.
+
+87
+00:04:11.954 --> 00:04:18.370
+So I'll say my hobby is dance
+
+88
+00:04:19.649 --> 00:04:25.630
+and I will say sport is boxing.
+
+89
+00:04:27.930 --> 00:04:40.830
+For fun, I will see driving and work DevOps.
+
+90
+00:04:42.290 --> 00:04:44.914
+So these are some different activities key value pairs.
+
+91
+00:04:44.962 --> 00:04:47.094
+I'm going to pass the activities and the
+
+92
+00:04:47.132 --> 00:04:49.506
+minutes and this function is going to return
+
+93
+00:04:49.568 --> 00:04:52.302
+me randomly that for this activity you should
+
+94
+00:04:52.316 --> 00:04:53.778
+be spending this much amount of time.
+
+95
+00:04:53.804 --> 00:04:56.274
+So it's going to sum all these values plus
+
+96
+00:04:56.312 --> 00:04:58.722
+it's going to add its own random number to
+
+97
+00:04:58.736 --> 00:05:01.482
+it and return me that for this activity you
+
+98
+00:05:01.496 --> 00:05:03.642
+will be spending this much amount of time.
+
+99
+00:05:03.836 --> 00:05:05.526
+Okay, let's write the function
+
+100
+00:05:05.648 --> 00:05:10.830
+def time_activity.
+
+101
+00:05:13.770 --> 00:05:15.862
+So first to take all the integers in, I
+
+102
+00:05:15.876 --> 00:05:18.470
+will say args that will be a tuple.
+
+103
+00:05:18.590 --> 00:05:21.350
+Ten 2010 will be in a tuple.
+
+104
+00:05:21.470 --> 00:05:23.218
+And then I will say for all
+
+105
+00:05:23.244 --> 00:05:26.830
+the other dictionary I'll say kwargs.
+
+106
+00:05:30.670 --> 00:05:31.600
+My bad.
+
+107
+00:05:32.110 --> 00:05:34.430
+It's actually two stars.
+
+108
+00:05:36.310 --> 00:05:38.870
+Name does not matter, that star matters.
+
+109
+00:05:39.670 --> 00:05:40.970
+Put some comment.
+
+110
+00:05:42.790 --> 00:05:45.254
+So input, you can pass multiple values for
+
+111
+00:05:45.292 --> 00:05:47.810
+minutes and key value pair for the activities.
+
+112
+00:05:48.130 --> 00:05:49.466
+And again it's any number.
+
+113
+00:05:49.528 --> 00:05:52.490
+Okay, I'm passing three, can pass many.
+
+114
+00:05:52.660 --> 00:05:54.102
+And here also key value pair.
+
+115
+00:05:54.126 --> 00:05:55.900
+We can pass many or one.
+
+116
+00:05:57.430 --> 00:05:59.306
+Let's just first print these things.
+
+117
+00:05:59.368 --> 00:06:03.410
+Okay, let's see how do they look? Print.
+
+118
+00:06:16.670 --> 00:06:18.534
+Okay, let's first just print it.
+
+119
+00:06:18.632 --> 00:06:19.700
+Let's run this.
+
+120
+00:06:21.410 --> 00:06:23.658
+Okay, you see that ten 2010, it is
+
+121
+00:06:23.684 --> 00:06:26.058
+stored in a tuple, that's ARGs and all
+
+122
+00:06:26.084 --> 00:06:27.574
+the other it's stored in a dictionary.
+
+123
+00:06:27.622 --> 00:06:29.190
+That's kw ARGs.
+
+124
+00:06:29.630 --> 00:06:31.330
+Now let's do some processing.
+
+125
+00:06:31.450 --> 00:06:35.000
+Okay, so I'll take a variable minute and I will
+
+126
+00:06:35.570 --> 00:06:40.470
+store I'll use this sum function which will just summarize
+
+127
+00:06:41.630 --> 00:06:44.310
+addition of all the values in the ARGs.
+
+128
+00:06:45.950 --> 00:06:48.114
+Plus with that I want to add some
+
+129
+00:06:48.152 --> 00:06:50.110
+number and I want to be random.
+
+130
+00:06:50.170 --> 00:06:55.410
+So I'm going to use a function module called as random.
+
+131
+00:06:56.630 --> 00:07:04.282
+In random you have a method called Rand and
+
+132
+00:07:04.296 --> 00:07:07.560
+I'm going to say from zero to 60.
+
+133
+00:07:08.430 --> 00:07:10.958
+So from zero to 60 it's going to return any random
+
+134
+00:07:10.994 --> 00:07:14.040
+integer and that I'm going to add it with this number
+
+135
+00:07:14.430 --> 00:07:16.982
+and that will be stored in this variable minute.
+
+136
+00:07:17.126 --> 00:07:20.618
+Okay, let's print once again, what do we get in minute?
+
+137
+00:07:20.654 --> 00:07:21.530
+And it will be random.
+
+138
+00:07:21.590 --> 00:07:26.146
+Okay, so ten plus 20 plus ten, that's 40, right?
+
+139
+00:07:26.208 --> 00:07:28.550
+Plus we're going to add with some random integer.
+
+140
+00:07:28.610 --> 00:07:29.880
+Let's see what we get.
+
+141
+00:07:31.110 --> 00:07:32.698
+Okay, I got 72.
+
+142
+00:07:32.844 --> 00:07:35.206
+I got 44. I got 90.
+
+143
+00:07:35.268 --> 00:07:37.846
+You see, that's random because it's going
+
+144
+00:07:37.848 --> 00:07:39.600
+to add it with some random number.
+
+145
+00:07:40.230 --> 00:07:43.150
+Now, let's randomly pick an activity.
+
+146
+00:07:44.310 --> 00:07:46.990
+So I'll take a variable called choice,
+
+147
+00:07:48.030 --> 00:07:51.970
+and I will say random choice.
+
+148
+00:07:53.010 --> 00:07:54.850
+Okay, now, that choice function also
+
+149
+00:07:54.900 --> 00:07:57.720
+runs on a sequence list.
+
+150
+00:07:58.050 --> 00:07:59.830
+It runs on a list, okay?
+
+151
+00:07:59.880 --> 00:08:06.514
+So I'm going to say kwkargs keys that will return
+
+152
+00:08:06.552 --> 00:08:08.974
+a tuple I would like to convert into a list.
+
+153
+00:08:09.012 --> 00:08:10.860
+So I'm going to put it into list function.
+
+154
+00:08:13.690 --> 00:08:15.878
+So kwargs.keys is going to return all the
+
+155
+00:08:15.904 --> 00:08:20.718
+key hobby, sport, fun work that returns a tuple.
+
+156
+00:08:20.754 --> 00:08:22.780
+And I'm converting it into a list.
+
+157
+00:08:23.890 --> 00:08:26.894
+And from that list, randomly, it's going to pick up any
+
+158
+00:08:26.932 --> 00:08:29.570
+of the string and store it into the variable choice.
+
+159
+00:08:29.950 --> 00:08:32.630
+Okay, let's print choice.
+
+160
+00:08:37.490 --> 00:08:39.090
+So it's going to be random.
+
+161
+00:08:40.370 --> 00:08:42.381
+So a random number, random
+
+162
+00:08:42.466 --> 00:08:45.630
+integer, and a random string.
+
+163
+00:08:48.690 --> 00:08:50.422
+Okay, let's give a proper message.
+
+164
+00:08:50.496 --> 00:08:52.380
+Now let's print a proper message.
+
+165
+00:08:56.590 --> 00:09:03.640
+I will say you have to spend like,
+
+166
+00:09:04.090 --> 00:09:10.130
+these many minutes for the activity, okay?
+
+167
+00:09:10.180 --> 00:09:12.410
+So keyword args.
+
+168
+00:09:13.210 --> 00:09:15.938
+And I'm going to pass the key choice, and
+
+169
+00:09:15.964 --> 00:09:18.254
+it's going to return the value of that.
+
+170
+00:09:18.412 --> 00:09:22.434
+So if choice randomly is a hobby, so hobby
+
+171
+00:09:22.482 --> 00:09:26.258
+dot hobby's value is going to be dance, right?
+
+172
+00:09:26.284 --> 00:09:28.060
+So that's what it's going to return.
+
+173
+00:09:28.750 --> 00:09:29.980
+Let's run that.
+
+174
+00:09:31.750 --> 00:09:33.566
+Okay, now let's comment all the
+
+175
+00:09:33.628 --> 00:09:35.200
+other things that we don't need.
+
+176
+00:09:35.590 --> 00:09:43.850
+Choice minimum over here, the args, the keyword args
+
+177
+00:09:49.190 --> 00:09:50.298
+Okay, now it should be good.
+
+178
+00:09:50.324 --> 00:09:51.680
+Okay, now let's run it.
+
+179
+00:09:52.790 --> 00:09:54.894
+Okay, so you have to spend 96
+
+180
+00:09:54.932 --> 00:09:56.840
+minutes, but that's too much, man.
+
+181
+00:09:57.590 --> 00:09:59.490
+92 for driving.
+
+182
+00:09:59.870 --> 00:10:01.546
+That depends on traffic.
+
+183
+00:10:01.738 --> 00:10:03.118
+70 for DevOps.
+
+184
+00:10:03.214 --> 00:10:04.220
+That's less.
+
+185
+00:10:05.270 --> 00:10:07.602
+52 for dance. That's fine.
+
+186
+00:10:07.736 --> 00:10:08.720
+That's better.
+
+187
+00:10:09.710 --> 00:10:12.318
+Okay, 57 for boxing. You see that?
+
+188
+00:10:12.404 --> 00:10:13.230
+You know what I'll say?
+
+189
+00:10:13.280 --> 00:10:15.440
+57 minutes.
+
+190
+00:10:21.150 --> 00:10:22.438
+I have written this function
+
+191
+00:10:22.524 --> 00:10:24.840
+really in the lockdown time.
+
+192
+00:10:28.690 --> 00:10:30.818
+And that time, the fun was different.
+
+193
+00:10:30.964 --> 00:10:32.380
+The hobby was different.
+
+194
+00:10:33.130 --> 00:10:34.470
+There was no sport.
+
+195
+00:10:34.650 --> 00:10:37.898
+Anyway, so that should tell you how
+
+196
+00:10:37.984 --> 00:10:41.980
+the args and kwargs work together.
+
+197
+00:10:43.090 --> 00:10:48.510
+So that is all in functions we'll see. Now, modules.

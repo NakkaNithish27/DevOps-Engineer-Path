@@ -1,0 +1,117 @@
+WEBVTT
+
+0
+00:00.440 --> 00:06.050
+Our previous continuous integration pipeline publishes artifacts, the WAR file.
+
+1
+00:07.580 --> 00:11.750
+In this continuous integration pipeline, we will be publishing Docker images.
+
+2
+00:12.950 --> 00:15.680
+Please check Introduction to Containers section.
+
+3
+00:16.650 --> 00:19.410
+to see how Docker images are built and publish.
+
+4
+00:19.420 --> 00:25.600
+We will be doing similar thing, but we will be doing it through pipeline as a code from a Jenkins.
+
+5
+00:25.680 --> 00:29.100
+So whenever a developer makes a change to the code.
+
+6
+00:30.590 --> 00:31.820
+It comes on the GitHub.
+
+7
+00:32.150 --> 00:36.440
+Jenkins will detect it, fetch the code and will run the test.
+
+8
+00:36.710 --> 00:37.550
+The unit test.
+
+9
+00:38.330 --> 00:41.960
+Then we will do code analysis with checkstyle and then again.
+
+10
+00:41.960 --> 00:43.490
+Code analysis with sonarqube.
+
+11
+00:44.480 --> 00:46.490
+Upload the results on the sonarqube server.
+
+12
+00:46.790 --> 00:48.320
+Wait for the quality gate.
+
+13
+00:48.560 --> 00:53.090
+If everything is good, then we are going to build a Docker image.
+
+14
+00:53.810 --> 00:56.150
+That Docker image will contain the artifact.
+
+15
+00:56.660 --> 00:58.370
+So this is the build process here.
+
+16
+00:58.880 --> 01:05.030
+The build process is the Docker build process where we get the docker image and we publish the Docker
+
+17
+01:05.030 --> 01:06.230
+image to a registry.
+
+18
+01:06.620 --> 01:11.630
+In this example, we will be using Amazon ECR, elastic container registry.
+
+19
+01:12.320 --> 01:20.630
+There could be here a GCR, Google Container Registry or Azure Registry Service or Docker Hub or your
+
+20
+01:20.630 --> 01:22.550
+own solution like Nexus.
+
+21
+01:22.910 --> 01:28.130
+In this example, we will see ECR because we're using AWS already.
+
+22
+01:28.880 --> 01:31.790
+Doesn't matter where you publish your image.
+
+23
+01:31.820 --> 01:36.620
+The only process that we change over here is the login process to your registry service.
+
+24
+01:37.280 --> 01:39.740
+Otherwise, all of this remains similar.
+
+25
+01:41.420 --> 01:47.570
+So let's take a look at the pipeline code, how this can be done, and then we will talk about the prerequisite
+
+26
+01:47.570 --> 01:50.930
+that we need to do in order to run this pipeline on Jenkins.
+
+27
+01:51.500 --> 01:52.520
+So see you.
+
+28
+01:54.060 --> 01:54.960
+In the next lecture.

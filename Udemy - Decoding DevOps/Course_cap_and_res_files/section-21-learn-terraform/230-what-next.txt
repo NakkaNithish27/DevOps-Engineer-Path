@@ -1,0 +1,145 @@
+WEBVTT
+
+00:00.360 --> 00:01.659
+Speaker: Okay, so what next?
+
+00:01.659 --> 00:05.491
+Well, there are many things that you can do with Terraform
+
+00:05.491 --> 00:08.130
+and we have more lectures on Terraform,
+
+00:08.130 --> 00:11.280
+but they are distributed in different sections,
+
+00:11.280 --> 00:14.670
+like in AWS part two, where we see how to create
+
+00:14.670 --> 00:16.260
+and manage VPC manually.
+
+00:16.260 --> 00:20.340
+After that, we will have a lecture of how to manage VPC
+
+00:20.340 --> 00:23.117
+by using Terraform, like that in Kubernetes,
+
+00:23.117 --> 00:25.920
+We are going to see how to use Terraform
+
+00:25.920 --> 00:27.843
+to manage Kubernetes cluster on AWS.
+
+00:29.100 --> 00:32.820
+But now once you got all your hands on Terraform,
+
+00:32.820 --> 00:34.710
+you have a solid ground.
+
+00:34.710 --> 00:37.020
+From here, there are two ways,
+
+00:37.020 --> 00:40.537
+or not just two ways, both ways I should say,
+
+00:40.537 --> 00:45.030
+because you can write Terraform code as we did previously.
+
+00:45.030 --> 00:46.428
+Go to the provider, go to the resources,
+
+00:46.428 --> 00:50.040
+find the documentation, put it in your code and write it.
+
+00:50.040 --> 00:51.420
+Or there is one more way.
+
+00:51.420 --> 00:55.457
+You can use modules provided by Terraform registry
+
+00:55.457 --> 00:58.230
+where you have the pre-written code, which you can use
+
+00:58.230 --> 01:01.710
+and just pass some values based on your requirement,
+
+01:01.710 --> 01:04.260
+and Terraform will make sure it completes
+
+01:04.260 --> 01:06.943
+the setup and maintains it.
+
+01:06.943 --> 01:09.720
+We will see those things in upcoming lectures
+
+01:09.720 --> 01:11.731
+in various section, as I told you previously,
+
+01:11.731 --> 01:15.270
+but generally, if you just want to use any resource,
+
+01:15.270 --> 01:18.420
+you can say browse providers, select your provider.
+
+01:18.420 --> 01:19.842
+Like for example, AWS.
+
+01:19.842 --> 01:22.692
+Go to documentation, search
+
+01:22.692 --> 01:25.380
+for the resource that you want to use.
+
+01:25.380 --> 01:29.084
+Or you can just use the control F in the browser to search.
+
+01:29.084 --> 01:32.640
+Like I have search for auto-scaling,
+
+01:32.640 --> 01:37.080
+I find the resource AWS auto-scaling group.
+
+01:37.080 --> 01:38.732
+I see the example.
+
+01:38.732 --> 01:43.320
+I put this in my code and make the changes and test it.
+
+01:43.320 --> 01:46.530
+Same way like this for VPC and many other things.
+
+01:46.530 --> 01:49.050
+But coming back to registry, there are also modules.
+
+01:49.050 --> 01:50.850
+You can say browse modules.
+
+01:50.850 --> 01:52.950
+You can select your provider here, AWS,
+
+01:52.950 --> 01:56.070
+and you can see that you made modules to do stuff, which
+
+01:56.070 --> 01:58.200
+as I told you, we're going to see in upcoming lectures
+
+01:58.200 --> 02:00.052
+in different sections.
+
+02:00.052 --> 02:03.741
+So for now, you're good with what you know in Terraform.
+
+02:03.741 --> 02:07.400
+You're going to learn more in Terraform
+
+02:07.400 --> 02:08.460
+in different sections.
+
+02:08.460 --> 02:12.240
+So we'll cross the bridge when we come there.
+
+02:12.240 --> 02:13.710
+That is all in this section.
+
+02:13.710 --> 02:15.303
+I will see you in the next one.

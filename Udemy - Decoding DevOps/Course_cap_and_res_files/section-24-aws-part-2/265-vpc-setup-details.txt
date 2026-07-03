@@ -1,0 +1,220 @@
+WEBVTT
+
+00:01.290 --> 00:04.050
+Instructor: In this video, we will be creating the VPC,
+
+00:04.050 --> 00:08.430
+but before we start doing it, we'll create the blueprint.
+
+00:08.430 --> 00:11.730
+Okay, so this is the design what we are going to go with.
+
+00:11.730 --> 00:15.510
+We will have first, we'll give the VPC range,
+
+00:15.510 --> 00:17.430
+the main network range,
+
+00:17.430 --> 00:22.430
+and we'll say it is 172, dot, let's say 20.0.0/16, okay?
+
+00:25.680 --> 00:30.680
+You know that gives us like, more than 65,000 IP address.
+
+00:30.750 --> 00:33.660
+We need to divide it into smaller subnets.
+
+00:33.660 --> 00:37.653
+So we will go with four subnets to begin with.
+
+00:39.150 --> 00:43.173
+Okay, this, you'll have two public subnet,
+
+00:44.400 --> 00:46.923
+and two private subnet.
+
+00:48.750 --> 00:50.640
+Again, two for high availability,
+
+00:50.640 --> 00:52.770
+we are going to divide it among multiple zones,
+
+00:52.770 --> 00:54.270
+two zones, specifically, okay?
+
+00:54.270 --> 00:56.583
+So we'll have two zones.
+
+00:57.870 --> 00:59.100
+We'll decide the region.
+
+00:59.100 --> 01:03.120
+We'll go with region North California,
+
+01:03.120 --> 01:06.660
+so region called US West one.
+
+01:06.660 --> 01:08.043
+It has two zones.
+
+01:09.930 --> 01:14.930
+You have US-West-1A, and you have US-West-1B.
+
+01:20.040 --> 01:22.200
+Okay, so you'll have two public subnet
+
+01:22.200 --> 01:24.090
+in two different zone, two private subnet
+
+01:24.090 --> 01:26.850
+again distributed in these two zones.
+
+01:26.850 --> 01:28.593
+So we say total four subnets.
+
+01:29.640 --> 01:34.170
+So let's URL subnet range 172.20, dot,
+
+01:34.170 --> 01:37.410
+I'll start with 1.0/24.
+
+01:37.410 --> 01:42.410
+That's four subnet, 172.20.2.0/24,
+
+01:44.532 --> 01:49.532
+172.20.3.0/24, and 172.20.4.0/24.
+
+01:56.810 --> 01:59.760
+Okay, so two public subnet and two private subnet,
+
+01:59.760 --> 02:02.490
+and we'll also give the zone names there.
+
+02:02.490 --> 02:07.490
+Okay, first subnet in US West-1A, second in US West-1B.
+
+02:08.070 --> 02:10.950
+So that was about the network design.
+
+02:10.950 --> 02:13.890
+Now, we also have to create some components.
+
+02:13.890 --> 02:15.873
+We need one internet gateway.
+
+02:19.470 --> 02:24.470
+We need two NAD gateway, but for the sake of saving cost,
+
+02:25.500 --> 02:27.420
+we'll just create one single NAD gateway.
+
+02:27.420 --> 02:30.300
+But if you're doing high availability for NAD gateway,
+
+02:30.300 --> 02:33.120
+then you should have minimum two NAD gateway distributed
+
+02:33.120 --> 02:35.880
+in two different zones.
+
+02:35.880 --> 02:38.670
+You also need one elastic IP,
+
+02:38.670 --> 02:42.540
+which will be assigned for the NAD gateway.
+
+02:42.540 --> 02:45.540
+So NAD Gateway will have an elastic IP.
+
+02:45.540 --> 02:47.883
+Route table, we need two route tables.
+
+02:52.110 --> 02:54.573
+One will be for the public subnet,
+
+02:59.760 --> 03:01.623
+and one for the private subnet.
+
+03:05.070 --> 03:08.400
+So this subnets route table will be attached
+
+03:08.400 --> 03:12.630
+to these subnets, and it will tell public subnet
+
+03:12.630 --> 03:15.000
+to go to the internet gateway,
+
+03:15.000 --> 03:18.780
+and private subnet to go to the NAD gateway,
+
+03:18.780 --> 03:20.193
+as you see in the diagram.
+
+03:21.150 --> 03:23.460
+We'll need also one Bastion host
+
+03:23.460 --> 03:26.340
+or the jump server in the public subnet
+
+03:26.340 --> 03:29.550
+so we can access instances in the private subnet.
+
+03:29.550 --> 03:31.200
+Now, that should complete our design,
+
+03:31.200 --> 03:33.300
+but we are also going to see NACL,
+
+03:33.300 --> 03:37.110
+network access control list for the public subnet.
+
+03:37.110 --> 03:39.210
+It's like a firewall, like you have security group.
+
+03:39.210 --> 03:40.680
+It's gonna be similar to that,
+
+03:40.680 --> 03:44.820
+but will give you more control, and this is for the subnet.
+
+03:44.820 --> 03:47.010
+Like security group is for the instance,
+
+03:47.010 --> 03:49.200
+NACL is for the subnet,
+
+03:49.200 --> 03:52.920
+and in NACL, you have allow and deny rule both.
+
+03:52.920 --> 03:55.650
+In security group, you just have the allow rule.
+
+03:55.650 --> 03:58.020
+So we'll be seeing that once we set up our entire VPC,
+
+03:58.020 --> 04:00.690
+we'll be seeing NACL also, and we'll be also doing,
+
+04:00.690 --> 04:03.540
+we also will create one more VPC,
+
+04:03.540 --> 04:07.683
+and this is so we can see what is VPC peering.
+
+04:10.200 --> 04:12.690
+So in this second VPC that we are going to create,
+
+04:12.690 --> 04:14.940
+we are not going to create subnets and the complete thing,
+
+04:14.940 --> 04:19.940
+we'll just create the VPC, and we'll peer our main VPC
+
+04:19.950 --> 04:23.523
+with the other VPC that we just created.
+
+04:24.420 --> 04:26.700
+So with all that information, we can go
+
+04:26.700 --> 04:30.063
+to AWS console and start creating our VPC.

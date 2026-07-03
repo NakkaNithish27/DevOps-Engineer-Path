@@ -1,0 +1,433 @@
+WEBVTT
+
+1
+00:00:00.550 --> 00:00:01.530
+Hello and welcome.
+
+2
+00:00:01.640 --> 00:00:03.054
+In this video we will talk
+
+3
+00:00:03.092 --> 00:00:07.290
+about Kubernetes objects and Kubernetes documentation.
+
+4
+00:00:08.750 --> 00:00:11.190
+If you're wondering what are objects,
+
+5
+00:00:12.350 --> 00:00:13.902
+let me give you an example.
+
+6
+00:00:14.096 --> 00:00:19.018
+Container for understanding, you can say container
+
+7
+00:00:19.054 --> 00:00:21.210
+is an object in a docker.
+
+8
+00:00:22.490 --> 00:00:24.258
+So let's see some of the objects that
+
+9
+00:00:24.284 --> 00:00:26.060
+we are going to cover in this course.
+
+10
+00:00:27.230 --> 00:00:28.050
+Pod.
+
+11
+00:00:28.670 --> 00:00:30.414
+This is the smallest object
+
+12
+00:00:30.512 --> 00:00:32.670
+that we create in Kubernetes.
+
+13
+00:00:33.950 --> 00:00:36.754
+And container lives inside a pod.
+
+14
+00:00:36.922 --> 00:00:40.342
+Yes, we do not directly touch containers.
+
+15
+00:00:40.486 --> 00:00:42.522
+We manage pods and Pod in
+
+16
+00:00:42.536 --> 00:00:44.550
+turn will manage containers for us.
+
+17
+00:00:44.660 --> 00:00:46.098
+We'll learn about this in
+
+18
+00:00:46.124 --> 00:00:50.420
+detail in Pod lecture service.
+
+19
+00:00:52.010 --> 00:00:54.018
+To have a static endpoint to
+
+20
+00:00:54.044 --> 00:00:56.506
+your pod, like a load balancer,
+
+21
+00:00:56.578 --> 00:01:01.700
+We have on an EC2 instance. Replica Set
+
+22
+00:01:02.390 --> 00:01:06.366
+to create a cluster of pods or replica of
+
+23
+00:01:06.428 --> 00:01:11.780
+same pod deployment which works similar to Replica set.
+
+24
+00:01:12.290 --> 00:01:16.606
+Plus you can deploy new image tags by using deployment.
+
+25
+00:01:16.798 --> 00:01:19.450
+And let me tell you, in my own experience, deployment
+
+26
+00:01:19.510 --> 00:01:23.418
+is the most used object as far as DevOps is
+
+27
+00:01:23.444 --> 00:01:26.734
+concerned because we are involved in a lot of deployments.
+
+28
+00:01:26.842 --> 00:01:30.440
+And deployment object will help us do that.
+
+29
+00:01:30.830 --> 00:01:32.670
+Config map to store our
+
+30
+00:01:32.720 --> 00:01:36.450
+variables and configuration secret.
+
+31
+00:01:36.890 --> 00:01:40.220
+Again, variables and some information you can store
+
+32
+00:01:40.550 --> 00:01:43.950
+which are not in clear text volumes.
+
+33
+00:01:44.510 --> 00:01:46.638
+Just like we have EBS volumes for
+
+34
+00:01:46.664 --> 00:01:48.606
+EC2 instances, we can have different
+
+35
+00:01:48.668 --> 00:01:51.210
+kinds of volumes attached to our pod.
+
+36
+00:01:52.310 --> 00:01:53.886
+These are some of the objects that we
+
+37
+00:01:53.888 --> 00:01:55.278
+are going to cover in this course.
+
+38
+00:01:55.364 --> 00:01:58.470
+Now, let's go and check Kubernetes documentation.
+
+39
+00:02:00.470 --> 00:02:02.446
+Whenever you are lost in Kubernetes,
+
+40
+00:02:02.518 --> 00:02:04.522
+you can always refer to documentation.
+
+41
+00:02:04.606 --> 00:02:07.160
+And let me tell you, they are very, very good.
+
+42
+00:02:08.030 --> 00:02:11.300
+I use Kubernetes documentation every day.
+
+43
+00:02:11.810 --> 00:02:13.878
+Now, if there is some object that you use on
+
+44
+00:02:13.904 --> 00:02:17.994
+a regular basis, you will remember everything about it.
+
+45
+00:02:18.032 --> 00:02:19.782
+It's configuration, how to create it, how
+
+46
+00:02:19.796 --> 00:02:21.500
+to update it, how to edit it.
+
+47
+00:02:22.430 --> 00:02:25.458
+But then there are many things in Kubernetes and
+
+48
+00:02:25.484 --> 00:02:27.800
+it becomes difficult to remember all of this.
+
+49
+00:02:28.490 --> 00:02:31.246
+So the best way is to come to documentation.
+
+50
+00:02:31.378 --> 00:02:33.750
+For example, I will search here for
+
+51
+00:02:33.800 --> 00:02:38.666
+Pod and I get some results.
+
+52
+00:02:38.798 --> 00:02:40.920
+Pod kuberrnetes, let's click on that.
+
+53
+00:02:41.250 --> 00:02:43.234
+And here you can read about what is
+
+54
+00:02:43.272 --> 00:02:46.214
+Pod and how to use a pod.
+
+55
+00:02:46.322 --> 00:02:47.446
+Like this example.
+
+56
+00:02:47.568 --> 00:02:52.634
+It shows you a configuration of how to create a pod.
+
+57
+00:02:52.682 --> 00:02:55.390
+This looks similar to Docker compose
+
+58
+00:02:55.890 --> 00:02:57.518
+because it is in YAML format.
+
+59
+00:02:57.554 --> 00:03:00.682
+And we will understand how to write it,
+
+60
+00:03:00.756 --> 00:03:03.934
+edit it created and we'll understand all the
+
+61
+00:03:03.972 --> 00:03:06.960
+configuration of different objects in this course.
+
+62
+00:03:07.710 --> 00:03:09.166
+But the point here is you
+
+63
+00:03:09.168 --> 00:03:10.198
+don't need to remember all this.
+
+64
+00:03:10.224 --> 00:03:13.318
+You can come to documentation, find it and you can see
+
+65
+00:03:13.344 --> 00:03:15.970
+the commands how you can use to set this up.
+
+66
+00:03:16.020 --> 00:03:19.010
+kubectl, apply and there is a URL.
+
+67
+00:03:19.190 --> 00:03:21.538
+Now, you can create your own file and
+
+68
+00:03:21.564 --> 00:03:24.010
+you can say apply on that file.
+
+69
+00:03:24.390 --> 00:03:27.214
+Or you can give a link like this one.
+
+70
+00:03:27.252 --> 00:03:28.500
+Let's check this link.
+
+71
+00:03:32.530 --> 00:03:34.098
+So it has downloaded the file.
+
+72
+00:03:34.134 --> 00:03:36.158
+So you can download the file or create the
+
+73
+00:03:36.184 --> 00:03:38.140
+file or you can directly give the link.
+
+74
+00:03:38.590 --> 00:03:41.606
+There are many objects that are created, or
+
+75
+00:03:41.668 --> 00:03:43.914
+should I say these definition files are created
+
+76
+00:03:43.962 --> 00:03:46.014
+by different different providers and vendors.
+
+77
+00:03:46.062 --> 00:03:47.138
+You can give the link and
+
+78
+00:03:47.164 --> 00:03:49.190
+you can directly apply objects.
+
+79
+00:03:49.570 --> 00:03:51.470
+Let's take a few more examples.
+
+80
+00:03:52.810 --> 00:03:55.010
+Let's search for a deployment.
+
+81
+00:04:01.670 --> 00:04:04.810
+Again, you can read about deployments, it's use cases.
+
+82
+00:04:04.870 --> 00:04:06.642
+When should you use deployment object
+
+83
+00:04:06.716 --> 00:04:08.298
+and how do you create it.
+
+84
+00:04:08.384 --> 00:04:09.774
+So, there's an example for this.
+
+85
+00:04:09.812 --> 00:04:12.462
+Also, you can take your time and read it.
+
+86
+00:04:12.476 --> 00:04:17.478
+It's really easy to understand this configuration file, but
+
+87
+00:04:17.564 --> 00:04:20.694
+there are some points that you need to remember
+
+88
+00:04:20.851 --> 00:04:22.640
+that we are going to cover later.
+
+89
+00:04:24.830 --> 00:04:27.402
+Again, similarly, how you can apply it and
+
+90
+00:04:27.476 --> 00:04:29.934
+kubectl get deployments which is going to show
+
+91
+00:04:29.972 --> 00:04:35.622
+you your deployment object, its state, how you
+
+92
+00:04:35.636 --> 00:04:37.866
+can update a deployment or edit it.
+
+93
+00:04:37.928 --> 00:04:39.882
+kubectl set image and you can set a
+
+94
+00:04:39.896 --> 00:04:42.800
+different image while you are upgrading it.
+
+95
+00:04:43.730 --> 00:04:45.058
+These are some examples.
+
+96
+00:04:45.094 --> 00:04:46.338
+If you come directly to the
+
+97
+00:04:46.364 --> 00:04:49.110
+main page, go to documentation.
+
+98
+00:04:50.150 --> 00:04:52.878
+You have many other links over here.
+
+99
+00:04:52.904 --> 00:04:54.082
+Like what is Kubernetes?
+
+100
+00:04:54.166 --> 00:04:56.550
+Different components, kubernetes API.
+
+101
+00:04:57.050 --> 00:04:59.502
+So I really want you to bookmark this link in
+
+102
+00:04:59.516 --> 00:05:02.840
+your browser and use it whenever you need it.
+
+103
+00:05:04.370 --> 00:05:05.526
+So take your time.
+
+104
+00:05:05.588 --> 00:05:08.302
+Go through this link, check different pages.
+
+105
+00:05:08.446 --> 00:05:11.002
+Just get comfortable with these documentation.
+
+106
+00:05:11.086 --> 00:05:14.850
+You will need it like on a regular basis.
+
+107
+00:05:15.290 --> 00:05:16.482
+So take your time.
+
+108
+00:05:16.616 --> 00:05:19.090
+Once you're done, join me in the next lecture.

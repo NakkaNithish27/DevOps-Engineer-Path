@@ -1,0 +1,437 @@
+WEBVTT
+
+0
+00:00.600 --> 00:07.500
+All right, so welcome to the last session of BASC scrioting in last video we have seen.
+
+1
+00:08.620 --> 00:14.650
+How we can have a script detect operating system and based on that.
+
+2
+00:15.870 --> 00:23.610
+Execute the right command. In this session, we will push the script to all the remote machines, Web
+
+3
+00:23.620 --> 00:26.830
+01, Web 02, Web 03 and then execute it.
+
+4
+00:26.850 --> 00:29.010
+And for this, we need to write another script.
+
+5
+00:29.850 --> 00:34.560
+Now, if you don't know how to push files to Linux machines, well, it's pretty simple.
+
+6
+00:34.710 --> 00:36.060
+Just need to use scp.
+
+7
+00:37.120 --> 00:40.870
+Now, scp uses ssh, so if your ssh is working, your scp works.
+
+8
+00:41.530 --> 00:43.750
+So let's create a file, echo.
+
+9
+00:44.440 --> 00:45.010
+I say.
+
+10
+00:45.370 --> 00:46.450
+testfile
+
+11
+00:47.500 --> 00:49.240
+.
+
+12
+00:50.250 --> 00:51.810
+testfile.txt
+
+13
+00:53.730 --> 00:58.020
+OK, so let's say this is the file, I want to push it to the other machine, so I'm going to say
+
+14
+00:58.020 --> 01:07.170
+testfile source and then you give the destination as you go for ssh username at the rate and the
+
+15
+01:07.170 --> 01:11.550
+hostname or the IP, colon and you to give the path, for example, /tmp/.
+
+16
+01:13.890 --> 01:15.810
+OK, so that's how you can push the script.
+
+17
+01:16.080 --> 01:16.340
+All right.
+
+18
+01:16.980 --> 01:24.420
+Let's try a different dir, the root dir and it says, permission denied because the root directory
+
+19
+01:24.420 --> 01:29.100
+is owned by root user and devops user is trying to access root dir.
+
+20
+01:29.100 --> 01:30.480
+So that's why permission denied.
+
+21
+01:31.200 --> 01:36.150
+Similarly, you can fetch the file also instead of source, you just change from source to destination
+
+22
+01:36.690 --> 01:37.830
+and destination to source.
+
+23
+01:39.030 --> 01:43.050
+And it did not ask us any password, anything, because it is using the key.
+
+24
+01:43.380 --> 01:47.940
+OK, as I said, scp uses ssh protocol, it is basically using our key.
+
+25
+01:49.130 --> 01:53.630
+.ssh/id_rsa, so it's happening like this.
+
+26
+01:55.340 --> 01:55.610
+Yeah.
+
+27
+01:56.310 --> 02:00.050
+To slash home, slash dev ops.
+
+28
+02:03.000 --> 02:05.490
+If there is no key exchanged, then it will.
+
+29
+02:06.030 --> 02:07.530
+ask you the password.
+
+30
+02:08.490 --> 02:10.830
+So now we write a script that is going to push.
+
+31
+02:11.970 --> 02:15.090
+Our multios websetup script and then execute it.
+
+32
+02:15.540 --> 02:16.470
+So let's write it.
+
+33
+02:17.130 --> 02:18.480
+Let me clear the screen first.
+
+34
+02:19.560 --> 02:20.850
+I want to copy the name.
+
+35
+02:22.310 --> 02:25.940
+And I'm going to write the script name as Web deploy dot.
+
+36
+02:32.850 --> 02:37.950
+All right, so I'm going to write the for loop, for host in.
+
+37
+02:39.320 --> 02:39.800
+cat
+
+38
+02:42.110 --> 02:48.090
+remhosts file do echo
+
+39
+02:50.820 --> 02:54.630
+connecting to $host.
+
+40
+03:02.110 --> 03:03.160
+little cosmetic changes
+
+41
+03:04.000 --> 03:08.320
+OK, so now let's do the ssh here.
+
+42
+03:09.990 --> 03:15.300
+Lets also set the hostname as the variable. Oh sorry username as the variable, so I'm going to see
+
+43
+03:16.200 --> 03:17.190
+USR
+
+44
+03:20.610 --> 03:21.300
+devops
+
+45
+03:23.110 --> 03:31.780
+$USR@$host so that will have the hostname.
+
+46
+03:33.600 --> 03:34.210
+No, mybad
+
+47
+03:34.500 --> 03:37.860
+We have to do first scp, copy, push our script.
+
+48
+03:39.490 --> 03:42.100
+that script to this location.
+
+49
+03:42.250 --> 03:44.380
+:/tmp/
+
+50
+03:47.070 --> 03:50.730
+OK, and then simply execute the script.
+
+51
+03:51.150 --> 03:53.070
+How? Well, ssh and  execute.
+
+52
+04:00.040 --> 04:01.600
+/tmp/
+
+53
+04:02.560 --> 04:02.830
+Yeah.
+
+54
+04:02.950 --> 04:06.160
+Give the path of the script, and that's it done.
+
+55
+04:06.940 --> 04:08.890
+Oh, we can do some cosmetics.
+
+56
+04:08.890 --> 04:10.330
+We can print some messages.
+
+57
+04:12.370 --> 04:12.700
+All right.
+
+58
+04:13.000 --> 04:18.970
+So just put everything in between this hashas and printing messages like connecting host one, pushing
+
+59
+04:18.970 --> 04:20.780
+the script, executing the script.
+
+60
+04:21.490 --> 04:23.800
+And what this basically contains is two things.
+
+61
+04:23.800 --> 04:26.680
+It's going to push the script and execute the script.
+
+62
+04:27.490 --> 04:33.670
+Now, if the script doesn't have sudo, then you should give sudo here.
+
+63
+04:34.880 --> 04:41.270
+Because our script contains command of installing software, managing service that needs root privileges,
+
+64
+04:41.280 --> 04:46.130
+so either you do sudo and execute the script or your script should have the sudo commands.
+
+65
+04:46.880 --> 04:49.340
+And once this is done, I also would like to.
+
+66
+04:51.010 --> 04:51.550
+Delete.
+
+67
+04:55.520 --> 05:01.490
+Delete the script, now script generates data, and that data we are cleaning in the script itself,
+
+68
+05:01.490 --> 05:02.620
+we have the commands for that.
+
+69
+05:02.890 --> 05:04.600
+But the script also needs to be cleaned.
+
+70
+05:04.620 --> 05:09.600
+So once the execution is completed, I want to cleanly basically clean execution.
+
+71
+05:09.620 --> 05:12.640
+OK, remove the data which got created while the execution.
+
+72
+05:13.690 --> 05:15.460
+So let's  save & quit this
+
+73
+05:17.370 --> 05:18.780
+Lets make it executable.
+
+74
+05:21.470 --> 05:22.970
+And it's Showtime.
+
+75
+05:29.860 --> 05:31.990
+All right, so that worked for Webb zero one.
+
+76
+05:36.100 --> 05:36.620
+OK.
+
+77
+05:36.640 --> 05:39.040
+And then this is going for Webbs 02.
+
+78
+05:46.020 --> 05:50.520
+OK, Web 03 great detected that you see that, and it's using apt there.
+
+79
+05:50.940 --> 05:51.630
+Nice.
+
+80
+05:54.600 --> 05:56.070
+OK, that completed.
+
+81
+05:57.120 --> 05:58.170
+Let's check that.
+
+82
+05:58.950 --> 05:59.400
+So.
+
+83
+06:00.710 --> 06:03.260
+The IP address, /etc/hosts
+
+84
+06:04.720 --> 06:08.320
+All right, because my laptop does not know its website on Web01/02
+
+85
+06:08.350 --> 06:13.240
+We don't have it in the host file there, so we'll access all the IP addresses from browser.
+
+86
+06:14.110 --> 06:17.250
+So that's Web 01, Awesome.
+
+87
+06:17.320 --> 06:20.560
+It's set up and that's 14, Web 02.
+
+88
+06:21.710 --> 06:22.140
+Nice.
+
+89
+06:22.150 --> 06:23.050
+That is also done.
+
+90
+06:23.050 --> 06:26.860
+And that is Web 03, which was different operating system.
+
+91
+06:31.300 --> 06:32.270
+Alrighty, right.
+
+92
+06:32.410 --> 06:39.550
+So you see the amount of power now you have in your fingertips at your fingertips.
+
+93
+06:40.120 --> 06:43.300
+Imagine this REM file, remote host file.
+
+94
+06:43.330 --> 06:45.730
+Imagine there are hundreds of machines over there.
+
+95
+06:46.870 --> 06:51.760
+All right, so you can write a simple script and push it and execute it and manage hundreds of machine,
+
+96
+06:51.770 --> 06:57.260
+that's how we used to do automation for many, many machine like a decade back.
+
+97
+06:57.260 --> 07:02.810
+But now we have much more fancier tools like Ansible, which makes our life easier.
+
+98
+07:02.810 --> 07:09.260
+But if you really want to learn and master those tools, you should have these background of scripting.
+
+99
+07:09.260 --> 07:15.020
+You should understand how this condition works, how this for loop works, how you can use it to achieve
+
+100
+07:15.020 --> 07:16.250
+some complex tasks.
+
+101
+07:17.330 --> 07:21.950
+And trust me, if you can do this, if you have come so far, you have done a good job, a great job,
+
+102
+07:21.950 --> 07:26.580
+and now you are eligible to learn any automation tool.
+
+103
+07:27.230 --> 07:30.770
+And not only just eligible to learn, even eligible to master them.
+
+104
+07:31.990 --> 07:33.910
+So overall, really very good job.
+
+105
+07:35.590 --> 07:38.830
+Now we can conclude our Bash scripting section.
+
+106
+07:39.820 --> 07:44.290
+I recommend you go through all the scripts, download from the resource section, go through all the
+
+107
+07:44.290 --> 07:44.830
+scripts.
+
+108
+07:45.810 --> 07:49.530
+And once you do this, wrap this up and join me in the next section.

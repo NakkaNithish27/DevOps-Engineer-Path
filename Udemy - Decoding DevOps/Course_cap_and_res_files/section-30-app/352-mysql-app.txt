@@ -1,0 +1,634 @@
+WEBVTT
+
+00:00.600 --> 00:01.620
+Instructor: Okay, so I'm again
+
+00:01.620 --> 00:05.610
+and again saying POD, db pod, Tomcat pod this, pod that pod.
+
+00:05.610 --> 00:06.720
+But we are not actually going
+
+00:06.720 --> 00:08.730
+to write the pod definition file.
+
+00:08.730 --> 00:10.260
+We need deployment definition.
+
+00:10.260 --> 00:12.720
+So if our pod fails
+
+00:12.720 --> 00:14.700
+or if you want to upgrade our pod,
+
+00:14.700 --> 00:18.300
+we can use the deployment object, right?
+
+00:18.300 --> 00:21.150
+If the DB pod fails or whatever pod is managing,
+
+00:21.150 --> 00:24.090
+if it fails, it's going to recreate that, right?
+
+00:24.090 --> 00:27.360
+As a job of deployment, you want to update a newer version
+
+00:27.360 --> 00:29.520
+of your image.
+
+00:29.520 --> 00:32.130
+Your container image. You can give that image tag
+
+00:32.130 --> 00:35.587
+to the deployment and deployment will replace it.
+
+00:35.587 --> 00:37.620
+The, you know, delete the old container
+
+00:37.620 --> 00:39.920
+and create a new container with the new image.
+
+00:40.770 --> 00:45.000
+Okay? So copy a deployment definition manifest from either
+
+00:45.000 --> 00:48.180
+Kubernetes definition file from any generative AI like Chat
+
+00:48.180 --> 00:49.680
+GPT or anywhere else.
+
+00:49.680 --> 00:52.350
+I just put it Kubernetes deployment YAML,
+
+00:52.350 --> 00:55.121
+and I get this, I'm going to use this skeleton
+
+00:55.121 --> 00:57.000
+and write it from the scratch.
+
+00:57.000 --> 01:00.450
+So just paste it here and then just make the changes. Okay?
+
+01:00.450 --> 01:02.670
+First of all, the name, I'm going to give it name
+
+01:02.670 --> 01:07.670
+as a pro DB also labels, it's important for a service.
+
+01:08.160 --> 01:12.390
+So when we create the service for db, we're going
+
+01:12.390 --> 01:14.337
+to say find a part that has so
+
+01:14.337 --> 01:17.160
+and so label app with pro db label is going to connect
+
+01:17.160 --> 01:19.500
+that service to this bot.
+
+01:19.500 --> 01:21.334
+Okay? Replica, we just need one single,
+
+01:21.334 --> 01:24.262
+we cannot have replica for database.
+
+01:24.262 --> 01:28.110
+That's a whole different concept that can be managed by
+
+01:28.110 --> 01:30.570
+still full set, okay?
+
+01:30.570 --> 01:35.570
+Selector, same app web pro db, right?
+
+01:36.180 --> 01:38.550
+So any pod that has this label is going to be part
+
+01:38.550 --> 01:40.980
+of this deployment definition.
+
+01:40.980 --> 01:44.400
+Okay? Then the template of our pod.
+
+01:44.400 --> 01:47.430
+So metadata labels, again, same.
+
+01:47.430 --> 01:49.623
+I'm giving web pro DB.
+
+01:51.636 --> 01:54.150
+Spec, now in this, the container information, so I'm going
+
+01:54.150 --> 01:57.450
+to give the name as web pro DB to the container,
+
+01:57.450 --> 02:00.540
+image will be vpro container / vprofile db.
+
+02:00.540 --> 02:03.690
+This image I built in the containerization lecture.
+
+02:03.690 --> 02:05.528
+So you can use the same image
+
+02:05.528 --> 02:08.490
+or if you have built your own image,
+
+02:08.490 --> 02:09.960
+it's running with Docker composed,
+
+02:09.960 --> 02:12.420
+then give your image that will be better.
+
+02:12.420 --> 02:14.970
+If you don't want to take any risk, you can give my image
+
+02:14.970 --> 02:17.790
+that's a public image, it'll fetch it and run it.
+
+02:17.790 --> 02:21.600
+Okay? Ports will come there in a moment. Oh, you know what?
+
+02:21.600 --> 02:24.429
+Let's give port a name.
+
+02:24.429 --> 02:26.910
+So - name : the port name I'm giving Vpro DB hyphen port
+
+02:28.470 --> 02:32.220
+and the container port with P capital 3306.
+
+02:32.220 --> 02:35.740
+So my skill service that runs in this
+
+02:36.660 --> 02:38.730
+runs on port 3306.
+
+02:38.730 --> 02:42.990
+So that's why we are giving the port 3306. Okay?
+
+02:42.990 --> 02:46.200
+Now as we discussed previously, in order
+
+02:46.200 --> 02:50.783
+to run this My SQL service from this My SQL container,
+
+02:50.783 --> 02:53.910
+we need to mention the My SQL root password.
+
+02:53.910 --> 02:55.110
+Otherwise it does not run.
+
+02:55.110 --> 02:57.963
+So we need to set an environment variable over here.
+
+02:58.830 --> 03:02.040
+My SQL route password, so ENV in the same line as Port.
+
+03:02.040 --> 03:06.510
+Env:- name, the name of the variable and value.
+
+03:06.510 --> 03:08.580
+Now we cannot give the value directly, right?
+
+03:08.580 --> 03:11.490
+We created a secret. So value will be from the secret.
+
+03:11.490 --> 03:13.210
+So that's why it says value from
+
+03:14.284 --> 03:18.720
+secret key ref name of the secret app hyphen secret,
+
+03:18.720 --> 03:20.820
+right in the secret, you see the name
+
+03:20.820 --> 03:22.530
+of our secret is app secret.
+
+03:22.530 --> 03:24.660
+And in that we have the data DB pass.
+
+03:24.660 --> 03:26.340
+We need to mention that, right?
+
+03:26.340 --> 03:28.320
+So secret, key reference name, app secret,
+
+03:28.320 --> 03:29.460
+and the key DB pass.
+
+03:29.460 --> 03:33.210
+So it's going to take its value, which is encoded, decoded,
+
+03:33.210 --> 03:35.700
+and then inject it into this container.
+
+03:35.700 --> 03:38.220
+So if someone sees this deployment definition file,
+
+03:38.220 --> 03:39.750
+they won't be able to see the password.
+
+03:39.750 --> 03:44.340
+So that's the idea. Preventing accidental exposure.
+
+03:44.340 --> 03:46.470
+That is the only way, only reason
+
+03:46.470 --> 03:48.180
+that you should use encoding and decoding.
+
+03:48.180 --> 03:51.390
+Otherwise you should do encryption
+
+03:51.390 --> 03:53.351
+by using keys in AWS.
+
+03:53.351 --> 03:57.690
+You can use AWS KM as keys, but they're not free
+
+03:57.690 --> 04:00.510
+and there are definitely other methods also,
+
+04:00.510 --> 04:03.393
+but you should always encrypt your data.
+
+04:04.650 --> 04:07.110
+Okay? Now, so that is the container information.
+
+04:07.110 --> 04:08.910
+We need to also mention the volume.
+
+04:08.910 --> 04:12.828
+We need to connect the volume. PVCV, right?
+
+04:12.828 --> 04:14.028
+Where is the PVC, DBPVC.
+
+04:16.620 --> 04:18.540
+Its name is DB PV claim.
+
+04:18.540 --> 04:21.547
+We need to map that with the var lib My SQL.
+
+04:22.680 --> 04:25.110
+So first we need to mention here the volumes.
+
+04:25.110 --> 04:27.450
+We need to create the volume
+
+04:27.450 --> 04:29.850
+that is coming from the persistent volume claim.
+
+04:31.579 --> 04:33.990
+Okay? So in the same line as the containers,
+
+04:33.990 --> 04:36.030
+we are given containers and container information we are
+
+04:36.030 --> 04:38.700
+given here, like then the same line volumes name
+
+04:38.700 --> 04:40.810
+of the volume I've given as WEBPRO DB data
+
+04:41.894 --> 04:44.040
+and persistent volume claim,
+
+04:44.040 --> 04:47.010
+claim name DB PV claim.
+
+04:47.010 --> 04:51.300
+So this claim, right, this claim which is of three GB,
+
+04:51.300 --> 04:54.330
+this persistent volume claim of PVC insured is going
+
+04:54.330 --> 04:57.090
+to create three GB of volume for us.
+
+04:57.090 --> 04:58.620
+And then we are going, we are saying here
+
+04:58.620 --> 05:01.537
+that this PVC is this volume.
+
+05:01.537 --> 05:04.260
+We can say no, we are just giving it a name, right?
+
+05:04.260 --> 05:07.350
+So we can map it. Now this is the volume that we need
+
+05:07.350 --> 05:09.240
+to map it with var lib my SQL.
+
+05:09.240 --> 05:14.130
+We need to mount it to the pods. Var lib my SQL folder.
+
+05:14.130 --> 05:16.833
+So just below this image I'm giving here,
+
+05:18.900 --> 05:20.160
+volume mounts,
+
+05:20.160 --> 05:24.090
+Mount Path Valley MySQL name is this,
+
+05:24.090 --> 05:25.770
+this volume, right?
+
+05:25.770 --> 05:29.280
+This volume will be mapped to var lib MySQL.
+
+05:29.280 --> 05:32.370
+So what happens is it runs the container
+
+05:32.370 --> 05:35.130
+in our case MySQL service
+
+05:35.130 --> 05:38.070
+and it has a folder var lib my SQL that it'll connect it
+
+05:38.070 --> 05:41.670
+with this volume, which basically is the PVC.
+
+05:41.670 --> 05:43.560
+It gives it three GB of volume.
+
+05:43.560 --> 05:45.480
+So this three GB of volume gets connected
+
+05:45.480 --> 05:48.720
+to var lib my SQL okay?
+
+05:48.720 --> 05:52.800
+Now there is one known issue with this EBS volume.
+
+05:52.800 --> 05:54.660
+When we create the EBS volume
+
+05:54.660 --> 05:57.810
+and when we format it, it creates a folder called
+
+05:57.810 --> 05:59.547
+as Lost plus found.
+
+05:59.547 --> 06:01.410
+This is common in Linux.
+
+06:01.410 --> 06:03.720
+Any new partition you create you format,
+
+06:03.720 --> 06:06.507
+it creates there a folder called Lost plus found.
+
+06:06.507 --> 06:08.400
+Now what's the problem with that folder?
+
+06:08.400 --> 06:11.791
+Well, the volume should be basically empty when the my
+
+06:11.791 --> 06:14.010
+service is coming up first time,
+
+06:14.010 --> 06:17.580
+my var lib my SQL folder should be empty, right?
+
+06:17.580 --> 06:20.130
+But what's going to happen that EBS volume will be connected
+
+06:20.130 --> 06:21.930
+to validate MySQL.
+
+06:21.930 --> 06:24.132
+That volume will have lost plus found folder.
+
+06:24.132 --> 06:26.949
+So the MySQL service will say there is already
+
+06:26.949 --> 06:28.314
+some data in that.
+
+06:28.314 --> 06:30.931
+So it's not going to start the service.
+
+06:30.931 --> 06:33.885
+So we need to make sure var lib MySQL is completely empty
+
+06:33.885 --> 06:37.221
+folder and it won't be because the volume
+
+06:37.221 --> 06:39.375
+that is coming from EBS will already have a
+
+06:39.375 --> 06:41.340
+lost plus found folder.
+
+06:41.340 --> 06:42.538
+So we need to make sure
+
+06:42.538 --> 06:46.440
+before this container comes up, we take that volume
+
+06:46.440 --> 06:49.080
+and we remove that lost plus found, right?
+
+06:49.080 --> 06:50.927
+So before this container comes,
+
+06:50.927 --> 06:53.220
+so we need to have an in it container.
+
+06:53.220 --> 06:55.230
+We need to create a container in the same pod
+
+06:55.230 --> 06:58.819
+that maps the volume, removes the lost plus sound folder
+
+06:58.819 --> 07:01.560
+and then releases it, okay?
+
+07:01.560 --> 07:04.140
+So at the end we'll create an in it container.
+
+07:04.140 --> 07:06.120
+So in the same line as the volumes,
+
+07:06.120 --> 07:08.640
+the containers volumes we give in it containers.
+
+07:08.640 --> 07:10.590
+And here you give the name of a container.
+
+07:10.590 --> 07:13.080
+So I'm going to use an image called Busy Box.
+
+07:13.080 --> 07:16.497
+It's a very basic Linux image, okay?
+
+07:16.497 --> 07:19.440
+So -name, busy box image, busy box, latest.
+
+07:19.440 --> 07:21.210
+Again, it's a very basic Linux image.
+
+07:21.210 --> 07:24.930
+Just simply runs a container from this Linux image
+
+07:24.930 --> 07:28.920
+and we are going to map the volume to this.
+
+07:28.920 --> 07:31.680
+Okay? So volume mounts, same as what we did in db, right?
+
+07:31.680 --> 07:33.360
+So we give the name WEBPRO DB data,
+
+07:33.360 --> 07:35.160
+which is the persistent volume claim
+
+07:35.160 --> 07:37.260
+and map it to var lib MySQL.
+
+07:37.260 --> 07:39.480
+Basically we can map it to any folder here.
+
+07:39.480 --> 07:42.720
+It's not a big deal because our intention is just to remove
+
+07:42.720 --> 07:44.580
+that lost plus found folder.
+
+07:44.580 --> 07:48.930
+And so we want to run a command RM -rf, you know,
+
+07:48.930 --> 07:51.210
+lost remove, lost plus found like that.
+
+07:51.210 --> 07:54.930
+So we're going to give here a command with arguments.
+
+07:54.930 --> 07:59.930
+So ARGs in square bracket, RM,RF,the path, okay?
+
+08:02.730 --> 08:04.620
+It should be always, the command should be always
+
+08:04.620 --> 08:06.540
+in this format.
+
+08:06.540 --> 08:08.130
+Same like Python list.
+
+08:08.130 --> 08:11.550
+We have seen similarly, rm-RF and the path.
+
+08:11.550 --> 08:13.170
+Make sure everything is in the double code
+
+08:13.170 --> 08:15.030
+and separated by comma.
+
+08:15.030 --> 08:17.070
+Okay? Once again, this var lib MySQL.
+
+08:17.070 --> 08:18.300
+We can give any other folder.
+
+08:18.300 --> 08:19.350
+Also, it doesn't matter,
+
+08:19.350 --> 08:20.970
+but I just want you to make a point, right?
+
+08:20.970 --> 08:23.280
+When var lib MySQL connects the volume,
+
+08:23.280 --> 08:25.050
+there will be a folder lost plus font.
+
+08:25.050 --> 08:26.250
+That's why I've given this path.
+
+08:26.250 --> 08:29.070
+Otherwise it can give any path here, right?
+
+08:29.070 --> 08:32.820
+Make sure the mount path and this path is same here. Okay?
+
+08:32.820 --> 08:35.010
+Now what's going to happen when we run this, it's going to,
+
+08:35.010 --> 08:36.780
+before it brings the DB pole, it's going
+
+08:36.780 --> 08:39.660
+to create this container, map the volume,
+
+08:39.660 --> 08:42.930
+remove this lost plus found, and any container will be dead.
+
+08:42.930 --> 08:45.090
+It executes this command. Its job will be done.
+
+08:45.090 --> 08:46.500
+The container will be dead.
+
+08:46.500 --> 08:48.330
+Then it is going to bring up the DB part.
+
+08:48.330 --> 08:53.100
+Now DB part is going to again mount the volume to my skill
+
+08:53.100 --> 08:55.230
+and it'll be empty because you already removed the
+
+08:55.230 --> 08:57.240
+loss plus font folder.
+
+08:57.240 --> 08:59.490
+Okay? That's so difficult to say in the same line again
+
+08:59.490 --> 09:02.310
+and again, but you got my point, right?
+
+09:02.310 --> 09:04.590
+The whole intention of using any container here is
+
+09:04.590 --> 09:09.090
+to remove the folder in minuscule, okay?
+
+09:09.090 --> 09:11.850
+And that is all. Once again, if you don't intend
+
+09:11.850 --> 09:13.470
+to write all this definition file,
+
+09:13.470 --> 09:16.500
+you can just copy it from the Kube app folder.
+
+09:16.500 --> 09:18.660
+Just make sure you understand all the options
+
+09:18.660 --> 09:20.760
+that we are using here, okay?
+
+09:20.760 --> 09:24.090
+And when you do that, just save this file. Alright?
+
+09:24.090 --> 09:25.393
+That was DB deployment
+
+09:25.393 --> 09:29.070
+and we did with connected with PVC.
+
+09:29.070 --> 09:31.053
+And then we also have the secret.
+
+09:32.248 --> 09:35.460
+In the next lecture, we'll create a service for this one.
+
+09:35.460 --> 09:38.793
+So it can be connected internally. See you in the next one.

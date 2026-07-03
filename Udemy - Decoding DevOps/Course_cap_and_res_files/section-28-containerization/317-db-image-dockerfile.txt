@@ -1,0 +1,466 @@
+WEBVTT
+
+00:00.780 --> 00:01.800
+Instructor: Okay, in this lecture
+
+00:01.800 --> 00:05.400
+we are going to build Docker file for DB
+
+00:05.400 --> 00:07.170
+for our MySQL service.
+
+00:07.170 --> 00:10.073
+So come to Docker hub and search for MySQL.
+
+00:11.238 --> 00:13.653
+That's the MySQL official image.
+
+00:14.670 --> 00:16.740
+Okay, let's scroll through this.
+
+00:16.740 --> 00:19.230
+So what all we can do with this Docker image,
+
+00:19.230 --> 00:21.330
+how can we run the container.
+
+00:21.330 --> 00:24.480
+-: e MYSQL_ROOT_PASSWORD, that's the password,
+
+00:24.480 --> 00:26.530
+that's how you can set the root password.
+
+00:28.657 --> 00:30.510
+Okay, MySQL custom configuration,
+
+00:30.510 --> 00:34.020
+if we want to upload our own MySQL configuration,
+
+00:34.020 --> 00:37.800
+then we can connect it through the volume -v option.
+
+00:37.800 --> 00:40.470
+We mentioned the path of our configuration
+
+00:40.470 --> 00:42.320
+and the destination will be this one.
+
+00:44.460 --> 00:46.740
+Environment variable.
+
+00:46.740 --> 00:48.390
+MYSQL_ROOT_PASSWORD you can set,
+
+00:48.390 --> 00:50.910
+you can set the database name also
+
+00:50.910 --> 00:54.960
+with MYSQL_DATABASE variable.
+
+00:54.960 --> 00:56.010
+You can set the user,
+
+00:56.010 --> 00:58.830
+you can set the password for that user, right?
+
+00:58.830 --> 01:00.390
+By setting up these variables,
+
+01:00.390 --> 01:03.090
+you can make changes in the Docker container,
+
+01:03.090 --> 01:04.680
+this MySQL container.
+
+01:04.680 --> 01:06.660
+There's also Docker Secrets.
+
+01:06.660 --> 01:09.180
+Initializing a fresh instance.
+
+01:09.180 --> 01:10.440
+So MySQL service will run,
+
+01:10.440 --> 01:12.570
+but if you want to inject your own schema,
+
+01:12.570 --> 01:15.420
+how you can do that, that's also mentioned over here.
+
+01:15.420 --> 01:16.870
+So I recommend you read this.
+
+01:18.300 --> 01:21.300
+What I'll say is when you start the container,
+
+01:21.300 --> 01:22.860
+it is going to execute any file
+
+01:22.860 --> 01:27.860
+that ends with .sh, .sql, or .sql.gz
+
+01:28.200 --> 01:32.150
+found in /docker-entrypoint-initdb.d.
+
+01:33.900 --> 01:36.840
+So if you put any file that ends with any of this extension
+
+01:36.840 --> 01:38.970
+in this folder of this container,
+
+01:38.970 --> 01:41.130
+it will execute it when it starts.
+
+01:41.130 --> 01:43.710
+So if you put our SQL file into that folder,
+
+01:43.710 --> 01:44.790
+when the container starts,
+
+01:44.790 --> 01:46.560
+it's going to execute those SQL queries
+
+01:46.560 --> 01:49.290
+and initialize our database, right?
+
+01:49.290 --> 01:53.613
+Now let's look at the setup, the MySQL setup how we did.
+
+01:56.340 --> 01:58.410
+Okay, so we installed the service,
+
+01:58.410 --> 02:01.563
+we start and enabled, that's covered in the Docker image.
+
+02:02.520 --> 02:04.380
+Setting up the DB name and users.
+
+02:04.380 --> 02:06.450
+That's how we do it, we run the SQL queries,
+
+02:06.450 --> 02:07.770
+but in the Docker image,
+
+02:07.770 --> 02:10.860
+we can set the variables, environment variable, right?
+
+02:10.860 --> 02:14.157
+Like MYSQL_ROOT_PASSWORD, MYSQL_USER, MYSQL_PASSWORD.
+
+02:16.530 --> 02:17.380
+Right? Like that.
+
+02:18.330 --> 02:19.770
+And initializing the database.
+
+02:19.770 --> 02:21.240
+So we cloned the source code
+
+02:21.240 --> 02:24.810
+and we have this db_backup.sql file
+
+02:24.810 --> 02:28.320
+which we run against the database named accounts.
+
+02:28.320 --> 02:31.110
+So we need to have a database named accounts,
+
+02:31.110 --> 02:34.800
+and we can run our SQL query on that database.
+
+02:34.800 --> 02:37.380
+How can we do in this Docker image?
+
+02:37.380 --> 02:40.080
+Well, we can do this.
+
+02:40.080 --> 02:43.863
+We can put this file that ends with .sql into this folder.
+
+02:45.360 --> 02:48.720
+So you see how important it is for you
+
+02:48.720 --> 02:50.700
+to understand your own setup
+
+02:50.700 --> 02:54.960
+and then read the documentation on the Docker hub.
+
+02:54.960 --> 02:57.660
+If you know both, it will be very easy for you
+
+02:57.660 --> 03:00.273
+to build any Docker file, any Docker image.
+
+03:01.320 --> 03:04.470
+So that's the most important point that I want to make
+
+03:04.470 --> 03:07.650
+in this project setup, in this containerization.
+
+03:07.650 --> 03:09.210
+So when you want to containerize
+
+03:09.210 --> 03:11.820
+any project, any application,
+
+03:11.820 --> 03:15.420
+you should know these two things as the information,
+
+03:15.420 --> 03:17.160
+and then follow the technical details,
+
+03:17.160 --> 03:18.930
+the instruction names in the Docker file,
+
+03:18.930 --> 03:22.863
+like from, label, environment, add, copy, stuff like that.
+
+03:23.880 --> 03:27.450
+Okay, let's start writing the DB Docker file.
+
+03:27.450 --> 03:29.073
+So I'm going to close this one.
+
+03:31.050 --> 03:34.140
+Expand Docker-files, db, Dockerfile.
+
+03:34.140 --> 03:37.367
+Now here I have also placed db_backup.sql file,
+
+03:37.367 --> 03:40.653
+so you can quickly copy it by using copy instruction.
+
+03:41.640 --> 03:43.440
+So first we mentioned the base image
+
+03:43.440 --> 03:45.450
+by using FROM instruction.
+
+03:45.450 --> 03:50.450
+The image is mysql and the tag is 8.0.33.
+
+03:52.140 --> 03:53.520
+Once again, in this project,
+
+03:53.520 --> 03:55.230
+I'm telling you what is the version to use.
+
+03:55.230 --> 03:57.180
+In real-time, you need to get this information
+
+03:57.180 --> 03:58.380
+from the developer.
+
+03:58.380 --> 04:00.090
+And you match that version
+
+04:00.090 --> 04:03.303
+with the Docker image tag from the Docker hub.
+
+04:04.860 --> 04:06.540
+Okay, I'm also putting label,
+
+04:06.540 --> 04:09.630
+not mandatory, but just so you know.
+
+04:09.630 --> 04:12.330
+Later also you can use these labels.
+
+04:12.330 --> 04:14.070
+There is really no use case for us
+
+04:14.070 --> 04:15.690
+for this vprofile-project,
+
+04:15.690 --> 04:16.680
+but we'll still use it
+
+04:16.680 --> 04:19.770
+so you can learn some extra instructions.
+
+04:19.770 --> 04:23.520
+So LABEL "Project" = the project name.
+
+04:23.520 --> 04:26.373
+Again, this is just like we use tags in AWS.
+
+04:27.570 --> 04:30.630
+I'll keep this also in the DB image,
+
+04:30.630 --> 04:31.970
+sorry, in the app image.
+
+04:31.970 --> 04:35.673
+So we put that in the app image also here.
+
+04:38.790 --> 04:41.670
+Okay, now we need to set the MySQL root password.
+
+04:41.670 --> 04:46.650
+We need to set the database with name accounts,
+
+04:46.650 --> 04:49.590
+and then we need to copy our SQL file.
+
+04:49.590 --> 04:52.563
+So to set the variable, you have the instruction ENV.
+
+04:53.700 --> 04:58.260
+So ENV MYSQL_ROOT_PASSWORD, all in caps.
+
+04:58.260 --> 05:01.290
+This is just as it's shown in the documentation.
+
+05:01.290 --> 05:02.823
+I'm setting a password.
+
+05:03.720 --> 05:08.310
+MYSQL_DATABASE, the database name is accounts.
+
+05:08.310 --> 05:10.110
+Now, how do I know this information,
+
+05:10.110 --> 05:11.820
+the database name is accounts?
+
+05:11.820 --> 05:15.090
+Because I have already set this project locally,
+
+05:15.090 --> 05:18.120
+I got this information from the developers.
+
+05:18.120 --> 05:20.250
+And also there will be configuration files
+
+05:20.250 --> 05:23.280
+in your source code that can tell you that.
+
+05:23.280 --> 05:26.460
+So let me collapse these things.
+
+05:26.460 --> 05:30.060
+So in the src we have main, we have resources,
+
+05:30.060 --> 05:32.010
+and application.properties file.
+
+05:32.010 --> 05:34.350
+We've seen this file many times.
+
+05:34.350 --> 05:36.000
+But in the containers branch
+
+05:36.000 --> 05:38.460
+we have different names over here.
+
+05:38.460 --> 05:41.220
+The username is root, not admin,
+
+05:41.220 --> 05:44.092
+and the password is vprodbpass.
+
+05:44.092 --> 05:46.473
+And the database name is same, accounts.
+
+05:47.430 --> 05:50.790
+We are going to build the source code from this.
+
+05:50.790 --> 05:55.410
+This application properties file will be in the artifact.
+
+05:55.410 --> 05:58.950
+So this information really matters a lot.
+
+05:58.950 --> 06:01.380
+So if you wish to change that in the Docker file,
+
+06:01.380 --> 06:02.760
+you need to change it over here.
+
+06:02.760 --> 06:04.020
+Or if you change it here,
+
+06:04.020 --> 06:06.840
+then you need to change it in the Docker file.
+
+06:06.840 --> 06:08.100
+All this is very much required
+
+06:08.100 --> 06:09.963
+to have a functional application.
+
+06:13.260 --> 06:16.170
+Okay, next we are going to copy this db_backup.sql file
+
+06:16.170 --> 06:18.000
+into the container.
+
+06:18.000 --> 06:20.130
+We can do that with the ADD or COPY instruction.
+
+06:20.130 --> 06:22.890
+We're going to do it with ADD instruction.
+
+06:22.890 --> 06:26.850
+So it takes this SQL file and it put in this location.
+
+06:26.850 --> 06:27.930
+Now, why this location?
+
+06:27.930 --> 06:30.840
+It's clearly mentioned in the documentation.
+
+06:30.840 --> 06:33.750
+Any file that ends with .sql or .sh
+
+06:33.750 --> 06:36.420
+will be executed if you put it in this folder.
+
+06:36.420 --> 06:37.650
+So that's why we are doing that.
+
+06:37.650 --> 06:39.930
+So when we run the container from this image,
+
+06:39.930 --> 06:42.450
+it's going to copy this SQL file,
+
+06:42.450 --> 06:44.160
+and that should initialize the database.
+
+06:44.160 --> 06:46.680
+This SQL file contains the SQL queries
+
+06:46.680 --> 06:47.910
+that will get executed
+
+06:47.910 --> 06:50.490
+and which will create the schema, right?
+
+06:50.490 --> 06:53.370
+Make sure to save this file. And that is all.
+
+06:53.370 --> 06:57.510
+Now, you can add here expose 3306 and other MySQL commands,
+
+06:57.510 --> 07:00.570
+it's really not necessary because that's all we need.
+
+07:00.570 --> 07:05.570
+MySQL image will always under MySQL service on port 3306.
+
+07:05.850 --> 07:08.250
+It's there in the documentation.
+
+07:08.250 --> 07:10.680
+All right, so that will be all in this lecture.
+
+07:10.680 --> 07:11.513
+In the next lecture,
+
+07:11.513 --> 07:14.430
+we are going to build the NGINX web image.
+
+07:14.430 --> 07:15.630
+See you in the next one.
