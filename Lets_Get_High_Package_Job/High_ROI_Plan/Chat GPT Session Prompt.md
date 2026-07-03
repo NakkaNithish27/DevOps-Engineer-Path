@@ -181,7 +181,7 @@ Ensure the combined parts form one complete replacement document.
 ```markdown
 ## End of Iteration – Project Progress Tracker Update
 
-I will upload the current **Project Progress Tracker**, **Project Specification**, **DevOps Career Roadmap**
+I will upload the current **Project Progress Tracker**, **Project Specification**, and **DevOps Career Roadmap**.
 
 Based on the approved Progress Tracker Review, update the tracker by making only the changes necessary to reflect the project's current state.
 
@@ -190,14 +190,21 @@ Treat this as a surgical edit operation, not a document rewrite.
 Requirements:
 - Use the uploaded tracker as the source of truth.
 - Apply only the approved changes.
-- Preserve all formatting, structure, headings, spacing, Markdown, wording, and ordering unless a change is required.
-- Do not rewrite or rephrase unchanged content.
+- Do not infer, improve, reorganize, normalize, or clean up the tracker.
+- If a change was not explicitly approved in the Progress Tracker Review, leave it unchanged.
+- If an approved change affects multiple related sections, update every affected occurrence while preserving the document structure.
+- Preserve all formatting, structure, headings, spacing, Markdown, wording, ordering, and document layout unless a change is required.
+- Do not rewrite, rephrase, move, merge, split, or reorder unchanged content.
 - Leave every unrelated line untouched.
 
 Before generating the updated file, verify that:
-- All approved changes have been applied.
-- No unintended changes have been introduced.
+- Every approved change has been applied everywhere it is required.
+- No approved changes have been missed.
+- No duplicate sections, headings, or content have been introduced.
+- No formatting or structural inconsistencies have been introduced.
+- No unrelated content has been modified or removed.
 - The updated tracker differs from the original only where approved changes were required.
+- The document remains internally consistent after the edits.
 
 Output:
 - Generate the updated Markdown (.md) file.
