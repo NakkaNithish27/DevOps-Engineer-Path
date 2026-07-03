@@ -133,102 +133,25 @@ Based on everything I have completed so far in this iteration, help me complete 
 
 ```
 
-## End of Iteration – Progress Review & Tracker Update
+## End of Session Review
 
 ```markdown
-# End of Iteration – Project Progress Tracker Update
+## Progress Tracker Review
 
-Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
-
----
-
-# Phase 1 — Progress Review
-
-Before updating the tracker, review everything completed since the last tracker update and provide a concise overview of the planned changes.
+Before updating the Project Progress Tracker, review everything completed since the last update and provide a concise overview of the changes you plan to make.
 
 Include:
+- Current position updates (phase, iteration, article, track)
+- Newly completed work across all four tracks
+- New deliverables, assets, and milestones
+- Deferred items (if any)
+- Changes to Current Focus, Next Actions, and Overall Status
 
-## Current Position
+Do **not** generate the updated tracker yet. Wait for my confirmation.
+```
 
-* Phase
-* Iteration
-* Article
-* Current Track
+## Progress Tracker Update
 
-## Newly Completed Work
-
-Review progress across all four tracks:
-
-* Track 1 — Core Technical Building
-* Track 2 — Projects & GitHub Evolution
-* Track 3 — Personal Branding & Communication
-* Track 4 — Interview & Job Conversion
-
-## New Deliverables
-
-List any newly completed:
-
-* Technical deliverables
-* GitHub assets
-* LinkedIn assets
-* Career assets
-* Infrastructure assets
-
-## Deferred Work
-
-List anything intentionally deferred and briefly explain why.
-
-## Planned Tracker Updates
-
-Summarize what will change in:
-
-* Current Focus
-* Next Actions
-* Milestones
-* Overall Status
-
-**Do not generate the updated tracker yet.**
-
-Wait for my confirmation.
-
----
-
-# Phase 2 — Generate Updated Tracker
-
-After I confirm, generate the **entire Project Progress Tracker** as a complete replacement document.
-
-Update:
-
-* Current position (phase, iteration, article, current track)
-* Completed work across all four tracks
-* Completed phases, iterations, and article count
-* Deliverables, assets, and milestones
-* Deferred work
-* Current Focus
-* Next Actions
-* Milestones
-* Overall Status
-
-Keep the tracker fully consistent with the:
-
-* Project Specification
-* DevOps Career Roadmap
-
-Generate the **entire tracker** so I can directly replace the existing document.
-
-### Large Document Handling
-
-If the complete tracker is too large to generate in a single response:
-
-1. **Determine how many parts** are required.
-2. **Tell me upfront** how many parts the tracker will be split into.
-3. Generate the tracker sequentially as:
-
-   * Part 1 of N
-   * Part 2 of N
-   * ...
-   * Part N of N
-4. Ensure that **no content is omitted, summarized, or reformatted differently** because of the split.
-5. The combined parts must form a **single, complete replacement document** when copied together.
+```markdown
 
 ```
