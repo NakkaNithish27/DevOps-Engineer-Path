@@ -138,7 +138,9 @@ Based on everything I have completed so far in this iteration, help me complete 
 ```markdown
 ## Progress Tracker Review
 
-Review everything completed since the last Project Progress Tracker update and summarize the changes that should be reflected in the tracker.
+Review everything completed since the last Project Progress Tracker update and identify the exact changes that should be reflected in the tracker.
+
+Only identify changes that require edits to the tracker. Do not summarize the overall project state or include unchanged areas.
 
 Include:
 
@@ -147,6 +149,12 @@ Include:
 - Newly created assets, deliverables, and milestones
 - Deferred items (if any)
 - Changes to Current Focus, Next Actions, Overall Progress, and Overall Status
+
+Requirements:
+- Report only differences between the current tracker and the updated tracker.
+- Do not suggest improvements, restructuring, or cleanup.
+- Do not rewrite tracker content.
+- If an area has no changes, explicitly state **No changes**.
 
 Do **not** generate the updated tracker yet.
 
