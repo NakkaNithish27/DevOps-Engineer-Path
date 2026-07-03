@@ -197,10 +197,16 @@ Treat this as a surgical edit operation, not a document rewrite.
 
 Requirements:
 - Use the uploaded tracker as the source of truth.
+- Treat the approved Progress Tracker Review as the complete and authoritative patch list.
 - Apply only the approved changes.
 - Do not infer, improve, reorganize, normalize, or clean up the tracker.
 - If a change was not explicitly approved in the Progress Tracker Review, leave it unchanged.
+- Modify existing content in place whenever possible.
+- Every approved change must be mapped to an existing location in the tracker before editing. Do not guess edit locations.
+- Do not append new versions of existing content or create duplicate sections, headings, or lists.
+- If an approved change replaces existing content, replace it instead of adding another copy.
 - If an approved change affects multiple related sections, update every affected occurrence while preserving the document structure.
+- If the correct edit location cannot be determined with certainty, stop and ask instead of guessing.
 - Preserve all formatting, structure, headings, spacing, Markdown, wording, ordering, and document layout unless a change is required.
 - Do not rewrite, rephrase, move, merge, split, or reorder unchanged content.
 - Leave every unrelated line untouched.
@@ -208,6 +214,7 @@ Requirements:
 Before generating the updated file, verify that:
 - Every approved change has been applied everywhere it is required.
 - No approved changes have been missed.
+- Every modification corresponds to an approved change.
 - No duplicate sections, headings, or content have been introduced.
 - No formatting or structural inconsistencies have been introduced.
 - No unrelated content has been modified or removed.
