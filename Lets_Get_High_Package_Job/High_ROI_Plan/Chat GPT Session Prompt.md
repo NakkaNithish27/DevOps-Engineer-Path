@@ -175,3 +175,65 @@ If the tracker is too large for one response:
 
 Ensure the combined parts form one complete replacement document.
 ```
+
+## Progress Tracker Update - No Manual Editing - Just Download The Updated Progress Tracker
+
+```markdown
+## End of Iteration – Project Progress Tracker Update
+
+I will upload the current Project Progress Tracker.
+
+Based on the approved Progress Tracker Review in this conversation, update the tracker by making only the changes necessary to reflect the project's current state.
+
+Treat this as a surgical edit operation, not a document rewrite.
+
+Requirements:
+- Use the uploaded tracker as the source of truth.
+- Apply only the approved changes.
+- Preserve all formatting, structure, headings, spacing, Markdown, wording, and ordering unless a change is required.
+- Do not rewrite or rephrase unchanged content.
+- Leave every unrelated line untouched.
+
+Before generating the updated file, verify that:
+- All approved changes have been applied.
+- No unintended changes have been introduced.
+- The updated tracker differs from the original only where approved changes were required.
+
+Output:
+- Generate the updated Markdown (.md) file.
+- Return it as a downloadable file.
+```
+
+## Updated Project Progress Tracker Validation
+
+```markdown
+## Project Progress Tracker Validation
+
+I will upload:
+
+1. The original Project Progress Tracker.
+2. The updated Project Progress Tracker.
+
+Based on the approved Progress Tracker Review in this conversation, compare the original and updated trackers.
+
+Verify that:
+- All approved changes were applied.
+- No approved changes were missed.
+- No unintended changes were introduced.
+- No important content was removed.
+- The updated tracker is identical to the original except for the approved changes.
+
+If everything is correct, respond with:
+
+✅ PASS – Only the approved changes were made.
+
+Otherwise, respond with:
+
+❌ FAIL
+
+List:
+- Missing changes
+- Unexpected changes
+- Removed content
+- Any inconsistencies
+```
