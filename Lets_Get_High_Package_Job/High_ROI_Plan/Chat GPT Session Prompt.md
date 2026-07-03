@@ -181,9 +181,9 @@ Ensure the combined parts form one complete replacement document.
 ```markdown
 ## End of Iteration – Project Progress Tracker Update
 
-I will upload the current Project Progress Tracker.
+I will upload the current **Project Progress Tracker**, **Project Specification**, **DevOps Career Roadmap**
 
-Based on the approved Progress Tracker Review in this conversation, update the tracker by making only the changes necessary to reflect the project's current state.
+Based on the approved Progress Tracker Review, update the tracker by making only the changes necessary to reflect the project's current state.
 
 Treat this as a surgical edit operation, not a document rewrite.
 
