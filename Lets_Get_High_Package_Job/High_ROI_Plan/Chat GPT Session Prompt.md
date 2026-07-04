@@ -237,49 +237,36 @@ Use:
   - included in the user's message, or
   - the immediately preceding approved assistant response.
 
-Apply the approved edit script by executing deterministic code.
+Apply the edit script by executing a deterministic interpreter.
 
-Do **not** manually rewrite the document.
-
-The edit script completely defines every permitted modification.
+Do **not** manually edit or rewrite the tracker.
 
 ### Execution
 
-Implement a deterministic interpreter for the Progress Tracker Edit Script.
-
-The interpreter must:
-
-1. Parse the edit script into individual PATCH objects.
-2. Read every PATCH directly from the parsed data.
-3. Execute every PATCH directly from the parsed data.
-4. Never manually encode, rewrite, reinterpret, or hardcode any PATCH contents.
-
-### Requirements
+- Parse the edit script into PATCH objects.
+- Execute every PATCH directly from the parsed PATCH data.
+- The interpreter must be generic and data-driven.
+- The generated code must not contain any document-specific text outside the parsed PATCH objects.
 
 For each PATCH:
 
-- Locate the specified **Anchor** by matching its heading path exactly.
+- Locate the specified **Anchor**.
 - Search only within that Anchor.
-- Verify that the **Find** text exists exactly once within the Anchor.
-- Apply only the specified **Operation** (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
-- Verify that the operation completed successfully before continuing to the next PATCH.
+- Verify the **Find** text exists exactly once.
+- Execute the specified **Operation** (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
+- Verify the PATCH was applied successfully before continuing.
 
-If any PATCH cannot be applied unambiguously:
+If any PATCH cannot be applied unambiguously, stop immediately and report the PATCH number and reason.
 
-- Stop immediately.
-- Report the PATCH number and the reason.
-- Do not continue with the remaining PATCHES.
+### Validation
 
-### Final Validation
-
-After all PATCHES have been processed, verify that:
+Verify that:
 
 - Every PATCH was parsed.
 - Every PATCH was applied exactly once.
 - No PATCH was skipped.
 - No PATCH modified the wrong location.
 - No additional edits were introduced.
-- The updated tracker differs from the original only where specified by the approved edit script.
 
 ### Output
 
