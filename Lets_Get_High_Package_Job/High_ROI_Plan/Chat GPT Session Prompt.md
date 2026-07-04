@@ -135,37 +135,63 @@ Based on everything I have completed so far in this iteration, help me complete 
 
 ## End of Session Review
 
-### Unified diff Output:
+### Progress Tracker Edit Script:
 
 ~~~markdown
-## Progress Tracker Patch
+## Progress Tracker Edit Script
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
-Compare the current **Project Progress Tracker** with the project's current state.
+Compare the current tracker with the project's current state.
 
-Output **only** the minimal unified diff required to update the tracker.
+Output only the minimal edit script required to update the tracker.
+
+### Format
+
+Each edit must follow this format:
+
+PATCH <number>
+
+Section:
+<top-level section>
+
+Anchor:
+<unique heading within that section>
+
+Operation:
+Replace
+OR
+Insert Before
+OR
+Insert After
+OR
+Replace Block
+OR
+Delete
+
+Find:
+<existing text>
+
+With:
+<replacement text>
 
 ### Requirements
 
-- Output **only** a unified diff (git patch format).
-- Include only sections that actually change.
-- Use standard unified diff hunks (`@@ ... @@`) with sufficient surrounding context to uniquely identify each edit.
-- Include line numbers in every hunk.
-- Group nearby edits into the same hunk when appropriate.
-- Modify only the required lines.
-- Preserve all unchanged content exactly.
-- Do not explain, summarize, or justify the changes.
-- Do not suggest improvements or restructure the tracker.
-- If there are no changes, output exactly:
+- Generate only the edits that are required.
+- Every patch must have a unique anchor.
+- Use headings as anchors instead of line numbers.
+- The Find text must exactly match the current tracker.
+- Keep the Find block as small as possible while remaining unique.
+- Preserve every unchanged line.
+- Do not explain the edits.
+- Do not summarize the project.
+- If no edits are required, output exactly:
 
-```text
 No changes.
-```
 
-Do **not** generate the updated tracker.
+Do not generate the updated tracker.
 
-Wait for my confirmation before applying the patch.
+Wait for my confirmation before applying the edit script.
 ~~~
 
 ### Unstructured Output
