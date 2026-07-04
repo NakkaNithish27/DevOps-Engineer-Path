@@ -332,39 +332,44 @@ Output:
 ## Updated Project Progress Tracker Validation
 
 ~~~markdown
-## Validate Progress Tracker Patch
+## Validate Progress Tracker Edit Script
 
-I will upload:
+Use:
 
 - The original **Project Progress Tracker**
 - The updated **Project Progress Tracker**
-- The approved **Progress Tracker Patch** (unified diff)
+- The approved **Progress Tracker Edit Script**, which may be either:
+  - included in the user's message, or
+  - the immediately preceding approved assistant response.
 
-Validate that the updated tracker is exactly the result of applying the approved patch to the original tracker.
+Validate that the updated tracker is exactly the result of applying the approved edit script to the original tracker.
 
-Treat the unified diff as the **only source of truth**.
+The edit script completely defines every permitted modification.
 
 ### Validation
 
-For each patch hunk:
+For each PATCH:
 
 - Verify it was applied exactly once.
-- Verify it was applied to the correct location using the hunk's context.
-- Verify no part of the hunk was skipped or applied incorrectly.
+- Verify it was applied to the correct **Section** and **Anchor**.
+- Verify the specified **Operation** was performed correctly.
+- Verify the **Find** text was replaced, inserted, or deleted exactly as specified.
 
 Then verify that:
 
-- Every difference between the original and updated tracker is explained by the approved patch.
+- Every difference between the original and updated tracker is explained by the approved edit script.
+- No PATCH was skipped.
+- No PATCH modified the wrong location.
 - No additional edits were introduced.
 - No unrelated content was modified or removed.
-- Formatting and document structure are unchanged outside the approved patch.
+- Formatting, Markdown, headings, spacing, ordering, and document structure remain unchanged except where explicitly modified by the approved edit script.
 
 ### Output
 
 If everything is correct, respond exactly:
 
 ```text
-✅ PASS – The approved patch was applied successfully.
+✅ PASS – The approved edit script was applied successfully.
 ```
 
 Otherwise respond with:
@@ -373,10 +378,10 @@ Otherwise respond with:
 ❌ FAIL
 ```
 
-Then list only the failures under the relevant headings:
+Then list only the validation failures under the relevant headings (omit any heading with no issues):
 
-- Missing Patch Hunks
-- Incorrectly Applied Patch Hunks
+- Missing PATCHES
+- Incorrectly Applied PATCHES
 - Unexpected Changes
 - Removed Content
 - Duplicate Content
@@ -384,6 +389,7 @@ Then list only the failures under the relevant headings:
 - Other Inconsistencies
 
 Do not suggest improvements or rewrite the tracker.
+Only validate whether the approved edit script was applied correctly.
 ~~~
 
 ```markdown
