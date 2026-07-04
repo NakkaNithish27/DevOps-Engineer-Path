@@ -203,45 +203,36 @@ I will upload:
 
 - The current **Project Progress Tracker**
 - The approved **Progress Tracker Patch** (unified diff)
-- (If needed) the **Project Specification**
-- (If needed) the **DevOps Career Roadmap**
 
-Apply the approved patch to the uploaded **Project Progress Tracker**.
+Apply the approved patch to the tracker.
 
-Treat the unified diff as the **single source of truth** for every modification.
-
-This is a **patch application task**, not a document rewrite.
+Treat the unified diff as the **only source of truth**.
 
 ### Requirements
 
-- Use the uploaded Project Progress Tracker as the base document.
-- Apply the unified diff exactly as provided.
+- Use the uploaded tracker as the base document.
+- Apply each unified diff hunk independently.
+- Locate each edit using the hunk's **context and line numbers**, not by global text replacement.
+- If identical text appears multiple times, use the surrounding context to identify the correct location.
 - Modify only the lines specified by the patch.
-- Preserve every unchanged line exactly as it appears.
-- Preserve all headings, spacing, Markdown, formatting, ordering, and document structure.
-- Do not infer additional edits.
-- Do not fix, improve, normalize, reorganize, or rewrite any content.
-- Do not change wording unless required by the patch.
-- Do not modify any section that is not referenced by the patch.
-- If a patch hunk affects multiple matching locations, apply it only where the unified diff indicates.
-- If any hunk cannot be applied with certainty, stop and explain the conflict instead of guessing.
+- Preserve all other content exactly.
+- Do not infer, rewrite, improve, reorganize, or normalize anything.
+- If any hunk cannot be applied with certainty, stop and report the conflict instead of guessing.
 
 ### Validation
 
-Before generating the updated file, verify that:
+Before generating the file, verify that:
 
-- Every patch hunk has been applied successfully.
-- No patch hunk has been skipped.
-- No additional modifications have been made.
-- No duplicate content has been introduced.
+- Every patch hunk was applied exactly once.
+- No patch hunk was skipped.
+- No additional edits were introduced.
 - The updated tracker differs from the original only where specified by the patch.
-- The final document remains internally consistent.
 
 ### Output
 
 Generate the updated **Project Progress Tracker** as a Markdown (`.md`) file.
 
-Return only the updated downloadable file.
+Return only the downloadable file.
 ~~~
 
 ## Progress Tracker Update - Manually copy paste
