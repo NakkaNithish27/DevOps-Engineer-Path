@@ -43,6 +43,31 @@ Provide a concise overview including:
 Then wait for my input before we begin.
 
 ```
+## Section Context Initialization
+~~~markdown
+## Section Context Initialization
+
+The uploaded articles represent the complete learning material for the **current section** of the DevOps roadmap.
+
+Before we begin Track 1:
+
+- Read every uploaded article.
+- Understand the section as a whole rather than as individual articles.
+- Identify the overall objective of this section.
+- Understand how the articles relate to one another.
+- Identify the practical skills that will be developed throughout this section.
+- Use this understanding as the context for the remainder of this chat.
+
+During this session:
+
+- Treat all uploaded articles as the authoritative source for this section.
+- Maintain awareness of the entire section while we work through each article in Track 1.
+- As we complete each article, keep track of the cumulative knowledge and practical work completed.
+
+Do not begin teaching or summarizing yet.
+
+Wait for my next instruction.
+~~~
 
 ## Track 1 – Core Technical Building
 
