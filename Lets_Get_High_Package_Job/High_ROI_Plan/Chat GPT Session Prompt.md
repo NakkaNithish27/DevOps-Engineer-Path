@@ -223,37 +223,39 @@ Wait for my confirmation.
 
 ## Apply Progress Tracker Patch
 ~~~markdown
-## Apply Progress Tracker Patch
+## Apply Progress Tracker Edit Script
 
 Use:
 
 - The uploaded **Project Progress Tracker** as the base document.
-- The approved **Progress Tracker Patch** (unified diff), which may be either:
+- The approved **Progress Tracker Edit Script**, which may be either:
   - included in the user's message, or
   - the immediately preceding approved assistant response.
 
-Apply the approved patch to the tracker.
+Apply the approved edit script to the tracker.
 
-Treat the unified diff as the **only source of truth**.
+The edit script completely defines every permitted modification. Do not make any change that is not explicitly described by a PATCH.
 
 ### Requirements
 
-- Apply each unified diff hunk independently.
-- Locate each edit using the hunk's context and line numbers, not by global text replacement.
-- If identical text appears multiple times, use the surrounding context to identify the correct location.
-- Modify only the lines specified by the patch.
-- Preserve all other content exactly.
-- Do not infer, rewrite, improve, reorganize, or normalize anything.
-- If any patch hunk cannot be applied with certainty, stop and report the conflict instead of guessing.
+- Apply each PATCH independently.
+- Locate the target using the PATCH's **Section** and **Anchor**.
+- Within that anchor, perform the specified operation (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
+- Verify that the **Find** text exactly matches the current tracker before making the edit.
+- Modify only the content specified by the PATCH.
+- Preserve all other content exactly as it is.
+- Do not infer, rewrite, improve, reorganize, normalize, or make any additional edits.
+- If a PATCH cannot be applied unambiguously, stop and report the conflict instead of guessing.
 
 ### Validation
 
 Before generating the file, verify that:
 
-- Every patch hunk was applied exactly once.
-- No patch hunk was skipped.
+- Every PATCH was applied exactly once.
+- No PATCH was skipped.
+- No PATCH modified the wrong location.
 - No additional edits were introduced.
-- The updated tracker differs from the original only where specified by the patch.
+- The updated tracker differs from the original only where specified by the approved edit script.
 
 ### Output
 
