@@ -142,41 +142,21 @@ Based on everything I have completed so far in this iteration, help me complete 
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
-Review everything completed since the last update and compare it against the current **Project Progress Tracker**.
+Compare the current **Project Progress Tracker** with the project's current state.
 
-Produce **only the minimal changes** required to transform the current tracker into the correct updated tracker.
-
-### Output Format
-
-Output **only a unified diff (git patch format)**.
-
-Example:
-
-```diff
---- Project Progress Tracker.md
-+++ Project Progress Tracker.md
-
-@@ -31,3 +31,3 @@
--**Iteration 1 — Environment Foundation**
-+**Iteration 2 — Linux Foundation**
-```
+Output **only** the minimal unified diff required to update the tracker.
 
 ### Requirements
 
-- Compare the current tracker with the project's current state.
-- Include **only** sections that actually change.
-- Do **not** include unchanged sections.
-- Preserve the existing wording unless it must change.
-- Preserve formatting exactly.
-- Use unified diff hunks (`@@ ... @@`) for every change.
-- Include the corresponding line numbers from the current tracker in each hunk.
-- Group nearby edits into the same hunk whenever appropriate.
-- Do not rewrite entire sections when only a few lines changed.
-- Do not explain the changes.
-- Do not summarize the project.
-- Do not suggest improvements.
-- Do not restructure the tracker.
-- Do not output markdown outside the diff.
+- Output **only** a unified diff (git patch format).
+- Include only sections that actually change.
+- Use standard unified diff hunks (`@@ ... @@`) with sufficient surrounding context to uniquely identify each edit.
+- Include line numbers in every hunk.
+- Group nearby edits into the same hunk when appropriate.
+- Modify only the required lines.
+- Preserve all unchanged content exactly.
+- Do not explain, summarize, or justify the changes.
+- Do not suggest improvements or restructure the tracker.
 - If there are no changes, output exactly:
 
 ```text
