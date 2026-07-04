@@ -232,20 +232,20 @@ Use:
   - included in the user's message, or
   - the immediately preceding approved assistant response.
 
-Apply the approved edit script to the tracker.
+Apply the approved edit script by executing deterministic code.
+
+Do **not** perform the edits by rewriting the document manually.
 
 The edit script completely defines every permitted modification. Do not make any change that is not explicitly described by a PATCH.
 
 ### Requirements
 
-- Apply each PATCH independently.
-- Locate the target using the PATCH's **Section** and **Anchor**.
-- Within that anchor, perform the specified operation (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
-- Verify that the **Find** text exactly matches the current tracker before making the edit.
-- Modify only the content specified by the PATCH.
-- Preserve all other content exactly as it is.
-- Do not infer, rewrite, improve, reorganize, normalize, or make any additional edits.
-- If a PATCH cannot be applied unambiguously, stop and report the conflict instead of guessing.
+- Parse and apply each PATCH independently.
+- Use the PATCH's **Section**, **Anchor**, **Operation**, **Find**, and **With** fields to locate and modify the document.
+- Verify that the **Find** text exactly matches the current tracker before applying each PATCH.
+- Apply only the specified operation (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
+- Preserve all other content exactly as it appears.
+- If any PATCH cannot be applied unambiguously, stop and report the conflict instead of guessing.
 
 ### Validation
 
