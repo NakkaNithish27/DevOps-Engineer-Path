@@ -105,17 +105,17 @@ Then:
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
-Based on the practicals I have completed so far in this iteration, help me complete the **Projects & GitHub Evolution** track.
+Based on everything completed in **Track 1 during this session** and the current project context, help me complete the **Projects & GitHub Evolution** track.
 
 * Review the GitHub deliverables planned for the current iteration.
-* Recommend only recruiter-worthy portfolio assets.
+* Consider everything completed throughout this section, not just the final article.
+* Recommend only recruiter-worthy portfolio assets that demonstrate meaningful engineering work or technical capability.
 * Ignore personal notes, summaries, study material, and anything intended only for personal learning.
 * If a deliverable should be deferred because it belongs to a larger future project, clearly explain why and tell me to wait.
 * If there are GitHub tasks to complete now, guide me through them in the recommended order.
-* If there is nothing to do at this stage of the iteration, simply say:
+* If there is nothing to do at this stage of the section, simply say:
 
-  **"There are no Projects & GitHub deliverables to complete at this stage of the iteration."**
-
+  **"There are no Projects & GitHub deliverables to complete at this stage of the section."**
 ```
 
 ## Track 3 – Personal Branding & Communication
