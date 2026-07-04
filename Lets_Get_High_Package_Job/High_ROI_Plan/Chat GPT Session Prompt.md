@@ -239,23 +239,42 @@ Use:
 
 Apply the approved edit script by executing deterministic code.
 
-Do **not** perform the edits by rewriting the document manually.
+Do **not** manually rewrite the document.
 
-The edit script completely defines every permitted modification. Do not make any change that is not explicitly described by a PATCH.
+The edit script completely defines every permitted modification.
+
+### Execution
+
+Implement a deterministic interpreter for the Progress Tracker Edit Script.
+
+The interpreter must:
+
+1. Parse the edit script into individual PATCH objects.
+2. Read every PATCH directly from the parsed data.
+3. Execute every PATCH directly from the parsed data.
+4. Never manually encode, rewrite, reinterpret, or hardcode any PATCH contents.
 
 ### Requirements
 
-- Parse and apply each PATCH independently.
-- Use the PATCH's **Section**, **Anchor**, **Operation**, **Find**, and **With** fields to locate and modify the document.
-- Verify that the **Find** text exactly matches the current tracker before applying each PATCH.
-- Apply only the specified operation (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
-- Preserve all other content exactly as it appears.
-- If any PATCH cannot be applied unambiguously, stop and report the conflict instead of guessing.
+For each PATCH:
 
-### Validation
+- Locate the specified **Anchor** by matching its heading path exactly.
+- Search only within that Anchor.
+- Verify that the **Find** text exists exactly once within the Anchor.
+- Apply only the specified **Operation** (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
+- Verify that the operation completed successfully before continuing to the next PATCH.
 
-Before generating the file, verify that:
+If any PATCH cannot be applied unambiguously:
 
+- Stop immediately.
+- Report the PATCH number and the reason.
+- Do not continue with the remaining PATCHES.
+
+### Final Validation
+
+After all PATCHES have been processed, verify that:
+
+- Every PATCH was parsed.
 - Every PATCH was applied exactly once.
 - No PATCH was skipped.
 - No PATCH modified the wrong location.
