@@ -30,21 +30,21 @@ This document should remain concise, scalable, and easy to update regardless of 
 
 ## Current Iteration
 
-**Iteration 1 — Environment Foundation**
+**Iteration 2 — Linux Foundation**
 
 ---
 
 ## Current Curriculum Position
 
-**Section 2 — Prerequisites Info & Setup** ✅ Completed
+**Section 3 — VM Setup** ✅ Completed
 
-**Next:** Section 3 — VM Setup
+**Next:** Section 4 — Linux Foundation
 
 ---
 
 ## Current Article
 
-**6 / 350**
+**10 / 350**
 
 ---
 
@@ -58,7 +58,7 @@ This document should remain concise, scalable, and easy to update regardless of 
 
 🟡 **IN PROGRESS**
 
-Iteration 1 remains open because Section 3 (VM Setup) is still pending.
+Phase 1 continues with **Iteration 2 — Linux Foundation** after successfully completing Iteration 1.
 
 ---
 
@@ -80,8 +80,8 @@ Iteration 1 remains open because Section 3 (VM Setup) is still pending.
 
 | Iteration   | Status         |
 | ----------- | -------------- |
-| Iteration 1 | 🟡 In Progress |
-| Iteration 2 | ⚪ Not Started  |
+| Iteration 1 | ✅ Completed   |
+| Iteration 2 | 🟡 In Progress |
 | Iteration 3 | ⚪ Not Started  |
 | Iteration 4 | ⚪ Not Started  |
 | Iteration 5 | ⚪ Not Started  |
@@ -94,7 +94,7 @@ Iteration 1 remains open because Section 3 (VM Setup) is still pending.
 
 ## Articles Completed
 
-**6 / 350**
+**10 / 350**
 
 ---
 
@@ -139,6 +139,13 @@ Complete the development environment required for all future DevOps learning.
 * AWS Billing Monitoring
 * CloudWatch → SNS Alert Flow
 
+### Section 3
+
+* Virtualization Overview
+* Hypervisors (Type 1 vs Type 2)
+* Manual Virtual Machine Setup
+* Automated Virtual Machine Setup (Vagrant)
+
 For every completed article:
 
 * Theory Refresher
@@ -149,16 +156,7 @@ For every completed article:
 
 ## Remaining
 
-Iteration 1
-
-* Section 3 — VM Setup
-
-Definition of Done
-
-* Development environment ready
-* Virtual machine operational
-* Development tools installed
-* Environment validated
+Iteration 2 — Linux Foundation
 
 ---
 
@@ -316,6 +314,9 @@ These activities will begin during the Career Conversion phase.
 * SNS Billing Notifications
 * DuckDNS Account
 * DuckDNS Domain
+* Oracle VM VirtualBox Environment
+* Vagrant Environment
+* Local Linux Development Environment
 
 ```text
 nakkanithish.duckdns.org
@@ -381,24 +382,21 @@ nakkanithish.duckdns.org
 
 ### Current Work
 
-🔄 Section 3 — VM Setup
+🔄 Iteration 2 — Linux Foundation
 
 Current objective:
 
-Establish the local development environment that will be used throughout the remainder of the roadmap.
+Begin Linux Foundation and Linux administration learning.
 
 ---
 
 ### Immediate Outcome
 
-By the end of Iteration 1, the following should exist:
+Current focus:
 
-* Working Virtual Machine
-* Linux Development Environment
-* AWS Learning Environment
-* Oracle Cloud Environment
-* GitHub Foundation
-* LinkedIn Foundation
+* Linux Foundation
+* Linux Administration
+* Hands-on Linux Practice
 
 ---
 
@@ -486,17 +484,9 @@ A professional custom domain (such as `nakkanithish.dev`) will be purchased imme
 
 ## Track 1
 
-Complete:
+Begin:
 
-### Section 3 — VM Setup
-
-Objectives:
-
-* Install VirtualBox
-* Create Ubuntu Virtual Machine
-* Configure Linux Environment
-* Install Development Tools
-* Validate Development Environment
+### Iteration 2 — Linux Foundation
 
 ---
 
@@ -532,7 +522,7 @@ Interview preparation remains intentionally deferred.
 
 ## Current Milestone
 
-### Iteration 1 — Environment Foundation
+### Iteration 2 — Linux Foundation
 
 Status
 
@@ -540,29 +530,24 @@ Status
 
 Objective
 
-Establish the complete development environment required for the remainder of the DevOps roadmap.
+Build a strong Linux administration foundation for all future DevOps technologies.
 
 Definition of Done
 
-* AWS configured
-* VM operational
-* Development tools installed
-* GitHub foundation complete
-* LinkedIn foundation complete
+See Iteration 2 exit criteria.
 
 ---
 
 ## Next Milestone
 
-### Iteration 2 — Linux Foundation
+### Iteration 3 — Development Workflow
 
 Primary Focus
 
-* Linux Administration
-* Linux Labs
-* Bash
-* Linux Documentation
-* Linux GitHub Repository
+* Git Fundamentals
+* Vagrant
+* JSON & YAML
+* Development Workflow
 
 ---
 
@@ -591,9 +576,9 @@ This becomes the project's final polish before entering the job market.
 | ------------------ | ---------------------- |
 | Project            | 🟡 In Progress         |
 | Phase              | 🟡 Phase 1             |
-| Iteration          | 🟡 Iteration 1         |
+| Iteration          | 🟡 Iteration 2         |
 | Technical Learning | 🟡 In Progress         |
-| Environment Setup  | 🟡 Nearly Complete     |
+| Environment Setup  | ✅ Complete            |
 | GitHub             | 🟡 Foundation Complete |
 | LinkedIn           | 🟡 Foundation Complete |
 | Career Preparation | ⚪ Deferred             |
