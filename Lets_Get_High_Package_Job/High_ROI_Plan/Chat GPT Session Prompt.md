@@ -152,25 +152,22 @@ Each edit must follow this format:
 
 PATCH <number>
 
-Section:
-<top-level section>
-
 Anchor:
-<unique heading within that section>
+<unique heading path>
 
 Operation:
 Replace
+OR
+Replace Block
 OR
 Insert Before
 OR
 Insert After
 OR
-Replace Block
-OR
 Delete
 
 Find:
-<existing text>
+<existing text within the Anchor>
 
 With:
 <replacement text>
@@ -178,11 +175,19 @@ With:
 ### Requirements
 
 - Generate only the edits that are required.
-- Every patch must have a unique anchor.
-- Use headings as anchors instead of line numbers.
-- The Find text must exactly match the current tracker.
-- Keep the Find block as small as possible while remaining unique.
-- Preserve every unchanged line.
+- Every PATCH must have a unique **Anchor**.
+- Use heading paths as anchors instead of line numbers.
+
+  Example:
+
+  Anchor:
+  # Current Focus > ### Current Work
+
+- The **Find** text must exactly match the current tracker.
+- The **Find** text must be unique within the specified **Anchor**.
+- Keep the **Find** block as small as possible while still uniquely identifying the target.
+- If necessary, expand the **Find** block with additional surrounding context until it is unique within the Anchor.
+- Preserve every unchanged line exactly.
 - Do not explain the edits.
 - Do not summarize the project.
 - If no edits are required, output exactly:
