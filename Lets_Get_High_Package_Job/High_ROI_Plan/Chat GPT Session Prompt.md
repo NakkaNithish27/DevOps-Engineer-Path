@@ -199,7 +199,7 @@ Do not generate the updated tracker.
 Wait for my confirmation before applying the edit script.
 ~~~
 
-### Unstructured Output
+Unstructured Output
 ```markdown
 ## Progress Tracker Review
 
@@ -275,7 +275,7 @@ Generate the updated **Project Progress Tracker** as a Markdown (`.md`) file.
 Return only the downloadable file.
 ~~~
 
-## Progress Tracker Update - Manually copy paste
+Progress Tracker Update - Manually copy paste
 
 ```markdown
 ## End of Iteration – Project Progress Tracker Update
@@ -298,7 +298,7 @@ If the tracker is too large for one response:
 Ensure the combined parts form one complete replacement document.
 ```
 
-## Progress Tracker Update - No Manual Editing - Just Download The Updated Progress Tracker - Error Prone
+Progress Tracker Update - No Manual Editing - Just Download The Updated Progress Tracker - Error Prone
 
 ```markdown
 ## End of Iteration – Project Progress Tracker Update
