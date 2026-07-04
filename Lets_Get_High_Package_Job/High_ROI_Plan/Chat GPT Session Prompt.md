@@ -331,6 +331,64 @@ Output:
 
 ## Updated Project Progress Tracker Validation
 
+~~~markdown
+## Validate Progress Tracker Patch
+
+I will upload:
+
+1. The original **Project Progress Tracker**
+2. The updated **Project Progress Tracker**
+3. The approved **Progress Tracker Patch** (unified diff)
+
+Validate that the updated tracker is the result of applying the approved patch to the original tracker.
+
+Treat the approved unified diff as the **single source of truth** for every expected modification.
+
+This is a **patch validation task**, not a document review.
+
+### Validation Rules
+
+Verify that:
+
+- Every patch hunk was applied successfully.
+- No patch hunk was skipped.
+- No patch hunk was applied incorrectly.
+- Every difference between the original and updated trackers is explained by the approved patch.
+- No additional edits were introduced.
+- No unrelated content was modified.
+- No unrelated content was removed.
+- No duplicate sections, headings, lists, or content were introduced.
+- Formatting, Markdown, spacing, ordering, and document structure remain unchanged except where explicitly modified by the patch.
+- The updated tracker is identical to the original everywhere outside the approved patch.
+
+### Output
+
+If everything is correct, respond with exactly:
+
+```text
+✅ PASS – The approved patch was applied successfully.
+```
+
+Otherwise respond with:
+
+```text
+❌ FAIL
+```
+
+Then list only the validation failures under the following headings (omit any section with no issues):
+
+- Missing Patch Hunks
+- Incorrectly Applied Patch Hunks
+- Unexpected Changes
+- Removed Content
+- Duplicate Content
+- Formatting or Structural Issues
+- Other Inconsistencies
+
+Do not suggest improvements or rewrite the tracker.
+Only validate whether the approved patch was applied correctly.
+~~~
+
 ```markdown
 ## Project Progress Tracker Validation
 
