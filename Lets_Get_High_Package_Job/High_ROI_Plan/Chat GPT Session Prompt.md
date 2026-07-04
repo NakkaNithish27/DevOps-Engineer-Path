@@ -135,6 +135,60 @@ Based on everything I have completed so far in this iteration, help me complete 
 
 ## End of Session Review
 
+### Unified diff Output:
+
+~~~markdown
+## Progress Tracker Patch
+
+Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+
+Review everything completed since the last update and compare it against the current **Project Progress Tracker**.
+
+Produce **only the minimal changes** required to transform the current tracker into the correct updated tracker.
+
+### Output Format
+
+Output **only a unified diff (git patch format)**.
+
+Example:
+
+```diff
+--- Project Progress Tracker.md
++++ Project Progress Tracker.md
+
+@@ -31,3 +31,3 @@
+-**Iteration 1 — Environment Foundation**
++**Iteration 2 — Linux Foundation**
+```
+
+### Requirements
+
+- Compare the current tracker with the project's current state.
+- Include **only** sections that actually change.
+- Do **not** include unchanged sections.
+- Preserve the existing wording unless it must change.
+- Preserve formatting exactly.
+- Use unified diff hunks (`@@ ... @@`) for every change.
+- Include the corresponding line numbers from the current tracker in each hunk.
+- Group nearby edits into the same hunk whenever appropriate.
+- Do not rewrite entire sections when only a few lines changed.
+- Do not explain the changes.
+- Do not summarize the project.
+- Do not suggest improvements.
+- Do not restructure the tracker.
+- Do not output markdown outside the diff.
+- If there are no changes, output exactly:
+
+```text
+No changes.
+```
+
+Do **not** generate the updated tracker.
+
+Wait for my confirmation before applying the patch.
+~~~
+
+### Unstructured Output
 ```markdown
 ## Progress Tracker Review
 
