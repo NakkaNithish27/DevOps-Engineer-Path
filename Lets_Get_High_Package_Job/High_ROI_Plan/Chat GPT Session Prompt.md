@@ -199,10 +199,12 @@ Wait for my confirmation.
 ~~~markdown
 ## Apply Progress Tracker Patch
 
-I will upload:
+Use:
 
-- The current **Project Progress Tracker**
-- The approved **Progress Tracker Patch** (unified diff)
+- The uploaded **Project Progress Tracker** as the base document.
+- The approved **Progress Tracker Patch** (unified diff), which may be either:
+  - included in the user's message, or
+  - the immediately preceding approved assistant response.
 
 Apply the approved patch to the tracker.
 
@@ -210,14 +212,13 @@ Treat the unified diff as the **only source of truth**.
 
 ### Requirements
 
-- Use the uploaded tracker as the base document.
 - Apply each unified diff hunk independently.
-- Locate each edit using the hunk's **context and line numbers**, not by global text replacement.
+- Locate each edit using the hunk's context and line numbers, not by global text replacement.
 - If identical text appears multiple times, use the surrounding context to identify the correct location.
 - Modify only the lines specified by the patch.
 - Preserve all other content exactly.
 - Do not infer, rewrite, improve, reorganize, or normalize anything.
-- If any hunk cannot be applied with certainty, stop and report the conflict instead of guessing.
+- If any patch hunk cannot be applied with certainty, stop and report the conflict instead of guessing.
 
 ### Validation
 
