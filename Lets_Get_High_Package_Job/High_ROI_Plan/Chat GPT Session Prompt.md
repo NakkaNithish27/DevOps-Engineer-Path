@@ -152,25 +152,22 @@ Each edit must follow this format:
 
 PATCH <number>
 
-Section:
-<top-level section>
-
 Anchor:
-<unique heading within that section>
+<unique heading path>
 
 Operation:
 Replace
+OR
+Replace Block
 OR
 Insert Before
 OR
 Insert After
 OR
-Replace Block
-OR
 Delete
 
 Find:
-<existing text>
+<existing text within the Anchor>
 
 With:
 <replacement text>
@@ -178,11 +175,19 @@ With:
 ### Requirements
 
 - Generate only the edits that are required.
-- Every patch must have a unique anchor.
-- Use headings as anchors instead of line numbers.
-- The Find text must exactly match the current tracker.
-- Keep the Find block as small as possible while remaining unique.
-- Preserve every unchanged line.
+- Every PATCH must have a unique **Anchor**.
+- Use heading paths as anchors instead of line numbers.
+
+  Example:
+
+  Anchor:
+  # Current Focus > ### Current Work
+
+- The **Find** text must exactly match the current tracker.
+- The **Find** text must be unique within the specified **Anchor**.
+- Keep the **Find** block as small as possible while still uniquely identifying the target.
+- If necessary, expand the **Find** block with additional surrounding context until it is unique within the Anchor.
+- Preserve every unchanged line exactly.
 - Do not explain the edits.
 - Do not summarize the project.
 - If no edits are required, output exactly:
@@ -232,30 +237,36 @@ Use:
   - included in the user's message, or
   - the immediately preceding approved assistant response.
 
-Apply the approved edit script to the tracker.
+Apply the edit script by executing a deterministic interpreter.
 
-The edit script completely defines every permitted modification. Do not make any change that is not explicitly described by a PATCH.
+Do **not** manually edit or rewrite the tracker.
 
-### Requirements
+### Execution
 
-- Apply each PATCH independently.
-- Locate the target using the PATCH's **Section** and **Anchor**.
-- Within that anchor, perform the specified operation (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
-- Verify that the **Find** text exactly matches the current tracker before making the edit.
-- Modify only the content specified by the PATCH.
-- Preserve all other content exactly as it is.
-- Do not infer, rewrite, improve, reorganize, normalize, or make any additional edits.
-- If a PATCH cannot be applied unambiguously, stop and report the conflict instead of guessing.
+- Parse the edit script into PATCH objects.
+- Execute every PATCH directly from the parsed PATCH data.
+- The interpreter must be generic and data-driven.
+- The generated code must not contain any document-specific text outside the parsed PATCH objects.
+
+For each PATCH:
+
+- Locate the specified **Anchor**.
+- Search only within that Anchor.
+- Verify the **Find** text exists exactly once.
+- Execute the specified **Operation** (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
+- Verify the PATCH was applied successfully before continuing.
+
+If any PATCH cannot be applied unambiguously, stop immediately and report the PATCH number and reason.
 
 ### Validation
 
-Before generating the file, verify that:
+Verify that:
 
+- Every PATCH was parsed.
 - Every PATCH was applied exactly once.
 - No PATCH was skipped.
 - No PATCH modified the wrong location.
 - No additional edits were introduced.
-- The updated tracker differs from the original only where specified by the approved edit script.
 
 ### Output
 
