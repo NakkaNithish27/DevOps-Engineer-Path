@@ -145,17 +145,17 @@ Based on everything completed in **Track 1 during this session** and the current
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
-Based on everything I have completed so far in this iteration, help me complete the **Interview & Job Conversion** track.
+Based on everything completed in **Track 1 during this session** and the current project context, help me complete the **Interview & Job Conversion** track.
 
 * Review the interview deliverables planned for the current iteration.
+* Consider everything completed throughout this section, not just the final article.
 * Recommend only interview preparation that adds value at my current stage of the roadmap.
-* Keep all recommendations aligned with my current technical level and completed practicals.
+* Keep all recommendations aligned with my current technical level and completed technical work.
 * If there are interview tasks to complete now, guide me through them in the recommended order (e.g., concept revision, troubleshooting scenarios, common interview questions, hands-on exercises, mock interviews, resume preparation, etc.).
 * If a deliverable should be deferred because it will be more valuable after completing future topics, projects, or iterations, clearly explain why and tell me to wait.
-* If there is nothing to do at this stage of the iteration, simply say:
+* If there is nothing to do at this stage of the section, simply say:
 
-  **"There are no Interview & Job Conversion deliverables to complete at this stage of the iteration."**
-
+  **"There are no Interview & Job Conversion deliverables to complete at this stage of the section."**
 ```
 
 ## End of Session Review
