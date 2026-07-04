@@ -125,17 +125,17 @@ Based on everything completed in **Track 1 during this session** and the current
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
-Based on everything I have completed so far in this iteration, help me complete the **Personal Branding & Communication** track.
+Based on everything completed in **Track 1 during this session** and the current project context, help me complete the **Personal Branding & Communication** track.
 
 * Review the communication deliverables planned for the current iteration.
+* Consider everything completed throughout this section, not just the final article.
 * Recommend only meaningful public-facing content that demonstrates real engineering work, technical understanding, or professional growth.
 * Ignore trivial setup tasks, routine course progress, personal study notes, and content that would not add value to my professional profile.
 * If there are communication tasks to complete now, guide me through them in the recommended order (e.g., LinkedIn profile updates, technical posts, project walkthroughs, architecture explanations, portfolio descriptions, etc.).
 * If a communication deliverable should be deferred because it depends on a larger project or milestone, clearly explain why and tell me to wait.
-* If there is nothing to do at this stage of the iteration, simply say:
+* If there is nothing to do at this stage of the section, simply say:
 
-  **"There are no Personal Branding & Communication deliverables to complete at this stage of the iteration."**
-
+  **"There are no Personal Branding & Communication deliverables to complete at this stage of the section."**
 ```
 
 ## Track 4 – Interview & Job Conversion
