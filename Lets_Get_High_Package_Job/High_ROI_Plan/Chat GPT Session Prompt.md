@@ -215,7 +215,56 @@ Do **not** generate the updated tracker yet.
 Wait for my confirmation.
 ```
 
-## Progress Tracker Update
+## Apply Progress Tracker Patch
+~~~markdown
+## Apply Progress Tracker Patch
+
+I will upload:
+
+- The current **Project Progress Tracker**
+- The approved **Progress Tracker Patch** (unified diff)
+- (If needed) the **Project Specification**
+- (If needed) the **DevOps Career Roadmap**
+
+Apply the approved patch to the uploaded **Project Progress Tracker**.
+
+Treat the unified diff as the **single source of truth** for every modification.
+
+This is a **patch application task**, not a document rewrite.
+
+### Requirements
+
+- Use the uploaded Project Progress Tracker as the base document.
+- Apply the unified diff exactly as provided.
+- Modify only the lines specified by the patch.
+- Preserve every unchanged line exactly as it appears.
+- Preserve all headings, spacing, Markdown, formatting, ordering, and document structure.
+- Do not infer additional edits.
+- Do not fix, improve, normalize, reorganize, or rewrite any content.
+- Do not change wording unless required by the patch.
+- Do not modify any section that is not referenced by the patch.
+- If a patch hunk affects multiple matching locations, apply it only where the unified diff indicates.
+- If any hunk cannot be applied with certainty, stop and explain the conflict instead of guessing.
+
+### Validation
+
+Before generating the updated file, verify that:
+
+- Every patch hunk has been applied successfully.
+- No patch hunk has been skipped.
+- No additional modifications have been made.
+- No duplicate content has been introduced.
+- The updated tracker differs from the original only where specified by the patch.
+- The final document remains internally consistent.
+
+### Output
+
+Generate the updated **Project Progress Tracker** as a Markdown (`.md`) file.
+
+Return only the updated downloadable file.
+~~~
+
+## Progress Tracker Update - Manually copy paste
 
 ```markdown
 ## End of Iteration – Project Progress Tracker Update
@@ -238,7 +287,7 @@ If the tracker is too large for one response:
 Ensure the combined parts form one complete replacement document.
 ```
 
-## Progress Tracker Update - No Manual Editing - Just Download The Updated Progress Tracker
+## Progress Tracker Update - No Manual Editing - Just Download The Updated Progress Tracker - Error Prone
 
 ```markdown
 ## End of Iteration – Project Progress Tracker Update
