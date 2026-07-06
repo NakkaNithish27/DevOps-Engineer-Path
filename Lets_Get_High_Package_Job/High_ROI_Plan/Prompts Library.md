@@ -270,29 +270,32 @@ Wait for my confirmation before applying the edit script.
 
 Use:
 
-- The uploaded **Project Progress Tracker** as the base document.
-- The approved **Progress Tracker Edit Script**, which may be either:
-  - included in the user's message, or
-  - the immediately preceding approved assistant response.
+* The uploaded **Project Progress Tracker** as the base document.
+* The approved **Progress Tracker Edit Script**, which may be either:
+
+  * included in the user's message, or
+  * the immediately preceding approved assistant response.
 
 Apply the edit script by executing a deterministic interpreter.
 
-Do **not** manually edit or rewrite the tracker.
+Treat the approved edit script as the **only source of truth** for all permitted document modifications.
+
+Do **not** manually edit, rewrite, improve, reorganize, or optimize the tracker.
 
 ### Execution
 
-- Parse the edit script into PATCH objects.
-- Execute every PATCH directly from the parsed PATCH data.
-- The interpreter must be generic and data-driven.
-- The generated code must not contain any document-specific text outside the parsed PATCH objects.
+* Parse the approved edit script into PATCH objects.
+* Execute every PATCH directly from the parsed PATCH data.
+* The interpreter must be generic and data-driven.
+* The generated code must not contain any document-specific text outside the parsed PATCH objects.
 
 For each PATCH:
 
-- Locate the specified **Anchor**.
-- Search only within that Anchor.
-- Verify the **Find** text exists exactly once.
-- Execute the specified **Operation** (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
-- Verify the PATCH was applied successfully before continuing.
+* Locate the specified **Anchor**.
+* Search only within that Anchor.
+* Verify the **Find** text exists exactly once.
+* Execute the specified **Operation** (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
+* Verify the PATCH was applied successfully before continuing.
 
 If any PATCH cannot be applied unambiguously, stop immediately and report the PATCH number and reason.
 
@@ -300,17 +303,19 @@ If any PATCH cannot be applied unambiguously, stop immediately and report the PA
 
 Verify that:
 
-- Every PATCH was parsed.
-- Every PATCH was applied exactly once.
-- No PATCH was skipped.
-- No PATCH modified the wrong location.
-- No additional edits were introduced.
+* Every PATCH was parsed.
+* Every PATCH was applied exactly once.
+* No PATCH was skipped.
+* No PATCH modified the wrong location.
+* Every modification in the generated tracker is explained by exactly one PATCH.
+* No additional edits were introduced.
 
 ### Output
 
 Generate the updated **Project Progress Tracker** as a Markdown (`.md`) file.
 
 Return only the downloadable file.
+
 ~~~
 
 ## 10. Updated Project Progress Tracker Validation
