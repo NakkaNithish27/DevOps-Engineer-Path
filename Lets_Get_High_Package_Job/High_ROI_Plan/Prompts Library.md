@@ -1,6 +1,6 @@
-# Chat GPT Session Prompt
+# Prompts Library
 
-## Start the Chat GPT Session
+## 1. Start the Chat GPT Session
 
 ```markdown
 ## Session Initialization
@@ -17,7 +17,7 @@ Do not begin any work yet. Wait for my next instruction.
 
 ```
 
-## Current Iteration Review
+## 2. Current Iteration Review
 
 ```markdown
 ## Current Iteration Review
@@ -43,7 +43,7 @@ Provide a concise overview including:
 Then wait for my input before we begin.
 
 ```
-## Section Context Initialization
+## 3. Section Context Initialization
 ~~~markdown
 ## Section Context Initialization
 
@@ -69,7 +69,7 @@ Do not begin teaching or summarizing yet.
 Wait for my next instruction.
 ~~~
 
-## Track 1 – Core Technical Building
+## 4. Track 1 – Core Technical Building
 
 ```markdown
 ## Track 1 – Core Technical Building
@@ -98,7 +98,7 @@ Then:
 
 ```
 
-## Track 2 – Projects & GitHub Evolution
+## 5. Track 2 – Projects & GitHub Evolution
 
 ```markdown
 ## Track 2 – Projects & GitHub Evolution
@@ -118,7 +118,7 @@ Based on everything completed in **Track 1 during this session** and the current
   **"There are no Projects & GitHub deliverables to complete at this stage of the section."**
 ```
 
-## Track 3 – Personal Branding & Communication
+## 6. Track 3 – Personal Branding & Communication
 
 ```markdown
 ## Track 3 – Personal Branding & Communication
@@ -138,7 +138,7 @@ Based on everything completed in **Track 1 during this session** and the current
   **"There are no Personal Branding & Communication deliverables to complete at this stage of the section."**
 ```
 
-## Track 4 – Interview & Job Conversion
+## 7. Track 4 – Interview & Job Conversion
 
 ```markdown
 ## Track 4 – Interview & Job Conversion
@@ -158,7 +158,7 @@ Based on everything completed in **Track 1 during this session** and the current
   **"There are no Interview & Job Conversion deliverables to complete at this stage of the section."**
 ```
 
-## End of Session Review
+## 8. End of Session Review
 
 ### Progress Tracker Edit Script:
 
@@ -224,34 +224,7 @@ Do not generate the updated tracker.
 Wait for my confirmation before applying the edit script.
 ~~~
 
-Unstructured Output
-```markdown
-## Progress Tracker Review
-
-Review everything completed since the last Project Progress Tracker update and identify the exact changes that should be reflected in the tracker.
-
-Only identify changes that require edits to the tracker. Do not summarize the overall project state or include unchanged areas.
-
-Include:
-
-- Current position updates (Phase, Iteration, Section, Article, Track)
-- Changes across all four tracks
-- Newly created assets, deliverables, and milestones
-- Deferred items (if any)
-- Changes to Current Focus, Next Actions, Overall Progress, and Overall Status
-
-Requirements:
-- Report only differences between the current tracker and the updated tracker.
-- Do not suggest improvements, restructuring, or cleanup.
-- Do not rewrite tracker content.
-- If an area has no changes, explicitly state **No changes**.
-
-Do **not** generate the updated tracker yet.
-
-Wait for my confirmation.
-```
-
-## Apply Progress Tracker Patch
+## 9. Apply Progress Tracker Patch
 ~~~markdown
 ## Apply Progress Tracker Edit Script
 
@@ -300,72 +273,7 @@ Generate the updated **Project Progress Tracker** as a Markdown (`.md`) file.
 Return only the downloadable file.
 ~~~
 
-Progress Tracker Update - Manually copy paste
-
-```markdown
-## End of Iteration – Project Progress Tracker Update
-
-Based on the approved Progress Tracker Review, generate the **entire updated Project Progress Tracker** as a complete replacement document.
-
-The tracker is a **dynamic current-state dashboard**, not a historical log.
-
-Update only what is necessary to accurately reflect the current project state while keeping the document concise, internally consistent, and aligned with the Project Specification and DevOps Career Roadmap.
-
-If the tracker is too large for one response:
-
-1. Tell me how many parts are required.
-2. Generate it sequentially as:
-   - Part 1 of N
-   - Part 2 of N
-   - ...
-   - Part N of N
-
-Ensure the combined parts form one complete replacement document.
-```
-
-Progress Tracker Update - No Manual Editing - Just Download The Updated Progress Tracker - Error Prone
-
-```markdown
-## End of Iteration – Project Progress Tracker Update
-
-I will upload the current **Project Progress Tracker**, **Project Specification**, and **DevOps Career Roadmap**.
-
-Based on the approved Progress Tracker Review, update the tracker by making only the changes necessary to reflect the project's current state.
-
-Treat this as a surgical edit operation, not a document rewrite.
-
-Requirements:
-- Use the uploaded tracker as the source of truth.
-- Treat the approved Progress Tracker Review as the complete and authoritative patch list.
-- Apply only the approved changes.
-- Do not infer, improve, reorganize, normalize, or clean up the tracker.
-- If a change was not explicitly approved in the Progress Tracker Review, leave it unchanged.
-- Modify existing content in place whenever possible.
-- Every approved change must be mapped to an existing location in the tracker before editing. Do not guess edit locations.
-- Do not append new versions of existing content or create duplicate sections, headings, or lists.
-- If an approved change replaces existing content, replace it instead of adding another copy.
-- If an approved change affects multiple related sections, update every affected occurrence while preserving the document structure.
-- If the correct edit location cannot be determined with certainty, stop and ask instead of guessing.
-- Preserve all formatting, structure, headings, spacing, Markdown, wording, ordering, and document layout unless a change is required.
-- Do not rewrite, rephrase, move, merge, split, or reorder unchanged content.
-- Leave every unrelated line untouched.
-
-Before generating the updated file, verify that:
-- Every approved change has been applied everywhere it is required.
-- No approved changes have been missed.
-- Every modification corresponds to an approved change.
-- No duplicate sections, headings, or content have been introduced.
-- No formatting or structural inconsistencies have been introduced.
-- No unrelated content has been modified or removed.
-- The updated tracker differs from the original only where approved changes were required.
-- The document remains internally consistent after the edits.
-
-Output:
-- Generate the updated Markdown (.md) file.
-- Return it as a downloadable file.
-```
-
-## Updated Project Progress Tracker Validation
+## 10. Updated Project Progress Tracker Validation
 
 ~~~markdown
 ## Validate Progress Tracker Edit Script
@@ -428,37 +336,3 @@ Do not suggest improvements or rewrite the tracker.
 Only validate whether the approved edit script was applied correctly.
 ~~~
 
-```markdown
-## Project Progress Tracker Validation
-
-I will upload:
-
-1. The original Project Progress Tracker.
-2. The updated Project Progress Tracker.
-
-Based on the approved Progress Tracker Review in this conversation, compare the original and updated trackers.
-
-Treat the approved Progress Tracker Review as the authoritative list of expected differences.
-
-Verify that:
-- All approved changes were applied.
-- No approved changes were missed.
-- Every difference between the original and updated trackers corresponds to an approved change.
-- No unintended changes were introduced.
-- No important content was removed.
-- The updated tracker is identical to the original except for the approved changes.
-
-If everything is correct, respond with:
-
-✅ PASS – Only the approved changes were made.
-
-Otherwise, respond with:
-
-❌ FAIL
-
-List:
-- Missing changes
-- Unexpected changes
-- Removed content
-- Any inconsistencies
-```
