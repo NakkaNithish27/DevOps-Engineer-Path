@@ -266,56 +266,32 @@ Wait for my confirmation before applying the edit script.
 
 ## 9. Apply Progress Tracker Patch
 ~~~markdown
-## Apply Progress Tracker Edit Script
+Apply Progress Tracker Edit Script
 
 Use:
 
-* The uploaded **Project Progress Tracker** as the base document.
-* The approved **Progress Tracker Edit Script**, which may be either:
+- The uploaded Project Progress Tracker as the base document.
+- The approved Progress Tracker Edit Script, which may be either:
+  - included in the user's message, or
+  - the immediately preceding approved assistant response.
 
-  * included in the user's message, or
-  * the immediately preceding approved assistant response.
+Apply the approved edit script deterministically.
 
-Apply the edit script by executing a deterministic interpreter.
+Treat the approved edit script as the only source of truth.
 
-Treat the approved edit script as the **only source of truth** for all permitted document modifications.
+Do not manually edit, rewrite, infer, improve, reorganize, optimize, or introduce any changes beyond those defined by the approved edit script.
 
-Do **not** manually edit, rewrite, improve, reorganize, or optimize the tracker.
+If any PATCH cannot be applied exactly, stop immediately and report the PATCH number and reason.
 
-### Execution
+Validate that:
 
-* Parse the approved edit script into PATCH objects.
-* Execute every PATCH directly from the parsed PATCH data.
-* The interpreter must be generic and data-driven.
-* The generated code must not contain any document-specific text outside the parsed PATCH objects.
+- Every PATCH was applied exactly once.
+- No PATCH was skipped.
+- No additional edits were introduced.
 
-For each PATCH:
-
-* Locate the specified **Anchor**.
-* Search only within that Anchor.
-* Verify the **Find** text exists exactly once.
-* Execute the specified **Operation** (`Replace`, `Replace Block`, `Insert Before`, `Insert After`, or `Delete`).
-* Verify the PATCH was applied successfully before continuing.
-
-If any PATCH cannot be applied unambiguously, stop immediately and report the PATCH number and reason.
-
-### Validation
-
-Verify that:
-
-* Every PATCH was parsed.
-* Every PATCH was applied exactly once.
-* No PATCH was skipped.
-* No PATCH modified the wrong location.
-* Every modification in the generated tracker is explained by exactly one PATCH.
-* No additional edits were introduced.
-
-### Output
-
-Generate the updated **Project Progress Tracker** as a Markdown (`.md`) file.
+Generate the updated Project Progress Tracker as a Markdown (".md") file.
 
 Return only the downloadable file.
-
 ~~~
 
 ## 10. Updated Project Progress Tracker Validation
