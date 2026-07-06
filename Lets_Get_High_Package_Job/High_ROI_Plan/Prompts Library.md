@@ -26,9 +26,9 @@ Based on the attached **Project Specification**, **DevOps Career Roadmap**, and 
 
 Provide a concise overview including:
 
-* My current phase, iteration, article, and current track.
+* My current phase, iteration, curriculum position, article, and current track.
 * The objective of the current iteration.
-* The topics and articles planned for this iteration.
+* The topics and articles planned for the current iteration.
 * The planned deliverables for all four tracks:
 
   * Core Technical Building
@@ -39,8 +39,14 @@ Provide a concise overview including:
 * What remains to be completed in the current iteration.
 * The recommended order for completing the remaining work.
 * Any deferred work that should be revisited before moving to the next iteration.
+* Current interview readiness for the technologies covered so far.
+* Any technologies currently in the Technical Revision Queue.
+* The recommended technical focus for today's learning session.
 
-Then wait for my input before we begin.
+Do not begin teaching.
+
+Wait for my next instruction.
+
 
 ```
 ## 3. Section Context Initialization
@@ -142,20 +148,36 @@ Based on everything completed in **Track 1 during this session** and the current
 
 ```markdown
 ## Track 4 – Interview & Job Conversion
+## Track 4 – Interview & Job Conversion
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
 Based on everything completed in **Track 1 during this session** and the current project context, help me complete the **Interview & Job Conversion** track.
 
 * Review the interview deliverables planned for the current iteration.
-* Consider everything completed throughout this section, not just the final article.
+* Consider everything completed throughout the current section, not just the final article.
 * Recommend only interview preparation that adds value at my current stage of the roadmap.
 * Keep all recommendations aligned with my current technical level and completed technical work.
-* If there are interview tasks to complete now, guide me through them in the recommended order (e.g., concept revision, troubleshooting scenarios, common interview questions, hands-on exercises, mock interviews, resume preparation, etc.).
+* Match the depth of interview preparation to the current roadmap phase:
+
+  * **Phase 1:** Quick Interview Readiness Check (Recognition & Recall only)
+  * **Phase 2:** Add Application assessment when appropriate.
+  * **Phase 3–4:** Add Troubleshooting assessment when appropriate.
+  * **Phase 5:** Conduct comprehensive interview preparation, mock interviews, and job conversion activities.
+* If there are interview tasks to complete now, guide me through them in the recommended order (e.g., concept revision, interview questions, hands-on reasoning, troubleshooting scenarios, mock interviews, resume preparation, etc.).
+* At the end of the session, assign confidence scores for the technology covered today:
+
+  * Recognition
+  * Recall
+  * Application (if applicable)
+  * Troubleshooting (if applicable)
+  * Overall Confidence
+* Recommend revision only when the confidence score indicates it is necessary.
 * If a deliverable should be deferred because it will be more valuable after completing future topics, projects, or iterations, clearly explain why and tell me to wait.
 * If there is nothing to do at this stage of the section, simply say:
 
   **"There are no Interview & Job Conversion deliverables to complete at this stage of the section."**
+
 ```
 
 ## 8. End of Session Review
@@ -177,8 +199,7 @@ Each edit must follow this format:
 
 PATCH <number>
 
-Anchor:
-<unique heading path>
+Anchor: <unique heading path>
 
 Operation:
 Replace
@@ -191,37 +212,56 @@ Insert After
 OR
 Delete
 
-Find:
-<existing text within the Anchor>
+Find: <existing text within the Anchor>
 
-With:
-<replacement text>
+With: <replacement text>
 
 ### Requirements
 
-- Generate only the edits that are required.
-- Every PATCH must have a unique **Anchor**.
-- Use heading paths as anchors instead of line numbers.
+* Generate only the edits that are required.
+
+* Every PATCH must have a unique **Anchor**.
+
+* Use heading paths as anchors instead of line numbers.
 
   Example:
 
   Anchor:
+
   # Current Focus > ### Current Work
 
-- The **Find** text must exactly match the current tracker.
-- The **Find** text must be unique within the specified **Anchor**.
-- Keep the **Find** block as small as possible while still uniquely identifying the target.
-- If necessary, expand the **Find** block with additional surrounding context until it is unique within the Anchor.
-- Preserve every unchanged line exactly.
-- Do not explain the edits.
-- Do not summarize the project.
-- If no edits are required, output exactly:
+* The **Find** text must exactly match the current tracker.
+
+* The **Find** text must be unique within the specified **Anchor**.
+
+* Keep the **Find** block as small as possible while still uniquely identifying the target.
+
+* If necessary, expand the **Find** block with additional surrounding context until it is unique within the Anchor.
+
+* Preserve every unchanged line exactly.
+
+* Update only the sections affected by the completed learning session.
+
+* Update the **Technical Confidence Dashboard** only when a confidence assessment was completed during **Track 4 – Interview & Job Conversion**.
+
+* Update the **Technical Revision Queue** only when confidence scores indicate that a technology should be added, updated, reprioritized, or removed.
+
+* Do not mark roadmap items as completed unless their roadmap completion criteria have been satisfied.
+
+* Do not modify the roadmap structure or static project information.
+
+* Do not explain the edits.
+
+* Do not summarize the project.
+
+* If no edits are required, output exactly:
 
 No changes.
 
 Do not generate the updated tracker.
 
 Wait for my confirmation before applying the edit script.
+
 ~~~
 
 ## 9. Apply Progress Tracker Patch

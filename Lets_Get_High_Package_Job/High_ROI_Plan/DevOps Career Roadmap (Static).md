@@ -1,6 +1,6 @@
-# DevOps Career Project
+# DevOps Career Roadmap
 
-# DevOps Career Roadmap v2.1
+# DevOps Career Roadmap v2.2
 
 ---
 
@@ -40,7 +40,8 @@ Examples:
 * Architecture diagrams
 * LinkedIn posts
 * Technical explanations
-* Interview preparation notes
+* Interview readiness assessments
+* Technical confidence improvements
 
 Progress is measured by career maturity rather than course completion.
 
@@ -77,6 +78,25 @@ Track 2  ███████                LIGHT
 Track 3  ██████                 LIGHT
 Track 4  ░░░░░░░                MINIMAL
 ```
+
+---
+
+## Interview Philosophy
+
+During Phase 1, the objective is **not** to prepare extensively for interviews.
+
+The priority is building strong technical foundations.
+
+Interview activities remain intentionally lightweight and focus only on validating foundational understanding.
+
+Assessment during this phase consists of:
+
+* Recognition
+* Recall
+
+The goal is to identify weak areas early without slowing technical progress.
+
+Technical confidence is recorded continuously in the **Project Progress Tracker** and used later during comprehensive interview preparation.
 
 ---
 
@@ -151,7 +171,14 @@ Establish the complete development environment required for the remainder of the
 
 **Outcome**
 
-No interview preparation required during this iteration.
+* No formal interview preparation.
+* Perform a lightweight Interview Readiness Check covering the topics learned during this iteration.
+* Assess:
+
+  * Recognition
+  * Recall
+* Record confidence in the **Technical Confidence Dashboard**.
+* Update the **Technical Revision Queue** if reinforcement is required.
 
 ---
 
@@ -251,7 +278,14 @@ Develop practical Linux administration skills that will serve as the foundation 
 
 **Outcome**
 
-Interview preparation intentionally deferred while establishing technical foundations.
+* Perform a lightweight Linux Interview Readiness Check.
+* Assess:
+
+  * Recognition
+  * Recall
+* Record Linux confidence in the **Technical Confidence Dashboard**.
+* Update the **Technical Revision Queue** if additional Linux revision is required.
+* Defer comprehensive Linux interview preparation until later roadmap phases.
 
 ---
 
@@ -352,8 +386,20 @@ Build a complete development workflow that supports version control, virtualized
 
 **Outcome**
 
-* Basic Git interview concepts collected
-* Version control interview notes started
+* Perform a Development Workflow Interview Readiness Check.
+* Assess:
+
+  * Recognition
+  * Recall
+* Record confidence for:
+
+  * Git
+  * Vagrant
+  * JSON
+  * YAML
+* Update the **Technical Confidence Dashboard**.
+* Update the **Technical Revision Queue** where necessary.
+* Defer comprehensive Git interview preparation until later roadmap phases.
 
 ---
 
@@ -369,6 +415,9 @@ Build a complete development workflow that supports version control, virtualized
 ### Exit Criteria
 
 A complete local development workflow is established using Git, Vagrant, JSON, and YAML, providing a solid foundation for all future DevOps projects.
+
+---
+
 # Phase 2 — DevOps Projects
 
 ## Goal
@@ -377,12 +426,30 @@ Convert technical knowledge into practical DevOps projects while significantly s
 
 ### Track Priority
 
-```text id="d8kvql"
+```text
 Track 1  ██████████████        MEDIUM-HEAVY
 Track 2  ████████████████      HEAVY
 Track 3  ████████████          MEDIUM
 Track 4  █████                 LIGHT
 ```
+
+---
+
+## Interview Philosophy
+
+Phase 2 begins transitioning from **learning** to **practical application**.
+
+Interview preparation remains lightweight, but technical confidence is now measured through both:
+
+* Recognition
+* Recall
+* Application
+
+The objective is not to pass interviews yet.
+
+The objective is to verify that completed technical work can be understood, explained, and applied in practical situations.
+
+The Technical Confidence Dashboard gradually becomes the source of truth for future interview preparation.
 
 ---
 
@@ -470,9 +537,19 @@ Understand how traditional multi-tier applications are deployed, networked, cont
 
 **Outcome**
 
-* Initial troubleshooting scenarios collected
-* Networking interview notes started
-* Docker interview preparation initiated
+* Perform an Interview Readiness Check covering:
+
+  * Networking
+  * Docker Fundamentals
+  * Application Deployment
+* Assess:
+
+  * Recognition
+  * Recall
+  * Application
+* Record confidence in the **Technical Confidence Dashboard**.
+* Update the **Technical Revision Queue** where reinforcement is required.
+* Defer extensive troubleshooting and mock interviews until later phases.
 
 ---
 
@@ -591,10 +668,20 @@ Automate infrastructure tasks and deploy production-style applications on AWS us
 
 **Outcome**
 
-* AWS interview notes
-* Linux troubleshooting notes
-* Bash interview preparation
-* Cloud deployment interview preparation
+* Perform an Interview Readiness Check covering:
+
+  * Linux
+  * Bash
+  * AWS Fundamentals
+  * Cloud Deployment
+* Assess:
+
+  * Recognition
+  * Recall
+  * Application
+* Record confidence in the **Technical Confidence Dashboard**.
+* Update the **Technical Revision Queue** where required.
+* Defer comprehensive troubleshooting, mock interviews, and resume preparation until later roadmap phases.
 
 ---
 
@@ -639,9 +726,15 @@ Able to automate infrastructure tasks and confidently deploy, migrate, and expla
 * Development workflow documentation
 * Initial professional technical content
 
+### Interview Readiness
+
+* Recognition and Recall assessed for foundational technologies.
+* Initial confidence baseline established.
+* Technical Confidence Dashboard initialized.
+
 ### Career Progress
 
-At the end of Phase 1, you have established a solid technical foundation together with the first version of your professional portfolio and online presence.
+At the end of Phase 1, you have established a solid technical foundation together with the first version of your professional portfolio, online presence, and initial interview confidence baseline.
 
 ---
 
@@ -670,9 +763,18 @@ At the end of Phase 1, you have established a solid technical foundation togethe
 * Automation scripts
 * Cloud portfolio
 
+### Interview Readiness
+
+* Application confidence established for core deployment technologies.
+* Technical Confidence Dashboard expanded.
+* Technical Revision Queue updated based on assessment results.
+
 ### Career Progress
 
-At the end of Phase 2, you have transitioned from foundational learning into building production-oriented DevOps projects that demonstrate practical engineering capability suitable for a professional portfolio.
+At the end of Phase 2, you have transitioned from foundational learning into building production-oriented DevOps projects while establishing measurable interview confidence for your core technologies.
+
+---
+
 # Phase 3 — CI/CD & Infrastructure Automation
 
 ## Goal
@@ -687,6 +789,25 @@ Track 2  ████████████████      HEAVY
 Track 3  ████████████          MEDIUM
 Track 4  ███████               GROWING
 ```
+
+---
+
+## Interview Philosophy
+
+Phase 3 marks the transition from **application** to **engineering**.
+
+By this stage, technologies should no longer be judged only by understanding or implementation.
+
+They should also be evaluated by the ability to troubleshoot, reason about failures, and explain engineering decisions.
+
+Interview readiness is now assessed using:
+
+* Recognition
+* Recall
+* Application
+* Troubleshooting
+
+Confidence should reflect practical engineering ability rather than theoretical knowledge.
 
 ---
 
@@ -708,7 +829,7 @@ Track 4  ███████               GROWING
 
 * Maven
 * Build Automation
-* Jenkins Installation
+* Jenkins
 * Jenkins Pipelines
 * Pipeline as Code
 * Jenkins Agents
@@ -729,18 +850,16 @@ Track 4  ███████               GROWING
 * Boto3
 * Cloud Automation
 * AI-assisted Python Development
-* Terraform Basics
+* Terraform
 * Infrastructure as Code
 * Terraform Variables
 * Terraform Backends
 * Provisioners
-* Ansible Inventory
-* Ad-hoc Commands
+* Ansible
 * Playbooks
 * Roles
-* Variables
 * Templates
-* AWS Automation with Ansible
+* AWS Automation
 
 ---
 
@@ -802,13 +921,24 @@ Automate application builds, deployment pipelines, infrastructure provisioning, 
 
 **Outcome**
 
-* Jenkins interview notes
-* GitHub Actions interview notes
-* Terraform interview notes
-* Python interview notes
-* Ansible interview notes
-* CI/CD troubleshooting scenarios
-* Infrastructure automation interview preparation
+* Perform an Interview Readiness Check covering:
+
+  * Jenkins
+  * GitHub Actions
+  * GitLab CI
+  * Python
+  * Terraform
+  * Ansible
+* Assess:
+
+  * Recognition
+  * Recall
+  * Application
+  * Troubleshooting
+* Record confidence in the **Technical Confidence Dashboard**.
+* Update the **Technical Revision Queue** based on assessment results.
+* Practice troubleshooting scenarios relevant to today's technologies.
+* Continue deferring full mock interviews until Phase 5.
 
 ---
 
@@ -848,6 +978,23 @@ Track 4  ██████████            MEDIUM
 
 ---
 
+## Interview Philosophy
+
+Phase 4 focuses on production engineering.
+
+Interview readiness now emphasizes reasoning, troubleshooting, architecture discussions, and operational decision-making.
+
+Confidence should reflect the ability to operate real production systems.
+
+Assessment continues using:
+
+* Recognition
+* Recall
+* Application
+* Troubleshooting
+
+---
+
 # Iteration 7 — Cloud Native Deployment
 
 ### Technical Scope
@@ -857,63 +1004,15 @@ Track 4  ██████████            MEDIUM
 * Section 23 — Monitoring & Observability
 * Section 24 — AWS Part-2
 * Section 25 — AWS CI/CD Project
-* Section 26 — Project on Google Cloud
+* Section 26 — Google Cloud Project
 * Section 27 — Docker
 * Section 28 — Containerization
 * Section 29 — Kubernetes
-* Section 30 — App Deployment on Kubernetes Cluster
-
-### Topics
-
-* Monitoring Fundamentals
-* Observability
-* Prometheus
-* PromQL
-* Grafana
-* Loki
-* Alloy
-* Alerting
-* Logging
-* AWS VPC
-* Subnets
-* Route Tables
-* Internet Gateway
-* NAT Gateway
-* Bastion Host
-* VPC Peering
-* Lambda
-* CodeBuild
-* CodePipeline
-* Google Cloud Platform
-* Cloud SQL
-* Memorystore
-* Managed Instance Groups
-* Load Balancer
-* Docker Engine
-* Docker Images
-* Docker Volumes
-* Docker Compose
-* Multi-stage Dockerfiles
-* Containerization
-* Kubernetes
-* Pods
-* Services
-* ReplicaSets
-* Deployments
-* ConfigMaps
-* Secrets
-* Volumes
-* Ingress
-* Helm
-* Lens
-* Amazon EKS
-* Production Application Deployment
-
----
+* Section 30 — Kubernetes Deployment
 
 ### Objective
 
-Deploy, monitor, scale, and manage production-ready cloud-native applications using modern container orchestration and cloud infrastructure technologies.
+Deploy, monitor, scale, and manage production-ready cloud-native applications using modern container orchestration and cloud infrastructure.
 
 ---
 
@@ -947,7 +1046,6 @@ Deploy, monitor, scale, and manage production-ready cloud-native applications us
 * Kubernetes repository
 * Production deployment repository
 * Helm configurations
-* Dashboard screenshots
 * Architecture diagrams
 * Cloud-native documentation
 
@@ -971,12 +1069,22 @@ Deploy, monitor, scale, and manage production-ready cloud-native applications us
 
 **Outcome**
 
-* Kubernetes interview preparation
-* Docker interview preparation
-* Monitoring interview preparation
-* AWS networking interview preparation
-* Cloud troubleshooting scenarios
-* Production troubleshooting scenarios
+* Perform an Interview Readiness Check covering:
+
+  * Monitoring
+  * Docker
+  * Kubernetes
+  * AWS Networking
+  * Google Cloud
+* Assess:
+
+  * Recognition
+  * Recall
+  * Application
+  * Troubleshooting
+* Record confidence in the **Technical Confidence Dashboard**.
+* Update the **Technical Revision Queue**.
+* Practice production troubleshooting scenarios.
 
 ---
 
@@ -1006,28 +1114,9 @@ Able to deploy, monitor, troubleshoot, and explain production-ready Kubernetes-b
 * Section 31 — Final GitOps Project
 * Section 32 — Conclusion
 
-### Topics
-
-* GitOps
-* Argo CD
-* Helm Charts
-* Git Repository Strategy
-* SonarQube
-* Amazon ECR
-* IAM
-* GitHub Secrets
-* GitHub Variables
-* CI/CD Integration
-* Amazon EKS
-* Terraform for EKS
-* Continuous Deployment
-* End-to-End DevOps Platform
-
----
-
 ### Objective
 
-Integrate all previously learned technologies into a complete production-grade GitOps platform demonstrating an end-to-end DevOps implementation.
+Integrate every previously learned technology into a complete production-grade GitOps platform demonstrating an end-to-end DevOps implementation.
 
 ---
 
@@ -1076,10 +1165,17 @@ Integrate all previously learned technologies into a complete production-grade G
 
 **Outcome**
 
-* Major technical interview preparation completed
-* GitOps interview preparation
-* Complete troubleshooting knowledge base
-* Technical explanation confidence
+* Perform an end-to-end Interview Readiness Check covering the complete GitOps platform.
+* Assess:
+
+  * Recognition
+  * Recall
+  * Application
+  * Troubleshooting
+* Validate cross-technology understanding rather than isolated concepts.
+* Update the **Technical Confidence Dashboard**.
+* Prioritize remaining weak technologies in the **Technical Revision Queue**.
+* Build confidence before entering the Career Conversion phase.
 
 ---
 
@@ -1120,9 +1216,15 @@ Able to independently design, implement, explain, and demonstrate a complete end
 * Python automation projects
 * Enterprise pipeline documentation
 
+### Interview Readiness
+
+* Troubleshooting confidence established for core automation technologies.
+* Confidence recorded across major CI/CD and Infrastructure as Code tools.
+* Revision priorities continuously refined.
+
 ### Career Progress
 
-At the end of Phase 3, you transition from deploying applications to engineering complete automation platforms capable of supporting production-scale environments.
+At the end of Phase 3, you transition from deploying applications to engineering complete automation platforms while building measurable confidence in production engineering skills.
 
 ---
 
@@ -1146,23 +1248,59 @@ At the end of Phase 3, you transition from deploying applications to engineering
 * Monitoring dashboards
 * Recruiter-ready GitHub portfolio
 
+### Interview Readiness
+
+* Production engineering confidence established.
+* Cross-technology troubleshooting capability assessed.
+* Technical Confidence Dashboard now reflects overall engineering readiness before entering the final career phase.
+
 ### Career Progress
 
-At the end of Phase 4, you possess a production-grade DevOps portfolio demonstrating the ability to design, deploy, automate, monitor, and manage modern cloud-native systems from end to end.
+At the end of Phase 4, you possess a production-grade DevOps portfolio together with measurable confidence across the major engineering technologies required for professional DevOps roles.
+
+---
+
 # Phase 5 — Career Conversion
 
 ## Goal
 
-Convert technical preparation, portfolio development, and communication skills into successful employment as a DevOps Engineer.
+Convert technical preparation, portfolio development, communication skills, and accumulated interview confidence into a successful DevOps Engineer role.
 
 ### Track Priority
 
-```text id="6dv1zs"
+```text id="z4n3ya"
 Track 1  ███████               MAINTENANCE
 Track 2  ██████████            POLISHING
 Track 3  ███████████           CONFIDENCE
 Track 4  ██████████████████    PRIMARY
 ```
+
+---
+
+## Interview Philosophy
+
+Phase 5 is no longer about building technical knowledge.
+
+It is about converting existing capability into successful interview performance and job offers.
+
+The **Technical Confidence Dashboard** and **Technical Revision Queue** become the primary drivers of technical revision.
+
+Interview preparation is now comprehensive and includes:
+
+* Recognition
+* Recall
+* Application
+* Troubleshooting
+
+along with:
+
+* Technical communication
+* Resume review
+* Behavioral interviews
+* Mock interviews
+* Job applications
+
+Revision is driven by measured confidence rather than by rereading the entire roadmap.
 
 ---
 
@@ -1209,7 +1347,7 @@ Track 4  ██████████████████    PRIMARY
 
 ### Objective
 
-Consolidate all technical knowledge, polish the professional portfolio, prepare for interviews, and successfully secure a DevOps Engineer position.
+Consolidate all technical knowledge, polish the professional portfolio, maximize interview confidence, and successfully secure a DevOps Engineer position.
 
 ---
 
@@ -1256,44 +1394,39 @@ Consolidate all technical knowledge, polish the professional portfolio, prepare 
 
 **Outcome**
 
-* Resume finalized
-* Mock interviews completed
-* Linux interview preparation
-* Git interview preparation
-* Networking interview preparation
-* Docker interview preparation
-* AWS interview preparation
-* Jenkins interview preparation
-* GitHub Actions interview preparation
-* Python interview preparation
-* Terraform interview preparation
-* Ansible interview preparation
-* Monitoring interview preparation
-* Kubernetes interview preparation
-* GitOps interview preparation
-* Troubleshooting practice
-* Job applications
-* Referral outreach
-* Interview tracking
+* Review the **Technical Confidence Dashboard**.
+* Prioritize revision using the **Technical Revision Queue**.
+* Close remaining confidence gaps across all core technologies.
+* Complete comprehensive technical revision.
+* Perform full mock interviews.
+* Practice troubleshooting scenarios.
+* Practice behavioral interviews using the STAR method.
+* Finalize resume.
+* Finalize LinkedIn profile.
+* Finalize GitHub portfolio.
+* Begin active job applications.
+* Track interviews and continuously improve based on interview feedback.
 
 ---
 
 ### Project Assets Produced
 
-* Professional DevOps resume
-* Complete interview knowledge base
-* Mock interview experience
-* Job application tracker
-* Referral tracker
-* Professional GitHub portfolio
-* Optimized LinkedIn profile
-* Complete career portfolio
+* Professional DevOps Resume
+* Complete Interview Preparation Library
+* Technical Confidence Dashboard
+* Technical Revision Queue
+* Mock Interview Experience
+* Job Application Tracker
+* Referral Tracker
+* Professional GitHub Portfolio
+* Optimized LinkedIn Profile
+* Complete Career Portfolio
 
 ---
 
 ### Exit Criteria
 
-Consistently perform well in technical interviews, actively pursue DevOps opportunities, and successfully secure a DevOps Engineer role.
+Consistently demonstrate high confidence across all core DevOps technologies, perform well in technical interviews, actively pursue opportunities, and successfully secure a DevOps Engineer role.
 
 ---
 
@@ -1303,22 +1436,24 @@ Consistently perform well in technical interviews, actively pursue DevOps opport
 
 * Technical knowledge consolidated
 * Troubleshooting confidence strengthened
-* Interview readiness achieved
+* Interview confidence validated
 * Professional portfolio finalized
 * Career transition completed
 
 ### Career Assets Produced
 
-* Professional resume
-* Final GitHub portfolio
-* Interview preparation library
-* Mock interview experience
-* Job application tracker
-* Complete professional brand
+* Professional Resume
+* Final GitHub Portfolio
+* Interview Preparation Library
+* Technical Confidence Dashboard
+* Technical Revision Queue
+* Mock Interview Experience
+* Job Application Tracker
+* Complete Professional Brand
 
 ### Career Progress
 
-At the end of Phase 5, you have transformed from a learner into a job-ready DevOps Engineer with the technical skills, portfolio, communication ability, and interview readiness expected by employers.
+At the end of Phase 5, technical capability, portfolio quality, communication skills, and interview confidence converge into successful employment as a DevOps Engineer.
 
 ---
 
@@ -1330,17 +1465,17 @@ Upon completing this roadmap, you will have developed competence across all four
 
 You will be able to:
 
-* Administer Linux systems confidently
-* Design and troubleshoot networking environments
-* Automate tasks using Bash and Python
-* Build and manage CI/CD pipelines
-* Provision infrastructure using Terraform
-* Configure systems using Ansible
-* Deploy and manage applications on AWS
-* Build and operate Kubernetes clusters
-* Implement GitOps workflows
-* Monitor and troubleshoot production systems
-* Design, automate, deploy, and maintain modern DevOps environments
+* Administer Linux systems confidently.
+* Design and troubleshoot networking environments.
+* Automate tasks using Bash and Python.
+* Build and manage CI/CD pipelines.
+* Provision infrastructure using Terraform.
+* Configure systems using Ansible.
+* Deploy and manage applications on AWS.
+* Build and operate Kubernetes clusters.
+* Implement GitOps workflows.
+* Monitor and troubleshoot production systems.
+* Design, automate, deploy, and maintain modern DevOps environments.
 
 ---
 
@@ -1348,14 +1483,14 @@ You will be able to:
 
 You will possess:
 
-* A professional GitHub profile
-* Multiple production-quality repositories
-* A flagship end-to-end DevOps project
-* Professional README files
-* Architecture diagrams
-* Deployment guides
-* Infrastructure documentation
-* Recruiter-ready project portfolio
+* A professional GitHub profile.
+* Multiple production-quality repositories.
+* A flagship end-to-end DevOps project.
+* Professional README files.
+* Architecture diagrams.
+* Deployment guides.
+* Infrastructure documentation.
+* Recruiter-ready project portfolio.
 
 ---
 
@@ -1363,27 +1498,29 @@ You will possess:
 
 You will have:
 
-* An optimized LinkedIn profile
-* A history of technical posts
-* Technical articles
-* Architecture walkthroughs
-* Deployment demonstrations
-* Strong technical communication skills
-* Confidence explaining complete engineering solutions
+* An optimized LinkedIn profile.
+* A history of technical posts.
+* Technical articles.
+* Architecture walkthroughs.
+* Deployment demonstrations.
+* Strong technical communication skills.
+* Confidence explaining complete engineering solutions.
 
 ---
 
 ## Track 4 — Interview & Job Conversion
 
-You will have:
+You will possess:
 
-* A professional DevOps resume
-* Complete interview preparation
-* Mock interview experience
-* Troubleshooting confidence
-* Job application tracking
-* Professional referral pipeline
-* Readiness to succeed in DevOps interviews
+* High confidence across all major DevOps technologies.
+* A continuously maintained Technical Confidence Dashboard.
+* A prioritized Technical Revision Queue.
+* A professional DevOps resume.
+* Extensive mock interview experience.
+* Strong troubleshooting ability.
+* Technical communication confidence.
+* A systematic interview preparation process driven by measured confidence rather than guesswork.
+* Readiness to succeed in professional DevOps interviews.
 
 ---
 
@@ -1391,14 +1528,15 @@ You will have:
 
 The roadmap is considered successfully completed when:
 
-* ✓ Core DevOps technologies can be used confidently in practical environments.
+* ✓ Core DevOps technologies can be applied confidently in practical environments.
 * ✓ Real-world projects demonstrate hands-on engineering capability.
 * ✓ GitHub showcases professional-quality work.
 * ✓ Projects include polished documentation, architecture diagrams, and deployment guides.
 * ✓ Professional communication demonstrates continuous technical growth.
 * ✓ Technical concepts and troubleshooting approaches can be explained confidently.
+* ✓ Technical Confidence Dashboard demonstrates strong confidence across all major technologies.
+* ✓ Technical Revision Queue contains no unresolved high-priority technologies.
 * ✓ Resume and LinkedIn profile are fully optimized.
-* ✓ Interview preparation has been completed across all major topics.
 * ✓ Mock interviews have been successfully completed.
 * ✓ Active job applications and networking efforts are underway.
 * ✓ A DevOps Engineer position has been successfully secured.
@@ -1409,23 +1547,25 @@ The roadmap is considered successfully completed when:
 
 **Document Name:** DevOps Career Roadmap
 
-**Version:** 2.1
+**Version:** 2.2
 
-**Purpose**
+---
+
+## Purpose
 
 This document defines the complete long-term roadmap for becoming a DevOps Engineer.
 
-It is a **static planning document** and should only be updated if the overall learning strategy, curriculum, or roadmap changes.
+It is a **static planning document** and should only be updated when the overall learning strategy, curriculum, or roadmap architecture changes.
 
-Daily progress and iteration completion are **not** tracked here.
+Daily execution, confidence assessments, and project progress are **not** tracked here.
 
 Those belong exclusively in the **Project Progress Tracker**.
 
 ---
 
-## Relationship with Other Project Documents
+# Relationship with Other Project Documents
 
-### 1. Project Specification
+## 1. Project Specification
 
 Defines:
 
@@ -1436,7 +1576,7 @@ Defines:
 
 ---
 
-### 2. DevOps Career Roadmap *(This Document)*
+## 2. DevOps Career Roadmap *(This Document)*
 
 Defines:
 
@@ -1444,37 +1584,155 @@ Defines:
 * Phases
 * Iterations
 * Objectives
-* Track outcomes
-* Career assets
+* Technical curriculum
+* Four-track outcomes
+* Project assets
 * Exit criteria
+* Progressive interview philosophy
 
 ---
 
-### 3. Project Progress Tracker
+## 3. Project Progress Tracker
 
-Tracks:
+Tracks the project's current state, including:
 
-* Current position
-* Completed work
+* Current roadmap position
+* Current phase and iteration
 * Track progress
 * Technical progress
 * Portfolio progress
+* Technical Confidence Dashboard
+* Technical Revision Queue
 * Interview readiness
+* Current assets
 * Deferred work
-* Overall project completion
+* Current focus
+* Overall project health
 
-This is the **only document** updated after each completed iteration.
+This is the **only dynamic project document** and is updated continuously throughout the roadmap.
+
+---
+
+# Roadmap Design Principles
+
+The roadmap follows these principles:
+
+* **Capability Before Certification** — Build practical engineering capability rather than completing a course.
+* **Four-Track Growth** — Every iteration strengthens technical skills, portfolio, communication, and interview readiness together.
+* **Portfolio-Driven Learning** — Every major technology should produce recruiter-worthy assets.
+* **Progressive Interview Preparation** — Interview preparation becomes deeper as technical maturity increases.
+* **Confidence-Driven Revision** — Revision is guided by measured confidence rather than guesswork.
+* **High ROI Learning** — Time is invested where it provides the greatest long-term career value.
+* **Career Assets Grow Continuously** — GitHub, LinkedIn, documentation, and projects evolve alongside technical learning.
+* **Job Conversion Is the Destination** — Every iteration contributes toward securing a DevOps Engineer role.
+
+---
+
+# Progressive Interview Readiness Model
+
+Interview preparation evolves throughout the roadmap.
+
+It intentionally avoids spending excessive time on interviews before sufficient technical capability has been developed.
+
+```text
+Phase 1
+Foundation
+Recognition
+Recall
+
+        ↓
+
+Phase 2
+Application
+Recognition
+Recall
+Application
+
+        ↓
+
+Phase 3
+Engineering
+Recognition
+Recall
+Application
+Troubleshooting
+
+        ↓
+
+Phase 4
+Production Engineering
+Recognition
+Recall
+Application
+Troubleshooting
+
+        ↓
+
+Phase 5
+Career Conversion
+
+Technical Revision
+
+↓
+
+Technical Confidence Dashboard
+
+↓
+
+Technical Revision Queue
+
+↓
+
+Mock Interviews
+
+↓
+
+Resume & Portfolio
+
+↓
+
+Job Applications
+```
+
+The **Technical Confidence Dashboard** becomes the single source of truth for interview readiness.
+
+The **Technical Revision Queue** ensures revision is targeted only at technologies that require reinforcement.
+
+---
+
+# Project Completion Philosophy
+
+The roadmap is complete when technical capability, practical evidence, communication ability, and interview confidence converge.
+
+Completion is **not** defined by finishing a course.
+
+Completion is achieved when all of the following are true:
+
+* Technical capability has been demonstrated through practical engineering work.
+* Recruiter-ready portfolio assets have been produced.
+* Professional communication skills have been developed.
+* Technical confidence has been measured and strengthened.
+* Weak technologies have been systematically revised.
+* Interview performance is consistently strong.
+* A DevOps Engineer position has been successfully secured.
 
 ---
 
 # Document Maintenance Rules
 
-* Do **not** update this document after every iteration.
-* Modify this roadmap only if the learning strategy or curriculum changes.
-* Keep all iterations and phases stable once finalized.
-* Record execution progress exclusively in the **Project Progress Tracker**.
-* Treat this roadmap as the long-term reference document for the project.
+* Do **not** update this document after every learning session.
+* Modify this roadmap only when the curriculum, learning strategy, or roadmap architecture changes.
+* Keep phases and iterations stable once finalized.
+* Do not record execution progress in this document.
+* Do not record confidence scores in this document.
+* Do not record revision status in this document.
+* Record all dynamic project state exclusively in the **Project Progress Tracker**.
+* Treat this roadmap as the project's long-term architectural and execution reference.
 
 ---
 
 # End of Document
+
+
+
+

@@ -1,6 +1,6 @@
-# DevOps Career Project
+# Project Progress Tracker
 
-# Project Progress Tracker v3.0
+**Version:** 4.0
 
 ---
 
@@ -8,15 +8,20 @@
 
 This document is the **single dynamic document** of the DevOps Career Project.
 
-Unlike the **Project Specification** and **DevOps Career Roadmap**, which define the long-term architecture and execution strategy, this tracker records only the **current state** of the project.
+Unlike the **Project Specification** and **DevOps Career Roadmap**, which define the project's architecture and long-term execution strategy, this tracker records only the **current state** of the project.
 
 Its purpose is to answer one question:
 
 > **"Where am I right now in my DevOps Career Project?"**
 
-The tracker intentionally focuses on the present state of the project rather than maintaining a complete historical log. Historical details remain available through completed work and previous conversations.
+The tracker serves as both:
 
-This document should remain concise, scalable, and easy to update regardless of whether the project is at **Article 6** or **Article 350**. It is aligned with the Project Specification and DevOps Career Roadmap.
+* A **progress tracker**, showing the current state of the roadmap.
+* An **external project memory**, preserving important assets, deferred decisions, confidence levels, and current project state so they do not need to be tracked elsewhere.
+
+The tracker intentionally records **current state**, not complete history.
+
+It should grow with the project's capabilities—not with time.
 
 ---
 
@@ -80,7 +85,7 @@ Phase 1 continues with **Iteration 2 — Linux Foundation** after successfully c
 
 | Iteration   | Status         |
 | ----------- | -------------- |
-| Iteration 1 | ✅ Completed   |
+| Iteration 1 | ✅ Completed    |
 | Iteration 2 | 🟡 In Progress |
 | Iteration 3 | ⚪ Not Started  |
 | Iteration 4 | ⚪ Not Started  |
@@ -95,6 +100,55 @@ Phase 1 continues with **Iteration 2 — Linux Foundation** after successfully c
 ## Articles Completed
 
 **10 / 350**
+
+---
+
+# Technical Confidence Dashboard
+
+This section measures interview readiness.
+
+Confidence is updated only after completing the **Interview & Job Conversion** track for the corresponding technology.
+
+Scores are based on:
+
+* Recognition
+* Recall
+* Application
+* Troubleshooting
+* Overall Confidence
+
+---
+
+| Technology     | Recognition | Recall | Application | Troubleshooting | Overall | Status       |
+| -------------- | ----------: | -----: | ----------: | --------------: | ------: | ------------ |
+| Linux          |           - |      - |           - |               - |       - | Not Assessed |
+| Git            |           - |      - |           - |               - |       - | Not Assessed |
+| Networking     |           - |      - |           - |               - |       - | Not Assessed |
+| Docker         |           - |      - |           - |               - |       - | Not Assessed |
+| Jenkins        |           - |      - |           - |               - |       - | Not Assessed |
+| GitHub Actions |           - |      - |           - |               - |       - | Not Assessed |
+| GitLab CI      |           - |      - |           - |               - |       - | Not Assessed |
+| AWS            |           - |      - |           - |               - |       - | Not Assessed |
+| Terraform      |           - |      - |           - |               - |       - | Not Assessed |
+| Ansible        |           - |      - |           - |               - |       - | Not Assessed |
+| Kubernetes     |           - |      - |           - |               - |       - | Not Assessed |
+| Monitoring     |           - |      - |           - |               - |       - | Not Assessed |
+| GitOps         |           - |      - |           - |               - |       - | Not Assessed |
+| Python         |           - |      - |           - |               - |       - | Not Assessed |
+
+---
+
+# Technical Revision Queue
+
+Technologies are added here only when their confidence scores indicate additional revision is required.
+
+The queue is prioritized by interview readiness rather than roadmap order.
+
+---
+
+| Priority | Technology | Weak Area | Recommended Action | Status |
+| -------- | ---------- | --------- | ------------------ | ------ |
+| None     | -          | -         | -                  | -      |
 
 ---
 
@@ -156,7 +210,7 @@ For every completed article:
 
 ## Remaining
 
-Iteration 2 — Linux Foundation
+**Iteration 2 — Linux Foundation**
 
 ---
 
@@ -176,7 +230,7 @@ Build a recruiter-ready GitHub profile while postponing major repositories until
 
 ## Current Deliverables
 
-Completed
+### Completed
 
 * Professional GitHub Profile Cleanup
 * Professional GitHub Bio
@@ -187,13 +241,13 @@ Completed
 * Recruiter-oriented Branding
 * Profile Positioning Review
 
-Current GitHub Foundation
+### Current GitHub Foundation
 
-* Professional profile
+* Professional Profile
 * Professional README
-* Clean metadata
-* Recruiter-friendly branding
-* Future repository strategy
+* Clean Metadata
+* Recruiter-Friendly Branding
+* Future Repository Strategy
 
 ---
 
@@ -209,6 +263,7 @@ Current GitHub Foundation
 * GitOps Repository
 
 These will be created alongside the corresponding roadmap projects.
+
 ---
 
 # Track 3 — Personal Branding & Communication
@@ -227,7 +282,7 @@ Establish a professional online presence that evolves naturally throughout the r
 
 ## Current Deliverables
 
-Completed
+### Completed
 
 * LinkedIn Profile Review
 * Professional Headline
@@ -238,7 +293,7 @@ Completed
 * Professional Profile Picture Planning
 * Two-phase Branding Strategy
 
-Branding Philosophy
+### Branding Philosophy
 
 Phase 1
 
@@ -266,7 +321,6 @@ Final Recruiter Optimization
 These will be completed alongside technical projects.
 
 ---
-
 # Track 4 — Interview & Job Conversion
 
 ## Status
@@ -277,7 +331,17 @@ These will be completed alongside technical projects.
 
 ## Current Objective
 
-Focus entirely on technical foundation before beginning interview preparation.
+Build interview readiness progressively without slowing technical learning.
+
+Interview preparation should always match the current roadmap phase.
+
+---
+
+## Current Interview Readiness
+
+| Technology | Overall Confidence | Status       |
+| ---------- | -----------------: | ------------ |
+| None       |                  - | Not Assessed |
 
 ---
 
@@ -285,21 +349,24 @@ Focus entirely on technical foundation before beginning interview preparation.
 
 None.
 
-Interview preparation is intentionally postponed until the roadmap reaches the appropriate phase.
+Formal interview preparation remains intentionally deferred until sufficient technical maturity has been achieved.
+
+Only lightweight interview readiness checks are performed during the early phases.
 
 ---
 
 ## Remaining
 
 * Resume
-* Interview Notes
+* Technical Interview Notes
 * STAR Stories
 * Mock Interviews
+* Systematic Revision
 * Job Applications
 * Recruiter Outreach
 * Salary Negotiation
 
-These activities will begin during the Career Conversion phase.
+These activities will gradually increase throughout the roadmap and become the primary focus during **Phase 5 — Career Conversion**.
 
 ---
 
@@ -366,7 +433,9 @@ nakkanithish.duckdns.org
 * Continuous Integration
 * Continuous Delivery
 
-✅ Section 2 — Prerequisites Info & Setup
+---
+
+✅ Section 2 — Prerequisites & Setup
 
 * AWS Account
 * Root User Security
@@ -382,17 +451,9 @@ nakkanithish.duckdns.org
 
 ### Current Work
 
-🔄 Iteration 2 — Linux Foundation
+🔄 **Iteration 2 — Linux Foundation**
 
-Current objective:
-
-Begin Linux Foundation and Linux administration learning.
-
----
-
-### Immediate Outcome
-
-Current focus:
+Current Objective
 
 * Linux Foundation
 * Linux Administration
@@ -400,17 +461,25 @@ Current focus:
 
 ---
 
+### Current Interview Focus
+
+None.
+
+Interview preparation remains intentionally lightweight during Phase 1.
+
+---
+
 # Deferred Work
 
-Only work that is **currently** deferred is listed here.
+Only work that is intentionally postponed is listed here.
 
-Completed items are removed from this section once finished.
+Completed items are removed automatically once finished.
 
 ---
 
 ## GitHub
 
-Deferred
+### Deferred
 
 * Career Repository
 * Linux Repository
@@ -422,7 +491,7 @@ Deferred
 * GitOps Repository
 * Flagship DevOps Project
 
-Reason
+### Reason
 
 Repositories should be created only after meaningful technical implementations exist.
 
@@ -430,7 +499,7 @@ Repositories should be created only after meaningful technical implementations e
 
 ## LinkedIn
 
-Deferred
+### Deferred
 
 * Technical Learning Posts
 * Architecture Posts
@@ -439,36 +508,39 @@ Deferred
 * Recommendations
 * Final Recruiter Optimization
 
-Reason
+### Reason
 
 Public content should reflect completed projects rather than theoretical learning.
+
 ---
 
 ## Career
 
-Deferred
+### Deferred
 
 * Resume
-* Mock Interviews
 * Technical Interview Notes
+* Mock Interviews
 * Job Applications
 * Recruiter Outreach
 * Salary Negotiation
 * Interview Tracking
 
-Reason
+### Reason
 
-Interview preparation begins only after sufficient technical maturity has been achieved.
+These activities provide the highest return on investment during the Career Conversion phase.
+
+Until then, only lightweight interview readiness assessments are performed.
 
 ---
 
 ## Infrastructure
 
-Deferred
+### Deferred
 
 Custom Domain
 
-Reason
+### Reason
 
 Current learning environment uses:
 
@@ -476,7 +548,7 @@ Current learning environment uses:
 nakkanithish.duckdns.org
 ```
 
-A professional custom domain (such as `nakkanithish.dev`) will be purchased immediately before the active job search and integrated with AWS Certificate Manager (ACM).
+A professional custom domain (for example, **nakkanithish.dev**) will be purchased immediately before the active job search and integrated with AWS Certificate Manager (ACM).
 
 ---
 
@@ -484,7 +556,7 @@ A professional custom domain (such as `nakkanithish.dev`) will be purchased imme
 
 ## Track 1
 
-Begin:
+Continue:
 
 ### Iteration 2 — Linux Foundation
 
@@ -492,29 +564,29 @@ Begin:
 
 ## Track 2
 
-After Section 3:
+After Linux Foundation:
 
 * Initialize Career Repository
 * Create Linux Repository
-* Publish first technical documentation
+* Publish Linux documentation
 
 ---
 
 ## Track 3
 
-After Section 3:
+After Linux Foundation:
 
 * Generate professional AI profile photograph
 * Upload LinkedIn banner
-* Publish first technical introduction post
+* Publish first technical learning post
 
 ---
 
 ## Track 4
 
-No action required.
+Continue lightweight interview readiness checks only.
 
-Interview preparation remains intentionally deferred.
+Comprehensive interview preparation remains deferred until later roadmap phases.
 
 ---
 
@@ -524,17 +596,17 @@ Interview preparation remains intentionally deferred.
 
 ### Iteration 2 — Linux Foundation
 
-Status
+**Status**
 
 🟡 In Progress
 
-Objective
+**Objective**
 
-Build a strong Linux administration foundation for all future DevOps technologies.
+Build a strong Linux administration foundation for every future DevOps technology.
 
-Definition of Done
+**Definition of Done**
 
-See Iteration 2 exit criteria.
+See Iteration 2 exit criteria in the roadmap.
 
 ---
 
@@ -563,25 +635,12 @@ Complete final professional review of:
 * Portfolio
 * Projects
 * Documentation
+* Technical Confidence Dashboard
+* Revision Queue
 * Mock Interviews
 * ATS Optimization
 
-This becomes the project's final polish before entering the job market.
-
----
-
-# Current Roadmap Status
-
-| Area               | Status                 |
-| ------------------ | ---------------------- |
-| Project            | 🟡 In Progress         |
-| Phase              | 🟡 Phase 1             |
-| Iteration          | 🟡 Iteration 2         |
-| Technical Learning | 🟡 In Progress         |
-| Environment Setup  | ✅ Complete            |
-| GitHub             | 🟡 Foundation Complete |
-| LinkedIn           | 🟡 Foundation Complete |
-| Career Preparation | ⚪ Deferred             |
+This becomes the project's final preparation before entering the job market.
 
 ---
 
@@ -593,7 +652,23 @@ This becomes the project's final polish before entering the job market.
 
 The project is progressing according to the planned roadmap.
 
-Current work remains aligned with the Project Specification and DevOps Career Roadmap.
+Current work remains aligned with the **Project Specification** and **DevOps Career Roadmap**.
+
+---
+
+## Technical Learning Status
+
+🟡 In Progress
+
+Technical learning remains the highest priority.
+
+---
+
+## Interview Readiness
+
+⚪ Early Stage
+
+Interview preparation is intentionally lightweight and will increase progressively throughout the roadmap.
 
 ---
 
@@ -602,16 +677,19 @@ Current work remains aligned with the Project Specification and DevOps Career Ro
 None.
 
 The project is proceeding as expected.
+
 ---
 
 ## Important Notes
 
 * Technical learning remains the highest priority during Phase 1.
-* GitHub and LinkedIn foundations have intentionally been completed early so they can evolve naturally alongside technical growth.
+* GitHub and LinkedIn foundations were intentionally completed early so they can evolve naturally alongside technical growth.
 * Every completed technical topic should contribute to a long-term career asset whenever appropriate.
-* The tracker represents the **current project state**, not a historical archive.
-* Completed historical discussions remain available through previous conversations and do not need to be duplicated here.
-* Update this tracker only when the project's current state changes significantly (for example, at the end of an iteration or major milestone).
+* Technical confidence should be assessed gradually throughout the roadmap rather than only at the end.
+* The Technical Confidence Dashboard should represent current interview readiness, not theoretical knowledge.
+* The Revision Queue should always contain only the technologies that genuinely require reinforcement.
+* This tracker represents the **current project state**, not a historical archive.
+* Update this tracker only when the current project state changes significantly.
 
 ---
 
@@ -623,38 +701,38 @@ The project will be considered successful when all of the following are true:
 * Professional GitHub portfolio showcasing production-style work.
 * Strong LinkedIn profile documenting technical growth.
 * Resume optimized for DevOps roles.
-* Interview readiness achieved.
+* High interview confidence across all major DevOps technologies.
 * DevOps Engineer job offer accepted.
 
 ---
 
 # Version Information
 
-**Document**
+## Document
 
 Project Progress Tracker
 
 ---
 
-**Version**
+## Version
 
-**3.0**
+**4.0**
 
 ---
 
-**Document Type**
+## Document Type
 
 Dynamic
 
 ---
 
-**Update Frequency**
+## Update Frequency
 
-End of each completed iteration or major project milestone.
+End of each completed iteration or major milestone.
 
 ---
 
-**Related Documents**
+## Related Documents
 
 1. Project Specification *(Static)*
 2. DevOps Career Roadmap *(Static)*
@@ -664,14 +742,33 @@ End of each completed iteration or major project milestone.
 
 # Design Principles
 
-This tracker follows five principles:
+This tracker follows the following principles:
 
-* **Current State Only** — Focus on where the project is now.
-* **Scalable** — Maintain a similar size from Article 1 to Article 350+.
+* **Current State Only** — Record only the project's current state.
+* **External Project Memory** — Preserve important assets, deferred work, and operational information.
+* **Capability-Based Growth** — Grow with technologies and career capabilities, not with time or article count.
+* **Confidence-Driven Revision** — Use confidence scores to identify weak technologies and prioritize revision.
+* **Interview Readiness Over Completion** — Measure how prepared the learner is, not just what has been completed.
+* **Scalable** — Maintain a manageable size from the beginning to the end of the roadmap.
 * **Action-Oriented** — Emphasize current objectives and next actions.
-* **Single Source of Truth** — Reflect the live state of the project.
+* **Single Source of Truth** — Reflect the live project state.
 * **Roadmap Aligned** — Stay consistent with the Project Specification and DevOps Career Roadmap.
 
 ---
 
+# Tracker Maintenance Rules
+
+* Record only information that is useful for understanding the project's current state.
+* Do not maintain a detailed historical log.
+* Remove completed items from Deferred Work once they are no longer deferred.
+* Add technologies to the Technical Confidence Dashboard only once they become part of the roadmap.
+* Update confidence scores only after completing the corresponding **Track 4 – Interview & Job Conversion** assessment.
+* Add technologies to the Revision Queue only when confidence indicates reinforcement is needed.
+* Keep all section headings stable to preserve deterministic **Anchor → Find → Replace** patching.
+* Avoid unnecessary structural changes so that the Progress Tracker Edit Script remains reliable over the lifetime of the project.
+
+---
+
 # End of Document
+
+

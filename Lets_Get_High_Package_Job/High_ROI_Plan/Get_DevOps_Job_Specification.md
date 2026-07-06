@@ -1,6 +1,6 @@
 # DevOps Career Project Specification
 
-**Version:** **2.0**
+**Version:** **2.1**
 
 ---
 
@@ -10,19 +10,30 @@
 
 **DevOps Career Project**
 
+---
+
 ## Project Objective
 
-To systematically prepare for and secure a DevOps Engineer role by developing practical technical skills, building a strong public portfolio, improving technical communication, and successfully converting those efforts into a job offer.
+Systematically prepare for and secure a DevOps Engineer role by developing practical engineering skills, building a strong public portfolio, improving technical communication, continuously measuring interview readiness, and successfully converting those efforts into a job offer.
+
+---
 
 ## Project Duration
 
 Estimated Duration: **6 Months**
 
-The duration may vary depending on learning pace, project complexity, and job market conditions.
+The duration may vary depending on learning pace, project complexity, and the job market.
+
+---
 
 ## Project Success Definition
 
-The project is considered successful when a DevOps Engineer job offer has been accepted.
+The project is considered successful when:
+
+* A DevOps Engineer job offer has been accepted.
+* Practical engineering capability has been demonstrated.
+* A recruiter-ready portfolio has been built.
+* Interview readiness has been validated through measurable technical confidence.
 
 ---
 
@@ -33,14 +44,24 @@ The project consists of four parallel workstreams that operate simultaneously th
 ```text
 Track 1 → Core Technical Building
 
+        ↓
+
 Track 2 → Projects & GitHub Evolution
+
+        ↓
 
 Track 3 → Personal Branding & Communication
 
-Track 4 → Interview & Job Conversion
+        ↓
+
+Track 4 → Interview Readiness & Job Conversion
 ```
 
 These tracks support each other rather than being completed sequentially.
+
+The priority of each track changes throughout the roadmap as technical maturity increases.
+
+Track 4 intentionally remains lightweight during the early phases and gradually becomes the primary focus during career conversion.
 
 ---
 
@@ -50,21 +71,39 @@ The Core Technical Building track follows a structured learning curriculum based
 
 **Master DevOps with AWS, Docker, Kubernetes, GCP, GitHub Actions, ArgoCD, GitOps, Terraform, Monitoring & AI**
 
-The curriculum serves as the technical foundation of the project while the Iteration Roadmap transforms each learning phase into practical projects, GitHub portfolio assets, technical communication, and interview preparation.
+The curriculum serves as the technical foundation of the project while the Career Roadmap transforms each learning milestone into:
 
-The project emphasizes **career readiness rather than course completion**. Every completed technical topic should contribute to one or more long-term career assets such as projects, documentation, architecture diagrams, technical articles, interview preparation, or portfolio improvements.
+* Practical engineering capability
+* Professional GitHub assets
+* Technical communication
+* Interview readiness
+* Career conversion
+
+The project emphasizes **career readiness rather than course completion**.
+
+Every completed technical topic should contribute to one or more permanent career assets such as:
+
+* Projects
+* Documentation
+* Architecture diagrams
+* Technical articles
+* Portfolio improvements
+* Technical confidence
+* Interview readiness
 
 ---
 
 # 3. Track Specifications
 
-## Track 1 — Core Technical Building
+# Track 1 — Core Technical Building
 
-### Purpose
+## Purpose
 
-Develop practical DevOps skills required for building, deploying, automating, monitoring, and maintaining modern cloud infrastructure and applications.
+Develop practical DevOps engineering skills required to build, deploy, automate, monitor, troubleshoot, and maintain modern cloud infrastructure and applications.
 
-### Scope
+---
+
+## Scope
 
 The technical curriculum includes the following capability areas:
 
@@ -98,11 +137,15 @@ The technical curriculum includes the following capability areas:
 * GitOps with Argo CD
 * End-to-End DevOps Platform Integration
 
-### Primary Goal
+---
 
-Become comfortable enough with each technology to confidently build, automate, deploy, monitor, troubleshoot, and explain complete DevOps solutions and implementation decisions.
+## Primary Goal
 
-### Deliverables
+Become capable of confidently building, automating, deploying, monitoring, troubleshooting, and explaining complete DevOps solutions and engineering decisions.
+
+---
+
+## Deliverables
 
 * Practical Linux administration skills
 * Git-based development workflow
@@ -110,67 +153,76 @@ Become comfortable enough with each technology to confidently build, automate, d
 * Bash automation scripts
 * Python automation scripts
 * Traditional application deployment experience
-* Dockerized and containerized applications
+* Dockerized applications
 * AWS cloud deployments
-* CI/CD pipelines using Jenkins, GitHub Actions, and GitLab
-* Infrastructure as Code using Terraform
-* Configuration management using Ansible
-* Monitoring and observability implementation
+* CI/CD pipelines
+* Infrastructure as Code
+* Configuration management
+* Monitoring implementation
 * Kubernetes deployments
-* Helm-based application deployments
-* GitOps workflows using Argo CD
-* Production-style cloud-native deployment experience
+* Helm deployments
+* GitOps workflows
+* Production-style cloud-native engineering capability
 
 ---
 
-## Track 2 — Projects & GitHub Evolution
+# Track 2 — Projects & GitHub Evolution
 
-### Purpose
+## Purpose
 
-Create visible evidence of practical technical skills by converting technical learning into professional portfolio assets.
+Create visible evidence of engineering capability by transforming technical learning into recruiter-ready portfolio assets.
 
-### Scope
+---
+
+## Scope
 
 * Professional GitHub profile
 * Git repositories
-* Project READMEs
-* Technical documentation
+* Project documentation
+* Professional READMEs
 * Architecture diagrams
 * Infrastructure diagrams
 * Deployment documentation
-* Automation scripts
+* Automation repositories
 * Flagship DevOps project
 * Portfolio organization
 
-### Primary Goal
+---
 
-Build a professional GitHub portfolio that demonstrates practical DevOps capability through well-documented, production-inspired projects.
+## Primary Goal
 
-### Deliverables
+Build a professional GitHub portfolio that demonstrates practical engineering capability through well-documented, production-inspired projects.
+
+---
+
+## Deliverables
 
 * Professional GitHub profile
-* 3–5 high-quality repositories
-* Professional project documentation
-* Well-written READMEs
+* High-quality technical repositories
+* Professional documentation
+* Production-quality READMEs
 * Architecture diagrams
 * Deployment guides
 * Infrastructure documentation
-* One flagship DevOps project
+* Automation repositories
+* Flagship DevOps project
 * Recruiter-ready GitHub portfolio
 
 ---
 
-## Track 3 — Personal Branding & Communication
+# Track 3 — Personal Branding & Communication
 
-### Purpose
+## Purpose
 
-Develop the ability to communicate technical knowledge effectively while building a professional online presence.
+Develop the ability to communicate technical knowledge clearly while building a professional online presence that grows alongside technical capability.
 
-### Scope
+---
+
+## Scope
 
 * LinkedIn optimization
 * Technical learning posts
-* Learning documentation
+* Technical documentation
 * Technical articles
 * Architecture explanations
 * Deployment walkthroughs
@@ -179,16 +231,20 @@ Develop the ability to communicate technical knowledge effectively while buildin
 * Project storytelling
 * Technical presentations
 
-### Primary Goal
+---
 
-Become capable of clearly explaining technical work, architectural decisions, implementation approaches, and troubleshooting processes while maintaining a professional online presence.
+## Primary Goal
 
-### Deliverables
+Become capable of confidently explaining technical work, engineering decisions, implementation approaches, troubleshooting processes, and complete DevOps solutions while maintaining a professional online presence.
+
+---
+
+## Deliverables
 
 * Optimized LinkedIn profile
 * Consistent technical posts
-* Learning documentation
-* Technical explanations
+* Technical documentation
+* Technical articles
 * Architecture walkthroughs
 * Deployment walkthroughs
 * Troubleshooting write-ups
@@ -197,72 +253,156 @@ Become capable of clearly explaining technical work, architectural decisions, im
 
 ---
 
-## Track 4 — Interview & Job Conversion
+# Track 4 — Interview Readiness & Job Conversion
 
-### Purpose
+## Purpose
 
-Convert technical preparation into employment by developing interview readiness and maintaining a structured job search process.
+Systematically measure, improve, and convert technical capability into interview success and ultimately a DevOps Engineer job offer.
 
-### Scope
+Unlike traditional interview preparation, this track grows progressively alongside technical learning instead of being postponed until the end of the roadmap.
 
-* Resume development
-* Technical interview preparation
-* Linux interview questions
-* Docker interview questions
-* Kubernetes interview questions
-* AWS interview questions
-* Terraform interview questions
-* CI/CD interview questions
-* Troubleshooting scenarios
+---
+
+## Scope
+
+* Interview Readiness Checks
+* Technical Confidence Assessment
+* Technical Confidence Dashboard
+* Technical Revision Queue
+* Technical Interview Questions
+* Troubleshooting Scenarios
+* Mock Interviews
+* Resume Development
+* LinkedIn Optimization
+* Job Applications
+* Referral Outreach
+* Interview Tracking
+
+---
+
+## Primary Goal
+
+Build measurable interview readiness by continuously assessing technical confidence throughout the roadmap, then convert that readiness into successful interview performance and a DevOps Engineer job offer.
+
+---
+
+## Progressive Interview Model
+
+Interview preparation evolves throughout the project.
+
+### Early Phases
+
+Focus on validating understanding without slowing technical learning.
+
+Assessment includes:
+
+* Recognition
+* Recall
+
+---
+
+### Middle Phases
+
+Focus on validating practical engineering ability.
+
+Assessment includes:
+
+* Recognition
+* Recall
+* Application
+
+---
+
+### Advanced Phases
+
+Focus on engineering reasoning.
+
+Assessment includes:
+
+* Recognition
+* Recall
+* Application
+* Troubleshooting
+
+---
+
+### Career Conversion Phase
+
+Focus shifts almost entirely toward employment.
+
+Activities include:
+
+* Technical revision
+* Confidence-driven revision
 * Mock interviews
+* Behavioral interviews
+* Resume optimization
+* Portfolio polishing
 * Job applications
-* Referral outreach
-* Interview tracking
-
-### Primary Goal
-
-Become fully prepared for DevOps interviews and successfully secure a DevOps Engineer job offer.
-
-### Deliverables
-
-* Professional DevOps resume
-* Interview preparation material
-* Technical interview notes
-* Troubleshooting knowledge base
-* Mock interview experience
-* Job application tracker
-* Referral outreach
-* Interview progress tracking
-* Accepted DevOps Engineer job offer
-
----
-## 4. Project Timeline
-
-The project progresses through three major phases, with the priority of each track evolving as technical maturity and career readiness increase.
+* Interview feedback
 
 ---
 
-## Phase 1 (Months 1–2)
+## Technical Confidence Framework
+
+Technical confidence is measured continuously rather than only during final interview preparation.
+
+Each major technology is assessed using:
+
+* Recognition
+* Recall
+* Application *(when applicable)*
+* Troubleshooting *(when applicable)*
+* Overall Confidence
+
+Confidence represents current interview readiness rather than course completion.
+
+Low-confidence technologies become candidates for revision through the **Technical Revision Queue**.
+
+---
+
+## Deliverables
+
+* Technical Confidence Dashboard
+* Technical Revision Queue
+* Professional DevOps Resume
+* Interview Preparation Library
+* Technical Interview Readiness
+* Troubleshooting Knowledge Base
+* Mock Interview Experience
+* Job Application Tracker
+* Referral Outreach
+* Interview Progress Tracking
+* Accepted DevOps Engineer Job Offer
+
+---
+
+# 4. Project Timeline
+
+The project progresses through major phases while the priority of each track evolves with technical maturity.
+
+---
+
+## Phase 1 — Technical Foundation
 
 ### Primary Focus
 
 * Building the technical foundation
 * Establishing the development environment
-* Learning core DevOps concepts and tools
-* GitHub profile setup
+* Learning core DevOps technologies
+* GitHub setup
 * Small technical projects
 * Documentation habits
 * LinkedIn optimization
-* Communication habits
+* Technical communication habits
+* Lightweight Interview Readiness Checks
 
 ### Technical Focus
 
-The primary technical focus includes foundational DevOps technologies such as:
-
 * Linux Administration
 * Git & Version Control
-* Development Environments & Virtualization
-* Variables, JSON & YAML
+* Development Environments
+* JSON & YAML
 * Bash Scripting
 * Traditional Application Deployment
 * Networking Fundamentals
@@ -278,9 +418,11 @@ Track 3 — Light
 
 Track 4 — Minimal
 
+Interview preparation remains intentionally lightweight and focuses only on Recognition and Recall.
+
 ---
 
-## Phase 2 (Months 3–4)
+## Phase 2 — Engineering Projects
 
 ### Primary Focus
 
@@ -292,20 +434,18 @@ Track 4 — Minimal
 * GitHub portfolio improvement
 * Architecture understanding
 * Technical communication
-* Initial interview preparation
+* Application-oriented Interview Readiness Checks
 
 ### Technical Focus
 
-The primary technical focus expands into cloud, automation, and infrastructure engineering, including:
-
-* AWS Cloud Services
-* Lift & Shift Deployment
+* AWS Cloud
+* Cloud Migration
 * Cloud Re-Architecture
 * Build Tools
 * Jenkins
 * GitHub Actions
 * GitLab CI/CD
-* Python Automation
+* Python
 * Terraform
 * Ansible
 
@@ -319,35 +459,31 @@ Track 3 — Medium
 
 Track 4 — Light
 
+Interview preparation expands to include Application assessment while remaining secondary to technical learning.
+
 ---
 
-## Phase 3 (Months 5–6)
+## Phase 3 — Career Conversion
 
 ### Primary Focus
 
 * Cloud-native engineering
-* Production-style deployments
 * Portfolio refinement
 * Resume refinement
+* Technical revision
 * Mock interviews
-* Technical interview preparation
 * Job applications
-* Referrals
-* Final project polishing
+* Professional networking
+* Confidence-driven interview preparation
 
 ### Technical Focus
 
-The primary technical focus shifts toward production-ready DevOps practices, including:
-
-* Monitoring & Observability
-* Advanced AWS Services
-* AWS CI/CD
-* Google Cloud Platform
+* Monitoring
+* Advanced AWS
 * Kubernetes
-* Kubernetes Deployments
 * Helm
-* GitOps with Argo CD
-* End-to-End DevOps Platform Integration
+* GitOps
+* Production engineering
 
 ### Track Priority
 
@@ -357,51 +493,49 @@ Track 2 — Polishing
 
 Track 3 — Confidence Building
 
-Track 4 — Heavy
+Track 4 — Primary
+
+The Technical Confidence Dashboard and Technical Revision Queue become the primary drivers of technical revision and interview preparation.
 
 ---
 
 # 5. Project Deliverables
 
-By the completion of the project, the following outputs should exist.
+By project completion, the following outputs should exist.
 
 ---
 
 ## Technical Deliverables
 
+* Practical DevOps engineering capability
 * Linux administration competency
 * Git workflow competency
-* Development environment proficiency
-* Networking fundamentals
-* Bash scripting competency
-* Python automation competency
-* Docker and containerization competency
-* Traditional application deployment experience
+* Networking competency
+* Bash automation
+* Python automation
+* Docker and containerization
 * AWS cloud competency
-* Cloud migration experience
-* Cloud application re-architecture experience
-* CI/CD implementation using Jenkins, GitHub Actions, and GitLab
-* Infrastructure as Code using Terraform
-* Configuration management using Ansible
-* Monitoring and observability implementation
+* CI/CD implementations
+* Terraform infrastructure
+* Ansible automation
+* Monitoring implementation
 * Kubernetes competency
-* Helm deployment experience
-* GitOps implementation using Argo CD
-* Production-style DevOps platform implementation
+* Helm deployments
+* GitOps implementation
+* Production-style DevOps platform
 
 ---
 
 ## Portfolio Deliverables
 
 * Professional GitHub profile
-* 3–5 high-quality repositories
-* Professional project documentation
-* Well-structured READMEs
+* High-quality repositories
+* Professional documentation
 * Architecture diagrams
 * Infrastructure diagrams
 * Deployment guides
 * Automation repositories
-* One flagship DevOps project
+* Flagship DevOps project
 * Recruiter-ready GitHub portfolio
 
 ---
@@ -409,12 +543,11 @@ By the completion of the project, the following outputs should exist.
 ## Personal Branding Deliverables
 
 * Optimized LinkedIn profile
-* Consistent technical posts
-* Learning documentation
+* Technical posts
+* Technical documentation
 * Technical articles
 * Project walkthroughs
 * Architecture explanations
-* Deployment explanations
 * Troubleshooting explanations
 * Technical storytelling
 * Professional online presence
@@ -423,15 +556,15 @@ By the completion of the project, the following outputs should exist.
 
 ## Career Deliverables
 
-* Professional DevOps resume
-* Interview preparation material
-* Technical interview notes
-* Troubleshooting knowledge base
-* Mock interview experience
-* Job application tracker
-* Referral network
-* Interview tracking
-* DevOps Engineer job offer
+* Technical Confidence Dashboard
+* Technical Revision Queue
+* Professional DevOps Resume
+* Interview Preparation Library
+* Mock Interview Experience
+* Job Application Tracker
+* Referral Network
+* Interview Tracking
+* Accepted DevOps Engineer Job Offer
 
 ---
 
@@ -439,18 +572,125 @@ By the completion of the project, the following outputs should exist.
 
 The project follows these guiding principles.
 
-* Learn by building.
-* Build consistently rather than occasionally.
-* Push every meaningful project to GitHub.
-* Document everything you build.
-* Explain everything you learn.
-* Start GitHub early.
-* Start communication early.
-* Build projects instead of collecting certificates.
-* Focus on practical understanding over perfection.
-* Convert every learning milestone into a permanent career asset.
-* Build a portfolio that demonstrates practical capability rather than theoretical knowledge.
-* Improve continuously throughout the project.
+## Capability Before Completion
+
+The objective is not to finish a course.
+
+The objective is to build practical engineering capability.
+
+---
+
+## Learn by Building
+
+Every major technology should be reinforced through practical implementation rather than passive study.
+
+---
+
+## Portfolio-Driven Learning
+
+Every meaningful technical milestone should produce a permanent career asset whenever appropriate.
+
+Examples include:
+
+* GitHub repositories
+* Professional documentation
+* Architecture diagrams
+* Deployment guides
+* Automation scripts
+* Flagship projects
+
+---
+
+## Explain Everything You Learn
+
+Technical understanding is strengthened by explaining:
+
+* Concepts
+* Architectures
+* Design decisions
+* Deployments
+* Troubleshooting processes
+
+Communication grows continuously alongside technical capability.
+
+---
+
+## Confidence-Driven Revision
+
+Interview preparation should be driven by measured technical confidence rather than intuition.
+
+Revision should focus on technologies with the lowest interview readiness instead of revisiting the entire roadmap.
+
+---
+
+## Progressive Interview Preparation
+
+Interview preparation should evolve naturally throughout the roadmap.
+
+```text
+Foundation
+
+↓
+
+Recognition
+
+↓
+
+Recall
+
+↓
+
+Application
+
+↓
+
+Troubleshooting
+
+↓
+
+Mock Interviews
+
+↓
+
+Job Conversion
+```
+
+Heavy interview preparation is intentionally postponed until sufficient engineering capability has been developed.
+
+---
+
+## High Return on Investment
+
+Time should always be invested where it provides the greatest long-term career value.
+
+During early phases:
+
+* Build skills.
+
+During later phases:
+
+* Refine confidence.
+* Polish communication.
+* Convert capability into employment.
+
+---
+
+## Continuous Career Growth
+
+Every completed iteration should strengthen one or more of the following:
+
+* Technical capability
+* Portfolio
+* Professional communication
+* Interview readiness
+
+No iteration should produce only theoretical knowledge.
+
+---
+
+## External Project Memory
+
+Important assets, deferred work, technical confidence, and project state should be maintained in the **Project Progress Tracker**, eliminating the need to manage them separately.
 
 ---
 
@@ -459,94 +699,104 @@ The project follows these guiding principles.
 The project follows the dependency chain below.
 
 ```text
-Core Technical Skills
+Core Technical Building
           │
           ▼
-Projects & GitHub
+Projects & GitHub Evolution
           │
-          ├──────────────► Communication & Personal Brand
+          ├──────────────► Personal Branding & Communication
           │
           ▼
 Interview Readiness
           │
           ▼
-Job Applications
+Job Conversion
           │
           ▼
-DevOps Job Offer
+DevOps Engineer Job Offer
 ```
 
-Technical skills create projects.
+The relationship between the tracks is continuous rather than sequential.
 
-Projects create public evidence of practical capability.
+Technical capability generates projects.
 
-Public evidence, documentation, and technical communication strengthen professional credibility and interview performance.
+Projects strengthen communication.
 
-Strong interview performance, combined with a professional portfolio and consistent applications, leads to successful job conversion.
+Technical capability, projects, and communication together improve interview readiness.
+
+Measured interview readiness drives focused revision.
+
+Focused revision improves interview performance.
+
+Strong interview performance leads to successful job conversion.
 
 ---
 
-## 8. Project Milestones
+# 8. Project Milestones
 
 The project progresses through the following milestones.
 
 ### Milestone 1
 
-Development environment established and technical foundation ready.
+Development environment established.
 
 ---
 
 ### Milestone 2
 
-Core Linux, Git, and development workflow established.
+Linux, Git, and development workflow established.
 
 ---
 
 ### Milestone 3
 
-First complete DevOps project published on GitHub.
+First production-quality DevOps project published.
 
 ---
 
 ### Milestone 4
 
-Multiple high-quality repositories completed with professional documentation.
+Professional GitHub portfolio established.
 
 ---
 
 ### Milestone 5
 
-Cloud deployments, automation, and CI/CD implementations completed.
+Cloud deployments, automation, and CI/CD completed.
 
 ---
 
 ### Milestone 6
 
-Production-ready Kubernetes and GitOps implementations completed.
+Production-ready Kubernetes and GitOps platform completed.
 
 ---
 
 ### Milestone 7
 
-Flagship DevOps project completed with complete documentation and architecture diagrams.
+Flagship DevOps project completed with professional documentation and architecture diagrams.
 
 ---
 
 ### Milestone 8
 
-LinkedIn consistently reflects technical growth and project progress.
+Professional branding consistently reflects technical growth.
 
 ---
 
 ### Milestone 9
 
-Resume finalized and technical interview readiness achieved.
+Technical Confidence Dashboard demonstrates strong interview readiness across core technologies.
 
 ---
 
 ### Milestone 10
 
-Job applications submitted consistently through a structured application process.
+Resume, portfolio, GitHub, and LinkedIn finalized.
+
+Mock interviews completed.
+
+Technical Revision Queue reduced to low-priority items only.
 
 ---
 
@@ -560,65 +810,66 @@ DevOps Engineer job offer accepted.
 
 The project is complete when all of the following conditions are satisfied.
 
-### Technical Competency
+---
 
-* Core DevOps technologies can be used confidently.
-* Linux administration tasks can be performed comfortably.
-* Applications can be deployed manually and through automation.
-* Docker and containerized applications can be built and managed.
-* Cloud infrastructure can be deployed and maintained on AWS.
-* CI/CD pipelines can be designed and implemented.
-* Infrastructure can be provisioned using Terraform.
-* Systems can be configured using Ansible.
-* Monitoring and observability solutions can be implemented.
-* Kubernetes applications can be deployed, managed, and troubleshot.
-* GitOps workflows can be implemented using Argo CD.
-* Production-style DevOps environments can be built, automated, monitored, and explained confidently.
+## Technical Competency
+
+* Core DevOps technologies can be applied confidently.
+* Production environments can be designed, deployed, automated, monitored, and troubleshot.
+* Engineering decisions can be explained clearly.
+* Practical implementation experience exists across the major DevOps technology stack.
 
 ---
 
-### Portfolio
+## Portfolio
 
 * GitHub contains a professional portfolio.
-* Multiple high-quality repositories demonstrate practical DevOps capability.
-* One flagship DevOps project showcases end-to-end implementation.
-* Projects are documented with professional-quality READMEs.
-* Architecture diagrams exist for major projects.
-* Deployment documentation clearly explains implementation decisions.
-* The GitHub portfolio provides strong evidence of practical engineering skills.
+* Multiple high-quality repositories demonstrate engineering capability.
+* A flagship DevOps project showcases complete end-to-end implementation.
+* Projects include professional documentation.
+* Architecture diagrams and deployment guides are available.
+* The portfolio demonstrates practical engineering ability rather than theoretical learning.
 
 ---
 
-### Communication & Personal Brand
+## Communication & Personal Brand
 
-* LinkedIn reflects continuous technical learning.
+* LinkedIn reflects continuous technical growth.
 * Technical concepts can be explained confidently.
-* Projects can be presented clearly from architecture through deployment.
-* Technical decisions and troubleshooting approaches can be communicated effectively.
-* Professional online presence demonstrates continuous growth throughout the project.
+* Architecture decisions can be justified.
+* Troubleshooting approaches can be communicated clearly.
+* Professional online presence demonstrates engineering maturity.
 
 ---
 
-### Career Readiness
+## Interview Readiness
 
-* Resume is optimized for DevOps Engineer roles.
-* Technical interview preparation has been completed.
-* Mock interviews have been practiced.
-* Core DevOps topics can be discussed confidently during interviews.
+* Technical Confidence Dashboard demonstrates consistently strong confidence across all major technologies.
+* Technical Revision Queue contains no significant unresolved weaknesses.
+* Technical discussions can be handled confidently.
 * Troubleshooting scenarios can be analyzed and explained.
-* Job applications have been submitted consistently.
-* Professional referrals and networking activities have been maintained.
+* Mock interviews have been successfully completed.
+* Resume, GitHub, and LinkedIn are recruiter-ready.
 
 ---
 
-### Project Success
+## Career Readiness
+
+* Job applications are being submitted consistently.
+* Professional networking has been maintained.
+* Interview feedback is incorporated into continued improvement.
+* Confidence has been converted into successful interview performance.
+
+---
+
+## Project Success
 
 The project is considered complete when:
 
-* Practical DevOps skills have been demonstrated through completed projects.
-* A professional GitHub portfolio showcases real-world capability.
-* Technical communication reflects confidence and clarity.
-* Interview readiness has been achieved.
+* Practical DevOps engineering capability has been demonstrated.
+* A professional GitHub portfolio showcases real-world engineering work.
+* Technical communication demonstrates confidence and clarity.
+* Interview readiness has been systematically measured and validated.
 * A DevOps Engineer job offer has been accepted.
 
 ---
@@ -627,11 +878,11 @@ The project is considered complete when:
 
 ---
 
-## Version Information
+# Version Information
 
 **Document Name:** DevOps Career Project Specification
 
-**Version:** 2.0
+**Version:** **2.1**
 
 ---
 
@@ -641,18 +892,21 @@ This specification defines the overall architecture of the DevOps Career Project
 
 It establishes:
 
-* The project objective.
-* The four parallel workstreams.
-* The technical curriculum scope.
-* Project phases.
-* Expected deliverables.
-* Project principles.
-* Milestones.
-* Definition of Done.
-* Success criteria.
+* Project objective
+* Four-track architecture
+* Technical curriculum scope
+* Project phases
+* Track specifications
+* Progressive interview model
+* Technical confidence framework
+* Expected deliverables
+* Project principles
+* Milestones
+* Definition of Done
+* Success criteria
 
-The detailed execution of this specification—including project iterations, course mapping, technical implementation, GitHub evolution, communication activities, and interview preparation—is defined separately in the **Iteration Roadmap**.
+The detailed execution of this specification—including iterations, curriculum mapping, projects, GitHub evolution, communication activities, interview readiness assessments, and job conversion—is defined separately in the **DevOps Career Roadmap**.
 
----
+The **Project Progress Tracker** serves as the project's single dynamic document, recording current progress, technical confidence, revision priorities, assets, deferred work, and overall project state.
 
 
