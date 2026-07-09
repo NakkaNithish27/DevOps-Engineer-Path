@@ -148,7 +148,6 @@ Based on everything completed in **Track 1 during this session** and the current
 
 ```markdown
 ## Track 4 – Interview & Job Conversion
-## Track 4 – Interview & Job Conversion
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
