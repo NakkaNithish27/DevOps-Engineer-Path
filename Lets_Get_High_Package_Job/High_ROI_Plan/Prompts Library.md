@@ -75,35 +75,6 @@ Do not begin teaching or summarizing yet.
 Wait for my next instruction.
 ~~~
 
-## 4. Track 1 – Core Technical Building
-
-```markdown
-## Track 1 – Core Technical Building
-
-Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
-
-Then use this article to complete the **Core Technical Building** track for today's learning session.
-
-Before starting, classify this topic into one of these categories:
-
-* 🟢 **Follow (20%)** — Mindset: *"If I forget this in six months, I can confidently follow the documentation again."*
-
-* 🟡 **Understand (60%)** — Mindset: *"If someone asks me how this works, I should be able to explain the flow without looking at notes."*
-
-* 🔴 **Troubleshoot (100%)** — Mindset: *"If this breaks in production at 2 AM, I should know where to start investigating."*
-
-Briefly explain why you chose that category and tell me where I should spend my mental effort during this learning session.
-
-Then:
-
-* Give me a quick theory refresher (2–3 minutes) based on the **Theory** section.
-* Dump the entire **Practical** section as-is in a clean, reader-friendly format (split it into multiple parts if it's too long).
-* After the Practical section, dump the entire **Mental Compression Map** section as-is in a clean, reader-friendly format.
-* Keep production tips and troubleshooting minimal, and only include them when absolutely necessary.
-* Do not omit, summarize, or skip any practical steps or Mental Compression Map content.
-
-```
-
 ## 5. Track 2 – Projects & GitHub Evolution
 
 ```markdown
@@ -144,7 +115,40 @@ Based on everything completed in **Track 1 during this session** and the current
   **"There are no Personal Branding & Communication deliverables to complete at this stage of the section."**
 ```
 
-## 7. Track 4 – Interview & Job Conversion
+## 4. Track 1 – Core Technical Building
+
+```markdown
+## Track 1 – Core Technical Building
+
+Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+
+Then use this article to complete the **Core Technical Building** track for today's learning session.
+
+Before starting, classify this topic into one of these categories:
+
+* 🟢 **Follow (20%)** — Mindset: *"If I forget this in six months, I can confidently follow the documentation again."*
+
+* 🟡 **Understand (60%)** — Mindset: *"If someone asks me how this works, I should be able to explain the flow without looking at notes."*
+
+* 🔴 **Troubleshoot (100%)** — Mindset: *"If this breaks in production at 2 AM, I should know where to start investigating."*
+
+Briefly explain why you chose that category and tell me where I should spend my mental effort during this learning session.
+
+Then:
+
+* Give me a quick theory refresher (2–3 minutes) based on the **Theory** section.
+* Dump the entire **Practical** section as-is in a clean, reader-friendly format (split it into multiple parts if it's too long).
+* After the Practical section, dump the entire **Mental Compression Map** section as-is in a clean, reader-friendly format.
+* Keep production tips and troubleshooting minimal, and only include them when absolutely necessary.
+* Do not omit, summarize, or skip any practical steps or Mental Compression Map content.
+
+```
+
+## Upload all the articles again, tell those are completed (tell track 2 and track 3 also if nothing is there)
+## Paste the track 2 suggesstion and complete it if any
+## Paste the track 3 sugesstion and complete it if any
+
+## 7. Track 4 – Interview & Job Conversion Assessment
 
 ```markdown
 ## Track 4 – Interview & Job Conversion
