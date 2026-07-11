@@ -35,27 +35,27 @@ It should grow with the project's capabilities—not with time.
 
 ## Current Iteration
 
-**Iteration 2 — Linux Foundation**
+**Iteration 3 — Development Workflow**
 
 ---
 
 ## Current Curriculum Position
 
-**Section 3 — VM Setup** ✅ Completed
+**Section 4 — Linux Foundation** ✅ Completed
 
-**Next:** Section 4 — Linux Foundation
+**Next:** Section 5 — Git
 
 ---
 
 ## Current Article
 
-**10 / 350**
+**25 / 350**
 
 ---
 
 ## Current Track
 
-**Track 1 — Core Technical Building**
+**Track 1 — Core Technical Building (Iteration 3)**
 
 ---
 
@@ -63,7 +63,7 @@ It should grow with the project's capabilities—not with time.
 
 🟡 **IN PROGRESS**
 
-Phase 1 continues with **Iteration 2 — Linux Foundation** after successfully completing Iteration 1.
+Phase 1 continues with **Iteration 3 — Development Workflow** after successfully completing Iteration 2.
 
 ---
 
@@ -86,8 +86,8 @@ Phase 1 continues with **Iteration 2 — Linux Foundation** after successfully c
 | Iteration   | Status         |
 | ----------- | -------------- |
 | Iteration 1 | ✅ Completed    |
-| Iteration 2 | 🟡 In Progress |
-| Iteration 3 | ⚪ Not Started  |
+| Iteration 2 | ✅ Completed    |
+| Iteration 3 | 🟡 In Progress |
 | Iteration 4 | ⚪ Not Started  |
 | Iteration 5 | ⚪ Not Started  |
 | Iteration 6 | ⚪ Not Started  |
@@ -99,7 +99,7 @@ Phase 1 continues with **Iteration 2 — Linux Foundation** after successfully c
 
 ## Articles Completed
 
-**10 / 350**
+**25 / 350**
 
 ---
 
@@ -121,7 +121,7 @@ Scores are based on:
 
 | Technology     | Recognition | Recall | Application | Troubleshooting | Overall | Status       |
 | -------------- | ----------: | -----: | ----------: | --------------: | ------: | ------------ |
-| Linux          |           - |      - |           - |               - |       - | Not Assessed |
+| Linux          |          98 |     93 |    Deferred |        Deferred |      95 | Assessed     |
 | Git            |           - |      - |           - |               - |       - | Not Assessed |
 | Networking     |           - |      - |           - |               - |       - | Not Assessed |
 | Docker         |           - |      - |           - |               - |       - | Not Assessed |
@@ -160,13 +160,13 @@ The queue is prioritized by interview readiness rather than roadmap order.
 
 ## Status
 
-🟡 Active
+🟡 Active (Iteration 3)
 
 ---
 
 ## Current Objective
 
-Complete the development environment required for all future DevOps learning.
+Build a complete development workflow using Git, Vagrant, JSON, and YAML.
 
 ---
 
@@ -206,11 +206,35 @@ For every completed article:
 * Practical Walkthrough
 * Mental Compression Map
 
+### Section 4
+
+* Linux Fundamentals
+* Linux File System
+* Linux Commands
+* Vim Editor
+* File Types
+* Filters
+* Redirection
+* Users & Groups
+* File Permissions
+* Sudo
+* Package Management
+* Services
+* Processes
+* Archiving
+* Ubuntu Commands
+
+For every completed article:
+
+* Theory Refresher
+* Practical Walkthrough
+* Mental Compression Map
+
 ---
 
 ## Remaining
 
-**Iteration 2 — Linux Foundation**
+**Iteration 3 — Development Workflow**
 
 ---
 
@@ -339,9 +363,9 @@ Interview preparation should always match the current roadmap phase.
 
 ## Current Interview Readiness
 
-| Technology | Overall Confidence | Status       |
-| ---------- | -----------------: | ------------ |
-| None       |                  - | Not Assessed |
+| Technology | Overall Confidence | Status    |
+| ---------- | -----------------: | --------- |
+| Linux      |                 95 | Assessed  |
 
 ---
 
@@ -451,13 +475,15 @@ nakkanithish.duckdns.org
 
 ### Current Work
 
-🔄 **Iteration 2 — Linux Foundation**
+🔄 **Iteration 3 — Development Workflow**
 
 Current Objective
 
-* Linux Foundation
-* Linux Administration
-* Hands-on Linux Practice
+* Git
+* Vagrant
+* JSON
+* YAML
+* Development Workflow
 
 ---
 
@@ -558,33 +584,25 @@ A professional custom domain (for example, **nakkanithish.dev**) will be purchas
 
 Continue:
 
-### Iteration 2 — Linux Foundation
+### Iteration 3 — Development Workflow
 
 ---
 
 ## Track 2
 
-After Linux Foundation:
-
-* Initialize Career Repository
-* Create Linux Repository
-* Publish Linux documentation
+Continue deferring repository creation until meaningful engineering implementations exist.
 
 ---
 
 ## Track 3
 
-After Linux Foundation:
-
-* Generate professional AI profile photograph
-* Upload LinkedIn banner
-* Publish first technical learning post
+Continue deferring public communication until meaningful engineering projects exist.
 
 ---
 
 ## Track 4
 
-Continue lightweight interview readiness checks only.
+Continue lightweight interview readiness checks for each completed iteration.
 
 Comprehensive interview preparation remains deferred until later roadmap phases.
 
@@ -594,7 +612,7 @@ Comprehensive interview preparation remains deferred until later roadmap phases.
 
 ## Current Milestone
 
-### Iteration 2 — Linux Foundation
+### Iteration 3 — Development Workflow
 
 **Status**
 
@@ -602,24 +620,24 @@ Comprehensive interview preparation remains deferred until later roadmap phases.
 
 **Objective**
 
-Build a strong Linux administration foundation for every future DevOps technology.
+Build a complete development workflow using Git, Vagrant, JSON, and YAML.
 
 **Definition of Done**
 
-See Iteration 2 exit criteria in the roadmap.
+See Iteration 3 exit criteria in the roadmap.
 
 ---
 
 ## Next Milestone
 
-### Iteration 3 — Development Workflow
+### Iteration 4 — Traditional Application Deployment
 
 Primary Focus
 
-* Git Fundamentals
-* Vagrant
-* JSON & YAML
-* Development Workflow
+* VProfile
+* Networking
+* Docker Fundamentals
+* Containerization
 
 ---
 

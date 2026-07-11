@@ -41,15 +41,15 @@ It should grow with the project's capabilities—not with time.
 
 ## Current Curriculum Position
 
-**Section 4 — Linux Foundation** ✅ Completed
+**Section 5 — Git** ✅ Completed
 
-**Next:** Section 5 — Git
+**Next:** Section 6 — Vagrant & Linux Servers
 
 ---
 
 ## Current Article
 
-**25 / 350**
+**35 / 350**
 
 ---
 
@@ -99,7 +99,7 @@ Phase 1 continues with **Iteration 3 — Development Workflow** after successful
 
 ## Articles Completed
 
-**25 / 350**
+**35 / 350**
 
 ---
 
@@ -122,7 +122,7 @@ Scores are based on:
 | Technology     | Recognition | Recall | Application | Troubleshooting | Overall | Status       |
 | -------------- | ----------: | -----: | ----------: | --------------: | ------: | ------------ |
 | Linux          |          98 |     93 |    Deferred |        Deferred |      95 | Assessed     |
-| Git            |           - |      - |           - |               - |       - | Not Assessed |
+| Git            |          93 |     85 |    Deferred |        Deferred |      89 | Assessed     |
 | Networking     |           - |      - |           - |               - |       - | Not Assessed |
 | Docker         |           - |      - |           - |               - |       - | Not Assessed |
 | Jenkins        |           - |      - |           - |               - |       - | Not Assessed |
@@ -223,6 +223,37 @@ For every completed article:
 * Processes
 * Archiving
 * Ubuntu Commands
+
+For every completed article:
+
+* Theory Refresher
+* Practical Walkthrough
+* Mental Compression Map
+
+### Section 5
+
+* Git Fundamentals
+* Git Installation
+* Repository Initialization
+* Working Directory, Staging Area & Repository
+* Git Status
+* Git Add
+* Git Commit
+* Git Log
+* Git Diff
+* Git Branching
+* Branch Merging
+* Merge Conflicts
+* Git Rollback
+* Git Restore
+* Git Revert
+* Git Reset
+* SSH Authentication
+* GitHub Authentication
+* Semantic Versioning
+* Git Tags
+* GitHub Releases
+* GitHub Copilot
 
 For every completed article:
 
@@ -366,6 +397,7 @@ Interview preparation should always match the current roadmap phase.
 | Technology | Overall Confidence | Status    |
 | ---------- | -----------------: | --------- |
 | Linux      |                 95 | Assessed  |
+| Git        |                 89 | Assessed  |
 
 ---
 
@@ -479,7 +511,6 @@ nakkanithish.duckdns.org
 
 Current Objective
 
-* Git
 * Vagrant
 * JSON
 * YAML
