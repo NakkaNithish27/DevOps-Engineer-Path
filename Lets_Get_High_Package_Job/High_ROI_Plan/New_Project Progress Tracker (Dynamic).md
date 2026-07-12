@@ -41,9 +41,9 @@ It should grow with the project's capabilities—not with time.
 
 ## Current Curriculum Position
 
-**Section 5 — Git** ✅ Completed
+**Section 6 — Vagrant & Linux Servers** ✅ Completed
 
-**Next:** Section 6 — Vagrant & Linux Servers
+**Next:** Section 7 — Variables, JSON & YAML
 
 ---
 
@@ -123,6 +123,7 @@ Scores are based on:
 | -------------- | ----------: | -----: | ----------: | --------------: | ------: | ------------ |
 | Linux          |          98 |     93 |    Deferred |        Deferred |      95 | Assessed     |
 | Git            |          93 |     85 |    Deferred |        Deferred |      89 | Assessed     |
+| Vagrant        |          96 |     91 |    Deferred |        Deferred |      94 | Assessed     |
 | Networking     |           - |      - |           - |               - |       - | Not Assessed |
 | Docker         |           - |      - |           - |               - |       - | Not Assessed |
 | Jenkins        |           - |      - |           - |               - |       - | Not Assessed |
@@ -261,11 +262,31 @@ For every completed article:
 * Practical Walkthrough
 * Mental Compression Map
 
+### Section 6
+
+* Manual Website Deployment
+* WordPress Deployment
+* Vagrant Provisioning
+* Infrastructure as Code
+* AI-assisted Scaffolding
+* Multi-VM Vagrant
+* Custom systemd Services
+
+For every completed article:
+
+* Theory Refresher
+* Practical Walkthrough
+* Mental Compression Map
+
 ---
 
 ## Remaining
 
 **Iteration 3 — Development Workflow**
+
+Remaining technical scope:
+
+* Section 7 — Variables, JSON & YAML
 
 ---
 
@@ -398,6 +419,7 @@ Interview preparation should always match the current roadmap phase.
 | ---------- | -----------------: | --------- |
 | Linux      |                 95 | Assessed  |
 | Git        |                 89 | Assessed  |
+| Vagrant    |                 94 | Assessed  |
 
 ---
 
