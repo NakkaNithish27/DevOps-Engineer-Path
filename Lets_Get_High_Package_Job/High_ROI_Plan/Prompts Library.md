@@ -186,22 +186,43 @@ Based on everything completed in **Track 1 during this session** and the current
 ## 8. End of Session Review
 ### Progress Tracker Edit Script for Json tracker:
 ~~~markdown
-## Generate Progress Tracker JSON Patch
+# Generate Progress Tracker JSON Patch
 
 Use the attached:
 
-- Project Specification
-- DevOps Career Roadmap
-- Progress Tracker V2 JSON
+* Project Specification
+* DevOps Career Roadmap
+* Progress Tracker V2 JSON
 
 Compare the current tracker with the current project state.
 
-Output only the minimal patch required to update the tracker.
+Output only the minimal patch required to synchronize the tracker with the current project state.
 
-### Format
+## Tracker Philosophy
+
+The Progress Tracker is the project's **live execution state**, not a historical record.
+
+Its purpose is to represent the project's **current actionable state**. After applying the generated patch, the tracker should answer:
+
+> **"If I open this tracker tomorrow, what should I work on next?"**
+
+rather than:
+
+> **"What was the last thing I completed?"**
+
+Whenever a roadmap milestone (such as an article, section, iteration, or phase) has satisfied its completion criteria, the tracker must:
+
+* Mark the milestone as completed.
+* Advance the current working position to the next logical roadmap item, if one exists.
+* Update every dependent field required to keep the tracker internally consistent.
+
+Do not leave the tracker pointing at a completed milestone unless there is intentionally no next milestone.
+
+## Format
 
 Each change must follow this format:
 
+```text
 PATCH <number>
 
 Path:
@@ -219,27 +240,43 @@ Old Value:
 
 New Value:
 <replacement value>
+```
 
-### Requirements
+## Requirements
 
-- Generate only the changes that are required.
-- Every PATCH must reference exactly one JSON path.
-- The JSON path must uniquely identify the value being modified.
-- The Old Value must exactly match the current tracker.
-- The New Value must contain the complete replacement value.
-- Preserve every unchanged value exactly.
-- Update only the state object. Never modify the schema.
-- Update only the fields affected by the completed learning session.
-- Update technical confidence only when Track 4 completed a confidence assessment.
-- Update the revision queue only when confidence changes require it.
-- Do not mark roadmap progress as completed unless its completion criteria have been satisfied.
-- Do not modify unrelated state.
-- Do not explain the changes.
-- Do not generate the updated tracker.
+* Generate only the changes that are required.
+* Every PATCH must reference exactly one JSON path.
+* The JSON path must uniquely identify the value being modified.
+* The Old Value must exactly match the current tracker.
+* The New Value must contain the complete replacement value.
+* Preserve every unchanged value exactly.
+* Update only the `state` object. Never modify the `schema`.
+* Update only the fields affected by the completed work and any dependent fields required to keep the tracker synchronized.
+* Do not mark roadmap progress as completed unless its documented completion criteria have been satisfied.
+* Respect deferred deliverables. A deliverable intentionally deferred by the roadmap counts as satisfied when the roadmap explicitly specifies that it should remain deferred at the current stage.
+* Update technical confidence only when Track 4 completed a confidence assessment.
+* Update only the technologies assessed during this session.
+* Update the Technical Revision Queue only when the confidence assessment changes its required state.
+* Generate the smallest possible set of PATCH operations that results in a fully synchronized tracker.
+* Do not modify unrelated state.
+* Do not generate redundant patches.
+
+## Consistency Requirement
+
+The generated patch must leave the tracker in a **fully synchronized and internally consistent state**.
+
+Whenever a roadmap milestone changes state, update every dependent field that must also change so that no part of the tracker references an outdated or completed roadmap item when a logical next item exists.
+
+## Output Rules
+
+* Do not explain the changes.
+* Do not generate the updated tracker.
 
 If no changes are required, output exactly:
 
+```text
 No changes.
+```
 
 Wait for my confirmation before applying the patch.
 ~~~
