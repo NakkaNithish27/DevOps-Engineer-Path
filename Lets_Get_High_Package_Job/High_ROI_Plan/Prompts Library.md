@@ -198,6 +198,8 @@ Compare the current tracker with the current project state.
 
 Output only the minimal patch required to synchronize the tracker with the current project state.
 
+---
+
 ## Tracker Philosophy
 
 The Progress Tracker is the project's **live execution state**, not a historical record.
@@ -217,6 +219,24 @@ Whenever a roadmap milestone (such as an article, section, iteration, or phase) 
 * Update every dependent field required to keep the tracker internally consistent.
 
 Do not leave the tracker pointing at a completed milestone unless there is intentionally no next milestone.
+
+---
+
+## Roadmap Hierarchy Requirement
+
+The **DevOps Career Roadmap** is the authoritative source for the project hierarchy:
+
+**Phase → Iteration → Section → Article**
+
+When determining the current project state or generating updates, use this hierarchy to determine the correct roadmap position.
+
+If completing a roadmap milestone advances the project to the next milestone, update every affected level of the roadmap hierarchy so the tracker remains synchronized with the roadmap.
+
+Never leave different levels of the roadmap hierarchy referring to different logical positions (for example, a completed iteration with a current section that belongs to the next iteration).
+
+If the **Progress Tracker** and the **DevOps Career Roadmap** disagree about the current roadmap position, treat the **DevOps Career Roadmap** as the authoritative source for roadmap progression and generate the patch required to reconcile the tracker.
+
+---
 
 ## Format
 
@@ -242,9 +262,11 @@ New Value:
 <replacement value>
 ```
 
+---
+
 ## Requirements
 
-* Generate only the changes that are required.
+* Generate only the changes required to produce a fully synchronized and internally consistent tracker.
 * Every PATCH must reference exactly one JSON path.
 * The JSON path must uniquely identify the value being modified.
 * The Old Value must exactly match the current tracker.
@@ -257,15 +279,24 @@ New Value:
 * Update technical confidence only when Track 4 completed a confidence assessment.
 * Update only the technologies assessed during this session.
 * Update the Technical Revision Queue only when the confidence assessment changes its required state.
-* Generate the smallest possible set of PATCH operations that results in a fully synchronized tracker.
+* Generate the smallest possible set of PATCH operations that leaves the tracker fully synchronized and internally consistent.
 * Do not modify unrelated state.
 * Do not generate redundant patches.
+
+---
 
 ## Consistency Requirement
 
 The generated patch must leave the tracker in a **fully synchronized and internally consistent state**.
 
-Whenever a roadmap milestone changes state, update every dependent field that must also change so that no part of the tracker references an outdated or completed roadmap item when a logical next item exists.
+Whenever a roadmap milestone changes state, update every dependent field that must also change so that:
+
+* the tracker remains internally consistent,
+* every level of the roadmap hierarchy matches the current project state,
+* no part of the tracker references an outdated or completed roadmap item when a logical next item exists,
+* and no two parts of the tracker contradict each other.
+
+---
 
 ## Output Rules
 
@@ -279,6 +310,7 @@ No changes.
 ```
 
 Wait for my confirmation before applying the patch.
+
 ~~~
 
 ## 9. Apply Progress Tracker Patch for Json Tracker
