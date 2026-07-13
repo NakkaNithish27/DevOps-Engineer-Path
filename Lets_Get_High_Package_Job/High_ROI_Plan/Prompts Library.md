@@ -184,8 +184,11 @@ Based on everything completed in **Track 1 during this session** and the current
 ```
 
 ## 8. End of Session Review
+### Progress Tracker Edit Script for Json tracker:
+~~~markdown
 
-### Progress Tracker Edit Script:
+~~~
+### Progress Tracker Edit Script for Mardown tracker:
 
 ~~~markdown
 ## Progress Tracker Edit Script
