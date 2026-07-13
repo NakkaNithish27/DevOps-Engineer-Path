@@ -152,8 +152,8 @@
         "status": "IN_PROGRESS"
       },
       "section": {
-        "id": "SECTION_7",
-        "status": "COMPLETED"
+        "id": "SECTION_8",
+        "status": "NOT_STARTED"
       },
       "article": {
         "current": 35,
@@ -190,7 +190,7 @@
         "SECTION_5": "COMPLETED",
         "SECTION_6": "COMPLETED",
         "SECTION_7": "COMPLETED",
-        "SECTION_8": "NOT_STARTED",
+        "SECTION_8": "IN_PROGRESS",
         "SECTION_9": "NOT_STARTED",
         "SECTION_10": "NOT_STARTED"
       },
@@ -225,19 +225,19 @@
         "status": "ASSESSED"
       },
       "python": {
-        "recognition": 96,
-        "recall": 91,
+        "recognition": 95,
+        "recall": 90,
         "application": null,
         "troubleshooting": null,
-        "overall": 94,
+        "overall": 93,
         "status": "ASSESSED"
       },
       "jsonYaml": {
-        "recognition": 98,
-        "recall": 95,
+        "recognition": 97,
+        "recall": 93,
         "application": null,
         "troubleshooting": null,
-        "overall": 97,
+        "overall": 95,
         "status": "ASSESSED"
       },
       "networking": {
@@ -414,9 +414,9 @@
     "tracks": {
       "track1": {
         "status": "IN_PROGRESS",
-        "objective": "Complete the current technical section.",
+        "objective": "Begin Traditional Application Deployment by starting Section 8.",
         "deliverables": {
-          "sectionCompletion": "IN_PROGRESS"
+          "sectionCompletion": "NOT_STARTED"
         }
       },
       "track2": {
@@ -541,7 +541,7 @@
     "focus": {
       "technical": {
         "status": "IN_PROGRESS",
-        "currentObjective": "Complete Section 7."
+        "currentObjective": "Begin Section 8 — VProfile Project Setup."
       },
       "projects": {
         "status": "DEFERRED",
@@ -559,7 +559,7 @@
     "actions": {
       "track1": {
         "status": "CONTINUE",
-        "nextAction": "Complete the next roadmap section."
+        "nextAction": "Begin Section 8 — VProfile Project Setup."
       },
       "track2": {
         "status": "WAIT",
