@@ -243,7 +243,87 @@ No changes.
 
 Wait for my confirmation before applying the patch.
 ~~~
+### Progress Tracker Edit Script for Mardown tracker:
 
+~~~markdown
+## Progress Tracker Edit Script
+
+Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+
+Compare the current tracker with the project's current state.
+
+Output only the minimal edit script required to update the tracker.
+
+### Format
+
+Each edit must follow this format:
+
+PATCH <number>
+
+Anchor: <unique heading path>
+
+Operation:
+Replace
+OR
+Replace Block
+OR
+Insert Before
+OR
+Insert After
+OR
+Delete
+
+Find: <existing text within the Anchor>
+
+With: <replacement text>
+
+### Requirements
+
+* Generate only the edits that are required.
+
+* Every PATCH must have a unique **Anchor**.
+
+* Use heading paths as anchors instead of line numbers.
+
+  Example:
+
+  Anchor:
+
+  # Current Focus > ### Current Work
+
+* The **Find** text must exactly match the current tracker.
+
+* The **Find** text must be unique within the specified **Anchor**.
+
+* Keep the **Find** block as small as possible while still uniquely identifying the target.
+
+* If necessary, expand the **Find** block with additional surrounding context until it is unique within the Anchor.
+
+* Preserve every unchanged line exactly.
+
+* Update only the sections affected by the completed learning session.
+
+* Update the **Technical Confidence Dashboard** only when a confidence assessment was completed during **Track 4 – Interview & Job Conversion**.
+
+* Update the **Technical Revision Queue** only when confidence scores indicate that a technology should be added, updated, reprioritized, or removed.
+
+* Do not mark roadmap items as completed unless their roadmap completion criteria have been satisfied.
+
+* Do not modify the roadmap structure or static project information.
+
+* Do not explain the edits.
+
+* Do not summarize the project.
+
+* If no edits are required, output exactly:
+
+No changes.
+
+Do not generate the updated tracker.
+
+Wait for my confirmation before applying the edit script.
+
+~~~
 ## 9. Apply Progress Tracker Patch for Json Tracker
 ~~~markdown
 ## Apply Progress Tracker JSON Patch
@@ -271,7 +351,35 @@ Generate the updated Progress Tracker V2 as a JSON (".json") file.
 
 Return only the downloadable file.
 ~~~
+## 9. Apply Progress Tracker Patch for Mardown Tracker
+~~~markdown
+Apply Progress Tracker Edit Script
 
+Use:
+
+- The uploaded Project Progress Tracker as the base document.
+- The approved Progress Tracker Edit Script, which may be either:
+  - included in the user's message, or
+  - the immediately preceding approved assistant response.
+
+Apply the approved edit script deterministically.
+
+Treat the approved edit script as the only source of truth.
+
+Do not manually edit, rewrite, infer, improve, reorganize, optimize, or introduce any changes beyond those defined by the approved edit script.
+
+If any PATCH cannot be applied exactly, stop immediately and report the PATCH number and reason.
+
+Validate that:
+
+- Every PATCH was applied exactly once.
+- No PATCH was skipped.
+- No additional edits were introduced.
+
+Generate the updated Project Progress Tracker as a Markdown (".md") file.
+
+Return only the downloadable file.
+~~~
 ## 10. Updated Project Json Progress Tracker Validation
 ~~~markdown
 ## Validate Progress Tracker JSON Patch
@@ -335,3 +443,66 @@ Do not rewrite the tracker.
 
 Only validate whether the approved JSON patch was applied correctly.
 ~~~
+## 10. Updated Project Markdown Progress Tracker Validation
+
+~~~markdown
+## Validate Progress Tracker Edit Script 
+
+Use:
+
+- The original **Project Progress Tracker**
+- The updated **Project Progress Tracker**
+- The approved **Progress Tracker Edit Script**, which may be either:
+  - included in the user's message, or
+  - the immediately preceding approved assistant response.
+
+Validate that the updated tracker is exactly the result of applying the approved edit script to the original tracker.
+
+The edit script completely defines every permitted modification.
+
+### Validation
+
+For each PATCH:
+
+- Verify it was applied exactly once.
+- Verify it was applied to the correct **Section** and **Anchor**.
+- Verify the specified **Operation** was performed correctly.
+- Verify the **Find** text was replaced, inserted, or deleted exactly as specified.
+
+Then verify that:
+
+- Every difference between the original and updated tracker is explained by the approved edit script.
+- No PATCH was skipped.
+- No PATCH modified the wrong location.
+- No additional edits were introduced.
+- No unrelated content was modified or removed.
+- Formatting, Markdown, headings, spacing, ordering, and document structure remain unchanged except where explicitly modified by the approved edit script.
+
+### Output
+
+If everything is correct, respond exactly:
+
+```text
+✅ PASS – The approved edit script was applied successfully.
+```
+
+Otherwise respond with:
+
+```text
+❌ FAIL
+```
+
+Then list only the validation failures under the relevant headings (omit any heading with no issues):
+
+- Missing PATCHES
+- Incorrectly Applied PATCHES
+- Unexpected Changes
+- Removed Content
+- Duplicate Content
+- Formatting or Structural Issues
+- Other Inconsistencies
+
+Do not suggest improvements or rewrite the tracker.
+Only validate whether the approved edit script was applied correctly.
+~~~
+
