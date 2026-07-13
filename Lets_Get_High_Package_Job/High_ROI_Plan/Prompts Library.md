@@ -186,7 +186,62 @@ Based on everything completed in **Track 1 during this session** and the current
 ## 8. End of Session Review
 ### Progress Tracker Edit Script for Json tracker:
 ~~~markdown
+## Generate Progress Tracker JSON Patch
 
+Use the attached:
+
+- Project Specification
+- DevOps Career Roadmap
+- Progress Tracker V2 JSON
+
+Compare the current tracker with the current project state.
+
+Output only the minimal patch required to update the tracker.
+
+### Format
+
+Each change must follow this format:
+
+PATCH <number>
+
+Path:
+<JSON path>
+
+Operation:
+SET
+OR
+ADD
+OR
+REMOVE
+
+Old Value:
+<existing value>
+
+New Value:
+<replacement value>
+
+### Requirements
+
+- Generate only the changes that are required.
+- Every PATCH must reference exactly one JSON path.
+- The JSON path must uniquely identify the value being modified.
+- The Old Value must exactly match the current tracker.
+- The New Value must contain the complete replacement value.
+- Preserve every unchanged value exactly.
+- Update only the state object. Never modify the schema.
+- Update only the fields affected by the completed learning session.
+- Update technical confidence only when Track 4 completed a confidence assessment.
+- Update the revision queue only when confidence changes require it.
+- Do not mark roadmap progress as completed unless its completion criteria have been satisfied.
+- Do not modify unrelated state.
+- Do not explain the changes.
+- Do not generate the updated tracker.
+
+If no changes are required, output exactly:
+
+No changes.
+
+Wait for my confirmation before applying the patch.
 ~~~
 ### Progress Tracker Edit Script for Mardown tracker:
 
@@ -269,8 +324,34 @@ Do not generate the updated tracker.
 Wait for my confirmation before applying the edit script.
 
 ~~~
+## 9. Apply Progress Tracker Patch for Json Tracker
+~~~markdown
+## Apply Progress Tracker JSON Patch
 
-## 9. Apply Progress Tracker Patch
+Use:
+
+- The uploaded Progress Tracker V2 JSON as the base document.
+- The approved Progress Tracker JSON Patch, which may be either:
+  - included in the user's message, or
+  - the immediately preceding approved assistant response.
+
+Apply the approved patch to the tracker.
+
+The approved patch is the complete specification of the permitted changes.
+
+If any PATCH cannot be applied exactly, stop immediately and report the PATCH number and reason.
+
+Validate that:
+
+- Every PATCH was applied exactly once.
+- No PATCH was skipped.
+- No changes were made beyond the approved patch.
+
+Generate the updated Progress Tracker V2 as a JSON (".json") file.
+
+Return only the downloadable file.
+~~~
+## 9. Apply Progress Tracker Patch for Mardown Tracker
 ~~~markdown
 Apply Progress Tracker Edit Script
 
@@ -299,11 +380,73 @@ Generate the updated Project Progress Tracker as a Markdown (".md") file.
 
 Return only the downloadable file.
 ~~~
+## 10. Updated Project Json Progress Tracker Validation
+~~~markdown
+## Validate Progress Tracker JSON Patch
 
-## 10. Updated Project Progress Tracker Validation
+Use:
+
+- The original Progress Tracker V2 JSON.
+- The updated Progress Tracker V2 JSON.
+- The approved Progress Tracker JSON Patch, which may be either:
+  - included in the user's message, or
+  - the immediately preceding approved assistant response.
+
+Validate that the updated tracker is exactly the result of applying the approved patch to the original tracker.
+
+The approved patch completely defines every permitted modification.
+
+### Verify
+
+For each PATCH:
+
+- It was applied exactly once.
+- It was applied to the specified JSON path.
+- The specified operation was performed correctly.
+- The Old Value was replaced, added, or removed exactly as defined.
+
+Then verify that:
+
+- Every difference between the original and updated tracker is explained by the approved patch.
+- No additional changes were introduced.
+- No unrelated values were modified or removed.
+- The schema object is unchanged.
+- The updated tracker remains valid JSON.
+
+### Output
+
+If everything is correct, respond exactly:
+
+```text
+✅ PASS – The approved JSON patch was applied successfully.
+```
+
+Otherwise respond:
+
+```text
+❌ FAIL
+```
+
+Then list only the validation failures under the relevant headings (omit any heading with no issues):
+
+- Missing PATCHES
+- Incorrectly Applied PATCHES
+- Unexpected Changes
+- Removed Content
+- Invalid JSON
+- Modified Schema
+- Other Inconsistencies
+
+Do not suggest improvements.
+
+Do not rewrite the tracker.
+
+Only validate whether the approved JSON patch was applied correctly.
+~~~
+## 10. Updated Project Markdown Progress Tracker Validation
 
 ~~~markdown
-## Validate Progress Tracker Edit Script
+## Validate Progress Tracker Edit Script 
 
 Use:
 

@@ -1,0 +1,611 @@
+{
+  "schema": {
+    "metadata": {
+      "trackerVersion": "2.0.0",
+      "schemaVersion": "2.0.0",
+      "description": "Self-describing project progress tracker for the DevOps Career Roadmap.",
+      "stateVersioning": "Semantic",
+      "owner": "Nithish"
+    },
+    "enums": {
+      "status": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "DEFERRED",
+        "NOT_APPLICABLE"
+      ],
+      "confidenceStatus": [
+        "NOT_ASSESSED",
+        "ASSESSED"
+      ],
+      "priority": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "ownership": {
+      "currentPosition": [
+        "phase",
+        "iteration",
+        "section",
+        "article",
+        "track",
+        "status"
+      ],
+      "progress": [
+        "phases",
+        "iterations",
+        "sections",
+        "articles"
+      ],
+      "confidence": [
+        "allTechnologies"
+      ],
+      "revisionQueue": [
+        "allTechnologies"
+      ],
+      "tracks": [
+        "trackObjectives",
+        "trackDeliverables"
+      ],
+      "assets": [
+        "careerAssets"
+      ],
+      "deferred": [
+        "deferredItems"
+      ],
+      "focus": [
+        "currentLearningFocus"
+      ],
+      "actions": [
+        "nextActions"
+      ],
+      "health": [
+        "projectHealth"
+      ]
+    },
+    "objectDefinitions": {
+      "metadata": {
+        "required": true,
+        "mutable": false
+      },
+      "currentPosition": {
+        "required": true,
+        "mutable": true
+      },
+      "progress": {
+        "required": true,
+        "mutable": true
+      },
+      "confidence": {
+        "required": true,
+        "mutable": true
+      },
+      "revisionQueue": {
+        "required": true,
+        "mutable": true
+      },
+      "tracks": {
+        "required": true,
+        "mutable": true
+      },
+      "assets": {
+        "required": true,
+        "mutable": true
+      },
+      "deferred": {
+        "required": true,
+        "mutable": true
+      },
+      "focus": {
+        "required": true,
+        "mutable": true
+      },
+      "actions": {
+        "required": true,
+        "mutable": true
+      },
+      "health": {
+        "required": true,
+        "mutable": true
+      }
+    },
+    "validationRules": [
+      "JSON must be syntactically valid.",
+      "Schema object must never be modified.",
+      "Only the state object may change.",
+      "Every required object must exist.",
+      "No unexpected top-level objects may exist.",
+      "Every tracked fact has exactly one owner.",
+      "No duplicate state is permitted.",
+      "Enum values must match the schema.",
+      "Required fields cannot be removed.",
+      "Data types must remain unchanged."
+    ],
+    "updateRules": [
+      "Never modify the schema.",
+      "Update only mutable state fields.",
+      "Never duplicate information already owned by another object.",
+      "Preserve all unknown fields.",
+      "Do not reorder objects.",
+      "Do not rename keys.",
+      "Do not remove required objects.",
+      "Every update must be deterministic."
+    ]
+  },
+  "state": {
+    "metadata": {
+      "trackerVersion": "2.0.0",
+      "roadmapVersion": "1.0.0",
+      "lastUpdated": null
+    },
+    "currentPosition": {
+      "phase": {
+        "id": "PHASE_1",
+        "status": "IN_PROGRESS"
+      },
+      "iteration": {
+        "id": "ITERATION_3",
+        "status": "IN_PROGRESS"
+      },
+      "section": {
+        "id": "SECTION_7",
+        "status": "IN_PROGRESS"
+      },
+      "article": {
+        "current": 35,
+        "total": 350
+      },
+      "track": {
+        "id": "TRACK_1"
+      }
+    },
+    "progress": {
+      "phases": {
+        "PHASE_1": "IN_PROGRESS",
+        "PHASE_2": "NOT_STARTED",
+        "PHASE_3": "NOT_STARTED",
+        "PHASE_4": "NOT_STARTED",
+        "PHASE_5": "NOT_STARTED"
+      },
+      "iterations": {
+        "ITERATION_1": "COMPLETED",
+        "ITERATION_2": "COMPLETED",
+        "ITERATION_3": "IN_PROGRESS",
+        "ITERATION_4": "NOT_STARTED",
+        "ITERATION_5": "NOT_STARTED",
+        "ITERATION_6": "NOT_STARTED",
+        "ITERATION_7": "NOT_STARTED",
+        "ITERATION_8": "NOT_STARTED",
+        "ITERATION_9": "NOT_STARTED"
+      },
+      "sections": {
+        "SECTION_1": "COMPLETED",
+        "SECTION_2": "COMPLETED",
+        "SECTION_3": "COMPLETED",
+        "SECTION_4": "COMPLETED",
+        "SECTION_5": "COMPLETED",
+        "SECTION_6": "COMPLETED",
+        "SECTION_7": "IN_PROGRESS",
+        "SECTION_8": "NOT_STARTED",
+        "SECTION_9": "NOT_STARTED",
+        "SECTION_10": "NOT_STARTED"
+      },
+      "articles": {
+        "completed": 35,
+        "total": 350
+      }
+    },
+    "confidence": {
+      "linux": {
+        "recognition": 98,
+        "recall": 93,
+        "application": null,
+        "troubleshooting": null,
+        "overall": 95,
+        "status": "ASSESSED"
+      },
+      "git": {
+        "recognition": 93,
+        "recall": 85,
+        "application": null,
+        "troubleshooting": null,
+        "overall": 89,
+        "status": "ASSESSED"
+      },
+      "vagrant": {
+        "recognition": 96,
+        "recall": 91,
+        "application": null,
+        "troubleshooting": null,
+        "overall": 94,
+        "status": "ASSESSED"
+      },
+      "python": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "jsonYaml": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "networking": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "docker": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "jenkins": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "githubActions": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "gitlabCI": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "aws": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "terraform": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "ansible": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "kubernetes": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "monitoring": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      },
+      "gitOps": {
+        "recognition": null,
+        "recall": null,
+        "application": null,
+        "troubleshooting": null,
+        "overall": null,
+        "status": "NOT_ASSESSED"
+      }
+    },
+    "revisionQueue": {
+      "linux": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "git": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "vagrant": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "python": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "jsonYaml": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "networking": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "docker": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "jenkins": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "githubActions": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "gitlabCI": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "aws": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "terraform": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "ansible": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "kubernetes": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "monitoring": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      },
+      "gitOps": {
+        "status": "NOT_REQUIRED",
+        "priority": null,
+        "reason": null
+      }
+    },
+    "tracks": {
+      "track1": {
+        "status": "IN_PROGRESS",
+        "objective": "Complete the current technical section.",
+        "deliverables": {
+          "sectionCompletion": "IN_PROGRESS"
+        }
+      },
+      "track2": {
+        "status": "DEFERRED",
+        "objective": "Build recruiter-worthy GitHub projects.",
+        "deliverables": {
+          "careerRepository": "DEFERRED",
+          "linuxRepository": "DEFERRED",
+          "dockerRepository": "DEFERRED",
+          "terraformRepository": "DEFERRED",
+          "kubernetesRepository": "DEFERRED"
+        }
+      },
+      "track3": {
+        "status": "DEFERRED",
+        "objective": "Build public technical credibility.",
+        "deliverables": {
+          "technicalPosts": "DEFERRED",
+          "projectShowcase": "DEFERRED",
+          "linkedinFeatured": "DEFERRED"
+        }
+      },
+      "track4": {
+        "status": "IN_PROGRESS",
+        "objective": "Continuously improve interview readiness.",
+        "deliverables": {
+          "technicalConfidence": "IN_PROGRESS",
+          "revisionQueue": "IN_PROGRESS"
+        }
+      }
+    },
+    "assets": {
+      "technical": {
+        "awsAccount": {
+          "status": "COMPLETED"
+        },
+        "oracleCloudVM": {
+          "status": "COMPLETED"
+        },
+        "localLinuxEnvironment": {
+          "status": "COMPLETED"
+        },
+        "vagrantEnvironment": {
+          "status": "COMPLETED"
+        }
+      },
+      "github": {
+        "profile": {
+          "status": "COMPLETED"
+        },
+        "readme": {
+          "status": "COMPLETED"
+        },
+        "branding": {
+          "status": "COMPLETED"
+        }
+      },
+      "linkedin": {
+        "profile": {
+          "status": "COMPLETED"
+        },
+        "headline": {
+          "status": "COMPLETED"
+        },
+        "aboutSection": {
+          "status": "COMPLETED"
+        },
+        "brandingStrategy": {
+          "status": "COMPLETED"
+        }
+      },
+      "career": {
+        "roadmap": {
+          "status": "COMPLETED"
+        },
+        "projectSpecification": {
+          "status": "COMPLETED"
+        },
+        "progressTracker": {
+          "status": "COMPLETED"
+        }
+      }
+    },
+    "deferred": {
+      "careerRepository": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_REAL_PROJECT"
+      },
+      "linuxRepository": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_REAL_PROJECT"
+      },
+      "dockerRepository": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_REAL_PROJECT"
+      },
+      "terraformRepository": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_REAL_PROJECT"
+      },
+      "kubernetesRepository": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_REAL_PROJECT"
+      },
+      "technicalPosts": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_REAL_PROJECT"
+      },
+      "projectShowcase": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_REAL_PROJECT"
+      },
+      "resume": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_INTERVIEW_PHASE"
+      },
+      "mockInterviews": {
+        "status": "DEFERRED",
+        "reason": "WAIT_FOR_INTERVIEW_PHASE"
+      }
+    },
+    "focus": {
+      "technical": {
+        "status": "IN_PROGRESS",
+        "currentObjective": "Complete Section 7."
+      },
+      "projects": {
+        "status": "DEFERRED",
+        "currentObjective": "Wait until meaningful engineering projects begin."
+      },
+      "branding": {
+        "status": "DEFERRED",
+        "currentObjective": "Publish technical content after real projects."
+      },
+      "interview": {
+        "status": "IN_PROGRESS",
+        "currentObjective": "Maintain interview readiness for completed technologies."
+      }
+    },
+    "actions": {
+      "track1": {
+        "status": "CONTINUE",
+        "nextAction": "Complete the next roadmap section."
+      },
+      "track2": {
+        "status": "WAIT",
+        "nextAction": "Begin GitHub repositories after infrastructure projects."
+      },
+      "track3": {
+        "status": "WAIT",
+        "nextAction": "Publish technical content after recruiter-worthy work."
+      },
+      "track4": {
+        "status": "CONTINUE",
+        "nextAction": "Assess confidence after each completed section."
+      }
+    },
+    "health": {
+      "overall": {
+        "status": "HEALTHY"
+      },
+      "learning": {
+        "status": "ON_TRACK",
+        "confidenceCoverage": "IN_PROGRESS"
+      },
+      "projects": {
+        "status": "ON_TRACK"
+      },
+      "branding": {
+        "status": "ON_TRACK"
+      },
+      "interview": {
+        "status": "ON_TRACK"
+      },
+      "roadmap": {
+        "status": "ON_TRACK"
+      },
+      "risks": {
+        "active": [],
+        "blocked": false
+      },
+      "statistics": {
+        "completedPhases": 0,
+        "completedIterations": 2,
+        "completedSections": 6,
+        "completedArticles": 35,
+        "assessedTechnologies": 3,
+        "pendingRevisionTechnologies": 0
+      }
+    }
+  }
+}
