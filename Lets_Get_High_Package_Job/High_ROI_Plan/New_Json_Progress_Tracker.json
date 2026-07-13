@@ -149,7 +149,7 @@
       },
       "iteration": {
         "id": "ITERATION_3",
-        "status": "IN_PROGRESS"
+        "status": "COMPLETED"
       },
       "section": {
         "id": "SECTION_8",
@@ -174,7 +174,7 @@
       "iterations": {
         "ITERATION_1": "COMPLETED",
         "ITERATION_2": "COMPLETED",
-        "ITERATION_3": "IN_PROGRESS",
+        "ITERATION_3": "COMPLETED",
         "ITERATION_4": "NOT_STARTED",
         "ITERATION_5": "NOT_STARTED",
         "ITERATION_6": "NOT_STARTED",
@@ -190,7 +190,7 @@
         "SECTION_5": "COMPLETED",
         "SECTION_6": "COMPLETED",
         "SECTION_7": "COMPLETED",
-        "SECTION_8": "IN_PROGRESS",
+        "SECTION_8": "NOT_STARTED",
         "SECTION_9": "NOT_STARTED",
         "SECTION_10": "NOT_STARTED"
       },
@@ -233,11 +233,11 @@
         "status": "ASSESSED"
       },
       "jsonYaml": {
-        "recognition": 97,
-        "recall": 93,
+        "recognition": 95,
+        "recall": 90,
         "application": null,
         "troubleshooting": null,
-        "overall": 95,
+        "overall": 93,
         "status": "ASSESSED"
       },
       "networking": {
@@ -414,9 +414,9 @@
     "tracks": {
       "track1": {
         "status": "IN_PROGRESS",
-        "objective": "Begin Traditional Application Deployment by starting Section 8.",
+        "objective": "Complete the current technical section.",
         "deliverables": {
-          "sectionCompletion": "NOT_STARTED"
+          "sectionCompletion": "IN_PROGRESS"
         }
       },
       "track2": {
@@ -541,7 +541,7 @@
     "focus": {
       "technical": {
         "status": "IN_PROGRESS",
-        "currentObjective": "Begin Section 8 — VProfile Project Setup."
+        "currentObjective": "Begin Section 8 — VProfile Project Setup Manual & Automated."
       },
       "projects": {
         "status": "DEFERRED",
@@ -559,7 +559,7 @@
     "actions": {
       "track1": {
         "status": "CONTINUE",
-        "nextAction": "Begin Section 8 — VProfile Project Setup."
+        "nextAction": "Begin Section 8 — VProfile Project Setup Manual & Automated."
       },
       "track2": {
         "status": "WAIT",
@@ -600,7 +600,7 @@
       },
       "statistics": {
         "completedPhases": 0,
-        "completedIterations": 2,
+        "completedIterations": 3,
         "completedSections": 7,
         "completedArticles": 35,
         "assessedTechnologies": 5,
