@@ -144,6 +144,86 @@ Then:
 
 ```
 
+## Prompt — Engineering Debrief (End of Section)
+~~~markdown
+# Prompt — Engineering Debrief (End of Section)
+
+Use the attached **Project Specification**, **DevOps Career Roadmap**, **Project Progress Tracker**, and **all articles from the completed section** as the context.
+
+Assume I have successfully completed every practical in this section. During the section, my priority was execution and producing a working implementation. This debrief exists to convert that completed work into a compact engineering mental model before moving to the next section.
+
+Produce an **Engineering Debrief** that maximizes **engineering understanding per minute invested**.
+
+The output should contain the following sections.
+
+---
+
+## 1. Big Picture
+
+Present the completed section as one coherent system rather than a collection of articles.
+
+Explain:
+
+* What was built.
+* Why it exists.
+* The problem it solves.
+* How the major components interact.
+* The end-to-end system flow.
+* The single mental model that best represents the section.
+
+The goal is that I can explain and sketch the architecture from memory.
+
+---
+
+## 2. Engineering Thinking
+
+Develop engineering intuition using a small set of representative real-world scenarios from this section.
+
+For each scenario, explain:
+
+* The observed symptom.
+* How an experienced engineer would reason about it.
+* How the problem space is narrowed before investigating specific commands or tools.
+
+Focus on reasoning rather than procedures.
+
+---
+
+## 3. Engineering Invariants
+
+Extract the highest-value engineering principles from this section.
+
+Include only concepts that remain useful even if the specific technology changes.
+
+Prefer transferable architecture, infrastructure, deployment, networking, automation, and operational principles over technology-specific details.
+
+---
+
+## 4. Interview Compression
+
+Provide explanations suitable for interviews in three formats:
+
+* 30-second explanation
+* 2-minute explanation
+* 5-minute explanation
+
+The explanations should demonstrate genuine engineering understanding rather than course memorization.
+
+---
+
+## Success Criteria
+
+The debrief should:
+
+* Maximize engineering understanding while minimizing review time.
+* Merge overlapping concepts instead of following the article structure.
+* Avoid repeating Track 1 content, installation procedures, commands, or configuration syntax unless essential for understanding.
+* Focus on mental models, engineering reasoning, and transferable principles.
+* Leave me confident explaining, reasoning about, and discussing the completed section in an engineering interview.
+* Prepare me to continue to the next section without needing to revisit the completed articles.
+
+
+~~~
 ## Upload all the articles again, tell those are completed (tell track 2 and track 3 also if nothing is there)
 ## Paste the track 2 suggesstion and complete it if any
 ## Paste the track 3 sugesstion and complete it if any
