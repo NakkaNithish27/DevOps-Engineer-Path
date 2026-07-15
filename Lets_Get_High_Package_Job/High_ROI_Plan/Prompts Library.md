@@ -183,7 +183,7 @@ Based on everything completed in **Track 1 during this session** and the current
 
 ```
 
-##7.2 Prompt — Interview Answer Reviewer
+## 7.2 Prompt — Interview Answer Reviewer
 ~~~markdown
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
