@@ -183,6 +183,92 @@ Based on everything completed in **Track 1 during this session** and the current
 
 ```
 
+##7.2 Prompt — Interview Answer Reviewer
+~~~markdown
+
+Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+
+My answers are responses to interview questions based on the technologies and topics completed so far in the roadmap.
+
+Assume I answered **without looking at notes**.
+
+The objective of this prompt is **not** to generate interview questions.
+
+Its only responsibility is to review and improve my interview answers.
+
+For **every answer I provide**, perform the following:
+
+---
+
+## 1. My Answer
+
+Show **my original answer exactly as I wrote it**.
+
+* Do **not** rewrite it.
+* Do **not** correct it.
+* Do **not** improve it.
+* Preserve my wording so I can compare it with the improved version.
+
+---
+
+## 2. Interview Quality Improvement
+
+Internally evaluate my answer for:
+
+* Missing technical concepts.
+* Incorrect understanding.
+* Weak or imprecise wording.
+* Missing interview points.
+* Incomplete explanations.
+
+Do **not** show this internal evaluation.
+
+Instead, provide a rewritten answer that:
+
+* Preserves my current level of technical knowledge.
+* Fills only the important knowledge gaps appropriate for my current roadmap stage.
+* Uses accurate technical terminology naturally.
+* Sounds like an engineer with approximately **3–5 years of DevOps experience** answering in a technical interview.
+* Remains completely aligned with the technologies and concepts I have already completed.
+* Does **not** introduce advanced topics from future roadmap sections simply to make the answer sound more senior.
+* Produces an answer that I could realistically explain during a real interview.
+
+---
+
+## 3. Why This Answer Is Better
+
+Briefly explain why the improved answer is stronger.
+
+Focus on improvements such as:
+
+* Better technical terminology.
+* More complete explanation.
+* Better logical structure.
+* More professional interview wording.
+* Important concepts that were added.
+* Improved clarity.
+
+Do **not** critique my original answer line by line.
+
+The objective is to teach me how experienced engineers communicate the same technical knowledge professionally.
+
+---
+
+# General Rules
+
+* Review every answer independently.
+* Preserve the intent of my original answer whenever possible.
+* Correct factual mistakes.
+* Fill important knowledge gaps appropriate to my current roadmap stage.
+* Keep answers concise but interview-ready.
+* Optimize for real technical interviews rather than textbook definitions.
+* Show my original answer before the improved answer so I can easily compare the two.
+* Do not ask follow-up questions unless my answer is too ambiguous to improve accurately.
+* Do not introduce technologies, production practices, or concepts that belong to future sections of the roadmap.
+* The goal is to help me progressively improve both my **technical understanding** and my **professional interview communication**, not simply to provide model answers.
+
+~~~
+
 ## 8. End of Session Review
 ### Progress Tracker Edit Script for Json tracker:
 ~~~markdown
