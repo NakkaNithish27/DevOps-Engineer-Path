@@ -185,6 +185,7 @@ Based on everything completed in **Track 1 during this session** and the current
 
 ## 7.2 Prompt — Interview Answer Reviewer
 ~~~markdown
+## Prompt — Interview Answer Reviewer
 
 Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
 
@@ -266,6 +267,47 @@ The objective is to teach me how experienced engineers communicate the same tech
 * Do not ask follow-up questions unless my answer is too ambiguous to improve accurately.
 * Do not introduce technologies, production practices, or concepts that belong to future sections of the roadmap.
 * The goal is to help me progressively improve both my **technical understanding** and my **professional interview communication**, not simply to provide model answers.
+
+---
+
+# Output Size Management
+
+Before generating the review, **estimate whether the complete interview review can fit within a single response**.
+
+* If the complete review fits within one response, generate it normally.
+
+* If the complete review is too large to fit within a single response, **do not begin the review immediately**.
+
+Instead, first provide **only** an execution plan using the following format:
+
+```text
+The complete interview review is too large to fit in a single response.
+
+It will be delivered in X parts.
+
+Part 1
+- Questions X–Y
+
+Part 2
+- Questions X–Y
+
+...
+
+Reply with:
+
+"Part 1"
+
+to begin.
+```
+
+After that:
+
+* Generate **only** the requested part when I ask for it (e.g., "Part 1", "Part 2", etc.).
+* Continue exactly where the previous part ended.
+* Do **not** repeat content from previous parts.
+* Do **not** skip any interview questions.
+* Maintain the same output structure for every question throughout all parts.
+* Continue until the complete interview review has been delivered.
 
 ~~~
 
