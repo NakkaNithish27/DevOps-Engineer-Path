@@ -144,10 +144,6 @@ Then:
 
 ```
 
-## Upload all the articles again, tell those are completed (tell track 2 and track 3 also if nothing is there)
-## Paste the track 2 suggesstion and complete it if any
-## Paste the track 3 sugesstion and complete it if any
-
 ## 7. Track 4 ‚Äì Interview & Job Conversion Assessment
 
 ```markdown
@@ -311,66 +307,127 @@ After that:
 
 ~~~
 
-## 8. End of Session Review
+##  8.0 Tell ai about all tracks result
+
+## 8.1 End of Session Review
 ### Progress Tracker Edit Script for Json tracker:
 ~~~markdown
-# Generate Progress Tracker JSON Patch
+Generate Execution Tracker JSON Patch
 
 Use the attached:
 
-* Project Specification
-* DevOps Career Roadmap
-* Progress Tracker V2 JSON
+- Project Specification
+- Project Roadmap
+- Execution Tracker JSON
 
-Compare the current tracker with the current project state.
+Compare the current Execution Tracker with the current project state.
 
-Output only the minimal patch required to synchronize the tracker with the current project state.
-
----
-
-## Tracker Philosophy
-
-The Progress Tracker is the project's **live execution state**, not a historical record.
-
-Its purpose is to represent the project's **current actionable state**. After applying the generated patch, the tracker should answer:
-
-> **"If I open this tracker tomorrow, what should I work on next?"**
-
-rather than:
-
-> **"What was the last thing I completed?"**
-
-Whenever a roadmap milestone (such as an article, section, iteration, or phase) has satisfied its completion criteria, the tracker must:
-
-* Mark the milestone as completed.
-* Advance the current working position to the next logical roadmap item, if one exists.
-* Update every dependent field required to keep the tracker internally consistent.
-
-Do not leave the tracker pointing at a completed milestone unless there is intentionally no next milestone.
+Output only the minimal JSON patch required to synchronize the Execution Tracker with the current project state.
 
 ---
 
-## Roadmap Hierarchy Requirement
+Execution Tracker Philosophy
 
-The **DevOps Career Roadmap** is the authoritative source for the project hierarchy:
+The Execution Tracker is the project's persistent execution memory.
 
-**Phase ‚Üí Iteration ‚Üí Section ‚Üí Article**
+It stores only the smallest set of execution facts that cannot be reconstructed from the static project documents.
 
-When determining the current project state or generating updates, use this hierarchy to determine the correct roadmap position.
+The Execution Tracker is not:
 
-If completing a roadmap milestone advances the project to the next milestone, update every affected level of the roadmap hierarchy so the tracker remains synchronized with the roadmap.
+- a dashboard
+- a progress report
+- a roadmap
+- a summary
+- a historical log
 
-Never leave different levels of the roadmap hierarchy referring to different logical positions (for example, a completed iteration with a current section that belongs to the next iteration).
+Instead, it is the project's single source of execution truth.
 
-If the **Progress Tracker** and the **DevOps Career Roadmap** disagree about the current roadmap position, treat the **DevOps Career Roadmap** as the authoritative source for roadmap progression and generate the patch required to reconcile the tracker.
+Every change must preserve this philosophy.
 
 ---
 
-## Format
+Design Principles
+
+For every potential change, apply the following rules.
+
+Rule 1 ó Store only execution state
+
+Store only facts that represent something that actually happened.
+
+Examples include:
+
+- completed work
+- execution notes
+- assessments
+- decisions
+- deferred work
+- created references
+- execution artifacts
+
+---
+
+Rule 2 ó Never store derived information
+
+If information can be reconstructed from:
+
+- the Project Specification
+- the Project Roadmap
+- other execution state already stored
+
+do not store it.
+
+Examples of derived information include:
+
+- current phase
+- current iteration
+- current section
+- current article
+- dashboards
+- progress percentages
+- summaries
+- health
+- recommendations
+- next actions
+- generated reports
+
+These must always be derived dynamically.
+
+---
+
+Rule 3 ó Preserve single ownership
+
+Every execution fact must have exactly one owner.
+
+Never duplicate execution state.
+
+If information naturally belongs to a section, deferment, assessment, reference, or another execution unit, update only that owner.
+
+---
+
+Rule 4 ó Keep the tracker minimal
+
+Only modify execution state that actually changed.
+
+Never reorganize the tracker.
+
+Never rewrite existing data unless it is necessary to keep the execution state correct.
+
+---
+
+Rule 5 ó Respect the roadmap
+
+The Project Roadmap is the authoritative definition of project structure and completion criteria.
+
+Only record execution state that satisfies the roadmap's documented completion requirements.
+
+If the tracker and roadmap disagree, generate the minimal patch necessary to reconcile the tracker with the roadmap.
+
+---
+
+Patch Format
 
 Each change must follow this format:
 
-```text
 PATCH <number>
 
 Path:
@@ -388,133 +445,119 @@ Old Value:
 
 New Value:
 <replacement value>
-```
 
 ---
 
-## Requirements
+Requirements
 
-* Generate only the changes required to produce a fully synchronized and internally consistent tracker.
-* Every PATCH must reference exactly one JSON path.
-* The JSON path must uniquely identify the value being modified.
-* The Old Value must exactly match the current tracker.
-* The New Value must contain the complete replacement value.
-* Preserve every unchanged value exactly.
-* Update only the `state` object. Never modify the `schema`.
-* Update only the fields affected by the completed work and any dependent fields required to keep the tracker synchronized.
-* Do not mark roadmap progress as completed unless its documented completion criteria have been satisfied.
-* Respect deferred deliverables. A deliverable intentionally deferred by the roadmap counts as satisfied when the roadmap explicitly specifies that it should remain deferred at the current stage.
-* Update technical confidence only when Track 4 completed a confidence assessment.
-* Update only the technologies assessed during this session.
-* Update the Technical Revision Queue only when the confidence assessment changes its required state.
-* Generate the smallest possible set of PATCH operations that leaves the tracker fully synchronized and internally consistent.
-* Do not modify unrelated state.
-* Do not generate redundant patches.
-
----
-
-## Consistency Requirement
-
-The generated patch must leave the tracker in a **fully synchronized and internally consistent state**.
-
-Whenever a roadmap milestone changes state, update every dependent field that must also change so that:
-
-* the tracker remains internally consistent,
-* every level of the roadmap hierarchy matches the current project state,
-* no part of the tracker references an outdated or completed roadmap item when a logical next item exists,
-* and no two parts of the tracker contradict each other.
+- Generate only the minimal set of PATCH operations required.
+- Every PATCH must reference exactly one JSON path.
+- The JSON path must uniquely identify the value being modified.
+- The Old Value must exactly match the current tracker.
+- The New Value must contain the complete replacement value.
+- Preserve every unchanged value exactly.
+- Do not restructure the tracker.
+- Do not introduce new schema elements unless explicitly required by the project.
+- Do not duplicate execution state.
+- Do not store derived information.
+- Modify only execution state that changed during this iteration.
+- Respect deferred work recorded in the roadmap.
+- Update assessments only when a new assessment has actually been completed.
+- Update references only when a new project reference has been created or an existing reference has changed.
+- Generate the smallest possible patch.
+- Do not generate redundant PATCH operations.
 
 ---
 
-## Output Rules
+Consistency Requirement
 
-* Do not explain the changes.
-* Do not generate the updated tracker.
+After applying the generated patch:
+
+- every stored execution fact must remain correct,
+- no execution fact may contradict another,
+- no duplicate execution state may exist,
+- every execution fact must have a single owner,
+- and every stored value must represent persistent execution state rather than derived information.
+
+---
+
+Output Rules
+
+- Do not explain the changes.
+- Do not generate the updated tracker.
 
 If no changes are required, output exactly:
 
-```text
 No changes.
-```
 
 Wait for my confirmation before applying the patch.
-
 ~~~
 
 ## 9. Apply Progress Tracker Patch for Json Tracker
 ~~~markdown
-## Apply Progress Tracker JSON Patch
+Apply Execution Tracker JSON Patch
 
 Use:
 
-- The uploaded Progress Tracker V2 JSON as the base document.
-- The approved Progress Tracker JSON Patch, which may be either:
-  - included in the user's message, or
-  - the immediately preceding approved assistant response.
+- The uploaded Execution Tracker JSON as the base document.
+- The approved Execution Tracker JSON Patch, provided either:
+  - in the user's message, or
+  - in the immediately preceding approved assistant response.
 
-Apply the approved patch to the tracker.
+Apply the approved patch to the Execution Tracker.
 
-The approved patch is the complete specification of the permitted changes.
+The updated tracker must satisfy all of the following:
 
-If any PATCH cannot be applied exactly, stop immediately and report the PATCH number and reason.
+- Every PATCH has been applied exactly once.
+- No PATCH has been skipped.
+- No changes have been made beyond those specified by the approved patch.
+- The resulting JSON is valid.
+- The tracker structure is unchanged unless the approved patch explicitly modifies it.
 
-Validate that:
+If any PATCH cannot be applied exactly, stop immediately and report the PATCH number and the reason.
 
-- Every PATCH was applied exactly once.
-- No PATCH was skipped.
-- No changes were made beyond the approved patch.
-
-Generate the updated Progress Tracker V2 as a JSON (".json") file.
+Output the updated Execution Tracker as a ".json" file.
 
 Return only the downloadable file.
 ~~~
 
 ## 10. Updated Project Json Progress Tracker Validation
 ~~~markdown
-## Validate Progress Tracker JSON Patch
+Validate Execution Tracker JSON Patch
 
 Use:
 
-- The original Progress Tracker V2 JSON.
-- The updated Progress Tracker V2 JSON.
-- The approved Progress Tracker JSON Patch, which may be either:
-  - included in the user's message, or
-  - the immediately preceding approved assistant response.
+- The original Execution Tracker JSON.
+- The updated Execution Tracker JSON.
+- The approved Execution Tracker JSON Patch, provided either:
+  - in the user's message, or
+  - in the immediately preceding approved assistant response.
 
-Validate that the updated tracker is exactly the result of applying the approved patch to the original tracker.
+Validate whether the updated Execution Tracker is exactly the result of applying the approved patch to the original Execution Tracker.
 
-The approved patch completely defines every permitted modification.
+The approved patch is the complete specification of all permitted changes.
 
-### Verify
+Validation Criteria
 
-For each PATCH:
+Confirm that:
 
-- It was applied exactly once.
-- It was applied to the specified JSON path.
-- The specified operation was performed correctly.
-- The Old Value was replaced, added, or removed exactly as defined.
-
-Then verify that:
-
+- Every approved PATCH has been applied correctly.
+- No approved PATCH has been omitted.
+- No approved PATCH has been applied incorrectly.
 - Every difference between the original and updated tracker is explained by the approved patch.
-- No additional changes were introduced.
-- No unrelated values were modified or removed.
-- The schema object is unchanged.
-- The updated tracker remains valid JSON.
+- No additional modifications have been introduced.
+- The tracker structure is unchanged unless explicitly modified by the approved patch.
+- The updated tracker is valid JSON.
 
-### Output
+Output
 
-If everything is correct, respond exactly:
+If the validation succeeds, respond exactly:
 
-```text
-‚úÖ PASS ‚Äì The approved JSON patch was applied successfully.
-```
+ PASS ñ The approved JSON patch was applied successfully.
 
-Otherwise respond:
+Otherwise respond exactly:
 
-```text
-‚ùå FAIL
-```
+ FAIL
 
 Then list only the validation failures under the relevant headings (omit any heading with no issues):
 
@@ -523,12 +566,12 @@ Then list only the validation failures under the relevant headings (omit any hea
 - Unexpected Changes
 - Removed Content
 - Invalid JSON
-- Modified Schema
+- Modified Structure
 - Other Inconsistencies
 
 Do not suggest improvements.
 
 Do not rewrite the tracker.
 
-Only validate whether the approved JSON patch was applied correctly.
+Only determine whether the approved JSON patch was applied correctly.
 ~~~
