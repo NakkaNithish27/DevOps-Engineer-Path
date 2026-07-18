@@ -311,19 +311,49 @@ After that:
 
 ## 8.1 Progress Tracker Log
 ~~~markdown
-Go through the attached pdf that contains this entire chat conversation, and Progress_Tracker document that contains previous chat sessions logs. Generate a Markdown session log that captures everything meaningfully accomplished during this conversation.
+Go through the attached PDF containing this entire chat conversation and the attached Progress_Tracker document containing previous session logs.
 
-Include completed work, important decisions, problems encountered, solutions, files created or modified, and any information that will help continue the project in future sessions.
+Generate a concise Markdown session log that records the highest-value permanent outcomes of this session.
 
-Do not include unfinished discussions, abandoned ideas, or conversational filler.
+The log should function as an append-only execution history for the project, documenting only information that will remain useful in future sessions.
 
-The output should be written naturally without following a fixed template or mandatory headings. Organize the information in whatever way best reflects the work completed during the session.
+Include, where applicable:
 
-Assume this Markdown file is the project's long-term execution history. Include enough context that someone reading it months later can understand what was accomplished and what should happen next.
+Completed work and milestones reached.
 
-Keep the summary between 200 and 500 words. If very little was accomplished, write less. If a lot was accomplished, prioritize the highest-value information instead of trying to include everything.
+Important decisions or changes in direction.
 
-Return only the Markdown content, ready to append to the end of "Progress_Tracker.md".
+Significant problems encountered and their resolutions.
 
-Also include a line breaker at the end, and give the output in writing block.
+Files, documents, or major artifacts created or modified.
+
+Important insights or conclusions that affect future work.
+
+The logical next starting point for the project.
+
+
+Do not include:
+
+Unfinished discussions.
+
+Abandoned ideas.
+
+Brainstorming or conversational filler.
+
+Step-by-step learning notes or explanations unless they produced a lasting project decision.
+
+Minor implementation details that can be recovered from project files or documentation.
+
+
+Prioritize recording what changed rather than everything that was discussed. If several related tasks were completed, summarize them together instead of listing every individual activity.
+
+Write naturally without following a fixed template or mandatory headings. Organize the information in whatever structure best reflects the completed work.
+
+Assume someone will read this log months later to understand the project's evolution. Include enough context for continuity, but avoid repeating information already captured in previous session logs unless it changed during this session.
+
+Target approximately 150–300 words. If very little was accomplished, write less. If an unusually large amount was accomplished, remain concise by recording only the most important outcomes.
+
+Return only the Markdown content, enclosed in a fenced Markdown code block, ready to append to the end of Progress_Tracker.md.
+
+End the output with a horizontal rule (---) to serve as the session separator.
 ~~~
