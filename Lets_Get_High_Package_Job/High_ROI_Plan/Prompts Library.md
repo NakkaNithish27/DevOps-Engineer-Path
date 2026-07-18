@@ -324,4 +324,6 @@ Assume this Markdown file is the project's long-term execution history. Include 
 Keep the summary between 200 and 500 words. If very little was accomplished, write less. If a lot was accomplished, prioritize the highest-value information instead of trying to include everything.
 
 Return only the Markdown content, ready to append to the end of "Progress_Tracker.md".
+
+Also include a line breaker at the end, and give the output in writing block.
 ~~~
