@@ -12,6 +12,7 @@ This session also established several long-term project decisions. The objective
 
 At the end of this session, the development environment, AWS account, billing protection, DuckDNS configuration, and primary cloud strategy were all in place, providing a solid foundation for the remaining sections of the roadmap.
 
+---
 Session — Virtualization, Linux Foundation & Git
 
 Completed the virtual development environment by installing and configuring VirtualBox and Vagrant. Established a repeatable local lab environment that can be recreated whenever required, providing a reliable foundation for future multi-machine DevOps projects. Built confidence in using Vagrant for managing virtual machines and provisioning development environments.
@@ -22,6 +23,7 @@ Moved on to Git and version control. Learned the complete Git workflow, includin
 
 By the end of this phase, a stable virtual lab environment, strong Linux administration skills, and a professional version control workflow were established, forming the technical foundation required for the remaining DevOps roadmap.
 
+---
 Session — Infrastructure Automation, Multi-VM Environments, Variables, JSON & YAML
 
 Continued building practical DevOps skills by focusing on development environment automation and configuration management concepts. Used Vagrant to move beyond manually created virtual machines and built reproducible Infrastructure as Code (IaC) environments capable of provisioning complete development setups automatically.
@@ -33,4 +35,40 @@ Studied variables, JSON, and YAML, gaining an understanding of how structured da
 Throughout this phase, an important portfolio decision was reinforced: learning notes and small practice exercises would not be published as standalone GitHub repositories. Instead, GitHub would be reserved for projects that demonstrate meaningful engineering capability and are valuable to recruiters. This decision keeps the future portfolio focused on quality over quantity.
 
 By the end of this session, development environment automation, Infrastructure as Code fundamentals, multi-VM provisioning, Linux service management, and structured configuration formats had become part of the core technical foundation, preparing the way for larger deployment projects in the next stage of the roadmap.
+
+---
+Session — Section 8 Complete: VProfile Multi-Tier Application Deployment
+
+Completed Section 8 — VProfile Project Setup (Manual & Automated), marking the completion of the first major traditional application deployment project in the DevOps roadmap. This concluded all articles in the section, covering both manual deployment and automated provisioning workflows. 
+
+The completed work established a solid understanding of deploying and operating a traditional multi-tier application stack consisting of Nginx, Tomcat, RabbitMQ, Memcached, and MySQL/MariaDB across separate virtual machines. The session reinforced service lifecycle management with systemd, application packaging and deployment using Maven and WAR files, database initialization and remote access configuration, cache and messaging infrastructure, firewall configuration, deployment validation, and end-to-end request flow through the application stack. Special emphasis was placed on understanding the architecture, service interactions, validation techniques, and common troubleshooting patterns rather than memorizing commands.  
+
+The automation portion demonstrated how the manual deployment process is transformed into reproducible infrastructure using Vagrant provisioning with Bash scripts. The key takeaway was the shift from interactive administration to non-interactive provisioning suitable for Infrastructure as Code. Concepts such as one provisioning script per VM, heredoc usage, shell variables, provisioning lifecycle, and automation-friendly configuration patterns were identified as the primary learning objectives because they form the conceptual foundation for later technologies including Ansible, Terraform, cloud-init, CI/CD pipelines, and Kubernetes bootstrapping. 
+
+Track 2 (Projects & GitHub Evolution) was reviewed after completing the technical work. A deliberate portfolio decision was reaffirmed: no GitHub repositories should be created for this section. Although the VProfile deployment and Vagrant automation provide valuable learning, they are intermediate implementations that will later be superseded by stronger cloud-native projects. All repository ideas related to VProfile deployment, provisioning, architecture documentation, deployment guides, and automation documentation remain intentionally deferred until they become part of larger production-grade projects.
+
+Track 3 (Personal Branding & Communication) reached the same conclusion. No LinkedIn posts, technical articles, project walkthroughs, or public-facing communication assets should be published at this stage. Professional communication will remain deferred until complete engineering solutions involving Docker, cloud infrastructure, Infrastructure as Code, Kubernetes, CI/CD, and GitOps can be presented as cohesive portfolio projects.
+
+With Section 8 complete, the roadmap is ready to continue into Section 9 — Networking, followed by Section 10 — Introducing Containers, before performing the Iteration 4 interview readiness assessment and updating the project progress tracker.  
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
