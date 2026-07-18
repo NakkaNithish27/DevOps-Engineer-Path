@@ -311,7 +311,7 @@ After that:
 
 ## 8.1 Progress Tracker Log
 ~~~markdown
-Go through the attached pdf that contains this entire chat conversation, generate a Markdown session log that captures everything meaningfully accomplished during this conversation.
+Go through the attached pdf that contains this entire chat conversation, and Progress_Tracker document that contains previous chat sessions logs. Generate a Markdown session log that captures everything meaningfully accomplished during this conversation.
 
 Include completed work, important decisions, problems encountered, solutions, files created or modified, and any information that will help continue the project in future sessions.
 
