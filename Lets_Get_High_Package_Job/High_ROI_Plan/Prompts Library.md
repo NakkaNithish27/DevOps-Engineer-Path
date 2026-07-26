@@ -458,7 +458,7 @@ After that:
 * Continue until the complete interview review has been delivered.
 
 ~~~
-## Listen to the interview question and answers:
+## Get ai narration friendly interview question and answers:
 ~~~markdown
 I am attaching the entire conversation for you. From all the parts interview review, read the interview questions along with their final interview-quality answers and convert them into a clean Interview Preparation Handbook.
 
@@ -511,6 +511,11 @@ The final output should read like a clean interview handbook containing only que
 Note:
 
 If the output exceeds the response limit, split it into multiple parts while preserving the numbering. Tell me how many parts you can give me the output.
+~~~
+
+## Use the below prompt twice, one without voice agent and again with voice agent enable: ( This is new thing I found)
+~~~
+Read out these interview question and answer to me as it is, did you understand what I mean?
 ~~~
 ##  8.0 Tell ai about all tracks result
 
