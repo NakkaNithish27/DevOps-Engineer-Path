@@ -513,9 +513,9 @@ Note:
 If the output exceeds the response limit, split it into multiple parts while preserving the numbering. Tell me how many parts you can give me the output.
 ~~~
 
-## Use the below prompt twice, one without voice agent and again with voice agent enable: ( This is new thing I found)
-~~~
-Read out these interview question and answer to me as it is, did you understand what I mean?
+## Listen using gemini voice agent 
+~~~markdown
+Narrate me the attached document as it is.
 ~~~
 ##  8.0 Tell ai about all tracks result
 
