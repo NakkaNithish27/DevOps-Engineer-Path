@@ -306,7 +306,7 @@ After that:
 * Continue until the complete interview review has been delivered.
 
 ~~~
-## With Recall Mapping 
+## Prompt — Interview Answer Reviewer With Recall Mapping 
 ~~~markdown
 # Prompt — Interview Answer Reviewer
 
@@ -457,6 +457,69 @@ After that:
 * Maintain the same output structure for every question throughout all parts.
 * Continue until the complete interview review has been delivered.
 
+~~~
+## Listen to the interview question and answers:
+~~~markdown
+From all the parts, using the interview questions along with their final interview-quality answers.
+
+Your task is to convert them into a clean Interview Preparation Handbook.
+
+Instructions
+
+For each question, output only:
+
+The question.
+
+The interview-quality answer immediately below it.
+
+
+Do not include:
+
+"Answer:"
+
+"Interview Quality Answer"
+
+"My Answer"
+
+"Why This Answer Is Better"
+
+"Recall Mapping"
+
+Scores
+
+Feedback
+
+Notes
+
+Tips
+
+Any headings or commentary.
+
+
+Preserve the original question numbering and order.
+
+Do not modify, rewrite, improve, shorten, expand, or paraphrase the interview-quality answers. Copy them exactly as provided.
+
+If the output exceeds the response limit, split it into multiple parts while preserving the numbering.
+
+
+Output Format
+
+1. <Question>
+
+<Interview-quality answer>
+
+2. <Question>
+
+<Interview-quality answer>
+
+3. <Question>
+
+<Interview-quality answer>
+
+...
+
+The final output should read like a clean interview handbook containing only questions and their corresponding interview-quality answers.
 ~~~
 ##  8.0 Tell ai about all tracks result
 
