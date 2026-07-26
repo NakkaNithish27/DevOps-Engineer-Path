@@ -460,9 +460,7 @@ After that:
 ~~~
 ## Listen to the interview question and answers:
 ~~~markdown
-From all the parts, using the interview questions along with their final interview-quality answers.
-
-Your task is to convert them into a clean Interview Preparation Handbook.
+I am attaching the entire conversation for you. From all the parts interview review, read the interview questions along with their final interview-quality answers and convert them into a clean Interview Preparation Handbook.
 
 Instructions
 
@@ -471,7 +469,6 @@ For each question, output only:
 The question.
 
 The interview-quality answer immediately below it.
-
 
 Do not include:
 
@@ -495,31 +492,25 @@ Tips
 
 Any headings or commentary.
 
-
 Preserve the original question numbering and order.
 
 Do not modify, rewrite, improve, shorten, expand, or paraphrase the interview-quality answers. Copy them exactly as provided.
 
-If the output exceeds the response limit, split it into multiple parts while preserving the numbering.
-
-
 Output Format
 
-1. <Question>
+1. <Question>          
 
-<Interview-quality answer>
+<Interview-quality answer>          2. <Question>          
 
-2. <Question>
+<Interview-quality answer>          3. <Question>          
 
-<Interview-quality answer>
-
-3. <Question>
-
-<Interview-quality answer>
-
-...
+<Interview-quality answer>          ...
 
 The final output should read like a clean interview handbook containing only questions and their corresponding interview-quality answers.
+
+Note:
+
+If the output exceeds the response limit, split it into multiple parts while preserving the numbering. Tell me how many parts you can give me the output.
 ~~~
 ##  8.0 Tell ai about all tracks result
 
