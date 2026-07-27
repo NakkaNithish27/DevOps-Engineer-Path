@@ -116,6 +116,11 @@ Based on everything completed in **Track 1 during this session** and the current
 ```
 
 ## 4. Track 1 – Core Technical Building
+### Get as image
+~~~markdown
+/handwritten + /visualizelearning: convert the attached document into image, preserve everything in a one image, you can avoid duplicate information.
+~~~
+### Get in Chat
 
 ```markdown
 ## Track 1 – Core Technical Building
