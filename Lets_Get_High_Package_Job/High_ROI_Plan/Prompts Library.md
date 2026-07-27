@@ -120,6 +120,43 @@ Based on everything completed in **Track 1 during this session** and the current
 ~~~markdown
 /handwritten + /visualizelearning: convert the attached document into image, preserve everything in a one image, you can avoid duplicate information.
 ~~~
+~~~markdown
+/handwritten + /visualizelearning
+
+Transform the attached document into a single handwritten visual learning sheet.
+
+## Objective
+
+Create a **high-density visual learning companion** for the document. The image should maximise understanding, recall, revision speed, and practical execution while complementing the original document rather than replacing it.
+
+## Requirements
+
+- Preserve all important concepts, workflows, relationships, dependencies, practical procedures, and key technical details from the source. Remove duplicated, redundant, and low-value explanatory content where appropriate.
+- Preserve the original document hierarchy, pedagogical flow, dependencies, relationships, workflows, execution order, and meaning. Do not reorder or redesign the document structure.
+- Ignore the document's **Mental Map**, **Mental Compression Map**, **Summary**, or equivalent revision section. Do not include it in the image.
+- Prioritise **practical content** over theory while preserving the original document hierarchy. Allocate more visual space and emphasis to practical procedures, workflows, commands, verification steps, troubleshooting, warnings, and decision points.
+- Include the theory required to understand the practical work, presenting it as concisely as possible without losing the core concepts.
+- Preserve all essential technical details accurately, including commands, code snippets, configuration, syntax, filenames, shortcuts, examples, warnings, verification steps, decision points, and practical procedures.
+- Optimise the image for **rapid visual scanning and memory recall**. Prefer concise notes, workflows, diagrams, arrows, comparisons, grouping, and visual cues over long paragraphs wherever possible.
+- Present the content as a cohesive handwritten engineering notebook or whiteboard, using natural handwritten layouts, annotations, callouts, sketches, icons, colour, and visual hierarchy to improve understanding and retention.
+- Maximise information density while maintaining readability.
+- Produce exactly one high-resolution image representing the entire document.
+
+## Success Criteria
+
+The generated image should function as a **visual learning companion** to the original document.
+
+After studying the original document once, a learner should be able to use only the image to:
+
+- Quickly reconstruct the complete topic.
+- Recall the important concepts, relationships, and workflows.
+- Revise the topic efficiently.
+- Perform the practical workflows with confidence.
+- Remember the important commands, procedures, warnings, verification steps, and decision points.
+- Know when to return to the original document for deeper explanations or implementation details.
+
+The image should minimise rereading of the document while significantly accelerating understanding, recall, revision, and practical execution.
+~~~
 ### Get in Chat
 
 ```markdown
