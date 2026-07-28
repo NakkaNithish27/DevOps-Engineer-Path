@@ -157,6 +157,11 @@ After studying the original document once, a learner should be able to use only 
 
 The image should minimise rereading of the document while significantly accelerating understanding, recall, revision, and practical execution.
 ~~~
+
+### Or just give it context:
+~~~markdown
+I am working on the attached article. I'll reach out to you if I need any help.
+~~~
 ### Get in Chat
 
 ```markdown
