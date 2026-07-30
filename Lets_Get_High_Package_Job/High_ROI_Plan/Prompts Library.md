@@ -466,677 +466,223 @@ End the output with a horizontal rule (---) to serve as the session separator.
 # GLOBAL COURSE INTELLIGENCE GENERATION PROMPT
 ## Version 2.0
 ~~~markdown
-You are an expert Technical Curriculum Architect, Senior Software/DevOps Engineer, Technical Hiring Manager, Learning Scientist, and Career Coach.
+You are an experienced Senior Software Engineer, Senior DevOps Engineer, Technical Curriculum Architect, and Engineering Mentor.
 
-Your responsibility is NOT to summarize the course.
+Your task is not to summarize a course.
 
-Your responsibility is to reverse engineer an entire technical course repository and compile it into a permanent Course Intelligence System.
+Your task is to reverse engineer an entire technical course repository and produce a Course Execution Companion that captures what the instructor actually does throughout the course.
 
-Think like an experienced engineering mentor redesigning an entire curriculum into the shortest path to professional employability.
+Think like an experienced engineer reviewing another engineer's work.
+
+Ignore educational presentation as much as possible.
+
+Focus on the engineering work being performed.
 
 ---
 
-# REPOSITORY
+REPOSITORY
 
 Repository URL
 
 <REPOSITORY_URL>
 
-Example
+Analyze the entire repository.
 
-https://github.com/USERNAME/REPOSITORY
+The repository contains one folder per course section.
 
-Analyze the ENTIRE repository.
+Each section contains one or more Markdown articles describing the instructor's work.
 
-Read every section, article, document, project, code sample, exercise, and supporting file required to understand the complete curriculum.
+Read every section and every article before producing the final document.
 
-Never optimize a section independently.
+Never analyze sections independently.
 
-Always evaluate every section relative to the ENTIRE course.
-
-A later section may reinforce, replace, or completely supersede an earlier section.
-
-Use the entire repository before making any recommendation.
+Always understand how each section fits into the complete course.
 
 ---
 
-# PRIMARY OBJECTIVE
+PRIMARY OBJECTIVE
 
-Optimize the course for one goal.
+Produce a permanent engineering execution document that allows someone to understand the entire course without reading every article.
 
-Become employable as quickly as possible with strong real-world engineering capability while minimizing unnecessary study time.
+The document should preserve the instructor's engineering workflow while eliminating repetition, unnecessary explanations, and educational filler.
 
-The objective is NOT maximum knowledge.
+The objective is not to teach.
 
-The objective is maximum employability.
-
-Whenever trade-offs exist, preserve at least 90% of employability value while minimizing study time.
+The objective is to document what the instructor actually builds, configures, deploys, automates, troubleshoots, and accomplishes.
 
 ---
 
-# LEARNER PROFILE
+GUIDING PRINCIPLES
 
-Assume the learner:
+Always prioritize:
 
-• Has general computer literacy
+- Engineering work
+- Practical execution
+- Project progression
+- Infrastructure changes
+- Configuration changes
+- Automation
+- Code creation
+- Deployments
+- Troubleshooting
+- Final outcomes
 
-• Wants a Junior / Associate DevOps Engineer role
+Minimize:
 
-• Prefers learning by building
+- Theory
+- Definitions
+- Historical background
+- Marketing language
+- Repeated explanations
+- Long conceptual discussions
 
-• Wants practical engineering capability
-
-• Wants interview readiness
-
-• Wants portfolio-ready skills
-
-• Wants the shortest path to employability
-
----
-
-# DECISION PRIORITY
-
-Whenever recommendations conflict, prioritize in this order.
-
-1. Daily engineering work
-
-2. Core engineering principles
-
-3. Interview frequency
-
-4. Portfolio value
-
-5. Industry relevance
-
-6. Career growth
-
-7. Learning efficiency
-
-8. Historical completeness
-
-If two paths produce similar employability, always recommend the path requiring less study.
+Preserve important engineering context whenever it explains why the instructor performs a particular action.
 
 ---
 
-# GUIDING PRINCIPLES
+OUTPUT
 
-Always optimize for
+Generate one section summary for every course section.
 
-• Practical engineering capability
+Each section should read like an engineering journal.
 
-• Production engineering
+Do not use bullet lists.
 
-• Industry standards
+Do not create study notes.
 
-• Long-term maintainability
-
-• Learning efficiency
-
-Never optimize for
-
-• Academic completeness
-
-• Historical completeness
-
-• Vendor trivia
-
-• Low-value repetition
-
-• Obsolete technologies
+Do not explain concepts unless absolutely necessary for understanding the engineering work.
 
 ---
 
-# OUTPUTS
+REQUIRED FORMAT
 
-Produce TWO completely separate outputs.
-
--------------------------------------
-
-OUTPUT A
-
-# Course Intelligence Guide
-
-Purpose
-
-Human-readable strategic explanation.
-
-Audience
-
-The learner.
-
-Explain:
-
-• why capabilities matter
-
-• why sections are prioritized
-
-• why technologies are skipped
-
-• why learning depth differs
-
-This guide is intended for one-time reading only.
-
--------------------------------------
-
-OUTPUT B
-
-# Course Intelligence Database
-
-Purpose
-
-Machine-readable intelligence layer.
-
-Audience
-
-Future prompts.
-
-This is the PRIMARY artifact.
-
-Every future prompt should consume ONLY this database.
-
-The database should minimize explanations and maximize structured intelligence.
+For every course section use the following structure.
 
 ---
 
-# REQUIRED ANALYSIS
+Section <Number> – <Section Title>
 
-The following information must be compiled into the Course Intelligence Database.
+Write a chronological engineering execution narrative.
 
----
+Each sentence must describe one meaningful engineering milestone.
 
-## PART 1 — Capability Registry
+Place every sentence on its own line.
 
-Identify every capability taught.
+The narrative should naturally describe:
 
-Assign a permanent ID.
+- what the instructor begins with
+- what is configured
+- what is created
+- what is modified
+- what is deployed
+- what is tested
+- what is automated
+- what is troubleshot
+- what is completed
 
-Example
+The section should read like a continuous story rather than disconnected notes.
 
-CAP-001 Linux
+Whenever the narrative moves into work introduced by a new article, append the corresponding article filename(s) in parentheses.
 
-CAP-002 Networking
+Example:
 
-CAP-003 Bash
+The instructor installs Docker and verifies the installation on the development environment. (01-Installing Docker.md)
 
-CAP-004 Git
+He pulls several images from Docker Hub and demonstrates how containers are created and managed. (02-Docker Images.md)
 
-CAP-005 Docker
+The focus then shifts to building custom images by creating a Dockerfile and incrementally refining it. (03-Dockerfile.md)
 
-For every capability record:
+The completed image is tested locally before being tagged and pushed to Docker Hub for reuse. (04-Publishing Images.md)
 
-• Capability ID
-
-• Name
-
-• Description (1 sentence maximum)
-
-• Importance
-
-★★★★★
-
-★★★★☆
-
-★★★☆☆
-
-★★☆☆☆
-
-★☆☆☆☆
-
-• Learning Depth
-
-Master
-
-Working Knowledge
-
-Read Once
-
-Reference Only
-
-Safe to Skip
-
-• Interview Priority (1–5)
-
-• Daily Work Priority (1–5)
-
-• Portfolio Priority (1–5)
-
-• Career Growth Priority (1–5)
+By the end of the section, a reusable Docker image has been successfully created, tested, and published. (Section Summary)
 
 ---
 
-## PART 2 — Capability Evolution
+ARTICLE TRACEABILITY
 
-For every capability record
+Every engineering milestone must be traceable back to its source article.
 
-• Introduced In
+Whenever information originates from one or more articles, append the corresponding article filename(s) in parentheses.
 
-• Reinforced In
+Examples:
 
-• Mastered In
+(03-Dockerfile.md)
 
-• Superseded By
+(05-Terraform Variables.md, 06-Terraform Outputs.md)
 
-Example
+If a concluding sentence summarizes the overall section rather than a specific article, use:
 
-CAP-006
-
-Introduced
-
-SEC-006
-
-Mastered
-
-SEC-021
-
-Superseded By
-
-Terraform
+(Section Summary)
 
 ---
 
-## PART 3 — Capability Relationships
+PROJECT CONTINUITY
 
-For every capability record
+As you analyze the entire repository, identify how engineering work progresses across sections.
 
-Depends On
+Whenever a section naturally starts, extends, or completes a larger engineering project, mention this naturally within the narrative.
 
-Unlocks
+Examples:
 
-Related Capabilities
+This section establishes the foundation for the Kubernetes deployment completed later in the course.
 
-Superseded By
+The automation introduced here is expanded in the following section.
 
-This creates the capability graph.
+This concludes the CI/CD pipeline that began in Section 18.
 
----
+Do not create separate "Project Status" headings.
 
-## PART 4 — Minimum Competency
-
-This defines where learning STOPS.
-
-For every capability identify
-
-Must Know
-
-Must Practice
-
-Can Ignore
-
-Example
-
-Terraform
-
-Must Know
-
-• Modules
-
-• Variables
-
-• Outputs
-
-• State
-
-• EC2 provisioning
-
-Can Ignore
-
-• Enterprise
-
-• Cloud Workspaces
-
-• Advanced Backends
-
-This becomes the stopping boundary for downstream learning.
+Integrate project continuity naturally into the execution narrative.
 
 ---
 
-## PART 5 — Section Registry
+COMPRESSION RULES
 
-Assign every section a permanent ID.
+Compress aggressively while preserving engineering work.
 
-Example
+Merge repetitive explanations.
 
-SEC-001
+Remove duplicated demonstrations.
 
-SEC-002
+Remove educational filler.
 
-SEC-003
+Preserve every meaningful engineering activity.
 
-For every section record
-
-Section ID
-
-Title
-
-Purpose
-
-Classification
-
-Foundation
-
-Primary
-
-Reinforcement
-
-Application
-
-Reference
-
-Optional
-
-Legacy
-
-Capability IDs covered
-
-Study Percentage
-
-Read Once Percentage
-
-Reference Percentage
-
-Skip Percentage
-
-Reason
-
-Essential Articles
-
-Optional Articles
+The final narrative should contain enough detail that a reader understands exactly what the instructor accomplished without reading the original articles.
 
 ---
 
-## PART 6 — Knowledge Dependency Graph
+DO NOT
 
-Create the complete dependency graph.
+Do not create study notes.
 
-Represent every prerequisite relationship.
+Do not explain concepts.
 
-Example
+Do not summarize theory.
 
-CAP-001
+Do not list learning objectives.
 
-↓
+Do not evaluate the learner.
 
-CAP-002
+Do not recommend improvements.
 
-↓
+Do not generate interview questions.
 
-CAP-004
+Do not generate portfolio advice.
 
-↓
+Do not create capability databases.
 
-CAP-007
+Do not reorganize the course.
 
-↓
-
-CAP-012
+Simply document the engineering execution exactly as it unfolds throughout the course.
 
 ---
 
-## PART 7 — Redundancy Analysis
+FINAL OUTPUT
 
-Identify
+Produce a single Markdown document containing every course section in order.
 
-Repeated concepts
-
-Repeated explanations
-
-Best learning location
-
-Safe sections to skim
-
-Safe sections to postpone
-
-Safe sections to ignore
-
-Only recommend skipping when later material fully replaces earlier material.
-
----
-
-## PART 8 — Industry Evolution
-
-Classify technologies
-
-Foundational
-
-Transitional
-
-Legacy
-
-Modern Industry Standard
-
-Recommend investment level for each.
-
----
-
-## PART 9 — Employability Matrix
-
-For every capability record
-
-Interview
-
-Daily Work
-
-Portfolio
-
-Career Growth
-
-Learning ROI
-
-Overall Priority
-
-Use numeric scores where possible.
-
----
-
-## PART 10 — Global Learning Strategy
-
-For every capability define
-
-Learning Depth
-
-Minimum Competency
-
-Maximum Recommended Depth
-
-Recommended Stopping Point
-
----
-
-## PART 11 — Global Skip Strategy
-
-For every section define
-
-Study %
-
-Read Once %
-
-Reference %
-
-Skip %
-
-Explain ONLY if necessary.
-
-The goal is aggressive global optimization.
-
----
-
-## PART 12 — Portfolio Intelligence
-
-For every capability define
-
-Portfolio Required
-
-Recommended Project
-
-Minimum Project
-
-Advanced Project
-
-Portfolio Priority
-
-Hiring Value
-
----
-
-## PART 13 — Interview Intelligence
-
-For every capability define
-
-Common Interview Topics
-
-Hands-on Questions
-
-Troubleshooting Questions
-
-Scenario Questions
-
-Whiteboard Topics
-
----
-
-## PART 14 — Learning Risks
-
-Identify
-
-Common over-study
-
-Common under-study
-
-Common misconceptions
-
-Obsolete knowledge
-
-High ROI concepts students miss
-
----
-
-## PART 15 — Capability Roadmap
-
-Organize the learning roadmap by Capability IDs.
-
-Not by sections.
-
-Every capability should include
-
-Capability ID
-
-Learning Depth
-
-Importance
-
-Sections
-
-Portfolio
-
-Completion Outcome
-
-Dependencies
-
-Unlocked Capabilities
-
----
-
-# CONFIDENCE
-
-Whenever information is uncertain
-
-Never guess.
-
-Instead report
-
-Confidence
-
-High
-
-Medium
-
-Low
-
-Explain uncertainty briefly.
-
----
-
-# CONSTRAINTS
-
-Do NOT
-
-Summarize articles.
-
-Rewrite tutorials.
-
-Teach concepts.
-
-Create study notes.
-
-List every heading.
-
-Optimize sections independently.
-
-The goal is strategic intelligence, not educational content.
-
----
-
-# OUTPUT QUALITY
-
-The Course Intelligence Database must be
-
-• Compact
-
-• Machine-readable
-
-• Stable
-
-• Capability-oriented
-
-• Decision-focused
-
-• Consistent
-
-Every downstream prompt should be able to consume this database without needing to infer missing information.
-
----
-
-# FUTURE PROMPT COMPATIBILITY
-
-The Course Intelligence Database is the permanent intelligence layer for
-
-• Section Planner
-
-• Learning Sessions
-
-• Reinforcement Sessions
-
-• Portfolio Planner
-
-• Interview Planner
-
-• Revision Planner
-
-• Mastery Tracker
-
-Every downstream prompt should rely on this database rather than re-analyzing the repository.
-
----
-
-# FINAL OUTPUT
-
-Produce exactly two artifacts.
-
-Artifact 1
-
-# Course Intelligence Guide
-
-Human-readable explanation of the strategy.
-
-Artifact 2
-
-# Course Intelligence Database
-
-Machine-readable strategic intelligence database.
-
-The Database is the canonical source of truth.
-
-The Guide exists only to help the learner understand the strategy.
+The resulting document should function as a permanent Course Execution Companion that captures the instructor's engineering work across the entire course while preserving chronological flow and article-level traceability.
 ~~~
 # SECTION EXECUTION COMPILER
 ~~~markdown
