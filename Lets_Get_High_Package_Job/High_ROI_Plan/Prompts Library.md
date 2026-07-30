@@ -1138,3 +1138,173 @@ The Database is the canonical source of truth.
 
 The Guide exists only to help the learner understand the strategy.
 ~~~
+# SECTION EXECUTION COMPILER
+~~~markdown
+Objective
+
+Use the uploaded Course Intelligence Database as the canonical source of truth and compile one course section into a minimal execution plan.
+
+Optimize for becoming employable as a Junior/Associate DevOps Engineer in the shortest practical time.
+
+Do not optimize for completing the course.
+
+Do not teach.
+
+Do not summarize articles.
+
+Do not create study notes.
+
+The output should only help the learner navigate the section efficiently.
+
+---
+
+Inputs
+
+Input 1
+
+The Course Intelligence Database.
+
+Read and retain it as the canonical source of truth for the entire session.
+
+After loading it, reply only:
+
+«Database loaded successfully.
+
+Upload the section files.»
+
+---
+
+Input 2
+
+Files belonging to one course section.
+
+The files may be uploaded in multiple batches.
+
+After each batch, reply only:
+
+«Received <number> files.
+
+Upload the next batch, or reply:
+
+All files uploaded.»
+
+When the user replies:
+
+«All files uploaded.»
+
+Immediately generate the Section Execution Plan.
+
+Do not ask for confirmation.
+
+Do not explain what you are doing.
+
+Do not produce any text before the final output.
+
+---
+
+Required Output
+
+Produce exactly one artifact.
+
+Section Execution Plan
+
+---
+
+Section Completion
+
+Begin with:
+
+«After completing this section you should be able to:»
+
+List only the practical capabilities the learner should possess after completing the required material.
+
+---
+
+Capability Execution Map
+
+For every required capability provide only:
+
+Capability
+
+Use the Capability ID and Capability Name from the Course Intelligence Database.
+
+Completion
+
+Begin with:
+
+«After completing this capability you should be able to...»
+
+Describe the minimum practical competency required before moving on.
+
+Study
+
+List only the required articles.
+
+Required Headings
+
+Copy the heading text exactly as it appears in the uploaded files.
+
+Do not:
+
+- paraphrase
+- rename
+- shorten
+- summarize
+
+The learner should be able to jump directly using Ctrl+F.
+
+---
+
+Safe to Skip
+
+List only articles or headings that can safely be skipped for the learner's goal.
+
+Provide a one-line reason only when necessary.
+
+---
+
+Safe to Postpone
+
+List only articles or headings that should be learned later.
+
+Provide a one-line reason only when necessary.
+
+---
+
+Constraints
+
+Always use the Course Intelligence Database as the source of truth.
+
+Never optimize the section independently.
+
+Never contradict the Course Intelligence Database without explicit justification.
+
+Do not teach concepts.
+
+Do not explain technologies.
+
+Do not summarize tutorials.
+
+Do not generate study notes.
+
+Do not duplicate information already present in the Course Intelligence Database.
+
+Only include information that directly helps the learner navigate the section efficiently.
+
+---
+
+Success Criteria
+
+The output should function as a navigation map.
+
+After reading it, the learner should know:
+
+- what they will be able to do after completing the section,
+- which capabilities they need,
+- which articles to open,
+- which exact headings to study,
+- what can safely be skipped,
+- what can safely be postponed.
+
+Everything else should be omitted.
+~~~
