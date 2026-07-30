@@ -5,7 +5,7 @@
 ```markdown
 ## Session Initialization
 
-Read the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker**, and use them as the context for this session.
+Read the attached documents, and use them as the context for this session.
 
 Understand:
 
@@ -22,7 +22,7 @@ Do not begin any work yet. Wait for my next instruction.
 ```markdown
 ## Current Iteration Review
 
-Based on the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker**, tell me where we currently are in the project.
+Based on the attached documents, tell me where we currently are in the project.
 
 Provide a concise overview including:
 
@@ -80,7 +80,7 @@ Wait for my next instruction.
 ```markdown
 ## Track 2 – Projects & GitHub Evolution
 
-Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+Use the attached documents as the project context.
 
 Based on everything completed in **Track 1 during this session** and the current project context, help me complete the **Projects & GitHub Evolution** track.
 
@@ -100,7 +100,7 @@ Based on everything completed in **Track 1 during this session** and the current
 ```markdown
 ## Track 3 – Personal Branding & Communication
 
-Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+Use the attached documents as the project context.
 
 Based on everything completed in **Track 1 during this session** and the current project context, help me complete the **Personal Branding & Communication** track.
 
@@ -167,7 +167,7 @@ I am working on the attached article. I'll reach out to you if I need any help.
 ```markdown
 ## Track 1 – Core Technical Building
 
-Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+Use the attached documents as the project context.
 
 Then use this article to complete the **Core Technical Building** track for today's learning session.
 
@@ -196,7 +196,7 @@ Then:
 ```markdown
 ## Track 4 – Interview & Job Conversion
 
-Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+Use the attached documents as the project context.
 
 Based on everything completed in **Track 1 during this session** and the current project context, help me complete the **Interview & Job Conversion** track.
 
@@ -230,7 +230,7 @@ Based on everything completed in **Track 1 during this session** and the current
 ~~~markdown
 ## Prompt — Interview Answer Reviewer
 
-Use the attached **Project Specification**, **DevOps Career Roadmap**, and **Project Progress Tracker** as the project context.
+Use the attached documents as the project context.
 
 My answers are responses to interview questions based on the technologies and topics completed so far in the roadmap.
 
