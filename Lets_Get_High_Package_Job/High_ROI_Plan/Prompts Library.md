@@ -463,3 +463,465 @@ Return only the Markdown content, enclosed in a fenced Markdown code block, read
 
 End the output with a horizontal rule (---) to serve as the session separator.
 ~~~
+# GLOBAL COURSE INTELLIGENCE GENERATION PROMPT
+## Version 1.0
+~~~markdown
+You are an expert Technical Curriculum Architect, Senior Software/DevOps Engineer, Technical Hiring Manager, Learning Scientist, and Career Coach.
+
+Your task is NOT to summarize this course.
+
+Your task is to reverse engineer the entire course repository and build a permanent **Course Intelligence Document**.
+
+This document will become the strategic foundation for all future learning prompts.
+
+Think like an experienced engineering mentor redesigning the course into the shortest possible path to professional employability.
+
+---
+
+# PRIMARY OBJECTIVE
+
+Optimize the course for one goal:
+
+> Become employable as quickly as possible with strong real-world engineering capability while minimizing unnecessary study time.
+
+The objective is NOT maximum knowledge.
+
+The objective is maximum employability.
+
+---
+
+# GUIDING PRINCIPLES
+
+Always optimize for:
+
+• Practical engineering capability
+• Real-world DevOps work
+• Industry relevance
+• Portfolio value
+• Interview readiness
+• Long-term career growth
+• Learning efficiency
+
+Never optimize for:
+
+• Academic completeness
+• Historical completeness
+• Vendor-specific trivia
+• Low-value repetition
+• Knowledge that is quickly replaced later in the course
+
+Whenever trade-offs exist, always preserve at least **90% of the employability value while minimizing total study time**.
+
+---
+
+# REPOSITORY SCOPE
+
+Analyze the ENTIRE repository.
+
+Read every section, article, chapter, and supporting document necessary to understand:
+
+• Every capability taught
+• Concept evolution
+• Knowledge dependencies
+• Reinforcement
+• Redundancy
+• Technology evolution
+• Industry relevance
+• Practical exercises
+• Portfolio opportunities
+
+Never optimize a section independently.
+
+Always evaluate every section relative to the ENTIRE course.
+
+A later section may reinforce, replace, or supersede an earlier section.
+
+Use the complete repository before making recommendations.
+
+---
+
+# LEARNER PROFILE
+
+Assume the learner:
+
+• Has general computer literacy
+• Wants a Junior / Associate DevOps Engineer role
+• Prefers learning by building
+• Wants practical capability over theory
+• Wants strong interview preparation
+• Wants portfolio-ready projects
+• Is willing to revisit topics later
+• Wants the shortest path to employability
+
+---
+
+# DECISION FRAMEWORK
+
+Whenever making recommendations prioritize in this order:
+
+1. Daily engineering work
+2. Core engineering principles
+3. Interview frequency
+4. Portfolio value
+5. Industry relevance
+6. Career growth
+7. Learning efficiency
+8. Historical completeness
+
+If two options provide similar employability value, always recommend the option requiring less study time.
+
+---
+
+# REQUIRED ANALYSIS
+
+Produce the following permanent Course Intelligence.
+
+---
+
+## PART 1 — Capability Inventory
+
+Identify every major engineering capability taught by the course.
+
+For each capability include:
+
+• Purpose
+• Professional relevance
+• Industry importance
+• Recommended Learning Depth
+
+Learning Depth must be one of:
+
+• Master
+• Working Knowledge
+• Read Once
+• Reference Only
+• Safe to Skip
+
+---
+
+## PART 2 — Capability Evolution
+
+For every capability identify:
+
+• First Introduction
+• Reinforcement
+• Mastery Location
+• Advanced Evolution
+
+Show how knowledge evolves.
+
+Example
+
+Infrastructure as Code
+
+↓
+
+Vagrant
+
+↓
+
+Terraform
+
+↓
+
+Production Infrastructure
+
+The purpose is to avoid over-investing in introductory technologies.
+
+---
+
+## PART 3 — Mastery Location
+
+For every capability identify:
+
+• Introduction Sections
+• Reinforcement Sections
+• Mastery Sections
+
+Explicitly identify when later sections supersede earlier learning.
+
+---
+
+## PART 4 — Capability Importance
+
+Rate every capability.
+
+★★★★★
+★★★★☆
+★★★☆☆
+★★☆☆☆
+★☆☆☆☆
+
+Provide a short justification.
+
+Capability Importance and Learning Depth are independent.
+
+---
+
+## PART 5 — Section Classification
+
+Classify every section as exactly one:
+
+• Foundation
+• Primary Learning
+• Reinforcement
+• Application
+• Reference
+• Optional
+• Legacy
+
+Explain the reasoning.
+
+---
+
+## PART 6 — Knowledge Dependency Graph
+
+Identify prerequisite relationships.
+
+Example
+
+Linux
+
+↓
+
+Networking
+
+↓
+
+Virtualization
+
+↓
+
+Vagrant
+
+↓
+
+Provisioning
+
+↓
+
+Docker
+
+↓
+
+Kubernetes
+
+This graph defines the optimal learning sequence.
+
+---
+
+## PART 7 — Redundancy Analysis
+
+Identify:
+
+• Repeated concepts
+• Repeated explanations
+• Strongest explanation
+• Weaker explanations
+• Safe opportunities to skim
+
+Only recommend skipping when later material fully replaces earlier material.
+
+---
+
+## PART 8 — Industry Evolution
+
+Identify technologies that are:
+
+• Foundational
+• Transitional
+• Legacy
+• Modern Industry Standard
+
+Examples
+
+Vagrant → Terraform
+
+Jenkins Freestyle → Jenkins Pipeline
+
+Docker Compose → Kubernetes
+
+Recommend the appropriate investment level for each.
+
+---
+
+## PART 9 — Employability ROI
+
+For every capability score:
+
+Interview Value
+
+★★★★★
+
+Daily Job Value
+
+★★★★★
+
+Portfolio Value
+
+★★★★★
+
+Career Growth Value
+
+★★★★★
+
+Provide a concise justification.
+
+---
+
+## PART 10 — Global Learning Depth
+
+Determine the minimum learning depth required for every capability.
+
+Use ONLY:
+
+• Master
+• Working Knowledge
+• Read Once
+• Reference Only
+• Safe to Skip
+
+Justify every recommendation.
+
+---
+
+## PART 11 — Global Skip Strategy
+
+Across the ENTIRE course identify:
+
+• Safe to Skip Immediately
+• Safe to Postpone
+• Reference Only
+• Read Once
+• Master
+
+This is a GLOBAL optimization.
+
+Never evaluate sections independently.
+
+---
+
+## PART 12 — Portfolio Opportunities
+
+For every capability identify:
+
+• Should it produce a portfolio project?
+• Portfolio Priority
+• Recommended Project
+• Minimum Implementation
+• Optional Advanced Implementation
+
+Highlight the projects with the highest hiring value.
+
+---
+
+## PART 13 — Interview Intelligence
+
+Identify:
+
+• Highest-frequency interview topics
+• Practical interview exercises
+• Troubleshooting scenarios
+• Whiteboard/system explanation topics
+• Concepts expected to be explained confidently
+
+Prioritize real interview relevance over theoretical trivia.
+
+---
+
+## PART 14 — Common Learning Mistakes
+
+Identify where learners commonly:
+
+• Over-study
+• Under-study
+• Memorize instead of practice
+• Spend time on obsolete knowledge
+• Ignore high-value concepts
+
+Recommend how to avoid these mistakes.
+
+---
+
+## PART 15 — Capability-Based Learning Roadmap
+
+Create the final optimized roadmap.
+
+Organize by CAPABILITIES rather than sections.
+
+For every capability include:
+
+• Learning Depth
+• Capability Importance
+• Primary Sections
+• Supporting Sections
+• Mastery Section
+• Portfolio Recommendation
+• Completion Outcome
+
+This roadmap should represent the shortest path to employability.
+
+---
+
+# CONFIDENCE REPORTING
+
+If a recommendation is uncertain because the course material does not provide enough evidence:
+
+• State the uncertainty explicitly.
+• Explain why.
+• Do not guess.
+
+---
+
+# CONSTRAINTS
+
+Do NOT:
+
+• Summarize articles
+• Rewrite tutorials
+• Explain concepts in detail
+• Produce study notes
+• List every heading
+• Optimize sections independently
+
+Focus exclusively on strategic curriculum optimization.
+
+---
+
+# OUTPUT QUALITY STANDARDS
+
+The Course Intelligence document must be:
+
+• Strategic rather than descriptive
+• Capability-oriented rather than section-oriented
+• Concise rather than verbose
+• Actionable rather than explanatory
+• Stable enough to remain useful throughout the entire course
+
+Every recommendation should be justified by employability value.
+
+---
+
+# FUTURE PROMPT COMPATIBILITY
+
+Design this document to become the permanent input for future prompts including:
+
+• Section Planner
+• Learning Sessions
+• Reinforcement Sessions
+• Revision Planner
+• Portfolio Planner
+• Interview Planner
+
+The document should act as the single source of truth for all downstream learning workflows.
+
+---
+
+# FINAL OUTPUT
+
+Produce a structured Markdown document titled:
+
+# Course Intelligence
+
+This document should serve as the permanent strategic intelligence layer for this course and should not require regeneration unless the course content itself changes.
+~~~
