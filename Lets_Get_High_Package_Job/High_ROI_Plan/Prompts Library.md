@@ -465,18 +465,21 @@ End the output with a horizontal rule (---) to serve as the session separator.
 ~~~
 # GLOBAL COURSE INTELLIGENCE GENERATION PROMPT
 ## Version 2.0
+## Use this prompt on your course articles folder in GitHub Copilot 
 ~~~markdown
-You are an experienced Senior Software Engineer, Senior DevOps Engineer, Technical Curriculum Architect, and Engineering Mentor.
+You are an experienced Senior Software Engineer, Senior DevOps Engineer, Technical Architect, Technical Curriculum Architect, and Engineering Mentor.
 
 Your task is not to summarize a course.
 
-Your task is to reverse engineer an entire technical course repository and produce a Course Execution Companion that captures what the instructor actually does throughout the course.
+Your task is to reverse engineer the instructor's complete engineering journey and produce a permanent Course Execution Companion.
 
-Think like an experienced engineer reviewing another engineer's work.
+The finished document should allow an engineer to understand exactly what the instructor built, configured, deployed, automated, tested, integrated, and evolved throughout the entire course without rereading every article.
 
-Ignore educational presentation as much as possible.
+Think like an experienced engineer observing another engineer build a complete production system from scratch.
 
-Focus on the engineering work being performed.
+Ignore educational presentation whenever possible.
+
+Focus on engineering execution.
 
 ---
 
@@ -486,371 +489,317 @@ Repository URL
 
 <REPOSITORY_URL>
 
-Analyze the entire repository.
+The repository contains:
 
-The repository contains one folder per course section.
+- One folder per course section.
+- One or more Markdown articles inside each section.
 
-Each section contains one or more Markdown articles describing the instructor's work.
+Your responsibility is to analyze the entire repository before producing any output.
 
-Read every section and every article before producing the final document.
+---
 
-Never analyze sections independently.
+MANDATORY EXECUTION ORDER
 
-Always understand how each section fits into the complete course.
+You must execute this task in the following order.
+
+Phase 1 — Repository Discovery
+
+Discover every course section.
+
+Discover every Markdown article inside every section.
+
+Build a complete inventory of the repository.
+
+Do not generate any output.
+
+---
+
+Phase 2 — Repository Analysis
+
+Read every Markdown article in repository order.
+
+Do not skip articles.
+
+Do not summarize while reading.
+
+Build a complete internal understanding of:
+
+- engineering work
+- infrastructure
+- configuration
+- deployments
+- automation
+- project evolution
+- artifacts
+- dependencies
+- engineering decisions
+
+Do not generate any output.
+
+---
+
+Phase 3 — Cross-Repository Reasoning
+
+After reading the entire repository:
+
+Analyze how every section connects.
+
+Identify:
+
+- project continuity
+- infrastructure evolution
+- engineering dependencies
+- automation progression
+- deployment progression
+- cloud evolution
+- container evolution
+- CI/CD evolution
+- GitOps evolution
+
+Understand how projects begin, evolve, branch, merge, and finish.
+
+Do not generate any output.
+
+---
+
+Phase 4 — Repository Validation
+
+Before writing, verify internally that:
+
+✓ Every section has been analyzed.
+
+✓ Every Markdown article has been analyzed.
+
+✓ Every project progression has been understood.
+
+✓ Every section has enough information to describe its engineering state transition.
+
+If any repository content has not yet been analyzed, continue reading instead of writing.
+
+---
+
+Phase 5 — Document Generation
+
+Only after completing Phases 1–4 may you begin writing.
+
+Think first.
+
+Write last.
+
+Never generate output while repository discovery or analysis is still in progress.
 
 ---
 
 PRIMARY OBJECTIVE
 
-Produce a permanent engineering execution document that allows someone to understand the entire course without reading every article.
+Reconstruct the instructor's engineering journey.
 
-The document should preserve the instructor's engineering workflow while eliminating repetition, unnecessary explanations, and educational filler.
+The reader should understand:
 
-The objective is not to teach.
+- what was built
+- what was configured
+- what was deployed
+- what was automated
+- what was integrated
+- what was tested
+- what was troubleshot
+- what was modified
+- what infrastructure changed
+- what project state existed after every section
 
-The objective is to document what the instructor actually builds, configures, deploys, automates, troubleshoots, and accomplishes.
-
----
-
-GUIDING PRINCIPLES
-
-Always prioritize:
-
-- Engineering work
-- Practical execution
-- Project progression
-- Infrastructure changes
-- Configuration changes
-- Automation
-- Code creation
-- Deployments
-- Troubleshooting
-- Final outcomes
-
-Minimize:
-
-- Theory
-- Definitions
-- Historical background
-- Marketing language
-- Repeated explanations
-- Long conceptual discussions
-
-Preserve important engineering context whenever it explains why the instructor performs a particular action.
+The finished document should function as a permanent engineering companion.
 
 ---
 
-OUTPUT
+THINK LIKE AN ENGINEER
 
-Generate one section summary for every course section.
+Never think like a teacher.
 
-Each section should read like an engineering journal.
+Never think like a note taker.
 
-Do not use bullet lists.
+Never think like a documentation writer.
 
-Do not create study notes.
+Think like an experienced engineer reviewing another engineer's work.
 
-Do not explain concepts unless absolutely necessary for understanding the engineering work.
+For every article ask yourself:
 
----
+- What engineering work is actually happening?
+- Why is this step necessary?
+- What changed?
+- What new artifact now exists?
+- What infrastructure now exists?
+- What deployment now exists?
+- What automation now exists?
+- What can now be done that previously could not?
+- What engineering problem was solved?
 
-REQUIRED FORMAT
-
-For every course section use the following structure.
-
----
-
-Section <Number> – <Section Title>
-
-Write a chronological engineering execution narrative.
-
-Each sentence must describe one meaningful engineering milestone.
-
-Place every sentence on its own line.
-
-The narrative should naturally describe:
-
-- what the instructor begins with
-- what is configured
-- what is created
-- what is modified
-- what is deployed
-- what is tested
-- what is automated
-- what is troubleshot
-- what is completed
-
-The section should read like a continuous story rather than disconnected notes.
-
-Whenever the narrative moves into work introduced by a new article, append the corresponding article filename(s) in parentheses.
-
-Example:
-
-The instructor installs Docker and verifies the installation on the development environment. (01-Installing Docker.md)
-
-He pulls several images from Docker Hub and demonstrates how containers are created and managed. (02-Docker Images.md)
-
-The focus then shifts to building custom images by creating a Dockerfile and incrementally refining it. (03-Dockerfile.md)
-
-The completed image is tested locally before being tagged and pushed to Docker Hub for reuse. (04-Publishing Images.md)
-
-By the end of the section, a reusable Docker image has been successfully created, tested, and published. (Section Summary)
+Your writing should naturally answer these questions.
 
 ---
 
-ARTICLE TRACEABILITY
+WRITING STYLE
 
-Every engineering milestone must be traceable back to its source article.
+Write like an engineering journal.
 
-Whenever information originates from one or more articles, append the corresponding article filename(s) in parentheses.
+Do not produce:
+
+- study notes
+- tutorials
+- documentation
+- learning objectives
+- theory summaries
+
+Instead, narrate the engineering execution exactly as it unfolded.
+
+Every sentence represents one engineering milestone.
+
+Every sentence appears on its own line.
+
+The document should read like someone documenting months of engineering work.
+
+---
+
+REQUIRED LEVEL OF DETAIL
+
+Assume the reader will never read the original course again.
+
+Therefore preserve every meaningful engineering activity.
+
+Do not compress away engineering work.
+
+Avoid generic statements.
+
+Poor:
+
+"The instructor demonstrates Docker commands."
+
+Good:
+
+"The instructor installs Docker, validates the daemon, configures the runtime, pulls base images, creates and manages containers, inspects container lifecycle behavior, and establishes the operational workflow later used to containerize the application."
+
+Describe what actually happened.
+
+Not what topic was discussed.
+
+---
+
+ENGINEERING STATE TRANSITIONS
+
+This is the highest priority.
+
+Every section must clearly communicate:
+
+Engineering State Before
+
+↓
+
+Engineering Work Performed
+
+↓
+
+Engineering State After
+
+The final sentence of every section must clearly explain what now exists.
 
 Examples:
 
-(03-Dockerfile.md)
+"By the end of this section, a fully provisioned Vagrant environment exists that can automatically recreate the complete development infrastructure."
 
-(05-Terraform Variables.md, 06-Terraform Outputs.md)
+"By the end of this section, Jenkins automatically builds the application, performs code analysis, publishes artifacts to Nexus, builds Docker images, and prepares deployment artifacts."
 
-If a concluding sentence summarizes the overall section rather than a specific article, use:
+"By the end of this section, Kubernetes manifests, ConfigMaps, Secrets, Services, Deployments, PersistentVolumes, and Helm charts exist and are ready for GitOps deployment."
 
-(Section Summary)
+The reader should always leave the section understanding the engineering outcome.
 
 ---
 
 PROJECT CONTINUITY
 
-As you analyze the entire repository, identify how engineering work progresses across sections.
+Treat the repository as one continuously evolving engineering project.
 
-Whenever a section naturally starts, extends, or completes a larger engineering project, mention this naturally within the narrative.
+Whenever appropriate explain how sections connect.
 
 Examples:
 
-This section establishes the foundation for the Kubernetes deployment completed later in the course.
+"This section establishes infrastructure that Terraform later automates."
 
-The automation introduced here is expanded in the following section.
+"The Docker images produced here become deployment artifacts for Kubernetes."
 
-This concludes the CI/CD pipeline that began in Section 18.
+"The monitoring stack configured here is integrated into the GitOps deployment."
 
-Do not create separate "Project Status" headings.
+"The infrastructure created here becomes the foundation for the AWS CI/CD project."
 
-Integrate project continuity naturally into the execution narrative.
+Do not create separate continuity headings.
+
+Integrate them naturally into the narrative.
+
+---
+
+ARTICLE TRACEABILITY
+
+Every engineering milestone must be traceable.
+
+Append article filenames to every sentence.
+
+Example:
+
+The instructor provisions a Jenkins server and validates the installation before configuring build agents. (154-Introduction.md, 155-Installation.md)
+
+The instructor creates the first declarative pipeline and verifies automated builds after every commit. (158-First-Pipeline.md)
+
+If the sentence summarizes the engineering state of the completed section rather than a specific article, append:
+
+(Section Summary)
 
 ---
 
 COMPRESSION RULES
 
-Compress aggressively while preserving engineering work.
+Remove:
 
-Merge repetitive explanations.
+- repeated explanations
+- educational repetition
+- definitions
+- marketing language
+- unnecessary theory
+- duplicate demonstrations
 
-Remove duplicated demonstrations.
+Never remove:
 
-Remove educational filler.
+- engineering actions
+- configuration changes
+- infrastructure evolution
+- deployments
+- automation
+- integrations
+- troubleshooting
+- engineering decisions
+- project progression
+- produced artifacts
 
-Preserve every meaningful engineering activity.
+Compress wording.
 
-The final narrative should contain enough detail that a reader understands exactly what the instructor accomplished without reading the original articles.
-
----
-
-DO NOT
-
-Do not create study notes.
-
-Do not explain concepts.
-
-Do not summarize theory.
-
-Do not list learning objectives.
-
-Do not evaluate the learner.
-
-Do not recommend improvements.
-
-Do not generate interview questions.
-
-Do not generate portfolio advice.
-
-Do not create capability databases.
-
-Do not reorganize the course.
-
-Simply document the engineering execution exactly as it unfolds throughout the course.
+Never compress engineering work.
 
 ---
 
 FINAL OUTPUT
 
-Produce a single Markdown document containing every course section in order.
+Produce a single Markdown document.
 
-The resulting document should function as a permanent Course Execution Companion that captures the instructor's engineering work across the entire course while preserving chronological flow and article-level traceability.
-~~~
-# SECTION EXECUTION COMPILER
-~~~markdown
-Objective
+Include every repository section in order.
 
-Use the uploaded Course Intelligence Database as the canonical source of truth and compile one course section into a minimal execution plan.
+For every section:
 
-Optimize for becoming employable as a Junior/Associate DevOps Engineer in the shortest practical time.
+- Write one chronological engineering execution narrative.
+- Place every sentence on its own line.
+- Every sentence must describe one meaningful engineering milestone.
+- Every sentence must include article traceability.
+- The final sentence must clearly describe the engineering state that now exists after completing that section.
 
-Do not optimize for completing the course.
+The document must represent analysis of the entire repository, not a partially analyzed subset.
 
-Do not teach.
+The document must not begin until the complete repository has been analyzed and validated.
 
-Do not summarize articles.
-
-Do not create study notes.
-
-The output should only help the learner navigate the section efficiently.
-
----
-
-Inputs
-
-Input 1
-
-The Course Intelligence Database.
-
-Read and retain it as the canonical source of truth for the entire session.
-
-After loading it, reply only:
-
-«Database loaded successfully.
-
-Upload the section files.»
-
----
-
-Input 2
-
-Files belonging to one course section.
-
-The files may be uploaded in multiple batches.
-
-After each batch, reply only:
-
-«Received <number> files.
-
-Upload the next batch, or reply:
-
-All files uploaded.»
-
-When the user replies:
-
-«All files uploaded.»
-
-Immediately generate the Section Execution Plan.
-
-Do not ask for confirmation.
-
-Do not explain what you are doing.
-
-Do not produce any text before the final output.
-
----
-
-Required Output
-
-Produce exactly one artifact.
-
-Section Execution Plan
-
----
-
-Section Completion
-
-Begin with:
-
-«After completing this section you should be able to:»
-
-List only the practical capabilities the learner should possess after completing the required material.
-
----
-
-Capability Execution Map
-
-For every required capability provide only:
-
-Capability
-
-Use the Capability ID and Capability Name from the Course Intelligence Database.
-
-Completion
-
-Begin with:
-
-«After completing this capability you should be able to...»
-
-Describe the minimum practical competency required before moving on.
-
-Study
-
-List only the required articles.
-
-Required Headings
-
-Copy the heading text exactly as it appears in the uploaded files.
-
-Do not:
-
-- paraphrase
-- rename
-- shorten
-- summarize
-
-The learner should be able to jump directly using Ctrl+F.
-
----
-
-Safe to Skip
-
-List only articles or headings that can safely be skipped for the learner's goal.
-
-Provide a one-line reason only when necessary.
-
----
-
-Safe to Postpone
-
-List only articles or headings that should be learned later.
-
-Provide a one-line reason only when necessary.
-
----
-
-Constraints
-
-Always use the Course Intelligence Database as the source of truth.
-
-Never optimize the section independently.
-
-Never contradict the Course Intelligence Database without explicit justification.
-
-Do not teach concepts.
-
-Do not explain technologies.
-
-Do not summarize tutorials.
-
-Do not generate study notes.
-
-Do not duplicate information already present in the Course Intelligence Database.
-
-Only include information that directly helps the learner navigate the section efficiently.
-
----
-
-Success Criteria
-
-The output should function as a navigation map.
-
-After reading it, the learner should know:
-
-- what they will be able to do after completing the section,
-- which capabilities they need,
-- which articles to open,
-- which exact headings to study,
-- what can safely be skipped,
-- what can safely be postponed.
-
-Everything else should be omitted.
+The completed artifact should function as a permanent Course Execution Companion that an engineer can revisit months later to quickly understand, reconstruct, and navigate the complete engineering journey without rereading the original course.
 ~~~
