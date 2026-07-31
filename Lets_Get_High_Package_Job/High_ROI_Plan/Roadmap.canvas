@@ -1,1539 +1,193 @@
 {
-  "nodes": [
-    {
-      "id": "cba9c6bd-2ec7-4a78-bd63-ce4cc478aa3c",
-      "type": "text",
-      "text": "# Master DevOps with AWS, Docker, Kubernetes, GCP, GitHub Actions, ArgoCD, GitOps, Terraform, Monitoring & AI\n\n- ---\n\n",
-      "x": 0,
-      "y": 0,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "73fcfba4-0595-4f14-9b4c-c9b1b9eb60b6",
-      "type": "text",
-      "text": "# Capability 1 — DevOps Fundamentals\n\n- **Course Sections:** 01 — Introduction\n\n",
-      "x": 0,
-      "y": 380,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "d72b083b-0e29-4550-9509-c71b430dc32b",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Understand the overall DevOps lifecycle, course roadmap, and how every technology integrates into a complete DevOps platform.\n\n- **Why It Matters:**\n  - Provides the big-picture understanding required before learning individual DevOps tools.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn the DevOps lifecycle and overall system architecture.\n  - **How:**\n    - Complete the course section, understand the workflow, and identify how every upcoming technology fits into the complete platform.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Create permanent reference notes.\n  - **How:**\n    - Document the DevOps lifecycle, CI/CD concepts, and overall architecture using diagrams and concise notes.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain DevOps fundamentals.\n  - **How:**\n    - Write a short summary or create a simple architecture diagram explaining the DevOps lifecycle.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate understanding.\n  - **How:**\n    - Practice explaining DevOps, CI, CD, and the software delivery lifecycle while preparing 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 0,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "2351a6e0-8b31-41e6-8cd9-24d90eb7d2f4",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Can explain DevOps end-to-end\n- [ ] Notes completed\n- [ ] Architecture diagram created\n- [ ] Can answer interview questions confidently\n\n- ---\n\n",
-      "x": 650,
-      "y": 380,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "a4a66f93-9af9-4d87-ba70-5f61a4337d43",
-      "type": "text",
-      "text": "# Capability 2 — Development Environment Setup\n\n- **Course Sections:** 02 — Prerequisites, Setup & Accounts\n\n",
-      "x": 0,
-      "y": 760,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "a1da7343-e084-4e03-b6c1-601f577fc31a",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Create a standardized development environment for the entire course.\n\n- **Why It Matters:**\n  - Ensures all future projects run consistently without environment-related issues.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Install and configure all required software and accounts.\n  - **How:**\n    - Complete every installation, verify versions, and ensure all tools work correctly.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document the development environment.\n  - **How:**\n    - Record installed software, versions, setup steps, and troubleshooting notes.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the development environment.\n  - **How:**\n    - Create a setup guide or checklist for future reference.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Understand why each tool is required.\n  - **How:**\n    - Prepare interview questions about development environments and tooling.\n\n- ---\n\n",
-      "x": 650,
-      "y": 760,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "6c284e28-09c7-453f-a5e3-7efc8c5a831f",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] All required software installed\n- [ ] Accounts created\n- [ ] Environment validated\n- [ ] Setup documentation completed\n\n- ---\n\n",
-      "x": 650,
-      "y": 1140,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "cffad6ea-d1d9-49d7-82f0-0857d170e228",
-      "type": "text",
-      "text": "# Capability 3 — Virtual Machine Foundations\n\n- **Course Sections:** 03 — VM Setup\n\n",
-      "x": 0,
-      "y": 1140,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "5afaf938-da5b-46ba-9018-2bfc61aced8f",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Understand virtualization and build the VM environments used throughout the course.\n\n- **Why It Matters:**\n  - Provides isolated infrastructure for Linux, networking, and application deployment.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 8\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn virtualization and configure virtual machines.\n  - **How:**\n    - Build the VMs, validate networking, and understand virtualization concepts.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document VM architecture.\n  - **How:**\n    - Create notes on virtualization concepts and VM setup steps.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain virtualization.\n  - **How:**\n    - Create a simple VM architecture diagram.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate virtualization knowledge.\n  - **How:**\n    - Practice interview questions covering virtualization and VM management.\n\n- ---\n\n",
-      "x": 650,
-      "y": 1520,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "2972f9a6-0562-4338-bdf8-57b5b31f1186",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Virtual machines created\n- [ ] VM networking verified\n- [ ] Notes completed\n- [ ] Can explain virtualization confidently\n\n- ---\n\n",
-      "x": 650,
-      "y": 1900,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "cf0241b8-b20a-4d4c-a9ff-c90faf23a175",
-      "type": "text",
-      "text": "# Capability 4 — Linux Foundations\n\n- **Course Sections:** 04 — Linux\n\n",
-      "x": 0,
-      "y": 1520,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "ab1760b8-259e-4bba-ade7-d1b11957ff52",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Master Linux administration required for DevOps engineering.\n\n- **Why It Matters:**\n  - Linux is the operating system behind almost every DevOps platform.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Linux administration.\n  - **How:**\n    - Practice commands, permissions, services, processes, package management, networking, and troubleshooting.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a Linux command handbook.\n  - **How:**\n    - Organize commands, examples, and troubleshooting tips.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Linux concepts.\n  - **How:**\n    - Create cheat sheets or command references.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate Linux knowledge.\n  - **How:**\n    - Practice Linux interview questions and command-based scenarios while preparing 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 2280,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e8d77735-8354-4f3e-945a-6dc3458133fc",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Comfortable using Linux terminal\n- [ ] Linux notes completed\n- [ ] Common administration tasks mastered\n- [ ] Interview ready\n\n",
-      "x": 650,
-      "y": 2660,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "d6f6ca54-2fb5-4117-87c0-b1a4d43e5bb5",
-      "type": "text",
-      "text": "# Capability 5 — Git & Version Control\n\n- **Course Sections:** 05 — Git\n\n",
-      "x": 0,
-      "y": 1900,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "068c3ab1-593c-40f2-843b-8d916463ff0d",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Master Git workflows and repository management.\n\n- **Why It Matters:**\n  - Git is the foundation of CI/CD, Infrastructure as Code, and GitOps.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Git workflows.\n  - **How:**\n    - Practice branching, merging, tagging, rollback, and repository management.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build Git reference notes.\n  - **How:**\n    - Document Git workflows, branching strategies, and commonly used commands.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Git workflows.\n  - **How:**\n    - Create branching diagrams and workflow explanations.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate Git knowledge.\n  - **How:**\n    - Prepare interview questions and Git troubleshooting scenarios.\n\n- ---\n\n",
-      "x": 650,
-      "y": 3040,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "a70a1fbe-1df0-4d92-8331-85c64d977e16",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Git workflow mastered\n- [ ] Repository management understood\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 3420,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "b558f6ef-fd00-484c-8fa4-78a582a07ad6",
-      "type": "text",
-      "text": "# Capability 6 — Infrastructure Automation with Vagrant\n\n- **Course Sections:** 06 — Vagrant & Linux Servers\n\n",
-      "x": 0,
-      "y": 2280,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "b5ba1202-e5b2-436e-b53a-d2024401b85f",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Learn automated VM provisioning using Vagrant.\n\n- **Why It Matters:**\n  - Introduces Infrastructure as Code concepts before moving to cloud automation.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 8\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Automate VM provisioning.\n  - **How:**\n    - Build reproducible Vagrant environments and automate provisioning.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document Vagrant workflows.\n  - **How:**\n    - Record Vagrantfile structure and provisioning process.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Infrastructure as Code concepts.\n  - **How:**\n    - Create provisioning workflow diagrams.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate automation knowledge.\n  - **How:**\n    - Practice Infrastructure as Code interview questions.\n\n- ---\n\n",
-      "x": 650,
-      "y": 3800,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "8da9b1e6-1e09-43b1-8ce6-ca23e83e3a25",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Automated VM provisioning completed\n- [ ] Vagrant environment reproducible\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 4180,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e6598f9c-5b4f-4ab1-82d7-3f605d6fc36f",
-      "type": "text",
-      "text": "# Capability 7 — JSON & YAML\n\n- **Course Sections:** 07 — Variables, JSON & YAML\n\n",
-      "x": 0,
-      "y": 2660,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "9120bb75-1cea-4f89-9843-fb3fab9f952e",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Learn structured configuration formats used across DevOps tools.\n\n- **Why It Matters:**\n  - JSON and YAML are used by Terraform, Kubernetes, Ansible, CI/CD, and cloud services.\n\n- **Supports Projects:**\n  - Project 4–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn JSON and YAML.\n  - **How:**\n    - Practice writing, reading, validating, and troubleshooting configuration files.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a configuration reference.\n  - **How:**\n    - Document syntax, examples, and best practices.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain structured configuration.\n  - **How:**\n    - Create comparison notes between JSON and YAML.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate configuration knowledge.\n  - **How:**\n    - Practice configuration-related interview questions.\n\n- ---\n\n",
-      "x": 650,
-      "y": 4560,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "9bff11b5-32e3-48c1-aaca-788ac20a9876",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Comfortable writing JSON\n- [ ] Comfortable writing YAML\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 4940,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "42cd96e0-03fd-488c-9aaf-03e1da151a06",
-      "type": "text",
-      "text": "# Project 1 — VProfile Multi-Tier Application\n\n- **Course Sections:** 08\n\n",
-      "x": 0,
-      "y": 3040,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "171ace5c-85c9-4ffb-978e-4fbdc10db42e",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build and deploy the VProfile multi-tier application.\n\n- **Technologies:**\n  - Linux, Tomcat, MySQL, Maven, Git\n\n- **What This Project Proves:**\n  - I understand how a real multi-tier application is deployed and operated.\n\n- **Portfolio Rank:**\n  - #15 (Foundation Project)\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn and build the technical solution.\n  - **How:**\n    - Follow the course, complete the hands-on labs, practice independently, and troubleshoot until you can build it from scratch.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the project into a professional portfolio repository.\n  - **How:**\n    - Organize the project, write a professional README, add architecture diagrams, screenshots, deployment guide, and push everything to GitHub.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain and showcase the project through documentation and content.\n  - **How:**\n    - Write a LinkedIn post, create a project walkthrough, explain the architecture and decisions, and record a short demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate understanding through interview preparation and confidence assessment.\n  - **How:**\n    - Answer interview questions, explain the project without notes, solve troubleshooting scenarios, update confidence, revise weak areas, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 5320,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "7c0b2844-5a3d-44a0-91cb-3ede7aba97be",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Architecture Diagram\n- [ ] Infrastructure as Code / Configuration Files (if applicable)\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 5700,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "4773ce0d-495b-4aab-b84a-2d13480e4f2e",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Project works end-to-end\n- [ ] GitHub repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the architecture confidently\n- [ ] Able to answer interview questions confidently\n```` 0\n\n",
-      "x": 650,
-      "y": 6080,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e37bd7c7-5cc2-4fe6-87d4-028c598a7ab1",
-      "type": "text",
-      "text": "# Capability 8 — Networking Fundamentals\n\n- **Course Sections:** 09 — Networking\n\n",
-      "x": 0,
-      "y": 3420,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "60eeb439-47a6-4642-ab9c-e5685cc6266a",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Build a strong understanding of computer networking concepts used throughout cloud infrastructure, containers, Kubernetes, and production deployments.\n\n- **Why It Matters:**\n  - Networking is one of the core foundations of DevOps. Understanding networking is essential for designing, deploying, securing, and troubleshooting modern infrastructure.\n\n- **Supports Projects:**\n  - Project 2 — AWS Infrastructure\n  - Project 3 — AWS Re-Architected Application\n  - Project 9 — Monitoring & Observability Platform\n  - Project 11 — GCP Cloud Infrastructure\n  - Project 12 — Production Docker Platform\n  - Project 13 — Kubernetes Platform\n  - Project 14 — VProfile Deployment on Kubernetes\n  - Project 15 — GitOps Platform\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn networking fundamentals.\n  - **How:**\n    - Practice IP addressing, subnets, protocols, ports, DNS, routing, and networking troubleshooting commands.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build networking reference notes.\n  - **How:**\n    - Document networking concepts, diagrams, troubleshooting commands, and common scenarios.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain networking concepts.\n  - **How:**\n    - Create networking diagrams and explain packet flow between application components.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate networking knowledge.\n  - **How:**\n    - Practice networking interview questions and troubleshooting scenarios while preparing 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 6460,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "c9a45885-1177-4b0d-b9e8-00a91b513fe1",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Networking fundamentals understood\n- [ ] Troubleshooting commands mastered\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 6840,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "ab417f9c-6ae8-4235-8639-ce0e2b0d648f",
-      "type": "text",
-      "text": "# Capability 9 — Container Fundamentals\n\n- **Course Sections:** 10 — Containers\n\n",
-      "x": 0,
-      "y": 3800,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "ec6f50b8-3ffa-4eb3-b956-960b3a69d3fa",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Understand containerization concepts and how applications are packaged before moving to Docker and Kubernetes.\n\n- **Why It Matters:**\n  - Containers are the bridge between traditional infrastructure and cloud-native platforms.\n\n- **Supports Projects:**\n  - Project 12 — Production Docker Platform\n  - Project 13 — Kubernetes Platform\n  - Project 14 — VProfile Deployment on Kubernetes\n  - Project 15 — GitOps Platform\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn container concepts.\n  - **How:**\n    - Understand containers, Docker architecture, image lifecycle, container networking, and microservices concepts.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build container reference notes.\n  - **How:**\n    - Document container architecture, lifecycle, and comparisons with virtual machines.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain containerization.\n  - **How:**\n    - Create comparison diagrams between VMs and containers.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate container knowledge.\n  - **How:**\n    - Practice container-related interview questions while preparing 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 7220,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e1e804e7-fc89-4e95-9906-abf9c8e4d1a6",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Container concepts mastered\n- [ ] Architecture understood\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 7600,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "acc6e639-5134-49bb-b090-29978fff6064",
-      "type": "text",
-      "text": "# Capability 10 — Bash Scripting\n\n- **Course Sections:** 11 — Bash Scripting\n\n",
-      "x": 0,
-      "y": 4180,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "fe5ed769-708b-4768-ac81-a2ba63311e23",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Learn shell scripting for automation and operational tasks.\n\n- **Why It Matters:**\n  - Bash scripting is a fundamental automation skill used across Linux administration, CI/CD, cloud automation, and DevOps operations.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 2\n  - Project 4\n  - Project 5\n  - Project 6\n  - Project 7\n  - Project 8\n  - Project 10\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Bash scripting.\n  - **How:**\n    - Practice variables, loops, conditions, functions, remote execution, and automation scripts.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a Bash scripting handbook.\n  - **How:**\n    - Document syntax, reusable scripts, and automation patterns.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain scripting solutions.\n  - **How:**\n    - Document script workflows and automation logic with examples.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate scripting knowledge.\n  - **How:**\n    - Solve scripting problems and prepare 20–30 Bash interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 7980,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "5e62846f-f4bf-4f48-9720-2c50de2505e8",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Able to write Bash scripts independently\n- [ ] Automation concepts understood\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 8360,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "16ad20b5-77e4-4c8e-bae1-35c05369c0c6",
-      "type": "text",
-      "text": "# Capability 11 — AI-Assisted Scripting\n\n- **Course Sections:** 12 — AI Scripting\n\n",
-      "x": 0,
-      "y": 4560,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "9bf959c8-b301-4e67-9b87-8d391a39b03a",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Learn how to safely use AI to accelerate DevOps automation without compromising quality or security.\n\n- **Why It Matters:**\n  - Modern DevOps engineers increasingly use AI as a productivity tool while still validating every generated solution.\n\n- **Supports Projects:**\n  - Project 4–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn AI-assisted automation.\n  - **How:**\n    - Practice using AI to generate scripts, templates, and configurations while validating outputs.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document AI best practices.\n  - **How:**\n    - Record prompting techniques, validation methods, and security considerations.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain responsible AI usage.\n  - **How:**\n    - Share examples of AI-assisted automation and lessons learned.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate AI-assisted automation knowledge.\n  - **How:**\n    - Prepare interview questions covering AI usage, validation, and security.\n\n- ---\n\n",
-      "x": 650,
-      "y": 8740,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "cc6abb8a-68f5-4e31-9bbd-fac98aead513",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Able to use AI effectively for automation\n- [ ] Validation workflow understood\n- [ ] Notes completed\n- [ ] Interview ready\n```` 0\n\n",
-      "x": 650,
-      "y": 9120,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "b86fec95-6c9a-41a2-8da6-87f93f675565",
-      "type": "text",
-      "text": "# Project 2 — AWS Infrastructure\n\n- **Course Sections:** 13–14\n\n",
-      "x": 0,
-      "y": 4940,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e1ce769f-e409-419d-9587-8b169745ef0e",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build the complete AWS infrastructure for the VProfile application.\n\n- **Technologies:**\n  - AWS, EC2, VPC, ELB, Auto Scaling, CloudWatch\n\n- **What This Project Proves:**\n  - I understand AWS networking, compute, scaling, and production-style cloud infrastructure.\n\n- **Portfolio Rank:**\n  - #9\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the AWS infrastructure.\n  - **How:**\n    - Deploy and configure AWS networking, compute, storage, load balancing, monitoring, and scaling services while understanding how they work together.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the infrastructure into a professional portfolio repository.\n  - **How:**\n    - Create a GitHub repository with AWS architecture diagrams, infrastructure documentation, screenshots, deployment guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the AWS architecture.\n  - **How:**\n    - Write a LinkedIn post, create an AWS architecture walkthrough, explain design decisions, and record a short demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate AWS knowledge.\n  - **How:**\n    - Practice AWS interview questions, explain architecture decisions, solve troubleshooting scenarios, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 9500,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "42739cea-10f7-4a3c-a388-8e923aa02bae",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] AWS Architecture Diagram\n- [ ] Infrastructure as Code / Configuration Files (if applicable)\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 9880,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "bbababb7-41ac-4131-a9f4-777184be140c",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Infrastructure deployed successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain AWS architecture confidently\n- [ ] Able to answer interview questions confidently\n\n- ---\n\n",
-      "x": 650,
-      "y": 10260,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "72593331-0740-4d11-b0c4-1eba189e015f",
-      "type": "text",
-      "text": "# Project 3 — AWS Re-Architected Application\n\n- **Course Sections:** 15\n\n",
-      "x": 0,
-      "y": 5320,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e36d56de-e7bf-4657-b0fa-f455d4899e71",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Modernize the VProfile application using AWS managed services.\n\n- **Technologies:**\n  - Amazon RDS, Amazon ElastiCache, Amazon MQ, Elastic Beanstalk, CloudFront\n\n- **What This Project Proves:**\n  - I understand cloud modernization using AWS managed services.\n\n- **Portfolio Rank:**\n  - #11\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the re-architected cloud solution.\n  - **How:**\n    - Replace self-managed services with AWS managed services and understand the architectural improvements.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Convert the project into a portfolio repository.\n  - **How:**\n    - Include before-and-after architecture diagrams, deployment documentation, screenshots, and implementation details.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the modernization journey.\n  - **How:**\n    - Create architecture comparisons, document migration decisions, and record a walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate cloud architecture knowledge.\n  - **How:**\n    - Practice AWS architecture interview questions and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 10640,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "de6acbf9-0c89-46e7-bf94-7f39a0f37f6a",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Before vs After Architecture Diagram\n- [ ] Configuration Files\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 11020,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "04a9f95f-4872-4622-a184-5474081ca848",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Re-architected solution working\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain modernization decisions\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 11400,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "b5ab9661-6863-45e3-a315-d453f7c992a0",
-      "type": "text",
-      "text": "# Capability 12 — Build Tools\n\n- **Course Sections:** 16 — Build Tools\n\n",
-      "x": 0,
-      "y": 5700,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "61671571-8abc-4482-a6e3-b98a4033547a",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Learn build automation using Maven and understand how application artifacts are produced.\n\n- **Why It Matters:**\n  - Build tools produce the deployable artifacts consumed by CI/CD pipelines, Docker, Kubernetes, and cloud deployments.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 4\n  - Project 5\n  - Project 6\n  - Project 10\n  - Project 12\n  - Project 13\n  - Project 14\n  - Project 15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn build automation.\n  - **How:**\n    - Practice Maven builds, dependency management, packaging, and artifact generation.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build build-tool reference notes.\n  - **How:**\n    - Document Maven lifecycle, commands, and build workflows.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain build automation.\n  - **How:**\n    - Create diagrams showing how source code becomes deployable artifacts.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate build tool knowledge.\n  - **How:**\n    - Practice Maven interview questions and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 11780,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "db88ebf3-7f2f-48c9-80a5-5b647079233d",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Maven lifecycle understood\n- [ ] Able to build application artifacts\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 12160,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e7fe617f-d30b-4cf8-9779-9be1211be7f9",
-      "type": "text",
-      "text": "# Project 4 — Jenkins CI/CD Platform\n\n- **Course Sections:** 17\n\n",
-      "x": 0,
-      "y": 6080,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e786adff-203c-4a39-84b9-c45de0499f74",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build a production-ready Jenkins CI/CD platform.\n\n- **Technologies:**\n  - Jenkins, Maven, Nexus, SonarQube, Docker\n\n- **What This Project Proves:**\n  - I can build enterprise-grade CI/CD pipelines.\n\n- **Portfolio Rank:**\n  - #4\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the Jenkins CI/CD platform.\n  - **How:**\n    - Configure Jenkins, create pipelines, integrate Maven, Nexus, SonarQube, Docker, and automate software delivery.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the CI/CD platform into a professional portfolio repository.\n  - **How:**\n    - Publish Jenkinsfiles, pipeline diagrams, build logs, documentation, screenshots, and deployment guide.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the CI/CD pipeline.\n  - **How:**\n    - Create pipeline walkthroughs, architecture explanations, LinkedIn posts, and a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate CI/CD knowledge.\n  - **How:**\n    - Practice Jenkins interview questions, explain the complete pipeline, troubleshoot failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 12540,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "a1da61c9-9e42-41ed-9501-46cc26208041",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] CI/CD Architecture Diagram\n- [ ] Jenkinsfile\n- [ ] Pipeline Screenshots\n- [ ] Build Logs\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 12920,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "cbbb3434-4f8c-4106-82b8-b7418bb9a79b",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] CI/CD pipeline works end-to-end\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the complete pipeline\n- [ ] Interview ready\n\n",
-      "x": 650,
-      "y": 13300,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "c76f5c41-087d-4729-a528-a02e91fb60b9",
-      "type": "text",
-      "text": "# Project 5 — GitHub Actions CI/CD Platform\n\n- **Course Sections:** 18\n\n",
-      "x": 0,
-      "y": 6460,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "f3350894-35fa-4561-8e5f-f8c216d6c34f",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build CI/CD pipelines using GitHub Actions.\n\n- **Technologies:**\n  - GitHub Actions, Docker, Git\n\n- **What This Project Proves:**\n  - I know modern cloud-native CI/CD automation.\n\n- **Portfolio Rank:**\n  - #7\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build CI/CD pipelines using GitHub Actions.\n  - **How:**\n    - Create workflows, configure triggers, automate builds, perform security scanning, manage secrets, and publish container images.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GitHub Actions workflows into a professional portfolio repository.\n  - **How:**\n    - Publish workflow YAML files, architecture diagrams, workflow screenshots, deployment guide, and supporting documentation.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the GitHub Actions workflow.\n  - **How:**\n    - Create workflow diagrams, explain pipeline stages, write a LinkedIn post, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate GitHub Actions knowledge.\n  - **How:**\n    - Practice GitHub Actions interview questions, explain workflow execution, troubleshoot pipeline failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 13680,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "c1ec1d20-c27b-4c04-901b-87534028ea56",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Workflow Architecture Diagram\n- [ ] GitHub Actions Workflow YAML Files\n- [ ] Workflow Run Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 14060,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "1fe14c1f-c557-4bcc-923b-77f83b8aceb0",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Workflow executes successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain workflow execution confidently\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 14440,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "dbcb4a25-aa79-4a86-9f9f-f91fef1641e4",
-      "type": "text",
-      "text": "# Project 6 — GitLab CI/CD Platform\n\n- **Course Sections:** 19\n\n",
-      "x": 0,
-      "y": 6840,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "457c5b44-14f4-413d-a914-f68a188ffe86",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build CI/CD pipelines using GitLab CI.\n\n- **Technologies:**\n  - GitLab CI, Docker\n\n- **What This Project Proves:**\n  - I can work with multiple enterprise CI/CD platforms.\n\n- **Portfolio Rank:**\n  - #14\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build CI/CD pipelines using GitLab CI.\n  - **How:**\n    - Configure GitLab pipelines, variables, triggers, rules, artifacts, and Docker integration while understanding platform-specific features.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GitLab pipeline into a professional portfolio repository.\n  - **How:**\n    - Publish the `.gitlab-ci.yml` file, pipeline diagrams, screenshots, documentation, and deployment guide.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain GitLab CI workflows.\n  - **How:**\n    - Compare GitLab CI with Jenkins and GitHub Actions, document the pipeline flow, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate GitLab CI knowledge.\n  - **How:**\n    - Practice GitLab interview questions, explain pipeline execution, compare CI platforms, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 14820,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "66205283-86aa-4a05-a656-4a6e299d420a",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] CI/CD Architecture Diagram\n- [ ] `.gitlab-ci.yml`\n- [ ] Pipeline Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 15200,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "edf18c05-74b5-4572-b984-5babf077db32",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Pipeline executes successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain GitLab CI confidently\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 15580,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "ac04d3ab-74a3-48c5-a341-d188cf7daa78",
-      "type": "text",
-      "text": "# Capability 13 — Python Automation\n\n- **Course Sections:** 20 — Python\n\n",
-      "x": 0,
-      "y": 7220,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "9d779745-fa81-444b-9e50-5dfc7ec32593",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Learn Python as an automation language for DevOps tasks and cloud operations.\n\n- **Why It Matters:**\n  - Python is widely used for infrastructure automation, cloud SDKs, scripting, API integration, and operational tooling.\n\n- **Supports Projects:**\n  - Project 2\n  - Project 4\n  - Project 5\n  - Project 6\n  - Project 7\n  - Project 8\n  - Project 9\n  - Project 10\n  - Project 11\n  - Project 15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Python for DevOps automation.\n  - **How:**\n    - Practice variables, functions, modules, exception handling, file operations, OS interaction, subprocess execution, and cloud automation with Python.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a Python automation handbook.\n  - **How:**\n    - Document syntax, automation examples, cloud SDK usage, Fabric examples, and reusable scripts.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Python automation.\n  - **How:**\n    - Create automation flow diagrams, explain Python use cases in DevOps, and document practical examples.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate Python automation knowledge.\n  - **How:**\n    - Solve automation problems, explain Python scripts, and prepare 20–30 Python DevOps interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 15960,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "1552cc9e-880a-490b-8d26-91624d570a32",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Able to automate tasks using Python\n- [ ] Cloud automation concepts understood\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 16340,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "bd856c12-6480-4243-856b-98e359446758",
-      "type": "text",
-      "text": "# Project 7 — Terraform AWS Infrastructure\n\n- **Course Sections:** 21\n\n",
-      "x": 0,
-      "y": 7600,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "9b09a980-ce38-4fab-b75e-b7e9fa2fdfb8",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Provision AWS infrastructure using Terraform.\n\n- **Technologies:**\n  - Terraform, AWS\n\n- **What This Project Proves:**\n  - I automate cloud infrastructure instead of manually provisioning resources.\n\n- **Portfolio Rank:**\n  - #3\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build AWS infrastructure using Terraform.\n  - **How:**\n    - Learn Terraform fundamentals, create reusable modules, manage state, provision AWS resources, and understand Infrastructure as Code best practices.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Terraform project into a professional portfolio repository.\n  - **How:**\n    - Publish Terraform modules, infrastructure diagrams, project documentation, screenshots, deployment guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Infrastructure as Code.\n  - **How:**\n    - Create Terraform architecture diagrams, explain module design, document infrastructure decisions, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Terraform and IaC knowledge.\n  - **How:**\n    - Practice Terraform interview questions, explain state management, troubleshoot infrastructure deployments, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 16720,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "6940dad7-e766-4271-890f-8a45d98834db",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Infrastructure Architecture Diagram\n- [ ] Terraform Modules\n- [ ] Terraform Configuration Files\n- [ ] `terraform plan` Output\n- [ ] `terraform apply` Evidence\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 17100,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "4b1ef39a-4ca1-4bd6-9b30-440bba86e19d",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Infrastructure provisioned successfully\n- [ ] Terraform modules reusable\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Infrastructure as Code confidently\n- [ ] Interview ready\n\n",
-      "x": 650,
-      "y": 17480,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "8c524f2d-bdf3-4245-8c2c-ad26cdc13473",
-      "type": "text",
-      "text": "# Project 8 — Ansible Configuration Management Platform\n\n- **Course Sections:** 22\n\n",
-      "x": 0,
-      "y": 7980,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "6473f569-082d-42d1-a839-7219ff978fa4",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Automate server configuration using Ansible.\n\n- **Technologies:**\n  - Ansible\n\n- **What This Project Proves:**\n  - I can automate server configuration consistently across multiple systems.\n\n- **Portfolio Rank:**\n  - #10\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build an Ansible configuration management platform.\n  - **How:**\n    - Learn inventories, playbooks, roles, variables, templates, handlers, modules, loops, conditions, and idempotent automation while configuring application servers.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Ansible automation into a professional portfolio repository.\n  - **How:**\n    - Publish playbooks, roles, inventories, architecture diagrams, documentation, screenshots, deployment guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain configuration management.\n  - **How:**\n    - Create automation workflow diagrams, explain playbook execution, document infrastructure automation decisions, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Ansible knowledge.\n  - **How:**\n    - Practice Ansible interview questions, explain playbooks and roles, troubleshoot automation failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 17860,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "2c658504-5a80-4006-8b8c-850b5a2ce5f3",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Automation Architecture Diagram\n- [ ] Ansible Playbooks\n- [ ] Inventory Files\n- [ ] Roles\n- [ ] Execution Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 18240,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "369714a0-9bde-4603-b9f4-4b78d9a8210b",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Automation executes successfully\n- [ ] Infrastructure configured consistently\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Ansible architecture confidently\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 18620,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "f01ce613-eebc-4db0-97be-e79a9ac4477b",
-      "type": "text",
-      "text": "# Project 9 — Monitoring & Observability Platform\n\n- **Course Sections:** 23\n\n",
-      "x": 0,
-      "y": 8360,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "987aba99-1022-49c8-ae23-12c61a9a1022",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build a complete monitoring and observability platform for infrastructure and applications.\n\n- **Technologies:**\n  - Prometheus, Grafana, Loki, PromQL\n\n- **What This Project Proves:**\n  - I can monitor production infrastructure, visualize metrics, collect logs, and configure alerting.\n\n- **Portfolio Rank:**\n  - #6\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the monitoring platform.\n  - **How:**\n    - Install Prometheus, Grafana, Loki, configure exporters, build dashboards, create PromQL queries, and integrate alert notifications.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the monitoring platform into a professional portfolio repository.\n  - **How:**\n    - Publish monitoring architecture diagrams, dashboard screenshots, Prometheus configuration, Grafana dashboards, alert rules, and documentation.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain observability.\n  - **How:**\n    - Create monitoring architecture diagrams, explain metrics, logs, alerting workflow, and record a dashboard walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate monitoring knowledge.\n  - **How:**\n    - Practice Prometheus, Grafana, and observability interview questions, explain monitoring architecture, troubleshoot monitoring issues, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 19000,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "4c2d115f-3803-4cbf-b4eb-c81254223d0d",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Monitoring Architecture Diagram\n- [ ] Grafana Dashboards\n- [ ] Prometheus Configuration\n- [ ] Alert Rules\n- [ ] Dashboard Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 19380,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "6a466c10-e34e-480f-b768-12d21e8fb070",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Monitoring platform operational\n- [ ] Dashboards functioning correctly\n- [ ] Alerts configured\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain observability confidently\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 19760,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "bd804222-a69b-448a-bf80-d8defeb87dd3",
-      "type": "text",
-      "text": "# Capability 14 — AWS Networking & VPC\n\n- **Course Sections:** 24 — AWS Part 2 (VPC)\n\n",
-      "x": 0,
-      "y": 8740,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "3363b0a0-aed0-4306-8a92-e2998cac47e6",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Master AWS networking by designing secure, production-style Virtual Private Clouds (VPCs).\n\n- **Why It Matters:**\n  - Every production AWS environment depends on a well-designed VPC architecture with proper networking, routing, and security.\n\n- **Supports Projects:**\n  - Project 2 — AWS Infrastructure\n  - Project 3 — AWS Re-Architected Application\n  - Project 7 — Terraform AWS Infrastructure\n  - Project 10 — AWS Native CI/CD Platform\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn AWS VPC architecture.\n  - **How:**\n    - Build VPCs, public/private subnets, Internet Gateways, NAT Gateways, Route Tables, Bastion Hosts, and VPC Peering while understanding network isolation and security.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build AWS networking reference notes.\n  - **How:**\n    - Document VPC architecture, subnet design, routing, security patterns, and Terraform-based network provisioning.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain AWS networking.\n  - **How:**\n    - Create VPC architecture diagrams, explain packet flow, routing decisions, and network security design.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate AWS networking knowledge.\n  - **How:**\n    - Practice VPC interview questions, solve networking scenarios, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 20140,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "dcb3cd4c-10a8-4477-a121-4d0f5f4c5c90",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] VPC architecture understood\n- [ ] Networking components mastered\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 20520,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "ee7c43e1-66e4-49e6-859c-aa8da0ab2068",
-      "type": "text",
-      "text": "# Project 10 — AWS Native CI/CD Platform\n\n- **Course Sections:** 25\n\n",
-      "x": 0,
-      "y": 9120,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e4a7ffda-b36e-4108-9077-c17987757f6e",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build a fully managed AWS-native CI/CD pipeline.\n\n- **Technologies:**\n  - AWS CodeCommit, CodeBuild, Elastic Beanstalk, Amazon RDS\n\n- **What This Project Proves:**\n  - I can design and operate cloud-native CI/CD pipelines using AWS managed services.\n\n- **Portfolio Rank:**\n  - #8\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the AWS-native CI/CD platform.\n  - **How:**\n    - Configure CodeCommit, CodeBuild, Elastic Beanstalk, artifact flow, deployment automation, and managed application hosting.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the AWS-native pipeline into a professional portfolio repository.\n  - **How:**\n    - Publish architecture diagrams, pipeline documentation, screenshots, deployment guide, and AWS service configuration.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain AWS-native DevOps.\n  - **How:**\n    - Create pipeline architecture diagrams, explain service integration, document deployment workflow, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate AWS DevOps knowledge.\n  - **How:**\n    - Practice AWS DevOps interview questions, explain managed CI/CD architecture, troubleshoot deployment failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 20900,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "e3ee4366-ac18-453e-b571-9fbeaf225660",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] AWS CI/CD Architecture Diagram\n- [ ] Pipeline Configuration\n- [ ] Build & Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 21280,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "7659ffdd-86ba-426c-9d41-b0c6b2979fcc",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Pipeline operational\n- [ ] Application deployed automatically\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain AWS DevOps architecture confidently\n- [ ] Interview ready\n\n",
-      "x": 650,
-      "y": 21660,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "d28b67e4-2f83-4119-b6a1-32f87942f067",
-      "type": "text",
-      "text": "# Project 11 — GCP Cloud Infrastructure\n\n- **Course Sections:** 26\n\n",
-      "x": 0,
-      "y": 9500,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "a50f53d4-2ade-4ce2-b60c-58d7c01c2fff",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Deploy the VProfile application on Google Cloud Platform.\n\n- **Technologies:**\n  - Google Cloud Platform (GCP), VPC, Cloud SQL, Memorystore, Managed Instance Groups, Load Balancer\n\n- **What This Project Proves:**\n  - I can design and deploy cloud infrastructure across multiple cloud providers.\n\n- **Portfolio Rank:**\n  - #12\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build cloud infrastructure on GCP.\n  - **How:**\n    - Configure networking, virtual machines, managed services, instance groups, Cloud SQL, Memorystore, and load balancing while understanding GCP architecture.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GCP deployment into a professional portfolio repository.\n  - **How:**\n    - Publish GCP architecture diagrams, deployment documentation, screenshots, infrastructure configuration, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain GCP architecture.\n  - **How:**\n    - Create architecture walkthroughs, compare AWS and GCP designs, and record a project demo.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate GCP knowledge.\n  - **How:**\n    - Practice GCP interview questions, explain architectural decisions, troubleshoot cloud deployments, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 22040,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "07059b0f-fc58-441c-a28b-95c56bf274b8",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] GCP Architecture Diagram\n- [ ] Infrastructure Configuration\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 22420,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "bd510486-afb1-4538-adfb-a220277214b7",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] GCP deployment successful\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain GCP architecture confidently\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 22800,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "d1ab7d8b-3f2b-4c91-9bd9-0db201443311",
-      "type": "text",
-      "text": "# Project 12 — Production Docker Platform\n\n- **Course Sections:** 27–28\n\n",
-      "x": 0,
-      "y": 9880,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "54acac23-1ca5-4913-a8ee-3e53990d6c24",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Containerize the VProfile application and build production-ready Docker images.\n\n- **Technologies:**\n  - Docker, Docker Compose, Docker Hub\n\n- **What This Project Proves:**\n  - I can package applications into production-ready containers and manage multi-container environments.\n\n- **Portfolio Rank:**\n  - #5\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the Docker platform.\n  - **How:**\n    - Create Dockerfiles, optimize images, build multi-stage images, configure Docker Compose, publish images to Docker Hub, and validate the complete containerized application.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Docker platform into a professional portfolio repository.\n  - **How:**\n    - Publish Dockerfiles, Docker Compose files, container architecture diagrams, screenshots, deployment guide, and documentation.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain containerization.\n  - **How:**\n    - Create container architecture diagrams, explain image-building strategy, compare VMs vs containers, and record a project walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Docker knowledge.\n  - **How:**\n    - Practice Docker interview questions, explain container lifecycle, troubleshoot Docker issues, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 23180,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "ca38c41e-36b6-40bc-a743-3a1f7a914984",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Container Architecture Diagram\n- [ ] Dockerfiles\n- [ ] Docker Compose Files\n- [ ] Docker Hub Repository\n- [ ] Build Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 23560,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "1b93bde6-7381-4a14-b452-43dbb37998bf",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Application fully containerized\n- [ ] Images published successfully\n- [ ] Docker Compose working\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Docker architecture confidently\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 23940,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "22712b9b-c547-471b-afd2-e56a5f0e44e7",
-      "type": "text",
-      "text": "# Project 13 — Kubernetes Platform\n\n- **Course Sections:** 29\n\n",
-      "x": 0,
-      "y": 10260,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "6bf0a450-575f-4e08-af6f-2b85f01ec004",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build and manage a production-ready Kubernetes cluster.\n\n- **Technologies:**\n  - Kubernetes, Helm\n\n- **What This Project Proves:**\n  - I can deploy, manage, and scale containerized applications using Kubernetes.\n\n- **Portfolio Rank:**\n  - #2\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the Kubernetes platform.\n  - **How:**\n    - Configure Kubernetes clusters, create Pods, Deployments, Services, ConfigMaps, Secrets, Ingress, Volumes, and Helm charts while understanding cluster architecture.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Kubernetes platform into a professional portfolio repository.\n  - **How:**\n    - Publish Kubernetes manifests, Helm charts, cluster architecture diagrams, deployment documentation, screenshots, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Kubernetes architecture.\n  - **How:**\n    - Create cluster architecture diagrams, explain workload scheduling, service discovery, Helm packaging, and record a walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Kubernetes knowledge.\n  - **How:**\n    - Practice Kubernetes interview questions, explain cluster components, troubleshoot deployments, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 24320,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "105f6cde-9d89-4a05-91fa-bee8425e0036",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Kubernetes Architecture Diagram\n- [ ] Kubernetes Manifests\n- [ ] Helm Charts\n- [ ] Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 24700,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "53fde071-18f7-4198-80f6-00310712eeb4",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Kubernetes cluster operational\n- [ ] Workloads deployed successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Kubernetes architecture confidently\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 25080,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "349802d8-82a0-4ae1-a7a0-a7463210bb03",
-      "type": "text",
-      "text": "# Project 14 — VProfile Deployment on Kubernetes\n\n- **Course Sections:** 30\n\n",
-      "x": 0,
-      "y": 10640,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "0cfc1141-e0ae-4350-83fa-07ef349a0fb7",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Deploy the complete VProfile application onto Kubernetes.\n\n- **Technologies:**\n  - Kubernetes, Helm, MySQL, RabbitMQ, Memcached, Nginx\n\n- **What This Project Proves:**\n  - I can deploy and operate a real-world multi-tier application on Kubernetes.\n\n- **Portfolio Rank:**\n  - #1 (Flagship Project)\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Deploy the VProfile application on Kubernetes.\n  - **How:**\n    - Configure persistent storage, Secrets, ConfigMaps, Services, Ingress, application manifests, and validate end-to-end application deployment.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Kubernetes deployment into a flagship portfolio repository.\n  - **How:**\n    - Publish architecture diagrams, manifests, Helm charts, screenshots, deployment documentation, troubleshooting guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Showcase the flagship project.\n  - **How:**\n    - Write a LinkedIn article, create a detailed architecture walkthrough, explain deployment decisions, and record a professional demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate complete Kubernetes deployment knowledge.\n  - **How:**\n    - Explain the entire architecture without notes, troubleshoot production scenarios, answer Kubernetes deployment questions, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 25460,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "adba3b06-6fb9-45d7-adee-a0ba9dbeea6a",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] End-to-End Architecture Diagram\n- [ ] Kubernetes Manifests\n- [ ] Helm Charts\n- [ ] Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Troubleshooting Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 25840,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "4067a3fa-5f9e-46e5-9f1b-16cb851e2d1f",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Complete application deployed successfully\n- [ ] All services communicating correctly\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the complete architecture confidently\n- [ ] Ready to showcase as flagship portfolio project\n\n",
-      "x": 650,
-      "y": 26220,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "c7542c8e-059e-44f3-9549-024b51699783",
-      "type": "text",
-      "text": "# Project 15 — GitOps Platform (Argo CD)\n\n- **Course Sections:** 31\n\n",
-      "x": 0,
-      "y": 11020,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "9f5bcf8f-b227-4122-ba3b-fa0f880248cf",
-      "type": "text",
-      "text": "# Project Definition\n\n- **Purpose:**\n  - Build a complete GitOps platform that continuously deploys Kubernetes applications using Argo CD.\n\n- **Technologies:**\n  - Argo CD, Kubernetes, Helm, GitHub Actions, Amazon ECR, Amazon EKS, SonarQube\n\n- **What This Project Proves:**\n  - I can design and operate a modern enterprise GitOps platform with automated CI/CD, Kubernetes, and continuous reconciliation.\n\n- **Portfolio Rank:**\n  - #1 (Capstone Project)\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the GitOps platform.\n  - **How:**\n    - Configure Git repositories, GitHub Actions pipelines, Amazon ECR, Amazon EKS, Helm charts, Argo CD applications, and continuous synchronization while understanding the complete GitOps workflow.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GitOps platform into a capstone portfolio repository.\n  - **How:**\n    - Publish GitOps architecture diagrams, Helm charts, Kubernetes manifests, GitHub Actions workflows, Argo CD configuration, screenshots, documentation, and deployment guide.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Showcase the complete DevOps platform.\n  - **How:**\n    - Create an end-to-end DevOps architecture walkthrough, explain GitOps concepts, publish a LinkedIn article, and record a professional demonstration video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate complete DevOps platform knowledge.\n  - **How:**\n    - Explain the entire CI/CD + Kubernetes + GitOps workflow without notes, troubleshoot deployment scenarios, answer GitOps interview questions, and prepare 20–30 interview questions with answers.\n\n- ---\n\n",
-      "x": 650,
-      "y": 26600,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "2b40ce56-77f8-4e97-bad6-9f28880679a2",
-      "type": "text",
-      "text": "# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Complete DevOps Architecture Diagram\n- [ ] GitHub Actions Workflows\n- [ ] Kubernetes Manifests\n- [ ] Helm Charts\n- [ ] Argo CD Configuration\n- [ ] Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Troubleshooting Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n",
-      "x": 650,
-      "y": 26980,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "553a4780-cc1a-4038-b335-e51cb5f7e5a2",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] Complete GitOps pipeline operational\n- [ ] Continuous synchronization working\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the complete GitOps architecture confidently\n- [ ] Ready to showcase as capstone portfolio project\n\n- ---\n\n",
-      "x": 650,
-      "y": 27360,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "413d2e5e-f578-4dab-aae4-3ad9256f3fbd",
-      "type": "text",
-      "text": "# Capability 15 — Course Completion & Career Preparation\n\n- **Course Sections:** 32 — Conclusion\n\n",
-      "x": 0,
-      "y": 11400,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "9a962d0a-a390-4e0f-84bc-3f13c5a785d3",
-      "type": "text",
-      "text": "# Capability Definition\n\n- **Purpose:**\n  - Consolidate all knowledge gained throughout the course and prepare for DevOps job applications.\n\n- **Why It Matters:**\n  - Technical knowledge alone is not enough—this capability ensures you are ready to present your work professionally and convert it into job opportunities.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Review the complete DevOps learning journey.\n  - **How:**\n    - Revisit weak areas, validate every major capability, and ensure each project works successfully.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Organize the complete DevOps knowledge base.\n  - **How:**\n    - Consolidate notes, diagrams, commands, troubleshooting guides, and project documentation into a structured reference.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Prepare for professional visibility.\n  - **How:**\n    - Update LinkedIn, GitHub profile, resume, portfolio, and create a summary of completed projects.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Prepare for job interviews.\n  - **How:**\n    - Review all interview questions, revisit weak topics, conduct mock interviews, and finalize technical confidence assessment.\n\n- ---\n\n",
-      "x": 650,
-      "y": 27740,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "dbcc2db8-8ac4-4a2a-95b6-44a0bfc979c0",
-      "type": "text",
-      "text": "# Definition of Done\n\n- [ ] All projects completed\n- [ ] Portfolio finalized\n- [ ] Resume updated\n- [ ] LinkedIn updated\n- [ ] GitHub profile polished\n- [ ] Interview ready\n\n- ---\n\n",
-      "x": 650,
-      "y": 28120,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "d1d7e513-a687-45bf-ba44-f1c01a1ef8e7",
-      "type": "text",
-      "text": "# Final Portfolio Checklist\n\n- [ ] All 15 Projects completed\n- [ ] All Capability milestones completed\n- [ ] Every project uploaded to GitHub\n- [ ] Every repository has a professional README\n- [ ] Architecture diagrams created\n- [ ] Deployment guides completed\n- [ ] Demo videos recorded\n- [ ] Lessons learned documented\n- [ ] Future improvements documented\n\n- ---\n\n",
-      "x": 0,
-      "y": 11780,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "be5d21ab-95d9-4a3a-bea6-89b51e3451ed",
-      "type": "text",
-      "text": "# GitHub Profile Checklist\n\n- [ ] Professional GitHub profile picture\n- [ ] Professional bio\n- [ ] Pinned flagship repositories\n- [ ] Consistent repository naming\n- [ ] Well-written READMEs\n- [ ] Clean commit history\n- [ ] Organized repository structure\n\n- ---\n\n",
-      "x": 0,
-      "y": 12160,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "a7a201dd-f1a7-4a25-a600-6acf6a23eaaa",
-      "type": "text",
-      "text": "# Resume Checklist\n\n- [ ] Resume updated with all major projects\n- [ ] Technologies listed correctly\n- [ ] Quantifiable project achievements included\n- [ ] GitHub profile added\n- [ ] LinkedIn profile added\n- [ ] Resume reviewed and polished\n\n- ---\n\n",
-      "x": 0,
-      "y": 12540,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "bf143818-767d-4413-8699-049c1d5e764b",
-      "type": "text",
-      "text": "# LinkedIn Checklist\n\n- [ ] Professional headline\n- [ ] Updated About section\n- [ ] Featured GitHub projects\n- [ ] Published project posts\n- [ ] Professional profile photo\n- [ ] Skills updated\n- [ ] Certifications added (if applicable)\n\n- ---\n\n",
-      "x": 0,
-      "y": 12920,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "ce257b10-3661-44a5-b685-6170da7bb30d",
-      "type": "text",
-      "text": "# Interview Readiness Checklist\n\n- [ ] Linux\n- [ ] Git\n- [ ] Networking\n- [ ] Bash\n- [ ] Python\n- [ ] AWS\n- [ ] Docker\n- [ ] Kubernetes\n- [ ] Terraform\n- [ ] Ansible\n- [ ] Jenkins\n- [ ] GitHub Actions\n- [ ] GitLab CI\n- [ ] Monitoring\n- [ ] GitOps\n- [ ] VProfile Project\n- [ ] Kubernetes Deployment Project\n- [ ] GitOps Capstone Project\n\n- ---\n\n",
-      "x": 0,
-      "y": 13300,
-      "width": 500,
-      "height": 300
-    },
-    {
-      "id": "3b1339a2-b0ca-4759-b82f-99d1018a96b9",
-      "type": "text",
-      "text": "# DevOps Job Readiness Checklist\n\n- [ ] Strong Linux fundamentals\n- [ ] Strong Networking fundamentals\n- [ ] Cloud fundamentals\n- [ ] Infrastructure as Code\n- [ ] Configuration Management\n- [ ] CI/CD\n- [ ] Containers\n- [ ] Kubernetes\n- [ ] Monitoring & Observability\n- [ ] GitOps\n- [ ] Multi-cloud exposure\n- [ ] Professional GitHub portfolio\n- [ ] Professional LinkedIn profile\n- [ ] Resume ready\n- [ ] Mock interviews completed\n- [ ] Confident explaining every project\n- [ ] Ready to apply for DevOps Engineer roles\n",
-      "x": 0,
-      "y": 13680,
-      "width": 500,
-      "height": 300
-    }
-  ],
-  "edges": [
-    {
-      "id": "5f562811-78b4-45eb-80ce-21e460ef9eee",
-      "fromNode": "73fcfba4-0595-4f14-9b4c-c9b1b9eb60b6",
-      "fromSide": "bottom",
-      "toNode": "d72b083b-0e29-4550-9509-c71b430dc32b",
-      "toSide": "top"
-    },
-    {
-      "id": "9364338f-40fb-4655-b1ba-f23d6d0a5be4",
-      "fromNode": "73fcfba4-0595-4f14-9b4c-c9b1b9eb60b6",
-      "fromSide": "bottom",
-      "toNode": "2351a6e0-8b31-41e6-8cd9-24d90eb7d2f4",
-      "toSide": "top"
-    },
-    {
-      "id": "102149cb-76c7-425c-9d79-9e8d223dd303",
-      "fromNode": "a4a66f93-9af9-4d87-ba70-5f61a4337d43",
-      "fromSide": "bottom",
-      "toNode": "a1da7343-e084-4e03-b6c1-601f577fc31a",
-      "toSide": "top"
-    },
-    {
-      "id": "1f7b96aa-0e42-477d-af82-80385bf349a1",
-      "fromNode": "a4a66f93-9af9-4d87-ba70-5f61a4337d43",
-      "fromSide": "bottom",
-      "toNode": "6c284e28-09c7-453f-a5e3-7efc8c5a831f",
-      "toSide": "top"
-    },
-    {
-      "id": "e927895d-1c06-4000-992c-b785e08205c2",
-      "fromNode": "cffad6ea-d1d9-49d7-82f0-0857d170e228",
-      "fromSide": "bottom",
-      "toNode": "5afaf938-da5b-46ba-9018-2bfc61aced8f",
-      "toSide": "top"
-    },
-    {
-      "id": "c247ceaf-e2ae-440e-a20e-4b88ad412643",
-      "fromNode": "cffad6ea-d1d9-49d7-82f0-0857d170e228",
-      "fromSide": "bottom",
-      "toNode": "2972f9a6-0562-4338-bdf8-57b5b31f1186",
-      "toSide": "top"
-    },
-    {
-      "id": "a2f789c4-1e70-410c-aa3a-783b4ab28a1b",
-      "fromNode": "cf0241b8-b20a-4d4c-a9ff-c90faf23a175",
-      "fromSide": "bottom",
-      "toNode": "ab1760b8-259e-4bba-ade7-d1b11957ff52",
-      "toSide": "top"
-    },
-    {
-      "id": "9c4f7315-cb56-4ad0-81bf-bbcc3f1113ee",
-      "fromNode": "cf0241b8-b20a-4d4c-a9ff-c90faf23a175",
-      "fromSide": "bottom",
-      "toNode": "e8d77735-8354-4f3e-945a-6dc3458133fc",
-      "toSide": "top"
-    },
-    {
-      "id": "dd1e3d6d-8db5-4f5e-8835-20da754e0614",
-      "fromNode": "d6f6ca54-2fb5-4117-87c0-b1a4d43e5bb5",
-      "fromSide": "bottom",
-      "toNode": "068c3ab1-593c-40f2-843b-8d916463ff0d",
-      "toSide": "top"
-    },
-    {
-      "id": "01268ecc-d9c3-4332-8f51-bd160bc791e1",
-      "fromNode": "d6f6ca54-2fb5-4117-87c0-b1a4d43e5bb5",
-      "fromSide": "bottom",
-      "toNode": "a70a1fbe-1df0-4d92-8331-85c64d977e16",
-      "toSide": "top"
-    },
-    {
-      "id": "d6fcf246-5283-4d55-a17f-a7f31c876542",
-      "fromNode": "b558f6ef-fd00-484c-8fa4-78a582a07ad6",
-      "fromSide": "bottom",
-      "toNode": "b5ba1202-e5b2-436e-b53a-d2024401b85f",
-      "toSide": "top"
-    },
-    {
-      "id": "c747002c-1ce9-45cf-ba8e-5bb47d8f1b21",
-      "fromNode": "b558f6ef-fd00-484c-8fa4-78a582a07ad6",
-      "fromSide": "bottom",
-      "toNode": "8da9b1e6-1e09-43b1-8ce6-ca23e83e3a25",
-      "toSide": "top"
-    },
-    {
-      "id": "4acf6aad-dced-43f5-a2cd-1c097f38d148",
-      "fromNode": "e6598f9c-5b4f-4ab1-82d7-3f605d6fc36f",
-      "fromSide": "bottom",
-      "toNode": "9120bb75-1cea-4f89-9843-fb3fab9f952e",
-      "toSide": "top"
-    },
-    {
-      "id": "c5da4382-e11b-4fe6-b19f-db9fa62528b9",
-      "fromNode": "e6598f9c-5b4f-4ab1-82d7-3f605d6fc36f",
-      "fromSide": "bottom",
-      "toNode": "9bff11b5-32e3-48c1-aaca-788ac20a9876",
-      "toSide": "top"
-    },
-    {
-      "id": "f1d4d1cc-beaf-4176-a018-59449d3bda39",
-      "fromNode": "42cd96e0-03fd-488c-9aaf-03e1da151a06",
-      "fromSide": "bottom",
-      "toNode": "171ace5c-85c9-4ffb-978e-4fbdc10db42e",
-      "toSide": "top"
-    },
-    {
-      "id": "a74987d8-7c8f-4157-9787-06447aa753b8",
-      "fromNode": "42cd96e0-03fd-488c-9aaf-03e1da151a06",
-      "fromSide": "bottom",
-      "toNode": "7c0b2844-5a3d-44a0-91cb-3ede7aba97be",
-      "toSide": "top"
-    },
-    {
-      "id": "0a77a33f-70dd-475a-b522-265a172ef038",
-      "fromNode": "42cd96e0-03fd-488c-9aaf-03e1da151a06",
-      "fromSide": "bottom",
-      "toNode": "4773ce0d-495b-4aab-b84a-2d13480e4f2e",
-      "toSide": "top"
-    },
-    {
-      "id": "80b43ce4-bbdf-4d32-befe-e69b4d3d19fd",
-      "fromNode": "e37bd7c7-5cc2-4fe6-87d4-028c598a7ab1",
-      "fromSide": "bottom",
-      "toNode": "60eeb439-47a6-4642-ab9c-e5685cc6266a",
-      "toSide": "top"
-    },
-    {
-      "id": "0910e416-3c24-4cee-bb68-7ee41568feec",
-      "fromNode": "e37bd7c7-5cc2-4fe6-87d4-028c598a7ab1",
-      "fromSide": "bottom",
-      "toNode": "c9a45885-1177-4b0d-b9e8-00a91b513fe1",
-      "toSide": "top"
-    },
-    {
-      "id": "149df009-4650-4647-ae4c-7db96e63ce3f",
-      "fromNode": "ab417f9c-6ae8-4235-8639-ce0e2b0d648f",
-      "fromSide": "bottom",
-      "toNode": "ec6f50b8-3ffa-4eb3-b956-960b3a69d3fa",
-      "toSide": "top"
-    },
-    {
-      "id": "5e2786c2-7bed-419a-813a-989118ee4fa3",
-      "fromNode": "ab417f9c-6ae8-4235-8639-ce0e2b0d648f",
-      "fromSide": "bottom",
-      "toNode": "e1e804e7-fc89-4e95-9906-abf9c8e4d1a6",
-      "toSide": "top"
-    },
-    {
-      "id": "adbf700d-0cf6-447d-976b-44523fe9a61b",
-      "fromNode": "acc6e639-5134-49bb-b090-29978fff6064",
-      "fromSide": "bottom",
-      "toNode": "fe5ed769-708b-4768-ac81-a2ba63311e23",
-      "toSide": "top"
-    },
-    {
-      "id": "eaf6272e-8cf9-423b-b515-b798af558348",
-      "fromNode": "acc6e639-5134-49bb-b090-29978fff6064",
-      "fromSide": "bottom",
-      "toNode": "5e62846f-f4bf-4f48-9720-2c50de2505e8",
-      "toSide": "top"
-    },
-    {
-      "id": "1752e427-763b-4686-bfe2-d8164328da0f",
-      "fromNode": "16ad20b5-77e4-4c8e-bae1-35c05369c0c6",
-      "fromSide": "bottom",
-      "toNode": "9bf959c8-b301-4e67-9b87-8d391a39b03a",
-      "toSide": "top"
-    },
-    {
-      "id": "0c3cde09-4cb4-42ca-b661-e629bb49fb54",
-      "fromNode": "16ad20b5-77e4-4c8e-bae1-35c05369c0c6",
-      "fromSide": "bottom",
-      "toNode": "cc6abb8a-68f5-4e31-9bbd-fac98aead513",
-      "toSide": "top"
-    },
-    {
-      "id": "8f821fa9-d8cd-4383-8549-5062f478f238",
-      "fromNode": "b86fec95-6c9a-41a2-8da6-87f93f675565",
-      "fromSide": "bottom",
-      "toNode": "e1ce769f-e409-419d-9587-8b169745ef0e",
-      "toSide": "top"
-    },
-    {
-      "id": "ddde9a69-5d58-48d6-8293-dd940d8a737a",
-      "fromNode": "b86fec95-6c9a-41a2-8da6-87f93f675565",
-      "fromSide": "bottom",
-      "toNode": "42739cea-10f7-4a3c-a388-8e923aa02bae",
-      "toSide": "top"
-    },
-    {
-      "id": "e07cb272-8d41-48d1-a418-84eabc567b69",
-      "fromNode": "b86fec95-6c9a-41a2-8da6-87f93f675565",
-      "fromSide": "bottom",
-      "toNode": "bbababb7-41ac-4131-a9f4-777184be140c",
-      "toSide": "top"
-    },
-    {
-      "id": "bc0389b4-4fa6-4eb3-ba9a-74060df2384d",
-      "fromNode": "72593331-0740-4d11-b0c4-1eba189e015f",
-      "fromSide": "bottom",
-      "toNode": "e36d56de-e7bf-4657-b0fa-f455d4899e71",
-      "toSide": "top"
-    },
-    {
-      "id": "5ecf6bd5-1ca8-4d34-a256-f0d91a4cfaa0",
-      "fromNode": "72593331-0740-4d11-b0c4-1eba189e015f",
-      "fromSide": "bottom",
-      "toNode": "de6acbf9-0c89-46e7-bf94-7f39a0f37f6a",
-      "toSide": "top"
-    },
-    {
-      "id": "c7959581-c6de-4336-a76f-72086cae11df",
-      "fromNode": "72593331-0740-4d11-b0c4-1eba189e015f",
-      "fromSide": "bottom",
-      "toNode": "04a9f95f-4872-4622-a184-5474081ca848",
-      "toSide": "top"
-    },
-    {
-      "id": "61f083bb-aa58-449a-909c-61da3d8714d0",
-      "fromNode": "b5ab9661-6863-45e3-a315-d453f7c992a0",
-      "fromSide": "bottom",
-      "toNode": "61671571-8abc-4482-a6e3-b98a4033547a",
-      "toSide": "top"
-    },
-    {
-      "id": "d9942f19-e37c-4e00-bcaa-ac0ab9b67bd3",
-      "fromNode": "b5ab9661-6863-45e3-a315-d453f7c992a0",
-      "fromSide": "bottom",
-      "toNode": "db88ebf3-7f2f-48c9-80a5-5b647079233d",
-      "toSide": "top"
-    },
-    {
-      "id": "32e9c7e7-cab5-44e6-a7ea-23acb7b2535b",
-      "fromNode": "e7fe617f-d30b-4cf8-9779-9be1211be7f9",
-      "fromSide": "bottom",
-      "toNode": "e786adff-203c-4a39-84b9-c45de0499f74",
-      "toSide": "top"
-    },
-    {
-      "id": "fce11366-c35f-475a-b26f-f7dee46fe9aa",
-      "fromNode": "e7fe617f-d30b-4cf8-9779-9be1211be7f9",
-      "fromSide": "bottom",
-      "toNode": "a1da61c9-9e42-41ed-9501-46cc26208041",
-      "toSide": "top"
-    },
-    {
-      "id": "66665ce8-cf8b-47ba-8085-0e7d8f83902a",
-      "fromNode": "e7fe617f-d30b-4cf8-9779-9be1211be7f9",
-      "fromSide": "bottom",
-      "toNode": "cbbb3434-4f8c-4106-82b8-b7418bb9a79b",
-      "toSide": "top"
-    },
-    {
-      "id": "abecd431-2e18-43d9-8b43-3742f57660ee",
-      "fromNode": "c76f5c41-087d-4729-a528-a02e91fb60b9",
-      "fromSide": "bottom",
-      "toNode": "f3350894-35fa-4561-8e5f-f8c216d6c34f",
-      "toSide": "top"
-    },
-    {
-      "id": "d8f6a902-a48e-42ed-ad75-91cfa09c116d",
-      "fromNode": "c76f5c41-087d-4729-a528-a02e91fb60b9",
-      "fromSide": "bottom",
-      "toNode": "c1ec1d20-c27b-4c04-901b-87534028ea56",
-      "toSide": "top"
-    },
-    {
-      "id": "897b275c-0ced-464b-b3fc-e51382355663",
-      "fromNode": "c76f5c41-087d-4729-a528-a02e91fb60b9",
-      "fromSide": "bottom",
-      "toNode": "1fe14c1f-c557-4bcc-923b-77f83b8aceb0",
-      "toSide": "top"
-    },
-    {
-      "id": "88ec1d47-7cf0-4ad4-ac2c-211d165460c2",
-      "fromNode": "dbcb4a25-aa79-4a86-9f9f-f91fef1641e4",
-      "fromSide": "bottom",
-      "toNode": "457c5b44-14f4-413d-a914-f68a188ffe86",
-      "toSide": "top"
-    },
-    {
-      "id": "e84343f8-803e-44f0-b6ae-5819037bf74d",
-      "fromNode": "dbcb4a25-aa79-4a86-9f9f-f91fef1641e4",
-      "fromSide": "bottom",
-      "toNode": "66205283-86aa-4a05-a656-4a6e299d420a",
-      "toSide": "top"
-    },
-    {
-      "id": "1b057919-dba3-41d2-9335-8910f6c3e9f1",
-      "fromNode": "dbcb4a25-aa79-4a86-9f9f-f91fef1641e4",
-      "fromSide": "bottom",
-      "toNode": "edf18c05-74b5-4572-b984-5babf077db32",
-      "toSide": "top"
-    },
-    {
-      "id": "175f28fc-b0b2-4f5d-9b2b-e1fa0e3d5c18",
-      "fromNode": "ac04d3ab-74a3-48c5-a341-d188cf7daa78",
-      "fromSide": "bottom",
-      "toNode": "9d779745-fa81-444b-9e50-5dfc7ec32593",
-      "toSide": "top"
-    },
-    {
-      "id": "2d058292-5494-457b-b4e8-70e10a1056bc",
-      "fromNode": "ac04d3ab-74a3-48c5-a341-d188cf7daa78",
-      "fromSide": "bottom",
-      "toNode": "1552cc9e-880a-490b-8d26-91624d570a32",
-      "toSide": "top"
-    },
-    {
-      "id": "bd33ad40-7c3f-4c6b-80a2-9bc793c6959b",
-      "fromNode": "bd856c12-6480-4243-856b-98e359446758",
-      "fromSide": "bottom",
-      "toNode": "9b09a980-ce38-4fab-b75e-b7e9fa2fdfb8",
-      "toSide": "top"
-    },
-    {
-      "id": "8b63b791-b5d1-4fbe-bb42-465690bf4bfe",
-      "fromNode": "bd856c12-6480-4243-856b-98e359446758",
-      "fromSide": "bottom",
-      "toNode": "6940dad7-e766-4271-890f-8a45d98834db",
-      "toSide": "top"
-    },
-    {
-      "id": "9a558360-6a44-4211-a021-c95bc39f2073",
-      "fromNode": "bd856c12-6480-4243-856b-98e359446758",
-      "fromSide": "bottom",
-      "toNode": "4b1ef39a-4ca1-4bd6-9b30-440bba86e19d",
-      "toSide": "top"
-    },
-    {
-      "id": "cf40baae-d4e1-4ea6-9e7e-ecbd8ceb78d8",
-      "fromNode": "8c524f2d-bdf3-4245-8c2c-ad26cdc13473",
-      "fromSide": "bottom",
-      "toNode": "6473f569-082d-42d1-a839-7219ff978fa4",
-      "toSide": "top"
-    },
-    {
-      "id": "3fde03b1-8d51-43b2-8aa7-c3fce282eafa",
-      "fromNode": "8c524f2d-bdf3-4245-8c2c-ad26cdc13473",
-      "fromSide": "bottom",
-      "toNode": "2c658504-5a80-4006-8b8c-850b5a2ce5f3",
-      "toSide": "top"
-    },
-    {
-      "id": "26dda68d-5649-43b9-ac48-8085167b1fbb",
-      "fromNode": "8c524f2d-bdf3-4245-8c2c-ad26cdc13473",
-      "fromSide": "bottom",
-      "toNode": "369714a0-9bde-4603-b9f4-4b78d9a8210b",
-      "toSide": "top"
-    },
-    {
-      "id": "e9272b36-ead9-40e1-b324-938e4fe5b632",
-      "fromNode": "f01ce613-eebc-4db0-97be-e79a9ac4477b",
-      "fromSide": "bottom",
-      "toNode": "987aba99-1022-49c8-ae23-12c61a9a1022",
-      "toSide": "top"
-    },
-    {
-      "id": "732040f8-1ca6-46f6-8d5d-fdfec35abd81",
-      "fromNode": "f01ce613-eebc-4db0-97be-e79a9ac4477b",
-      "fromSide": "bottom",
-      "toNode": "4c2d115f-3803-4cbf-b4eb-c81254223d0d",
-      "toSide": "top"
-    },
-    {
-      "id": "a6fc7fa4-110d-4332-9126-c84c67e25122",
-      "fromNode": "f01ce613-eebc-4db0-97be-e79a9ac4477b",
-      "fromSide": "bottom",
-      "toNode": "6a466c10-e34e-480f-b768-12d21e8fb070",
-      "toSide": "top"
-    },
-    {
-      "id": "5be8a18b-8aaf-4112-b6b5-20056d78d49c",
-      "fromNode": "bd804222-a69b-448a-bf80-d8defeb87dd3",
-      "fromSide": "bottom",
-      "toNode": "3363b0a0-aed0-4306-8a92-e2998cac47e6",
-      "toSide": "top"
-    },
-    {
-      "id": "a72c847f-b52e-4121-9587-27cbb2883173",
-      "fromNode": "bd804222-a69b-448a-bf80-d8defeb87dd3",
-      "fromSide": "bottom",
-      "toNode": "dcb3cd4c-10a8-4477-a121-4d0f5f4c5c90",
-      "toSide": "top"
-    },
-    {
-      "id": "f2d5b3bc-7e00-47e3-88b8-06040e38ca71",
-      "fromNode": "ee7c43e1-66e4-49e6-859c-aa8da0ab2068",
-      "fromSide": "bottom",
-      "toNode": "e4a7ffda-b36e-4108-9077-c17987757f6e",
-      "toSide": "top"
-    },
-    {
-      "id": "043315db-4bae-462b-97f1-77ce209763c7",
-      "fromNode": "ee7c43e1-66e4-49e6-859c-aa8da0ab2068",
-      "fromSide": "bottom",
-      "toNode": "e3ee4366-ac18-453e-b571-9fbeaf225660",
-      "toSide": "top"
-    },
-    {
-      "id": "b2e59e7f-eec9-428f-9136-7068c8001631",
-      "fromNode": "ee7c43e1-66e4-49e6-859c-aa8da0ab2068",
-      "fromSide": "bottom",
-      "toNode": "7659ffdd-86ba-426c-9d41-b0c6b2979fcc",
-      "toSide": "top"
-    },
-    {
-      "id": "b0ba086f-6b6e-4576-8905-eefbaeea82dc",
-      "fromNode": "d28b67e4-2f83-4119-b6a1-32f87942f067",
-      "fromSide": "bottom",
-      "toNode": "a50f53d4-2ade-4ce2-b60c-58d7c01c2fff",
-      "toSide": "top"
-    },
-    {
-      "id": "a1103ee0-2828-43af-9686-dc308893d8a8",
-      "fromNode": "d28b67e4-2f83-4119-b6a1-32f87942f067",
-      "fromSide": "bottom",
-      "toNode": "07059b0f-fc58-441c-a28b-95c56bf274b8",
-      "toSide": "top"
-    },
-    {
-      "id": "401c1aa3-3322-4e8f-9177-30316d777bb5",
-      "fromNode": "d28b67e4-2f83-4119-b6a1-32f87942f067",
-      "fromSide": "bottom",
-      "toNode": "bd510486-afb1-4538-adfb-a220277214b7",
-      "toSide": "top"
-    },
-    {
-      "id": "ba5ff956-3477-4269-8421-481e365aac3d",
-      "fromNode": "d1ab7d8b-3f2b-4c91-9bd9-0db201443311",
-      "fromSide": "bottom",
-      "toNode": "54acac23-1ca5-4913-a8ee-3e53990d6c24",
-      "toSide": "top"
-    },
-    {
-      "id": "0e39e310-9f51-4e1c-b8a6-9d92a5a016c3",
-      "fromNode": "d1ab7d8b-3f2b-4c91-9bd9-0db201443311",
-      "fromSide": "bottom",
-      "toNode": "ca38c41e-36b6-40bc-a743-3a1f7a914984",
-      "toSide": "top"
-    },
-    {
-      "id": "56f03aaf-2c6d-4734-ba8d-e168c0c0c988",
-      "fromNode": "d1ab7d8b-3f2b-4c91-9bd9-0db201443311",
-      "fromSide": "bottom",
-      "toNode": "1b93bde6-7381-4a14-b452-43dbb37998bf",
-      "toSide": "top"
-    },
-    {
-      "id": "d02d79e9-68ad-41ea-935c-8f602b4ddf72",
-      "fromNode": "22712b9b-c547-471b-afd2-e56a5f0e44e7",
-      "fromSide": "bottom",
-      "toNode": "6bf0a450-575f-4e08-af6f-2b85f01ec004",
-      "toSide": "top"
-    },
-    {
-      "id": "6c122ea6-2116-4ddf-b93e-c5141cdade0d",
-      "fromNode": "22712b9b-c547-471b-afd2-e56a5f0e44e7",
-      "fromSide": "bottom",
-      "toNode": "105f6cde-9d89-4a05-91fa-bee8425e0036",
-      "toSide": "top"
-    },
-    {
-      "id": "2fdd82d6-e1fc-4a1f-8b9f-e47fa9de4549",
-      "fromNode": "22712b9b-c547-471b-afd2-e56a5f0e44e7",
-      "fromSide": "bottom",
-      "toNode": "53fde071-18f7-4198-80f6-00310712eeb4",
-      "toSide": "top"
-    },
-    {
-      "id": "11a2ccf4-f09d-468e-b8c8-d2396f21bc0e",
-      "fromNode": "349802d8-82a0-4ae1-a7a0-a7463210bb03",
-      "fromSide": "bottom",
-      "toNode": "0cfc1141-e0ae-4350-83fa-07ef349a0fb7",
-      "toSide": "top"
-    },
-    {
-      "id": "b83a5ad4-6605-4651-be5c-180b654f3c0f",
-      "fromNode": "349802d8-82a0-4ae1-a7a0-a7463210bb03",
-      "fromSide": "bottom",
-      "toNode": "adba3b06-6fb9-45d7-adee-a0ba9dbeea6a",
-      "toSide": "top"
-    },
-    {
-      "id": "94f4cf35-488c-4676-a981-dd0a9056777e",
-      "fromNode": "349802d8-82a0-4ae1-a7a0-a7463210bb03",
-      "fromSide": "bottom",
-      "toNode": "4067a3fa-5f9e-46e5-9f1b-16cb851e2d1f",
-      "toSide": "top"
-    },
-    {
-      "id": "e427f3d2-c2b8-4da5-b499-9bcfb0bf7f99",
-      "fromNode": "c7542c8e-059e-44f3-9549-024b51699783",
-      "fromSide": "bottom",
-      "toNode": "9f5bcf8f-b227-4122-ba3b-fa0f880248cf",
-      "toSide": "top"
-    },
-    {
-      "id": "5237057f-7b56-415c-8573-02dc9c456bd8",
-      "fromNode": "c7542c8e-059e-44f3-9549-024b51699783",
-      "fromSide": "bottom",
-      "toNode": "2b40ce56-77f8-4e97-bad6-9f28880679a2",
-      "toSide": "top"
-    },
-    {
-      "id": "a448d837-5e61-4c28-a446-d443f2c21c95",
-      "fromNode": "c7542c8e-059e-44f3-9549-024b51699783",
-      "fromSide": "bottom",
-      "toNode": "553a4780-cc1a-4038-b335-e51cb5f7e5a2",
-      "toSide": "top"
-    },
-    {
-      "id": "bf6aa1c5-086d-454c-97e9-683337be133d",
-      "fromNode": "413d2e5e-f578-4dab-aae4-3ad9256f3fbd",
-      "fromSide": "bottom",
-      "toNode": "9a962d0a-a390-4e0f-84bc-3f13c5a785d3",
-      "toSide": "top"
-    },
-    {
-      "id": "16d2b244-d94d-4eda-960e-e221673404a0",
-      "fromNode": "413d2e5e-f578-4dab-aae4-3ad9256f3fbd",
-      "fromSide": "bottom",
-      "toNode": "dbcc2db8-8ac4-4a2a-95b6-44a0bfc979c0",
-      "toSide": "top"
-    }
-  ]
+	"nodes":[
+		{"id":"a4a66f93-9af9-4d87-ba70-5f61a4337d43","type":"text","text":"# Capability 2 — Development Environment Setup\n\n- **Course Sections:** 02 — Prerequisites, Setup & Accounts\n\n","x":400,"y":-570,"width":500,"height":300,"color":"4"},
+		{"id":"a1da7343-e084-4e03-b6c1-601f577fc31a","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Create a standardized development environment for the entire course.\n\n- **Why It Matters:**\n  - Ensures all future projects run consistently without environment-related issues.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Install and configure all required software and accounts.\n  - **How:**\n    - Complete every installation, verify versions, and ensure all tools work correctly.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document the development environment.\n  - **How:**\n    - Record installed software, versions, setup steps, and troubleshooting notes.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the development environment.\n  - **How:**\n    - Create a setup guide or checklist for future reference.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Understand why each tool is required.\n  - **How:**\n    - Prepare interview questions about development environments and tooling.\n\n- ---\n\n","x":400,"y":-110,"width":500,"height":300,"color":"4"},
+		{"id":"6c284e28-09c7-453f-a5e3-7efc8c5a831f","type":"text","text":"# Definition of Done\n\n- [x] All required software installed\n- [x] Accounts created\n- [x] Environment validated\n- [x] Setup documentation completed\n\n- ---\n\n","x":1060,"y":-110,"width":500,"height":300,"color":"4"},
+		{"id":"ab1760b8-259e-4bba-ade7-d1b11957ff52","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Master Linux administration required for DevOps engineering.\n\n- **Why It Matters:**\n  - Linux is the operating system behind almost every DevOps platform.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Linux administration.\n  - **How:**\n    - Practice commands, permissions, services, processes, package management, networking, and troubleshooting.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a Linux command handbook.\n  - **How:**\n    - Organize commands, examples, and troubleshooting tips.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Linux concepts.\n  - **How:**\n    - Create cheat sheets or command references.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate Linux knowledge.\n  - **How:**\n    - Practice Linux interview questions and command-based scenarios while preparing 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":810,"width":500,"height":300,"color":"4"},
+		{"id":"cf0241b8-b20a-4d4c-a9ff-c90faf23a175","type":"text","text":"# Capability 4 — Linux Foundations\n\n- **Course Sections:** 04 — Linux\n\n","x":400,"y":350,"width":500,"height":300,"color":"4"},
+		{"id":"e8d77735-8354-4f3e-945a-6dc3458133fc","type":"text","text":"# Definition of Done\n\n- [x] Comfortable using Linux terminal\n- [x] Linux notes completed\n- [x] Common administration tasks mastered\n- [x] Interview ready\n\n","x":1060,"y":810,"width":500,"height":300,"color":"4"},
+		{"id":"b558f6ef-fd00-484c-8fa4-78a582a07ad6","type":"text","text":"# Capability 6 — Infrastructure Automation with Vagrant\n\n- **Course Sections:** 06 — Vagrant & Linux Servers\n\n","x":400,"y":1270,"width":500,"height":300,"color":"4"},
+		{"id":"8da9b1e6-1e09-43b1-8ce6-ca23e83e3a25","type":"text","text":"# Definition of Done\n\n- [x] Automated VM provisioning completed\n- [x] Vagrant environment reproducible\n- [x] Notes completed\n- [x] Interview ready\n\n- ---\n\n","x":1060,"y":1730,"width":500,"height":300,"color":"4"},
+		{"id":"b5ba1202-e5b2-436e-b53a-d2024401b85f","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Learn automated VM provisioning using Vagrant.\n\n- **Why It Matters:**\n  - Introduces Infrastructure as Code concepts before moving to cloud automation.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 8\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Automate VM provisioning.\n  - **How:**\n    - Build reproducible Vagrant environments and automate provisioning.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document Vagrant workflows.\n  - **How:**\n    - Record Vagrantfile structure and provisioning process.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Infrastructure as Code concepts.\n  - **How:**\n    - Create provisioning workflow diagrams.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate automation knowledge.\n  - **How:**\n    - Practice Infrastructure as Code interview questions.\n\n- ---\n\n","x":400,"y":1730,"width":500,"height":300,"color":"4"},
+		{"id":"ec6f50b8-3ffa-4eb3-b956-960b3a69d3fa","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Understand containerization concepts and how applications are packaged before moving to Docker and Kubernetes.\n\n- **Why It Matters:**\n  - Containers are the bridge between traditional infrastructure and cloud-native platforms.\n\n- **Supports Projects:**\n  - Project 12 — Production Docker Platform\n  - Project 13 — Kubernetes Platform\n  - Project 14 — VProfile Deployment on Kubernetes\n  - Project 15 — GitOps Platform\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn container concepts.\n  - **How:**\n    - Understand containers, Docker architecture, image lifecycle, container networking, and microservices concepts.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build container reference notes.\n  - **How:**\n    - Document container architecture, lifecycle, and comparisons with virtual machines.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain containerization.\n  - **How:**\n    - Create comparison diagrams between VMs and containers.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate container knowledge.\n  - **How:**\n    - Practice container-related interview questions while preparing 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":3810,"width":500,"height":300,"color":"4"},
+		{"id":"16ad20b5-77e4-4c8e-bae1-35c05369c0c6","type":"text","text":"# Capability 11 — AI-Assisted Scripting\n\n- **Course Sections:** 12 — AI Scripting\n\n","x":400,"y":4270,"width":500,"height":300,"color":"4"},
+		{"id":"9bf959c8-b301-4e67-9b87-8d391a39b03a","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Learn how to safely use AI to accelerate DevOps automation without compromising quality or security.\n\n- **Why It Matters:**\n  - Modern DevOps engineers increasingly use AI as a productivity tool while still validating every generated solution.\n\n- **Supports Projects:**\n  - Project 4–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn AI-assisted automation.\n  - **How:**\n    - Practice using AI to generate scripts, templates, and configurations while validating outputs.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document AI best practices.\n  - **How:**\n    - Record prompting techniques, validation methods, and security considerations.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain responsible AI usage.\n  - **How:**\n    - Share examples of AI-assisted automation and lessons learned.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate AI-assisted automation knowledge.\n  - **How:**\n    - Prepare interview questions covering AI usage, validation, and security.\n\n- ---\n\n","x":400,"y":4730,"width":500,"height":300,"color":"4"},
+		{"id":"e1e804e7-fc89-4e95-9906-abf9c8e4d1a6","type":"text","text":"# Definition of Done\n\n- [ ] Container concepts mastered\n- [x] Architecture understood\n- [x] Notes completed\n- [ ] Interview ready\n\n- ---\n\n","x":1060,"y":3810,"width":500,"height":300,"color":"3"},
+		{"id":"cc6abb8a-68f5-4e31-9bbd-fac98aead513","type":"text","text":"# Definition of Done\n\n- [x] Able to use AI effectively for automation\n- [x] Validation workflow understood\n- [x] Notes completed\n- [x] Interview ready\n```` 0\n\n","x":1060,"y":4730,"width":500,"height":300,"color":"4"},
+		{"id":"42cd96e0-03fd-488c-9aaf-03e1da151a06","type":"text","text":"# Project 1 — VProfile Multi-Tier Application\n\n- **Course Sections:** 08\n\n","x":400,"y":2430,"width":500,"height":300,"color":"3"},
+		{"id":"171ace5c-85c9-4ffb-978e-4fbdc10db42e","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build and deploy the VProfile multi-tier application.\n\n- **Technologies:**\n  - Linux, Tomcat, MySQL, Maven, Git\n\n- **What This Project Proves:**\n  - I understand how a real multi-tier application is deployed and operated.\n\n- **Portfolio Rank:**\n  - #15 (Foundation Project)\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn and build the technical solution.\n  - **How:**\n    - Follow the course, complete the hands-on labs, practice independently, and troubleshoot until you can build it from scratch.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the project into a professional portfolio repository.\n  - **How:**\n    - Organize the project, write a professional README, add architecture diagrams, screenshots, deployment guide, and push everything to GitHub.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain and showcase the project through documentation and content.\n  - **How:**\n    - Write a LinkedIn post, create a project walkthrough, explain the architecture and decisions, and record a short demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate understanding through interview preparation and confidence assessment.\n  - **How:**\n    - Answer interview questions, explain the project without notes, solve troubleshooting scenarios, update confidence, revise weak areas, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":2890,"width":500,"height":300,"color":"3"},
+		{"id":"4773ce0d-495b-4aab-b84a-2d13480e4f2e","type":"text","text":"# Definition of Done\n\n- [ ] Project works end-to-end\n- [ ] GitHub repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the architecture confidently\n- [ ] Able to answer interview questions confidently\n```` 0\n\n","x":1060,"y":2890,"width":500,"height":300,"color":"3"},
+		{"id":"7c0b2844-5a3d-44a0-91cb-3ede7aba97be","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Architecture Diagram\n- [ ] Infrastructure as Code / Configuration Files (if applicable)\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1720,"y":2890,"width":500,"height":300,"color":"3"},
+		{"id":"ab417f9c-6ae8-4235-8639-ce0e2b0d648f","type":"text","text":"# Capability 9 — Container Fundamentals\n\n- **Course Sections:** 10 — Containers\n\n","x":400,"y":3350,"width":500,"height":300,"color":"4"},
+		{"id":"9f5bcf8f-b227-4122-ba3b-fa0f880248cf","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build a complete GitOps platform that continuously deploys Kubernetes applications using Argo CD.\n\n- **Technologies:**\n  - Argo CD, Kubernetes, Helm, GitHub Actions, Amazon ECR, Amazon EKS, SonarQube\n\n- **What This Project Proves:**\n  - I can design and operate a modern enterprise GitOps platform with automated CI/CD, Kubernetes, and continuous reconciliation.\n\n- **Portfolio Rank:**\n  - #1 (Capstone Project)\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the GitOps platform.\n  - **How:**\n    - Configure Git repositories, GitHub Actions pipelines, Amazon ECR, Amazon EKS, Helm charts, Argo CD applications, and continuous synchronization while understanding the complete GitOps workflow.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GitOps platform into a capstone portfolio repository.\n  - **How:**\n    - Publish GitOps architecture diagrams, Helm charts, Kubernetes manifests, GitHub Actions workflows, Argo CD configuration, screenshots, documentation, and deployment guide.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Showcase the complete DevOps platform.\n  - **How:**\n    - Create an end-to-end DevOps architecture walkthrough, explain GitOps concepts, publish a LinkedIn article, and record a professional demonstration video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate complete DevOps platform knowledge.\n  - **How:**\n    - Explain the entire CI/CD + Kubernetes + GitOps workflow without notes, troubleshoot deployment scenarios, answer GitOps interview questions, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-2060,"y":13860,"width":500,"height":300,"color":"3"},
+		{"id":"2b40ce56-77f8-4e97-bad6-9f28880679a2","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Complete DevOps Architecture Diagram\n- [ ] GitHub Actions Workflows\n- [ ] Kubernetes Manifests\n- [ ] Helm Charts\n- [ ] Argo CD Configuration\n- [ ] Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Troubleshooting Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":-740,"y":13860,"width":500,"height":300,"color":"3"},
+		{"id":"553a4780-cc1a-4038-b335-e51cb5f7e5a2","type":"text","text":"# Definition of Done\n\n- [ ] Complete GitOps pipeline operational\n- [ ] Continuous synchronization working\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the complete GitOps architecture confidently\n- [ ] Ready to showcase as capstone portfolio project\n\n- ---\n\n","x":-1400,"y":13860,"width":500,"height":300,"color":"3"},
+		{"id":"105f6cde-9d89-4a05-91fa-bee8425e0036","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Kubernetes Architecture Diagram\n- [ ] Kubernetes Manifests\n- [ ] Helm Charts\n- [ ] Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":-2060,"y":12940,"width":500,"height":300,"color":"3"},
+		{"id":"53fde071-18f7-4198-80f6-00310712eeb4","type":"text","text":"# Definition of Done\n\n- [ ] Kubernetes cluster operational\n- [ ] Workloads deployed successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Kubernetes architecture confidently\n- [ ] Interview ready\n\n- ---\n\n","x":-1400,"y":12940,"width":500,"height":300,"color":"3"},
+		{"id":"6bf0a450-575f-4e08-af6f-2b85f01ec004","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build and manage a production-ready Kubernetes cluster.\n\n- **Technologies:**\n  - Kubernetes, Helm\n\n- **What This Project Proves:**\n  - I can deploy, manage, and scale containerized applications using Kubernetes.\n\n- **Portfolio Rank:**\n  - #2\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the Kubernetes platform.\n  - **How:**\n    - Configure Kubernetes clusters, create Pods, Deployments, Services, ConfigMaps, Secrets, Ingress, Volumes, and Helm charts while understanding cluster architecture.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Kubernetes platform into a professional portfolio repository.\n  - **How:**\n    - Publish Kubernetes manifests, Helm charts, cluster architecture diagrams, deployment documentation, screenshots, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Kubernetes architecture.\n  - **How:**\n    - Create cluster architecture diagrams, explain workload scheduling, service discovery, Helm packaging, and record a walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Kubernetes knowledge.\n  - **How:**\n    - Practice Kubernetes interview questions, explain cluster components, troubleshoot deployments, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-740,"y":12940,"width":500,"height":300,"color":"3"},
+		{"id":"c7542c8e-059e-44f3-9549-024b51699783","type":"text","text":"# Project 15 — GitOps Platform (Argo CD)\n\n- **Course Sections:** 31\n\n","x":-2060,"y":13400,"width":500,"height":300,"color":"3"},
+		{"id":"07059b0f-fc58-441c-a28b-95c56bf274b8","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] GCP Architecture Diagram\n- [ ] Infrastructure Configuration\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":-2060,"y":12020,"width":500,"height":300,"color":"3"},
+		{"id":"bd510486-afb1-4538-adfb-a220277214b7","type":"text","text":"# Definition of Done\n\n- [ ] GCP deployment successful\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain GCP architecture confidently\n- [ ] Interview ready\n\n- ---\n\n","x":-1400,"y":12020,"width":500,"height":300,"color":"3"},
+		{"id":"a50f53d4-2ade-4ce2-b60c-58d7c01c2fff","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Deploy the VProfile application on Google Cloud Platform.\n\n- **Technologies:**\n  - Google Cloud Platform (GCP), VPC, Cloud SQL, Memorystore, Managed Instance Groups, Load Balancer\n\n- **What This Project Proves:**\n  - I can design and deploy cloud infrastructure across multiple cloud providers.\n\n- **Portfolio Rank:**\n  - #12\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build cloud infrastructure on GCP.\n  - **How:**\n    - Configure networking, virtual machines, managed services, instance groups, Cloud SQL, Memorystore, and load balancing while understanding GCP architecture.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GCP deployment into a professional portfolio repository.\n  - **How:**\n    - Publish GCP architecture diagrams, deployment documentation, screenshots, infrastructure configuration, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain GCP architecture.\n  - **How:**\n    - Create architecture walkthroughs, compare AWS and GCP designs, and record a project demo.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate GCP knowledge.\n  - **How:**\n    - Practice GCP interview questions, explain architectural decisions, troubleshoot cloud deployments, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-740,"y":12020,"width":500,"height":300,"color":"3"},
+		{"id":"22712b9b-c547-471b-afd2-e56a5f0e44e7","type":"text","text":"# Project 13 — Kubernetes Platform\n\n- **Course Sections:** 29\n\n","x":-2060,"y":12480,"width":500,"height":300,"color":"3"},
+		{"id":"bd804222-a69b-448a-bf80-d8defeb87dd3","type":"text","text":"# Capability 14 — AWS Networking & VPC\n\n- **Course Sections:** 24 — AWS Part 2 (VPC)\n\n","x":-2060,"y":10640,"width":500,"height":300,"color":"3"},
+		{"id":"dcb3cd4c-10a8-4477-a121-4d0f5f4c5c90","type":"text","text":"# Definition of Done\n\n- [ ] VPC architecture understood\n- [ ] Networking components mastered\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n","x":-2060,"y":11100,"width":500,"height":300,"color":"3"},
+		{"id":"3363b0a0-aed0-4306-8a92-e2998cac47e6","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Master AWS networking by designing secure, production-style Virtual Private Clouds (VPCs).\n\n- **Why It Matters:**\n  - Every production AWS environment depends on a well-designed VPC architecture with proper networking, routing, and security.\n\n- **Supports Projects:**\n  - Project 2 — AWS Infrastructure\n  - Project 3 — AWS Re-Architected Application\n  - Project 7 — Terraform AWS Infrastructure\n  - Project 10 — AWS Native CI/CD Platform\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn AWS VPC architecture.\n  - **How:**\n    - Build VPCs, public/private subnets, Internet Gateways, NAT Gateways, Route Tables, Bastion Hosts, and VPC Peering while understanding network isolation and security.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build AWS networking reference notes.\n  - **How:**\n    - Document VPC architecture, subnet design, routing, security patterns, and Terraform-based network provisioning.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain AWS networking.\n  - **How:**\n    - Create VPC architecture diagrams, explain packet flow, routing decisions, and network security design.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate AWS networking knowledge.\n  - **How:**\n    - Practice VPC interview questions, solve networking scenarios, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-1400,"y":11100,"width":500,"height":300,"color":"3"},
+		{"id":"d28b67e4-2f83-4119-b6a1-32f87942f067","type":"text","text":"# Project 11 — GCP Cloud Infrastructure\n\n- **Course Sections:** 26\n\n","x":-2060,"y":11560,"width":500,"height":300,"color":"3"},
+		{"id":"8c524f2d-bdf3-4245-8c2c-ad26cdc13473","type":"text","text":"# Project 8 — Ansible Configuration Management Platform\n\n- **Course Sections:** 22\n\n","x":-2060,"y":9720,"width":500,"height":300,"color":"3"},
+		{"id":"2c658504-5a80-4006-8b8c-850b5a2ce5f3","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Automation Architecture Diagram\n- [ ] Ansible Playbooks\n- [ ] Inventory Files\n- [ ] Roles\n- [ ] Execution Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":-2060,"y":10180,"width":500,"height":300,"color":"3"},
+		{"id":"6473f569-082d-42d1-a839-7219ff978fa4","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Automate server configuration using Ansible.\n\n- **Technologies:**\n  - Ansible\n\n- **What This Project Proves:**\n  - I can automate server configuration consistently across multiple systems.\n\n- **Portfolio Rank:**\n  - #10\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build an Ansible configuration management platform.\n  - **How:**\n    - Learn inventories, playbooks, roles, variables, templates, handlers, modules, loops, conditions, and idempotent automation while configuring application servers.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Ansible automation into a professional portfolio repository.\n  - **How:**\n    - Publish playbooks, roles, inventories, architecture diagrams, documentation, screenshots, deployment guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain configuration management.\n  - **How:**\n    - Create automation workflow diagrams, explain playbook execution, document infrastructure automation decisions, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Ansible knowledge.\n  - **How:**\n    - Practice Ansible interview questions, explain playbooks and roles, troubleshoot automation failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-740,"y":10180,"width":500,"height":300,"color":"3"},
+		{"id":"369714a0-9bde-4603-b9f4-4b78d9a8210b","type":"text","text":"# Definition of Done\n\n- [ ] Automation executes successfully\n- [ ] Infrastructure configured consistently\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Ansible architecture confidently\n- [ ] Interview ready\n\n- ---\n\n","x":-1400,"y":10180,"width":500,"height":300,"color":"3"},
+		{"id":"b5ab9661-6863-45e3-a315-d453f7c992a0","type":"text","text":"# Capability 12 — Build Tools\n\n- **Course Sections:** 16 — Build Tools\n\n","x":-2060,"y":6500,"width":500,"height":300,"color":"3"},
+		{"id":"61671571-8abc-4482-a6e3-b98a4033547a","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Learn build automation using Maven and understand how application artifacts are produced.\n\n- **Why It Matters:**\n  - Build tools produce the deployable artifacts consumed by CI/CD pipelines, Docker, Kubernetes, and cloud deployments.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 4\n  - Project 5\n  - Project 6\n  - Project 10\n  - Project 12\n  - Project 13\n  - Project 14\n  - Project 15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn build automation.\n  - **How:**\n    - Practice Maven builds, dependency management, packaging, and artifact generation.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build build-tool reference notes.\n  - **How:**\n    - Document Maven lifecycle, commands, and build workflows.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain build automation.\n  - **How:**\n    - Create diagrams showing how source code becomes deployable artifacts.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate build tool knowledge.\n  - **How:**\n    - Practice Maven interview questions and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-2060,"y":6960,"width":500,"height":300,"color":"3"},
+		{"id":"db88ebf3-7f2f-48c9-80a5-5b647079233d","type":"text","text":"# Definition of Done\n\n- [ ] Maven lifecycle understood\n- [ ] Able to build application artifacts\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n","x":-1400,"y":6960,"width":500,"height":300,"color":"3"},
+		{"id":"c76f5c41-087d-4729-a528-a02e91fb60b9","type":"text","text":"# Project 5 — GitHub Actions CI/CD Platform\n\n- **Course Sections:** 18\n\n","x":-2060,"y":7420,"width":500,"height":300,"color":"3"},
+		{"id":"1fe14c1f-c557-4bcc-923b-77f83b8aceb0","type":"text","text":"# Definition of Done\n\n- [ ] Workflow executes successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain workflow execution confidently\n- [ ] Interview ready\n\n- ---\n\n","x":-2060,"y":7880,"width":500,"height":300,"color":"3"},
+		{"id":"f3350894-35fa-4561-8e5f-f8c216d6c34f","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build CI/CD pipelines using GitHub Actions.\n\n- **Technologies:**\n  - GitHub Actions, Docker, Git\n\n- **What This Project Proves:**\n  - I know modern cloud-native CI/CD automation.\n\n- **Portfolio Rank:**\n  - #7\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build CI/CD pipelines using GitHub Actions.\n  - **How:**\n    - Create workflows, configure triggers, automate builds, perform security scanning, manage secrets, and publish container images.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GitHub Actions workflows into a professional portfolio repository.\n  - **How:**\n    - Publish workflow YAML files, architecture diagrams, workflow screenshots, deployment guide, and supporting documentation.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the GitHub Actions workflow.\n  - **How:**\n    - Create workflow diagrams, explain pipeline stages, write a LinkedIn post, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate GitHub Actions knowledge.\n  - **How:**\n    - Practice GitHub Actions interview questions, explain workflow execution, troubleshoot pipeline failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-1400,"y":7880,"width":500,"height":300,"color":"3"},
+		{"id":"c1ec1d20-c27b-4c04-901b-87534028ea56","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Workflow Architecture Diagram\n- [ ] GitHub Actions Workflow YAML Files\n- [ ] Workflow Run Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":-2060,"y":8340,"width":500,"height":300,"color":"3"},
+		{"id":"ac04d3ab-74a3-48c5-a341-d188cf7daa78","type":"text","text":"# Capability 13 — Python Automation\n\n- **Course Sections:** 20 — Python\n\n","x":-2060,"y":8800,"width":500,"height":300,"color":"3"},
+		{"id":"9d779745-fa81-444b-9e50-5dfc7ec32593","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Learn Python as an automation language for DevOps tasks and cloud operations.\n\n- **Why It Matters:**\n  - Python is widely used for infrastructure automation, cloud SDKs, scripting, API integration, and operational tooling.\n\n- **Supports Projects:**\n  - Project 2\n  - Project 4\n  - Project 5\n  - Project 6\n  - Project 7\n  - Project 8\n  - Project 9\n  - Project 10\n  - Project 11\n  - Project 15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Python for DevOps automation.\n  - **How:**\n    - Practice variables, functions, modules, exception handling, file operations, OS interaction, subprocess execution, and cloud automation with Python.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a Python automation handbook.\n  - **How:**\n    - Document syntax, automation examples, cloud SDK usage, Fabric examples, and reusable scripts.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Python automation.\n  - **How:**\n    - Create automation flow diagrams, explain Python use cases in DevOps, and document practical examples.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate Python automation knowledge.\n  - **How:**\n    - Solve automation problems, explain Python scripts, and prepare 20–30 Python DevOps interview questions with answers.\n\n- ---\n\n","x":-2060,"y":9260,"width":500,"height":300,"color":"3"},
+		{"id":"1552cc9e-880a-490b-8d26-91624d570a32","type":"text","text":"# Definition of Done\n\n- [ ] Able to automate tasks using Python\n- [ ] Cloud automation concepts understood\n- [ ] Notes completed\n- [ ] Interview ready\n\n- ---\n\n","x":-1400,"y":9260,"width":500,"height":300,"color":"3"},
+		{"id":"b86fec95-6c9a-41a2-8da6-87f93f675565","type":"text","text":"# Project 2 — AWS Infrastructure\n\n- **Course Sections:** 13–14\n\n","x":-2060,"y":5580,"width":500,"height":300,"color":"3"},
+		{"id":"e1ce769f-e409-419d-9587-8b169745ef0e","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build the complete AWS infrastructure for the VProfile application.\n\n- **Technologies:**\n  - AWS, EC2, VPC, ELB, Auto Scaling, CloudWatch\n\n- **What This Project Proves:**\n  - I understand AWS networking, compute, scaling, and production-style cloud infrastructure.\n\n- **Portfolio Rank:**\n  - #9\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the AWS infrastructure.\n  - **How:**\n    - Deploy and configure AWS networking, compute, storage, load balancing, monitoring, and scaling services while understanding how they work together.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the infrastructure into a professional portfolio repository.\n  - **How:**\n    - Create a GitHub repository with AWS architecture diagrams, infrastructure documentation, screenshots, deployment guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the AWS architecture.\n  - **How:**\n    - Write a LinkedIn post, create an AWS architecture walkthrough, explain design decisions, and record a short demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate AWS knowledge.\n  - **How:**\n    - Practice AWS interview questions, explain architecture decisions, solve troubleshooting scenarios, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":-2060,"y":6040,"width":500,"height":300,"color":"3"},
+		{"id":"42739cea-10f7-4a3c-a388-8e923aa02bae","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] AWS Architecture Diagram\n- [ ] Infrastructure as Code / Configuration Files (if applicable)\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":-1400,"y":6040,"width":500,"height":300,"color":"3"},
+		{"id":"bbababb7-41ac-4131-a9f4-777184be140c","type":"text","text":"# Definition of Done\n\n- [ ] Infrastructure deployed successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain AWS architecture confidently\n- [ ] Able to answer interview questions confidently\n\n- ---\n\n","x":-740,"y":6040,"width":500,"height":300,"color":"3"},
+		{"id":"e36d56de-e7bf-4657-b0fa-f455d4899e71","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Modernize the VProfile application using AWS managed services.\n\n- **Technologies:**\n  - Amazon RDS, Amazon ElastiCache, Amazon MQ, Elastic Beanstalk, CloudFront\n\n- **What This Project Proves:**\n  - I understand cloud modernization using AWS managed services.\n\n- **Portfolio Rank:**\n  - #11\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the re-architected cloud solution.\n  - **How:**\n    - Replace self-managed services with AWS managed services and understand the architectural improvements.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Convert the project into a portfolio repository.\n  - **How:**\n    - Include before-and-after architecture diagrams, deployment documentation, screenshots, and implementation details.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the modernization journey.\n  - **How:**\n    - Create architecture comparisons, document migration decisions, and record a walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate cloud architecture knowledge.\n  - **How:**\n    - Practice AWS architecture interview questions and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":6040,"width":500,"height":300,"color":"3"},
+		{"id":"72593331-0740-4d11-b0c4-1eba189e015f","type":"text","text":"# Project 3 — AWS Re-Architected Application\n\n- **Course Sections:** 15\n\n","x":400,"y":5580,"width":500,"height":300,"color":"3"},
+		{"id":"de6acbf9-0c89-46e7-bf94-7f39a0f37f6a","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Before vs After Architecture Diagram\n- [ ] Configuration Files\n- [ ] Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1060,"y":6040,"width":500,"height":300,"color":"3"},
+		{"id":"04a9f95f-4872-4622-a184-5474081ca848","type":"text","text":"# Definition of Done\n\n- [ ] Re-architected solution working\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain modernization decisions\n- [ ] Interview ready\n\n- ---\n\n","x":1720,"y":6040,"width":500,"height":300,"color":"3"},
+		{"id":"e3ee4366-ac18-453e-b571-9fbeaf225660","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] AWS CI/CD Architecture Diagram\n- [ ] Pipeline Configuration\n- [ ] Build & Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":400,"y":10640,"width":500,"height":300,"color":"3"},
+		{"id":"7659ffdd-86ba-426c-9d41-b0c6b2979fcc","type":"text","text":"# Definition of Done\n\n- [ ] Pipeline operational\n- [ ] Application deployed automatically\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain AWS DevOps architecture confidently\n- [ ] Interview ready\n\n","x":1060,"y":10640,"width":500,"height":300,"color":"3"},
+		{"id":"e4a7ffda-b36e-4108-9077-c17987757f6e","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build a fully managed AWS-native CI/CD pipeline.\n\n- **Technologies:**\n  - AWS CodeCommit, CodeBuild, Elastic Beanstalk, Amazon RDS\n\n- **What This Project Proves:**\n  - I can design and operate cloud-native CI/CD pipelines using AWS managed services.\n\n- **Portfolio Rank:**\n  - #8\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the AWS-native CI/CD platform.\n  - **How:**\n    - Configure CodeCommit, CodeBuild, Elastic Beanstalk, artifact flow, deployment automation, and managed application hosting.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the AWS-native pipeline into a professional portfolio repository.\n  - **How:**\n    - Publish architecture diagrams, pipeline documentation, screenshots, deployment guide, and AWS service configuration.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain AWS-native DevOps.\n  - **How:**\n    - Create pipeline architecture diagrams, explain service integration, document deployment workflow, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate AWS DevOps knowledge.\n  - **How:**\n    - Practice AWS DevOps interview questions, explain managed CI/CD architecture, troubleshoot deployment failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":1720,"y":10640,"width":500,"height":300,"color":"3"},
+		{"id":"d1ab7d8b-3f2b-4c91-9bd9-0db201443311","type":"text","text":"# Project 12 — Production Docker Platform\n\n- **Course Sections:** 27–28\n\n","x":400,"y":11100,"width":500,"height":300,"color":"3"},
+		{"id":"ca38c41e-36b6-40bc-a743-3a1f7a914984","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Container Architecture Diagram\n- [ ] Dockerfiles\n- [ ] Docker Compose Files\n- [ ] Docker Hub Repository\n- [ ] Build Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1720,"y":11560,"width":500,"height":300,"color":"3"},
+		{"id":"54acac23-1ca5-4913-a8ee-3e53990d6c24","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Containerize the VProfile application and build production-ready Docker images.\n\n- **Technologies:**\n  - Docker, Docker Compose, Docker Hub\n\n- **What This Project Proves:**\n  - I can package applications into production-ready containers and manage multi-container environments.\n\n- **Portfolio Rank:**\n  - #5\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the Docker platform.\n  - **How:**\n    - Create Dockerfiles, optimize images, build multi-stage images, configure Docker Compose, publish images to Docker Hub, and validate the complete containerized application.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Docker platform into a professional portfolio repository.\n  - **How:**\n    - Publish Dockerfiles, Docker Compose files, container architecture diagrams, screenshots, deployment guide, and documentation.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain containerization.\n  - **How:**\n    - Create container architecture diagrams, explain image-building strategy, compare VMs vs containers, and record a project walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Docker knowledge.\n  - **How:**\n    - Practice Docker interview questions, explain container lifecycle, troubleshoot Docker issues, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":11560,"width":500,"height":300,"color":"3"},
+		{"id":"1b93bde6-7381-4a14-b452-43dbb37998bf","type":"text","text":"# Definition of Done\n\n- [ ] Application fully containerized\n- [ ] Images published successfully\n- [ ] Docker Compose working\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Docker architecture confidently\n- [ ] Interview ready\n\n- ---\n\n","x":1060,"y":11560,"width":500,"height":300,"color":"3"},
+		{"id":"349802d8-82a0-4ae1-a7a0-a7463210bb03","type":"text","text":"# Project 14 — VProfile Deployment on Kubernetes\n\n- **Course Sections:** 30\n\n","x":400,"y":12020,"width":500,"height":300,"color":"3"},
+		{"id":"0cfc1141-e0ae-4350-83fa-07ef349a0fb7","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Deploy the complete VProfile application onto Kubernetes.\n\n- **Technologies:**\n  - Kubernetes, Helm, MySQL, RabbitMQ, Memcached, Nginx\n\n- **What This Project Proves:**\n  - I can deploy and operate a real-world multi-tier application on Kubernetes.\n\n- **Portfolio Rank:**\n  - #1 (Flagship Project)\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Deploy the VProfile application on Kubernetes.\n  - **How:**\n    - Configure persistent storage, Secrets, ConfigMaps, Services, Ingress, application manifests, and validate end-to-end application deployment.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Kubernetes deployment into a flagship portfolio repository.\n  - **How:**\n    - Publish architecture diagrams, manifests, Helm charts, screenshots, deployment documentation, troubleshooting guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Showcase the flagship project.\n  - **How:**\n    - Write a LinkedIn article, create a detailed architecture walkthrough, explain deployment decisions, and record a professional demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate complete Kubernetes deployment knowledge.\n  - **How:**\n    - Explain the entire architecture without notes, troubleshoot production scenarios, answer Kubernetes deployment questions, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":12480,"width":500,"height":300,"color":"3"},
+		{"id":"adba3b06-6fb9-45d7-adee-a0ba9dbeea6a","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] End-to-End Architecture Diagram\n- [ ] Kubernetes Manifests\n- [ ] Helm Charts\n- [ ] Deployment Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Troubleshooting Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1720,"y":12480,"width":500,"height":300,"color":"3"},
+		{"id":"4067a3fa-5f9e-46e5-9f1b-16cb851e2d1f","type":"text","text":"# Definition of Done\n\n- [ ] Complete application deployed successfully\n- [ ] All services communicating correctly\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the complete architecture confidently\n- [ ] Ready to showcase as flagship portfolio project\n\n","x":1060,"y":12480,"width":500,"height":300,"color":"3"},
+		{"id":"413d2e5e-f578-4dab-aae4-3ad9256f3fbd","type":"text","text":"# Capability 15 — Course Completion & Career Preparation\n\n- **Course Sections:** 32 — Conclusion\n\n","x":400,"y":12940,"width":500,"height":300,"color":"3"},
+		{"id":"dbcc2db8-8ac4-4a2a-95b6-44a0bfc979c0","type":"text","text":"# Definition of Done\n\n- [ ] All projects completed\n- [ ] Portfolio finalized\n- [ ] Resume updated\n- [ ] LinkedIn updated\n- [ ] GitHub profile polished\n- [ ] Interview ready\n\n- ---\n\n","x":400,"y":13400,"width":500,"height":300,"color":"3"},
+		{"id":"9a962d0a-a390-4e0f-84bc-3f13c5a785d3","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Consolidate all knowledge gained throughout the course and prepare for DevOps job applications.\n\n- **Why It Matters:**\n  - Technical knowledge alone is not enough—this capability ensures you are ready to present your work professionally and convert it into job opportunities.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Review the complete DevOps learning journey.\n  - **How:**\n    - Revisit weak areas, validate every major capability, and ensure each project works successfully.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Organize the complete DevOps knowledge base.\n  - **How:**\n    - Consolidate notes, diagrams, commands, troubleshooting guides, and project documentation into a structured reference.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Prepare for professional visibility.\n  - **How:**\n    - Update LinkedIn, GitHub profile, resume, portfolio, and create a summary of completed projects.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Prepare for job interviews.\n  - **How:**\n    - Review all interview questions, revisit weak topics, conduct mock interviews, and finalize technical confidence assessment.\n\n- ---\n\n","x":1060,"y":13400,"width":500,"height":300,"color":"3"},
+		{"id":"987aba99-1022-49c8-ae23-12c61a9a1022","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build a complete monitoring and observability platform for infrastructure and applications.\n\n- **Technologies:**\n  - Prometheus, Grafana, Loki, PromQL\n\n- **What This Project Proves:**\n  - I can monitor production infrastructure, visualize metrics, collect logs, and configure alerting.\n\n- **Portfolio Rank:**\n  - #6\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the monitoring platform.\n  - **How:**\n    - Install Prometheus, Grafana, Loki, configure exporters, build dashboards, create PromQL queries, and integrate alert notifications.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the monitoring platform into a professional portfolio repository.\n  - **How:**\n    - Publish monitoring architecture diagrams, dashboard screenshots, Prometheus configuration, Grafana dashboards, alert rules, and documentation.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain observability.\n  - **How:**\n    - Create monitoring architecture diagrams, explain metrics, logs, alerting workflow, and record a dashboard walkthrough.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate monitoring knowledge.\n  - **How:**\n    - Practice Prometheus, Grafana, and observability interview questions, explain monitoring architecture, troubleshoot monitoring issues, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":9720,"width":500,"height":300,"color":"3"},
+		{"id":"f01ce613-eebc-4db0-97be-e79a9ac4477b","type":"text","text":"# Project 9 — Monitoring & Observability Platform\n\n- **Course Sections:** 23\n\n","x":400,"y":9260,"width":500,"height":300,"color":"3"},
+		{"id":"6a466c10-e34e-480f-b768-12d21e8fb070","type":"text","text":"# Definition of Done\n\n- [ ] Monitoring platform operational\n- [ ] Dashboards functioning correctly\n- [ ] Alerts configured\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain observability confidently\n- [ ] Interview ready\n\n- ---\n\n","x":1060,"y":9720,"width":500,"height":300,"color":"3"},
+		{"id":"ee7c43e1-66e4-49e6-859c-aa8da0ab2068","type":"text","text":"# Project 10 — AWS Native CI/CD Platform\n\n- **Course Sections:** 25\n\n","x":400,"y":10180,"width":500,"height":300,"color":"3"},
+		{"id":"4c2d115f-3803-4cbf-b4eb-c81254223d0d","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Monitoring Architecture Diagram\n- [ ] Grafana Dashboards\n- [ ] Prometheus Configuration\n- [ ] Alert Rules\n- [ ] Dashboard Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1720,"y":9720,"width":500,"height":300,"color":"3"},
+		{"id":"e7fe617f-d30b-4cf8-9779-9be1211be7f9","type":"text","text":"# Project 4 — Jenkins CI/CD Platform\n\n- **Course Sections:** 17\n\n","x":400,"y":6500,"width":500,"height":300,"color":"3"},
+		{"id":"e786adff-203c-4a39-84b9-c45de0499f74","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build a production-ready Jenkins CI/CD platform.\n\n- **Technologies:**\n  - Jenkins, Maven, Nexus, SonarQube, Docker\n\n- **What This Project Proves:**\n  - I can build enterprise-grade CI/CD pipelines.\n\n- **Portfolio Rank:**\n  - #4\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build the Jenkins CI/CD platform.\n  - **How:**\n    - Configure Jenkins, create pipelines, integrate Maven, Nexus, SonarQube, Docker, and automate software delivery.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the CI/CD platform into a professional portfolio repository.\n  - **How:**\n    - Publish Jenkinsfiles, pipeline diagrams, build logs, documentation, screenshots, and deployment guide.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain the CI/CD pipeline.\n  - **How:**\n    - Create pipeline walkthroughs, architecture explanations, LinkedIn posts, and a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate CI/CD knowledge.\n  - **How:**\n    - Practice Jenkins interview questions, explain the complete pipeline, troubleshoot failures, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":6960,"width":500,"height":300,"color":"3"},
+		{"id":"a1da61c9-9e42-41ed-9501-46cc26208041","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] CI/CD Architecture Diagram\n- [ ] Jenkinsfile\n- [ ] Pipeline Screenshots\n- [ ] Build Logs\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1060,"y":6960,"width":500,"height":300,"color":"3"},
+		{"id":"cbbb3434-4f8c-4106-82b8-b7418bb9a79b","type":"text","text":"# Definition of Done\n\n- [ ] CI/CD pipeline works end-to-end\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain the complete pipeline\n- [ ] Interview ready\n\n","x":1720,"y":6960,"width":500,"height":300,"color":"3"},
+		{"id":"dbcb4a25-aa79-4a86-9f9f-f91fef1641e4","type":"text","text":"# Project 6 — GitLab CI/CD Platform\n\n- **Course Sections:** 19\n\n","x":400,"y":7420,"width":500,"height":300,"color":"3"},
+		{"id":"bd856c12-6480-4243-856b-98e359446758","type":"text","text":"# Project 7 — Terraform AWS Infrastructure\n\n- **Course Sections:** 21\n\n","x":400,"y":8340,"width":500,"height":300,"color":"3"},
+		{"id":"9b09a980-ce38-4fab-b75e-b7e9fa2fdfb8","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Provision AWS infrastructure using Terraform.\n\n- **Technologies:**\n  - Terraform, AWS\n\n- **What This Project Proves:**\n  - I automate cloud infrastructure instead of manually provisioning resources.\n\n- **Portfolio Rank:**\n  - #3\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build AWS infrastructure using Terraform.\n  - **How:**\n    - Learn Terraform fundamentals, create reusable modules, manage state, provision AWS resources, and understand Infrastructure as Code best practices.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the Terraform project into a professional portfolio repository.\n  - **How:**\n    - Publish Terraform modules, infrastructure diagrams, project documentation, screenshots, deployment guide, and supporting files.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Infrastructure as Code.\n  - **How:**\n    - Create Terraform architecture diagrams, explain module design, document infrastructure decisions, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate Terraform and IaC knowledge.\n  - **How:**\n    - Practice Terraform interview questions, explain state management, troubleshoot infrastructure deployments, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":8800,"width":500,"height":300,"color":"3"},
+		{"id":"6940dad7-e766-4271-890f-8a45d98834db","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] Infrastructure Architecture Diagram\n- [ ] Terraform Modules\n- [ ] Terraform Configuration Files\n- [ ] `terraform plan` Output\n- [ ] `terraform apply` Evidence\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1720,"y":8800,"width":500,"height":300,"color":"3"},
+		{"id":"4b1ef39a-4ca1-4bd6-9b30-440bba86e19d","type":"text","text":"# Definition of Done\n\n- [ ] Infrastructure provisioned successfully\n- [ ] Terraform modules reusable\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain Infrastructure as Code confidently\n- [ ] Interview ready\n\n","x":1060,"y":8800,"width":500,"height":300,"color":"3"},
+		{"id":"457c5b44-14f4-413d-a914-f68a188ffe86","type":"text","text":"# Project Definition\n\n- **Purpose:**\n  - Build CI/CD pipelines using GitLab CI.\n\n- **Technologies:**\n  - GitLab CI, Docker\n\n- **What This Project Proves:**\n  - I can work with multiple enterprise CI/CD platforms.\n\n- **Portfolio Rank:**\n  - #14\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Build CI/CD pipelines using GitLab CI.\n  - **How:**\n    - Configure GitLab pipelines, variables, triggers, rules, artifacts, and Docker integration while understanding platform-specific features.\n\n- [ ] **Track 2 — Projects & GitHub Evolution**\n  - **What:**\n    - Turn the GitLab pipeline into a professional portfolio repository.\n  - **How:**\n    - Publish the `.gitlab-ci.yml` file, pipeline diagrams, screenshots, documentation, and deployment guide.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain GitLab CI workflows.\n  - **How:**\n    - Compare GitLab CI with Jenkins and GitHub Actions, document the pipeline flow, and record a demo video.\n\n- [ ] **Track 4 — Interview Readiness & Job Conversion**\n  - **What:**\n    - Validate GitLab CI knowledge.\n  - **How:**\n    - Practice GitLab interview questions, explain pipeline execution, compare CI platforms, and prepare 20–30 interview questions with answers.\n\n- ---\n\n","x":400,"y":7880,"width":500,"height":300,"color":"3"},
+		{"id":"66205283-86aa-4a05-a656-4a6e299d420a","type":"text","text":"# Deliverables\n\n- [ ] GitHub Repository\n- [ ] Professional README\n- [ ] CI/CD Architecture Diagram\n- [ ] `.gitlab-ci.yml`\n- [ ] Pipeline Screenshots\n- [ ] Demo Video\n- [ ] Deployment Guide\n- [ ] Lessons Learned\n- [ ] Future Improvements\n\n- ---\n\n","x":1060,"y":7880,"width":500,"height":300,"color":"3"},
+		{"id":"edf18c05-74b5-4572-b984-5babf077db32","type":"text","text":"# Definition of Done\n\n- [ ] Pipeline executes successfully\n- [ ] Repository complete\n- [ ] Documentation complete\n- [ ] Demo video recorded\n- [ ] Able to explain GitLab CI confidently\n- [ ] Interview ready\n\n- ---\n\n","x":1720,"y":7880,"width":500,"height":300,"color":"3"},
+		{"id":"e37bd7c7-5cc2-4fe6-87d4-028c598a7ab1","type":"text","text":"# Capability 8 — Networking Fundamentals\n\n- **Course Sections:** 09 — Networking\n\n","x":-2060,"y":3350,"width":500,"height":300,"color":"4"},
+		{"id":"60eeb439-47a6-4642-ab9c-e5685cc6266a","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Build a strong understanding of computer networking concepts used throughout cloud infrastructure, containers, Kubernetes, and production deployments.\n\n- **Why It Matters:**\n  - Networking is one of the core foundations of DevOps. Understanding networking is essential for designing, deploying, securing, and troubleshooting modern infrastructure.\n\n- **Supports Projects:**\n  - Project 2 — AWS Infrastructure\n  - Project 3 — AWS Re-Architected Application\n  - Project 9 — Monitoring & Observability Platform\n  - Project 11 — GCP Cloud Infrastructure\n  - Project 12 — Production Docker Platform\n  - Project 13 — Kubernetes Platform\n  - Project 14 — VProfile Deployment on Kubernetes\n  - Project 15 — GitOps Platform\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn networking fundamentals.\n  - **How:**\n    - Practice IP addressing, subnets, protocols, ports, DNS, routing, and networking troubleshooting commands.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build networking reference notes.\n  - **How:**\n    - Document networking concepts, diagrams, troubleshooting commands, and common scenarios.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain networking concepts.\n  - **How:**\n    - Create networking diagrams and explain packet flow between application components.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate networking knowledge.\n  - **How:**\n    - Practice networking interview questions and troubleshooting scenarios while preparing 20–30 interview questions with answers.\n\n- ---\n\n","x":-2060,"y":3810,"width":500,"height":300,"color":"4"},
+		{"id":"c9a45885-1177-4b0d-b9e8-00a91b513fe1","type":"text","text":"# Definition of Done\n\n- [x] Networking fundamentals understood\n- [ ] Troubleshooting commands mastered\n- [x] Notes completed\n- [ ] Interview ready\n\n- ---\n\n","x":-1400,"y":3810,"width":500,"height":300,"color":"3"},
+		{"id":"acc6e639-5134-49bb-b090-29978fff6064","type":"text","text":"# Capability 10 — Bash Scripting\n\n- **Course Sections:** 11 — Bash Scripting\n\n","x":-2060,"y":4270,"width":500,"height":300,"color":"4"},
+		{"id":"fe5ed769-708b-4768-ac81-a2ba63311e23","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Learn shell scripting for automation and operational tasks.\n\n- **Why It Matters:**\n  - Bash scripting is a fundamental automation skill used across Linux administration, CI/CD, cloud automation, and DevOps operations.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 2\n  - Project 4\n  - Project 5\n  - Project 6\n  - Project 7\n  - Project 8\n  - Project 10\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Bash scripting.\n  - **How:**\n    - Practice variables, loops, conditions, functions, remote execution, and automation scripts.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a Bash scripting handbook.\n  - **How:**\n    - Document syntax, reusable scripts, and automation patterns.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain scripting solutions.\n  - **How:**\n    - Document script workflows and automation logic with examples.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate scripting knowledge.\n  - **How:**\n    - Solve scripting problems and prepare 20–30 Bash interview questions with answers.\n\n- ---\n\n","x":-2060,"y":4730,"width":500,"height":300,"color":"4"},
+		{"id":"5e62846f-f4bf-4f48-9720-2c50de2505e8","type":"text","text":"# Definition of Done\n\n- [x] Able to write Bash scripts independently\n- [x] Automation concepts understood\n- [x] Notes completed\n- [x] Interview ready\n\n- ---\n\n","x":-1400,"y":4730,"width":500,"height":300,"color":"4"},
+		{"id":"d6f6ca54-2fb5-4117-87c0-b1a4d43e5bb5","type":"text","text":"# Capability 5 — Git & Version Control\n\n- **Course Sections:** 05 — Git\n\n","x":-2060,"y":1270,"width":500,"height":300,"color":"4"},
+		{"id":"068c3ab1-593c-40f2-843b-8d916463ff0d","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Master Git workflows and repository management.\n\n- **Why It Matters:**\n  - Git is the foundation of CI/CD, Infrastructure as Code, and GitOps.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn Git workflows.\n  - **How:**\n    - Practice branching, merging, tagging, rollback, and repository management.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build Git reference notes.\n  - **How:**\n    - Document Git workflows, branching strategies, and commonly used commands.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain Git workflows.\n  - **How:**\n    - Create branching diagrams and workflow explanations.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate Git knowledge.\n  - **How:**\n    - Prepare interview questions and Git troubleshooting scenarios.\n\n- ---\n\n","x":-2060,"y":1730,"width":500,"height":300,"color":"4"},
+		{"id":"a70a1fbe-1df0-4d92-8331-85c64d977e16","type":"text","text":"# Definition of Done\n\n- [x] Git workflow mastered\n- [x] Repository management understood\n- [x] Notes completed\n- [x] Interview ready\n\n- ---\n\n","x":-1400,"y":1730,"width":500,"height":300,"color":"4"},
+		{"id":"e6598f9c-5b4f-4ab1-82d7-3f605d6fc36f","type":"text","text":"# Capability 7 — JSON & YAML\n\n- **Course Sections:** 07 — Variables, JSON & YAML\n\n","x":-2060,"y":2430,"width":500,"height":300,"color":"4"},
+		{"id":"9120bb75-1cea-4f89-9843-fb3fab9f952e","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Learn structured configuration formats used across DevOps tools.\n\n- **Why It Matters:**\n  - JSON and YAML are used by Terraform, Kubernetes, Ansible, CI/CD, and cloud services.\n\n- **Supports Projects:**\n  - Project 4–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn JSON and YAML.\n  - **How:**\n    - Practice writing, reading, validating, and troubleshooting configuration files.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Build a configuration reference.\n  - **How:**\n    - Document syntax, examples, and best practices.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain structured configuration.\n  - **How:**\n    - Create comparison notes between JSON and YAML.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate configuration knowledge.\n  - **How:**\n    - Practice configuration-related interview questions.\n\n- ---\n\n","x":-2060,"y":2890,"width":500,"height":300,"color":"4"},
+		{"id":"9bff11b5-32e3-48c1-aaca-788ac20a9876","type":"text","text":"# Definition of Done\n\n- [x] Comfortable writing JSON\n- [x] Comfortable writing YAML\n- [x] Notes completed\n- [x] Interview ready\n\n- ---\n\n","x":-1400,"y":2890,"width":500,"height":300,"color":"4"},
+		{"id":"73fcfba4-0595-4f14-9b4c-c9b1b9eb60b6","type":"text","text":"# Capability 1 — DevOps Fundamentals\n\n- **Course Sections:** 01 — Introduction\n\n","x":-2060,"y":-570,"width":500,"height":300,"color":"4"},
+		{"id":"d72b083b-0e29-4550-9509-c71b430dc32b","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Understand the overall DevOps lifecycle, course roadmap, and how every technology integrates into a complete DevOps platform.\n\n- **Why It Matters:**\n  - Provides the big-picture understanding required before learning individual DevOps tools.\n\n- **Supports Projects:**\n  - Project 1–15\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn the DevOps lifecycle and overall system architecture.\n  - **How:**\n    - Complete the course section, understand the workflow, and identify how every upcoming technology fits into the complete platform.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Create permanent reference notes.\n  - **How:**\n    - Document the DevOps lifecycle, CI/CD concepts, and overall architecture using diagrams and concise notes.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain DevOps fundamentals.\n  - **How:**\n    - Write a short summary or create a simple architecture diagram explaining the DevOps lifecycle.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate understanding.\n  - **How:**\n    - Practice explaining DevOps, CI, CD, and the software delivery lifecycle while preparing 20–30 interview questions with answers.\n\n- ---\n\n","x":-2060,"y":-110,"width":500,"height":300,"color":"4"},
+		{"id":"2351a6e0-8b31-41e6-8cd9-24d90eb7d2f4","type":"text","text":"# Definition of Done\n\n- [x] Can explain DevOps end-to-end\n- [x] Notes completed\n- [x] Architecture diagram created\n- [x] Can answer interview questions confidently\n\n- ---\n\n","x":-1400,"y":-110,"width":500,"height":300,"color":"4"},
+		{"id":"cffad6ea-d1d9-49d7-82f0-0857d170e228","type":"text","text":"# Capability 3 — Virtual Machine Foundations\n\n- **Course Sections:** 03 — VM Setup\n\n","x":-2060,"y":350,"width":500,"height":300,"color":"4"},
+		{"id":"5afaf938-da5b-46ba-9018-2bfc61aced8f","type":"text","text":"# Capability Definition\n\n- **Purpose:**\n  - Understand virtualization and build the VM environments used throughout the course.\n\n- **Why It Matters:**\n  - Provides isolated infrastructure for Linux, networking, and application deployment.\n\n- **Supports Projects:**\n  - Project 1\n  - Project 8\n\n- ---\n\n- [ ] **Track 1 — Core Technical Building**\n  - **What:**\n    - Learn virtualization and configure virtual machines.\n  - **How:**\n    - Build the VMs, validate networking, and understand virtualization concepts.\n\n- [ ] **Track 2 — Knowledge Notes**\n  - **What:**\n    - Document VM architecture.\n  - **How:**\n    - Create notes on virtualization concepts and VM setup steps.\n\n- [ ] **Track 3 — Personal Branding & Communication**\n  - **What:**\n    - Explain virtualization.\n  - **How:**\n    - Create a simple VM architecture diagram.\n\n- [ ] **Track 4 — Interview Readiness**\n  - **What:**\n    - Validate virtualization knowledge.\n  - **How:**\n    - Practice interview questions covering virtualization and VM management.\n\n- ---\n\n","x":-2060,"y":810,"width":500,"height":300,"color":"4"},
+		{"id":"2972f9a6-0562-4338-bdf8-57b5b31f1186","type":"text","text":"# Definition of Done\n\n- [x] Virtual machines created\n- [x] VM networking verified\n- [x] Notes completed\n- [x] Can explain virtualization confidently\n\n- ---\n\n","x":-1400,"y":810,"width":500,"height":300,"color":"4"},
+		{"id":"d1d7e513-a687-45bf-ba44-f1c01a1ef8e7","type":"text","text":"# Final Portfolio Checklist\n\n- [ ] All 15 Projects completed\n- [ ] All Capability milestones completed\n- [ ] Every project uploaded to GitHub\n- [ ] Every repository has a professional README\n- [ ] Architecture diagrams created\n- [ ] Deployment guides completed\n- [ ] Demo videos recorded\n- [ ] Lessons learned documented\n- [ ] Future improvements documented\n\n- ---\n\n","x":-2080,"y":14720,"width":500,"height":300,"color":"3"},
+		{"id":"86727209e6d9de43","type":"text","text":"# GitHub Profile Checklist\n\n- [ ] Professional GitHub profile picture\n- [ ] Professional bio\n- [ ] Pinned flagship repositories\n- [ ] Consistent repository naming\n- [ ] Well-written READMEs\n- [ ] Clean commit history\n- [ ] Organized repository structure\n\n- ---\n\n","x":-1420,"y":14720,"width":500,"height":300,"color":"3"},
+		{"id":"0ca69957ceaea28d","type":"text","text":"# Resume Checklist\n\n- [ ] Resume updated with all major projects\n- [ ] Technologies listed correctly\n- [ ] Quantifiable project achievements included\n- [ ] GitHub profile added\n- [ ] LinkedIn profile added\n- [ ] Resume reviewed and polished\n\n- ---\n\n","x":-760,"y":14720,"width":500,"height":300,"color":"3"},
+		{"id":"68830bbcbd769165","type":"text","text":"# Interview Readiness Checklist\n\n- [ ] Linux\n- [ ] Git\n- [ ] Networking\n- [ ] Bash\n- [ ] Python\n- [ ] AWS\n- [ ] Docker\n- [ ] Kubernetes\n- [ ] Terraform\n- [ ] Ansible\n- [ ] Jenkins\n- [ ] GitHub Actions\n- [ ] GitLab CI\n- [ ] Monitoring\n- [ ] GitOps\n- [ ] VProfile Project\n- [ ] Kubernetes Deployment Project\n- [ ] GitOps Capstone Project\n\n- ---\n\n","x":560,"y":14720,"width":500,"height":300,"color":"3"},
+		{"id":"439d809a82e282f4","type":"text","text":"# DevOps Job Readiness Checklist\n\n- [ ] Strong Linux fundamentals\n- [ ] Strong Networking fundamentals\n- [ ] Cloud fundamentals\n- [ ] Infrastructure as Code\n- [ ] Configuration Management\n- [ ] CI/CD\n- [ ] Containers\n- [ ] Kubernetes\n- [ ] Monitoring & Observability\n- [ ] GitOps\n- [ ] Multi-cloud exposure\n- [ ] Professional GitHub portfolio\n- [ ] Professional LinkedIn profile\n- [ ] Resume ready\n- [ ] Mock interviews completed\n- [ ] Confident explaining every project\n- [ ] Ready to apply for DevOps Engineer roles\n","x":1220,"y":14720,"width":500,"height":300,"color":"3"},
+		{"id":"e0e567d6a2a265ad","type":"text","text":"# LinkedIn Checklist\n\n- [ ] Professional headline\n- [ ] Updated About section\n- [ ] Featured GitHub projects\n- [ ] Published project posts\n- [ ] Professional profile photo\n- [ ] Skills updated\n- [ ] Certifications added (if applicable)\n\n- ---\n\n","x":-100,"y":14720,"width":500,"height":300,"color":"3"},
+		{"id":"cba9c6bd-2ec7-4a78-bd63-ce4cc478aa3c","type":"text","text":"# Master DevOps with AWS, Docker, Kubernetes, GCP, GitHub Actions, ArgoCD, GitOps, Terraform, Monitoring & AI\n\n- ---\n\n","x":-900,"y":-1600,"width":500,"height":300,"color":"4"}
+	],
+	"edges":[
+		{"id":"102149cb-76c7-425c-9d79-9e8d223dd303","fromNode":"a4a66f93-9af9-4d87-ba70-5f61a4337d43","fromSide":"bottom","toNode":"a1da7343-e084-4e03-b6c1-601f577fc31a","toSide":"top"},
+		{"id":"1f7b96aa-0e42-477d-af82-80385bf349a1","fromNode":"a4a66f93-9af9-4d87-ba70-5f61a4337d43","fromSide":"bottom","toNode":"6c284e28-09c7-453f-a5e3-7efc8c5a831f","toSide":"top"},
+		{"id":"e927895d-1c06-4000-992c-b785e08205c2","fromNode":"cffad6ea-d1d9-49d7-82f0-0857d170e228","fromSide":"bottom","toNode":"5afaf938-da5b-46ba-9018-2bfc61aced8f","toSide":"top"},
+		{"id":"c247ceaf-e2ae-440e-a20e-4b88ad412643","fromNode":"cffad6ea-d1d9-49d7-82f0-0857d170e228","fromSide":"bottom","toNode":"2972f9a6-0562-4338-bdf8-57b5b31f1186","toSide":"top"},
+		{"id":"a2f789c4-1e70-410c-aa3a-783b4ab28a1b","fromNode":"cf0241b8-b20a-4d4c-a9ff-c90faf23a175","fromSide":"bottom","toNode":"ab1760b8-259e-4bba-ade7-d1b11957ff52","toSide":"top"},
+		{"id":"9c4f7315-cb56-4ad0-81bf-bbcc3f1113ee","fromNode":"cf0241b8-b20a-4d4c-a9ff-c90faf23a175","fromSide":"bottom","toNode":"e8d77735-8354-4f3e-945a-6dc3458133fc","toSide":"top"},
+		{"id":"dd1e3d6d-8db5-4f5e-8835-20da754e0614","fromNode":"d6f6ca54-2fb5-4117-87c0-b1a4d43e5bb5","fromSide":"bottom","toNode":"068c3ab1-593c-40f2-843b-8d916463ff0d","toSide":"top"},
+		{"id":"01268ecc-d9c3-4332-8f51-bd160bc791e1","fromNode":"d6f6ca54-2fb5-4117-87c0-b1a4d43e5bb5","fromSide":"bottom","toNode":"a70a1fbe-1df0-4d92-8331-85c64d977e16","toSide":"top"},
+		{"id":"d6fcf246-5283-4d55-a17f-a7f31c876542","fromNode":"b558f6ef-fd00-484c-8fa4-78a582a07ad6","fromSide":"bottom","toNode":"b5ba1202-e5b2-436e-b53a-d2024401b85f","toSide":"top"},
+		{"id":"c747002c-1ce9-45cf-ba8e-5bb47d8f1b21","fromNode":"b558f6ef-fd00-484c-8fa4-78a582a07ad6","fromSide":"bottom","toNode":"8da9b1e6-1e09-43b1-8ce6-ca23e83e3a25","toSide":"top"},
+		{"id":"4acf6aad-dced-43f5-a2cd-1c097f38d148","fromNode":"e6598f9c-5b4f-4ab1-82d7-3f605d6fc36f","fromSide":"bottom","toNode":"9120bb75-1cea-4f89-9843-fb3fab9f952e","toSide":"top"},
+		{"id":"c5da4382-e11b-4fe6-b19f-db9fa62528b9","fromNode":"e6598f9c-5b4f-4ab1-82d7-3f605d6fc36f","fromSide":"bottom","toNode":"9bff11b5-32e3-48c1-aaca-788ac20a9876","toSide":"top"},
+		{"id":"f1d4d1cc-beaf-4176-a018-59449d3bda39","fromNode":"42cd96e0-03fd-488c-9aaf-03e1da151a06","fromSide":"bottom","toNode":"171ace5c-85c9-4ffb-978e-4fbdc10db42e","toSide":"top"},
+		{"id":"a74987d8-7c8f-4157-9787-06447aa753b8","fromNode":"42cd96e0-03fd-488c-9aaf-03e1da151a06","fromSide":"bottom","toNode":"7c0b2844-5a3d-44a0-91cb-3ede7aba97be","toSide":"top"},
+		{"id":"0a77a33f-70dd-475a-b522-265a172ef038","fromNode":"42cd96e0-03fd-488c-9aaf-03e1da151a06","fromSide":"bottom","toNode":"4773ce0d-495b-4aab-b84a-2d13480e4f2e","toSide":"top"},
+		{"id":"80b43ce4-bbdf-4d32-befe-e69b4d3d19fd","fromNode":"e37bd7c7-5cc2-4fe6-87d4-028c598a7ab1","fromSide":"bottom","toNode":"60eeb439-47a6-4642-ab9c-e5685cc6266a","toSide":"top"},
+		{"id":"0910e416-3c24-4cee-bb68-7ee41568feec","fromNode":"e37bd7c7-5cc2-4fe6-87d4-028c598a7ab1","fromSide":"bottom","toNode":"c9a45885-1177-4b0d-b9e8-00a91b513fe1","toSide":"top"},
+		{"id":"149df009-4650-4647-ae4c-7db96e63ce3f","fromNode":"ab417f9c-6ae8-4235-8639-ce0e2b0d648f","fromSide":"bottom","toNode":"ec6f50b8-3ffa-4eb3-b956-960b3a69d3fa","toSide":"top"},
+		{"id":"5e2786c2-7bed-419a-813a-989118ee4fa3","fromNode":"ab417f9c-6ae8-4235-8639-ce0e2b0d648f","fromSide":"bottom","toNode":"e1e804e7-fc89-4e95-9906-abf9c8e4d1a6","toSide":"top"},
+		{"id":"adbf700d-0cf6-447d-976b-44523fe9a61b","fromNode":"acc6e639-5134-49bb-b090-29978fff6064","fromSide":"bottom","toNode":"fe5ed769-708b-4768-ac81-a2ba63311e23","toSide":"top"},
+		{"id":"eaf6272e-8cf9-423b-b515-b798af558348","fromNode":"acc6e639-5134-49bb-b090-29978fff6064","fromSide":"bottom","toNode":"5e62846f-f4bf-4f48-9720-2c50de2505e8","toSide":"top"},
+		{"id":"1752e427-763b-4686-bfe2-d8164328da0f","fromNode":"16ad20b5-77e4-4c8e-bae1-35c05369c0c6","fromSide":"bottom","toNode":"9bf959c8-b301-4e67-9b87-8d391a39b03a","toSide":"top"},
+		{"id":"0c3cde09-4cb4-42ca-b661-e629bb49fb54","fromNode":"16ad20b5-77e4-4c8e-bae1-35c05369c0c6","fromSide":"bottom","toNode":"cc6abb8a-68f5-4e31-9bbd-fac98aead513","toSide":"top"},
+		{"id":"8f821fa9-d8cd-4383-8549-5062f478f238","fromNode":"b86fec95-6c9a-41a2-8da6-87f93f675565","fromSide":"bottom","toNode":"e1ce769f-e409-419d-9587-8b169745ef0e","toSide":"top"},
+		{"id":"ddde9a69-5d58-48d6-8293-dd940d8a737a","fromNode":"b86fec95-6c9a-41a2-8da6-87f93f675565","fromSide":"bottom","toNode":"42739cea-10f7-4a3c-a388-8e923aa02bae","toSide":"top"},
+		{"id":"bc0389b4-4fa6-4eb3-ba9a-74060df2384d","fromNode":"72593331-0740-4d11-b0c4-1eba189e015f","fromSide":"bottom","toNode":"e36d56de-e7bf-4657-b0fa-f455d4899e71","toSide":"top"},
+		{"id":"5ecf6bd5-1ca8-4d34-a256-f0d91a4cfaa0","fromNode":"72593331-0740-4d11-b0c4-1eba189e015f","fromSide":"bottom","toNode":"de6acbf9-0c89-46e7-bf94-7f39a0f37f6a","toSide":"top"},
+		{"id":"61f083bb-aa58-449a-909c-61da3d8714d0","fromNode":"b5ab9661-6863-45e3-a315-d453f7c992a0","fromSide":"bottom","toNode":"61671571-8abc-4482-a6e3-b98a4033547a","toSide":"top"},
+		{"id":"d9942f19-e37c-4e00-bcaa-ac0ab9b67bd3","fromNode":"b5ab9661-6863-45e3-a315-d453f7c992a0","fromSide":"bottom","toNode":"db88ebf3-7f2f-48c9-80a5-5b647079233d","toSide":"top"},
+		{"id":"32e9c7e7-cab5-44e6-a7ea-23acb7b2535b","fromNode":"e7fe617f-d30b-4cf8-9779-9be1211be7f9","fromSide":"bottom","toNode":"e786adff-203c-4a39-84b9-c45de0499f74","toSide":"top"},
+		{"id":"fce11366-c35f-475a-b26f-f7dee46fe9aa","fromNode":"e7fe617f-d30b-4cf8-9779-9be1211be7f9","fromSide":"bottom","toNode":"a1da61c9-9e42-41ed-9501-46cc26208041","toSide":"top"},
+		{"id":"66665ce8-cf8b-47ba-8085-0e7d8f83902a","fromNode":"e7fe617f-d30b-4cf8-9779-9be1211be7f9","fromSide":"bottom","toNode":"cbbb3434-4f8c-4106-82b8-b7418bb9a79b","toSide":"top"},
+		{"id":"abecd431-2e18-43d9-8b43-3742f57660ee","fromNode":"c76f5c41-087d-4729-a528-a02e91fb60b9","fromSide":"bottom","toNode":"f3350894-35fa-4561-8e5f-f8c216d6c34f","toSide":"top"},
+		{"id":"d8f6a902-a48e-42ed-ad75-91cfa09c116d","fromNode":"c76f5c41-087d-4729-a528-a02e91fb60b9","fromSide":"bottom","toNode":"c1ec1d20-c27b-4c04-901b-87534028ea56","toSide":"top"},
+		{"id":"897b275c-0ced-464b-b3fc-e51382355663","fromNode":"c76f5c41-087d-4729-a528-a02e91fb60b9","fromSide":"bottom","toNode":"1fe14c1f-c557-4bcc-923b-77f83b8aceb0","toSide":"top"},
+		{"id":"88ec1d47-7cf0-4ad4-ac2c-211d165460c2","fromNode":"dbcb4a25-aa79-4a86-9f9f-f91fef1641e4","fromSide":"bottom","toNode":"457c5b44-14f4-413d-a914-f68a188ffe86","toSide":"top"},
+		{"id":"1b057919-dba3-41d2-9335-8910f6c3e9f1","fromNode":"dbcb4a25-aa79-4a86-9f9f-f91fef1641e4","fromSide":"bottom","toNode":"edf18c05-74b5-4572-b984-5babf077db32","toSide":"top"},
+		{"id":"175f28fc-b0b2-4f5d-9b2b-e1fa0e3d5c18","fromNode":"ac04d3ab-74a3-48c5-a341-d188cf7daa78","fromSide":"bottom","toNode":"9d779745-fa81-444b-9e50-5dfc7ec32593","toSide":"top"},
+		{"id":"bd33ad40-7c3f-4c6b-80a2-9bc793c6959b","fromNode":"bd856c12-6480-4243-856b-98e359446758","fromSide":"bottom","toNode":"9b09a980-ce38-4fab-b75e-b7e9fa2fdfb8","toSide":"top"},
+		{"id":"8b63b791-b5d1-4fbe-bb42-465690bf4bfe","fromNode":"bd856c12-6480-4243-856b-98e359446758","fromSide":"bottom","toNode":"6940dad7-e766-4271-890f-8a45d98834db","toSide":"top"},
+		{"id":"9a558360-6a44-4211-a021-c95bc39f2073","fromNode":"bd856c12-6480-4243-856b-98e359446758","fromSide":"bottom","toNode":"4b1ef39a-4ca1-4bd6-9b30-440bba86e19d","toSide":"top"},
+		{"id":"cf40baae-d4e1-4ea6-9e7e-ecbd8ceb78d8","fromNode":"8c524f2d-bdf3-4245-8c2c-ad26cdc13473","fromSide":"bottom","toNode":"6473f569-082d-42d1-a839-7219ff978fa4","toSide":"top"},
+		{"id":"3fde03b1-8d51-43b2-8aa7-c3fce282eafa","fromNode":"8c524f2d-bdf3-4245-8c2c-ad26cdc13473","fromSide":"bottom","toNode":"2c658504-5a80-4006-8b8c-850b5a2ce5f3","toSide":"top"},
+		{"id":"26dda68d-5649-43b9-ac48-8085167b1fbb","fromNode":"8c524f2d-bdf3-4245-8c2c-ad26cdc13473","fromSide":"bottom","toNode":"369714a0-9bde-4603-b9f4-4b78d9a8210b","toSide":"top"},
+		{"id":"e9272b36-ead9-40e1-b324-938e4fe5b632","fromNode":"f01ce613-eebc-4db0-97be-e79a9ac4477b","fromSide":"bottom","toNode":"987aba99-1022-49c8-ae23-12c61a9a1022","toSide":"top"},
+		{"id":"732040f8-1ca6-46f6-8d5d-fdfec35abd81","fromNode":"f01ce613-eebc-4db0-97be-e79a9ac4477b","fromSide":"bottom","toNode":"4c2d115f-3803-4cbf-b4eb-c81254223d0d","toSide":"top"},
+		{"id":"a6fc7fa4-110d-4332-9126-c84c67e25122","fromNode":"f01ce613-eebc-4db0-97be-e79a9ac4477b","fromSide":"bottom","toNode":"6a466c10-e34e-480f-b768-12d21e8fb070","toSide":"top"},
+		{"id":"5be8a18b-8aaf-4112-b6b5-20056d78d49c","fromNode":"bd804222-a69b-448a-bf80-d8defeb87dd3","fromSide":"bottom","toNode":"3363b0a0-aed0-4306-8a92-e2998cac47e6","toSide":"top"},
+		{"id":"a72c847f-b52e-4121-9587-27cbb2883173","fromNode":"bd804222-a69b-448a-bf80-d8defeb87dd3","fromSide":"bottom","toNode":"dcb3cd4c-10a8-4477-a121-4d0f5f4c5c90","toSide":"top"},
+		{"id":"f2d5b3bc-7e00-47e3-88b8-06040e38ca71","fromNode":"ee7c43e1-66e4-49e6-859c-aa8da0ab2068","fromSide":"bottom","toNode":"e4a7ffda-b36e-4108-9077-c17987757f6e","toSide":"top"},
+		{"id":"043315db-4bae-462b-97f1-77ce209763c7","fromNode":"ee7c43e1-66e4-49e6-859c-aa8da0ab2068","fromSide":"bottom","toNode":"e3ee4366-ac18-453e-b571-9fbeaf225660","toSide":"top"},
+		{"id":"b2e59e7f-eec9-428f-9136-7068c8001631","fromNode":"ee7c43e1-66e4-49e6-859c-aa8da0ab2068","fromSide":"bottom","toNode":"7659ffdd-86ba-426c-9d41-b0c6b2979fcc","toSide":"top"},
+		{"id":"b0ba086f-6b6e-4576-8905-eefbaeea82dc","fromNode":"d28b67e4-2f83-4119-b6a1-32f87942f067","fromSide":"bottom","toNode":"a50f53d4-2ade-4ce2-b60c-58d7c01c2fff","toSide":"top"},
+		{"id":"a1103ee0-2828-43af-9686-dc308893d8a8","fromNode":"d28b67e4-2f83-4119-b6a1-32f87942f067","fromSide":"bottom","toNode":"07059b0f-fc58-441c-a28b-95c56bf274b8","toSide":"top"},
+		{"id":"401c1aa3-3322-4e8f-9177-30316d777bb5","fromNode":"d28b67e4-2f83-4119-b6a1-32f87942f067","fromSide":"bottom","toNode":"bd510486-afb1-4538-adfb-a220277214b7","toSide":"top"},
+		{"id":"ba5ff956-3477-4269-8421-481e365aac3d","fromNode":"d1ab7d8b-3f2b-4c91-9bd9-0db201443311","fromSide":"bottom","toNode":"54acac23-1ca5-4913-a8ee-3e53990d6c24","toSide":"top"},
+		{"id":"0e39e310-9f51-4e1c-b8a6-9d92a5a016c3","fromNode":"d1ab7d8b-3f2b-4c91-9bd9-0db201443311","fromSide":"bottom","toNode":"ca38c41e-36b6-40bc-a743-3a1f7a914984","toSide":"top"},
+		{"id":"56f03aaf-2c6d-4734-ba8d-e168c0c0c988","fromNode":"d1ab7d8b-3f2b-4c91-9bd9-0db201443311","fromSide":"bottom","toNode":"1b93bde6-7381-4a14-b452-43dbb37998bf","toSide":"top"},
+		{"id":"d02d79e9-68ad-41ea-935c-8f602b4ddf72","fromNode":"22712b9b-c547-471b-afd2-e56a5f0e44e7","fromSide":"bottom","toNode":"6bf0a450-575f-4e08-af6f-2b85f01ec004","toSide":"top"},
+		{"id":"6c122ea6-2116-4ddf-b93e-c5141cdade0d","fromNode":"22712b9b-c547-471b-afd2-e56a5f0e44e7","fromSide":"bottom","toNode":"105f6cde-9d89-4a05-91fa-bee8425e0036","toSide":"top"},
+		{"id":"2fdd82d6-e1fc-4a1f-8b9f-e47fa9de4549","fromNode":"22712b9b-c547-471b-afd2-e56a5f0e44e7","fromSide":"bottom","toNode":"53fde071-18f7-4198-80f6-00310712eeb4","toSide":"top"},
+		{"id":"11a2ccf4-f09d-468e-b8c8-d2396f21bc0e","fromNode":"349802d8-82a0-4ae1-a7a0-a7463210bb03","fromSide":"bottom","toNode":"0cfc1141-e0ae-4350-83fa-07ef349a0fb7","toSide":"top"},
+		{"id":"94f4cf35-488c-4676-a981-dd0a9056777e","fromNode":"349802d8-82a0-4ae1-a7a0-a7463210bb03","fromSide":"bottom","toNode":"4067a3fa-5f9e-46e5-9f1b-16cb851e2d1f","toSide":"top"},
+		{"id":"e427f3d2-c2b8-4da5-b499-9bcfb0bf7f99","fromNode":"c7542c8e-059e-44f3-9549-024b51699783","fromSide":"bottom","toNode":"9f5bcf8f-b227-4122-ba3b-fa0f880248cf","toSide":"top"},
+		{"id":"5237057f-7b56-415c-8573-02dc9c456bd8","fromNode":"c7542c8e-059e-44f3-9549-024b51699783","fromSide":"bottom","toNode":"2b40ce56-77f8-4e97-bad6-9f28880679a2","toSide":"top"},
+		{"id":"a448d837-5e61-4c28-a446-d443f2c21c95","fromNode":"c7542c8e-059e-44f3-9549-024b51699783","fromSide":"bottom","toNode":"553a4780-cc1a-4038-b335-e51cb5f7e5a2","toSide":"top"},
+		{"id":"bf6aa1c5-086d-454c-97e9-683337be133d","fromNode":"413d2e5e-f578-4dab-aae4-3ad9256f3fbd","fromSide":"bottom","toNode":"9a962d0a-a390-4e0f-84bc-3f13c5a785d3","toSide":"top"},
+		{"id":"16d2b244-d94d-4eda-960e-e221673404a0","fromNode":"413d2e5e-f578-4dab-aae4-3ad9256f3fbd","fromSide":"bottom","toNode":"dbcc2db8-8ac4-4a2a-95b6-44a0bfc979c0","toSide":"top"},
+		{"id":"be3bda23ebb3d583","fromNode":"73fcfba4-0595-4f14-9b4c-c9b1b9eb60b6","fromSide":"bottom","toNode":"d72b083b-0e29-4550-9509-c71b430dc32b","toSide":"top"},
+		{"id":"852cabf84000bdfe","fromNode":"73fcfba4-0595-4f14-9b4c-c9b1b9eb60b6","fromSide":"bottom","toNode":"2351a6e0-8b31-41e6-8cd9-24d90eb7d2f4","toSide":"top"},
+		{"id":"c7959581-c6de-4336-a76f-72086cae11df","fromNode":"72593331-0740-4d11-b0c4-1eba189e015f","fromSide":"bottom","toNode":"04a9f95f-4872-4622-a184-5474081ca848","toSide":"top"},
+		{"id":"e07cb272-8d41-48d1-a418-84eabc567b69","fromNode":"b86fec95-6c9a-41a2-8da6-87f93f675565","fromSide":"bottom","toNode":"bbababb7-41ac-4131-a9f4-777184be140c","toSide":"top"},
+		{"id":"e84343f8-803e-44f0-b6ae-5819037bf74d","fromNode":"dbcb4a25-aa79-4a86-9f9f-f91fef1641e4","fromSide":"bottom","toNode":"66205283-86aa-4a05-a656-4a6e299d420a","toSide":"top"},
+		{"id":"2d058292-5494-457b-b4e8-70e10a1056bc","fromNode":"ac04d3ab-74a3-48c5-a341-d188cf7daa78","fromSide":"bottom","toNode":"1552cc9e-880a-490b-8d26-91624d570a32","toSide":"top"},
+		{"id":"b83a5ad4-6605-4651-be5c-180b654f3c0f","fromNode":"349802d8-82a0-4ae1-a7a0-a7463210bb03","fromSide":"bottom","toNode":"adba3b06-6fb9-45d7-adee-a0ba9dbeea6a","toSide":"top"}
+	]
 }
